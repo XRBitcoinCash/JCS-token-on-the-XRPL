@@ -217,12 +217,13 @@
               <td id="jesus-volume">$0</td>
             </tr>
             <tr>
-              <td>Crescite Token</td>
-              <td id="crescite-price">$0.00</td>
-              <td id="crescite-change"><span class="muted">0.00%</span></td>
-              <td id="crescite-marketcap">$0</td>
-              <td id="crescite-volume">$0</td>
-            </tr>
+  <td>Sologenic (SOLO)</td>
+  <td id="solo-price">$0.00</td>
+  <td id="solo-change"><span class="muted">0.00%</span></td>
+  <td id="solo-marketcap">$0</td>
+  <td id="solo-volume">$0</td>
+</tr>
+
           </tbody>
         </table>
         <p class="note">Enable live updates by adding the script block shown in Step 2 (no links displayed on the page).</p>
@@ -319,8 +320,57 @@
       <p class="note" style="margin-top:14px;">© 2025 Jesus Christ Saves Ministry — Powered by the XRP Ledger.</p>
     </div>
   </footer>
+<script>
+  // XRP via CoinGecko
+  async function updateXRP() {
+    try {
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
+      const d = await r.json();
+      document.getElementById('xrp-price').textContent = `$${(d.ripple?.usd ?? 0).toFixed(4)}`;
+      document.getElementById('xrp-change').innerHTML = `<span class="${d.ripple?.usd_24h_change >= 0 ? 'pos' : 'neg'}">${(d.ripple?.usd_24h_change ?? 0).toFixed(2)}%</span>`;
+      document.getElementById('xrp-marketcap').textContent = `$${Math.round(d.ripple?.usd_market_cap ?? 0).toLocaleString()}`;
+      document.getElementById('xrp-volume').textContent = `$${Math.round(d.ripple?.usd_24h_vol ?? 0).toLocaleString()}`;
+    } catch (e) {
+      console.warn('XRP fetch failed', e);
+    }
+  }
 
-  <!-- STEP 2 will go here: dynamic scripts (optional). Keep this comment as an anchor. -->
+  // SOLO via CoinGecko
+  async function updateSOLO() {
+    try {
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=sologenic&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
+      const d = await r.json();
+      document.getElementById('solo-price').textContent = `$${(d.sologenic?.usd ?? 0).toFixed(6)}`;
+      document.getElementById('solo-change').innerHTML = `<span class="${d.sologenic?.usd_24h_change >= 0 ? 'pos' : 'neg'}">${(d.sologenic?.usd_24h_change ?? 0).toFixed(2)}%</span>`;
+      document.getElementById('solo-marketcap').textContent = `$${Math.round(d.sologenic?.usd_market_cap ?? 0).toLocaleString()}`;
+      document.getElementById('solo-volume').textContent = `$${Math.round(d.sologenic?.usd_24h_vol ?? 0).toLocaleString()}`;
+    } catch (e) {
+      console.warn('SOLO fetch failed', e);
+    }
+  }
+
+  async function updateXRPLToken(symbol, priceId, changeId, mcId, volId) {
+    try {
+      const price = 0, change = 0, mc = 0, vol = 0;
+      document.getElementById(priceId).textContent = `$${price.toFixed(8)}`;
+      document.getElementById(changeId).innerHTML = `<span class="muted">${change.toFixed(2)}%</span>`;
+      document.getElementById(mcId).textContent = `$${mc.toLocaleString()}`;
+      document.getElementById(volId).textContent = `$${vol.toLocaleString()}`;
+    } catch (e) {
+      console.warn(`${symbol} fetch failed`, e);
+    }
+  }
+
+  function refreshAll() {
+    updateXRP();
+    updateSOLO();
+    updateXRPLToken('JCS', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
+  }
+
+  refreshAll();
+  setInterval(refreshAll, 60000);
+</script>
 </body>
+
 </html>
 
