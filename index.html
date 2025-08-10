@@ -102,6 +102,40 @@
       </ul>
       <p>The XRP Ledger’s proven reliability, high speed, and inclusive protocol mean all users—from the largest churches to individual donors—can participate safely, transparently, and impactfully.</p>
     </section>
+<!-- Existing XRP script ends here -->
+<script>
+  async function updateXRPLToken(symbol, issuer, priceId, changeId, marketcapId, volumeId) {
+    try {
+      const response = await fetch(`https://xrpl.services/?issuer=${issuer}&currency=${symbol}&limit=1000000000000`);
+      const data = await response.json();
+
+      const token = data[0]; // Assuming first result is the token
+      const price = parseFloat(token.price_USD);
+      const change = parseFloat(token.percent_change_24h);
+      const marketcap = parseFloat(token.marketcap_USD);
+      const volume = parseFloat(token.volume_USD);
+
+      document.getElementById(priceId).innerText = `$${price.toFixed(8)}`;
+      document.getElementById(changeId).innerHTML = `<span style="color:${change >= 0 ? 'green' : 'red'};">${change.toFixed(2)}%</span>`;
+      document.getElementById(marketcapId).innerText = `$${marketcap.toLocaleString()}`;
+      document.getElementById(volumeId).innerText = `$${volume.toLocaleString()}`;
+    } catch (error) {
+      console.error(`Error fetching ${symbol} data:`, error);
+    }
+  }
+
+  // Jesus Coin
+  updateXRPLToken('JCS', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
+
+  // Crescite Token (example issuer, update if needed)
+  updateXRPLToken('CRESCITE', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'crescite-price', 'crescite-change', 'crescite-marketcap', 'crescite-volume');
+
+  // Refresh every minute
+  setInterval(() => {
+    updateXRPLToken('JCS', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
+    updateXRPLToken('CRESCITE', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'crescite-price', 'crescite-change', 'crescite-marketcap', 'crescite-volume');
+  }, 60000);
+</script>
 
     <!-- Live Stats/Market Table -->
     <section id="live-stats">
@@ -137,20 +171,21 @@
   <td id="xrp-volume">$7,391,372,842</td>
 </tr>
 
+<tr>
+  <td>Jesus Coin</td>
+  <td id="jesus-price">$0.00000003638</td>
+  <td id="jesus-change"><span style="color:red;">-4.2%</span></td>
+  <td id="jesus-marketcap">$5,509,627</td>
+  <td id="jesus-volume">$11,211.71</td>
+</tr>
+<tr>
+  <td>Crescite Token</td>
+  <td id="crescite-price">$0.02</td>
+  <td id="crescite-change"><span style="color:green;">+0.6%</span></td>
+  <td id="crescite-marketcap">$100,000,000</td>
+  <td id="crescite-volume">$1,500,000</td>
 </tr>
 
-            <td><span style="color:green;">+0.6%</span></td>
-            <td>$100,000,000</td>
-            <td>$1,500,000</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>Updated every minute. Data sources: XRPL Explorer, CoinMarketCap, Bit Hump the Wicks.</p>
-    </section>
-    
-    <!-- Faith Impact and Community Section -->
-    <section id="impact">
-      <h2>Lives Transformed: Faith in Action</h2>
       <blockquote>
         "Faith awakens to the rhythm of change. Every donation touches hearts, sends hope globally, and unites believers in love and action." <small>— X Jesus Christ Ministry</small>
       </blockquote>
