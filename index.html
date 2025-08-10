@@ -282,4 +282,73 @@
     // Style and structure are modular and commented to invite further expansion by the crypto/engineer community.
   </script>
 </body>
+body {
+    background: linear-gradient(135deg, #191c24, #23263b 80%);
+    color: #fff;
+}
+.metrics-card {
+    background: #23263b;
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    padding: 2em 2em 1.5em 2em;
+    margin: 2em 0;
+}
+.metric-label {
+    color: #aaa;
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+}
+.metric-value {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #fff;
+}
+.metrics-section__card { /* ... */ }
+.metrics-section__label { /* ... */ }
+.metrics-section__value--positive { color: #28e48a; }
+.metrics-section__value--negative { color: #fc4e4e; }
+.header-logo, #bithump-logo, img[src*="bithump"], .brand-logo { display: none !important; }
+// Fetch XRP metrics from CoinGecko
+async function fetchXRP() {
+  const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data && data.length ? data[0] : null;
+}
+
+// Fetch JCS token info from XRPL.to
+async function fetchJCS() {
+  // Use a known identifier or search first
+  const searchUrl = 'https://api.xrpl.to/api/search?q=jesus%20christ%20saves';
+  const searchResult = await fetch(searchUrl).then(r => r.json());
+  const identifier = searchResult.tokens?.[0]?.id;
+  if (!identifier) return null;
+  const tokenData = await fetch(`https://api.xrpl.to/api/token/${identifier}`).then(r => r.json());
+  return tokenData?.metrics ? tokenData : null;
+}
+
+// Update UI with both results
+async function updateMetrics() {
+    const [xrp, jcs] = await Promise.all([fetchXRP(), fetchJCS()]);
+    updateTokenUI('xrp', xrp);
+    updateTokenUI('jcs', jcs);
+}
+setInterval(updateMetrics, 30000); // Every 30 seconds
+updateMetrics();
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "XRP",
+  "tickerSymbol": "XRP",
+  "description": "Live analytics for XRP including price, volume, and market cap.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0.55",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+
 </html>
