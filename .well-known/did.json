@@ -1,0 +1,36 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+  ],
+  "id": "did:web:xrbitcoincash.github.io",
+  "verificationMethod": [
+    {
+      "id": "did:web:xrbitcoincash.github.io#owner",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:xrbitcoincash.github.io",
+      "publicKeyMultibase": "69F598AC55C177B84BE9BD8E773ED9C88223E548CB4566C72A55D2C5731821C7"
+    }
+  ],
+  "authentication": [
+    "did:web:xrbitcoincash.github.io#owner"
+  ],
+  "assertionMethod": [
+    "did:web:xrbitcoincash.github.io#owner"
+  ],
+  "service": [
+    {
+      "id": "did:web:xrbitcoincash.github.io#project",
+      "type": "ProjectPage",
+      "serviceEndpoint": "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL./"
+    },
+    {
+      "id": "did:web:xrbitcoincash.github.io#xrpl",
+      "type": "XRPLAccount",
+      "serviceEndpoint": {
+        "address": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+        "network": "mainnet"
+      }
+    }
+  ]
+}
