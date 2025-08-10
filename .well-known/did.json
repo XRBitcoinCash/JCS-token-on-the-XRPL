@@ -9,7 +9,8 @@
       "id": "did:web:xrbitcoincash.github.io#owner",
       "type": "Ed25519VerificationKey2020",
       "controller": "did:web:xrbitcoincash.github.io",
-      "publicKeyMultibase": "69F598AC55C177B84BE9BD8E773ED9C88223E548CB4566C72A55D2C5731821C7"
+     "publicKeyMultibase": "zYourActualEd25519PublicKey"
+
     }
   ],
   "authentication": [
