@@ -2,377 +2,284 @@
 <html lang="en">
 <head>
   <!--
-    Cryptocurrency Metrics Dashboard for XRP & Jesus Christ Saves (JCS)
-    - All white text on dark background for accessibility and extended viewing
-    - Live price, 24h change, market cap, volume for XRP and JCS
-    - No buttons, logo, donation/domain references in visuals
-    - SEO and accessibility best practices
-    - Code is modular and comprehensively commented
-    - Instructions: 
-      * For live deployment, ensure HTTPS for all calls.
-      * If adding custom tokens, duplicate <article> blocks and update JS endpoints/IDs.
-      * API error handling adapts UI automatically.
-      * Customize colors in :root section.
+    Crypto Analytics Dashboard
+    - Displays live metrics for XRP and Jesus Christ Saves (JCS) token
+    - All white text on deep blue/black background
+    - No domain, logo, donation, or branding references
+    - Modular JS + CSS, full SEO (see comments throughout)
+    Integration:
+    1. Place this file at site root or in public directory
+    2. Ensure public network access to CoinGecko & XRPL.to APIs
+    3. Extend CSS/JS as needed for future tokens/metrics
   -->
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XRP & JCS Token Live Metrics • Price, Market Cap, Volume (2025)</title>
-  <meta name="description" content="Track live metrics for XRP and Jesus Christ Saves (JCS) token: real-time price, 24-hour changes, market cap, and volume. White-on-dark secure dashboard, fully SEO-optimized.">
-  <!-- JSON-LD: SEO Structured Data for both assets -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>XRP & JCS Live Crypto Dashboard | Price, Market Cap, Analytics</title>
+  <meta name="description" content="Track real-time price, 24H change, market cap & volume for XRP and Jesus Christ Saves (JCS) token. A modern crypto dashboard with live analytics.">
+  <meta name="robots" content="index,follow">
+
+  <!-- SEO/Accessibility essentials -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27><rect width=%2732%27 height=%2732%27 fill=%27%2323263b%27/></svg>">
+  <meta property="og:title" content="XRP & JCS Live Crypto Dashboard">
+  <meta property="og:description" content="Live analytics for XRP and Jesus Christ Saves (JCS) token. View price, change, volume, market cap.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="" /> <!-- If a logo is eventually desired, link here -->
+
+  <!-- Structured Data: XRP (repeat for JCS as needed) -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "XRP & JCS Token Live Crypto Metrics Dashboard",
-      "description": "Monitor live XRP and Jesus Christ Saves (JCS) crypto token prices, 24-hour fluctuations, market capitalization, and volume in a secure, accessible interface for August 2025.",
-      "mainEntity": [
-        {
-          "@type": "CryptoCurrency",
-          "name": "XRP",
-          "symbol": "XRP",
-          "description": "XRP real-time price, 24-hour change, market cap, volume.",
-          "url": "https://xrpl.org/"
-        },
-        {
-          "@type": "CryptoCurrency",
-          "name": "Jesus Christ Saves",
-          "symbol": "JCS",
-          "description": "XRPL-based Jesus Christ Saves (JCS) token live analytics and trading data.",
-          "url": "https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
-        }
-      ]
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "XRP",
+    "tickerSymbol": "XRP",
+    "description": "Live analytics for XRP: price, market cap, volume, 24h change.",
+    "offers": {
+      "@type": "Offer",
+      "price": "TO_BE_UPDATED",
+      "priceCurrency": "USD"
     }
+  }
   </script>
+
   <style>
-    :root {
-      --background: #181a20;
-      --surface: #23272f;
-      --text-main: #fff;
-      --text-accent: #4ecb71; /* green for positive */
-      --text-down: #e74c3c;   /* red for negative */
-      --text-muted: #cccccc; 
-      --border-radius: 1.25rem;
-      --section-gap: 2.5rem;
-      --card-padding: 2rem;
-      --shadow: 0 3px 16px rgba(0,0,0,0.28);
-      /* Adjust as needed for theme tweaking */
-    }
-
-    body {
+    /* Primary Dashboard Styles */
+    html, body {
       margin: 0;
-      font-family: 'Segoe UI', 'Poppins', Arial, sans-serif;
-      background-color: var(--background);
-      color: var(--text-main);
+      padding: 0;
       min-height: 100vh;
+      background: linear-gradient(135deg, #191c24, #23263b 75%);
+      color: #fff;
+      font-family: 'Inter', Arial, sans-serif;
+      letter-spacing: 0.02em;
     }
-
-    /* Header, No logo or domain info */
-    header {
-      padding: 2.5rem 0 1.5rem 0;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 2.35rem;
-      letter-spacing: 1.4px;
-      font-weight: 700;
-      margin: 0;
-    }
-    header h2 {
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      margin-top: 0.75rem;
-    }
-
     main {
-      max-width: 830px;
+      max-width: 900px;
+      padding: 2em 1em;
       margin: 0 auto;
-      padding: 0 1.5rem 4rem 1.5rem;
     }
-
-    section[aria-labelledby] {
-      display: grid;
-      gap: var(--section-gap);
-      grid-template-columns: 1fr 1fr;
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-top: 1.2em;
+      margin-bottom: 0.2em;
+      color: #fff;
+      letter-spacing: -0.01em;
     }
-    @media (max-width: 700px) {
-      section[aria-labelledby] {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    article {
-      background: var(--surface);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      padding: var(--card-padding);
-      min-width: 0;
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.3em; color: #f5f5f5; }
+    h3 { font-size: 1.1em; color: #b9b9cf; margin-top: 0.8em; }
+    .dashboard-intro { font-size: 1.15em; color: #bbb; margin-bottom: 2em; }
+    .metrics-section {
       display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    h3 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-    }
-
-    /* Live Metric Display Box */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.5rem 0;
-      margin: 0;
-    }
-
-    .metric-row {
-      display: flex;
-      align-items: center;
+      gap: 1.5em;
+      flex-wrap: wrap;
       justify-content: space-between;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(255,255,255, 0.045);
     }
-    .metric-row:last-child {
-      border-bottom: none;
+    .metrics-card {
+      flex: 1 1 320px;
+      background: #23263b;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.44);
+      padding: 2em 2em 1.5em 2em;
+      margin-bottom: 2em;
+      min-width: 300px;
+      position: relative;
     }
-
-    .metric-label {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      letter-spacing: .025em;
+    .metrics-label {
+      color: #bfc7de;
+      font-size: 1.09em;
+      margin-bottom: 0.3em;
+      display: block;
     }
-    .metric-value {
-      font-size: 1.25rem;
-      font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
-      font-weight: 600;
-      letter-spacing: .02em;
-      color: var(--text-main);
+    .metrics-value {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 0.2em;
+      background: none;
+      color: #fff;
     }
-    .metric-value.up {
-      color: var(--text-accent);
+    .metrics-delta--positive { color: #28e48a; }
+    .metrics-delta--negative { color: #ff5252; }
+    .metrics-data-row { margin-bottom: 0.7em; }
+    .metrics-meta {
+      font-size: 0.98em;
+      color: #9ac0ee;
+      margin-bottom: 0.3em;
     }
-    .metric-value.down {
-      color: var(--text-down);
+    /* Responsive Styles */
+    @media (max-width: 680px) {
+      .metrics-section { flex-direction: column; }
+      .metrics-card { min-width: 0; width: 100%; padding: 1.5em; }
     }
-
-    .error-msg {
-      color: var(--text-down);
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      font-weight: 500;
-    }
-    .timestamp {
-      text-align: right;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 0.7rem;
-    }
-
-    /* Hide unwanted elements (for legacy imports) */
-    .logo, .donate, .button, .domain, .unwanted-element { display: none !important; }
-    /* End CSS Customization Block */
+    /* Accessibility and Focus */
+    :focus-visible { outline: 3px solid #c2f65b; }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <h1>XRP &amp; Jesus Christ Saves (JCS) Token: Live Metrics Dashboard</h1>
-    <h2>Instant price, market cap, 24h changes &amp; volume. Secure. Accessible. No distractions.</h2>
-  </header>
   <main>
-    <section aria-labelledby="metrics-heading">
-      <!-- XRP Metrics Article -->
-      <article id="xrp-analytics" aria-label="XRP Metric Data">
-        <h3>XRP Metrics</h3>
-        <div id="xrp-loading" class="metric-label">Loading XRP data...</div>
-        <div class="metrics-grid" id="xrp-metrics" style="display:none;">
-          <div class="metric-row">
-            <span class="metric-label">Price (USD)</span>
-            <span class="metric-value" id="xrp-price">$0.00</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">24hr Change</span>
-            <span class="metric-value" id="xrp-change">0.00%</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">Market Cap</span>
-            <span class="metric-value" id="xrp-marketcap">$0</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">24hr Volume</span>
-            <span class="metric-value" id="xrp-volume">$0</span>
-          </div>
+    <h1>XRP & Jesus Christ Saves (JCS) Live Cryptocurrency Analytics</h1>
+    <p class="dashboard-intro">
+      Real-time price, 24-hour change, capitalization, and volume for XRP and the JCS token. Built for fast crypto analytics, no branding, ads, or donation clutter. <strong>All metrics update automatically every 30 seconds.</strong>
+    </p>
+
+    <section class="metrics-section">
+      <!-- XRP Metrics Card -->
+      <article class="metrics-card" id="card-xrp" aria-labelledby="h2-xrp">
+        <h2 id="h2-xrp">XRP (Ripple) Metrics</h2>
+        <div class="metrics-meta" id="xrp-lastupdated"></div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Price:</span>
+          <span class="metrics-value" id="xrp-price">--</span>
         </div>
-        <div class="error-msg" id="xrp-error" style="display: none;"></div>
-        <div class="timestamp" id="xrp-timestamp"></div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">24h Change:</span>
+          <span id="xrp-change" class="metrics-value">--</span>
+        </div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Market Cap:</span>
+          <span id="xrp-mcap" class="metrics-value">--</span>
+        </div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Volume (24h):</span>
+          <span id="xrp-volume" class="metrics-value">--</span>
+        </div>
       </article>
-      <!-- JCS Metrics Article -->
-      <article id="jcs-analytics" aria-label="Jesus Christ Saves Token Metric Data">
-        <h3>Jesus Christ Saves (JCS) Metrics</h3>
-        <div id="jcs-loading" class="metric-label">Loading JCS data...</div>
-        <div class="metrics-grid" id="jcs-metrics" style="display:none;">
-          <div class="metric-row">
-            <span class="metric-label">Price (USD)</span>
-            <span class="metric-value" id="jcs-price">$0.00</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">24hr Change</span>
-            <span class="metric-value" id="jcs-change">0.00%</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">Market Cap</span>
-            <span class="metric-value" id="jcs-marketcap">$0</span>
-          </div>
-          <div class="metric-row">
-            <span class="metric-label">24hr Volume</span>
-            <span class="metric-value" id="jcs-volume">$0</span>
-          </div>
+
+      <!-- JCS Metrics Card -->
+      <article class="metrics-card" id="card-jcs" aria-labelledby="h2-jcs">
+        <h2 id="h2-jcs">Jesus Christ Saves (JCS) Token Metrics [XRPL]</h2>
+        <div class="metrics-meta" id="jcs-lastupdated"></div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Price:</span>
+          <span class="metrics-value" id="jcs-price">--</span>
         </div>
-        <div class="error-msg" id="jcs-error" style="display: none;"></div>
-        <div class="timestamp" id="jcs-timestamp"></div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">24h Change:</span>
+          <span id="jcs-change" class="metrics-value">--</span>
+        </div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Market Cap:</span>
+          <span id="jcs-mcap" class="metrics-value">--</span>
+        </div>
+        <div class="metrics-data-row">
+          <span class="metrics-label">Volume (24h):</span>
+          <span id="jcs-volume" class="metrics-value">--</span>
+        </div>
       </article>
     </section>
-    <!-- Add more <article> sections here for additional tokens or advanced analytics as needed -->
+    <p class="dashboard-intro" style="margin-top:2em; font-size:1em;color:#aaa">
+      Data sources: <a href="https://coingecko.com/" target="_blank" style="color:#fff;text-decoration:underline;">CoinGecko</a> for XRP; <a href="https://xrpl.to/api-docs" target="_blank" style="color:#fff;text-decoration:underline;">XRPL.to</a> for JCS. <br>
+      Page designed for full accessibility and crypto SEO.
+    </p>
   </main>
-  <!-- FOOTER (optional: can be removed for pure data focus) -->
-  <footer style="text-align:center; color:var(--text-muted); padding: 2rem 0 0 0; font-size:0.98rem;">
-    &copy; 2025 — Secure Crypto Metrics Dashboard. All rights reserved.
-  </footer>
-  <script type="module">
-    /**
-     * JavaScript for live updates of XRP and JCS metrics.
-     * 
-     * Integration Instructions:
-     * - This code assumes no private API keys are required for CoinGecko and XRPL.to endpoints.
-     * - If a stricter API or proxy is needed, move fetch logic server-side for security.
-     * - To extend: duplicate "getJcsData" or "getXrpData" functions and UI bindings for more tokens.
-     * - Ensure site is served over HTTPS, especially if deploying analytics for real users.
-     * - All variables and selectors are modular for maintainability.
-     */
 
-    // XRP: CoinGecko API
-    const xrpApiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple';
-
-    // JCS: XPMarket / XRPL.to API (public, as of August 2025)
-    // REMINDER: XRPL.to slugs and IDs must be obtained for production deployments
-    // Replace TOKEN_ID with the JCS token unique identifier as used by the API.
-    const jcsId = 'JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
-    const jcsApiUrl = `https://api.xrpl.to/api/token/${jcsId}`;
-    const jcsStatusUrl = `https://api.xrpl.to/api/status`;
-
-    // Utility function to format large numbers for readability (e.g., 1,500,000 -> 1.50M)
-    function formatNumber(num) {
-      num = Number(num);
-      if (isNaN(num)) return "N/A";
-      if (num >= 1e9) return (num / 1e9).toFixed(2) + "B";
-      if (num >= 1e6) return (num / 1e6).toFixed(2) + "M";
-      if (num >= 1e3) return (num / 1e3).toFixed(1) + "K";
-      return num.toLocaleString(undefined, {maximumFractionDigits: 4});
-    }
-
-    // Live update function for XRP
-    async function getXrpData() {
-      const metrics = document.getElementById('xrp-metrics');
-      const loading = document.getElementById('xrp-loading');
-      const errMsg = document.getElementById('xrp-error');
-      const ts = document.getElementById('xrp-timestamp');
+  <!-- Modular JS: Fetching and Displaying Live Data -->
+  <script>
+    // =================== XRP FETCH: CoinGecko ===================
+    async function fetchXRP() {
       try {
-        loading.style.display = '';
-        metrics.style.display = 'none';
-        errMsg.style.display = 'none';
-
-        const resp = await fetch(xrpApiUrl);
-        if (!resp.ok) throw new Error('API unavailable');
-        const [data] = await resp.json();
-
-        document.getElementById('xrp-price').textContent = '$' + data.current_price.toLocaleString(undefined, {maximumFractionDigits: 5});
-        const changeElem = document.getElementById('xrp-change');
-        const change = data.price_change_percentage_24h;
-        changeElem.textContent = `${change?.toFixed(2) ?? '0.00'}%`;
-        changeElem.className = "metric-value " + (change >= 0 ? 'up' : 'down');
-        document.getElementById('xrp-marketcap').textContent = '$' + formatNumber(data.market_cap);
-        document.getElementById('xrp-volume').textContent = '$' + formatNumber(data.total_volume);
-
-        loading.style.display = 'none';
-        metrics.style.display = '';
-        ts.textContent = 'Updated: ' + new Date().toLocaleTimeString();
-      } catch (err) {
-        loading.style.display = 'none';
-        errMsg.style.display = '';
-        errMsg.textContent = "Could not load XRP metrics. Please retry later.";
-        ts.textContent = '';
+        const xrpEndpoint = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple';
+        const response = await fetch(xrpEndpoint);
+        const data = await response.json();
+        if (!data || !data.length) throw new Error("No XRP data");
+        return {
+          name: data[0].name,
+          price: data[0].current_price,
+          change: data[0].price_change_percentage_24h,
+          marketCap: data[0].market_cap,
+          volume: data[0].total_volume,
+          lastUpdated: data[0].last_updated
+        };
+      } catch (e) {
+        console.error("XRP fetch error", e);
+        return null;
       }
     }
 
-    // Live update function for JCS using two API endpoints:
-    async function getJcsData() {
-      const metrics = document.getElementById('jcs-metrics');
-      const loading = document.getElementById('jcs-loading');
-      const errMsg = document.getElementById('jcs-error');
-      const ts = document.getElementById('jcs-timestamp');
+    // =================== JCS FETCH: XRPL.to ===================
+    let cachedJCSTokenId = null;
+    async function fetchJCS() {
       try {
-        loading.style.display = '';
-        metrics.style.display = 'none';
-        errMsg.style.display = 'none';
-
-        const resp = await fetch(jcsApiUrl);
-        if (!resp.ok) throw new Error('JCS data unavailable');
-        const data = await resp.json();
-
-        // API returns data.price_usd, data.marketcap, data.vol24h_usd, etc. — Adjust property names if needed
-        document.getElementById('jcs-price').textContent = '$' + (data.price_usd ? Number(data.price_usd).toFixed(6) : "N/A");
-        // For 24h change, if no direct data, calculate from price history or show N/A
-        const changeElem = document.getElementById('jcs-change');
-        if (typeof data.change24h === "number") {
-          changeElem.textContent = `${data.change24h.toFixed(2)}%`;
-          changeElem.className = "metric-value " + (data.change24h >= 0 ? 'up' : 'down');
-        } else {
-          changeElem.textContent = "0.00%";
-          changeElem.className = "metric-value";
+        // Cache the identifier after first search
+        if (!cachedJCSTokenId) {
+          const search = await fetch('https://api.xrpl.to/api/search?q=jesus%20christ%20saves');
+          const searchData = await search.json();
+          cachedJCSTokenId = searchData?.tokens?.[0]?.id || null;
+          if (!cachedJCSTokenId) throw new Error("JCS token not found");
         }
-        document.getElementById('jcs-marketcap').textContent = '$' + (data.marketcap ? formatNumber(data.marketcap) : "N/A");
-        document.getElementById('jcs-volume').textContent = '$' + (data.vol24h_usd ? formatNumber(data.vol24h_usd) : "N/A");
-
-        loading.style.display = 'none';
-        metrics.style.display = '';
-        ts.textContent = 'Updated: ' + new Date().toLocaleTimeString();
-      } catch (err) {
-        loading.style.display = 'none';
-        errMsg.style.display = '';
-        errMsg.textContent = "Could not load JCS metrics. Please retry later.";
-        ts.textContent = '';
+        // Now fetch metrics
+        const resp = await fetch(`https://api.xrpl.to/api/token/${cachedJCSTokenId}`);
+        const d = await resp.json();
+        const m = d.metrics || {};
+        return {
+          name: d.name || "JCS Token",
+          price: m.priceUSD,
+          change: m.price24hChange,
+          marketCap: m.marketcapUSD,
+          volume: m.vol24hUSD,
+          lastUpdated: d.last_updated || new Date().toISOString()
+        };
+      } catch (e) {
+        console.error("JCS fetch error", e);
+        return null;
       }
     }
 
-    // Master refresh loop: call both metric loaders and set interval for live updates.
-    function refreshAllMetrics() {
-      getXrpData();
-      getJcsData();
+    // =================== DOM UPDATE ===================
+    function displayTokenMetrics(token, data) {
+      // Accepts `token` = 'xrp' or 'jcs', fills fields (handles null gracefully)
+      document.getElementById(token + '-price').textContent = (data && data.price !== undefined && data.price !== null)
+        ? ('$' + Number(data.price).toLocaleString(undefined,{maximumFractionDigits:8}))
+        : '--';
+      // 24h change: format + color
+      const changeElem = document.getElementById(token + '-change');
+      if (data && data.change !== undefined && data.change !== null) {
+        const chg = Number(data.change);
+        changeElem.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
+        changeElem.className = 'metrics-value metrics-delta--' + (chg >= 0 ? 'positive' : 'negative');
+      } else {
+        changeElem.textContent = '--';
+        changeElem.className = 'metrics-value';
+      }
+      document.getElementById(token + '-mcap').textContent = (data && data.marketCap !== undefined && data.marketCap !== null)
+        ? ('$' + Math.round(Number(data.marketCap)).toLocaleString())
+        : '--';
+      document.getElementById(token + '-volume').textContent = (data && data.volume !== undefined && data.volume !== null)
+        ? ('$' + Math.round(Number(data.volume)).toLocaleString())
+        : '--';
+      // Last updated date
+      document.getElementById(token + '-lastupdated').textContent = (data && data.lastUpdated) ?
+        'Last updated: ' + (new Date(data.lastUpdated)).toLocaleString(undefined, {hour12: false}) : '';
     }
 
-    // --- INITIALIZATION ---
+    // =================== REFRESH LOGIC ===================
+    async function refreshAllMetrics() {
+      // Use Promise.all for max concurrency (crypto users expect fast updates!)
+      const [xrp, jcs] = await Promise.all([fetchXRP(), fetchJCS()]);
+      displayTokenMetrics('xrp', xrp);
+      displayTokenMetrics('jcs', jcs);
+      // Optionally, update structured data dynamically
+      if (xrp && window?.document?.querySelector) {
+        const ldScript = document.querySelector(
+          'script[type="application/ld+json"]'
+        );
+        if (ldScript) {
+          let schema = JSON.parse(ldScript.innerText);
+          schema.offers.price = xrp.price;
+          ldScript.innerText = JSON.stringify(schema, null, 2);
+        }
+      }
+    }
+    // Initial load and then every 30 seconds
     refreshAllMetrics();
-    // Auto-refresh every 60 seconds (adjust interval to respect API rate limits as needed)
-    setInterval(refreshAllMetrics, 60000);
+    setInterval(refreshAllMetrics, 30000);
 
-    // Accessibility: Focus main on load for keyboard users
-    window.onload = () => {
-      document.querySelector("main").tabIndex = -1;
-      document.querySelector("main").focus();
-    };
+    // =================== SECURITY ===================
+    // All API returns are sanitized/injected only as textContent, never as HTML (prevent XSS vector).
+    // DOM updates are separated from network code for future maintenance.
 
-    // Legacy: Remove unwanted elements on load (compatibility for imported code)
-    document.querySelectorAll('.logo, .donate, .button, .domain').forEach(el => el.remove());
+    // =================== EXTENSIBILITY ===================
+    // To add more tokens or metrics, duplicate a metrics-card block and plug in new fetch logic.
+    // Style and structure are modular and commented to invite further expansion by the crypto/engineer community.
   </script>
 </body>
 </html>
-
-
-</body>
-
-</html>
-
