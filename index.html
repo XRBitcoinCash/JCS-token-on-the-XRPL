@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== REQUIRED META TAGS FOR SEO, ACCESSIBILITY, AND RESPONSIVENESS ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title and meta for search engines -->
+    <title>Jesus Christ Saves Ministries | Bringing Freedom Through Jesus in Granite City, IL</title>
+    <meta name="description" content="Jesus Christ Saves Ministries offers hope, service, and prayer. Join us for outreach, discipleship, and spiritual growth in Granite City, IL.">
+    <!-- Social sharing preview -->
+    <meta property="og:title" content="Jesus Christ Saves Ministries">
+    <meta property="og:description" content="Bringing freedom through Jesus. Outreach. Service. Hope. Prayer.">
+    <meta property="og:image" content="/assets/images/jcsm-share.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jesussavesministries.net/">
+    <!-- Bootstrap CSS Framework (Responsive, Accessible, Customizable) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts for typography (Optional) -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
+    <!-- Custom CSS overrides (Add your /css/custom.css or inline styles here) -->
+    <style>
+        /* ======== Custom styles for branding, highlights, and critical accessibility ======== */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f7f7f9;
+        }
+        .hero {
+            background: url('/assets/images/hero-bg.jpg') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            min-height: 360px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .overlay {
+            background: rgba(36,37,42, 0.7);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .section-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #19335e;
+        }
+        .testimony-card {
+            background: #fff;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,.05);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            min-height: 200px;
+        }
+        .subscribe-form input[type="email"] {
+            border-radius: 30px 0 0 30px;
+            border-right: 0;
+        }
+        .subscribe-form button {
+            border-radius: 0 30px 30px 0;
+        }
+        .footer-section {
+            background: #222747;
+            color: #eff4ff;
+            padding: 2rem 0 1rem 0;
+            font-size: 1rem;
+        }
+        .footer-section a {
+            color: #fcdfa4;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 99;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =================== HEADER & NAVIGATION =================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" role="navigation" aria-label="Main site navigation">
+            <div class="container">
+                <!-- Logo and site title -->
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <!-- SVG or PNG Logo. Use alt text for accessibility -->
+                    <img src="/assets/images/logo.svg" alt="Jesus Christ Saves Ministries logo" style="height:48px; margin-right:12px;">
+                    <span style="font-family:'Montserrat',Arial,sans-serif;font-weight:700;">Jesus Christ Saves Ministries</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Main navigation links -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#credentials">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#inspiration">Inspiration</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#serve">Serve</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#subscribe">Updates</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#prayer">Prayer</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-warning ms-3 text-dark" href="#donate" style="font-weight:600;">Donate</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End header/navigation -->
+
+    <!-- =================== HERO / MISSION STATEMENT SECTION =================== -->
+    <section class="hero d-flex align-items-center">
+        <!-- Overlay for text readability against image -->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center overlay mx-auto">
+                    <h1 class="display-4 fw-bold mb-2">Bringing Freedom Through Jesus</h1>
+                    <p class="lead mb-4">At Jesus Christ Saves Ministries, our mission is to see people walking in freedom through Jesus—meeting practical, spiritual, and relational needs and growing God's Kingdom together.</p>
+                    <a href="#prayer" class="btn btn-outline-light btn-lg mx-2 mb-2">Request Prayer</a>
+                    <a href="#donate" class="btn btn-warning btn-lg mx-2 mb-2 text-dark fw-semibold">Support Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End hero/mission -->
+
+    <!-- =================== CREDENTIALS / MINISTRIES SECTION =================== -->
+    <!--
+        This section highlights the ministry's story, core pillars, opportunities to serve, and credentials for community trust.
+        Use sub-sections for mission, value statement, and outreach highlights.
+    -->
+    <main id="main-content" tabindex="-1">
+    <section id="credentials" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Who We Are</h2>
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <p>
+                        <strong>Jesus Christ Saves Ministries</strong> (JCSM) was founded with a passion to reach the broken and forgotten in Granite City, Illinois and beyond—walking beside people and families through practical support and spiritual discipleship.
+                    </p>
+                    <ul>
+                        <li>Established non-profit with years of community impact</li>
+                        <li>Registered 501(c)(3) organization (EIN: [Your EIN Here])</li>
+                        <li>Faithfully serving 100s of local families annually</li>
+                    </ul>
+                    <p>
+                        <strong>Scripture foundation:</strong> “For God so loved the world, that He gave His one and only Son, that whoever believes in Him will not perish, but have everlasting life.” <em>(John 3:16)</em>
+                    </p>
+                    <a href="/docs/statement-of-faith.pdf" class="btn btn-sm btn-outline-primary me-2 mb-1" target="_blank" rel="noopener">Statement of Faith (PDF)</a>
+                    <a href="#serve" class="btn btn-sm btn-success mb-1">Find Service Opportunities</a>
+                </div>
+                <div class="col-md-5 mt-4 mt-md-0">
+                    <div class="p-3 shadow rounded bg-white">
+                        <h4 class="fw-bold mb-2">Current Outreach At A Glance</h4>
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-hand-holding-heart text-primary me-2"></i> Weekly food & clothing drives</li>
+                            <li><i class="fa fa-home text-primary me-2"></i> Homeless ministry Saturdays</li>
+                            <li><i class="fa fa-users text-primary me-2"></i> Friday youth nights & mentoring</li>
+                            <li><i class="fa fa-church text-primary me-2"></i> 2nd Sunday transport for worship</li>
+                        </ul>
+                        <a href="#calendar" class="btn btn-sm btn-outline-secondary">View Full Calendar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End credentials/ministries -->
+
+    <!-- =================== BLOG SECTION =================== -->
+    <!--
+        Showcase recent posts, articles, or sermons.
+        Replace with a feed if you have a CMS or manually update with your latest blog/resources.
+    -->
+    <section id="blog" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Latest Blog & Resources</h2>
+            <div class="row g-4">
+                <!-- Example blog article summary cards -->
+                <article class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <img src="/assets/images/blog-hope.jpg" class="card-img-top" alt="Hope Hangout Recap image showing joined hands in prayer.">
+                        <div class="card-body">
+                            <h5 class="card-title">Finding Hope in Community: The Power of Serving Together</h5>
+                            <p class="card-text">A reflection on our last Hope Hangout and the stories of lives touched through simple acts of love.</p>
+                            <a href="/blog/finding-hope-community.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white border-0">March 26, 2025 | by Pastor Sarah</div>
+                    </div>
+                </article>
+                <article class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <img src="/assets/images/blog-testimony.jpg" class="card-img-top" alt="Testimony of transformation at Jesus Christ Saves Ministries.">
+                        <div class="card-body">
+                            <h5 class="card-title">Testimony: "He Broke My Chains"</h5>
+                            <p class="card-text">Lin's story of transformation—from darkness to hope—through practical ministry and prayer.</p>
+                            <a href="/blog/he-broke-my-chains.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white border-0">March 11, 2025 | by Lin Maddox</div>
+                    </div>
+                </article>
+                <article class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <img src="/assets/images/blog-youth.jpg" class="card-img-top" alt="Friday Youth Night at JCSM.">
+                        <div class="card-body">
+                            <h5 class="card-title">Equipping the Next Generation</h5>
+                            <p class="card-text">Our latest Friday Youth Night was filled with learning, laughter, and reminders that Jesus changes everything.</p>
+                            <a href="/blog/equipping-next-generation.html" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                        <div class="card-footer bg-white border-0">February 28, 2025 | by Youth Team</div>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-4">
+                <a href="/blog/" class="btn btn-outline-secondary">View All Blog Posts</a>
+            </div>
+        </div>
+    </section>
+    <!-- End blog/resources -->
+
+    <!-- =================== INSPIRATION / TESTIMONIALS =================== -->
+    <!--
+        Use real or anonymized stories (with consent).
+        For more, expand to carousel/grid or integrate with video.
+    -->
+    <section id="inspiration" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Inspiration: Stories of Hope</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="testimony-card text-center">
+                        <img src="/assets/images/testimony1.jpg" alt="Portrait of ministry participant" class="rounded-circle mb-3" width="80" height="80">
+                        <blockquote class="blockquote mb-2">
+                            <p>The support I received changed my life. Thank you for loving me when I had nowhere left to turn.</p>
+                        </blockquote>
+                        <footer class="blockquote-footer">Tina M., <cite title="Served in 2024">Partner Family</cite></footer>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimony-card text-center">
+                        <img src="/assets/images/testimony2.jpg" alt="Smiling volunteer" class="rounded-circle mb-3" width="80" height="80">
+                        <blockquote class="blockquote mb-2">
+                            <p>Serving with JCSM gave me purpose. Seeing God at work is priceless!</p>
+                        </blockquote>
+                        <footer class="blockquote-footer">Miguel P., <cite title="Volunteer">Volunteer</cite></footer>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimony-card text-center">
+                        <img src="/assets/images/testimony3.jpg" alt="Happy youth event attendee" class="rounded-circle mb-3" width="80" height="80">
+                        <blockquote class="blockquote mb-2">
+                            <p>The youth nights are the highlight of my week. The team makes me feel known and cared for.</p>
+                        </blockquote>
+                        <footer class="blockquote-footer">Alex R., <cite title="Youth Night Attendee">Youth Night Attendee</cite></footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End inspiration/testimonials -->
+
+    <!-- =================== SUBSCRIPTION FORM =================== -->
+    <!--
+        Capture email addresses simply & securely for newsletter and service updates.
+        Use appropriate privacy policies and anti-spam text as required.
+        JavaScript optional for AJAX; here, a static simple form.
+    -->
+    <section id="subscribe" class="py-5 bg-primary text-white">
+        <div class="container">
+            <h2 class="section-title text-center text-white">Stay Connected: Get Updates</h2>
+            <p class="text-center mb-4">Sign up to receive ministry news, serving opportunities, and gathering invitations from Jesus Christ Saves Ministries.</p>
+            <form class="row g-3 justify-content-center subscribe-form" action="https://formspree.io/f/yourformid" method="POST" autocomplete="off" aria-label="Newsletter subscription form">
+                <div class="col-md-6 col-lg-4">
+                    <label for="newsletter-email" class="visually-hidden">Enter your email address</label>
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control" id="newsletter-email" placeholder="Your email address" required aria-required="true">
+                        <button type="submit" class="btn btn-warning text-dark fw-semibold" aria-label="Subscribe to newsletter"><i class="fa fa-envelope me-2"></i>Subscribe</button>
+                    </div>
+                </div>
+            </form>
+            <p class="small text-center mt-2">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+    </section>
+    <!-- End subscription -->
+
+    <!-- =================== PRAYER REQUEST FORM =================== -->
+    <!--
+        Secure, accessible request form (can be expanded to integrate with third-party church management systems, be delivered via email, or used with Formspree/JotForm).
+        Clearly signals prayer confidentiality.
+    -->
+    <section id="prayer" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Send a Prayer Request</h2>
+            <p class="text-center mb-4">We believe in the power of prayer. Share your prayer needs below—your request will be treated with care and compassion by our prayer team.</p>
+            <form class="row g-3 justify-content-center px-2 px-md-5" action="https://formspree.io/f/yourformid" method="POST" aria-label="Prayer request form">
+                <div class="col-md-6">
+                    <label for="prayer-name" class="form-label">Your Name (optional)</label>
+                    <input type="text" name="name" class="form-control" id="prayer-name" maxlength="64" autocomplete="name">
+                </div>
+                <div class="col-md-6">
+                    <label for="prayer-email" class="form-label">Your Email (optional, if response requested)</label>
+                    <input type="email" name="email" class="form-control" id="prayer-email" maxlength="100" autocomplete="email">
+                </div>
+                <div class="col-md-12">
+                    <label for="prayer-request" class="form-label">Prayer Request <span class="text-danger">(required)</span></label>
+                    <textarea name="request" class="form-control" id="prayer-request" rows="4" required aria-required="true" maxlength="850" placeholder="Type your prayer request here"></textarea>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success px-4">Send Prayer Request</button>
+                </div>
+                <div class="col-12 text-center small text-muted mt-2">Your prayer request will remain confidential unless you instruct us otherwise.</div>
+            </form>
+        </div>
+    </section>
+    <!-- End prayer form -->
+
+    <!-- =================== SERVING / VOLUNTEER OPPORTUNITIES =================== -->
+    <section id="serve" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Get Involved: Serve With Us</h2>
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <p>
+                        Step into life-changing ministry! Join us on <strong>2nd Saturdays, 12pm-2:30pm at 1818 Cleveland Blvd, Granite City</strong> to serve the homeless, or get involved in youth nights, prayer teams, food drives, or outreach events.
+                    </p>
+                    <ul style="margin-bottom: 1.2rem;">
+                        <li>Homeless outreach teams (every 2nd Saturday)</li>
+                        <li>Youth nights (Fridays) – serving, safety, and mentorship</li>
+                        <li>Door-to-door ministry and discipleship groups</li>
+                        <li>Tuesday evening prayer walks and food collection</li>
+                        <li>Weekly building clean-up/support</li>
+                        <li>Donation drives for food, clothing, and special projects</li>
+                    </ul>
+                    <a href="mailto:info@jesussavesministries.net?subject=Volunteer%20Inquiry" class="btn btn-outline-primary me-2 mb-2"><i class="fa fa-envelope me-2"></i>Contact to Serve</a>
+                </div>
+                <div class="col-md-5 text-center">
+                    <iframe title="Google Map to Jesus Christ Saves Ministries" src="https://maps.google.com/maps?q=3717c%20Nameoki%20Road,%20Granite%20City,%20Illinois&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="240" style="border-radius:9px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <p class="small mt-2">Main Ministry Site:<br> <span class="fw-semibold">3717c Nameoki Road, Granite City, IL 62040</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End serve/volunteer -->
+
+    <!-- =================== DONATION/SUPPORT SECTION =================== -->
+    <!-- Donation is present as modal and in prominent CTAs. Here, a centered action. -->
+    <section id="donate" class="py-4 bg-warning text-center">
+        <div class="container">
+            <h2 class="section-title mb-2" style="color:#322a04;">Your Generosity Makes Ministry Happen</h2>
+            <p class="mb-3" style="color:#322a04;">Join us in changing eternal lives. Support Jesus Christ Saves Ministries through a secure online donation, by mailing a gift, or via our <a href="https://a.co/3JIfmTX" target="_blank" rel="noopener" style="color:#e98c00">Amazon Wish List</a>.</p>
+            <a href="https://your-securedonationpage.com" target="_blank" rel="noopener" class="btn btn-dark btn-lg mx-2 mb-2" style="font-weight:600;"><i class="fa fa-heart me-2"></i>Give Today</a>
+            <a href="mailto:info@jesussavesministries.net?subject=Special%20Donation" class="btn btn-outline-dark btn-lg mx-2 mb-2">Mail A Gift</a>
+        </div>
+    </section>
+    <!-- End donation -->
+
+    </main><!-- End of main content -->
+
+    <!-- =================== FOOTER =================== -->
+    <!--
+        Footer contains:
+        - Contact/Location
+        - Service times
+        - Quick links
+        - Social media
+        - Email signup
+        - Copyright
+        - "Back to top" button
+    -->
+    <footer class="footer-section mt-0" role="contentinfo">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-1">Contact</h5>
+                    <p class="mb-1">
+                        Jesus Christ Saves Ministries<br>
+                        3717c Nameoki Road<br>
+                        Granite City, IL 62040
+                    </p>
+                    <p class="mb-1"><i class="fa fa-envelope me-2"></i><a href="mailto:info@jesussavesministries.net">info@jesussavesministries.net</a></p>
+                    <p class="mb-0"><i class="fa fa-phone me-2"></i>+1 (618) 555-1234</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold mb-1">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#credentials">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#serve">Serve</a></li>
+                        <li><a href="#donate">Donate</a></li>
+                        <li><a href="#prayer">Prayer Requests</a></li>
+                        <li><a href="/docs/statement-of-faith.pdf" target="_blank">Statement of Faith</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold mb-1">Service Times</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>Sundays: <strong>10:30am</strong></li>
+                        <li>Youth: <strong>Fridays 7:00pm</strong></li>
+                        <li>Homeless Outreach: <strong>2nd Sat</strong><br>12:00–2:30pm</li>
+                        <li>Prayer: <strong>Tues 6:30pm</strong></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="fw-bold mb-1">Connect With Us</h5>
+                    <div class="d-flex mb-2">
+                        <a href="https://facebook.com/jesussavesministries" class="me-3" target="_blank" aria-label="Facebook"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="https://instagram.com/jesussavesministries" class="me-3" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="https://twitter.com/jcsministries" target="_blank" aria-label="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+                    </div>
+                    <form class="d-flex" action="https://formspree.io/f/yourformid" method="POST">
+                        <label for="footer-email" class="visually-hidden">Email</label>
+                        <input type="email" name="email" id="footer-email" class="form-control me-2" placeholder="Email for updates" required>
+                        <button type="submit" class="btn btn-outline-warning text-white">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="border-light">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start text-center small">
+                    &copy; 2025 Jesus Christ Saves Ministries. All rights reserved.
+                </div>
+                <div class="col-md-6 text-md-end text-center small">
+                    <a href="/docs/privacy-policy.html" class="me-2">Privacy Policy</a>
+                    <a href="#top" class="back-to-top-link">Back to Top &uarr;</a>
+                </div>
+            </div>
+        </div>
+        <!-- Back to Top button (appears after scrolling) -->
+        <button class="btn btn-warning back-to-top" id="backToTopBtn" aria-label="Back to top">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+    </footer>
+    <!-- End footer -->
+
+    <!-- =================== SCRIPTS =================== -->
+    <!-- Bootstrap bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional: Smooth scroll and Back to Top script -->
+    <script>
+        // Smooth scroll for # links (add if more smoothness needed)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only enable for on-page anchors
+                if (document.getElementById(this.getAttribute('href')?.substring(1))) {
+                    e.preventDefault();
+                    document.getElementById(this.getAttribute('href').substring(1)).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // Show/Hide back-to-top button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        // Scroll page to top when button is clicked
+        backToTopBtn?.addEventListener('click', function() {
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    </script>
+    <!-- End scripts -->
+
+    <!-- =================== END DOCUMENT =================== -->
+
+</body>
+</html>
