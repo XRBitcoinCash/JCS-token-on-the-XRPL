@@ -1,260 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ==================================== -->
-  <!-- SEO META: Title, Description, Author -->
-  <!-- ==================================== -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faith-Based Crypto on XRP Ledger | X Jesus Christ Ministry</title>
-  <meta name="description" content="Empowering individuals and churches with blockchain technology and transparent cryptocurrency on the XRP Ledger. Combine faith, stewardship, and financial innovation.">
-  <meta name="keywords" content="faith-based crypto, XRP Ledger, digital giving, charity blockchain, decentralized stewardship, Jesus coin, X Jesus Christ Ministry">
-  <meta name="author" content="X Jesus Christ Ministry">
-  <!-- Open Graph/Social Sharing -->
-  <meta property="og:title" content="Faith-Based Crypto on XRP Ledger" />
-  <meta property="og:description" content="Join a new era of spiritual finance with transparent, low-cost giving on the XRP blockchain." />
-  <meta property="og:image" content="logo-xjesus-ministry.png" />
+  <!-- Basic SEO -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jesus Christ Token (JCS) on the XRP Ledger | Faith-Based Cryptocurrency</title>
+  <meta name="description" content="Jesus Christ Token (JCS) is a faith-based cryptocurrency on the XRP Ledger focused on transparent giving, stewardship, and global outreach." />
+  <meta name="keywords" content="Jesus Christ Token, JCS, XRP Ledger, XRPL, faith-based crypto, transparent giving, Christian crypto, blockchain stewardship" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="theme-color" content="#0e1b3d" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Canonical + Social (COMMENTED until you set your URL) -->
+  <!--
+  <link rel="canonical" href="https://YOUR-DOMAIN/" />
   <meta property="og:type" content="website" />
-  <!-- Schema.org JSON-LD Organization Markup -->
+  <meta property="og:title" content="Jesus Christ Token (JCS) on the XRP Ledger" />
+  <meta property="og:description" content="Transparent giving and digital stewardship powered by the XRP Ledger." />
+  <meta property="og:url" content="https://YOUR-DOMAIN/" />
+  <meta property="og:image" content="https://YOUR-DOMAIN/assets/img/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jesus Christ Token (JCS) on XRPL" />
+  <meta name="twitter:description" content="Where faith meets innovation—transparent giving on XRPL." />
+  <meta name="twitter:image" content="https://YOUR-DOMAIN/assets/img/og-image.jpg" />
+  -->
+
+  <!-- JSON-LD Structured Data (Project + Organization) -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
+  {
+    "@context": "https://schema.org",
+    "@type": "Project",
+    "name": "Jesus Christ Token (JCS)",
+    "alternateName": "JCS",
+    "description": "A faith-based cryptocurrency project on the XRP Ledger focused on transparent giving, stewardship, and global outreach.",
+    "keywords": "Jesus Christ Token, JCS, XRPL, XRP Ledger, Christian crypto, transparent giving, blockchain stewardship",
+    "creator": {
       "@type": "Organization",
-      "name": "X Jesus Christ Ministry",
-      "url": "https://yourdomain.com",
-      "logo": "https://yourdomain.com/logo-xjesus-ministry.png",
-      "description": "Faith-based cryptocurrency platform empowered by XRP Ledger.",
-      "sameAs": [
-        "https://twitter.com/xjesuschrist",
-        "https://facebook.com/xjesuschrist"
-      ]
-    }
+      "name": "Jesus Christ Saves Ministry",
+      "url": "https://example.com", 
+      "logo": "https://example.com/assets/img/logo.png",
+      "sameAs": []
+    },
+    "url": "https://example.com",
+    "image": "https://example.com/assets/img/og-image.jpg"
+  }
   </script>
-  <!-- CSS STYLES: Inline for example, should be external in production -->
+
+  <!-- Base styles: responsive, even spacing, no overlap -->
   <style>
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: Inter, Arial, sans-serif; color: #2B2B3F; background: #F8F9FB; line-height: 1.7; }
-    header, nav, main, section, article, footer { margin-bottom: 2rem; }
-    h1, h2, h3, h4, h5, h6 { text-wrap: balance; margin-top: 0; }
-    p { text-wrap: pretty; }
-    .hero { background: linear-gradient(135deg,#2B2B3F 70%,#31C3AA 96%); color: #FFF; padding: 3rem 2rem; text-align: center; }
-    .stats-table { width: 100%; border-collapse: collapse; background: #fff; margin: 0 auto; }
-    .stats-table th, .stats-table td { padding: 0.7rem; border-bottom: 1px solid #E9E9EF; text-align: right; }
-    .cta { border-radius: 5px; background: #31C3AA; color: #fff; padding: 1rem 2rem; border: none; font-size: 1.2rem; margin-top: 2rem; cursor: pointer; }
-    nav { background: #111827; }
-    nav ul { margin: 0; padding: 0.5rem; display: flex; gap: 2rem; justify-content: center; list-style: none; }
-    nav li { display: inline; }
-    nav a { color: #fff; font-weight: bold; text-decoration: none; }
-    @media (max-width: 800px) {
-      .hero { padding: 2rem 1rem; }
-      nav ul { flex-direction: column; align-items: center; }
+    :root{
+      --bg:#0a132b;
+      --bg-soft:#0f1f4a;
+      --card:#111c3f;
+      --text:#f2f5ff;
+      --muted:#b7c3ff;
+      --accent:#00e1ff;
+      --good:#2bd173;
+      --bad:#ff5e76;
+      --gold:#ffd166;
+      --maxw:1150px;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,0.35);
+      --space:clamp(14px, 2vw, 28px);
+      --space-lg:clamp(24px, 4vw, 48px);
     }
-    /* Accessibility: High contrast, large click targets */
-    .cta, nav a { min-width: 44px; min-height: 44px; display: inline-block; }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.55}
+    img{max-width:100%;height:auto;display:block;border-radius:12px}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--space)}
+    header.site{
+      position:relative;overflow:hidden;background:linear-gradient(180deg,#0b1633, #091028);
+      border-bottom:1px solid rgba(255,255,255,0.08)
+    }
+    .hero{
+      display:grid;grid-template-columns:1.1fr 0.9fr;gap:var(--space-lg);align-items:center;
+      padding:var(--space-lg) 0 var(--space-lg);
+    }
+    .hero h1{font-size:clamp(26px, 4vw, 46px);margin:0;line-height:1.15}
+    .hero p.lead{font-size:clamp(16px, 2.2vw, 20px);color:var(--muted);margin:12px 0 0}
+    .badge{display:inline-flex;gap:10px;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);padding:8px 12px;border-radius:999px;font-size:14px;margin:12px 0}
+    .grid{display:grid;gap:var(--space);grid-template-columns:repeat(12,1fr)}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--space)}
+    section{padding:var(--space-lg) 0}
+    h2{font-size:clamp(22px, 3vw, 32px);margin:0 0 10px}
+    h3{font-size:clamp(18px, 2.4vw, 24px);margin:0 0 8px}
+    p{margin:0 0 10px}
+    ul{margin:0;padding-left:20px}
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;background:rgba(0,225,255,0.12);border:1px solid rgba(0,225,255,0.35);padding:6px 10px;border-radius:999px;font-size:13px}
+    .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space)}
+    .kpi .metric{background:var(--bg-soft);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;text-align:center}
+    .kpi .metric .val{font-size:clamp(18px,3vw,28px);font-weight:700}
+    .kpi .metric .lab{font-size:13px;color:var(--muted)}
+    table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid rgba(255,255,255,0.12);border-radius:12px;overflow:hidden}
+    th,td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.08)}
+    th{background:rgba(255,255,255,0.06);text-align:left}
+    tr:last-child td{border-bottom:none}
+    .pos{color:var(--good)} .neg{color:var(--bad)}
+    .two-col{display:grid;gap:var(--space);grid-template-columns:1fr 1fr}
+    .note{font-size:13px;color:var(--muted)}
+    footer.site{padding:var(--space-lg) 0;border-top:1px solid rgba(255,255,255,0.08);background:#0a132b}
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr;gap:var(--space)}
+      .kpi{grid-template-columns:1fr 1fr}
+      .two-col{grid-template-columns:1fr}
+    }
+    @media (max-width: 520px){
+      .kpi{grid-template-columns:1fr}
+      th,td{padding:10px 12px}
+    }
   </style>
 </head>
 <body>
-  <!-- ==================================== -->
-  <!-- HEADER: Site Title & Navigation      -->
-  <!-- ==================================== -->
-  <header>
-    <h1>X Jesus Christ Ministry — Faith-Based Cryptocurrency on XRP Ledger</h1>
-    <nav>
-      <ul>
-        <li><a href="#mission">Mission</a></li>
-        <li><a href="#xrpl-benefits">XRPL Benefits</a></li>
-        <li><a href="#live-stats">Live Stats</a></li>
-        <li><a href="#impact">Faith Impact</a></li>
-        <li><a href="#donate">Donate</a></li>
-        <li><a href="#learn">Learn</a></li>
-      </ul>
-    </nav>
+  <!-- HEADER / HERO -->
+  <header class="site">
+    <div class="wrap hero">
+      <div>
+        <div class="badge">
+          <span class="pill">XRPL • Low Fees • High Speed</span>
+          <span class="pill">Faith-Based • Transparent Giving</span>
+        </div>
+        <h1>Jesus Christ Token (JCS) — Faith and Finance on the XRP Ledger</h1>
+        <p class="lead">Stewardship, generosity, and global outreach powered by an energy‑efficient blockchain. 100% auditable giving, instantly settled, globally accessible.</p>
+        <div class="kpi" aria-label="Project highlights">
+          <div class="metric"><div class="val">XRPL</div><div class="lab">Network</div></div>
+          <div class="metric"><div class="val">Low</div><div class="lab">Fees</div></div>
+          <div class="metric"><div class="val">~3–5s</div><div class="lab">Settlement</div></div>
+          <div class="metric"><div class="val">Eco</div><div class="lab">Footprint</div></div>
+        </div>
+      </div>
+      <div>
+        <img src="assets/img/hero-placeholder.jpg" alt="Faith-inspired XRP Ledger themed illustration" loading="lazy" />
+      </div>
+    </div>
   </header>
 
-  <!-- ==================================== -->
-  <!-- HERO SECTION: Faith/Tech Headline    -->
-  <!-- ==================================== -->
-  <section class="hero">
-    <h2>Join the Movement — Transparent Giving and Digital Stewardship</h2>
-    <p>Where faith meets innovation! Experience spiritual empowerment and transparent giving, powered by the XRP Ledger. Missions, donations, community, and economic justice brought together through blockchain technology.</p>
-    <button class="cta">Get Started</button>
+  <!-- ABOUT / MISSION -->
+  <section id="mission">
+    <div class="wrap grid">
+      <div class="card" style="grid-column: span 7;">
+        <h2>Mission</h2>
+        <p>Inspired by the teachings of Jesus Christ, JCS equips believers, ministries, and donors to engage digital finance with integrity and purpose. Our focus: transparent giving, auditable impact, and global reach through the XRP Ledger.</p>
+        <ul>
+          <li><strong>Transparent Giving:</strong> On-ledger receipts and auditable flows.</li>
+          <li><strong>Inclusive Access:</strong> Borderless support for missions, relief, and outreach.</li>
+          <li><strong>Responsible Stewardship:</strong> Low fees ensure more reaches those in need.</li>
+        </ul>
+      </div>
+      <div class="card" style="grid-column: span 5;">
+        <h3>What is JCS?</h3>
+        <p class="muted">A community token designed to encourage generosity, track project milestones, and reward participation in prayer, service, and outreach.</p>
+        <ul>
+          <li><span class="pill">XRPL Native Token</span></li>
+          <li><span class="pill">Community Rewards</span></li>
+          <li><span class="pill">Impact Tracking</span></li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <!-- ==================================== -->
-  <!-- ABOUT: Mission & Faith Motivation    -->
-  <!-- ==================================== -->
-  <main>
-    <article id="mission">
-      <h2>Our Mission: Bridging Faith and Financial Innovation</h2>
-      <p>Inspired by the teachings of Jesus Christ, we equip believers and churches to engage the evolving digital finance landscape with confidence and purpose. Our commitment is to empower all people to practice stewardship, generosity, and economic justice using trustworthy, low-cost cryptocurrency on the XRP Ledger.</p>
-      <p>Through prayer, education, and technology, X Jesus Christ Ministry connects the faithful to a new frontier of transparent giving and global outreach.</p>
-    </article>
+  <!-- TOKEN DETAILS -->
+  <section id="token">
+    <div class="wrap two-col">
+      <div class="card">
+        <h2>Token details</h2>
+        <ul>
+          <li><strong>Token name:</strong> Jesus Christ Token</li>
+          <li><strong>Ticker:</strong> JCS</li>
+          <li><strong>Network:</strong> XRPL (mainnet)</li>
+          <li><strong>Issuer account:</strong> <span id="issuer-address">[to be displayed]</span></li>
+          <li><strong>Supply:</strong> <span id="supply-total">[to be displayed]</span></li>
+        </ul>
+        <p class="note">Note: exact issuer and supply values can be updated live from the XRPL when you enable scripts below.</p>
+      </div>
+      <div class="card">
+        <h3>Tokenomics</h3>
+        <ul>
+          <li><strong>Distribution:</strong> Community, outreach funds, development, reserves.</li>
+          <li><strong>Utility:</strong> Recognition, participation rewards, project milestone tracking.</li>
+          <li><strong>Governance (future):</strong> Community signaling for impact priorities.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <!-- XRPL Service & Technology Section -->
-    <section id="xrpl-benefits">
-      <h2>Why the XRP Ledger? Faith-Aligned Blockchain for Good</h2>
-      <ul>
-        <li><b>Trust & Transparency:</b> All donations and transactions are immutably recorded and viewable.</li>
-        <li><b>Low Transaction Costs:</b> Giving is efficient—more resources go to those in need, not to overhead.</li>
-        <li><b>Global Reach:</b> Instant cross-border support for missions, disaster relief, and charity.</li>
-        <li><b>Eco-Friendly:</b> Energy-efficient protocol reflects our care for creation.</li>
-        <li><b>Tokenization:</b> Churches and ministries can issue tokens for community rewards, tracking projects, and fundraising.</li>
-      </ul>
-      <p>The XRP Ledger’s proven reliability, high speed, and inclusive protocol mean all users—from the largest churches to individual donors—can participate safely, transparently, and impactfully.</p>
-    </section>
-<!-- Existing XRP script ends here -->
-<script>
-  async function updateXRPLToken(symbol, issuer, priceId, changeId, marketcapId, volumeId) {
-    try {
-      const response = await fetch(`https://xrpl.services/?issuer=${issuer}&currency=${symbol}&limit=1000000000000`);
-      const data = await response.json();
+  <!-- LIVE METRICS -->
+  <section id="live-metrics">
+    <div class="wrap">
+      <h2>Live metrics</h2>
+      <div class="card">
+        <table aria-label="Live metrics for XRP and tokens">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Price (USD)</th>
+              <th>24h Change</th>
+              <th>Market Cap</th>
+              <th>Volume (24h)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>XRP</td>
+              <td id="xrp-price">$0.00</td>
+              <td id="xrp-change"><span class="muted">0.00%</span></td>
+              <td id="xrp-marketcap">$0</td>
+              <td id="xrp-volume">$0</td>
+            </tr>
+            <tr>
+              <td>Jesus Coin (JCS)</td>
+              <td id="jesus-price">$0.00000000</td>
+              <td id="jesus-change"><span class="muted">0.00%</span></td>
+              <td id="jesus-marketcap">$0</td>
+              <td id="jesus-volume">$0</td>
+            </tr>
+            <tr>
+              <td>Crescite Token</td>
+              <td id="crescite-price">$0.00</td>
+              <td id="crescite-change"><span class="muted">0.00%</span></td>
+              <td id="crescite-marketcap">$0</td>
+              <td id="crescite-volume">$0</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">Enable live updates by adding the script block shown in Step 2 (no links displayed on the page).</p>
+      </div>
+    </div>
+  </section>
 
-      const token = data[0]; // Assuming first result is the token
-      const price = parseFloat(token.price_USD);
-      const change = parseFloat(token.percent_change_24h);
-      const marketcap = parseFloat(token.marketcap_USD);
-      const volume = parseFloat(token.volume_USD);
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap two-col">
+      <div class="card">
+        <h2>How it works</h2>
+        <ol>
+          <li>Choose a wallet that supports XRPL.</li>
+          <li>Set a trustline to JCS.</li>
+          <li>Send and receive with low fees and instant settlement.</li>
+        </ol>
+        <p class="note">Trustline, issuer, and domain verification can be automated later; placeholders are used here.</p>
+      </div>
+      <div class="card">
+        <h3>Faith and impact</h3>
+        <p>Every transaction can reflect generosity and care, with transparent records that uphold accountability.</p>
+        <img src="assets/img/impact-placeholder.jpg" alt="Illustration of transparent giving and impact tracking" loading="lazy" />
+      </div>
+    </div>
+  </section>
 
-      document.getElementById(priceId).innerText = `$${price.toFixed(8)}`;
-      document.getElementById(changeId).innerHTML = `<span style="color:${change >= 0 ? 'green' : 'red'};">${change.toFixed(2)}%</span>`;
-      document.getElementById(marketcapId).innerText = `$${marketcap.toLocaleString()}`;
-      document.getElementById(volumeId).innerText = `$${volume.toLocaleString()}`;
-    } catch (error) {
-      console.error(`Error fetching ${symbol} data:`, error);
-    }
-  }
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="wrap">
+      <h2>Roadmap</h2>
+      <div class="grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Phase 1</h3>
+          <p>Token setup, mission articulation, website foundation, basic metrics.</p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>Phase 2</h3>
+          <p>Community rewards, education content, automated impact reporting.</p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>Phase 3</h3>
+          <p>Governance signals, partnerships, broader integrations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Jesus Coin
-  updateXRPLToken('JCS', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2>FAQ</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>What is JCS?</h3>
+          <p>A faith-driven community token on XRPL to support transparent giving and engagement.</p>
+        </div>
+        <div class="card">
+          <h3>Is this investment advice?</h3>
+          <p>No. JCS is for education, community, and outreach support. Do your own research.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Crescite Token (example issuer, update if needed)
-  updateXRPLToken('CRESCITE', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'crescite-price', 'crescite-change', 'crescite-marketcap', 'crescite-volume');
+  <!-- COMPLIANCE / DISCLOSURE -->
+  <section id="compliance">
+    <div class="wrap">
+      <div class="card">
+        <h2>Disclosures</h2>
+        <p>All content is informational and reflects a faith-based initiative on the XRP Ledger. No guarantees are made regarding price or performance. Use responsibly.</p>
+      </div>
+    </div>
+  </section>
 
-  // Refresh every minute
-  setInterval(() => {
-    updateXRPLToken('JCS', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
-    updateXRPLToken('CRESCITE', 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd', 'crescite-price', 'crescite-change', 'crescite-marketcap', 'crescite-volume');
-  }, 60000);
-</script>
-
-    <!-- Live Stats/Market Table -->
-    <section id="live-stats">
-      <h2>Real-Time XRP and Token Metrics</h2>
-      <table class="stats-table" aria-label="Live Token Statistics">
-        <caption>Sample Token and Donation Volume — Powered by XRPL</caption>
-        <thead>
-          <tr>
-            <th scope="col">Token</th>
-            <th scope="col">Price (USD)</th>
-            <th scope="col">24h Change</th>
-            <th scope="col">Market Cap</th>
-            <th scope="col">Volume (24h)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>XRP</td>
-            <td>$2.96</td>
-            <td><span style="color:green;">+1.5%</span></td>
-            <td>$167,417,549,722</td>
-            <td>$7,391,372,842</td>
-          </tr>
-          <tr>
-            <td>Jesus Coin</td>
-            <td>$0.00000003638</td>
-            <td><span style="color:red;">-4.2%</span></td>
-           <tr>
-  <td>XRP</td>
-  <td id="xrp-price">$2.96</td>
-  <td id="xrp-change"><span style="color:green;">+1.5%</span></td>
-  <td id="xrp-marketcap">$167,417,549,722</td>
-  <td id="xrp-volume">$7,391,372,842</td>
-</tr>
-
-<tr>
-  <td>Jesus Coin</td>
-  <td id="jesus-price">$0.00000003638</td>
-  <td id="jesus-change"><span style="color:red;">-4.2%</span></td>
-  <td id="jesus-marketcap">$5,509,627</td>
-  <td id="jesus-volume">$11,211.71</td>
-</tr>
-<tr>
-  <td>Crescite Token</td>
-  <td id="crescite-price">$0.02</td>
-  <td id="crescite-change"><span style="color:green;">+0.6%</span></td>
-  <td id="crescite-marketcap">$100,000,000</td>
-  <td id="crescite-volume">$1,500,000</td>
-</tr>
-
-      <blockquote>
-        "Faith awakens to the rhythm of change. Every donation touches hearts, sends hope globally, and unites believers in love and action." <small>— X Jesus Christ Ministry</small>
-      </blockquote>
-      <ul>
-        <li><b>Digital Tithing:</b> Empower your giving—100% auditable, borderless, immediate.</li>
-        <li><b>Charity & Outreach:</b> Track impact and reach for every project, from medical missions to food banks.</li>
-        <li><b>Community Rewards:</b> Engage and grow together through token-based rewards for service, volunteering, and prayer missions.</li>
-      </ul>
-      <p>Read stories from around the world—how faith, technology, and generosity have multiplied reach and impact through blockchain transparency and efficiency.</p>
-    </section>
-
-    <!-- Donation Call to Action -->
-    <section id="donate">
-      <h2>Support Our Mission</h2>
-      <p>Your gift fosters global outreach, education, and empowerment, fully recorded and trusted on the XRP Ledger. Every donation, large or small, advances the Kingdom and leaves a legacy of stewardship.</p>
-      <button class="cta">Donate via XRPL</button>
-      <p><small>All donations are processed securely and transparently, with receipts issued instantly on the blockchain.</small></p>
-    </section>
-
-    <!-- Learn & Resources Section -->
-    <section id="learn">
-      <h2>Learn More: Faith, Crypto, and the Future</h2>
-      <ul>
-        <li><b>What is XRPL?</b> Read guides and technical documents on XRP Ledger infrastructure.</li>
-        <li><b>Crypto and the Gospel:</b> Articles on stewardship, community economics, and technological mission outreach.</li>
-        <li><b>FAQs:</b> Get quick answers on donations, wallets, and tokenization for churches.</li>
-      </ul>
-      <p>Interested in starting your own faith-based project with blockchain? Contact our team for resources, setup guides, and developer support.</p>
-    </section>
-
-  </main>
-
-  <!-- ==================================== -->
-  <!-- FOOTER: Contact & Legal              -->
-  <!-- ==================================== -->
-  <footer>
-    <address>
-      <strong>X Jesus Christ Ministry</strong><br>
-      Email: info@xjesuschrist.com<br>
-      Location: Digital. Global Ministries.<br>
-    </address>
-    <p>&copy; 2025 X Jesus Christ Ministry. All rights reserved.<br>
-      Powered by the XRP Ledger. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-<script>
-  async function updateMetrics() {
-    try {
-      const response = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP', {
-        headers: {
-          'X-CMC_PRO_API_KEY': 'YOUR_API_KEY_HERE'
-        }
-      });
-      const data = await response.json();
-      const xrp = data.data.XRP.quote.USD;
-
-      document.getElementById('xrp-price').innerText = `$${xrp.price.toFixed(2)}`;
-      document.getElementById('xrp-change').innerHTML = `<span style="color:${xrp.percent_change_24h >= 0 ? 'green' : 'red'};">${xrp.percent_change_24h.toFixed(2)}%</span>`;
-      document.getElementById('xrp-marketcap').innerText = `$${xrp.market_cap.toLocaleString()}`;
-      document.getElementById('xrp-volume').innerText = `$${xrp.volume_24h.toLocaleString()}`;
-    } catch (error) {
-      console.error('Error fetching XRP data:', error);
-    }
-  }
-
-  updateMetrics();
-  setInterval(updateMetrics, 60000);
-</script>
-    </p>
+  <!-- FOOTER -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="two-col">
+        <div class="card">
+          <h3>Project identity</h3>
+          <ul>
+            <li><strong>Project:</strong> Jesus Christ Token (JCS)</li>
+            <li><strong>Network:</strong> XRPL (mainnet)</li>
+            <li><strong>Domain:</strong> [to be finalized]</li>
+          </ul>
+          <p class="note">Add DID and xrp-ledger.toml once your new domain is ready.</p>
+        </div>
+        <div class="card">
+          <h3>Contact</h3>
+          <p class="muted">Add your preferred contact channel later. No links are included yet.</p>
+        </div>
+      </div>
+      <p class="note" style="margin-top:14px;">© 2025 Jesus Christ Saves Ministry — Powered by the XRP Ledger.</p>
+    </div>
   </footer>
-  <!-- End of Index HTML -->
+
+  <!-- STEP 2 will go here: dynamic scripts (optional). Keep this comment as an anchor. -->
 </body>
 </html>
 
