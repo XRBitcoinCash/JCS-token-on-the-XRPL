@@ -1,0 +1,25 @@
+[account]
+address = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+desc = "Jesus Christ Saves Issuer"
+
+[meta]
+domain = "jesuschristsaves.org"
+website = "https://www.jesuschristsaves.org/"
+logo = "https://yourdomain.com/assets/jcs-icon-256.png"
+description = "Jesus Christ Saves (JCS) is a spiritually inspired token on the XRP Ledger, promoting faith, hope, and purpose through digital community."
+
+[social]
+twitter = "@JesusChristSaves"
+email = "contact@jesuschristsaves.org"
+
+[[currencies]]
+currency = "JCS"
+issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+name = "Jesus Christ Saves"
+desc = "Jesus Christ Saves (JCS) is a spiritually inspired token on the XRP Ledger, promoting faith, hope, and purpose through digital community."
+icon = "https://yourdomain.com/assets/jcs-icon-256.png"
+
+[[currencies.links]]
+url = "https://www.jesuschristsaves.org/"
+title = "Official Website"
+type = "website"
