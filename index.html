@@ -211,85 +211,156 @@
     </div>
   </section>
 
-  <!-- LIVE METRICS -->
-  <table id="liveMetrics">
-  <thead>
-    <tr>
-      <th>Asset</th>
-      <th>Price (USD)</th>
-      <th>24h Change</th>
-      <th>Market Cap</th>
-      <th>Volume (24h)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>XRP</td>
-      <td id="xrpPrice">—</td>
-      <td><span id="xrpChange" data-dir="">—</span></td>
-      <td>—</td>
-      <td>$0</td>
-    </tr>
-    <tr>
-      <td>Jesus Coin (JCS)</td>
-      <td id="jcsPrice">—</td>
-      <td><span id="jcsChange" data-dir="">—</span></td>
-      <td><span id="jcsMcap">—</span></td>
-      <td>$0</td>
-    </tr>
-    <tr>
-      <td>Sologenic (SOLO)</td>
-      <td id="soloPrice">—</td>
-      <td><span id="soloChange" data-dir="">—</span></td>
-      <td>—</td>
-      <td>$0</td>
-    </tr>
-  </tbody>
-</table>
+<!-- LIVE METRICS SECTION: XRP, JCS, SOLO -->
+<!-- ====================== HTML, CSS, & JS ====================== -->
 
-  <section id="live-metrics">
-    <div class="wrap">
-      <h2>Live metrics</h2>
-      <div class="card">
-        <table aria-label="Live metrics for XRP and tokens">
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Price (USD)</th>
-              <th>24h Change</th>
-              <th>Market Cap</th>
-              <th>Volume (24h)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>XRP</td>
-              <td id="xrp-price">$0.00</td>
-              <td id="xrp-change"><span class="muted">0.00%</span></td>
-              <td id="xrp-marketcap">$0</td>
-              <td id="xrp-volume">$0</td>
-            </tr>
-            <tr>
-              <td>Jesus Coin (JCS)</td>
-              <td id="jesus-price">$0.00000000</td>
-              <td id="jesus-change"><span class="muted">0.00%</span></td>
-              <td id="jesus-marketcap">$0</td>
-              <td id="jesus-volume">$0</td>
-            </tr>
-            <tr>
-  <td>Sologenic (SOLO)</td>
-  <td id="solo-price">$0.00</td>
-  <td id="solo-change"><span class="muted">0.00%</span></td>
-  <td id="solo-marketcap">$0</td>
-  <td id="solo-volume">$0</td>
-</tr>
+<!-- Import Google Fonts for visual consistency -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-          </tbody>
-        </table>
-        <p class="note">Enable live updates by adding the script block shown in Step 2 (no links displayed on the page).</p>
-      </div>
-    </div>
-  </section>
+<!-- Responsive container for table -->
+<div class="table-responsive">
+  <table id="crypto-metrics-table" class="crypto-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Price (USD)</th>
+        <th>24h Change</th>
+        <th>Market Cap</th>
+        <th>Volume (24H)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="7" style="text-align:center" id="table-loading-row">Loading live data...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Inline CSS for table styling and responsiveness -->
+<style>
+  body { font-family: 'Poppins', sans-serif; color: #222; }
+  .crypto-table          { width: 100%; border-collapse: collapse; background: #fff; font-size: 1rem; }
+  .crypto-table th, 
+  .crypto-table td       { padding: 0.8em 1em; border: 1px solid #e4e4e4; text-align: center; vertical-align: middle; }
+  .crypto-table th       { background: #825CFF; color: #fff; font-weight: 600; }
+  .crypto-table tbody tr:nth-child(even) { background: #f9f9fc; }
+  .crypto-table tbody tr:hover           { background: #f3eaff; }
+  .crypto-table .text-green              { color: #1db954; font-weight: 500; }
+  .crypto-table .text-red                { color: #e74c3c; font-weight: 500; }
+  .table-responsive     { width: 100%; overflow-x: auto; }
+
+  /* Responsive font sizing for smaller devices */
+  @media (max-width: 600px) {
+    .crypto-table th, .crypto-table td { padding: 0.5em 0.6em; font-size: 0.92rem; }
+  }
+</style>
+
+<!-- Optionally add Fetch Polyfill for older browsers -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script> -->
+
+<script>
+/**
+ * LIVE METRICS JAVASCRIPT
+ * --------------------------------------------------
+ * - Fetches real-time data for XRP, JCS, and Sologenic (SOLO)
+ * - Displays price, 24h change, market cap, and 24h volume
+ * - Updates table dynamically every 60 seconds
+ * - No dependencies (uses fetch API - polyfill above for legacy)
+ *
+ * INTEGRATION INSTRUCTIONS:
+ * - Embed inside any HTML file where live metrics are needed
+ * - Place at the end of the <body> section, after the table markup
+ * - Ensure CSS and font imports (edit or comment if using own scheme)
+ * --------------------------------------------------
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+  // CoinGecko API endpoint & IDs for XRP, JCS, SOLO
+  const API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=ripple,jesus-coin,sologenic&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true';
+
+  // Index labels and table rows (for Name/Symbol mapping)
+  const COINS = [
+    { id: 'ripple',       name: 'XRP', symbol: 'XRP' },
+    { id: 'jesus-coin',   name: 'JCS', symbol: 'JCS' },
+    { id: 'sologenic',    name: 'SOLO', symbol: 'SOLO' }
+  ];
+  
+  const tableBody = document.querySelector('#crypto-metrics-table tbody');
+  const loadingRowId = 'table-loading-row';
+
+  // Utility for large numbers with thousand separators and symbols
+  function formatValue(value, symbol = '$', digits = 2) {
+    if (!value && value !== 0) return '—';
+    if (Math.abs(value) >= 1e9)
+      return symbol + (value / 1e9).toFixed(digits) + 'B';
+    if (Math.abs(value) >= 1e6)
+      return symbol + (value / 1e6).toFixed(digits) + 'M';
+    if (Math.abs(value) >= 1e3)
+      return symbol + (value / 1e3).toFixed(digits) + 'K';
+    return symbol + Number(value).toLocaleString(undefined, {minimumFractionDigits: digits, maximumFractionDigits: digits});
+  }
+  // Utility for % formatting
+  function formatChange(val, digits = 2) {
+    const num = Number(val);
+    if (isNaN(num)) return '—';
+    const cls = num >= 0 ? 'text-green' : 'text-red';
+    const sign = num > 0 ? '+' : '';
+    return `<span class="${cls}">${sign}${num.toFixed(digits)}%</span>`;
+  }
+
+  /**
+   * Fetches live data for the defined assets and renders the table.
+   * Retry logic built-in: up to 3 total attempts, 2s between retries.
+   */
+  async function fetchAndRenderLiveMetrics(retries = 3) {
+    try {
+      // Fetch data from CoinGecko API
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error(`API Error: HTTP ${response.status}`);
+      const data = await response.json();
+      // Remove loading row if present
+      const loadingRow = document.getElementById(loadingRowId);
+      if (loadingRow) loadingRow.remove();
+      // Build table rows
+      let rowsHtml = '';
+      COINS.forEach((coin, idx) => {
+        const d = data[coin.id] || {};
+        rowsHtml += `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>${coin.name}</td>
+            <td>${coin.symbol}</td>
+            <td>${formatValue(d.usd)}</td>
+            <td>${formatChange(d.usd_24h_change)}</td>
+            <td>${formatValue(d.usd_market_cap)}</td>
+            <td>${formatValue(d.usd_24h_vol)}</td>
+          </tr>
+        `;
+      });
+      tableBody.innerHTML = rowsHtml;
+    } catch (err) {
+      // If this was the last retry, display error
+      if (retries === 1) {
+        tableBody.innerHTML = `<tr><td colspan="7" style="color:#e53935;text-align:center;">Error fetching live data. Please try refreshing.</td></tr>`;
+        console.error("Live metrics error:", err);
+      } else {
+        // Wait and retry
+        setTimeout(() => fetchAndRenderLiveMetrics(retries - 1), 2000);
+      }
+    }
+  }
+
+  // Initial load and interval refresh setup
+  fetchAndRenderLiveMetrics();
+  setInterval(fetchAndRenderLiveMetrics, 60000); // Update every 60 sec
+});
+</script>
+
+<!-- ===================== END LIVE METRICS ===================== -->
+
 
   <!-- HOW IT WORKS -->
   <section id="how">
