@@ -11,6 +11,9 @@ description = "Jesus Christ Saves (JCS) is a spiritually inspired token on the X
 [social]
 twitter = "@JesusChristSaves"
 email = "contact@jesuschristsaves.org"
+[DID]
+id = "did:xrpl:69F598AC55C5731821C7"
+url = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/"
 
 [[currencies]]
 currency = "JCS"
