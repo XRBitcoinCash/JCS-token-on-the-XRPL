@@ -3,9 +3,9 @@ address = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
 desc = "Jesus Christ Saves Issuer"
 
 [meta]
-domain = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/"
-website = "https://www.jesuschristsaves.org/"
-logo = "https://yourdomain.com/assets/jcs-icon-256.png"
+domain = "xrbitcoincash.github.io"
+website = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/"
+logo = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/assets/jcs-icon-256.png"
 description = "Jesus Christ Saves (JCS) is a spiritually inspired token on the XRP Ledger, promoting faith, hope, and purpose through digital community."
 
 [social]
@@ -17,7 +17,7 @@ currency = "JCS"
 issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
 name = "Jesus Christ Saves"
 desc = "Jesus Christ Saves (JCS) is a spiritually inspired token on the XRP Ledger, promoting faith, hope, and purpose through digital community."
-icon = "https://yourdomain.com/assets/jcs-icon-256.png"
+icon = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/assets/jcs-icon-256.png"
 
 [[currencies.links]]
 url = "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL/"
