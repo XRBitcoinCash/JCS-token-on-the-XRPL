@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+  #xrpChange[data-dir="up"],
+  #soloChange[data-dir="up"],
+  #jcsChange[data-dir="up"] {
+    color: #0a8f55;
+  }
+  #xrpChange[data-dir="down"],
+  #soloChange[data-dir="down"],
+  #jcsChange[data-dir="down"] {
+    color: #c62828;
+  }
+</style>
+
   <!-- Basic SEO -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,7 +25,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <!-- Canonical + Social (COMMENTED until you set your URL) -->
-  <!--
+ <div>
+  <strong>XRP:</strong> <span id="xrpPrice">—</span> <small id="xrpChange" data-dir="">—</small>
+</div>
+<div>
+  <strong>SOLO:</strong> <span id="soloPrice">—</span> <small id="soloChange" data-dir="">—</small>
+</div>
+<div>
+  <strong>JCS:</strong> <span id="jcsPrice">—</span> <small id="jcsChange" data-dir="">—</small>
+</div>
+<div>
+  <strong>JCS Market Cap:</strong> <span id="jcsMcap">—</span>
+</div>
+ <!--
   <link rel="canonical" href="https://YOUR-DOMAIN/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Jesus Christ Token (JCS) on the XRP Ledger" />
@@ -321,55 +346,226 @@
     </div>
   </footer>
 <script>
-  // XRP via CoinGecko
-  async function updateXRP() {
+/**
+ * JCS live metrics engine
+ * - XRP + SOLO prices from CoinGecko
+ * - JCS/XRP top-of-book midpoint from XRPL DEX, then JCS/USD via XRP/USD
+ * - Market cap from configured supply
+ *
+ * Required DOM IDs:
+ *   #xrpPrice #xrpChange #soloPrice #soloChange #jcsPrice #jcsChange #jcsMcap
+ *
+ * Customize here:
+ */
+const CONFIG = {
+  ISSUER: 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd',
+  CURRENCY: 'JCS',
+  SUPPLY: 1_000_000_000_000, // total/circulating supply for market cap calc
+  XRPL_WSS: 'wss://xrplcluster.com', // fallback option: 'wss://s1.ripple.com'
+  REFRESH_MS: 30_000, // update interval
+  PRICE_DECIMALS: {
+    xrp: 4,
+    solo: 4,
+    jcs: 8 // JCS may be thinly traded; preserve precision
+  }
+};
+
+// ---- DOM helpers ----
+const $ = (id) => document.getElementById(id);
+const setText = (id, val) => { const el = $(id); if (el) el.textContent = val; };
+const setChange = (id, pct) => {
+  const el = $(id);
+  if (!el) return;
+  if (pct == null || Number.isNaN(pct)) { el.textContent = '—'; el.removeAttribute('data-dir'); return; }
+  const dir = pct >= 0 ? 'up' : 'down';
+  el.textContent = `${pct.toFixed(2)}%`;
+  el.setAttribute('data-dir', dir);
+};
+
+// ---- Format helpers ----
+const fmtUSD = (n, dp = 2) => {
+  if (n == null || !Number.isFinite(n)) return '—';
+  return n < 1 ? `$${n.toFixed(dp)}` : `$${n.toLocaleString(undefined, { maximumFractionDigits: dp })}`;
+};
+const fmtNum = (n, dp = 4) => {
+  if (n == null || !Number.isFinite(n)) return '—';
+  return n < 1 ? n.toFixed(dp) : n.toLocaleString(undefined, { maximumFractionDigits: dp });
+};
+const safeMid = (bid, ask) => {
+  if (Number.isFinite(bid) && Number.isFinite(ask)) return (bid + ask) / 2;
+  if (Number.isFinite(bid)) return bid;
+  if (Number.isFinite(ask)) return ask;
+  return null;
+};
+
+// ---- CoinGecko ----
+async function fetchCgSimple(ids) {
+  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(ids.join(','))}&vs_currencies=usd&include_24hr_change=true`;
+  const res = await fetch(url, { headers: { 'accept': 'application/json' }, cache: 'no-store' });
+  if (!res.ok) throw new Error(`CoinGecko HTTP ${res.status}`);
+  return res.json();
+}
+
+async function getFiatBenchmarks() {
+  // ripple => XRP, sologenic => SOLO
+  const data = await fetchCgSimple(['ripple', 'sologenic']);
+  const xrp = {
+    usd: data?.ripple?.usd ?? null,
+    chg: data?.ripple?.usd_24h_change ?? null
+  };
+  const solo = {
+    usd: data?.sologenic?.usd ?? null,
+    chg: data?.sologenic?.usd_24h_change ?? null
+  };
+  return { xrp, solo };
+}
+
+// ---- XRPL DEX order book (top-of-book JCS/XRP midpoint) ----
+function xrplWs(url) {
+  const ws = new WebSocket(url);
+  const pending = new Map();
+  let nextId = 1;
+
+  ws.onmessage = (ev) => {
     try {
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
-      const d = await r.json();
-      document.getElementById('xrp-price').textContent = `$${(d.ripple?.usd ?? 0).toFixed(4)}`;
-      document.getElementById('xrp-change').innerHTML = `<span class="${d.ripple?.usd_24h_change >= 0 ? 'pos' : 'neg'}">${(d.ripple?.usd_24h_change ?? 0).toFixed(2)}%</span>`;
-      document.getElementById('xrp-marketcap').textContent = `$${Math.round(d.ripple?.usd_market_cap ?? 0).toLocaleString()}`;
-      document.getElementById('xrp-volume').textContent = `$${Math.round(d.ripple?.usd_24h_vol ?? 0).toLocaleString()}`;
+      const msg = JSON.parse(ev.data);
+      const id = msg.id;
+      if (id && pending.has(id)) {
+        const { resolve, reject, timer } = pending.get(id);
+        clearTimeout(timer);
+        pending.delete(id);
+        if (msg.status === 'success') resolve(msg);
+        else reject(new Error(msg.error_message || msg.error || 'XRPL error'));
+      }
     } catch (e) {
-      console.warn('XRP fetch failed', e);
+      // ignore parse errors
     }
+  };
+
+  function send(method, params, timeoutMs = 6000) {
+    return new Promise((resolve, reject) => {
+      if (ws.readyState !== 1) {
+        ws.addEventListener('open', () => send(method, params, timeoutMs).then(resolve).catch(reject), { once: true });
+        if (ws.readyState === 0) return; // opening; will re-enter
+        return reject(new Error('WebSocket not open'));
+      }
+      const id = nextId++;
+      const payload = { id, command: method, ...params };
+      const timer = setTimeout(() => {
+        if (pending.has(id)) {
+          pending.delete(id);
+          reject(new Error('XRPL request timeout'));
+        }
+      }, timeoutMs);
+      pending.set(id, { resolve, reject, timer });
+      ws.send(JSON.stringify(payload));
+    });
   }
 
-  // SOLO via CoinGecko
-  async function updateSOLO() {
-    try {
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=sologenic&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
-      const d = await r.json();
-      document.getElementById('solo-price').textContent = `$${(d.sologenic?.usd ?? 0).toFixed(6)}`;
-      document.getElementById('solo-change').innerHTML = `<span class="${d.sologenic?.usd_24h_change >= 0 ? 'pos' : 'neg'}">${(d.sologenic?.usd_24h_change ?? 0).toFixed(2)}%</span>`;
-      document.getElementById('solo-marketcap').textContent = `$${Math.round(d.sologenic?.usd_market_cap ?? 0).toLocaleString()}`;
-      document.getElementById('solo-volume').textContent = `$${Math.round(d.sologenic?.usd_24h_vol ?? 0).toLocaleString()}`;
-    } catch (e) {
-      console.warn('SOLO fetch failed', e);
-    }
+  function close() {
+    try { ws.close(); } catch (_) {}
   }
 
-  async function updateXRPLToken(symbol, priceId, changeId, mcId, volId) {
-    try {
-      const price = 0, change = 0, mc = 0, vol = 0;
-      document.getElementById(priceId).textContent = `$${price.toFixed(8)}`;
-      document.getElementById(changeId).innerHTML = `<span class="muted">${change.toFixed(2)}%</span>`;
-      document.getElementById(mcId).textContent = `$${mc.toLocaleString()}`;
-      document.getElementById(volId).textContent = `$${vol.toLocaleString()}`;
-    } catch (e) {
-      console.warn(`${symbol} fetch failed`, e);
-    }
-  }
+  return { send, close, ws };
+}
 
-  function refreshAll() {
-    updateXRP();
-    updateSOLO();
-    updateXRPLToken('JCS', 'jesus-price', 'jesus-change', 'jesus-marketcap', 'jesus-volume');
-  }
+async function getJcsXrpTopOfBook() {
+  const { ISSUER, CURRENCY, XRPL_WSS } = CONFIG;
+  const client = xrplWs(XRPL_WSS);
 
-  refreshAll();
-  setInterval(refreshAll, 60000);
+  try {
+    // Asks: you pay XRP to get JCS => price = XRP per 1 JCS (want lowest)
+    const asksReq = client.send('book_offers', {
+      taker_pays: { currency: CURRENCY, issuer: ISSUER },
+      taker_gets: { currency: 'XRP' },
+      limit: 20
+    });
+
+    // Bids: you get XRP by giving JCS => price = XRP per 1 JCS (want highest)
+    const bidsReq = client.send('book_offers', {
+      taker_pays: { currency: 'XRP' },
+      taker_gets: { currency: CURRENCY, issuer: ISSUER },
+      limit: 20
+    });
+
+    const [asksRes, bidsRes] = await Promise.all([asksReq, bidsReq]);
+
+    const asks = Array.isArray(asksRes.result?.offers) ? asksRes.result.offers : [];
+    const bids = Array.isArray(bidsRes.result?.offers) ? bidsRes.result.offers : [];
+
+    // quality is the exchange rate: TakerPays per 1 TakerGets
+    const askQualities = asks.map(o => Number(o.quality)).filter(Number.isFinite).sort((a, b) => a - b);
+    const bidQualities = bids.map(o => Number(o.quality)).filter(Number.isFinite).sort((a, b) => a - b);
+
+    const bestAsk = askQualities.length ? askQualities[0] : null;
+    const bestBid = bidQualities.length ? bidQualities[bidQualities.length - 1] : null;
+
+    return { bestBid, bestAsk, mid: safeMid(bestBid, bestAsk) };
+  } finally {
+    client.close();
+  }
+}
+
+// ---- Main loop ----
+let lastJcsUsd = null;
+
+async function refreshMetrics() {
+  try {
+    const [{ xrp, solo }, jcsBook] = await Promise.all([
+      getFiatBenchmarks(),
+      getJcsXrpTopOfBook().catch(() => ({ bestBid: null, bestAsk: null, mid: null }))
+    ]);
+
+    // Update XRP + SOLO
+    setText('xrpPrice', fmtUSD(xrp.usd, CONFIG.PRICE_DECIMALS.xrp));
+    setChange('xrpChange', xrp.chg);
+
+    setText('soloPrice', fmtUSD(solo.usd, CONFIG.PRICE_DECIMALS.solo));
+    setChange('soloChange', solo.chg);
+
+    // JCS price (USD) from JCS/XRP mid * XRP/USD
+    const jcsXrp = jcsBook.mid;
+    const jcsUsd = Number.isFinite(jcsXrp) && Number.isFinite(xrp.usd) ? jcsXrp * xrp.usd : null;
+
+    // Lightweight synthetic 24h change for JCS (if no direct history):
+    // If we lack a prior reference, show em dash; otherwise compare to last snapshot.
+    const jcsChange = (lastJcsUsd && jcsUsd)
+      ? ((jcsUsd - lastJcsUsd) / lastJcsUsd) * 100
+      : null;
+
+    if (Number.isFinite(jcsUsd)) lastJcsUsd = jcsUsd;
+
+    setText('jcsPrice', Number.isFinite(jcsUsd) ? fmtUSD(jcsUsd, CONFIG.PRICE_DECIMALS.jcs) : '—');
+    setChange('jcsChange', Number.isFinite(jcsChange) ? jcsChange : null);
+
+    // Market cap
+    const mcap = Number.isFinite(jcsUsd) ? jcsUsd * CONFIG.SUPPLY : null;
+    setText('jcsMcap', Number.isFinite(mcap) ? fmtUSD(mcap, 0) : '—');
+
+  } catch (e) {
+    console.warn('Metrics refresh failed:', e);
+    // Keep existing DOM values; show placeholders if empty
+    setText('xrpPrice', $('xrpPrice')?.textContent || '—');
+    setText('soloPrice', $('soloPrice')?.textContent || '—');
+    setText('jcsPrice', $('jcsPrice')?.textContent || '—');
+    setText('jcsMcap', $('jcsMcap')?.textContent || '—');
+  }
+}
+
+function startMetrics() {
+  // First paint quickly, then on interval
+  refreshMetrics();
+  setInterval(refreshMetrics, CONFIG.REFRESH_MS);
+}
+
+// Auto-start when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startMetrics);
+} else {
+  startMetrics();
+}
 </script>
+
 </body>
 
 </html>
