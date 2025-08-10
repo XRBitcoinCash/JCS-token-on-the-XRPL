@@ -194,6 +194,29 @@
     </address>
     <p>&copy; 2025 X Jesus Christ Ministry. All rights reserved.<br>
       Powered by the XRP Ledger. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+<script>
+  async function updateMetrics() {
+    try {
+      const response = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP', {
+        headers: {
+          'X-CMC_PRO_API_KEY': 'YOUR_API_KEY_HERE'
+        }
+      });
+      const data = await response.json();
+      const xrp = data.data.XRP.quote.USD;
+
+      document.getElementById('xrp-price').innerText = `$${xrp.price.toFixed(2)}`;
+      document.getElementById('xrp-change').innerHTML = `<span style="color:${xrp.percent_change_24h >= 0 ? 'green' : 'red'};">${xrp.percent_change_24h.toFixed(2)}%</span>`;
+      document.getElementById('xrp-marketcap').innerText = `$${xrp.market_cap.toLocaleString()}`;
+      document.getElementById('xrp-volume').innerText = `$${xrp.volume_24h.toLocaleString()}`;
+    } catch (error) {
+      console.error('Error fetching XRP data:', error);
+    }
+  }
+
+  updateMetrics();
+  setInterval(updateMetrics, 60000);
+</script>
     </p>
   </footer>
   <!-- End of Index HTML -->
