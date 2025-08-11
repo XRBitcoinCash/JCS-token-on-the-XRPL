@@ -227,19 +227,23 @@ particlesJS("particles-js", {
 // XRPL.to API for Live Metrics
 async function fetchMetrics() {
   try {
-    const res = await fetch("https://api.xrpl.to/api/token/JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd");
+    const res = await fetch('https://api.xrpl.to/api/tokens/JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd');
     const data = await res.json();
-    document.getElementById('price').innerText = `$${parseFloat(data.price).toFixed(6)}`;
-    document.getElementById('change').innerText = `${parseFloat(data.change24h).toFixed(2)}%`;
-    document.getElementById('marketcap').innerText = `$${parseFloat(data.marketCap).toLocaleString()}`;
-    document.getElementById('supply').innerText = `${parseFloat(data.supply).toLocaleString()} JCS`;
+
+    // If API returns data
+    if (data && data.data) {
+      document.getElementById('price').innerText = `$${parseFloat(data.data.price_usd).toFixed(6)}`;
+      document.getElementById('change').innerText = `${parseFloat(data.data.price_change_24h).toFixed(2)}%`;
+      document.getElementById('marketcap').innerText = `$${parseFloat(data.data.market_cap_usd).toLocaleString()}`;
+      document.getElementById('supply').innerText = `${parseFloat(data.data.circulating_supply).toLocaleString()} JCS`;
+    } else {
+      throw new Error("No data for token.");
+    }
   } catch (e) {
-    document.getElementById('price').innerText = "Unavailable";
-    document.getElementById('change').innerText = "Unavailable";
-    document.getElementById('marketcap').innerText = "Unavailable";
-    document.getElementById('supply').innerText = "Unavailable";
+    console.error('Error fetching XRPL metrics:', e);
   }
 }
+
 fetchMetrics();
 setInterval(fetchMetrics, 60000);
 </script>
