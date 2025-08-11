@@ -81,9 +81,7 @@ h2 {
 }
 
 /* Roadmap Checkmarks */
-.roadmap li {
-  margin: 10px 0;
-}
+.roadmap li { margin: 10px 0; }
 .check { color: #0f0; font-weight: bold; }
 
 /* Prayer Requests */
@@ -92,8 +90,10 @@ h2 {
 }
 .prayer-list { margin-top: 20px; }
 .prayer-item {
-  background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;
-  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 10px; border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
 }
 .prayer-item span { flex: 1; }
 .prayer-item button { margin-left: 10px; }
@@ -196,62 +196,36 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
+// Floating glowing crosses
 particlesJS("particles-js", {
   "particles": {
-    "number": {
-      "value": 40,
-      "density": { "enable": true, "value_area": 800 }
-    },
-    "color": { "value": "#ffffff" },
+    "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
     "shape": {
-      "type": "image",
-      "image": {
-        "src": "cross.png",  // Place cross.png in same folder as HTML file
-        "width": 30,
-        "height": 30
-      }
+      "type": "images",
+      "images": [
+        { "src": "cross1.png", "width": 40, "height": 40 },
+        { "src": "cross2.png", "width": 40, "height": 40 }
+      ]
     },
     "opacity": {
       "value": 0.9,
-      "anim": {
-        "enable": true,
-        "speed": 1,
-        "opacity_min": 0.3,
-        "sync": false
-      }
+      "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.4 }
     },
-    "size": {
-      "value": 18,
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 4,
-        "size_min": 12,
-        "sync": false
-      }
-    },
+    "size": { "value": 28, "random": true },
     "line_linked": { "enable": false },
     "move": {
-      "enable": true,
-      "speed": 0.8,
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false
+      "enable": true, "speed": 0.4,
+      "direction": "top", "random": true,
+      "straight": false, "out_mode": "out"
     }
   },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": { "enable": false },
-      "onclick": { "enable": false }
-    }
-  },
+  "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
   "retina_detect": true
 });
 </script>
+
 <script>
+// Fetch market metrics
 async function fetchMetrics() {
   try {
     const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=jesus-christ-saves-token&vs_currencies=usd&include_market_cap=true&include_24hr_change=true');
@@ -267,16 +241,19 @@ async function fetchMetrics() {
 }
 fetchMetrics();
 setInterval(fetchMetrics, 60000);
+</script>
 
 <script>
+// Prayer request system
 let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
 
 function renderPrayers() {
   const list = document.getElementById('prayerList');
   list.innerHTML = '';
   prayers.forEach((p, i) => {
-    if (p.privacy === 'private' && !window.location.hostname.includes('github.io')) return;
+    if (p.privacy === 'private' && window.location.hostname !== 'jesuschristsavestoken.com') return;
     const div = document.createElement('div');
+    div.className = 'prayer-item';
     div.innerHTML = `
       <span><strong>${p.name}:</strong> ${p.text}</span>
       <span>🙏 ${p.count}</span>
@@ -296,14 +273,13 @@ function addPrayer() {
   renderPrayers();
 }
 
-// Increment prayer count
 function markPrayed(i) {
   prayers[i].count++;
   localStorage.setItem('prayers', JSON.stringify(prayers));
   renderPrayers();
 }
 
-// Archive monthly on load
+// Archive old prayers monthly
 (() => {
   const cutoff = Date.now() - 30*24*60*60*1000;
   prayers = prayers.filter(p => p.ts > cutoff);
@@ -311,6 +287,10 @@ function markPrayed(i) {
   renderPrayers();
 })();
 </script>
+
+</body>
+</html>
+
 
 
 </body>
