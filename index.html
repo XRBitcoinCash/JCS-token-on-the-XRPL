@@ -223,29 +223,63 @@ particlesJS("particles-js", {
 });
 </script>
 
+<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 <script>
-// XRPL.to API for Live Metrics
-async function fetchMetrics() {
-  try {
-    const res = await fetch('https://api.xrpl.to/api/tokens/JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd');
-    const data = await res.json();
+async function fetchXRPLMetrics() {
+    const client = new xrpl.Client("wss://xrplcluster.com")
+    await client.connect()
 
-    // If API returns data
-    if (data && data.data) {
-      document.getElementById('price').innerText = `$${parseFloat(data.data.price_usd).toFixed(6)}`;
-      document.getElementById('change').innerText = `${parseFloat(data.data.price_change_24h).toFixed(2)}%`;
-      document.getElementById('marketcap').innerText = `$${parseFloat(data.data.market_cap_usd).toLocaleString()}`;
-      document.getElementById('supply').innerText = `${parseFloat(data.data.circulating_supply).toLocaleString()} JCS`;
-    } else {
-      throw new Error("No data for token.");
+    const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+    const currency = "JCS"
+
+    // 1. Get order book for JCS/XRP
+    const bookOffers = await client.request({
+        command: "book_offers",
+        taker_gets: { currency: currency, issuer: issuer },
+        taker_pays: { currency: "XRP" },
+        limit: 1
+    })
+
+    let priceXRP = 0
+    if (bookOffers.result.offers.length > 0) {
+        const offer = bookOffers.result.offers[0]
+        priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value))
     }
-  } catch (e) {
-    console.error('Error fetching XRPL metrics:', e);
-  }
+
+    // 2. Get XRP/USD price from external source (for USD conversion)
+    const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd")
+    const xrpData = await xrpPriceRes.json()
+    const xrpUSD = xrpData.ripple.usd
+
+    const priceUSD = priceXRP * xrpUSD
+
+    // 3. Get circulating supply from issuer account lines
+    const accountLines = await client.request({
+        command: "account_lines",
+        account: issuer
+    })
+
+    let totalSupply = 0
+    accountLines.result.lines.forEach(line => {
+        if (line.currency === currency) {
+            totalSupply += parseFloat(line.balance)
+        }
+    })
+
+    // 4. Calculate market cap
+    const marketCap = totalSupply * priceUSD
+
+    // 5. Update HTML
+    document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`
+    document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`
+    document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`
+    document.getElementById('change').innerText = "N/A" // needs historical tracking
+
+    await client.disconnect()
 }
 
-fetchMetrics();
-setInterval(fetchMetrics, 60000);
+fetchXRPLMetrics()
+setInterval(fetchXRPLMetrics, 60000)
 </script>
 
 <script>
