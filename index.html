@@ -1,779 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesus Christ Saves Token (JCS)</title>
+<link rel="icon" href="jcs-logo.png" type="image/png">
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Jesus Christ Saves Token (JCS) on the XRP Ledger | Live Metrics, Details, and Mission</title>
-  <meta name="description" content="Jesus Christ Saves Token (JCS) is a faith-driven token on the XRP Ledger, focused on transparent stewardship and global outreach. Explore live XRP and JCS metrics, project details, and disclosures." />
-  <meta name="keywords" content="JCS, Jesus Christ Saves, Jesus Christ Token, XRP, XRPL, XRP Ledger, crypto, cryptocurrency, faith-based token, blockchain stewardship, transparent giving" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#0b1221" />
+<style>
+/* RESET & BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: radial-gradient(circle at top left, #000428, #004e92);
+  color: #fff;
+  overflow-x: hidden;
+}
+a { color: #00d4ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-  <!-- Resource Hints -->
-  <link rel="preconnect" href="https://api.coingecko.com" crossorigin />
-  <link rel="dns-prefetch" href="https://api.coingecko.com" />
-  <link rel="preconnect" href="https://api.kraken.com" crossorigin />
-  <link rel="dns-prefetch" href="https://api.kraken.com" />
+/* PARTICLES CONTAINER */
+#particles-js {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+}
 
-  <!-- JSON-LD: WebSite + Organization + Project (Crypto Token) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"Jesus Christ Saves Token (JCS)",
-    "url":"", 
-    "potentialAction":{
-      "@type":"SearchAction",
-      "target":"?q={search_term_string}",
-      "query-input":"required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Jesus Christ Saves Ministry",
-    "logo":"",
-    "sameAs":[
-      "https://x.com/JesusCS_token"
-    ],
-    "description":"A ministry-aligned initiative stewarding the Jesus Christ Saves Token (JCS) on the XRP Ledger."
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Project",
-    "name":"Jesus Christ Saves Token",
-    "alternateName":"JCS",
-    "keywords":"XRPL, XRP Ledger, crypto, token, faith-based, stewardship",
-    "description":"A faith-driven token on the XRP Ledger focused on transparent stewardship and global outreach.",
-    "creator":{
-      "@type":"Organization",
-      "name":"Jesus Christ Saves Ministry"
-    },
-    "additionalProperty":[
-      { "@type":"PropertyValue", "name":"Ticker", "value":"JCS" },
-      { "@type":"PropertyValue", "name":"Issuer", "value":"rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" },
-      { "@type":"PropertyValue", "name":"Network", "value":"XRPL (mainnet)" }
-    ]
-  }
-  </script>
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 40px;
+  z-index: 1000;
+}
+header img { height: 50px; }
+nav a {
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+nav a:hover { color: #00d4ff; }
 
-  <!-- Base Styles -->
-  <style>
-    /* Root palette and typography */
-    :root{
-      --bg:#0b1221;
-      --bg-alt:#0d1529;
-      --card:#111a33;
-      --ink:#ffffff;
-      --ink-soft:#e6ebff;
-      --muted:#c7d2ff;
-      --line:rgba(255,255,255,0.12);
-      --line-soft:rgba(255,255,255,0.08);
-      --accent:#00e1ff;
-      --good:#2bd173;
-      --bad:#ff5e76;
-      --gold:#ffd166;
-      --maxw:1180px;
-      --radius:16px;
-      --shadow:0 14px 40px rgba(0,0,0,0.45);
-      --space:clamp(14px, 2vw, 28px);
-      --space-md:clamp(18px, 2.6vw, 34px);
-      --space-lg:clamp(24px, 4vw, 52px);
-      --h1:clamp(28px, 4.6vw, 52px);
-      --h2:clamp(22px, 3.2vw, 34px);
-      --h3:clamp(18px, 2.4vw, 26px);
-      --p:clamp(15px, 1.8vw, 18px);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding-top: 80px;
+}
+.hero h1 {
+  font-size: 3em;
+  text-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+.hero p {
+  margin-top: 10px;
+  font-size: 1.2em;
+  max-width: 700px;
+}
+.hero .cta {
+  margin-top: 25px;
+}
+.hero .cta a {
+  padding: 12px 24px;
+  margin: 10px;
+  border-radius: 30px;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,212,255,0.6);
+  transition: all 0.3s;
+}
+.hero .cta a:hover {
+  background: #fff;
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
 
-    /* Global reset */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.6}
-    img{display:block;max-width:100%;height:auto}
-    a{color:inherit;text-decoration:none}
-    ::selection{background:#1d9bf0;color:#fff}
+/* SECTION */
+section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  text-shadow: 0 0 15px rgba(0,212,255,0.6);
+}
+.card {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  margin-bottom: 20px;
+}
 
-    /* Layout helpers */
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--space)}
-    .grid{display:grid;gap:var(--space);grid-template-columns:repeat(12,1fr)}
-    .two-col{display:grid;gap:var(--space);grid-template-columns:1fr 1fr}
-    .three-col{display:grid;gap:var(--space);grid-template-columns:repeat(3,1fr)}
-    .stack{display:flex;flex-direction:column;gap:var(--space)}
-    .center{display:flex;justify-content:center;align-items:center}
-    .right{display:flex;justify-content:flex-end}
-    .spaced{display:flex;justify-content:space-between;align-items:center}
-    .muted{color:var(--muted)}
-    .note{font-size:13px;color:var(--muted)}
-    .mono{font-family:var(--mono)}
+/* FOOTER */
+footer {
+  background: rgba(0,0,0,0.8);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9em;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
 
-    /* Cards and sections */
-    section{padding:var(--space-lg) 0}
-    .card{
-      background:linear-gradient(180deg, var(--card), var(--bg-alt));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:var(--space);
-    }
-    .soft{
-      background:linear-gradient(180deg, var(--bg-alt), var(--bg));
-      border:1px solid var(--line-soft);
-    }
-
-    /* Headings */
-    h1{font-size:var(--h1);line-height:1.15;margin:0 0 10px}
-    h2{font-size:var(--h2);line-height:1.2;margin:0 0 8px}
-    h3{font-size:var(--h3);line-height:1.25;margin:0 0 8px}
-    p{font-size:var(--p);margin:0 0 10px}
-
-    /* Header / Hero */
-    header.site{
-      position:relative;
-      overflow:hidden;
-      background:radial-gradient(1200px 600px at 20% -20%, #132349 0%, #0b1221 60%, #0b1221 100%);
-      border-bottom:1px solid var(--line);
-    }
-    .hero{
-      display:grid;
-      grid-template-columns:1.1fr 0.9fr;
-      gap:var(--space-lg);
-      align-items:center;
-      padding:var(--space-lg) 0 var(--space-lg);
-    }
-    .hero .logo-row{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      margin-bottom:10px;
-    }
-    .logo-img{
-      width:64px;height:64px;border-radius:14px;
-      background:#0e1c3f;
-      border:1px solid var(--line);
-      overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .logo-img img{width:90%;height:auto}
-    .tagline{color:var(--muted);margin-top:6px}
-    .kpi{
-      display:grid;grid-template-columns:repeat(4,1fr);
-      gap:var(--space);
-      margin-top:var(--space);
-    }
-    .metric{
-      background:var(--bg-alt);
-      border:1px solid var(--line-soft);
-      border-radius:12px;
-      padding:14px;
-      text-align:center;
-    }
-    .metric .val{font-weight:700;font-size:clamp(18px,2.4vw,22px)}
-    .metric .lab{font-size:13px;color:var(--muted)}
-
-    /* Ticker bar (top, non-button, passive) */
-    .ticker{
-      width:100%;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-    }
-    .ticker .track{
-      display:flex;gap:24px;overflow:hidden;white-space:nowrap;
-      padding:10px var(--space);
-      font-variant-numeric:tabular-nums;
-    }
-    .pill{
-      display:inline-flex;gap:8px;align-items:center;
-      background:rgba(255,255,255,0.06);
-      border:1px solid var(--line);
-      padding:6px 10px;border-radius:999px;font-size:13px
-    }
-    .chg[data-dir="up"]{color:var(--good);font-weight:600}
-    .chg[data-dir="down"]{color:var(--bad);font-weight:600}
-
-    /* Metrics Table */
-    .metrics{
-      margin-top:6px;
-    }
-    .metrics h2{margin-bottom:10px}
-    table.metrics-table{
-      width:100%;
-      border-collapse:separate;border-spacing:0;
-      border:1px solid var(--line);
-      border-radius:12px;overflow:hidden;
-      font-variant-numeric:tabular-nums;
-    }
-    .metrics-table thead th{
-      background:rgba(255,255,255,0.06);
-      padding:12px 14px;text-align:left;color:var(--ink-soft);
-      font-weight:500;border-bottom:1px solid var(--line-soft)
-    }
-    .metrics-table td{
-      padding:12px 14px;border-bottom:1px solid var(--line-soft)
-    }
-    .metrics-table tr:last-child td{border-bottom:none}
-    .metrics-table td .dir[data-dir="up"]{color:var(--good);font-weight:600}
-    .metrics-table td .dir[data-dir="down"]{color:var(--bad);font-weight:600}
-
-    /* Definition lists for token details */
-    .defs{display:grid;grid-template-columns:1fr 2fr;gap:8px;font-size:15px}
-    .defs dt{color:var(--muted)}
-    .defs dd{margin:0}
-
-    /* Content blocks */
-    .prose p + p{margin-top:8px}
-    .list{padding-left:18px;margin:8px 0 0}
-    .list li{margin:6px 0}
-
-    /* Footer */
-    footer.site{
-      border-top:1px solid var(--line);
-      background:linear-gradient(180deg, #0a1020, #0b1221);
-      padding:var(--space-lg) 0;
-    }
-
-    /* Accessibility helpers */
-    [role="status"]{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-
-    /* Responsive adjustments */
-    @media (max-width: 1020px){
-      .hero{grid-template-columns:1fr;gap:var(--space)}
-      .kpi{grid-template-columns:repeat(2,1fr)}
-      .two-col{grid-template-columns:1fr}
-      .three-col{grid-template-columns:1fr}
-    }
-
-    /* Optional: change badge colors by data attribute (for inline spans) */
-    #xrpChange[data-dir="up"],
-    #jcsChange[data-dir="up"] { color: var(--good); font-weight:600; }
-    <style>
-  #xrpChange[data-dir="down"],
-  #jcsChange[data-dir="down"] { color: var(--bad); font-weight:600; }
+/* ANIMATION */
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.fade-in-up { animation: fadeInUp 0.8s ease forwards; }
 </style>
-
-<!-- ✅ Social preview image -->
-<meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
-<meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
 </head>
-
 <body>
 
-<!-- ✅ One visible logo -->
-<div class="logo-container" style="text-align:center;margin:16px auto;">
-  <img src="jcs-logo.png" alt="JCS logo" width="128" height="128" loading="lazy" decoding="async" />
-</div>
+<div id="particles-js"></div>
 
-<!-- Accessible live region for updates -->
-<div role="status" aria-live="polite" id="a11yStatus">Loading live metrics…</div>
+<!-- HEADER -->
+<header>
+  <img src="jcs-logo.png" alt="Jesus Christ Saves Token Logo">
+  <nav>
+    <a href="#metrics">Metrics</a>
+    <a href="#mission">Mission</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
 
-  <div role="status" aria-live="polite" id="a11yStatus">Loading live metrics…</div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Jesus Christ Saves Token (JCS)</h1>
+  <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
+  <div class="cta">
+    <a href="#metrics">📊 View Token Metrics</a>
+    <a href="#trustline">➕ Set Trustline</a>
+  </div>
+</section>
 
-  <!-- Header / Hero -->
-  <header class="site" id="top">
-    <div class="wrap hero">
-      <div class="stack">
-        <div class="logo-row">
-          <div class="logo-img" aria-hidden="true">
-            <!-- Non-clickable Bithomp-style logo (replace src when ready) -->
-            <img src="assets/img/bithomp-logo-placeholder.png" alt="Bithomp logo placeholder" />
-          </div>
-          <div>
-            <h1>Jesus Christ Saves Token (JCS) on XRPL</h1>
-            <p class="tagline">Faith-driven stewardship, transparent by design, built on the XRP Ledger.</p>
-          </div>
-        </div>
+<!-- LIVE TICKER -->
+<section id="metrics">
+  <h2>📈 Live Token Metrics</h2>
+  <div class="card">
+    <p>Price: <span id="price">Loading...</span></p>
+    <p>24h Change: <span id="change">Loading...</span></p>
+    <p>Market Cap: <span id="marketcap">Loading...</span></p>
+    <p>Circulating Supply: <span id="supply">Loading...</span></p>
+  </div>
+</section>
 
-        <div class="kpi" aria-label="Network highlights">
-          <div class="metric">
-            <div class="val">XRPL</div>
-            <div class="lab">Network</div>
-          </div>
-          <div class="metric">
-            <div class="val">Low</div>
-            <div class="lab">Fees</div>
-          </div>
-          <div class="metric">
-            <div class="val">~3–5s</div>
-            <div class="lab">Settlement</div>
-          </div>
-          <div class="metric">
-            <div class="val">Eco</div>
-            <div class="lab">Footprint</div>
-          </div>
-        </div>
+<!-- MISSION -->
+<section id="mission">
+  <h2>🙏 Our Mission</h2>
+  <div class="card fade-in-up">
+    <p>Our mission is to spread the message of salvation and provide believers with a transparent, secure, and community-driven token ecosystem. JCS serves as both a digital asset and a platform for global outreach, charity, and ministry support.</p>
+  </div>
+</section>
 
-        <div class="prose">
-          <p>Guided by the teachings of Jesus Christ, this project emphasizes generous outreach and accountable transparency. JCS exists to support mission-driven action with verifiable, on-ledger clarity.</p>
-        </div>
-      </div>
+<!-- ROADMAP -->
+<section id="roadmap">
+  <h2>🛣️ Roadmap</h2>
+  <div class="card">
+    <ul>
+      <li>Q1: Launch token on XRPL</li>
+      <li>Q2: Community growth & outreach</li>
+      <li>Q3: Charity partnerships</li>
+      <li>Q4: Global faith-based events</li>
+    </ul>
+  </div>
+</section>
 
-      <div class="card soft">
-        <h2 style="margin-bottom:8px;">At-a-glance ticker</h2>
-        <div class="ticker">
-          <div class="track" id="tickerTrack">
-            <span class="pill">
-              <strong>XRP</strong>
-              <span id="tkXrpPrice" class="mono">$—</span>
-              <span id="tkXrpChange" class="chg" data-dir="">—</span>
-            </span>
-            <span class="pill">
-              <strong>JCS</strong>
-              <span id="tkJcsPrice" class="mono">$—</span>
-              <span id="tkJcsChange" class="chg" data-dir="">—</span>
-            </span>
-          </div>
-        </div>
-        <p class="note" style="margin-top:8px;">Live data refreshes periodically; JCS price derived from XRPL order book midpoint × XRP/USD.</p>
-      </div>
-    </div>
-  </header>
+<!-- FAQ -->
+<section id="faq">
+  <h2>❓ FAQ</h2>
+  <div class="card">
+    <p><strong>What is JCS?</strong> A faith-based cryptocurrency on the XRPL network.</p>
+    <p><strong>How do I set a trustline?</strong> Use your XRPL wallet to add JCS Token with our issuer address.</p>
+  </div>
+</section>
 
-  <!-- Live Metrics -->
-  <section id="live-metrics">
-    <div class="wrap metrics">
-      <div class="card">
-        <h2>Live metrics</h2>
-        <table class="metrics-table" aria-label="Live metrics for XRP and JCS">
-          <thead>
-            <tr>
-              <th>Asset</th>
-              <th>Price (USD)</th>
-              <th>24h Change</th>
-              <th>Market Cap</th>
-              <th>Volume (24h)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>XRP</td>
-              <td id="xrpPrice" class="mono">$0.00</td>
-              <td><span id="xrpChange" class="dir" data-dir="">0.00%</span></td>
-              <td id="xrpMarketCap" class="mono">$0</td>
-              <td id="xrpVolume" class="mono">$0</td>
-            </tr>
-            <tr>
-              <td>JCS</td>
-              <td id="jcsPrice" class="mono">$0.00000000</td>
-              <td><span id="jcsChange" class="dir" data-dir="">—</span></td>
-              <td id="jcsMcap" class="mono">$0</td>
-              <td id="jcsVolume" class="mono">—</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="note" style="margin-top:10px;">JCS 24h change is estimated locally when available; accurate volume requires an indexer and is shown as “—” until configured.</p>
-      </div>
-    </div>
-  </section>
-[[currencies]]
-icon = "https://jesuschristsavestoken.com/jcs-logo.png"
+<!-- LIVECOINWATCH WIDGET -->
+<section id="marketwidget">
+  <h2>📊 Live Market Data</h2>
+  <div class="card" style="text-align:center;">
+    <iframe src="https://www.livecoinwatch.com/embeds/ticker?coin=JCS&theme=dark&transparent=true" 
+      width="100%" height="200" frameborder="0" scrolling="no"></iframe>
+  </div>
+</section>
 
-  <!-- Token Details -->
-  <section id="token">
-    <div class="wrap">
-      <div class="two-col">
-        <div class="card">
-          <h2>Token details</h2>
-          <dl class="defs">
-            <dt>Ticker</dt>
-            <dd>JCS</dd>
-            <dt>Network</dt>
-            <dd>XRPL (mainnet)</dd>
-            <dt>Issuer</dt>
-            <dd class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</dd>
-            <dt>Supply</dt>
-            <dd class="mono">1,000,000,000,000</dd>
-            <dt>Decimals</dt>
-            <dd class="mono">As configured by wallets/DEX</dd>
-            <dt>Purpose</dt>
-            <dd>Stewardship, outreach support, and community recognition.</dd>
-          </dl>
-          <p class="note">For trustline details and issuances, consult XRPL explorers. Avoid sharing private keys.</p>
-        </div>
-        <div class="card">
-          <h2>Mission</h2>
-          <div class="prose">
-            <p>Jesus Christ Saves Token exists to enable transparent generosity and responsible stewardship in the digital economy. The goal is simple: direct more value to real needs with accountable clarity and low friction.</p>
-            <ul class="list">
-              <li>Low-cost settlements enable more impact with fewer intermediaries.</li>
-              <li>On-ledger records uphold integrity and confidence.</li>
-              <li>Community participation is recognized and encouraged.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<!-- FOOTER -->
+<footer>
+  © 2025 Jesus Christ Saves Token. All Rights Reserved.
+</footer>
 
-      <div class="card soft" style="margin-top:var(--space);">
-        <h3>How it works</h3>
-        <ol class="list">
-          <li>Choose a wallet that supports XRPL.</li>
-          <li>Set a trustline to JCS (verify issuer carefully).</li>
-          <li>Send and receive with near-instant settlement and low fees.</li>
-        </ol>
-        <p class="note">Always verify issuer and token details; exercise caution with third-party tools.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Identity (non-clickable visuals, no domain mentions) -->
-  <section id="identity">
-    <div class="wrap">
-      <div class="card">
-        <h2>Project identity</h2>
-        <div class="two-col">
-          <div>
-            <p><strong>Name:</strong> Jesus Christ Saves Token (JCS)</p>
-            <p><strong>Alignment:</strong> Faith-based stewardship and outreach</p>
-            <p><strong>Network:</strong> XRP Ledger (XRPL)</p>
-            <p><strong>Issuer:</strong> <span class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</span></p>
-          </div>
-          <div>
-            <p><strong>Visibility:</strong> Designed for clarity across wallets and explorers</p>
-            <p><strong>Transparency:</strong> On-ledger records and auditable flows</p>
-            <p><strong>Community:</strong> Faith, integrity, and practical service</p>
-          </div>
-        </div>
-        <p class="note" style="margin-top:8px;">No donation prompts or domain references are displayed on this page.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section id="roadmap">
-    <div class="wrap">
-      <div class="three-col">
-        <div class="card">
-          <h3>Phase 1</h3>
-          <p>Establish token identity, publish baseline documentation, and deploy live metrics for XRP and JCS.</p>
-        </div>
-        <div class="card">
-          <h3>Phase 2</h3>
-          <p>Community education and engagement, improved data pipelines for deeper analytics, and structured disclosures.</p>
-        </div>
-        <div class="card">
-          <h3>Phase 3</h3>
-          <p>Broader integrations and optional governance signals focused on mission alignment and impact.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="wrap">
-      <div class="two-col">
-        <div class="card">
-          <h3>Is JCS an investment?</h3>
-          <p>No. JCS represents a faith-driven initiative on XRPL. It is not investment advice. Evaluate carefully and use responsibly.</p>
-        </div>
-        <div class="card">
-          <h3>How is transparency achieved?</h3>
-          <p>XRPL’s public ledger enables verifiable transactions, with an emphasis on clear issuer identity and auditable flows.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Disclosures -->
-  <section id="disclosures">
-    <div class="wrap">
-      <div class="card">
-        <h2>Disclosures</h2>
-        <p>All content is informational, reflecting a faith-based initiative on the XRP Ledger. No guarantees are made regarding price or performance. Use responsibly and conduct your own due diligence.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site">
-    <div class="wrap">
-      <div class="two-col">
-        <div class="card soft">
-          <h3>Project snapshot</h3>
-          <ul class="list">
-            <li><strong>Ticker:</strong> JCS</li>
-            <li><strong>Network:</strong> XRPL (mainnet)</li>
-            <li><strong>Issuer:</strong> <span class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</span></li>
-          </ul>
-        </div>
-        <div class="card soft">
-          <h3>Community link</h3>
-          <p>Follow updates on X: <span class="mono">x.com/JesusCS_token</span></p>
-          <p class="note">This link is provided for reference. No login or interaction is required.</p>
-        </div>
-      </div>
-      <p class="note" style="margin-top:12px;">© Jesus Christ Saves Ministry. Faith-driven stewardship on the XRP Ledger.</p>
-    </div>
-  </footer>
-
-  <!-- Live Metrics Engine (XRP + JCS) -->
-  <script>
-  
-
-    const CONFIG = {
-      ISSUER: 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd',
-      CURRENCY: 'JCS',
-      SUPPLY: 1_000_000_000_000,
-      XRPL_WSS: 'wss://xrplcluster.com',
-      REFRESH_MS: 60_000,
-      DROPS_PER_XRP: 1_000_000
-    };
-
-    // DOM helpers
-    const $ = (id) => document.getElementById(id);
-    const setText = (id, val) => { const el = $(id); if (el) el.textContent = val; };
-    const setDir = (id, pct) => {
-      const el = $(id);
-      if (!el) return;
-      if (pct == null || !Number.isFinite(pct)) {
-        el.textContent = '—';
-        el.removeAttribute('data-dir');
-        return;
-      }
-      const dir = pct >= 0 ? 'up' : 'down';
-      el.textContent = `${pct.toFixed(2)}%`;
-      el.setAttribute('data-dir', dir);
-    };
-
-    // Formatters
-    const fmtUSD = (n, dp = 2) => (Number.isFinite(n) ? (n < 1 ? `$${n.toFixed(dp)}` : `$${n.toLocaleString(undefined, { maximumFractionDigits: dp })}`) : '—');
-
-    // CoinGecko primary
-    async function fetchCG(ids) {
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(ids.join(','))}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`;
-      const res = await fetch(url, { cache: 'no-store', headers: { 'accept':'application/json' } });
-      if (!res.ok) throw new Error(`CG ${res.status}`);
-      return res.json();
+<!-- PARTICLES.JS SCRIPT -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": "#00d4ff" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5, "random": false },
+    "size": { "value": 3, "random": true },
+    "line_linked": { "enable": true, "distance": 150, "color": "#00d4ff", "opacity": 0.4, "width": 1 },
+    "move": { "enable": true, "speed": 3 }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": { "enable": true, "mode": "grab" },
+      "onclick": { "enable": true, "mode": "push" }
+    },
+    "modes": {
+      "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+      "push": { "particles_nb": 4 }
     }
+  },
+  "retina_detect": true
+});
+</script>
 
-    // Kraken fallback for XRP price/change
-    async function fetchKrakenXRP() {
-      const res = await fetch('https://api.kraken.com/0/public/Ticker?pair=XXRPZUSD', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`Kraken ${res.status}`);
-      const d = await res.json();
-      const t = d?.result?.XXRPZUSD;
-      const last = t?.c ? Number(t.c[0]) : null;
-      const open = t?.o ? Number(t.o) : null;
-      const chg = (Number.isFinite(last) && Number.isFinite(open) && open > 0) ? ((last - open) / open) * 100 : null;
-      return { usd:last ?? null, chg: chg ?? null, mcap: null, vol: null };
-    }
-
-    // Get XRP benchmarks (with fallback)
-    async function getXrpMetrics() {
-      try {
-        const d = await fetchCG(['ripple']);
-        return {
-          usd: d?.ripple?.usd ?? null,
-          chg: d?.ripple?.usd_24h_change ?? null,
-          mcap: d?.ripple?.usd_market_cap ?? null,
-          vol: d?.ripple?.usd_24h_vol ?? null
-        };
-      } catch (e) {
-        console.warn('CoinGecko XRP failed; fallback to Kraken price/change.', e.message);
-        return fetchKrakenXRP().catch(err => { console.warn('Kraken fallback failed', err.message); return { usd:null, chg:null, mcap:null, vol:null }; });
-      }
-    }
-
-    // Lightweight XRPL WS client
-    function xrplWs(url){
-      const ws = new WebSocket(url);
-      const pending = new Map();
-      let nextId = 1;
-
-      ws.onmessage = (ev) => {
-        try {
-          const msg = JSON.parse(ev.data);
-          if (msg.id && pending.has(msg.id)) {
-            const { resolve, reject, timer } = pending.get(msg.id);
-            clearTimeout(timer);
-            pending.delete(msg.id);
-            if (msg.status === 'success') resolve(msg);
-            else reject(new Error(msg.error_message || msg.error || 'XRPL error'));
-          }
-        } catch (_) {}
-      };
-
-      function send(command, params, timeoutMs = 7000) {
-        return new Promise((resolve, reject) => {
-          const doSend = () => {
-            const id = nextId++;
-            const payload = { id, command, ...params };
-            const timer = setTimeout(() => {
-              if (pending.has(id)) { pending.delete(id); reject(new Error('XRPL request timeout')); }
-            }, timeoutMs);
-            pending.set(id, { resolve, reject, timer });
-            try { ws.send(JSON.stringify(payload)); } catch (e) { clearTimeout(timer); pending.delete(id); reject(e); }
-          };
-          if (ws.readyState === 1) return doSend();
-          if (ws.readyState === 0) { ws.addEventListener('open', doSend, { once:true }); return; }
-          reject(new Error('WebSocket not open'));
-        });
-      }
-
-      function close(){ try{ ws.close(); }catch(_){} }
-      return { send, close };
-    }
-
-    // JCS/XRP top-of-book midpoint (XRP per JCS)
-    async function getJcsMidXrp(){
-      const CURRENCY = CONFIG.CURRENCY;
-      const ISSUER = CONFIG.ISSUER;
-      const WSS = CONFIG.XRPL_WSS;
-      const client = xrplWs(WSS);
-
-      try {
-        // Asks: SELL JCS for XRP (taker pays XRP, gets JCS)
-        const asksP = client.send('book_offers', {
-          taker_pays: { currency: 'XRP' },
-          taker_gets: { currency: CURRENCY, issuer: ISSUER },
-          limit: 20
-        });
-        // Bids: BUY JCS with XRP (taker pays JCS, gets XRP)
-        const bidsP = client.send('book_offers', {
-          taker_pays: { currency: CURRENCY, issuer: ISSUER },
-          taker_gets: { currency: 'XRP' },
-          limit: 20
-        });
-
-        const [asksRes, bidsRes] = await Promise.all([asksP, bidsP]);
-        const asks = Array.isArray(asksRes.result?.offers) ? asksRes.result.offers : [];
-        const bids = Array.isArray(bidsRes.result?.offers) ? bidsRes.result.offers : [];
-
-        // quality = TakerPays / TakerGets
-        // Asks: drops (XRP) / JCS -> XRP per JCS = quality / 1e6
-        const askPrices = asks
-          .map(o => Number(o.quality))
-          .filter(Number.isFinite)
-          .map(q => q / CONFIG.DROPS_PER_XRP);
-
-        // Bids: JCS / drops (XRP) -> XRP per JCS = 1 / (quality * 1e6)
-        const bidPrices = bids
-          .map(o => Number(o.quality))
-          .filter(Number.isFinite)
-          .map(q => 1 / (q * CONFIG.DROPS_PER_XRP));
-
-        const bestAsk = askPrices.length ? Math.min(...askPrices) : null;
-        const bestBid = bidPrices.length ? Math.max(...bidPrices) : null;
-        const mid = (Number.isFinite(bestAsk) && Number.isFinite(bestBid)) ? (bestAsk + bestBid) / 2
-                  : (Number.isFinite(bestAsk) ? bestAsk : (Number.isFinite(bestBid) ? bestBid : null));
-
-        return { bestAsk, bestBid, mid };
-      } catch (e) {
-        console.warn('XRPL book_offers failed', e.message);
-        return { bestAsk:null, bestBid:null, mid:null };
-      } finally {
-        client.close();
-      }
-    }
-
-    // Local baseline for JCS 24h change (very rough approximation)
-    function getBaseline(){
-      try{
-        const raw = localStorage.getItem('jcs_baseline');
-        if (!raw) return null;
-        const data = JSON.parse(raw);
-        if (!data || typeof data !== 'object') return null;
-        const age = Date.now() - (data.ts || 0);
-        // If older than ~24 hours, reset baseline on next good price
-        if (age > 24*60*60*1000) return null;
-        return data;
-      }catch(_){ return null; }
-    }
-    function setBaseline(priceUsd){
-      try{
-        localStorage.setItem('jcs_baseline', JSON.stringify({ ts: Date.now(), price: priceUsd }));
-      }catch(_){}
-    }
-
-    let lastJcsUsd = null;
-
-    async function refreshAll() {
-      try {
-        // XRP metrics
-        const xrp = await getXrpMetrics();
-        setText('xrpPrice', fmtUSD(xrp.usd, 4));
-        setDir('xrpChange', xrp.chg);
-        setText('xrpMarketCap', Number.isFinite(xrp.mcap) ? fmtUSD(Math.round(xrp.mcap), 0) : '—');
-        setText('xrpVolume', Number.isFinite(xrp.vol) ? fmtUSD(Math.round(xrp.vol), 0) : '—');
-
-        // JCS pricing via XRPL midpoint
-        const jcsBook = await getJcsMidXrp();
-        const jcsXrp = jcsBook.mid;
-        const jcsUsd = (Number.isFinite(jcsXrp) && Number.isFinite(xrp.usd)) ? jcsXrp * xrp.usd : null;
-
-        // Manage local baseline for rough 24h change estimation
-        const base = getBaseline();
-        if (!base && Number.isFinite(jcsUsd)) {
-          setBaseline(jcsUsd);
-        }
-
-        let jcsChangePct = null;
-        if (Number.isFinite(jcsUsd)) {
-          if (base && Number.isFinite(base.price) && base.price > 0) {
-            jcsChangePct = ((jcsUsd - base.price) / base.price) * 100;
-          }
-          lastJcsUsd = jcsUsd;
-        }
-
-        // Update DOM for JCS
-        setText('jcsPrice', Number.isFinite(jcsUsd) ? fmtUSD(jcsUsd, 8) : '—');
-        setDir('jcsChange', Number.isFinite(jcsChangePct) ? jcsChangePct : null);
-
-        const jcsMcap = Number.isFinite(jcsUsd) ? jcsUsd * CONFIG.SUPPLY : null;
-        setText('jcsMcap', Number.isFinite(jcsMcap) ? fmtUSD(jcsMcap, 0) : '—');
-
-        // JCS volume unavailable without indexer
-        setText('jcsVolume', '—');
-
-        // Mirror to ticker
-        setText('tkXrpPrice', Number.isFinite(xrp.usd) ? fmtUSD(xrp.usd, 4) : '—');
-        if (Number.isFinite(xrp.chg)) {
-          const tkX = document.getElementById('tkXrpChange');
-          if (tkX) {
-            tkX.textContent = `${xrp.chg.toFixed(2)}%`;
-            tkX.setAttribute('data-dir', xrp.chg >= 0 ? 'up':'down');
-          }
-        } else {
-          const tkX = document.getElementById('tkXrpChange');
-          if (tkX) { tkX.textContent = '—'; tkX.removeAttribute('data-dir'); }
-        }
-
-        setText('tkJcsPrice', Number.isFinite(jcsUsd) ? fmtUSD(jcsUsd, 8) : '—');
-        const tkJ = document.getElementById('tkJcsChange');
-        if (tkJ) {
-          if (Number.isFinite(jcsChangePct)) {
-            tkJ.textContent = `${jcsChangePct.toFixed(2)}%`;
-            tkJ.setAttribute('data-dir', jcsChangePct >= 0 ? 'up':'down');
-          } else {
-            tkJ.textContent = '—';
-            tkJ.removeAttribute('data-dir');
-          }
-        }
-
-        // Announce for screen readers
-        const aria = document.getElementById('a11yStatus');
-        if (aria) aria.textContent = `Updated: XRP ${Number.isFinite(xrp.usd) ? '$'+xrp.usd.toFixed(4) : '—'}, JCS ${Number.isFinite(jcsUsd) ? '$'+jcsUsd.toFixed(8) : '—'}.`;
-
-      } catch (e) {
-        console.warn('Metrics refresh failed:', e);
-      }
-    }
-
-    // Initialize
-    (function init(){
-      refreshAll();
-      setInterval(refreshAll, CONFIG.REFRESH_MS);
-    })();
-  </script>
+<!-- LIVE DATA SCRIPT -->
+<script>
+async function fetchMetrics() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=jesus-christ-saves-token&vs_currencies=usd&include_market_cap=true&include_24hr_change=true');
+    const data = await res.json();
+    const token = data['jesus-christ-saves-token'];
+    document.getElementById('price').innerText = `$${token.usd.toFixed(6)}`;
+    document.getElementById('change').innerText = `${token.usd_24h_change.toFixed(2)}%`;
+    document.getElementById('marketcap').innerText = `$${token.usd_market_cap.toLocaleString()}`;
+    document.getElementById('supply').innerText = `${(token.usd_market_cap / token.usd).toLocaleString()} JCS`;
+  } catch (e) {
+    console.error('Error fetching metrics:', e);
+  }
+}
+fetchMetrics();
+setInterval(fetchMetrics, 60000);
+</script>
 
 </body>
-</html>
-
-
 </html>
