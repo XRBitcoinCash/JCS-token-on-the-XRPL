@@ -5,49 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jesus Christ Saves Token (JCS)</title>
 <link rel="icon" href="jcs-logo.png" type="image/png">
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* RESET & BASE */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Montserrat', sans-serif;
   background: radial-gradient(circle at top left, #000428, #004e92);
   color: #fff;
   overflow-x: hidden;
 }
-a { color: #00d4ff; text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color:#00d4ff; text-decoration:none; }
+a:hover { text-decoration:underline; }
 
-/* PARTICLES CONTAINER */
 #particles-js {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -1;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
 }
 
-/* HEADER */
+/* Header */
 header {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  position: fixed; top:0; left:0; width:100%;
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(6px);
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 40px;
   z-index: 1000;
 }
 header img { height: 50px; }
-nav a {
-  margin: 0 15px;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-nav a:hover { color: #00d4ff; }
+nav a { margin:0 15px; font-weight:bold; }
 
-/* HERO */
+/* Hero */
 .hero {
   height: 100vh;
   display: flex; flex-direction: column;
@@ -60,70 +50,66 @@ nav a:hover { color: #00d4ff; }
   text-shadow: 0 0 20px rgba(255,255,255,0.6);
 }
 .hero p {
-  margin-top: 10px;
-  font-size: 1.2em;
-  max-width: 700px;
+  margin-top: 10px; font-size: 1.2em; max-width: 700px;
 }
-.hero .cta {
-  margin-top: 25px;
-}
+.hero .cta { margin-top: 25px; }
 .hero .cta a {
-  padding: 12px 24px;
-  margin: 10px;
+  padding: 12px 24px; margin: 10px;
   border-radius: 30px;
-  background: #00d4ff;
-  color: black;
-  font-weight: bold;
+  background: #00d4ff; color: black; font-weight: bold;
   box-shadow: 0 0 15px rgba(0,212,255,0.6);
   transition: all 0.3s;
 }
 .hero .cta a:hover {
-  background: #fff;
-  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+  background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.8);
 }
 
-/* SECTION */
+/* Sections */
 section {
   padding: 80px 20px;
-  max-width: 1100px;
-  margin: auto;
+  max-width: 1100px; margin: auto;
 }
 h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 2.2em;
+  text-align: center; margin-bottom: 30px; font-size: 2.2em;
   text-shadow: 0 0 15px rgba(0,212,255,0.6);
 }
 .card {
   background: rgba(0,0,0,0.6);
-  padding: 20px;
-  border-radius: 12px;
+  padding: 20px; border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,212,255,0.2);
   margin-bottom: 20px;
 }
 
-/* FOOTER */
+/* Roadmap Checkmarks */
+.roadmap li {
+  margin: 10px 0;
+}
+.check { color: #0f0; font-weight: bold; }
+
+/* Prayer Requests */
+.prayer-form input, .prayer-form textarea, .prayer-form select {
+  width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none;
+}
+.prayer-list { margin-top: 20px; }
+.prayer-item {
+  background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;
+  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+.prayer-item span { flex: 1; }
+.prayer-item button { margin-left: 10px; }
+
+/* Footer */
 footer {
   background: rgba(0,0,0,0.8);
-  padding: 20px;
-  text-align: center;
-  font-size: 0.9em;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 20px; text-align: center;
+  font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);
 }
-
-/* ANIMATION */
-@keyframes fadeInUp {
-  from {opacity: 0; transform: translateY(30px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-.fade-in-up { animation: fadeInUp 0.8s ease forwards; }
 </style>
 </head>
 <body>
 
 <div id="particles-js"></div>
 
-<!-- HEADER -->
 <header>
   <img src="jcs-logo.png" alt="Jesus Christ Saves Token Logo">
   <nav>
@@ -131,20 +117,19 @@ footer {
     <a href="#mission">Mission</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#faq">FAQ</a>
+    <a href="#prayers">Prayers</a>
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Jesus Christ Saves Token (JCS)</h1>
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
   <div class="cta">
     <a href="#metrics">📊 View Token Metrics</a>
-    <a href="#trustline">➕ Set Trustline</a>
+    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank">➕ Set Trustline</a>
   </div>
 </section>
 
-<!-- LIVE TICKER -->
 <section id="metrics">
   <h2>📈 Live Token Metrics</h2>
   <div class="card">
@@ -155,59 +140,68 @@ footer {
   </div>
 </section>
 
-<!-- MISSION -->
 <section id="mission">
   <h2>🙏 Our Mission</h2>
-  <div class="card fade-in-up">
-    <p>Our mission is to spread the message of salvation and provide believers with a transparent, secure, and community-driven token ecosystem. JCS serves as both a digital asset and a platform for global outreach, charity, and ministry support.</p>
+  <div class="card">
+    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the word of our Lord to the crypto community. We believe that the Lord Jesus Christ should be represented in every part of the world—including the digital world. Become a member today for prayer, hope, and fellowship. Together, we spread salvation, transparency, and faith across the blockchain while supporting global outreach, charity, and ministry efforts.</p>
   </div>
 </section>
 
-<!-- ROADMAP -->
 <section id="roadmap">
   <h2>🛣️ Roadmap</h2>
   <div class="card">
-    <ul>
-      <li>Q1: Launch token on XRPL</li>
-      <li>Q2: Community growth & outreach</li>
-      <li>Q3: Charity partnerships</li>
-      <li>Q4: Global faith-based events</li>
+    <ul class="roadmap">
+      <li>✅ Launch token on XRPL</li>
+      <li>✅ Hold an AirDrop for the faithful</li>
+      <li>✅ Build a liquidity pool pegged to XRP</li>
+      <li>⬜ Create 1 million micro transactions</li>
+      <li>⬜ Support the XRPL community and represent Jesus Christ on the ledger</li>
     </ul>
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <h2>❓ FAQ</h2>
   <div class="card">
     <p><strong>What is JCS?</strong> A faith-based cryptocurrency on the XRPL network.</p>
-    <p><strong>How do I set a trustline?</strong> Use your XRPL wallet to add JCS Token with our issuer address.</p>
+    <p><strong>How do I set a trustline?</strong> Click the trustline button above to automatically set it up in your XRPL wallet.</p>
   </div>
 </section>
 
-<!-- LIVECOINWATCH WIDGET -->
 <section id="marketwidget">
   <h2>📊 Live Market Data</h2>
   <div class="card" style="text-align:center;">
-    <iframe src="https://www.livecoinwatch.com/embeds/ticker?coin=JCS&theme=dark&transparent=true" 
-      width="100%" height="200" frameborder="0" scrolling="no"></iframe>
+    <script defer src="https://www.livecoinwatch.com/static/lcw-widget.js"></script>
+    <div class="livecoinwatch-widget-5" lcw-base="USD" lcw-color-tx="#999999" lcw-marquee-1="coins" lcw-marquee-2="movers" lcw-marquee-items="10"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<section id="prayers">
+  <h2>🙏 Prayer Requests</h2>
+  <div class="card prayer-form">
+    <input type="text" id="prayerName" placeholder="Your Name">
+    <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
+    <select id="prayerPrivacy">
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+    <button onclick="addPrayer()">Submit Prayer</button>
+  </div>
+  <div class="card prayer-list" id="prayerList"></div>
+</section>
+
 <footer>
   © 2025 Jesus Christ Saves Token. All Rights Reserved.
 </footer>
 
-<!-- PARTICLES.JS SCRIPT -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js", {
   "particles": {
     "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
     "color": { "value": "#00d4ff" },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.5, "random": false },
+    "shape": { "type": "triangle" },
+    "opacity": { "value": 0.5 },
     "size": { "value": 3, "random": true },
     "line_linked": { "enable": true, "distance": 150, "color": "#00d4ff", "opacity": 0.4, "width": 1 },
     "move": { "enable": true, "speed": 3 }
@@ -227,7 +221,6 @@ particlesJS("particles-js", {
 });
 </script>
 
-<!-- LIVE DATA SCRIPT -->
 <script>
 async function fetchMetrics() {
   try {
@@ -244,6 +237,20 @@ async function fetchMetrics() {
 }
 fetchMetrics();
 setInterval(fetchMetrics, 60000);
+
+function addPrayer() {
+  const name = document.getElementById('prayerName').value || 'Anonymous';
+  const text = document.getElementById('prayerText').value;
+  const privacy = document.getElementById('prayerPrivacy').value;
+  if (!text.trim()) return alert("Please enter a prayer request.");
+  if (privacy === 'private') return alert("Private prayer submitted. Only the Lord knows.");
+  const list = document.getElementById('prayerList');
+  const item = document.createElement('div');
+  item.className = 'prayer-item';
+  item.innerHTML = `<span><strong>${name}:</strong> ${text}</span> <input type="checkbox" title="Mark as Prayed">`;
+  list.prepend(item);
+  document.getElementById('prayerText').value = '';
+}
 </script>
 
 </body>
