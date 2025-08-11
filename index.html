@@ -253,14 +253,26 @@
     /* Optional: change badge colors by data attribute (for inline spans) */
     #xrpChange[data-dir="up"],
     #jcsChange[data-dir="up"] { color: var(--good); font-weight:600; }
-    #xrpChange[data-dir="down"],
-    #jcsChange[data-dir="down"] { color: var(--bad); font-weight:600; }
-  </style>
+    <style>
+  #xrpChange[data-dir="down"],
+  #jcsChange[data-dir="down"] { color: var(--bad); font-weight:600; }
+</style>
+
+<!-- ✅ Social preview image -->
+<meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
+<meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
 </head>
 
-  <body>
+<body>
 
-  <!-- Accessible live region for updates -->
+<!-- ✅ One visible logo -->
+<div class="logo-container" style="text-align:center;margin:16px auto;">
+  <img src="jcs-logo.png" alt="JCS logo" width="128" height="128" loading="lazy" decoding="async" />
+</div>
+
+<!-- Accessible live region for updates -->
+<div role="status" aria-live="polite" id="a11yStatus">Loading live metrics…</div>
+
   <div role="status" aria-live="polite" id="a11yStatus">Loading live metrics…</div>
 
   <!-- Header / Hero -->
