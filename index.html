@@ -238,18 +238,56 @@ async function fetchMetrics() {
 fetchMetrics();
 setInterval(fetchMetrics, 60000);
 
+let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
+
+function renderPrayers() {
+  const list = document.getElementById('prayerList');
+  list.innerHTML = '';
+  prayers.forEach((prayer, index) => {
+    // Only show private prayers if viewing from your GitHub account
+    if (prayer.privacy === 'private' && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('github.io')) return;
+
+    const item = document.createElement('div');
+    item.className = 'prayer-item';
+    item.innerHTML = `
+      <span><strong>${prayer.name}:</strong> ${prayer.text}</span>
+      <div>
+        <span>🙏 ${prayer.count}</span>
+        <button onclick="markPrayed(${index})">I Prayed</button>
+      </div>
+    `;
+    list.prepend(item);
+  });
+}
+
 function addPrayer() {
   const name = document.getElementById('prayerName').value || 'Anonymous';
-  const text = document.getElementById('prayerText').value;
+  const text = document.getElementById('prayerText').value.trim();
   const privacy = document.getElementById('prayerPrivacy').value;
-  if (!text.trim()) return alert("Please enter a prayer request.");
-  if (privacy === 'private') return alert("Private prayer submitted. Only the Lord knows.");
-  const list = document.getElementById('prayerList');
-  const item = document.createElement('div');
-  item.className = 'prayer-item';
-  item.innerHTML = `<span><strong>${name}:</strong> ${text}</span> <input type="checkbox" title="Mark as Prayed">`;
-  list.prepend(item);
+  if (!text) return alert("Please enter a prayer request.");
+  prayers.push({ name, text, privacy, count: 0, date: Date.now() });
+  localStorage.setItem('prayers', JSON.stringify(prayers));
   document.getElementById('prayerText').value = '';
+  renderPrayers();
+}
+
+function markPrayed(index) {
+  prayers[index].count++;
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+  renderPrayers();
+}
+
+function archiveOldPrayers() {
+  const monthAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+  prayers = prayers.filter(prayer => prayer.date > monthAgo);
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+}
+
+// Run archive on load
+archiveOldPrayers();
+renderPrayers();
+
+
 }
 </script>
 
