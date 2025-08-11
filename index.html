@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jesus Christ Saves Token (JCS)</title>
 <link rel="icon" href="jcs-logo.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -14,7 +13,7 @@ body {
   background: radial-gradient(circle at top left, #000428, #004e92);
   color: #fff;
   overflow-x: hidden;
-  line-height: 1.8; /* Better text spacing */
+  line-height: 1.8;
 }
 a { color:#00d4ff; text-decoration:none; }
 a:hover { text-decoration:underline; }
@@ -24,6 +23,7 @@ a:hover { text-decoration:underline; }
   top:0; left:0;
   width:100%; height:100%;
   z-index:-1;
+  filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
 }
 
 /* Header */
@@ -67,15 +67,22 @@ nav a { margin:0 15px; font-weight:bold; }
 
 /* Sections */
 section {
-  padding: 40px 20px; /* Less gap between sections */
+  padding: 50px 20px;
   max-width: 1100px; margin: auto;
 }
 section p {
   margin-bottom: 15px;
 }
 h2 {
-  text-align: center; margin-bottom: 20px; font-size: 2.2em;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.2em;
   text-shadow: 0 0 15px rgba(0,212,255,0.6);
+  animation: fadeSlideIn 1s ease forwards;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .card {
   background: rgba(0,0,0,0.6);
@@ -84,7 +91,22 @@ h2 {
   margin-bottom: 15px;
 }
 
+/* Verse of the Day */
+#verseCard {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 25px rgba(255,255,200,0.4);
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
 /* Prayer Requests */
+#prayers h2 { font-family: 'UnifrakturCook', cursive; }
 .prayer-form input, .prayer-form textarea, .prayer-form select {
   width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none;
 }
@@ -103,11 +125,6 @@ footer {
   background: rgba(0,0,0,0.8);
   padding: 20px; text-align: center;
   font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Glow around crosses */
-canvas {
-  filter: drop-shadow(0 0 18px rgba(255,255,200,0.9));
 }
 </style>
 </head>
@@ -133,6 +150,10 @@ canvas {
     <a href="#metrics">📊 View Token Metrics</a>
     <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
   </div>
+  <div id="verseCard">
+    <h3>📖 Verse of the Day</h3>
+    <p id="dailyVerse">Loading verse...</p>
+  </div>
 </section>
 
 <section id="metrics">
@@ -148,7 +169,7 @@ canvas {
 <section id="mission">
   <h2>🙏 Our Mission</h2>
   <div class="card">
-    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the word of our Lord to the crypto community...</p>
+    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the Word of our Lord to the crypto community...</p>
   </div>
 </section>
 
@@ -168,7 +189,8 @@ canvas {
 <section id="faq">
   <h2>❓ FAQ</h2>
   <div class="card">
-    <p><strong>What is XRP?</strong> XRP is the native token of the XRP Ledger...</p>
+    <p><strong>Why a Christian token?</strong> To spread the message of Jesus Christ into new digital frontiers while supporting faith-based causes.</p>
+    <p><strong>How do I use it?</strong> Set the trustline, hold the token, and participate in community prayers, charity pools, and faith projects.</p>
   </div>
 </section>
 
@@ -204,18 +226,13 @@ particlesJS("particles-js", {
         "height": 40
       }
     },
-    "opacity": {
-      "value": 0.95,
-      "anim": { "enable": true, "speed": 0.3, "opacity_min": 0.7 }
-    },
+    "opacity": { "value": 0.95 },
     "size": { "value": 45, "random": true },
     "line_linked": { "enable": false },
     "move": {
       "enable": true,
       "speed": 0.4,
       "direction": "top",
-      "random": false,
-      "straight": false,
       "out_mode": "out"
     }
   },
@@ -223,69 +240,58 @@ particlesJS("particles-js", {
 });
 </script>
 
+<!-- Verse of the Day -->
+<script>
+async function loadVerse() {
+  const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+  const data = await res.json();
+  document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
+}
+loadVerse();
+</script>
+
+<!-- Token Metrics -->
 <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 <script>
 async function fetchXRPLMetrics() {
     const client = new xrpl.Client("wss://xrplcluster.com")
     await client.connect()
-
     const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
     const currency = "JCS"
-
-    // 1. Get order book for JCS/XRP
     const bookOffers = await client.request({
         command: "book_offers",
         taker_gets: { currency: currency, issuer: issuer },
         taker_pays: { currency: "XRP" },
         limit: 1
     })
-
     let priceXRP = 0
     if (bookOffers.result.offers.length > 0) {
         const offer = bookOffers.result.offers[0]
         priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value))
     }
-
-    // 2. Get XRP/USD price from external source (for USD conversion)
     const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd")
     const xrpData = await xrpPriceRes.json()
     const xrpUSD = xrpData.ripple.usd
-
     const priceUSD = priceXRP * xrpUSD
-
-    // 3. Get circulating supply from issuer account lines
-    const accountLines = await client.request({
-        command: "account_lines",
-        account: issuer
-    })
-
+    const accountLines = await client.request({ command: "account_lines", account: issuer })
     let totalSupply = 0
     accountLines.result.lines.forEach(line => {
-        if (line.currency === currency) {
-            totalSupply += parseFloat(line.balance)
-        }
+        if (line.currency === currency) totalSupply += parseFloat(line.balance)
     })
-
-    // 4. Calculate market cap
     const marketCap = totalSupply * priceUSD
-
-    // 5. Update HTML
     document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`
     document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`
     document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`
-    document.getElementById('change').innerText = "N/A" // needs historical tracking
-
+    document.getElementById('change').innerText = "N/A"
     await client.disconnect()
 }
-
 fetchXRPLMetrics()
 setInterval(fetchXRPLMetrics, 60000)
 </script>
 
+<!-- Prayer system -->
 <script>
-// Prayer system
 let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
-
 function renderPrayers() {
   const list = document.getElementById('prayerList');
   list.innerHTML = '';
@@ -301,7 +307,6 @@ function renderPrayers() {
     list.prepend(div);
   });
 }
-
 function addPrayer() {
   const name = document.getElementById('prayerName').value || 'Anonymous';
   const text = document.getElementById('prayerText').value.trim();
@@ -311,15 +316,12 @@ function addPrayer() {
   localStorage.setItem('prayers', JSON.stringify(prayers));
   renderPrayers();
 }
-
 function markPrayed(i, btn) {
   prayers[i].count++;
-  btn.innerHTML = "✅ Prayed";
+  btn.innerHTML = "🙏 Prayed";
   localStorage.setItem('prayers', JSON.stringify(prayers));
   renderPrayers();
 }
-
-// Remove old prayers monthly
 (() => {
   const cutoff = Date.now() - 30*24*60*60*1000;
   prayers = prayers.filter(p => p.ts > cutoff);
@@ -327,6 +329,5 @@ function markPrayed(i, btn) {
   renderPrayers();
 })();
 </script>
-
 </body>
 </html>
