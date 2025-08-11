@@ -14,7 +14,7 @@ body {
   background: radial-gradient(circle at top left, #000428, #004e92);
   color: #fff;
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.8; /* Better text spacing */
 }
 a { color:#00d4ff; text-decoration:none; }
 a:hover { text-decoration:underline; }
@@ -40,7 +40,7 @@ nav a { margin:0 15px; font-weight:bold; }
 
 /* Hero */
 .hero {
-  height: 90vh;
+  height: 85vh;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   text-align: center;
@@ -67,26 +67,22 @@ nav a { margin:0 15px; font-weight:bold; }
 
 /* Sections */
 section {
-  padding: 50px 20px;
+  padding: 40px 20px; /* Less gap between sections */
   max-width: 1100px; margin: auto;
 }
 section p {
   margin-bottom: 15px;
 }
 h2 {
-  text-align: center; margin-bottom: 25px; font-size: 2.2em;
+  text-align: center; margin-bottom: 20px; font-size: 2.2em;
   text-shadow: 0 0 15px rgba(0,212,255,0.6);
 }
 .card {
   background: rgba(0,0,0,0.6);
   padding: 20px; border-radius: 12px;
   box-shadow: 0 0 20px rgba(0,212,255,0.2);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
-
-/* Roadmap Checkmarks */
-.roadmap li { margin: 10px 0; }
-.check { color: #0f0; font-weight: bold; }
 
 /* Prayer Requests */
 .prayer-form input, .prayer-form textarea, .prayer-form select {
@@ -111,7 +107,7 @@ footer {
 
 /* Glow around crosses */
 canvas {
-  filter: drop-shadow(0 0 12px rgba(255,255,200,0.8));
+  filter: drop-shadow(0 0 18px rgba(255,255,200,0.9));
 }
 </style>
 </head>
@@ -135,7 +131,7 @@ canvas {
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
   <div class="cta">
     <a href="#metrics">📊 View Token Metrics</a>
-    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank">➕ Set Trustline</a>
+    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
   </div>
 </section>
 
@@ -152,14 +148,14 @@ canvas {
 <section id="mission">
   <h2>🙏 Our Mission</h2>
   <div class="card">
-    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the word of our Lord to the crypto community. We believe that the Lord Jesus Christ should be represented in every part of the world—including the digital world. Become a member today for prayer, hope, and fellowship. Together, we spread salvation, transparency, and faith across the blockchain while supporting global outreach, charity, and ministry efforts.</p>
+    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the word of our Lord to the crypto community...</p>
   </div>
 </section>
 
 <section id="roadmap">
   <h2>🛣️ Roadmap</h2>
   <div class="card">
-    <ul class="roadmap">
+    <ul>
       <li>✅ Launch token on XRPL</li>
       <li>✅ Hold an AirDrop for the faithful</li>
       <li>✅ Build a liquidity pool pegged to XRP</li>
@@ -172,25 +168,12 @@ canvas {
 <section id="faq">
   <h2>❓ FAQ</h2>
   <div class="card">
-    <p><strong>What is XRP?</strong> XRP is the native token of the XRP Ledger—an open-source, decentralized blockchain built for fast, low-cost, and eco-friendly transactions.</p>
-    <p><strong>What’s the difference between Ripple and XRP?</strong> Ripple is the company contributing to XRPL; XRP is the digital asset that runs on that ledger.</p>
-    <p><strong>Is there a minimum balance for XRP wallets?</strong> Yes—each account must hold 1 XRP base reserve, plus 0.2 XRP for each ledger object (e.g., trustline).</p>
-    <p><strong>What is a destination tag?</strong> It’s a numeric memo used to identify your payment; missing or incorrect tags may cause lost or delayed transactions.</p>
-    <p><strong>Can I use XRP for DeFi?</strong> Definitely! The ledger now supports features like NFTs, AMMs, and smart-contract-like extensions.</p>
-    <p><strong>How does XRP improve cross-border payments?</strong> By serving as a bridge currency, it enables near-instant, low-cost currency conversions—much faster and cheaper than traditional banking networks.</p>
-  </div>
-</section>
-
-<section id="marketwidget">
-  <h2>📊 Live Market Data</h2>
-  <div class="card" style="text-align:center;">
-    <script defer src="https://www.livecoinwatch.com/static/lcw-widget.js"></script>
-    <div class="livecoinwatch-widget-5" lcw-base="USD" lcw-color-tx="#999999" lcw-marquee-1="coins" lcw-marquee-2="movers" lcw-marquee-items="10"></div>
+    <p><strong>What is XRP?</strong> XRP is the native token of the XRP Ledger...</p>
   </div>
 </section>
 
 <section id="prayers">
-  <h2 class="gothic-title">🙏 Prayer Requests</h2>
+  <h2>🙏 Prayer Requests</h2>
   <div class="card prayer-form">
     <input type="text" id="prayerName" placeholder="Your Name">
     <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
@@ -241,18 +224,20 @@ particlesJS("particles-js", {
 </script>
 
 <script>
-// Fetch market metrics
+// XRPL.to API for Live Metrics
 async function fetchMetrics() {
   try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=jesus-christ-saves-token&vs_currencies=usd&include_market_cap=true&include_24hr_change=true');
+    const res = await fetch("https://api.xrpl.to/api/token/JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd");
     const data = await res.json();
-    const token = data['jesus-christ-saves-token'];
-    document.getElementById('price').innerText = `$${token.usd.toFixed(6)}`;
-    document.getElementById('change').innerText = `${token.usd_24h_change.toFixed(2)}%`;
-    document.getElementById('marketcap').innerText = `$${token.usd_market_cap.toLocaleString()}`;
-    document.getElementById('supply').innerText = `${(token.usd_market_cap / token.usd).toLocaleString()} JCS`;
+    document.getElementById('price').innerText = `$${parseFloat(data.price).toFixed(6)}`;
+    document.getElementById('change').innerText = `${parseFloat(data.change24h).toFixed(2)}%`;
+    document.getElementById('marketcap').innerText = `$${parseFloat(data.marketCap).toLocaleString()}`;
+    document.getElementById('supply').innerText = `${parseFloat(data.supply).toLocaleString()} JCS`;
   } catch (e) {
-    console.error('Error fetching metrics:', e);
+    document.getElementById('price').innerText = "Unavailable";
+    document.getElementById('change').innerText = "Unavailable";
+    document.getElementById('marketcap').innerText = "Unavailable";
+    document.getElementById('supply').innerText = "Unavailable";
   }
 }
 fetchMetrics();
@@ -260,7 +245,7 @@ setInterval(fetchMetrics, 60000);
 </script>
 
 <script>
-// Prayer request system
+// Prayer system
 let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
 
 function renderPrayers() {
@@ -273,7 +258,7 @@ function renderPrayers() {
     div.innerHTML = `
       <span><strong>${p.name}:</strong> ${p.text}</span>
       <span>🙏 ${p.count}</span>
-      <button onclick="markPrayed(${i})">I Prayed</button>
+      <button onclick="markPrayed(${i}, this)">I Prayed</button>
     `;
     list.prepend(div);
   });
@@ -289,13 +274,14 @@ function addPrayer() {
   renderPrayers();
 }
 
-function markPrayed(i) {
+function markPrayed(i, btn) {
   prayers[i].count++;
+  btn.innerHTML = "✅ Prayed";
   localStorage.setItem('prayers', JSON.stringify(prayers));
   renderPrayers();
 }
 
-// Archive old prayers monthly
+// Remove old prayers monthly
 (() => {
   const cutoff = Date.now() - 30*24*60*60*1000;
   prayers = prayers.filter(p => p.ts > cutoff);
