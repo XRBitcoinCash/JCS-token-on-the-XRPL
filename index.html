@@ -14,6 +14,7 @@ body {
   background: radial-gradient(circle at top left, #000428, #004e92);
   color: #fff;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 a { color:#00d4ff; text-decoration:none; }
 a:hover { text-decoration:underline; }
@@ -39,7 +40,7 @@ nav a { margin:0 15px; font-weight:bold; }
 
 /* Hero */
 .hero {
-  height: 100vh;
+  height: 90vh;
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
   text-align: center;
@@ -50,7 +51,7 @@ nav a { margin:0 15px; font-weight:bold; }
   text-shadow: 0 0 20px rgba(255,255,255,0.6);
 }
 .hero p {
-  margin-top: 10px; font-size: 1.2em; max-width: 700px;
+  margin-top: 15px; font-size: 1.2em; max-width: 700px;
 }
 .hero .cta { margin-top: 25px; }
 .hero .cta a {
@@ -66,11 +67,14 @@ nav a { margin:0 15px; font-weight:bold; }
 
 /* Sections */
 section {
-  padding: 80px 20px;
+  padding: 50px 20px;
   max-width: 1100px; margin: auto;
 }
+section p {
+  margin-bottom: 15px;
+}
 h2 {
-  text-align: center; margin-bottom: 30px; font-size: 2.2em;
+  text-align: center; margin-bottom: 25px; font-size: 2.2em;
   text-shadow: 0 0 15px rgba(0,212,255,0.6);
 }
 .card {
@@ -103,6 +107,11 @@ footer {
   background: rgba(0,0,0,0.8);
   padding: 20px; text-align: center;
   font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Glow around crosses */
+canvas {
+  filter: drop-shadow(0 0 12px rgba(255,255,200,0.8));
 }
 </style>
 </head>
@@ -172,7 +181,6 @@ footer {
   </div>
 </section>
 
-
 <section id="marketwidget">
   <h2>📊 Live Market Data</h2>
   <div class="card" style="text-align:center;">
@@ -183,7 +191,7 @@ footer {
 
 <section id="prayers">
   <h2 class="gothic-title">🙏 Prayer Requests</h2>
-  <div class="card prayer-form church-bg">
+  <div class="card prayer-form">
     <input type="text" id="prayerName" placeholder="Your Name">
     <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
     <select id="prayerPrivacy">
@@ -192,26 +200,23 @@ footer {
     </select>
     <button onclick="addPrayer()">Submit Prayer</button>
   </div>
-  <div class="card prayer-list church-bg" id="prayerList"></div>
+  <div class="card prayer-list" id="prayerList"></div>
 </section>
-
 
 <footer>
   © 2025 Jesus Christ Saves Token. All Rights Reserved.
 </footer>
 
+<!-- Cross particle background -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js", {
   "particles": {
-    "number": {
-      "value": 5,  /* Only 5 crosses total */
-      "density": { "enable": false }
-    },
+    "number": { "value": 3, "density": { "enable": false } },
     "shape": {
       "type": "image",
       "image": {
-        "src": "cross1.png",  // Make sure file is in same folder
+        "src": "cross1.png",
         "width": 40,
         "height": 40
       }
@@ -221,9 +226,19 @@ particlesJS("particles-js", {
       "anim": { "enable": true, "speed": 0.3, "opacity_min": 0.7 }
     },
     "size": { "value": 45, "random": true },
-    "lin
-
-
+    "line_linked": { "enable": false },
+    "move": {
+      "enable": true,
+      "speed": 0.4,
+      "direction": "top",
+      "random": false,
+      "straight": false,
+      "out_mode": "out"
+    }
+  },
+  "retina_detect": true
+});
+</script>
 
 <script>
 // Fetch market metrics
@@ -288,11 +303,6 @@ function markPrayed(i) {
   renderPrayers();
 })();
 </script>
-
-</body>
-</html>
-
-
 
 </body>
 </html>
