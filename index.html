@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    Jesus Christ Saves Token (JCS) • Unified One-File Build
-    - White lettering, dark contrasting background for easy reading
-    - No buttons, no donation elements, no visible domain mentions
-    - Includes live metrics for XRP and JCS (price, 24h change, market cap; JCS volume displays "—" until an indexer is provided)
-    - Bithomp logo (as a plain, non-clickable image) in header
-    - Clean, accessible layout inspired by a ministry theme (simple sections, clear headings)
-    - SEO-ready with schema.org, OpenGraph/Twitter (commented until domain finalized)
-    - Fully responsive, no external assets required (you can swap placeholder images later)
-    - All styles and scripts embedded for portability
-  -->
+
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,23 +17,6 @@
   <link rel="dns-prefetch" href="https://api.coingecko.com" />
   <link rel="preconnect" href="https://api.kraken.com" crossorigin />
   <link rel="dns-prefetch" href="https://api.kraken.com" />
-
-  <!-- Canonical + Social (commented until domain is finalized to avoid stale signals)
-  <link rel="canonical" href="https://YOUR-DOMAIN/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Jesus Christ Saves Token (JCS) on XRPL | Live Metrics and Mission" />
-  <meta property="og:description" content="Explore live XRP and JCS metrics, project identity, and disclosures for Jesus Christ Saves Token on the XRP Ledger." />
-  <meta property="og:url" content="https://YOUR-DOMAIN/" />
-  <meta property="og:image" content="https://YOUR-DOMAIN/assets/img/og-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Jesus Christ Saves Token (JCS) on XRPL" />
-  <meta name="twitter:description" content="Live metrics, identity, and mission — faith meets blockchain stewardship." />
-  <meta name="twitter:image" content="https://YOUR-DOMAIN/assets/img/og-image.jpg" />
-  -->
-
-  <!-- PWA Manifest (optional; keep local icons or swap later)
-  <link rel="manifest" href="/manifest.json" />
-  -->
 
   <!-- JSON-LD: WebSite + Organization + Project (Crypto Token) -->
   <script type="application/ld+json">
@@ -540,15 +513,7 @@ icon = "https://jesuschristsavestoken.com/jcs-logo.png"
 
   <!-- Live Metrics Engine (XRP + JCS) -->
   <script>
-    /*
-      Live Metrics Engine (XRP + JCS)
-      - XRP price, 24h change, market cap, volume via public APIs (CoinGecko primary, Kraken fallback for price/change)
-      - JCS price from XRPL DEX top-of-book midpoint (XRP per JCS), then multiplied by XRP/USD
-      - JCS market cap computed from configured supply
-      - JCS 24h change estimated locally using rolling baseline in localStorage
-      - JCS volume requires an indexer; shown as em dash until configured
-      - Ticker mirrors primary table values for quick scan
-    */
+  
 
     const CONFIG = {
       ISSUER: 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd',
