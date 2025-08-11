@@ -204,34 +204,25 @@ footer {
 <script>
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
+    "number": {
+      "value": 5,  /* Only 5 crosses total */
+      "density": { "enable": false }
+    },
     "shape": {
       "type": "image",
       "image": {
-        "src": "cross1.png",
+        "src": "cross1.png",  // Make sure file is in same folder
         "width": 40,
         "height": 40
       }
     },
     "opacity": {
-      "value": 0.9,
-      "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.4 }
+      "value": 0.95,
+      "anim": { "enable": true, "speed": 0.3, "opacity_min": 0.7 }
     },
-    "size": { "value": 28, "random": true },
-    "line_linked": { "enable": false },
-    "move": {
-      "enable": true,
-      "speed": 0.4,
-      "direction": "top",
-      "random": true,
-      "straight": false,
-      "out_mode": "out"
-    }
-  },
-  "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-  "retina_detect": true
-});
-</script>
+    "size": { "value": 45, "random": true },
+    "lin
+
 
 
 <script>
