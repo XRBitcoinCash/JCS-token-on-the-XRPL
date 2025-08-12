@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
+  <!-- Meta -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency</title>
@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Favicons & Theme -->
+  <!-- Favicon -->
   <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png">
   <meta name="theme-color" content="#004e92">
 
@@ -114,11 +114,72 @@
       color: #004e92;
       background: #f4f4f4;
     }
+
+    /* Make canvas full width in header */
+    #prayerCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      z-index: 0;
+    }
+
+    /* Cloud Section */
+    #cloud-section {
+      position: fixed;
+      top: 150px;
+      right: 0;
+      width: 220px;
+      height: 80%;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+      padding: 1rem;
+      overflow-y: auto;
+      border-radius: 8px 0 0 8px;
+    }
+    #cloud-section h3 {
+      text-align: center;
+      color: #004e92;
+    }
+    #cloud-prayers img {
+      display: block;
+      margin: 0 auto 10px auto;
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: white;
+      padding: 1.5rem;
+      margin: 10% auto;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      color: #333;
+    }
+    .close-btn {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div id="particles-js"></div>
+    <!-- Canvas replaces particles.js -->
+    <canvas id="prayerCanvas"></canvas>
     <h1>About Jesus Christ Saves Token (JCS)</h1>
   </header>
 
@@ -129,6 +190,31 @@
     <a href="set-trustline.html">Set Trustline</a>
   </nav>
 
+  <!-- Floating "cloud" section for read prayers -->
+  <aside id="cloud-section">
+    <h3>Answered Prayers</h3>
+    <div id="cloud-prayers"></div>
+  </aside>
+
+  <!-- Modal for viewing a prayer -->
+  <div id="prayerModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h3 id="modal-prayer-name"></h3>
+      <p id="modal-prayer-text"></p>
+      <label>
+        <input type="checkbox" id="mark-read"> Mark as read
+      </label>
+    </div>
+  </div>
+
+  <main>
+    <section>
+      <h2>Our Mission</h2>
+      <p>The Lord said, “Break the stone and you will find Me. Chop the wood and you will find Me.” Whatever this means to you on your personal journey through life is the truth. We each find the Lord in our own unique way — yet we are drawn together to celebrate the joy of having found Him, and of knowing that He has found us. We are united in glory and love for our Lord Jesus Christ.</p>
+      <p>However you choose to connect with the Lord is your personal journey — and your journey is good. JesusChristSavesToken.com believes that our strength lies not only in the words we stand by, but most importantly in the actions we take. In 2020, our Christian organization realized that by working together, we could overcome challenges more effectively. That is why we ultimately launched JesusChristSavesToken.com.</p>
+      <p>Certified as a church ministry since July 21, 2020, we are committed to fostering well-being, encouraging fellowship, and providing tools that help our community members reach their goals and fulfill their potential. Learn more about the positive impact we strive for — and join us in bringing about change through the power of prayer.</p>
+    </section>
   <main>
     <section>
       <h2>Our Mission</h2>
@@ -157,118 +243,27 @@
     </section>
   </main>
 
+  <!-- Floating "cloud" section for read prayers -->
+  <aside id="cloud-section">
+    <h3>Answered Prayers</h3>
+    <div id="cloud-prayers"></div>
+  </aside>
+
+  <!-- Modal for viewing a prayer -->
+  <div id="prayerModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h3 id="modal-prayer-name"></h3>
+      <p id="modal-prayer-text"></p>
+      <label>
+        <input type="checkbox" id="mark-read"> Mark as read
+      </label>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; <span id="year"></span> Jesus Christ Saves Token (JCS). All rights reserved.</p>
   </footer>
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Jesus Christ Saves Token",
-    "url": "https://jesuschristsavestoken.com/",
-    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
-    "sameAs": [
-      "https://twitter.com/JesusCS_token"
-    ]
-  }
-  </script>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://jesuschristsavestoken.com/",
-    "name": "Jesus Christ Saves Token (JCS)",
-    "description": "Faith-based cryptocurrency on the XRPL for believers worldwide."
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesuschristsavestoken.com/" },
-      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://jesuschristsavestoken.com/about-jcs.html" }
-    ]
-  }
-  </script>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    // Particle background
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#ffffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5, random: true },
-        size: { value: 3, random: true },
-        move: { enable: true, speed: 1, random: false, straight: false }
-      },
-      interactivity: {
-        events: { onhover: { enable: true, mode: "repulse" } }
-      }
-    });
-
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Prayer Wall
-    let prayers = JSON.parse(localStorage.getItem("prayers")) || [];
-    const prayerForm = document.getElementById("prayer-form");
-    const prayerList = document.getElementById("prayer-list");
-
-    function renderPrayers() {
-      prayerList.innerHTML = "";
-      prayers.forEach((p, i) => {
-        let prayerDiv = document.createElement("div");
-        prayerDiv.setAttribute("itemscope", "");
-        prayerDiv.setAttribute("itemtype", "https://schema.org/CreativeWork");
-
-        let name = document.createElement("strong");
-        name.setAttribute("itemprop", "author");
-        name.textContent = p.privacy ? "Anonymous" : p.name;
-
-        let text = document.createElement("p");
-        text.setAttribute("itemprop", "text");
-        text.textContent = p.text;
-
-        prayerDiv.appendChild(name);
-        prayerDiv.appendChild(text);
-        prayerList.appendChild(prayerDiv);
-      });
-    }
-
-    prayerForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("prayer-name").value.trim();
-      const text = document.getElementById("prayer-text").value.trim();
-      const privacy = document.getElementById("prayer-private").checked;
-      if (name && text) {
-        prayers.unshift({ name, text, privacy });
-        localStorage.setItem("prayers", JSON.stringify(prayers));
-        renderPrayers();
-        prayerForm.reset();
-      }
-    });
-
-    renderPrayers();
-
-    // Verse of the Day
-    fetch("https://beta.ourmanna.com/api/v1/get/?format=json&order=random")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("verse").textContent =
-          data.verse.details.text + " — " + data.verse.details.reference;
-      })
-      .catch(() => {
-        document.getElementById("verse").textContent = "Verse unavailable. Please try again later.";
-      });
-  </script>
-</body>
-</html>
 
     
