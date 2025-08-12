@@ -11,99 +11,39 @@
   <link rel="canonical" href="https://jesuschristsavestoken.com/about-jcs.html">
   <link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/about-jcs.html">
 
-  <!-- Fonts & Preconnect -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Favicons & Theme Colors -->
+  <!-- Favicons & Theme -->
   <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png">
   <meta name="theme-color" content="#004e92">
-  <meta name="msapplication-TileColor" content="#004e92">
-  <meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo.png">
-
-  <!-- Open Graph -->
-  <meta property="og:locale" content="en_US">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Jesus Christ Saves Token">
-  <meta property="og:title" content="About Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency">
-  <meta property="og:description" content="Discover the mission and governance behind JCS: a transparent, faith-driven token on the XRP Ledger.">
-  <meta property="og:url" content="https://jesuschristsavestoken.com/about-jcs.html">
-  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta property="og:image:alt" content="Jesus Christ Saves Token Logo">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@JesusCS_token">
-  <meta name="twitter:title" content="About Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency">
-  <meta name="twitter:description" content="Explore the faith-first vision of JCS and how it serves the Body through transparency and stewardship on XRPL.">
-  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-
-  <!-- JSON-LD Structured Data: Organization -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Jesus Christ Saves Token",
-    "url": "https://jesuschristsavestoken.com/",
-    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
-    "sameAs": [
-      "https://twitter.com/JesusCS_token"
-    ]
-  }
-  </script>
-
-  <!-- JSON-LD Structured Data: WebSite -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://jesuschristsavestoken.com/",
-    "name": "Jesus Christ Saves Token (JCS)",
-    "description": "Faith-based cryptocurrency on the XRPL for believers worldwide."
-  }
-  </script>
-
-  <!-- JSON-LD Structured Data: Breadcrumbs -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://jesuschristsavestoken.com/"
-    },{
-      "@type": "ListItem",
-      "position": 2,
-      "name": "About",
-      "item": "https://jesuschristsavestoken.com/about-jcs.html"
-    }]
-  }
-  </script>
 
   <!-- Styles -->
   <style>
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+      background: linear-gradient(to right, #004e92, #000428);
+      color: #fff;
       line-height: 1.6;
     }
     header {
       position: relative;
-      background: linear-gradient(to right, #004e92, #000428);
-      color: white;
       text-align: center;
-      padding: 1rem;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 2.5rem;
+      margin: 0;
+      z-index: 1;
+      position: relative;
     }
     nav {
-      background: #000428;
-      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.75rem;
       text-align: center;
     }
     nav a {
@@ -111,31 +51,68 @@
       margin: 0 1rem;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
     }
     nav a:hover {
-      text-decoration: underline;
-    }
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
+      color: #ffd700;
     }
     main {
       max-width: 900px;
-      margin: auto;
+      margin: 2rem auto;
       padding: 2rem;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+      color: #333;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 8px;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    section h2 {
+      color: #004e92;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      padding: 0.75rem;
+      background: #004e92;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #003b73;
     }
     footer {
       background: #000428;
       color: white;
       text-align: center;
       padding: 1rem;
-      margin-top: 2rem;
+    }
+    blockquote {
+      font-style: italic;
+      border-left: 4px solid #004e92;
+      padding-left: 1rem;
+      color: #004e92;
+      background: #f4f4f4;
     }
   </style>
 </head>
@@ -144,16 +121,20 @@
     <div id="particles-js"></div>
     <h1>About Jesus Christ Saves Token (JCS)</h1>
   </header>
+
   <nav>
     <a href="index.html">Home</a>
-    <a href="about-jcs.html">About</a>
+    <a href="about-jcs.html" class="active">About</a>
     <a href="prayer-wall.html">Prayer Wall</a>
     <a href="set-trustline.html">Set Trustline</a>
   </nav>
+
   <main>
     <section>
       <h2>Our Mission</h2>
-      <p>Jesus Christ Saves Token (JCS) is a faith-based cryptocurrency built on the XRP Ledger (XRPL) to embody Christian stewardship, transparency, and service through verifiable, low-cost transactions.</p>
+      <p>The Lord said, “Break the stone and you will find Me. Chop the wood and you will find Me.” Whatever this means to you on your personal journey through life is the truth. We each find the Lord in our own unique way — yet we are drawn together to celebrate the joy of having found Him, and of knowing that He has found us. We are united in glory and love for our Lord Jesus Christ.</p>
+      <p>However you choose to connect with the Lord is your personal journey — and your journey is good. JesusChristSavesToken.com believes that our strength lies not only in the words we stand by, but most importantly in the actions we take. In 2020, our Christian organization realized that by working together, we could overcome challenges more effectively. That is why we ultimately launched JesusChristSavesToken.com.</p>
+      <p>Certified as a church ministry since July 21, 2020, we are committed to fostering well-being, encouraging fellowship, and providing tools that help our community members reach their goals and fulfill their potential. Learn more about the positive impact we strive for — and join us in bringing about change through the power of prayer.</p>
     </section>
 
     <section>
@@ -179,6 +160,40 @@
   <footer>
     <p>&copy; <span id="year"></span> Jesus Christ Saves Token (JCS). All rights reserved.</p>
   </footer>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Jesus Christ Saves Token",
+    "url": "https://jesuschristsavestoken.com/",
+    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+    "sameAs": [
+      "https://twitter.com/JesusCS_token"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://jesuschristsavestoken.com/",
+    "name": "Jesus Christ Saves Token (JCS)",
+    "description": "Faith-based cryptocurrency on the XRPL for believers worldwide."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesuschristsavestoken.com/" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "https://jesuschristsavestoken.com/about-jcs.html" }
+    ]
+  }
+  </script>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -186,18 +201,23 @@
     // Particle background
     particlesJS("particles-js", {
       particles: {
-        number: { value: 80 },
-        size: { value: 3 },
-        move: { speed: 1 }
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1, random: false, straight: false }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } }
       }
     });
 
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Load prayers from localStorage
+    // Prayer Wall
     let prayers = JSON.parse(localStorage.getItem("prayers")) || [];
-
     const prayerForm = document.getElementById("prayer-form");
     const prayerList = document.getElementById("prayer-list");
 
@@ -207,7 +227,7 @@
         let prayerDiv = document.createElement("div");
         prayerDiv.setAttribute("itemscope", "");
         prayerDiv.setAttribute("itemtype", "https://schema.org/CreativeWork");
-        
+
         let name = document.createElement("strong");
         name.setAttribute("itemprop", "author");
         name.textContent = p.privacy ? "Anonymous" : p.name;
