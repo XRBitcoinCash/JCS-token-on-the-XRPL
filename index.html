@@ -1,136 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  ...
-  <!-- Fonts & Styles -->
-  <link rel="icon" href="jcs-logo.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesus Christ Saves Token (JCS) — Faith Meets Blockchain</title>
 
-  <style>
-  /* Full-page translucent background image */
-  body::before {
-    content: "";
-    background: url('background-translucent.png') center center no-repeat;
-    background-size: cover;
-    opacity: 0.08;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -2;
-  }
+<!-- Primary SEO Meta Tags -->
+<meta name="description" content="Jesus Christ Saves Token (JCS) combines Christian faith with blockchain transparency. View live XRPL token metrics, join community prayers, and support faith-driven causes.">
+<meta name="keywords" content="Christian cryptocurrency, Jesus Christ Saves Token, JCS token, XRPL Christian token, blockchain ministry, faith-based crypto, cryptocurrency for Christians, prayer blockchain">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourdomain.com/">
 
-  a { color:#00d4ff; text-decoration:none; }
-  a:hover { text-decoration:underline; }
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jesus Christ Saves Token (JCS) — Faith Meets Blockchain">
+<meta property="og:description" content="A faith-driven cryptocurrency on the XRPL network. Live metrics, prayers, and community engagement for believers worldwide.">
+<meta property="og:image" content="https://yourdomain.com/jcs-logo.png">
+<meta property="og:url" content="https://yourdomain.com/">
 
-  #particles-js {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index:-1;
-    filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
-  }
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jesus Christ Saves Token (JCS)">
+<meta name="twitter:description" content="Faith + Blockchain. Join the JCS community and explore how cryptocurrency can empower believers.">
+<meta name="twitter:image" content="https://yourdomain.com/jcs-logo.png">
 
-  /* Header */
-  header {
-    position: fixed; top:0; left:0; width:100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 40px;
-    z-index: 1000;
-  }
-  header img { height: 50px; }
-  nav a { margin:0 15px; font-weight:bold; }
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Jesus Christ Saves Token",
+  "url": "https://yourdomain.com",
+  "logo": "https://yourdomain.com/jcs-logo.png",
+  "sameAs": [
+    "https://twitter.com/YourTwitter",
+    "https://facebook.com/YourFacebook",
+    "https://instagram.com/YourInstagram",
+    "https://www.youtube.com/YourYouTube"
+  ],
+  "description": "Jesus Christ Saves Token (JCS) brings Christian faith to the blockchain community with transparency, prayer, and global engagement."
+}
+</script>
 
-  /* Hero */
-  .hero {
-    height: 85vh;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    text-align: center;
-    padding-top: 80px;
-  }
-  .hero h1 {
-    font-size: 3em;
-    text-shadow: 0 0 20px rgba(255,255,255,0.6);
-  }
-  .hero p {
-    margin-top: 15px; font-size: 1.2em; max-width: 700px;
-  }
-  .hero .cta { margin-top: 25px; }
-  .hero .cta a {
-    padding: 12px 24px; margin: 10px;
-    border-radius: 30px;
-    background: #00d4ff; color: black; font-weight: bold;
-    box-shadow: 0 0 15px rgba(0,212,255,0.6);
-    transition: all 0.3s;
-  }
-  .hero .cta a:hover {
-    background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.8);
-  }
+<!-- Fonts & Styles -->
+<link rel="icon" href="jcs-logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  /* Sections */
-  section {
-    padding: 50px 20px;
-    max-width: 1100px; margin: auto;
-  }
-  section p { margin-bottom: 15px; }
-  h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 2.2em;
-    text-shadow: 0 0 15px rgba(0,212,255,0.6);
-    animation: fadeSlideIn 1s ease forwards;
-  }
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .card {
-    background: rgba(0,0,0,0.6);
-    padding: 20px; border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,212,255,0.2);
-    margin-bottom: 15px;
-  }
-
-  /* Verse of the Day */
-  #verseCard {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 0 25px rgba(255,255,200,0.4);
-    animation: fadeIn 2s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity:0; }
-    to { opacity:1; }
-  }
-
-  /* Prayer Requests */
-  #prayers h2 { font-family: 'UnifrakturCook', cursive; }
-  .prayer-form input, .prayer-form textarea, .prayer-form select {
-    width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none;
-  }
-  .prayer-list { margin-top: 20px; }
-  .prayer-item {
-    background: rgba(255,255,255,0.05);
-    padding: 10px; border-radius: 8px;
-    margin-bottom: 10px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .prayer-item span { flex: 1; }
-  .prayer-item button { margin-left: 10px; }
-
-  /* Footer */
-  footer {
-    background: rgba(0,0,0,0.8);
-    padding: 20px; text-align: center;
-    font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  </style>
+<style>
+/* Keep your existing CSS here */
+</style>
 </head>
-
 
 
 /* Full-page translucent background image */
@@ -449,5 +368,4 @@ function markPrayed(i, btn) {
 </script>
 </body>
 </html>
-
 
