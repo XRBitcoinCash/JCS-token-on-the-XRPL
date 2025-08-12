@@ -1,10 +1,8 @@
 NETWORKS = ["mainnet"]
-
 [[ACCOUNTS]]
 address = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
 network = "mainnet"
 desc = "Official Jesus Christ Saves Token account."
-
 [[CURRENCIES]]
 code = "JCS"
 issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
@@ -13,22 +11,31 @@ decimals = 6
 name = "Jesus Christ Saves"
 desc = "Jesus Christ Saves (JCS) is a spiritually inspired token on the XRP Ledger, promoting faith, hope, and purpose through digital community."
 icon = "https://jesuschristsavestoken.com/jcs-logo.png"
-
 [[CURRENCIES.links]]
 url = "https://jesuschristsavestoken.com/"
 title = "Official Website"
 type = "website"
-
+[[CURRENCIES.links]]
+url = "https://bithomp.com/en/account/rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+title = "Issuer on Bithomp"
+type = "explorer"
+[[CURRENCIES.links]]
+url = "https://jesuschristsavestoken.com/whitepaper.pdf"
+title = "Whitepaper"
+type = "documentation"
+[[CURRENCIES.links]]
+url = "https://xrpl.services/trustline?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&network=mainnet"
+title = "Set Trustline"
+type = "onboarding"
 [meta]
 domain = "jesuschristsavestoken.com"
 website = "https://jesuschristsavestoken.com/"
 logo = "https://jesuschristsavestoken.com/jcs-logo.png"
 description = "Jesus Christ Saves Token (JCS) empowers believers through blockchain transparency and purpose."
-
 [social]
 twitter = "@JesusCS_token"
 email = "jesuschristsavestoken@gmail.com"
-
 [DID]
 id = "did:xrpl:69F598AC55C5731821C7"
 url = "https://jesuschristsavestoken.com/"
+
