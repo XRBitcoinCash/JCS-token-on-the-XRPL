@@ -11,11 +11,10 @@
   <link rel="canonical" href="https://jesuschristsavestoken.com/about-jcs.html">
   <link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/about-jcs.html">
 
-  <!-- DNS Prefetch & Preconnect for Speed -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <!-- Fonts & Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
   <!-- Favicons & Theme Colors -->
   <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png">
@@ -109,51 +108,49 @@
   }
   </script>
 
-  <!-- Styles: use the exact same CSS as index.html -->
-  <!-- Option A: External stylesheet (update path if needed) -->
-  <!-- <link rel="stylesheet" href="/styles.css"> -->
-
-  <!-- Option B: Inline — paste the identical <style> block from index.html below -->
-  <!--
+  <!-- Matching CSS from index.html -->
   <style>
-    [PASTE THE EXACT CSS FROM YOUR index.html HERE SO VISUALS MATCH]
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(to right, #004e92, #000428);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    section h2 {
+      color: #004e92;
+    }
+    footer {
+      background: #000428;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
   </style>
-  -->
 </head>
 <body>
   <header>
     <h1>About Jesus Christ Saves Token (JCS)</h1>
   </header>
-
   <main>
-    <section id="why-jcs-on-xrpl">
-      <h2>Why represent Jesus Christ on the XRP Ledger?</h2>
-      <p>
-        Jesus is proclaimed in word and deed — through Scripture, teaching, community, and prayer. In a digital economy, the XRP Ledger offers a public, auditable rail where stewardship can be practiced with integrity: rapid settlement reduces friction for generosity; transparent ledgers foster trust and accountability; and open standards invite the Body to build together across borders. Representing Christ on XRPL is not about branding a blockchain with a name, but about forming a witness: honest measures, clear governance, and shared responsibility that reflect the Kingdom’s values. When gifts flow with clarity, and communities can verify how they’re used, teaching becomes embodied, fellowship is strengthened, and prayerful action becomes measurable — a light set on a stand in the commons of our time.
-      </p>
-    </section>
-
-    <section id="faq">
-      <h2>Frequently asked questions</h2>
-
-      <h3>What is Jesus Christ Saves Token (JCS)?</h3>
-      <p>JCS is a faith-based token on the XRP Ledger, built for transparent giving, stewardship, and community participation.</p>
-
-      <h3>How does JCS reflect Christian values?</h3>
-      <p>By prioritizing honesty, verifiability, and service. Governance aims for clarity, costs stay low to serve people first, and the mission is openly auditable.</p>
-
-      <h3>How can I get involved?</h3>
-      <p>Begin with learning and prayer, then join the community channels, set up a non-custodial wallet, and participate as you feel led.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; <span id="year"></span> Jesus Christ Saves Token (JCS). All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Simple year updater (matches index behavior if present)
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
