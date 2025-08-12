@@ -85,30 +85,7 @@
   }
   </script>
 
-  <!-- JSON-LD Structured Data: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [{
-      "@type": "Question",
-      "name": "What is Jesus Christ Saves Token (JCS)?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Jesus Christ Saves Token (JCS) is a faith-based cryptocurrency on the XRP Ledger designed to embody Christian stewardship, transparency, and service through verifiable, low-cost transactions."
-      }
-    },{
-      "@type": "Question",
-      "name": "Why represent Jesus Christ on the XRP Ledger?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Because the gospel advances through witness, teaching, community, and prayer. XRPL’s speed, cost-efficiency, and transparency make it a fitting, auditable medium for generosity, accountability, and mission in the digital commons."
-      }
-    }]
-  }
-  </script>
-
-  <!-- Matching CSS from index.html -->
+  <!-- Styles -->
   <style>
     body {
       margin: 0;
@@ -118,15 +95,33 @@
       line-height: 1.6;
     }
     header {
+      position: relative;
       background: linear-gradient(to right, #004e92, #000428);
       color: white;
+      text-align: center;
       padding: 1rem;
+    }
+    nav {
+      background: #000428;
+      padding: 0.5rem;
       text-align: center;
     }
-    header h1 {
-      font-family: 'UnifrakturCook', cursive;
-      font-size: 2.5rem;
-      margin: 0;
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
     main {
       max-width: 900px;
@@ -135,22 +130,125 @@
       background: white;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    section {
-      margin-bottom: 2rem;
-    }
-    section h2 {
-      color: #004e92;
-    }
     footer {
       background: #000428;
       color: white;
       text-align: center;
       padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
+    <div id="particles-js"></div>
     <h1>About Jesus Christ Saves Token (JCS)</h1>
   </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about-jcs.html">About</a>
+    <a href="prayer-wall.html">Prayer Wall</a>
+    <a href="set-trustline.html">Set Trustline</a>
+  </nav>
   <main>
+    <section>
+      <h2>Our Mission</h2>
+      <p>Jesus Christ Saves Token (JCS) is a faith-based cryptocurrency built on the XRP Ledger (XRPL) to embody Christian stewardship, transparency, and service through verifiable, low-cost transactions.</p>
+    </section>
+
+    <section>
+      <h2>Interactive Prayer Wall</h2>
+      <form id="prayer-form">
+        <input type="text" id="prayer-name" placeholder="Your Name" required>
+        <textarea id="prayer-text" placeholder="Write your prayer..." required></textarea>
+        <label>
+          <input type="checkbox" id="prayer-private">
+          Keep my prayer private
+        </label>
+        <button type="submit">Submit Prayer</button>
+      </form>
+      <div id="prayer-list" itemscope itemtype="https://schema.org/CollectionPage"></div>
+    </section>
+
+    <section>
+      <h2>Verse of the Day</h2>
+      <blockquote id="verse"></blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Jesus Christ Saves Token (JCS). All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Particle background
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80 },
+        size: { value: 3 },
+        move: { speed: 1 }
+      }
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Load prayers from localStorage
+    let prayers = JSON.parse(localStorage.getItem("prayers")) || [];
+
+    const prayerForm = document.getElementById("prayer-form");
+    const prayerList = document.getElementById("prayer-list");
+
+    function renderPrayers() {
+      prayerList.innerHTML = "";
+      prayers.forEach((p, i) => {
+        let prayerDiv = document.createElement("div");
+        prayerDiv.setAttribute("itemscope", "");
+        prayerDiv.setAttribute("itemtype", "https://schema.org/CreativeWork");
+        
+        let name = document.createElement("strong");
+        name.setAttribute("itemprop", "author");
+        name.textContent = p.privacy ? "Anonymous" : p.name;
+
+        let text = document.createElement("p");
+        text.setAttribute("itemprop", "text");
+        text.textContent = p.text;
+
+        prayerDiv.appendChild(name);
+        prayerDiv.appendChild(text);
+        prayerList.appendChild(prayerDiv);
+      });
+    }
+
+    prayerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("prayer-name").value.trim();
+      const text = document.getElementById("prayer-text").value.trim();
+      const privacy = document.getElementById("prayer-private").checked;
+      if (name && text) {
+        prayers.unshift({ name, text, privacy });
+        localStorage.setItem("prayers", JSON.stringify(prayers));
+        renderPrayers();
+        prayerForm.reset();
+      }
+    });
+
+    renderPrayers();
+
+    // Verse of the Day
+    fetch("https://beta.ourmanna.com/api/v1/get/?format=json&order=random")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("verse").textContent =
+          data.verse.details.text + " — " + data.verse.details.reference;
+      })
+      .catch(() => {
+        document.getElementById("verse").textContent = "Verse unavailable. Please try again later.";
+      });
+  </script>
+</body>
+</html>
+
+    
