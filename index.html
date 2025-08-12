@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jesus Christ Saves Token (JCS)</title>
+<meta name="description" content="Jesus Christ Saves Token (JCS) empowers believers through blockchain transparency and faith-driven purpose. Join our mission for faith, community, and crypto.">
 <link rel="icon" href="jcs-logo.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -14,10 +15,22 @@ body {
   color: #fff;
   overflow-x: hidden;
   line-height: 1.8;
+  position: relative;
 }
-a { color:#00d4ff; text-decoration:none; }
-a:hover { text-decoration:underline; }
 
+/* Background image layer */
+body::before {
+  content: "";
+  background: url('jcs-logo.png') center center no-repeat;
+  background-size: cover;
+  opacity: 0.08; /* Almost transparent */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -2;
+}
+
+/* Particle layer stays above background image */
 #particles-js {
   position: fixed;
   top:0; left:0;
@@ -25,6 +38,9 @@ a:hover { text-decoration:underline; }
   z-index:-1;
   filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
 }
+
+a { color:#00d4ff; text-decoration:none; }
+a:hover { text-decoration:underline; }
 
 /* Header */
 header {
@@ -70,9 +86,7 @@ section {
   padding: 50px 20px;
   max-width: 1100px; margin: auto;
 }
-section p {
-  margin-bottom: 15px;
-}
+section p { margin-bottom: 15px; }
 h2 {
   text-align: center;
   margin-bottom: 25px;
@@ -148,7 +162,7 @@ footer {
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
   <div class="cta">
     <a href="#metrics">📊 View Token Metrics</a>
-    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
+    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank" rel="noopener">➕ Set Trustline</a>
   </div>
   <div id="verseCard">
     <h3>📖 Verse of the Day</h3>
@@ -212,7 +226,7 @@ footer {
   © 2025 Jesus Christ Saves Token. All Rights Reserved.
 </footer>
 
-<!-- Cross particle background -->
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js", {
@@ -220,76 +234,68 @@ particlesJS("particles-js", {
     "number": { "value": 3, "density": { "enable": false } },
     "shape": {
       "type": "image",
-      "image": {
-        "src": "cross1.png",
-        "width": 40,
-        "height": 40
-      }
+      "image": { "src": "cross1.png", "width": 40, "height": 40 }
     },
     "opacity": { "value": 0.95 },
     "size": { "value": 45, "random": true },
     "line_linked": { "enable": false },
-    "move": {
-      "enable": true,
-      "speed": 0.4,
-      "direction": "top",
-      "out_mode": "out"
-    }
+    "move": { "enable": true, "speed": 0.4, "direction": "top", "out_mode": "out" }
   },
   "retina_detect": true
 });
 </script>
 
-<!-- Verse of the Day -->
 <script>
 async function loadVerse() {
-  const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
-  const data = await res.json();
-  document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
+  try {
+    const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+    const data = await res.json();
+    document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
+  } catch (err) {
+    document.getElementById("dailyVerse").innerText = "Verse could not be loaded.";
+  }
 }
 loadVerse();
 </script>
 
-<!-- Token Metrics -->
 <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 <script>
 async function fetchXRPLMetrics() {
-    const client = new xrpl.Client("wss://xrplcluster.com")
-    await client.connect()
-    const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
-    const currency = "JCS"
+    const client = new xrpl.Client("wss://xrplcluster.com");
+    await client.connect();
+    const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+    const currency = "JCS";
     const bookOffers = await client.request({
         command: "book_offers",
         taker_gets: { currency: currency, issuer: issuer },
         taker_pays: { currency: "XRP" },
         limit: 1
-    })
-    let priceXRP = 0
+    });
+    let priceXRP = 0;
     if (bookOffers.result.offers.length > 0) {
-        const offer = bookOffers.result.offers[0]
-        priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value))
+        const offer = bookOffers.result.offers[0];
+        priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value));
     }
-    const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd")
-    const xrpData = await xrpPriceRes.json()
-    const xrpUSD = xrpData.ripple.usd
-    const priceUSD = priceXRP * xrpUSD
-    const accountLines = await client.request({ command: "account_lines", account: issuer })
-    let totalSupply = 0
+    const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+    const xrpData = await xrpPriceRes.json();
+    const xrpUSD = xrpData.ripple.usd;
+    const priceUSD = priceXRP * xrpUSD;
+    const accountLines = await client.request({ command: "account_lines", account: issuer });
+    let totalSupply = 0;
     accountLines.result.lines.forEach(line => {
-        if (line.currency === currency) totalSupply += parseFloat(line.balance)
-    })
-    const marketCap = totalSupply * priceUSD
-    document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`
-    document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`
-    document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`
-    document.getElementById('change').innerText = "N/A"
-    await client.disconnect()
+        if (line.currency === currency) totalSupply += parseFloat(line.balance);
+    });
+    const marketCap = totalSupply * priceUSD;
+    document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`;
+    document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`;
+    document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`;
+    document.getElementById('change').innerText = "N/A";
+    await client.disconnect();
 }
-fetchXRPLMetrics()
-setInterval(fetchXRPLMetrics, 60000)
+fetchXRPLMetrics();
+setInterval(fetchXRPLMetrics, 60000);
 </script>
 
-<!-- Prayer system -->
 <script>
 let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
 function renderPrayers() {
@@ -331,3 +337,4 @@ function markPrayed(i, btn) {
 </script>
 </body>
 </html>
+
