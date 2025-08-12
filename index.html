@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jesus Christ Saves Token (JCS)</title>
-<meta name="description" content="Jesus Christ Saves Token (JCS) empowers believers through blockchain transparency and faith-driven purpose. Join our mission for faith, community, and crypto.">
 <link rel="icon" href="jcs-logo.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -18,19 +17,21 @@ body {
   position: relative;
 }
 
-/* Background image layer */
+/* Full-page translucent background image */
 body::before {
   content: "";
-  background: url('jcs-logo.png') center center no-repeat;
+  background: url('background-translucent.png') center center no-repeat;
   background-size: cover;
-  opacity: 0.08; /* Almost transparent */
+  opacity: 0.08; /* Transparency level */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: -2;
 }
 
-/* Particle layer stays above background image */
+a { color:#00d4ff; text-decoration:none; }
+a:hover { text-decoration:underline; }
+
 #particles-js {
   position: fixed;
   top:0; left:0;
@@ -38,9 +39,6 @@ body::before {
   z-index:-1;
   filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
 }
-
-a { color:#00d4ff; text-decoration:none; }
-a:hover { text-decoration:underline; }
 
 /* Header */
 header {
@@ -86,7 +84,9 @@ section {
   padding: 50px 20px;
   max-width: 1100px; margin: auto;
 }
-section p { margin-bottom: 15px; }
+section p {
+  margin-bottom: 15px;
+}
 h2 {
   text-align: center;
   margin-bottom: 25px;
@@ -162,7 +162,7 @@ footer {
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
   <div class="cta">
     <a href="#metrics">📊 View Token Metrics</a>
-    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank" rel="noopener">➕ Set Trustline</a>
+    <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
   </div>
   <div id="verseCard">
     <h3>📖 Verse of the Day</h3>
@@ -247,13 +247,9 @@ particlesJS("particles-js", {
 
 <script>
 async function loadVerse() {
-  try {
-    const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
-    const data = await res.json();
-    document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
-  } catch (err) {
-    document.getElementById("dailyVerse").innerText = "Verse could not be loaded.";
-  }
+  const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+  const data = await res.json();
+  document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
 }
 loadVerse();
 </script>
@@ -337,4 +333,5 @@ function markPrayed(i, btn) {
 </script>
 </body>
 </html>
+
 
