@@ -188,50 +188,65 @@ document.addEventListener("DOMContentLoaded", () => {
     `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`;
 
   const form = document.getElementById("prayer-form");
-  const prayersEl = document.getElementById("prayers");
-  const successMsg = document.getElementById("success-message");
   const answeredEl = document.getElementById("answered-list");
+  const successMsg = document.getElementById("success-message");
 
+  // Store prayers with extra fields for checkbox
   let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
-  let answered = JSON.parse(localStorage.getItem("answered") || "[]");
 
-  const renderPrayers = () => {
-    prayersEl.innerHTML = "";
-    prayers.forEach((p) => {
-      const div = document.createElement("div");
-      div.className = "prayer-item";
-      div.innerHTML = `<strong>${p.name}</strong>: ${p.text}`;
-      const commentsDiv = document.createElement("div");
-      commentsDiv.className = "comments";
-      p.comments.forEach(c => {
-        const cd = document.createElement("div");
-        cd.className = "comment";
-        cd.textContent = c;
-        commentsDiv.appendChild(cd);
-      });
-      const commentForm = document.createElement("div");
-      commentForm.className = "comment-form";
-      commentForm.innerHTML = `<input placeholder="Add a comment"><button>Post</button>`;
-      commentForm.querySelector("button").onclick = () => {
-        const val = commentForm.querySelector("input").value.trim();
-        if (val) {
-          p.comments.push(val);
-          localStorage.setItem("prayers", JSON.stringify(prayers));
-          renderPrayers();
-        }
-      };
-      commentsDiv.appendChild(commentForm);
-      div.appendChild(commentsDiv);
-      prayersEl.appendChild(div);
-    });
+  const savePrayers = () => {
+    localStorage.setItem("prayers", JSON.stringify(prayers));
   };
 
-  const renderAnswered = () => {
+  const renderPrayersRight = () => {
     answeredEl.innerHTML = "";
-    answered.forEach(a => {
+    prayers.forEach((p, index) => {
       const div = document.createElement("div");
-      div.className = "answered-prayer";
-      div.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Peace_dove_icon.svg"> ${a}`;
+      div.className = "prayer-item";
+
+      // Checkbox
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = p.read || false;
+      checkbox.addEventListener("change", () => {
+        p.read = checkbox.checked;
+        savePrayers();
+      });
+
+      // Prayer text
+      const prayerText = document.createElement("span");
+      prayerText.textContent = ` ${p.name}: ${p.text}`;
+      prayerText.style.marginLeft = "8px";
+
+      // Edit button
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.style.marginLeft = "10px";
+      editBtn.onclick = () => {
+        const newText = prompt("Edit prayer text:", p.text);
+        if (newText !== null && newText.trim() !== "") {
+          p.text = newText.trim();
+          savePrayers();
+          renderPrayersRight();
+        }
+      };
+
+      // Delete button
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.style.marginLeft = "5px";
+      delBtn.onclick = () => {
+        if (confirm("Delete this prayer?")) {
+          prayers.splice(index, 1);
+          savePrayers();
+          renderPrayersRight();
+        }
+      };
+
+      div.appendChild(checkbox);
+      div.appendChild(prayerText);
+      div.appendChild(editBtn);
+      div.appendChild(delBtn);
       answeredEl.appendChild(div);
     });
   };
@@ -241,17 +256,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("name").value;
     const text = document.getElementById("prayer").value;
     const priv = document.getElementById("private").checked;
-    prayers.push({ name, text: priv ? "[Private Prayer]" : text, comments: [] });
-    localStorage.setItem("prayers", JSON.stringify(prayers));
+    prayers.push({
+      name,
+      text: priv ? "[Private Prayer]" : text,
+      comments: [],
+      read: false
+    });
+    savePrayers();
     form.reset();
     successMsg.style.display = "block";
     setTimeout(() => { successMsg.style.display = "none"; }, 2000);
-    renderPrayers();
+    renderPrayersRight();
   };
 
-  renderPrayers();
-  renderAnswered();
+  renderPrayersRight();
 
+  // Collapsible control
   const coll = document.querySelector(".collapsible");
   const content = document.querySelector(".content");
   const isOpen = localStorage.getItem("prayerWallOpen") === "true";
@@ -262,5 +282,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-</body>
-</html>
