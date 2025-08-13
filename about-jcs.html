@@ -1,263 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jesus Christ Saves Token (JCS) – Prayer Wall</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    background: black url('cross2.png') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #001a33; /* Dark blue instead of black */
+    background-image: url('cross2.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%; /* Half size so full cross is visible */
     animation: fadeIn 1.5s ease-in-out;
   }
+
+  /* Glow effect around the cross */
   body::before {
     content: "";
     position: fixed;
-    top: 0; 
+    top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, rgba(0,26,51,0.85) 70%);
     z-index: 0;
   }
-  nav {
-    background: rgba(0,0,0,0.7);
-    text-align: center;
-    padding: 12px;
-    z-index: 2;
-    position: relative;
-  }
-  nav a {
-    color: white;
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  nav a:hover { color: #ffd700; transform: scale(1.05); }
-  .container {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: rgba(255,255,255,0.92);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    position: relative;
+
+  /* Sparkle animation overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.ibb.co/4g1SmG5/sparkle.png'); /* transparent sparkle texture */
+    background-repeat: repeat;
+    background-size: 200px;
+    animation: sparkleMove 8s linear infinite;
+    opacity: 0.2;
     z-index: 1;
-    animation: fadeIn 1s ease-in-out;
+    pointer-events: none;
   }
-  .verse {
-    background: #fff3cd;
-    padding: 1rem;
-    border-left: 6px solid #ffc107;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
+
+  @keyframes sparkleMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
   }
-  .prayer-wall-container { margin-top: 2rem; }
-  .collapsible {
-    background: #004e92;
-    color: white;
-    padding: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  .collapsible:hover { background: #0066cc; }
-  .content { display: none; margin-top: 1rem; }
-  .flex-sections {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .section {
-    flex: 1;
-    min-width: 300px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  .section:hover { transform: translateY(-3px); transition: transform 0.3s ease; }
-  .prayer-form { display: flex; flex-direction: column; gap: 10px; }
-  .prayer-form input, .prayer-form textarea {
-    padding: 0.8rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    transition: box-shadow 0.3s ease;
-  }
-  .prayer-form input:focus, .prayer-form textarea:focus {
-    box-shadow: 0 0 5px rgba(0,78,146,0.5);
-    outline: none;
-  }
-  .prayer-form button {
-    background: #004e92;
-    color: white;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .prayer-form button:hover { background: #0066cc; }
-  .prayer-item {
-    background: #fff;
-    border-left: 4px solid #002147;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-  }
-  .comments { margin-top: 10px; padding-left: 20px; font-size: 0.9em; }
-  .comment { background: #eef; padding: 5px; border-radius: 4px; margin-bottom: 5px; }
-  .comment-form { margin-top: 5px; display: flex; gap: 5px; }
-  .comment-form input {
-    flex: 1;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  .comment-form button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  #answered-list {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .answered-prayer {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  .answered-prayer img { width: 20px; height: 20px; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
-</head>
-<body>
-<nav>
-  <a href="index.html">Home</a>
-</nav>
-
-<div class="container">
-  <h2>Our Mission</h2>
-  <p>Jesus Christ Saves Token (JCS) is a faith-based cryptocurrency built on the XRP Ledger (XRPL) to embody Christian stewardship, transparency, and service through verifiable, low-cost transactions.</p>
-  <div class="verse" id="verse">Loading verse…</div>
-</div>
-
-<div class="container prayer-wall-container">
-  <button type="button" class="collapsible">Show / Hide Prayer Wall</button>
-  <div class="content">
-    <div class="flex-sections">
-      <div class="section">
-        <h3>Interactive Prayer Wall</h3>
-        <form id="prayer-form" class="prayer-form">
-          <input type="text" id="name" placeholder="Your Name" required>
-          <textarea id="prayer" placeholder="Write your prayer..." rows="4" required></textarea>
-          <label><input type="checkbox" id="private"> Keep my prayer private</label>
-          <button type="submit">Submit Prayer</button>
-          <div id="success-message" style="display:none;color:green;font-weight:bold;">Your prayer has been posted 🙏</div>
-        </form>
-        <div id="prayers"></div>
-      </div>
-      <div class="section">
-        <h3>Answered Prayers</h3>
-        <div id="answered-list"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("verse").textContent =
-    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`;
-
-  const form = document.getElementById("prayer-form");
-  const prayersEl = document.getElementById("prayers");
-  const successMsg = document.getElementById("success-message");
-  const answeredEl = document.getElementById("answered-list");
-
-  let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
-  let answered = JSON.parse(localStorage.getItem("answered") || "[]");
-
-  const renderPrayers = () => {
-    prayersEl.innerHTML = "";
-    prayers.forEach((p) => {
-      const div = document.createElement("div");
-      div.className = "prayer-item";
-      div.innerHTML = `<strong>${p.name}</strong>: ${p.text}`;
-      const commentsDiv = document.createElement("div");
-      commentsDiv.className = "comments";
-      p.comments.forEach(c => {
-        const cd = document.createElement("div");
-        cd.className = "comment";
-        cd.textContent = c;
-        commentsDiv.appendChild(cd);
-      });
-      const commentForm = document.createElement("div");
-      commentForm.className = "comment-form";
-      commentForm.innerHTML = `<input placeholder="Add a comment"><button>Post</button>`;
-      commentForm.querySelector("button").onclick = () => {
-        const val = commentForm.querySelector("input").value.trim();
-        if (val) {
-          p.comments.push(val);
-          localStorage.setItem("prayers", JSON.stringify(prayers));
-          renderPrayers();
-        }
-      };
-      commentsDiv.appendChild(commentForm);
-      div.appendChild(commentsDiv);
-      prayersEl.appendChild(div);
-    });
-  };
-
-  const renderAnswered = () => {
-    answeredEl.innerHTML = "";
-    answered.forEach(a => {
-      const div = document.createElement("div");
-      div.className = "answered-prayer";
-      div.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Peace_dove_icon.svg"> ${a}`;
-      answeredEl.appendChild(div);
-    });
-  };
-
-  form.onsubmit = e => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const text = document.getElementById("prayer").value;
-    const priv = document.getElementById("private").checked;
-    prayers.push({ name, text: priv ? "[Private Prayer]" : text, comments: [] });
-    localStorage.setItem("prayers", JSON.stringify(prayers));
-    form.reset();
-    successMsg.style.display = "block";
-    setTimeout(() => { successMsg.style.display = "none"; }, 2000);
-    renderPrayers();
-  };
-
-  renderPrayers();
-  renderAnswered();
-
-  const coll = document.querySelector(".collapsible");
-  const content = document.querySelector(".content");
-  const isOpen = localStorage.getItem("prayerWallOpen") === "true";
-  if (isOpen) content.style.display = "block";
-  coll.addEventListener("click", () => {
-    content.style.display = content.style.display === "block" ? "none" : "block";
-    localStorage.setItem("prayerWallOpen", content.style.display === "block");
-  });
-});
-</script>
-</body>
-</html>
