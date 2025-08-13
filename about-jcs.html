@@ -113,8 +113,6 @@
     nav a:hover {
       text-decoration: underline;
     }
-
-    /* Floating crosses canvas */
     #prayerCanvas {
       position: absolute;
       top: 0;
@@ -123,7 +121,6 @@
       height: 250px;
       z-index: 0;
     }
-
     main {
       max-width: 900px;
       margin: auto;
@@ -131,8 +128,6 @@
       background: white;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    /* Cloud Section */
     #cloud-section {
       position: fixed;
       top: 150px;
@@ -155,8 +150,6 @@
       width: 32px;
       height: 32px;
     }
-
-    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
@@ -181,7 +174,6 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
-
     footer {
       background: #000428;
       color: white;
@@ -196,14 +188,12 @@
     <canvas id="prayerCanvas"></canvas>
     <h1>About Jesus Christ Saves Token (JCS)</h1>
   </header>
-
   <nav>
     <a href="index.html">Home</a>
     <a href="about-jcs.html">About</a>
     <a href="prayer-wall.html">Prayer Wall</a>
     <a href="set-trustline.html">Set Trustline</a>
   </nav>
-
   <main>
     <section>
       <h2>Our Mission</h2>
@@ -230,22 +220,23 @@
     </section>
   </main>
 
-  <!-- Cloud Section -->
+  <!-- Answered Prayers Cloud -->
   <aside id="cloud-section">
     <h3>Answered Prayers</h3>
     <div id="cloud-prayers"></div>
   </aside>
 
   <!-- Modal -->
-  <div id="prayerModal" class="modal">
+  <div id="prayer-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
-      <h3 id="modalName"></h3>
-      <p id="modalText"></p>
+      <h3 id="modal-prayer-name"></h3>
+      <p id="modal-prayer-text"></p>
       <label>
-        <input type="checkbox" id="markRead">
-        Mark as answered
+        <input type="checkbox" id="mark-answered"> Mark as answered
       </label>
+      <br><br>
+      <button id="save-answered">Save</button>
     </div>
   </div>
 
@@ -256,19 +247,22 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* ------------------------------
-   PRAYER DATA STORAGE & RENDERING
------------------------------- */
+/* =========================
+   Prayer Data & Rendering
+========================= */
 let prayers = JSON.parse(localStorage.getItem("prayers")) || [];
 let answeredPrayers = JSON.parse(localStorage.getItem("answeredPrayers")) || [];
 
 const prayerForm = document.getElementById("prayer-form");
 const prayerList = document.getElementById("prayer-list");
 const cloudPrayers = document.getElementById("cloud-prayers");
-const modal = document.getElementById("prayerModal");
-const modalText = document.getElementById("modal-text");
-const modalAuthor = document.getElementById("modal-author");
-const modalCheckbox = document.getElementById("mark-as-read");
+
+const modal = document.getElementById("prayer-modal");
+const modalName = document.getElementById("modal-prayer-name");
+const modalText = document.getElementById("modal-prayer-text");
+const modalCheckbox = document.getElementById("mark-answered");
+const saveAnsweredBtn = document.getElementById("save-answered");
+
 let currentPrayerIndex = null;
 
 function savePrayers() {
@@ -279,9 +273,9 @@ function savePrayers() {
 function renderPrayers() {
   prayerList.innerHTML = "";
   prayers.forEach((p, i) => {
-    let prayerDiv = document.createElement("div");
-    prayerDiv.setAttribute("itemscope", "");
-    prayerDiv.setAttribute("itemtype", "https://schema.org/CreativeWork");
+    let div = document.createElement("div");
+    div.setAttribute("itemscope", "");
+    div.setAttribute("itemtype", "https://schema.org/CreativeWork");
 
     let name = document.createElement("strong");
     name.setAttribute("itemprop", "author");
@@ -291,14 +285,14 @@ function renderPrayers() {
     text.setAttribute("itemprop", "text");
     text.textContent = p.text;
 
-    prayerDiv.addEventListener("click", () => openPrayerModal(i));
+    div.addEventListener("click", () => openPrayerModal(i));
 
-    prayerDiv.appendChild(name);
-    prayerDiv.appendChild(text);
-    prayerList.appendChild(prayerDiv);
+    div.appendChild(name);
+    div.appendChild(text);
+    prayerList.appendChild(div);
   });
 
-  // Cloud answered prayers
+  // Render answered prayers cloud
   cloudPrayers.innerHTML = "";
   answeredPrayers.forEach(() => {
     let img = document.createElement("img");
@@ -311,7 +305,7 @@ function renderPrayers() {
 function openPrayerModal(index) {
   currentPrayerIndex = index;
   modal.style.display = "block";
-  modalAuthor.textContent = prayers[index].privacy ? "Anonymous" : prayers[index].name;
+  modalName.textContent = prayers[index].privacy ? "Anonymous" : prayers[index].name;
   modalText.textContent = prayers[index].text;
   modalCheckbox.checked = false;
 }
@@ -321,9 +315,11 @@ function closePrayerModal() {
 }
 
 document.querySelector(".close-btn").addEventListener("click", closePrayerModal);
-window.addEventListener("click", (e) => { if (e.target === modal) closePrayerModal(); });
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closePrayerModal();
+});
 
-modalCheckbox.addEventListener("change", () => {
+saveAnsweredBtn.addEventListener("click", () => {
   if (modalCheckbox.checked && currentPrayerIndex !== null) {
     answeredPrayers.push(prayers[currentPrayerIndex]);
     prayers.splice(currentPrayerIndex, 1);
@@ -338,19 +334,21 @@ prayerForm.addEventListener("submit", (e) => {
   const name = document.getElementById("prayer-name").value.trim();
   const text = document.getElementById("prayer-text").value.trim();
   const privacy = document.getElementById("prayer-private").checked;
+
   if (name && text) {
     prayers.unshift({ name, text, privacy });
     savePrayers();
     renderPrayers();
     prayerForm.reset();
+    createCrosses(); // update floating crosses
   }
 });
 
 renderPrayers();
 
-/* ------------------------------
-   VERSE OF THE DAY
------------------------------- */
+/* =========================
+   Verse of the Day
+========================= */
 fetch("https://beta.ourmanna.com/api/v1/get/?format=json&order=random")
   .then(res => res.json())
   .then(data => {
@@ -361,9 +359,9 @@ fetch("https://beta.ourmanna.com/api/v1/get/?format=json&order=random")
     document.getElementById("verse").textContent = "Verse unavailable. Please try again later.";
   });
 
-/* ------------------------------
-   FLOATING CROSS CANVAS ANIMATION
------------------------------- */
+/* =========================
+   Floating Cross Animation
+========================= */
 const canvas = document.getElementById("prayerCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -384,7 +382,7 @@ function createCrosses() {
 
 function animateCrosses() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  crosses.forEach((cross, i) => {
+  crosses.forEach(cross => {
     ctx.drawImage(crossImg, cross.x, cross.y, 24, 24);
     cross.y += cross.speedY;
     if (cross.y > canvas.height) cross.y = -24;
@@ -403,5 +401,7 @@ window.addEventListener("resize", () => {
   createCrosses();
 });
 </script>
+</body>
+</html>
 
 
