@@ -8,48 +8,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Styles copied from index.html -->
   <style>
-   #market-widgets .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Live Market Data uniform cards */
-#market-widgets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-#market-widgets .card {
-  flex: 1 1 calc(33.333% - 20px); /* three columns desktop */
-  display: flex;
-  flex-direction: column;
-  height: 500px; /* exact uniform height */
-}
-
-#market-widgets .card h3 {
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#market-widgets .card iframe {
-  flex: 1;
-  width: 100%;
-  border: none;
-}
-
-/* Mobile: stack full width */
-@media (max-width: 768px) {
-  #market-widgets .card {
-    flex: 1 1 100%;
-    height: 500px;
-  }
-}
-
-
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
@@ -69,6 +28,7 @@
       width: 100%; height: 100%;
       z-index: -2;
     }
+
     header {
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(6px);
@@ -77,17 +37,22 @@
     }
     header a {
       padding: 10px 20px;
-      background: #00d4ff; color: black;
-      border-radius: 30px; font-weight: bold;
+      background: #00d4ff;
+      color: black;
+      border-radius: 30px;
+      font-weight: bold;
       text-decoration: none;
       box-shadow: 0 0 15px rgba(0,212,255,0.6);
     }
     header a:hover {
-      background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.8);
+      background: #fff;
+      box-shadow: 0 0 25px rgba(255,255,255,0.8);
     }
+
     section {
-      padding: 50px 20px;
-      max-width: 1100px; margin: auto;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
     }
     h2 {
       text-align: center;
@@ -95,13 +60,46 @@
       font-size: 2.2em;
       text-shadow: 0 0 15px rgba(0,212,255,0.6);
     }
+
+    /* Uniform card styles */
     .card {
       background: rgba(0,0,0,0.6);
-      padding: 20px;
+      padding: 15px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,212,255,0.2);
-      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 500px;
     }
+    .card h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .card iframe {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Layout wrapper for uniform spacing */
+    #market-widgets {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .card {
+        height: 450px; /* smaller height on phones */
+      }
+      #market-widgets {
+        gap: 25px;
+      }
+    }
+
     footer {
       background: rgba(0,0,0,0.8);
       padding: 20px;
@@ -109,13 +107,6 @@
       font-size: 0.9em;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
-  /* Mobile height fix for Sologenic chart */
-@media (max-width: 768px) {
-  #market-widgets .card iframe[src*="sologenic.org"] {
-    height: 550px !important;
-  }
-}
-
   </style>
 </head>
 <body>
@@ -125,38 +116,27 @@
   <a href="index.html">🏠 Home</a>
 </header>
 
-<section id="jcs-metrics">
-  <h2>JCS Token Live Market</h2>
-  <div class="card">
-    <iframe 
-      src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP"
-      width="100%" height="600" style="border:none;">
-    </iframe>
-  </div>
-</section>
-
-<section id="market-widgets">
+<section>
   <h2>Live Market Data</h2>
 
-  <!-- XRP Chart -->
-  <div class="card">
-    <h3>XRP Live Price Chart</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:XRPUSDT&interval=60&hidesidetoolbar=1&theme=dark"
-      style="width: 100%; height: 450px; border:none;"></iframe>
-  </div>
+  <div id="market-widgets">
+    <!-- JCS Token Chart -->
+    <div class="card">
+      <h3>JCS Token Live Market (Sologenic)</h3>
+      <iframe src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP"></iframe>
+    </div>
 
-  <!-- JCS Token Chart -->
-  <div class="card">
-    <h3>JCS Token Live Chart (Sologenic)</h3>
-    <iframe src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP"
-      style="width: 100%; height: 450px; border:none;"></iframe>
-  </div>
+    <!-- XRP Chart -->
+    <div class="card">
+      <h3>XRP Live Price Chart</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:XRPUSDT&interval=60&hidesidetoolbar=1&theme=dark"></iframe>
+    </div>
 
-  <!-- Bitcoin Chart -->
-  <div class="card">
-    <h3>Bitcoin Live Chart</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP:BTCUSD&interval=60&hidesidetoolbar=1&theme=dark"
-      style="width: 100%; height: 450px; border:none;"></iframe>
+    <!-- Bitcoin Chart -->
+    <div class="card">
+      <h3>Bitcoin Live Chart</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP:BTCUSD&interval=60&hidesidetoolbar=1&theme=dark"></iframe>
+    </div>
   </div>
 </section>
 
