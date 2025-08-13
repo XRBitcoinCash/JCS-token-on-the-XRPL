@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Homepage -->
   <url>
     <loc>https://jesuschristsavestoken.com/</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- About Page -->
   <url>
     <loc>https://jesuschristsavestoken.com/about-jcs.html</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Metrics Page -->
   <url>
     <loc>https://jesuschristsavestoken.com/metrics.html</loc>
     <lastmod>2025-08-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- XRP Ledger Config (optional for indexing) -->
   <url>
     <loc>https://jesuschristsavestoken.com/.well-known/xrp-ledger.toml</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-
 </urlset>
