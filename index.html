@@ -256,7 +256,8 @@
 
 <!-- Connect Wallet Button -->
 <div class="cta">
-  <a id="openTrustline">➕ Set Trustline</a>
+  <a id="openTrustlineCard">➕ Set Trustline</a>
+
   <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" class="wallet-btn">🔗 Connect Wallet</a>
   <a href="about-jcs.html">🛐 About JCS</a>
 </div>
@@ -326,6 +327,13 @@
     <p><strong>How do I use it?</strong> Set the trustline, hold the token, and participate in community prayers, charity pools, and faith projects.</p>
   </div>
 </section>
+<!-- Trustline Card (hidden by default) -->
+<div id="trustlineCard" style="display:none; margin: 20px auto; max-width: 900px; background: rgba(0,0,0,0.9); border-radius: 12px; padding: 10px; box-shadow: 0 0 20px rgba(0,212,255,0.4);">
+  <iframe 
+    src="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" 
+    style="width: 100%; height: 500px; border: none; border-radius: 8px;">
+  </iframe>
+</div>
 
 <section id="prayers">
   <h2>🙏 Prayer Requests</h2>
@@ -578,6 +586,14 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
     if (e.target === modal) {
       modal.style.display = 'none';
     }
+  });
+</script>
+<script>
+  const trustlineBtn = document.getElementById('openTrustlineCard');
+  const trustlineCard = document.getElementById('trustlineCard');
+
+  trustlineBtn.addEventListener('click', () => {
+    trustlineCard.style.display = trustlineCard.style.display === 'none' ? 'block' : 'none';
   });
 </script>
 
