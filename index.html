@@ -288,7 +288,7 @@
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
 <div class="cta">
   
-  <a href="https://xpmarket.com/trustline/set?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
+ <a id="openTrustlineCard">➕ Set Trustline</a>
   <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" class="wallet-btn">🔗 Connect Wallet</a>
   <a href="about-jcs.html">🛐 About JCS</a>
 </div>
@@ -569,25 +569,7 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
     window.open("https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd", "_blank");
 });
 </script>
-<script>
-  const modal = document.getElementById('trustlineModal');
-  const openBtn = document.getElementById('openTrustline');
-  const closeBtn = document.getElementById('closeModal');
 
-  openBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-</script>
 <script>
   const trustlineBtn = document.getElementById('openTrustlineCard');
   const trustlineCard = document.getElementById('trustlineCard');
@@ -598,6 +580,5 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
 </script>
 
 </body>
-</html>
 </html>
 
