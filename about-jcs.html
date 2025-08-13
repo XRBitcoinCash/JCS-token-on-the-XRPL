@@ -65,19 +65,11 @@
 /* =======================
    Prayer Wall Container
 ======================= */
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prayer Wall</title>
-<style>
-/* =======================
-   Container & Collapsible
-======================= */
 .prayer-wall-container {
   margin-top: 2rem;
 }
+
+/* Collapsible Section Button */
 .collapsible {
   background: #004e92;
   color: white;
@@ -91,12 +83,13 @@
 .collapsible:hover {
   background: #0066cc;
 }
+
 .content {
   display: none;
   margin-top: 1rem;
 }
 
-/* Flexible Layout */
+/* Flexible Layout for Sections */
 .flex-sections {
   display: flex;
   gap: 20px;
@@ -148,8 +141,6 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: transform 0.2s ease-in-out;
 }
@@ -162,6 +153,7 @@
   color: white;
   border: none;
   padding: 5px 10px;
+  margin-left: 5px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -178,183 +170,6 @@
   margin-right: 10px;
   transition: all 0.3s ease-in-out;
 }
-@keyframes greenPulse {
-  0% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
-  50% { box-shadow: 0 0 15px #28a745, 0 0 25px rgba(40, 167, 69, 0.8); }
-  100% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
-}
-.prayer-item input[type="checkbox"]:checked {
-  border: 2px solid #28a745;
-  background-color: #28a745;
-  animation: greenPulse 1.5s infinite;
-}
-
-/* =======================
-   Comments
-======================= */
-.comments {
-  margin-top: 10px;
-  padding-left: 20px;
-  font-size: 0.9em;
-}
-.comment {
-  background: #eef;
-  padding: 5px;
-  border-radius: 4px;
-  margin-bottom: 5px;
-}
-.comment-form {
-  margin-top: 5px;
-  display: flex;
-  gap: 5px;
-}
-.comment-form input {
-  flex: 1;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-.comment-form button {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-/* =======================
-   Scroll Settings
-======================= */
-#answered-list {
-  max-height: 400px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-</style>
-</head>
-<body>
-
-<!-- Login -->
-<div id="login-section">
-  <h3>Sign In</h3>
-  <input type="text" id="login-name" placeholder="Your Name">
-  <input type="password" id="login-pass" placeholder="Password">
-  <button id="login-btn">Login</button>
-</div>
-
-<!-- Prayer Wall -->
-<div id="prayer-wall" style="display:none;">
-  <div class="prayer-wall-section">
-    <h3>Prayer Wall</h3>
-    <form id="prayer-form">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <textarea id="prayer" placeholder="Write your prayer..." required></textarea>
-      <label><input type="checkbox" id="private"> Private Prayer</label>
-      <button type="submit">Add Prayer</button>
-    </form>
-    <div id="answered-list"></div>
-  </div>
-</div>
-
-<script>
-let currentUser = null;
-let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
-
-document.getElementById("login-btn").onclick = () => {
-  const name = document.getElementById("login-name").value.trim();
-  const pass = document.getElementById("login-pass").value.trim();
-  if (!name || !pass) return alert("Enter name and password");
-
-  currentUser = { name, pass };
-  document.getElementById("login-section").style.display = "none";
-  document.getElementById("prayer-wall").style.display = "block";
-  renderPrayers();
-};
-
-function savePrayers() {
-  localStorage.setItem("prayers", JSON.stringify(prayers));
-}
-
-function renderPrayers() {
-  const answeredEl = document.getElementById("answered-list");
-  answeredEl.innerHTML = "";
-  prayers.forEach((p, index) => {
-    const div = document.createElement("div");
-    div.className = "prayer-item";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = p.read || false;
-    checkbox.addEventListener("change", () => {
-      p.read = checkbox.checked;
-      savePrayers();
-    });
-
-    const prayerText = document.createElement("span");
-    prayerText.textContent = ` ${p.name}: ${p.text}`;
-
-    if (currentUser && currentUser.name === p.createdBy && currentUser.pass === p.password) {
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.onclick = () => {
-        const newText = prompt("Edit prayer text:", p.text);
-        if (newText) {
-          p.text = newText.trim();
-          savePrayers();
-          renderPrayers();
-        }
-      };
-      div.appendChild(editBtn);
-    }
-
-    if (
-      (currentUser && currentUser.name === p.createdBy && currentUser.pass === p.password) ||
-      (currentUser && currentUser.name.toLowerCase() === "admin")
-    ) {
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Delete";
-      delBtn.onclick = () => {
-        if (confirm("Delete this prayer?")) {
-          prayers.splice(index, 1);
-          savePrayers();
-          renderPrayers();
-        }
-      };
-      div.appendChild(delBtn);
-    }
-
-    div.appendChild(checkbox);
-    div.appendChild(prayerText);
-    answeredEl.appendChild(div);
-  });
-}
-
-document.getElementById("prayer-form").onsubmit = e => {
-  e.preventDefault();
-  const name = document.getElementById("name").value.trim();
-  const text = document.getElementById("prayer").value.trim();
-  const priv = document.getElementById("private").checked;
-
-  prayers.push({
-    name,
-    text: priv ? "[Private Prayer]" : text,
-    read: false,
-    createdBy: currentUser.name,
-    password: currentUser.pass
-  });
-
-  savePrayers();
-  e.target.reset();
-  renderPrayers();
-};
-
-renderPrayers();
-</script>
-
-</body>
-</html>
-
 @keyframes greenPulse {
   0% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
   50% { box-shadow: 0 0 15px #28a745, 0 0 25px rgba(40, 167, 69, 0.8); }
