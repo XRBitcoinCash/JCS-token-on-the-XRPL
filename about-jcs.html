@@ -10,20 +10,18 @@
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    background: url('https://i.ibb.co/b1qZrXQ/jesus-light-blue-heaven.jpg') no-repeat center center fixed;
+    background: black url('cross2.png') no-repeat center center fixed;
     background-size: cover;
     animation: fadeIn 1.5s ease-in-out;
   }
   body::before {
     content: "";
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('https://i.ibb.co/8r3v3dk/cross-icon.png') repeat,
-                url('https://i.ibb.co/TYxxT9v/dove-icon.png') repeat,
-                url('https://i.ibb.co/pJtPh9k/bible-icon.png') repeat;
-    background-size: 80px, 100px, 90px;
-    opacity: 0.05;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
     z-index: 0;
   }
   nav {
@@ -195,4 +193,71 @@ document.addEventListener("DOMContentLoaded", () => {
   let answered = JSON.parse(localStorage.getItem("answered") || "[]");
 
   const renderPrayers = () => {
-    prayersEl.innerHTML =
+    prayersEl.innerHTML = "";
+    prayers.forEach((p) => {
+      const div = document.createElement("div");
+      div.className = "prayer-item";
+      div.innerHTML = `<strong>${p.name}</strong>: ${p.text}`;
+      const commentsDiv = document.createElement("div");
+      commentsDiv.className = "comments";
+      p.comments.forEach(c => {
+        const cd = document.createElement("div");
+        cd.className = "comment";
+        cd.textContent = c;
+        commentsDiv.appendChild(cd);
+      });
+      const commentForm = document.createElement("div");
+      commentForm.className = "comment-form";
+      commentForm.innerHTML = `<input placeholder="Add a comment"><button>Post</button>`;
+      commentForm.querySelector("button").onclick = () => {
+        const val = commentForm.querySelector("input").value.trim();
+        if (val) {
+          p.comments.push(val);
+          localStorage.setItem("prayers", JSON.stringify(prayers));
+          renderPrayers();
+        }
+      };
+      commentsDiv.appendChild(commentForm);
+      div.appendChild(commentsDiv);
+      prayersEl.appendChild(div);
+    });
+  };
+
+  const renderAnswered = () => {
+    answeredEl.innerHTML = "";
+    answered.forEach(a => {
+      const div = document.createElement("div");
+      div.className = "answered-prayer";
+      div.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Peace_dove_icon.svg"> ${a}`;
+      answeredEl.appendChild(div);
+    });
+  };
+
+  form.onsubmit = e => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const text = document.getElementById("prayer").value;
+    const priv = document.getElementById("private").checked;
+    prayers.push({ name, text: priv ? "[Private Prayer]" : text, comments: [] });
+    localStorage.setItem("prayers", JSON.stringify(prayers));
+    form.reset();
+    successMsg.style.display = "block";
+    setTimeout(() => { successMsg.style.display = "none"; }, 2000);
+    renderPrayers();
+  };
+
+  renderPrayers();
+  renderAnswered();
+
+  const coll = document.querySelector(".collapsible");
+  const content = document.querySelector(".content");
+  const isOpen = localStorage.getItem("prayerWallOpen") === "true";
+  if (isOpen) content.style.display = "block";
+  coll.addEventListener("click", () => {
+    content.style.display = content.style.display === "block" ? "none" : "block";
+    localStorage.setItem("prayerWallOpen", content.style.display === "block");
+  });
+});
+</script>
+</body>
+</html>
