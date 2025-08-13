@@ -10,7 +10,7 @@
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    background: url('https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?auto=format&fit=crop&w=1740&q=80') no-repeat center center fixed;
+    background: url('https://i.ibb.co/b1qZrXQ/jesus-light-blue-heaven.jpg') no-repeat center center fixed;
     background-size: cover;
     animation: fadeIn 1.5s ease-in-out;
   }
@@ -61,9 +61,7 @@
     border-radius: 6px;
     margin-bottom: 1.5rem;
   }
-  .prayer-wall-container {
-    margin-top: 2rem;
-  }
+  .prayer-wall-container { margin-top: 2rem; }
   .collapsible {
     background: #004e92;
     color: white;
@@ -74,13 +72,8 @@
     font-weight: bold;
     transition: 0.3s;
   }
-  .collapsible:hover {
-    background: #0066cc;
-  }
-  .content {
-    display: none;
-    margin-top: 1rem;
-  }
+  .collapsible:hover { background: #0066cc; }
+  .content { display: none; margin-top: 1rem; }
   .flex-sections {
     display: flex;
     gap: 20px;
@@ -94,15 +87,8 @@
     padding: 1rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
-  .section:hover {
-    transform: translateY(-3px);
-    transition: transform 0.3s ease;
-  }
-  .prayer-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .section:hover { transform: translateY(-3px); transition: transform 0.3s ease; }
+  .prayer-form { display: flex; flex-direction: column; gap: 10px; }
   .prayer-form input, .prayer-form textarea {
     padding: 0.8rem;
     border-radius: 6px;
@@ -122,9 +108,7 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  .prayer-form button:hover {
-    background: #0066cc;
-  }
+  .prayer-form button:hover { background: #0066cc; }
   .prayer-item {
     background: #fff;
     border-left: 4px solid #002147;
@@ -160,10 +144,7 @@
     border-bottom: 1px solid #eee;
   }
   .answered-prayer img { width: 20px; height: 20px; }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </head>
 <body>
@@ -181,7 +162,6 @@
   <button type="button" class="collapsible">Show / Hide Prayer Wall</button>
   <div class="content">
     <div class="flex-sections">
-      <!-- Prayer Wall -->
       <div class="section">
         <h3>Interactive Prayer Wall</h3>
         <form id="prayer-form" class="prayer-form">
@@ -193,7 +173,6 @@
         </form>
         <div id="prayers"></div>
       </div>
-      <!-- Answered Prayers -->
       <div class="section">
         <h3>Answered Prayers</h3>
         <div id="answered-list"></div>
@@ -216,72 +195,4 @@ document.addEventListener("DOMContentLoaded", () => {
   let answered = JSON.parse(localStorage.getItem("answered") || "[]");
 
   const renderPrayers = () => {
-    prayersEl.innerHTML = "";
-    prayers.forEach((p) => {
-      const div = document.createElement("div");
-      div.className = "prayer-item";
-      div.innerHTML = `<strong>${p.name}</strong>: ${p.text}`;
-      const commentsDiv = document.createElement("div");
-      commentsDiv.className = "comments";
-      p.comments.forEach(c => {
-        const cd = document.createElement("div");
-        cd.className = "comment";
-        cd.textContent = c;
-        commentsDiv.appendChild(cd);
-      });
-      const commentForm = document.createElement("div");
-      commentForm.className = "comment-form";
-      commentForm.innerHTML = `<input placeholder="Add a comment"><button>Post</button>`;
-      commentForm.querySelector("button").onclick = () => {
-        const val = commentForm.querySelector("input").value.trim();
-        if (val) {
-          p.comments.push(val);
-          localStorage.setItem("prayers", JSON.stringify(prayers));
-          renderPrayers();
-        }
-      };
-      commentsDiv.appendChild(commentForm);
-      div.appendChild(commentsDiv);
-      prayersEl.appendChild(div);
-    });
-  };
-
-  const renderAnswered = () => {
-    answeredEl.innerHTML = "";
-    answered.forEach(a => {
-      const div = document.createElement("div");
-      div.className = "answered-prayer";
-      div.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Peace_dove_icon.svg"> ${a}`;
-      answeredEl.appendChild(div);
-    });
-  };
-
-  form.onsubmit = e => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const text = document.getElementById("prayer").value;
-    const priv = document.getElementById("private").checked;
-    prayers.push({ name, text: priv ? "[Private Prayer]" : text, comments: [] });
-    localStorage.setItem("prayers", JSON.stringify(prayers));
-    form.reset();
-    successMsg.style.display = "block";
-    setTimeout(() => { successMsg.style.display = "none"; }, 2000);
-    renderPrayers();
-  };
-
-  renderPrayers();
-  renderAnswered();
-
-  // Collapsible functionality with persistent state
-  const coll = document.querySelector(".collapsible");
-  const content = document.querySelector(".content");
-  const isOpen = localStorage.getItem("prayerWallOpen") === "true";
-  if (isOpen) content.style.display = "block";
-  coll.addEventListener("click", () => {
-    content.style.display = content.style.display === "block" ? "none" : "block";
-    localStorage.setItem("prayerWallOpen", content.style.display === "block");
-  });
-});
-</script>
-</body>
-</html>
+    prayersEl.innerHTML =
