@@ -62,90 +62,216 @@
     border-radius: 6px;
     margin-bottom: 1.5rem;
   }
-  .prayer-wall-container { margin-top: 2rem; }
-  .collapsible {
-    background: #004e92;
-    color: white;
-    padding: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  .collapsible:hover { background: #0066cc; }
-  .content { display: none; margin-top: 1rem; }
-  .flex-sections {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .section {
-    flex: 1;
-    min-width: 300px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  .section:hover { transform: translateY(-3px); transition: transform 0.3s ease; }
-  .prayer-form { display: flex; flex-direction: column; gap: 10px; }
-  .prayer-form input, .prayer-form textarea {
-    padding: 0.8rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    transition: box-shadow 0.3s ease;
-  }
-  .prayer-form input:focus, .prayer-form textarea:focus {
-    box-shadow: 0 0 5px rgba(0,78,146,0.5);
-    outline: none;
-  }
-  .prayer-form button {
-    background: #004e92;
-    color: white;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .prayer-form button:hover { background: #0066cc; }
-  .prayer-item {
-    background: #fff;
-    border-left: 4px solid #002147;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-  }
-  .comments { margin-top: 10px; padding-left: 20px; font-size: 0.9em; }
-  .comment { background: #eef; padding: 5px; border-radius: 4px; margin-bottom: 5px; }
-  .comment-form { margin-top: 5px; display: flex; gap: 5px; }
-  .comment-form input {
-    flex: 1;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  .comment-form button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-  #answered-list {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .answered-prayer {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  .answered-prayer img { width: 20px; height: 20px; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* =======================
+   Prayer Wall Container
+======================= */
+.prayer-wall-container {
+  margin-top: 2rem;
+}
+
+/* Collapsible Section Button */
+.collapsible {
+  background: #004e92;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.collapsible:hover {
+  background: #0066cc;
+}
+
+.content {
+  display: none;
+  margin-top: 1rem;
+}
+
+/* Flexible Layout for Sections */
+.flex-sections {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.section {
+  flex: 1;
+  min-width: 300px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.section:hover {
+  transform: translateY(-3px);
+}
+
+/* =======================
+   Prayer Wall Main Box
+======================= */
+.prayer-wall-section {
+  background: linear-gradient(145deg, #fdfdfd, #f1f7ff);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 100, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid rgba(0, 100, 255, 0.1);
+}
+.prayer-wall-section:hover {
+  box-shadow: 0 0 25px rgba(0, 150, 255, 0.4);
+}
+.prayer-wall-section h3 {
+  font-size: 1.6rem;
+  color: #004e92;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(0, 150, 255, 0.3);
+}
+
+/* =======================
+   Prayer Items
+======================= */
+.prayer-item {
+  background: white;
+  border-left: 4px solid #002147;
+  border-radius: 10px;
+  padding: 0.8rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out;
+}
+.prayer-item:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.prayer-item button {
+  background: #004e92;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.prayer-item button:hover {
+  background: #0066cc;
+}
+
+/* =======================
+   Checkbox Glow Animation
+======================= */
+.prayer-item input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
+}
+@keyframes greenPulse {
+  0% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
+  50% { box-shadow: 0 0 15px #28a745, 0 0 25px rgba(40, 167, 69, 0.8); }
+  100% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
+}
+.prayer-item input[type="checkbox"]:checked {
+  border: 2px solid #28a745;
+  background-color: #28a745;
+  animation: greenPulse 1.5s infinite;
+}
+
+/* =======================
+   Form Styling
+======================= */
+.prayer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prayer-form input,
+.prayer-form textarea {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease;
+}
+.prayer-form input:focus,
+.prayer-form textarea:focus {
+  box-shadow: 0 0 5px rgba(0,78,146,0.5);
+  outline: none;
+}
+.prayer-form button {
+  background: #004e92;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.prayer-form button:hover {
+  background: #0066cc;
+}
+
+/* =======================
+   Comments Section
+======================= */
+.comments {
+  margin-top: 10px;
+  padding-left: 20px;
+  font-size: 0.9em;
+}
+.comment {
+  background: #eef;
+  padding: 5px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+.comment-form {
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+}
+.comment-form input {
+  flex: 1;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.comment-form button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* =======================
+   Answered List Scrolling
+======================= */
+#answered-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.answered-prayer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+.answered-prayer img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 </style>
 </head>
 <body>
@@ -191,7 +317,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const answeredEl = document.getElementById("answered-list");
   const successMsg = document.getElementById("success-message");
 
-  // Store prayers with extra fields for checkbox
+  // Change section title
+  const titleEl = answeredEl.previousElementSibling;
+  if (titleEl && titleEl.tagName === "H3") {
+    titleEl.textContent = "Prayer Wall";
+    titleEl.parentElement.classList.add("prayer-wall-section");
+  }
+
   let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
 
   const savePrayers = () => {
@@ -204,7 +336,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "prayer-item";
 
-      // Checkbox
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = p.read || false;
@@ -213,15 +344,11 @@ document.addEventListener("DOMContentLoaded", () => {
         savePrayers();
       });
 
-      // Prayer text
       const prayerText = document.createElement("span");
       prayerText.textContent = ` ${p.name}: ${p.text}`;
-      prayerText.style.marginLeft = "8px";
 
-      // Edit button
       const editBtn = document.createElement("button");
       editBtn.textContent = "Edit";
-      editBtn.style.marginLeft = "10px";
       editBtn.onclick = () => {
         const newText = prompt("Edit prayer text:", p.text);
         if (newText !== null && newText.trim() !== "") {
@@ -231,10 +358,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
 
-      // Delete button
       const delBtn = document.createElement("button");
       delBtn.textContent = "Delete";
-      delBtn.style.marginLeft = "5px";
       delBtn.onclick = () => {
         if (confirm("Delete this prayer?")) {
           prayers.splice(index, 1);
@@ -259,7 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
     prayers.push({
       name,
       text: priv ? "[Private Prayer]" : text,
-      comments: [],
       read: false
     });
     savePrayers();
@@ -271,7 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderPrayersRight();
 
-  // Collapsible control
   const coll = document.querySelector(".collapsible");
   const content = document.querySelector(".content");
   const isOpen = localStorage.getItem("prayerWallOpen") === "true";
