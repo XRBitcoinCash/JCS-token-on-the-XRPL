@@ -255,19 +255,8 @@
 <body>
 
 <!-- Connect Wallet Button -->
-<div class="cta">
-  <a id="openTrustlineCard">➕ Set Trustline</a>
+<!-- Trustline widget card (hidden by default) -->
 
-  <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" class="wallet-btn">🔗 Connect Wallet</a>
-  <a href="about-jcs.html">🛐 About JCS</a>
-</div>
-<!-- Trustline Modal -->
-<div id="trustlineModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="closeModal">&times;</span>
-    <iframe src="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000"></iframe>
-  </div>
-</div>
 
 
 <div id="particles-js"></div>
@@ -287,10 +276,19 @@
   <h1>Jesus Christ Saves Token (JCS)</h1>
   <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
 <div class="cta">
-  
- <a id="openTrustlineCard">➕ Set Trustline</a>
+  <a id="openTrustlineCard" href="javascript:void(0)">➕ Set Trustline</a>
   <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" class="wallet-btn">🔗 Connect Wallet</a>
   <a href="about-jcs.html">🛐 About JCS</a>
+</div>
+
+<!-- Trustline widget card (hidden by default) -->
+<div id="trustlineCard" style="display:none; margin-top:20px;">
+  <iframe 
+    src="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000"
+    width="100%" 
+    height="500" 
+    style="border:1px solid #ccc; border-radius:8px;">
+  </iframe>
 </div>
 
 
@@ -328,12 +326,7 @@
   </div>
 </section>
 <!-- Trustline Card (hidden by default) -->
-<div id="trustlineCard" style="display:none; margin: 20px auto; max-width: 900px; background: rgba(0,0,0,0.9); border-radius: 12px; padding: 10px; box-shadow: 0 0 20px rgba(0,212,255,0.4);">
-  <iframe 
-    src="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" 
-    style="width: 100%; height: 500px; border: none; border-radius: 8px;">
-  </iframe>
-</div>
+
 
 <section id="prayers">
   <h2>🙏 Prayer Requests</h2>
