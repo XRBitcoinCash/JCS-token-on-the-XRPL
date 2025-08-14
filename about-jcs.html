@@ -17,6 +17,11 @@
     background-size: 50%; /* Full cross visible */
     animation: fadeIn 1.5s ease-in-out;
   }
+ #verse {
+  transition: opacity 0.5s ease-in-out;
+  text-align: center;
+}
+
   body::before {
     content: "";
     position: fixed;
@@ -310,8 +315,38 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("verse").textContent =
-    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`;
+const verseEl = document.getElementById("verse");
+const verses = [
+  `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
+  `"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16`,
+  `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
+  `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
+  `"Come to me, all you who are weary and burdened, and I will give you rest." — Matthew 11:28`
+];
+
+// Label above the verse
+const scriptureLabel = document.createElement("h3");
+scriptureLabel.textContent = "Scripture";
+scriptureLabel.style.textAlign = "center";
+verseEl.parentNode.insertBefore(scriptureLabel, verseEl);
+
+let currentVerse = 0;
+
+function updateVerse() {
+  verseEl.style.opacity = 0; // fade out
+  setTimeout(() => {
+    verseEl.textContent = verses[currentVerse];
+    verseEl.style.opacity = 1; // fade in
+    currentVerse = (currentVerse + 1) % verses.length;
+  }, 500);
+}
+
+updateVerse();
+setInterval(updateVerse, 20000); // change every 20 seconds
+
+updateVerse();
+setInterval(updateVerse, 20000); // change every 20 seconds
+
 
   const form = document.getElementById("prayer-form");
   const answeredEl = document.getElementById("answered-list");
