@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign the Ledger — JCS Proof‑of‑Faith</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle at top left, #000428, #004e92);
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.8;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      background: url('background-translucent.png') center center no-repeat;
+      background-size: cover;
+      opacity: 0.08;
+      position: fixed; inset: 0; z-index: -2;
+    }
+    a { color:#00d4ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    header {
+      position: sticky; top:0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      padding: 14px 24px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:10;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    header .title {
+      display:flex; gap:12px; align-items:center;
+      font-weight:700;
+    }
+    header .title img { height: 36px; border-radius: 6px; }
+    header .actions a {
+      padding: 10px 18px;
+      background: #00d4ff; color:#000; border-radius: 30px; font-weight:700;
+      box-shadow: 0 0 15px rgba(0,212,255,0.6);
+    }
+    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,0.9); }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    .hero {
+      text-align:center; margin-bottom: 36px;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      text-shadow: 0 0 20px rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .hero p { color:#d5f7ff; max-width: 800px; margin: 0 auto; }
+
+    .grid {
+      display:grid; grid-template-columns: 1fr 1fr; gap:24px;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: rgba(0,0,0,0.6);
+      border-radius: 16px;
+      box-shadow: 0 0 22px rgba(0,212,255,0.18);
+      padding: 20px;
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(0,212,255,0.5);
+    }
+
+    /* Form */
+    .field { margin-top: 12px; }
+    .field label { display:block; font-weight:700; margin-bottom:6px; }
+    .field input, .field textarea, .field select {
+      width:100%; padding:12px 14px; border:none; border-radius: 10px;
+      background: rgba(255,255,255,0.1); color:#fff;
+      outline: 1px solid rgba(255,255,255,0.12);
+    }
+    .help { font-size: 0.9rem; color:#b9ecff; margin-top:6px; }
+
+    .row { display:flex; gap:12px; }
+    .row .field { flex:1; }
+
+    .cta {
+      margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn {
+      padding: 12px 20px; border:none; border-radius: 30px; font-weight:700; cursor:pointer;
+      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,0.6);
+    }
+    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,0.2); }
+    .btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+    .status {
+      margin-top: 12px; font-size:0.95rem;
+      padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.08);
+    }
+
+    /* Feed */
+    .feed { display:flex; flex-direction:column; gap:12px; margin-top: 10px; }
+    .item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 12px;
+    }
+    .item .meta { font-size:0.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
+    .item .msg { margin-top:6px; white-space: pre-wrap; }
+
+    footer {
+      background: rgba(0,0,0,0.8);
+      padding: 18px; text-align:center; font-size:0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
+    }
+
+    .note {
+      font-size:0.9rem; color:#ffedb5; margin-top:8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">
+      <img src="jcs-logo.png" alt="JCS logo"/>
+      <span>JCS Proof‑of‑Faith</span>
+    </div>
+    <div class="actions">
+      <a href="index.html">🏠 Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>🖋 Sign the Ledger</h1>
+      <p>
+        Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo.  
+        Your message is stored immutably and viewable by anyone — a Web3 testimony that endures.
+      </p>
+      <p class="note">Note: This sends a <strong>1‑drop</strong> micro‑payment to the JCS issuer with your memo and costs the standard XRPL network fee.</p>
+    </section>
+
+    <section class="grid">
+      <!-- Left: Form -->
+      <div class="card">
+        <h2>Compose your on‑chain message</h2>
+
+        <div class="field">
+          <label for="message">Message (required)</label>
+          <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
+          <div class="help"><span id="charCount">0</span>/240</div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="name">Display name (optional)</label>
+            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D."/>
+          </div>
+          <div class="field">
+            <label for="handle">Handle (optional)</label>
+            <input id="handle" type="text" maxlength="32" placeholder="@yourname"/>
+          </div>
+        </div>
+
+        <div class="cta">
+          <button id="connectBtn" class="btn">🔌 Connect GemWallet</button>
+          <button id="signBtn" class="btn" disabled>🖊️ Sign & Submit</button>
+          <button id="clearBtn" class="btn secondary">🧹 Clear</button>
+        </div>
+
+        <div id="status" class="status" hidden></div>
+        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
+      </div>
+
+      <!-- Right: Feed -->
+      <div class="card">
+        <h2>Recent On‑Chain Testimonies</h2>
+        <div id="feed" class="feed" aria-live="polite"></div>
+        <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof‑of‑Faith memos).</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Jesus Christ Saves Token. All Rights Reserved.
+  </footer>
+
+  <!-- XRPL client -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+
+  <script>
+    /***********************
+     * Configuration
+     ***********************/
+    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // JCS issuer
+    const IDENT_TAG   = "JCS_VERIFY_V1";                      // memo flag
+    const XRPL_WSS    = "wss://xrplcluster.com";
+
+    /***********************
+     * Utilities
+     ***********************/
+    const el = (id) => document.getElementById(id);
+
+    const strToHex = (s="") =>
+      Array.from(new TextEncoder().encode(s))
+        .map(b => b.toString(16).padStart(2, "0")).join("");
+
+    const hexToStr = (h="") => {
+      try {
+        const bytes = h.match(/.{1,2}/g)?.map(b => parseInt(b,16)) ?? [];
+        return new TextDecoder().decode(new Uint8Array(bytes));
+      } catch { return ""; }
+    };
+
+    const short = (s, n=12) => s.length > n ? s.slice(0,n) + "…" : s;
+
+    const setStatus = (msg, type="info") => {
+      const box = el("status");
+      box.hidden = !msg;
+      box.style.background = type === "error"
+        ? "rgba(255, 102, 102, 0.18)"
+        : type === "success"
+          ? "rgba(102, 255, 153, 0.18)"
+          : "rgba(255,255,255,0.08)";
+      box.innerText = msg || "";
+    };
+
+    /***********************
+     * Character counter
+     ***********************/
+    el("message").addEventListener("input", () => {
+      el("charCount").innerText = el("message").value.length;
+    });
+
+    el("clearBtn").addEventListener("click", () => {
+      el("message").value = "";
+      el("name").value = "";
+      el("handle").value = "";
+      el("charCount").innerText = "0";
+      setStatus("");
+    });
+
+    /***********************
+     * Wallet connect (GemWallet)
+     ***********************/
+    let connectedAddress = null;
+
+    async function connectGemWallet() {
+      if (!window.gemWallet) {
+        setStatus("GemWallet not detected. Install the browser extension to continue.", "error");
+        window.open("https://gemwallet.app", "_blank");
+        return;
+      }
+      try {
+        const resp = await window.gemWallet.getAddress();
+        if (resp && resp.address) {
+          connectedAddress = resp.address;
+          setStatus(`Connected: ${connectedAddress}`, "success");
+          el("signBtn").disabled = false;
+          el("connectBtn").disabled = true;
+          el("connectBtn").innerText = "Connected ✅";
+        } else {
+          throw new Error("No address returned from wallet.");
+        }
+      } catch (e) {
+        setStatus(`Connection failed: ${e.message || e}`, "error");
+      }
+    }
+
+    el("connectBtn").addEventListener("click", connectGemWallet);
+
+    /***********************
+     * Build & submit TX
+     ***********************/
+    async function signAndSubmit() {
+      setStatus("");
+      if (!connectedAddress) {
+        setStatus("Please connect GemWallet first.", "error");
+        return;
+      }
+
+      const message = el("message").value.trim();
+      const name = el("name").value.trim();
+      const handle = el("handle").value.trim();
+
+      if (!message) {
+        setStatus("Please enter a message (required).", "error");
+        return;
+      }
+
+      // Compose memos (hex encoded)
+      const memos = [
+        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) } },
+        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)    } },
+      ];
+      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
+      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
+
+      // Minimal micro‑tx: 1 drop to issuer account + memos
+      const txjson = {
+        TransactionType: "Payment",
+        Account: connectedAddress,
+        Destination: DESTINATION,
+        Amount: "1", // 1 drop
+        Memos: memos
+      };
+
+      try {
+        el("signBtn").disabled = true;
+        el("signBtn").innerText = "Signing…";
+        setStatus("Please approve the transaction in your GemWallet…");
+
+        // GemWallet: sign & submit
+        const res = await window.gemWallet.submitTransaction(txjson);
+        // Expected res shape: { result: 'success', txHash: '...', ... } (implementation may vary)
+        if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
+          const hash = res.txHash || res.hash || "";
+          setStatus("Submitted! Waiting for ledger confirmation…", "success");
+          // Link out to explorer if we have a hash
+          if (hash) {
+            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+          }
+          // Refresh feed shortly
+          setTimeout(loadFeed, 2500);
+        } else {
+          throw new Error(res?.engine_result_message || "Transaction was not accepted.");
+        }
+      } catch (e) {
+        setStatus(`Submit failed: ${e.message || e}`, "error");
+      } finally {
+        el("signBtn").disabled = false;
+        el("signBtn").innerText = "🖊️ Sign & Submit";
+      }
+    }
+
+    el("signBtn").addEventListener("click", signAndSubmit);
+
+    /***********************
+     * Feed loader (XRPL)
+     ***********************/
+    let xrplClient;
+
+    async function ensureClient() {
+      if (xrplClient && xrplClient.isConnected()) return xrplClient;
+      xrplClient = new xrpl.Client(XRPL_WSS);
+      await xrplClient.connect();
+      return xrplClient;
+    }
+
+    function parseMemos(memos = []) {
+      const out = {};
+      for (const m of memos) {
+        const memo = m?.Memo || {};
+        const key = hexToStr(memo.MemoType || "").trim().toLowerCase();
+        const val = hexToStr(memo.MemoData || "").trim();
+        if (key) out[key] = val;
+      }
+      return out;
+    }
+
+    async function loadFeed() {
+      try {
+        const client = await ensureClient();
+        // Fetch recent transactions that affected DESTINATION
+        const resp = await client.request({
+          command: "account_tx",
+          account: DESTINATION,
+          ledger_index_min: -1,
+          ledger_index_max: -1,
+          limit: 50
+        });
+
+        const items = [];
+        for (const e of (resp.result.transactions || [])) {
+          const tx = e.tx || e.transaction || {};
+          if (tx.TransactionType !== "Payment") continue;
+          if (tx.Destination !== DESTINATION) continue;
+
+          const memos = parseMemos(tx.Memos || []);
+          if (memos.app !== IDENT_TAG) continue; // our tagged messages only
+
+          items.push({
+            hash: tx.hash || e.hash || "",
+            account: tx.Account,
+            date: e.tx?.date || e.date, // Ripple epoch
+            message: memos.msg || "",
+            name: memos.name || "",
+            handle: memos.handle || ""
+          });
+        }
+
+        // Sort newest first
+        items.sort((a,b) => (b.date||0) - (a.date||0));
+
+        // Render
+        const feed = el("feed");
+        feed.innerHTML = "";
+        if (!items.length) {
+          feed.innerHTML = `<div class="item"><div class="msg">No on‑chain messages yet. Be the first to sign the ledger!</div></div>`;
+          return;
+        }
+
+        const toDate = (rippleEpoch) => {
+          // XRPL timestamp = seconds since 2000-01-01 (Ripple epoch)
+          if (!rippleEpoch) return "";
+          const unixMs = (rippleEpoch + 946684800) * 1000;
+          return new Date(unixMs).toLocaleString();
+        };
+
+        items.slice(0, 15).forEach(it => {
+          const name = it.name ? ` • ${it.name}` : "";
+          const handle = it.handle ? ` • ${it.handle}` : "";
+          const when = toDate(it.date);
+          const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
+
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
+            <div class="meta">
+              <span>From: ${short(it.account || "unknown", 14)}</span>
+              <span>• ${when || "pending…"}</span>
+              ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
+            </div>
+            <div class="msg">${(it.message || "").replace(/[<>&]/g, s => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
+            ${
+              it.name || it.handle
+                ? `<div class="meta">Signed by: ${it.name ? it.name : ""} ${it.handle ? it.handle : ""}</div>`
+                : ""
+            }
+          `;
+          feed.appendChild(div);
+        });
+      } catch (e) {
+        // Non-fatal feed error
+        const feed = el("feed");
+        feed.innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
+        console.error(e);
+      }
+    }
+
+    // Kick things off
+    loadFeed();
+    // Refresh feed periodically
+    setInterval(loadFeed, 60000);
+  </script>
+</body>
+</html>
