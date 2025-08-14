@@ -435,10 +435,7 @@ function addPrayer() {
   const text = document.getElementById('prayerText').value.trim();
   const privacy = document.getElementById('prayerPrivacy').value;
   if (!text) return alert("Enter a prayer request.");
- prayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
-localStorage.setItem('prayers', JSON.stringify(prayers));
-renderPrayers();
-
+  prayers.unshift({ name, text, privacy, countprayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
 localStorage.setItem('prayers', JSON.stringify(prayers));
 renderPrayers();
 }
@@ -559,8 +556,7 @@ function markPrayed(i, btn) {
   localStorage.setItem('prayers', JSON.stringify(prayers));
   renderPrayers();
 })();
-// Other page HTML
-
+<!-- Other page HTML -->
 
 <script>
 document.getElementById("connectWalletBtn").addEventListener("click", function() {
@@ -570,6 +566,8 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
 
 
 
+</body>
+</html>
 </body>
 </html>
 
