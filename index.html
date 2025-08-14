@@ -433,23 +433,11 @@ fetchXRPLMetrics();
 setInterval(fetchXRPLMetrics, 60000);
 </script>
 
-function addPrayer() {
-  const name = document.getElementById('prayerName').value || 'Anonymous';
-  const text = document.getElementById('prayerText').value.trim();
-  const privacy = document.getElementById('prayerPrivacy').value;
-  if (!text) return alert("Enter a prayer request.");
-  prayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
-  localStorage.setItem('prayers', JSON.stringify(prayers));
-  renderPrayers();
+
 }
 
 
-(() => {
-  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  prayers = prayers.filter(p => p.ts > cutoff);
-  localStorage.setItem('prayers', JSON.stringify(prayers));
-  renderPrayers();
-})();
+
 <!-- Other page HTML -->
 
 <script>
