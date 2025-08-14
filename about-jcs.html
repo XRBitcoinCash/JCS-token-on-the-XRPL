@@ -6,6 +6,7 @@
 <title>Jesus Christ Saves Token (JCS) – Prayer Wall</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  /* === Your original styling preserved === */
   body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -17,150 +18,68 @@
     background-size: 50%;
     animation: fadeIn 1.5s ease-in-out;
   }
-  #verse {
-    transition: opacity 0.5s ease-in-out;
-    text-align: center;
-  }
+  #verse { transition: opacity 0.5s ease-in-out; text-align: center; }
   body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
+    content: ""; position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 26, 51, 0.6);
-    z-index: 0;
+    background: rgba(0, 26, 51, 0.6); z-index: 0;
   }
   nav {
-    background: rgba(0,0,0,0.7);
-    text-align: center;
-    padding: 12px;
-    position: relative;
-    z-index: 2;
+    background: rgba(0,0,0,0.7); text-align: center;
+    padding: 12px; position: relative; z-index: 2;
   }
-  nav a {
-    color: white;
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+  nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; transition: 0.3s; }
   nav a:hover { color: #ffd700; transform: scale(1.05); }
   .container {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: rgba(255,255,255,0.92);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 1;
+    max-width: 1100px; margin: 2rem auto; padding: 2rem;
+    background: rgba(255,255,255,0.92); border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; z-index: 1;
     animation: fadeIn 1s ease-in-out;
   }
-  .verse {
-    background: #fff3cd;
-    padding: 1rem;
-    border-left: 6px solid #ffc107;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-  }
+  .verse { background: #fff3cd; padding: 1rem; border-left: 6px solid #ffc107;
+    font-size: 1.2rem; font-weight: bold; border-radius: 6px; margin-bottom: 1.5rem; }
   .prayer-wall-container { margin-top: 2rem; }
   .collapsible {
-    background: #004e92;
-    color: white;
-    padding: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
+    background: #004e92; color: white; padding: 1rem; cursor: pointer;
+    border: none; border-radius: 8px; font-weight: bold; transition: 0.3s;
   }
   .collapsible:hover { background: #0066cc; }
   .content { display: none; margin-top: 1rem; }
   .flex-sections { display: flex; gap: 20px; flex-wrap: wrap; }
-  .section {
-    flex: 1; min-width: 300px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
+  .section { flex: 1; min-width: 300px; background: #f9f9f9; border-radius: 8px;
+    padding: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
   .section:hover { transform: translateY(-3px); }
-  .prayer-wall-section {
-    background: linear-gradient(145deg, #fdfdfd, #f1f7ff);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 0 20px rgba(0, 100, 255, 0.1);
-    border: 1px solid rgba(0, 100, 255, 0.1);
-  }
-  .prayer-wall-section:hover { box-shadow: 0 0 25px rgba(0, 150, 255, 0.4); }
-  .prayer-wall-section h3 {
-    font-size: 1.6rem;
-    color: #004e92;
-    text-align: center;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 8px rgba(0, 150, 255, 0.3);
-  }
   .prayer-item {
-    background: white;
-    border-left: 4px solid #002147;
-    border-radius: 10px;
-    padding: 0.8rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease-in-out;
+    background: white; border-left: 4px solid #002147; border-radius: 10px;
+    padding: 0.8rem; margin-bottom: 10px; display: flex; align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s ease-in-out;
   }
   .prayer-item:hover { transform: scale(1.01); }
-  .prayer-item button {
-    background: #004e92;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-left: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+  .prayer-item button { background: #004e92; color: white; border: none; padding: 5px 10px;
+    margin-left: 5px; border-radius: 5px; cursor: pointer; transition: 0.2s; }
   .prayer-item button:hover { background: #0066cc; }
-  .prayer-item input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-right: 10px;
-  }
+  .prayer-item input[type="checkbox"] { transform: scale(1.2); margin-right: 10px; }
   @keyframes greenPulse {
     0% { box-shadow: 0 0 5px #28a745; }
     50% { box-shadow: 0 0 15px #28a745; }
     100% { box-shadow: 0 0 5px #28a745; }
   }
   .prayer-item input[type="checkbox"]:checked {
-    border: 2px solid #28a745;
-    background-color: #28a745;
-    animation: greenPulse 1.5s infinite;
+    border: 2px solid #28a745; background-color: #28a745; animation: greenPulse 1.5s infinite;
   }
   .prayer-form { display: flex; flex-direction: column; gap: 10px; }
   .prayer-form input, .prayer-form textarea {
-    padding: 0.8rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 0.8rem; border-radius: 6px; border: 1px solid #ccc;
   }
-  .prayer-form button {
-    background: #004e92;
-    color: white;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 6px;
-  }
+  .prayer-form button { background: #004e92; color: white; padding: 0.8rem; border: none; border-radius: 6px; }
   .prayer-form button:hover { background: #0066cc; }
   #answered-list { max-height: 400px; overflow-y: auto; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .badge { font-size: 0.9rem; background: gold; color: black; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html">Home</a>
-</nav>
+<nav><a href="index.html">Home</a></nav>
 
 <div class="container">
   <h2>Our Mission</h2>
@@ -175,18 +94,23 @@
       <div class="section">
         <h3>Interactive Prayer Wall</h3>
 
-        <!-- Login Form -->
-        <div id="login-section" style="margin-bottom: 1rem;">
-          <h3>Sign In</h3>
-          <input type="text" id="login-name" placeholder="Name" required>
-          <input type="password" id="login-password" placeholder="Password" required>
-          <button id="login-btn">Login</button>
+        <!-- Login / Signup -->
+        <div id="auth-section" style="margin-bottom: 1rem;">
+          <h3 id="auth-title">Sign In</h3>
+          <input type="text" id="auth-name" placeholder="Name" required>
+          <input type="password" id="auth-password" placeholder="Password" required>
+          <input type="password" id="auth-confirm" placeholder="Confirm Password" style="display:none;">
+          <button id="auth-btn">Login</button>
+          <p><a href="#" id="toggle-auth">Need an account? Sign Up</a></p>
         </div>
+
+        <!-- Logged in info -->
         <div id="user-info" style="display:none; margin-bottom: 1rem;">
-          Logged in as <span id="current-user"></span>
+          Logged in as <span id="current-user"></span> <span id="user-badge" class="badge"></span>
           <button id="logout-btn">Logout</button>
         </div>
 
+        <!-- Prayer Form -->
         <form id="prayer-form" class="prayer-form">
           <textarea id="prayer" placeholder="Write your prayer..." rows="4" required></textarea>
           <label><input type="checkbox" id="private"> Keep my prayer private</label>
@@ -204,7 +128,6 @@
 </div>
 
 <script>
-// Simple password hash (for demo)
 function simpleHash(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -215,186 +138,84 @@ function simpleHash(str) {
 }
 
 let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let prayers = [];
 
-function updateLoginUI() {
-  const loginSection = document.getElementById("login-section");
-  const userInfo = document.getElementById("user-info");
-  if (currentUser) {
-    loginSection.style.display = "none";
-    userInfo.style.display = "block";
-    document.getElementById("current-user").textContent = currentUser.name;
-  } else {
-    loginSection.style.display = "block";
-    userInfo.style.display = "none";
-  }
-}
+// === Auth mode ===
+let isSignup = false;
+document.getElementById("toggle-auth").addEventListener("click", e => {
+  e.preventDefault();
+  isSignup = !isSignup;
+  document.getElementById("auth-title").textContent = isSignup ? "Sign Up" : "Sign In";
+  document.getElementById("auth-btn").textContent = isSignup ? "Create Account" : "Login";
+  document.getElementById("auth-confirm").style.display = isSignup ? "block" : "none";
+  document.getElementById("toggle-auth").textContent = isSignup ? "Already have an account? Sign In" : "Need an account? Sign Up";
+});
 
-document.getElementById("login-btn").addEventListener("click", () => {
-  const name = document.getElementById("login-name").value.trim();
-  const password = document.getElementById("login-password").value;
+// === Login / Signup handler ===
+document.getElementById("auth-btn").addEventListener("click", () => {
+  const name = document.getElementById("auth-name").value.trim();
+  const password = document.getElementById("auth-password").value;
+  const confirmPass = document.getElementById("auth-confirm").value;
+
   if (!name || password.length < 4) {
     alert("Name and password (4+ chars) required");
     return;
   }
-  currentUser = { name, passHash: simpleHash(password) };
+
+  if (isSignup) {
+    if (password !== confirmPass) {
+      alert("Passwords do not match");
+      return;
+    }
+    if (users.find(u => u.name === name)) {
+      alert("User already exists");
+      return;
+    }
+    const newUser = { name, passHash: simpleHash(password), prayersPosted: 0, badgeLevel: 1 };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Account created! Please log in.");
+    isSignup = false;
+    document.getElementById("toggle-auth").click();
+    return;
+  }
+
+  // Login mode
+  const user = users.find(u => u.name === name && u.passHash === simpleHash(password));
+  if (!user) {
+    alert("Invalid login");
+    return;
+  }
+  currentUser = user;
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   updateLoginUI();
+  renderPrayers();
 });
 
 document.getElementById("logout-btn").addEventListener("click", () => {
   localStorage.removeItem("currentUser");
   currentUser = null;
   updateLoginUI();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  updateLoginUI();
-
-  const verseEl = document.getElementById("verse");
-  const verses = [
-    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
-    `"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16`,
-    `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
-    `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
-    `"Come to me, all you who are weary and burdened, and I will give you rest." — Matthew 11:28`
-  ];
-  let currentVerse = 0;
-  function updateVerse() {
-    verseEl.style.opacity = 0;
-    setTimeout(() => {
-      verseEl.textContent = verses[currentVerse];
-      verseEl.style.opacity = 1;
-      currentVerse = (currentVerse + 1) % verses.length;
-    }, 500);
-  }
-  updateVerse();
-  setInterval(updateVerse, 20000);
-
-  let prayers = JSON.parse(localStorage.getItem("prayers") || "[]")
-    .filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
-
-  const savePrayers = () => {
-    localStorage.setItem("prayers", JSON.stringify(prayers));
-  };
-
-  const answeredEl = document.getElementById("answered-list");
-  const renderPrayers = () => {
-    answeredEl.innerHTML = "";
-    prayers.forEach((p, index) => {
-      const div = document.createElement("div");
-      div.className = "prayer-item";
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = p.read || false;
-      checkbox.addEventListener("change", () => {
-        p.read = checkbox.checked;
-        savePrayers();
-      });
-
-      const prayerText = document.createElement("span");
-      prayerText.textContent = ` ${p.name}: ${p.text}`;
-
-      if (currentUser && (currentUser.name === p.name && currentUser.passHash === p.ownerHash || currentUser.name === "admin")) {
-        const editBtn = document.createElement("button");
-        editBtn.textContent = "Edit";
-        editBtn.onclick = () => {
-          const newText = prompt("Edit prayer text:", p.text);
-          if (newText && newText.trim()) {
-            p.text = newText.trim();
-            savePrayers();
-            renderPrayers();
-          }
-        };
-        const delBtn = document.createElement("button");
-        delBtn.textContent = "Delete";
-        delBtn.onclick = () => {
-          if (confirm("Delete this prayer?")) {
-            prayers.splice(index, 1);
-            savePrayers();
-            renderPrayers();
-          }
-        };
-        div.appendChild(editBtn);
-        div.appendChild(delBtn);
-      }
-
-      div.insertBefore(prayerText, div.firstChild);
-      div.insertBefore(checkbox, div.firstChild);
-      answeredEl.appendChild(div);
-    });
-  };
-
-  const form = document.getElementById("prayer-form");
-  const successMsg = document.getElementById("success-message");
-  form.onsubmit = e => {
-    e.preventDefault();
-    if (!currentUser) {
-      alert("You must log in first");
-      return;
-    }
-    const text = document.getElementById("prayer").value;
-    const priv = document.getElementById("private").checked;
-    prayers.push({
-      name: currentUser.name,
-      ownerHash: currentUser.passHash,
-      text: priv ? "[Private Prayer]" : text,
-      read: false,
-      createdAt: Date.now()
-    });
-    savePrayers();
-    form.reset();
-    successMsg.style.display = "block";
-    setTimeout(() => successMsg.style.display = "none", 2000);
-    renderPrayers();
-  };
-
   renderPrayers();
-
-  const coll = document.querySelector(".collapsible");
-  const content = document.querySelector(".content");
-  const isOpen = localStorage.getItem("prayerWallOpen") === "true";
-  if (isOpen) content.style.display = "block";
-  coll.addEventListener("click", () => {
-    content.style.display = content.style.display === "block" ? "none" : "block";
-    localStorage.setItem("prayerWallOpen", content.style.display === "block");
-  });
 });
-<script>
-// ===== Simple password hash =====
-function simpleHash(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash << 5) - hash + str.charCodeAt(i);
-    hash |= 0; // convert to 32-bit int
+
+function updateLoginUI() {
+  if (currentUser) {
+    document.getElementById("auth-section").style.display = "none";
+    document.getElementById("user-info").style.display = "block";
+    document.getElementById("current-user").textContent = currentUser.name;
+    document.getElementById("user-badge").textContent = `Badge: ${currentUser.badgeLevel}`;
+  } else {
+    document.getElementById("auth-section").style.display = "block";
+    document.getElementById("user-info").style.display = "none";
   }
-  return hash.toString();
 }
 
-// ===== Global State =====
-let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
-let prayers = [];
-
-// ===== Utility: Save prayers =====
 function savePrayers() {
   localStorage.setItem("prayers", JSON.stringify(prayers));
 }
 
-// ===== Login UI Update =====
-function updateLoginUI() {
-  const loginSection = document.getElementById("login-section");
-  const userInfo = document.getElementById("user-info");
-  if (currentUser) {
-    loginSection.style.display = "none";
-    userInfo.style.display = "block";
-    document.getElementById("current-user").textContent = currentUser.name;
-  } else {
-    loginSection.style.display = "block";
-    userInfo.style.display = "none";
-  }
-}
-
-// ===== Render Prayers =====
 function renderPrayers() {
   const listEl = document.getElementById("prayers");
   const answeredEl = document.getElementById("answered-list");
@@ -402,7 +223,6 @@ function renderPrayers() {
   answeredEl.innerHTML = "";
 
   prayers.forEach((p, index) => {
-    // Hide private prayers from non-owners/non-admin
     if (p.text === "[Private Prayer]" &&
        (!currentUser || (currentUser.name !== p.name && currentUser.name !== "admin"))) {
       return;
@@ -425,7 +245,6 @@ function renderPrayers() {
     div.appendChild(checkbox);
     div.appendChild(prayerText);
 
-    // Edit/Delete buttons if owner or admin
     if (currentUser &&
         (currentUser.name === p.name && currentUser.passHash === p.ownerHash ||
          currentUser.name === "admin")) {
@@ -454,16 +273,11 @@ function renderPrayers() {
       div.appendChild(delBtn);
     }
 
-    // Append to answered list if marked read
-    if (p.read) {
-      answeredEl.appendChild(div);
-    } else {
-      listEl.appendChild(div);
-    }
+    if (p.read) answeredEl.appendChild(div);
+    else listEl.appendChild(div);
   });
 }
 
-// ===== Submit Prayer =====
 function handlePrayerSubmit(e) {
   e.preventDefault();
   if (!currentUser) {
@@ -485,24 +299,28 @@ function handlePrayerSubmit(e) {
     createdAt: Date.now()
   });
 
-  // Remove expired prayers (30 days)
-  prayers = prayers.filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
+  currentUser.prayersPosted++;
+  currentUser.badgeLevel = Math.min(100, Math.floor(currentUser.prayersPosted / 10) + 1);
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  users = users.map(u => u.name === currentUser.name ? currentUser : u);
+  localStorage.setItem("users", JSON.stringify(users));
 
+  prayers = prayers.filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
   savePrayers();
   e.target.reset();
   document.getElementById("success-message").style.display = "block";
   setTimeout(() => document.getElementById("success-message").style.display = "none", 2000);
+  updateLoginUI();
   renderPrayers();
 }
 
-// ===== Verse Rotation =====
 function initVerseRotation() {
   const verseEl = document.getElementById("verse");
   const verses = [
-    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
-    `"For God so loved the world that he gave his one and only Son..." — John 3:16`,
-    `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
-    `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
+    `"The thief comes only to steal and kill and destroy..." — John 10:10`,
+    `"For God so loved the world..." — John 3:16`,
+    `"I can do all things through Christ..." — Philippians 4:13`,
+    `"The Lord is my shepherd..." — Psalm 23:1`,
     `"Come to me, all you who are weary..." — Matthew 11:28`
   ];
   let current = 0;
@@ -518,7 +336,6 @@ function initVerseRotation() {
   setInterval(showVerse, 20000);
 }
 
-// ===== Collapsible Wall Toggle =====
 function initCollapsible() {
   const coll = document.querySelector(".collapsible");
   const content = document.querySelector(".content");
@@ -532,44 +349,15 @@ function initCollapsible() {
   });
 }
 
-// ===== Init =====
 document.addEventListener("DOMContentLoaded", () => {
   updateLoginUI();
-
-  // Load prayers from storage and filter expired
   prayers = JSON.parse(localStorage.getItem("prayers") || "[]")
     .filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
-
   renderPrayers();
   initVerseRotation();
   initCollapsible();
-
-  // Event Listeners
-  document.getElementById("login-btn").addEventListener("click", () => {
-    const name = document.getElementById("login-name").value.trim();
-    const password = document.getElementById("login-password").value;
-    if (!name || password.length < 4) {
-      alert("Name and password (4+ chars) required");
-      return;
-    }
-    currentUser = { name, passHash: simpleHash(password) };
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    updateLoginUI();
-    renderPrayers();
-  });
-
-  document.getElementById("logout-btn").addEventListener("click", () => {
-    localStorage.removeItem("currentUser");
-    currentUser = null;
-    updateLoginUI();
-    renderPrayers();
-  });
-
   document.getElementById("prayer-form").addEventListener("submit", handlePrayerSubmit);
 });
-
-
 </script>
 </body>
 </html>
-
