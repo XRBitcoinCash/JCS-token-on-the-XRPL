@@ -274,7 +274,7 @@
    <a href="#mission">Mission</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#faq">FAQ</a>
-    <a href="#prayers">Prayers</a>
+  
   </nav>
 </header>
 
@@ -290,21 +290,8 @@
   <a href="about-jcs.html">🛐 About JCS</a>
 </div>
 
-<!-- Trustline widget card (hidden by default) -->
-
-
-
-
 </section>
 
-
-
-<section id="mission">
-  <h2>🙏 Our Mission</h2>
-  <div class="card">
-    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the Word of our Lord to the crypto community...</p>
-  </div>
-</section>
 
 <section id="roadmap">
   <h2>🛣️ Roadmap</h2>
@@ -327,21 +314,6 @@
   </div>
 </section>
 <!-- Trustline Card (hidden by default) -->
-
-
-<section id="prayers">
-  <h2>🙏 Prayer Requests</h2>
-  <div class="card prayer-form">
-    <input type="text" id="prayerName" placeholder="Your Name">
-    <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
-    <select id="prayerPrivacy">
-      <option value="public">Public</option>
-      <option value="private">Private</option>
-    </select>
-    <button onclick="addPrayer()">Submit Prayer</button>
-  </div>
-  <div class="card prayer-list" id="prayerList"></div>
-</section>
 
 <footer>
   © 2025 Jesus Christ Saves Token. All Rights Reserved.
@@ -413,33 +385,7 @@ fetchXRPLMetrics();
 setInterval(fetchXRPLMetrics, 60000);
 </script>
 
-<script>
-let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
-function renderPrayers() {
-  const list = document.getElementById('prayerList');
-  list.innerHTML = '';
-  prayers.forEach((p, i) => {
-    if (p.privacy === 'private' && window.location.hostname !== 'jesuschristsavestoken.com') return;
-    const div = document.createElement('div');
-    div.className = 'prayer-item';
-    div.innerHTML = `
-      <span><strong>${p.name}:</strong> ${p.text}</span>
-      <span>🙏 ${p.count}</span>
-      <button onclick="markPrayed(${i}, this)">I Prayed</button>
-    `;
-    list.prepend(div);
-  });
-}
-function addPrayer() {
-  const name = document.getElementById('prayerName').value || 'Anonymous';
-  const text = document.getElementById('prayerText').value.trim();
-  const privacy = document.getElementById('prayerPrivacy').value;
-  if (!text) return alert("Enter a prayer request.");
-  prayers.unshift({ name, text, privacy, countprayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
-localStorage.setItem('prayers', JSON.stringify(prayers));
-renderPrayers();
-}
-</script>
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
@@ -514,25 +460,6 @@ fetchXRPLMetrics();
 setInterval(fetchXRPLMetrics, 60000);
 </script>
 
-<script>
-let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
-
-function renderPrayers() {
-  const list = document.getElementById('prayerList');
-  list.innerHTML = '';
-  prayers.forEach((p, i) => {
-    if (p.privacy === 'private' && window.location.hostname !== 'jesuschristsavestoken.com') return;
-    const div = document.createElement('div');
-    div.className = 'prayer-item';
-    div.innerHTML = `
-      <span><strong>${p.name}:</strong> ${p.text}</span>
-      <span>🙏 ${p.count}</span>
-      <button onclick="markPrayed(${i}, this)">I Prayed</button>
-    `;
-    list.prepend(div);
-  });
-}
-
 function addPrayer() {
   const name = document.getElementById('prayerName').value || 'Anonymous';
   const text = document.getElementById('prayerText').value.trim();
@@ -543,12 +470,6 @@ function addPrayer() {
   renderPrayers();
 }
 
-function markPrayed(i, btn) {
-  prayers[i].count++;
-  btn.innerHTML = "🙏 Prayed";
-  localStorage.setItem('prayers', JSON.stringify(prayers));
-  renderPrayers();
-}
 
 (() => {
   const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
@@ -566,8 +487,6 @@ document.getElementById("connectWalletBtn").addEventListener("click", function()
 
 
 
-</body>
-</html>
 </body>
 </html>
 
