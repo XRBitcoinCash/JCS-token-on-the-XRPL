@@ -270,13 +270,15 @@
 
 <header>
   <img src="jcs-logo.png" alt="Jesus Christ Saves Token Logo">
-  <nav>
+ <nav>
    <a href="metrics.html">📊 Metrics</a>
    <a href="#mission">Mission</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#faq">FAQ</a>
-    <a href="#prayers">Prayers</a>
-  </nav>
+   <a href="#roadmap">Roadmap</a>
+   <a href="#faq">FAQ</a>
+   <a href="#prayers">Prayers</a>
+   <a href="join.html">🙋 Join</a>
+</nav>
+
 </header>
 
 <section class="hero">
@@ -328,6 +330,20 @@
   </div>
 </section>
 <!-- Trustline Card (hidden by default) -->
+
+<section id="memberAccess">
+  <h2>🔐 Member Sign-Up</h2>
+  <div class="card">
+    <form id="signupForm">
+      <input type="text" id="signupName" placeholder="Full Name" required>
+      <input type="email" id="signupEmail" placeholder="Email Address" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Create Account</button>
+    </form>
+  </div>
+</section>
+
 
 
 <section id="prayers">
@@ -435,11 +451,25 @@ function addPrayer() {
   const name = document.getElementById('prayerName').value || 'Anonymous';
   const text = document.getElementById('prayerText').value.trim();
   const privacy = document.getElementById('prayerPrivacy').value;
+
   if (!text) return alert("Enter a prayer request.");
-  prayers.unshift({ name, text, privacy, countprayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
-localStorage.setItem('prayers', JSON.stringify(prayers));
-renderPrayers();
+
+  // Add the new prayer to the start of the list
+  prayers.unshift({ 
+    name, 
+    text, 
+    privacy, 
+    count: 0, 
+    ts: Date.now() 
+  });
+
+  // Save updated prayers to localStorage
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+
+  // Refresh the list display
+  renderPrayers();
 }
+
 </script>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -562,6 +592,108 @@ function markPrayed(i, btn) {
 <script>
 document.getElementById("connectWalletBtn").addEventListener("click", function() {
     window.open("https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd", "_blank");
+});
+</script>
+</section>
+
+
+
+<section id="mission">
+  <h2>🙏 Our Mission</h2>
+  <div class="card">
+    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the Word of our Lord to the crypto community...</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <h2>🛣️ Roadmap</h2>
+  <div class="card">
+    <ul>
+      <li>✅ Launch token on XRPL</li>
+      <li>✅ Hold an AirDrop for the faithful</li>
+      <li>✅ Build a liquidity pool pegged to XRP</li>
+      <li>⬜ Create 1 million micro transactions</li>
+      <li>⬜ Support the XRPL community and represent Jesus Christ on the ledger</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>❓ FAQ</h2>
+  <div class="card">
+    <p><strong>Why a Christian token?</strong> To spread the message of Jesus Christ into new digital frontiers while supporting faith-based causes.</p>
+    <p><strong>How do I use it?</strong> Set the trustline, hold the token, and participate in community prayers, charity pools, and faith projects.</p>
+  </div>
+</section>
+<!-- Trustline Card (hidden by default) -->
+
+<section id="memberAccess">
+  <h2>🔐 Member Sign-Up</h2>
+  <div class="card">
+    <form id="signupForm">
+      <input type="text" id="signupName" placeholder="Full Name" required>
+      <input type="email" id="signupEmail" placeholder="Email Address" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Create Account</button>
+    </form>
+  </div>
+</section>
+
+
+
+<section id="prayers">
+  <h2>🙏 Prayer Requests</h2>
+  <div class="card prayer-form">
+    <input type="text" id="prayerName" placeholder="Your Name">
+    <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
+    <select id="prayerPrivacy">
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+    <button onclick="addPrayer()">Submit Prayer</button>
+  </div>
+  <div class="card prayer-list" id="prayerList"></div>
+</section>
+
+<footer>
+  © 2025 Jesus Christ Saves Token. All Rights Reserved.
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 3, "density": { "enable": false } },
+    "shape": {
+      "type": "image",
+      "image": { "src": "cross1.png", "width": 40, "height": 40 }
+    },
+    "opacity": { "value": 0.95 },
+    "size": { "value": 45, "random": true },
+    "line_linked": { "enable": false },
+    "move": { "enable": true, "speed": 0.4, "direction": "top", "out_mode": "out" }
+  },
+  "retina_detect": true
+});
+</script>
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const pass = document.getElementById('signupPassword').value;
+  const confirmPass = document.getElementById('confirmPassword').value;
+  if (pass !== confirmPass) {
+    alert("Passwords do not match!");
+    return;
+  }
+  // Store user in localStorage (temporary for demo purposes)
+  localStorage.setItem('member', JSON.stringify({
+    name: document.getElementById('signupName').value,
+    email: document.getElementById('signupEmail').value
+  }));
+  alert("Account created! You can now access the Prayer Wall.");
+  window.location.href = "prayer-wall.html";
 });
 </script>
 
