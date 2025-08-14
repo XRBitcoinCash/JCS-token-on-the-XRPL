@@ -1,136 +1,347 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Jesus Christ Saves Token (JCS)</title>
-  <meta name="description" content="Learn more about Jesus Christ Saves Token, a Christian faith-driven cryptocurrency on the XRPL, spreading the Gospel and supporting believers worldwide." />
-  
+  <!-- Basic Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency</title>
+  <meta name="description" content="Jesus Christ Saves Token (JCS) empowers believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today.">
+  <meta name="keywords" content="Jesus Christ Saves Token, JCS, XRPL, XRP Ledger, Christian Cryptocurrency, Faith Blockchain, Christian Token, Crypto Ministry">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <!-- Canonical & Language -->
+  <link rel="canonical" href="https://jesuschristsavestoken.com/">
+  <link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/">
+
+  <!-- Speed Optimizations -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicons & Theme Colors -->
+  <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png">
+  <meta name="theme-color" content="#004e92">
+  <meta name="msapplication-TileColor" content="#004e92">
+  <meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo.png">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jesus Christ Saves Token">
+  <meta property="og:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency">
+  <meta property="og:description" content="Empowering believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today.">
+  <meta property="og:url" content="https://jesuschristsavestoken.com/">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta property="og:image:alt" content="Jesus Christ Saves Token Logo">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@JesusCS_token">
+  <meta name="twitter:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency">
+  <meta name="twitter:description" content="Empowering believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today.">
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+
+  <!-- Bing Webmaster Verification (optional if already verified) -->
+  <!-- <meta name="msvalidate.01" content="YOUR-BING-VERIFICATION-CODE" /> -->
+</head>
+
+
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Jesus Christ Saves Token",
+    "url": "https://jesuschristsavestoken.com/",
+    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+    "sameAs": [
+      "https://twitter.com/JesusCS_token"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://jesuschristsavestoken.com/",
+    "name": "Jesus Christ Saves Token (JCS)",
+    "description": "Faith-based cryptocurrency on the XRPL for believers worldwide.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jesus Christ Saves Token",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jesuschristsavestoken.com/jcs-logo.png"
+      }
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top left, #000428, #004e92);
-      color: #fff;
-      line-height: 1.8;
-      overflow-x: hidden;
+ <style>
+  .cta a.wallet-btn {
+  margin-top: 10px; /* space above Connect Wallet button */
+  display: inline-block;
+}
+
+   * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle at top left, #000428, #004e92);
+    color: #fff;
+    overflow-x: hidden;
+    line-height: 1.8;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    background: url('background-translucent.png') center center no-repeat;
+    background-size: cover;
+    opacity: 0.08;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -2;
+  }
+  a { color:#00d4ff; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  #particles-js {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
+  }
+  header {
+    position: fixed; top:0; left:0; width:100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 40px;
+    z-index: 1000;
+  }
+  header img { height: 50px; }
+  nav a { margin:0 15px; font-weight:bold; }
+  .hero {
+    height: 85vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding-top: 80px;
+  }
+  .hero h1 {
+    font-size: 3em;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  .hero p {
+    margin-top: 15px; font-size: 1.2em; max-width: 700px;
+  }
+  .hero .cta { margin-top: 25px; }
+  .hero .cta a {
+    padding: 12px 24px; margin: 10px;
+    border-radius: 30px;
+    background: #00d4ff; color: black; font-weight: bold;
+    box-shadow: 0 0 15px rgba(0,212,255,0.6);
+    transition: all 0.3s;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .hero .cta a:hover {
+    background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.8);
+  }
+  section {
+    padding: 50px 20px;
+    max-width: 1100px; margin: auto;
+  }
+  section p { margin-bottom: 15px; }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    text-shadow: 0 0 15px rgba(0,212,255,0.6);
+    animation: fadeSlideIn 1s ease forwards;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card {
+    background: rgba(0,0,0,0.6);
+    padding: 20px; border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+    margin-bottom: 15px;
+  }
+  #verseCard {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(255,255,200,0.4);
+    animation: fadeIn 2s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity:0; }
+    to { opacity:1; }
+  }
+  #prayers h2 { font-family: 'UnifrakturCook', cursive; }
+  .prayer-form input, .prayer-form textarea, .prayer-form select {
+    width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none;
+  }
+  .prayer-list { margin-top: 20px; }
+  .prayer-item {
+    background: rgba(255,255,255,0.05);
+    padding: 10px; border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .prayer-item span { flex: 1; }
+  .prayer-item button { margin-left: 10px; }
+  footer {
+    background: rgba(0,0,0,0.8);
+    padding: 20px; text-align: center;
+    font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Mobile fix for button/mission overlap */
+  @media (max-width: 768px) {
+    .about-jcs-button {
+      display: block;
+      margin-bottom: 30px; /* space below button */
     }
-    #particles-js {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-      filter: drop-shadow(0 0 15px rgba(255,255,200,0.9));
+    #mission {
+      margin-top: 30px; /* space above mission section */
     }
-    header {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 40px;
-      position: sticky; top: 0;
-      z-index: 1000;
-    }
-    header img { height: 50px; }
-    nav a {
-      margin:0 15px;
-      font-weight:bold;
-      color:#ff4b4b;
-      text-shadow:0 0 10px rgba(255,75,75,0.8);
-    }
-    nav a:hover {
-      color:#fff;
-      text-shadow:0 0 15px rgba(255,255,255,1);
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h1, h2 {
-      text-align: center;
-      text-shadow:0 0 15px rgba(255,75,75,0.8);
-    }
-    .card {
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
-      border-radius: 20px;
-      border: 2px solid red;
-      box-shadow: 0 0 20px rgba(255,0,0,0.5);
-      margin-bottom: 20px;
-    }
-    .cta a {
-      display: inline-block;
-      padding: 12px 24px;
-      margin: 10px;
-      border-radius: 30px;
-      background: red;
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 0 20px rgba(255,0,0,0.7);
-      transition: all 0.3s;
-    }
-    .cta a:hover {
-      background: #fff;
-      color: red;
-      box-shadow: 0 0 30px rgba(255,255,255,0.9);
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9em;
-      background: rgba(0,0,0,0.8);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-  </style>
+  }
+
+ 
+   
+   .modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+.modal-content {
+  position: relative;
+  margin: 50px auto;
+  background: rgba(0,0,0,0.9);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.modal-content iframe {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+ </style>
+
+
 </head>
 <body>
+
+<!-- Connect Wallet Button -->
+<!-- Trustline widget card (hidden by default) -->
+
+
 
 <div id="particles-js"></div>
 
 <header>
   <img src="jcs-logo.png" alt="Jesus Christ Saves Token Logo">
   <nav>
-    <a href="index.html">🏠 Home</a>
-    <a href="metrics.html">📊 Metrics</a>
-    <a href="#mission">Mission</a>
-    <a href="#verse">Verse</a>
+   <a href="metrics.html">📊 Metrics</a>
+   <a href="#mission">Mission</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
+    <a href="#prayers">Prayers</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>About Jesus Christ Saves Token (JCS)</h1>
-  <div class="card">
-    <p>
-      Jesus Christ Saves Token is a faith-based digital currency built on the XRPL to glorify God through blockchain transparency, integrity, and community outreach.
-      Our mission is rooted in the Great Commission — to proclaim the Gospel to all nations, even in the digital marketplace.
-    </p>
-    <p>
-      Every transaction is an opportunity to share the message of salvation through Jesus Christ. Our token exists not just to move value, but to move hearts toward Him.
-    </p>
-    <div class="cta">
-      <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS" target="_blank">➕ Set Trustline</a>
-      <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank">🔗 Connect Wallet</a>
-    </div>
-  </div>
+  <h1>Jesus Christ Saves Token (JCS)</h1>
+  <p>Empowering believers through blockchain transparency and faith-driven purpose.</p>
+<div class="cta">
+ <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank">
+  ➕ Set Trustline
+</a>
+
+  <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" class="wallet-btn">🔗 Connect Wallet</a>
+  <a href="about-jcs.html">🛐 About JCS</a>
+</div>
+
+<!-- Trustline widget card (hidden by default) -->
+
+
+
+
 </section>
+
+
 
 <section id="mission">
   <h2>🙏 Our Mission</h2>
   <div class="card">
-    <p>
-      To create a global Christian community united through digital stewardship, prayer, and charity. We aim to support missions, feed the hungry, help the poor, and spread the Gospel — all backed by a secure, transparent ledger.
-    </p>
-    <p>
-      "Go therefore and make disciples of all nations" — Matthew 28:19
-    </p>
+    <p>Welcome to the <strong>Cryptocurrency Community Church of Jesus Christ</strong>. Our ministry brings the Word of our Lord to the crypto community...</p>
   </div>
 </section>
 
-<section id="verse">
-  <h2>📖 Verse of the Day</h2>
-  <div class="card" id="dailyVerse">Loading verse...</div>
+<section id="roadmap">
+  <h2>🛣️ Roadmap</h2>
+  <div class="card">
+    <ul>
+      <li>✅ Launch token on XRPL</li>
+      <li>✅ Hold an AirDrop for the faithful</li>
+      <li>✅ Build a liquidity pool pegged to XRP</li>
+      <li>⬜ Create 1 million micro transactions</li>
+      <li>⬜ Support the XRPL community and represent Jesus Christ on the ledger</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>❓ FAQ</h2>
+  <div class="card">
+    <p><strong>Why a Christian token?</strong> To spread the message of Jesus Christ into new digital frontiers while supporting faith-based causes.</p>
+    <p><strong>How do I use it?</strong> Set the trustline, hold the token, and participate in community prayers, charity pools, and faith projects.</p>
+  </div>
+</section>
+<!-- Trustline Card (hidden by default) -->
+
+
+<section id="prayers">
+  <h2>🙏 Prayer Requests</h2>
+  <div class="card prayer-form">
+    <input type="text" id="prayerName" placeholder="Your Name">
+    <textarea id="prayerText" placeholder="Your Prayer Request"></textarea>
+    <select id="prayerPrivacy">
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+    <button onclick="addPrayer()">Submit Prayer</button>
+  </div>
+  <div class="card prayer-list" id="prayerList"></div>
 </section>
 
 <footer>
@@ -141,38 +352,221 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
 particlesJS("particles-js", {
-  particles: {
-    number: { value: 3, density: { enable: false } },
-    shape: {
-      type: "image",
-      image: { src: "cross1.png", width: 40, height: 40 }
+  "particles": {
+    "number": { "value": 3, "density": { "enable": false } },
+    "shape": {
+      "type": "image",
+      "image": { "src": "cross1.png", "width": 40, "height": 40 }
     },
-    opacity: { value: 0.95 },
-    size: { value: 45, random: true },
-    line_linked: { enable: false },
-    move: { enable: true, speed: 0.4, direction: "top", out_mode: "out" }
+    "opacity": { "value": 0.95 },
+    "size": { "value": 45, "random": true },
+    "line_linked": { "enable": false },
+    "move": { "enable": true, "speed": 0.4, "direction": "top", "out_mode": "out" }
   },
-  retina_detect: true
+  "retina_detect": true
 });
 </script>
 
 <script>
 async function loadVerse() {
-  try {
-    const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
-    const data = await res.json();
-    document.getElementById("dailyVerse").innerText =
-      `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
-  } catch (e) {
-    document.getElementById("dailyVerse").innerText = "Unable to load verse.";
-  }
+  const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+  const data = await res.json();
+  document.getElementById("dailyVerse").innerText = `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
 }
 loadVerse();
 </script>
 
+<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+<script>
+async function fetchXRPLMetrics() {
+    const client = new xrpl.Client("wss://xrplcluster.com");
+    await client.connect();
+    const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+    const currency = "JCS";
+    const bookOffers = await client.request({
+        command: "book_offers",
+        taker_gets: { currency: currency, issuer: issuer },
+        taker_pays: { currency: "XRP" },
+        limit: 1
+    });
+    let priceXRP = 0;
+    if (bookOffers.result.offers.length > 0) {
+        const offer = bookOffers.result.offers[0];
+        priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value));
+    }
+    const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+    const xrpData = await xrpPriceRes.json();
+    const xrpUSD = xrpData.ripple.usd;
+    const priceUSD = priceXRP * xrpUSD;
+    const accountLines = await client.request({ command: "account_lines", account: issuer });
+    let totalSupply = 0;
+    accountLines.result.lines.forEach(line => {
+        if (line.currency === currency) totalSupply += parseFloat(line.balance);
+    });
+    const marketCap = totalSupply * priceUSD;
+    document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`;
+    document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`;
+    document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`;
+    document.getElementById('change').innerText = "N/A";
+    await client.disconnect();
+}
+fetchXRPLMetrics();
+setInterval(fetchXRPLMetrics, 60000);
+</script>
+
+<script>
+let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
+function renderPrayers() {
+  const list = document.getElementById('prayerList');
+  list.innerHTML = '';
+  prayers.forEach((p, i) => {
+    if (p.privacy === 'private' && window.location.hostname !== 'jesuschristsavestoken.com') return;
+    const div = document.createElement('div');
+    div.className = 'prayer-item';
+    div.innerHTML = `
+      <span><strong>${p.name}:</strong> ${p.text}</span>
+      <span>🙏 ${p.count}</span>
+      <button onclick="markPrayed(${i}, this)">I Prayed</button>
+    `;
+    list.prepend(div);
+  });
+}
+function addPrayer() {
+  const name = document.getElementById('prayerName').value || 'Anonymous';
+  const text = document.getElementById('prayerText').value.trim();
+  const privacy = document.getElementById('prayerPrivacy').value;
+  if (!text) return alert("Enter a prayer request.");
+  prayers.unshift({ name, text, privacy, countprayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
+localStorage.setItem('prayers', JSON.stringify(prayers));
+renderPrayers();
+}
+</script>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 3, "density": { "enable": false } },
+    "shape": {
+      "type": "image",
+      "image": { "src": "cross1.png", "width": 40, "height": 40 }
+    },
+    "opacity": { "value": 0.95 },
+    "size": { "value": 45, "random": true },
+    "line_linked": { "enable": false },
+    "move": { "enable": true, "speed": 0.4, "direction": "top", "out_mode": "out" }
+  },
+  "retina_detect": true
+});
+</script>
+
+<script>
+async function loadVerse() {
+  const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+  const data = await res.json();
+  document.getElementById("dailyVerse").innerText =
+    `${data[0].bookname} ${data[0].chapter}:${data[0].verse} — "${data[0].text}"`;
+}
+loadVerse();
+</script>
+
+<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+<script>
+async function fetchXRPLMetrics() {
+  const client = new xrpl.Client("wss://xrplcluster.com");
+  await client.connect();
+  const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+  const currency = "JCS";
+
+  const bookOffers = await client.request({
+    command: "book_offers",
+    taker_gets: { currency: currency, issuer: issuer },
+    taker_pays: { currency: "XRP" },
+    limit: 1
+  });
+
+  let priceXRP = 0;
+  if (bookOffers.result.offers.length > 0) {
+    const offer = bookOffers.result.offers[0];
+    priceXRP = Number(offer.TakerPays) / 1_000_000 / (Number(offer.TakerGets.value));
+  }
+
+  const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+  const xrpData = await xrpPriceRes.json();
+  const xrpUSD = xrpData.ripple.usd;
+  const priceUSD = priceXRP * xrpUSD;
+
+  const accountLines = await client.request({ command: "account_lines", account: issuer });
+  let totalSupply = 0;
+  accountLines.result.lines.forEach(line => {
+    if (line.currency === currency) totalSupply += parseFloat(line.balance);
+  });
+
+  const marketCap = totalSupply * priceUSD;
+
+  document.getElementById('price').innerText = `$${priceUSD.toFixed(6)}`;
+  document.getElementById('marketcap').innerText = `$${marketCap.toLocaleString()}`;
+  document.getElementById('supply').innerText = `${totalSupply.toLocaleString()} JCS`;
+  document.getElementById('change').innerText = "N/A";
+
+  await client.disconnect();
+}
+fetchXRPLMetrics();
+setInterval(fetchXRPLMetrics, 60000);
+</script>
+
+<script>
+let prayers = JSON.parse(localStorage.getItem('prayers')) || [];
+
+function renderPrayers() {
+  const list = document.getElementById('prayerList');
+  list.innerHTML = '';
+  prayers.forEach((p, i) => {
+    if (p.privacy === 'private' && window.location.hostname !== 'jesuschristsavestoken.com') return;
+    const div = document.createElement('div');
+    div.className = 'prayer-item';
+    div.innerHTML = `
+      <span><strong>${p.name}:</strong> ${p.text}</span>
+      <span>🙏 ${p.count}</span>
+      <button onclick="markPrayed(${i}, this)">I Prayed</button>
+    `;
+    list.prepend(div);
+  });
+}
+
+function addPrayer() {
+  const name = document.getElementById('prayerName').value || 'Anonymous';
+  const text = document.getElementById('prayerText').value.trim();
+  const privacy = document.getElementById('prayerPrivacy').value;
+  if (!text) return alert("Enter a prayer request.");
+  prayers.unshift({ name, text, privacy, count: 0, ts: Date.now() });
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+  renderPrayers();
+}
+
+function markPrayed(i, btn) {
+  prayers[i].count++;
+  btn.innerHTML = "🙏 Prayed";
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+  renderPrayers();
+}
+
+(() => {
+  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  prayers = prayers.filter(p => p.ts > cutoff);
+  localStorage.setItem('prayers', JSON.stringify(prayers));
+  renderPrayers();
+})();
+<!-- Other page HTML -->
+
+<script>
+document.getElementById("connectWalletBtn").addEventListener("click", function() {
+    window.open("https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd", "_blank");
+});
+</script>
+
+
+
 </body>
 </html>
-
-
-</body>
 </html>
