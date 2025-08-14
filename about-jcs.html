@@ -360,6 +360,215 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("prayerWallOpen", content.style.display === "block");
   });
 });
+<script>
+// ===== Simple password hash =====
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0; // convert to 32-bit int
+  }
+  return hash.toString();
+}
+
+// ===== Global State =====
+let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+let prayers = [];
+
+// ===== Utility: Save prayers =====
+function savePrayers() {
+  localStorage.setItem("prayers", JSON.stringify(prayers));
+}
+
+// ===== Login UI Update =====
+function updateLoginUI() {
+  const loginSection = document.getElementById("login-section");
+  const userInfo = document.getElementById("user-info");
+  if (currentUser) {
+    loginSection.style.display = "none";
+    userInfo.style.display = "block";
+    document.getElementById("current-user").textContent = currentUser.name;
+  } else {
+    loginSection.style.display = "block";
+    userInfo.style.display = "none";
+  }
+}
+
+// ===== Render Prayers =====
+function renderPrayers() {
+  const listEl = document.getElementById("prayers");
+  const answeredEl = document.getElementById("answered-list");
+  listEl.innerHTML = "";
+  answeredEl.innerHTML = "";
+
+  prayers.forEach((p, index) => {
+    // Hide private prayers from non-owners/non-admin
+    if (p.text === "[Private Prayer]" &&
+       (!currentUser || (currentUser.name !== p.name && currentUser.name !== "admin"))) {
+      return;
+    }
+
+    const div = document.createElement("div");
+    div.className = "prayer-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = p.read || false;
+    checkbox.addEventListener("change", () => {
+      p.read = checkbox.checked;
+      savePrayers();
+    });
+
+    const prayerText = document.createElement("span");
+    prayerText.textContent = ` ${p.name}: ${p.text}`;
+
+    div.appendChild(checkbox);
+    div.appendChild(prayerText);
+
+    // Edit/Delete buttons if owner or admin
+    if (currentUser &&
+        (currentUser.name === p.name && currentUser.passHash === p.ownerHash ||
+         currentUser.name === "admin")) {
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.onclick = () => {
+        const newText = prompt("Edit prayer text:", p.text);
+        if (newText && newText.trim()) {
+          p.text = newText.trim();
+          savePrayers();
+          renderPrayers();
+        }
+      };
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.onclick = () => {
+        if (confirm("Delete this prayer?")) {
+          prayers.splice(index, 1);
+          savePrayers();
+          renderPrayers();
+        }
+      };
+
+      div.appendChild(editBtn);
+      div.appendChild(delBtn);
+    }
+
+    // Append to answered list if marked read
+    if (p.read) {
+      answeredEl.appendChild(div);
+    } else {
+      listEl.appendChild(div);
+    }
+  });
+}
+
+// ===== Submit Prayer =====
+function handlePrayerSubmit(e) {
+  e.preventDefault();
+  if (!currentUser) {
+    alert("You must log in first");
+    return;
+  }
+  const text = document.getElementById("prayer").value.trim();
+  const priv = document.getElementById("private").checked;
+  if (!text) {
+    alert("Prayer cannot be empty");
+    return;
+  }
+
+  prayers.push({
+    name: currentUser.name,
+    ownerHash: currentUser.passHash,
+    text: priv ? "[Private Prayer]" : text,
+    read: false,
+    createdAt: Date.now()
+  });
+
+  // Remove expired prayers (30 days)
+  prayers = prayers.filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
+
+  savePrayers();
+  e.target.reset();
+  document.getElementById("success-message").style.display = "block";
+  setTimeout(() => document.getElementById("success-message").style.display = "none", 2000);
+  renderPrayers();
+}
+
+// ===== Verse Rotation =====
+function initVerseRotation() {
+  const verseEl = document.getElementById("verse");
+  const verses = [
+    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
+    `"For God so loved the world that he gave his one and only Son..." — John 3:16`,
+    `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
+    `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
+    `"Come to me, all you who are weary..." — Matthew 11:28`
+  ];
+  let current = 0;
+  function showVerse() {
+    verseEl.style.opacity = 0;
+    setTimeout(() => {
+      verseEl.textContent = verses[current];
+      verseEl.style.opacity = 1;
+      current = (current + 1) % verses.length;
+    }, 500);
+  }
+  showVerse();
+  setInterval(showVerse, 20000);
+}
+
+// ===== Collapsible Wall Toggle =====
+function initCollapsible() {
+  const coll = document.querySelector(".collapsible");
+  const content = document.querySelector(".content");
+  if (localStorage.getItem("prayerWallOpen") === "true") {
+    content.style.display = "block";
+  }
+  coll.addEventListener("click", () => {
+    const isVisible = content.style.display === "block";
+    content.style.display = isVisible ? "none" : "block";
+    localStorage.setItem("prayerWallOpen", !isVisible);
+  });
+}
+
+// ===== Init =====
+document.addEventListener("DOMContentLoaded", () => {
+  updateLoginUI();
+
+  // Load prayers from storage and filter expired
+  prayers = JSON.parse(localStorage.getItem("prayers") || "[]")
+    .filter(p => Date.now() - p.createdAt < 30 * 24 * 60 * 60 * 1000);
+
+  renderPrayers();
+  initVerseRotation();
+  initCollapsible();
+
+  // Event Listeners
+  document.getElementById("login-btn").addEventListener("click", () => {
+    const name = document.getElementById("login-name").value.trim();
+    const password = document.getElementById("login-password").value;
+    if (!name || password.length < 4) {
+      alert("Name and password (4+ chars) required");
+      return;
+    }
+    currentUser = { name, passHash: simpleHash(password) };
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    updateLoginUI();
+    renderPrayers();
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", () => {
+    localStorage.removeItem("currentUser");
+    currentUser = null;
+    updateLoginUI();
+    renderPrayers();
+  });
+
+  document.getElementById("prayer-form").addEventListener("submit", handlePrayerSubmit);
+});
+
+
 </script>
 </body>
 </html>
