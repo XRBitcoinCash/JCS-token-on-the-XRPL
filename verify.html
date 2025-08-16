@@ -181,6 +181,7 @@
 
         <div class="cta">
           <button id="connectBtn" class="btn">🔌 Connect GemWallet</button>
+          <button id="xummBtn" class="btn">📱 Connect Xumm</button>
           <button id="signBtn" class="btn" disabled>🖊️ Sign & Submit</button>
           <button id="clearBtn" class="btn secondary">🧹 Clear</button>
         </div>
@@ -204,6 +205,8 @@
 
   <!-- XRPL client -->
   <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <!-- Xumm SDK -->
+  <script src="https://unpkg.com/xumm-sdk"></script>
 
   <script>
     /***********************
@@ -212,7 +215,8 @@
     const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // JCS issuer
     const IDENT_TAG   = "JCS_VERIFY_V1";                      // memo flag
     const XRPL_WSS    = "wss://xrplcluster.com";
-
+// 👇 Add your XUMM API key here
+const XUMM_API_KEY = "7737775c-1645-4a4e-a92d-ffe51530a348";
     /***********************
      * Utilities
      ***********************/
@@ -285,70 +289,130 @@
     }
 
     el("connectBtn").addEventListener("click", connectGemWallet);
+/***********************
+ * Wallet connect (Xumm Mobile)
+ ***********************/
+let xumm; 
+let xummConnected = false;
+let xummAddress = null;
 
-    /***********************
-     * Build & submit TX
-     ***********************/
-    async function signAndSubmit() {
-      setStatus("");
-      if (!connectedAddress) {
-        setStatus("Please connect GemWallet first.", "error");
-        return;
-      }
 
-      const message = el("message").value.trim();
-      const name = el("name").value.trim();
-      const handle = el("handle").value.trim();
 
-      if (!message) {
-        setStatus("Please enter a message (required).", "error");
-        return;
-      }
+async function connectXumm() {
+  try {
+    if (!xumm) {
+      xumm = new XummSdk(XUMM_API_KEY);
+    }
 
-      // Compose memos (hex encoded)
-      const memos = [
-        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) } },
-        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)    } },
-      ];
-      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
-      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
+    const payload = await xumm.payload.create({
+      txjson: { TransactionType: "SignIn" }
+    });
 
-      // Minimal micro‑tx: 1 drop to issuer account + memos
-      const txjson = {
-        TransactionType: "Payment",
-        Account: connectedAddress,
-        Destination: DESTINATION,
-        Amount: "1", // 1 drop
-        Memos: memos
-      };
+    // If on mobile → open deep link
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = payload.next.always;
+    } else {
+      console.log("Scan this QR in Xumm:", payload.refs.qr_png);
+    }
 
-      try {
-        el("signBtn").disabled = true;
-        el("signBtn").innerText = "Signing…";
-        setStatus("Please approve the transaction in your GemWallet…");
+    setStatus("Open Xumm to approve connection…", "info");
 
-        // GemWallet: sign & submit
-        const res = await window.gemWallet.submitTransaction(txjson);
-        // Expected res shape: { result: 'success', txHash: '...', ... } (implementation may vary)
-        if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
-          const hash = res.txHash || res.hash || "";
-          setStatus("Submitted! Waiting for ledger confirmation…", "success");
-          // Link out to explorer if we have a hash
-          if (hash) {
-            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
-          }
-          // Refresh feed shortly
-          setTimeout(loadFeed, 2500);
-        } else {
-          throw new Error(res?.engine_result_message || "Transaction was not accepted.");
-        }
-      } catch (e) {
-        setStatus(`Submit failed: ${e.message || e}`, "error");
-      } finally {
-        el("signBtn").disabled = false;
-        el("signBtn").innerText = "🖊️ Sign & Submit";
+    const result = await xumm.payload.get(payload.uuid);
+    if (result?.response?.account) {
+      xummConnected = true;
+      xummAddress = result.response.account;
+      setStatus(`Connected with Xumm: ${xummAddress}`, "success");
+      el("signBtn").disabled = false;
+      el("xummBtn").disabled = true;
+      el("xummBtn").innerText = "Connected ✅";
+    } else {
+      throw new Error("Xumm connection failed.");
+    }
+  } catch (e) {
+    setStatus(`Xumm connect error: ${e.message || e}`, "error");
+  }
+}
+
+el("xummBtn").addEventListener("click", connectXumm);
+
+  /***********************
+ * Build & submit TX
+ ***********************/
+async function signAndSubmit() {
+  setStatus("");
+
+  const message = el("message").value.trim();
+  const name = el("name").value.trim();
+  const handle = el("handle").value.trim();
+
+  if (!message) {
+    setStatus("Please enter a message (required).", "error");
+    return;
+  }
+
+  // Build memos
+  const memos = [
+    { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) } },
+    { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) } },
+  ];
+  if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});  
+  if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});  
+
+  const txjson = {
+    TransactionType: "Payment",
+    Destination: DESTINATION,
+    Amount: "1", // 1 drop
+    Memos: memos
+  };
+
+  try {
+    // If GemWallet is connected
+    if (connectedAddress) {
+      el("signBtn").disabled = true;
+      el("signBtn").innerText = "Signing…";
+      setStatus("Please approve the transaction in your GemWallet…");
+
+      const res = await window.gemWallet.submitTransaction(txjson);
+      if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
+        const hash = res.txHash || res.hash || "";
+        setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+        setTimeout(loadFeed, 2500);
+      } else {
+        throw new Error(res?.engine_result_message || "Transaction was not accepted.");
       }
     }
+    // If Xumm is connected
+    else if (xummConnected && xumm) {
+      setStatus("Please approve in Xumm…");
+
+      const payload = await xumm.payload.create({ txjson });
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        window.location.href = payload.next.always; // deep link to Xumm mobile app
+      } else {
+        console.log("Scan this QR in Xumm:", payload.refs.qr_png); // desktop QR
+      }
+
+      const result = await xumm.payload.get(payload.uuid);
+      if (result?.meta?.resolved && result?.response?.hex) {
+        const hash = result.response.txid || "";
+        setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+        setTimeout(loadFeed, 2500);
+      } else {
+        throw new Error("Xumm signing rejected or failed.");
+      }
+    }
+    // No wallet connected
+    else {
+      setStatus("Please connect a wallet first.", "error");
+    }
+  } catch (e) {
+    setStatus(`Submit failed: ${e.message || e}`, "error");
+  } finally {
+    el("signBtn").disabled = false;
+    el("signBtn").innerText = "🖊️ Sign & Submit";
+  }
+}
+
 
     el("signBtn").addEventListener("click", signAndSubmit);
 
