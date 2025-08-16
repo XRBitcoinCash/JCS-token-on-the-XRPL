@@ -200,23 +200,24 @@
   </main>
 
   <footer>
-    © 2025 Jesus Christ Saves Token. All Rights Reserved.
-  </footer>
+  © 2025 Jesus Christ Saves Token. All Rights Reserved.
+</footer>
 
-  <!-- XRPL client -->
-  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
-  <!-- Xumm SDK -->
-  <script src="https://unpkg.com/xumm-sdk"></script>
+<!-- XRPL client -->
+<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-  <script>
-    /***********************
-     * Configuration
-     ***********************/
-    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // JCS issuer
-    const IDENT_TAG   = "JCS_VERIFY_V1";                      // memo flag
-    const XRPL_WSS    = "wss://xrplcluster.com";
-// 👇 Add your XUMM API key here
-const XUMM_API_KEY = "7737775c-1645-4a4e-a92d-ffe51530a348";
+<!-- Xumm SDK for browsers -->
+<script src="https://unpkg.com/xumm-sdk-web/dist/xumm-sdk-web.min.js"></script>
+
+<script>
+  /***********************
+   * Configuration
+   ***********************/
+   const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+   const IDENT_TAG   = "JCS_VERIFY_V1";
+   const XRPL_WSS    = "wss://xrplcluster.com";
+   const XUMM_API_KEY = "7737775c-1645-4a4e-a92d-ffe51530a348";
+
     /***********************
      * Utilities
      ***********************/
@@ -296,27 +297,28 @@ let xumm;
 let xummConnected = false;
 let xummAddress = null;
 
-
-
 async function connectXumm() {
   try {
     if (!xumm) {
+      // Use the browser SDK
       xumm = new XummSdk(XUMM_API_KEY);
     }
 
+    // Create a sign-in payload
     const payload = await xumm.payload.create({
       txjson: { TransactionType: "SignIn" }
     });
 
-    // If on mobile → open deep link
+    // Handle mobile vs desktop
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      window.location.href = payload.next.always;
+      window.location.href = payload.next.always;  // deep link into Xumm app
     } else {
       console.log("Scan this QR in Xumm:", payload.refs.qr_png);
     }
 
     setStatus("Open Xumm to approve connection…", "info");
 
+    // Wait for approval
     const result = await xumm.payload.get(payload.uuid);
     if (result?.response?.account) {
       xummConnected = true;
