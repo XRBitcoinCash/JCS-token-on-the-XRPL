@@ -43,10 +43,16 @@
       font-weight:700;
     }
     header .title img { height: 36px; border-radius: 6px; }
-    header .actions a {
+   header .actions a {
       padding: 10px 18px;
-      background: #00d4ff; color:#000; border-radius: 30px; font-weight:700;
+      background: #00d4ff; 
+      color:#000; 
+      border-radius: 30px; 
+      font-weight:700;
       box-shadow: 0 0 15px rgba(0,212,255,0.6);
+      white-space: nowrap; /* 👈 keeps "🏠 Back to Home" on one line */
+}
+
     }
     header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,0.9); }
 
