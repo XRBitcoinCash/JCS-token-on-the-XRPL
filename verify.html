@@ -261,36 +261,6 @@
       setStatus("");
     });
 
-   /***********************
- * Wallet connect (GemWallet)
- ***********************/
-let connectedAddress = null;
-
-async function connectGemWallet() {
-  if (!window.gemWallet) {
-    setStatus("GemWallet not detected. Install the browser extension to continue.", "error");
-    window.open("https://gemwallet.app", "_blank");
-    return;
-  }
-  try {
-    const resp = await window.gemWallet.getAddress();
-    if (resp && resp.address) {
-      connectedAddress = resp.address;
-      setStatus(`Connected: ${connectedAddress}`, "success");
-      el("signBtn").disabled = false;
-      el("connectBtn").disabled = true;
-      el("connectBtn").innerText = "Connected ✅";
-    } else {
-      throw new Error("No address returned from wallet.");
-    }
-  } catch (e) {
-    setStatus(`Connection failed: ${e.message || e}`, "error");
-  }
-}
-
-el("connectBtn").addEventListener("click", connectGemWallet);
-
-
 /***********************
  * Wallet connect (Xumm Mobile)
  ***********************/
@@ -301,8 +271,8 @@ let xummAddress = null;
 async function connectXumm() {
   try {
     if (!xumm) {
-      // ✅ Correct class for browser SDK
-      xumm = new XummSdk(XUMM_API_KEY);
+      // ✅ Use your API Key as a string
+      xumm = new XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
     }
 
     // Create a SignIn payload
@@ -337,6 +307,7 @@ async function connectXumm() {
 }
 
 el("xummBtn").addEventListener("click", connectXumm);
+
 
 
 
