@@ -266,18 +266,20 @@ if (!window.Xumm) {
       el("charCount").innerText = el("message").value.length;
     });
 
-    el("clearBtn").addEventListener("click", () => {
-      el("message").value = "";
-      el("name").value = "";
-      el("handle").value = "";
-      el("charCount").innerText = "0";
-      setStatus("");
-      const qrBox = el("xummQr");
-      qrBox.hidden = true;
-      qrBox.innerHTML = "";
-   // ✅ Prevent ReferenceError if GemWallet isn’t connected yet
-let connectedAddress = null;
-    });
+  const clearBtn = el("clearBtn");
+if (clearBtn) {
+  clearBtn.addEventListener("click", () => {
+    el("message").value = "";
+    el("name").value = "";
+    el("handle").value = "";
+    el("charCount").innerText = "0";
+    setStatus("");
+    const qrBox = el("xummQr");
+    qrBox.hidden = true;
+    qrBox.innerHTML = "";
+  });
+}
+
 
     /***********************
      * Wallet connect (Xumm Mobile)
