@@ -199,32 +199,17 @@
     </section>
   </main>
 
-<footer>
+  <footer>
   © 2025 Jesus Christ Saves Token. All Rights Reserved.
 </footer>
 
 <!-- XRPL client -->
 <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-<!-- Xumm SDK for browsers (UMD exposes window.XummSdk) -->
-<script src="https://xumm.app/assets/cdn/xumm-sdk.min.js"></script>
+<!-- Xumm SDK for browsers -->
+<script src="https://unpkg.com/xumm-sdk-web/dist/xumm-sdk-web.min.js"></script>
 
-<!-- ✅ SDK load check: must be after the CDN, before your code -->
 <script>
-  if (!window.XummSdk) {
-    console.error("XummSdk failed to load — check the CDN tag order & URL.");
-  } else {
-    console.log("XummSdk loaded successfully.");
-  }
-</script>
-
-<!-- your app scripts (must come last) -->
-<script src="app.js"></script>
-
-
-<!-- your app scripts -->
-<script src="app.js"></script>
-
   /***********************
    * Configuration
    ***********************/
