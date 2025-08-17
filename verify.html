@@ -186,11 +186,11 @@
         <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
 
         <!-- Buttons (were missing) -->
-        <div class="cta">
-          <button id="xummBtn" class="btn">🔗 Connect with Xumm</button>
-          <button id="signBtn" class="btn" disabled>🖊️ Sign & Submit</button>
-          <button id="clearBtn" class="btn secondary">Clear</button>
-        </div>
+       <div class="cta">
+  <button id="xummBtn" class="btn">Connect with XUM</button>
+  <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
+</div>
+
       </div>
 
       <!-- Right: Feed -->
@@ -209,17 +209,18 @@
   <!-- XRPL client -->
   <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-  <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
-  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+ <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
+<script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
 
-  <!-- ✅ Debugging load check (fixed to check window.Xumm) -->
-  <script>
-  if (!window.Xumm) {
-    console.error("❌ Xumm failed to load — check the CDN link.");
-  } else {
-    console.log("✅ Xumm loaded correctly.");
-  }
-  </script>
+
+ <script>
+if (!window.Xumm) {
+  console.error("❌ Xumm SDK failed to load — check the CDN link (https://xaman.app/assets/cdn/xumm.min.js).");
+} else {
+  console.log("✅ Xumm SDK loaded correctly.", window.Xumm?.name || "");
+}
+</script>
+
 
   <script>
     /***********************
@@ -274,6 +275,8 @@
       const qrBox = el("xummQr");
       qrBox.hidden = true;
       qrBox.innerHTML = "";
+   // ✅ Prevent ReferenceError if GemWallet isn’t connected yet
+let connectedAddress = null;
     });
 
     /***********************
@@ -287,7 +290,8 @@
       try {
         if (!xumm) {
           // ✅ Use your API Key as a string (fixed class name)
-          xumm = new window.Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+         xumm = new window.Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+
         }
 
         // Create a SignIn payload
