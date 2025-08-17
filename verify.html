@@ -50,15 +50,13 @@
       border-radius: 30px; 
       font-weight:700;
       box-shadow: 0 0 15px rgba(0,212,255,0.6);
-      white-space: nowrap; /* 👈 keeps "🏠 Back to Home" on one line */
+      white-space: nowrap;
     }
     header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,0.9); }
 
     main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
 
-    .hero {
-      text-align:center; margin-bottom: 36px;
-    }
+    .hero { text-align:center; margin-bottom: 36px; }
     .hero h1 {
       font-size: 2.6rem;
       text-shadow: 0 0 20px rgba(255,255,255,0.6);
@@ -66,9 +64,7 @@
     }
     .hero p { color:#d5f7ff; max-width: 800px; margin: 0 auto; }
 
-    .grid {
-      display:grid; grid-template-columns: 1fr 1fr; gap:24px;
-    }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
     .card {
@@ -77,13 +73,8 @@
       box-shadow: 0 0 22px rgba(0,212,255,0.18);
       padding: 20px;
     }
-    .card h2 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      text-shadow: 0 0 12px rgba(0,212,255,0.5);
-    }
+    .card h2 { font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 0 12px rgba(0,212,255,0.5); }
 
-    /* Form */
     .field { margin-top: 12px; }
     .field label { display:block; font-weight:700; margin-bottom:6px; }
     .field input, .field textarea, .field select {
@@ -112,7 +103,6 @@
       padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.08);
     }
 
-    /* Feed */
     .feed { display:flex; flex-direction:column; gap:12px; margin-top: 10px; }
     .item {
       background: rgba(255,255,255,0.06);
@@ -129,9 +119,7 @@
       margin-top: 40px;
     }
 
-    .note {
-      font-size:0.9rem; color:#ffedb5; margin-top:8px;
-    }
+    .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
   </style>
 </head>
 <body>
@@ -183,14 +171,12 @@
         <!-- QR code placeholder for desktop users -->
         <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
 
-        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
+        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
 
-        <!-- Buttons (were missing) -->
-       <div class="cta">
-  <button id="xummBtn" class="btn">Connect with XUM</button>
-  <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-</div>
-
+        <div class="cta">
+          <button id="xummBtn" class="btn">Connect with XUM</button>
+          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
+        </div>
       </div>
 
       <!-- Right: Feed -->
@@ -209,19 +195,17 @@
   <!-- XRPL client -->
   <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
- <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
-<script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+  <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
+  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
 
-
- <script>
-if (!window.Xumm) {
-  console.error("❌ Xumm SDK failed to load — check the CDN link (https://xaman.app/assets/cdn/xumm.min.js).");
-} else {
- console.log("✅ Xumm SDK loaded correctly.", (window.Xumm && window.Xumm.name) ? window.Xumm.name : "");
-
-}
-</script>
-
+  <script>
+    // Quick SDK sanity check
+    if (!window.Xumm) {
+      console.error("❌ Xumm SDK failed to load — check the CDN link (https://xumm.app/assets/cdn/xumm.min.js).");
+    } else {
+      console.log("✅ Xumm SDK loaded.");
+    }
+  </script>
 
   <script>
     /***********************
@@ -230,7 +214,7 @@ if (!window.Xumm) {
     const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
     const IDENT_TAG   = "JCS_VERIFY_V1";
     const XRPL_WSS    = "wss://xrplcluster.com";
-  
+
     /***********************
      * Utilities
      ***********************/
@@ -267,95 +251,121 @@ if (!window.Xumm) {
       el("charCount").innerText = el("message").value.length;
     });
 
-  const clearBtn = el("clearBtn");
-if (clearBtn) {
-  clearBtn.addEventListener("click", () => {
-    el("message").value = "";
-    el("name").value = "";
-    el("handle").value = "";
-    el("charCount").innerText = "0";
-    setStatus("");
-    const qrBox = el("xummQr");
-    qrBox.hidden = true;
-    qrBox.innerHTML = "";
-  });
-}
-
-/***********************
- * Wallet connect (Xumm Mobile)
- ***********************/
-let xumm;
-
-async function connectXumm() {
-  try {
-    // Initialize once
-    if (!xumm) {
-      if (typeof XummSdkJwt !== "function") {
-        console.error("❌ Xumm SDK not available. Check the CDN script.");
-        return;
-      }
-      // ✅ Correct constructor
-      xumm = new XummSdkJwt("7737775c-1645-4a4e-a92d-ffe51530a348");
-      console.log("✅ Xumm instance created:", xumm);
+    const clearBtn = el("clearBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        el("message").value = "";
+        el("name").value = "";
+        el("handle").value = "";
+        el("charCount").innerText = "0";
+        setStatus("");
+        const qrBox = el("xummQr");
+        qrBox.hidden = true;
+        qrBox.innerHTML = "";
+      });
     }
 
-    console.log("Creating SignIn payload...");
-    const payload = await xumm.payload.create({
-      txjson: { TransactionType: "SignIn" }
-    });
+    /***********************
+     * Wallet connect (Xumm Mobile)
+     ***********************/
+    let xumm;
+    let xummConnected = false;
+    let xummAddress = null;
 
-    console.log("✅ Payload created:", payload);
+    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
 
-    // Handle mobile vs desktop
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      window.location.href = payload.next.always; // deep link into Xumm app
-    } else {
-      const qrBox = document.getElementById("xummQr");
-      qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
-          style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-      qrBox.hidden = false;
-    }
-  } catch (err) {
-    console.error("❌ Xumm connect failed:", err);
-  }
-}
-
-
-
-        setStatus("Open Xumm to approve connection…", "info");
-
-        // Wait for approval (simple poll-once approach preserved)
-        const result = await xumm.payload.get(payload.uuid);
-        if (result?.response?.account) {
-          xummConnected = true;
-          xummAddress = result.response.account;
-          setStatus(`Connected with Xumm: ${xummAddress}`, "success");
-          el("signBtn").disabled = false;
-          el("xummBtn").disabled = true;
-          el("xummBtn").innerText = "Connected ✅";
-        } else {
-          throw new Error("Xumm connection failed.");
+    // Poll helper: wait for account approval
+    async function waitForAccount(uuid, {tries=120, delayMs=1500} = {}) {
+      for (let i = 0; i < tries; i++) {
+        try {
+          const res = await xumm.payload.get(uuid);
+          const acct = res?.response?.account || res?.account;
+          if (acct) return acct;
+          if (res?.meta?.expired) break;
+        } catch (e) {
+          console.warn("Polling error (will retry):", e);
         }
-      } catch (e) {
-        setStatus(`Xumm connect error: ${e.message || e}`, "error");
+        await new Promise(r => setTimeout(r, delayMs));
+      }
+      return null;
+    }
+
+    async function connectXumm() {
+      try {
+        if (!window.Xumm) {
+          setStatus("Xumm SDK failed to load. Refresh this page.", "error");
+          return;
+        }
+        if (!xumm) {
+          // ✅ Correct constructor for the browser UMD
+          xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+          console.log("✅ Xumm instance created.");
+        }
+
+        setStatus("Creating Sign-In request…");
+        const payload = await xumm.payload.create({
+          txjson: { TransactionType: "SignIn" }
+        });
+
+        if (!payload) {
+          setStatus("Could not create sign-in request.", "error");
+          return;
+        }
+
+        // Desktop → show QR. Mobile → deep link
+        if (isMobile()) {
+          setStatus("Opening Xaman…");
+          window.location.href = payload.next.always;
+        } else {
+          const qrBox = el("xummQr");
+          qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
+            style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+          qrBox.hidden = false;
+          setStatus("Scan the QR with Xaman to connect…");
+        }
+
+        // Wait for approval (poll)
+        const account = await waitForAccount(payload.uuid);
+        if (!account) {
+          setStatus("Connection not approved (expired or cancelled).", "error");
+          return;
+        }
+
+        // Connected 🎉
+        xummConnected = true;
+        xummAddress = account;
+
+        // UI updates
+        el("signBtn").disabled = false;
+        const btn = el("xummBtn");
+        btn.disabled = true;
+        btn.innerText = "Connected ✅";
+        const qrBox = el("xummQr");
+        qrBox.hidden = true;
+        qrBox.innerHTML = "";
+
+        setStatus(`Connected with Xumm: ${account}`, "success");
+      } catch (err) {
+        console.error("❌ Xumm connect failed:", err);
+        setStatus(`Connection failed: ${err?.message || err}`, "error");
       }
     }
 
-   document.addEventListener("DOMContentLoaded", () => {
-  const btn = el("xummBtn");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      console.log("✅ Button clicked, running connectXumm()");
-      connectXumm();
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = el("xummBtn");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          console.log("✅ Connect button clicked.");
+          connectXumm();
+        });
+      } else {
+        console.error("❌ xummBtn not found in DOM");
+      }
     });
-  } else {
-    console.error("❌ xummBtn not found in DOM");
-  }
-});
-
 
     /***********************
      * Build & submit TX
+     * (left as-is; will use xummConnected set above)
      ***********************/
     async function signAndSubmit() {
       setStatus("");
@@ -385,7 +395,7 @@ async function connectXumm() {
       };
 
       try {
-        // 👉 If GemWallet is connected (guarded to avoid ReferenceError)
+        // 👉 If GemWallet is connected (guarded)
         if (typeof connectedAddress !== "undefined" && connectedAddress) {
           el("signBtn").disabled = true;
           el("signBtn").innerText = "Signing…";
@@ -407,7 +417,7 @@ async function connectXumm() {
 
           const payload = await xumm.payload.create({ txjson });
 
-          if (/Mobi|Android/i.test(navigator.userAgent)) {
+          if (isMobile()) {
             window.location.href = payload.next.always; // deep link to Xumm app
           } else {
             const qrBox = el("xummQr");
@@ -416,14 +426,22 @@ async function connectXumm() {
             qrBox.hidden = false;
           }
 
-          // Wait for user approval
-          const result = await xumm.payload.get(payload.uuid);
-          if (result?.meta?.resolved && result?.response?.txid) {
-            const hash = result.response.txid;
-            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+          // Wait for user approval (simple poll)
+          let approvedHash = null;
+          for (let i = 0; i < 120; i++) {
+            const result = await xumm.payload.get(payload.uuid);
+            if (result?.meta?.resolved) {
+              approvedHash = result?.response?.txid || null;
+              break;
+            }
+            await new Promise(r => setTimeout(r, 1500));
+          }
+
+          if (approvedHash) {
+            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${approvedHash}`, "success");
             setTimeout(loadFeed, 2500);
           } else {
-            throw new Error("Xumm signing rejected or failed.");
+            throw new Error("Xumm signing rejected or expired.");
           }
         }
 
@@ -467,7 +485,6 @@ async function connectXumm() {
     async function loadFeed() {
       try {
         const client = await ensureClient();
-        // Fetch recent transactions that affected DESTINATION
         const resp = await client.request({
           command: "account_tx",
           account: DESTINATION,
@@ -483,22 +500,20 @@ async function connectXumm() {
           if (tx.Destination !== DESTINATION) continue;
 
           const memos = parseMemos(tx.Memos || []);
-          if (memos.app !== IDENT_TAG) continue; // our tagged messages only
+          if (memos.app !== IDENT_TAG) continue;
 
           items.push({
             hash: tx.hash || e.hash || "",
             account: tx.Account,
-            date: e.tx?.date || e.date, // Ripple epoch
+            date: e.tx?.date || e.date,
             message: memos.msg || "",
             name: memos.name || "",
             handle: memos.handle || ""
           });
         }
 
-        // Sort newest first
         items.sort((a,b) => (b.date||0) - (a.date||0));
 
-        // Render
         const feed = el("feed");
         feed.innerHTML = "";
         if (!items.length) {
@@ -507,7 +522,6 @@ async function connectXumm() {
         }
 
         const toDate = (rippleEpoch) => {
-          // XRPL timestamp = seconds since 2000-01-01 (Ripple epoch)
           if (!rippleEpoch) return "";
           const unixMs = (rippleEpoch + 946684800) * 1000;
           return new Date(unixMs).toLocaleString();
@@ -528,16 +542,11 @@ async function connectXumm() {
               ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
             </div>
             <div class="msg">${(it.message || "").replace(/[<>&]/g, s => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
-            ${
-              it.name || it.handle
-                ? `<div class="meta">Signed by: ${it.name ? it.name : ""} ${it.handle ? it.handle : ""}</div>`
-                : ""
-            }
+            ${ it.name || it.handle ? `<div class="meta">Signed by: ${it.name ? it.name : ""} ${it.handle ? it.handle : ""}</div>` : "" }
           `;
           feed.appendChild(div);
         });
       } catch (e) {
-        // Non-fatal feed error
         const feed = el("feed");
         feed.innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
         console.error(e);
@@ -546,7 +555,6 @@ async function connectXumm() {
 
     // Kick things off
     loadFeed();
-    // Refresh feed periodically
     setInterval(loadFeed, 60000);
   </script>
 </body>
