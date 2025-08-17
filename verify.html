@@ -562,6 +562,197 @@ async function connectXumm() {
     // Kick things off
     loadFeed();
     setInterval(loadFeed, 60000);
+ <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+<script>
+/**********************
+ * CONFIGURATION
+ **********************/
+const APP_KEY    = "7737775c-1645-4a4e-a92d-ffe51530a348"; // your Xumm API key
+const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // JCS issuer wallet
+const IDENT_TAG   = "JCS_VERIFY_V1";
+const XRPL_WSS    = "wss://xrplcluster.com";
+
+let xumm, connectedAccount = null;
+
+/**********************
+ * HELPERS
+ **********************/
+const el = (id) => document.getElementById(id);
+const strToHex = (s="") => Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
+const hexToStr = (h="") => {
+  try {
+    const bytes = h.match(/.{1,2}/g)?.map(b=>parseInt(b,16)) ?? [];
+    return new TextDecoder().decode(new Uint8Array(bytes));
+  } catch { return ""; }
+};
+const rippleToDate = (r) => new Date((r+946684800)*1000).toLocaleString();
+
+/**********************
+ * INIT XUMM
+ **********************/
+function initXumm() {
+  xumm = new Xumm(APP_KEY);
+
+  xumm.on("ready", () => {
+    console.log("✅ Xumm SDK ready");
+    el("xummBtn").disabled = false;
+  });
+
+  xumm.on("success", async () => {
+    connectedAccount = await xumm.user.account;
+    console.log("🎉 Connected:", connectedAccount);
+    el("xummBtn").innerText = "Connected ✅";
+    el("signBtn").disabled = false;
+  });
+
+  xumm.on("logout", () => {
+    connectedAccount = null;
+    el("xummBtn").innerText = "Connect with XUM";
+    el("signBtn").disabled = true;
+  });
+}
+
+/**********************
+ * SIGN + SEND MESSAGE
+ **********************/
+async function sendPrayer() {
+  const message = el("message").value.trim();
+  if (!message) {
+    alert("Please enter a prayer message.");
+    return;
+  }
+  if (!connectedAccount) {
+    alert("Please connect your wallet first.");
+    return;
+  }
+
+  const memos = [
+    { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) }},
+    { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) }}
+  ];
+
+  const txjson = {
+    TransactionType: "Payment",
+    Destination: DESTINATION,
+    Amount: "1", // 1 drop
+    Memos: memos
+  };
+
+  try {
+    const payload = await xumm.payload.create({ txjson });
+
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      window.location.href = payload.next.always; // mobile deep link
+    } else {
+      el("xummQr").innerHTML = `<img src="${payload.refs.qr_png}" style="max-width:220px;border-radius:12px"/>`;
+      el("xummQr").hidden = false;
+    }
+
+    // Poll until signed
+    let resultHash = null;
+    for (let i=0; i<120; i++) {
+      const res = await xumm.payload.get(payload.uuid);
+      if (res?.response?.txid) { resultHash = res.response.txid; break; }
+      if (res?.meta?.expired) break;
+      await new Promise(r=>setTimeout(r,1500));
+    }
+
+    if (resultHash) {
+      showConfirmation(message, resultHash);
+      loadFeed();
+    } else {
+      alert("Prayer signing cancelled or expired.");
+    }
+  } catch (e) {
+    console.error(e);
+    alert("Error: " + e.message);
+  }
+}
+
+/**********************
+ * CONFIRMATION MODAL
+ **********************/
+function showConfirmation(msg, hash) {
+  const box = document.createElement("div");
+  box.style.position="fixed"; box.style.top="50%"; box.style.left="50%";
+  box.style.transform="translate(-50%,-50%)";
+  box.style.background="rgba(0,0,0,0.9)";
+  box.style.padding="20px"; box.style.borderRadius="12px"; box.style.color="#fff";
+  box.style.boxShadow="0 0 20px rgba(0,212,255,0.6)";
+  box.style.zIndex="1000"; box.style.maxWidth="400px"; box.style.textAlign="center";
+  box.innerHTML = `
+    <h3>🙏 Prayer Submitted</h3>
+    <p>${msg}</p>
+    <p><small><a href="https://bithomp.com/explorer/${hash}" target="_blank">View on Ledger</a></small></p>
+    <p><small>${new Date().toLocaleString()}</small></p>
+    <button style="margin-top:12px;padding:8px 16px;border:none;border-radius:8px;cursor:pointer">Close</button>
+  `;
+  document.body.appendChild(box);
+  box.querySelector("button").onclick = ()=>box.remove();
+}
+
+/**********************
+ * FEED LOADER
+ **********************/
+let xrplClient;
+async function ensureClient() {
+  if (xrplClient && xrplClient.isConnected()) return xrplClient;
+  xrplClient = new xrpl.Client(XRPL_WSS);
+  await xrplClient.connect();
+  return xrplClient;
+}
+async function loadFeed() {
+  try {
+    const client = await ensureClient();
+    const resp = await client.request({
+      command: "account_tx",
+      account: DESTINATION,
+      limit: 50,
+      ledger_index_min: -1,
+      ledger_index_max: -1
+    });
+
+    const feed = el("feed");
+    feed.innerHTML = "";
+    (resp.result.transactions||[])
+      .map(e => e.tx || e.transaction)
+      .filter(tx => tx.TransactionType==="Payment" && tx.Destination===DESTINATION)
+      .map(tx => {
+        const memos = (tx.Memos||[]).reduce((acc,m)=>{
+          const t=hexToStr(m.Memo.MemoType||"").toLowerCase();
+          const d=hexToStr(m.Memo.MemoData||"");
+          acc[t]=d; return acc;
+        },{});
+        if (memos.app!==IDENT_TAG) return null;
+        return {msg:memos.msg, hash:tx.hash, date:tx.date};
+      })
+      .filter(Boolean)
+      .slice(0,20)
+      .forEach(it=>{
+        const div=document.createElement("div");
+        div.className="item";
+        div.innerHTML=`<div class="msg">${it.msg}</div>
+          <div class="meta"><a href="https://bithomp.com/explorer/${it.hash}" target="_blank">Tx</a> • ${rippleToDate(it.date)}</div>`;
+        feed.appendChild(div);
+      });
+  } catch(e) {
+    console.error("Feed load error",e);
+  }
+}
+
+/**********************
+ * BIND EVENTS
+ **********************/
+document.addEventListener("DOMContentLoaded",()=>{
+  initXumm();
+  el("xummBtn").addEventListener("click", ()=>xumm.authorize());
+  el("signBtn").addEventListener("click", sendPrayer);
+  loadFeed();
+  setInterval(loadFeed,60000);
+});
+</script>
+
   </script>
 </body>
 </html>
