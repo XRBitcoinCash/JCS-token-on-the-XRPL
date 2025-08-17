@@ -281,24 +281,21 @@ if (clearBtn) {
   });
 }
 
-
-    /***********************
+/***********************
  * Wallet connect (Xumm Mobile)
  ***********************/
 let xumm;
-let xummConnected = false;
-let xummAddress = null;
 
 async function connectXumm() {
   try {
+    // Initialize once
     if (!xumm) {
-      if (typeof window.Xumm !== "function") {
-        console.error("❌ Xumm SDK not available. Check that the CDN is loading correctly.");
-        setStatus("Xumm SDK failed to load. Please refresh.", "error");
+      if (typeof XummSdkJwt !== "function") {
+        console.error("❌ Xumm SDK not available. Check the CDN script.");
         return;
       }
-      // ✅ Correct class for the CDN version
-      xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+      // ✅ Correct constructor
+      xumm = new XummSdkJwt("7737775c-1645-4a4e-a92d-ffe51530a348");
       console.log("✅ Xumm instance created:", xumm);
     }
 
@@ -307,26 +304,22 @@ async function connectXumm() {
       txjson: { TransactionType: "SignIn" }
     });
 
-    if (!payload) {
-      console.error("❌ No payload returned");
-      setStatus("Payload creation failed.", "error");
-      return;
-    }
+    console.log("✅ Payload created:", payload);
 
     // Handle mobile vs desktop
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      window.location.href = payload.next.always; // deep link into Xumm mobile app
+      window.location.href = payload.next.always; // deep link into Xumm app
     } else {
-      const qrBox = el("xummQr");
+      const qrBox = document.getElementById("xummQr");
       qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
           style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
       qrBox.hidden = false;
     }
   } catch (err) {
     console.error("❌ Xumm connect failed:", err);
-    setStatus("Connection failed. Try again.", "error");
   }
 }
+
 
 
         setStatus("Open Xumm to approve connection…", "info");
