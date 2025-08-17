@@ -136,7 +136,37 @@
         }
       }
     </script>
-    
+    <!-- ========== N7: Payment UI and Cost Calculation ========== -->
+<section id="n7-payment" class="n7-section">
+  <h2>Send Your Prayer to the XRP Ledger</h2>
+  <form id="n7-payment-form" class="n7-form">
+    <div class="n7-row">
+      <label for="n7-amount">Choose Donation:</label>
+      <input type="range" min="0.01" max="0.25" step="0.01" id="n7-amount" name="amount" value="0.10" />
+      <span class="n7-amount-display"><span id="n7-amount-usd">0.10</span> USD</span>
+    </div>
+    <div class="n7-row">
+      <label for="n7-prayer">Your Prayer:</label>
+      <textarea id="n7-prayer" name="prayer" maxlength="150" rows="3" placeholder="Type your prayer here..."></textarea>
+    </div>
+    <div class="n7-row">
+      <span>Current Rate:</span>
+      <span id="n7-xrp-rate">Fetching...</span>
+    </div>
+    <div class="n7-row">
+      <span>Amount in XRP:</span>
+      <span id="n7-amount-xrp">--</span>
+    </div>
+    <div class="n7-row">
+      <span>Amount in JCS:</span>
+      <span id="n7-amount-jcs">--</span>
+    </div>
+    <button id="n7-pay-btn" type="submit" disabled>Submit Prayer & Pay</button>
+  </form>
+  <div id="n7-transaction-status" class="n7-status"></div>
+  <div id="n7-payload-display" class="n7-payload"></div>
+</section>
+
     <!-- N4: Prayer Submission + Payment Form -->
     <section id="n4-prayer-form">
       <form id="n4-form" autocomplete="off">
