@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- 
+    ============================
+    META & TITLE SECTION
+    ============================
+    - Sets character encoding (UTF-8)
+    - Makes site mobile-friendly (viewport)
+    - Page title shown in browser tab
+  -->
   <meta charset="utf-8">
   <title>Xumm Connect Wallet Demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Optionally, add minimal CSS for polish -->
+
+  <!-- 
+    ============================
+    CSS STYLING SECTION
+    ============================
+    - Inline <style> block to control basic layout
+    - You can later move this into a separate CSS file (styles.css)
+    - Controls fonts, colors, button styles, layout
+  -->
   <style>
     body { font-family: sans-serif; background: #fafbfc; margin: 0; padding: 40px; display: flex; flex-direction: column; align-items: center; }
     #walletAddress { font-size: 1.15em; color: #284be5; margin: 20px 0 0 0;}
@@ -12,18 +28,69 @@
     #logoutButton { background: #ccc; color: #222;}
     #status { margin-top: 16px; color: #a13b1b; }
   </style>
-  <!-- Load Xumm SDK from CDN (always up to date) -->
+
+  <!-- 
+    ============================
+    LIBRARY IMPORT SECTION
+    ============================
+    - Loads the Xumm/Xaman SDK from a CDN
+    - This gives you access to the `Xumm` object used in your script
+    - Always include BEFORE your custom script
+  -->
   <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
 </head>
+
 <body>
+  <!-- 
+    ============================
+    HEADER / TITLE SECTION
+    ============================
+    - Visible heading of the page
+    - Branding, can include logo later
+  -->
   <h1>Xumm/Xaman Wallet Connect Demo</h1>
+
+  <!-- 
+    ============================
+    WALLET STATUS DISPLAY
+    ============================
+    - Shows connection status or wallet address once connected
+  -->
   <div id="walletAddress">Status: Not connected</div>
+
+  <!-- 
+    ============================
+    INTERACTION BUTTONS
+    ============================
+    - Connect Wallet → starts Xumm auth flow
+    - Logout → clears wallet connection
+    - Later we’ll add "Trustline" and "Buy" buttons here
+  -->
   <button id="connectWalletButton">Connect Wallet</button>
   <button id="logoutButton" style="display:none">Logout</button>
+
+  <!-- 
+    ============================
+    STATUS OUTPUT SECTION
+    ============================
+    - Shows current state / errors to the user
+  -->
   <div id="status"></div>
+
+  <!-- 
+    ============================
+    JAVASCRIPT LOGIC SECTION
+    ============================
+    - Initializes the Xumm SDK with your API key
+    - Handles wallet connection / disconnection
+    - Updates the UI dynamically
+    - All dApp logic goes here
+  -->
   <script>
     // Initialize SDK with your public API key
     const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+
+    // Grab UI elements
     const connectWalletButton = document.getElementById('connectWalletButton');
     const walletAddressElement = document.getElementById('walletAddress');
     const logoutButton = document.getElementById('logoutButton');
@@ -67,6 +134,12 @@
     };
   </script>
 
-
+  <!-- 
+    ============================
+    FOOTER / EXTRA SPACE
+    ============================
+    - Good place for future expansion
+    - e.g. links to docs, support, ledger info, etc.
+  -->
 </body>
 </html>
