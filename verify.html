@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign the Ledger — JCS Proof‑of‑Faith</title>
+  <title>Sign the Ledger — JCS Proof-of-Faith</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
       font-weight:700;
     }
     header .title img { height: 36px; border-radius: 6px; }
-   header .actions a {
+    header .actions a {
       padding: 10px 18px;
       background: #00d4ff; 
       color:#000; 
@@ -51,8 +51,6 @@
       font-weight:700;
       box-shadow: 0 0 15px rgba(0,212,255,0.6);
       white-space: nowrap; /* 👈 keeps "🏠 Back to Home" on one line */
-}
-
     }
     header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,0.9); }
 
@@ -140,7 +138,7 @@
   <header>
     <div class="title">
       <img src="jcs-logo.png" alt="JCS logo"/>
-      <span>JCS Proof‑of‑Faith</span>
+      <span>JCS Proof-of-Faith</span>
     </div>
     <div class="actions">
       <a href="index.html">🏠 Back to Home</a>
@@ -154,13 +152,13 @@
         Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo.  
         Your message is stored immutably and viewable by anyone — a Web3 testimony that endures.
       </p>
-      <p class="note">Note: This sends a <strong>1‑drop</strong> micro‑payment to the JCS issuer with your memo and costs the standard XRPL network fee.</p>
+      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the JCS issuer with your memo and costs the standard XRPL network fee.</p>
     </section>
 
     <section class="grid">
       <!-- Left: Form -->
       <div class="card">
-        <h2>Compose your on‑chain message</h2>
+        <h2>Compose your on-chain message</h2>
 
         <div class="field">
           <label for="message">Message (required)</label>
@@ -179,54 +177,57 @@
           </div>
         </div>
 
-      <div id="status" class="status" hidden></div>
-
-<!-- QR code placeholder for desktop users -->
-<div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
-
-<div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
-
-
+        <!-- Single status box -->
         <div id="status" class="status" hidden></div>
+
+        <!-- QR code placeholder for desktop users -->
+        <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
+
         <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
+
+        <!-- Buttons (were missing) -->
+        <div class="cta">
+          <button id="xummBtn" class="btn">🔗 Connect with Xumm</button>
+          <button id="signBtn" class="btn" disabled>🖊️ Sign & Submit</button>
+          <button id="clearBtn" class="btn secondary">Clear</button>
+        </div>
       </div>
 
       <!-- Right: Feed -->
       <div class="card">
-        <h2>Recent On‑Chain Testimonies</h2>
+        <h2>Recent On-Chain Testimonies</h2>
         <div id="feed" class="feed" aria-live="polite"></div>
-        <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof‑of‑Faith memos).</div>
+        <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof-of-Faith memos).</div>
       </div>
     </section>
   </main>
 
   <footer>
-  © 2025 Jesus Christ Saves Token. All Rights Reserved.
-</footer>
+    © 2025 Jesus Christ Saves Token. All Rights Reserved.
+  </footer>
 
-<!-- XRPL client -->
-<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <!-- XRPL client -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-<!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
-<script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+  <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
+  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
 
+  <!-- ✅ Debugging load check (fixed to check window.Xumm) -->
+  <script>
+  if (!window.Xumm) {
+    console.error("❌ Xumm failed to load — check the CDN link.");
+  } else {
+    console.log("✅ Xumm loaded correctly.");
+  }
+  </script>
 
-<!-- ✅ Debugging load check -->
-<script>
-if (!window.XummSdk) {
-  console.error("❌ XummSdk failed to load — check the CDN link.");
-} else {
-  console.log("✅ XummSdk loaded correctly.");
-}
-</script>
-
-<script>
-  /***********************
-   * Configuration
-   ***********************/
-   const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
-   const IDENT_TAG   = "JCS_VERIFY_V1";
-   const XRPL_WSS    = "wss://xrplcluster.com";
+  <script>
+    /***********************
+     * Configuration
+     ***********************/
+    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+    const IDENT_TAG   = "JCS_VERIFY_V1";
+    const XRPL_WSS    = "wss://xrplcluster.com";
   
     /***********************
      * Utilities
@@ -270,147 +271,148 @@ if (!window.XummSdk) {
       el("handle").value = "";
       el("charCount").innerText = "0";
       setStatus("");
+      const qrBox = el("xummQr");
+      qrBox.hidden = true;
+      qrBox.innerHTML = "";
     });
 
-/***********************
- * Wallet connect (Xumm Mobile)
- ***********************/
-let xumm;
-let xummConnected = false;
-let xummAddress = null;
+    /***********************
+     * Wallet connect (Xumm Mobile)
+     ***********************/
+    let xumm;
+    let xummConnected = false;
+    let xummAddress = null;
 
-async function connectXumm() {
-  try {
-    if (!xumm) {
-      // ✅ Use your API Key as a string
-     xumm = new window.XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
+    async function connectXumm() {
+      try {
+        if (!xumm) {
+          // ✅ Use your API Key as a string (fixed class name)
+          xumm = new window.Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+        }
 
-    }
+        // Create a SignIn payload
+        const payload = await xumm.payload.create({
+          txjson: { TransactionType: "SignIn" }
+        });
 
-    // Create a SignIn payload
-    const payload = await xumm.payload.create({
-      txjson: { TransactionType: "SignIn" }
-    });
+        // Handle mobile vs desktop
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+          window.location.href = payload.next.always; // deep link into Xumm mobile app
+        } else {
+          // Show QR on desktop (was only console.log)
+          const qrBox = el("xummQr");
+          qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
+              style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+          qrBox.hidden = false;
+        }
 
-    // Handle mobile vs desktop
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      window.location.href = payload.next.always; // deep link into Xumm mobile app
-    } else {
-      console.log("📱 Scan this QR in Xumm:", payload.refs.qr_png);
-    }
+        setStatus("Open Xumm to approve connection…", "info");
 
-    setStatus("Open Xumm to approve connection…", "info");
-
-    // Wait for approval
-    const result = await xumm.payload.get(payload.uuid);
-    if (result?.response?.account) {
-      xummConnected = true;
-      xummAddress = result.response.account;
-      setStatus(`Connected with Xumm: ${xummAddress}`, "success");
-      el("signBtn").disabled = false;
-      el("xummBtn").disabled = true;
-      el("xummBtn").innerText = "Connected ✅";
-    } else {
-      throw new Error("Xumm connection failed.");
-    }
-  } catch (e) {
-    setStatus(`Xumm connect error: ${e.message || e}`, "error");
-  }
-}
-
-el("xummBtn").addEventListener("click", connectXumm);
-
-
-
-
-/***********************
- * Build & submit TX
- ***********************/
-async function signAndSubmit() {
-  setStatus("");
-
-  const message = el("message").value.trim();
-  const name = el("name").value.trim();
-  const handle = el("handle").value.trim();
-
-  if (!message) {
-    setStatus("Please enter a message (required).", "error");
-    return;
-  }
-
-  // Build memos
-  const memos = [
-    { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) } },
-    { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) } },
-  ];
-  if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});  
-  if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});  
-
-  const txjson = {
-    TransactionType: "Payment",
-    Destination: DESTINATION,
-    Amount: "1", // 1 drop
-    Memos: memos
-  };
-
-  try {
-    // 👉 If GemWallet is connected
-    if (connectedAddress) {
-      el("signBtn").disabled = true;
-      el("signBtn").innerText = "Signing…";
-      setStatus("Please approve the transaction in your GemWallet…");
-
-      const res = await window.gemWallet.submitTransaction(txjson);
-      if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
-        const hash = res.txHash || res.hash || "";
-        setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
-        setTimeout(loadFeed, 2500);
-      } else {
-        throw new Error(res?.engine_result_message || "Transaction was not accepted.");
+        // Wait for approval (simple poll-once approach preserved)
+        const result = await xumm.payload.get(payload.uuid);
+        if (result?.response?.account) {
+          xummConnected = true;
+          xummAddress = result.response.account;
+          setStatus(`Connected with Xumm: ${xummAddress}`, "success");
+          el("signBtn").disabled = false;
+          el("xummBtn").disabled = true;
+          el("xummBtn").innerText = "Connected ✅";
+        } else {
+          throw new Error("Xumm connection failed.");
+        }
+      } catch (e) {
+        setStatus(`Xumm connect error: ${e.message || e}`, "error");
       }
     }
 
-    // 👉 If Xumm is connected
-    else if (xummConnected && xumm) {
-      setStatus("Please approve in Xumm…");
+    el("xummBtn").addEventListener("click", connectXumm);
 
-      const payload = await xumm.payload.create({ txjson });
+    /***********************
+     * Build & submit TX
+     ***********************/
+    async function signAndSubmit() {
+      setStatus("");
 
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        window.location.href = payload.next.always; // deep link to Xumm app
-     } else {
-  const qrBox = el("xummQr");
-  qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm" 
-    style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-  qrBox.hidden = false;
-}
+      const message = el("message").value.trim();
+      const name = el("name").value.trim();
+      const handle = el("handle").value.trim();
 
+      if (!message) {
+        setStatus("Please enter a message (required).", "error");
+        return;
+      }
 
-      // Wait for user approval
-      const result = await xumm.payload.get(payload.uuid);
-      if (result?.meta?.resolved && result?.response?.txid) {
-        const hash = result.response.txid;
-        setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
-        setTimeout(loadFeed, 2500);
-      } else {
-        throw new Error("Xumm signing rejected or failed.");
+      // Build memos
+      const memos = [
+        { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) } },
+        { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) } },
+      ];
+      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});  
+      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});  
+
+      const txjson = {
+        TransactionType: "Payment",
+        Destination: DESTINATION,
+        Amount: "1", // 1 drop
+        Memos: memos
+      };
+
+      try {
+        // 👉 If GemWallet is connected (guarded to avoid ReferenceError)
+        if (typeof connectedAddress !== "undefined" && connectedAddress) {
+          el("signBtn").disabled = true;
+          el("signBtn").innerText = "Signing…";
+          setStatus("Please approve the transaction in your GemWallet…");
+
+          const res = await window.gemWallet.submitTransaction(txjson);
+          if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
+            const hash = res.txHash || res.hash || "";
+            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+            setTimeout(loadFeed, 2500);
+          } else {
+            throw new Error(res?.engine_result_message || "Transaction was not accepted.");
+          }
+        }
+
+        // 👉 If Xumm is connected
+        else if (xummConnected && xumm) {
+          setStatus("Please approve in Xumm…");
+
+          const payload = await xumm.payload.create({ txjson });
+
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
+            window.location.href = payload.next.always; // deep link to Xumm app
+          } else {
+            const qrBox = el("xummQr");
+            qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm" 
+              style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+            qrBox.hidden = false;
+          }
+
+          // Wait for user approval
+          const result = await xumm.payload.get(payload.uuid);
+          if (result?.meta?.resolved && result?.response?.txid) {
+            const hash = result.response.txid;
+            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
+            setTimeout(loadFeed, 2500);
+          } else {
+            throw new Error("Xumm signing rejected or failed.");
+          }
+        }
+
+        // 👉 No wallet connected
+        else {
+          setStatus("Please connect a wallet first.", "error");
+        }
+      } catch (e) {
+        setStatus(`Submit failed: ${e.message || e}`, "error");
+      } finally {
+        el("signBtn").disabled = false;
+        el("signBtn").innerText = "🖊️ Sign & Submit";
       }
     }
 
-    // 👉 No wallet connected
-    else {
-      setStatus("Please connect a wallet first.", "error");
-    }
-  } catch (e) {
-    setStatus(`Submit failed: ${e.message || e}`, "error");
-  } finally {
-    el("signBtn").disabled = false;
-    el("signBtn").innerText = "🖊️ Sign & Submit";
-  }
-}
-
-el("signBtn").addEventListener("click", signAndSubmit);
-
+    el("signBtn").addEventListener("click", signAndSubmit);
 
     /***********************
      * Feed loader (XRPL)
@@ -473,7 +475,7 @@ el("signBtn").addEventListener("click", signAndSubmit);
         const feed = el("feed");
         feed.innerHTML = "";
         if (!items.length) {
-          feed.innerHTML = `<div class="item"><div class="msg">No on‑chain messages yet. Be the first to sign the ledger!</div></div>`;
+          feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
           return;
         }
 
