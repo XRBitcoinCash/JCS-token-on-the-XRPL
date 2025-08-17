@@ -601,19 +601,20 @@ function initXumm() {
     el("xummBtn").disabled = false;
   });
 
-  xumm.on("success", async () => {
-    connectedAccount = await xumm.user.account;
-    console.log("🎉 Connected:", connectedAccount);
-    el("xummBtn").innerText = "Connected ✅";
-    el("signBtn").disabled = false;
-  });
+xumm.on("success", async () => {
+  connectedAccount = await xumm.user.account;
+  console.log("🎉 Connected:", connectedAccount);
+  el("xummBtn").innerText = "Connected ✅";
+  el("signBtn").disabled = false;
+  el("disconnectBtn").disabled = false;  // 🟢 Enable disconnect
+});
 
-  xumm.on("logout", () => {
-    connectedAccount = null;
-    el("xummBtn").innerText = "Connect with XUM";
-    el("signBtn").disabled = true;
-  });
-}
+ xumm.on("logout", () => {
+  connectedAccount = null;
+  el("xummBtn").innerText = "Connect with XUM";
+  el("signBtn").disabled = true;
+  el("disconnectBtn").disabled = true;  // 🔴 Disable again
+});
 
 /**********************
  * SIGN + SEND MESSAGE
