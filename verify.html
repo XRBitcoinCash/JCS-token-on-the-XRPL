@@ -217,7 +217,8 @@
 if (!window.Xumm) {
   console.error("❌ Xumm SDK failed to load — check the CDN link (https://xaman.app/assets/cdn/xumm.min.js).");
 } else {
-  console.log("✅ Xumm SDK loaded correctly.", window.Xumm?.name || "");
+ console.log("✅ Xumm SDK loaded correctly.", (window.Xumm && window.Xumm.name) ? window.Xumm.name : "");
+
 }
 </script>
 
