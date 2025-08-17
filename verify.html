@@ -179,12 +179,13 @@
           </div>
         </div>
 
-        <div class="cta">
-          <button id="connectBtn" class="btn">🔌 Connect GemWallet</button>
-          <button id="xummBtn" class="btn">📱 Connect Xumm</button>
-          <button id="signBtn" class="btn" disabled>🖊️ Sign & Submit</button>
-          <button id="clearBtn" class="btn secondary">🧹 Clear</button>
-        </div>
+      <div id="status" class="status" hidden></div>
+
+<!-- QR code placeholder for desktop users -->
+<div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
+
+<div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
+
 
         <div id="status" class="status" hidden></div>
         <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet extension.</div>
@@ -206,8 +207,18 @@
 <!-- XRPL client -->
 <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-<!-- Xumm SDK for browsers -->
-<script src="https://unpkg.com/xumm-sdk-web/dist/xumm-sdk-web.min.js"></script>
+<!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
+<script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+
+
+<!-- ✅ Debugging load check -->
+<script>
+if (!window.XummSdk) {
+  console.error("❌ XummSdk failed to load — check the CDN link.");
+} else {
+  console.log("✅ XummSdk loaded correctly.");
+}
+</script>
 
 <script>
   /***********************
@@ -272,7 +283,8 @@ async function connectXumm() {
   try {
     if (!xumm) {
       // ✅ Use your API Key as a string
-      xumm = new XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
+     xumm = new window.XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
+
     }
 
     // Create a SignIn payload
@@ -366,9 +378,13 @@ async function signAndSubmit() {
 
       if (/Mobi|Android/i.test(navigator.userAgent)) {
         window.location.href = payload.next.always; // deep link to Xumm app
-      } else {
-        console.log("📱 Scan this QR in Xumm:", payload.refs.qr_png); // desktop QR
-      }
+     } else {
+  const qrBox = el("xummQr");
+  qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm" 
+    style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+  qrBox.hidden = false;
+}
+
 
       // Wait for user approval
       const result = await xumm.payload.get(payload.uuid);
