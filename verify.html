@@ -119,9 +119,51 @@
       margin-top: 40px;
     }
 
-    .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
+     .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
+
+/* ✅ Mobile button layout */
+@media (max-width: 768px) {
+  .buttons {
+    display: flex;
+    flex-direction: column;   /* stack vertically */
+    gap: 14px;                /* equal spacing */
+    margin-top: 18px;
+  }
+
+  .buttons .btn {
+    width: 100%;              /* full width on mobile */
+    max-width: 320px;         /* cap so it doesn’t stretch too wide */
+    margin: 0 auto;           /* center align */
+    padding: 14px;            /* uniform button height */
+    font-size: 1rem;          /* consistent text size */
+    transition: all 0.25s ease; /* smooth hover/tap transition */
+  }
+
+  .buttons .btn:hover,
+  .buttons .btn:active {
+    transform: scale(1.03);     /* slight "pop" effect */
+    box-shadow: 0 0 20px rgba(0,212,255,0.8); /* glow */
+    background-color: #00bfe6; /* slightly darker shade */
+  }
+}
+/* ✅ Custom style for Disconnect button */
+#disconnectBtn {
+  background-color: #800020;   /* burgundy base */
+  color: #fff;
+  box-shadow: 0 0 12px rgba(128, 0, 32, 0.6);
+  transition: all 0.25s ease;
+}
+
+#disconnectBtn:hover,
+#disconnectBtn:active {
+  transform: scale(1.03);       /* same "pop" effect */
+  box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
+  background-color: #a00028;    /* slightly lighter burgundy on hover */
+}
+
   </style>
 </head>
+
 <body>
   <header>
     <div class="title">
