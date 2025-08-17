@@ -606,12 +606,14 @@ function initXumm() {
     console.log("🎉 Connected:", connectedAccount);
     el("xummBtn").innerText = "Connected ✅";
     el("signBtn").disabled = false;
+    el("disconnectBtn").disabled = false; // enable disconnect button
   });
 
   xumm.on("logout", () => {
     connectedAccount = null;
     el("xummBtn").innerText = "Connect with XUM";
     el("signBtn").disabled = true;
+    el("disconnectBtn").disabled = true; // disable disconnect button
   });
 }
 
