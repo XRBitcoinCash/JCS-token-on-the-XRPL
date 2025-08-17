@@ -748,8 +748,19 @@ async function loadFeed() {
  **********************/
 document.addEventListener("DOMContentLoaded",()=>{
   initXumm();
-  el("xummBtn").addEventListener("click", ()=>xumm.authorize());
-  el("signBtn").addEventListener("click", sendPrayer);
+ el("xummBtn").addEventListener("click", ()=>xumm.authorize());
+el("signBtn").addEventListener("click", sendPrayer);
+el("disconnectBtn").addEventListener("click", () => {
+  if (xumm) {
+    xumm.logout();
+    connectedAccount = null;
+    el("xummBtn").innerText = "Connect with XUM";
+    el("signBtn").disabled = true;
+    el("disconnectBtn").disabled = true;
+    alert("🔒 Wallet disconnected safely!");
+  }
+});
+
   loadFeed();
   setInterval(loadFeed,60000);
 });
