@@ -283,38 +283,46 @@ if (clearBtn) {
 
 
     /***********************
-     * Wallet connect (Xumm Mobile)
-     ***********************/
-    let xumm;
-    let xummConnected = false;
-    let xummAddress = null;
+ * Wallet connect (Xumm Mobile)
+ ***********************/
+let xumm;
+let xummConnected = false;
+let xummAddress = null;
 
-    async function connectXumm() {
-      try {
-        if (!xumm) {
-  if (typeof window.Xumm !== "function") {
-    console.error("❌ Xumm SDK not available. Check that the CDN is loading correctly.");
-    setStatus("Xumm SDK failed to load. Please refresh.", "error");
-    return;
+async function connectXumm() {
+  try {
+    if (!xumm) {
+      if (typeof window.Xumm !== "function") {
+        console.error("❌ Xumm SDK not available. Check that the CDN is loading correctly.");
+        setStatus("Xumm SDK failed to load. Please refresh.", "error");
+        return;
+      }
+      // Use the browser SDK (not JWT)
+      xumm = new XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
+      console.log("✅ Xumm instance created:", xumm);
+    }
+
+    // Create a SignIn payload
+    const payload = await xumm.payload.create({
+      txjson: { TransactionType: "SignIn" }
+    });
+
+    // Handle mobile vs desktop
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      // Deep link into Xumm mobile app
+      window.location.href = payload.next.always;
+    } else {
+      // Show QR on desktop
+      const qrBox = el("xummQr");
+      qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
+          style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+      qrBox.hidden = false;
+    }
+  } catch (err) {
+    console.error("❌ Xumm connect failed:", err);
+    setStatus("Connection failed. Try again.", "error");
   }
-  xumm = new window.Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
-  console.log("✅ Xumm instance created:", xumm);
 }
-  // Create a SignIn payload
-        const payload = await xumm.payload.create({
-          txjson: { TransactionType: "SignIn" }
-        });
-
-        // Handle mobile vs desktop
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
-          window.location.href = payload.next.always; // deep link into Xumm mobile app
-        } else {
-          // Show QR on desktop (was only console.log)
-          const qrBox = el("xummQr");
-          qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
-              style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-          qrBox.hidden = false;
-        }
 
         setStatus("Open Xumm to approve connection…", "info");
 
