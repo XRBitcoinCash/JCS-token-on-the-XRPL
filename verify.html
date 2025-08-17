@@ -245,72 +245,78 @@
     };
 
     /***********************
-     * Character counter
-     ***********************/
-    el("message").addEventListener("input", () => {
-      el("charCount").innerText = el("message").value.length;
+ * Wallet connect (Xumm Mobile)
+ ***********************/
+let xumm;
+let xummConnected = false;
+let xummAddress = null;
+
+const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
+
+// Poll helper: wait for account approval
+async function waitForAccount(uuid, {tries=120, delayMs=1500} = {}) {
+  for (let i = 0; i < tries; i++) {
+    try {
+      const res = await xumm.payload.get(uuid);
+      const acct = res?.response?.account || res?.account;
+      if (acct) return acct;
+      if (res?.meta?.expired) break;
+    } catch (e) {
+      console.warn("Polling error (will retry):", e);
+    }
+    await new Promise(r => setTimeout(r, delayMs));
+  }
+  return null;
+}
+
+async function connectXumm() {
+  try {
+    if (!window.Xumm) {
+      console.error("❌ Xumm SDK not available. Check that the CDN is loading correctly.");
+      alert("Xumm SDK failed to load. Please refresh.");
+      return;
+    }
+    if (!xumm) {
+      // ✅ Correct constructor for the browser UMD
+      xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
+      console.log("✅ Xumm instance created.");
+    }
+
+    console.log("📡 Creating Sign-In payload...");
+    const payload = await xumm.payload.create({
+      txjson: { TransactionType: "SignIn" }
     });
 
-    const clearBtn = el("clearBtn");
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        el("message").value = "";
-        el("name").value = "";
-        el("handle").value = "";
-        el("charCount").innerText = "0";
-        setStatus("");
-        const qrBox = el("xummQr");
-        qrBox.hidden = true;
-        qrBox.innerHTML = "";
-      });
+    console.log("✅ Payload created:", payload);
+
+    if (!payload || !payload.refs) {
+      console.error("❌ No payload returned:", payload);
+      alert("Failed to create Sign-In request. Check API settings.");
+      return;
     }
 
-    /***********************
-     * Wallet connect (Xumm Mobile)
-     ***********************/
-    let xumm;
-    let xummConnected = false;
-    let xummAddress = null;
-
-    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
-
-    // Poll helper: wait for account approval
-    async function waitForAccount(uuid, {tries=120, delayMs=1500} = {}) {
-      for (let i = 0; i < tries; i++) {
-        try {
-          const res = await xumm.payload.get(uuid);
-          const acct = res?.response?.account || res?.account;
-          if (acct) return acct;
-          if (res?.meta?.expired) break;
-        } catch (e) {
-          console.warn("Polling error (will retry):", e);
-        }
-        await new Promise(r => setTimeout(r, delayMs));
+    // Handle mobile vs desktop
+    if (isMobile()) {
+      console.log("📲 Redirecting to Xumm mobile app:", payload.next.always);
+      window.location.href = payload.next.always;
+    } else {
+      console.log("🖥 Showing QR code:", payload.refs.qr_png);
+      const qrBox = document.getElementById("xummQr");
+      if (qrBox) {
+        qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
+            style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
+        qrBox.hidden = false;
+      } else {
+        console.warn("⚠️ No element with ID 'xummQr' found to show QR code.");
+        alert("QR could not be displayed. Add a <div id='xummQr'></div> to your HTML.");
       }
-      return null;
     }
+  } catch (err) {
+    console.error("❌ Xumm connect failed:", err);
+    alert("Connection failed. See console for details.");
+  }
+}
 
-    async function connectXumm() {
-      try {
-        if (!window.Xumm) {
-          setStatus("Xumm SDK failed to load. Refresh this page.", "error");
-          return;
-        }
-        if (!xumm) {
-          // ✅ Correct constructor for the browser UMD
-          xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
-          console.log("✅ Xumm instance created.");
-        }
-
-        setStatus("Creating Sign-In request…");
-        const payload = await xumm.payload.create({
-          txjson: { TransactionType: "SignIn" }
-        });
-
-        if (!payload) {
-          setStatus("Could not create sign-in request.", "error");
-          return;
-        }
 
         // Desktop → show QR. Mobile → deep link
         if (isMobile()) {
