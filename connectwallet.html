@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Xumm Connect Wallet Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Optionally, add minimal CSS for polish -->
+  <style>
+    body { font-family: sans-serif; background: #fafbfc; margin: 0; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+    #walletAddress { font-size: 1.15em; color: #284be5; margin: 20px 0 0 0;}
+    #connectWalletButton, #logoutButton { padding: 10px 32px; font-size: 1.1em; border: none; border-radius: 5px; margin: 20px 0; background: #284be5; color: #fff; cursor: pointer;}
+    #logoutButton { background: #ccc; color: #222;}
+    #status { margin-top: 16px; color: #a13b1b; }
+  </style>
+  <!-- Load Xumm SDK from CDN (always up to date) -->
+  <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+</head>
+<body>
+  <h1>Xumm/Xaman Wallet Connect Demo</h1>
+  <div id="walletAddress">Status: Not connected</div>
+  <button id="connectWalletButton">Connect Wallet</button>
+  <button id="logoutButton" style="display:none">Logout</button>
+  <div id="status"></div>
+  <script>
+    // Initialize SDK with your public API key
+    const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+    const connectWalletButton = document.getElementById('connectWalletButton');
+    const walletAddressElement = document.getElementById('walletAddress');
+    const logoutButton = document.getElementById('logoutButton');
+    const statusDiv = document.getElementById('status');
+
+    // Wait for SDK to be ready
+    xumm.on('ready', () => {
+      statusDiv.textContent = 'Xumm SDK loaded and ready.';
+      connectWalletButton.disabled = false;
+    });
+
+    // "Connect Wallet" button triggers the authorization flow
+    connectWalletButton.onclick = () => {
+      statusDiv.textContent = 'Connecting to Xumm wallet...';
+      xumm.authorize().catch(error => {
+        statusDiv.textContent = 'Authorization failed: ' + error.message;
+      });
+    };
+
+    // On successful connection
+    xumm.on('success', async () => {
+      const account = await xumm.user.account; // e.g., r...
+      walletAddressElement.textContent = 'Wallet Connected: ' + account;
+      connectWalletButton.style.display = 'none';
+      logoutButton.style.display = '';
+      statusDiv.textContent = 'Connected successfully.';
+    });
+
+    // On logout, reset UI state
+    xumm.on('logout', async () => {
+      walletAddressElement.textContent = 'Status: Not connected';
+      connectWalletButton.style.display = '';
+      logoutButton.style.display = 'none';
+      statusDiv.textContent = 'You have logged out.';
+    });
+
+    // Logout action
+    logoutButton.onclick = () => {
+      xumm.logout();
+      statusDiv.textContent = 'Logging out...';
+    };
+  </script>
+</body>
+</html>
