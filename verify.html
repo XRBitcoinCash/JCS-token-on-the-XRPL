@@ -335,7 +335,18 @@ if (clearBtn) {
       }
     }
 
-    el("xummBtn").addEventListener("click", connectXumm);
+   document.addEventListener("DOMContentLoaded", () => {
+  const btn = el("xummBtn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      console.log("✅ Button clicked, running connectXumm()");
+      connectXumm();
+    });
+  } else {
+    console.error("❌ xummBtn not found in DOM");
+  }
+});
+
 
     /***********************
      * Build & submit TX
