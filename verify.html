@@ -297,22 +297,26 @@ async function connectXumm() {
         setStatus("Xumm SDK failed to load. Please refresh.", "error");
         return;
       }
-      // Use the browser SDK (not JWT)
-      xumm = new XummSdk("7737775c-1645-4a4e-a92d-ffe51530a348");
+      // ✅ Correct class for the CDN version
+      xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
       console.log("✅ Xumm instance created:", xumm);
     }
 
-    // Create a SignIn payload
+    console.log("Creating SignIn payload...");
     const payload = await xumm.payload.create({
       txjson: { TransactionType: "SignIn" }
     });
 
+    if (!payload) {
+      console.error("❌ No payload returned");
+      setStatus("Payload creation failed.", "error");
+      return;
+    }
+
     // Handle mobile vs desktop
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      // Deep link into Xumm mobile app
-      window.location.href = payload.next.always;
+      window.location.href = payload.next.always; // deep link into Xumm mobile app
     } else {
-      // Show QR on desktop
       const qrBox = el("xummQr");
       qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
           style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
@@ -323,6 +327,7 @@ async function connectXumm() {
     setStatus("Connection failed. Try again.", "error");
   }
 }
+
 
         setStatus("Open Xumm to approve connection…", "info");
 
