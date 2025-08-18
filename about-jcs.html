@@ -124,14 +124,21 @@
   max-height: 500px; /* adjust as needed */
 }
 
-/* Make the feed scroll inside instead of expanding forever */
-#prayers, 
-#answered-list {
-  flex: 1 1 auto;
+/* Scrollable feeds */
+#prayers {
+  max-height: 400px;   /* adjust as needed */
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 6px; /* space for scrollbar */
+  padding-right: 6px;
 }
+
+#answered-list {
+  max-height: 400px;   /* same height for consistency */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+}
+
 
 
 /* =======================
