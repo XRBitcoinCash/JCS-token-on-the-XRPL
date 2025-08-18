@@ -461,7 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!answeredList){
       const ansBtn = document.createElement("button");
       ansBtn.className = "btn btn-answered";
-      ansBtn.textContent = "Mark Answered";
+      ansBtn.textContent = "Pray For";
       ansBtn.addEventListener("click", () => {
         const idx = byId(prayer.id);
         if (idx>-1){ prayers[idx].answered = true; savePrayers(); renderAll(); }
