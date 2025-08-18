@@ -200,40 +200,41 @@
       box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
       background-color: #a00028;    /* slightly lighter burgundy on hover */
     }
- <style>
-/* --- Floating Orbs Container --- */
+<style>
+/* --- Floating Orbs Container (centered on button cluster) --- */
 .orb-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* don’t block clicks */
-  overflow: hidden;
-  z-index: 0; /* ensures they float behind buttons */
+  top: 50%;
+  left: 50%;
+  width: 320px;   /* tunnel diameter */
+  height: 320px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0; /* stay behind buttons */
 }
 
+/* --- Orbs --- */
 .orb {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 12px;   /* smaller size */
+  height: 12px;
   border-radius: 50%;
-  background: rgba(0, 212, 255, 0.5); /* default */
-  filter: blur(8px);
-  animation: floatLoop 12s infinite linear;
+  background: rgba(0, 212, 255, 0.25); /* base glow */
+  filter: blur(6px);
   mix-blend-mode: screen;
+  animation: orbitTunnel 14s linear infinite;
 }
 
-/* Floating tunnel-like looping motion */
-@keyframes floatLoop {
-  0%   { transform: translate(0, 0) scale(1); }
-  25%  { transform: translate(80px, -40px) scale(1.1); }
-  50%  { transform: translate(160px, 20px) scale(0.9); }
-  75%  { transform: translate(80px, 60px) scale(1.05); }
-  100% { transform: translate(0, 0) scale(1); }
+/* --- Tunneling Orbit Motion --- */
+@keyframes orbitTunnel {
+  0%   { transform: rotate(0deg) translateX(140px) scale(0.9); }
+  25%  { transform: rotate(90deg) translateX(140px) scale(1); }
+  50%  { transform: rotate(180deg) translateX(140px) scale(0.8); }
+  75%  { transform: rotate(270deg) translateX(140px) scale(1.05); }
+  100% { transform: rotate(360deg) translateX(140px) scale(0.9); }
 }
 
-/* Make sure buttons stay above the orbs */
+/* --- Keep buttons above orbs --- */
 .buttons, #connectBtn, #signBtn, #submitBtn, #disconnectBtn {
   position: relative;
   z-index: 2;
@@ -242,14 +243,16 @@
 
 <!-- ✅ Orb Container -->
 <div class="orb-container">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
+  <div class="orb" style="animation-delay: 0s;"></div>
+  <div class="orb" style="animation-delay: 1.2s;"></div>
+  <div class="orb" style="animation-delay: 2.4s;"></div>
+  <div class="orb" style="animation-delay: 3.6s;"></div>
+  <div class="orb" style="animation-delay: 4.8s;"></div>
+  <div class="orb" style="animation-delay: 6s;"></div>
+  <div class="orb" style="animation-delay: 7.2s;"></div>
+  <div class="orb" style="animation-delay: 8.4s;"></div>
+  <div class="orb" style="animation-delay: 9.6s;"></div>
+  <div class="orb" style="animation-delay: 10.8s;"></div>
 </div>
 
 <script>
@@ -279,35 +282,30 @@ function updateOrbColors() {
     const orbRect = orb.getBoundingClientRect();
     const orbCenter = { x: orbRect.left + orbRect.width/2, y: orbRect.top + orbRect.height/2 };
 
-    // Calculate distance to each button
+    // Distances to buttons
     const distConnect = distance(orbCenter, connectCenter);
     const distSign = distance(orbCenter, signCenter);
     const distSubmit = distance(orbCenter, submitCenter);
     const distDisconnect = distance(orbCenter, disconnectCenter);
 
-    // Find closest button
+    // Nearest button decides orb color
     const minDist = Math.min(distConnect, distSign, distSubmit, distDisconnect);
     if (minDist === distConnect) {
-      orb.style.background = "rgba(0,212,255,0.6)"; // cyan for Connect
+      orb.style.background = "rgba(0,212,255,0.45)"; // cyan for Connect
     } else if (minDist === distSign || minDist === distSubmit) {
-      orb.style.background = "rgba(0,255,150,0.6)"; // green for Sign/Submit
+      orb.style.background = "rgba(0,255,150,0.45)"; // green for Sign/Submit
     } else {
-      orb.style.background = "rgba(255,77,109,0.6)"; // red-pink for Disconnect
+      orb.style.background = "rgba(255,77,109,0.45)"; // red-pink for Disconnect
     }
   });
 
   requestAnimationFrame(updateOrbColors);
 }
 
-// Initialize random orb positions
-orbs.forEach((orb, i) => {
-  orb.style.top = `${Math.random() * 80 + 10}%`;
-  orb.style.left = `${Math.random() * 80 + 10}%`;
-  orb.style.animationDelay = `${i * 1.2}s`;
-});
-
+/* Start continuous update */
 updateOrbColors();
 </script>
+
 
 
 </head>
