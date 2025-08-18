@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ultimate Prayer Map</title>
+
+  <!-- Leaflet Core -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Marker Clustering -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+  <!-- Heatmap Plugin -->
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+  <style>
+    body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; background:#111; color:#eee; }
+    #map { width:100%; height:100%; }
+    .leaflet-popup-content { font-size: 14px; line-height:1.4; }
+    .filter-panel {
+      position: absolute; top:10px; left:10px; z-index:9999;
+      background:rgba(0,0,0,0.85); padding:10px; border-radius:6px; color:#FFD700;
+      max-width:250px;
+    }
+    .filter-panel select, .filter-panel button, .filter-panel input {
+      width:100%;
+      background:#222; color:#FFD700; border:1px solid #FFD700;
+      padding:6px 8px; margin:6px 0; border-radius:4px;
+      font-size:14px;
+    }
+    .verse { margin-top:6px; font-style:italic; color:#a3d4ff; }
+    .recent { color:#00FFAA; font-weight:bold; }
+    @media (max-width:768px) {
+      .filter-panel { font-size:13px; padding:8px; }
+      .filter-panel select, .filter-panel button, .filter-panel input { font-size:13px; padding:5px; }
+      .leaflet-popup-content { font-size:13px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="map" role="region" aria-label="Interactive Prayer Map"></div>
+
+<!-- Filter Panel -->
+<div class="filter-panel" role="form" aria-label="Prayer Map Filters">
+  <strong>Prayer Map Filters</strong><br>
+  <label for="countryFilter">Country:</label>
+  <select id="countryFilter"><option value="all">All</option></select><br>
+  <label for="keywordFilter">Keyword:</label>
+  <input type="text" id="keywordFilter" placeholder="Search prayers..."/><br>
+  <button id="toggleHeat">Toggle Heatmap</button><br>
+  <button id="toggleTheme">Toggle Light/Dark</button>
+</div>
+
+<script>
+  // 🌍 Initialize Map
+  const map = L.map('map').setView([20,0], 2);
+
+  // Dark theme (default)
+  let darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  let lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    subdomains: 'abcd',
+    maxZoom: 19
+  });
+
+  // Cluster group
+  const clusterGroup = L.markerClusterGroup();
+  map.addLayer(clusterGroup);
+
+  // 🔄 Load Prayer Data
+  const prayers = JSON.parse(localStorage.getItem('prayers') || '[]')
+    .filter(p => !p.priv); // only public prayers
+
+  // 🌐 Country Coordinates (centroids for 195 countries) — trimmed for brevity
+  const coords = { "Afghanistan":[33.9391,67.7100],"Albania":[41.1533,20.1683], /* ... all 195 ... */ "Zimbabwe":[-19.0154,29.1549] };
+
+  // 📖 Bible Verse Bank
+  const verses = [
+    "The Lord is my shepherd; I shall not want. (Psalm 23:1)",
+    "Cast all your anxiety on Him because He cares for you. (1 Peter 5:7)",
+    "Do not be anxious about anything... (Philippians 4:6)",
+    "The prayer of a righteous person is powerful and effective. (James 5:16)",
+    "Ask and it will be given to you... (Matthew 7:7)",
+    "Blessed are the peacemakers. (Matthew 5:9)",
+    "Be strong and courageous. (Joshua 1:9)"
+  ];
+  const randomVerse = () => verses[Math.floor(Math.random() * verses.length)];
+
+  // 📊 Group by country
+  const byCountry = {};
+  prayers.forEach(p => {
+    const c = p.country || "Unknown";
+    if (!byCountry[c]) byCountry[c] = [];
+    byCountry[c].push(p);
+  });
+
+  // Heatmap data
+  const heatPoints = [];
+
+  // Populate map
+  Object.entries(byCountry).forEach(([country, list]) => {
+    const latlng = coords[country];
+    if (!latlng) return;
+
+    // Circle (~100 mile radius glow)
+    L.circle(latlng, { radius: 160000, color: '#FFD700', fillColor:'#FFD700', fillOpacity: 0.15 })
+      .addTo(map)
+      .bindPopup(`<strong>${country}</strong><br>${list.length} prayer(s)`);
+
+    // Add dropdown option
+    const sel = document.getElementById("countryFilter");
+    const opt = document.createElement("option");
+    opt.value = country; opt.textContent = `${country} (${list.length})`;
+    sel.appendChild(opt);
+
+    // Add markers
+    list.forEach(pr => {
+      const marker = L.marker(latlng);
+      const recent = (Date.now() - new Date(pr.date||Date.now())) < 7*24*60*60*1000;
+      marker.bindPopup(`
+        <strong>${pr.title||"Prayer Request"}</strong><br>
+        ${pr.text||""}<br>
+        <small>${country} - ${new Date(pr.date||Date.now()).toLocaleDateString()}</small>
+        ${recent ? '<div class="recent">New Prayer ✨</div>' : ''}
+        <div class="verse">${randomVerse()}</div>
+      `);
+      clusterGroup.addLayer(marker);
+      heatPoints.push([latlng[0], latlng[1], 0.5]);
+    });
+  });
+
+  // Heatmap
+  const heatLayer = L.heatLayer(heatPoints, { radius: 25, blur: 15, maxZoom: 5 });
+
+  // 🎛 Controls
+  document.getElementById("toggleHeat").onclick = () => {
+    if (map.hasLayer(heatLayer)) { map.removeLayer(heatLayer); }
+    else { map.addLayer(heatLayer); }
+  };
+
+  document.getElementById("toggleTheme").onclick = () => {
+    if (map.hasLayer(darkTiles)) { map.removeLayer(darkTiles); lightTiles.addTo(map); }
+    else { map.removeLayer(lightTiles); darkTiles.addTo(map); }
+  };
+
+  // Filter by country
+  document.getElementById("countryFilter").onchange = (e) => {
+    const val = e.target.value;
+    clusterGroup.clearLayers();
+    Object.entries(byCountry).forEach(([country, list]) => {
+      if (val !== "all" && country !== val) return;
+      list.forEach(pr => {
+        const latlng = coords[country];
+        if (!latlng) return;
+        const marker = L.marker(latlng).bindPopup(`<strong>${pr.title}</strong><br>${pr.text}`);
+        clusterGroup.addLayer(marker);
+      });
+    });
+  };
+
+  // Filter by keyword
+  document.getElementById("keywordFilter").oninput = (e) => {
+    const keyword = e.target.value.toLowerCase();
+    clusterGroup.clearLayers();
+    Object.entries(byCountry).forEach(([country, list]) => {
+      list.filter(pr => pr.text.toLowerCase().includes(keyword)).forEach(pr => {
+        const latlng = coords[country];
+        if (!latlng) return;
+        const marker = L.marker(latlng).bindPopup(`<strong>${pr.title}</strong><br>${pr.text}`);
+        clusterGroup.addLayer(marker);
+      });
+    });
+  };
+</script>
+</body>
+</html>
 
