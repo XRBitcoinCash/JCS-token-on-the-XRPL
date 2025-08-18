@@ -5,10 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign the Ledger — JCS Proof-of-Faith</title>
 
-  <!-- Fonts -->
+  <!-- ✅ Core Metadata -->
+  <meta name="description" content="Sign the Ledger with JCS Proof-of-Faith — a decentralized, immutable record where individuals declare belief and trust on the blockchain. Join a timeless ledger of faith and community.">
+  <meta name="keywords" content="Proof-of-Faith, blockchain ledger, immutable record, faith on-chain, JCS ledger, Web3 spirituality, decentralized community">
+  <meta name="author" content="JCS Proof-of-Faith Project">
+  <meta name="robots" content="index, follow">
+
+  <!-- ✅ Open Graph (Social Sharing) -->
+  <meta property="og:title" content="Sign the Ledger — JCS Proof-of-Faith">
+  <meta property="og:description" content="Sign the decentralized Proof-of-Faith ledger. Immutable, eternal, and open for all.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/sign-ledger"> <!-- Replace with actual page URL -->
+  <meta property="og:image" content="https://yourdomain.com/images/ledger-preview.png"> <!-- Replace with preview image -->
+  <meta property="og:site_name" content="JCS Proof-of-Faith">
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sign the Ledger — JCS Proof-of-Faith">
+  <meta name="twitter:description" content="Add your name to the immutable Proof-of-Faith ledger.">
+  <meta name="twitter:image" content="https://yourdomain.com/images/ledger-preview.png"> <!-- Replace with preview image -->
+
+  <!-- ✅ Web3 Metadata -->
+  <meta name="dapp:name" content="JCS Proof-of-Faith Ledger">
+  <meta name="dapp:network" content="Ethereum / Polygon / Web3"> <!-- adjust to your chain -->
+  <meta name="dapp:category" content="Faith, Community, Decentralized Identity">
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-ledger.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-ledger.png">
+  <link rel="apple-touch-icon" href="favicon-ledger.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- ✅ Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
+  <!-- ✅ Styles (your existing CSS starts here) -->
   <style>
+    /* Your CSS continues here... */
+
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Montserrat', sans-serif;
@@ -166,86 +200,115 @@
       box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
       background-color: #a00028;    /* slightly lighter burgundy on hover */
     }
-  /* --- CONNECT BUTTON: Pulsing Glow --- */
-#connectBtn {
-  position: relative;
-  z-index: 1;
-}
-
-#connectBtn::after {
-  content: "";
+ <style>
+/* --- Floating Orbs Container --- */
+.orb-container {
   position: absolute;
-  inset: -8px; /* glow size around button */
-  border-radius: 40px;
-  background: rgba(0, 212, 255, 0.4);
-  filter: blur(12px);
-  animation: pulseGlow 2s infinite;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* don’t block clicks */
+  overflow: hidden;
+  z-index: 0; /* ensures they float behind buttons */
 }
 
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
-}
-
-
-/* --- SIGN & SUBMIT BUTTONS: Orbiting Ring --- */
-#signBtn, #submitBtn {
-  position: relative;
-  z-index: 1;
-}
-
-#signBtn::after, #submitBtn::after {
-  content: "";
+.orb {
   position: absolute;
-  width: 140%; height: 140%;
-  border: 2px dashed rgba(0,212,255,0.6);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: orbit 6s linear infinite;
-  pointer-events: none; /* don't block clicks */
+  background: rgba(0, 212, 255, 0.5); /* default */
+  filter: blur(8px);
+  animation: floatLoop 12s infinite linear;
+  mix-blend-mode: screen;
 }
 
-@keyframes orbit {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+/* Floating tunnel-like looping motion */
+@keyframes floatLoop {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(80px, -40px) scale(1.1); }
+  50%  { transform: translate(160px, 20px) scale(0.9); }
+  75%  { transform: translate(80px, 60px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
-
-/* --- DISCONNECT BUTTON: Floating Particles --- */
-#disconnectBtn {
+/* Make sure buttons stay above the orbs */
+.buttons, #connectBtn, #signBtn, #submitBtn, #disconnectBtn {
   position: relative;
-  overflow: visible;
-  z-index: 1;
+  z-index: 2;
+}
+</style>
+
+<!-- ✅ Orb Container -->
+<div class="orb-container">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<script>
+/* 🎨 Dynamic Orb Color Logic */
+const orbs = document.querySelectorAll('.orb');
+const connectBtn = document.getElementById('connectBtn');
+const signBtn = document.getElementById('signBtn');
+const submitBtn = document.getElementById('submitBtn');
+const disconnectBtn = document.getElementById('disconnectBtn');
+
+function getCenter(el) {
+  const rect = el.getBoundingClientRect();
+  return { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
 }
 
-#disconnectBtn::before, 
-#disconnectBtn::after {
-  content: "";
-  position: absolute;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #ff4d6d; /* playful pink/red particles */
-  animation: floatParticles 3s infinite ease-in-out;
+function distance(a, b) {
+  return Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
 }
 
-#disconnectBtn::before { 
-  top: -12px; left: 20%; 
+function updateOrbColors() {
+  const connectCenter = getCenter(connectBtn);
+  const signCenter = getCenter(signBtn);
+  const submitCenter = getCenter(submitBtn);
+  const disconnectCenter = getCenter(disconnectBtn);
+
+  orbs.forEach(orb => {
+    const orbRect = orb.getBoundingClientRect();
+    const orbCenter = { x: orbRect.left + orbRect.width/2, y: orbRect.top + orbRect.height/2 };
+
+    // Calculate distance to each button
+    const distConnect = distance(orbCenter, connectCenter);
+    const distSign = distance(orbCenter, signCenter);
+    const distSubmit = distance(orbCenter, submitCenter);
+    const distDisconnect = distance(orbCenter, disconnectCenter);
+
+    // Find closest button
+    const minDist = Math.min(distConnect, distSign, distSubmit, distDisconnect);
+    if (minDist === distConnect) {
+      orb.style.background = "rgba(0,212,255,0.6)"; // cyan for Connect
+    } else if (minDist === distSign || minDist === distSubmit) {
+      orb.style.background = "rgba(0,255,150,0.6)"; // green for Sign/Submit
+    } else {
+      orb.style.background = "rgba(255,77,109,0.6)"; // red-pink for Disconnect
+    }
+  });
+
+  requestAnimationFrame(updateOrbColors);
 }
 
-#disconnectBtn::after { 
-  bottom: -12px; right: 25%; 
-  animation-delay: 1.5s; 
-}
+// Initialize random orb positions
+orbs.forEach((orb, i) => {
+  orb.style.top = `${Math.random() * 80 + 10}%`;
+  orb.style.left = `${Math.random() * 80 + 10}%`;
+  orb.style.animationDelay = `${i * 1.2}s`;
+});
 
-@keyframes floatParticles {
-  0%   { transform: translateY(0) scale(1); opacity: 1; }
-  50%  { transform: translateY(-20px) scale(1.2); opacity: 0.6; }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
-}
+updateOrbColors();
+</script>
 
-  </style>
 
 </head>
 
