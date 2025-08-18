@@ -984,12 +984,15 @@ el("disconnectBtn").addEventListener("click", () => {
 });
 </script>
 
-  </script>
 <style>
 /* === Testimonies Section === */
+/* === Recent On-Chain Testimonies === */
 .testimonies-wrapper {
-  position: relative;
-  max-height: 400px;   /* adjust height if needed */
-  border-radius: 12px;
-  overflow: hidden;    /* container hides overflow */
+  max-height: 400px;     /* lock the height of the card */
+  overflow-y: auto;      /* vertical scroll when content overflows */
+  overflow-x: hidden;    /* prevent sideways scrolling */
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: #fff;      /* optional: keeps it card-like */
 }
+
