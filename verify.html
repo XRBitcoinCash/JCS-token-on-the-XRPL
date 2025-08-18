@@ -45,22 +45,39 @@
     /* Your CSS continues here... */
 
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top left, #000428, #004e92);
-      color: #fff;
-      overflow-x: hidden;
-      line-height: 1.8;
-      position: relative;
-      min-height: 100vh;
-    }
-    body::before {
-      content: "";
-      background: url('background-translucent.png') center center no-repeat;
-      background-size: cover;
-      opacity: 0.08;
-      position: fixed; inset: 0; z-index: -2;
-    }
+   /* Global page background (desktop + mobile) */
+html {
+  background-color: #000428; /* fallback bluish tone */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  line-height: 1.8;
+  position: relative;
+  background: radial-gradient(circle at top left, #000428, #004e92);
+}
+
+/* Translucent background photo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("background-translucent.png") center / cover no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Mobile — force same as desktop */
+@media (max-width: 900px) {
+  body {
+    background: radial-gradient(circle at top left, #000428, #004e92);
+  }
+}
+
     a { color:#00d4ff; text-decoration:none; }
     a:hover { text-decoration:underline; }
 
