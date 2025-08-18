@@ -98,6 +98,13 @@
     .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,0.2); }
     .btn:disabled { opacity:0.6; cursor:not-allowed; }
 
+    /* ✅ Desktop button layout */
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
     .status {
       margin-top: 12px; font-size:0.95rem;
       padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.08);
@@ -119,49 +126,48 @@
       margin-top: 40px;
     }
 
-     .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
+    .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
 
-/* ✅ Mobile button layout */
-@media (max-width: 768px) {
-  .buttons {
-    display: flex;
-    flex-direction: column;   /* stack vertically */
-    gap: 14px;                /* equal spacing */
-    margin-top: 18px;
-  }
+    /* ✅ Mobile button layout */
+    @media (max-width: 768px) {
+      .buttons {
+        flex-direction: column;   /* stack vertically */
+        gap: 14px;
+      }
 
-  .buttons .btn {
-    width: 100%;              /* full width on mobile */
-    max-width: 320px;         /* cap so it doesn’t stretch too wide */
-    margin: 0 auto;           /* center align */
-    padding: 14px;            /* uniform button height */
-    font-size: 1rem;          /* consistent text size */
-    transition: all 0.25s ease; /* smooth hover/tap transition */
-  }
+      .buttons .btn {
+        width: 100%;              /* full width on mobile */
+        max-width: 320px;         /* cap so it doesn’t stretch too wide */
+        margin: 0 auto;           /* center align */
+        padding: 14px;            /* uniform button height */
+        font-size: 1rem;          /* consistent text size */
+        transition: all 0.25s ease; /* smooth hover/tap transition */
+      }
 
-  .buttons .btn:hover,
-  .buttons .btn:active {
-    transform: scale(1.03);     /* slight "pop" effect */
-    box-shadow: 0 0 20px rgba(0,212,255,0.8); /* glow */
-    background-color: #00bfe6; /* slightly darker shade */
-  }
-}
-/* ✅ Custom style for Disconnect button */
-#disconnectBtn {
-  background-color: #800020;   /* burgundy base */
-  color: #fff;
-  box-shadow: 0 0 12px rgba(128, 0, 32, 0.6);
-  transition: all 0.25s ease;
-}
+      .buttons .btn:hover,
+      .buttons .btn:active {
+        transform: scale(1.03);     /* slight "pop" effect */
+        box-shadow: 0 0 20px rgba(0,212,255,0.8); /* glow */
+        background-color: #00bfe6; /* slightly darker shade */
+      }
+    }
 
-#disconnectBtn:hover,
-#disconnectBtn:active {
-  transform: scale(1.03);       /* same "pop" effect */
-  box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
-  background-color: #a00028;    /* slightly lighter burgundy on hover */
-}
+    /* ✅ Custom style for Disconnect button */
+    #disconnectBtn {
+      background-color: #800020;   /* burgundy base */
+      color: #fff;
+      box-shadow: 0 0 12px rgba(128, 0, 32, 0.6);
+      transition: all 0.25s ease;
+    }
 
+    #disconnectBtn:hover,
+    #disconnectBtn:active {
+      transform: scale(1.03);       /* same "pop" effect */
+      box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
+      background-color: #a00028;    /* slightly lighter burgundy on hover */
+    }
   </style>
+
 </head>
 
 <body>
@@ -215,10 +221,10 @@
 
         <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
 
-      <div class="buttons">
+   <div class="buttons">
   <button id="xummBtn" class="btn">Connect with Xaman</button>
   <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-  <button id="disconnectBtn" class="btn disconnect" disabled>Disconnect wallet</button>
+  <button id="disconnectBtn" class="btn disconnect" disabled>Disconnect</button>
 </div>
 
       </div>
