@@ -114,26 +114,25 @@
 }
 
 /* =======================
-   Prayer Wall Main Box
+   Prayer Wall Scroll Fix
 ======================= */
-.prayer-wall-section {
-  background: linear-gradient(145deg, #fdfdfd, #f1f7ff);
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 0 20px rgba(0, 100, 255, 0.1);
-  transition: all 0.3s ease-in-out;
-  border: 1px solid rgba(0, 100, 255, 0.1);
+
+/* Keep the prayer wall sections at a consistent height */
+.section {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px; /* adjust as needed */
 }
-.prayer-wall-section:hover {
-  box-shadow: 0 0 25px rgba(0, 150, 255, 0.4);
+
+/* Make the feed scroll inside instead of expanding forever */
+#prayers, 
+#answered-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px; /* space for scrollbar */
 }
-.prayer-wall-section h3 {
-  font-size: 1.6rem;
-  color: #004e92;
-  text-align: center;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 8px rgba(0, 150, 255, 0.3);
-}
+
 
 /* =======================
    Prayer Items
