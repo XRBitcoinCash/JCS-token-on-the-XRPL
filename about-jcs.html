@@ -1,288 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Jesus Christ Saves Token (JCS) – Prayer Wall</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
 <style>
+  :root{
+    --ink:#2f3040;
+    --gold:#ffd700;
+    --blue-1:#001a33;
+    --blue-2:#003366;
+    --parchment:#fdfaf5;
+    --parchment-2:#fbf7ef;
+    --panel:#f3f7ff;
+    --accent:#004e92;
+    --accent-2:#0066cc;
+    --amen:#28a745;
+    --danger:#c62828;
+  }
+
+  *{box-sizing:border-box}
   body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    color: #333;
-    background-color: #001a33; /* Dark blue */
-    background-image: url('cross2.png'); /* Cross image */
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 50%; /* Full cross visible */
-    animation: fadeIn 1.5s ease-in-out;
+    color: var(--ink);
+    background:
+      linear-gradient(to bottom, var(--blue-1), var(--blue-2));
+    background-image:
+      url('cross2.png'),
+      linear-gradient(to bottom, var(--blue-1), var(--blue-2));
+    background-repeat: no-repeat, no-repeat;
+    background-position: center 12%, center;
+    background-size: 42%, cover;
+    animation: fadeIn 1.2s ease-in-out;
   }
- #verse {
-  transition: opacity 0.5s ease-in-out;
-  text-align: center;
-}
-
   body::before {
     content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 26, 51, 0.6); /* Soft overlay for readability */
+    position: fixed; inset: 0;
+    background: rgba(0, 26, 51, 0.58);
     z-index: 0;
   }
+
   nav {
     background: rgba(0,0,0,0.7);
     text-align: center;
     padding: 12px;
-    z-index: 2;
-    position: relative;
+    position: relative; z-index: 2;
   }
   nav a {
-    color: white;
+    color: #fff;
     margin: 0 1rem;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 700;
+    transition: 0.25s ease;
   }
-  nav a:hover { color: #ffd700; transform: scale(1.05); }
+  nav a:hover { color: var(--gold); transform: translateY(-1px); }
+
   .container {
     max-width: 1100px;
     margin: 2rem auto;
     padding: 2rem;
-    background: rgba(255,255,255,0.92);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: rgba(253,250,245,0.94); /* parchment */
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+    position: relative; z-index: 1;
+    animation: fadeIn 0.8s ease-in-out;
+    backdrop-filter: blur(2px);
+  }
+
+  h2, h3 {
     position: relative;
-    z-index: 1;
-    animation: fadeIn 1s ease-in-out;
+    margin-top: 0;
   }
+  h2::before, h3::before {
+    content: "✝️ ";
+    position: relative; left: -4px;
+  }
+
   .verse {
-    background: #fff3cd;
+    font-family: 'Dancing Script', cursive;
+    background: #fff8e7;
     padding: 1rem;
-    border-left: 6px solid #ffc107;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
+    border-left: 6px solid var(--gold);
+    font-size: 1.4rem;
+    border-radius: 8px;
+    margin: 1.25rem 0 0;
+    text-align: center;
+    transition: opacity .5s ease-in-out;
   }
-/* =======================
-   Prayer Wall Container
-======================= */
-.prayer-wall-container {
-  margin-top: 2rem;
-}
 
-/* Collapsible Section Button */
-.collapsible {
-  background: #004e92;
-  color: white;
-  padding: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.collapsible:hover {
-  background: #0066cc;
-}
+  /* Top bar controls */
+  .top-controls{
+    margin-top: .75rem;
+    display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center;
+  }
+  .music-toggle{
+    background: var(--accent);
+    color:#fff; border:none; padding:.6rem .9rem; border-radius:8px; cursor:pointer;
+  }
+  .music-toggle:hover{ background: var(--accent-2); }
 
-.content {
-  display: none;
-  margin-top: 1rem;
-}
+  /* Prayer Wall */
+  .prayer-wall-container { margin-top: 2rem; }
+  .collapsible {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.25s ease;
+    width: 100%;
+  }
+  .collapsible:hover { background: var(--accent-2); }
+  .content { display: none; margin-top: 1rem; }
 
-/* Flexible Layout for Sections */
-.flex-sections {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.section {
-  flex: 1;
-  min-width: 300px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-.section:hover {
-  transform: translateY(-3px);
-}
+  .flex-sections {
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .section {
+    flex: 1;
+    min-width: 300px;
+    background: var(--panel);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    display: flex; flex-direction: column;
+    max-height: 520px;
+    border: 2px solid transparent;
+    transition: border-color .25s ease;
+  }
+  .section:hover { border-color: var(--gold); }
+  .section h3{ margin-bottom: .5rem; }
 
-/* =======================
-   Prayer Wall Scroll Fix
-======================= */
+  /* Scrollable feeds */
+  #prayers, #answered-list {
+    max-height: 420px;
+    overflow-y: auto; overflow-x: hidden;
+    padding-right: 6px;
+  }
 
-/* Keep the prayer wall sections at a consistent height */
-.section {
-  display: flex;
-  flex-direction: column;
-  max-height: 500px; /* adjust as needed */
-}
+  /* Form */
+  .prayer-form {
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: .5rem;
+  }
+  .prayer-form input, .prayer-form textarea {
+    padding: 0.85rem;
+    border-radius: 8px;
+    border: 1px solid #cfcfcf;
+    background: var(--parchment-2);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .prayer-form input:focus, .prayer-form textarea:focus {
+    box-shadow: 0 0 7px rgba(0,78,146,0.35);
+    outline: none; border-color: var(--accent);
+  }
+  .prayer-form button {
+    background: var(--accent);
+    color: white;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.25s ease, transform .05s ease;
+    font-weight: 700;
+  }
+  .prayer-form button:active{ transform: translateY(1px); }
+  .prayer-form button:hover { background: var(--accent-2); }
 
-/* Scrollable feeds */
-#prayers {
-  max-height: 400px;   /* adjust as needed */
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 6px;
-}
+  /* Items */
+  .list-subtitle{ margin: .3rem 0 .5rem; font-size:.95rem; opacity:.8; }
+  .prayer-item {
+    background: var(--parchment);
+    border-left: 4px solid #002147;
+    border-radius: 10px;
+    padding: 0.8rem;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    opacity: 0;
+    animation: fadeInUp .7s forwards;
+  }
+  .item-main{ display:flex; align-items:center; gap:10px; }
+  .name{ font-weight:700; }
+  .text{ opacity:.95; }
 
-#answered-list {
-  max-height: 400px;   /* same height for consistency */
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 6px;
-}
+  .controls{
+    display:flex; gap:6px; flex-wrap:wrap; justify-self:end;
+  }
+  .btn{
+    border:none; padding:6px 10px; border-radius:7px; cursor:pointer; color:#fff;
+    transition: filter .2s ease;
+  }
+  .btn:hover{ filter: brightness(1.05); }
+  .btn-amen{ background: var(--amen); }
+  .btn-edit{ background: #607d8b; }
+  .btn-delete{ background: var(--danger); }
+  .btn-answered{ background: #b48806; } /* gold-ish */
+  .btn-restore{ background: #6c5ce7; }
 
+  /* Read checkbox (kept for parity with your version) */
+  .read-wrap{ display:flex; align-items:center; gap:6px; }
+  .read-wrap input[type="checkbox"]{
+    transform: scale(1.2);
+    transition: all 0.3s ease-in-out;
+    accent-color: var(--amen);
+  }
+  @keyframes greenPulse {
+    0% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.4); }
+    50% { box-shadow: 0 0 14px #28a745, 0 0 24px rgba(40, 167, 69, 0.75); }
+    100% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.4); }
+  }
+  .read-wrap input[type="checkbox"]:checked{ animation: greenPulse 1.6s infinite; }
 
+  /* Candle flicker */
+  .candle{
+    position: fixed;
+    right: 18px; bottom: 18px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display:none; align-items:center; gap:8px; z-index: 5;
+  }
+  .candle.on{ display:flex; animation: fadeIn .3s ease; }
+  .flame{ font-size: 1.15rem; animation: flicker 1s infinite ease-in-out; }
+  @keyframes flicker {
+    0%,100% { transform: translateY(0) scale(1); opacity: 0.9; }
+    50% { transform: translateY(-1px) scale(1.05); opacity: 1; }
+  }
 
-/* =======================
-   Prayer Items
-======================= */
-.prayer-item {
-  background: white;
-  border-left: 4px solid #002147;
-  border-radius: 10px;
-  padding: 0.8rem;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease-in-out;
-}
-.prayer-item:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.prayer-item button {
-  background: #004e92;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  margin-left: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.prayer-item button:hover {
-  background: #0066cc;
-}
+  /* New highlight */
+  .new-highlight{
+    box-shadow: 0 0 0 2px var(--gold) inset, 0 0 16px rgba(255,215,0,0.4);
+    animation: glowOut 2.2s ease forwards;
+  }
+  @keyframes glowOut{
+    0%{ box-shadow: 0 0 0 2px var(--gold) inset, 0 0 18px rgba(255,215,0,0.55); }
+    100%{ box-shadow: none; }
+  }
 
-/* =======================
-   Checkbox Glow Animation
-======================= */
-.prayer-item input[type="checkbox"] {
-  transform: scale(1.2);
-  margin-right: 10px;
-  transition: all 0.3s ease-in-out;
-}
-@keyframes greenPulse {
-  0% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
-  50% { box-shadow: 0 0 15px #28a745, 0 0 25px rgba(40, 167, 69, 0.8); }
-  100% { box-shadow: 0 0 5px #28a745, 0 0 10px rgba(40, 167, 69, 0.5); }
-}
-.prayer-item input[type="checkbox"]:checked {
-  border: 2px solid #28a745;
-  background-color: #28a745;
-  animation: greenPulse 1.5s infinite;
-}
-
-/* =======================
-   Form Styling
-======================= */
-.prayer-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.prayer-form input,
-.prayer-form textarea {
-  padding: 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  transition: box-shadow 0.3s ease;
-}
-.prayer-form input:focus,
-.prayer-form textarea:focus {
-  box-shadow: 0 0 5px rgba(0,78,146,0.5);
-  outline: none;
-}
-.prayer-form button {
-  background: #004e92;
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-.prayer-form button:hover {
-  background: #0066cc;
-}
-
-/* =======================
-   Comments Section
-======================= */
-.comments {
-  margin-top: 10px;
-  padding-left: 20px;
-  font-size: 0.9em;
-}
-.comment {
-  background: #eef;
-  padding: 5px;
-  border-radius: 4px;
-  margin-bottom: 5px;
-}
-.comment-form {
-  margin-top: 5px;
-  display: flex;
-  gap: 5px;
-}
-.comment-form input {
-  flex: 1;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-.comment-form button {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-/* =======================
-   Answered List Scrolling
-======================= */
-#answered-list {
-  max-height: 400px;
-  overflow-y: auto;
-}
-.answered-prayer {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0.3rem 0;
-  border-bottom: 1px solid #eee;
-}
-.answered-prayer img {
-  width: 20px;
-  height: 20px;
-}
-
-/* Fade In Animation */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+  /* Animations */
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes fadeInUp { from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
 </style>
 </head>
 <body>
@@ -292,159 +260,273 @@
 
 <div class="container">
   <h2>Our Mission</h2>
-  <p>Jesus Christ Saves Token (JCS) is a faith-based cryptocurrency built on the XRP Ledger (XRPL) to embody Christian stewardship, transparency, and service through verifiable, low-cost transactions.</p>
+  <p>
+    Jesus Christ Saves Token (JCS) exists to spread the good news of salvation through our Lord and Savior, Jesus Christ.
+    We believe in proclaiming the Gospel not only through the Holy Bible and through our words, but also through the tools of today — technology and the XRP Ledger.
+    By combining faith and innovation, we create a platform where believers can share their prayers, lift each other up, and demonstrate the love of God in a digital world.
+    Through JCS, we carry the message of Christ to the nations, showing that His light shines even in the newest frontiers.
+  </p>
+
   <div class="verse" id="verse">Loading verse…</div>
+
+  <div class="top-controls">
+    <button id="music-toggle" class="music-toggle" aria-label="Toggle background worship music">🎵 Play Ambient Worship</button>
+    <audio id="bg-music" loop preload="none" src="music/ambient.mp3"></audio>
+  </div>
 </div>
 
 <div class="container prayer-wall-container">
   <button type="button" class="collapsible">Show / Hide Prayer Wall</button>
-  <div class="content">
+  <div class="content" id="wall">
     <div class="flex-sections">
       <div class="section">
-        <h3>Interactive Prayer Wall</h3>
-        <form id="prayer-form" class="prayer-form">
-          <input type="text" id="name" placeholder="Your Name" required>
-          <textarea id="prayer" placeholder="Write your prayer..." rows="4" required></textarea>
-          <label><input type="checkbox" id="private"> Keep my prayer private</label>
+        <h3>Interactive Prayer Wall 🙏</h3>
+        <form id="prayer-form" class="prayer-form" autocomplete="off">
+          <input type="text" id="name" placeholder="Your Name" required aria-label="Your name">
+          <textarea id="prayer" placeholder="Write your prayer..." rows="4" required aria-label="Your prayer"></textarea>
+          <label class="read-wrap" style="justify-content:flex-start;">
+            <input type="checkbox" id="private"> Keep my prayer private
+          </label>
           <button type="submit">Submit Prayer</button>
-          <div id="success-message" style="display:none;color:green;font-weight:bold;">Your prayer has been posted 🙏</div>
+          <div id="success-message" style="display:none;color:green;font-weight:bold;">Your prayer has been posted 🕯</div>
         </form>
-        <div id="prayers"></div>
+
+        <div class="list-subtitle">Active Prayers</div>
+        <div id="prayers" aria-live="polite"></div>
       </div>
+
       <div class="section">
-        <h3>Answered Prayers</h3>
-        <div id="answered-list"></div>
+        <h3>Answered Prayers 🕊</h3>
+        <div id="answered-list" aria-live="polite"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Candle -->
+<div class="candle" id="candle"><span class="flame">🕯</span><span>Submitted</span></div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-const verseEl = document.getElementById("verse");
-const verses = [
-  `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
-  `"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16`,
-  `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
-  `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
-  `"Come to me, all you who are weary and burdened, and I will give you rest." — Matthew 11:28`
-];
-
-// Label above the verse
-const scriptureLabel = document.createElement("h3");
-scriptureLabel.textContent = "Scripture";
-scriptureLabel.style.textAlign = "center";
-verseEl.parentNode.insertBefore(scriptureLabel, verseEl);
-
-let currentVerse = 0;
-
-function updateVerse() {
-  verseEl.style.opacity = 0; // fade out
-  setTimeout(() => {
-    verseEl.textContent = verses[currentVerse];
-    verseEl.style.opacity = 1; // fade in
-    currentVerse = (currentVerse + 1) % verses.length;
-  }, 500);
-}
-
-updateVerse();
-setInterval(updateVerse, 20000); // change every 20 seconds
-
-updateVerse();
-setInterval(updateVerse, 20000); // change every 20 seconds
-
-
-  const form = document.getElementById("prayer-form");
-  const answeredEl = document.getElementById("answered-list");
-  const successMsg = document.getElementById("success-message");
-
-  // Change section title
-  const titleEl = answeredEl.previousElementSibling;
-  if (titleEl && titleEl.tagName === "H3") {
-    titleEl.textContent = "Prayer Wall";
-    titleEl.parentElement.classList.add("prayer-wall-section");
-  }
-
-  let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
-
-  const savePrayers = () => {
-    localStorage.setItem("prayers", JSON.stringify(prayers));
+  /* ===== Scripture Rotator ===== */
+  const verseEl = document.getElementById("verse");
+  const verses = [
+    `"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full." — John 10:10`,
+    `"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." — John 3:16`,
+    `"I can do all things through Christ who strengthens me." — Philippians 4:13`,
+    `"The Lord is my shepherd, I lack nothing." — Psalm 23:1`,
+    `"Come to me, all you who are weary and burdened, and I will give you rest." — Matthew 11:28`
+  ];
+  let currentVerse = 0;
+  const updateVerse = () => {
+    verseEl.style.opacity = 0;
+    setTimeout(() => {
+      verseEl.textContent = verses[currentVerse];
+      verseEl.style.opacity = 1;
+      currentVerse = (currentVerse + 1) % verses.length;
+    }, 500);
   };
+  updateVerse();
+  setInterval(updateVerse, 20000);
 
-  const renderPrayersRight = () => {
-    answeredEl.innerHTML = "";
-    prayers.forEach((p, index) => {
-      const div = document.createElement("div");
-      div.className = "prayer-item";
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = p.read || false;
-      checkbox.addEventListener("change", () => {
-        p.read = checkbox.checked;
-        savePrayers();
-      });
-
-      const prayerText = document.createElement("span");
-      prayerText.textContent = ` ${p.name}: ${p.text}`;
-
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.onclick = () => {
-        const newText = prompt("Edit prayer text:", p.text);
-        if (newText !== null && newText.trim() !== "") {
-          p.text = newText.trim();
-          savePrayers();
-          renderPrayersRight();
-        }
-      };
-
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Delete";
-      delBtn.onclick = () => {
-        if (confirm("Delete this prayer?")) {
-          prayers.splice(index, 1);
-          savePrayers();
-          renderPrayersRight();
-        }
-      };
-
-      div.appendChild(checkbox);
-      div.appendChild(prayerText);
-      div.appendChild(editBtn);
-      div.appendChild(delBtn);
-      answeredEl.appendChild(div);
-    });
-  };
-
-  form.onsubmit = e => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const text = document.getElementById("prayer").value;
-    const priv = document.getElementById("private").checked;
-    prayers.push({
-      name,
-      text: priv ? "[Private Prayer]" : text,
-      read: false
-    });
-    savePrayers();
-    form.reset();
-    successMsg.style.display = "block";
-    setTimeout(() => { successMsg.style.display = "none"; }, 2000);
-    renderPrayersRight();
-  };
-
-  renderPrayersRight();
-
+  /* ===== Collapsible (remember open state) ===== */
   const coll = document.querySelector(".collapsible");
   const content = document.querySelector(".content");
   const isOpen = localStorage.getItem("prayerWallOpen") === "true";
   if (isOpen) content.style.display = "block";
   coll.addEventListener("click", () => {
-    content.style.display = content.style.display === "block" ? "none" : "block";
-    localStorage.setItem("prayerWallOpen", content.style.display === "block");
+    const open = content.style.display === "block";
+    content.style.display = open ? "none" : "block";
+    localStorage.setItem("prayerWallOpen", !open);
   });
+
+  /* ===== Music Toggle (remember preference) ===== */
+  const musicBtn = document.getElementById("music-toggle");
+  const musicEl = document.getElementById("bg-music");
+  const musicOn = localStorage.getItem("musicOn") === "true";
+  const setMusicButtonText = (on) => {
+    musicBtn.textContent = on ? "🎵 Pause Ambient Worship" : "🎵 Play Ambient Worship";
+  };
+  setMusicButtonText(musicOn);
+  if (musicOn) {
+    // Autoplay often blocked until user interaction; we also toggle on first click anywhere
+    const tryPlay = () => musicEl.play().catch(()=>{});
+    document.body.addEventListener("click", tryPlay, { once: true });
+  }
+  musicBtn.addEventListener("click", async () => {
+    if (musicEl.paused) {
+      try { await musicEl.play(); localStorage.setItem("musicOn", true); setMusicButtonText(true); }
+      catch(e){ /* ignore */ }
+    } else {
+      musicEl.pause(); localStorage.setItem("musicOn", false); setMusicButtonText(false);
+    }
+  });
+
+  /* ===== Data & Rendering ===== */
+  const form = document.getElementById("prayer-form");
+  const activeEl = document.getElementById("prayers");
+  const answeredEl = document.getElementById("answered-list");
+  const successMsg = document.getElementById("success-message");
+  const candle = document.getElementById("candle");
+
+  let prayers = JSON.parse(localStorage.getItem("prayers") || "[]");
+
+  // Migration / defaults for older saved entries
+  prayers = prayers.map((p, i) => ({
+    id: p.id || (Date.now() + i + Math.floor(Math.random()*1000)),
+    name: p.name || "Anonymous",
+    text: p.text || "",
+    read: !!p.read,
+    amens: p.amens || 0,
+    answered: !!p.answered,
+    createdAt: p.createdAt || Date.now()
+  }));
+
+  const savePrayers = () => localStorage.setItem("prayers", JSON.stringify(prayers));
+  const byId = (id) => prayers.findIndex(x => x.id === id);
+
+  function createItem(prayer, answeredList=false){
+    const wrap = document.createElement("div");
+    wrap.className = "prayer-item";
+    wrap.dataset.id = prayer.id;
+
+    const main = document.createElement("div");
+    main.className = "item-main";
+
+    // Read checkbox (kept for your original feature)
+    const readWrap = document.createElement("label");
+    readWrap.className = "read-wrap";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = !!prayer.read;
+    cb.title = "Mark as read";
+    cb.addEventListener("change", () => {
+      const idx = byId(prayer.id);
+      if (idx>-1) { prayers[idx].read = cb.checked; savePrayers(); }
+    });
+    readWrap.appendChild(cb);
+
+    const meta = document.createElement("div");
+    const name = document.createElement("span"); name.className="name"; name.textContent = prayer.name + ": ";
+    const text = document.createElement("span"); text.className="text"; text.textContent = prayer.text;
+    meta.appendChild(name); meta.appendChild(text);
+
+    main.appendChild(readWrap);
+    main.appendChild(meta);
+
+    const controls = document.createElement("div");
+    controls.className = "controls";
+
+    const amenBtn = document.createElement("button");
+    amenBtn.className = "btn btn-amen";
+    amenBtn.innerHTML = `💙 Amen (${prayer.amens||0})`;
+    amenBtn.addEventListener("click", () => {
+      const idx = byId(prayer.id);
+      if (idx>-1) {
+        prayers[idx].amens = (prayers[idx].amens || 0) + 1;
+        savePrayers(); renderAll();
+      }
+    });
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn btn-edit";
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", () => {
+      const idx = byId(prayer.id);
+      if (idx>-1) {
+        const newText = prompt("Edit prayer text:", prayers[idx].text);
+        if (newText !== null && newText.trim() !== "") {
+          prayers[idx].text = newText.trim();
+          savePrayers(); renderAll();
+        }
+      }
+    });
+
+    const delBtn = document.createElement("button");
+    delBtn.className = "btn btn-delete";
+    delBtn.textContent = "Delete";
+    delBtn.addEventListener("click", () => {
+      if (confirm("Delete this prayer?")) {
+        const idx = byId(prayer.id);
+        if (idx>-1){ prayers.splice(idx,1); savePrayers(); renderAll(); }
+      }
+    });
+
+    controls.appendChild(amenBtn);
+    controls.appendChild(editBtn);
+    controls.appendChild(delBtn);
+
+    if (!answeredList){
+      const ansBtn = document.createElement("button");
+      ansBtn.className = "btn btn-answered";
+      ansBtn.textContent = "Mark Answered";
+      ansBtn.addEventListener("click", () => {
+        const idx = byId(prayer.id);
+        if (idx>-1){ prayers[idx].answered = true; savePrayers(); renderAll(); }
+      });
+      controls.appendChild(ansBtn);
+    } else {
+      const restoreBtn = document.createElement("button");
+      restoreBtn.className = "btn btn-restore";
+      restoreBtn.textContent = "Restore";
+      restoreBtn.addEventListener("click", () => {
+        const idx = byId(prayer.id);
+        if (idx>-1){ prayers[idx].answered = false; savePrayers(); renderAll(); }
+      });
+      controls.appendChild(restoreBtn);
+    }
+
+    wrap.appendChild(main);
+    wrap.appendChild(controls);
+    return wrap;
+  }
+
+  function renderAll(){
+    activeEl.innerHTML = "";
+    answeredEl.innerHTML = "";
+    const active = prayers.filter(p => !p.answered).sort((a,b)=>b.createdAt-a.createdAt);
+    const answered = prayers.filter(p => p.answered).sort((a,b)=>b.createdAt-a.createdAt);
+
+    active.forEach(p => activeEl.appendChild(createItem(p,false)));
+    answered.forEach(p => answeredEl.appendChild(createItem(p,true)));
+  }
+
+  /* Submit */
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = (document.getElementById("name").value || "Anonymous").trim();
+    const textRaw = (document.getElementById("prayer").value || "").trim();
+    const priv = document.getElementById("private").checked;
+
+    if (!textRaw) return;
+
+    const entry = {
+      id: Date.now(),
+      name,
+      text: priv ? "[Private Prayer]" : textRaw,
+      read: false,
+      amens: 0,
+      answered: false,
+      createdAt: Date.now()
+    };
+    prayers.unshift(entry);
+    savePrayers();
+    form.reset();
+
+    // Feedback
+    successMsg.style.display = "block";
+    setTimeout(() => successMsg.style.display = "none", 2000);
+
+    renderAll();
+
+    // Highlight the newest item and show candle
+    const firstItem = activeEl.querySelector(".prayer-item");
+    if (firstItem){ firstItem.classList.add("new-highlight"); setTimeout(()=>firstItem.classList.remove("new-highlight"), 2200); }
+    candle.classList.add("on"); setTimeout(()=>candle.classList.remove("on"), 2200);
+  });
+
+  renderAll();
 });
 </script>
-});
-</script>
+</body>
+</html>
