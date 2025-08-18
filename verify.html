@@ -220,25 +220,136 @@
       background-color: #a00028;    /* slightly lighter burgundy on hover */
     }
 <style>
-/* Global page background */
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: url("your-background.jpg") no-repeat center center fixed;
-  background-size: cover;
-  background-color: #0a192f; /* fallback bluish tone */
-  color: #fff; /* make sure all text is readable */
+/* --- Orb Container (inside the message box) --- */
+.message-box {
+  position: relative;
+  overflow: hidden;   /* keep orbs inside */
+  z-index: 1;
 }
 
-/* Ensure mobile doesn’t override it */
-@media (max-width: 900px) {
-  body {
-    background: url("your-background.jpg") no-repeat center center fixed;
-    background-size: cover;
-    background-color: #0a192f;
-  }
+.orb-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
+/* --- Orbs --- */
+.orb {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.9);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  animation: spiralTight 10s infinite linear,
+             fadeGlow 5s infinite ease-in-out;
+  transform-origin: center;
+}
+
+/* Tight spiral orbit motion */
+@keyframes spiralTight {
+  0%   { transform: rotate(0deg) translateX(40px) scale(0.9); }
+  25%  { transform: rotate(90deg) translateX(45px) scale(1.1); }
+  50%  { transform: rotate(180deg) translateX(50px) scale(0.8); }
+  75%  { transform: rotate(270deg) translateX(45px) scale(1.05); }
+  100% { transform: rotate(360deg) translateX(40px) scale(0.9); }
+}
+
+/* Firefly flicker */
+@keyframes fadeGlow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Keep buttons above most orbs */
+.buttons, #connectBtn, #signBtn, #submitBtn, #disconnectBtn {
+  position: relative;
+  z-index: 2;
+}
+</style>
+
+<!-- ✅ Orb Container -->
+<div class="orb-container">
+  <!-- 16 orbs -->
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<script>
+/* 🎨 Dynamic Orb Color Logic */
+const orbs = document.querySelectorAll('.orb');
+const connectBtn = document.getElementById('connectBtn');
+const signBtn = document.getElementById('signBtn');
+const submitBtn = document.getElementById('submitBtn');
+const disconnectBtn = document.getElementById('disconnectBtn');
+
+function getCenter(el) {
+  const rect = el.getBoundingClientRect();
+  return { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
+}
+
+function distance(a, b) {
+  return Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
+}
+
+function updateOrbColors() {
+  const connectCenter = getCenter(connectBtn);
+  const signCenter = getCenter(signBtn);
+  const submitCenter = getCenter(submitBtn);
+  const disconnectCenter = getCenter(disconnectBtn);
+
+  orbs.forEach(orb => {
+    const orbRect = orb.getBoundingClientRect();
+    const orbCenter = { x: orbRect.left + orbRect.width/2, y: orbRect.top + orbRect.height/2 };
+
+    const distConnect = distance(orbCenter, connectCenter);
+    const distSign = distance(orbCenter, signCenter);
+    const distSubmit = distance(orbCenter, submitCenter);
+    const distDisconnect = distance(orbCenter, disconnectCenter);
+
+    const minDist = Math.min(distConnect, distSign, distSubmit, distDisconnect);
+    if (minDist === distConnect) {
+      orb.style.background = "rgba(0,212,255,0.9)"; // cyan glow
+    } else if (minDist === distSign || minDist === distSubmit) {
+      orb.style.background = "rgba(0,255,150,0.9)"; // green glow
+    } else {
+      orb.style.background = "rgba(255,77,109,0.9)"; // red-pink glow
+    }
+  });
+
+  requestAnimationFrame(updateOrbColors);
+}
+
+/* 🎲 Randomize orbs */
+orbs.forEach((orb, i) => {
+  orb.style.top = "50%";
+  orb.style.left = "50%";
+  orb.style.animationDuration = `${8 + Math.random() * 4}s, ${3 + Math.random() * 2}s`;
+  orb.style.animationDelay = `${Math.random() * 6}s, ${Math.random() * 2}s`;
+  orb.style.zIndex = Math.random() > 0.6 ? 3 : 1; // some in front, most behind
+});
+
+updateOrbColors();
+</script>
 
 
 
