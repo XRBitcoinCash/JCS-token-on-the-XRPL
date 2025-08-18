@@ -102,11 +102,29 @@
     .grid { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
-    .card {
-      background: rgba(0,0,0,0.6);
-      border-radius: 16px;
-      box-shadow: 0 0 22px rgba(0,212,255,0.18);
-      padding: 20px;
+  /* Lock the height of the right testimonies card and make its feed scroll */
+.card.testimonies-card {
+  display: flex;               /* stack header, feed, help vertically */
+  flex-direction: column;
+  height: clamp(340px, 60vh, 520px); /* fixed-ish height on desktop & mobile */
+}
+
+/* The header and the help line should not scroll */
+.card.testimonies-card h2,
+.card.testimonies-card .help {
+  flex: 0 0 auto;
+}
+
+/* The feed area fills the remaining space and scrolls */
+#feed {
+  flex: 1 1 auto;
+  min-height: 0;               /* 🔑 required for scroll in flex layouts */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem;
+  -webkit-overflow-scrolling: touch; /* smoother iOS scrolling */
+}
+
     }
     .card h2 { font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 0 12px rgba(0,212,255,0.5); }
 
@@ -398,11 +416,13 @@ updateOrbColors();
       </div>
 
       <!-- Right: Feed -->
-      <div class="card">
-        <h2>Recent On-Chain Testimonies</h2>
-        <div id="feed" class="feed" aria-live="polite"></div>
-        <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof-of-Faith memos).</div>
-      </div>
+    <!-- Right: Feed -->
+<div class="card testimonies-card">
+  <h2>Recent On-Chain Testimonies</h2>
+  <div id="feed" class="feed" aria-live="polite"></div>
+  <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof-of-Faith memos).</div>
+</div>
+
     </section>
   </main>
 
