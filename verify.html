@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -965,49 +966,30 @@ async function loadFeed() {
  **********************/
 document.addEventListener("DOMContentLoaded",()=>{
   initXumm();
-  el("xummBtn").addEventListener("click", ()=>xumm.authorize());
-  el("signBtn").addEventListener("click", sendPrayer);
-  el("disconnectBtn").addEventListener("click", () => xumm.logout());
+ el("xummBtn").addEventListener("click", ()=>xumm.authorize());
+el("signBtn").addEventListener("click", sendPrayer);
+el("disconnectBtn").addEventListener("click", () => {
+  if (xumm) {
+    xumm.logout();
+    connectedAccount = null;
+    el("xummBtn").innerText = "Connect with XUM";
+    el("signBtn").disabled = true;
+    el("disconnectBtn").disabled = true;
+    alert("🔒 Wallet disconnected safely!");
+  }
+});
+
+  loadFeed();
+  setInterval(loadFeed,60000);
 });
 </script>
 
-<!-- ==========================
-     RECENT ON-CHAIN TESTIMONIES
-     ========================== -->
-<h2>Recent On-Chain Testimonies</h2>
-
-<!-- ✅ Added wrapper here -->
-<div class="testimonies-wrapper">
-  <div id="feed"></div>
-</div>
-
+  </script>
 <style>
 /* === Testimonies Section === */
 .testimonies-wrapper {
   position: relative;
-  max-height: 400px;   /* keeps box from stretching forever */
-  overflow-y: auto;    /* makes it scrollable */
-  border-radius: 8px;
-
-  /* Firefox support */
-  scrollbar-width: thin;
-  scrollbar-color: #1e3a8a #0a192f;
+  max-height: 400px;   /* adjust height if needed */
+  border-radius: 12px;
+  overflow: hidden;    /* container hides overflow */
 }
-
-/* WebKit Browsers (Chrome, Edge, Safari, Opera) */
-.testimonies-wrapper::-webkit-scrollbar {
-  width: 8px;
-}
-.testimonies-wrapper::-webkit-scrollbar-track {
-  background: #0a192f;
-  border-radius: 4px;
-}
-.testimonies-wrapper::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
-  border-radius: 4px;
-}
-.testimonies-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
-}
-</style>
-
