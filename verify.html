@@ -988,34 +988,23 @@ el("disconnectBtn").addEventListener("click", () => {
 /* === Testimonies Section === */
 .testimonies-wrapper {
   position: relative;
-  max-height: 400px;
+  max-height: 400px;   /* adjust height if needed */
   border-radius: 12px;
-  overflow: hidden;
-  background: #0d1628; /* card background */
-  display: flex;
-  flex-direction: row;
-  gap: 0;
+  overflow: hidden;    /* container hides overflow */
 }
 
-/* Scrollable box (shared styles) */
+/* Scrollable box */
 .testimonies-box {
-  max-height: 400px;
-  overflow-y: auto;
+  max-height: 400px;   /* same as wrapper */
+  overflow-y: auto;    /* enables scroll on desktop + mobile touch */
   padding: 1rem;
+  padding-right: 40px; /* space for scroll buttons */
   scroll-behavior: smooth;
-  flex: 1;
+  direction: rtl;      /* trick: scrollbar moves left side */
 }
 
-/* Left-side scrollbar */
-.left-scroll {
-  padding-left: 40px;  /* leave space for scrollbar */
-  direction: rtl;      /* move scrollbar left */
-}
-.left-scroll > * { direction: ltr; }
-
-/* Right-side scrollbar */
-.right-scroll {
-  padding-right: 40px; /* leave space for arrows */
+.testimonies-box > * {
+  direction: ltr; /* reset so text isn't mirrored */
 }
 
 /* Each testimony */
@@ -1028,7 +1017,7 @@ el("disconnectBtn").addEventListener("click", () => {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Scroll buttons (float on right side) */
+/* Scroll buttons (fixed inside container) */
 .scroll-buttons {
   position: absolute;
   top: 10px;
@@ -1042,38 +1031,26 @@ el("disconnectBtn").addEventListener("click", () => {
   background: rgba(0,212,255,0.85);
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   color: white;
   font-size: 18px;
-  line-height: 36px;
+  line-height: 32px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   transition: background 0.3s;
-  z-index: 10;
 }
 .scroll-btn:hover {
   background: rgba(0,212,255,1);
 }
-
-/* Ensure scrollbars visible */
-.testimonies-box::-webkit-scrollbar {
-  width: 10px;
-}
-.testimonies-box::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.5);
-  border-radius: 8px;
-}
-.testimonies-box::-webkit-scrollbar-track {
-  background: transparent;
-}
 </style>
 
-<!-- ✅ Inside your “Recent On-Chain Testimonials” card -->
+<!-- ✅ Testimonies Section -->
 <div class="testimonies-wrapper">
-  <!-- Scrollable prayers list (left scrollbar) -->
-  <div class="testimonies-box left-scroll" id="leftScroll">
+  <!-- Scrollable Box -->
+  <div class="testimonies-box" id="testimoniesBox">
+    <!-- Example testimonies -->
     <div class="testimony">
       <p>Our Father, who art in heaven, hallowed be thy name...</p>
       <small>Tx • 8/17/2025, 6:09:20 PM</small>
@@ -1082,23 +1059,10 @@ el("disconnectBtn").addEventListener("click", () => {
       <p>I pray in Jesus name.</p>
       <small>Tx • 8/17/2025, 4:25:01 PM</small>
     </div>
-    <!-- More testimonies -->
+    <!-- More testimonies will load here -->
   </div>
 
-  <!-- Scrollable prayers list (right scrollbar) -->
-  <div class="testimonies-box right-scroll" id="rightScroll">
-    <div class="testimony">
-      <p>Our Father, who art in heaven, hallowed be thy name...</p>
-      <small>Tx • 8/17/2025, 6:09:20 PM</small>
-    </div>
-    <div class="testimony">
-      <p>I pray in Jesus name.</p>
-      <small>Tx • 8/17/2025, 4:25:01 PM</small>
-    </div>
-    <!-- More testimonies -->
-  </div>
-
-  <!-- Scroll buttons -->
+  <!-- Scroll Buttons -->
   <div class="scroll-buttons">
     <button class="scroll-btn" id="scrollTop">↑</button>
     <button class="scroll-btn" id="scrollBottom">↓</button>
@@ -1107,31 +1071,20 @@ el("disconnectBtn").addEventListener("click", () => {
 
 <script>
 // Grab references
-const leftScroll = document.getElementById("leftScroll");
-const rightScroll = document.getElementById("rightScroll");
+const testimoniesBox = document.getElementById("testimoniesBox");
 const scrollTopBtn = document.getElementById("scrollTop");
 const scrollBottomBtn = document.getElementById("scrollBottom");
 
-// Sync scroll positions
-function syncScroll(src, dest) {
-  dest.scrollTop = src.scrollTop;
-}
-leftScroll.addEventListener("scroll", () => syncScroll(leftScroll, rightScroll));
-rightScroll.addEventListener("scroll", () => syncScroll(rightScroll, leftScroll));
-
 // Scroll to top
 scrollTopBtn.addEventListener("click", () => {
-  leftScroll.scrollTo({ top: 0, behavior: "smooth" });
-  rightScroll.scrollTo({ top: 0, behavior: "smooth" });
+  testimoniesBox.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 // Scroll to bottom
 scrollBottomBtn.addEventListener("click", () => {
-  leftScroll.scrollTo({ top: leftScroll.scrollHeight, behavior: "smooth" });
-  rightScroll.scrollTo({ top: rightScroll.scrollHeight, behavior: "smooth" });
+  testimoniesBox.scrollTo({ top: testimoniesBox.scrollHeight, behavior: "smooth" });
 });
 </script>
-
 
 </body>
 </html>
