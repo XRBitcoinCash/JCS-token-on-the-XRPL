@@ -367,6 +367,10 @@ orbs.forEach((orb, i) => {
 
 updateOrbColors();
 </script>
+
+
+
+
 </head>
 
 <body>
@@ -443,133 +447,11 @@ updateOrbColors();
     © 2025 Jesus Christ Saves Token. All Rights Reserved.
   </footer>
 
-
+  <!-- XRPL client -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
   <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
   <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
-<script src="https://unpkg.com/xrpl@2.11.0/build/xrpl-latest-min.js"></script>
-<script src="https://unpkg.com/xumm-sdk/dist/xumm.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-  // --- Initialize Leaflet Map ---
-  const map = L.map('map')?.setView([37.7749, -122.4194], 3); // optional if you have a map
-  if(map) {
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-  }
-
-  // --- Testimonies Feed ---
-  function loadFeed() {
-      fetch('https://your-server.com/testimonies-feed.json') // Replace with your feed URL
-          .then(res => res.json())
-          .then(data => {
-              const feed = document.getElementById('feed');
-              feed.innerHTML = '';
-
-              data.forEach(item => {
-                  const card = document.createElement('div');
-                  card.className = 'testimony-card';
-                  card.innerHTML = `
-                      <strong>${item.name || 'Anonymous'}</strong>: ${item.message} 
-                      <br><span>${item.date}</span>
-                  `;
-                  feed.appendChild(card);
-
-                  // Add map marker if coordinates exist
-                  if(map && item.lat && item.lng) {
-                      L.marker([item.lat, item.lng])
-                        .addTo(map)
-                        .bindPopup(`<strong>${item.name || 'Anonymous'}</strong><br>${item.message}`);
-                  }
-              });
-          })
-          .catch(err => console.error('Error loading feed:', err));
-  }
-
-  loadFeed(); // initial load
-
-  // --- Xumm SDK Integration ---
-  const xumm = new XummSdk("YOUR_XUMM_API_KEY"); // <-- Replace with your key
-
-  const signBtn = document.getElementById('signBtn');
-  const xummBtn = document.getElementById('xummBtn');
-  const disconnectBtn = document.getElementById('disconnectBtn');
-  const statusBox = document.getElementById('status');
-
-  // Enable Sign button after wallet connect
-  xummBtn.addEventListener('click', async () => {
-      try {
-          statusBox.hidden = false;
-          statusBox.textContent = "Connecting to Xumm wallet...";
-          // Could implement OAuth/Xumm connect here
-          signBtn.disabled = false;
-          disconnectBtn.disabled = false;
-          statusBox.textContent = "Connected! Ready to sign your prayer.";
-      } catch(err) {
-          console.error(err);
-          statusBox.textContent = "Failed to connect.";
-      }
-  });
-
-  disconnectBtn.addEventListener('click', () => {
-      signBtn.disabled = true;
-      disconnectBtn.disabled = true;
-      statusBox.textContent = "Disconnected.";
-  });
-
-  signBtn.addEventListener('click', async () => {
-      const message = document.getElementById('message').value.trim();
-      const name = document.getElementById('name').value.trim();
-      const handle = document.getElementById('handle').value.trim();
-
-      if(!message) {
-          alert("Message is required.");
-          return;
-      }
-
-      try {
-          statusBox.textContent = "Creating XRPL transaction...";
-
-          // Construct payment payload
-          const payload = {
-              TransactionType: "Payment",
-              Destination: "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe", // Replace with JCS issuer
-              Amount: "1", // testnet drops
-              Memos: [
-                  {
-                      Memo: {
-                          MemoData: Buffer.from(JSON.stringify({
-                              message,
-                              name,
-                              handle
-                          })).toString('hex')
-                      }
-                  }
-              ]
-          };
-
-          const created = await xumm.payload.create(payload);
-          window.open(created.next.always, "_blank"); // Open Xumm signing page
-          statusBox.textContent = "Waiting for signature...";
-
-          // Poll for signature completion
-          const result = await xumm.payload.get(created.uuid);
-          if(result && result.meta && result.meta.signed){
-              statusBox.textContent = "Prayer signed successfully!";
-              // Refresh feed/map after signing
-              loadFeed();
-          } else {
-              statusBox.textContent = "Signing canceled or failed.";
-          }
-
-      } catch(err) {
-          console.error(err);
-          statusBox.textContent = "Error signing transaction.";
-      }
-  });
-</script>
 
   <script>
     // Quick SDK sanity check
@@ -1007,33 +889,12 @@ async function sendPrayer() {
     { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) }}
   ];
 
-  navigator.geolocation.getCurrentPosition(async (pos) => {
-  const lat = pos.coords.latitude;
-  const lng = pos.coords.longitude;
-
-  const prayerText = document.getElementById("prayerInput").value;
-
-  const tx = {
+  const txjson = {
     TransactionType: "Payment",
-    Account: wallet.classicAddress,
-    Destination: PRAYER_ACCOUNT,
-    Amount: "1",
-    Memos: [
-      {
-        Memo: {
-          MemoData: Buffer.from(prayerText, "utf8").toString("hex"),
-          MemoType: Buffer.from(`${lat},${lng}`, "utf8").toString("hex")
-        }
-      }
-    ]
+    Destination: DESTINATION,
+    Amount: "1", // 1 drop
+    Memos: memos
   };
-
-  const prepared = await client.autofill(tx);
-  const signed = wallet.sign(prepared);
-  const result = await client.submitAndWait(signed.tx_blob);
-  console.log("Prayer submitted:", result);
-});
-
 
   try {
     const payload = await xumm.payload.create({ txjson });
