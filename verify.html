@@ -889,12 +889,33 @@ async function sendPrayer() {
     { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) }}
   ];
 
-  const txjson = {
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+  const lat = pos.coords.latitude;
+  const lng = pos.coords.longitude;
+
+  const prayerText = document.getElementById("prayerInput").value;
+
+  const tx = {
     TransactionType: "Payment",
-    Destination: DESTINATION,
-    Amount: "1", // 1 drop
-    Memos: memos
+    Account: wallet.classicAddress,
+    Destination: PRAYER_ACCOUNT,
+    Amount: "1",
+    Memos: [
+      {
+        Memo: {
+          MemoData: Buffer.from(prayerText, "utf8").toString("hex"),
+          MemoType: Buffer.from(`${lat},${lng}`, "utf8").toString("hex")
+        }
+      }
+    ]
   };
+
+  const prepared = await client.autofill(tx);
+  const signed = wallet.sign(prepared);
+  const result = await client.submitAndWait(signed.tx_blob);
+  console.log("Prayer submitted:", result);
+});
+
 
   try {
     const payload = await xumm.payload.create({ txjson });
