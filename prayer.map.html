@@ -75,9 +75,43 @@
   const clusterGroup = L.markerClusterGroup();
   map.addLayer(clusterGroup);
 
-  // 🔄 Load Prayer Data
-  const prayers = JSON.parse(localStorage.getItem('prayers') || '[]')
-    .filter(p => !p.priv); // only public prayers
+ // 🔄 Load Prayer Data from XRPL
+const prayers = [];
+
+// Connect to XRPL Testnet (use Mainnet if desired)
+const client = new xrpl.Client("wss://s.altnet.rippletest.net:51233");
+await client.connect();
+
+// Replace with your issuing account that signs the prayer transactions
+const PRAYER_ACCOUNT = "rYourPrayerAccountAddressHere";
+
+// Fetch account transactions
+const txs = await client.request({
+  command: "account_tx",
+  account: PRAYER_ACCOUNT,
+  limit: 200
+});
+
+// Extract prayers from transactions
+txs.result.transactions.forEach(tx => {
+  const memo = tx.tx?.Memos?.[0]?.Memo?.MemoData;
+  if (memo) {
+    const decoded = new TextDecoder().decode(
+      Uint8Array.from(Buffer.from(memo, "hex"))
+    );
+
+    prayers.push({
+      text: decoded,
+      date: tx.tx?.date ? new Date((tx.tx.date + 946684800) * 1000) : new Date(),
+      country: tx.tx?.Memos?.[0]?.Memo?.MemoType
+        ? new TextDecoder().decode(Uint8Array.from(Buffer.from(tx.tx.Memos[0].Memo.MemoType, "hex")))
+        : "Unknown"
+    });
+  }
+});
+
+client.disconnect();
+
 
   // 🌐 ALL 195 Country Coordinates (centroids) 
   // ⚠️ [You already had full "coords" object here — I kept it unchanged for brevity]
