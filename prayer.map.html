@@ -1,51 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Ultimate Prayer Map</title>
-
-  <!-- Leaflet Core -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <!-- Marker Clustering -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-
-  <!-- Heatmap Plugin -->
-  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-
-  <style>
-    body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; background:#111; color:#eee; }
-    #map { width:100%; height:100%; }
-    .leaflet-popup-content { font-size: 14px; line-height:1.4; }
-    .filter-panel {
-      position: absolute; top:10px; left:10px; z-index:9999;
-      background:rgba(0,0,0,0.85); padding:10px; border-radius:6px; color:#FFD700;
-      max-width:220px;
-    }
-    .filter-panel select, .filter-panel button {
-      width:100%;
-      background:#222; color:#FFD700; border:1px solid #FFD700;
-      padding:6px 8px; margin:6px 0; border-radius:4px;
-      font-size:14px;
-    }
-    .verse { margin-top:6px; font-style:italic; color:#a3d4ff; }
-    .recent { color:#00FFAA; font-weight:bold; }
-    @media (max-width:768px) {
-      .filter-panel { font-size:13px; padding:8px; }
-      .filter-panel select, .filter-panel button { font-size:13px; padding:5px; }
-      .leaflet-popup-content { font-size:13px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ultimate Prayer Map</title>
+<!-- Leaflet Core -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Marker Clustering -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<!-- Heatmap Plugin -->
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+<!-- XRPL SDK -->
+<script src="https://unpkg.com/xrpl@2.11.0/build/xrpl-latest-min.js"></script>
+<style>
+body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; background:#111; color:#eee; }
+#map { width:100%; height:100%; }
+.leaflet-popup-content { font-size: 14px; line-height:1.4; }
+.filter-panel {
+  position: absolute; top:10px; left:10px; z-index:9999;
+  background:rgba(0,0,0,0.85); padding:10px; border-radius:6px; color:#FFD700;
+  max-width:220px;
+}
+.filter-panel select, .filter-panel button {
+  width:100%;
+  background:#222; color:#FFD700; border:1px solid #FFD700;
+  padding:6px 8px; margin:6px 0; border-radius:4px;
+  font-size:14px;
+}
+.verse { margin-top:6px; font-style:italic; color:#a3d4ff; }
+.recent { color:#00FFAA; font-weight:bold; }
+@media (max-width:768px) {
+  .filter-panel { font-size:13px; padding:8px; }
+  .filter-panel select, .filter-panel button { font-size:13px; padding:5px; }
+  .leaflet-popup-content { font-size:13px; }
+}
+</style>
 </head>
 <body>
-
 <div id="map"></div>
-
-<!-- Filter Panel -->
 <div class="filter-panel">
   <strong>Prayer Map Filters</strong><br>
   <label for="countryFilter">Country:</label>
@@ -55,69 +50,22 @@
 </div>
 
 <script>
-  // 🌍 Initialize Map
+(async function() {
+  // Initialize map
   const map = L.map('map').setView([20,0], 2);
-
-  // Dark theme (default)
-  let darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
-    subdomains: 'abcd',
-    maxZoom: 19
+  const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors', subdomains:'abcd', maxZoom:19
   }).addTo(map);
-
-  let lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
-    subdomains: 'abcd',
-    maxZoom: 19
+  const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors', subdomains:'abcd', maxZoom:19
   });
 
-  // Cluster group
   const clusterGroup = L.markerClusterGroup();
+  const heatPoints = [];
   map.addLayer(clusterGroup);
+  const heat = L.heatLayer(heatPoints, { radius: 25, blur: 15, maxZoom: 6 });
 
- // 🔄 Load Prayer Data from XRPL
-const prayers = [];
-
-// Connect to XRPL Testnet (use Mainnet if desired)
-const client = new xrpl.Client("wss://s.altnet.rippletest.net:51233");
-await client.connect();
-
-// Replace with your issuing account that signs the prayer transactions
-const PRAYER_ACCOUNT = "rYourPrayerAccountAddressHere";
-
-// Fetch account transactions
-const txs = await client.request({
-  command: "account_tx",
-  account: PRAYER_ACCOUNT,
-  limit: 200
-});
-
-// Extract prayers from transactions
-txs.result.transactions.forEach(tx => {
-  const memo = tx.tx?.Memos?.[0]?.Memo?.MemoData;
-  if (memo) {
-    const decoded = new TextDecoder().decode(
-      Uint8Array.from(Buffer.from(memo, "hex"))
-    );
-
-    prayers.push({
-      text: decoded,
-      date: tx.tx?.date ? new Date((tx.tx.date + 946684800) * 1000) : new Date(),
-      country: tx.tx?.Memos?.[0]?.Memo?.MemoType
-        ? new TextDecoder().decode(Uint8Array.from(Buffer.from(tx.tx.Memos[0].Memo.MemoType, "hex")))
-        : "Unknown"
-    });
-  }
-});
-
-client.disconnect();
-
-
-  // 🌐 ALL 195 Country Coordinates (centroids) 
-  // ⚠️ [You already had full "coords" object here — I kept it unchanged for brevity]
-  const coords = { /* ... all 195 countries ... */ };
-
-  // 📖 Bible Verse Bank
+  // Bible verses
   const verses = [
     "The Lord is my shepherd; I shall not want. (Psalm 23:1)",
     "Cast all your anxiety on Him because He cares for you. (1 Peter 5:7)",
@@ -127,73 +75,56 @@ client.disconnect();
     "Blessed are the peacemakers, for they shall be called children of God. (Matthew 5:9)",
     "Be strong and courageous. Do not be afraid. (Joshua 1:9)"
   ];
-  const randomVerse = () => verses[Math.floor(Math.random() * verses.length)];
+  const randomVerse = () => verses[Math.floor(Math.random()*verses.length)];
 
-  // 📊 Group by country
-  const byCountry = {};
-  prayers.forEach(p => {
-    const c = p.country || "Unknown";
-    if (!byCountry[c]) byCountry[c] = [];
-    byCountry[c].push(p);
+  // XRPL client
+  const client = new xrpl.Client("wss://s.altnet.rippletest.net:51233");
+  await client.connect();
+  const PRAYER_ACCOUNT = "rYourPrayerAccountAddressHere";
+
+  // Load last 200 prayers
+  const txs = await client.request({ command:"account_tx", account:PRAYER_ACCOUNT, limit:200 });
+  txs.result.transactions.forEach(tx => addPrayer(tx.tx));
+
+  // Listen for new transactions in real-time
+  client.connection.on('transaction', (tx) => {
+    if (tx.transaction.Account === PRAYER_ACCOUNT) addPrayer(tx.transaction);
   });
 
-  // Heatmap data
-  const heatPoints = [];
+  function addPrayer(tx) {
+    const memo = tx?.Memos?.[0]?.Memo;
+    if (!memo?.MemoData) return;
 
-  // Populate map
-  Object.entries(byCountry).forEach(([country, list]) => {
-    const latlng = coords[country];
-    if (!latlng) return;
+    const prayerText = new TextDecoder().decode(Uint8Array.from(Buffer.from(memo.MemoData,'hex')));
+    let latlng = [20,0];
+    if (memo.MemoType) {
+      const coordsStr = new TextDecoder().decode(Uint8Array.from(Buffer.from(memo.MemoType,'hex')));
+      const [lat,lng] = coordsStr.split(",").map(Number);
+      if (!isNaN(lat) && !isNaN(lng)) latlng = [lat,lng];
+    }
 
-    // Circle (~100 mile radius glow)
-    L.circle(latlng, { radius: 160000, color: '#FFD700', fillColor:'#FFD700', fillOpacity: 0.15 })
-      .addTo(map)
-      .bindPopup(`<strong>${country}</strong><br>${list.length} prayer(s)`);
+    const age = Date.now() - (tx.date ? (tx.date+946684800)*1000 : Date.now());
+    const recent = age < (7*24*60*60*1000);
 
-    // Add to dropdown
-    const sel = document.getElementById("countryFilter");
-    const opt = document.createElement("option");
-    opt.value = country; opt.textContent = country;
-    sel.appendChild(opt);
+    const marker = L.marker(latlng).bindPopup(`
+      <strong>Prayer</strong><br>
+      <span class="${recent ? "recent" : ""}">${prayerText}</span><br>
+      <div class="verse">${randomVerse()}</div>
+    `);
+    clusterGroup.addLayer(marker);
+    heatPoints.push([latlng[0], latlng[1], 1]);
+    heat.setLatLngs(heatPoints);
+  }
 
-    // Individual prayer markers
-    list.forEach(prayer => {
-      const marker = L.marker(latlng);
-      const age = Date.now() - new Date(prayer.date).getTime();
-      const recent = age < (7 * 24 * 60 * 60 * 1000); // 7 days
-      marker.bindPopup(`
-        <strong>${prayer.title || "Prayer Request"}</strong><br>
-        <span class="${recent ? "recent" : ""}">${prayer.text}</span><br>
-        <em>From ${country}</em><br>
-        <div class="verse">${randomVerse()}</div>
-      `);
-      clusterGroup.addLayer(marker);
-
-      // Heatmap weight
-      heatPoints.push([latlng[0], latlng[1], 1]);
-    });
+  // Controls
+  document.getElementById("toggleHeat").addEventListener("click", ()=> {
+    map.hasLayer(heat) ? map.removeLayer(heat) : map.addLayer(heat);
   });
-
-  // Heatmap layer
-  const heat = L.heatLayer(heatPoints, { radius: 25, blur: 15, maxZoom: 6 });
-
-  // 🎛 Controls
-  document.getElementById("toggleHeat").addEventListener("click", () => {
-    if (map.hasLayer(heat)) { map.removeLayer(heat); }
-    else { map.addLayer(heat); }
-  });
-
-  document.getElementById("toggleTheme").addEventListener("click", () => {
-    if (map.hasLayer(darkTiles)) { map.removeLayer(darkTiles); lightTiles.addTo(map); }
+  document.getElementById("toggleTheme").addEventListener("click", ()=> {
+    if(map.hasLayer(darkTiles)) { map.removeLayer(darkTiles); lightTiles.addTo(map); }
     else { map.removeLayer(lightTiles); darkTiles.addTo(map); }
   });
-
-  document.getElementById("countryFilter").addEventListener("change", e => {
-    const val = e.target.value;
-    if (val === "all") { map.setView([20,0], 2); return; }
-    if (coords[val]) map.setView(coords[val], 5);
-  });
+})();
 </script>
-
 </body>
 </html>
