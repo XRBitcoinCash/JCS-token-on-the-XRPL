@@ -21,22 +21,42 @@
 <script src="https://unpkg.com/xrpl@2.11.0/build/xrpl-latest-min.js"></script>
 
 <style>
-body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; background:#111; color:#eee; }
+body, html { margin:0; height:100%; font-family:"Segoe UI", sans-serif; background:#111; color:#eee; }
 #map { width:100%; height:100%; }
-.leaflet-popup-content { font-size: 14px; line-height:1.4; }
+.leaflet-popup-content { font-size:14px; line-height:1.4; }
+
 .filter-panel {
-  position: absolute; top:10px; left:10px; z-index:9999;
+  position:absolute; top:10px; left:10px; z-index:9999;
   background:rgba(0,0,0,0.85); padding:10px; border-radius:6px; color:#FFD700;
   max-width:220px;
 }
 .filter-panel select, .filter-panel button {
   width:100%;
   background:#222; color:#FFD700; border:1px solid #FFD700;
-  padding:6px 8px; margin:6px 0; border-radius:4px;
-  font-size:14px;
+  padding:6px 8px; margin:6px 0; border-radius:4px; font-size:14px;
 }
 .verse { margin-top:6px; font-style:italic; color:#a3d4ff; }
 .recent { color:#00FFAA; font-weight:bold; }
+
+.home-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.home-button a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+}
+.home-button a:hover {
+  color: #00FFAA;
+}
+
 @media (max-width:768px) {
   .filter-panel { font-size:13px; padding:8px; }
   .filter-panel select, .filter-panel button { font-size:13px; padding:5px; }
@@ -46,23 +66,32 @@ body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; backgro
 </head>
 <body>
 
-<div id="map"></div>
+  <!-- Filter Panel -->
+  <div class="filter-panel">
+    <strong>Prayer Map Filters</strong><br>
+    <label for="countryFilter">Country:</label>
+    <select id="countryFilter"><option value="all">All</option></select><br>
+    <button id="toggleHeat">Toggle Heatmap</button><br>
+    <button id="toggleTheme">Toggle Light/Dark</button>
+  </div>
 
-<div class="filter-panel">
-  <strong>Prayer Map Filters</strong><br>
-  <label for="countryFilter">Country:</label>
-  <select id="countryFilter"><option value="all">All</option></select><br>
-  <button id="toggleHeat">Toggle Heatmap</button><br>
-  <button id="toggleTheme">Toggle Light/Dark</button>
-</div>
+  <!-- Home Button -->
+  <div class="home-button">
+    <a href="index.html">🏠 Home</a>
+  </div>
+
+  <!-- Map Container -->
+  <div id="map"></div>
 
 <script>
 (async function() {
   // --- Initialize map ---
   const map = L.map('map').setView([20,0], 2);
+
   const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors', subdomains:'abcd', maxZoom:19
   }).addTo(map);
+
   const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors', subdomains:'abcd', maxZoom:19
   });
@@ -72,7 +101,7 @@ body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; backgro
   map.addLayer(clusterGroup);
   const heat = L.heatLayer(heatPoints, { radius: 25, blur: 15, maxZoom: 6 });
 
-  // --- Bible verses for popups ---
+  // --- Bible verses ---
   const verses = [
     "The Lord is my shepherd; I shall not want. (Psalm 23:1)",
     "Cast all your anxiety on Him because He cares for you. (1 Peter 5:7)",
@@ -89,27 +118,36 @@ body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; backgro
   await client.connect();
   const PRAYER_ACCOUNT = "rYourPrayerAccountAddressHere"; // Replace with your JCS account
 
-  // Load last 200 prayers
+  // Load recent 200 prayers
   const txs = await client.request({ command:"account_tx", account:PRAYER_ACCOUNT, limit:200 });
   txs.result.transactions.forEach(tx => addPrayer(tx.tx));
 
-  // Listen for new transactions in real-time
+  // Real-time listening
   client.connection.on('transaction', (tx) => {
     if (tx.transaction.Account === PRAYER_ACCOUNT) addPrayer(tx.transaction);
   });
 
-  // --- Add prayer to map & heat ---
+  // --- Function to add prayer marker ---
   function addPrayer(tx) {
     const memo = tx?.Memos?.[0]?.Memo;
     if (!memo?.MemoData) return;
 
     const prayerText = new TextDecoder().decode(Uint8Array.from(Buffer.from(memo.MemoData,'hex')));
     let latlng = [20,0];
+
     if (memo.MemoType) {
       const coordsStr = new TextDecoder().decode(Uint8Array.from(Buffer.from(memo.MemoType,'hex')));
       const [lat,lng] = coordsStr.split(",").map(Number);
       if (!isNaN(lat) && !isNaN(lng)) latlng = [lat,lng];
     }
+
+    // Spread within 500-mile (~805 km) radius
+    const kmRadius = 805;
+    const spread = kmRadius / 111; // km -> degrees approx
+    latlng = [
+      latlng[0] + (Math.random() * spread * 2 - spread),
+      latlng[1] + (Math.random() * spread * 2 - spread)
+    ];
 
     const age = Date.now() - (tx.date ? (tx.date+946684800)*1000 : Date.now());
     const recent = age < (7*24*60*60*1000);
@@ -119,6 +157,7 @@ body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; backgro
       <span class="${recent ? "recent" : ""}">${prayerText}</span><br>
       <div class="verse">${randomVerse()}</div>
     `);
+
     clusterGroup.addLayer(marker);
     heatPoints.push([latlng[0], latlng[1], 1]);
     heat.setLatLngs(heatPoints);
@@ -128,10 +167,12 @@ body, html { margin:0; height:100%; font-family: "Segoe UI", sans-serif; backgro
   document.getElementById("toggleHeat").addEventListener("click", ()=> {
     map.hasLayer(heat) ? map.removeLayer(heat) : map.addLayer(heat);
   });
+
   document.getElementById("toggleTheme").addEventListener("click", ()=> {
     if(map.hasLayer(darkTiles)) { map.removeLayer(darkTiles); lightTiles.addTo(map); }
     else { map.removeLayer(lightTiles); darkTiles.addTo(map); }
   });
+
 })();
 </script>
 
