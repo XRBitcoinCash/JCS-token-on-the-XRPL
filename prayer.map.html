@@ -2,574 +2,202 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JCS Prayer Map – Live Prayers on the World Map</title>
-
-  <!-- SEO Meta Tags -->
+  <title>JCS Prayer Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The JCS Prayer Map visualizes signed prayers from around the world, using Leaflet.js and the XRP Ledger. See where prayers are being made and join the movement in real-time.">
-  <meta name="keywords" content="Prayer Map, XRP Ledger, Leaflet, JCS, Blockchain Prayers, Real-time Prayer Requests, Digital Faith, Christian, Testimonies, Global Prayer">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://yourdomain.tld/path/to/jcs-prayer-map">
-
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="JCS Prayer Map – Live Prayers">
-  <meta property="og:description" content="Discover prayers mapped across the world, signed via the XRP Ledger. Filter by country, switch heatmap, toggle light/dark theme. Fully interactive and real-time!">
-  <meta property="og:image" content="https://yourdomain.tld/path/to/og-image.png">
-  <meta property="og:url" content="https://yourdomain.tld/path/to/jcs-prayer-map">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Theming -->
-  <meta name="theme-color" content="#232328" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#50aeea" media="(prefers-color-scheme: light)">
-
-  <!-- Favicon (SVG) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='32' height='32' rx='6' fill='%23235aad'/%3E%3Ccircle cx='17' cy='15' r='12' fill='%23eaeaea' stroke='%235e857e' stroke-width='1.8'/%3E%3Ctext x='16' y='21' font-size='12' font-family='monospace' text-anchor='middle' fill='%23352215' font-weight='bold'%3EJCS%3C/text%3E%3C/svg%3E">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-uFz5cDbT2bbKiB2o9Q92IzpN/Z+6A50pJ1e6zUEwo2iLoU1W+a7Gh2DtYuW6qYk7" crossorigin="anonymous">
-  <!-- Heatmap plugin -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
-
+  <!-- Leaflet CSS must load before anything tries to initialize the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Optional: Esri Leaflet Geocoder for address search UI and geocoding -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
   <style>
-    :root {
-      --bg-light: #f0f5f2;
-      --bg-dark: #232328;
-      --panel-bg-light: #fff;
-      --panel-bg-dark: #181824;
-      --text-light: #222;
-      --text-dark: #f8fafb;
-      --brand-accent: #50aeea;
-      --marker-blue: #2876c3;
-      --marker-orange: #cf7500;
-    }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", "Arial", sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      height: 100vh;
-    }
-    #app-container {
-      height: 100vh;
-      width: 100vw;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      transition: background 0.3s;
-    }
-    #filter-panel {
-      position: absolute;
-      top: 24px;
-      left: 24px;
-      z-index: 1002;
-      background: var(--panel-bg-dark);
-      color: var(--text-dark);
-      border-radius: 18px;
-      box-shadow: 0 2px 14px rgb(45,45,45,0.10), 0 0 1px rgb(255,255,255,0.12);
-      padding: 18px 20px 12px 16px;
-      display: flex;
-      flex-direction: column;
-      min-width: 242px;
-      user-select: none;
-      font-size: 15px;
-      transition: background 0.3s, color 0.3s;
-    }
-    #filter-panel label {
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: var(--brand-accent);
-    }
-    #filter-panel select,
-    #filter-panel button {
-      appearance: none;
-      border: 0;
-      border-radius: 6px;
-      padding: 7px 13px;
-      margin-bottom: 10px;
-      font-size: 15px;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      transition: background 0.25s, color 0.25s;
-      outline: none;
-      box-shadow: 0 1px 1.5px rgb(0,0,0,0.035);
-    }
-    #filter-panel select:focus,
-    #filter-panel button:focus {
-      outline: 2px solid var(--brand-accent);
-    }
-    #filter-panel .btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    #filter-panel .btn-toggle {
-      cursor: pointer;
-      border: 1px solid var(--brand-accent);
-      background: none;
-      font-weight: 600;
-      color: var(--text-dark);
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
-    }
-    #filter-panel .btn-toggle.active {
-      background: var(--brand-accent);
-      color: #fff;
-    }
-    #filter-panel .status {
-      font-size: 13px;
-      color: var(--brand-accent);
-      margin-top: 8px;
-    }
+    html, body { height: 100%; margin: 0; padding: 0; }
     #map {
-      height: 100vh;
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
       width: 100vw;
+      height: 100vh;
       z-index: 0;
-      background: #222; /* fallback for dark mode */
     }
-    /* Home Button Control */
-    .leaflet-control-home {
-      background: #fff;
-      border: 1px solid #bbb;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgb(80,80,80,0.085);
-      width: 32px; height: 32px;
-      display: flex; justify-content: center; align-items: center;
-      margin-right: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .leaflet-control-home:hover,
-    .leaflet-control-home:focus {
-      background: #f0f5f2;
-    }
-    .leaflet-control-home .home-icon {
-      width: 21px; height: 21px;
-      display: block;
-    }
-    .leaflet-popup-content {
-      background: var(--panel-bg-dark);
-      color: var(--text-dark);
-      padding: 3px 6px 0px 3px;
-      border-radius: 8px;
-      min-width: 220px;
-      font-size: 1.05em;
-    }
-    .leaflet-popup-content .prayer-title {
-      font-weight: bold; color: var(--brand-accent); font-size: 1.12em;
-    }
-    .leaflet-popup-content .prayer-meta {
-      color: #8bdfff; font-style: italic; font-size: 0.95em; display: block; margin-bottom: 5px;
-    }
-    .leaflet-control-attribution {
-      background: unset;
-      color: #88a8c6;
-    }
-    /* Dark and Light theme handling */
-    .theme-light {
-      --bg-dark: #ecf4f9; --panel-bg-dark: #f0f4f6;
-      --text-dark: #222; --panel-bg-light: #fff; --brand-accent: #2a6d3f;
-      --marker-blue: #3b93cc; --marker-orange: #f7801c;
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-    .theme-light #filter-panel {
-      background: var(--panel-bg-light);
-      color: var(--text-light);
-    }
-    .theme-light .leaflet-popup-content {
-      background: var(--panel-bg-light);
-      color: var(--text-light);
-    }
-    .theme-light .leaflet-control-home {
-      background: #e5f6fe;
-      border-color: #aee3e6;
-      color: #035;
-    }
-    /* Map tiles filter for dark mode */
-    .map-tiles {
-      filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-      /* These filters create a visually appealing "dark" effect while retaining clarity */
-      transition: filter 0.5s;
-    }
-    .theme-light .map-tiles {
-      filter: none !important;
-    }
-    /* Accessibility, Focus/Active States */
-    #filter-panel select:focus-visible,
-    #filter-panel button:focus-visible {
-      outline: 2px solid var(--brand-accent);
-      outline-offset: 1px;
-    }
-
-    /* Responsive Design */
+    /* Optionally style popups for clarity */
+    .prayer-popup { font-size: 1rem; }
     @media (max-width: 600px) {
-      #filter-panel {
-        top: 6px; left: 6px; min-width: 120px; padding: 8px 6px 6px 6px; font-size: 13px;
-      }
-      .leaflet-popup-content {
-        min-width: 110px;
-      }
+      #map { height: 100vh; width: 100vw; }
     }
   </style>
 </head>
-
 <body>
-<div id="app-container">
-  <!-- Filter/Control Panel -->
-  <div id="filter-panel" role="region" aria-label="Prayer Map Controls">
-    <label for="countrySelect">Country:</label>
-    <select id="countrySelect" autocomplete="on">
-      <option value="all">All Countries</option>
-    </select>
-    <div class="btn-row">
-      <button id="btnHeatmap" class="btn-toggle" aria-pressed="false">Toggle Heatmap</button>
-      <button id="btnTheme" class="btn-toggle" aria-pressed="false">Toggle Theme</button>
-    </div>
-    <div class="status" id="statusMsg">Loading prayers from XRPL...</div>
-  </div>
   <div id="map"></div>
-</div>
 
-<!-- Required Scripts: Leaflet, XRPL.js, Heatmap plugin -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-XhpF5bZFL9D4fITe8y1q3QleXL8Szd420VkpViUmdkR/0Pc1SV2YwDDxFH+nx+n/" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/xrpl@4.7.1/build/xrpl-latest-min.js"></script>
-<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <!-- Leaflet and Plugins -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Esri Geocoder (optional, if you want geocoding UI for searches) -->
+  <script src="https://unpkg.com/esri-leaflet"></script>
+  <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+  <!-- xrpl.js for XRP Ledger interaction -->
+  <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
+  <!-- Main JS Logic -->
+  <script>
+    // GLOBAL FIX: Ensure Leaflet map renders full screen and resizes correctly.
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Leaflet map at a sensible default
+      const map = L.map('map', {
+        attributionControl: true,
+        zoomControl: true,
+      }).setView([35, 0], 2);
 
-<script>
-/* ---------------------------- XRPL Ledger Fetch and Memo Parsing ------------------------------- */
-const XRPL_ISSUER = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // Permanent; do not edit
-const TX_FETCH_LIMIT = 250; // XRPL's account_tx API pagination limit (max 400 per page, pref. <400 for performance)
-let allPrayers = []; // {country, lat, lng, prayer, tx, date, hash}
-let uniqueCountries = new Set();
+      // 2. Add base tile layer (OpenStreetMap, with mobile/hidpi detection)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        detectRetina: true,
+        maxZoom: 18
+      }).addTo(map);
 
-/**
- * Simple memo decode utility (hex to string)
- */
-function hexToUtf8(hex) {
-  if(!hex) return "";
-  try {
-    return decodeURIComponent('%' + hex.match(/.{1,2}/g).map(x => ('00'+parseInt(x, 16).toString(16)).substr(-2)).join('%')).replace(/%00/g, "");
-  } catch (e) { return ""; }
-}
+      // 3. Responsive map layout: listen for window and container resizes
+      window.addEventListener('resize', () => { map.invalidateSize(); });
+      // Modern: use ResizeObserver for precise container changes
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(() => map.invalidateSize());
+        ro.observe(document.getElementById('map'));
+      }
 
-/**
- * Parse memo for structured prayer JSON
- */
-function parsePrayerMemo(memos) {
-  if (!memos || !Array.isArray(memos)) return null;
-  for (let i = 0; i < memos.length; ++i) {
-    if (memos[i] && memos[i].Memo && memos[i].Memo.MemoData) {
-      let decoded = hexToUtf8(memos[i].Memo.MemoData);
+      // 4. Optional: Add a geocode search UI for manual address lookups
       try {
-        // Many memos will be plain JSON, but fallback to plain string for just prayer
-        let obj = JSON.parse(decoded);
-        if (obj && typeof obj === "object") {
-          // A minimal prayer memo: must include lat/lng and prayer text
-          if ('lat' in obj && 'lng' in obj && typeof obj.prayer === "string") {
-            return {
-              country: obj.country || obj.cty || null,
-              lat: Number(obj.lat),
-              lng: Number(obj.lng),
-              prayer: obj.prayer.trim(),
-            };
+        const search = L.esri.Geocoding.geosearch({ expanded: true }).addTo(map);
+        const searchResults = L.layerGroup().addTo(map);
+        search.on('results', function(data) {
+          searchResults.clearLayers();
+          for (const result of data.results) {
+            L.marker(result.latlng).addTo(searchResults)
+              .bindPopup(`Search result: ${result.text}`).openPopup();
+          }
+        });
+      } catch (e) {
+        // If Esri plugin is unavailable, skip the geosearch UI
+      }
+
+      // 5. Initialize layergroup for dynamic prayer markers
+      const prayerMarkers = L.layerGroup().addTo(map);
+
+      // Utility: Decode XRP memo hex (hex string => UTF-8)
+      function decodeHexMemo(memoHex) {
+        memoHex = memoHex.replace(/^0x/, '');
+        const bytes = new Uint8Array(memoHex.length / 2);
+        for (let i = 0; i < bytes.length; i++) {
+          bytes[i] = parseInt(memoHex.substr(i*2, 2), 16);
+        }
+        return new TextDecoder().decode(bytes);
+      }
+
+      // Optionally support base64 (older tx’s may use, but XRPL tools recommend hex)
+      function decodeBase64Memo(memoBase64) {
+        return atob(memoBase64);
+      }
+
+      // Parse and plot a single prayer submission given decoded JSON
+      function plotPrayer(prayer) {
+        let { lat, lon, message, address } = prayer;
+
+        // If coords missing but address present, geocode them before plotting
+        if ((lat === undefined || lon === undefined) && address) {
+          // Nominatim example: slow & public, for low volume, be gentle!
+          fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+            .then(r => r.json())
+            .then(result => {
+              if (result.length > 0) {
+                lat = parseFloat(result[0].lat);
+                lon = parseFloat(result[0].lon);
+                addPrayerMarker(lat, lon, message || address, address);
+              }
+            });
+        } else if ((typeof lat === "number" && typeof lon === "number")) {
+          addPrayerMarker(lat, lon, message, address);
+        }
+      }
+
+      // Place a marker with popup at a (lat,lon)
+      function addPrayerMarker(lat, lon, message, address) {
+        let popupContent = `<div class="prayer-popup"><strong>Prayer:</strong> ${message || '(No text)'}`;
+        if (address) popupContent += `<br/><span style="color:gray;font-size:.9em">(${address})</span>`;
+        popupContent += `</div>`;
+        const marker = L.marker([lat, lon]);
+        marker.bindPopup(popupContent);
+        prayerMarkers.addLayer(marker);
+      }
+
+      // Fetch and display all prayer submissions from a known XRPL account
+      async function displayPrayersFromXRPL() {
+        // XRPL ACCOUNT ADDRESS where prayer submissions are sent to:
+        const PRAYER_ACCOUNT = 'rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe'; // <== CHANGE TO YOUR PRAYER ADDRESS
+
+        // 0. Clear previous markers
+        prayerMarkers.clearLayers();
+
+        // 1. Connect to the XRP Ledger (testnet; use mainnet WSS for prod)
+        const client = new xrpl.Client('wss://s.altnet.rippletest.net:51233');
+        await client.connect();
+
+        // 2. Query recent transactions involving the prayer account
+        let txs;
+        try {
+          const resp = await client.request({
+            command: 'account_tx',
+            account: PRAYER_ACCOUNT,
+            ledger_index_min: -1,
+            ledger_index_max: -1,
+            limit: 200 // adjust as needed
+          });
+          txs = resp.result.transactions;
+        } catch (err) {
+          console.error("XRPL fetch error:", err);
+          await client.disconnect();
+          alert("Failed to fetch XRPL prayer data.");
+          return;
+        }
+
+        // 3. For each transaction, process and plot prayer memos
+        for (const tx of txs) {
+          try {
+            // Some XRPL nodes structure as .tx.Memos, some as .tx_json.Memos
+            const memos = (tx.tx && tx.tx.Memos) || (tx.tx_json && tx.tx_json.Memos);
+            if (Array.isArray(memos) && memos.length > 0) {
+              for (const memoObj of memos) {
+                const memoHex = memoObj.Memo.MemoData;
+                if (!memoHex) continue;
+                try {
+                  // Decode memo as hex-encoded JSON (standard XRPL practice for custom metadata)
+                  const jsonStr = decodeHexMemo(memoHex);
+                  const prayer = JSON.parse(jsonStr);
+                  // Expected: { lat: Number, lon: Number, message: 'string', address?: 'optional address' }
+                  plotPrayer(prayer);
+                } catch (decodeErr) {
+                  // If hex fails, maybe base64? If that fails, log and skip
+                  try {
+                    const base64Str = atob(memoHex);
+                    const prayer = JSON.parse(base64Str);
+                    plotPrayer(prayer);
+                  } catch {}
+                }
+              }
+            }
+          } catch (txe) {
+            // Ignore strange transactions
+            continue;
           }
         }
-      } catch(e) {
-        // Fallback: treat as plaintext prayer at "unknown" location
-        if (decoded && decoded.length > 3) {
-          return {country: null, lat: null, lng: null, prayer: decoded.trim() };
+
+        // 4. If any markers found, fit the map bounds to their locations for immediate visibility
+        if (prayerMarkers.getLayers().length > 0) {
+          map.fitBounds(prayerMarkers.getBounds(), { maxZoom: 8, padding: [40, 40] });
         }
+
+        await client.disconnect();
       }
-    }
-  }
-  return null;
-}
 
-/**
- * Fetch (paginated) transactions from XRPL for account,
- * return as array of parsed prayers sorted newest to oldest.
- */
-async function fetchPrayersFromXRPL({maxPages = 6, statusCallback} = {}) {
-  const client = new xrpl.Client("wss://xrplcluster.com/");
-  await client.connect();
-  let prayers = [];
-  let marker = null;
-  let page = 0;
-  let done = false;
-  if (statusCallback) statusCallback("Connecting to XRP Ledger...");
-  do {
-    let req = {command: "account_tx", account: XRPL_ISSUER,
-      ledger_index_min: -1, ledger_index_max: -1, binary: false, limit: TX_FETCH_LIMIT };
-    if (marker) req.marker = marker;
-    let resp = await client.request(req);
-    if (statusCallback) statusCallback(`Reading XRPL... page ${page+1}`);
-    for (let txo of resp.result.transactions) {
-      // Only validated, non-failed Payment transactions
-      if (txo.validated && txo.tx && (txo.tx.TransactionType === "Payment" || !txo.tx.TransactionType)) {
-        let memo = parsePrayerMemo(txo.tx.Memos);
-        if (!memo || !memo.prayer) continue;
-        // Require lat/lng within reasonable bounds else skip
-        if (typeof memo.lat !== "number" || typeof memo.lng !== "number" || isNaN(memo.lat) || isNaN(memo.lng)
-            || memo.lat < -90 || memo.lat > 90 || memo.lng < -180 || memo.lng > 180) continue;
-        // Extract meta
-        let country = memo.country;
-        if (!country && memo.lat && memo.lng) {
-          // Optionally later: Reverse geocoder... (out of scope for this version)
-        }
-        prayers.push({
-          ...memo,
-          country: country ? String(country).trim().replace(/[^A-Za-z -]/g,"") : null,
-          lat: memo.lat, lng: memo.lng,
-          tx: txo.tx, date: txo.tx.date ? xrpl.rippleTimeToISOTime(txo.tx.date) : null,
-          hash: txo.tx.hash || null,
-        });
-      }
-    }
-    marker = resp.result.marker;
-    // Hard limit history for perf.
-    page++;
-    if (!marker || page >= maxPages) done = true;
-  } while (!done);
-  await client.disconnect();
-  prayers.sort((a,b) => (b.date||0) > (a.date||0) ? 1 : -1);
-  return prayers;
-}
+      // Initial (one-time) fetch on page load
+      displayPrayersFromXRPL();
 
-/**
- * Populate all global data: allPrayers, uniqueCountries
- */
-async function refreshPrayerData(statusCallback) {
-  let prayers = [];
-  try {
-    prayers = await fetchPrayersFromXRPL({maxPages:8, statusCallback});
-  } catch(e) {
-    if (statusCallback) statusCallback("⚠️ Error loading XRPL data");
-    prayers = []; // fallback: empty
-  }
-  allPrayers = prayers;
-  uniqueCountries = new Set();
-  prayers.forEach(p => { if (p.country) uniqueCountries.add(p.country); });
-  if (statusCallback) statusCallback(`Loaded ${prayers.length} prayers.`);
-  return prayers;
-}
-
-/* --------------------------------------------------- */
-/* ------------------- Map Setup --------------------- */
-
-const initialView = {center: [17, 10], zoom: 2.15}; // World view
-let map, markerLayer, heatLayer, homeControl, bounds;
-let currentTheme = "dark"; // true = dark, false = light
-
-function getDarkTileLayer() {
-  // Use OSM HOT for best filter result; .map-tiles class enables dark CSS
-  return L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    className: 'map-tiles',
-    crossOrigin: ''
-  });
-}
-function getLightTileLayer() {
-  // OpenTopoMap, gives blue oceans and topo land
-  return L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{
-    maxZoom: 17,
-    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-    className: 'map-tiles',
-    crossOrigin: ''
-  });
-}
-
-/**
- * Adds custom home button to Leaflet (top right).
- */
-function addHomeControlToMap(map) {
-  let control = L.Control.extend({
-    options: { position: 'topright' },
-    onAdd: function() {
-      let btn = L.DomUtil.create("div", "leaflet-control-home");
-      btn.title = "Reset to Home View";
-      btn.setAttribute("tabindex", "0");
-      btn.setAttribute("role", "button");
-      btn.innerHTML =
-        '<svg class="home-icon" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#3b93cc"/><path d="M6 17L16 9l10 8v8a2 2 0 01-2 2h-4a2 2 0 01-2-2v-4h-4v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-8z" fill="#fff"/></svg>';
-      btn.onclick = function() {
-        map.setView(initialView.center, initialView.zoom, {animate:true});
-      };
-      btn.onkeydown = function(e){
-        if (e.key === " " || e.key === "Enter") { e.preventDefault(); map.setView(initialView.center, initialView.zoom, {animate:true}); }
-      };
-      L.DomEvent.disableClickPropagation(btn); // prevent interfering with map
-      return btn;
-    }
-  });
-  let instance = new control();
-  map.addControl(instance);
-  return instance;
-}
-
-/**
- * Applies 'max bounds' lips so map can't expose whitespace.
- */
-function updateMaxBounds() {
-  if (!map) return;
-  let edge = 0.5;
-  bounds = L.latLngBounds([[-90-edge, -180-edge],[90+edge, 180+edge]]);
-  map.setMaxBounds(bounds);
-}
-
-/**
- * Map initialization (tiles, marker layer, home, etc.)
- */
-function setupMap() {
-  if (map) map.remove();
-  map = L.map("map", {
-    center: initialView.center,
-    zoom: initialView.zoom,
-    minZoom: 2,
-    maxZoom: 17,
-    zoomControl: true,
-    attributionControl: true,
-    preferCanvas: true, // To improve heatmap perf.
-  });
-  let tileLayer = currentTheme === "dark" ? getDarkTileLayer() : getLightTileLayer();
-  tileLayer.addTo(map);
-
-  // Markers
-  if (markerLayer) markerLayer.clearLayers();
-  markerLayer = L.layerGroup().addTo(map);
-
-  // Heatmap
-  if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
-
-  // Custom Home Button
-  homeControl = addHomeControlToMap(map);
-
-  updateMaxBounds();
-  new ResizeObserver(() => { map.invalidateSize(); }).observe(document.getElementById("map"));
-}
-
-/**
- * Toggle map theme (dark <--> light)
- */
-function toggleTheme(force) {
-  let appc = document.getElementById("app-container");
-  currentTheme = force ? force : (currentTheme === "dark" ? "light" : "dark");
-  appc.classList.toggle("theme-light", currentTheme === "light");
-  // Remove existing tile
-  map.eachLayer(function(layer){
-    if (layer instanceof L.TileLayer)
-      map.removeLayer(layer);
-  });
-  // Add new proper base
-  let newTileLayer = currentTheme === "dark" ? getDarkTileLayer() : getLightTileLayer();
-  newTileLayer.addTo(map);
-  // Reapply marker and heat layers
-  markerLayer.addTo(map);
-  if (heatLayer && map.hasLayer(heatLayer)) heatLayer.addTo(map);
-}
-
-/* --------------------------------------------------- */
-/* ------- Markers, Heatmap, Country Filter ---------- */
-
-/**
- * Country dropdown population (unique sorted list, 'All Countries' first)
- */
-function fillCountryDropdown(selected) {
-  let sel = document.getElementById("countrySelect");
-  sel.innerHTML = '<option value="all">All Countries</option>';
-  let arr = Array.from(uniqueCountries).sort();
-  arr.forEach(c => {
-    let opt = document.createElement("option");
-    opt.value = c; opt.innerText = c;
-    if (selected && (selected === c)) opt.selected = true;
-    sel.appendChild(opt);
-  });
-}
-
-/**
- * Show filtered markers and associated heatmap.
- */
-function renderMapLayers({country = "all"} = {}) {
-  markerLayer.clearLayers();
-  let prayersToShow = allPrayers.filter(p => !country || country === "all" || (p.country && p.country === country));
-  prayersToShow.forEach((p,idx) => {
-    let m = L.marker([p.lat, p.lng],{
-      icon: L.icon({
-        iconUrl: currentTheme==="dark"
-          ? 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png'
-          : 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-        iconSize: [25,41], iconAnchor:[12,40], popupAnchor:[1,-32],
-      })
-    }).addTo(markerLayer);
-    let dateline = p.date ? `<span class="prayer-meta">Date: ${p.date.slice(0,10)}</span>` : "";
-    let countryline = p.country ? `<span class="prayer-meta">Country: ${p.country}</span>` : "";
-    m.bindPopup(
-      `<div><div class="prayer-title">Prayer:</div>
-      <div>${p.prayer.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
-      ${countryline} ${dateline}</div>`
-    );
-  });
-  // Heatmap
-  if (heatLayer) map.removeLayer(heatLayer);
-  if (document.getElementById("btnHeatmap").classList.contains("active")) {
-    let points = prayersToShow.map(p => [p.lat, p.lng, 0.67]);
-    heatLayer = L.heatLayer(points, {radius:17, blur:22, minOpacity:0.27, gradient:{
-      0.2:"#fec62a", 0.5:"#674be6", 0.7:"#367fd3", 1:"#ea3032"
-    }});
-    heatLayer.addTo(map);
-  }
-}
-
-/* --------------- Filter Control wireup ------------------ */
-
-document.addEventListener("DOMContentLoaded", async function(){
-  setupMap();
-  let statusMsg = document.getElementById("statusMsg");
-  statusMsg.innerText = "Reading the XRP Ledger…";
-  // 1. Load Prayers
-  await refreshPrayerData(msg => { statusMsg.innerText = msg; });
-  fillCountryDropdown();
-  statusMsg.innerText = "Showing latest prayers on the map.";
-  renderMapLayers();
-
-  // 2. Country filter
-  let sel = document.getElementById("countrySelect");
-  sel.onchange = function(){
-    renderMapLayers({country: sel.value});
-    statusMsg.innerText = sel.value==="all"
-        ? `Showing all countries (${allPrayers.length} prayers).`
-        : `Showing ${sel.value}.`;
-  };
-
-  // 3. Heatmap toggle
-  let btnHeatmap = document.getElementById("btnHeatmap");
-  btnHeatmap.onclick = function(){
-    btnHeatmap.classList.toggle("active");
-    btnHeatmap.setAttribute("aria-pressed",btnHeatmap.classList.contains("active"));
-    renderMapLayers({country: sel.value});
-  };
-
-  // 4. Theme toggle
-  let btnTheme = document.getElementById("btnTheme");
-  btnTheme.onclick = function(){
-    btnTheme.classList.toggle("active");
-    btnTheme.setAttribute("aria-pressed",btnTheme.classList.contains("active"));
-    toggleTheme();
-  };
-
-  // Ensure at least once rendered correctly after tiles load
-  setTimeout(()=>{map.invalidateSize();},800);
-
-  // 5. Periodic Refresh (every 2 mins)
-  setInterval(async () => {
-    statusMsg.innerText = "Refreshing XRPL prayers…";
-    await refreshPrayerData(msg => { statusMsg.innerText = msg; });
-    fillCountryDropdown(sel.value);
-    renderMapLayers({country: sel.value});
-    statusMsg.innerText = `Prayer map auto-refreshed (${allPrayers.length} prayers).`;
-  },1000*120);
-});
-</script>
+      // Optionally: Poll for new prayers every minute for live updates
+      setInterval(displayPrayersFromXRPL, 60000);
+    });
+  </script>
 </body>
 </html>
