@@ -60,17 +60,35 @@
       }
 
       // 4. Optional: Add a geocode search UI for manual address lookups
-      try {
-        const search = L.esri.Geocoding.geosearch({ expanded: true }).addTo(map);
-        const searchResults = L.layerGroup().addTo(map);
-        search.on('results', function(data) {
-          searchResults.clearLayers();
-          for (const result of data.results) {
-            L.marker(result.latlng).addTo(searchResults)
-              .bindPopup(`Search result: ${result.text}`).openPopup();
-          }
-        });
-      } catch (e) {
+    <!-- Leaflet core -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Esri Leaflet core -->
+<script src="https://unpkg.com/esri-leaflet"></script>
+
+<!-- Esri Leaflet Geocoder plugin -->
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
+<script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+
+<script>
+  const map = L.map('map').setView([20, 0], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+  // Create the geosearch control
+  const searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+  const resultsLayer = L.layerGroup().addTo(map);
+
+  searchControl.on('results', function(data) {
+    resultsLayer.clearLayers();
+    data.results.forEach(function(result) {
+      resultsLayer.addLayer(L.marker(result.latlng).bindPopup(result.text));
+      map.setView(result.latlng, 12);
+    });
+  });
+</script>
+
         // If Esri plugin is unavailable, skip the geosearch UI
       }
 
