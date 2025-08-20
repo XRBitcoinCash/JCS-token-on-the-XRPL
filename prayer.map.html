@@ -1,192 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>JCS Prayer Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Leaflet CSS must load before anything tries to initialize the map -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- Optional: Esri Leaflet Geocoder for address search UI and geocoding -->
-  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
-  <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    #map {
-      position: absolute;
-      top: 0; bottom: 0; left: 0; right: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-    }
-    /* Optionally style popups for clarity */
-    .prayer-popup { font-size: 1rem; }
-    @media (max-width: 600px) {
-      #map { height: 100vh; width: 100vw; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>JCS Prayer Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #f7f8ff url('background-translucent.png') center/cover no-repeat fixed;
+    /* Soft glow overlay */
+    background-blend-mode: lighten;
+  }
+  #map {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+  }
+  .prayer-popup {
+    font-family: "Georgia", serif;
+    font-size: 1rem;
+    color: #4b2e83;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+  }
+</style>
 </head>
 <body>
-  <div id="map"></div>
 
-  <!-- Leaflet and Plugins -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Esri Geocoder (optional, if you want geocoding UI for searches) -->
-  <script src="https://unpkg.com/esri-leaflet"></script>
-  <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
-  <!-- xrpl.js for XRP Ledger interaction -->
-  <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
-  <!-- Main JS Logic -->
-  <script>
-    // GLOBAL FIX: Ensure Leaflet map renders full screen and resizes correctly.
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Initialize Leaflet map at a sensible default
-      const map = L.map('map', {
-        attributionControl: true,
-        zoomControl: true,
-      }).setView([35, 0], 2);
+<div id="map"></div>
 
-      // 2. Add base tile layer (OpenStreetMap, with mobile/hidpi detection)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
-        detectRetina: true,
-        maxZoom: 18
-      }).addTo(map);
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-      // 3. Responsive map layout: listen for window and container resizes
-      window.addEventListener('resize', () => { map.invalidateSize(); });
-      // Modern: use ResizeObserver for precise container changes
-      if ('ResizeObserver' in window) {
-        const ro = new ResizeObserver(() => map.invalidateSize());
-        ro.observe(document.getElementById('map'));
-      }
+  // 1. Create Leaflet map with OpenStreetMap tiles
+  const map = L.map('map', {
+    attributionControl: true,
+    zoomControl: true
+  }).setView([20, 0], 2);
 
- 
-        // If Esri plugin is unavailable, skip the geosearch UI
-      }
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    detectRetina: true,
+    maxZoom: 18
+  }).addTo(map);
 
-      // 5. Initialize layergroup for dynamic prayer markers
-      const prayerMarkers = L.layerGroup().addTo(map);
+  const prayerMarkers = L.layerGroup().addTo(map);
 
-      // Utility: Decode XRP memo hex (hex string => UTF-8)
-      function decodeHexMemo(memoHex) {
-        memoHex = memoHex.replace(/^0x/, '');
-        const bytes = new Uint8Array(memoHex.length / 2);
-        for (let i = 0; i < bytes.length; i++) {
-          bytes[i] = parseInt(memoHex.substr(i*2, 2), 16);
-        }
-        return new TextDecoder().decode(bytes);
-      }
+  // 2. Decode functions for XRPL memos
+  function decodeHexMemo(memoHex) {
+    memoHex = memoHex.replace(/^0x/, '');
+    const bytes = new Uint8Array(memoHex.length / 2);
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = parseInt(memoHex.substr(i*2, 2), 16);
+    }
+    return new TextDecoder().decode(bytes);
+  }
 
-      // Optionally support base64 (older tx’s may use, but XRPL tools recommend hex)
-      function decodeBase64Memo(memoBase64) {
-        return atob(memoBase64);
-      }
+  function addPrayerMarker(lat, lon, message, address) {
+    let content = `<div class="prayer-popup"><strong>Prayer:</strong> ${message || '(No text)'}`;
+    if (address) content += `<br/><em>${address}</em>`;
+    content += '</div>';
+    L.marker([lat, lon]).addTo(prayerMarkers).bindPopup(content);
+  }
 
-      // Parse and plot a single prayer submission given decoded JSON
-      function plotPrayer(prayer) {
-        let { lat, lon, message, address } = prayer;
+  // 3. Main fetch from XRPL
+  async function displayPrayersFromXRPL() {
+    const PRAYER_ACCOUNT = 'rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe';
+    prayerMarkers.clearLayers();
+    const client = new xrpl.Client('wss://s.altnet.rippletest.net:51233');
+    await client.connect();
 
-        // If coords missing but address present, geocode them before plotting
-        if ((lat === undefined || lon === undefined) && address) {
-          // Nominatim example: slow & public, for low volume, be gentle!
-          fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-            .then(r => r.json())
-            .then(result => {
-              if (result.length > 0) {
-                lat = parseFloat(result[0].lat);
-                lon = parseFloat(result[0].lon);
-                addPrayerMarker(lat, lon, message || address, address);
+    let txs;
+    try {
+      const resp = await client.request({
+        command: 'account_tx',
+        account: PRAYER_ACCOUNT,
+        ledger_index_min: -1,
+        ledger_index_max: -1,
+        limit: 200
+      });
+      txs = resp.result.transactions;
+    } catch (err) {
+      console.error('XRPL fetch error:', err);
+      await client.disconnect();
+      return;
+    }
+
+    for (const tx of txs) {
+      try {
+        const memos = (tx.tx && tx.tx.Memos) || (tx.tx_json && tx.tx_json.Memos);
+        if (Array.isArray(memos)) {
+          for (const memoObj of memos) {
+            const memoHex = memoObj.Memo.MemoData;
+            if (!memoHex) continue;
+            try {
+              const jsonStr = decodeHexMemo(memoHex);
+              const prayer = JSON.parse(jsonStr);
+              if (typeof prayer.lat === 'number' && typeof prayer.lon === 'number') {
+                addPrayerMarker(prayer.lat, prayer.lon, prayer.message, prayer.address);
               }
-            });
-        } else if ((typeof lat === "number" && typeof lon === "number")) {
-          addPrayerMarker(lat, lon, message, address);
-        }
-      }
-
-      // Place a marker with popup at a (lat,lon)
-      function addPrayerMarker(lat, lon, message, address) {
-        let popupContent = `<div class="prayer-popup"><strong>Prayer:</strong> ${message || '(No text)'}`;
-        if (address) popupContent += `<br/><span style="color:gray;font-size:.9em">(${address})</span>`;
-        popupContent += `</div>`;
-        const marker = L.marker([lat, lon]);
-        marker.bindPopup(popupContent);
-        prayerMarkers.addLayer(marker);
-      }
-
-      // Fetch and display all prayer submissions from a known XRPL account
-      async function displayPrayersFromXRPL() {
-        // XRPL ACCOUNT ADDRESS where prayer submissions are sent to:
-        const PRAYER_ACCOUNT = 'rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe'; // <== CHANGE TO YOUR PRAYER ADDRESS
-
-        // 0. Clear previous markers
-        prayerMarkers.clearLayers();
-
-        // 1. Connect to the XRP Ledger (testnet; use mainnet WSS for prod)
-        const client = new xrpl.Client('wss://s.altnet.rippletest.net:51233');
-        await client.connect();
-
-        // 2. Query recent transactions involving the prayer account
-        let txs;
-        try {
-          const resp = await client.request({
-            command: 'account_tx',
-            account: PRAYER_ACCOUNT,
-            ledger_index_min: -1,
-            ledger_index_max: -1,
-            limit: 200 // adjust as needed
-          });
-          txs = resp.result.transactions;
-        } catch (err) {
-          console.error("XRPL fetch error:", err);
-          await client.disconnect();
-          alert("Failed to fetch XRPL prayer data.");
-          return;
-        }
-
-        // 3. For each transaction, process and plot prayer memos
-        for (const tx of txs) {
-          try {
-            // Some XRPL nodes structure as .tx.Memos, some as .tx_json.Memos
-            const memos = (tx.tx && tx.tx.Memos) || (tx.tx_json && tx.tx_json.Memos);
-            if (Array.isArray(memos) && memos.length > 0) {
-              for (const memoObj of memos) {
-                const memoHex = memoObj.Memo.MemoData;
-                if (!memoHex) continue;
-                try {
-                  // Decode memo as hex-encoded JSON (standard XRPL practice for custom metadata)
-                  const jsonStr = decodeHexMemo(memoHex);
-                  const prayer = JSON.parse(jsonStr);
-                  // Expected: { lat: Number, lon: Number, message: 'string', address?: 'optional address' }
-                  plotPrayer(prayer);
-                } catch (decodeErr) {
-                  // If hex fails, maybe base64? If that fails, log and skip
-                  try {
-                    const base64Str = atob(memoHex);
-                    const prayer = JSON.parse(base64Str);
-                    plotPrayer(prayer);
-                  } catch {}
-                }
-              }
-            }
-          } catch (txe) {
-            // Ignore strange transactions
-            continue;
+            } catch {}
           }
         }
+      } catch {}
+    }
 
-        // 4. If any markers found, fit the map bounds to their locations for immediate visibility
-        if (prayerMarkers.getLayers().length > 0) {
-          map.fitBounds(prayerMarkers.getBounds(), { maxZoom: 8, padding: [40, 40] });
-        }
+    if (prayerMarkers.getLayers().length > 0) {
+      map.fitBounds(prayerMarkers.getBounds(), { maxZoom: 8, padding: [40, 40] });
+    }
 
-        await client.disconnect();
-      }
+    await client.disconnect();
+  }
 
-      // Initial (one-time) fetch on page load
-      displayPrayersFromXRPL();
+  displayPrayersFromXRPL();
+  setInterval(displayPrayersFromXRPL, 60000);
 
-      // Optionally: Poll for new prayers every minute for live updates
-      setInterval(displayPrayersFromXRPL, 60000);
-    });
-  </script>
+  // Auto-resize fix
+  window.addEventListener('resize', () => { map.invalidateSize(); });
+
+});
+</script>
 </body>
 </html>
+
