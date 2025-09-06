@@ -252,7 +252,41 @@
   color: white;
   cursor: pointer;
 }
-</style>
+/* Consistent spacing system */
+:root {
+  --section-spacing: 70px; /* desktop */
+  --section-spacing-mobile: 50px; /* mobile */
+}
+
+/* Prevent header overlap */
+main, section {
+  padding-top: var(--section-spacing);
+}
+
+/* Mobile spacing adjustments */
+@media (max-width: 768px) {
+  main, section {
+    padding-top: var(--section-spacing-mobile);
+  }
+
+  .hero {
+    padding: 60px 20px 40px; /* extra top space under fixed header */
+  }
+
+  .hero .cta a {
+    display: block;
+    margin: 12px auto;
+    width: 100%; /* buttons full width on mobile */
+    max-width: 320px;
+  }
+
+  /* Ensure Roadmap headline never collides */
+  #roadmap {
+    margin-top: 40px;
+  }
+}
+
+ </style>
 </head>
 <body>
 
