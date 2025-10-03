@@ -1,514 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign the Ledger — JCS Proof-of-Faith</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency</title>
+  <meta name="description" content="Jesus Christ Saves Token (JCS) empowers believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today." />
+  <meta name="keywords" content="Jesus Christ Saves Token, JCS, XRPL, XRP Ledger, Christian Cryptocurrency, Faith Blockchain, Christian Token, Crypto Ministry" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-  <!-- SEO / Social (replace URLs/images if you want) -->
-  <meta name="description" content="Sign the Ledger with JCS Proof-of-Faith — decentralized, immutable testimonies on XRPL.">
-  <meta name="robots" content="index,follow">
-  <meta property="og:title" content="Sign the Ledger — JCS Proof-of-Faith">
-  <meta property="og:description" content="Add your message of faith to the XRPL ledger.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jesuschristsavestoken.com/jcs-test.html">
-  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- Canonical & Language -->
+  <link rel="canonical" href="https://jesuschristsavestoken.com/" />
+  <link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/" />
+
+  <!-- Speed Optimizations -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Favicons & App Icons -->
+  <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://jesuschristsavestoken.com/jcs-logo-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://jesuschristsavestoken.com/jcs-logo-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://jesuschristsavestoken.com/jcs-logo-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="https://jesuschristsavestoken.com/jcs-logo-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://jesuschristsavestoken.com/jcs-logo-180.png" />
+  <link rel="mask-icon" href="https://jesuschristsavestoken.com/safari-pinned-tab.svg" color="#004e92" />
+  <meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo-270.png" />
+  <meta name="msapplication-TileColor" content="#004e92" />
+  <meta name="theme-color" content="#004e92" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Jesus Christ Saves Token" />
+  <meta property="og:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency" />
+  <meta property="og:description" content="Empowering believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today." />
+  <meta property="og:url" content="https://jesuschristsavestoken.com/" />
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
+  <meta property="og:image:alt" content="Jesus Christ Saves Token Logo" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JesusCS_token" />
+  <meta name="twitter:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency" />
+  <meta name="twitter:description" content="Empowering believers through blockchain transparency and faith-driven purpose. Join the XRPL Christian crypto community today." />
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Jesus Christ Saves Token",
+    "url": "https://jesuschristsavestoken.com/",
+    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+    "sameAs": ["https://twitter.com/JesusCS_token"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://jesuschristsavestoken.com/",
+    "name": "Jesus Christ Saves Token (JCS)",
+    "description": "Faith-based cryptocurrency on the XRPL for believers worldwide.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jesus Christ Saves Token",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jesuschristsavestoken.com/jcs-logo.png"
+      }
+    }
+  }
+  </script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { background:#000428; }
+    :root {
+      --gold-1: #ffd700;
+      --gold-2: #fff8dc;
+      --blue-1: #000428;
+      --blue-2: #004e92;
+      --glow: 0 0 24px rgba(255, 255, 255, 0.55);
+      --card-bg: rgba(0, 0, 0, 0.55);
+      --muted: #b8c7e0;
+      --section-spacing: 80px;
+      --section-spacing-mobile: 56px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-      min-height:100vh; font-family:Montserrat, system-ui, -apple-system, Arial, sans-serif;
-      color:#fff; line-height:1.8; background: radial-gradient(circle at top left,#000428,#004e92);
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(1600px 800px at 50% -10%, rgba(255,255,255,0.12), transparent),
+                  linear-gradient(180deg, var(--blue-1), var(--blue-2));
+      color: #fff;
+      line-height: 1.8;
+      overflow-x: hidden;
     }
+
+    /* Subtle light rays */
     body::before {
-      content:""; position:fixed; inset:0; z-index:-2;
-      background:url("background-translucent.png") center/cover no-repeat; opacity:.08; pointer-events:none;
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1200px 600px at 50% -20%, rgba(255,255,255,0.18), transparent 60%),
+        conic-gradient(from 200deg at 50% 10%, rgba(255,255,255,0.06), transparent 40% 80%, rgba(255,255,255,0.06));
+      z-index: -2;
+      filter: blur(1px);
     }
-    a { color:#00d4ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
 
+    a { color: #00d4ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Particles (crosses) */
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      filter: drop-shadow(0 0 16px rgba(255,255,255,0.6));
+    }
+
+    /* Header */
     header {
-      position:sticky; top:0; z-index:10;
-      background:rgba(0,0,0,.6); backdrop-filter:blur(6px);
-      padding:14px 24px; display:flex; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 28px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    header .title { display:flex; gap:12px; align-items:center; font-weight:700; }
-    header .title img { height:36px; border-radius:6px; }
-    header .actions a {
-      padding:10px 18px; background:#00d4ff; color:#000; border-radius:30px; font-weight:700;
-      box-shadow:0 0 15px rgba(0,212,255,.6); white-space:nowrap;
+    header img { height: 48px; filter: drop-shadow(0 0 12px rgba(255,255,255,0.4)); }
+    nav a { margin: 0 12px; font-weight: 700; letter-spacing: 0.2px; }
+
+    /* Focal CTA */
+    .sign-ledger-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+      color: #000 !important;
+      padding: 10px 20px;
+      border-radius: 26px;
+      box-shadow: 0 0 20px rgba(255,215,0,0.8);
+      font-weight: 800;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      border: 1px solid rgba(0,0,0,0.12);
     }
-    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,.9); }
+    .sign-ledger-btn:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 0 28px rgba(255,255,255,1);
+      text-decoration: none;
+      filter: saturate(1.1);
+    }
 
-    main { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
-    .hero { text-align:center; margin-bottom:36px; }
-    .hero h1 { font-size:2.6rem; text-shadow:0 0 20px rgba(255,255,255,.6); margin-bottom:8px; }
-    .hero p { color:#d5f7ff; max-width:800px; margin:0 auto; }
-    .note { font-size:.9rem; color:#ffedb5; margin-top:8px; text-align:center; }
+    main, section { padding-top: var(--section-spacing); }
 
-    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+    /* Hero */
+    .hero {
+      min-height: 86vh;
+      display: grid; place-items: center;
+      text-align: center;
+      padding: 120px 20px 40px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+      text-shadow: var(--glow);
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .hero p {
+      margin-top: 16px;
+      max-width: 780px;
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      color: var(--muted);
+    }
+    .cta {
+      margin-top: 26px;
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .cta a {
+      padding: 12px 22px;
+      border-radius: 30px;
+      background: #00d4ff;
+      color: #000;
+      font-weight: 800;
+      box-shadow: 0 0 16px rgba(0,212,255,0.5);
+      transition: transform .25s ease, box-shadow .25s ease;
+      text-decoration: none;
+    }
+    .cta a:hover {
+      background: #fff;
+      box-shadow: 0 0 24px rgba(255,255,255,0.85);
+      transform: translateY(-1px);
+    }
+    .cta a.wallet-btn { margin-left: 8px; }
 
+    /* Sections */
+    section { padding: 56px 20px; max-width: 1100px; margin: 0 auto; }
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      text-shadow: 0 0 14px rgba(0,212,255,0.55);
+      font-weight: 800;
+    }
+
+    .cards { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
     .card {
-      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
-      border-radius:14px; padding:16px 16px 18px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
-    .card h2 { font-size:1.4rem; margin-bottom:10px; text-shadow:0 0 12px rgba(0,212,255,.5); }
+    .card h3 { margin-bottom: 8px; font-size: 1.05rem; }
+    .muted { color: var(--muted); }
 
-    .field { margin-top:12px; position:relative; }
-    .field label { display:block; font-weight:700; margin-bottom:6px; }
-    .field input, .field textarea {
-      width:100%; padding:12px 14px; border:none; border-radius:10px;
-      background:rgba(255,255,255,.1); color:#fff; outline:1px solid rgba(255,255,255,.12);
+    /* Metrics */
+    .metrics-grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+    .metric {
+      background: rgba(0,0,0,0.6);
+      padding: 18px; border-radius: 12px;
+      text-align: center; border: 1px solid rgba(255,255,255,0.08);
     }
-    .help { font-size:.9rem; color:#b9ecff; margin-top:6px; }
+    .metric .value { font-size: 1.4rem; font-weight: 800; margin-top: 6px; text-shadow: var(--glow); }
 
-    .row { display:flex; gap:12px; }
-    .row .field { flex:1; }
-
-    .buttons { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; align-items:center; }
-    .btn {
-      padding:12px 20px; border:none; border-radius:30px; font-weight:700; cursor:pointer;
-      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,.6);
+    /* Verse card */
+    #verseCard {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 12px;
+      box-shadow: 0 0 22px rgba(255,255,200,0.35);
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,.2); }
-    .btn:disabled { opacity:.6; cursor:not-allowed; }
+    #dailyVerse { font-style: italic; }
 
-    @media (max-width:768px){
-      .buttons{ flex-direction:column; gap:14px; }
-      .buttons .btn{ width:100%; max-width:320px; margin:0 auto; padding:14px; font-size:1rem; transition:all .25s ease; }
-      .buttons .btn:hover,.buttons .btn:active{ transform:scale(1.03); box-shadow:0 0 20px rgba(0,212,255,.8); background:#00bfe6; }
-    }
-
-    #disconnectBtn{ background:#800020; color:#fff; box-shadow:0 0 12px rgba(128,0,32,.6); }
-    #disconnectBtn:hover{ transform:scale(1.03); box-shadow:0 0 20px rgba(128,0,32,.9); background:#a00028; }
-
-    .status {
-      margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
+    /* Lists */
+    ul.checklist { list-style: none; padding-left: 0; }
+    ul.checklist li {
+      padding: 6px 0;
+      display: flex; align-items: baseline; gap: 10px;
     }
 
-    /* Testimonies card with internal scroll */
-    .testimonies-card { display:flex; flex-direction:column; height:clamp(340px,60vh,520px); }
-    .testimonies-card h2, .testimonies-card .help { flex:0 0 auto; }
-    #feed { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; padding:.5rem; -webkit-overflow-scrolling:touch; }
-
-    .feed { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
-    .item { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; }
-    .item .meta { font-size:.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
-    .item .msg { margin-top:6px; white-space:pre-wrap; }
-
+    /* Footer */
     footer {
-      background:rgba(0,0,0,.8); padding:18px; text-align:center; font-size:.9rem;
-      border-top:1px solid rgba(255,255,255,.1); margin-top:40px;
+      text-align: center;
+      padding: 38px 20px 64px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.45);
+      margin-top: 36px;
     }
 
-    /* Orb visuals */
-    .message-box{ position:relative; overflow:hidden; z-index:1; }
-    .orb-container{ position:absolute; inset:0; pointer-events:none; z-index:0; }
-    .orb{
-      position:absolute; width:6px; height:6px; border-radius:50%;
-      background:rgba(0,212,255,.9); filter:blur(10px); mix-blend-mode:screen;
-      animation:spiralTight 10s infinite linear, fadeGlow 5s infinite ease-in-out;
-      transform-origin:center;
+    /* Mobile */
+    @media (max-width: 900px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: 1fr; }
     }
-    @keyframes spiralTight{
-      0%{ transform:rotate(0deg) translateX(40px) scale(.9); }
-      25%{ transform:rotate(90deg) translateX(45px) scale(1.1); }
-      50%{ transform:rotate(180deg) translateX(50px) scale(.8); }
-      75%{ transform:rotate(270deg) translateX(45px) scale(1.05); }
-      100%{ transform:rotate(360deg) translateX(40px) scale(.9); }
+    @media (max-width: 768px) {
+      main, section { padding-top: var(--section-spacing-mobile); }
+      .hero { padding: 100px 16px 36px; }
+      .cta a { width: 100%; max-width: 360px; text-align: center; }
     }
-    @keyframes fadeGlow{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
-    .buttons,#xummBtn,#signBtn,#disconnectBtn{ position:relative; z-index:2; }
   </style>
 </head>
 <body>
+  <noscript style="position:fixed;top:0;left:0;right:0;background:#000;color:#fff;padding:10px;text-align:center;z-index:9999;">
+    This site works best with JavaScript enabled.
+  </noscript>
+
+  <!-- Background crosses -->
+  <div id="particles-js"></div>
+
+  <!-- Header -->
   <header>
-    <div class="title">
-      <img src="jcs-logo.png" alt="JCS logo"/>
-      <span>JCS Proof-of-Faith</span>
-    </div>
-    <div class="actions">
-      <a href="index.html">🏠 Back to Home</a>
-    </div>
+    <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token Logo" />
+    <nav>
+      <a href="verify.html" class="sign-ledger-btn">🖋 Sign the Ledger</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#faq">FAQ</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>🖋 Sign the Ledger</h1>
-      <p>Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo. Your message is immutable and viewable by anyone.</p>
-      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the collector wallet with your memo and uses the standard XRPL network fee (paid by your wallet).</p>
-    </section>
-
-    <section class="grid">
-      <!-- Left: Form -->
-      <div class="card">
-        <h2>Compose your on-chain message</h2>
-
-        <div class="field message-box">
-          <label for="message">Message (required)</label>
-          <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
-          <div class="help"><span id="charCount">0</span>/240</div>
-
-          <!-- Orbs -->
-          <div class="orb-container" aria-hidden="true">
-            <!-- 16 orbs -->
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="field">
-            <label for="name">Display name (optional)</label>
-            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D.">
-          </div>
-          <div class="field">
-            <label for="handle">Handle (optional)</label>
-            <input id="handle" type="text" maxlength="32" placeholder="@yourname">
-          </div>
-        </div>
-
-        <!-- Single status box -->
-        <div id="status" class="status" hidden></div>
-
-        <!-- QR code placeholder for desktop -->
-        <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
-
-        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
-
-        <div class="buttons">
-          <button id="xummBtn" class="btn" disabled>Connect with Xaman</button>
-          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-          <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
-        </div>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Jesus Christ Saves Token (JCS)</h1>
+      <p>Empowering believers through blockchain transparency and faith-driven purpose on the XRP Ledger.</p>
+      <div class="cta">
+        <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank" rel="noopener">
+          ➕ Set Trustline
+        </a>
+        <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener" class="wallet-btn">
+          🔗 Connect Wallet
+        </a>
+        <a href="about-jcs.html">🛐 About JCS</a>
       </div>
 
-      <!-- Right: Feed -->
-      <div class="card testimonies-card">
-        <h2>Recent On-Chain Testimonies</h2>
-        <div id="feed" class="feed" aria-live="polite"></div>
-        <div class="help">Pulled live from XRPL (filtered for JCS Proof-of-Faith memos).</div>
+      <!-- Daily verse -->
+      <div id="verseCard">
+        <strong>Verse of the Day</strong>
+        <p id="dailyVerse" class="muted">Loading…</p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- Metrics -->
+  <section id="metrics" aria-label="JCS Live Metrics">
+    <h2>📊 Live Metrics</h2>
+    <div class="metrics-grid" role="list">
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Price (USD)</div>
+        <div id="price" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Market Cap</div>
+        <div id="marketcap" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Circulating Supply</div>
+        <div id="supply" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">24h Change</div>
+        <div id="change" class="value">N/A</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:10px;">Price derived from XRPL order books (JCS/XRP) × XRP/USD (CoinGecko). Updates every 60s.</p>
+  </section>
+
+  <!-- Roadmap -->
+  <section id="roadmap" aria-label="Project Roadmap">
+    <h2>🛣️ Roadmap</h2>
+    <div class="card">
+      <ul class="checklist">
+        <li>✅ <strong>Launch</strong> JCS on XRPL</li>
+        <li>✅ <strong>AirDrop</strong> completed for early believers</li>
+        <li>✅ <strong>Liquidity</strong> pool pegged to XRP</li>
+        <li>✨ <strong>1M Micro-Transactions</strong> initiative for on-ledger engagement</li>
+        <li>✨ <strong>Charity Pool</strong> (tithe allocation to verified ministries)</li>
+        <li>✨ <strong>Listings</strong> on CoinGecko & CoinMarketCap</li>
+        <li>✨ <strong>Christian Art NFTs</strong> linked to JCS community rewards</li>
+        <li>⬜ <strong>Major Exchanges</strong> (incl. Coinbase) — application phases</li>
+        <li>⬜ <strong>XRPL Escrow</strong> for transparent reserves / time-based releases</li>
+        <li>⬜ <strong>Global Prayer Network</strong> — decentralized voting for causes</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-label="Frequently Asked Questions">
+    <h2>❓ FAQ</h2>
+    <div class="cards">
+      <article class="card" style="grid-column: span 12;">
+        <h3>Why a Christian token?</h3>
+        <p>To bring the message of Jesus Christ into new digital frontiers while supporting ministries, charity pools, and believers building on transparent, open infrastructure.</p>
+      </article>
+
+      <article class="card" style="grid-column: span 6;">
+        <h3>How do I start?</h3>
+        <p>Set the trustline, connect your wallet, and hold JCS. Join community prayers, participate in cause voting, and support charity initiatives.</p>
+      </article>
+
+      <article class="card" style="grid-column: span 6;">
+        <h3>Is a trustline safe?</h3>
+        <p>Yes. XRPL trustlines are a standard ledger feature. They don’t lock your XRP; they simply allow your wallet to hold JCS securely.</p>
+      </article>
+
+      <article class="card" style="grid-column: span 6;">
+        <h3>What’s the long-term vision?</h3>
+        <p>A faith-driven crypto ecosystem: transparent reserves via escrow, charity distribution on-ledger, Christian art NFTs, and a global prayer network.</p>
+      </article>
+
+      <article class="card" style="grid-column: span 6;">
+        <h3>How can I support?</h3>
+        <p>Hold JCS, share it with believers, and participate in governance and charitable votes. Every wallet and every prayer matters.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     © 2025 Jesus Christ Saves Token. All Rights Reserved.
   </footer>
 
-  <!-- SDKs (load once) -->
-  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
-  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
-
-  <!-- App -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    /**************
-     * CONFIG
-     **************/
-    const APP_KEY     = "7737775c-1645-4a4e-a92d-ffe51530a348"; // Xumm API key
-    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";   // collector/issuer wallet (source of memory)
-    const IDENT_TAG   = "JCS_VERIFY_V1";
-    const XRPL_WSS    = "wss://xrplcluster.com";
-
-    /**************
-     * HELPERS
-     **************/
-    const $ = (id) => document.getElementById(id);
-    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
-
-    const strToHex = (s="") =>
-      Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
-    const hexToStr = (h="") => {
-      try { return new TextDecoder().decode(new Uint8Array((h.match(/.{1,2}/g)||[]).map(b=>parseInt(b,16)))); }
-      catch { return ""; }
-    };
-    const rippleToDate = (r) => r ? new Date((r + 946684800)*1000).toLocaleString() : "";
-
-    const setStatus = (msg, type="info") => {
-      const box = $("status");
-      box.hidden = !msg;
-      box.style.background =
-        type==="error"   ? "rgba(255, 102, 102, .18)" :
-        type==="success" ? "rgba(102, 255, 153, .18)" :
-                           "rgba(255,255,255,.08)";
-      box.textContent = msg || "";
-    };
-    const short = (s,n=12) => s && s.length>n ? s.slice(0,n)+"…" : (s||"");
-
-    /**************
-     * ORBS COLOR REACTIVITY
-     **************/
-    (function initOrbs(){
-      const orbs = document.querySelectorAll(".orb");
-      // randomize timings
-      orbs.forEach(orb=>{
-        orb.style.top="50%"; orb.style.left="50%";
-        orb.style.animationDuration = `${8+Math.random()*4}s, ${3+Math.random()*2}s`;
-        orb.style.animationDelay = `${Math.random()*6}s, ${Math.random()*2}s`;
-        orb.style.zIndex = Math.random()>0.6 ? 3 : 1;
-      });
-      const btns = ["xummBtn","signBtn","disconnectBtn"].map($);
-      const center = (el)=>{ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; };
-      const dist = (a,b)=>Math.hypot(a.x-b.x, a.y-b.y);
-      function tick(){
-        const cs = btns.map(center);
-        orbs.forEach(orb=>{
-          const r = orb.getBoundingClientRect();
-          const oc = {x:r.left+r.width/2, y:r.top+r.height/2};
-          const d = cs.map(c=>dist(oc,c));
-          const m = Math.min(...d), i = d.indexOf(m);
-          orb.style.background =
-            i===0 ? "rgba(0,212,255,.9)" :
-            i===1 ? "rgba(0,255,150,.9)" :
-                    "rgba(255,77,109,.9)";
-        });
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })();
-
-    /**************
-     * XUMM SETUP
-     **************/
-    let xumm = null;
-    let connectedAccount = null;
-
-    function initXumm(){
-      if (!window.Xumm){ console.error("Xumm SDK failed to load"); return; }
-      xumm = new Xumm(APP_KEY);
-
-      xumm.on("ready", () => {
-        console.log("✅ Xumm SDK ready");
-        $("xummBtn").disabled = false;
-      });
-
-      xumm.on("success", async () => {
-        connectedAccount = await xumm.user.account;
-        $("xummBtn").textContent = "Connected ✅";
-        $("signBtn").disabled = false;
-        $("disconnectBtn").disabled = false;
-        setStatus(`Connected: ${connectedAccount}`, "success");
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-      });
-
-      xumm.on("logout", () => {
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        setStatus("Disconnected.");
-      });
-    }
-
-    async function connectXumm(){
-      // xumm.authorize() opens sign-in (with QR on desktop automatically)
-      try {
-        setStatus("Opening Xaman to connect…");
-        await xumm.authorize();
-      } catch (e) {
-        console.warn(e);
-        setStatus("Connection cancelled.", "error");
-      }
-    }
-
-    /**************
-     * SIGN & SUBMIT PRAYER
-     **************/
-    async function sendPrayer(){
-      setStatus("");
-
-      const message = $("message").value.trim();
-      const name    = $("name").value.trim();
-      const handle  = $("handle").value.trim();
-
-      if (!message){ setStatus("Please enter a message (required).", "error"); return; }
-      if (!connectedAccount){ setStatus("Please connect your wallet first.", "error"); return; }
-
-      // Build memos
-      const memos = [
-        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) }},
-        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)   }},
-      ];
-      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
-      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
-
-      // Minimal 1-drop Payment to collector with memos
-      const txjson = { TransactionType:"Payment", Destination:DESTINATION, Amount:"1", Memos:memos };
-
-      try {
-        setStatus("Creating sign request…");
-        const payload = await xumm.payload.create({ txjson });
-
-        if (isMobile()){
-          // Mobile: deep link to Xaman
-          window.location.href = payload.next.always;
-        } else {
-          // Desktop: show QR
-          $("xummQr").innerHTML =
-            `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
-              style="max-width:260px;border-radius:12px;box-shadow:0 0 12px rgba(0,212,255,.4)"/>`;
-          $("xummQr").hidden = false;
-          setStatus("Scan the QR with Xaman to sign…");
-        }
-
-        // Poll for result
-        let txHash = null;
-        for (let i=0; i<120; i++){
-          const res = await xumm.payload.get(payload.uuid);
-          if (res?.meta?.resolved){
-            txHash = res?.response?.txid || null;
-            break;
-          }
-          await new Promise(r=>setTimeout(r,1500));
-        }
-
-        if (txHash){
-          setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${txHash}`, "success");
-          $("message").value = ""; $("name").value = ""; $("handle").value = "";
-          $("charCount").textContent = "0";
-          $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-          loadFeedSoon();
-        } else {
-          setStatus("Signing cancelled or expired.", "error");
-        }
-      } catch(e){
-        console.error(e);
-        setStatus(`Error: ${e?.message || e}`, "error");
-      }
-    }
-
-    function disconnectWallet(){
-      if (xumm){
-        xumm.logout();
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-        setStatus("🔒 Wallet disconnected safely!", "success");
-      }
-    }
-
-    /**************
-     * FEED (XRPL)
-     **************/
-    let xrplClient = null;
-    async function ensureClient(){
-      if (xrplClient && xrplClient.isConnected()) return xrplClient;
-      xrplClient = new xrpl.Client(XRPL_WSS);
-      await xrplClient.connect();
-      return xrplClient;
-    }
-
-    function parseMemos(memos=[]){
-      const out = {};
-      for (const m of memos){
-        const memo = m?.Memo || {};
-        const k = (hexToStr(memo.MemoType||"")||"").trim().toLowerCase();
-        const v = (hexToStr(memo.MemoData||"")||"").trim();
-        if (k) out[k]=v;
-      }
-      return out;
-    }
-
-    async function loadFeed(){
-      try{
-        const client = await ensureClient();
-        const resp = await client.request({
-          command: "account_tx",
-          account: DESTINATION,
-          ledger_index_min: -1,
-          ledger_index_max: -1,
-          limit: 50
-        });
-
-        const items = [];
-        for (const e of (resp.result.transactions||[])){
-          const tx = e.tx || e.transaction || {};
-          if (tx.TransactionType !== "Payment") continue;
-          if (tx.Destination !== DESTINATION) continue;
-          const memos = parseMemos(tx.Memos || []);
-          if (memos.app !== IDENT_TAG) continue;
-
-          items.push({
-            hash: tx.hash || e.hash || "",
-            account: tx.Account,
-            date: e.tx?.date || e.date,
-            message: memos.msg || "",
-            name: memos.name || "",
-            handle: memos.handle || ""
-          });
-        }
-
-        items.sort((a,b)=> (b.date||0) - (a.date||0));
-
-        const feed = $("feed");
-        feed.innerHTML = "";
-        if (!items.length){
-          feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
-          return;
-        }
-
-        items.slice(0, 20).forEach(it=>{
-          const when = rippleToDate(it.date);
-          const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
-          const signedBy = (it.name || it.handle) ? `<div class="meta">Signed by: ${it.name||""} ${it.handle||""}</div>` : "";
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = `
-            <div class="meta">
-              <span>From: ${short(it.account,14)}</span>
-              <span>• ${when || "pending…"}</span>
-              ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
-            </div>
-            <div class="msg">${(it.message || "").replace(/[<>&]/g, s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
-            ${signedBy}
-          `;
-          feed.appendChild(div);
-        });
-      } catch(e){
-        console.error("Feed load error:", e);
-        $("feed").innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
-      }
-    }
-
-    let feedTimer = null;
-    function loadFeedSoon(){
-      clearTimeout(feedTimer);
-      feedTimer = setTimeout(loadFeed, 2500);
-    }
-
-    /**************
-     * BINDINGS
-     **************/
-    document.addEventListener("DOMContentLoaded", ()=>{
-      // init Xumm
-      initXumm();
-
-      // buttons
-      $("xummBtn").addEventListener("click", connectXumm);
-      $("signBtn").addEventListener("click", sendPrayer);
-      $("disconnectBtn").addEventListener("click", disconnectWallet);
-
-      // char counter
-      const msgEl = $("message"), cnt = $("charCount");
-      const updateCnt = ()=>{ cnt.textContent = String(msgEl.value.length); };
-      msgEl.addEventListener("input", updateCnt); updateCnt();
-
-      // load feed and refresh every 60s
-      loadFeed();
-      setInterval(loadFeed, 60000);
+    // Cross particles (subtle, upward drift)
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 3, "density": { "enable": false } },
+        "shape": { "type": "image", "image": { "src": "cross1.png", "width": 40, "height": 40 } },
+        "opacity": { "value": 0.95 },
+        "size": { "value": 46, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 0.45, "direction": "top", "out_mode": "out" }
+      },
+      "retina_detect": true
     });
+  </script>
+
+  <!-- Verse of the Day -->
+  <script>
+    async function loadVerse() {
+      try {
+        const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
+        if (!res.ok) throw new Error("Verse API error");
+        const data = await res.json();
+        const v = data && data[0];
+        if (v) {
+          document.getElementById("dailyVerse").innerText =
+            `${v.bookname} ${v.chapter}:${v.verse} — "${v.text}"`;
+        }
+      } catch (e) {
+        document.getElementById("dailyVerse").innerText = "Unable to load verse right now.";
+        console.error(e);
+      }
+    }
+    loadVerse();
+  </script>
+
+  <!-- XRPL Metrics -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <script>
+    async function fetchXRPLMetrics() {
+      const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+      const currency = "JCS";
+      let client;
+
+      try {
+        client = new xrpl.Client("wss://xrplcluster.com");
+        await client.connect();
+
+        // Best price from order book (JCS/XRP)
+        const bookOffers = await client.request({
+          command: "book_offers",
+          taker_gets: { currency, issuer },
+          taker_pays: { currency: "XRP" },
+          limit: 1
+        });
+
+        let priceXRP = 0;
+        if (bookOffers.result.offers && bookOffers.result.offers.length > 0) {
+          const offer = bookOffers.result.offers[0];
+          // price = XRP / JCS
+          priceXRP = (Number(offer.TakerPays) / 1_000_000) / Number(offer.TakerGets.value);
+        }
+
+        // XRP→USD
+        const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+        const xrpData = await xrpPriceRes.json();
+        const xrpUSD = xrpData?.ripple?.usd ?? 0;
+        const priceUSD = priceXRP * xrpUSD;
+
+        // Circulating supply via account_lines (sum of balances)
+        const accountLines = await client.request({ command: "account_lines", account: issuer });
+        let totalSupply = 0;
+        for (const line of (accountLines.result.lines || [])) {
+          if (line.currency === currency) totalSupply += parseFloat(line.balance);
+        }
+
+        const marketCap = totalSupply * (priceUSD || 0);
+
+        document.getElementById('price').innerText = priceUSD ? `$${priceUSD.toFixed(6)}` : "—";
+        document.getElementById('marketcap').innerText = isFinite(marketCap) ? `$${marketCap.toLocaleString()}` : "—";
+        document.getElementById('supply').innerText = `${Number.isFinite(totalSupply) ? totalSupply.toLocaleString() : "—"} JCS`;
+        document.getElementById('change').innerText = "N/A"; // placeholder unless you add 24h calc
+      } catch (e) {
+        console.error("Metrics error:", e);
+      } finally {
+        try { if (client) await client.disconnect(); } catch {}
+      }
+    }
+    fetchXRPLMetrics();
+    setInterval(fetchXRPLMetrics, 60000);
   </script>
 </body>
 </html>
