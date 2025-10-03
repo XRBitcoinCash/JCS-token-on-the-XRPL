@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,373 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign the Ledger — JCS Proof-of-Faith</title>
 
-  <!-- ✅ Core Metadata -->
-  <meta name="description" content="Sign the Ledger with JCS Proof-of-Faith — a decentralized, immutable record where individuals declare belief and trust on the blockchain. Join a timeless ledger of faith and community.">
-  <meta name="keywords" content="Proof-of-Faith, blockchain ledger, immutable record, faith on-chain, JCS ledger, Web3 spirituality, decentralized community">
-  <meta name="author" content="JCS Proof-of-Faith Project">
-  <meta name="robots" content="index, follow">
-
-  <!-- ✅ Open Graph (Social Sharing) -->
+  <!-- SEO / Social (replace URLs/images if you want) -->
+  <meta name="description" content="Sign the Ledger with JCS Proof-of-Faith — decentralized, immutable testimonies on XRPL.">
+  <meta name="robots" content="index,follow">
   <meta property="og:title" content="Sign the Ledger — JCS Proof-of-Faith">
-  <meta property="og:description" content="Sign the decentralized Proof-of-Faith ledger. Immutable, eternal, and open for all.">
+  <meta property="og:description" content="Add your message of faith to the XRPL ledger.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com/sign-ledger"> <!-- Replace with actual page URL -->
-  <meta property="og:image" content="https://yourdomain.com/images/ledger-preview.png"> <!-- Replace with preview image -->
-  <meta property="og:site_name" content="JCS Proof-of-Faith">
-
-  <!-- ✅ Twitter Card -->
+  <meta property="og:url" content="https://jesuschristsavestoken.com/jcs-test.html">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sign the Ledger — JCS Proof-of-Faith">
-  <meta name="twitter:description" content="Add your name to the immutable Proof-of-Faith ledger.">
-  <meta name="twitter:image" content="https://yourdomain.com/images/ledger-preview.png"> <!-- Replace with preview image -->
 
-  <!-- ✅ Web3 Metadata -->
-  <meta name="dapp:name" content="JCS Proof-of-Faith Ledger">
-  <meta name="dapp:network" content="Ethereum / Polygon / Web3"> <!-- adjust to your chain -->
-  <meta name="dapp:category" content="Faith, Community, Decentralized Identity">
-
-  <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-ledger.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-ledger.png">
-  <link rel="apple-touch-icon" href="favicon-ledger.png">
-  <link rel="manifest" href="site.webmanifest">
-
-  <!-- ✅ Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-  <!-- ✅ Styles (your existing CSS starts here) -->
+  <!-- Styles -->
   <style>
-    /* Your CSS continues here... */
-
     * { margin:0; padding:0; box-sizing:border-box; }
-   /* Global page background (desktop + mobile) */
-html {
-  background-color: #000428; /* fallback bluish tone */
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  line-height: 1.8;
-  position: relative;
-  background: radial-gradient(circle at top left, #000428, #004e92);
-}
-
-/* Translucent background photo */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background: url("background-translucent.png") center / cover no-repeat;
-  opacity: 0.08;
-  pointer-events: none;
-}
-
-/* Mobile — force same as desktop */
-@media (max-width: 900px) {
-  body {
-    background: radial-gradient(circle at top left, #000428, #004e92);
-  }
-}
-
+    html { background:#000428; }
+    body {
+      min-height:100vh; font-family:Montserrat, system-ui, -apple-system, Arial, sans-serif;
+      color:#fff; line-height:1.8; background: radial-gradient(circle at top left,#000428,#004e92);
+    }
+    body::before {
+      content:""; position:fixed; inset:0; z-index:-2;
+      background:url("background-translucent.png") center/cover no-repeat; opacity:.08; pointer-events:none;
+    }
     a { color:#00d4ff; text-decoration:none; }
     a:hover { text-decoration:underline; }
 
     header {
-      position: sticky; top:0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      padding: 14px 24px;
-      display:flex; justify-content:space-between; align-items:center;
-      z-index:10;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position:sticky; top:0; z-index:10;
+      background:rgba(0,0,0,.6); backdrop-filter:blur(6px);
+      padding:14px 24px; display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    header .title {
-      display:flex; gap:12px; align-items:center;
-      font-weight:700;
-    }
-    header .title img { height: 36px; border-radius: 6px; }
+    header .title { display:flex; gap:12px; align-items:center; font-weight:700; }
+    header .title img { height:36px; border-radius:6px; }
     header .actions a {
-      padding: 10px 18px;
-      background: #00d4ff; 
-      color:#000; 
-      border-radius: 30px; 
-      font-weight:700;
-      box-shadow: 0 0 15px rgba(0,212,255,0.6);
-      white-space: nowrap;
+      padding:10px 18px; background:#00d4ff; color:#000; border-radius:30px; font-weight:700;
+      box-shadow:0 0 15px rgba(0,212,255,.6); white-space:nowrap;
     }
-    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,0.9); }
+    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,.9); }
 
-    main { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+    main { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
+    .hero { text-align:center; margin-bottom:36px; }
+    .hero h1 { font-size:2.6rem; text-shadow:0 0 20px rgba(255,255,255,.6); margin-bottom:8px; }
+    .hero p { color:#d5f7ff; max-width:800px; margin:0 auto; }
+    .note { font-size:.9rem; color:#ffedb5; margin-top:8px; text-align:center; }
 
-    .hero { text-align:center; margin-bottom: 36px; }
-    .hero h1 {
-      font-size: 2.6rem;
-      text-shadow: 0 0 20px rgba(255,255,255,0.6);
-      margin-bottom: 8px;
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+    .card {
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; padding:16px 16px 18px;
     }
-    .hero p { color:#d5f7ff; max-width: 800px; margin: 0 auto; }
+    .card h2 { font-size:1.4rem; margin-bottom:10px; text-shadow:0 0 12px rgba(0,212,255,.5); }
 
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
-    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
-
-  /* Lock the height of the right testimonies card and make its feed scroll */
-.card.testimonies-card {
-  display: flex;               /* stack header, feed, help vertically */
-  flex-direction: column;
-  height: clamp(340px, 60vh, 520px); /* fixed-ish height on desktop & mobile */
-}
-
-/* The header and the help line should not scroll */
-.card.testimonies-card h2,
-.card.testimonies-card .help {
-  flex: 0 0 auto;
-}
-
-/* The feed area fills the remaining space and scrolls */
-#feed {
-  flex: 1 1 auto;
-  min-height: 0;               /* 🔑 required for scroll in flex layouts */
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0.5rem;
-  -webkit-overflow-scrolling: touch; /* smoother iOS scrolling */
-}
-
-    }
-    .card h2 { font-size: 1.4rem; margin-bottom: 10px; text-shadow: 0 0 12px rgba(0,212,255,0.5); }
-
-    .field { margin-top: 12px; }
+    .field { margin-top:12px; position:relative; }
     .field label { display:block; font-weight:700; margin-bottom:6px; }
-    .field input, .field textarea, .field select {
-      width:100%; padding:12px 14px; border:none; border-radius: 10px;
-      background: rgba(255,255,255,0.1); color:#fff;
-      outline: 1px solid rgba(255,255,255,0.12);
+    .field input, .field textarea {
+      width:100%; padding:12px 14px; border:none; border-radius:10px;
+      background:rgba(255,255,255,.1); color:#fff; outline:1px solid rgba(255,255,255,.12);
     }
-    .help { font-size: 0.9rem; color:#b9ecff; margin-top:6px; }
+    .help { font-size:.9rem; color:#b9ecff; margin-top:6px; }
 
     .row { display:flex; gap:12px; }
     .row .field { flex:1; }
 
-    .cta {
-      margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center;
-    }
+    .buttons { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; align-items:center; }
     .btn {
-      padding: 12px 20px; border:none; border-radius: 30px; font-weight:700; cursor:pointer;
-      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,0.6);
+      padding:12px 20px; border:none; border-radius:30px; font-weight:700; cursor:pointer;
+      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,.6);
     }
-    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,0.2); }
-    .btn:disabled { opacity:0.6; cursor:not-allowed; }
+    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,.2); }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
 
-    /* ✅ Desktop button layout */
-    .buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
+    @media (max-width:768px){
+      .buttons{ flex-direction:column; gap:14px; }
+      .buttons .btn{ width:100%; max-width:320px; margin:0 auto; padding:14px; font-size:1rem; transition:all .25s ease; }
+      .buttons .btn:hover,.buttons .btn:active{ transform:scale(1.03); box-shadow:0 0 20px rgba(0,212,255,.8); background:#00bfe6; }
     }
+
+    #disconnectBtn{ background:#800020; color:#fff; box-shadow:0 0 12px rgba(128,0,32,.6); }
+    #disconnectBtn:hover{ transform:scale(1.03); box-shadow:0 0 20px rgba(128,0,32,.9); background:#a00028; }
 
     .status {
-      margin-top: 12px; font-size:0.95rem;
-      padding:10px 12px; border-radius:10px; background: rgba(255,255,255,0.08);
+      margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
     }
 
-    .feed { display:flex; flex-direction:column; gap:12px; margin-top: 10px; }
-    .item {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px; padding: 12px;
-    }
-    .item .meta { font-size:0.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
-    .item .msg { margin-top:6px; white-space: pre-wrap; }
+    /* Testimonies card with internal scroll */
+    .testimonies-card { display:flex; flex-direction:column; height:clamp(340px,60vh,520px); }
+    .testimonies-card h2, .testimonies-card .help { flex:0 0 auto; }
+    #feed { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; padding:.5rem; -webkit-overflow-scrolling:touch; }
+
+    .feed { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+    .item { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; }
+    .item .meta { font-size:.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
+    .item .msg { margin-top:6px; white-space:pre-wrap; }
 
     footer {
-      background: rgba(0,0,0,0.8);
-      padding: 18px; text-align:center; font-size:0.9rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 40px;
+      background:rgba(0,0,0,.8); padding:18px; text-align:center; font-size:.9rem;
+      border-top:1px solid rgba(255,255,255,.1); margin-top:40px;
     }
 
-    .note { font-size:0.9rem; color:#ffedb5; margin-top:8px; }
-
-    /* ✅ Mobile button layout */
-    @media (max-width: 768px) {
-      .buttons {
-        flex-direction: column;   /* stack vertically */
-        gap: 14px;
-      }
-
-      .buttons .btn {
-        width: 100%;              /* full width on mobile */
-        max-width: 320px;         /* cap so it doesn’t stretch too wide */
-        margin: 0 auto;           /* center align */
-        padding: 14px;            /* uniform button height */
-        font-size: 1rem;          /* consistent text size */
-        transition: all 0.25s ease; /* smooth hover/tap transition */
-      }
-
-      .buttons .btn:hover,
-      .buttons .btn:active {
-        transform: scale(1.03);     /* slight "pop" effect */
-        box-shadow: 0 0 20px rgba(0,212,255,0.8); /* glow */
-        background-color: #00bfe6; /* slightly darker shade */
-      }
+    /* Orb visuals */
+    .message-box{ position:relative; overflow:hidden; z-index:1; }
+    .orb-container{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+    .orb{
+      position:absolute; width:6px; height:6px; border-radius:50%;
+      background:rgba(0,212,255,.9); filter:blur(10px); mix-blend-mode:screen;
+      animation:spiralTight 10s infinite linear, fadeGlow 5s infinite ease-in-out;
+      transform-origin:center;
     }
-
-    /* ✅ Custom style for Disconnect button */
-    #disconnectBtn {
-      background-color: #800020;   /* burgundy base */
-      color: #fff;
-      box-shadow: 0 0 12px rgba(128, 0, 32, 0.6);
-      transition: all 0.25s ease;
+    @keyframes spiralTight{
+      0%{ transform:rotate(0deg) translateX(40px) scale(.9); }
+      25%{ transform:rotate(90deg) translateX(45px) scale(1.1); }
+      50%{ transform:rotate(180deg) translateX(50px) scale(.8); }
+      75%{ transform:rotate(270deg) translateX(45px) scale(1.05); }
+      100%{ transform:rotate(360deg) translateX(40px) scale(.9); }
     }
-
-    #disconnectBtn:hover,
-    #disconnectBtn:active {
-      transform: scale(1.03);       /* same "pop" effect */
-      box-shadow: 0 0 20px rgba(128, 0, 32, 0.9); /* stronger burgundy glow */
-      background-color: #a00028;    /* slightly lighter burgundy on hover */
-    }
-<style>
-/* --- Orb Container (inside the message box) --- */
-.message-box {
-  position: relative;
-  overflow: hidden;   /* keep orbs inside */
-  z-index: 1;
-}
-
-.orb-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* --- Orbs --- */
-.orb {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(0, 212, 255, 0.9);
-  filter: blur(10px);
-  mix-blend-mode: screen;
-  animation: spiralTight 10s infinite linear,
-             fadeGlow 5s infinite ease-in-out;
-  transform-origin: center;
-}
-
-/* Tight spiral orbit motion */
-@keyframes spiralTight {
-  0%   { transform: rotate(0deg) translateX(40px) scale(0.9); }
-  25%  { transform: rotate(90deg) translateX(45px) scale(1.1); }
-  50%  { transform: rotate(180deg) translateX(50px) scale(0.8); }
-  75%  { transform: rotate(270deg) translateX(45px) scale(1.05); }
-  100% { transform: rotate(360deg) translateX(40px) scale(0.9); }
-}
-
-/* Firefly flicker */
-@keyframes fadeGlow {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 1; }
-}
-
-/* Keep buttons above most orbs */
-.buttons, #connectBtn, #signBtn, #submitBtn, #disconnectBtn {
-  position: relative;
-  z-index: 2;
-}
-</style>
-
-<!-- ✅ Orb Container -->
-<div class="orb-container">
-  <!-- 16 orbs -->
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
-
-<script>
-/* 🎨 Dynamic Orb Color Logic */
-const orbs = document.querySelectorAll('.orb');
-const connectBtn = document.getElementById('connectBtn');
-const signBtn = document.getElementById('signBtn');
-const submitBtn = document.getElementById('submitBtn');
-const disconnectBtn = document.getElementById('disconnectBtn');
-
-function getCenter(el) {
-  const rect = el.getBoundingClientRect();
-  return { x: rect.left + rect.width/2, y: rect.top + rect.height/2 };
-}
-
-function distance(a, b) {
-  return Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
-}
-
-function updateOrbColors() {
-  const connectCenter = getCenter(connectBtn);
-  const signCenter = getCenter(signBtn);
-  const submitCenter = getCenter(submitBtn);
-  const disconnectCenter = getCenter(disconnectBtn);
-
-  orbs.forEach(orb => {
-    const orbRect = orb.getBoundingClientRect();
-    const orbCenter = { x: orbRect.left + orbRect.width/2, y: orbRect.top + orbRect.height/2 };
-
-    const distConnect = distance(orbCenter, connectCenter);
-    const distSign = distance(orbCenter, signCenter);
-    const distSubmit = distance(orbCenter, submitCenter);
-    const distDisconnect = distance(orbCenter, disconnectCenter);
-
-    const minDist = Math.min(distConnect, distSign, distSubmit, distDisconnect);
-    if (minDist === distConnect) {
-      orb.style.background = "rgba(0,212,255,0.9)"; // cyan glow
-    } else if (minDist === distSign || minDist === distSubmit) {
-      orb.style.background = "rgba(0,255,150,0.9)"; // green glow
-    } else {
-      orb.style.background = "rgba(255,77,109,0.9)"; // red-pink glow
-    }
-  });
-
-  requestAnimationFrame(updateOrbColors);
-}
-
-/* 🎲 Randomize orbs */
-orbs.forEach((orb, i) => {
-  orb.style.top = "50%";
-  orb.style.left = "50%";
-  orb.style.animationDuration = `${8 + Math.random() * 4}s, ${3 + Math.random() * 2}s`;
-  orb.style.animationDelay = `${Math.random() * 6}s, ${Math.random() * 2}s`;
-  orb.style.zIndex = Math.random() > 0.6 ? 3 : 1; // some in front, most behind
-});
-
-updateOrbColors();
-</script>
-
-
-
-
+    @keyframes fadeGlow{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
+    .buttons,#xummBtn,#signBtn,#disconnectBtn{ position:relative; z-index:2; }
+  </style>
 </head>
-
 <body>
   <header>
     <div class="title">
@@ -387,11 +143,8 @@ updateOrbColors();
   <main>
     <section class="hero">
       <h1>🖋 Sign the Ledger</h1>
-      <p>
-        Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo.  
-        Your message is stored immutably and viewable by anyone — a Web3 testimony that endures.
-      </p>
-      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the JCS issuer with your memo and costs the standard XRPL network fee.</p>
+      <p>Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo. Your message is immutable and viewable by anyone.</p>
+      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the collector wallet with your memo and uses the standard XRPL network fee (paid by your wallet).</p>
     </section>
 
     <section class="grid">
@@ -399,47 +152,53 @@ updateOrbColors();
       <div class="card">
         <h2>Compose your on-chain message</h2>
 
-        <div class="field">
+        <div class="field message-box">
           <label for="message">Message (required)</label>
           <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
           <div class="help"><span id="charCount">0</span>/240</div>
+
+          <!-- Orbs -->
+          <div class="orb-container" aria-hidden="true">
+            <!-- 16 orbs -->
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+          </div>
         </div>
 
         <div class="row">
           <div class="field">
             <label for="name">Display name (optional)</label>
-            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D."/>
+            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D.">
           </div>
           <div class="field">
             <label for="handle">Handle (optional)</label>
-            <input id="handle" type="text" maxlength="32" placeholder="@yourname"/>
+            <input id="handle" type="text" maxlength="32" placeholder="@yourname">
           </div>
         </div>
 
         <!-- Single status box -->
         <div id="status" class="status" hidden></div>
 
-        <!-- QR code placeholder for desktop users -->
+        <!-- QR code placeholder for desktop -->
         <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
 
         <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
 
-   <div class="buttons">
-  <button id="xummBtn" class="btn">Connect with Xaman</button>
-  <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-  <button id="disconnectBtn" class="btn disconnect" disabled>Disconnect</button>
-</div>
-
+        <div class="buttons">
+          <button id="xummBtn" class="btn" disabled>Connect with Xaman</button>
+          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
+          <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
+        </div>
       </div>
 
       <!-- Right: Feed -->
-    <!-- Right: Feed -->
-<div class="card testimonies-card">
-  <h2>Recent On-Chain Testimonies</h2>
-  <div id="feed" class="feed" aria-live="polite"></div>
-  <div class="help">Pulled live from the XRPL ledger (filtered for JCS Proof-of-Faith memos).</div>
-</div>
-
+      <div class="card testimonies-card">
+        <h2>Recent On-Chain Testimonies</h2>
+        <div id="feed" class="feed" aria-live="polite"></div>
+        <div class="help">Pulled live from XRPL (filtered for JCS Proof-of-Faith memos).</div>
+      </div>
     </section>
   </main>
 
@@ -447,304 +206,223 @@ updateOrbColors();
     © 2025 Jesus Christ Saves Token. All Rights Reserved.
   </footer>
 
-  <!-- XRPL client -->
+  <!-- SDKs (load once) -->
+  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
   <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
 
-  <!-- Xumm (Xaman) SDK for browsers: UMD exposes `window.Xumm` -->
-  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
-
+  <!-- App -->
   <script>
-    // Quick SDK sanity check
-    if (!window.Xumm) {
-      console.error("❌ Xumm SDK failed to load — check the CDN link (https://xumm.app/assets/cdn/xumm.min.js).");
-    } else {
-      console.log("✅ Xumm SDK loaded.");
-    }
-  </script>
-
-  <script>
-    /***********************
-     * Configuration
-     ***********************/
-    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+    /**************
+     * CONFIG
+     **************/
+    const APP_KEY     = "7737775c-1645-4a4e-a92d-ffe51530a348"; // Xumm API key
+    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";   // collector/issuer wallet (source of memory)
     const IDENT_TAG   = "JCS_VERIFY_V1";
     const XRPL_WSS    = "wss://xrplcluster.com";
 
-    /***********************
-     * Utilities
-     ***********************/
-    const el = (id) => document.getElementById(id);
+    /**************
+     * HELPERS
+     **************/
+    const $ = (id) => document.getElementById(id);
+    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
 
     const strToHex = (s="") =>
-      Array.from(new TextEncoder().encode(s))
-        .map(b => b.toString(16).padStart(2, "0")).join("");
-
+      Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
     const hexToStr = (h="") => {
-      try {
-        const bytes = h.match(/.{1,2}/g)?.map(b => parseInt(b,16)) ?? [];
-        return new TextDecoder().decode(new Uint8Array(bytes));
-      } catch { return ""; }
+      try { return new TextDecoder().decode(new Uint8Array((h.match(/.{1,2}/g)||[]).map(b=>parseInt(b,16)))); }
+      catch { return ""; }
     };
-
-    const short = (s, n=12) => s.length > n ? s.slice(0,n) + "…" : s;
+    const rippleToDate = (r) => r ? new Date((r + 946684800)*1000).toLocaleString() : "";
 
     const setStatus = (msg, type="info") => {
-      const box = el("status");
+      const box = $("status");
       box.hidden = !msg;
-      box.style.background = type === "error"
-        ? "rgba(255, 102, 102, 0.18)"
-        : type === "success"
-          ? "rgba(102, 255, 153, 0.18)"
-          : "rgba(255,255,255,0.08)";
-      box.innerText = msg || "";
+      box.style.background =
+        type==="error"   ? "rgba(255, 102, 102, .18)" :
+        type==="success" ? "rgba(102, 255, 153, .18)" :
+                           "rgba(255,255,255,.08)";
+      box.textContent = msg || "";
     };
+    const short = (s,n=12) => s && s.length>n ? s.slice(0,n)+"…" : (s||"");
 
-    /***********************
- * Wallet connect (Xumm Mobile)
- ***********************/
-let xumm;
-let xummConnected = false;
-let xummAddress = null;
-
-const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
-
-// Poll helper: wait for account approval
-async function waitForAccount(uuid, {tries=120, delayMs=1500} = {}) {
-  for (let i = 0; i < tries; i++) {
-    try {
-      const res = await xumm.payload.get(uuid);
-      const acct = res?.response?.account || res?.account;
-      if (acct) return acct;
-      if (res?.meta?.expired) break;
-    } catch (e) {
-      console.warn("Polling error (will retry):", e);
-    }
-    await new Promise(r => setTimeout(r, delayMs));
-  }
-  return null;
-}
-
-async function connectXumm() {
-  try {
-    if (!window.Xumm) {
-      console.error("❌ Xumm SDK not available. Check that the CDN is loading correctly.");
-      alert("Xumm SDK failed to load. Please refresh.");
-      return;
-    }
-    if (!xumm) {
-      // ✅ Correct constructor for the browser UMD
-      xumm = new Xumm("7737775c-1645-4a4e-a92d-ffe51530a348");
-      console.log("✅ Xumm instance created.");
-    }
-
-    console.log("📡 Creating Sign-In payload...");
-    const payload = await xumm.payload.create({
-      txjson: { TransactionType: "SignIn" }
-    });
-
-    console.log("✅ Payload created:", payload);
-
-    if (!payload || !payload.refs) {
-      console.error("❌ No payload returned:", payload);
-      alert("Failed to create Sign-In request. Check API settings.");
-      return;
-    }
-
-    // Handle mobile vs desktop
-    if (isMobile()) {
-      console.log("📲 Redirecting to Xumm mobile app:", payload.next.always);
-      window.location.href = payload.next.always;
-    } else {
-      console.log("🖥 Showing QR code:", payload.refs.qr_png);
-      const qrBox = document.getElementById("xummQr");
-      if (qrBox) {
-        qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm"
-            style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-        qrBox.hidden = false;
-      } else {
-        console.warn("⚠️ No element with ID 'xummQr' found to show QR code.");
-        alert("QR could not be displayed. Add a <div id='xummQr'></div> to your HTML.");
-      }
-    }
-  } catch (err) {
-    console.error("❌ Xumm connect failed:", err);
-    alert("Connection failed. See console for details.");
-  }
-}
-
-
-        // Desktop → show QR. Mobile → deep link
-        if (isMobile()) {
-          setStatus("Opening Xaman…");
-          window.location.href = payload.next.always;
-        } else {
-          const qrBox = el("xummQr");
-          qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
-            style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-          qrBox.hidden = false;
-          setStatus("Scan the QR with Xaman to connect…");
-        }
-
-        // Wait for approval (poll)
-        const account = await waitForAccount(payload.uuid);
-        if (!account) {
-          setStatus("Connection not approved (expired or cancelled).", "error");
-          return;
-        }
-
-        // Connected 🎉
-        xummConnected = true;
-        xummAddress = account;
-
-        // UI updates
-        el("signBtn").disabled = false;
-        const btn = el("xummBtn");
-        btn.disabled = true;
-        btn.innerText = "Connected ✅";
-        const qrBox = el("xummQr");
-        qrBox.hidden = true;
-        qrBox.innerHTML = "";
-
-        setStatus(`Connected with Xumm: ${account}`, "success");
-      } catch (err) {
-        console.error("❌ Xumm connect failed:", err);
-        setStatus(`Connection failed: ${err?.message || err}`, "error");
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const btn = el("xummBtn");
-      if (btn) {
-        btn.addEventListener("click", () => {
-          console.log("✅ Connect button clicked.");
-          connectXumm();
+    /**************
+     * ORBS COLOR REACTIVITY
+     **************/
+    (function initOrbs(){
+      const orbs = document.querySelectorAll(".orb");
+      // randomize timings
+      orbs.forEach(orb=>{
+        orb.style.top="50%"; orb.style.left="50%";
+        orb.style.animationDuration = `${8+Math.random()*4}s, ${3+Math.random()*2}s`;
+        orb.style.animationDelay = `${Math.random()*6}s, ${Math.random()*2}s`;
+        orb.style.zIndex = Math.random()>0.6 ? 3 : 1;
+      });
+      const btns = ["xummBtn","signBtn","disconnectBtn"].map($);
+      const center = (el)=>{ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; };
+      const dist = (a,b)=>Math.hypot(a.x-b.x, a.y-b.y);
+      function tick(){
+        const cs = btns.map(center);
+        orbs.forEach(orb=>{
+          const r = orb.getBoundingClientRect();
+          const oc = {x:r.left+r.width/2, y:r.top+r.height/2};
+          const d = cs.map(c=>dist(oc,c));
+          const m = Math.min(...d), i = d.indexOf(m);
+          orb.style.background =
+            i===0 ? "rgba(0,212,255,.9)" :
+            i===1 ? "rgba(0,255,150,.9)" :
+                    "rgba(255,77,109,.9)";
         });
-      } else {
-        console.error("❌ xummBtn not found in DOM");
+        requestAnimationFrame(tick);
       }
-    });
+      requestAnimationFrame(tick);
+    })();
 
-    /***********************
-     * Build & submit TX
-     * (left as-is; will use xummConnected set above)
-     ***********************/
-    async function signAndSubmit() {
+    /**************
+     * XUMM SETUP
+     **************/
+    let xumm = null;
+    let connectedAccount = null;
+
+    function initXumm(){
+      if (!window.Xumm){ console.error("Xumm SDK failed to load"); return; }
+      xumm = new Xumm(APP_KEY);
+
+      xumm.on("ready", () => {
+        console.log("✅ Xumm SDK ready");
+        $("xummBtn").disabled = false;
+      });
+
+      xumm.on("success", async () => {
+        connectedAccount = await xumm.user.account;
+        $("xummBtn").textContent = "Connected ✅";
+        $("signBtn").disabled = false;
+        $("disconnectBtn").disabled = false;
+        setStatus(`Connected: ${connectedAccount}`, "success");
+        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+      });
+
+      xumm.on("logout", () => {
+        connectedAccount = null;
+        $("xummBtn").textContent = "Connect with Xaman";
+        $("signBtn").disabled = true;
+        $("disconnectBtn").disabled = true;
+        setStatus("Disconnected.");
+      });
+    }
+
+    async function connectXumm(){
+      // xumm.authorize() opens sign-in (with QR on desktop automatically)
+      try {
+        setStatus("Opening Xaman to connect…");
+        await xumm.authorize();
+      } catch (e) {
+        console.warn(e);
+        setStatus("Connection cancelled.", "error");
+      }
+    }
+
+    /**************
+     * SIGN & SUBMIT PRAYER
+     **************/
+    async function sendPrayer(){
       setStatus("");
 
-      const message = el("message").value.trim();
-      const name = el("name").value.trim();
-      const handle = el("handle").value.trim();
+      const message = $("message").value.trim();
+      const name    = $("name").value.trim();
+      const handle  = $("handle").value.trim();
 
-      if (!message) {
-        setStatus("Please enter a message (required).", "error");
-        return;
-      }
+      if (!message){ setStatus("Please enter a message (required).", "error"); return; }
+      if (!connectedAccount){ setStatus("Please connect your wallet first.", "error"); return; }
 
       // Build memos
       const memos = [
-        { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) } },
-        { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) } },
+        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) }},
+        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)   }},
       ];
-      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});  
-      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});  
+      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
+      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
 
-      const txjson = {
-        TransactionType: "Payment",
-        Destination: DESTINATION,
-        Amount: "1", // 1 drop
-        Memos: memos
-      };
+      // Minimal 1-drop Payment to collector with memos
+      const txjson = { TransactionType:"Payment", Destination:DESTINATION, Amount:"1", Memos:memos };
 
       try {
-        // 👉 If GemWallet is connected (guarded)
-        if (typeof connectedAddress !== "undefined" && connectedAddress) {
-          el("signBtn").disabled = true;
-          el("signBtn").innerText = "Signing…";
-          setStatus("Please approve the transaction in your GemWallet…");
+        setStatus("Creating sign request…");
+        const payload = await xumm.payload.create({ txjson });
 
-          const res = await window.gemWallet.submitTransaction(txjson);
-          if (res?.result === "success" || res?.engine_result === "tesSUCCESS") {
-            const hash = res.txHash || res.hash || "";
-            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${hash}`, "success");
-            setTimeout(loadFeed, 2500);
-          } else {
-            throw new Error(res?.engine_result_message || "Transaction was not accepted.");
-          }
+        if (isMobile()){
+          // Mobile: deep link to Xaman
+          window.location.href = payload.next.always;
+        } else {
+          // Desktop: show QR
+          $("xummQr").innerHTML =
+            `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
+              style="max-width:260px;border-radius:12px;box-shadow:0 0 12px rgba(0,212,255,.4)"/>`;
+          $("xummQr").hidden = false;
+          setStatus("Scan the QR with Xaman to sign…");
         }
 
-        // 👉 If Xumm is connected
-        else if (xummConnected && xumm) {
-          setStatus("Please approve in Xumm…");
-
-          const payload = await xumm.payload.create({ txjson });
-
-          if (isMobile()) {
-            window.location.href = payload.next.always; // deep link to Xumm app
-          } else {
-            const qrBox = el("xummQr");
-            qrBox.innerHTML = `<img src="${payload.refs.qr_png}" alt="Scan with Xumm" 
-              style="max-width:260px; border-radius:12px; box-shadow:0 0 12px rgba(0,212,255,0.4);"/>`;
-            qrBox.hidden = false;
+        // Poll for result
+        let txHash = null;
+        for (let i=0; i<120; i++){
+          const res = await xumm.payload.get(payload.uuid);
+          if (res?.meta?.resolved){
+            txHash = res?.response?.txid || null;
+            break;
           }
-
-          // Wait for user approval (simple poll)
-          let approvedHash = null;
-          for (let i = 0; i < 120; i++) {
-            const result = await xumm.payload.get(payload.uuid);
-            if (result?.meta?.resolved) {
-              approvedHash = result?.response?.txid || null;
-              break;
-            }
-            await new Promise(r => setTimeout(r, 1500));
-          }
-
-          if (approvedHash) {
-            setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${approvedHash}`, "success");
-            setTimeout(loadFeed, 2500);
-          } else {
-            throw new Error("Xumm signing rejected or expired.");
-          }
+          await new Promise(r=>setTimeout(r,1500));
         }
 
-        // 👉 No wallet connected
-        else {
-          setStatus("Please connect a wallet first.", "error");
+        if (txHash){
+          setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${txHash}`, "success");
+          $("message").value = ""; $("name").value = ""; $("handle").value = "";
+          $("charCount").textContent = "0";
+          $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+          loadFeedSoon();
+        } else {
+          setStatus("Signing cancelled or expired.", "error");
         }
-      } catch (e) {
-        setStatus(`Submit failed: ${e.message || e}`, "error");
-      } finally {
-        el("signBtn").disabled = false;
-        el("signBtn").innerText = "🖊️ Sign & Submit";
+      } catch(e){
+        console.error(e);
+        setStatus(`Error: ${e?.message || e}`, "error");
       }
     }
 
-    el("signBtn").addEventListener("click", signAndSubmit);
+    function disconnectWallet(){
+      if (xumm){
+        xumm.logout();
+        connectedAccount = null;
+        $("xummBtn").textContent = "Connect with Xaman";
+        $("signBtn").disabled = true;
+        $("disconnectBtn").disabled = true;
+        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+        setStatus("🔒 Wallet disconnected safely!", "success");
+      }
+    }
 
-    /***********************
-     * Feed loader (XRPL)
-     ***********************/
-    let xrplClient;
-
-    async function ensureClient() {
+    /**************
+     * FEED (XRPL)
+     **************/
+    let xrplClient = null;
+    async function ensureClient(){
       if (xrplClient && xrplClient.isConnected()) return xrplClient;
       xrplClient = new xrpl.Client(XRPL_WSS);
       await xrplClient.connect();
       return xrplClient;
     }
 
-    function parseMemos(memos = []) {
+    function parseMemos(memos=[]){
       const out = {};
-      for (const m of memos) {
+      for (const m of memos){
         const memo = m?.Memo || {};
-        const key = hexToStr(memo.MemoType || "").trim().toLowerCase();
-        const val = hexToStr(memo.MemoData || "").trim();
-        if (key) out[key] = val;
+        const k = (hexToStr(memo.MemoType||"")||"").trim().toLowerCase();
+        const v = (hexToStr(memo.MemoData||"")||"").trim();
+        if (k) out[k]=v;
       }
       return out;
     }
 
-    async function loadFeed() {
-      try {
+    async function loadFeed(){
+      try{
         const client = await ensureClient();
         const resp = await client.request({
           command: "account_tx",
@@ -755,11 +433,10 @@ async function connectXumm() {
         });
 
         const items = [];
-        for (const e of (resp.result.transactions || [])) {
+        for (const e of (resp.result.transactions||[])){
           const tx = e.tx || e.transaction || {};
           if (tx.TransactionType !== "Payment") continue;
           if (tx.Destination !== DESTINATION) continue;
-
           const memos = parseMemos(tx.Memos || []);
           if (memos.app !== IDENT_TAG) continue;
 
@@ -773,262 +450,65 @@ async function connectXumm() {
           });
         }
 
-        items.sort((a,b) => (b.date||0) - (a.date||0));
+        items.sort((a,b)=> (b.date||0) - (a.date||0));
 
-        const feed = el("feed");
+        const feed = $("feed");
         feed.innerHTML = "";
-        if (!items.length) {
+        if (!items.length){
           feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
           return;
         }
 
-        const toDate = (rippleEpoch) => {
-          if (!rippleEpoch) return "";
-          const unixMs = (rippleEpoch + 946684800) * 1000;
-          return new Date(unixMs).toLocaleString();
-        };
-
-        items.slice(0, 15).forEach(it => {
-          const name = it.name ? ` • ${it.name}` : "";
-          const handle = it.handle ? ` • ${it.handle}` : "";
-          const when = toDate(it.date);
+        items.slice(0, 20).forEach(it=>{
+          const when = rippleToDate(it.date);
           const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
-
+          const signedBy = (it.name || it.handle) ? `<div class="meta">Signed by: ${it.name||""} ${it.handle||""}</div>` : "";
           const div = document.createElement("div");
           div.className = "item";
           div.innerHTML = `
             <div class="meta">
-              <span>From: ${short(it.account || "unknown", 14)}</span>
+              <span>From: ${short(it.account,14)}</span>
               <span>• ${when || "pending…"}</span>
               ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
             </div>
-            <div class="msg">${(it.message || "").replace(/[<>&]/g, s => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
-            ${ it.name || it.handle ? `<div class="meta">Signed by: ${it.name ? it.name : ""} ${it.handle ? it.handle : ""}</div>` : "" }
+            <div class="msg">${(it.message || "").replace(/[<>&]/g, s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
+            ${signedBy}
           `;
           feed.appendChild(div);
         });
-      } catch (e) {
-        const feed = el("feed");
-        feed.innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
-        console.error(e);
+      } catch(e){
+        console.error("Feed load error:", e);
+        $("feed").innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
       }
     }
 
-    // Kick things off
-    loadFeed();
-    setInterval(loadFeed, 60000);
- <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
-<script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
-<script>
-/**********************
- * CONFIGURATION
- **********************/
-const APP_KEY    = "7737775c-1645-4a4e-a92d-ffe51530a348"; // your Xumm API key
-const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"; // JCS issuer wallet
-const IDENT_TAG   = "JCS_VERIFY_V1";
-const XRPL_WSS    = "wss://xrplcluster.com";
-
-let xumm, connectedAccount = null;
-
-/**********************
- * HELPERS
- **********************/
-const el = (id) => document.getElementById(id);
-const strToHex = (s="") => Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
-const hexToStr = (h="") => {
-  try {
-    const bytes = h.match(/.{1,2}/g)?.map(b=>parseInt(b,16)) ?? [];
-    return new TextDecoder().decode(new Uint8Array(bytes));
-  } catch { return ""; }
-};
-const rippleToDate = (r) => new Date((r+946684800)*1000).toLocaleString();
-
-/**********************
- * INIT XUMM
- **********************/
-function initXumm() {
-  xumm = new Xumm(APP_KEY);
-
-  xumm.on("ready", () => {
-    console.log("✅ Xumm SDK ready");
-    el("xummBtn").disabled = false;
-  });
-
-  xumm.on("success", async () => {
-    connectedAccount = await xumm.user.account;
-    console.log("🎉 Connected:", connectedAccount);
-    el("xummBtn").innerText = "Connected ✅";
-    el("signBtn").disabled = false;
-    el("disconnectBtn").disabled = false; // enable disconnect button
-  });
-
-  xumm.on("logout", () => {
-    connectedAccount = null;
-    el("xummBtn").innerText = "Connect with XUM";
-    el("signBtn").disabled = true;
-    el("disconnectBtn").disabled = true; // disable disconnect button
-  });
-}
-
-/**********************
- * SIGN + SEND MESSAGE
- **********************/
-async function sendPrayer() {
-  const message = el("message").value.trim();
-  if (!message) {
-    alert("Please enter a prayer message.");
-    return;
-  }
-  if (!connectedAccount) {
-    alert("Please connect your wallet first.");
-    return;
-  }
-
-  const memos = [
-    { Memo: { MemoType: strToHex("app"), MemoData: strToHex(IDENT_TAG) }},
-    { Memo: { MemoType: strToHex("msg"), MemoData: strToHex(message) }}
-  ];
-
-  const txjson = {
-    TransactionType: "Payment",
-    Destination: DESTINATION,
-    Amount: "1", // 1 drop
-    Memos: memos
-  };
-
-  try {
-    const payload = await xumm.payload.create({ txjson });
-
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      window.location.href = payload.next.always; // mobile deep link
-    } else {
-      el("xummQr").innerHTML = `<img src="${payload.refs.qr_png}" style="max-width:220px;border-radius:12px"/>`;
-      el("xummQr").hidden = false;
+    let feedTimer = null;
+    function loadFeedSoon(){
+      clearTimeout(feedTimer);
+      feedTimer = setTimeout(loadFeed, 2500);
     }
 
-    // Poll until signed
-    let resultHash = null;
-    for (let i=0; i<120; i++) {
-      const res = await xumm.payload.get(payload.uuid);
-      if (res?.response?.txid) { resultHash = res.response.txid; break; }
-      if (res?.meta?.expired) break;
-      await new Promise(r=>setTimeout(r,1500));
-    }
+    /**************
+     * BINDINGS
+     **************/
+    document.addEventListener("DOMContentLoaded", ()=>{
+      // init Xumm
+      initXumm();
 
-    if (resultHash) {
-      showConfirmation(message, resultHash);
+      // buttons
+      $("xummBtn").addEventListener("click", connectXumm);
+      $("signBtn").addEventListener("click", sendPrayer);
+      $("disconnectBtn").addEventListener("click", disconnectWallet);
+
+      // char counter
+      const msgEl = $("message"), cnt = $("charCount");
+      const updateCnt = ()=>{ cnt.textContent = String(msgEl.value.length); };
+      msgEl.addEventListener("input", updateCnt); updateCnt();
+
+      // load feed and refresh every 60s
       loadFeed();
-    } else {
-      alert("Prayer signing cancelled or expired.");
-    }
-  } catch (e) {
-    console.error(e);
-    alert("Error: " + e.message);
-  }
-}
-
-/**********************
- * CONFIRMATION MODAL
- **********************/
-function showConfirmation(msg, hash) {
-  const box = document.createElement("div");
-  box.style.position="fixed"; box.style.top="50%"; box.style.left="50%";
-  box.style.transform="translate(-50%,-50%)";
-  box.style.background="rgba(0,0,0,0.9)";
-  box.style.padding="20px"; box.style.borderRadius="12px"; box.style.color="#fff";
-  box.style.boxShadow="0 0 20px rgba(0,212,255,0.6)";
-  box.style.zIndex="1000"; box.style.maxWidth="400px"; box.style.textAlign="center";
-  box.innerHTML = `
-    <h3>🙏 Prayer Submitted</h3>
-    <p>${msg}</p>
-    <p><small><a href="https://bithomp.com/explorer/${hash}" target="_blank">View on Ledger</a></small></p>
-    <p><small>${new Date().toLocaleString()}</small></p>
-    <button style="margin-top:12px;padding:8px 16px;border:none;border-radius:8px;cursor:pointer">Close</button>
-  `;
-  document.body.appendChild(box);
-  box.querySelector("button").onclick = ()=>box.remove();
-}
-
-/**********************
- * FEED LOADER
- **********************/
-let xrplClient;
-async function ensureClient() {
-  if (xrplClient && xrplClient.isConnected()) return xrplClient;
-  xrplClient = new xrpl.Client(XRPL_WSS);
-  await xrplClient.connect();
-  return xrplClient;
-}
-async function loadFeed() {
-  try {
-    const client = await ensureClient();
-    const resp = await client.request({
-      command: "account_tx",
-      account: DESTINATION,
-      limit: 50,
-      ledger_index_min: -1,
-      ledger_index_max: -1
+      setInterval(loadFeed, 60000);
     });
-
-    const feed = el("feed");
-    feed.innerHTML = "";
-    (resp.result.transactions||[])
-      .map(e => e.tx || e.transaction)
-      .filter(tx => tx.TransactionType==="Payment" && tx.Destination===DESTINATION)
-      .map(tx => {
-        const memos = (tx.Memos||[]).reduce((acc,m)=>{
-          const t=hexToStr(m.Memo.MemoType||"").toLowerCase();
-          const d=hexToStr(m.Memo.MemoData||"");
-          acc[t]=d; return acc;
-        },{});
-        if (memos.app!==IDENT_TAG) return null;
-        return {msg:memos.msg, hash:tx.hash, date:tx.date};
-      })
-      .filter(Boolean)
-      .slice(0,20)
-      .forEach(it=>{
-        const div=document.createElement("div");
-        div.className="item";
-        div.innerHTML=`<div class="msg">${it.msg}</div>
-          <div class="meta"><a href="https://bithomp.com/explorer/${it.hash}" target="_blank">Tx</a> • ${rippleToDate(it.date)}</div>`;
-        feed.appendChild(div);
-      });
-  } catch(e) {
-    console.error("Feed load error",e);
-  }
-}
-
-/**********************
- * BIND EVENTS
- **********************/
-document.addEventListener("DOMContentLoaded",()=>{
-  initXumm();
- el("xummBtn").addEventListener("click", ()=>xumm.authorize());
-el("signBtn").addEventListener("click", sendPrayer);
-el("disconnectBtn").addEventListener("click", () => {
-  if (xumm) {
-    xumm.logout();
-    connectedAccount = null;
-    el("xummBtn").innerText = "Connect with XUM";
-    el("signBtn").disabled = true;
-    el("disconnectBtn").disabled = true;
-    alert("🔒 Wallet disconnected safely!");
-  }
-});
-
- loadFeed();
-  setInterval(loadFeed,60000);
-});
-</script>
-
-<style>
-/* === Testimonies Section === */
-/* === Recent On-Chain Testimonies === */
-.testimonies-wrapper {
-  max-height: 400px;     /* lock the height of the card */
-  overflow-y: auto;      /* vertical scroll when content overflows */
-  overflow-x: hidden;    /* prevent sideways scrolling */
-  border-radius: 8px;
-  padding: 0.5rem;
-  background: #fff;      /* optional: keeps it card-like */
-}
+  </script>
+</body>
+</html>
