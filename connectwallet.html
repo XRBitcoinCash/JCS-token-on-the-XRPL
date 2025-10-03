@@ -2,146 +2,215 @@
 <html lang="en">
 <head>
   <!-- 
-    ============================
-    META & TITLE SECTION
-    ============================
-    - Sets character encoding (UTF-8)
-    - Makes site mobile-friendly (viewport)
-    - Page title shown in browser tab
+    ===================================
+    META SECTION — CRYPTIC + RELIGIOUS
+    ===================================
   -->
   <meta charset="utf-8">
-  <title>Xumm Connect Wallet Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xumm Wallet · Codex Verbi Dei</title>
+  <meta name="description" content="Xumm Wallet Connect — a cryptic ledger of faith, code, and eternal witness. Catholic verses, Dead Sea Scroll fragments, and the Shroud as backdrop.">
+  <meta name="keywords" content="XRPL, Xumm, Catholic Crypto, Dead Sea Scrolls, Shroud of Turin, Jesus Christ Saves, blockchain faith, codex">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta property="og:title" content="Codex Verbi Dei · Xumm Connect">
+  <meta property="og:description" content="Connect to the ledger of faith — scripture, code, and light.">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/shroud-bg.jpg">
+  <meta property="og:url" content="https://jesuschristsavestoken.com/wallet-demo.html">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#111111">
 
-  <!-- 
-    ============================
-    CSS STYLING SECTION
-    ============================
-    - Inline <style> block to control basic layout
-    - You can later move this into a separate CSS file (styles.css)
-    - Controls fonts, colors, button styles, layout
-  -->
+  <!-- FONT & STYLE -->
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: sans-serif; background: #fafbfc; margin: 0; padding: 40px; display: flex; flex-direction: column; align-items: center; }
-    #walletAddress { font-size: 1.15em; color: #284be5; margin: 20px 0 0 0;}
-    #connectWalletButton, #logoutButton { padding: 10px 32px; font-size: 1.1em; border: none; border-radius: 5px; margin: 20px 0; background: #284be5; color: #fff; cursor: pointer;}
-    #logoutButton { background: #ccc; color: #222;}
-    #status { margin-top: 16px; color: #a13b1b; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      color: #f8f8f2;
+      background: url('https://jesuschristsavestoken.com/shroud-bg.jpg') center/cover no-repeat fixed;
+      background-blend-mode: multiply;
+      background-color: #0a0a0a;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(0,0,0,0.65);
+      border-bottom: 2px solid #444;
+      width: 100%;
+    }
+    header h1 {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 2.2rem;
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255,215,0,0.5);
+    }
+    header p {
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    #walletAddress {
+      margin-top: 1rem;
+      font-size: 1.2em;
+      color: #8ecae6;
+      text-shadow: 0 0 5px rgba(0,200,255,0.6);
+    }
+
+    button {
+      padding: 10px 28px;
+      margin: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+    #connectWalletButton { background:#0066cc; color:#fff; }
+    #connectWalletButton:hover { background:#3388ff; }
+    #logoutButton { background:#444; color:#fff; }
+    #trustlineButton { background:#28a745; color:#fff; }
+    #buyButton { background:#ffd700; color:#111; }
+
+    #status {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-style: italic;
+      color: #d4af37;
+    }
+
+    /* Ledger Counter Box */
+    .ledger-counter {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid #ffd700;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.7);
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.8rem;
+      text-align: center;
+      color: #ffd700;
+      text-shadow: 0 0 12px rgba(255,215,0,0.6);
+      box-shadow: 0 0 25px rgba(255,215,0,0.3);
+    }
+
+    /* Cryptic scroll quotes */
+    .scroll-verse {
+      margin-top: 50px;
+      padding: 18px;
+      max-width: 700px;
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid #ffd700;
+      border-radius: 8px;
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #f0f0e0;
+    }
+    .scroll-verse em {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
   </style>
 
-  <!-- 
-    ============================
-    LIBRARY IMPORT SECTION
-    ============================
-    - Loads the Xumm/Xaman SDK from a CDN
-    - This gives you access to the `Xumm` object used in your script
-    - Always include BEFORE your custom script
-  -->
+  <!-- Xumm/Xaman SDK -->
   <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
 </head>
-
 <body>
-  <!-- 
-    ============================
-    HEADER / TITLE SECTION
-    ============================
-    - Visible heading of the page
-    - Branding, can include logo later
-  -->
-  <h1>Xumm/Xaman Wallet Connect Demo</h1>
 
-  <!-- 
-    ============================
-    WALLET STATUS DISPLAY
-    ============================
-    - Shows connection status or wallet address once connected
-  -->
-  <div id="walletAddress">Status: Not connected</div>
+<header>
+  <h1>Codex Verbi Dei</h1>
+  <p>"Et Verbum caro factum est, et habitavit in nobis." — John 1:14</p>
+</header>
 
-  <!-- 
-    ============================
-    INTERACTION BUTTONS
-    ============================
-    - Connect Wallet → starts Xumm auth flow
-    - Logout → clears wallet connection
-    - Later we’ll add "Trustline" and "Buy" buttons here
-  --><button id="trustlineButton" style="display:none">➕ Set JCS Trustline</button>
-<button id="buyButton" style="display:none">💸 Buy JCS Tokens (1 XRP)</button>
+<div id="walletAddress">Status: Not connected</div>
 
+<!-- Interaction buttons -->
+<div>
+  <button id="trustlineButton" style="display:none">➕ Set JCS Trustline</button>
+  <button id="buyButton" style="display:none">💸 Buy JCS Tokens (1 XRP)</button>
   <button id="connectWalletButton">Connect Wallet</button>
   <button id="logoutButton" style="display:none">Logout</button>
+</div>
 
-  <!-- 
-    ============================
-    STATUS OUTPUT SECTION
-    ============================
-    - Shows current state / errors to the user
-  -->
-  <div id="status"></div>
+<div id="status"></div>
 
-  <!-- 
-    ============================
-    JAVASCRIPT LOGIC SECTION
-    ============================
-    - Initializes the Xumm SDK with your API key
-    - Handles wallet connection / disconnection
-    - Updates the UI dynamically
-    - All dApp logic goes here
-  -->
-  <script>
-    // Initialize SDK with your public API key
-    const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+<!-- Ledger Counter -->
+<div class="ledger-counter" id="ledgerCounter">
+  Ledger Count: 0
+</div>
 
-    // Grab UI elements
-    const connectWalletButton = document.getElementById('connectWalletButton');
-    const walletAddressElement = document.getElementById('walletAddress');
-    const logoutButton = document.getElementById('logoutButton');
-    const statusDiv = document.getElementById('status');
+<!-- Cryptic Verses -->
+<div class="scroll-verse">
+  "Beati pauperes spiritu, quoniam ipsorum est regnum caelorum."<br>
+  <em>— Dead Sea Scroll Fragment echoing Matthew 5:3</em>
+</div>
+<div class="scroll-verse">
+  "Ego sum lux mundi; qui sequitur me, non ambulabit in tenebris."<br>
+  <em>— Jesus, John 8:12</em>
+</div>
 
-    // Wait for SDK to be ready
-    xumm.on('ready', () => {
-      statusDiv.textContent = 'Xumm SDK loaded and ready.';
-      connectWalletButton.disabled = false;
+<script>
+  // Initialize SDK with your public API key
+  const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+
+  // UI Elements
+  const connectWalletButton = document.getElementById('connectWalletButton');
+  const walletAddressElement = document.getElementById('walletAddress');
+  const logoutButton = document.getElementById('logoutButton');
+  const statusDiv = document.getElementById('status');
+  const ledgerCounter = document.getElementById('ledgerCounter');
+
+  // Ledger ticker simulation (for demo)
+  let ledger = 987654;
+  setInterval(() => {
+    ledger += Math.floor(Math.random()*3); // simulate new ledgers
+    ledgerCounter.textContent = "Ledger Count: " + ledger.toLocaleString();
+  }, 4000);
+
+  // Wait for SDK to be ready
+  xumm.on('ready', () => {
+    statusDiv.textContent = 'Xumm SDK loaded and ready.';
+    connectWalletButton.disabled = false;
+  });
+
+  // "Connect Wallet"
+  connectWalletButton.onclick = () => {
+    statusDiv.textContent = 'Connecting to Xumm wallet...';
+    xumm.authorize().catch(error => {
+      statusDiv.textContent = 'Authorization failed: ' + error.message;
     });
+  };
 
-    // "Connect Wallet" button triggers the authorization flow
-    connectWalletButton.onclick = () => {
-      statusDiv.textContent = 'Connecting to Xumm wallet...';
-      xumm.authorize().catch(error => {
-        statusDiv.textContent = 'Authorization failed: ' + error.message;
-      });
-    };
+  // On success
+  xumm.on('success', async () => {
+    const account = await xumm.user.account;
+    walletAddressElement.textContent = 'Wallet Connected: ' + account;
+    connectWalletButton.style.display = 'none';
+    logoutButton.style.display = '';
+    statusDiv.textContent = 'Connected successfully.';
+  });
 
-    // On successful connection
-    xumm.on('success', async () => {
-      const account = await xumm.user.account; // e.g., r...
-      walletAddressElement.textContent = 'Wallet Connected: ' + account;
-      connectWalletButton.style.display = 'none';
-      logoutButton.style.display = '';
-      statusDiv.textContent = 'Connected successfully.';
-    });
+  // On logout
+  xumm.on('logout', async () => {
+    walletAddressElement.textContent = 'Status: Not connected';
+    connectWalletButton.style.display = '';
+    logoutButton.style.display = 'none';
+    statusDiv.textContent = 'You have logged out.';
+  });
 
-    // On logout, reset UI state
-    xumm.on('logout', async () => {
-      walletAddressElement.textContent = 'Status: Not connected';
-      connectWalletButton.style.display = '';
-      logoutButton.style.display = 'none';
-      statusDiv.textContent = 'You have logged out.';
-    });
+  // Manual logout
+  logoutButton.onclick = () => {
+    xumm.logout();
+    statusDiv.textContent = 'Logging out...';
+  };
+</script>
 
-    // Logout action
-    logoutButton.onclick = () => {
-      xumm.logout();
-      statusDiv.textContent = 'Logging out...';
-    };
-  </script>
-
-  <!-- 
-    ============================
-    FOOTER / EXTRA SPACE
-    ============================
-    - Good place for future expansion
-    - e.g. links to docs, support, ledger info, etc.
-  -->
 </body>
 </html>
