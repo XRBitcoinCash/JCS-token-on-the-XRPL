@@ -1,361 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Prayer Map – Connected to XRP Ledger</title>
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign the Ledger — JCS Proof-of-Faith</title>
 
+  <!-- SEO / Social (replace URLs/images if you want) -->
+  <meta name="description" content="Sign the Ledger with JCS Proof-of-Faith — decentralized, immutable testimonies on XRPL.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Sign the Ledger — JCS Proof-of-Faith">
+  <meta property="og:description" content="Add your message of faith to the XRPL ledger.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jesuschristsavestoken.com/jcs-test.html">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <style>
-    html, body, #container {
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { background:#000428; }
     body {
-      background: #0e1822;
-      overflow: hidden;
+      min-height:100vh; font-family:Montserrat, system-ui, -apple-system, Arial, sans-serif;
+      color:#fff; line-height:1.8; background: radial-gradient(circle at top left,#000428,#004e92);
     }
-    #container {
-      position: relative;
-      height: 100vh;
-      width: 100vw;
-      /* Change the image URL below to your background image */
-      background: url('YOUR_BACKGROUND_IMAGE_URL.jpg') center center / cover no-repeat;
-      overflow: hidden;
+    body::before {
+      content:""; position:fixed; inset:0; z-index:-2;
+      background:url("background-translucent.png") center/cover no-repeat; opacity:.08; pointer-events:none;
     }
-    #map {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+    a { color:#00d4ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    header {
+      position:sticky; top:0; z-index:10;
+      background:rgba(0,0,0,.6); backdrop-filter:blur(6px);
+      padding:14px 24px; display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    #prayer-form-container {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 900;
-      background: rgba(255,255,255,0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-      padding: 20px 28px 16px 28px;
-      min-width: 280px;
-      max-width: 95vw;
-      font-family: 'Segoe UI', Arial, sans-serif;
+    header .title { display:flex; gap:12px; align-items:center; font-weight:700; }
+    header .title img { height:36px; border-radius:6px; }
+    header .actions a {
+      padding:10px 18px; background:#00d4ff; color:#000; border-radius:30px; font-weight:700;
+      box-shadow:0 0 15px rgba(0,212,255,.6); white-space:nowrap;
     }
-    @media (max-width: 600px) {
-      #prayer-form-container {
-        min-width: unset;
-        max-width: 99vw;
-        padding: 12px 6vw 10px 6vw;
-      }
+    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,.9); }
+
+    main { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
+    .hero { text-align:center; margin-bottom:36px; }
+    .hero h1 { font-size:2.6rem; text-shadow:0 0 20px rgba(255,255,255,.6); margin-bottom:8px; }
+    .hero p { color:#d5f7ff; max-width:800px; margin:0 auto; }
+    .note { font-size:.9rem; color:#ffedb5; margin-top:8px; text-align:center; }
+
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+    .card {
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+      border-radius:14px; padding:16px 16px 18px;
     }
-    #prayer-form label {
-      font-size: 1.07em;
-      color: #384056;
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
+    .card h2 { font-size:1.4rem; margin-bottom:10px; text-shadow:0 0 12px rgba(0,212,255,.5); }
+
+    .field { margin-top:12px; position:relative; }
+    .field label { display:block; font-weight:700; margin-bottom:6px; }
+    .field input, .field textarea {
+      width:100%; padding:12px 14px; border:none; border-radius:10px;
+      background:rgba(255,255,255,.1); color:#fff; outline:1px solid rgba(255,255,255,.12);
     }
-    #prayer-form textarea {
-      width: 100%;
-      min-height: 68px;
-      border-radius: 7px;
-      padding: 8px 10px;
-      border: 1px solid #bdbecb;
-      margin-bottom: 12px;
-      font-size: 1em;
-      resize: vertical;
-      background: #f9faff;
-      color: #384056;
-      font-family: inherit;
+    .help { font-size:.9rem; color:#b9ecff; margin-top:6px; }
+
+    .row { display:flex; gap:12px; }
+    .row .field { flex:1; }
+
+    .buttons { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; align-items:center; }
+    .btn {
+      padding:12px 20px; border:none; border-radius:30px; font-weight:700; cursor:pointer;
+      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,.6);
     }
-    #prayer-form button {
-      background: #2461b1;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 28px;
-      font-size: 1.0em;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 8px 0 rgba(36,97,177,0.17);
-      transition: background .18s;
+    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,.2); }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
+
+    @media (max-width:768px){
+      .buttons{ flex-direction:column; gap:14px; }
+      .buttons .btn{ width:100%; max-width:320px; margin:0 auto; padding:14px; font-size:1rem; transition:all .25s ease; }
+      .buttons .btn:hover,.buttons .btn:active{ transform:scale(1.03); box-shadow:0 0 20px rgba(0,212,255,.8); background:#00bfe6; }
     }
-    #prayer-form button:disabled {
-      background: #b5c8e6;
-      cursor: not-allowed;
+
+    #disconnectBtn{ background:#800020; color:#fff; box-shadow:0 0 12px rgba(128,0,32,.6); }
+    #disconnectBtn:hover{ transform:scale(1.03); box-shadow:0 0 20px rgba(128,0,32,.9); background:#a00028; }
+
+    .status {
+      margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
     }
-    /* Leaflet popups: make them larger and more readable */
-    .leaflet-popup-content-wrapper {
-      background: #f6f8fc;
-      border-radius: 13px;
-      box-shadow: 0 2px 16px rgba(63,79,117,0.08);
+
+    /* Testimonies card with internal scroll */
+    .testimonies-card { display:flex; flex-direction:column; height:clamp(340px,60vh,520px); }
+    .testimonies-card h2, .testimonies-card .help { flex:0 0 auto; }
+    #feed { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; padding:.5rem; -webkit-overflow-scrolling:touch; }
+
+    .feed { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+    .item { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; }
+    .item .meta { font-size:.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
+    .item .msg { margin-top:6px; white-space:pre-wrap; }
+
+    footer {
+      background:rgba(0,0,0,.8); padding:18px; text-align:center; font-size:.9rem;
+      border-top:1px solid rgba(255,255,255,.1); margin-top:40px;
     }
-    .leaflet-popup-content {
-      color: #223156;
-      font-size: 1.1em;
-      font-weight: 500;
-      line-height: 1.35;
-      padding: 8px 8px 6px 8px;
+
+    /* Orb visuals */
+    .message-box{ position:relative; overflow:hidden; z-index:1; }
+    .orb-container{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+    .orb{
+      position:absolute; width:6px; height:6px; border-radius:50%;
+      background:rgba(0,212,255,.9); filter:blur(10px); mix-blend-mode:screen;
+      animation:spiralTight 10s infinite linear, fadeGlow 5s infinite ease-in-out;
+      transform-origin:center;
     }
-    /* Hide the Leaflet logo/attribution */
-    /* This is also handled in JS, but double-guard with CSS */
-    .leaflet-control-attribution,
-    .leaflet-control-container .leaflet-control-attribution {
-      display: none !important;
-      visibility: hidden;
+    @keyframes spiralTight{
+      0%{ transform:rotate(0deg) translateX(40px) scale(.9); }
+      25%{ transform:rotate(90deg) translateX(45px) scale(1.1); }
+      50%{ transform:rotate(180deg) translateX(50px) scale(.8); }
+      75%{ transform:rotate(270deg) translateX(45px) scale(1.05); }
+      100%{ transform:rotate(360deg) translateX(40px) scale(.9); }
     }
-    /* Custom feedback popup styling */
-    #popup-feedback {
-      position: absolute;
-      left: 50%;
-      top: 18%;
-      z-index: 1100;
-      transform: translateX(-50%);
-      background: #ffffffdd;
-      border-radius: 18px;
-      box-shadow: 0 6px 32px rgba(43,77,172,0.30);
-      padding: 32px 40px;
-      font-size: 1.3em;
-      font-weight: 600;
-      text-align: center;
-      color: #278419;
-      animation: popupIn 0.35s cubic-bezier(.4,1.3,.8,1);
-      display: none;
-    }
-    @keyframes popupIn {
-      from { opacity: 0; transform: translateX(-50%) scale(.85);}
-      to   { opacity: 1; transform: translateX(-50%) scale(1);}
-    }
+    @keyframes fadeGlow{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
+    .buttons,#xummBtn,#signBtn,#disconnectBtn{ position:relative; z-index:2; }
   </style>
 </head>
 <body>
-  <div id="container">
-    <div id="map"></div>
-
-    <div id="prayer-form-container">
-      <form id="prayer-form" autocomplete="off">
-        <label for="prayer-text">Add your prayer to the map (recorded on the XRP Ledger):</label>
-        <textarea id="prayer-text" name="prayer-text" maxlength="350" required placeholder="Type your prayer or blessing here (max 350 characters)..."></textarea>
-        <button id="submit-prayer" type="submit">Submit Prayer</button>
-      </form>
+  <header>
+    <div class="title">
+      <img src="jcs-logo.png" alt="JCS logo"/>
+      <span>JCS Proof-of-Faith</span>
     </div>
-
-    <div id="popup-feedback"></div>
-  </div>
-
-  <!-- Prayer Wall (must be before scripts so JS can attach listeners) -->
-  <section id="prayer-wall" style="position:absolute;top:20px;left:20px;z-index:999;background:#fff;padding:15px;border-radius:10px;max-width:300px;">
-    <h3>🙏 Recent Prayers</h3>
-    <button id="load-prayers">Load Prayers</button>
-    <ul id="prayer-list"></ul>
-    <div id="pagination-controls">
-      <button id="prev-page" disabled>← Prev</button>
-      <span id="page-info"></span>
-      <button id="next-page">Next →</button>
+    <div class="actions">
+      <a href="index.html">🏠 Back to Home</a>
     </div>
-  </section>
+  </header>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- xrpl.js for browser -->
-  <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
+  <main>
+    <section class="hero">
+      <h1>🖋 Sign the Ledger</h1>
+      <p>Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo. Your message is immutable and viewable by anyone.</p>
+      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the collector wallet with your memo and uses the standard XRPL network fee (paid by your wallet).</p>
+    </section>
 
+    <section class="grid">
+      <!-- Left: Form -->
+      <div class="card">
+        <h2>Compose your on-chain message</h2>
+
+        <div class="field message-box">
+          <label for="message">Message (required)</label>
+          <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
+          <div class="help"><span id="charCount">0</span>/240</div>
+
+          <!-- Orbs -->
+          <div class="orb-container" aria-hidden="true">
+            <!-- 16 orbs -->
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="name">Display name (optional)</label>
+            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D.">
+          </div>
+          <div class="field">
+            <label for="handle">Handle (optional)</label>
+            <input id="handle" type="text" maxlength="32" placeholder="@yourname">
+          </div>
+        </div>
+
+        <!-- Single status box -->
+        <div id="status" class="status" hidden></div>
+
+        <!-- QR code placeholder for desktop -->
+        <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
+
+        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
+
+        <div class="buttons">
+          <button id="xummBtn" class="btn" disabled>Connect with Xaman</button>
+          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
+          <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
+        </div>
+      </div>
+
+      <!-- Right: Feed -->
+      <div class="card testimonies-card">
+        <h2>Recent On-Chain Testimonies</h2>
+        <div id="feed" class="feed" aria-live="polite"></div>
+        <div class="help">Pulled live from XRPL (filtered for JCS Proof-of-Faith memos).</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Jesus Christ Saves Token. All Rights Reserved.
+  </footer>
+
+  <!-- SDKs (load once) -->
+  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+
+  <!-- App -->
   <script>
+    /**************
+     * CONFIG
+     **************/
+    const APP_KEY     = "7737775c-1645-4a4e-a92d-ffe51530a348"; // Xumm API key
+    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";   // collector/issuer wallet (source of memory)
+    const IDENT_TAG   = "JCS_VERIFY_V1";
+    const XRPL_WSS    = "wss://xrplcluster.com";
 
-/* ================================
-   CONFIG
-================================ */
-const NETWORK = "mainnet";
-const collectorAddress = "rED7fJm5i2gJ6ZqF3madgu7rsubnhxdr8x";
-const JCS_ISSUER = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
-const EXPLORER_TX_BASE = "https://livenet.xrpl.org/transactions/";
+    /**************
+     * HELPERS
+     **************/
+    const $ = (id) => document.getElementById(id);
+    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
 
-/* ================================
-   MAP SETUP (same as before)
-================================ */
-let map;
-let lastClickLatLng = null;
-document.addEventListener("DOMContentLoaded", function () {
-  let defaultCoords = [20.0, 0.0];
-  let defaultZoom = 2;
+    const strToHex = (s="") =>
+      Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    const hexToStr = (h="") => {
+      try { return new TextDecoder().decode(new Uint8Array((h.match(/.{1,2}/g)||[]).map(b=>parseInt(b,16)))); }
+      catch { return ""; }
+    };
+    const rippleToDate = (r) => r ? new Date((r + 946684800)*1000).toLocaleString() : "";
 
-  map = L.map("map", {
-    attributionControl: false,
-    zoomControl: true,
-    minZoom: 2,
-    maxZoom: 10,
-  }).setView(defaultCoords, defaultZoom);
+    const setStatus = (msg, type="info") => {
+      const box = $("status");
+      box.hidden = !msg;
+      box.style.background =
+        type==="error"   ? "rgba(255, 102, 102, .18)" :
+        type==="success" ? "rgba(102, 255, 153, .18)" :
+                           "rgba(255,255,255,.08)";
+      box.textContent = msg || "";
+    };
+    const short = (s,n=12) => s && s.length>n ? s.slice(0,n)+"…" : (s||"");
 
-  const tiles = L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    { maxZoom: 19, attribution: '' }
-  ).addTo(map);
-
-  tiles.on('tileerror', () => {});
-
-  map.on('click', function (e) {
-    lastClickLatLng = e.latlng;
-    document.getElementById('prayer-text').focus();
-  });
-});
-
-/* ================================
-   FEEDBACK HELPERS
-================================ */
-function showFeedbackPopup(message, isError = false) {
-  const feedback = document.getElementById('popup-feedback');
-  feedback.innerText = message;
-  feedback.style.color = isError ? '#db3030' : '#278419';
-  feedback.style.display = 'block';
-  setTimeout(() => { feedback.style.display = 'none'; }, isError ? 4000 : 2750);
-}
-function showMapPopup(message, latlng=null) {
-  let coord = latlng || lastClickLatLng || [20.0,0.0];
-  map.openPopup(message, coord, {autoClose: true, closeOnClick: false});
-}
-
-/* ================================
-   PREPARE PRAYER TX (unsigned)
-================================ */
-async function preparePrayerTx(prayerText) {
-  const memoData = xrpl.convertStringToHex(prayerText.slice(0,350));
-  return {
-    TransactionType: "Payment",
-    Account: null, // filled by signer
-    Destination: collectorAddress,
-    Amount: {
-      currency: "JCS",
-      value: "1",
-      issuer: JCS_ISSUER
-    },
-    Memos: [
-      { Memo: { MemoType: xrpl.convertStringToHex("Prayer"), MemoData: memoData } }
-    ]
-  };
-}
-
-/* ================================
-   FORM SUBMISSION
-================================ */
-document.addEventListener('DOMContentLoaded', function () {
-  const prayerForm = document.getElementById('prayer-form');
-  const prayerTextArea = document.getElementById('prayer-text');
-  const submitBtn = document.getElementById('submit-prayer');
-  let submitting = false;
-
-  prayerForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    if (submitting) return;
-    const text = prayerTextArea.value.trim();
-    if (!text) { prayerTextArea.focus(); return; }
-
-    submitting = true;
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Preparing...";
-
-    try {
-      const tx = await preparePrayerTx(text);
-
-      // ⚠️ In production, forward to your backend to create a Xumm payload.
-      // For test/demo, just log the tx so you can paste into Xumm Dev Tools.
-      console.log("Unsigned Prayer TX:", tx);
-
-      showFeedbackPopup("Prayer prepared. Please sign with your Xaman wallet.");
-      prayerTextArea.value = '';
-      showMapPopup("🙏 Prayer prepared for ledger submission.", lastClickLatLng);
-
-    } catch (err) {
-      console.error(err);
-      showFeedbackPopup("Error preparing prayer transaction", true);
-    } finally {
-      submitting = false;
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit Prayer";
-    }
-  });
-});
-
-/* ================================
-   PRAYER WALL (reads from collector)
-================================ */
-let testimonials = [];
-let currentPage = 1;
-const ITEMS_PER_PAGE = 5;
-
-function renderPrayers() {
-  const list = document.getElementById("prayer-list");
-  const pageInfo = document.getElementById("page-info");
-  const prevBtn = document.getElementById("prev-page");
-  const nextBtn = document.getElementById("next-page");
-  list.innerHTML = "";
-
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageItems = testimonials.slice(start, start + ITEMS_PER_PAGE);
-
-  pageItems.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `<p>${item.text}</p>
-      <a href="${item.link}" target="_blank">View on Ledger</a>`;
-    list.appendChild(li);
-  });
-
-  const totalPages = Math.max(1, Math.ceil(testimonials.length / ITEMS_PER_PAGE));
-  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage >= totalPages;
-}
-
-document.getElementById("prev-page").addEventListener("click", () => {
-  if (currentPage > 1) { currentPage--; renderPrayers(); }
-});
-document.getElementById("next-page").addEventListener("click", () => {
-  if ((currentPage * ITEMS_PER_PAGE) < testimonials.length) { currentPage++; renderPrayers(); }
-});
-
-/* Load from Ripple Data API */
-async function loadPrayersFromLedger() {
-  try {
-    const url = `https://data.ripple.com/v2/accounts/${collectorAddress}/transactions?type=payment&limit=50`;
-    const res = await fetch(url);
-    const data = await res.json();
-    testimonials = [];
-
-    data.transactions.forEach(entry => {
-      const tx = entry.tx;
-      if (tx.Memos) {
-        tx.Memos.forEach(m => {
-          if (m.Memo && m.Memo.MemoType === xrpl.convertStringToHex("Prayer")) {
-            const text = xrpl.convertHexToString(m.Memo.MemoData);
-            testimonials.push({
-              text,
-              link: EXPLORER_TX_BASE + tx.hash,
-              ledger_index: tx.ledger_index
-            });
-          }
+    /**************
+     * ORBS COLOR REACTIVITY
+     **************/
+    (function initOrbs(){
+      const orbs = document.querySelectorAll(".orb");
+      // randomize timings
+      orbs.forEach(orb=>{
+        orb.style.top="50%"; orb.style.left="50%";
+        orb.style.animationDuration = `${8+Math.random()*4}s, ${3+Math.random()*2}s`;
+        orb.style.animationDelay = `${Math.random()*6}s, ${Math.random()*2}s`;
+        orb.style.zIndex = Math.random()>0.6 ? 3 : 1;
+      });
+      const btns = ["xummBtn","signBtn","disconnectBtn"].map($);
+      const center = (el)=>{ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; };
+      const dist = (a,b)=>Math.hypot(a.x-b.x, a.y-b.y);
+      function tick(){
+        const cs = btns.map(center);
+        orbs.forEach(orb=>{
+          const r = orb.getBoundingClientRect();
+          const oc = {x:r.left+r.width/2, y:r.top+r.height/2};
+          const d = cs.map(c=>dist(oc,c));
+          const m = Math.min(...d), i = d.indexOf(m);
+          orb.style.background =
+            i===0 ? "rgba(0,212,255,.9)" :
+            i===1 ? "rgba(0,255,150,.9)" :
+                    "rgba(255,77,109,.9)";
         });
+        requestAnimationFrame(tick);
       }
+      requestAnimationFrame(tick);
+    })();
+
+    /**************
+     * XUMM SETUP
+     **************/
+    let xumm = null;
+    let connectedAccount = null;
+
+    function initXumm(){
+      if (!window.Xumm){ console.error("Xumm SDK failed to load"); return; }
+      xumm = new Xumm(APP_KEY);
+
+      xumm.on("ready", () => {
+        console.log("✅ Xumm SDK ready");
+        $("xummBtn").disabled = false;
+      });
+
+      xumm.on("success", async () => {
+        connectedAccount = await xumm.user.account;
+        $("xummBtn").textContent = "Connected ✅";
+        $("signBtn").disabled = false;
+        $("disconnectBtn").disabled = false;
+        setStatus(`Connected: ${connectedAccount}`, "success");
+        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+      });
+
+      xumm.on("logout", () => {
+        connectedAccount = null;
+        $("xummBtn").textContent = "Connect with Xaman";
+        $("signBtn").disabled = true;
+        $("disconnectBtn").disabled = true;
+        setStatus("Disconnected.");
+      });
+    }
+
+    async function connectXumm(){
+      // xumm.authorize() opens sign-in (with QR on desktop automatically)
+      try {
+        setStatus("Opening Xaman to connect…");
+        await xumm.authorize();
+      } catch (e) {
+        console.warn(e);
+        setStatus("Connection cancelled.", "error");
+      }
+    }
+
+    /**************
+     * SIGN & SUBMIT PRAYER
+     **************/
+    async function sendPrayer(){
+      setStatus("");
+
+      const message = $("message").value.trim();
+      const name    = $("name").value.trim();
+      const handle  = $("handle").value.trim();
+
+      if (!message){ setStatus("Please enter a message (required).", "error"); return; }
+      if (!connectedAccount){ setStatus("Please connect your wallet first.", "error"); return; }
+
+      // Build memos
+      const memos = [
+        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) }},
+        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)   }},
+      ];
+      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
+      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
+
+      // Minimal 1-drop Payment to collector with memos
+      const txjson = { TransactionType:"Payment", Destination:DESTINATION, Amount:"1", Memos:memos };
+
+      try {
+        setStatus("Creating sign request…");
+        const payload = await xumm.payload.create({ txjson });
+
+        if (isMobile()){
+          // Mobile: deep link to Xaman
+          window.location.href = payload.next.always;
+        } else {
+          // Desktop: show QR
+          $("xummQr").innerHTML =
+            `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
+              style="max-width:260px;border-radius:12px;box-shadow:0 0 12px rgba(0,212,255,.4)"/>`;
+          $("xummQr").hidden = false;
+          setStatus("Scan the QR with Xaman to sign…");
+        }
+
+        // Poll for result
+        let txHash = null;
+        for (let i=0; i<120; i++){
+          const res = await xumm.payload.get(payload.uuid);
+          if (res?.meta?.resolved){
+            txHash = res?.response?.txid || null;
+            break;
+          }
+          await new Promise(r=>setTimeout(r,1500));
+        }
+
+        if (txHash){
+          setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${txHash}`, "success");
+          $("message").value = ""; $("name").value = ""; $("handle").value = "";
+          $("charCount").textContent = "0";
+          $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+          loadFeedSoon();
+        } else {
+          setStatus("Signing cancelled or expired.", "error");
+        }
+      } catch(e){
+        console.error(e);
+        setStatus(`Error: ${e?.message || e}`, "error");
+      }
+    }
+
+    function disconnectWallet(){
+      if (xumm){
+        xumm.logout();
+        connectedAccount = null;
+        $("xummBtn").textContent = "Connect with Xaman";
+        $("signBtn").disabled = true;
+        $("disconnectBtn").disabled = true;
+        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
+        setStatus("🔒 Wallet disconnected safely!", "success");
+      }
+    }
+
+    /**************
+     * FEED (XRPL)
+     **************/
+    let xrplClient = null;
+    async function ensureClient(){
+      if (xrplClient && xrplClient.isConnected()) return xrplClient;
+      xrplClient = new xrpl.Client(XRPL_WSS);
+      await xrplClient.connect();
+      return xrplClient;
+    }
+
+    function parseMemos(memos=[]){
+      const out = {};
+      for (const m of memos){
+        const memo = m?.Memo || {};
+        const k = (hexToStr(memo.MemoType||"")||"").trim().toLowerCase();
+        const v = (hexToStr(memo.MemoData||"")||"").trim();
+        if (k) out[k]=v;
+      }
+      return out;
+    }
+
+    async function loadFeed(){
+      try{
+        const client = await ensureClient();
+        const resp = await client.request({
+          command: "account_tx",
+          account: DESTINATION,
+          ledger_index_min: -1,
+          ledger_index_max: -1,
+          limit: 50
+        });
+
+        const items = [];
+        for (const e of (resp.result.transactions||[])){
+          const tx = e.tx || e.transaction || {};
+          if (tx.TransactionType !== "Payment") continue;
+          if (tx.Destination !== DESTINATION) continue;
+          const memos = parseMemos(tx.Memos || []);
+          if (memos.app !== IDENT_TAG) continue;
+
+          items.push({
+            hash: tx.hash || e.hash || "",
+            account: tx.Account,
+            date: e.tx?.date || e.date,
+            message: memos.msg || "",
+            name: memos.name || "",
+            handle: memos.handle || ""
+          });
+        }
+
+        items.sort((a,b)=> (b.date||0) - (a.date||0));
+
+        const feed = $("feed");
+        feed.innerHTML = "";
+        if (!items.length){
+          feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
+          return;
+        }
+
+        items.slice(0, 20).forEach(it=>{
+          const when = rippleToDate(it.date);
+          const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
+          const signedBy = (it.name || it.handle) ? `<div class="meta">Signed by: ${it.name||""} ${it.handle||""}</div>` : "";
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
+            <div class="meta">
+              <span>From: ${short(it.account,14)}</span>
+              <span>• ${when || "pending…"}</span>
+              ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
+            </div>
+            <div class="msg">${(it.message || "").replace(/[<>&]/g, s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
+            ${signedBy}
+          `;
+          feed.appendChild(div);
+        });
+      } catch(e){
+        console.error("Feed load error:", e);
+        $("feed").innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
+      }
+    }
+
+    let feedTimer = null;
+    function loadFeedSoon(){
+      clearTimeout(feedTimer);
+      feedTimer = setTimeout(loadFeed, 2500);
+    }
+
+    /**************
+     * BINDINGS
+     **************/
+    document.addEventListener("DOMContentLoaded", ()=>{
+      // init Xumm
+      initXumm();
+
+      // buttons
+      $("xummBtn").addEventListener("click", connectXumm);
+      $("signBtn").addEventListener("click", sendPrayer);
+      $("disconnectBtn").addEventListener("click", disconnectWallet);
+
+      // char counter
+      const msgEl = $("message"), cnt = $("charCount");
+      const updateCnt = ()=>{ cnt.textContent = String(msgEl.value.length); };
+      msgEl.addEventListener("input", updateCnt); updateCnt();
+
+      // load feed and refresh every 60s
+      loadFeed();
+      setInterval(loadFeed, 60000);
     });
-
-    testimonials.sort((a,b) => b.ledger_index - a.ledger_index);
-    currentPage = 1;
-    renderPrayers();
-    showFeedbackPopup("Loaded recent prayers.");
-  } catch (err) {
-    console.error("Prayer load error:", err);
-    showFeedbackPopup("Error loading prayers", true);
-  }
-}
-
-document.getElementById("load-prayers").addEventListener("click", loadPrayersFromLedger);
-
-</script>
-
+  </script>
 </body>
 </html>
