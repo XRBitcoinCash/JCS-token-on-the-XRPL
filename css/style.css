@@ -1,67 +1,68 @@
 /* ============================================================
-   JESUS CHRIST SAVES TOKEN — REFINED GLOBAL STYLE SHEET
-   Optimized for both desktop and mobile
+   JESUS CHRIST SAVES TOKEN — CLEAN & RESPONSIVE CSS
+   Faithful to original desktop layout + mobile fixes only
    ============================================================ */
 
 /* --------------------------
-   Color Tokens
+   Root Variables
 --------------------------- */
 :root {
   --gold-1: #ffd700;
   --gold-2: #fff8dc;
   --blue-1: #000428;
   --blue-2: #004e92;
-  --bg-gradient: linear-gradient(180deg, var(--blue-1) 0%, var(--blue-2) 100%);
-  --glow: 0 0 20px rgba(255, 255, 255, 0.45);
+  --glow: 0 0 24px rgba(255, 255, 255, 0.55);
   --card-bg: rgba(0, 0, 0, 0.55);
-  --muted: #cfd9f0;
-  --max-width: 1100px;
-  --radius: 14px;
+  --muted: #b8c7e0;
   --section-spacing: 80px;
   --section-spacing-mobile: 56px;
 }
 
 /* --------------------------
-   Reset / Base
+   Reset + Base
 --------------------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html, body {
-  height: 100%;
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; scroll-behavior: smooth; }
 body {
-  font-family: "Montserrat", sans-serif;
-  background: var(--bg-gradient);
+  font-family: 'Montserrat', sans-serif;
+  background: radial-gradient(1600px 800px at 50% -10%, rgba(255,255,255,0.12), transparent),
+              linear-gradient(180deg, var(--blue-1), var(--blue-2));
   color: #fff;
   line-height: 1.8;
   overflow-x: hidden;
 }
 
-/* Gradient fix: smooth and even */
+/* Subtle light rays (top area only) */
 body::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
   pointer-events: none;
-  background: radial-gradient(
-    1500px 700px at 50% -10%,
-    rgba(255, 255, 255, 0.08),
-    transparent 80%
-  );
+  background:
+    radial-gradient(1000px 500px at 50% -10%, rgba(255,255,255,0.18), transparent 70%),
+    conic-gradient(from 200deg at 50% 10%, rgba(255,255,255,0.06), transparent 40% 80%, rgba(255,255,255,0.06));
   z-index: -2;
   filter: blur(1px);
 }
 
-a {
-  color: #00d4ff;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+a { color: #00d4ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --------------------------
+   Background Particles (Crosses)
+--------------------------- */
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60vh; /* visible only top section */
+  width: 100%;
+  z-index: -1;
+  filter: drop-shadow(0 0 16px rgba(255,255,255,0.6));
+  overflow: hidden;
 }
 
 /* --------------------------
@@ -69,59 +70,65 @@ a:hover {
 --------------------------- */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.55);
   backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 10px 28px;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-header img {
-  height: 48px;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
+header img { height: 48px; filter: drop-shadow(0 0 12px rgba(255,255,255,0.4)); }
+nav a { margin: 0 12px; font-weight: 700; letter-spacing: 0.2px; }
+
+/* --------------------------
+   Gold Sign Ledger Button
+--------------------------- */
+.sign-ledger-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  color: #000 !important;
+  padding: 10px 20px;
+  border-radius: 26px;
+  box-shadow: 0 0 20px rgba(255,215,0,0.8);
+  font-weight: 800;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  border: 1px solid rgba(0,0,0,0.12);
 }
-nav a {
-  margin: 0 12px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
+.sign-ledger-btn:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 28px rgba(255,255,255,1);
+  text-decoration: none;
+  filter: saturate(1.1);
 }
 
 /* --------------------------
-   Hero Section
+   Hero
 --------------------------- */
 .hero {
-  min-height: 88vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-height: 86vh;
+  display: grid;
+  place-items: center;
   text-align: center;
   padding: 120px 20px 40px;
-  max-width: var(--max-width);
-  margin: 0 auto;
 }
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
   text-shadow: var(--glow);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  margin-top: 16px;
 }
 .hero p {
   margin-top: 16px;
-  max-width: 700px;
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  max-width: 780px;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   color: var(--muted);
 }
 .cta {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+  margin-top: 26px;
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
 }
 .cta a {
   padding: 12px 22px;
@@ -129,108 +136,83 @@ nav a {
   background: #00d4ff;
   color: #000;
   font-weight: 800;
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.55);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 16px rgba(0,212,255,0.5);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 .cta a:hover {
   background: #fff;
-  box-shadow: 0 0 22px rgba(255, 255, 255, 0.85);
-  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(255,255,255,0.85);
+  transform: translateY(-1px);
 }
 
 /* --------------------------
-   Cards / Sections
+   Sections / Cards
 --------------------------- */
-section {
-  padding: 56px 20px;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+section { padding: 56px 20px; max-width: 1100px; margin: 0 auto; }
 h2 {
   text-align: center;
-  margin-bottom: 28px;
-  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+  margin-bottom: 24px;
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  text-shadow: 0 0 14px rgba(0,212,255,0.55);
   font-weight: 800;
-  text-shadow: 0 0 14px rgba(0, 212, 255, 0.55);
-}
-.cards {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  justify-items: center;
-}
-.card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-  width: 100%;
-  max-width: 520px;
-  word-wrap: break-word;
-}
-.card h3 {
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-}
-.muted {
-  color: var(--muted);
 }
 
+.cards { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  word-wrap: break-word;
+}
+.card h3 { margin-bottom: 8px; font-size: 1.05rem; }
+.muted { color: var(--muted); }
+
 /* --------------------------
-   Metrics Section
+   Metrics
 --------------------------- */
 .metrics-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
-  text-align: center;
 }
 .metric {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0,0,0,0.6);
   padding: 18px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
   width: 100%;
-  max-width: 260px;
 }
 .metric .value {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  text-shadow: var(--glow);
   margin-top: 6px;
+  text-shadow: var(--glow);
 }
 
 /* --------------------------
-   Verse of the Day Card
+   Verse Card
 --------------------------- */
 #verseCard {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius);
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
   padding: 18px;
-  margin-top: 18px;
-  box-shadow: 0 0 20px rgba(255, 255, 200, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 12px;
+  box-shadow: 0 0 22px rgba(255,255,200,0.35);
+  border: 1px solid rgba(255,255,255,0.1);
 }
-#dailyVerse {
-  font-style: italic;
-  word-wrap: break-word;
-}
+#dailyVerse { font-style: italic; }
 
 /* --------------------------
    Checklist / Roadmap
 --------------------------- */
-ul.checklist {
-  list-style: none;
-  padding-left: 0;
-}
+ul.checklist { list-style: none; padding-left: 0; }
 ul.checklist li {
-  padding: 8px 0;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  line-height: 1.5;
+  padding: 6px 0;
+  display: flex; align-items: baseline; gap: 10px;
 }
 
 /* --------------------------
@@ -238,38 +220,43 @@ ul.checklist li {
 --------------------------- */
 footer {
   text-align: center;
-  padding: 40px 20px 64px;
+  padding: 38px 20px 64px;
   color: var(--muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.45);
-  margin-top: 40px;
-  font-size: 0.95rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.45);
+  margin-top: 36px;
 }
 
 /* --------------------------
-   Responsive Improvements
+   MOBILE FIXES ONLY
 --------------------------- */
+@media (max-width: 900px) {
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .cards { grid-template-columns: 1fr; }
+}
 @media (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: center;
+    text-align: center;
     padding: 12px;
+  }
+  nav a { display: inline-block; margin: 6px 8px; }
+  .hero {
+    padding: 100px 16px 36px;
+    min-height: 80vh;
+  }
+  .hero h1 { margin-top: 8px; }
+  .cta a {
+    width: 100%;
+    max-width: 340px;
     text-align: center;
   }
-  nav a {
-    display: inline-block;
-    margin: 8px;
-  }
-  .hero {
-    padding-top: 140px;
-  }
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
+  .metrics-grid { grid-template-columns: 1fr; }
   .metric {
-    max-width: 90%;
+    max-width: 100%;
   }
-  .cards {
-    grid-template-columns: 1fr;
+  .card {
+    padding: 16px 14px;
   }
 }
