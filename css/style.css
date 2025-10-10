@@ -243,3 +243,21 @@ footer {
   .metric { max-width: 100%; }
   .card { padding: 16px 14px; }
 }
+/* === FIX: Prevent metric overflow === */
+.metric {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric .value {
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
