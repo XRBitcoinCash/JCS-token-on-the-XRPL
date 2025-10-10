@@ -261,3 +261,24 @@ footer {
   overflow-wrap: break-word;
   max-width: 100%;
 }
+/* === FIX: Prevent Circulating Supply overflow === */
+#supply.value {
+  font-size: clamp(0.75rem, 1vw, 1rem);
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+/* Optional — keep all metrics balanced visually */
+.metric .value {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-align: center;
+}
+
+/* Optional — if you want a little breathing room inside cards */
+.metric {
+  padding: 14px 8px;
+}
