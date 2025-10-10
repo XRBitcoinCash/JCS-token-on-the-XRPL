@@ -206,15 +206,50 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Jesus Christ Saves Token. All Rights Reserved.
-  </footer>
 
+   <!-- Footer -->
+<footer class="ecosystem-footer">
+  <div class="footer-container">
+    <h3>JC Ecosystem</h3>
+    <p class="ecosystem-desc">
+      Interlinked XRPL-based assets — XRBitcoin Cash (XRBC), XRB, and Jesus Christ Saves Token (JCS).
+    </p>
+
+    <div class="ecosystem-links">
+      <a href="https://xrbitcoincash.com" class="eco-link" target="_blank" rel="noopener">
+        <img src="https://xrbitcoincash.com/xrbc-nft.png" alt="XRBitcoinCash logo">
+        <span>XRBitcoin Cash (XRBC)</span>
+      </a>
+
+      <a href="https://xrbitcoincash.github.io/XRBitcoin/" class="eco-link" target="_blank" rel="noopener">
+        <img src="https://xrbitcoincash.github.io/XRBitcoin/xrbitcoin-logo.png" alt="XRBitcoin logo">
+        <span>XRB</span>
+      </a>
+
+      <a href="https://jesuschristsavestoken.com/" class="eco-link" target="_blank" rel="noopener">
+        <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token logo">
+        <span>Jesus Christ Saves Token (JCS)</span>
+      </a>
+
+      <a href="https://x.com/JesusCS_token" target="_blank" class="eco-link" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
+             alt="Twitter" style="width:22px;height:22px;">
+        <span>Twitter</span>
+      </a>
+    </div>
+
+    <p class="ecosystem-tagline"><strong>Built on the XRP Ledger.</strong></p>
+    <p class="ecosystem-copy">© 2025 Jesus Christ Saves Token. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
+
+  <!-- Scripts -->
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Cross particles (subtle, upward drift)
+    // ✝️ Cross particles (subtle, upward drift)
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 3, "density": { "enable": false } },
@@ -228,24 +263,100 @@
     });
   </script>
 
-  <!-- Verse of the Day -->
+  <!-- ✝️ Verse of the Day (Local Rotating Version) -->
   <script>
-    async function loadVerse() {
-      try {
-        const res = await fetch("https://labs.bible.org/api/?passage=votd&type=json");
-        if (!res.ok) throw new Error("Verse API error");
-        const data = await res.json();
-        const v = data && data[0];
-        if (v) {
-          document.getElementById("dailyVerse").innerText =
-            `${v.bookname} ${v.chapter}:${v.verse} — "${v.text}"`;
-        }
-      } catch (e) {
-        document.getElementById("dailyVerse").innerText = "Unable to load verse right now.";
-        console.error(e);
-      }
+    const verses = [
+      { ref: "John 3:16", text: "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life." },
+      { ref: "Psalm 23:1", text: "The Lord is my shepherd; I shall not want." },
+      { ref: "Philippians 4:13", text: "I can do all things through Christ who strengthens me." },
+      { ref: "Romans 8:28", text: "And we know that in all things God works for the good of those who love Him, who have been called according to His purpose." },
+      { ref: "Proverbs 3:5-6", text: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight." },
+      { ref: "Isaiah 40:31", text: "But those who hope in the Lord will renew their strength; they will soar on wings like eagles; they will run and not grow weary; they will walk and not faint." },
+      { ref: "Matthew 5:16", text: "Let your light so shine before men, that they may see your good works and glorify your Father in heaven." },
+      { ref: "Ephesians 2:8-9", text: "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast." },
+      { ref: "Jeremiah 29:11", text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future." },
+      { ref: "2 Corinthians 5:7", text: "For we walk by faith, not by sight." }
+    ];
+
+    function showRandomVerse() {
+      const v = verses[Math.floor(Math.random() * verses.length)];
+      const el = document.getElementById("dailyVerse");
+      if (el) el.innerText = `${v.ref} — "${v.text}"`;
     }
-    loadVerse();
+
+    // Rotate every 45s
+    showRandomVerse();
+    setInterval(showRandomVerse, 45000);
+  </script>
+
+  <!-- ✝️ NEW: Gentle Glow Cross Cursor -->
+  <script>
+    // Adds a subtle glowing cross cursor effect on hover
+    document.addEventListener("mousemove", (e) => {
+      let cursor = document.getElementById("cross-cursor");
+      if (!cursor) {
+        cursor = document.createElement("div");
+        cursor.id = "cross-cursor";
+        cursor.style.position = "fixed";
+        cursor.style.width = "20px";
+        cursor.style.height = "20px";
+        cursor.style.background = "url('https://jesuschristsavestoken.com/cross1.png') center/contain no-repeat";
+        cursor.style.pointerEvents = "none";
+        cursor.style.zIndex = "9999";
+        cursor.style.filter = "drop-shadow(0 0 8px rgba(255,215,0,0.8))";
+        document.body.appendChild(cursor);
+      }
+      cursor.style.left = e.pageX + "px";
+      cursor.style.top = e.pageY + "px";
+    });
+  </script>
+
+  <!-- ✝️ NEW: Subtle "Amen" Glow after clicking anywhere -->
+  <script>
+    document.addEventListener("click", (e) => {
+      const amen = document.createElement("span");
+      amen.innerText = "Amen ✝️";
+      amen.style.position = "fixed";
+      amen.style.left = e.pageX + "px";
+      amen.style.top = e.pageY + "px";
+      amen.style.color = "#ffd700";
+      amen.style.fontWeight = "800";
+      amen.style.fontFamily = "Montserrat, sans-serif";
+      amen.style.textShadow = "0 0 10px rgba(255,255,255,0.9)";
+      amen.style.pointerEvents = "none";
+      amen.style.transition = "all 1.8s ease-out";
+      document.body.appendChild(amen);
+      setTimeout(() => {
+        amen.style.opacity = 0;
+        amen.style.transform = "translateY(-60px)";
+      }, 50);
+      setTimeout(() => amen.remove(), 2000);
+    });
+  </script>
+
+  <!-- ✝️ NEW: Daily Blessing Footer Rotator -->
+  <script>
+    const blessings = [
+      "May the Lord bless your wallet with wisdom and generosity.",
+      "Walk in faith today, knowing the ledger of Heaven is balanced in love.",
+      "Jesus Christ Saves — both souls and integrity on the XRPL.",
+      "Let your transactions be transparent and your heart pure.",
+      "Grace be with you as you navigate each block of your journey."
+    ];
+    const footer = document.querySelector("footer");
+    if (footer) {
+      const bless = document.createElement("p");
+      bless.id = "dailyBlessing";
+      bless.style.marginTop = "12px";
+      bless.style.color = "#fff8dc";
+      bless.style.fontWeight = "600";
+      bless.style.textShadow = "0 0 8px rgba(255,255,255,0.6)";
+      bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      footer.appendChild(bless);
+      setInterval(() => {
+        bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      }, 60000);
+    }
   </script>
 
   <!-- XRPL Metrics -->
@@ -255,45 +366,34 @@
       const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
       const currency = "JCS";
       let client;
-
       try {
         client = new xrpl.Client("wss://xrplcluster.com");
         await client.connect();
-
-        // Best price from order book (JCS/XRP)
         const bookOffers = await client.request({
           command: "book_offers",
           taker_gets: { currency, issuer },
           taker_pays: { currency: "XRP" },
           limit: 1
         });
-
         let priceXRP = 0;
-        if (bookOffers.result.offers && bookOffers.result.offers.length > 0) {
+        if (bookOffers.result.offers?.length > 0) {
           const offer = bookOffers.result.offers[0];
-          // price = XRP / JCS
           priceXRP = (Number(offer.TakerPays) / 1_000_000) / Number(offer.TakerGets.value);
         }
-
-        // XRP→USD
         const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
         const xrpData = await xrpPriceRes.json();
         const xrpUSD = xrpData?.ripple?.usd ?? 0;
         const priceUSD = priceXRP * xrpUSD;
-
-        // Circulating supply via account_lines (sum of balances)
         const accountLines = await client.request({ command: "account_lines", account: issuer });
         let totalSupply = 0;
         for (const line of (accountLines.result.lines || [])) {
           if (line.currency === currency) totalSupply += parseFloat(line.balance);
         }
-
         const marketCap = totalSupply * (priceUSD || 0);
-
         document.getElementById('price').innerText = priceUSD ? `$${priceUSD.toFixed(6)}` : "—";
         document.getElementById('marketcap').innerText = isFinite(marketCap) ? `$${marketCap.toLocaleString()}` : "—";
         document.getElementById('supply').innerText = `${Number.isFinite(totalSupply) ? totalSupply.toLocaleString() : "—"} JCS`;
-        document.getElementById('change').innerText = "N/A"; // placeholder unless you add 24h calc
+        document.getElementById('change').innerText = "N/A";
       } catch (e) {
         console.error("Metrics error:", e);
       } finally {
