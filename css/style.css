@@ -300,3 +300,48 @@ footer {
     padding-bottom: 80px;
   }
 }
+/* ============================================================
+   DESKTOP FAQ GRID FIX — JESUS CHRIST SAVES TOKEN
+   Expands FAQ cards evenly across the width without compression.
+   Keeps mobile layout untouched.
+   ============================================================ */
+#faq .faq-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#faq .faq-cards .card {
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  padding: 20px 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#faq .faq-cards .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.15);
+}
+
+#faq .faq-cards h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  #faq .faq-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  #faq .faq-cards .card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
