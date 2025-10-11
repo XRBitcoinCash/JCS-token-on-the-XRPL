@@ -345,3 +345,53 @@ footer {
     max-width: 360px;
   }
 }
+/* ============================================================
+   FINAL FAQ DESKTOP FIX — JESUS CHRIST SAVES TOKEN
+   Forces 3 clean, even FAQ columns on desktop.
+   Does NOT affect mobile or other sections.
+   ============================================================ */
+@media (min-width: 1024px) {
+  #faq .cards.faq-cards {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+    justify-items: stretch;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  #faq .cards.faq-cards .card {
+    max-width: none !important;
+    height: 100%;
+    padding: 22px 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    background: rgba(0,0,0,0.55);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  #faq .cards.faq-cards .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(255,255,255,0.15);
+  }
+
+  #faq .cards.faq-cards h3 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+/* Tablet fallback (2 columns) */
+@media (min-width: 769px) and (max-width: 1023px) {
+  #faq .cards.faq-cards {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 22px !important;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile remains unchanged */
