@@ -352,3 +352,114 @@ footer {
   color: #888;
   margin-top: 8px;
 }
+/* ============================================================
+   MOBILE VIEW FIXES — JESUS CHRIST SAVES TOKEN
+   Fixes header overlap, section gradient alignment,
+   light/dark transitions, and uneven card scaling.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* --- HEADER / HERO FIX --- */
+  header {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8); /* darken for readability */
+    padding: 10px 16px;
+  }
+
+  /* Prevent transparent button from stretching header */
+  .sign-ledger-btn {
+    width: auto;
+    max-width: 240px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  /* Add padding so hero content isn't hidden by header */
+  .hero {
+    padding-top: 140px !important;
+    min-height: 85vh;
+  }
+
+  .hero h1 {
+    margin-top: 16px;
+    line-height: 1.2;
+  }
+
+  /* --- BACKGROUND GRADIENT ALIGNMENT FIX --- */
+  body {
+    background: linear-gradient(
+      180deg,
+      var(--blue-1) 0%,
+      #001a44 35%,
+      #003d8b 65%,
+      var(--blue-2) 100%
+    );
+  }
+
+  section {
+    background: transparent;
+    padding: 48px 18px;
+  }
+
+  /* --- VERSE CARD ALIGNMENT --- */
+  #verseCard {
+    background: rgba(0, 0, 0, 0.55);
+    margin-top: 24px;
+    box-shadow: 0 0 18px rgba(255, 255, 200, 0.25);
+  }
+
+  /* --- METRICS FIX --- */
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .metric {
+    background: rgba(0, 0, 0, 0.55);
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    transform: none;
+  }
+
+  /* --- ROADMAP / CHECKLIST ALIGNMENT --- */
+  ul.checklist li {
+    align-items: flex-start;
+    font-size: 0.95rem;
+  }
+
+  /* --- CARD SCALING FIX --- */
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    transform: none !important;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* Ensure even visual weight for FAQ & ecosystem sections */
+  footer,
+  .ecosystem-footer {
+    background: rgba(0, 0, 0, 0.85);
+    padding-bottom: 80px;
+  }
+
+  /* --- LIGHT/DARK BALANCE --- */
+  section:nth-of-type(even),
+  .metrics-grid:nth-of-type(even),
+  .cards:nth-of-type(even) {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  section:nth-of-type(odd),
+  .metrics-grid:nth-of-type(odd),
+  .cards:nth-of-type(odd) {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
