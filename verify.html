@@ -557,5 +557,133 @@
       setInterval(loadFeed, 60000);
     });
   </script>
+<script>
+/**
+ * Xaman/Xumm header click shield
+ * - Finds wallet iframe(s) and floats an invisible div over the TOP header band.
+ * - Blocks clicks/taps on the title/About area that cause 404s.
+ * - Does not cover the QR/content area.
+ *
+ * Tweak HEADER_HEIGHT if needed.
+ */
+(function () {
+  // Adjust if you still manage to click the title/About
+  const HEADER_HEIGHT = 72; // px
+
+  // If the widget title bar is taller/shorter on mobile, you can vary by screen width
+  // const HEADER_HEIGHT = matchMedia('(max-width: 640px)').matches ? 80 : 72;
+
+  // Identify candidate iframes
+  function isXamanIframe(el) {
+    if (!(el instanceof HTMLIFrameElement)) return false;
+    const src   = (el.getAttribute('src')   || '').toLowerCase();
+    const title = (el.getAttribute('title') || '').toLowerCase();
+    return /xumm|xaman/.test(src) || /xumm|xaman/.test(title);
+  }
+
+  // Map<iframe, shieldDiv>
+  const shields = new Map();
+
+  function makeShield() {
+    const s = document.createElement('div');
+    // Cover clicks but remain visually invisible
+    Object.assign(s.style, {
+      position: 'fixed',
+      left: '0px',
+      top: '0px',
+      width: '0px',
+      height: '0px',
+      pointerEvents: 'auto',
+      background: 'transparent',
+      zIndex: '2147483646', // just under most cookie banners, above modals
+      // Optional debug tint:
+      // background: 'rgba(255,0,0,0.08)'
+      touchAction: 'none', // block touch gestures
+    });
+
+    // Safety: swallow events
+    ['click','mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(evt =>
+      s.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, { passive: false })
+    );
+
+    document.body.appendChild(s);
+    return s;
+  }
+
+  function positionShieldOverHeader(ifr) {
+    const rect = ifr.getBoundingClientRect();
+    // Hide if iframe not visible
+    if (rect.width <= 0 || rect.height <= 0) {
+      const sh = shields.get(ifr);
+      if (sh) sh.style.display = 'none';
+      return;
+    }
+
+    let sh = shields.get(ifr);
+    if (!sh) {
+      sh = makeShield();
+      shields.set(ifr, sh);
+    }
+
+    sh.style.display = 'block';
+    sh.style.left   = rect.left + 'px';
+    sh.style.top    = rect.top  + 'px';
+    sh.style.width  = rect.width + 'px';
+    sh.style.height = Math.min(HEADER_HEIGHT, rect.height) + 'px';
+  }
+
+  function hideShield(ifr) {
+    const sh = shields.get(ifr);
+    if (sh) sh.style.display = 'none';
+  }
+
+  function scanIframes() {
+    const nodes = Array.from(document.querySelectorAll('iframe'));
+    const xamanIframes = nodes.filter(isXamanIframe);
+
+    // Position shields over all detected wallet iframes
+    xamanIframes.forEach(positionShieldOverHeader);
+
+    // Hide shields for any iframes that disappeared
+    for (const ifr of shields.keys()) {
+      if (!document.body.contains(ifr) || !xamanIframes.includes(ifr)) hideShield(ifr);
+    }
+  }
+
+  // Continuously track layout/animation changes
+  let ticking = false;
+  function tick() {
+    ticking = false;
+    scanIframes();
+    requestAnimationFrame(tick);
+  }
+
+  // React to DOM changes and resizes
+  const mo = new MutationObserver(() => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } });
+  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+
+  window.addEventListener('resize',  () => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }, { passive: true });
+  window.addEventListener('scroll',  () => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }, { passive: true });
+
+  // Also re-run when new iframes are added to start watching their size
+  const ro = new ResizeObserver(entries => {
+    for (const entry of entries) {
+      if (entry.target instanceof HTMLIFrameElement && isXamanIframe(entry.target)) {
+        positionShieldOverHeader(entry.target);
+      }
+    }
+  });
+  const watchFrames = new MutationObserver(() => {
+    document.querySelectorAll('iframe').forEach(ifr => {
+      try { ro.observe(ifr); } catch {}
+    });
+  });
+  watchFrames.observe(document.documentElement, { childList: true, subtree: true });
+
+  // Kick off
+  requestAnimationFrame(tick);
+})();
+</script>
+
 </body>
 </html>
