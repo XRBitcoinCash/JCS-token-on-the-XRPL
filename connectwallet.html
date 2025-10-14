@@ -122,39 +122,17 @@
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
-
-  <style>
-   /* ============================================================
-   Xaman (Xumm) QR Modal — Hard Overrides
-   Purpose: Remove “About” entry + make header title non-link.
-   Drop this at the VERY END of your CSS so it wins specificity.
+<style>
+/* ============================================================
+   Xaman (Xumm) QR Modal — (FYI: iframe-insulated; harmless to keep)
    ============================================================ */
-
-/* 1) Remove every known “About” variant the widget emits */
 .xumm-about,
 [data-testid="xumm-about"],
 .xumm-modal-header a[href*="about"],
 .xumm-modal-header button[aria-label="About"],
 .xumm-qr-modal a[href*="/about"],
-.xumm-qr a[href*="/about"],
-/* Defensive: any header/topbar item literally named About */
-.xumm-modal-header a:where(:is(:link,:visited)) :where(span,em,strong)::before,
-.xumm-modal-header a:where(:is(:link,:visited)) {
-  /* If it’s an About link in header, hide it */
-}
-.xumm-modal-header a[href*="about"],
-.xumm-modal-header nav a[href*="about"],
-.xumm-modal-header button[aria-label="About"],
-.xumm-qr-modal [href*="/about"],
-.xumm-qr [href*="/about"] {
-  display: none !important;
-}
+.xumm-qr a[href*="/about"] { display: none !important; }
 
-/* 2) Title should remain visible but be non-interactive if rendered as <a> */
-.xumm-modal-header a,
-.xumm-qr a {
-  /* Only neutralize anchors that look like the title in the header */
-}
 .xumm-modal-header a.xumm-title,
 .xumm-modal-header a.xumm-title-link,
 .xumm-modal-header h1 a,
@@ -166,72 +144,15 @@
 .xumm-modal-header > a:first-child,
 .xumm-modal-header .brand a,
 .xumm-modal-header .logo a {
-  pointer-events: none !important;     /* ignore clicks/taps */
-  cursor: default !important;          /* don’t show link cursor */
-  text-decoration: none !important;    /* remove underline */
-  color: inherit !important;           /* keep existing color */
-  /* Optional: visually indicate it’s not interactive */
-  filter: none !important;
-}
-
-/* 3) Kill hover/active/focus link effects on the title anchor */
-.xumm-modal-header a.xumm-title:hover,
-.xumm-modal-header a.xumm-title:active,
-.xumm-modal-header a.xumm-title:focus,
-.xumm-modal-header a.xumm-title-link:hover,
-.xumm-modal-header a.xumm-title-link:active,
-.xumm-modal-header a.xumm-title-link:focus,
-.xumm-modal-header h1 a:hover,
-.xumm-modal-header h1 a:active,
-.xumm-modal-header h1 a:focus,
-.xumm-modal-header h2 a:hover,
-.xumm-modal-header h2 a:active,
-.xumm-modal-header h2 a:focus,
-.xumm-modal-header .xumm-title a:hover,
-.xumm-modal-header .xumm-title a:active,
-.xumm-modal-header .xumm-title a:focus,
-.xumm-modal-header .title a:hover,
-.xumm-modal-header .title a:active,
-.xumm-modal-header .title a:focus,
-.xumm-qr .xumm-title a:hover,
-.xumm-qr .xumm-title a:active,
-.xumm-qr .xumm-title a:focus,
-.xumm-qr .title a:hover,
-.xumm-qr .title a:active,
-.xumm-qr .title a:focus,
-.xumm-modal-header > a:first-child:hover,
-.xumm-modal-header > a:first-child:active,
-.xumm-modal-header > a:first-child:focus,
-.xumm-modal-header .brand a:hover,
-.xumm-modal-header .brand a:active,
-.xumm-modal-header .brand a:focus,
-.xumm-modal-header .logo a:hover,
-.xumm-modal-header .logo a:active,
-.xumm-modal-header .logo a:focus {
-  outline: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
   text-decoration: none !important;
-  box-shadow: none !important;
+  color: inherit !important;
 }
+</style>
 
-/* 4) Defensive: nuke any cursor/underline styles applied generically to header links */
-.xumm-modal-header a,
-.xumm-qr a {
-  text-decoration-thickness: 0 !important;
-}
-
-/* (Optional) If the widget puts title & About in a flex header,
-   removing About can shift spacing; keep header nicely aligned. */
-.xumm-modal-header,
-.xumm-qr-modal .xumm-modal-header {
-  gap: 0.5rem; /* or whatever your header spacing is */
-}
-
-  </style>
-
-  <!-- Xumm/Xaman SDK -->
- <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
-
-
+<!-- Xumm/Xaman SDK -->
+<script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
 </head>
 <body>
 
@@ -262,11 +183,8 @@
 
 <div id="status"></div>
 
-
 <!-- Ledger Counter -->
-<div class="ledger-counter" id="ledgerCounter">
-  Ledger Count: 0
-</div>
+<div class="ledger-counter" id="ledgerCounter">Ledger Count: 0</div>
 
 <!-- Cryptic Verses -->
 <div class="scroll-verse">
@@ -292,7 +210,7 @@
   // Ledger ticker simulation (for demo)
   let ledger = 987654;
   setInterval(() => {
-    ledger += Math.floor(Math.random()*3); // simulate new ledgers
+    ledger += Math.floor(Math.random() * 3); // simulate new ledgers
     ledgerCounter.textContent = "Ledger Count: " + ledger.toLocaleString();
   }, 4000);
 
@@ -333,93 +251,77 @@
     statusDiv.textContent = 'Logging out...';
   };
 </script>
+
+<!-- >>> KEEP ONLY THIS ONE SHIELD SCRIPT BELOW <<< -->
 <script>
-/* Route any injected "About" control in the Xaman/Xumm widget to https://xaman.app/ */
-(() => {
-  const DEST = 'https://xaman.app/';
+(function () {
+  const HEADER_HEIGHT = 64; // px; adjust if your Xaman modal header is taller/shorter
+  let shield = null, trackedIframe = null;
 
-  // 1) Click interceptor (shadow-DOM safe via composedPath)
-document.addEventListener('click', (e) => {
-  const path = (typeof e.composedPath === 'function') ? e.composedPath() : [];
-  const chain = path.length ? path : [e.target];
-
-  for (let i = 0; i < Math.min(chain.length, 8); i++) {
-    const el = chain[i];
-    if (!(el instanceof Element)) continue;
-
-    const tag  = (el.tagName || '').toLowerCase();
-    const aria = (el.getAttribute && el.getAttribute('aria-label')) || '';
-    const text = (el.textContent || '').trim();
-
-    const looksLikeAbout =
-      /\babout\b/i.test(aria) ||
-      /^about(\s+xumm|\s+xaman)?$/i.test(text);
-
-    const isButtonish =
-      tag === 'a' || tag === 'button' || el.getAttribute('role') === 'button';
-
-    if (isButtonish && looksLikeAbout) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.open(DEST, '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    if (tag === 'a') {
-      const href = el.getAttribute('href') || '';
-      if (/^\/?about(\b|\/|\?|#|$)/i.test(href) || (/about/i.test(href) && !/^https?:\/\//i.test(href))) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.open(DEST, '_blank', 'noopener,noreferrer');
-        return;
-      }
-    }
-  }
-}, true);
-
-
-  // 2) Mutation rewrite (updates any anchor the widget injects)
-  function rewrite(root = document) {
-    root.querySelectorAll('a,button,[role="button"]').forEach((el) => {
-      const aria = (el.getAttribute && el.getAttribute('aria-label')) || '';
-      const text = (el.textContent || '').trim();
-      const href = el.getAttribute && el.getAttribute('href');
-
-      const isAbout =
-        /\babout\b/i.test(aria) ||
-        /^about(\s+xumm|\s+xaman)?$/i.test(text) ||
-        (typeof href === 'string' && (/^\/?about(\b|\/|\?|#|$)/i.test(href) || (/about/i.test(href) && !/^https?:\/\//i.test(href))));
-
-      if (isAbout) {
-        if (el.tagName.toLowerCase() === 'a') {
-          el.setAttribute('href', DEST);
-          el.setAttribute('target', '_blank');
-          el.setAttribute('rel', 'noopener');
-        } else {
-          el.style.cursor = 'pointer';
-        }
-      }
-    });
-
-    // Watch open shadow roots too
-    root.querySelectorAll('*').forEach((n) => {
-      if (n.shadowRoot) observe(n.shadowRoot);
-    });
+  function makeShield() {
+    if (shield) return shield;
+    shield = document.createElement('div');
+    shield.style.position = 'fixed';
+    shield.style.left = '0';
+    shield.style.top = '0';
+    shield.style.width = '0';
+    shield.style.height = '0';
+    shield.style.zIndex = '2147483646';
+    shield.style.pointerEvents = 'auto';      // absorb clicks
+    shield.style.background = 'transparent';  // keep header visible
+    // If you also want to visually hide the header, use:
+    // shield.style.background = 'rgba(0,0,0,0.9)';
+    document.body.appendChild(shield);
+    return shield;
   }
 
-  function observe(root = document) {
-    rewrite(root);
-    const mo = new MutationObserver(() => rewrite(root));
-    mo.observe(root, { childList: true, subtree: true });
+  function positionShieldOverHeader(ifr) {
+    const s = makeShield();
+    const r = ifr.getBoundingClientRect();
+    s.style.left = r.left + 'px';
+    s.style.top = r.top + 'px';
+    s.style.width = r.width + 'px';
+    s.style.height = Math.min(HEADER_HEIGHT, r.height) + 'px';
+    s.style.display = 'block';
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => observe(document));
-  } else {
-    observe(document);
+  function hideShield() { if (shield) shield.style.display = 'none'; }
+
+  function looksLikeXamanIframe(el) {
+    if (!(el instanceof HTMLIFrameElement)) return false;
+    const src = (el.getAttribute('src') || '').toLowerCase();
+    const title = (el.getAttribute('title') || '').toLowerCase();
+    return /xumm|xaman/.test(src) || /xumm|xaman/.test(title);
   }
+
+  function scanForIframe() {
+    const iframes = Array.from(document.querySelectorAll('iframe'));
+    return iframes.find(looksLikeXamanIframe) || null;
+  }
+
+  function tick() {
+    const ifr = scanForIframe();
+    if (ifr) { trackedIframe = ifr; positionShieldOverHeader(ifr); }
+    else { trackedIframe = null; hideShield(); }
+  }
+
+  const ro = new ResizeObserver(() => { if (trackedIframe) positionShieldOverHeader(trackedIframe); });
+  const mo = new MutationObserver(() => tick());
+  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', tick, { passive: true });
+  window.addEventListener('scroll', tick, { passive: true });
+
+  // Observe iframes for size changes
+  const io = new MutationObserver(() => {
+    document.querySelectorAll('iframe').forEach(ifr => { try { ro.observe(ifr); } catch {} });
+  });
+  io.observe(document.documentElement, { childList: true, subtree: true });
+
+  // Keep aligned with animations/layout changes
+  (function loop(){ tick(); requestAnimationFrame(loop); })();
 })();
 </script>
 
 </body>
 </html>
+
