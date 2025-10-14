@@ -152,174 +152,238 @@
 </style>
 
 <!-- Xumm/Xaman SDK -->
-<script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
-</head>
-<body>
-
-<header>
-  <h1>Codex Verbi Dei</h1>
-  <p>"Et Verbum caro factum est, et habitavit in nobis." — John 1:14</p>
-</header>
-
-<div id="walletAddress">Status: Not connected</div>
-
-<!-- Interaction buttons -->
-<div class="btn-row">
-  <button id="trustlineButton" style="display:none">➕ Set JCS Trustline</button>
-  <button id="buyButton" style="display:none">💸 Buy JCS Tokens (1 XRP)</button>
-  <button id="connectWalletButton">Connect Wallet</button>
-  <button id="logoutButton" style="display:none">Logout</button>
-
-  <!-- NEW: About Xaman (formerly Xumm) -->
-  <a
-    id="aboutXamanButton"
-    href="https://xaman.app/"
-    target="_blank"
-    rel="noopener"
-    role="button"
-    style="padding:10px 28px;margin:12px;font-size:1em;border:none;border-radius:6px;cursor:pointer;font-weight:bold;transition:.3s;background:#444;color:#fff;display:inline-block;text-decoration:none"
-  >About Xaman</a>
-</div>
-
-<div id="status"></div>
-
-<!-- Ledger Counter -->
-<div class="ledger-counter" id="ledgerCounter">Ledger Count: 0</div>
-
-<!-- Cryptic Verses -->
-<div class="scroll-verse">
-  "Beati pauperes spiritu, quoniam ipsorum est regnum caelorum."<br>
-  <em>— Dead Sea Scroll Fragment echoing Matthew 5:3</em>
-</div>
-<div class="scroll-verse">
-  "Ego sum lux mundi; qui sequitur me, non ambulabit in tenebris."<br>
-  <em>— Jesus, John 8:12</em>
-</div>
-
 <script>
-  // Initialize SDK with your public API key
-  const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+/**
+ * JCS · Xaman Connect (Custom Modal)
+ * Desktop: QR + deep link
+ * Mobile: direct deep link (no QR)
+ * No embedded iframe header; avoids 404.local
+ */
 
-  // UI Elements
-  const connectWalletButton = document.getElementById('connectWalletButton');
-  const walletAddressElement = document.getElementById('walletAddress');
-  const logoutButton = document.getElementById('logoutButton');
-  const statusDiv = document.getElementById('status');
-  const ledgerCounter = document.getElementById('ledgerCounter');
+//////////////////////////////
+// 0) SDK init (unchanged) //
+//////////////////////////////
+const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
 
-  // Ledger ticker simulation (for demo)
-  let ledger = 987654;
-  setInterval(() => {
-    ledger += Math.floor(Math.random() * 3); // simulate new ledgers
-    ledgerCounter.textContent = "Ledger Count: " + ledger.toLocaleString();
-  }, 4000);
+//////////////////////////////
+// 1) Grab existing elements //
+//////////////////////////////
+const connectWalletButton  = document.getElementById('connectWalletButton');
+const logoutButton         = document.getElementById('logoutButton');
+const walletAddressElement = document.getElementById('walletAddress');
+const statusDiv            = document.getElementById('status');
+const ledgerCounter        = document.getElementById('ledgerCounter');
+const trustlineButton      = document.getElementById('trustlineButton'); // if you wire later
+const buyButton            = document.getElementById('buyButton');       // if you wire later
 
-  // Wait for SDK to be ready
-  xumm.on('ready', () => {
-    statusDiv.textContent = 'Xumm SDK loaded and ready.';
-    connectWalletButton.disabled = false;
-  });
+// Lightweight ledger ticker (kept)
+let ledger = 987654;
+setInterval(() => {
+  ledger += Math.floor(Math.random() * 3);
+  if (ledgerCounter) ledgerCounter.textContent = "Ledger Count: " + ledger.toLocaleString();
+}, 4000);
 
-  // "Connect Wallet"
-  connectWalletButton.onclick = () => {
-    statusDiv.textContent = 'Connecting to Xumm wallet...';
-    xumm.authorize().catch(error => {
-      statusDiv.textContent = 'Authorization failed: ' + error.message;
-    });
+/////////////////////////////////////
+// 2) Build a branded custom modal //
+/////////////////////////////////////
+const modal = document.createElement('div');
+modal.id = 'xamanModal';
+Object.assign(modal.style, {
+  display:'none', position:'fixed', inset:'0', background:'rgba(0,0,0,.72)',
+  zIndex:'2147483646', alignItems:'center', justifyContent:'center'
+});
+
+const panel = document.createElement('div');
+Object.assign(panel.style, {
+  width:'min(520px,92vw)', background:'#0f1115', color:'#fff',
+  borderRadius:'14px', padding:'22px', boxShadow:'0 10px 40px rgba(0,0,0,.6)',
+  border:'1px solid rgba(255,255,255,.06)', fontFamily:'Montserrat,system-ui'
+});
+
+// Header
+const headerRow = document.createElement('div');
+Object.assign(headerRow.style, { display:'flex', alignItems:'center', justifyContent:'space-between', gap:'12px', marginBottom:'14px' });
+
+const brand = document.createElement('div');
+Object.assign(brand.style, { display:'flex', alignItems:'center', gap:'10px' });
+
+const logo = document.createElement('img');
+logo.src = 'https://xaman.app/favicon.ico';
+logo.alt = 'Xaman';
+logo.width = 20; logo.height = 20;
+logo.style.borderRadius = '4px';
+
+const brandText = document.createElement('div');
+brandText.style.lineHeight = '1.1';
+const brandStrong = document.createElement('strong');
+brandStrong.textContent = 'Connect with Xaman';
+Object.assign(brandStrong.style, { fontWeight:'700', fontSize:'16px' });
+const brandSub = document.createElement('span');
+brandSub.textContent = 'Powered by Xaman (formerly Xumm)';
+Object.assign(brandSub.style, { fontWeight:'500', fontSize:'12px', color:'#9bb3d1', display:'block', marginTop:'2px' });
+brandText.appendChild(brandStrong);
+brandText.appendChild(brandSub);
+
+brand.appendChild(logo);
+brand.appendChild(brandText);
+
+const closeBtn = document.createElement('button');
+closeBtn.id = 'xamanClose';
+closeBtn.setAttribute('aria-label','Close');
+closeBtn.textContent = '✕';
+Object.assign(closeBtn.style, { background:'#1b1f2a', color:'#cbd5e1', border:'0', borderRadius:'8px', padding:'6px 10px', cursor:'pointer' });
+
+headerRow.appendChild(brand);
+headerRow.appendChild(closeBtn);
+
+// Body
+const body = document.createElement('div');
+body.id = 'xamanModalBody';
+Object.assign(body.style, { display:'grid', gap:'16px', justifyItems:'center', textAlign:'center' });
+
+const qrImg = document.createElement('img');
+qrImg.id = 'xamanQR';
+qrImg.alt = 'Scan this QR with the Xaman app';
+Object.assign(qrImg.style, {
+  width:'280px', height:'280px', objectFit:'contain',
+  background:'#fff', borderRadius:'10px', padding:'8px', display:'none'
+});
+
+const deeplinkA = document.createElement('a');
+deeplinkA.id = 'xamanDeeplink';
+deeplinkA.target = '_blank';
+deeplinkA.rel = 'noopener';
+deeplinkA.textContent = 'Open in Xaman';
+Object.assign(deeplinkA.style, {
+  display:'none', background:'#3b82f6', color:'#fff',
+  textDecoration:'none', padding:'10px 16px', borderRadius:'10px', fontWeight:'700'
+});
+
+const modalStatus = document.createElement('div');
+modalStatus.id = 'xamanStatus';
+Object.assign(modalStatus.style, { color:'#b8c7e0', fontSize:'14px' });
+modalStatus.textContent = 'Preparing secure connection…';
+
+const micro = document.createElement('div');
+micro.textContent = 'You’ll review and approve in the Xaman app. We never see your secret keys.';
+Object.assign(micro.style, { color:'#93a4bd', fontSize:'11px' });
+
+body.appendChild(qrImg);
+body.appendChild(deeplinkA);
+body.appendChild(modalStatus);
+body.appendChild(micro);
+
+panel.appendChild(headerRow);
+panel.appendChild(body);
+modal.appendChild(panel);
+document.body.appendChild(modal);
+
+// Helpers
+function openModal(){ modal.style.display = 'flex'; }
+function closeModal(){ modal.style.display = 'none'; }
+closeBtn.addEventListener('click', closeModal);
+
+//////////////////////////////////////
+// 3) Mobile detection (no QR on mobile)
+//////////////////////////////////////
+function isMobile() {
+  const ua = navigator.userAgent || '';
+  const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone/i.test(ua);
+  const smallScreen = matchMedia && matchMedia('(max-width: 812px)').matches; // phones & many small tablets
+  return mobileUA || smallScreen;
+}
+
+//////////////////////////////////////
+// 4) SDK lifecycle + connect flow //
+//////////////////////////////////////
+xumm.on('ready', () => {
+  if (statusDiv) statusDiv.textContent = 'Xumm SDK loaded and ready.';
+  if (connectWalletButton) connectWalletButton.disabled = false;
+});
+
+// SIGN IN payload JSON (this is the only JSON required for connect)
+const SIGNIN_PAYLOAD = { txjson: { TransactionType: 'SignIn' } };
+
+// Connect handler
+if (connectWalletButton) {
+  connectWalletButton.onclick = async () => {
+    openModal();
+    qrImg.style.display = 'none';
+    deeplinkA.style.display = 'none';
+    modalStatus.textContent = 'Generating SignIn request…';
+
+    try {
+      const sub = await xumm.payload.createAndSubscribe(
+        SIGNIN_PAYLOAD,
+        evt => {
+          if (evt?.data?.signed === true) modalStatus.textContent = 'Signed. Finalizing…';
+          else if (evt?.data?.signed === false) modalStatus.textContent = 'Request rejected in Xaman.';
+        }
+      );
+
+      const { created, resolved } = sub;
+
+      // Build the deep link (universal link Xaman provides)
+      const deep = created?.next?.always || created?.refs?.link || '';
+      const qr   = created?.refs?.qr_png || '';
+
+      // MOBILE: no QR, go straight to app
+      if (isMobile() && deep) {
+        modalStatus.textContent = 'Opening Xaman…';
+        // try to open in-place (fewer pop-up blockers on mobile)
+        window.location.href = deep;
+        // keep a fallback button in case the OS blocks navigation
+        deeplinkA.href = deep;
+        deeplinkA.style.display = '';
+      } else {
+        // DESKTOP: show QR (and also the deep link button as a backup)
+        if (qr) { qrImg.src = qr; qrImg.style.display = ''; }
+        if (deep) { deeplinkA.href = deep; deeplinkA.style.display = ''; }
+        modalStatus.textContent = 'Scan the QR with Xaman, or click the button.';
+      }
+
+      // Wait for result
+      const outcome = await resolved; // { signed: boolean, ... }
+      if (!outcome?.signed) {
+        modalStatus.textContent = 'Not signed. You can close this window.';
+        return;
+      }
+
+      // On success, fetch account & update UI
+      try {
+        const account = await xumm.user.account;
+        walletAddressElement.textContent = 'Wallet Connected: ' + account;
+        connectWalletButton.style.display = 'none';
+        if (logoutButton) logoutButton.style.display = '';
+        if (statusDiv) statusDiv.textContent = 'Connected successfully via SignIn.';
+      } catch (e) {
+        if (statusDiv) statusDiv.textContent = 'Signed, but unable to fetch account. (Try refresh.)';
+      } finally {
+        closeModal();
+      }
+    } catch (err) {
+      console.error(err);
+      modalStatus.textContent = 'Error creating SignIn. Please try again.';
+    }
   };
+}
 
-  // On success
-  xumm.on('success', async () => {
-    const account = await xumm.user.account;
-    walletAddressElement.textContent = 'Wallet Connected: ' + account;
-    connectWalletButton.style.display = 'none';
-    logoutButton.style.display = '';
-    statusDiv.textContent = 'Connected successfully.';
-  });
-
-  // On logout
-  xumm.on('logout', async () => {
-    walletAddressElement.textContent = 'Status: Not connected';
-    connectWalletButton.style.display = '';
-    logoutButton.style.display = 'none';
-    statusDiv.textContent = 'You have logged out.';
-  });
-
-  // Manual logout
+//////////////////////////////////////
+// 5) Logout (unchanged semantics)  //
+//////////////////////////////////////
+if (logoutButton) {
   logoutButton.onclick = () => {
     xumm.logout();
-    statusDiv.textContent = 'Logging out...';
+    if (statusDiv) statusDiv.textContent = 'Logging out...';
   };
-</script>
+}
 
-<!-- >>> KEEP ONLY THIS ONE SHIELD SCRIPT BELOW <<< -->
-<script>
-(function () {
-  const HEADER_HEIGHT = 64; // px; adjust if your Xaman modal header is taller/shorter
-  let shield = null, trackedIframe = null;
-
-  function makeShield() {
-    if (shield) return shield;
-    shield = document.createElement('div');
-    shield.style.position = 'fixed';
-    shield.style.left = '0';
-    shield.style.top = '0';
-    shield.style.width = '0';
-    shield.style.height = '0';
-    shield.style.zIndex = '2147483646';
-    shield.style.pointerEvents = 'auto';      // absorb clicks
-    shield.style.background = 'transparent';  // keep header visible
-    // If you also want to visually hide the header, use:
-    // shield.style.background = 'rgba(0,0,0,0.9)';
-    document.body.appendChild(shield);
-    return shield;
-  }
-
-  function positionShieldOverHeader(ifr) {
-    const s = makeShield();
-    const r = ifr.getBoundingClientRect();
-    s.style.left = r.left + 'px';
-    s.style.top = r.top + 'px';
-    s.style.width = r.width + 'px';
-    s.style.height = Math.min(HEADER_HEIGHT, r.height) + 'px';
-    s.style.display = 'block';
-  }
-
-  function hideShield() { if (shield) shield.style.display = 'none'; }
-
-  function looksLikeXamanIframe(el) {
-    if (!(el instanceof HTMLIFrameElement)) return false;
-    const src = (el.getAttribute('src') || '').toLowerCase();
-    const title = (el.getAttribute('title') || '').toLowerCase();
-    return /xumm|xaman/.test(src) || /xumm|xaman/.test(title);
-  }
-
-  function scanForIframe() {
-    const iframes = Array.from(document.querySelectorAll('iframe'));
-    return iframes.find(looksLikeXamanIframe) || null;
-  }
-
-  function tick() {
-    const ifr = scanForIframe();
-    if (ifr) { trackedIframe = ifr; positionShieldOverHeader(ifr); }
-    else { trackedIframe = null; hideShield(); }
-  }
-
-  const ro = new ResizeObserver(() => { if (trackedIframe) positionShieldOverHeader(trackedIframe); });
-  const mo = new MutationObserver(() => tick());
-  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
-  window.addEventListener('resize', tick, { passive: true });
-  window.addEventListener('scroll', tick, { passive: true });
-
-  // Observe iframes for size changes
-  const io = new MutationObserver(() => {
-    document.querySelectorAll('iframe').forEach(ifr => { try { ro.observe(ifr); } catch {} });
-  });
-  io.observe(document.documentElement, { childList: true, subtree: true });
-
-  // Keep aligned with animations/layout changes
-  (function loop(){ tick(); requestAnimationFrame(loop); })();
-})();
+xumm.on('logout', () => {
+  walletAddressElement.textContent = 'Status: Not connected';
+  if (connectWalletButton) connectWalletButton.style.display = '';
+  if (logoutButton) logoutButton.style.display = 'none';
+  if (statusDiv) statusDiv.textContent = 'You have logged out.';
+});
 </script>
 
 </body>
