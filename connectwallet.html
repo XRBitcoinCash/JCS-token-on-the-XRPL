@@ -221,7 +221,9 @@
   </style>
 
   <!-- Xumm/Xaman SDK -->
-  <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+ <script src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+
+
 </head>
 <body>
 
@@ -322,6 +324,93 @@
     xumm.logout();
     statusDiv.textContent = 'Logging out...';
   };
+</script>
+<script>
+/* Route any injected "About" control in the Xaman/Xumm widget to https://xaman.app/ */
+(() => {
+  const DEST = 'https://xaman.app/';
+
+  // 1) Click interceptor (shadow-DOM safe via composedPath)
+document.addEventListener('click', (e) => {
+  const path = (typeof e.composedPath === 'function') ? e.composedPath() : [];
+  const chain = path.length ? path : [e.target];
+
+  for (let i = 0; i < Math.min(chain.length, 8); i++) {
+    const el = chain[i];
+    if (!(el instanceof Element)) continue;
+
+    const tag  = (el.tagName || '').toLowerCase();
+    const aria = (el.getAttribute && el.getAttribute('aria-label')) || '';
+    const text = (el.textContent || '').trim();
+
+    const looksLikeAbout =
+      /\babout\b/i.test(aria) ||
+      /^about(\s+xumm|\s+xaman)?$/i.test(text);
+
+    const isButtonish =
+      tag === 'a' || tag === 'button' || el.getAttribute('role') === 'button';
+
+    if (isButtonish && looksLikeAbout) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(DEST, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    if (tag === 'a') {
+      const href = el.getAttribute('href') || '';
+      if (/^\/?about(\b|\/|\?|#|$)/i.test(href) || (/about/i.test(href) && !/^https?:\/\//i.test(href))) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.open(DEST, '_blank', 'noopener,noreferrer');
+        return;
+      }
+    }
+  }
+}, true);
+
+
+  // 2) Mutation rewrite (updates any anchor the widget injects)
+  function rewrite(root = document) {
+    root.querySelectorAll('a,button,[role="button"]').forEach((el) => {
+      const aria = (el.getAttribute && el.getAttribute('aria-label')) || '';
+      const text = (el.textContent || '').trim();
+      const href = el.getAttribute && el.getAttribute('href');
+
+      const isAbout =
+        /\babout\b/i.test(aria) ||
+        /^about(\s+xumm|\s+xaman)?$/i.test(text) ||
+        (typeof href === 'string' && (/^\/?about(\b|\/|\?|#|$)/i.test(href) || (/about/i.test(href) && !/^https?:\/\//i.test(href))));
+
+      if (isAbout) {
+        if (el.tagName.toLowerCase() === 'a') {
+          el.setAttribute('href', DEST);
+          el.setAttribute('target', '_blank');
+          el.setAttribute('rel', 'noopener');
+        } else {
+          el.style.cursor = 'pointer';
+        }
+      }
+    });
+
+    // Watch open shadow roots too
+    root.querySelectorAll('*').forEach((n) => {
+      if (n.shadowRoot) observe(n.shadowRoot);
+    });
+  }
+
+  function observe(root = document) {
+    rewrite(root);
+    const mo = new MutationObserver(() => rewrite(root));
+    mo.observe(root, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => observe(document));
+  } else {
+    observe(document);
+  }
+})();
 </script>
 
 </body>
