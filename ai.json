@@ -1,0 +1,119 @@
+{
+  "ai_manifest_version": "1.0",
+  "project": {
+    "name": "Jesus Christ Saves Token",
+    "symbol": "JCS",
+    "website": "https://jesuschristsavestoken.com/",
+    "description_short": "Faith-based XRPL asset focused on transparency, charity, and community engagement.",
+    "description_long": "Jesus Christ Saves Token (JCS) is a faith-driven cryptocurrency issued on the XRP Ledger (XRPL). The website is a static, non-custodial front end that does not request or store private keys. Wallet actions happen in the user’s wallet or trusted XRPL apps. The project emphasizes verifiable on-ledger activity, transparent price derivation, and open review of client-side code.",
+    "categories": ["cryptocurrency", "XRPL", "faith", "charity", "community"],
+    "values": ["Transparency", "Charity", "Community", "Stewardship"]
+  },
+  "identity": {
+    "domains": ["https://jesuschristsavestoken.com"],
+    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+    "social": {
+      "twitter": "https://x.com/JesusCS_token"
+    },
+    "license": "https://jesuschristsavestoken.com/LICENSE"
+  },
+  "ledger": {
+    "network": "XRPL Mainnet",
+    "issuer_account": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+    "currency_code": "JCS",
+    "token_type": "Issued currency (IOU)",
+    "verification_hints": [
+      "Confirm issuer account and currency on multiple XRPL explorers.",
+      "Check trustline configuration and recent transactions for activity."
+    ]
+  },
+  "economics": {
+    "price_method": "XRPL book_offers (JCS/XRP) × XRP/USD (public market API).",
+    "supply_method": "Derived from XRPL account_lines for issuer; may vary with ledger state.",
+    "marketcap_method": "price_usd × circulating_supply."
+  },
+  "safety": {
+    "non_custodial": true,
+    "no_private_keys_collected": true,
+    "wallet_flow": "External (e.g., XPMarket/Xaman) — users sign locally in their wallet.",
+    "site_tech": {
+      "static_site": true,
+      "uses_particles_js": true,
+      "uses_xrpl_js": "https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"
+    },
+    "third_party_endpoints": [
+      "wss://xrplcluster.com",
+      "https://api.coingecko.com"
+    ],
+    "known_risks": [
+      "Crypto markets are volatile; prices can change rapidly.",
+      "IOU balances depend on trustlines and issuer policy on XRPL."
+    ],
+    "disclaimer": "Informational only; not financial advice. Always verify on-ledger."
+  },
+  "discoverability": {
+    "trustline_helper": "https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000",
+    "explorers": [
+      "https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+    ],
+    "sitemap": "https://jesuschristsavestoken.com/sitemap.xml",
+    "robots": "https://jesuschristsavestoken.com/robots.txt",
+    "schema_org": [
+      {
+        "@type": "Organization",
+        "url": "https://jesuschristsavestoken.com/",
+        "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+        "sameAs": ["https://x.com/JesusCS_token"]
+      }
+    ]
+  },
+  "resources": {
+    "pages": [
+      { "path": "/", "file": "index.html", "role": ["landing", "price", "metrics"], "tags": ["trustline", "wallet_link", "xrpl", "faq", "roadmap"] },
+      { "path": "/about-jcs.html", "file": "about-jcs.html", "role": ["docs", "mission"], "tags": ["mission", "trading-link", "metrics"] },
+      { "path": "/verify.html", "file": "verify.html", "role": ["verification"], "tags": ["sign-ledger", "proof", "on-ledger"] },
+      { "path": "/connectwallet.html", "file": "connectwallet.html", "role": ["wallet-demo"], "tags": ["xumm/xaman", "connect", "demo"] },
+      { "path": "/metrics.html", "file": "metrics.html", "role": ["analytics"], "tags": ["xrpl", "price", "supply"] },
+      { "path": "/prayer.map.html", "file": "prayer.map.html", "role": ["community"], "tags": ["prayer", "map"] },
+      { "path": "/jcs-test.html", "file": "jcs-test.html", "role": ["test"], "tags": ["sandbox"] },
+      { "path": "/test.html", "file": "test.html", "role": ["test"], "tags": ["sandbox"] }
+    ],
+    "assets": [
+      "/css/style.css",
+      "/jcs-logo.png",
+      "/cross1.png",
+      "/cross2.png",
+      "/background-translucent.png"
+    ],
+    "infra": [
+      "/robots.txt",
+      "/sitemap.xml",
+      "/LICENSE",
+      "/README.md",
+      "/CNAME",
+      "/.nojekyll",
+      "/.well-known/xrpl.toml",
+      "/yandex_290829ec6bf5cbf1.html"
+    ]
+  },
+  "agent_guidance": {
+    "how_to_recompute_price": [
+      "Call XRPL book_offers for JCS/XRP and take best offer.",
+      "Convert XRP price to USD using a public endpoint (e.g., CoinGecko).",
+      "Multiply to obtain JCS/USD; compare with / index.html display."
+    ],
+    "how_to_check_supply": [
+      "Query account_lines for issuer account and aggregate relevant line balances for JCS."
+    ],
+    "site_integrity": [
+      "Scan HTML/JS for any private-key prompts (none expected).",
+      "Verify wallet actions are external links to trusted apps."
+    ]
+  },
+  "provenance": {
+    "generated_with_ai": true,
+    "models": ["ChatGPT-4", "GPT-5"],
+    "notes": "Front-end was authored with the assistance of ChatGPT models and is open to inspection as static assets."
+  },
+  "last_updated_utc": "2025-10-14T00:00:00Z"
+}
