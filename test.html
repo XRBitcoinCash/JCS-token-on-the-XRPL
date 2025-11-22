@@ -1826,24 +1826,72 @@
     updateWalletButtons();
   }
 
-  if (typeof Xumm !== 'undefined' && XUMM_API_KEY) {
-    xumm = new Xumm(XUMM_API_KEY);
+if (typeof Xumm !== 'undefined' && XUMM_API_KEY) {
+xumm = new Xumm(XUMM_API_KEY);
 
-    xumm.on('ready', async () => {
-      try {
-        const acct = await xumm.user.account;
-        if (acct) {
-          setConnected(acct);
-        } else {
-          let saved = null;
-          try { saved = localStorage.getItem('xrbWallet'); } catch {}
-          if (saved) setConnected(saved);
-          else updateWalletButtons();
-        }
-      } catch {
+```
+// Wait for SDK to be ready
+xumm.on('ready', async () => {
+    let acct = null;
+    try {
+        acct = await xumm.user.account;
+    } catch {}
+
+    // Restore from localStorage if no account
+    if (!acct) {
+        try { acct = localStorage.getItem('xrbWallet'); } catch {}
+    }
+
+    if (acct) {
+        setConnected(acct);
+    } else {
         updateWalletButtons();
-      }
+    }
+});
+
+// Handle returning focus (mobile deep link support)
+window.addEventListener('focus', async () => {
+    if (!xumm) return;
+    try {
+        const acct = await xumm.user.account;
+        if (acct) setConnected(acct);
+    } catch {}
+});
+
+// Connect wallet button
+if (connectBtn) {
+    connectBtn.addEventListener('click', async () => {
+        if (currentAccount) {
+            setStatus(walletStatus, 'Already connected: ' + currentAccount);
+            return;
+        }
+        setStatus(walletStatus, 'Waiting for Xaman...');
+        try {
+            await xumm.authorize();
+            const acct = await xumm.user.account;
+            if (acct) setConnected(acct);
+            else setStatus(walletStatus, 'Connect canceled or no account', 'err');
+        } catch (e) {
+            setStatus(walletStatus, 'Connect failed: ' + (e.message || e), 'err');
+        }
     });
+}
+
+// Disconnect wallet button
+if (disconnectBtn) {
+    disconnectBtn.addEventListener('click', () => {
+        try { xumm.logout(); } catch {}
+        setDisconnected();
+    });
+}
+```
+
+} else {
+if (walletStatus) setStatus(walletStatus, 'Xaman SDK not loaded; wallet features disabled.', 'err');
+if (connectBtn) connectBtn.disabled = true;
+if (setTrustBtn) setTrustBtn.disabled = true;
+}
+
 
     window.addEventListener('focus', () => {
       if (!xumm) return;
