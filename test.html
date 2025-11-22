@@ -1,2729 +1,1507 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JCS — Trading & Liquidity Sentinel</title>
+  <!-- Basic Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency</title>
+  <meta name="description" content="Jesus Christ Saves Token (JCS) is a faith-centered digital asset on the XRP Ledger, using transparent, immutable technology to point hearts to Jesus and support prayer, ministry, and generosity." />
+  <meta name="keywords" content="Jesus Christ Saves Token, JCS, XRPL, XRP Ledger, Christian Cryptocurrency, Faith Blockchain, Christian Token, Crypto Ministry, Prayer, Jesus" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
-  <!-- AI / Security manifests -->
-  <link rel="ai-manifest" href="/universal-ai.json">
-  <link rel="security" href="/.well-known/security.txt">
-  <link rel="schema.dcterms" href="/ai/schemas/universal-ai.v1.json">
-  <link rel="alternate" type="application/json" href="/.well-known/ai.json">
-  <link rel="source" href="/ai/provenance.json">
+  <!-- Canonical & Language -->
+  <link rel="canonical" href="https://jesuschristsavestoken.com/" />
+  <link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/" />
+  <link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
 
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" href="./jcs-favicon.png">
-  <link rel="shortcut icon" type="image/png" href="./jcs-favicon.png">
-  <link rel="apple-touch-icon" type="image/png" href="./jcs-favicon.png">
+  <!-- Speed Optimizations -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- SEO -->
-  <meta name="description" content="JCS — fixed-supply XRPL token. Non-custodial DEX portal with trading, orders, metrics, and Liquidity Sentinel.">
-  <meta name="keywords" content="JCS, XRPL, XRP Ledger, DEX, AMM, Xaman, Liquidity Sentinel">
-  <link rel="canonical" href="https://your-domain.example/jcs-links.html"><!-- TODO: replace -->
+  <!-- Favicons & App Icons -->
+  <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="https://jesuschristsavestoken.com/jcs-logo-16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://jesuschristsavestoken.com/jcs-logo-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="https://jesuschristsavestoken.com/jcs-logo-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="https://jesuschristsavestoken.com/jcs-logo-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://jesuschristsavestoken.com/jcs-logo-180.png" />
+  <link rel="mask-icon" href="https://jesuschristsavestoken.com/safari-pinned-tab.svg" color="#004e92" />
+  <meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo-270.png" />
+  <meta name="msapplication-TileColor" content="#004e92" />
+  <meta name="theme-color" content="#004e92" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="JCS — Trading & Liquidity Sentinel">
-  <meta property="og:description" content="Trade JCS on XRPL and audit liquidity and AMM pools with Liquidity Sentinel. Non-custodial. Xaman-native.">
-  <meta property="og:image" content="https://your-domain.example/jcs-logo-512.png"><!-- TODO: replace -->
-  <meta property="og:url" content="https://your-domain.example/jcs-links.html"><!-- TODO: replace -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Jesus Christ Saves Token" />
+  <meta property="og:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency" />
+  <meta property="og:description" content="An immutable witness on the XRP Ledger pointing to Jesus Christ through transparency, prayer, and community generosity." />
+  <meta property="og:url" content="https://jesuschristsavestoken.com/" />
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
+  <meta property="og:image:alt" content="Jesus Christ Saves Token Logo" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JCS — Trading & Liquidity Sentinel">
-  <meta name="twitter:description" content="Single-page JCS DEX, open orders, metrics, and Liquidity Sentinel.">
-  <meta name="twitter:image" content="https://your-domain.example/jcs-logo-512.png"><!-- TODO: replace -->
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@JesusCS_token" />
+  <meta name="twitter:title" content="Jesus Christ Saves Token (JCS) | Faith-Based XRPL Cryptocurrency" />
+  <meta name="twitter:description" content="Faith-driven, community-focused JCS on XRPL. Verify. Pray. Build transparently." />
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
 
-  <!-- Preconnects -->
-  <link rel="preconnect" href="https://xumm.app" crossorigin>
-  <link rel="preconnect" href="https://xaman.app" crossorigin>
-  <link rel="preconnect" href="https://xrbitcoincash-github-io.onrender.com" crossorigin>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Jesus Christ Saves Token",
+    "url": "https://jesuschristsavestoken.com/",
+    "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+    "sameAs": [
+      "https://x.com/JesusCS_token"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://jesuschristsavestoken.com/",
+    "name": "Jesus Christ Saves Token (JCS)",
+    "description": "Faith-based cryptocurrency on the XRPL pointing to Jesus Christ through transparent, immutable infrastructure.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jesus Christ Saves Token",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jesuschristsavestoken.com/jcs-logo.png"
+      }
+    }
+  }
+  </script>
 
-  <!-- CSP -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' https://xumm.app https://xaman.app;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data: https:;
-    connect-src 'self' https://xumm.app https://oauth2.xumm.app https://xaman.app https://xrbitcoincash-github-io.onrender.com;
-    frame-src 'self' https://xumm.app https://oauth2.xumm.app https://xaman.app;
-    base-uri 'self';
-    form-action 'self';
-  ">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
 
-  <!-- Base layout + UI styles -->
+  <!-- Global Styles (keep external file; minimal structural helpers here if needed) -->
+  <link rel="stylesheet" href="/css/style.css?v=2.0.0">
+
   <style>
-    :root{
-  --wrap:1100px;
-  --bg:#020817;
-  --panel:#050b18;
-  --panel-2:#050814;
-  --ink:#e5e7eb;
-  --muted:#9ca3af;
-  --line:#1f2933;
-  --ok:#22c55e;
-  --err:#ef4444;
-  --blue:#2563eb;
-  --yellow:#f59e0b;
-  --shadow:rgba(0,0,0,.35);
-  --accent:#38bdf8;
-  --font:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",sans-serif;
-}
+    body {
+      margin: 0;
+      font-family: "Montserrat", sans-serif;
+      background: radial-gradient(circle at top, #0b1020 0%, #020308 40%, #000000 100%);
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
 
-*{box-sizing:border-box}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 6vw;
+      backdrop-filter: blur(14px);
+      background: rgba(0, 0, 0, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-html,
-body{
-  margin:0;
-  padding:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:14px/1.5 var(--font);
-  max-width:100%;
-  overflow-x:hidden;
-}
+    header img {
+      height: 52px;
+    }
 
-a{
-  color:var(--accent);
-  text-decoration:none;
-}
-a:hover{text-decoration:underline}
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      color: #f5f5f5;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+    }
 
-/* Background */
-.bg-nodes{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  background:
-    radial-gradient(900px 500px at 10% 0,rgba(56,189,248,.12),transparent),
-    radial-gradient(900px 600px at 100% 0,rgba(16,185,129,.06),transparent);
-}
+    nav a:hover {
+      color: #ffd700;
+      border-color: #ffd700;
+    }
 
-/* Layout */
-.container{
-  max-width:var(--wrap);
-  margin:0 auto;
-  padding:0 16px;
-}
+    .sign-ledger-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #ffd700;
+      font-size: 0.9rem;
+    }
 
-/* Header */
-header{
-  position:sticky;
-  top:0;
-  z-index:40;
-  background:linear-gradient(180deg,rgba(2,6,23,.97),rgba(2,6,23,.9));
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
+    .hero {
+      min-height: 82vh;
+      padding: 80px 6vw 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+      gap: 40px;
+      align-items: center;
+      position: relative;
+    }
 
-.header__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 16px 8px;
-}
+    .hero h1 {
+      font-family: "UnifrakturCook", cursive;
+      font-size: 3.2rem;
+      margin: 0 0 16px;
+      color: #ffd700;
+      letter-spacing: 1px;
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.brand__logo{
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  border:1px solid var(--line);
-}
-.brand__title{
-  font-weight:800;
-  font-size:18px;
-}
-.brand__subtitle{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:2px;
-}
+    .hero p {
+      margin: 0 0 18px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+    }
 
-.nav{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
+    .hero .subline {
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+      color: #cfd8dc;
+    }
 
-/* Buttons and pills */
-.btn,
-.nav-pill{
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:
-    radial-gradient(circle at 0 0,rgba(56,189,248,.06),transparent),
-    linear-gradient(180deg,var(--panel),var(--panel-2));
-  color:var(--ink);
-  padding:7px 11px;
-  font-size:12px;
-  font-weight:600;
-  cursor:pointer;
-  min-height:32px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  text-decoration:none;
-  box-shadow:0 6px 18px var(--shadow);
-  white-space:nowrap;
-}
-.btn--primary{
-  border-color:var(--accent);
-  box-shadow:0 10px 26px rgba(56,189,248,.18);
-}
-.btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-  box-shadow:none;
-}
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
 
-/* Hero */
-.hero{
-  padding:18px 0 4px;
-}
-.hero__title{
-  margin:0 0 4px;
-  font-size:22px;
-  font-weight:800;
-}
-.hero__lead{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-}
-.cta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:10px;
-}
+    .cta a {
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.14), transparent);
+      transition: all 0.22s ease;
+    }
 
-/* Main layout */
-main{
-  padding:4px 0 24px;
-}
+    .cta a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.3);
+      border-color: #ffd700;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:10px;
-}
+    #verseCard,
+    #jesusWordsCard {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top, rgba(255, 215, 0, 0.15), rgba(0, 0, 0, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+    }
 
-/* Cards */
-.card{
-  background:linear-gradient(180deg,var(--panel),var(--panel-2));
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px;
-  box-shadow:0 10px 30px var(--shadow);
-  margin-top:10px;
-}
-.card--third{grid-column:span 4;}
-.card--half{grid-column:span 6;}
+    #verseCard strong,
+    #jesusWordsCard strong {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffd700;
+    }
 
-.card__head{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  font-weight:700;
-  margin-bottom:4px;
-}
-.card__title{
-  font-size:14px;
-}
-.card__text{
-  color:var(--muted);
-  font-size:12px;
-  margin:0;
-}
+    .muted {
+      color: #b0bec5;
+      font-size: 0.86rem;
+    }
 
-.issuer-code{
-  display:block;
-  border:1px solid var(--line);
-  padding:7px;
-  border-radius:10px;
-  background:#020814;
-  color:#c7d2fe;
-  word-break:break-all;
-  font-size:11px;
-}
+    .hero-side-panel {
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.98));
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
 
-/* Text helpers */
-.section-title{
-  margin:0 0 6px;
-  font-size:16px;
-  font-weight:700;
-}
-.status{
-  font-size:11px;
-  color:var(--muted);
-  margin:3px 0 0;
-}
-.status.ok{color:var(--ok);}
-.status.err{color:var(--err);}
-.hint{
-  font-size:11px;
-  color:var(--muted);
-  margin:4px 0 0;
-}
-.mono{
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-.small{font-size:11px;}
-.nowrap{white-space:nowrap;}
+    .hero-side-panel h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #ffd700;
+    }
 
-/* Badges */
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  padding:2px 8px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  font-size:10px;
-  color:var(--muted);
-}
-.badge.mainnet{
-  background:#050816;
-  color:#c7d2fe;
-  border-color:#374151;
-}
+    .hero-side-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+      display: grid;
+      gap: 5px;
+    }
 
-/* Tables */
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:10.5px;
-  margin-top:6px;
-}
-th,
-td{
-  padding:5px 6px;
-  border-bottom:1px solid #111827;
-  text-align:left;
-  vertical-align:top;
-}
-th{
-  font-size:10px;
-  color:var(--muted);
-  font-weight:600;
-}
+    .hero-side-panel li span.label {
+      color: #90a4ae;
+    }
 
-/* Log box */
-.log{
-  max-height:180px;
-  overflow:auto;
-  border-radius:10px;
-  background:#020814;
-  border:1px solid var(--line);
-  padding:7px;
-  font-size:10px;
-  white-space:pre-wrap;
-}
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(144, 164, 174, 0.55);
+      font-size: 0.7rem;
+      color: #cfd8dc;
+    }
 
-/* Progress bars */
-.progress{
-  height:5px;
-  background:#050814;
-  border-radius:999px;
-  overflow:hidden;
-  margin-top:6px;
-}
-.progress > span{
-  display:block;
-  height:100%;
-  width:0;
-  background:var(--blue);
-  transition:width .18s ease-out;
-}
+    section {
+      padding: 36px 6vw 14px;
+    }
 
-/* Eco link */
-.eco-link{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 8px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:linear-gradient(180deg,var(--panel),var(--panel-2));
-  color:var(--ink);
-  text-decoration:none;
-  font-size:11px;
-}
-.eco-link img{
-  width:20px;
-  height:20px;
-  border-radius:5px;
-  border:1px solid var(--line);
-}
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: #ffd700;
+    }
 
-/* Footer */
-footer{
-  border-top:1px solid var(--line);
-  padding:16px 0 18px;
-  margin-top:18px;
-  background:radial-gradient(600px 200px at 10% 0,rgba(56,189,248,.04),transparent);
-}
+    .section-lede {
+      font-size: 0.95rem;
+      color: #cfd8dc;
+      max-width: 760px;
+      margin-bottom: 16px;
+    }
 
-/* Trading block */
-#trade.card{margin-top:14px;}
-#trade .trade-logo{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:6px;
-}
-#trade .asset-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  padding:2px 8px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  font-size:10px;
-  background:#020814;
-}
-#trade .asset-chip img{
-  width:14px;
-  height:14px;
-  border-radius:3px;
-}
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 12px;
+    }
 
-.tabset{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:4px;
-  margin:4px 0 6px;
-}
-.tab{
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#020814;
-  color:var(--muted);
-  padding:5px 8px;
-  font-size:11px;
-  cursor:pointer;
-  text-align:center;
-}
-.tab.active{
-  background:var(--blue);
-  color:#e5e7eb;
-  border-color:var(--blue);
-}
+    .card {
+      padding: 14px 14px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.98));
+      font-size: 0.86rem;
+      color: #cfd8dc;
+    }
 
-.field{margin-top:6px;}
-.field label{
-  display:block;
-  font-size:10px;
-  color:var(--muted);
-  margin-bottom:2px;
-}
-.field input{
-  width:100%;
-  padding:6px 8px;
-  border-radius:10px;
-  border:1px solid #111827;
-  background:#020814;
-  color:var(--ink);
-  font-size:11px;
-}
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #ffe082;
+    }
 
-.amount-row{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.amount-row img{
-  width:16px;
-  height:16px;
-  border-radius:4px;
-}
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 4px;
+      font-size: 0.86rem;
+    }
 
-.quick-amounts{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:4px;
-  margin-top:4px;
-}
-.quick-amounts .qa{
-  padding:4px 0;
-  border-radius:8px;
-  border:1px solid var(--line);
-  background:#020814;
-  color:var(--muted);
-  font-size:10px;
-  cursor:pointer;
-}
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
 
-.best-price-strip{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  margin-top:6px;
-}
-.best-price-btn{
-  font-size:10px;
-  padding:4px 8px;
-  border-radius:999px;
-}
+    .metric {
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(0, 0, 0, 0.9);
+    }
 
-.total-line{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:4px;
-  font-size:10px;
-  color:var(--muted);
-}
+    .metric .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: #90a4ae;
+      margin-bottom: 3px;
+    }
 
-.button-row{
-  display:grid;
-  grid-template-columns:auto auto;
-  gap:6px;
-  align-items:center;
-  margin-top:6px;
-}
-.button-row .btn{
-  font-size:10px;
-  padding:6px 10px;
-}
+    .metric .value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
 
-#xrbSecurityCode{
-  display:none;
-  margin-top:6px;
-  text-align:center;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:0.18em;
-  color:#facc15;
-  padding:4px 14px;
-  border-radius:12px;
-  background:rgba(0,0,0,.9);
-  box-shadow:0 0 8px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.9);
-}
+    .faq-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
 
-#tradeMsg{margin-top:4px;}
+    .prayer-wall {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(220px, 1.5fr);
+      gap: 16px;
+    }
 
-/* Sentinel health table */
-#healthWrap{
-  overflow:auto;
-  margin-top:6px;
-}
-#healthTable{
-  min-width:720px;
-}
+    .prayer-list {
+      display: grid;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: #cfd8dc;
+    }
 
-/* Icons in Sentinel */
-#healthTable img{
-  width:14px;
-  height:14px;
-  border-radius:3px;
-  background:#020817;
-  border:1px solid rgba(56,189,248,.18);
-  object-fit:cover;
-}
+    .prayer-item strong {
+      color: #ffe082;
+      font-size: 0.82rem;
+    }
 
-/* Emphasize JCS style if matched by alt */
-#healthTable img[alt*="JCS"]{
-  border-color:var(--accent);
-}
+    .notice {
+      font-size: 0.75rem;
+      color: #90a4ae;
+      margin-top: 4px;
+    }
 
-/* Watch star */
-.icon-star{
-  cursor:pointer;
-  font-size:12px;
-  margin-right:3px;
-  user-select:none;
-  color:#4b5563;
-}
-.icon-star.on{
-  color:#fde047;
-  filter:drop-shadow(0 0 6px rgba(250,204,21,.35));
-}
+    .ecosystem-footer {
+      margin-top: 32px;
+      padding: 22px 6vw 18px;
+      background: radial-gradient(circle at top, #111827, #020308);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+    }
 
-/* Delta markers */
-.delta{
-  font-size:8px;
-  margin-left:4px;
-  opacity:.85;
-}
-.delta.up{color:#22c55e;}
-.delta.down{color:#ef4444;}
-.delta.neutral{color:#9ca3af;}
+    .footer-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      text-align: left;
+    }
 
-/* Status pill */
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:2px 8px;
-  border-radius:999px;
-  font-size:9px;
-  border:1px solid var(--line);
-  color:var(--muted);
-  background:#020814;
-}
-.pill.H{
-  border-color:#22c55e;
-  color:#22c55e;
-}
-.pill.C{
-  border-color:#f59e0b;
-  color:#fbbf24;
-}
-.pill.R{
-  border-color:#ef4444;
-  color:#f87171;
-}
+    .footer-container h3 {
+      margin: 0 0 6px;
+      font-size: 1.2rem;
+      color: #ffd700;
+    }
 
-/* Metrics layout */
-#metrics{
-  margin-top:10px;
-}
-#metrics #xrbtcSummary{
-  margin-top:4px;
-}
+    .ecosystem-desc {
+      margin: 0 0 12px;
+      font-size: 0.85rem;
+      color: #b0bec5;
+    }
 
-/* target the 2-column wrapper inside metrics card */
-#metrics > div:nth-of-type(2){
-  display:grid !important;
-  grid-template-columns:1.4fr 1fr;
-  gap:10px;
-  margin-top:8px;
-}
-#metrics > div:nth-of-type(2) h3.small{
-  margin:0 0 4px;
-}
+    .ecosystem-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
 
-/* Footer text lists */
-.factlist{margin:0;padding:0;}
-.fact{list-style:none;}
+    .eco-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      text-decoration: none;
+      font-size: 0.78rem;
+      color: #e0e0e0;
+      background: rgba(0, 0, 0, 0.94);
+      transition: all 0.2s ease;
+    }
 
-/* Responsive */
-@media (max-width:720px){
-  .header__inner{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:6px;
-  }
-  .nav{
-    justify-content:flex-start;
-  }
-  .hero__title{
-    text-align:left;
-    font-size:19px;
-  }
-  .hero__lead{
-    text-align:left;
-    font-size:12px;
-  }
-  .grid{
-    grid-template-columns:repeat(12,1fr);
-  }
-  .card--third,
-  .card--half{
-    grid-column:span 12;
-  }
+    .eco-link img {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      object-fit: contain;
+    }
 
-  /* Metrics: stack */
-  #metrics > div:nth-of-type(2){
-    display:block !important;
-    margin-top:6px;
-  }
-  #metrics > div:nth-of-type(2) > div{
-    margin-top:6px;
-  }
-  #metrics #xrbtcSummary{
-    font-size:10px;
-  }
-  #metrics h3.small{
-    font-size:10px;
-  }
+    .eco-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 14px rgba(255, 215, 0, 0.28);
+      border-color: #ffd700;
+      color: #ffd700;
+    }
 
-  .log{
-    max-height:140px;
-    font-size:9px;
-  }
+    .ecosystem-tagline,
+    .ecosystem-copy {
+      margin: 2px 0;
+      font-size: 0.75rem;
+      color: #90a4ae;
+    }
 
-  .btn,
-  .nav-pill{
-    font-size:11px;
-    padding:6px 10px;
-    min-height:30px;
-  }
-}
+    #dailyBlessing {
+      margin-top: 10px;
+    }
 
+    /* JCS DEX helper layout */
+    .dex-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1.4fr);
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    .dex-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 10px;
+    }
+
+    .dex-actions button {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.9);
+      color: #f5f5f5;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dex-actions button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .dex-actions button:hover:not(:disabled) {
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255,215,0,0.3);
+      transform: translateY(-1px);
+    }
+
+    .orderbook-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 0.8rem;
+    }
+
+    .orderbook-table th,
+    .orderbook-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .orderbook-table th {
+      font-weight: 600;
+      color: #90a4ae;
+    }
+
+    .orderbook-table td {
+      text-align: right;
+    }
+
+    .orderbook-table th:first-child,
+    .orderbook-table td:first-child {
+      text-align: left;
+    }
+
+    .side-buy {
+      color: #4ade80;
+    }
+
+    .side-sell {
+      color: #f97373;
+    }
+
+    #dexForm {
+      display: grid;
+      gap: 6px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+    }
+
+    #dexForm input,
+    #dexForm select,
+    #dexTxJson {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.9);
+      color: #f5f5f5;
+      font-family: inherit;
+      font-size: 0.82rem;
+    }
+
+    #dexTxJson {
+      resize: vertical;
+      min-height: 140px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .dex-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 70px;
+      }
+      header {
+        padding: 10px 12px;
+      }
+      nav a {
+        margin-left: 10px;
+        font-size: 0.78rem;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+    }
   </style>
 </head>
-<body id="top">
-<div class="bg-nodes" aria-hidden="true"></div>
 
-<header>
-  <div class="header__inner container">
-    <div class="brand">
-      <img src="./jcs-favicon.png" alt="JCS logo" class="brand__logo">
-      <div>
-        <div class="brand__title" data-asset-field="name">JCS</div>
-        <div class="brand__subtitle">JCS on XRPL · Non-custodial portal</div>
-      </div>
-    </div>
-    <nav class="nav" aria-label="Primary navigation">
-      <a class="nav-pill" href="#trade">Trade</a>
-      <a class="nav-pill" href="#open-orders">Open Orders</a>
-      <a class="nav-pill" href="#metrics">Metrics</a>
-      <a class="nav-pill" href="#sentinel">Liquidity Sentinel</a>
+<body>
+  <noscript style="position:fixed;top:0;left:0;right:0;background:#000;color:#fff;padding:10px;text-align:center;z-index:9999;">
+    This site works best with JavaScript enabled.
+  </noscript>
+
+  <!-- Background crosses -->
+  <div id="particles-js"></div>
+
+  <!-- Header -->
+  <header>
+    <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token Logo" />
+    <nav>
+      <a href="verify.html" class="sign-ledger-btn">🖋 Sign the Ledger</a>
+      <a href="#about">About</a>
+      <a href="#mission">Mission</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#dex">DEX</a>
+      <a href="#prayer">Prayer</a>
+      <a href="#faq">FAQ</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <h1 class="hero__title" data-asset-field="name-heading">JCS — Trustless, transparent, fixed supply on XRPL</h1>
-      <p class="hero__lead">
-        Single interface to trade JCS, manage orders, inspect AMM + order book, and run Liquidity Sentinel checks.
-        All transactions are built client-side and signed in your Xaman wallet.
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Jesus Christ Saves Token (JCS)</h1>
+      <p>
+        JCS is a faith-based token on the XRP Ledger that uses transparent,
+        immutable infrastructure to point every transaction, every holder,
+        and every prayer back to one Name: Jesus Christ.
+      </p>
+      <p class="subline">
+        Verified issuer: <strong>rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong> •
+        Ticker: <strong>JCS</strong> • Domain verified on-ledger.
       </p>
       <div class="cta">
-        <!-- TODO: replace with real JCS Sologenic pair -->
-        <a href="https://sologenic.org/trade?market=4A43530000000000000000000000000000000000%2BYOUR_JCS_ISSUER_ADDRESS%2FXRP"
-           class="btn btn--primary" rel="noopener">🚀 Trade on Sologenic</a>
-        <!-- TODO: replace with real JCS XPMarket page -->
-        <a href="https://xpmarket.com/token/JCS-YOUR_JCS_ISSUER_ADDRESS"
-           class="btn" rel="noopener">📊 View on XPMarket</a>
-        <!-- TODO: replace NFT collection link if needed -->
-        <a href="#"
-           class="btn" rel="noopener">🎨 NFT Gallery</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- INFO GRID -->
-  <section class="section">
-    <div class="container grid">
-      <article class="card card--third">
-        <div class="card__head">
-          <span>₿</span><div class="card__title">About JCS</div>
-        </div>
-        <p class="card__text">
-          JCS mirrors Bitcoin-style scarcity on XRPL. Fixed supply, blackholed issuer, and verifiable escrows.
-        </p>
-      </article>
-      <article class="card card--third">
-        <div class="card__head">
-          <span>⚙️</span><div class="card__title">Xaman-native</div>
-        </div>
-        <p class="card__text">
-          All actions prepare XRPL payloads that you review and sign in Xaman. No keys, no custody.
-        </p>
-      </article>
-      <article class="card card--third">
-        <div class="card__head">
-          <span>🛡️</span><div class="card__title">Liquidity Sentinel</div>
-        </div>
-        <p class="card__text">
-          Integrated wallet health scan, AMM pool checks, and JSON export for audits.
-        </p>
-      </article>
-      <article class="card card--half">
-        <div class="card__head">
-          <span>🔗</span><div class="card__title">JCS asset</div>
-        </div>
-        <p class="card__text"><strong>Issuer</strong></p>
-        <code class="issuer-code" data-asset-field="issuer">YOUR_JCS_ISSUER_ADDRESS</code>
-        <p class="card__text" style="margin-top:8px"><strong>Currency (HEX)</strong></p>
-        <code class="issuer-code" data-asset-field="currencyHex">4A43530000000000000000000000000000000000</code>
-        <p class="card__text" style="margin-top:8px">
-          Fixed supply · Blackholed · XRPL mainnet.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- WALLET STATUS -->
-  <section class="container">
-    <article class="card">
-      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center">
-        <div>
-          <div class="section-title">Wallet connection</div>
-          <p id="walletStatus" class="status">Status: Not connected</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-          <span id="netBadge" class="badge mainnet">XRPL Mainnet</span>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end">
-            <button id="connectWalletBtn" class="btn small" type="button">Connect Xaman</button>
-            <button id="disconnectWalletBtn" class="btn small" type="button" disabled>Disconnect</button>
-            <a href="https://xaman.app" class="btn small" target="_blank" rel="noopener">Download Xaman</a>
-          </div>
-          <button id="setTrustlineBtn" class="btn small" type="button" disabled>
-            Add JCS Trust Line
-          </button>
-        </div>
-      </div>
-      <p id="trustlineMsg" class="hint"></p>
-      <div id="xrbSecurityCode" aria-live="polite"></div>
-    </article>
-  </section>
-
-  <!-- TRADE -->
-  <section class="container">
-    <article id="trade" class="card" aria-label="JCS Trading">
-      <div class="trade-logo">
-        <span class="asset-chip">
-          <img src="./jcs-favicon.png" alt="JCS logo" width="24" height="24">
-          JCS
-        </span>
-        <span>/</span>
-        <span class="asset-chip">XRP</span>
-      </div>
-      <div class="tabset" role="tablist">
-        <button id="buyTab" class="tab active" type="button" role="tab" aria-selected="true">Buy JCS</button>
-        <button id="sellTab" class="tab" type="button" role="tab" aria-selected="false">Sell JCS</button>
-      </div>
-      <div id="sideExplain" class="small">
-        <div class="note buy">Buying: trade XRP to receive JCS.</div>
-        <div class="note sell" hidden>Selling: trade JCS to receive XRP.</div>
-      </div>
-      <div class="field">
-        <label for="amount" id="amountLabel">Amount (JCS)</label>
-        <div class="amount-row">
-          <img
-            src="./jcs-favicon.png"
-            alt="JCS logo"
-            width="16"
-            height="16"
-            loading="lazy"
-          >
-          <input
-            id="amount"
-            type="number"
-            step="0.000001"
-            inputmode="decimal"
-            placeholder="0.000000"
-          >
-        </div>
-        <div class="quick-amounts" aria-label="Quick amount">
-          <button class="qa" data-q="25" type="button">25%</button>
-          <button class="qa" data-q="50" type="button">50%</button>
-          <button class="qa" data-q="75" type="button">75%</button>
-          <button class="qa" data-q="100" type="button">100%</button>
-        </div>
-        <div id="amountHint" class="hint">
-          Amount to <span id="actionWord">buy</span>. You trade XRP to receive JCS.
-        </div>
-      </div>
-      <div class="best-price-strip">
-        <button id="suggestPriceBtn" class="btn best-price-btn" type="button">Best price from AMM / book</button>
-        <div class="hint">Uses XRPL AMM and top-of-book. Auto-refresh while amount is set.</div>
-      </div>
-      <div class="field">
-        <label for="price">Limit price (XRP per JCS)</label>
-        <input id="price" type="number" step="0.000001" inputmode="decimal" placeholder="e.g. 0.500000">
-        <div class="hint">For market swap, leave pricing to the AMM helper below.</div>
-      </div>
-      <div class="total-line">
-        <span>Total</span>
-        <strong id="totalXrp">0.000000 XRP</strong>
-      </div>
-      <div class="button-row">
-        <button id="placeOfferBtn" class="btn btn--primary" type="button" disabled>Place limit order</button>
-        <button id="marketTradeBtn" class="btn" type="button" disabled>Market swap (AMM, 2% cap)</button>
-      </div>
-      <p id="tradeMsg" class="status">—</p>
-      <select id="side" hidden>
-        <option value="buy" selected>Buy</option>
-        <option value="sell">Sell</option>
-      </select>
-      <input id="orderType" type="hidden" value="limit">
-    </article>
-  </section>
-
-  <!-- OPEN ORDERS -->
-  <section class="container">
-    <article id="open-orders" class="card" aria-label="Open orders">
-      <h2 class="section-title">Open orders · Extract & cancel</h2>
-      <p class="hint">
-        View your JCS-related offers and cancel individually or in bulk. Signing always in Xaman with a sentinel memo code.
-      </p>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
-        <button id="btnRefreshOffers" class="btn" type="button">Refresh orders</button>
-        <button id="btnCancelAll" class="btn" type="button">Cancel all visible</button>
-      </div>
-      <div class="progress"><span id="offersProgress"></span></div>
-      <div id="offersWrap" class="hint" style="margin-top:6px">No data yet.</div>
-      <p id="offersStatus" class="status"></p>
-    </article>
-  </section>
-
-  <!-- METRICS -->
-  <section class="container">
-    <article id="metrics" class="card" aria-label="JCS live metrics">
-      <h2 class="section-title">JCS / XRP · Live metrics</h2>
-      <div id="xrbtcSummary" class="hint">
-        <span id="xrbtcSpot">Spot: —</span> ·
-        <span id="xrbtcAmm">AMM: —</span> ·
-        <span id="xrbtcSpread">Spread: —</span> ·
-        <span id="xrbtcLedgerMini">Ledger: —</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px;margin-top:8px">
-        <div>
-          <h3 class="small">Order book (top levels)</h3>
-          <div id="priceOutput" class="hint">—</div>
-        </div>
-        <div>
-          <h3 class="small">Ledger snapshot</h3>
-          <pre id="ledgerOutput" class="log">—</pre>
-        </div>
-      </div>
-    </article>
-  </section>
-
-  <!-- LIQUIDITY SENTINEL + QUICK BUY + LOG + LEGAL -->
-  <section class="container" id="sentinel">
-    <article class="card">
-      <h2 class="section-title">Liquidity Sentinel · Wallet liquidity health</h2>
-      <p class="hint">
-        Scans your trustlines, finds XRPL AMM pools (XRP/IOU), estimates slippage, scores tokens, and tracks changes.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px">
-        <button id="btnHealthScan" class="btn" type="button" disabled>Scan health</button>
-        <label class="hint"><input id="riskOnly" type="checkbox"> Risk only</label>
-        <label class="hint"><input id="watchOnly" type="checkbox"> Watchlist only</label>
-        <label class="hint"><input id="autoRefresh" type="checkbox"> Auto-refresh</label>
-        <select id="autoEvery" class="hint">
-          <option value="15" selected>15s</option>
-          <option value="30">30s</option>
-          <option value="60">60s</option>
-        </select>
-        <span id="lastScan" class="status">Last scan: —</span>
-        <span id="ledgerPill" class="badge">Ledger: —</span>
-      </div>
-      <div class="progress"><span id="healthProgress"></span></div>
-      <p id="healthStatus" class="status"></p>
-      <div id="healthWrap">
-        <table id="healthTable" style="display:none">
-          <thead>
-          <tr>
-            <th>⭐</th>
-            <th>Token / Hex<br><span class="small">Issuer</span></th>
-            <th>Pool</th>
-            <th>Reserves<br><span class="small">XRP / IOU</span></th>
-            <th>Fee</th>
-            <th>Slippage<br><span class="small">10 / 100 XRP</span></th>
-            <th>Score</th>
-            <th>Status</th>
-          </tr>
-          </thead>
-          <tbody id="healthBody"></tbody>
-        </table>
-      </div>
-      <p id="healthNote" class="hint">Connect wallet to enable scanning.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
-        <button id="btnExportJson" class="btn" type="button">Export JSON</button>
-        <button id="btnCopyJson" class="btn" type="button">Copy JSON</button>
-        <button id="btnHealthRetry" class="btn" type="button">Retry</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <h2 class="section-title">Quick buy · JCS</h2>
-      <p class="hint">Pathfinding via XRPL with 2% slippage cap. Requires JCS trustline. Signing in Xaman.</p>
-      <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <button id="buy1" class="btn btn--primary" type="button">Buy 1 JCS</button>
-          <span id="est1" class="status">≈ — XRP</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <button id="buy25" class="btn" type="button">Buy 25 JCS</button>
-          <span id="est25" class="status">≈ — XRP</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <button id="buy50" class="btn" type="button">Buy 50 JCS</button>
-          <span id="est50" class="status">≈ — XRP</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <button id="buy100" class="btn" type="button">Buy 100 JCS</button>
-          <span id="est100" class="status">≈ — XRP</span>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
-          <button id="btnRefreshEst" class="btn" type="button">Refresh estimates</button>
-          <button id="btnTrustXRBT" class="btn" type="button">Add JCS trust line</button>
-        </div>
-        <p class="hint">
-          Issuer:
-          <span class="mono" data-asset-field="issuer">YOUR_JCS_ISSUER_ADDRESS</span>
-        </p>
-        <p id="buyStatus" class="status"></p>
-      </div>
-    </article>
-
-    <article class="card">
-      <h2 class="section-title">Results & activity log</h2>
-      <div id="resultBox" class="hint">Receipts and messages will appear here.</div>
-      <div style="margin-top:6px;display:flex;gap:6px;align-items:center">
-        <button id="btnClearLog" class="btn" type="button">Clear log</button>
-      </div>
-      <pre id="log" class="log" aria-live="polite"></pre>
-    </article>
-
-    <article class="card">
-      <h2 class="section-title">Important</h2>
-      <div class="small" style="border-left:3px solid var(--yellow);padding-left:8px">
-        <p><strong>Non-custodial.</strong> This page constructs XRPL transactions that you must review and sign in your own Xaman wallet.</p>
-        <p><strong>No brokerage or guarantees.</strong> No custody, no discretionary routing, no advice. Market conditions and routes can change between preview and signing.</p>
-        <p><strong>Irreversible.</strong> XRPL transactions are final once validated. Verify asset, issuer, amounts, and memos before signing.</p>
-      </div>
-    </article>
-  </section>
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="small" style="display:grid;gap:18px;grid-template-columns:1fr;max-width:var(--wrap);margin:0 auto;">
-
-      <section>
-        <h3>About this portal</h3>
-        <p class="hint">
-          This page is a non-custodial trading, monitoring, and diagnostics interface for
-          <strong data-asset-field="name">JCS</strong> on the <span class="nowrap">XRP Ledger</span>.
-          All transactions are prepared client-side and must be signed in your own Xaman wallet.
-        </p>
-        <dl class="factlist" aria-label="JCS details" style="display:grid;gap:6px;margin:0">
-          <div class="fact" style="display:flex;gap:8px">
-            <strong style="min-width:142px;color:#cfe6ff">Symbol</strong>
-            <span class="mono" data-asset-field="name">JCS</span>
-          </div>
-          <div class="fact" style="display:flex;gap:8px">
-            <strong style="min-width:142px;color:#cfe6ff">Issuer</strong>
-            <span class="mono" data-asset-field="issuer">YOUR_JCS_ISSUER_ADDRESS</span>
-          </div>
-          <div class="fact" style="display:flex;gap:8px">
-            <strong style="min-width:142px;color:#cfe6ff">Currency HEX</strong>
-            <span class="mono" data-asset-field="currencyHex">4A43530000000000000000000000000000000000</span>
-          </div>
-          <div class="fact" style="display:flex;gap:8px">
-            <strong style="min-width:142px;color:#cfe6ff">Portal URL</strong>
-            <span class="mono">https://your-domain.example/jcs-links.html</span><!-- TODO: replace -->
-          </div>
-        </dl>
-      </section>
-
-      <section>
-        <h3>How this page handles security</h3>
-        <ul class="small" style="margin:0;padding-left:18px;line-height:1.5;text-align:left;max-width:720px;">
-          <li><strong>Non-custodial.</strong> No secret keys, seeds, or recovery phrases are requested or stored.</li>
-          <li><strong>Wallet-side signing only.</strong> Transactions are constructed in the browser and signed in Xaman.</li>
-          <li><strong>Sentinel memo codes.</strong> 6-digit codes in memos let you match on-page intent with Xaman payloads.</li>
-          <li><strong>On-ledger data only.</strong> Order books, AMM reads, and health checks query XRPL infrastructure.</li>
-        </ul>
-      </section>
-    </div>
-
-    <div class="small"
-         style="border-top:1px solid var(--line);margin-top:14px;padding-top:10px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-start">
-
-      <div style="display:flex;flex-direction:column;gap:4px;min-width:220px">
-        <strong data-asset-field="name">JCS · JCS/XRP Trading & Sentinel Portal</strong>
-        <span class="mono" data-asset-field="issuer">Issuer: YOUR_JCS_ISSUER_ADDRESS</span>
-        <span class="mono" data-asset-field="currencyHex">Currency HEX: 4A43530000000000000000000000000000000000</span>
-        <span class="mono">Network: XRPL Mainnet</span>
-      </div>
-
-      <div style="flex:1;min-width:260px">
-        <ul style="margin:0;padding-left:18px;line-height:1.45">
-          <li><strong>Not financial advice.</strong> Perform independent checks.</li>
-          <li><strong>Non-custodial.</strong> You control your wallet; signing happens only in Xaman.</li>
-          <li><strong>On-ledger risk.</strong> XRPL transactions are final; verify issuer, asset, and amounts.</li>
-          <li><strong>Verify the URL.</strong> Only use the portal URL published by the issuer.</li>
-          <li><strong>No endorsement implied.</strong> “XRP” is by Ripple Labs, Inc.; “Xaman (Xumm)” is by XRPL Labs.</li>
-        </ul>
-      </div>
-
-      <div style="min-width:160px;display:flex;flex-direction:column;gap:4px;align-items:flex-end">
-        <a href="#top" class="eco-link">
-          <img src="./jcs-favicon.png" alt="JCS logo">
-          <span>Back to top</span>
+        <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank" rel="noopener">
+          ➕ Set Trustline
+        </a>
+        <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener" class="wallet-btn">
+          🔗 View on XPMarket
+        </a>
+        <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" target="_blank" rel="noopener">
+          🕊 Trade JCS on Sologenic
+        </a>
+        <a href="about-jcs.html">
+          🛐 Learn the Vision
         </a>
       </div>
+
+      <!-- Daily verse -->
+      <div id="verseCard">
+        <strong>Scripture of the Day</strong>
+        <p id="dailyVerse" class="muted">Loading…</p>
+      </div>
+
+      <!-- Rotating words of Jesus -->
+      <div id="jesusWordsCard">
+        <strong>Words of Jesus (Daily Rotation)</strong>
+        <p id="jesusWords" class="muted">Loading…</p>
+      </div>
     </div>
-  </div>
-</footer>
 
-<!-- App configuration -->
-<script type="application/json" id="app-config">
-{
-  "proxyUrl": "https://xrbitcoincash-github-io.onrender.com",
-  "xummApiKey": "YOUR_JCS_XUMM_API_KEY",
-  "appName": "JCS",
-  "ticker": "JCS",
-  "sentinelPrefix": "JCS",
-  "logoUrl": "./jcs-favicon.png",
-  "asset": {
-    "issuer": "YOUR_JCS_ISSUER_ADDRESS",
-    "currencyHex": "4A43530000000000000000000000000000000000"
-  }
-}
-</script>
+    <aside class="hero-side-panel">
+      <h2>On-Ledger Integrity</h2>
+      <span class="pill">✔ TOML Verified Domain</span>
+      <span class="pill">✔ Xaman KYC Flag</span>
+      <span class="pill">✔ Immutable public issuer</span>
+      <ul>
+        <li><span class="label">Network:</span> XRP Ledger Mainnet</li>
+        <li><span class="label">Symbol:</span> JCS</li>
+        <li><span class="label">Issuer:</span> rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</li>
+        <li><span class="label">Use:</span> Prayer-driven community, charity support, Christian builders</li>
+      </ul>
+      <p class="muted">
+        Always verify both <strong>JCS</strong> and the correct issuer before adding trustlines or trading.
+      </p>
+    </aside>
+  </section>
 
-<!-- Xaman / Xumm SDK -->
-<script src="https://xaman.app/assets/cdn/xumm.min.js" crossorigin="anonymous"></script>
+  <!-- About -->
+  <section id="about" aria-label="About JCS">
+    <h2>✝ About Jesus Christ Saves Token</h2>
+    <p class="section-lede">
+      JCS is not a replacement for faith, church, or Scripture.
+      It is a focused digital witness: a tokenized reminder that Jesus Christ saves,
+      anchored on a public ledger where records cannot be quietly altered.
+    </p>
+    <div class="highlight-grid">
+      <div class="card">
+        <h3>Immutable Witness</h3>
+        <p>
+          The XRP Ledger records every JCS movement in public view.
+          This transparency reflects our conviction that stewardship, giving,
+          and leadership should be accountable and in the light.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Prayer-Minded Utility</h3>
+        <p>
+          JCS holders are invited to unite in regular on-ledger prayer campaigns,
+          support verifiable ministries, and highlight needs that the Body of Christ can meet.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Community of Believers</h3>
+        <p>
+          JCS is designed for Christians, ministries, and builders
+          who want technology that openly confesses Christ and resists anonymity-driven abuse.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Sound Warnings</h3>
+        <p>
+          JCS is not financial advice, not a promise of profit, and not a substitute
+          for personal conviction. Always verify issuer data and beware imitators.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<!-- Main script -->
-<script>
-(function () {
-  'use strict';
+  <!-- Mission -->
+  <section id="mission" aria-label="Mission and Vision">
+    <h2>🕊 Mission: Let Every Block Point Back to Christ</h2>
+    <p class="section-lede">
+      “For where your treasure is, there will your heart be also.” (Matthew 6:21)
+      JCS aims to align digital activity with eternal perspective.
+    </p>
+    <div class="card">
+      <h3>Three Pillars</h3>
+      <ul class="checklist">
+        <li>✅ <strong>Confession:</strong> Every brand element boldly names Jesus Christ.</li>
+        <li>✅ <strong>Clarity:</strong> Public issuer, verified domain, verifiable token metadata.</li>
+        <li>✅ <strong>Charity:</strong> Framework for transparent ministry support and community-led giving.</li>
+        <li>✨ <strong>Prayer Integration:</strong> Rotating verses, prompts, and campaigns to keep the focus on Christ, not charts.</li>
+        <li>✨ <strong>Creative Witness:</strong> Future NFT and content drops centered on the Gospel message.</li>
+      </ul>
+    </div>
+  </section>
 
-  function safeJson(elId) {
-    try {
-      const el = document.getElementById(elId);
-      if (!el) return {};
-      return JSON.parse(el.textContent || el.innerText || '{}') || {};
-    } catch {
-      return {};
-    }
-  }
+  <!-- Metrics -->
+  <section id="metrics" aria-label="JCS Live Metrics">
+    <h2>📊 Live Metrics</h2>
+    <p class="section-lede">
+      Indicative on-ledger data for JCS. Values update using public XRPL order books and XRP/USD feeds.
+    </p>
+    <div class="metrics-grid" role="list">
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Price (USD)</div>
+        <div id="price" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Estimated Market Cap</div>
+        <div id="marketcap" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Circulating Supply</div>
+        <div id="supply" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">24h Change</div>
+        <div id="change" class="value">N/A</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:10px;">
+      Data is informational. Always confirm on-ledger before large decisions.
+    </p>
+  </section>
 
-  const cfg = safeJson('app-config');
+  <!-- JCS DEX -->
+  <section id="dex" aria-label="On-ledger JCS DEX helper">
+    <h2>⚖ JCS On-Ledger DEX</h2>
+    <p class="section-lede">
+      Live JCS/XRP order book and AMM snapshot, plus a limit-order builder that outputs
+      XRPL <code>OfferCreate</code> JSON. This page never asks for seed phrases or secrets;
+      use a wallet like Xaman to sign and submit.
+    </p>
 
-  function resolveProxyBase() {
-    const fromCfg = (cfg.proxyUrl || '').trim();
-    if (fromCfg) return fromCfg.replace(/\/+$/, '');
-    const origin = (location && location.origin) || '';
-    const host = (location && location.hostname) || '';
-    if (/xrbitcoincash/i.test(host) || /xrbitcoin/i.test(host)) {
-      return 'https://xrbitcoincash-github-io.onrender.com';
-    }
-    return origin ? origin + '/xrpl-proxy' : '';
-  }
+    <div class="dex-grid">
+      <!-- Left: Order book + AMM -->
+      <div class="card">
+        <h3>Order Book (JCS/XRP)</h3>
+        <p class="muted" id="dexStatus">
+          Not connected. Click “Connect to XRPL” to load live data.
+        </p>
 
-  const PROXY_BASE = resolveProxyBase();
-  const XUMM_API_KEY = (cfg.xummApiKey || '').trim();
-  const ASSET = cfg.asset || {};
-  const CURRENCY_HEX = String(ASSET.currencyHex || '').toUpperCase();
-  const ISSUER = (ASSET.issuer || '').trim();
+        <div class="dex-actions">
+          <button id="dexConnectBtn" type="button">Connect to XRPL</button>
+          <button id="dexRefreshBtn" type="button" disabled>Refresh Data</button>
+        </div>
 
-  const XRP_TO_DROPS = 1000000;
-  const SLIPPAGE_PCT = 2;
-  const RESERVE_BUFFER_XRP = 1.0;
+        <div class="orderbook-wrapper">
+          <table class="orderbook-table" aria-label="Best bids and asks for JCS/XRP">
+            <thead>
+              <tr>
+                <th scope="col">Side</th>
+                <th scope="col">Price (XRP/JCS)</th>
+                <th scope="col">Size (JCS)</th>
+                <th scope="col">Total (XRP)</th>
+              </tr>
+            </thead>
+            <tbody id="dexOrderbookBody">
+              <tr>
+                <td colspan="4" class="muted" style="text-align:left;">
+                  No data yet. Connect to XRPL to view live offers.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="notice">
+            Prices are indicative only. Always confirm in your wallet or trusted explorer before trading.
+          </p>
+        </div>
 
-  if (!PROXY_BASE) console.warn('Proxy URL missing');
-  if (!ISSUER || !CURRENCY_HEX) console.warn('Asset config missing');
+        <div class="card" style="margin-top:10px;">
+          <h3>AMM Pool Snapshot</h3>
+          <p class="muted">
+            If a JCS/XRP AMM exists on XRPL, its spot price and depth will appear here.
+          </p>
+          <div class="metrics-grid">
+            <div class="metric">
+              <div class="label muted">AMM Spot (XRP/JCS)</div>
+              <div id="dexAmmSpot" class="value">—</div>
+            </div>
+            <div class="metric">
+              <div class="label muted">Pool JCS</div>
+              <div id="dexAmmJcs" class="value">—</div>
+            </div>
+            <div class="metric">
+              <div class="label muted">Pool XRP</div>
+              <div id="dexAmmXrp" class="value">—</div>
+            </div>
+            <div class="metric">
+              <div class="label muted">Trading Fee (bps)</div>
+              <div id="dexAmmFee" class="value">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  const $ = id => document.getElementById(id);
+      <!-- Right: Limit order builder -->
+      <div class="card">
+        <h3>Limit Order Builder (TX JSON)</h3>
+        <p class="muted">
+          Build a JCS/XRP <code>OfferCreate</code> transaction. This page does not submit
+          anything to the ledger and never handles secrets. Use the JSON with Xaman or
+          your own secure backend.
+        </p>
 
-  const walletStatus = $('walletStatus');
-  const trustlineMsg = $('trustlineMsg');
-  const connectBtn = $('connectWalletBtn');
-  const disconnectBtn = $('disconnectWalletBtn');
-  const setTrustBtn = $('setTrustlineBtn');
-  const logEl = $('log');
-  const resultBox = $('resultBox');
+        <form id="dexForm" autocomplete="off">
+          <label class="muted" for="dexSide">Side</label>
+          <select id="dexSide">
+            <option value="buy">Buy JCS (pay XRP)</option>
+            <option value="sell">Sell JCS (receive XRP)</option>
+          </select>
 
-  function log(msg) {
-    if (!logEl) return;
-    logEl.textContent += msg + '\n';
-    logEl.scrollTop = logEl.scrollHeight;
-  }
+          <label class="muted" for="dexPrice">Limit Price (XRP per 1 JCS)</label>
+          <input id="dexPrice" type="number" step="0.0000001" min="0" inputmode="decimal" />
 
-  function setStatus(el, msg, cls) {
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.remove('ok', 'err');
-    if (cls) el.classList.add(cls);
-    if (el === walletStatus) log('[wallet] ' + msg);
-    if (el === $('tradeMsg')) log('[trade] ' + msg);
-    if (el === $('offersStatus')) log('[offers] ' + msg);
-    if (el === $('healthStatus')) log('[health] ' + msg);
-    if (el === $('buyStatus')) log('[buy] ' + msg);
-  }
+          <label class="muted" for="dexAmountJcs">Amount (JCS)</label>
+          <input id="dexAmountJcs" type="number" step="0.000001" min="0" inputmode="decimal" />
 
-  function setResult(msg) {
-    if (!resultBox) return;
-    resultBox.textContent = msg;
-    log('[result] ' + msg);
-  }
+          <p class="muted" id="dexEstSummary">Estimated total: —</p>
 
-  function toDrops(xrp) {
-    return Math.round(Number(xrp) * XRP_TO_DROPS).toString();
-  }
+          <div class="dex-actions">
+            <button type="button" id="dexBuildBtn">Build TX JSON</button>
+            <button type="reset" id="dexResetBtn">Reset</button>
+          </div>
+        </form>
 
-  function genCode() {
-    return String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
-  }
+        <label class="muted" for="dexTxJson">OfferCreate JSON (for wallet signing)</label>
+        <textarea id="dexTxJson" readonly rows="10" spellcheck="false"></textarea>
 
-  function asciiToHex(str) {
-    let out = '';
-    for (let i = 0; i < str.length; i++) {
-      const h = str.charCodeAt(i).toString(16).toUpperCase();
-      out += (h.length === 1 ? '0' : '') + h;
-    }
-    return out;
-  }
+        <p class="notice">
+          Most wallets will fill in <code>Account</code>, <code>Fee</code>, and
+          <code>Sequence</code> automatically when you import this JSON. Do not paste
+          seed phrases or secrets into this page.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  function hexToAsciiSymbol(hex) {
-    if (!hex) return '';
-    let out = '';
-    for (let i = 0; i < hex.length; i += 2) {
-      const b = parseInt(hex.slice(i, i + 2), 16);
-      if (!Number.isFinite(b) || b <= 0) break;
-      out += String.fromCharCode(b);
-    }
-    return out.replace(/[^\x20-\x7E]/g, '');
-  }
+  <!-- Prayer & Participation -->
+  <section id="prayer" aria-label="Prayer and Participation">
+    <h2>🙏 Prayer, Stewardship, and Participation</h2>
+    <p class="section-lede">
+      JCS exists to keep Christ central. Hold if you wish, share if you are led,
+      but above all, pray. The goal is a visible, verifiable trail of faith-driven action.
+    </p>
+    <div class="prayer-wall">
+      <div class="card">
+        <h3>Prayer Wall (Concept)</h3>
+        <div class="prayer-list">
+          <div class="prayer-item">
+            <strong>For Ministries:</strong>
+            Lord, guide resources toward honest, Christ-centered work with transparent use.
+          </div>
+          <div class="prayer-item">
+            <strong>For Holders:</strong>
+            May every wallet remember the poor, the lost, and the persecuted Church.
+          </div>
+          <div class="prayer-item">
+            <strong>For Builders:</strong>
+            Let Christian developers honor You with code that reflects truth and integrity.
+          </div>
+          <div class="prayer-item">
+            <strong>For Witness:</strong>
+            May this project always exalt Jesus’ name above any token or metric.
+          </div>
+        </div>
+        <p class="notice">
+          Future updates can integrate signed on-ledger “prayer signals” without exposing private data.
+        </p>
+      </div>
+      <div class="card">
+        <h3>How To Engage</h3>
+        <ul class="checklist">
+          <li>Set the JCS trustline with the verified issuer.</li>
+          <li>Use only official links listed on this site.</li>
+          <li>Join community calls, prayer threads, and Gospel-centered initiatives.</li>
+          <li>Never share your secret keys; no JCS feature ever requires them.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  function nowIso() {
-    try { return new Date().toISOString(); } catch { return ''; }
-  }
+  <!-- FAQ -->
+  <section id="faq" aria-label="Frequently Asked Questions">
+    <h2>❓ FAQ</h2>
+    <div class="faq-cards">
+      <article class="card">
+        <h3>Why a Christian token?</h3>
+        <p>
+          To plant a clear testimony of Jesus Christ inside Web3,
+          using transparent rails where faith, generosity, and accountability can be verified.
+        </p>
+      </article>
 
-  function originForMemo() {
-    try { return location.origin + location.pathname; } catch { return ''; }
-  }
+      <article class="card">
+        <h3>Is this a church or ministry?</h3>
+        <p>
+          No. JCS is a technology and branding layer that openly confesses Christ.
+          Individual believers and ministries choose how to use it.
+        </p>
+      </article>
 
-  const TOKEN_META = {};
+      <article class="card">
+        <h3>Is a trustline safe?</h3>
+        <p>
+          XRPL trustlines permit your wallet to hold a token.
+          They do not give anyone control of your funds or keys.
+          Always verify issuer details before signing.
+        </p>
+      </article>
 
-  function decodeCurrencyHex(hex) {
-    if (!hex) return null;
-    let trimmed = hex.replace(/0+$/,'');
-    if (!trimmed || trimmed.length % 2 !== 0) return null;
-    let out = '';
-    for (let i = 0; i < trimmed.length; i += 2) {
-      const code = parseInt(trimmed.slice(i, i + 2), 16);
-      if (!Number.isFinite(code) || code < 0x21 || code > 0x7E) return null;
-      out += String.fromCharCode(code);
-    }
-    if (!out.trim()) return null;
-    if (out.length > 12) return null;
-    return out;
-  }
+      <article class="card">
+        <h3>How do I trade JCS?</h3>
+        <p>
+          Trade JCS through XRPL DEX interfaces that show the correct issuer.
+          Use the official Sologenic and XPMarket links here to reduce impersonation risk.
+        </p>
+      </article>
 
-  function getDisplayTicker(hex, issuer) {
-    if (!hex) return 'IOU';
-    const meta = TOKEN_META[hex];
-    if (meta && meta.ticker) return meta.ticker;
-    const decoded = decodeCurrencyHex(hex);
-    if (decoded) return decoded;
-    return hex.slice(0, 6);
-  }
+      <article class="card">
+        <h3>Is this financial advice?</h3>
+        <p>
+          No. JCS is a symbolic and utility-focused project for believers.
+          Prices are volatile. Seek wisdom, pray, and follow your own informed conviction.
+        </p>
+      </article>
 
-  function iconUrlForToken(hex, issuer) {
-    const meta = TOKEN_META[hex];
-    if (meta && meta.logo) return meta.logo;
-    const label = (getDisplayTicker(hex, issuer) || '?').slice(0, 4);
-    const svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">' +
-        '<rect width="16" height="16" rx="3" fill="#020817"/>' +
-        '<text x="50%" y="55%" font-size="6" text-anchor="middle" fill="#38bdf8" font-family="system-ui, -apple-system, sans-serif">' +
-        label +
-        '</text>' +
-      '</svg>';
-    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-  }
+      <article class="card">
+        <h3>What is the long-term vision?</h3>
+        <p>
+          Persistent Gospel witness on-ledger, transparent giving mechanics,
+          Christ-centered NFTs, and community tools that keep Jesus’ words visible in a digital age.
+        </p>
+      </article>
+    </div>
+  </section>
 
-  const CURRENCY_ASCII = hexToAsciiSymbol(CURRENCY_HEX);
-  const APP_NAME = (cfg.appName || cfg.ticker || CURRENCY_ASCII || 'JCS').trim() || 'JCS';
+  <!-- Footer -->
+  <footer class="ecosystem-footer">
+    <div class="footer-container">
+      <h3>JCS Official Links</h3>
+      <p class="ecosystem-desc">
+        Use only these verified entry points when exploring Jesus Christ Saves Token on the XRP Ledger.
+      </p>
 
-  TOKEN_META[CURRENCY_HEX] = {
-    ticker: APP_NAME,
-    logo: (cfg.logoUrl || './jcs-favicon.png')
-  };
+      <div class="ecosystem-links">
+        <a href="https://jesuschristsavestoken.com/" class="eco-link">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token logo">
+          <span>Official JCS Website</span>
+        </a>
 
-  const SENTINEL_PREFIX = (cfg.sentinelPrefix || APP_NAME || 'JCS').toUpperCase();
-  const SENTINEL_VERSION = 'v1';
+        <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" class="eco-link" target="_blank" rel="noopener">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS/XRP">
+          <span>Sologenic: JCS/XRP Market</span>
+        </a>
 
-  function appIdFromPath(p) {
-    try {
-      const name = (p || location.pathname).split('/').filter(Boolean).pop() || 'index.html';
-      return APP_NAME + ':' + name;
-    } catch {
-      return APP_NAME + ':index';
-    }
-  }
+        <a href="https://sologenic.org/amm/JCS_XRP_rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" class="eco-link" target="_blank" rel="noopener">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS AMM">
+          <span>Sologenic: JCS-XRP AMM</span>
+        </a>
 
-  function applyAssetMeta() {
-    try {
-      document.querySelectorAll('[data-asset-field="name"]').forEach(el => {
-        el.textContent = APP_NAME;
-      });
-      document.querySelectorAll('[data-asset-field="issuer"]').forEach(el => {
-        el.textContent = ISSUER || '—';
-      });
-      document.querySelectorAll('[data-asset-field="currencyHex"]').forEach(el => {
-        el.textContent = CURRENCY_HEX || '—';
-      });
-    } catch {}
-  }
-  applyAssetMeta();
+        <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" class="eco-link" target="_blank" rel="noopener">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XPMarket JCS">
+          <span>XPMarket: JCS Listing</span>
+        </a>
 
-  function buildSentinelMemos(code) {
-    const ctx = {
-      v: SENTINEL_VERSION,
-      ts: nowIso(),
-      origin: originForMemo(),
-      app_id: appIdFromPath(location.pathname)
-    };
-    return [
-      { Memo: { MemoType: asciiToHex(SENTINEL_PREFIX + '-SENT'), MemoData: asciiToHex(code) } },
-      { Memo: { MemoType: asciiToHex(SENTINEL_PREFIX + '-CTX'),  MemoData: asciiToHex(JSON.stringify(ctx)) } }
-    ];
-  }
+        <a href="https://x.com/JesusCS_token" target="_blank" class="eco-link" rel="noopener">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
+               alt="Twitter">
+          <span>@JesusCS_token</span>
+        </a>
+      </div>
 
-  function setSecurityCodeDisplay(code) {
-    const el = $('xrbSecurityCode');
-    if (!el) return;
-    if (code) {
-      el.textContent = 'Xaman security code: ' + code;
-      el.style.display = '';
-    } else {
-      el.textContent = '';
-      el.style.display = 'none';
-    }
-  }
+      <p class="ecosystem-tagline"><strong>Built on the XRP Ledger. Centered on Jesus Christ.</strong></p>
+      <p class="ecosystem-copy">© 2025 Jesus Christ Saves Token. All Rights Reserved.</p>
+    </div>
+  </footer>
 
-  async function xrplRequest(payload, { timeoutMs = 15000 } = {}) {
-    if (!PROXY_BASE) throw new Error('Proxy URL missing');
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), timeoutMs);
-    try {
-      const res = await fetch(PROXY_BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'cors',
-        cache: 'no-store',
-        credentials: 'omit',
-        body: JSON.stringify(payload),
-        signal: ctrl.signal
-      });
-      if (!res.ok) throw new Error('Proxy HTTP ' + res.status);
-      const data = await res.json();
-      let envelope;
-      if (data && typeof data === 'object' && 'result' in data) envelope = data;
-      else envelope = { result: data };
-      const r = envelope.result || {};
-      if (r && (r.error || r.error_message)) {
-        throw new Error(r.error_message || r.error || 'XRPL error');
-      }
-      return envelope;
-    } finally {
-      clearTimeout(t);
-    }
-  }
-
-  async function call(method, params) {
-    const base = { ...(params || {}), ledger_index: 'validated' };
-    const r = await xrplRequest({ method, params: [base] });
-    return r.result;
-  }
-
-  let xumm = null;
-  let currentAccount = null;
-  let HAS_TRUSTLINE = false;
-
-  function updateWalletButtons() {
-    const connected = !!currentAccount;
-    if (connectBtn) connectBtn.disabled = connected;
-    if (disconnectBtn) disconnectBtn.disabled = !connected;
-    if (setTrustBtn) setTrustBtn.disabled = !connected || HAS_TRUSTLINE;
-    const allowTrade = connected && HAS_TRUSTLINE;
-    if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade;
-    if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade;
-    if ($('btnHealthScan')) $('btnHealthScan').disabled = !connected;
-  }
-
-  async function checkTrustline(acct) {
-    try {
-      const r = await xrplRequest({
-        method: 'account_lines',
-        params: [{ account: acct, peer: ISSUER, ledger_index: 'validated', limit: 400 }]
-      });
-      const lines = (r.result && r.result.lines) || [];
-      return lines.some(l => {
-        const cur = (l.currency || '').toUpperCase();
-        return cur === CURRENCY_HEX;
-      });
-    } catch {
-      return false;
-    }
-  }
-
-  async function refreshTrustline() {
-    if (!currentAccount) {
-      HAS_TRUSTLINE = false;
-      updateWalletButtons();
-      return;
-    }
-    HAS_TRUSTLINE = await checkTrustline(currentAccount);
-    if (HAS_TRUSTLINE) {
-      setStatus(trustlineMsg, APP_NAME + ' trustline present.', 'ok');
-    } else {
-      setStatus(trustlineMsg, APP_NAME + ' trustline not found. Use “Add ' + APP_NAME + ' Trust Line”.');
-    }
-    updateWalletButtons();
-  }
-
-  function setConnected(acct) {
-    currentAccount = acct;
-    window.__xrbWallet = acct;
-    try { localStorage.setItem('xrbWallet', acct); } catch {}
-    setStatus(walletStatus, 'Connected: ' + acct, 'ok');
-    updateWalletButtons();
-    refreshTrustline().catch(() => {});
-    refreshAll().catch(() => {});
-  }
-
-  function setDisconnected() {
-    currentAccount = null;
-    window.__xrbWallet = null;
-    try { localStorage.removeItem('xrbWallet'); } catch {}
-    HAS_TRUSTLINE = false;
-    setStatus(walletStatus, 'Status: Not connected');
-    setStatus(trustlineMsg, '');
-    updateWalletButtons();
-  }
-
-  if (typeof Xumm !== 'undefined' && XUMM_API_KEY) {
-    xumm = new Xumm(XUMM_API_KEY);
-
-    xumm.on('ready', async () => {
-      try {
-        const acct = await xumm.user.account;
-        if (acct) {
-          setConnected(acct);
-        } else {
-          let saved = null;
-          try { saved = localStorage.getItem('xrbWallet'); } catch {}
-          if (saved) setConnected(saved);
-          else updateWalletButtons();
-        }
-      } catch {
-        updateWalletButtons();
-      }
-    });
-
-    window.addEventListener('focus', () => {
-      if (!xumm) return;
-      xumm.user.account.then(a => { if (a) setConnected(a); }).catch(() => {});
-    });
-
-    if (connectBtn) {
-      connectBtn.addEventListener('click', async () => {
-        try {
-          if (currentAccount) {
-            setStatus(walletStatus, 'Already connected: ' + currentAccount);
-            return;
-          }
-          setStatus(walletStatus, 'Waiting for Xaman');
-          await xumm.authorize();
-          const acct = await xumm.user.account;
-          if (acct) setConnected(acct);
-          else setStatus(walletStatus, 'Connect canceled or no account', 'err');
-        } catch (e) {
-          setStatus(walletStatus, 'Connect failed: ' + (e.message || e), 'err');
-        }
-      });
-    }
-
-    if (disconnectBtn) {
-      disconnectBtn.addEventListener('click', () => {
-        try { xumm.logout(); } catch {}
-        setDisconnected();
-      });
-    }
-
-    if (setTrustBtn) {
-      setTrustBtn.addEventListener('click', async () => {
-        try {
-          if (!currentAccount) {
-            setStatus(trustlineMsg, 'Connect wallet first.', 'err');
-            return;
-          }
-          setTrustBtn.disabled = true;
-
-          const exists = await checkTrustline(currentAccount);
-          if (exists) {
-            HAS_TRUSTLINE = true;
-            setStatus(trustlineMsg, APP_NAME + ' trustline already present.', 'ok');
-            updateWalletButtons();
-            return;
-          }
-
-          const code = genCode();
-          const txjson = {
-            TransactionType: 'TrustSet',
-            Account: currentAccount,
-            LimitAmount: { currency: CURRENCY_HEX, issuer: ISSUER, value: '1000000000' },
-            Memos: buildSentinelMemos(code)
-          };
-
-          setStatus(walletStatus, 'Verify code: ' + code + ' in Xaman memos.');
-
-          const { created, resolved } = await xumm.payload.createAndSubscribe(
-            {
-              txjson,
-              options: { submit: true, expire: 300 },
-              custom_meta: {
-                instruction: 'Verify code ' + code + ' and details, then sign.',
-                identifier: 'sentinel:trust:' + code
-              }
-            },
-            e => {
-              if (e?.opened) setStatus(trustlineMsg, 'Open Xaman or scan QR to review.');
-              if (e?.signed === false) setStatus(trustlineMsg, 'Trustline rejected.', 'err');
-            }
-          );
-
-          const sec = created?.meta?.security_code || created?.meta?.securityCode || null;
-          setSecurityCodeDisplay(sec || code);
-
-          const res = await resolved;
-          setSecurityCodeDisplay(null);
-
-          if (!res?.signed) {
-            setStatus(trustlineMsg, 'Trustline not signed.', 'err');
-            return;
-          }
-
-          setStatus(trustlineMsg, 'Trustline set. Wait for validation.', 'ok');
-          HAS_TRUSTLINE = true;
-          updateWalletButtons();
-          refreshAll().catch(() => {});
-        } catch (e) {
-          setSecurityCodeDisplay(null);
-          setStatus(trustlineMsg, 'Trustline error: ' + (e.message || e), 'err');
-        } finally {
-          setTrustBtn.disabled = !currentAccount || HAS_TRUSTLINE;
-        }
-      });
-    }
-  } else {
-    if (walletStatus) setStatus(walletStatus, 'Xaman SDK not loaded; wallet features disabled.', 'err');
-    if (connectBtn) connectBtn.disabled = true;
-    if (setTrustBtn) setTrustBtn.disabled = true;
-  }
-
-  async function signWithSentinel(baseTx, purpose) {
-    if (!xumm) throw new Error('Wallet SDK not available');
-    const acct = currentAccount || await xumm.user.account;
-    if (!acct) throw new Error('Connect wallet first');
-
-    const code = genCode();
-    const memos = buildSentinelMemos(code);
-    const txjson = { Account: acct, ...baseTx, Memos: [ ...(baseTx.Memos || []), ...memos ] };
-
-    setStatus(walletStatus, 'Verify code: ' + code + ' in Xaman memos.');
-
-    const { created, resolved } = await xumm.payload.createAndSubscribe(
-      {
-        txjson,
-        options: { submit: true, expire: 300 },
-        custom_meta: {
-          instruction: 'Verify code ' + code + ' and details, then sign.',
-          identifier: 'sentinel:' + purpose + ':' + code
-        }
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Floating cross particles
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 3, "density": { "enable": false } },
+        "shape": { "type": "image", "image": { "src": "cross1.png", "width": 40, "height": 40 } },
+        "opacity": { "value": 0.95 },
+        "size": { "value": 46, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 0.45, "direction": "top", "out_mode": "out" }
       },
-      e => {
-        if (e?.opened) setStatus($('tradeMsg'), 'Payload opened in Xaman.');
-        if (e?.signed === false) setStatus($('tradeMsg'), 'Action rejected.', 'err');
+      "retina_detect": true
+    });
+  </script>
+
+  <!-- Rotating Scripture of the Day (general) -->
+  <script>
+    const verses = [
+      { ref: "John 3:16", text: "For God so loved the world that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
+      { ref: "Psalm 23:1", text: "The LORD is my shepherd; I shall not want." },
+      { ref: "Philippians 4:13", text: "I can do all things through Christ which strengtheneth me." },
+      { ref: "Romans 8:28", text: "All things work together for good to them that love God, to them who are the called according to his purpose." },
+      { ref: "Proverbs 3:5-6", text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding." },
+      { ref: "Isaiah 40:31", text: "They that wait upon the LORD shall renew their strength." },
+      { ref: "Matthew 5:16", text: "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven." },
+      { ref: "Ephesians 2:8-9", text: "By grace are ye saved through faith; and that not of yourselves: it is the gift of God." },
+      { ref: "Jeremiah 29:11", text: "I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil." },
+      { ref: "2 Corinthians 5:7", text: "For we walk by faith, not by sight." }
+    ];
+
+    function rotateVerseDaily() {
+      const el = document.getElementById("dailyVerse");
+      if (!el) return;
+      const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) % verses.length;
+      const v = verses[dayIndex];
+      el.textContent = v ? `${v.ref} — "${v.text}"` : "";
+    }
+
+    rotateVerseDaily();
+    setInterval(rotateVerseDaily, 45000);
+  </script>
+
+  <!-- Rotating Words of Jesus (daily deterministic) -->
+  <script>
+    const jesusWordsList = [
+      { ref: "John 14:6", text: "I am the way, the truth, and the life: no man cometh unto the Father, but by me." },
+      { ref: "Matthew 11:28", text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest." },
+      { ref: "John 8:12", text: "I am the light of the world: he that followeth me shall not walk in darkness, but shall have the light of life." },
+      { ref: "Matthew 5:9", text: "Blessed are the peacemakers: for they shall be called the children of God." },
+      { ref: "Matthew 6:33", text: "Seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you." },
+      { ref: "John 10:11", text: "I am the good shepherd: the good shepherd giveth his life for the sheep." },
+      { ref: "John 11:25", text: "I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live." },
+      { ref: "Luke 11:9", text: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you." },
+      { ref: "Matthew 28:20", text: "Lo, I am with you alway, even unto the end of the world." },
+      { ref: "Mark 16:15", text: "Go ye into all the world, and preach the gospel to every creature." }
+    ];
+
+    function setDailyJesusWords() {
+      const el = document.getElementById("jesusWords");
+      if (!el) return;
+      const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) % jesusWordsList.length;
+      const v = jesusWordsList[dayIndex];
+      el.textContent = v ? `${v.ref} — "${v.text}"` : "";
+    }
+
+    setDailyJesusWords();
+    setInterval(setDailyJesusWords, 60000);
+  </script>
+
+  <!-- Gentle Glow Cross Cursor -->
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      let cursor = document.getElementById("cross-cursor");
+      if (!cursor) {
+        cursor = document.createElement("div");
+        cursor.id = "cross-cursor";
+        cursor.style.position = "fixed";
+        cursor.style.width = "20px";
+        cursor.style.height = "20px";
+        cursor.style.background = "url('https://jesuschristsavestoken.com/cross1.png') center/contain no-repeat";
+        cursor.style.pointerEvents = "none";
+        cursor.style.zIndex = "9999";
+        cursor.style.filter = "drop-shadow(0 0 8px rgba(255,215,0,0.8))";
+        document.body.appendChild(cursor);
       }
-    );
+      cursor.style.left = e.pageX + "px";
+      cursor.style.top = e.pageY + "px";
+    });
+  </script>
 
-    const sec = created?.meta?.security_code || created?.meta?.securityCode || null;
-    setSecurityCodeDisplay(sec || code);
+  <!-- "Amen" Glow on Click -->
+  <script>
+    document.addEventListener("click", (e) => {
+      const amen = document.createElement("span");
+      amen.innerText = "Amen ✝️";
+      amen.style.position = "fixed";
+      amen.style.left = e.pageX + "px";
+      amen.style.top = e.pageY + "px";
+      amen.style.color = "#ffd700";
+      amen.style.fontWeight = "800";
+      amen.style.fontFamily = "Montserrat, sans-serif";
+      amen.style.textShadow = "0 0 10px rgba(255,255,255,0.9)";
+      amen.style.pointerEvents = "none";
+      amen.style.transition = "all 1.8s ease-out";
+      document.body.appendChild(amen);
+      setTimeout(() => {
+        amen.style.opacity = 0;
+        amen.style.transform = "translateY(-60px)";
+      }, 50);
+      setTimeout(() => amen.remove(), 2000);
+    });
+  </script>
 
-    const res = await resolved;
-    setSecurityCodeDisplay(null);
-
-    if (!res?.signed) throw new Error('Not signed');
-    return res;
-  }
-
-  const sideEl = $('side');
-  const buyTab = $('buyTab');
-  const sellTab = $('sellTab');
-  const amountEl = $('amount');
-  const priceEl = $('price');
-  const totalXrpEl = $('totalXrp');
-  const suggestBtn = $('suggestPriceBtn');
-  const placeOfferBtn = $('placeOfferBtn');
-  const marketBtn = $('marketTradeBtn');
-  const tradeMsg = $('tradeMsg');
-
-  function updateExplainer(side) {
-    const buyNote = document.querySelector('#sideExplain .note.buy');
-    const sellNote = document.querySelector('#sideExplain .note.sell');
-    const hint = $('amountHint');
-    if (side === 'buy') {
-      if (buyNote) buyNote.hidden = false;
-      if (sellNote) sellNote.hidden = true;
-      if (hint) hint.innerHTML =
-        'Amount to <span id="actionWord">buy</span>. You trade XRP to receive ' + APP_NAME + '.';
-    } else {
-      if (buyNote) buyNote.hidden = true;
-      if (sellNote) sellNote.hidden = false;
-      if (hint) hint.innerHTML =
-        'Amount to <span id="actionWord">sell</span>. You trade ' + APP_NAME + ' to receive XRP.';
+  <!-- Daily Blessing Footer Rotator -->
+  <script>
+    const blessings = [
+      "May every ledger entry remind you that Jesus Christ never changes.",
+      "Walk in faith; let your stewardship be as transparent as this ledger.",
+      "Jesus Christ Saves — let your digital steps confess His name.",
+      "Let your giving be in the light, your hope in the Lord.",
+      "Grace and truth remain greater than any market chart."
+    ];
+    const footer = document.querySelector("footer");
+    if (footer) {
+      const bless = document.createElement("p");
+      bless.id = "dailyBlessing";
+      bless.style.marginTop = "12px";
+      bless.style.color = "#fff8dc";
+      bless.style.fontWeight = "600";
+      bless.style.textShadow = "0 0 8px rgba(255,255,255,0.6)";
+      bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      footer.appendChild(bless);
+      setInterval(() => {
+        bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      }, 60000);
     }
-  }
+  </script>
 
-  function setSide(side) {
-    if (sideEl) sideEl.value = side;
-    if (buyTab) {
-      buyTab.classList.toggle('active', side === 'buy');
-      buyTab.setAttribute('aria-selected', side === 'buy' ? 'true' : 'false');
+  <!-- XRPL Metrics (no secrets; public endpoints only) -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <script>
+    async function fetchXRPLMetrics() {
+      const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+      const currency = "JCS";
+      let client;
+      try {
+        client = new xrpl.Client("wss://xrplcluster.com");
+        await client.connect();
+
+        const bookOffers = await client.request({
+          command: "book_offers",
+          taker_gets: { currency, issuer },
+          taker_pays: { currency: "XRP" },
+          limit: 1
+        });
+
+        let priceXRP = 0;
+        if (bookOffers.result.offers && bookOffers.result.offers.length > 0) {
+          const offer = bookOffers.result.offers[0];
+          const takerPaysXRP = Number(offer.TakerPays) / 1_000_000;
+          const takerGetsJCS = Number(offer.TakerGets.value);
+          if (takerGetsJCS > 0) {
+            priceXRP = takerPaysXRP / takerGetsJCS;
+          }
+        }
+
+        const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+        const xrpData = await xrpPriceRes.json();
+        const xrpUSD = xrpData?.ripple?.usd ?? 0;
+        const priceUSD = priceXRP * xrpUSD;
+
+        const accountLines = await client.request({ command: "account_lines", account: issuer });
+        let totalSupply = 0;
+        for (const line of (accountLines.result.lines || [])) {
+          if (line.currency === currency) {
+            totalSupply += parseFloat(line.balance);
+          }
+        }
+
+        const marketCap = totalSupply * (priceUSD || 0);
+
+        const priceEl = document.getElementById('price');
+        const mcEl = document.getElementById('marketcap');
+        const supplyEl = document.getElementById('supply');
+
+        if (priceEl) priceEl.innerText = priceUSD ? `$${priceUSD.toFixed(6)}` : "—";
+        if (mcEl) mcEl.innerText = Number.isFinite(marketCap) ? `$${marketCap.toLocaleString()}` : "—";
+        if (supplyEl) supplyEl.innerText = Number.isFinite(totalSupply) ? `${totalSupply.toLocaleString()} JCS` : "—";
+        const changeEl = document.getElementById('change');
+        if (changeEl) changeEl.innerText = "N/A";
+      } catch (e) {
+        console.error("Metrics error:", e);
+      } finally {
+        try { if (client) await client.disconnect(); } catch {}
+      }
     }
-    if (sellTab) {
-      sellTab.classList.toggle('active', side === 'sell');
-      sellTab.setAttribute('aria-selected', side === 'sell' ? 'true' : 'false');
-    }
-    const tradeCard = $('trade');
-    if (tradeCard) {
-      tradeCard.classList.toggle('buy', side === 'buy');
-      tradeCard.classList.toggle('sell', side === 'sell');
-    }
-    updateExplainer(side);
-    recalcTotals();
-  }
 
-  function recalcTotals() {
-    if (!totalXrpEl) return;
-    const amt = Number(amountEl && amountEl.value) || 0;
-    const px = Number(priceEl && priceEl.value) || 0;
-    const total = px * amt;
-    totalXrpEl.textContent = (isFinite(total) ? total : 0).toFixed(6) + ' XRP';
-  }
+    fetchXRPLMetrics();
+    setInterval(fetchXRPLMetrics, 60000);
+  </script>
 
-  if (buyTab) buyTab.addEventListener('click', () => setSide('buy'));
-  if (sellTab) sellTab.addEventListener('click', () => setSide('sell'));
-  setSide('buy');
+  <!-- JCS DEX logic -->
+  <script>
+    (function () {
+      const cfg = {
+        baseCurrency: "JCS",
+        baseIssuer: "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+        counterCurrency: "XRP",
+        endpoint: "wss://xrplcluster.com"
+      };
 
-  if (amountEl) amountEl.addEventListener('input', recalcTotals);
-  if (priceEl) priceEl.addEventListener('input', recalcTotals);
+      const state = {
+        client: null,
+        connecting: false,
+        lastRefresh: 0
+      };
 
-  const BAL = { xrp: 0, xrb: 0 };
+      function formatNum(value, decimals) {
+        if (!Number.isFinite(value)) return "—";
+        return value.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+      }
 
-  async function fetchBalances() {
-    if (!currentAccount) {
-      BAL.xrp = 0;
-      BAL.xrb = 0;
-      return BAL;
-    }
-    try {
-      const info = await call('account_info', { account: currentAccount });
-      BAL.xrp = Number(info.account_data.Balance || 0) / XRP_TO_DROPS;
-    } catch {
-      BAL.xrp = 0;
-    }
-    try {
-      const r = await xrplRequest({
-        method: 'account_lines',
-        params: [{ account: currentAccount, peer: ISSUER, ledger_index: 'validated' }]
-      });
-      const lines = (r.result && r.result.lines) || [];
-      const tl = lines.find(l => (l.currency || '').toUpperCase() === CURRENCY_HEX);
-      BAL.xrb = tl ? Math.max(0, Number(tl.balance || 0)) : 0;
-    } catch {
-      BAL.xrb = 0;
-    }
-    return BAL;
-  }
+      async function ensureClient() {
+        if (state.client && typeof state.client.isConnected === "function" && state.client.isConnected()) {
+          return state.client;
+        }
+        if (state.connecting) return state.client;
 
-  (function initPercentChips() {
-    const chips = document.querySelectorAll('.quick-amounts .qa');
-    if (!chips.length) return;
-    chips.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const pct = Number(btn.dataset.q || 0);
-        if (!pct || !currentAccount) return;
-        btn.disabled = true;
+        state.connecting = true;
+        const statusEl = document.getElementById("dexStatus");
+        if (statusEl) statusEl.textContent = "Connecting to XRPL...";
+
         try {
-          const side = sideEl.value;
-          await fetchBalances();
-          if (side === 'sell') {
-            const amt = BAL.xrb * (pct / 100);
-            if (amountEl) {
-              amountEl.value = amt.toFixed(6);
-              recalcTotals();
-            }
-          } else {
-            let px = Number(priceEl && priceEl.value) || 0;
-            if (!px) {
-              await fillBestPrice();
-              px = Number(priceEl && priceEl.value) || 0;
-            }
-            if (!px) return;
-            const spendable = Math.max(0, BAL.xrp - RESERVE_BUFFER_XRP) * (pct / 100);
-            const amt = spendable > 0 ? spendable / px : 0;
-            if (amountEl) {
-              amountEl.value = amt.toFixed(6);
-              recalcTotals();
-            }
+          const client = new xrpl.Client(cfg.endpoint);
+          await client.connect();
+          state.client = client;
+
+          if (statusEl) {
+            statusEl.textContent = "Connected to XRPL Mainnet (read-only).";
+          }
+          const refreshBtn = document.getElementById("dexRefreshBtn");
+          if (refreshBtn) refreshBtn.disabled = false;
+
+          await refresh();
+        } catch (e) {
+          console.error("JCS DEX XRPL connect error:", e);
+          if (statusEl) {
+            statusEl.textContent = "Could not connect to XRPL. Metrics-only mode.";
           }
         } finally {
-          btn.disabled = false;
+          state.connecting = false;
         }
-      });
-    });
-  })();
+        return state.client;
+      }
 
-  async function getTopOfBook() {
-    const [askRes, bidRes] = await Promise.all([
-      xrplRequest({
-        method: 'book_offers',
-        params: [{
-          taker_gets: { currency: CURRENCY_HEX, issuer: ISSUER },
-          taker_pays: { currency: 'XRP' },
-          limit: 5
-        }]
-      }),
-      xrplRequest({
-        method: 'book_offers',
-        params: [{
-          taker_gets: { currency: 'XRP' },
-          taker_pays: { currency: CURRENCY_HEX, issuer: ISSUER },
-          limit: 5
-        }]
-      })
-    ]);
+      async function refresh() {
+        const client = state.client;
+        if (!client) return;
 
-    function priceFrom(of) {
-      if (!of) return null;
-      const gets = of.TakerGets.value ? Number(of.TakerGets.value)
-        : Number(of.TakerGets) / XRP_TO_DROPS;
-      const pays = of.TakerPays.value ? Number(of.TakerPays.value)
-        : Number(of.TakerPays) / XRP_TO_DROPS;
-      if (!isFinite(gets) || gets <= 0 || !isFinite(pays)) return null;
-      return pays / gets;
-    }
+        const btn = document.getElementById("dexRefreshBtn");
+        if (btn) btn.disabled = true;
 
-    return {
-      bestAsk: priceFrom((askRes.result.offers || [])[0]) || null,
-      bestBid: priceFrom((bidRes.result.offers || [])[0]) || null
-    };
-  }
-
-  async function getMarketPrice(side) {
-    try {
-      const ammWrap = await xrplRequest({
-        method: 'amm_info',
-        params: [{ asset: { currency: 'XRP' }, asset2: { currency: CURRENCY_HEX, issuer: ISSUER } }]
-      });
-      const amm = ammWrap.result.amm;
-      if (amm && amountEl) {
-        const amt = Number(amountEl.value);
-        const reserveXrp = Number(amm.amount) / XRP_TO_DROPS;
-        const reserveTok = Number(amm.amount2.value);
-        const feeRate = (amm.trading_fee || 0) / 1000000;
-        const k = reserveXrp * reserveTok;
-        if (amt > 0 && reserveXrp > 0 && reserveTok > 0) {
-          if (side === 'buy') {
-            const newTok = reserveTok - amt;
-            if (newTok > 0) {
-              const newXrp = k / newTok;
-              let xrpIn = newXrp - reserveXrp;
-              xrpIn += xrpIn * feeRate;
-              return xrpIn / amt;
-            }
-          } else {
-            const newTok = reserveTok + amt;
-            const newXrp = k / newTok;
-            let xrpOut = reserveXrp - newXrp;
-            xrpOut -= xrpOut * feeRate;
-            if (amt > 0) return xrpOut / amt;
-          }
+        try {
+          await Promise.all([loadOrderbook(client), loadAmm(client)]);
+          state.lastRefresh = Date.now();
+        } catch (e) {
+          console.error("JCS DEX refresh error:", e);
+        } finally {
+          if (btn) btn.disabled = false;
         }
       }
-    } catch {}
-    const { bestAsk, bestBid } = await getTopOfBook();
-    return side === 'buy' ? bestAsk : bestBid;
-  }
 
-  async function fillBestPrice() {
-    if (!amountEl || !priceEl) return;
-    const side = sideEl.value;
-    const amt = Number(amountEl.value);
-    if (!amt || amt <= 0) return;
-    setStatus(tradeMsg, 'Querying XRPL for best price.');
-    try {
-      const px = await getMarketPrice(side);
-      if (!px || px <= 0) throw new Error('No price available');
-      priceEl.value = Number(px).toFixed(6);
-      recalcTotals();
-      setStatus(tradeMsg, 'Best price applied (' + side + ').', 'ok');
-    } catch (e) {
-      setStatus(tradeMsg, 'Price helper error: ' + (e.message || e), 'err');
-    }
-  }
+      async function loadOrderbook(client) {
+        const base = { currency: cfg.baseCurrency, issuer: cfg.baseIssuer };
 
-  if (suggestBtn) suggestBtn.addEventListener('click', () => fillBestPrice());
-  setInterval(() => {
-    const amt = Number(amountEl && amountEl.value);
-    if (amt > 0) fillBestPrice().catch(() => {});
-  }, 10000);
+        const [bidsRes, asksRes] = await Promise.all([
+          client.request({
+            command: "book_offers",
+            taker_gets: { currency: "XRP" },
+            taker_pays: base,
+            limit: 15,
+            ledger_index: "current"
+          }),
+          client.request({
+            command: "book_offers",
+            taker_gets: base,
+            taker_pays: { currency: "XRP" },
+            limit: 15,
+            ledger_index: "current"
+          })
+        ]);
 
-  if (placeOfferBtn) {
-    placeOfferBtn.addEventListener('click', async () => {
-      try {
-        if (!currentAccount) throw new Error('Connect wallet first');
-        if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
+        const rows = [];
+        const bids = (bidsRes.result && bidsRes.result.offers) || [];
+        const asks = (asksRes.result && asksRes.result.offers) || [];
+
+        for (const offer of bids) {
+          const xrp = Number(offer.TakerGets) / 1_000_000;
+          const jcs = Number(offer.TakerPays.value);
+          if (!Number.isFinite(xrp) || !Number.isFinite(jcs) || jcs <= 0) continue;
+          const px = xrp / jcs;
+          rows.push({ side: "buy", price: px, jcs, xrp });
+        }
+
+        for (const offer of asks) {
+          const jcs = Number(offer.TakerGets.value);
+          const xrp = Number(offer.TakerPays) / 1_000_000;
+          if (!Number.isFinite(xrp) || !Number.isFinite(jcs) || jcs <= 0) continue;
+          const px = xrp / jcs;
+          rows.push({ side: "sell", price: px, jcs, xrp });
+        }
+
+        const tbody = document.getElementById("dexOrderbookBody");
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        if (!rows.length) {
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.colSpan = 4;
+          td.className = "muted";
+          td.textContent = "No live offers found for JCS/XRP.";
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+          return;
+        }
+
+        const buys = rows.filter(r => r.side === "buy").sort((a, b) => b.price - a.price);
+        const sells = rows.filter(r => r.side === "sell").sort((a, b) => a.price - b.price);
+
+        const renderRow = (r) => {
+          const tr = document.createElement("tr");
+
+          const tdSide = document.createElement("td");
+          tdSide.textContent = r.side === "buy" ? "Buy JCS" : "Sell JCS";
+          tdSide.className = r.side === "buy" ? "side-buy" : "side-sell";
+
+          const tdPrice = document.createElement("td");
+          tdPrice.textContent = formatNum(r.price, 6);
+
+          const tdSize = document.createElement("td");
+          tdSize.textContent = formatNum(r.jcs, 2);
+
+          const tdTotal = document.createElement("td");
+          tdTotal.textContent = formatNum(r.xrp, 2);
+
+          tr.appendChild(tdSide);
+          tr.appendChild(tdPrice);
+          tr.appendChild(tdSize);
+          tr.appendChild(tdTotal);
+          return tr;
+        };
+
+        sells.slice(0, 8).forEach(r => tbody.appendChild(renderRow(r)));
+        buys.slice(0, 8).forEach(r => tbody.appendChild(renderRow(r)));
+      }
+
+      async function loadAmm(client) {
+        const spotEl = document.getElementById("dexAmmSpot");
+        const jcsEl = document.getElementById("dexAmmJcs");
+        const xrpEl = document.getElementById("dexAmmXrp");
+        const feeEl = document.getElementById("dexAmmFee");
+        if (!spotEl || !jcsEl || !xrpEl || !feeEl) return;
+
+        try {
+          const res = await client.request({
+            command: "amm_info",
+            asset: { currency: cfg.baseCurrency, issuer: cfg.baseIssuer },
+            asset2: { currency: "XRP" },
+            ledger_index: "validated"
+          });
+
+          const amm = res.result && res.result.amm;
+          if (!amm) throw new Error("No AMM found");
+
+          let poolJcs = 0;
+          let poolXrp = 0;
+
+          if (typeof amm.amount === "string") {
+            poolXrp = Number(amm.amount) / 1_000_000;
+          } else if (amm.amount && amm.amount.currency === cfg.baseCurrency) {
+            poolJcs = Number(amm.amount.value);
+          }
+
+          if (typeof amm.amount2 === "string") {
+            poolXrp = Number(amm.amount2) / 1_000_000;
+          } else if (amm.amount2 && amm.amount2.currency === cfg.baseCurrency) {
+            poolJcs = Number(amm.amount2.value);
+          }
+
+          const spot = poolJcs > 0 ? poolXrp / poolJcs : NaN;
+          const feeBps = amm.trading_fee ?? amm.TradingFee;
+
+          spotEl.textContent = formatNum(spot, 6);
+          jcsEl.textContent = poolJcs ? `${formatNum(poolJcs, 2)} JCS` : "—";
+          xrpEl.textContent = poolXrp ? `${formatNum(poolXrp, 2)} XRP` : "—";
+          feeEl.textContent = Number.isFinite(Number(feeBps)) ? `${feeBps}` : "—";
+        } catch (e) {
+          spotEl.textContent = "No AMM";
+          jcsEl.textContent = "—";
+          xrpEl.textContent = "—";
+          feeEl.textContent = "—";
+        }
+      }
+
+      function updateEstimate() {
+        const sideEl = document.getElementById("dexSide");
+        const priceEl = document.getElementById("dexPrice");
+        const amountEl = document.getElementById("dexAmountJcs");
+        const estEl = document.getElementById("dexEstSummary");
+        if (!sideEl || !priceEl || !amountEl || !estEl) return;
+
         const side = sideEl.value;
-        const amt = Number(amountEl.value);
-        const px = Number(priceEl.value);
-        if (!amt || !px || amt <= 0 || px <= 0) throw new Error('Enter Amount and Price');
-        const xrpTotal = px * amt;
+        const price = parseFloat(priceEl.value);
+        const jcs = parseFloat(amountEl.value);
+
+        if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(jcs) || jcs <= 0) {
+          estEl.textContent = "Estimated total: —";
+          return;
+        }
+
+        const totalXrp = price * jcs;
+        estEl.textContent = `Estimated total: ${formatNum(totalXrp, 4)} XRP to `
+          + (side === "buy" ? "pay" : "receive")
+          + ` for ${formatNum(jcs, 2)} JCS.`;
+      }
+
+      function buildTxJson() {
+        const priceEl = document.getElementById("dexPrice");
+        const amountEl = document.getElementById("dexAmountJcs");
+        const sideEl = document.getElementById("dexSide");
+        const out = document.getElementById("dexTxJson");
+        if (!priceEl || !amountEl || !sideEl || !out) return;
+
+        const price = parseFloat(priceEl.value);
+        const jcs = parseFloat(amountEl.value);
+        const side = sideEl.value;
+
+        if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(jcs) || jcs <= 0) {
+          out.value = "// Enter a positive price and amount first.";
+          return;
+        }
+
+        const totalXrp = price * jcs;
+        const drops = Math.round(totalXrp * 1_000_000);
+
         let tx;
-        if (side === 'sell') {
+        if (side === "buy") {
           tx = {
-            TransactionType: 'OfferCreate',
-            TakerGets: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
-            TakerPays: toDrops(xrpTotal),
-            Flags: 0x00080000
+            TransactionType: "OfferCreate",
+            TakerGets: {
+              currency: cfg.baseCurrency,
+              issuer: cfg.baseIssuer,
+              value: jcs.toFixed(6)
+            },
+            TakerPays: drops.toString(),
+            Flags: 0
           };
         } else {
           tx = {
-            TransactionType: 'OfferCreate',
-            TakerGets: toDrops(xrpTotal),
-            TakerPays: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
+            TransactionType: "OfferCreate",
+            TakerGets: drops.toString(),
+            TakerPays: {
+              currency: cfg.baseCurrency,
+              issuer: cfg.baseIssuer,
+              value: jcs.toFixed(6)
+            },
             Flags: 0
           };
         }
-        setStatus(tradeMsg, 'Open Xaman to review limit order.');
-        await signWithSentinel(tx, 'offer');
-        setStatus(tradeMsg, 'Order submitted.', 'ok');
-        setResult('Limit order placed.');
-        await refreshAll();
-      } catch (e) {
-        setStatus(tradeMsg, 'Error: ' + (e.message || e), 'err');
+
+        out.value = JSON.stringify(tx, null, 2);
       }
-    });
-  }
 
-  if (marketBtn) {
-    marketBtn.addEventListener('click', async () => {
-      try {
-        if (!currentAccount) throw new Error('Connect wallet first');
-        if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
-        const side = sideEl.value;
-        const amt = Number(amountEl.value);
-        if (!amt || amt <= 0) throw new Error('Enter Amount');
-        const basePx = await getMarketPrice(side);
-        if (!basePx || basePx <= 0) throw new Error('No market price');
-        const slip = SLIPPAGE_PCT / 100;
-        const TF_PARTIAL = 0x00020000;
+      function initUi() {
+        const connectBtn = document.getElementById("dexConnectBtn");
+        const refreshBtn = document.getElementById("dexRefreshBtn");
+        const priceEl = document.getElementById("dexPrice");
+        const amountEl = document.getElementById("dexAmountJcs");
+        const sideEl = document.getElementById("dexSide");
+        const buildBtn = document.getElementById("dexBuildBtn");
+        const resetBtn = document.getElementById("dexResetBtn");
 
-        async function findPaths(params) {
-          const r = await xrplRequest({ method: 'ripple_path_find', params: [params] });
-          return r.result.alternatives || [];
-        }
+        if (connectBtn) connectBtn.addEventListener("click", ensureClient);
+        if (refreshBtn) refreshBtn.addEventListener("click", refresh);
 
-        function pickCheapestXrp(alts) {
-          let best = null, bestDrops = Infinity;
-          for (const alt of alts) {
-            const sa = alt.source_amount;
-            let drops = Infinity;
-            if (typeof sa === 'string') drops = Number(sa);
-            else if (sa && sa.currency === 'XRP') drops = Math.round(Number(sa.value) * XRP_TO_DROPS);
-            if (isFinite(drops) && drops < bestDrops) { bestDrops = drops; best = alt; }
-          }
-          if (!best) throw new Error('No XRP path');
-          return { best, drops: bestDrops };
-        }
+        if (priceEl) priceEl.addEventListener("input", updateEstimate);
+        if (amountEl) amountEl.addEventListener("input", updateEstimate);
+        if (sideEl) sideEl.addEventListener("change", updateEstimate);
 
-        function pickCheapestIOU(alts) {
-          let best = null, bestVal = Infinity;
-          for (const alt of alts) {
-            const sa = alt.source_amount;
-            if (sa && sa.currency === CURRENCY_HEX && sa.issuer === ISSUER) {
-              const v = Number(sa.value);
-              if (isFinite(v) && v < bestVal) { bestVal = v; best = alt; }
-            }
-          }
-          if (!best) throw new Error('No ' + APP_NAME + ' path');
-          return { best, val: bestVal };
-        }
+        if (buildBtn) buildBtn.addEventListener("click", buildTxJson);
 
-        let tx;
-
-        if (side === 'buy') {
-          const destAmt = { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) };
-          const alts = await findPaths({
-            source_account: currentAccount,
-            destination_account: currentAccount,
-            destination_amount: destAmt,
-            source_currencies: [{ currency: 'XRP' }]
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            const estEl = document.getElementById("dexEstSummary");
+            const out = document.getElementById("dexTxJson");
+            if (estEl) estEl.textContent = "Estimated total: —";
+            if (out) out.value = "";
           });
-          const { best, drops } = pickCheapestXrp(alts);
-          const maxDrops = Math.ceil(drops * (1 + slip));
-          tx = {
-            TransactionType: 'Payment',
-            Destination: currentAccount,
-            Amount: destAmt,
-            SendMax: String(maxDrops),
-            Flags: TF_PARTIAL,
-            DeliverMin: {
-              currency: CURRENCY_HEX,
-              issuer: ISSUER,
-              value: (amt * (1 - slip)).toFixed(6)
-            },
-            Paths: best.paths_computed || best.paths_canonical || []
-          };
-        } else {
-          const estXrp = amt * basePx;
-          const minXrpDrops = Math.floor(estXrp * (1 - slip) * XRP_TO_DROPS);
-          if (minXrpDrops < 1) throw new Error('Amount too small after slippage');
-          const alts = await findPaths({
-            source_account: currentAccount,
-            destination_account: currentAccount,
-            destination_amount: String(minXrpDrops),
-            source_currencies: [{ currency: CURRENCY_HEX, issuer: ISSUER }]
-          });
-          const { best, val } = pickCheapestIOU(alts);
-          if (val > amt) throw new Error('Increase amount for slippage cap');
-          tx = {
-            TransactionType: 'Payment',
-            Destination: currentAccount,
-            Amount: String(minXrpDrops),
-            SendMax: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
-            Flags: TF_PARTIAL,
-            DeliverMin: String(minXrpDrops),
-            Paths: best.paths_computed || best.paths_canonical || []
-          };
-        }
-
-        setStatus(tradeMsg, 'Open Xaman to review market swap.');
-        await signWithSentinel(tx, 'swap');
-        setStatus(tradeMsg, 'Swap submitted.', 'ok');
-        setResult('Market swap submitted.');
-        await refreshAll();
-      } catch (e) {
-        setStatus(tradeMsg, 'Error: ' + (e.message || e), 'err');
-      }
-    });
-  }
-
-  const offersWrap = $('offersWrap');
-  const offersStatus = $('offersStatus');
-  const offersProgress = $('offersProgress');
-  const btnRefreshOffers = $('btnRefreshOffers');
-  const btnCancelAll = $('btnCancelAll');
-
-  function setOffersStatus(msg, cls) { setStatus(offersStatus, msg, cls); }
-  function setOffersProgress(pct) {
-    if (!offersProgress) return;
-    const v = Math.max(0, Math.min(100, pct));
-    offersProgress.style.width = v + '%';
-  }
-
-  async function fetchOffers(acct) {
-    if (!acct) {
-      setOffersStatus('Connect wallet first.', 'err');
-      return;
-    }
-    setOffersStatus('Loading offers.');
-    setOffersProgress(10);
-    try {
-      const r = await xrplRequest({
-        method: 'account_offers',
-        params: [{ account: acct, limit: 400 }]
-      });
-      const offers = (r.result && r.result.offers) || [];
-      renderOffers(offers);
-      setOffersStatus('Found ' + offers.length + ' open offer(s).', 'ok');
-      setOffersProgress(100);
-      setTimeout(() => setOffersProgress(0), 300);
-    } catch (e) {
-      renderOffers([]); 
-      setOffersStatus('Offers error: ' + (e.message || e), 'err');
-      setOffersProgress(0);
-    }
-  }
-
-  function renderOffers(offers) {
-    if (!offersWrap) return;
-    offersWrap.innerHTML = '';
-    if (!offers.length) {
-      offersWrap.textContent = 'No open offers found.';
-      return;
-    }
-    const wrap = document.createElement('div');
-    wrap.style.overflow = 'auto';
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const hr = document.createElement('tr');
-    ['Seq', 'Gets', 'Pays', 'Price', 'Action'].forEach(t => {
-      const th = document.createElement('th');
-      th.textContent = t;
-      hr.appendChild(th);
-    });
-    thead.appendChild(hr);
-    table.appendChild(thead);
-    const tbody = document.createElement('tbody');
-    const N = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
-    const fmt = a => {
-      if (typeof a === 'string') return (N(a) / XRP_TO_DROPS).toFixed(6) + ' XRP';
-      if (a && a.currency === 'XRP') return (N(a.value)).toFixed(6) + ' XRP';
-      if (a && a.value) return N(a.value).toFixed(6) + ' ' + (a.currency || 'IOU');
-      return '?';
-    };
-    const price = (g, p) => {
-      const gv = typeof g === 'string' ? N(g) / XRP_TO_DROPS : (g.value ? N(g.value) : 0);
-      const pv = typeof p === 'string' ? N(p) / XRP_TO_DROPS : (p.value ? N(p.value) : 0);
-      if (gv > 0 && pv > 0) return (pv / gv).toFixed(6);
-      return '—';
-    };
-    offers.forEach(of => {
-      const tr = document.createElement('tr');
-      tr.dataset.seq = of.seq;
-      const tdSeq = document.createElement('td');
-      tdSeq.textContent = of.seq;
-      tdSeq.className = 'mono';
-      tr.appendChild(tdSeq);
-      const tdG = document.createElement('td');
-      tdG.textContent = fmt(of.taker_gets);
-      tr.appendChild(tdG);
-      const tdP = document.createElement('td');
-      tdP.textContent = fmt(of.taker_pays);
-      tr.appendChild(tdP);
-      const tdPx = document.createElement('td');
-      tdPx.textContent = price(of.taker_gets, of.taker_pays);
-      tr.appendChild(tdPx);
-      const tdA = document.createElement('td');
-      const b = document.createElement('button');
-      b.textContent = 'Cancel';
-      b.className = 'btn';
-      b.type = 'button';
-      b.addEventListener('click', () => cancelOne(of.seq));
-      tdA.appendChild(b);
-      tr.appendChild(tdA);
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    wrap.appendChild(table);
-    offersWrap.appendChild(wrap);
-  }
-
-  async function cancelOne(seq) {
-    try {
-      const tx = { TransactionType: 'OfferCancel', OfferSequence: Number(seq) };
-      await signWithSentinel(tx, 'cancel');
-      setOffersStatus('Cancel ' + seq + ' submitted.', 'ok');
-      await fetchOffers(currentAccount);
-    } catch (e) {
-      setOffersStatus('Cancel error: ' + (e.message || e), 'err');
-    }
-  }
-
-  async function cancelAll() {
-    if (!offersWrap) return;
-    const rows = offersWrap.querySelectorAll('tbody tr');
-    const count = rows.length;
-    if (!count) {
-      setOffersStatus('No open offers to cancel.');
-      return;
-    }
-    if (!confirm('Cancel ' + count + ' offer(s)?')) return;
-    let i = 0;
-    for (const r of rows) {
-      const seq = r.dataset.seq;
-      if (!seq) continue;
-      i++;
-      setOffersProgress(((i - 1) / count) * 100);
-      try { await cancelOne(seq); } catch {}
-    }
-    setOffersProgress(100);
-    setTimeout(() => setOffersProgress(0), 400);
-  }
-
-  if (btnRefreshOffers) btnRefreshOffers.addEventListener('click', () => {
-    if (!currentAccount) setOffersStatus('Connect first.', 'err');
-    else fetchOffers(currentAccount);
-  });
-  if (btnCancelAll) btnCancelAll.addEventListener('click', cancelAll);
-
-  const ledgerOut = $('ledgerOutput');
-  const bookOut = $('priceOutput');
-  const spotEl = $('xrbtcSpot');
-  const ammEl = $('xrbtcAmm');
-  const spreadEl = $('xrbtcSpread');
-  const ledMiniEl = $('xrbtcLedgerMini');
-
-  async function getLedgerSummary() {
-    const r = await xrplRequest({
-      method: 'ledger',
-      params: [{ ledger_index: 'validated' }]
-    });
-    const res = r.result || {};
-    const led = res.ledger || {};
-    return {
-      index: res.ledger_index || res.validated_ledger_index || led.ledger_index,
-      hash: res.ledger_hash || led.ledger_hash,
-      close: led.close_time_human || '',
-      validated: res.validated !== false
-    };
-  }
-
-  async function refreshLedger() {
-    try {
-      const s = await getLedgerSummary();
-      if (ledgerOut) ledgerOut.textContent = JSON.stringify(s, null, 2);
-    } catch (e) {
-      if (ledgerOut) ledgerOut.textContent = 'Ledger error: ' + (e.message || e);
-    }
-  }
-
-  async function getOrderBookHtml() {
-    const r = await xrplRequest({
-      method: 'book_offers',
-      params: [{
-        taker_gets: { currency: CURRENCY_HEX, issuer: ISSUER },
-        taker_pays: { currency: 'XRP' },
-        limit: 5
-      }]
-    });
-    const asks = (r.result.offers || []);
-    const r2 = await xrplRequest({
-      method: 'book_offers',
-      params: [{
-        taker_gets: { currency: 'XRP' },
-        taker_pays: { currency: CURRENCY_HEX, issuer: ISSUER },
-        limit: 5
-      }]
-    });
-    const bids = (r2.result.offers || []);
-    const rows = [];
-    const N = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
-
-    function fp(of) {
-      const g = of.TakerGets.value ? N(of.TakerGets.value) : N(of.TakerGets) / XRP_TO_DROPS;
-      const p = of.TakerPays.value ? N(of.TakerPays.value) : N(of.TakerPays) / XRP_TO_DROPS;
-      return g > 0 ? (p / g) : NaN;
-    }
-
-    function fmt(of, side) {
-      const px = fp(of);
-      const amt = of.TakerGets.value
-        ? of.TakerGets.value
-        : (N(of.TakerGets) / XRP_TO_DROPS);
-      return `<tr><td>${side}</td><td>${isFinite(px) ? px.toFixed(6) : '—'}</td><td>${isFinite(amt) ? Number(amt).toFixed(3) : '—'}</td></tr>`;
-    }
-
-    if (!asks.length && !bids.length) {
-      return '<div class="hint">No book data.</div>';
-    }
-    asks.forEach(of => rows.push(fmt(of, 'Ask')));
-    bids.forEach(of => rows.push(fmt(of, 'Bid')));
-
-    return `<div style="overflow:auto">
-      <table>
-        <thead><tr><th>Side</th><th>Price (XRP/${APP_NAME})</th><th>Amount</th></tr></thead>
-        <tbody>${rows.join('')}</tbody>
-      </table>
-    </div>`;
-  }
-
-  async function refreshBook() {
-    try {
-      const html = await getOrderBookHtml();
-      if (bookOut) bookOut.innerHTML = html;
-    } catch (e) {
-      if (bookOut) bookOut.textContent = 'Book error: ' + (e.message || e);
-    }
-  }
-
-  async function refreshSummary() {
-    try {
-      const [ob, ammWrap, led] = await Promise.allSettled([
-        getTopOfBook(),
-        xrplRequest({
-          method: 'amm_info',
-          params: [{ asset: { currency: 'XRP' }, asset2: { currency: CURRENCY_HEX, issuer: ISSUER } }]
-        }),
-        getLedgerSummary()
-      ]);
-      const bestAsk = ob.status === 'fulfilled' ? ob.value.bestAsk : null;
-      const bestBid = ob.status === 'fulfilled' ? ob.value.bestBid : null;
-      let spot = null;
-      if (bestAsk && bestBid) spot = (bestAsk + bestBid) / 2;
-      else spot = bestAsk || bestBid || null;
-      let ammPx = null;
-      if (ammWrap.status === 'fulfilled' && ammWrap.value.result && ammWrap.value.result.amm) {
-        const amm = ammWrap.value.result.amm;
-        const rx = Number(amm.amount) / XRP_TO_DROPS;
-        const rt = Number(amm.amount2.value);
-        if (rx > 0 && rt > 0) ammPx = rx / rt;
-      }
-      let spread = null;
-      if (bestAsk && bestBid && bestAsk > 0 && bestBid <= bestAsk) {
-        spread = ((bestAsk - bestBid) / bestAsk) * 100;
-      }
-      const ledInfo = led.status === 'fulfilled' ? led.value : null;
-      if (spotEl) spotEl.textContent = 'Spot: ' + (spot ? spot.toFixed(6) + ' XRP/' + APP_NAME : '—');
-      if (ammEl) ammEl.textContent = 'AMM: ' + (ammPx ? ammPx.toFixed(6) + ' XRP/' + APP_NAME : '—');
-      if (spreadEl) spreadEl.textContent = 'Spread: ' + (spread != null ? spread.toFixed(2) + '%' : '—');
-      if (ledMiniEl) ledMiniEl.textContent =
-        'Ledger: ' + (ledInfo ? ('#' + ledInfo.index + (ledInfo.validated ? ' ✓' : '')) : '—');
-    } catch {}
-  }
-
-  const healthProgress = $('healthProgress');
-  const healthStatus = $('healthStatus');
-  const healthTable = $('healthTable');
-  const healthBody = $('healthBody');
-  const healthNote = $('healthNote');
-  const ledgerPill = $('ledgerPill');
-  const riskOnly = $('riskOnly');
-  const watchOnly = $('watchOnly');
-  const autoRefresh = $('autoRefresh');
-  const autoEvery = $('autoEvery');
-  const lastScanEl = $('lastScan');
-  const btnHealthScan = $('btnHealthScan');
-  const btnHealthRetry = $('btnHealthRetry');
-  const btnExportJson = $('btnExportJson');
-  const btnCopyJson = $('btnCopyJson');
-  const btnClearLog = $('btnClearLog');
-  const btnRefreshEst = $('btnRefreshEst');
-  const btnTrustXRBT = $('btnTrustXRBT');
-  const buyStatus = $('buyStatus');
-  const est1 = $('est1'), est25 = $('est25'), est50 = $('est50'), est100 = $('est100');
-  const buy1 = $('buy1'), buy25 = $('buy25'), buy50 = $('buy50'), buy100 = $('buy100');
-
-  const state = {
-    scanning: false,
-    lastScanTs: 0,
-    prevSnap: loadPrevSnap(),
-    watchlist: loadWatchlist(),
-    scanTimerId: null
-  };
-
-  function setHealthProgress(pct) {
-    if (!healthProgress) return;
-    const v = Math.max(0, Math.min(100, pct));
-    healthProgress.style.width = v + '%';
-  }
-
-  function renderLedgerPillFromServer(r) {
-    try {
-      const info = r.result.state || {};
-      const v = info.validated_ledger || {};
-      const idx = v.seq || v.ledger_index;
-      const age = v.age;
-      ledgerPill.textContent = idx
-        ? ('Ledger ' + idx + (age != null ? (' · ' + age + 's') : ''))
-        : 'Ledger: —';
-    } catch {
-      ledgerPill.textContent = 'Ledger: —';
-    }
-  }
-
-  function Nnum(v) {
-    const n = Number(v);
-    return Number.isFinite(n) ? n : 0;
-  }
-
-  function deltaBadge(curr, prev) {
-    if (!isFinite(curr) || !isFinite(prev)) return '<span class="delta neutral">•</span>';
-    const d = curr - prev;
-    if (Math.abs(d) < 1e-9) return '<span class="delta neutral">•</span>';
-    const cls = d > 0 ? 'up' : 'down';
-    const sym = d > 0 ? '▲' : '▼';
-    return `<span class="delta ${cls}">${sym} ${Math.abs(d).toFixed(2)}</span>`;
-  }
-
-  function tokenKey(hex, issuer) {
-    return (hex || '') + '|' + (issuer || '');
-  }
-
-  function savePrevSnap(obj) {
-    try { localStorage.setItem('xrb.prevHealth', JSON.stringify(obj)); } catch {}
-  }
-
-  function loadPrevSnap() {
-    try { return JSON.parse(localStorage.getItem('xrb.prevHealth') || '{}'); } catch { return {}; }
-  }
-
-  function saveWatchlist(set) {
-    try { localStorage.setItem('xrb.watchlist', JSON.stringify([...set])); } catch {}
-  }
-
-  function loadWatchlist() {
-    try {
-      return new Set(JSON.parse(localStorage.getItem('xrb.watchlist') || '[]'));
-    } catch {
-      return new Set();
-    }
-  }
-
-  function applyFilters() {
-    const onlyRisk = riskOnly && riskOnly.checked;
-    const onlyWatch = watchOnly && watchOnly.checked;
-    if (!healthBody) return;
-    const rows = healthBody.querySelectorAll('tr');
-    rows.forEach(tr => {
-      const isRisk = tr.dataset.status === 'R';
-      const key = tr.dataset.key || '';
-      const inWatch = state.watchlist.has(key);
-      let show = true;
-      if (onlyRisk && !isRisk) show = false;
-      if (onlyWatch && !inWatch) show = false;
-      tr.style.display = show ? '' : 'none';
-    });
-  }
-
-  function toggleWatch(key, starEl) {
-    if (state.watchlist.has(key)) state.watchlist.delete(key);
-    else state.watchlist.add(key);
-    saveWatchlist(state.watchlist);
-    if (starEl) starEl.classList.toggle('on');
-    applyFilters();
-  }
-
-  function saveRowsSnapshot(rows) {
-    const map = {};
-    rows.forEach(r => {
-      const k = tokenKey(r.hex, r.issuer);
-      map[k] = {
-        xrpRes: r.xrpRes,
-        slip10: r.slip10Pct,
-        slip100: r.slip100Pct
-      };
-    });
-    state.prevSnap = map;
-    savePrevSnap(map);
-  }
-
-  async function ammInfoXrpIou(hex, issuer) {
-    try {
-      const r = await xrplRequest({
-        method: 'amm_info',
-        params: [{ asset: { currency: 'XRP' }, asset2: { currency: hex, issuer } }]
-      });
-      return r.result.amm || null;
-    } catch {
-      return null;
-    }
-  }
-
-  function scoreHealth(row) {
-    let s = 0;
-    if (row.poolExists) s += 1;
-    if (row.xrpRes >= 500) s += 2;
-    else if (row.xrpRes >= 100) s += 1;
-    if (row.feePct <= 0.3) s += 1;
-    else if (row.feePct > 0.5) s -= 1;
-    if (row.slip10Pct <= 1) s += 2;
-    else if (row.slip10Pct <= 3) s += 1;
-    if (row.slip100Pct <= 10) s += 1;
-    let cls = 'C', text = 'Caution';
-    if (s >= 6) { cls = 'H'; text = 'Healthy'; }
-    else if (s <= 2) { cls = 'R'; text = 'Risk'; }
-    return { score: s, cls, status: text };
-  }
-
-  async function refreshHealth() {
-    if (!currentAccount) {
-      setStatus(healthStatus, 'Connect wallet to scan.');
-      return;
-    }
-    if (state.scanning) return;
-    state.scanning = true;
-    setHealthProgress(8);
-    setStatus(healthStatus, 'Fetching trustlines.');
-    try {
-      const srv = await xrplRequest({ method: 'server_state', params: [{}] }).catch(() => null);
-      if (srv && ledgerPill) renderLedgerPillFromServer(srv);
-
-      const linesWrap = await xrplRequest({
-        method: 'account_lines',
-        params: [{ account: currentAccount, limit: 400, ledger_index: 'validated' }]
-      });
-      const lines = (linesWrap.result && linesWrap.result.lines) || [];
-      if (!lines.length) {
-        if (healthNote) healthNote.textContent = 'No trustlines found.';
-        if (healthTable) healthTable.style.display = 'none';
-        setHealthProgress(0);
-        state.scanning = false;
-        return;
-      }
-
-      const rows = [];
-      let i = 0;
-
-      for (const l of lines) {
-        i++;
-        if (i % 3 === 0) {
-          setHealthProgress(8 + Math.min(70, Math.floor((i / lines.length) * 70)));
-        }
-
-        const hex = (l.currency || '').toUpperCase();
-        const issuer = l.account || l.issuer;
-        if (!hex || !issuer) continue;
-
-        const label = getDisplayTicker(hex, issuer);
-        const amm = await ammInfoXrpIou(hex, issuer);
-
-        if (!amm) {
-          rows.push({
-            key: tokenKey(hex, issuer),
-            label,
-            issuer,
-            hex,
-            pool: 'XRP/IOU',
-            xrpRes: 0,
-            iouRes: 0,
-            feePct: 0,
-            slip10Pct: 0,
-            slip100Pct: 0,
-            poolExists: false,
-            score: 0,
-            status: 'Caution',
-            cls: 'C'
-          });
-          continue;
-        }
-
-        let xrpRes = 0, iouRes = 0;
-        if (typeof amm.amount === 'string') xrpRes = Number(amm.amount) / XRP_TO_DROPS;
-        else if (amm.amount && amm.amount.value) xrpRes = Number(amm.amount.value);
-        if (amm.amount2 && amm.amount2.value) iouRes = Number(amm.amount2.value);
-
-        const feeBps = typeof amm.trading_fee === 'number' ? amm.trading_fee : 30;
-        const feePct = feeBps / 100;
-
-        function estSlip(xrpIn) {
-          if (xrpIn <= 0 || xrpRes <= 0 || iouRes <= 0) return 0;
-          const dy = (iouRes * xrpIn) / (xrpRes + xrpIn);
-          const spot = iouRes / xrpRes;
-          const eff = dy / xrpIn;
-          return Math.max(0, (spot - eff) / spot);
-        }
-
-        const slip10Pct = estSlip(10) * 100;
-        const slip100Pct = estSlip(100) * 100;
-        const h = scoreHealth({
-          poolExists: true,
-          xrpRes,
-          feePct,
-          slip10Pct,
-          slip100Pct
-        });
-
-        rows.push({
-          key: tokenKey(hex, issuer),
-          label,
-          issuer,
-          hex,
-          pool: 'XRP/IOU',
-          xrpRes,
-          iouRes,
-          feePct,
-          slip10Pct,
-          slip100Pct,
-          score: h.score,
-          status: h.status,
-          cls: h.cls,
-          poolExists: true
-        });
-      }
-
-      if (healthBody) {
-        const prev = state.prevSnap || {};
-        healthBody.innerHTML = rows.map(r => {
-          const p = prev[r.key] || {};
-          const dRes = deltaBadge(Nnum(r.xrpRes), Nnum(p.xrpRes));
-          const d10 = deltaBadge(Nnum(r.slip10Pct), Nnum(p.slip10));
-          const d100 = deltaBadge(Nnum(r.slip100Pct), Nnum(p.slip100));
-          const starOn = state.watchlist.has(r.key) ? 'on' : '';
-          return `
-          <tr data-key="${r.key}" data-status="${r.cls}">
-            <td><span class="icon-star ${starOn}" aria-label="Toggle watch">★</span></td>
-            <td>
-              <div style="display:flex;gap:6px;align-items:flex-start">
-                <img src="${iconUrlForToken(r.hex, r.issuer)}" alt="${r.label}" width="14" height="14">
-                <div>
-                  <div class="mono">${r.label}</div>
-                  <div class="hint" style="word-break:anywhere">
-                    ${r.hex}<br>
-                    Issuer: ${r.issuer}
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td>${r.pool}</td>
-            <td>${r.xrpRes.toFixed(2)} XRP / ${r.iouRes.toFixed(2)} ${dRes}</td>
-            <td>${r.feePct.toFixed(2)}%</td>
-            <td>${r.slip10Pct.toFixed(2)}% / ${r.slip100Pct.toFixed(2)}% ${d10}</td>
-            <td class="mono">${r.score}</td>
-            <td><span class="pill ${r.cls}">${r.status}</span></td>
-          </tr>`;
-        }).join('');
-
-        if (healthTable) healthTable.style.display = '';
-        if (healthNote) healthNote.textContent = 'Use filters or export JSON for records.';
-
-        healthBody.querySelectorAll('.icon-star').forEach(star => {
-          star.addEventListener('click', () => {
-            const tr = star.closest('tr');
-            const k = tr.dataset.key;
-            toggleWatch(k, star);
-          });
-        });
-      }
-
-      state.lastScanTs = Date.now();
-      saveRowsSnapshot(rows);
-      applyFilters();
-      setStatus(healthStatus, 'Scan complete.', 'ok');
-      setHealthProgress(100);
-      setTimeout(() => setHealthProgress(0), 400);
-    } catch (e) {
-      setStatus(healthStatus, 'Health error: ' + (e.message || e), 'err');
-      setHealthProgress(0);
-    } finally {
-      state.scanning = false;
-    }
-  }
-
-  function updateLastScan() {
-    if (!lastScanEl) return;
-    if (!state.lastScanTs) {
-      lastScanEl.textContent = 'Last scan: —';
-      return;
-    }
-    const diff = Math.max(0, Math.floor((Date.now() - state.lastScanTs) / 1000));
-    const m = String(Math.floor(diff / 60)).padStart(2, '0');
-    const s = String(diff % 60).padStart(2, '0');
-    lastScanEl.textContent = 'Last scan: ' + m + ':' + s + ' ago';
-  }
-
-  setInterval(updateLastScan, 1000);
-
-  function currentRowsJson() {
-    if (!healthBody) return [];
-    const rows = healthBody.querySelectorAll('tr');
-    const data = [];
-    rows.forEach(tr => {
-      if (tr.style.display === 'none') return;
-      const key = tr.dataset.key;
-      const tds = tr.querySelectorAll('td');
-      if (!key || tds.length < 8) return;
-      data.push({
-        key,
-        status: tds[7].innerText.trim()
-      });
-    });
-    return data;
-  }
-
-  if (btnHealthScan) btnHealthScan.addEventListener('click', () => refreshHealth());
-  if (btnHealthRetry) btnHealthRetry.addEventListener('click', () => refreshHealth());
-  if (riskOnly) riskOnly.addEventListener('change', applyFilters);
-  if (watchOnly) watchOnly.addEventListener('change', applyFilters);
-
-  if (btnExportJson) {
-    btnExportJson.addEventListener('click', () => {
-      const arr = currentRowsJson();
-      const blob = new Blob([JSON.stringify(arr, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'liquidity-health.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-  }
-
-  if (btnCopyJson) {
-    btnCopyJson.addEventListener('click', async () => {
-      try {
-        const arr = currentRowsJson();
-        await navigator.clipboard.writeText(JSON.stringify(arr, null, 2));
-        setStatus(healthStatus, 'JSON copied.', 'ok');
-      } catch {
-        setStatus(healthStatus, 'Copy failed.', 'err');
-      }
-    });
-  }
-
-  if (btnClearLog) {
-    btnClearLog.addEventListener('click', () => {
-      if (logEl) logEl.textContent = '';
-      setResult('Log cleared.');
-    });
-  }
-
-  function startAutoRefresh() {
-    stopAutoRefresh();
-    if (!autoEvery) return;
-    const sec = Math.max(5, Number(autoEvery.value || 15));
-    state.scanTimerId = setInterval(() => {
-      if (document.visibilityState !== 'visible') return;
-      refreshHealth().catch(() => {});
-    }, sec * 1000);
-  }
-
-  function stopAutoRefresh() {
-    if (state.scanTimerId) {
-      clearInterval(state.scanTimerId);
-      state.scanTimerId = null;
-    }
-  }
-
-  if (autoRefresh && autoEvery) {
-    autoRefresh.addEventListener('change', () => {
-      if (autoRefresh.checked) startAutoRefresh();
-      else stopAutoRefresh();
-    });
-    autoEvery.addEventListener('change', () => {
-      if (autoRefresh.checked) startAutoRefresh();
-    });
-  }
-
-  async function hasTrustline() {
-    return HAS_TRUSTLINE || await checkTrustline(currentAccount);
-  }
-
-  async function estimateBuy(units) {
-    if (!currentAccount) return null;
-    const amt = { currency: CURRENCY_HEX, issuer: ISSUER, value: String(units) };
-    const r = await xrplRequest({
-      method: 'ripple_path_find',
-      params: [{
-        source_account: currentAccount,
-        destination_account: currentAccount,
-        destination_amount: amt,
-        source_currencies: [{ currency: 'XRP' }]
-      }]
-    }).catch(() => null);
-    const alts = r && r.result && r.result.alternatives || [];
-    if (!alts.length) return null;
-    let best = Infinity;
-    for (const a of alts) {
-      const sa = a.source_amount;
-      let drops = Infinity;
-      if (typeof sa === 'string') drops = Number(sa);
-      else if (sa && sa.currency === 'XRP') drops = Math.round(Number(sa.value) * XRP_TO_DROPS);
-      if (isFinite(drops) && drops < best) best = drops;
-    }
-    if (!isFinite(best) || best === Infinity) return null;
-    return best / XRP_TO_DROPS;
-  }
-
-  async function refreshEstimates() {
-    const outEls = [est1, est25, est50, est100];
-    if (!currentAccount) {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-      return;
-    }
-    outEls.forEach(el => { if (el) el.textContent = '…'; });
-    try {
-      const vals = await Promise.all([1, 25, 50, 100].map(estimateBuy));
-      vals.forEach((v, i) => {
-        const el = outEls[i];
-        if (!el) return;
-        el.textContent = '≈ ' + (typeof v === 'number' ? v.toFixed(6) + ' XRP' : '—');
-      });
-    } catch {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-    }
-  }
-
-  async function quickTrust() {
-    if (!setTrustBtn) return;
-    setTrustBtn.click();
-  }
-
-  async function quickBuy(units) {
-    try {
-      if (!currentAccount) throw new Error('Connect wallet first');
-      if (!await hasTrustline()) throw new Error('Add ' + APP_NAME + ' trustline first');
-      const amt = { currency: CURRENCY_HEX, issuer: ISSUER, value: String(units) };
-      const r = await xrplRequest({
-        method: 'ripple_path_find',
-        params: [{
-          source_account: currentAccount,
-          destination_account: currentAccount,
-          destination_amount: amt,
-          source_currencies: [{ currency: 'XRP' }]
-        }]
-      });
-      const alts = r.result.alternatives || [];
-      if (!alts.length) throw new Error('No path for this size');
-      let best = null, bestDrops = Infinity;
-      for (const a of alts) {
-        const sa = a.source_amount;
-        let drops = Infinity;
-        if (typeof sa === 'string') drops = Number(sa);
-        else if (sa && sa.currency === 'XRP') drops = Math.round(Number(sa.value) * XRP_TO_DROPS);
-        if (isFinite(drops) && drops < bestDrops) {
-          bestDrops = drops;
-          best = a;
         }
       }
-      if (!best) throw new Error('No XRP path');
-      const maxDrops = Math.ceil(bestDrops * (1 + SLIPPAGE_PCT / 100));
-      const tx = {
-        TransactionType: 'Payment',
-        Destination: currentAccount,
-        Amount: amt,
-        SendMax: String(maxDrops),
-        Flags: 0x00020000,
-        Memos: []
-      };
-      setStatus(buyStatus, 'Open Xaman to buy ' + units + ' ' + APP_NAME + '.');
-      await signWithSentinel(tx, 'quickbuy');
-      setStatus(buyStatus, 'Quick buy submitted.', 'ok');
-      setResult('Quick buy ' + units + ' ' + APP_NAME + ' submitted.');
-      await refreshAll();
-    } catch (e) {
-      setStatus(buyStatus, 'Quick buy error: ' + (e.message || e), 'err');
-    }
-  }
 
-  if (btnRefreshEst) btnRefreshEst.addEventListener('click', () => refreshEstimates());
-  if (btnTrustXRBT) btnTrustXRBT.addEventListener('click', () => quickTrust());
-  if (buy1) buy1.addEventListener('click', () => quickBuy(1));
-  if (buy25) buy25.addEventListener('click', () => quickBuy(25));
-  if (buy50) buy50.addEventListener('click', () => quickBuy(50));
-  if (buy100) buy100.addEventListener('click', () => quickBuy(100));
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initUi);
+      } else {
+        initUi();
+      }
 
-  let refreshing = false;
-
-  async function refreshAll() {
-    if (refreshing) return;
-    refreshing = true;
-    try {
-      await Promise.allSettled([
-        refreshLedger(),
-        refreshBook(),
-        refreshSummary(),
-        currentAccount ? fetchOffers(currentAccount) : Promise.resolve(),
-        currentAccount ? refreshEstimates() : Promise.resolve()
-      ]);
-    } finally {
-      refreshing = false;
-    }
-  }
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') refreshAll().catch(() => {});
-  });
-  window.addEventListener('focus', () => { refreshAll().catch(() => {}); });
-
-  refreshAll().catch(() => {});
-})();
-</script>
+      window.addEventListener("beforeunload", () => {
+        try {
+          if (state.client) state.client.disconnect();
+        } catch (e) {}
+      });
+    })();
+  </script>
 </body>
 </html>
