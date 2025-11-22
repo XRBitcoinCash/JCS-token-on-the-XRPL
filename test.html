@@ -85,7 +85,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
 
-  <!-- Global Styles (keep external file; minimal structural helpers here if needed) -->
+  <!-- Global Styles (external) -->
   <link rel="stylesheet" href="/css/style.css?v=2.0.0">
 
   <style>
@@ -122,6 +122,7 @@
       padding-bottom: 4px;
       border-bottom: 2px solid transparent;
       transition: color 0.25s, border-color 0.25s;
+      font-size: 0.9rem;
     }
 
     nav a:hover {
@@ -195,8 +196,7 @@
       border-color: #ffd700;
     }
 
-    #verseCard,
-    #jesusWordsCard {
+    #verseCard, #jesusWordsCard {
       margin-top: 10px;
       padding: 12px 14px;
       border-radius: 12px;
@@ -363,6 +363,151 @@
       margin-top: 4px;
     }
 
+    /* Exchange (DEX) layout */
+    .exchange-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(220px, 1.5fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .exchange-panel h3 {
+      margin-bottom: 10px;
+    }
+
+    .wallet-connect {
+      margin-bottom: 14px;
+      padding: 10px 10px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .wallet-connect-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .wallet-label {
+      font-size: 0.82rem;
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.9);
+      color: #f9fafb;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 14px rgba(255, 215, 0, 0.28);
+      border-color: #ffd700;
+      color: #ffd700;
+    }
+
+    .btn-xaman {
+      border-color: #22c55e;
+    }
+
+    .btn-xaman:hover {
+      box-shadow: 0 0 14px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-primary {
+      border-color: #ffd700;
+      background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.2), rgba(0,0,0,0.95));
+    }
+
+    .qr-wrap {
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .qr-wrap img {
+      max-width: 170px;
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #000;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+    }
+
+    .field label {
+      color: #cbd5f5;
+    }
+
+    .field input,
+    .field select {
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 6px 8px;
+      font-size: 0.86rem;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #ffd700;
+      box-shadow: 0 0 0 1px rgba(255,215,0,0.4);
+    }
+
+    .exchange-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .exchange-footer-row small {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .order-status-box {
+      min-height: 80px;
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 10px;
+      font-size: 0.82rem;
+      color: #cbd5f5;
+      background: rgba(15,23,42,0.8);
+    }
+
+    .order-status-box strong {
+      color: #e5e7eb;
+    }
+
+    /* Footer */
     .ecosystem-footer {
       margin-top: 32px;
       padding: 22px 6vw 18px;
@@ -435,113 +580,7 @@
       margin-top: 10px;
     }
 
-    /* JCS DEX helper layout */
-    .dex-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1.4fr);
-      gap: 16px;
-      align-items: flex-start;
-      margin-top: 10px;
-    }
-
-    .dex-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 8px 0 10px;
-    }
-
-    .dex-actions button {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.9);
-      color: #f5f5f5;
-      font-size: 0.82rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .dex-actions button:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-
-    .dex-actions button:hover:not(:disabled) {
-      border-color: #ffd700;
-      box-shadow: 0 0 10px rgba(255,215,0,0.3);
-      transform: translateY(-1px);
-    }
-
-    .orderbook-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 6px;
-      font-size: 0.8rem;
-    }
-
-    .orderbook-table th,
-    .orderbook-table td {
-      padding: 4px 6px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .orderbook-table th {
-      font-weight: 600;
-      color: #90a4ae;
-    }
-
-    .orderbook-table td {
-      text-align: right;
-    }
-
-    .orderbook-table th:first-child,
-    .orderbook-table td:first-child {
-      text-align: left;
-    }
-
-    .side-buy {
-      color: #4ade80;
-    }
-
-    .side-sell {
-      color: #f97373;
-    }
-
-    #dexForm {
-      display: grid;
-      gap: 6px;
-      margin-top: 6px;
-      margin-bottom: 8px;
-      font-size: 0.85rem;
-    }
-
-    #dexForm input,
-    #dexForm select,
-    #dexTxJson {
-      width: 100%;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.9);
-      color: #f5f5f5;
-      font-family: inherit;
-      font-size: 0.82rem;
-    }
-
-    #dexTxJson {
-      resize: vertical;
-      min-height: 140px;
-      margin-top: 4px;
-    }
-
     @media (max-width: 900px) {
-      .dex-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 800px) {
       .hero {
         grid-template-columns: 1fr;
         padding-top: 70px;
@@ -555,6 +594,10 @@
       }
       .hero h1 {
         font-size: 2.3rem;
+      }
+      .prayer-wall,
+      .exchange-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -576,7 +619,7 @@
       <a href="#about">About</a>
       <a href="#mission">Mission</a>
       <a href="#metrics">Metrics</a>
-      <a href="#dex">DEX</a>
+      <a href="#exchange">Exchange</a>
       <a href="#prayer">Prayer</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -729,115 +772,83 @@
     </p>
   </section>
 
-  <!-- JCS DEX -->
-  <section id="dex" aria-label="On-ledger JCS DEX helper">
-    <h2>⚖ JCS On-Ledger DEX</h2>
+  <!-- Exchange (DEX) -->
+  <section id="exchange" aria-label="JCS Decentralized Exchange">
+    <h2>💱 JCS DEX (Experimental)</h2>
     <p class="section-lede">
-      Live JCS/XRP order book and AMM snapshot, plus a limit-order builder that outputs
-      XRPL <code>OfferCreate</code> JSON. This page never asks for seed phrases or secrets;
-      use a wallet like Xaman to sign and submit.
+      Connect with Xaman to create on-ledger limit orders for the JCS / XRP pair.
+      Keys never touch this site; all signing happens in your Xaman wallet.
     </p>
 
-    <div class="dex-grid">
-      <!-- Left: Order book + AMM -->
-      <div class="card">
-        <h3>Order Book (JCS/XRP)</h3>
-        <p class="muted" id="dexStatus">
-          Not connected. Click “Connect to XRPL” to load live data.
-        </p>
+    <div class="exchange-grid">
+      <div class="card exchange-panel">
+        <h3>Connect & Place Order</h3>
 
-        <div class="dex-actions">
-          <button id="dexConnectBtn" type="button">Connect to XRPL</button>
-          <button id="dexRefreshBtn" type="button" disabled>Refresh Data</button>
-        </div>
-
-        <div class="orderbook-wrapper">
-          <table class="orderbook-table" aria-label="Best bids and asks for JCS/XRP">
-            <thead>
-              <tr>
-                <th scope="col">Side</th>
-                <th scope="col">Price (XRP/JCS)</th>
-                <th scope="col">Size (JCS)</th>
-                <th scope="col">Total (XRP)</th>
-              </tr>
-            </thead>
-            <tbody id="dexOrderbookBody">
-              <tr>
-                <td colspan="4" class="muted" style="text-align:left;">
-                  No data yet. Connect to XRPL to view live offers.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="notice">
-            Prices are indicative only. Always confirm in your wallet or trusted explorer before trading.
-          </p>
-        </div>
-
-        <div class="card" style="margin-top:10px;">
-          <h3>AMM Pool Snapshot</h3>
-          <p class="muted">
-            If a JCS/XRP AMM exists on XRPL, its spot price and depth will appear here.
-          </p>
-          <div class="metrics-grid">
-            <div class="metric">
-              <div class="label muted">AMM Spot (XRP/JCS)</div>
-              <div id="dexAmmSpot" class="value">—</div>
-            </div>
-            <div class="metric">
-              <div class="label muted">Pool JCS</div>
-              <div id="dexAmmJcs" class="value">—</div>
-            </div>
-            <div class="metric">
-              <div class="label muted">Pool XRP</div>
-              <div id="dexAmmXrp" class="value">—</div>
-            </div>
-            <div class="metric">
-              <div class="label muted">Trading Fee (bps)</div>
-              <div id="dexAmmFee" class="value">—</div>
-            </div>
+        <!-- Wallet connect block -->
+        <div class="wallet-connect">
+          <div class="wallet-connect-header">
+            <span class="wallet-label">Xaman Wallet</span>
+            <button id="xamanConnectBtn" class="btn btn-xaman" type="button">
+              Connect Wallet
+            </button>
+          </div>
+          <div id="xamanStatus" class="muted" aria-live="polite">
+            Not connected. On desktop you’ll see a QR; on mobile Xaman will open directly.
+          </div>
+          <div id="xamanQrWrap" class="qr-wrap" hidden>
+            <img id="xamanQr" alt="Scan with Xaman wallet to continue" />
           </div>
         </div>
-      </div>
 
-      <!-- Right: Limit order builder -->
-      <div class="card">
-        <h3>Limit Order Builder (TX JSON)</h3>
-        <p class="muted">
-          Build a JCS/XRP <code>OfferCreate</code> transaction. This page does not submit
-          anything to the ledger and never handles secrets. Use the JSON with Xaman or
-          your own secure backend.
-        </p>
+        <!-- Simple limit order form (front-end only; backend builds OfferCreate) -->
+        <form id="jcsOrderForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="side">Side</label>
+              <select id="side" name="side">
+                <option value="buy">Buy JCS (pay XRP)</option>
+                <option value="sell">Sell JCS (receive XRP)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="price">Price (JCS per XRP)</label>
+              <input id="priceInput" name="price" type="number" step="0.000001" min="0" placeholder="e.g. 100" />
+            </div>
+          </div>
 
-        <form id="dexForm" autocomplete="off">
-          <label class="muted" for="dexSide">Side</label>
-          <select id="dexSide">
-            <option value="buy">Buy JCS (pay XRP)</option>
-            <option value="sell">Sell JCS (receive XRP)</option>
-          </select>
+          <div class="field-row">
+            <div class="field">
+              <label for="amount">Amount (JCS)</label>
+              <input id="amountInput" name="amount" type="number" step="0.000001" min="0" placeholder="e.g. 1000" />
+            </div>
+            <div class="field">
+              <label for="expires">Expires (minutes)</label>
+              <input id="expiresInput" name="expires" type="number" min="1" max="1440" value="60" />
+            </div>
+          </div>
 
-          <label class="muted" for="dexPrice">Limit Price (XRP per 1 JCS)</label>
-          <input id="dexPrice" type="number" step="0.0000001" min="0" inputmode="decimal" />
-
-          <label class="muted" for="dexAmountJcs">Amount (JCS)</label>
-          <input id="dexAmountJcs" type="number" step="0.000001" min="0" inputmode="decimal" />
-
-          <p class="muted" id="dexEstSummary">Estimated total: —</p>
-
-          <div class="dex-actions">
-            <button type="button" id="dexBuildBtn">Build TX JSON</button>
-            <button type="reset" id="dexResetBtn">Reset</button>
+          <div class="exchange-footer-row">
+            <small>
+              This form sends order details to a secure backend which creates a Xaman payload.
+              You’ll review and sign in the Xaman app.
+            </small>
+            <button id="submitOrderBtn" class="btn btn-primary" type="submit">
+              Place Limit Order
+            </button>
           </div>
         </form>
 
-        <label class="muted" for="dexTxJson">OfferCreate JSON (for wallet signing)</label>
-        <textarea id="dexTxJson" readonly rows="10" spellcheck="false"></textarea>
-
         <p class="notice">
-          Most wallets will fill in <code>Account</code>, <code>Fee</code>, and
-          <code>Sequence</code> automatically when you import this JSON. Do not paste
-          seed phrases or secrets into this page.
+          This DEX UI is experimental and for advanced users. Verify issuer and pair (JCS / XRP) before signing.
         </p>
+      </div>
+
+      <div class="card">
+        <h3>Order Preview & Status</h3>
+        <div id="orderStatus" class="order-status-box" aria-live="polite">
+          <strong>No active order.</strong><br />
+          Connect your wallet and submit the form to generate a Xaman signing request.
+        </div>
       </div>
     </div>
   </section>
@@ -970,6 +981,7 @@
           <span>XPMarket: JCS Listing</span>
         </a>
 
+        <!-- Twitter/X button -->
         <a href="https://x.com/JesusCS_token" target="_blank" class="eco-link" rel="noopener">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
                alt="Twitter">
@@ -982,7 +994,23 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- CONFIG FOR XAMAN BACKEND (SET THIS!) -->
+  <script>
+    // IMPORTANT: Set this to your actual backend HTTPS endpoint that:
+    // 1) Holds your Xaman/XUMM API key + secret (server-side only).
+    // 2) Calls the Xaman Platform to create a payload.
+    // 3) Returns the raw Xaman payload JSON (including next.always and refs.qr_png).
+    //
+    // Example shape expected by this front-end:
+    // {
+    //   "uuid": "...",
+    //   "next": { "always": "https://xumm.app/sign/..." },
+    //   "refs": { "qr_png": "https://xumm.app/..." }
+    // }
+    const JCS_XAMAN_PAYLOAD_ENDPOINT = null; // TODO: set e.g. "https://your-domain.com/api/xaman/jcs-payload"
+  </script>
+
+  <!-- Particles JS -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     // Floating cross particles
@@ -999,7 +1027,7 @@
     });
   </script>
 
-  <!-- Rotating Scripture of the Day (general) -->
+  <!-- Rotating Scripture of the Day -->
   <script>
     const verses = [
       { ref: "John 3:16", text: "For God so loved the world that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
@@ -1026,7 +1054,7 @@
     setInterval(rotateVerseDaily, 45000);
   </script>
 
-  <!-- Rotating Words of Jesus (daily deterministic) -->
+  <!-- Rotating Words of Jesus -->
   <script>
     const jesusWordsList = [
       { ref: "John 14:6", text: "I am the way, the truth, and the life: no man cometh unto the Father, but by me." },
@@ -1122,7 +1150,7 @@
     }
   </script>
 
-  <!-- XRPL Metrics (no secrets; public endpoints only) -->
+  <!-- XRPL Metrics (public endpoints only) -->
   <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
   <script>
     async function fetchXRPLMetrics() {
@@ -1185,322 +1213,138 @@
     setInterval(fetchXRPLMetrics, 60000);
   </script>
 
-  <!-- JCS DEX logic -->
+  <!-- Xaman connect + order payload wiring (front-end only) -->
   <script>
     (function () {
-      const cfg = {
-        baseCurrency: "JCS",
-        baseIssuer: "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
-        counterCurrency: "XRP",
-        endpoint: "wss://xrplcluster.com"
-      };
+      const connectBtn   = document.getElementById("xamanConnectBtn");
+      const statusEl     = document.getElementById("xamanStatus");
+      const qrWrap       = document.getElementById("xamanQrWrap");
+      const qrImg        = document.getElementById("xamanQr");
+      const orderForm    = document.getElementById("jcsOrderForm");
+      const orderStatus  = document.getElementById("orderStatus");
+      const submitBtn    = document.getElementById("submitOrderBtn");
 
-      const state = {
-        client: null,
-        connecting: false,
-        lastRefresh: 0
-      };
+      if (!connectBtn || !statusEl) return;
 
-      function formatNum(value, decimals) {
-        if (!Number.isFinite(value)) return "—";
-        return value.toLocaleString(undefined, {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      async function createXamanPayload(action, payloadData) {
+        if (!JCS_XAMAN_PAYLOAD_ENDPOINT) {
+          throw new Error("JCS_XAMAN_PAYLOAD_ENDPOINT not configured");
+        }
+
+        const res = await fetch(JCS_XAMAN_PAYLOAD_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action,
+            ...payloadData
+          })
+        });
+
+        if (!res.ok) {
+          throw new Error("Endpoint returned " + res.status);
+        }
+
+        const payload = await res.json();
+        const deepLink = payload?.next?.always || payload?.next || null;
+        const qrPng    = payload?.refs?.qr_png || payload?.refs?.qr || null;
+        const uuid     = payload?.uuid || null;
+
+        if (!deepLink && !qrPng) {
+          console.warn("Xaman payload missing deepLink/qrPng", payload);
+        }
+
+        return { deepLink, qrPng, uuid, raw: payload };
+      }
+
+      function showPayloadTarget(where, info) {
+        if (where === "connect") {
+          // statusEl is already updated in callers
+        }
+
+        if (isMobile && info.deepLink) {
+          window.location.href = info.deepLink;
+        } else if (info.qrPng) {
+          qrImg.src = info.qrPng;
+          qrWrap.hidden = false;
+        } else if (info.deepLink) {
+          // fallback: deep link even on desktop if no QR provided
+          window.location.href = info.deepLink;
+        }
+      }
+
+      async function handleConnectClick() {
+        qrWrap.hidden = true;
+        statusEl.textContent = "Contacting Xaman endpoint…";
+
+        try {
+          const info = await createXamanPayload("connect", {
+            network: "XRPL-MAINNET",
+            app: "JCS-DEX"
+          });
+          statusEl.textContent = "Xaman payload created. Follow the prompt in your wallet.";
+          showPayloadTarget("connect", info);
+        } catch (err) {
+          console.error("Xaman connect error:", err);
+          statusEl.textContent = "Wallet connect failed. Check configuration and try again.";
+        }
+      }
+
+      connectBtn.addEventListener("click", handleConnectClick);
+
+      if (orderForm && orderStatus && submitBtn) {
+        orderForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          qrWrap.hidden = true;
+
+          const side    = document.getElementById("side").value;
+          const price   = parseFloat(document.getElementById("priceInput").value || "0");
+          const amount  = parseFloat(document.getElementById("amountInput").value || "0");
+          const expires = parseInt(document.getElementById("expiresInput").value || "0", 10);
+
+          if (!price || price <= 0 || !amount || amount <= 0) {
+            orderStatus.innerHTML = "<strong>Invalid order.</strong><br/>Enter a positive price and amount.";
+            return;
+          }
+
+          if (!Number.isFinite(expires) || expires <= 0) {
+            orderStatus.innerHTML = "<strong>Invalid expiry.</strong><br/>Set minutes to a positive number.";
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Creating Xaman payload…";
+          orderStatus.innerHTML =
+            "<strong>Preparing order…</strong><br/>We’ll open Xaman (mobile) or show a QR (desktop) for signing.";
+
+          try {
+            const info = await createXamanPayload("place_order", {
+              network: "XRPL-MAINNET",
+              app: "JCS-DEX",
+              pair: "JCS/XRP",
+              side,
+              price,
+              amount,
+              expires_minutes: expires
+            });
+
+            orderStatus.innerHTML =
+              "<strong>Payload ready.</strong><br/>Review and sign this limit order in Xaman to submit it on-ledger.";
+
+            showPayloadTarget("order", info);
+          } catch (err) {
+            console.error("Xaman order error:", err);
+            orderStatus.innerHTML =
+              "<strong>Order payload failed.</strong><br/>Check the backend logs and configuration, then try again.";
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Place Limit Order";
+          }
         });
       }
-
-      async function ensureClient() {
-        if (state.client && typeof state.client.isConnected === "function" && state.client.isConnected()) {
-          return state.client;
-        }
-        if (state.connecting) return state.client;
-
-        state.connecting = true;
-        const statusEl = document.getElementById("dexStatus");
-        if (statusEl) statusEl.textContent = "Connecting to XRPL...";
-
-        try {
-          const client = new xrpl.Client(cfg.endpoint);
-          await client.connect();
-          state.client = client;
-
-          if (statusEl) {
-            statusEl.textContent = "Connected to XRPL Mainnet (read-only).";
-          }
-          const refreshBtn = document.getElementById("dexRefreshBtn");
-          if (refreshBtn) refreshBtn.disabled = false;
-
-          await refresh();
-        } catch (e) {
-          console.error("JCS DEX XRPL connect error:", e);
-          if (statusEl) {
-            statusEl.textContent = "Could not connect to XRPL. Metrics-only mode.";
-          }
-        } finally {
-          state.connecting = false;
-        }
-        return state.client;
-      }
-
-      async function refresh() {
-        const client = state.client;
-        if (!client) return;
-
-        const btn = document.getElementById("dexRefreshBtn");
-        if (btn) btn.disabled = true;
-
-        try {
-          await Promise.all([loadOrderbook(client), loadAmm(client)]);
-          state.lastRefresh = Date.now();
-        } catch (e) {
-          console.error("JCS DEX refresh error:", e);
-        } finally {
-          if (btn) btn.disabled = false;
-        }
-      }
-
-      async function loadOrderbook(client) {
-        const base = { currency: cfg.baseCurrency, issuer: cfg.baseIssuer };
-
-        const [bidsRes, asksRes] = await Promise.all([
-          client.request({
-            command: "book_offers",
-            taker_gets: { currency: "XRP" },
-            taker_pays: base,
-            limit: 15,
-            ledger_index: "current"
-          }),
-          client.request({
-            command: "book_offers",
-            taker_gets: base,
-            taker_pays: { currency: "XRP" },
-            limit: 15,
-            ledger_index: "current"
-          })
-        ]);
-
-        const rows = [];
-        const bids = (bidsRes.result && bidsRes.result.offers) || [];
-        const asks = (asksRes.result && asksRes.result.offers) || [];
-
-        for (const offer of bids) {
-          const xrp = Number(offer.TakerGets) / 1_000_000;
-          const jcs = Number(offer.TakerPays.value);
-          if (!Number.isFinite(xrp) || !Number.isFinite(jcs) || jcs <= 0) continue;
-          const px = xrp / jcs;
-          rows.push({ side: "buy", price: px, jcs, xrp });
-        }
-
-        for (const offer of asks) {
-          const jcs = Number(offer.TakerGets.value);
-          const xrp = Number(offer.TakerPays) / 1_000_000;
-          if (!Number.isFinite(xrp) || !Number.isFinite(jcs) || jcs <= 0) continue;
-          const px = xrp / jcs;
-          rows.push({ side: "sell", price: px, jcs, xrp });
-        }
-
-        const tbody = document.getElementById("dexOrderbookBody");
-        if (!tbody) return;
-
-        tbody.innerHTML = "";
-
-        if (!rows.length) {
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.colSpan = 4;
-          td.className = "muted";
-          td.textContent = "No live offers found for JCS/XRP.";
-          tr.appendChild(td);
-          tbody.appendChild(tr);
-          return;
-        }
-
-        const buys = rows.filter(r => r.side === "buy").sort((a, b) => b.price - a.price);
-        const sells = rows.filter(r => r.side === "sell").sort((a, b) => a.price - b.price);
-
-        const renderRow = (r) => {
-          const tr = document.createElement("tr");
-
-          const tdSide = document.createElement("td");
-          tdSide.textContent = r.side === "buy" ? "Buy JCS" : "Sell JCS";
-          tdSide.className = r.side === "buy" ? "side-buy" : "side-sell";
-
-          const tdPrice = document.createElement("td");
-          tdPrice.textContent = formatNum(r.price, 6);
-
-          const tdSize = document.createElement("td");
-          tdSize.textContent = formatNum(r.jcs, 2);
-
-          const tdTotal = document.createElement("td");
-          tdTotal.textContent = formatNum(r.xrp, 2);
-
-          tr.appendChild(tdSide);
-          tr.appendChild(tdPrice);
-          tr.appendChild(tdSize);
-          tr.appendChild(tdTotal);
-          return tr;
-        };
-
-        sells.slice(0, 8).forEach(r => tbody.appendChild(renderRow(r)));
-        buys.slice(0, 8).forEach(r => tbody.appendChild(renderRow(r)));
-      }
-
-      async function loadAmm(client) {
-        const spotEl = document.getElementById("dexAmmSpot");
-        const jcsEl = document.getElementById("dexAmmJcs");
-        const xrpEl = document.getElementById("dexAmmXrp");
-        const feeEl = document.getElementById("dexAmmFee");
-        if (!spotEl || !jcsEl || !xrpEl || !feeEl) return;
-
-        try {
-          const res = await client.request({
-            command: "amm_info",
-            asset: { currency: cfg.baseCurrency, issuer: cfg.baseIssuer },
-            asset2: { currency: "XRP" },
-            ledger_index: "validated"
-          });
-
-          const amm = res.result && res.result.amm;
-          if (!amm) throw new Error("No AMM found");
-
-          let poolJcs = 0;
-          let poolXrp = 0;
-
-          if (typeof amm.amount === "string") {
-            poolXrp = Number(amm.amount) / 1_000_000;
-          } else if (amm.amount && amm.amount.currency === cfg.baseCurrency) {
-            poolJcs = Number(amm.amount.value);
-          }
-
-          if (typeof amm.amount2 === "string") {
-            poolXrp = Number(amm.amount2) / 1_000_000;
-          } else if (amm.amount2 && amm.amount2.currency === cfg.baseCurrency) {
-            poolJcs = Number(amm.amount2.value);
-          }
-
-          const spot = poolJcs > 0 ? poolXrp / poolJcs : NaN;
-          const feeBps = amm.trading_fee ?? amm.TradingFee;
-
-          spotEl.textContent = formatNum(spot, 6);
-          jcsEl.textContent = poolJcs ? `${formatNum(poolJcs, 2)} JCS` : "—";
-          xrpEl.textContent = poolXrp ? `${formatNum(poolXrp, 2)} XRP` : "—";
-          feeEl.textContent = Number.isFinite(Number(feeBps)) ? `${feeBps}` : "—";
-        } catch (e) {
-          spotEl.textContent = "No AMM";
-          jcsEl.textContent = "—";
-          xrpEl.textContent = "—";
-          feeEl.textContent = "—";
-        }
-      }
-
-      function updateEstimate() {
-        const sideEl = document.getElementById("dexSide");
-        const priceEl = document.getElementById("dexPrice");
-        const amountEl = document.getElementById("dexAmountJcs");
-        const estEl = document.getElementById("dexEstSummary");
-        if (!sideEl || !priceEl || !amountEl || !estEl) return;
-
-        const side = sideEl.value;
-        const price = parseFloat(priceEl.value);
-        const jcs = parseFloat(amountEl.value);
-
-        if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(jcs) || jcs <= 0) {
-          estEl.textContent = "Estimated total: —";
-          return;
-        }
-
-        const totalXrp = price * jcs;
-        estEl.textContent = `Estimated total: ${formatNum(totalXrp, 4)} XRP to `
-          + (side === "buy" ? "pay" : "receive")
-          + ` for ${formatNum(jcs, 2)} JCS.`;
-      }
-
-      function buildTxJson() {
-        const priceEl = document.getElementById("dexPrice");
-        const amountEl = document.getElementById("dexAmountJcs");
-        const sideEl = document.getElementById("dexSide");
-        const out = document.getElementById("dexTxJson");
-        if (!priceEl || !amountEl || !sideEl || !out) return;
-
-        const price = parseFloat(priceEl.value);
-        const jcs = parseFloat(amountEl.value);
-        const side = sideEl.value;
-
-        if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(jcs) || jcs <= 0) {
-          out.value = "// Enter a positive price and amount first.";
-          return;
-        }
-
-        const totalXrp = price * jcs;
-        const drops = Math.round(totalXrp * 1_000_000);
-
-        let tx;
-        if (side === "buy") {
-          tx = {
-            TransactionType: "OfferCreate",
-            TakerGets: {
-              currency: cfg.baseCurrency,
-              issuer: cfg.baseIssuer,
-              value: jcs.toFixed(6)
-            },
-            TakerPays: drops.toString(),
-            Flags: 0
-          };
-        } else {
-          tx = {
-            TransactionType: "OfferCreate",
-            TakerGets: drops.toString(),
-            TakerPays: {
-              currency: cfg.baseCurrency,
-              issuer: cfg.baseIssuer,
-              value: jcs.toFixed(6)
-            },
-            Flags: 0
-          };
-        }
-
-        out.value = JSON.stringify(tx, null, 2);
-      }
-
-      function initUi() {
-        const connectBtn = document.getElementById("dexConnectBtn");
-        const refreshBtn = document.getElementById("dexRefreshBtn");
-        const priceEl = document.getElementById("dexPrice");
-        const amountEl = document.getElementById("dexAmountJcs");
-        const sideEl = document.getElementById("dexSide");
-        const buildBtn = document.getElementById("dexBuildBtn");
-        const resetBtn = document.getElementById("dexResetBtn");
-
-        if (connectBtn) connectBtn.addEventListener("click", ensureClient);
-        if (refreshBtn) refreshBtn.addEventListener("click", refresh);
-
-        if (priceEl) priceEl.addEventListener("input", updateEstimate);
-        if (amountEl) amountEl.addEventListener("input", updateEstimate);
-        if (sideEl) sideEl.addEventListener("change", updateEstimate);
-
-        if (buildBtn) buildBtn.addEventListener("click", buildTxJson);
-
-        if (resetBtn) {
-          resetBtn.addEventListener("click", () => {
-            const estEl = document.getElementById("dexEstSummary");
-            const out = document.getElementById("dexTxJson");
-            if (estEl) estEl.textContent = "Estimated total: —";
-            if (out) out.value = "";
-          });
-        }
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initUi);
-      } else {
-        initUi();
-      }
-
-      window.addEventListener("beforeunload", () => {
-        try {
-          if (state.client) state.client.disconnect();
-        } catch (e) {}
-      });
     })();
   </script>
 </body>
