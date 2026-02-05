@@ -8,9 +8,6 @@
   <meta name="description" content="Jesus Christ Saves Token (JCS) is a faith-centered digital asset on the XRP Ledger, using transparent, immutable technology to point hearts to Jesus and support prayer, ministry, and generosity." />
   <meta name="keywords" content="Jesus Christ Saves Token, JCS, XRPL, XRP Ledger, Christian Cryptocurrency, Faith Blockchain, Christian Token, Crypto Ministry, Prayer, Jesus" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="format-detection" content="telephone=no" />
 
   <!-- Canonical & Language -->
   <link rel="canonical" href="https://jesuschristsavestoken.com/" />
@@ -22,7 +19,6 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="https://jesuschristsavestoken.com/jcs-logo.png" />
 
   <!-- Favicons & App Icons -->
   <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png" />
@@ -45,6 +41,8 @@
   <meta property="og:url" content="https://jesuschristsavestoken.com/" />
   <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png" />
   <meta property="og:image:alt" content="Jesus Christ Saves Token Logo" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -83,17 +81,6 @@
     }
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Jesus Christ Saves Token (JCS)",
-    "url":"https://jesuschristsavestoken.com/",
-    "inLanguage":"en",
-    "description":"Faith-centered JCS on XRPL with live on-ledger indicators, prayer rotation, and verified issuer guidance.",
-    "isPartOf":{"@type":"WebSite","url":"https://jesuschristsavestoken.com/","name":"Jesus Christ Saves Token (JCS)"}
-  }
-  </script>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
@@ -102,73 +89,12 @@
   <link rel="stylesheet" href="/css/style.css?v=2.0.0">
 
   <style>
-    :root{
-      --bg0:#000000;
-      --bg1:#020308;
-      --bg2:#0b1020;
-      --panel:rgba(0,0,0,.90);
-      --glass:rgba(0,0,0,.72);
-      --line:rgba(255,255,255,.10);
-      --text:#f5f5f5;
-      --muted:#b0bec5;
-      --muted2:#90a4ae;
-      --gold:#ffd700;
-      --gold2:#ffe082;
-      --blue:#004e92;
-      --focus:#8ab4ff;
-      --wrap:1100px;
-      --r12:12px;
-      --r16:16px;
-      --r18:18px;
-      --shadow:0 0 18px rgba(255,215,0,.18);
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
     body {
       margin: 0;
       font-family: "Montserrat", sans-serif;
-      background: radial-gradient(circle at top, var(--bg2) 0%, var(--bg1) 40%, var(--bg0) 100%);
-      color: var(--text);
+      background: radial-gradient(circle at top, #0b1020 0%, #020308 40%, #000000 100%);
+      color: #f5f5f5;
       overflow-x: hidden;
-    }
-
-    /* Accessible skip link */
-    .skip-link{
-      position:absolute;
-      left:-9999px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-    }
-    .skip-link:focus{
-      left:14px;
-      top:14px;
-      width:auto;
-      height:auto;
-      padding:10px 12px;
-      background:#0b0f14;
-      border:1px solid var(--line);
-      border-radius:12px;
-      z-index:99999;
-      box-shadow:0 0 0 3px rgba(138,180,255,.25);
-    }
-
-    /* Visible focus (WCAG 2.2 friendly) */
-    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible{
-      outline: 3px solid rgba(138,180,255,.9);
-      outline-offset: 3px;
-      border-radius: 10px;
-    }
-
-    /* Background particles container */
-    #particles-js{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:.85;
     }
 
     header {
@@ -178,187 +104,82 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 6vw;
+      padding: 14px 6vw;
       backdrop-filter: blur(14px);
       background: rgba(0, 0, 0, 0.78);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .header-inner{
-      width:100%;
-      max-width: var(--wrap);
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 220px;
-    }
-    .brand a{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:var(--text);
-    }
-    .brand img {
-      height: 44px;
-      width: 44px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 0 14px rgba(0,78,146,.25);
-    }
-    .brand-title{
-      font-weight:800;
-      letter-spacing:.2px;
-      line-height:1.1;
-    }
-    .brand-sub{
-      display:block;
-      font-size:.78rem;
-      color: var(--muted);
-      margin-top:2px;
-    }
-
-    /* Mobile menu toggle (CSS-only) */
-    .nav-toggle{
-      position:absolute;
-      left:-9999px;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-    }
-    .nav-btn{
-      display:none;
-      user-select:none;
-      cursor:pointer;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.55);
-      color: var(--text);
-    }
-
-    nav {
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+    header img {
+      height: 52px;
     }
 
     nav a {
+      margin-left: 20px;
       text-decoration: none;
-      font-weight: 600;
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: transform .18s ease, color 0.25s, border-color 0.25s, box-shadow .18s ease;
-      font-size: .9rem;
-      white-space:nowrap;
+      font-weight: 500;
+      color: #f5f5f5;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
     }
+
     nav a:hover {
-      color: var(--gold);
-      border-color: rgba(255,215,0,.45);
-      box-shadow: 0 0 14px rgba(255,215,0,.14);
-      transform: translateY(-1px);
+      color: #ffd700;
+      border-color: #ffd700;
     }
 
     .sign-ledger-btn {
-      border: 1px solid var(--gold);
-      background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.14), transparent);
-    }
-
-    .nav-chip{
-      border:1px solid rgba(144,164,174,.55);
-      background: rgba(0,0,0,.35);
-      color:#cfd8dc;
-    }
-
-    main{
-      position:relative;
-      z-index:1;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #ffd700;
+      font-size: 0.9rem;
     }
 
     .hero {
-      max-width: var(--wrap);
-      margin:0 auto;
       min-height: 82vh;
-      padding: 72px 6vw 34px;
+      padding: 80px 6vw 40px;
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
-      gap: 34px;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+      gap: 40px;
       align-items: center;
       position: relative;
     }
 
     .hero h1 {
       font-family: "UnifrakturCook", cursive;
-      font-size: 3.1rem;
-      margin: 0 0 12px;
-      color: var(--gold);
+      font-size: 3.2rem;
+      margin: 0 0 16px;
+      color: #ffd700;
       letter-spacing: 1px;
-      text-shadow: 0 0 18px rgba(255,215,0,.12);
     }
 
     .hero p {
-      margin: 0 0 14px;
+      margin: 0 0 18px;
       font-size: 1rem;
       line-height: 1.7;
       color: #e0e0e0;
     }
 
     .hero .subline {
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       font-size: 0.95rem;
       color: #cfd8dc;
-    }
-
-    .subline .issuer-wrap{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .mini-btn{
-      appearance:none;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.50);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-weight:700;
-      font-size:.82rem;
-      cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .mini-btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,215,0,.35);
-      box-shadow: 0 0 12px rgba(255,215,0,.14);
     }
 
     .cta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 12px 0 14px;
+      margin-bottom: 18px;
     }
 
     .cta a {
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 999px;
       text-decoration: none;
       font-size: 0.92rem;
-      font-weight: 800;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -371,22 +192,13 @@
     .cta a:hover {
       transform: translateY(-2px);
       box-shadow: 0 0 16px rgba(255, 215, 0, 0.3);
-      border-color: var(--gold);
-    }
-
-    .cta a.eco {
-      background: radial-gradient(circle at top left, rgba(0, 78, 146, 0.28), transparent);
-      border-color: rgba(0, 78, 146, 0.55);
-    }
-    .cta a.eco:hover{
-      box-shadow: 0 0 18px rgba(0,78,146,.24);
-      border-color: rgba(255,215,0,.35);
+      border-color: #ffd700;
     }
 
     #verseCard, #jesusWordsCard {
       margin-top: 10px;
       padding: 12px 14px;
-      border-radius: var(--r12);
+      border-radius: 12px;
       background: radial-gradient(circle at top, rgba(255, 215, 0, 0.15), rgba(0, 0, 0, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 0.9rem;
@@ -397,38 +209,29 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: var(--gold);
+      color: #ffd700;
     }
 
     .muted {
-      color: var(--muted);
+      color: #b0bec5;
       font-size: 0.86rem;
-    }
-
-    .sr-only{
-      position:absolute;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;clip:rect(0,0,0,0);
-      white-space:nowrap;border:0;
     }
 
     .hero-side-panel {
       padding: 16px 16px 14px;
-      border-radius: var(--r18);
+      border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.09);
       background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.98));
       display: flex;
       flex-direction: column;
       gap: 10px;
       font-size: 0.85rem;
-      box-shadow: 0 0 22px rgba(0,78,146,.10);
     }
 
     .hero-side-panel h2 {
       margin: 0;
       font-size: 1.1rem;
-      color: var(--gold);
+      color: #ffd700;
     }
 
     .hero-side-panel ul {
@@ -436,37 +239,32 @@
       padding: 0;
       margin: 6px 0 0;
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
 
     .hero-side-panel li span.label {
-      color: var(--muted2);
+      color: #90a4ae;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
+      gap: 4px;
+      padding: 3px 9px;
       border-radius: 999px;
       border: 1px solid rgba(144, 164, 174, 0.55);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: #cfd8dc;
-      background: rgba(0,0,0,.45);
-      width: fit-content;
     }
 
     section {
-      max-width: var(--wrap);
-      margin:0 auto;
-      padding: 34px 6vw 12px;
+      padding: 36px 6vw 14px;
     }
 
     section h2 {
       font-size: 1.6rem;
       margin-bottom: 12px;
-      color: var(--gold);
-      text-shadow: 0 0 18px rgba(255,215,0,.10);
+      color: #ffd700;
     }
 
     .section-lede {
@@ -485,7 +283,7 @@
 
     .card {
       padding: 14px 14px 10px;
-      border-radius: var(--r16);
+      border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.98));
       font-size: 0.86rem;
@@ -495,7 +293,7 @@
     .card h3 {
       margin: 0 0 8px;
       font-size: 1rem;
-      color: var(--gold2);
+      color: #ffe082;
     }
 
     .checklist {
@@ -503,36 +301,34 @@
       padding: 0;
       margin: 0;
       display: grid;
-      gap: 6px;
+      gap: 4px;
       font-size: 0.86rem;
     }
 
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
       margin-top: 4px;
     }
 
     .metric {
-      padding: 12px;
-      border-radius: var(--r12);
+      padding: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.09);
       background: rgba(0, 0, 0, 0.9);
-      box-shadow: 0 0 16px rgba(255,215,0,.04);
     }
 
     .metric .label {
       font-size: 0.78rem;
       text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 4px;
-      letter-spacing: .4px;
+      color: #90a4ae;
+      margin-bottom: 3px;
     }
 
     .metric .value {
-      font-size: 1.02rem;
-      font-weight: 800;
+      font-size: 1rem;
+      font-weight: 600;
       color: #ffffff;
     }
 
@@ -550,20 +346,20 @@
 
     .prayer-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
       font-size: 0.86rem;
       color: #cfd8dc;
     }
 
     .prayer-item strong {
-      color: var(--gold2);
+      color: #ffe082;
       font-size: 0.82rem;
     }
 
     .notice {
       font-size: 0.75rem;
-      color: var(--muted2);
-      margin-top: 6px;
+      color: #90a4ae;
+      margin-top: 4px;
     }
 
     .ecosystem-footer {
@@ -572,11 +368,10 @@
       background: radial-gradient(circle at top, #111827, #020308);
       border-top: 1px solid rgba(255, 255, 255, 0.12);
       position: relative;
-      z-index:1;
     }
 
     .footer-container {
-      max-width: var(--wrap);
+      max-width: 1080px;
       margin: 0 auto;
       text-align: left;
     }
@@ -584,13 +379,13 @@
     .footer-container h3 {
       margin: 0 0 6px;
       font-size: 1.2rem;
-      color: var(--gold);
+      color: #ffd700;
     }
 
     .ecosystem-desc {
       margin: 0 0 12px;
       font-size: 0.85rem;
-      color: var(--muted);
+      color: #b0bec5;
     }
 
     .ecosystem-links {
@@ -624,386 +419,306 @@
     .eco-link:hover {
       transform: translateY(-1px);
       box-shadow: 0 0 14px rgba(255, 215, 0, 0.28);
-      border-color: var(--gold);
-      color: var(--gold);
+      border-color: #ffd700;
+      color: #ffd700;
     }
 
     .ecosystem-tagline,
     .ecosystem-copy {
       margin: 2px 0;
       font-size: 0.75rem;
-      color: var(--muted2);
+      color: #90a4ae;
     }
 
     #dailyBlessing {
       margin-top: 10px;
     }
 
-    /* Reduce motion support */
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-      #particles-js{ display:none; }
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 800px) {
       .hero {
         grid-template-columns: 1fr;
-        padding-top: 66px;
+        padding-top: 70px;
       }
-      .brand{ min-width: unset; }
-    }
-
-    @media (max-width: 800px) {
-      header { padding: 10px 12px; }
-      .header-inner{ gap:10px; }
-      nav{
-        position:absolute;
-        left:12px;
-        right:12px;
-        top:64px;
-        background: rgba(0,0,0,.86);
-        border:1px solid rgba(255,255,255,.10);
-        border-radius: 16px;
-        padding: 10px;
-        display:none;
-        box-shadow: 0 0 22px rgba(0,78,146,.10);
+      header {
+        padding: 10px 12px;
       }
-      .nav-btn{ display:inline-flex; align-items:center; justify-content:center; }
-      .nav-toggle:checked ~ nav{ display:flex; }
-      nav a{ width:100%; justify-content:flex-start; }
-      .hero h1 { font-size: 2.25rem; }
-      .prayer-wall { grid-template-columns: 1fr; }
+      nav a {
+        margin-left: 10px;
+        font-size: 0.78rem;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
     }
   </style>
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
   <noscript style="position:fixed;top:0;left:0;right:0;background:#000;color:#fff;padding:10px;text-align:center;z-index:9999;">
     This site works best with JavaScript enabled.
   </noscript>
 
   <!-- Background crosses -->
-  <div id="particles-js" aria-hidden="true"></div>
+  <div id="particles-js"></div>
 
   <!-- Header -->
   <header>
-    <div class="header-inner">
-      <div class="brand">
-        <a href="https://jesuschristsavestoken.com/" aria-label="Jesus Christ Saves Token home">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token Logo" width="44" height="44" decoding="async" loading="eager" />
-          <div>
-            <div class="brand-title">Jesus Christ Saves</div>
-            <span class="brand-sub">JCS · XRPL · Verified Issuer</span>
-          </div>
+    <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token Logo" />
+    <nav>
+      <a href="verify.html" class="sign-ledger-btn">🖋 Sign the Ledger</a>
+      <a href="#about">About</a>
+      <a href="#mission">Mission</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#prayer">Prayer</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Jesus Christ Saves Token (JCS)</h1>
+      <p>
+        JCS is a faith-based token on the XRP Ledger that uses transparent,
+        immutable infrastructure to point every transaction, every holder,
+        and every prayer back to one Name: Jesus Christ.
+      </p>
+      <p class="subline">
+        Verified issuer: <strong>rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong> •
+        Ticker: <strong>JCS</strong> • Domain verified on-ledger.
+      </p>
+      <div class="cta">
+        <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank" rel="noopener">
+          ➕ Set Trustline
+        </a>
+        <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener" class="wallet-btn">
+          🔗 View on XPMarket
+        </a>
+        <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" target="_blank" rel="noopener">
+          🕊 Trade JCS on Sologenic
+        </a>
+        <a href="about-jcs.html">
+          🛐 Learn the Vision
         </a>
       </div>
 
-      <!-- CSS-only mobile menu -->
-      <input id="navToggle" class="nav-toggle" type="checkbox" />
-      <label for="navToggle" class="nav-btn" aria-label="Open menu">☰</label>
+      <!-- Daily verse -->
+      <div id="verseCard">
+        <strong>Scripture of the Day</strong>
+        <p id="dailyVerse" class="muted">Loading…</p>
+      </div>
 
-      <nav aria-label="Primary navigation">
-        <a href="verify.html" class="sign-ledger-btn">🖋 Sign the Ledger</a>
-
-        <!-- Ecosystem / cross-site navigation (requested) -->
-        <a class="nav-chip" href="https://xrbitcoincash.com/" target="_blank" rel="noopener">XRBitcoinCash.com</a>
-        <a class="nav-chip" href="https://xrbitcoincash.com/xrbc-ecosystem.html" target="_blank" rel="noopener">XRBC Ecosystem</a>
-        <a class="nav-chip" href="https://xrbitcoin.xrp.name/" target="_blank" rel="noopener">XRBitcoin (Web3)</a>
-
-        <!-- On-page -->
-        <a href="#about">About</a>
-        <a href="#mission">Mission</a>
-        <a href="#metrics">Metrics</a>
-        <a href="#prayer">Prayer</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+      <!-- Rotating words of Jesus -->
+      <div id="jesusWordsCard">
+        <strong>Words of Jesus (Daily Rotation)</strong>
+        <p id="jesusWords" class="muted">Loading…</p>
+      </div>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section class="hero" id="home" aria-label="Hero">
-      <div>
-        <h1>Jesus Christ Saves Token (JCS)</h1>
-        <p>
-          JCS is a faith-based token on the XRP Ledger that uses transparent,
-          immutable infrastructure to point every transaction, every holder,
-          and every prayer back to one Name: Jesus Christ.
-        </p>
-
-        <p class="subline">
-          <span class="issuer-wrap">
-            Verified issuer: <strong id="issuerText">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong>
-            <button class="mini-btn" id="copyIssuer" type="button">Copy issuer</button>
-            <span id="copyMsg" class="sr-only" aria-live="polite"></span>
-            • Ticker: <strong>JCS</strong> • Domain verified on-ledger.
-          </span>
-        </p>
-
-        <div class="cta">
-          <a href="https://xrpl.services/?issuer=rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd&currency=JCS&limit=1000000000000" target="_blank" rel="noopener">
-            ➕ Set Trustline
-          </a>
-          <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener" class="wallet-btn">
-            🔗 View on XPMarket
-          </a>
-          <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" target="_blank" rel="noopener">
-            🕊 Trade JCS on Sologenic
-          </a>
-          <a href="about-jcs.html">
-            🛐 Learn the Vision
-          </a>
-
-          <!-- Requested ecosystem buttons (additive, no placeholder links) -->
-          <a class="eco" href="https://xrbitcoincash.com/xrbc-ecosystem.html" target="_blank" rel="noopener">
-            🧭 XRBC Ecosystem Tools
-          </a>
-          <a class="eco" href="https://xrbitcoin.xrp.name/" target="_blank" rel="noopener">
-            🌐 XRBitcoin Web3 Domain
-          </a>
-        </div>
-
-        <!-- Daily verse -->
-        <div id="verseCard">
-          <strong>Scripture of the Day</strong>
-          <p id="dailyVerse" class="muted">Loading…</p>
-        </div>
-
-        <!-- Rotating words of Jesus -->
-        <div id="jesusWordsCard">
-          <strong>Words of Jesus (Daily Rotation)</strong>
-          <p id="jesusWords" class="muted">Loading…</p>
-        </div>
-      </div>
-
-      <aside class="hero-side-panel" aria-label="On-ledger integrity panel">
-        <h2>On-Ledger Integrity</h2>
-        <span class="pill">✔ TOML Verified Domain</span>
-        <span class="pill">✔ Xaman KYC Flag</span>
-        <span class="pill">✔ Immutable public issuer</span>
-        <ul>
-          <li><span class="label">Network:</span> XRP Ledger Mainnet</li>
-          <li><span class="label">Symbol:</span> JCS</li>
-          <li><span class="label">Issuer:</span> rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</li>
-          <li><span class="label">Use:</span> Prayer-driven community, charity support, Christian builders</li>
-        </ul>
-        <p class="muted">
-          Always verify both <strong>JCS</strong> and the correct issuer before adding trustlines or trading.
-        </p>
-      </aside>
-    </section>
-
-    <!-- About -->
-    <section id="about" aria-label="About JCS">
-      <h2>✝ About Jesus Christ Saves Token</h2>
-      <p class="section-lede">
-        JCS is not a replacement for faith, church, or Scripture.
-        It is a focused digital witness: a tokenized reminder that Jesus Christ saves,
-        anchored on a public ledger where records cannot be quietly altered.
+    <aside class="hero-side-panel">
+      <h2>On-Ledger Integrity</h2>
+      <span class="pill">✔ TOML Verified Domain</span>
+      <span class="pill">✔ Xaman KYC Flag</span>
+      <span class="pill">✔ Immutable public issuer</span>
+      <ul>
+        <li><span class="label">Network:</span> XRP Ledger Mainnet</li>
+        <li><span class="label">Symbol:</span> JCS</li>
+        <li><span class="label">Issuer:</span> rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</li>
+        <li><span class="label">Use:</span> Prayer-driven community, charity support, Christian builders</li>
+      </ul>
+      <p class="muted">
+        Always verify both <strong>JCS</strong> and the correct issuer before adding trustlines or trading.
       </p>
-      <div class="highlight-grid">
-        <div class="card">
-          <h3>Immutable Witness</h3>
-          <p>
-            The XRP Ledger records every JCS movement in public view.
-            This transparency reflects our conviction that stewardship, giving,
-            and leadership should be accountable and in the light.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Prayer-Minded Utility</h3>
-          <p>
-            JCS holders are invited to unite in regular on-ledger prayer campaigns,
-            support verifiable ministries, and highlight needs that the Body of Christ can meet.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Community of Believers</h3>
-          <p>
-            JCS is designed for Christians, ministries, and builders
-            who want technology that openly confesses Christ and resists anonymity-driven abuse.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Sound Warnings</h3>
-          <p>
-            JCS is not financial advice, not a promise of profit, and not a substitute
-            for personal conviction. Always verify issuer data and beware imitators.
-          </p>
-        </div>
-      </div>
-    </section>
+    </aside>
+  </section>
 
-    <!-- Mission -->
-    <section id="mission" aria-label="Mission and Vision">
-      <h2>🕊 Mission: Let Every Block Point Back to Christ</h2>
-      <p class="section-lede">
-        “For where your treasure is, there will your heart be also.” (Matthew 6:21)
-        JCS aims to align digital activity with eternal perspective.
-      </p>
+  <!-- About -->
+  <section id="about" aria-label="About JCS">
+    <h2>✝ About Jesus Christ Saves Token</h2>
+    <p class="section-lede">
+      JCS is not a replacement for faith, church, or Scripture.
+      It is a focused digital witness: a tokenized reminder that Jesus Christ saves,
+      anchored on a public ledger where records cannot be quietly altered.
+    </p>
+    <div class="highlight-grid">
       <div class="card">
-        <h3>Three Pillars</h3>
+        <h3>Immutable Witness</h3>
+        <p>
+          The XRP Ledger records every JCS movement in public view.
+          This transparency reflects our conviction that stewardship, giving,
+          and leadership should be accountable and in the light.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Prayer-Minded Utility</h3>
+        <p>
+          JCS holders are invited to unite in regular on-ledger prayer campaigns,
+          support verifiable ministries, and highlight needs that the Body of Christ can meet.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Community of Believers</h3>
+        <p>
+          JCS is designed for Christians, ministries, and builders
+          who want technology that openly confesses Christ and resists anonymity-driven abuse.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Sound Warnings</h3>
+        <p>
+          JCS is not financial advice, not a promise of profit, and not a substitute
+          for personal conviction. Always verify issuer data and beware imitators.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="mission" aria-label="Mission and Vision">
+    <h2>🕊 Mission: Let Every Block Point Back to Christ</h2>
+    <p class="section-lede">
+      “For where your treasure is, there will your heart be also.” (Matthew 6:21)
+      JCS aims to align digital activity with eternal perspective.
+    </p>
+    <div class="card">
+      <h3>Three Pillars</h3>
+      <ul class="checklist">
+        <li>✅ <strong>Confession:</strong> Every brand element boldly names Jesus Christ.</li>
+        <li>✅ <strong>Clarity:</strong> Public issuer, verified domain, verifiable token metadata.</li>
+        <li>✅ <strong>Charity:</strong> Framework for transparent ministry support and community-led giving.</li>
+        <li>✨ <strong>Prayer Integration:</strong> Rotating verses, prompts, and campaigns to keep the focus on Christ, not charts.</li>
+        <li>✨ <strong>Creative Witness:</strong> Future NFT and content drops centered on the Gospel message.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section id="metrics" aria-label="JCS Live Metrics">
+    <h2>📊 Live Metrics</h2>
+    <p class="section-lede">
+      Indicative on-ledger data for JCS. Values update using public XRPL order books and XRP/USD feeds.
+    </p>
+    <div class="metrics-grid" role="list">
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Price (USD)</div>
+        <div id="price" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Estimated Market Cap</div>
+        <div id="marketcap" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">Circulating Supply</div>
+        <div id="supply" class="value">—</div>
+      </div>
+      <div class="metric" role="listitem" aria-live="polite">
+        <div class="label muted">24h Change</div>
+        <div id="change" class="value">N/A</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:10px;">
+      Data is informational. Always confirm on-ledger before large decisions.
+    </p>
+  </section>
+
+  <!-- Prayer & Participation -->
+  <section id="prayer" aria-label="Prayer and Participation">
+    <h2>🙏 Prayer, Stewardship, and Participation</h2>
+    <p class="section-lede">
+      JCS exists to keep Christ central. Hold if you wish, share if you are led,
+      but above all, pray. The goal is a visible, verifiable trail of faith-driven action.
+    </p>
+    <div class="prayer-wall">
+      <div class="card">
+        <h3>Prayer Wall (Concept)</h3>
+        <div class="prayer-list">
+          <div class="prayer-item">
+            <strong>For Ministries:</strong>
+            Lord, guide resources toward honest, Christ-centered work with transparent use.
+          </div>
+          <div class="prayer-item">
+            <strong>For Holders:</strong>
+            May every wallet remember the poor, the lost, and the persecuted Church.
+          </div>
+          <div class="prayer-item">
+            <strong>For Builders:</strong>
+            Let Christian developers honor You with code that reflects truth and integrity.
+          </div>
+          <div class="prayer-item">
+            <strong>For Witness:</strong>
+            May this project always exalt Jesus’ name above any token or metric.
+          </div>
+        </div>
+        <p class="notice">
+          Future updates can integrate signed on-ledger “prayer signals” without exposing private data.
+        </p>
+      </div>
+      <div class="card">
+        <h3>How To Engage</h3>
         <ul class="checklist">
-          <li>✅ <strong>Confession:</strong> Every brand element boldly names Jesus Christ.</li>
-          <li>✅ <strong>Clarity:</strong> Public issuer, verified domain, verifiable token metadata.</li>
-          <li>✅ <strong>Charity:</strong> Framework for transparent ministry support and community-led giving.</li>
-          <li>✨ <strong>Prayer Integration:</strong> Rotating verses, prompts, and campaigns to keep the focus on Christ, not charts.</li>
-          <li>✨ <strong>Creative Witness:</strong> Future NFT and content drops centered on the Gospel message.</li>
+          <li>Set the JCS trustline with the verified issuer.</li>
+          <li>Use only official links listed on this site.</li>
+          <li>Join community calls, prayer threads, and Gospel-centered initiatives.</li>
+          <li>Never share your secret keys; no JCS feature ever requires them.</li>
         </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Metrics -->
-    <section id="metrics" aria-label="JCS Live Metrics">
-      <h2>📊 Live Metrics</h2>
-      <p class="section-lede">
-        Indicative on-ledger data for JCS. Values update using public XRPL order books and XRP/USD feeds.
-      </p>
+  <!-- FAQ -->
+  <section id="faq" aria-label="Frequently Asked Questions">
+    <h2>❓ FAQ</h2>
+    <div class="faq-cards">
+      <article class="card">
+        <h3>Why a Christian token?</h3>
+        <p>
+          To plant a clear testimony of Jesus Christ inside Web3,
+          using transparent rails where faith, generosity, and accountability can be verified.
+        </p>
+      </article>
 
-      <div class="metrics-grid" role="list">
-        <div class="metric" role="listitem">
-          <div class="label muted">Price (USD)</div>
-          <div id="price" class="value" aria-live="polite">—</div>
-        </div>
+      <article class="card">
+        <h3>Is this a church or ministry?</h3>
+        <p>
+          No. JCS is a technology and branding layer that openly confesses Christ.
+          Individual believers and ministries choose how to use it.
+        </p>
+      </article>
 
-        <div class="metric" role="listitem">
-          <div class="label muted">Estimated Market Cap</div>
-          <div id="marketcap" class="value" aria-live="polite">—</div>
-        </div>
+      <article class="card">
+        <h3>Is a trustline safe?</h3>
+        <p>
+          XRPL trustlines permit your wallet to hold a token.
+          They do not give anyone control of your funds or keys.
+          Always verify issuer details before signing.
+        </p>
+      </article>
 
-        <div class="metric" role="listitem">
-          <div class="label muted">Circulating Supply</div>
-          <div id="supply" class="value" aria-live="polite">—</div>
-        </div>
+      <article class="card">
+        <h3>How do I trade JCS?</h3>
+        <p>
+          Trade JCS through XRPL DEX interfaces that show the correct issuer.
+          Use the official Sologenic and XPMarket links here to reduce impersonation risk.
+        </p>
+      </article>
 
-        <div class="metric" role="listitem">
-          <div class="label muted">24h Change</div>
-          <div id="change" class="value" aria-live="polite">N/A</div>
-        </div>
+      <article class="card">
+        <h3>Is this financial advice?</h3>
+        <p>
+          No. JCS is a symbolic and utility-focused project for believers.
+          Prices are volatile. Seek wisdom, pray, and follow your own informed conviction.
+        </p>
+      </article>
 
-        <!-- Additive metrics (no endpoint changes) -->
-        <div class="metric" role="listitem">
-          <div class="label muted">Price (XRP)</div>
-          <div id="priceXrp" class="value" aria-live="polite">—</div>
-        </div>
-
-        <div class="metric" role="listitem">
-          <div class="label muted">Holders (Trustlines)</div>
-          <div id="holders" class="value" aria-live="polite">—</div>
-        </div>
-
-        <div class="metric" role="listitem">
-          <div class="label muted">XRP (USD)</div>
-          <div id="xrpUsd" class="value" aria-live="polite">—</div>
-        </div>
-      </div>
-
-      <p class="muted" style="margin-top:10px;">
-        Data is informational. Always confirm on-ledger before large decisions.
-      </p>
-    </section>
-
-    <!-- Prayer & Participation -->
-    <section id="prayer" aria-label="Prayer and Participation">
-      <h2>🙏 Prayer, Stewardship, and Participation</h2>
-      <p class="section-lede">
-        JCS exists to keep Christ central. Hold if you wish, share if you are led,
-        but above all, pray. The goal is a visible, verifiable trail of faith-driven action.
-      </p>
-      <div class="prayer-wall">
-        <div class="card">
-          <h3>Prayer Wall (Concept)</h3>
-          <div class="prayer-list">
-            <div class="prayer-item">
-              <strong>For Ministries:</strong>
-              Lord, guide resources toward honest, Christ-centered work with transparent use.
-            </div>
-            <div class="prayer-item">
-              <strong>For Holders:</strong>
-              May every wallet remember the poor, the lost, and the persecuted Church.
-            </div>
-            <div class="prayer-item">
-              <strong>For Builders:</strong>
-              Let Christian developers honor You with code that reflects truth and integrity.
-            </div>
-            <div class="prayer-item">
-              <strong>For Witness:</strong>
-              May this project always exalt Jesus’ name above any token or metric.
-            </div>
-          </div>
-          <p class="notice">
-            Future updates can integrate signed on-ledger “prayer signals” without exposing private data.
-          </p>
-        </div>
-        <div class="card">
-          <h3>How To Engage</h3>
-          <ul class="checklist">
-            <li>Set the JCS trustline with the verified issuer.</li>
-            <li>Use only official links listed on this site.</li>
-            <li>Join community calls, prayer threads, and Gospel-centered initiatives.</li>
-            <li>Never share your secret keys; no JCS feature ever requires them.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" aria-label="Frequently Asked Questions">
-      <h2>❓ FAQ</h2>
-      <div class="faq-cards">
-        <article class="card">
-          <h3>Why a Christian token?</h3>
-          <p>
-            To plant a clear testimony of Jesus Christ inside Web3,
-            using transparent rails where faith, generosity, and accountability can be verified.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>Is this a church or ministry?</h3>
-          <p>
-            No. JCS is a technology and branding layer that openly confesses Christ.
-            Individual believers and ministries choose how to use it.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>Is a trustline safe?</h3>
-          <p>
-            XRPL trustlines permit your wallet to hold a token.
-            They do not give anyone control of your funds or keys.
-            Always verify issuer details before signing.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>How do I trade JCS?</h3>
-          <p>
-            Trade JCS through XRPL DEX interfaces that show the correct issuer.
-            Use the official Sologenic and XPMarket links here to reduce impersonation risk.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>Is this financial advice?</h3>
-          <p>
-            No. JCS is a symbolic and utility-focused project for believers.
-            Prices are volatile. Seek wisdom, pray, and follow your own informed conviction.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>What is the long-term vision?</h3>
-          <p>
-            Persistent Gospel witness on-ledger, transparent giving mechanics,
-            Christ-centered NFTs, and community tools that keep Jesus’ words visible in a digital age.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
+      <article class="card">
+        <h3>What is the long-term vision?</h3>
+        <p>
+          Persistent Gospel witness on-ledger, transparent giving mechanics,
+          Christ-centered NFTs, and community tools that keep Jesus’ words visible in a digital age.
+        </p>
+      </article>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="ecosystem-footer">
@@ -1015,44 +730,30 @@
 
       <div class="ecosystem-links">
         <a href="https://jesuschristsavestoken.com/" class="eco-link">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token logo" width="20" height="20" loading="lazy" decoding="async">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token logo">
           <span>Official JCS Website</span>
         </a>
 
+        <!-- Replaced XRBitcoin / XRB with Sologenic links -->
         <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS/XRP" width="20" height="20" loading="lazy" decoding="async">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS/XRP">
           <span>Sologenic: JCS/XRP Market</span>
         </a>
 
         <a href="https://sologenic.org/amm/JCS_XRP_rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS AMM" width="20" height="20" loading="lazy" decoding="async">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Sologenic JCS AMM">
           <span>Sologenic: JCS-XRP AMM</span>
         </a>
 
         <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XPMarket JCS" width="20" height="20" loading="lazy" decoding="async">
+          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XPMarket JCS">
           <span>XPMarket: JCS Listing</span>
-        </a>
-
-        <!-- Requested ecosystem links -->
-        <a href="https://xrbitcoincash.com/" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XRBitcoinCash.com" width="20" height="20" loading="lazy" decoding="async">
-          <span>XRBitcoinCash.com</span>
-        </a>
-
-        <a href="https://xrbitcoincash.com/xrbc-ecosystem.html" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XRBC Ecosystem" width="20" height="20" loading="lazy" decoding="async">
-          <span>XRBC Ecosystem Tools</span>
-        </a>
-
-        <a href="https://xrbitcoin.xrp.name/" class="eco-link" target="_blank" rel="noopener">
-          <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="XRBitcoin Web3" width="20" height="20" loading="lazy" decoding="async">
-          <span>XRBitcoin (Web3 Domain)</span>
         </a>
 
         <!-- Twitter/X button stays -->
         <a href="https://x.com/JesusCS_token" target="_blank" class="eco-link" rel="noopener">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="X" width="20" height="20" loading="lazy" decoding="async">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
+               alt="Twitter">
           <span>@JesusCS_token</span>
         </a>
       </div>
@@ -1063,65 +764,20 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Floating cross particles (unchanged core behavior; deferred until load for performance)
-    (function () {
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
-
-      window.addEventListener('load', () => {
-        if (typeof particlesJS !== "function") return;
-        particlesJS("particles-js", {
-          "particles": {
-            "number": { "value": 3, "density": { "enable": false } },
-            "shape": { "type": "image", "image": { "src": "cross1.png", "width": 40, "height": 40 } },
-            "opacity": { "value": 0.95 },
-            "size": { "value": 46, "random": true },
-            "line_linked": { "enable": false },
-            "move": { "enable": true, "speed": 0.45, "direction": "top", "out_mode": "out" }
-          },
-          "retina_detect": true
-        });
-      });
-    })();
-  </script>
-
-  <!-- Copy issuer helper (additive; no endpoint changes) -->
-  <script>
-    (function () {
-      const btn = document.getElementById('copyIssuer');
-      const textEl = document.getElementById('issuerText');
-      const msg = document.getElementById('copyMsg');
-      if (!btn || !textEl) return;
-
-      async function copyText(t){
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(t);
-          return true;
-        }
-        // Fallback
-        const ta = document.createElement('textarea');
-        ta.value = t;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.focus(); ta.select();
-        const ok = document.execCommand('copy');
-        ta.remove();
-        return ok;
-      }
-
-      btn.addEventListener('click', async () => {
-        const t = (textEl.textContent || '').trim();
-        try{
-          const ok = await copyText(t);
-          if (msg) msg.textContent = ok ? 'Issuer copied.' : 'Copy failed.';
-        }catch{
-          if (msg) msg.textContent = 'Copy failed.';
-        }
-      }, { passive: true });
-    })();
+    // Floating cross particles (unchanged core behavior)
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 3, "density": { "enable": false } },
+        "shape": { "type": "image", "image": { "src": "cross1.png", "width": 40, "height": 40 } },
+        "opacity": { "value": 0.95 },
+        "size": { "value": 46, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 0.45, "direction": "top", "out_mode": "out" }
+      },
+      "retina_detect": true
+    });
   </script>
 
   <!-- Rotating Scripture of the Day (general) -->
@@ -1170,5 +826,147 @@
     function setDailyJesusWords() {
       const el = document.getElementById("jesusWords");
       if (!el) return;
-      const dayIndex
+      const dayIndex = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) % jesusWordsList.length;
+      const v = jesusWordsList[dayIndex];
+      el.textContent = v ? `${v.ref} — "${v.text}"` : "";
+    }
+
+    setDailyJesusWords();
+    // Optional rotation for active sessions
+    setInterval(setDailyJesusWords, 60000);
+  </script>
+
+  <!-- Gentle Glow Cross Cursor -->
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      let cursor = document.getElementById("cross-cursor");
+      if (!cursor) {
+        cursor = document.createElement("div");
+        cursor.id = "cross-cursor";
+        cursor.style.position = "fixed";
+        cursor.style.width = "20px";
+        cursor.style.height = "20px";
+        cursor.style.background = "url('https://jesuschristsavestoken.com/cross1.png') center/contain no-repeat";
+        cursor.style.pointerEvents = "none";
+        cursor.style.zIndex = "9999";
+        cursor.style.filter = "drop-shadow(0 0 8px rgba(255,215,0,0.8))";
+        document.body.appendChild(cursor);
+      }
+      cursor.style.left = e.pageX + "px";
+      cursor.style.top = e.pageY + "px";
+    });
+  </script>
+
+  <!-- "Amen" Glow on Click -->
+  <script>
+    document.addEventListener("click", (e) => {
+      const amen = document.createElement("span");
+      amen.innerText = "Amen ✝️";
+      amen.style.position = "fixed";
+      amen.style.left = e.pageX + "px";
+      amen.style.top = e.pageY + "px";
+      amen.style.color = "#ffd700";
+      amen.style.fontWeight = "800";
+      amen.style.fontFamily = "Montserrat, sans-serif";
+      amen.style.textShadow = "0 0 10px rgba(255,255,255,0.9)";
+      amen.style.pointerEvents = "none";
+      amen.style.transition = "all 1.8s ease-out";
+      document.body.appendChild(amen);
+      setTimeout(() => {
+        amen.style.opacity = 0;
+        amen.style.transform = "translateY(-60px)";
+      }, 50);
+      setTimeout(() => amen.remove(), 2000);
+    });
+  </script>
+
+  <!-- Daily Blessing Footer Rotator -->
+  <script>
+    const blessings = [
+      "May every ledger entry remind you that Jesus Christ never changes.",
+      "Walk in faith; let your stewardship be as transparent as this ledger.",
+      "Jesus Christ Saves — let your digital steps confess His name.",
+      "Let your giving be in the light, your hope in the Lord.",
+      "Grace and truth remain greater than any market chart."
+    ];
+    const footer = document.querySelector("footer");
+    if (footer) {
+      const bless = document.createElement("p");
+      bless.id = "dailyBlessing";
+      bless.style.marginTop = "12px";
+      bless.style.color = "#fff8dc";
+      bless.style.fontWeight = "600";
+      bless.style.textShadow = "0 0 8px rgba(255,255,255,0.6)";
+      bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      footer.appendChild(bless);
+      setInterval(() => {
+        bless.innerText = blessings[Math.floor(Math.random() * blessings.length)];
+      }, 60000);
+    }
+  </script>
+
+  <!-- XRPL Metrics (no secrets; public endpoints only) -->
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <script>
+    async function fetchXRPLMetrics() {
+      const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+      const currency = "JCS";
+      let client;
+      try {
+        client = new xrpl.Client("wss://xrplcluster.com");
+        await client.connect();
+
+        const bookOffers = await client.request({
+          command: "book_offers",
+          taker_gets: { currency, issuer },
+          taker_pays: { currency: "XRP" },
+          limit: 1
+        });
+
+        let priceXRP = 0;
+        if (bookOffers.result.offers && bookOffers.result.offers.length > 0) {
+          const offer = bookOffers.result.offers[0];
+          const takerPaysXRP = Number(offer.TakerPays) / 1_000_000;
+          const takerGetsJCS = Number(offer.TakerGets.value);
+          if (takerGetsJCS > 0) {
+            priceXRP = takerPaysXRP / takerGetsJCS;
+          }
+        }
+
+        const xrpPriceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd");
+        const xrpData = await xrpPriceRes.json();
+        const xrpUSD = xrpData?.ripple?.usd ?? 0;
+        const priceUSD = priceXRP * xrpUSD;
+
+        const accountLines = await client.request({ command: "account_lines", account: issuer });
+        let totalSupply = 0;
+        for (const line of (accountLines.result.lines || [])) {
+          if (line.currency === currency) {
+            totalSupply += parseFloat(line.balance);
+          }
+        }
+
+        const marketCap = totalSupply * (priceUSD || 0);
+
+        const priceEl = document.getElementById('price');
+        const mcEl = document.getElementById('marketcap');
+        const supplyEl = document.getElementById('supply');
+
+        if (priceEl) priceEl.innerText = priceUSD ? `$${priceUSD.toFixed(6)}` : "—";
+        if (mcEl) mcEl.innerText = Number.isFinite(marketCap) ? `$${marketCap.toLocaleString()}` : "—";
+        if (supplyEl) supplyEl.innerText = Number.isFinite(totalSupply) ? `${totalSupply.toLocaleString()} JCS` : "—";
+        const changeEl = document.getElementById('change');
+        if (changeEl) changeEl.innerText = "N/A";
+      } catch (e) {
+        console.error("Metrics error:", e);
+      } finally {
+        try { if (client) await client.disconnect(); } catch {}
+      }
+    }
+
+    fetchXRPLMetrics();
+    setInterval(fetchXRPLMetrics, 60000);
+  </script>
+</body>
+</html>
 
