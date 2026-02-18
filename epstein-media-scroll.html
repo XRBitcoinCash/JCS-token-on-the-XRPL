@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0b0f14" />
   <meta name="robots" content="noindex,nofollow" />
-  <link rel="icon" href="/jcs-logo.png" sizes="any" />
-  <link rel="apple-touch-icon" href="/jcs-logo.png" />
+  <link rel="icon" href="/xrbc-nft.png" sizes="any" />
+  <link rel="apple-touch-icon" href="/xrbc-nft.png" />
 
   <style>
     :root{
@@ -75,7 +75,7 @@
       align-items:center;
       justify-content:center;
       gap:6px;
-      transition:background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .1s ease;
+      transition:background .15s ease, border-color .15s ease, box-shadow .15s ease;
       white-space:nowrap;
     }
     .btn.small{ padding:4px 10px; font-size:12px; }
@@ -134,36 +134,63 @@
       user-select:none;
     }
 
-    /* People directory */
-    #peopleList{
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
+    /* Endpoints */
+    .endpoints{
+      margin-top:10px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      border:1px dashed rgba(255,255,255,.10);
+      border-radius:12px;
+      padding:10px;
+      background:rgba(15,23,42,0.35);
+    }
+    .endpoints .row{ justify-content:space-between; }
+    .endpoints .mono{ overflow-wrap:anywhere; }
+
+    /* People */
+    #peopleCards{
+      display:flex;
+      flex-direction:column;
       gap:10px;
       margin-top:10px;
     }
-    .p-card{
-      grid-column:span 6;
+    .person-card{
       border:1px solid rgba(255,255,255,.10);
-      border-radius:14px;
+      border-radius:12px;
       padding:10px;
       background:rgba(15,23,42,0.35);
       display:flex;
       flex-direction:column;
       gap:8px;
     }
-    .p-top{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
-    .p-name{ font-weight:700; }
-    .p-meta{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-    .p-links{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-    .p-links a{ color:#93c5fd; text-decoration:none; font-size:12px; }
-    .p-links a:hover{ text-decoration:underline; }
-    .p-actions{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:flex-end; }
+    .person-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .person-name{ font-weight:700; }
+    .person-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .person-links a{
+      color:#93c5fd;
+      text-decoration:none;
+      font-size:12px;
+    }
+    .person-links a:hover{ text-decoration:underline; }
 
     /* Feed */
     #feed{
       display:flex;
       flex-direction:column;
       gap:12px;
+      margin-top:10px;
     }
     .media-card{
       display:flex;
@@ -191,9 +218,7 @@
       gap:8px;
     }
     .person-left{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
-    .person-name{ font-weight:600; }
     .person-sources{ display:flex; flex-wrap:wrap; gap:8px; }
-    .person-sources a{ font-size:12px; }
 
     .media{
       border-radius:14px;
@@ -212,6 +237,16 @@
       width:100%;
       display:block;
       background:#000;
+    }
+    .media-pdf{
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:center;
+      min-height:120px;
+      background:linear-gradient(180deg, rgba(56,189,248,.10), rgba(0,0,0,.0));
     }
     .media-actions{
       display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between;
@@ -249,7 +284,6 @@
       background:#000;
     }
     #lightboxBody img, #lightboxBody video{ width:100%; height:auto; display:block; }
-    #lightboxBody iframe{ width:100%; height:min(80vh, 900px); border:0; display:block; background:#000; }
     #lightboxTitle{ font-size:13px; color:var(--muted); }
     .spacer{ flex:1; }
 
@@ -268,13 +302,11 @@
       transition:width .18s ease-out;
     }
 
-    @media (max-width:900px){
-      .p-card{ grid-column:span 12; }
-    }
     @media (max-width:640px){
       .card{ padding:10px 10px 12px; }
       .meta{ flex-direction:column; align-items:flex-start; }
       .meta-right{ justify-content:flex-start; }
+      .person-top{ flex-direction:column; align-items:flex-start; }
     }
   </style>
 </head>
@@ -287,7 +319,7 @@
   <section class="card">
     <div class="row row-between">
       <div class="logo">
-        <img src="/jcs-logo.png" alt="Site logo" loading="lazy" decoding="async" />
+        <img src="/xrbc-nft.png" alt="Site logo" loading="lazy" decoding="async" />
         <a class="btn" href="/" title="Home">Home</a>
       </div>
       <span class="badge" id="manifestBadge">Manifest: not loaded</span>
@@ -298,7 +330,7 @@
     </div>
 
     <p class="hint" style="margin-top:6px">
-      Scrollable viewer for images/videos using a local manifest file.
+      Scrollable viewer for images/videos/PDF links using a local manifest file.
       This page does not infer identities; it renders only the names/status/sources you provide.
       Verify all claims in original sources; this index does not assert guilt.
     </p>
@@ -327,20 +359,33 @@
 
     <div class="progress" aria-hidden="true"><span id="bar"></span></div>
     <p class="hint" id="status" style="margin:8px 0 0">Status: idle</p>
-    <p class="hint" id="endpoints" style="margin:6px 0 0"></p>
-  </section>
 
-  <section class="card" aria-labelledby="peopleTitle">
-    <div class="row row-between">
-      <h2 id="peopleTitle">People</h2>
-      <div class="row" style="gap:8px">
-        <span class="badge" id="peopleBadge">0 people</span>
+    <div class="endpoints" role="region" aria-label="Endpoints">
+      <div class="row">
+        <span class="badge">Endpoints</span>
+        <button id="btnOpenManifest" class="btn small" type="button">Open manifest</button>
+      </div>
+      <div class="hint">
+        manifest: <span id="epManifest" class="mono">—</span><br/>
+        legal updates: <span id="epLegal" class="mono">—</span>
+      </div>
+      <div class="hint" id="manifestHelp" style="display:none">
+        Manifest not found. Create <span class="mono">/epstein-manifest.json</span> in the site root (same GitHub Pages repo)
+        with shape <span class="mono">{ "items": [ ... ] }</span>.
       </div>
     </div>
-    <p class="hint" style="margin-top:6px">
+
+    <div class="row row-between" style="margin-top:12px">
+      <h2>People</h2>
+      <div class="row" style="gap:8px">
+        <span class="badge" id="peopleBadge">0 people</span>
+        <button id="btnClearPerson" class="btn small" type="button" disabled>Clear person filter</button>
+      </div>
+    </div>
+    <p class="hint" style="margin:6px 0 0">
       Aggregated from the manifest. Click “Filter feed” on a person card to jump to matching media.
     </p>
-    <div id="peopleList"></div>
+    <div id="peopleCards"></div>
   </section>
 
   <section class="card">
@@ -382,19 +427,14 @@
 (function(){
   'use strict';
 
-  // ====== CONFIG ======
-  // Default endpoints for GitHub Pages on jesuschristsavestoken.com
-  // Optional overrides:
-  //   ?manifest=/path/to/epstein-manifest.json
-  //   ?updates=/path/to/epstein-legal-updates.json
-  const params = new URLSearchParams(location.search);
-
-  const MANIFEST_URL = params.get('manifest') || '/epstein-manifest.json';
-  const LEGAL_UPDATES_URL = params.get('updates') || '/epstein-legal-updates.json'; // optional file (safe to keep missing)
+  // ====== CONFIG (no placeholders; resolved from current page URL) ======
+  const MANIFEST_URL = new URL('epstein-manifest.json', location.href).href;
+  const LEGAL_UPDATES_URL = new URL('epstein-legal-updates.json', location.href).href; // optional
   const PAGE_SIZE = 24;
 
   // ====== DOM ======
   const $ = (id) => document.getElementById(id);
+
   const $feed = $('feed');
   const $q = $('q');
   const $typeFilter = $('typeFilter');
@@ -405,14 +445,19 @@
   const $btnTop = $('btnTop');
   const $status = $('status');
   const $bar = $('bar');
-  const $endpoints = $('endpoints');
 
   const $manifestBadge = $('manifestBadge');
   const $countBadge = $('countBadge');
   const $renderBadge = $('renderBadge');
 
-  const $peopleList = $('peopleList');
+  const $epManifest = $('epManifest');
+  const $epLegal = $('epLegal');
+  const $manifestHelp = $('manifestHelp');
+  const $btnOpenManifest = $('btnOpenManifest');
+
+  const $peopleCards = $('peopleCards');
   const $peopleBadge = $('peopleBadge');
+  const $btnClearPerson = $('btnClearPerson');
 
   const $lightbox = $('lightbox');
   const $lightboxTitle = $('lightboxTitle');
@@ -425,44 +470,44 @@
   let items = [];
   let filtered = [];
   let cursor = 0;
+
   let lastLightboxSource = null;
-  let lastLightboxMedia = null;
-  let lastLightboxType = null;
+  let personFilterKey = null; // "name|jurisdiction" lowercased
 
   // Video observer (play/pause)
   let videoObserver = null;
 
-  // ====== UTIL ======
+  // ====== UTIL (escape + url safety) ======
+  function escHtml(s){
+    return String(s ?? '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
   function setProgress(pct){
     $bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
   }
   function setStatus(s){
     $status.textContent = 'Status: ' + s;
   }
-  function safeText(s){
-    return String(s ?? '').replace(/[<>]/g,'');
-  }
-  function isHttpUrl(u){
-    try {
-      const url = new URL(u, location.href);
-      return (url.protocol === 'http:' || url.protocol === 'https:');
-    } catch {
-      return false;
-    }
-  }
-  function toAbsHttpUrl(u){
-    try {
-      const url = new URL(u, location.href);
-      if (url.protocol !== 'http:' && url.protocol !== 'https:') return '';
-      return url.toString();
-    } catch {
-      return '';
-    }
-  }
   function parseTimeMs(t){
     if (!t) return 0;
     const d = Date.parse(t);
     return Number.isFinite(d) ? d : 0;
+  }
+  function toAbsUrl(u){
+    try { return new URL(String(u||''), location.href).href; } catch { return ''; }
+  }
+  function isHttpUrl(u){
+    try {
+      const x = new URL(String(u||''), location.href);
+      return x.protocol === 'http:' || x.protocol === 'https:';
+    } catch { return false; }
+  }
+  function normKey(name, jurisdiction){
+    return (String(name||'').trim() + '|' + String(jurisdiction||'').trim()).toLowerCase();
   }
 
   function legalPill(status){
@@ -474,73 +519,52 @@
     return '<span class="pill warn">unknown</span>';
   }
 
-  function setManifestBadge(kind, extra){
-    if (kind === 'loaded'){
-      $manifestBadge.textContent = 'Manifest: loaded';
-      $manifestBadge.style.borderColor = '#22c55e';
-      $manifestBadge.style.color = '#bbf7d0';
-    } else if (kind === 'missing'){
-      $manifestBadge.textContent = 'Manifest: not found';
-      $manifestBadge.style.borderColor = '#f97373';
-      $manifestBadge.style.color = '#fecaca';
-    } else {
-      $manifestBadge.textContent = 'Manifest: not loaded';
-      $manifestBadge.style.borderColor = '';
-      $manifestBadge.style.color = '';
-    }
-    if (extra) $manifestBadge.title = extra;
-  }
-
-  function setEndpointsNote(){
-    $endpoints.textContent =
-      'Endpoints — manifest: ' + MANIFEST_URL + ' · legal updates: ' + LEGAL_UPDATES_URL;
-  }
-
   // ====== LOAD MANIFEST ======
   async function loadJson(url){
-    const res = await fetch(url, {
-      cache:'no-store',
-      headers: { 'Accept':'application/json' }
-    });
+    const res = await fetch(url, { cache:'no-store' });
     if (!res.ok) throw new Error(url + ' HTTP ' + res.status);
-    try {
-      return await res.json();
-    } catch (e) {
-      throw new Error(url + ' invalid JSON');
-    }
+    return await res.json();
   }
 
-  function normalizeType(t){
-    const s = String(t || '').toLowerCase().trim();
-    if (s === 'video') return 'video';
-    if (s === 'pdf') return 'pdf';
+  function classifyType(it){
+    const t = String(it?.type || '').toLowerCase().trim();
+    const mu = String(it?.mediaUrl || '');
+    if (t === 'video') return 'video';
+    if (t === 'pdf') return 'pdf';
+    if (/\.(pdf)(\?|#|$)/i.test(mu)) return 'pdf';
     return 'image';
   }
 
   function validateItem(it){
-    // Minimal validation; anything missing is simply rendered as blank.
-    const out = {
-      id: safeText(it?.id || ''),
-      type: normalizeType(it?.type),
-      capturedAt: safeText(it?.capturedAt || ''),
-      docRef: safeText(it?.docRef || ''),
-      sourceUrl: safeText(it?.sourceUrl || ''),
-      mediaUrl: safeText(it?.mediaUrl || ''),
-      thumbUrl: safeText(it?.thumbUrl || ''), // optional
-      caption: safeText(it?.caption || ''),
+    const mediaUrl = String(it?.mediaUrl || '');
+    const type = classifyType(it);
+
+    return {
+      id: String(it?.id || ''),
+      type,
+      capturedAt: String(it?.capturedAt || ''),
+      docRef: String(it?.docRef || ''),
+      sourceUrl: String(it?.sourceUrl || ''),
+      mediaUrl,
+      thumbUrl: String(it?.thumbUrl || ''),
+      caption: String(it?.caption || ''),
       people: Array.isArray(it?.people) ? it.people.map(p => ({
-        name: safeText(p?.name || ''),
-        jurisdiction: safeText(p?.jurisdiction || ''),
-        legalStatus: safeText(p?.legalStatus || 'unknown'),
-        caseUrl: safeText(p?.caseUrl || ''),
-        sources: Array.isArray(p?.sources) ? p.sources.map(safeText).filter(Boolean) : []
+        name: String(p?.name || ''),
+        jurisdiction: String(p?.jurisdiction || ''),
+        legalStatus: String(p?.legalStatus || 'unknown'),
+        caseUrl: String(p?.caseUrl || ''),
+        sources: Array.isArray(p?.sources) ? p.sources.map(x => String(x||'')).filter(Boolean) : []
       })) : []
     };
-    return out;
   }
 
   async function loadAll(){
-    setEndpointsNote();
+    // show resolved endpoints
+    $epManifest.textContent = MANIFEST_URL;
+    $epLegal.textContent = LEGAL_UPDATES_URL;
+
+    $manifestHelp.style.display = 'none';
+
     setStatus('loading manifest…');
     setProgress(10);
 
@@ -548,13 +572,10 @@
     setProgress(35);
 
     const list = Array.isArray(raw?.items) ? raw.items : [];
-    items = list
-      .map(validateItem)
-      .filter(it => isHttpUrl(it.mediaUrl)); // only render http/https media URLs
+    items = list.map(validateItem).filter(it => isHttpUrl(it.mediaUrl));
     setProgress(55);
 
-    // Optional legal updates file: merges statuses by (person name + jurisdiction) if present.
-    // If file is missing, viewer still works.
+    // Optional legal updates: merge by (name + jurisdiction)
     try{
       const upd = await loadJson(LEGAL_UPDATES_URL);
       applyLegalUpdates(upd);
@@ -562,13 +583,17 @@
       // ignore missing updates file
     }
 
-    setManifestBadge('loaded', 'Loaded from: ' + MANIFEST_URL);
+    $manifestBadge.textContent = 'Manifest: loaded';
+    $manifestBadge.style.borderColor = '#22c55e';
+    $manifestBadge.style.color = '#bbf7d0';
+
     $countBadge.textContent = items.length + ' items';
-    setProgress(75);
+    setProgress(70);
 
-    renderPeopleDirectory();
+    buildPeopleIndex();
+    setProgress(80);
+
     applyFilters(true);
-
     setProgress(100);
     setTimeout(()=>setProgress(0), 400);
 
@@ -576,143 +601,117 @@
   }
 
   function applyLegalUpdates(upd){
-    // Expected shape:
+    // Expected:
     // { "people": [ { "name":"", "jurisdiction":"", "legalStatus":"charged|convicted|acquitted|dismissed|unknown", "caseUrl":"", "sources":[...] } ] }
     const people = Array.isArray(upd?.people) ? upd.people : [];
     const map = new Map();
+
     for (const p of people){
       const name = String(p?.name||'').trim();
       const jur  = String(p?.jurisdiction||'').trim();
       if (!name) continue;
-      map.set((name+'|'+jur).toLowerCase(), {
+      map.set(normKey(name, jur), {
         legalStatus: String(p?.legalStatus||'unknown'),
         caseUrl: String(p?.caseUrl||''),
-        sources: Array.isArray(p?.sources) ? p.sources.map(String) : []
+        sources: Array.isArray(p?.sources) ? p.sources.map(x => String(x||'')) : []
       });
     }
+
     for (const it of items){
       for (const person of it.people){
-        const key = (person.name+'|'+person.jurisdiction).toLowerCase();
+        const key = normKey(person.name, person.jurisdiction);
         const u = map.get(key);
         if (!u) continue;
-        if (u.legalStatus) person.legalStatus = safeText(u.legalStatus);
-        if (u.caseUrl) person.caseUrl = safeText(u.caseUrl);
-        if (Array.isArray(u.sources) && u.sources.length) person.sources = u.sources.map(safeText);
+        if (u.legalStatus) person.legalStatus = u.legalStatus;
+        if (u.caseUrl) person.caseUrl = u.caseUrl;
+        if (Array.isArray(u.sources) && u.sources.length) person.sources = u.sources.slice();
       }
     }
   }
 
-  // ====== PEOPLE DIRECTORY ======
-  function renderPeopleDirectory(){
-    const map = new Map();
-
+  // ====== PEOPLE INDEX ======
+  function buildPeopleIndex(){
+    const agg = new Map(); // key -> { name, jurisdiction, legalStatus, caseUrl, sources[], count }
     for (const it of items){
       for (const p of (it.people || [])){
-        const name = String(p.name || '').trim();
+        const name = String(p.name||'').trim();
         if (!name) continue;
-        const jur = String(p.jurisdiction || '').trim();
-        const key = (name + '|' + jur).toLowerCase();
+        const jur = String(p.jurisdiction||'').trim();
+        const key = normKey(name, jur);
 
-        if (!map.has(key)){
-          map.set(key, {
-            name,
-            jurisdiction: jur,
-            legalStatus: String(p.legalStatus || 'unknown'),
-            caseUrl: String(p.caseUrl || ''),
-            sources: Array.isArray(p.sources) ? p.sources.slice() : [],
-            count: 0
-          });
-        }
-        const row = map.get(key);
-        row.count += 1;
+        const cur = agg.get(key) || {
+          key,
+          name,
+          jurisdiction: jur,
+          legalStatus: String(p.legalStatus||'unknown'),
+          caseUrl: String(p.caseUrl||''),
+          sources: [],
+          count: 0
+        };
+        cur.count += 1;
 
-        // Prefer a stronger status if encountered
-        const s = String(p.legalStatus || '').toLowerCase().trim();
-        if (s === 'convicted') row.legalStatus = 'convicted';
-        else if (s === 'charged' && row.legalStatus !== 'convicted') row.legalStatus = 'charged';
+        // prefer "stronger" status if present
+        const st = String(p.legalStatus||'unknown').toLowerCase();
+        if (st && st !== 'unknown') cur.legalStatus = st;
 
-        // Prefer a caseUrl if present
-        if (!row.caseUrl && p.caseUrl) row.caseUrl = String(p.caseUrl);
-
-        // Merge sources (cap later when rendering)
+        // case url and sources
+        if (p.caseUrl && !cur.caseUrl) cur.caseUrl = String(p.caseUrl);
         if (Array.isArray(p.sources)){
-          for (const u of p.sources){
-            if (row.sources.indexOf(u) === -1) row.sources.push(u);
+          for (const s of p.sources){
+            const u = String(s||'');
+            if (u && !cur.sources.includes(u)) cur.sources.push(u);
           }
         }
+
+        agg.set(key, cur);
       }
     }
 
-    const arr = Array.from(map.values());
-    arr.sort((a,b) => {
-      // convicted first, then charged, then others, then by count desc, then name
-      const rank = (x) => (x === 'convicted' ? 0 : x === 'charged' ? 1 : 2);
-      const ra = rank(String(a.legalStatus||'').toLowerCase());
-      const rb = rank(String(b.legalStatus||'').toLowerCase());
-      if (ra !== rb) return ra - rb;
-      if (b.count !== a.count) return b.count - a.count;
-      return a.name.localeCompare(b.name);
-    });
+    const people = Array.from(agg.values())
+      .sort((a,b) => (b.count - a.count) || a.name.localeCompare(b.name));
 
-    $peopleBadge.textContent = arr.length + ' people';
-    if (!arr.length){
-      $peopleList.innerHTML =
-        '<div class="hint">No people entries found in the manifest. Add <span class="mono">people[]</span> arrays to items in epstein-manifest.json.</div>';
+    $peopleBadge.textContent = people.length + ' people';
+
+    if (!people.length){
+      $peopleCards.innerHTML = '<div class="hint">0 people. Aggregated from the manifest.</div>';
       return;
     }
 
-    const html = arr.slice(0, 2000).map(p => {
-      const jur = p.jurisdiction ? `<span class="badge">${safeText(p.jurisdiction)}</span>` : `<span class="badge">jurisdiction: —</span>`;
+    const html = people.slice(0, 200).map(p => {
+      const jur = p.jurisdiction ? `<span class="badge">${escHtml(p.jurisdiction)}</span>` : `<span class="badge">jurisdiction: —</span>`;
       const pill = legalPill(p.legalStatus);
-      const count = `<span class="badge">${p.count} item(s)</span>`;
 
       const caseLink = isHttpUrl(p.caseUrl)
-        ? `<a href="${toAbsHttpUrl(p.caseUrl)}" target="_blank" rel="noopener">case</a>`
+        ? `<a href="${escHtml(toAbsUrl(p.caseUrl))}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">case</a>`
         : '';
 
-      const srcLinks = (Array.isArray(p.sources) ? p.sources : [])
-        .map(s => String(s || ''))
+      const srcLinks = (p.sources || [])
         .filter(isHttpUrl)
-        .slice(0, 6)
-        .map(u => `<a href="${toAbsHttpUrl(u)}" target="_blank" rel="noopener">source</a>`)
+        .slice(0, 4)
+        .map(u => `<a href="${escHtml(toAbsUrl(u))}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">source</a>`)
         .join(' ');
 
       return `
-        <div class="p-card" data-person="${safeText(p.name)}">
-          <div class="p-top">
-            <div class="p-meta">
-              <span class="p-name">${safeText(p.name)}</span>
+        <div class="person-card" data-personkey="${escHtml(p.key)}">
+          <div class="person-top">
+            <div class="row" style="gap:8px">
+              <span class="person-name">${escHtml(p.name)}</span>
               ${jur}
               ${pill}
-              ${count}
+              <span class="badge">${p.count} item(s)</span>
             </div>
-            <div class="p-actions">
-              <button class="btn small" type="button" data-filter-person="${safeText(p.name)}">Filter feed</button>
+            <div class="person-actions">
+              <button class="btn small glow-blue" type="button" data-filterperson="${escHtml(p.key)}">Filter feed</button>
             </div>
           </div>
-          <div class="p-links">
-            ${caseLink}
-            ${srcLinks || '<span class="badge">no sources</span>'}
+          <div class="person-links">
+            ${caseLink} ${srcLinks ? (' ' + srcLinks) : ''}
           </div>
         </div>
       `;
     }).join('');
 
-    $peopleList.innerHTML = html;
-
-    // Wire buttons
-    document.querySelectorAll('button[data-filter-person]').forEach(btn => {
-      if (btn.__wired) return;
-      btn.__wired = true;
-      btn.addEventListener('click', () => {
-        const name = btn.getAttribute('data-filter-person') || '';
-        if (name){
-          $q.value = name;
-          applyFilters(true);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      });
-    });
+    $peopleCards.innerHTML = html + (people.length > 200 ? '<div class="hint">Showing top 200 people by item count.</div>' : '');
   }
 
   // ====== FILTERING / SORT ======
@@ -723,11 +722,19 @@
 
     filtered = items.filter(it => {
       if (tf !== 'all' && it.type !== tf) return false;
+
+      if (personFilterKey){
+        const ok = (it.people || []).some(p => normKey(p.name, p.jurisdiction) === personFilterKey);
+        if (!ok) return false;
+      }
+
       if (!q) return true;
 
       const blob =
-        (it.caption+' '+it.docRef+' '+it.capturedAt+' '+
-         it.people.map(p => (p.name+' '+p.jurisdiction+' '+p.legalStatus)).join(' ')
+        (String(it.caption||'') + ' ' +
+         String(it.docRef||'') + ' ' +
+         String(it.capturedAt||'') + ' ' +
+         (it.people||[]).map(p => (String(p.name||'')+' '+String(p.jurisdiction||'')+' '+String(p.legalStatus||''))).join(' ')
         ).toLowerCase();
 
       return blob.includes(q);
@@ -744,30 +751,32 @@
       $feed.innerHTML = '';
     }
 
-    $countBadge.textContent = filtered.length + ' items (filtered)';
+    const suffix = personFilterKey ? ' (person filtered)' : '';
+    $countBadge.textContent = filtered.length + ' items (filtered)' + suffix;
     renderNextPage();
   }
 
   // ====== RENDER ======
-  function renderPerson(p){
+  function renderPersonRow(p){
     const hasSources = Array.isArray(p.sources) && p.sources.length > 0;
+
     const sourceLinks = hasSources
       ? p.sources
           .filter(isHttpUrl)
           .slice(0, 6)
-          .map(u => `<a href="${toAbsHttpUrl(u)}" target="_blank" rel="noopener">source</a>`)
+          .map(u => `<a href="${escHtml(toAbsUrl(u))}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">source</a>`)
           .join(' ')
       : '<span class="badge">no sources</span>';
 
     const caseLink = isHttpUrl(p.caseUrl)
-      ? `<a href="${toAbsHttpUrl(p.caseUrl)}" target="_blank" rel="noopener">case</a>`
+      ? `<a href="${escHtml(toAbsUrl(p.caseUrl))}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">case</a>`
       : '';
 
     return `
       <div class="person-row">
         <div class="person-left">
-          <span class="person-name">${safeText(p.name) || 'Unnamed'}</span>
-          ${p.jurisdiction ? `<span class="badge">${safeText(p.jurisdiction)}</span>` : `<span class="badge">jurisdiction: —</span>`}
+          <span class="person-name">${escHtml(p.name || 'Unnamed')}</span>
+          ${p.jurisdiction ? `<span class="badge">${escHtml(p.jurisdiction)}</span>` : `<span class="badge">jurisdiction: —</span>`}
           ${legalPill(p.legalStatus)}
         </div>
         <div class="person-sources">
@@ -780,88 +789,82 @@
 
   function renderItem(it){
     const srcLink = isHttpUrl(it.sourceUrl)
-      ? `<a href="${toAbsHttpUrl(it.sourceUrl)}" target="_blank" rel="noopener">source</a>`
+      ? `<a href="${escHtml(toAbsUrl(it.sourceUrl))}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">source</a>`
       : `<span class="badge">source: —</span>`;
 
-    const doc = it.docRef ? `<span class="badge">doc: <span class="mono">${it.docRef}</span></span>` : '';
-    const dt  = it.capturedAt ? `<span class="badge">${it.capturedAt}</span>` : '';
+    const doc = it.docRef ? `<span class="badge">doc: <span class="mono">${escHtml(it.docRef)}</span></span>` : '';
+    const dt  = it.capturedAt ? `<span class="badge">${escHtml(it.capturedAt)}</span>` : '';
 
     const peopleBlock = (it.people && it.people.length)
-      ? `
-        <div class="people">
-          ${it.people.map(renderPerson).join('')}
-        </div>
-      `
-      : `
-        <div class="people">
-          <div class="person-row">
-            <div class="person-left">
-              <span class="badge">people: none listed</span>
-              <span class="badge">add people + sources in epstein-manifest.json</span>
-            </div>
-          </div>
-        </div>
-      `;
+      ? `<div class="people">${it.people.map(renderPersonRow).join('')}</div>`
+      : `<div class="people">
+           <div class="person-row">
+             <div class="person-left">
+               <span class="badge">people: none listed</span>
+               <span class="badge">add people + sources in epstein-manifest.json</span>
+             </div>
+           </div>
+         </div>`;
 
-    const mediaAbs = toAbsHttpUrl(it.mediaUrl);
+    const mediaAbs = toAbsUrl(it.mediaUrl);
 
     let mediaEl = '';
     if (it.type === 'video'){
       mediaEl = `<video
           data-media
-          data-kind="video"
-          data-source="${safeText(it.sourceUrl||'')}"
-          src="${mediaAbs}"
+          data-source="${escHtml(it.sourceUrl||'')}"
+          src="${escHtml(mediaAbs)}"
           preload="metadata"
           muted
           playsinline
           controls
+          referrerpolicy="no-referrer"
         ></video>`;
     } else if (it.type === 'pdf'){
-      // Minimal PDF handling: show a click-through view (iframe may be blocked by source site headers).
-      mediaEl = `
-        <div style="padding:12px">
+      // Compliant + reliable: do NOT try to fetch/parse/embed cross-origin PDFs.
+      // Just link out over HTTPS.
+      mediaEl = `<div class="media-pdf">
+        <div class="row" style="gap:8px">
           <span class="badge">PDF</span>
-          <span class="badge">Click Open to view</span>
+          <span class="hint">Opens in a new tab (no embedding / no scraping)</span>
         </div>
-        <a class="btn small" href="${mediaAbs}" target="_blank" rel="noopener" style="margin:0 12px 12px">Open PDF</a>
-        <iframe data-media data-kind="pdf" data-source="${safeText(it.sourceUrl||'')}" src="${mediaAbs}" title="PDF preview"></iframe>
-      `;
+        <a class="btn glow-blue" href="${escHtml(mediaAbs)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Open PDF</a>
+        <div class="hint mono">${escHtml(mediaAbs)}</div>
+      </div>`;
     } else {
       mediaEl = `<img
           data-media
-          data-kind="image"
-          data-source="${safeText(it.sourceUrl||'')}"
-          src="${mediaAbs}"
-          alt="${safeText(it.caption || it.docRef || it.id)}"
+          data-source="${escHtml(it.sourceUrl||'')}"
+          src="${escHtml(mediaAbs)}"
+          alt="${escHtml(it.caption || it.docRef || it.id || 'Image')}"
           loading="lazy"
           decoding="async"
           referrerpolicy="no-referrer"
         />`;
     }
 
-    const cap = it.caption ? `<div class="caption">${safeText(it.caption)}</div>` : `<div class="caption">—</div>`;
+    const cap = it.caption ? `<div class="caption">${escHtml(it.caption)}</div>` : `<div class="caption">—</div>`;
 
     return `
-      <article class="card media-card" data-id="${safeText(it.id)}" data-type="${it.type}">
+      <article class="card media-card" data-id="${escHtml(it.id)}" data-type="${escHtml(it.type)}">
         <div class="meta">
           <div class="meta-left">
             <div class="row" style="gap:8px">
-              <span class="badge">${it.type.toUpperCase()}</span>
+              <span class="badge">${escHtml(it.type.toUpperCase())}</span>
               ${dt}
               ${doc}
             </div>
-            <div class="hint">ID: <span class="mono">${safeText(it.id)}</span></div>
+            <div class="hint">ID: <span class="mono">${escHtml(it.id)}</span></div>
           </div>
           <div class="meta-right">
             ${srcLink}
-            <button class="btn small" type="button" data-open="${safeText(it.id)}">Open</button>
+            <button class="btn small" type="button" data-open="${escHtml(it.id)}">Open</button>
           </div>
         </div>
 
         ${peopleBlock}
 
-        <div class="media" data-id="${safeText(it.id)}">
+        <div class="media" data-id="${escHtml(it.id)}">
           ${mediaEl}
         </div>
 
@@ -892,18 +895,22 @@
     const card = document.querySelector(`article[data-id="${CSS.escape(cardId)}"]`);
     if (!card) return;
 
-    const media = card.querySelector('[data-media]');
-    if (!media) return;
-
     const type = card.getAttribute('data-type') || 'image';
     const title = (card.querySelector('.hint .mono')?.textContent || cardId);
 
-    lastLightboxSource = media.getAttribute('data-source') || null;
-    lastLightboxMedia = (media.getAttribute('src') || media.getAttribute('href') || media.currentSrc || '');
-    lastLightboxType = type;
-
     $lightboxTitle.textContent = title;
     $lightboxBody.innerHTML = '';
+    lastLightboxSource = null;
+
+    const media = card.querySelector('[data-media]');
+    if (!media){
+      // PDFs have no data-media; open the link in a new tab instead.
+      const pdfBtn = card.querySelector('a[href][target="_blank"]');
+      if (pdfBtn && pdfBtn.href) window.open(pdfBtn.href, '_blank', 'noopener');
+      return;
+    }
+
+    lastLightboxSource = media.getAttribute('data-source') || null;
 
     if (type === 'video'){
       const v = document.createElement('video');
@@ -914,16 +921,10 @@
       v.preload = 'auto';
       $lightboxBody.appendChild(v);
       try { v.play().catch(()=>{}); } catch {}
-    } else if (type === 'pdf'){
-      const iframe = document.createElement('iframe');
-      iframe.src = media.getAttribute('src') || '';
-      iframe.title = 'PDF preview';
-      $lightboxBody.appendChild(iframe);
     } else {
       const img = document.createElement('img');
       img.src = media.getAttribute('src') || '';
       img.alt = 'Preview';
-      img.referrerPolicy = 'no-referrer';
       $lightboxBody.appendChild(img);
     }
 
@@ -934,8 +935,6 @@
     $lightbox.classList.remove('open');
     $lightboxBody.innerHTML = '';
     lastLightboxSource = null;
-    lastLightboxMedia = null;
-    lastLightboxType = null;
   }
 
   // ====== VIDEO AUTOPLAY ON SCROLL ======
@@ -965,14 +964,12 @@
   }
 
   function wireNewCards(){
-    // Open buttons
     document.querySelectorAll('button[data-open]').forEach(btn => {
       if (btn.__wired) return;
       btn.__wired = true;
       btn.addEventListener('click', () => openLightboxFromCard(btn.getAttribute('data-open')));
     });
 
-    // Clicking image itself also opens
     document.querySelectorAll('.media img[data-media]').forEach(img => {
       if (img.__wired) return;
       img.__wired = true;
@@ -985,7 +982,10 @@
   }
 
   // ====== EVENTS ======
-  $btnReload.addEventListener('click', () => loadAll().catch(err => setStatus('error: ' + err.message)));
+  $btnReload.addEventListener('click', () => loadAll().catch(err => {
+    setStatus('error: ' + err.message);
+  }));
+
   $btnMore.addEventListener('click', () => renderNextPage());
   $btnTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
@@ -993,48 +993,66 @@
   $typeFilter.addEventListener('change', () => applyFilters(true));
   $sortBy.addEventListener('change', () => applyFilters(true));
 
-  $autoplayToggle.addEventListener('change', () => {
-    resetVideoObserver();
-  });
+  $autoplayToggle.addEventListener('change', () => resetVideoObserver());
 
   $btnClose.addEventListener('click', closeLightbox);
-  $lightbox.addEventListener('click', (e) => {
-    if (e.target === $lightbox) closeLightbox();
-  });
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && $lightbox.classList.contains('open')) closeLightbox();
-  });
+  $lightbox.addEventListener('click', (e) => { if (e.target === $lightbox) closeLightbox(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $lightbox.classList.contains('open')) closeLightbox(); });
 
   $btnOpenSource.addEventListener('click', () => {
     if (lastLightboxSource && isHttpUrl(lastLightboxSource)){
-      window.open(toAbsHttpUrl(lastLightboxSource), '_blank', 'noopener');
-      return;
-    }
-    // fallback: open media if source missing
-    if (lastLightboxMedia && isHttpUrl(lastLightboxMedia)){
-      window.open(toAbsHttpUrl(lastLightboxMedia), '_blank', 'noopener');
+      window.open(toAbsUrl(lastLightboxSource), '_blank', 'noopener');
     }
   });
 
-  // ====== BOOT ======
-  setEndpointsNote();
-  loadAll().catch(err => {
-    setManifestBadge('missing', 'Missing: ' + MANIFEST_URL);
-    setStatus('error: ' + err.message);
-    $countBadge.textContent = '0 items (filtered)';
-    $renderBadge.textContent = '0 rendered';
-    $btnMore.disabled = true;
-    $peopleBadge.textContent = '0 people';
-    $peopleList.innerHTML =
-      '<div class="hint">' +
-      'Manifest not found. Create <span class="mono">/epstein-manifest.json</span> in the site root (same GitHub Pages repo) with shape <span class="mono">{ "items": [ ... ] }</span>.' +
-      '</div>';
+  $btnOpenManifest.addEventListener('click', () => {
+    window.open(MANIFEST_URL, '_blank', 'noopener');
   });
+
+  $peopleCards.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!(t instanceof HTMLElement)) return;
+    const k = t.getAttribute('data-filterperson');
+    if (!k) return;
+    personFilterKey = String(k||'').toLowerCase();
+    $btnClearPerson.disabled = false;
+    applyFilters(true);
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  $btnClearPerson.addEventListener('click', () => {
+    personFilterKey = null;
+    $btnClearPerson.disabled = true;
+    applyFilters(true);
+  });
+
+  // ====== BOOT ======
+  (function boot(){
+    $epManifest.textContent = MANIFEST_URL;
+    $epLegal.textContent = LEGAL_UPDATES_URL;
+
+    loadAll().catch(err => {
+      $manifestBadge.textContent = 'Manifest: not found';
+      $manifestBadge.style.borderColor = '#f97373';
+      $manifestBadge.style.color = '#fecaca';
+
+      $manifestHelp.style.display = 'block';
+      setStatus('error: ' + err.message);
+
+      // still render empty state for people/feed
+      items = [];
+      filtered = [];
+      $peopleBadge.textContent = '0 people';
+      $peopleCards.innerHTML = '<div class="hint">0 people. Aggregated from the manifest.</div>';
+      $countBadge.textContent = '0 items (filtered)';
+      $renderBadge.textContent = '0 rendered';
+      $btnMore.disabled = true;
+    });
+  })();
 
 })();
 </script>
 
 </body>
 </html>
-
 
