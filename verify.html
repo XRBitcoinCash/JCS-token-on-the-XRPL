@@ -6,9 +6,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#071225" name="theme-color"/>
 <meta content="JCS Sign the Ledger" name="application-name"/>
-<meta content="4.0.0" name="jcs-ledger-release"/>
-<title>Sign the Ledger v4.0.0 · JCS Prayer NFT Social Ledger</title>
-<meta content="Mint JCS-logo prayer NFTs through Xaman and publish numbered prayers, testimonies, replies, and Amen reactions directly to the XRP Ledger." name="description"/>
+<meta content="4.2.0" name="jcs-ledger-release"/>
+<title>Sign the Ledger v4.2.0 · JCS Prayer NFT Social Ledger</title>
+<meta content="Mint JCS prayer NFTs through Xaman, publish validated testimonies and replies to the XRP Ledger, and enter continuous sacred music and Scripture-reading streams." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large" name="robots"/>
@@ -29,24 +29,33 @@
 <link crossorigin="" href="https://xaman.app" rel="preconnect"/>
 <link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
 <meta content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://unpkg.com;
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data: https:;
-      connect-src 'self'
-        https://xumm.app https://*.xumm.app
-        https://oauth2.xumm.app
-        https://xaman.app https://*.xaman.app
-        wss://xumm.app wss://*.xumm.app
-        wss://xaman.app wss://*.xaman.app
-        wss://xrplcluster.com
-        wss://s1.ripple.com
-        wss://s2.ripple.com
-        wss://honeycluster.io;
-      frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app;
-      base-uri 'self';
-      form-action 'self';
-    " http-equiv="Content-Security-Policy"/>
+  default-src 'self';
+  script-src 'self' 'unsafe-inline'
+    https://xumm.app https://*.xumm.app
+    https://xaman.app https://*.xaman.app
+    https://unpkg.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  media-src 'self' blob:
+    https://archive.org https://*.archive.org;
+  connect-src 'self'
+    https://xumm.app https://*.xumm.app
+    https://oauth2.xumm.app
+    https://xaman.app https://*.xaman.app
+    https://archive.org https://*.archive.org
+    wss://xumm.app wss://*.xumm.app
+    wss://xaman.app wss://*.xaman.app
+    wss://xrplcluster.com
+    wss://s1.ripple.com
+    wss://s2.ripple.com
+    wss://honeycluster.io;
+  frame-src 'self'
+    https://xumm.app https://*.xumm.app
+    https://oauth2.xumm.app
+    https://xaman.app https://*.xaman.app;
+  base-uri 'self';
+  form-action 'self';
+" http-equiv="Content-Security-Policy"/>
 <style>
     :root{
       --bg:#f6f8fc;
@@ -682,6 +691,407 @@
   .publish-flow{grid-template-columns:1fr}
   .explain-grid{grid-template-columns:1fr}
 }
+
+
+/* =========================================================
+   Sign the Ledger v4.2.0 · Sacred Audio Sanctuary
+   ========================================================= */
+.audio-sanctuary{
+  margin-top:22px;
+  padding:clamp(22px,4vw,38px);
+  border-color:rgba(201,152,32,.31);
+  background:
+    radial-gradient(circle at 96% 0,rgba(201,152,32,.11),transparent 28rem),
+    var(--surface);
+}
+.audio-intro{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+}
+.audio-intro h2{
+  margin:14px 0 7px;
+  font-size:1.55rem;
+}
+.audio-intro p{
+  max-width:790px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.audio-master-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-end;
+}
+.audio-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+.audio-channel{
+  min-width:0;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface-2);
+}
+.audio-channel h3{
+  margin:0 0 6px;
+  font-size:1.18rem;
+}
+.audio-channel p{
+  margin:0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
+}
+.audio-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.audio-controls label{
+  color:var(--ink);
+  font-size:.75rem;
+  font-weight:850;
+}
+.audio-controls input[type="range"]{
+  width:auto;
+  min-width:140px;
+  flex:1;
+  accent-color:var(--blue);
+}
+.now-playing{
+  min-height:45px;
+  margin-top:12px;
+  padding:10px 11px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+  color:var(--muted);
+  background:var(--surface);
+  font-size:.76rem;
+  overflow-wrap:anywhere;
+}
+.now-playing.is-live{
+  border-color:rgba(8,125,78,.42);
+  color:var(--green);
+}
+.now-playing.is-muted{
+  border-color:rgba(201,152,32,.38);
+  color:var(--gold);
+}
+.audio-policy{
+  margin:14px 0 0;
+  padding:11px 13px;
+  border-left:4px solid var(--gold);
+  border-radius:10px;
+  color:var(--muted);
+  background:rgba(201,152,32,.07);
+  font-size:.8rem;
+}
+@media(max-width:860px){
+  .audio-intro{display:block}
+  .audio-master-actions{
+    justify-content:flex-start;
+    margin-top:14px;
+  }
+  .audio-grid{grid-template-columns:1fr}
+}
+
+
+/* =========================================================
+   Unified site header copied from index.html
+   Header-only override; all Sign the Ledger content remains unchanged.
+   ========================================================= */
+.jcs-unified-header{
+  position:sticky !important;
+  top:0;
+  z-index:1000;
+  width:100%;
+  border-bottom:1px solid rgba(201,152,32,.28) !important;
+  background:rgba(3,10,23,.94) !important;
+  backdrop-filter:blur(18px);
+}
+body.light-mode .jcs-unified-header,
+html[data-theme="light"] .jcs-unified-header{
+  background:rgba(255,255,255,.94) !important;
+}
+.jcs-unified-header .header-inner{
+  width:min(1260px,100%);
+  min-height:64px;
+  margin:0 auto;
+  padding:7px 18px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:14px;
+  align-items:center;
+}
+.jcs-unified-header .brand{
+  min-width:max-content;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:inherit;
+  text-decoration:none;
+}
+.jcs-unified-header .brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.42);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(201,152,32,.14);
+}
+.jcs-unified-header .brand-copy{display:grid}
+.jcs-unified-header .brand-title{
+  font:900 1rem/1.1 Georgia,"Times New Roman",serif;
+}
+.jcs-unified-header .brand-subtitle{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:.67rem;
+  font-weight:800;
+}
+.jcs-unified-header .header-nav{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.jcs-unified-header .header-nav::-webkit-scrollbar{display:none}
+.jcs-unified-header .nav-link,
+.jcs-unified-header .btn{
+  min-height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:8px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:var(--ink);
+  background:transparent;
+  font-size:.78rem;
+  font-weight:850;
+  line-height:1;
+  text-decoration:none;
+  white-space:nowrap;
+  box-shadow:none;
+}
+.jcs-unified-header .nav-link:hover,
+.jcs-unified-header .nav-link:focus-visible{
+  border-color:var(--line);
+  color:var(--blue,#55a4ff);
+  background:var(--panel-2,var(--surface-2));
+  outline:none;
+  text-decoration:none;
+}
+.jcs-unified-header .header-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.jcs-unified-header .btn{
+  border-color:var(--line);
+  background:var(--panel,var(--surface));
+}
+.jcs-unified-header .btn.blue{
+  border-color:#1458d5;
+  color:#fff;
+  background:linear-gradient(180deg,#2f80ed,#1458d5);
+}
+.jcs-unified-header .btn.danger{
+  border-color:rgba(197,52,77,.45);
+  color:var(--err,#ff7184);
+}
+.jcs-unified-header .wallet-pill{
+  max-width:190px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:750;
+}
+.jcs-unified-header .sign-ledger-gold{
+  border-color:#c99820 !important;
+  color:#111 !important;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b) !important;
+  box-shadow:0 9px 26px rgba(201,152,32,.19) !important;
+}
+.jcs-unified-header .sign-ledger-gold:hover,
+.jcs-unified-header .sign-ledger-gold:focus-visible{
+  color:#111 !important;
+  border-color:#ffe59a !important;
+}
+@media(max-width:1050px){
+  .jcs-unified-header .header-inner{
+    grid-template-columns:auto 1fr;
+  }
+  .jcs-unified-header .header-nav{
+    grid-column:1/-1;
+    justify-content:flex-start;
+  }
+  .jcs-unified-header .header-actions{justify-self:end}
+}
+@media(max-width:700px){
+  .jcs-unified-header{position:static !important}
+  .jcs-unified-header .header-inner{grid-template-columns:1fr}
+  .jcs-unified-header .brand{justify-content:center}
+  .jcs-unified-header .header-actions{justify-self:center;flex-wrap:wrap;justify-content:center}
+  .jcs-unified-header .header-nav{width:100%;justify-content:flex-start}
+  .jcs-unified-header .wallet-pill{max-width:100%}
+}
+
+
+/* =========================================================
+   Sign the Ledger v4.2.0 · prayer rotation and social sharing
+   ========================================================= */
+.prayer-library{
+  margin-top:14px;
+  border:1px solid rgba(201,152,32,.36);
+  border-radius:15px;
+  background:
+    radial-gradient(circle at 100% 0,rgba(201,152,32,.10),transparent 18rem),
+    var(--surface-2);
+  overflow:hidden;
+}
+.prayer-library > summary{
+  padding:13px 14px;
+  cursor:pointer;
+  color:var(--ink);
+  font-size:.82rem;
+  font-weight:950;
+  list-style:none;
+}
+.prayer-library > summary::-webkit-details-marker{display:none}
+.prayer-library > summary::after{
+  content:"＋";
+  float:right;
+  color:var(--gold);
+  font-size:1rem;
+}
+.prayer-library[open] > summary::after{content:"−"}
+.prayer-library-body{
+  padding:0 14px 14px;
+  border-top:1px solid rgba(201,152,32,.22);
+}
+.prayer-library-controls{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:end;
+  margin-top:12px;
+}
+.prayer-library-controls label{
+  display:grid;
+  gap:5px;
+  color:var(--ink);
+  font-size:.72rem;
+  font-weight:900;
+}
+.prayer-rotation-status{
+  margin:9px 0;
+  color:var(--muted);
+  font-size:.68rem;
+  line-height:1.45;
+}
+.prayer-template-grid{
+  max-height:420px;
+  overflow:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding:2px 4px 4px 0;
+  scrollbar-color:var(--gold) transparent;
+}
+.prayer-template{
+  min-width:0;
+  display:grid;
+  gap:4px;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--ink);
+  background:var(--surface);
+  text-align:left;
+}
+.prayer-template:hover,.prayer-template:focus-visible{
+  border-color:var(--gold);
+  background:rgba(201,152,32,.08);
+  outline:none;
+}
+.prayer-template-title{
+  color:var(--ink);
+  font-size:.76rem;
+  font-weight:950;
+}
+.prayer-template-ref{
+  color:var(--gold);
+  font-size:.65rem;
+  font-weight:900;
+}
+.prayer-template-preview{
+  color:var(--muted);
+  font-size:.67rem;
+  line-height:1.4;
+}
+.prayer-library-note{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.68rem;
+}
+.share-menu{
+  position:relative;
+}
+.share-menu > summary{
+  list-style:none;
+  cursor:pointer;
+}
+.share-menu > summary::-webkit-details-marker{display:none}
+.share-menu[open] > summary{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+.share-options{
+  width:min(470px,calc(100vw - 48px));
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:8px;
+  padding:10px;
+  border:1px solid rgba(201,152,32,.38);
+  border-radius:12px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+.share-action[data-share-platform="all"]{
+  border-color:rgba(201,152,32,.55);
+  color:#111;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b);
+}
+html[data-theme="dark"] .share-action[data-share-platform="all"]{color:#111}
+.post-card:target{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,152,32,.15),0 18px 42px rgba(0,0,0,.18);
+}
+@media(max-width:700px){
+  .prayer-library-controls,
+  .prayer-template-grid{grid-template-columns:1fr}
+  .prayer-template-grid{max-height:500px}
+  .share-options{width:100%}
+}
+
 </style>
 <script>
     (function(){
@@ -700,7 +1110,7 @@
   "url": "https://jesuschristsavestoken.com/verify.html",
   "applicationCategory": "SocialNetworkingApplication",
   "operatingSystem": "Any modern browser",
-  "softwareVersion": "4.0.0",
+  "softwareVersion": "4.2.0",
   "isAccessibleForFree": true,
   "description": "A non-custodial JCS prayer NFT and social testimony interface that reads and publishes validated XRP Ledger transactions.",
   "publisher": {
@@ -715,28 +1125,32 @@
     "Rolling testimony feed from validated account history",
     "Inline on-ledger replies without modal blur",
     "On-ledger Amen reactions",
-    "Public XRPL WebSocket failover"
+    "Public XRPL WebSocket failover",
+    "Automatic wall-clock synchronized sacred music",
+    "Automatic wall-clock synchronized Scripture readings",
+    "Local listening pause without stopping the shared timeline"
   ]
 }</script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
-<header class="site-header">
+<header class="site-header jcs-unified-header">
 <div class="header-inner">
 <a class="brand" href="index.html">
 <img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
 <span class="brand-copy">
-<span class="brand-title">Sign the Ledger</span>
-<span class="brand-subtitle">JCS prayer NFT social ledger · v4.0.0</span>
+<span class="brand-title">Jesus Christ Saves Token</span>
+<span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
 </span>
 </a>
 <nav aria-label="Primary" class="header-nav">
-<a class="nav-link" href="#compose">Compose</a>
-<a class="nav-link" href="#testimonies">Testimonies</a>
-<a class="nav-link" href="#my-nfts">My NFTs</a>
-<a class="nav-link" href="index.html">JCS Home</a>
-<a class="nav-link" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
-<a class="nav-link" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="about-jcs.html">Vision</a>
+<a class="nav-link sign-ledger-gold" href="verify.html">Sign the Ledger</a>
+<a class="nav-link" href="index.html#trade">Trade</a>
+<a class="nav-link" href="index.html#scripture">Scripture</a>
+<a class="nav-link" href="index.html#sacred-film">Sacred Film</a>
+<a class="nav-link" href="index.html#audio">Sacred Audio</a>
 </nav>
 <div class="header-actions">
 <button aria-label="Change theme" class="btn theme-toggle" id="themeToggle" type="button">◐</button>
@@ -775,6 +1189,62 @@
 </div>
 </div>
 </aside>
+</section><section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
+<div class="audio-intro">
+<div>
+<span class="eyebrow">Continuous wall-clock synchronized streams</span>
+<h2 id="audio-title">Sacred Audio Sanctuary</h2>
+<p>
+        Church music and spoken Scripture automatically join the current point
+        in their continuous station timelines. Pausing your listening only
+        mutes this browser; the station clock continues, and resuming rejoins
+        the current position rather than restarting.
+      </p>
+</div>
+<div class="audio-master-actions">
+<button class="btn primary" id="audioListenAll" type="button">Listen to both channels</button>
+<button class="btn" id="audioMuteAll" type="button">Pause listening</button>
+</div>
+</div>
+<div class="audio-grid">
+<article class="audio-channel">
+<h3>Church Music Radio</h3>
+<p>
+        Gregorian chant, Ave Maria, and suitable public-domain archival sacred
+        recordings. The station begins loading when the page opens.
+      </p>
+<audio autoplay="" crossorigin="anonymous" id="musicAudio" playsinline="" preload="auto"></audio>
+<div class="audio-controls">
+<button class="btn" id="musicListen" type="button">Listen</button>
+<button class="btn" id="musicMute" type="button">Pause listening</button>
+<label for="musicVolume">Volume</label>
+<input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0.18"/>
+</div>
+<div class="now-playing" id="musicNow">
+        Joining the current church-music station position…
+      </div>
+</article>
+<article class="audio-channel">
+<h3>Continuous Scripture Reading</h3>
+<p>
+        King James Psalms, the Book of Enoch, and the Book of Jubilees from
+        public-domain LibriVox and Internet Archive recordings.
+      </p>
+<audio autoplay="" crossorigin="anonymous" id="readingAudio" playsinline="" preload="auto"></audio>
+<div class="audio-controls">
+<button class="btn" id="readingListen" type="button">Listen</button>
+<button class="btn" id="readingMute" type="button">Pause listening</button>
+<label for="readingVolume">Volume</label>
+<input id="readingVolume" max="1" min="0" step="0.01" type="range" value="0.78"/>
+</div>
+<div class="now-playing" id="readingNow">
+        Joining the current Scripture-reading station position…
+      </div>
+</article>
+</div>
+<p aria-live="polite" class="audio-policy" id="audioStatus">
+    Both continuous channels are joining the same wall-clock station positions used on the JCS home page. If the browser blocks audible autoplay, the first non-wallet click or key press enables sound. No video is loaded on this page.
+  </p>
 </section>
 <section class="social-layout">
 <article class="card composer" id="compose">
@@ -805,6 +1275,33 @@
 </select>
 </div>
 </div>
+
+<details class="prayer-library" id="prayerLibrary" open>
+<summary>Choose a rotating prayer or testimony starter</summary>
+<div class="prayer-library-body">
+<div class="prayer-library-controls">
+<label for="prayerSourceFilter">
+Prayer source
+<select id="prayerSourceFilter">
+<option value="all">All three Scripture collections</option>
+<option value="kjv">King James Version</option>
+<option value="enoch">1 Enoch · R. H. Charles</option>
+<option value="jubilees">Book of Jubilees · R. H. Charles</option>
+</select>
+</label>
+<button class="btn small" id="prayerNextBtn" type="button">Show another 20</button>
+</div>
+<p aria-live="polite" class="prayer-rotation-status" id="prayerRotationStatus">
+Loading the rotating prayer selection…
+</p>
+<div class="prayer-template-grid" id="prayerTemplateGrid"></div>
+<p class="prayer-library-note">
+Clicking a prayer fills both the testimony message and Scripture reference.
+You may edit the wording before minting or publishing anything.
+</p>
+</div>
+</details>
+
 <div class="field">
 <label for="message">
             Message
@@ -976,11 +1473,10 @@
 <img alt="Scan the Xaman sign request" class="sign-qr" hidden="" id="signQr"/>
 </div>
 </aside>
-
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
-<strong>Jesus Christ Saves Token · Sign the Ledger v4.0.0</strong>
+<strong>Jesus Christ Saves Token · Sign the Ledger v4.2.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
         permanent availability from every public XRPL server, moderate religious
@@ -1002,7 +1498,7 @@
 (() => {
   'use strict';
 
-  const APP_KEY = '9f853ecf-d95f-4e03-8591-e41f91b9f3c5';
+  const APP_KEY = '7737775c-1645-4a4e-a92d-ffe51530a348';
   const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
   const JCS_LOGO = 'https://jesuschristsavestoken.com/jcs-logo.png';
   const APP_TAG = 'JCS_SOCIAL_V4';
@@ -1406,6 +1902,150 @@
       $(id).addEventListener('input', updateComposer);
       $(id).addEventListener('change', updateComposer);
     });
+
+
+  const PRAYER_LIBRARY = [{"id":"kjv-ps23","source":"kjv","sourceLabel":"King James Version","title":"The Shepherd’s Guidance","ref":"Psalm 23:1–4","message":"Lord Jesus, shepherd me through every uncertain place. Restore my soul, guide me in righteous paths, and keep fear from ruling my heart. Let Your presence comfort me and make my life a testimony of Your faithful care. Amen."},{"id":"kjv-ps27","source":"kjv","sourceLabel":"King James Version","title":"Light in Fear","ref":"Psalm 27:1","message":"Lord Jesus, be my light and my salvation. When fear rises, remind me that my life is held by You. Give me courage to walk in truth and let my confidence in You become a witness to others. Amen."},{"id":"kjv-ps46","source":"kjv","sourceLabel":"King James Version","title":"Refuge in Trouble","ref":"Psalm 46:1","message":"Father, be my refuge and strength in every trouble. Steady my thoughts, protect those I love, and teach me to trust Your help before I trust my fear. May my calm faith point others toward You. Amen."},{"id":"kjv-ps51","source":"kjv","sourceLabel":"King James Version","title":"A Clean Heart","ref":"Psalm 51:10","message":"Merciful God, create in me a clean heart and renew a faithful spirit within me. Remove bitterness, pride, and hidden sin. Make my words and actions honest, gentle, and centered on Christ. Amen."},{"id":"kjv-ps91","source":"kjv","sourceLabel":"King James Version","title":"Under His Wings","ref":"Psalm 91:1–4","message":"Most High God, keep me beneath Your shelter. Cover my family with mercy, guard our steps, and give us wisdom in danger. Let us rest in Your faithfulness and never forget where our protection comes from. Amen."},{"id":"kjv-ps121","source":"kjv","sourceLabel":"King James Version","title":"Help from the Lord","ref":"Psalm 121:1–2","message":"Lord, I lift my eyes beyond my circumstances and remember that my help comes from You. Strengthen me for today, guide every decision, and keep me from despair. Let gratitude rise before the answer arrives. Amen."},{"id":"kjv-prov3","source":"kjv","sourceLabel":"King James Version","title":"Trust the Path","ref":"Proverbs 3:5–6","message":"Lord Jesus, help me trust You with my whole heart instead of leaning only on what I understand. Direct my path, correct my plans, and teach me to acknowledge You in every choice. Amen."},{"id":"kjv-prov16","source":"kjv","sourceLabel":"King James Version","title":"Commit the Work","ref":"Proverbs 16:3","message":"Father, I commit my work, plans, and responsibilities to You. Purify my motives, establish what is good, and close every path that would lead me away from Your will. May the results honor Christ. Amen."},{"id":"kjv-isa40","source":"kjv","sourceLabel":"King James Version","title":"Renewed Strength","ref":"Isaiah 40:31","message":"Lord, renew my strength while I wait upon You. Lift me above discouragement, help me run without losing heart, and teach me to walk faithfully through ordinary days. Let endurance become part of my testimony. Amen."},{"id":"kjv-isa41","source":"kjv","sourceLabel":"King James Version","title":"Do Not Fear","ref":"Isaiah 41:10","message":"God, when I feel weak or alone, remind me that You are with me. Strengthen me, uphold me, and keep fear from controlling my decisions. Let Your presence make me brave, humble, and compassionate. Amen."},{"id":"kjv-jer29","source":"kjv","sourceLabel":"King James Version","title":"Hope for the Future","ref":"Jeremiah 29:11","message":"Father, I place my future in Your hands. Give me hope without presumption, patience without passivity, and wisdom for the next faithful step. Use every season to draw me closer to Jesus. Amen."},{"id":"kjv-matt5","source":"kjv","sourceLabel":"King James Version","title":"A Light Before Others","ref":"Matthew 5:14–16","message":"Lord Jesus, let Your light be visible through my choices. Help me serve without seeking praise, speak truth with love, and do good that directs attention toward our Father in heaven. Amen."},{"id":"kjv-matt6","source":"kjv","sourceLabel":"King James Version","title":"Teach Us to Pray","ref":"Matthew 6:9–13","message":"Our Father, make Your name holy in my life. Let Your will be done, provide what is needed today, forgive me as I forgive others, and deliver me from temptation and evil. Keep me faithful to Christ. Amen."},{"id":"kjv-matt11","source":"kjv","sourceLabel":"King James Version","title":"Rest for the Weary","ref":"Matthew 11:28–30","message":"Jesus, I bring You my weariness, grief, and heavy burdens. Teach me Your gentle way, quiet the pressure within me, and give my soul true rest. Help me carry only what You have asked of me. Amen."},{"id":"kjv-mark9","source":"kjv","sourceLabel":"King James Version","title":"Help My Unbelief","ref":"Mark 9:24","message":"Lord Jesus, I believe; help the places where doubt still remains. Strengthen my trust without hiding my questions, and let honest faith grow through prayer, obedience, and Your mercy. Amen."},{"id":"kjv-luke1","source":"kjv","sourceLabel":"King James Version","title":"Nothing Is Impossible","ref":"Luke 1:37","message":"God, remind me that no promise of Yours is powerless. Give me courage to obey when the way appears impossible, and keep me from confusing my limits with Yours. May my response be faithful and humble. Amen."},{"id":"kjv-john3","source":"kjv","sourceLabel":"King James Version","title":"Grateful for Salvation","ref":"John 3:16","message":"Father, thank You for loving the world and giving Your Son. Help me receive the life offered through Jesus, share that hope without pride, and treat every person as someone deeply loved by You. Amen."},{"id":"kjv-john14way","source":"kjv","sourceLabel":"King James Version","title":"The Way, Truth, and Life","ref":"John 14:6","message":"Jesus, keep me close to You as the way, the truth, and the life. Correct every false path in me, deepen my love for truth, and let my life openly confess that access to the Father is through You. Amen."},{"id":"kjv-john14peace","source":"kjv","sourceLabel":"King James Version","title":"Christ’s Peace","ref":"John 14:27","message":"Lord Jesus, place Your peace within me—a peace stronger than circumstances. Calm my troubled heart, free me from needless fear, and make me a peacemaker wherever tension and division appear. Amen."},{"id":"kjv-rom8","source":"kjv","sourceLabel":"King James Version","title":"Purpose Through Every Season","ref":"Romans 8:28","message":"Father, work even the difficult parts of my life toward Your good purpose. Keep me from calling evil good, yet give me confidence that nothing surrendered to You is wasted. Shape me into the likeness of Christ. Amen."},{"id":"kjv-rom12","source":"kjv","sourceLabel":"King James Version","title":"Renew My Mind","ref":"Romans 12:2","message":"God, renew my mind so I am not shaped by fear, pride, anger, or the pressure of this world. Teach me to recognize what is good and pleasing to You, and give me courage to live it. Amen."},{"id":"kjv-phil4peace","source":"kjv","sourceLabel":"King James Version","title":"Prayer Instead of Anxiety","ref":"Philippians 4:6–7","message":"Lord, I bring every anxious thought to You with thanksgiving. Guard my heart and mind in Christ, give me wisdom for what I can do, and peace for what I must place in Your hands. Amen."},{"id":"kjv-phil4strength","source":"kjv","sourceLabel":"King James Version","title":"Strength Through Christ","ref":"Philippians 4:13","message":"Jesus, strengthen me for every task You truly place before me. Keep me from pride when I succeed and despair when I struggle. Let Your strength be shown through faithful endurance. Amen."},{"id":"kjv-eph6","source":"kjv","sourceLabel":"King James Version","title":"Stand in God’s Armor","ref":"Ephesians 6:10–11","message":"Lord, make me strong in Your power. Clothe me with truth, righteousness, peace, faith, salvation, and Your Word. Help me stand against deception without becoming hateful toward people. Amen."},{"id":"enoch-1","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Peace for the Righteous","ref":"1 Enoch 1:8","message":"Holy God, establish Your peace in those who seek righteousness. Protect the vulnerable, expose what is false, and let mercy and light guide my conduct. Keep my hope fixed on Your justice. Amen."},{"id":"enoch-2","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Learn from Creation","ref":"1 Enoch 2:1–3","message":"Creator of heaven and earth, teach me to notice the order, faithfulness, and wisdom displayed in Your works. Let creation humble me, steady me, and move me to obey You with reverence. Amen."},{"id":"enoch-5","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Choose the Upright Way","ref":"1 Enoch 5:4–9","message":"Lord, turn me away from stubbornness and toward uprightness. Give me a heart that loves truth, receives correction, and seeks peace. May my life bear fruit worthy of the mercy You have shown me. Amen."},{"id":"enoch-9","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Hear the Cry of the Oppressed","ref":"1 Enoch 9:3–11","message":"Most High God, hear those who suffer under violence, exploitation, and injustice. Raise up truthful witnesses, restrain evil, and show me how to defend the oppressed without becoming consumed by hatred. Amen."},{"id":"enoch-10","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Cleanse What Corrupts","ref":"1 Enoch 10:16–22","message":"God of righteousness, remove what corrupts my heart and community. Break cycles of violence and deception, restore what has been harmed, and teach us to cultivate peace, truth, and faithful stewardship. Amen."},{"id":"enoch-14","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Reverence Before the Throne","ref":"1 Enoch 14:20–25","message":"Lord of glory, fill me with reverence before Your holiness. Keep me from treating sacred things lightly, purify my worship, and help me approach You with humility, gratitude, and awe. Amen."},{"id":"enoch-15","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Remain Within God’s Order","ref":"1 Enoch 15:3–4","message":"Wise God, teach me to respect the boundaries and responsibilities You have given. Keep ambition from becoming rebellion, and help me use every gift in service rather than self-exaltation. Amen."},{"id":"enoch-22","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Hope Beyond Death","ref":"1 Enoch 22:9–13","message":"God of the living, comfort those who grieve and remind us that every life is known to You. Help me live honestly in light of eternity, seek reconciliation quickly, and treasure what cannot be taken away. Amen."},{"id":"enoch-25","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"The Fragrance of Righteousness","ref":"1 Enoch 25:4–6","message":"Lord, make righteousness beautiful in my life. Let my words carry grace, my actions bring healing, and my presence reflect the hope of Your kingdom. Remove every hidden desire to harm or deceive. Amen."},{"id":"enoch-27","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Turn from Hardness","ref":"1 Enoch 27:3–5","message":"Merciful God, do not let my heart grow hard against truth. Give me repentance before consequences force it, compassion before judgment, and wisdom to leave every path that destroys peace. Amen."},{"id":"enoch-39","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Dwell with the Faithful","ref":"1 Enoch 39:4–8","message":"Lord, gather me among those who love righteousness and truth. Help me build fellowship marked by prayer, integrity, and mutual care. Let our community become a refuge rather than a place of pride. Amen."},{"id":"enoch-40","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Mercy, Wisdom, and Intercession","ref":"1 Enoch 40:1–9","message":"God of mercy and wisdom, teach me to pray for others, speak truth, and seek healing. Give me compassion for the broken, courage before evil, and humility in every spiritual responsibility. Amen."},{"id":"enoch-41","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Order in the Heavens","ref":"1 Enoch 41:1–8","message":"Creator, as the heavens follow the order You established, bring order to my thoughts, habits, and relationships. Help me be dependable, disciplined, and peaceful without losing tenderness. Amen."},{"id":"enoch-45","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"A Renewed Earth","ref":"1 Enoch 45:3–6","message":"Lord, awaken hope for the day when corruption is removed and righteousness remains. Until then, make me a faithful caretaker of people and creation, serving Your future kingdom through present obedience. Amen."},{"id":"enoch-46","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Justice Under the Son of Man","ref":"1 Enoch 46:1–6","message":"Righteous God, place every power beneath Your truth. Protect those harmed by arrogance and oppression, and keep me from using influence selfishly. Let my allegiance remain with the justice of heaven. Amen."},{"id":"enoch-48","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"The Name of Hope","ref":"1 Enoch 48:1–7","message":"God of salvation, anchor my hope in the One appointed before the foundations of the world. Let His light guide my choices, His mercy soften my heart, and His truth remain stronger than every deception. Amen."},{"id":"enoch-50","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Repent While Mercy Calls","ref":"1 Enoch 50:1–5","message":"Lord, while mercy is offered, lead me into sincere repentance. Show me what must change, give me courage to make amends, and help me walk in righteousness without returning to old destruction. Amen."},{"id":"enoch-58","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Light and Lasting Peace","ref":"1 Enoch 58:1–6","message":"Father of light, lead me out of confusion and into lasting peace. Let truth brighten my mind, hope strengthen my spirit, and love guide the way I treat every person. Amen."},{"id":"enoch-61","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Praise Before Judgment","ref":"1 Enoch 61:1–13","message":"Most High God, teach me to worship with sincerity and live as one accountable to You. Keep praise from becoming empty words; let it produce justice, humility, and obedience in my daily life. Amen."},{"id":"enoch-62","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Comfort for the Faithful","ref":"1 Enoch 62:13–16","message":"Lord, comfort those who remain faithful through rejection and hardship. Give us endurance without bitterness, hope without denial, and confidence that Your final word is mercy and justice. Amen."},{"id":"enoch-69","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Truth Above Every Power","ref":"1 Enoch 69:26–29","message":"Sovereign God, let truth stand above every throne, institution, and human scheme. Keep me loyal to what is righteous, even when compromise appears easier or more profitable. Amen."},{"id":"enoch-71","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"A Heart Prepared for Glory","ref":"1 Enoch 71:14–17","message":"Holy One, prepare my heart for Your presence. Remove vanity and spiritual pride, deepen my reverence, and help me reflect heavenly compassion in ordinary acts of faithfulness. Amen."},{"id":"enoch-81","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Wisdom for the Appointed Time","ref":"1 Enoch 81:1–10","message":"God of all times and seasons, give me wisdom to recognize my responsibilities today. Keep me from wasting life in fear or speculation; make me attentive, obedient, and ready to serve. Amen."},{"id":"enoch-104","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Encouragement for the Righteous","ref":"1 Enoch 104:1–6","message":"Lord, encourage everyone who chooses righteousness when faithfulness feels costly. Record our tears, strengthen our resolve, and help us trust that no act of truth, mercy, or courage is forgotten by You. Amen."},{"id":"jub-1","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Return with the Whole Heart","ref":"Jubilees 1:20–25","message":"Lord, turn my whole heart back to You. Remove divided loyalties, teach me to love You sincerely, and help my family remember Your ways. Let repentance become the beginning of restoration. Amen."},{"id":"jub-2","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Holy Rest","ref":"Jubilees 2:31–33","message":"Creator, teach me the holiness of rest. Free me from endless striving, help me worship with attention, and restore my body, mind, and relationships. Let sacred rest renew my gratitude and obedience. Amen."},{"id":"jub-4","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Walk in Wisdom","ref":"Jubilees 4:17–19","message":"God of wisdom, teach me to walk uprightly in a confused generation. Give me discernment, patience, and courage to preserve what is true while treating others with mercy. Amen."},{"id":"jub-6","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Remember the Covenant","ref":"Jubilees 6:17–22","message":"Faithful God, help me remember Your covenant and the signs of Your mercy. Keep me from forgetting Your goodness when life becomes comfortable, and from doubting it when life becomes difficult. Amen."},{"id":"jub-7","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Teach the Next Generation","ref":"Jubilees 7:20–29","message":"Lord, give parents, elders, and teachers wisdom to guide the next generation. Help us model truth instead of merely demanding it, correct with patience, and pass on faith through consistent love. Amen."},{"id":"jub-10","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Protection from Destructive Influence","ref":"Jubilees 10:1–6","message":"Most High God, protect minds and homes from destructive spiritual influence. Give us discernment, self-control, and courage to reject what corrupts. Fill every empty place with truth and peace. Amen."},{"id":"jub-12","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Leave Idols Behind","ref":"Jubilees 12:19–21","message":"Lord, reveal every idol competing for my trust—money, approval, control, pleasure, or fear. Give me courage to leave them behind and follow You with an undivided heart. Amen."},{"id":"jub-14","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Believe the Promise","ref":"Jubilees 14:20","message":"Faithful God, help me believe Your promise even when fulfillment seems delayed. Keep me obedient in the waiting, grateful for each sign of grace, and patient with the timing I cannot control. Amen."},{"id":"jub-15","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Covenant Written on the Heart","ref":"Jubilees 15:26–27","message":"Lord, let covenant faithfulness reach beyond outward signs and shape my heart. Make my obedience sincere, my worship truthful, and my identity rooted in belonging to You. Amen."},{"id":"jub-17","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Faith Under Testing","ref":"Jubilees 17:15–18","message":"God, when my faith is tested, keep me from panic and resentment. Give me wisdom to distinguish Your leading from harmful impulse, and courage to remain faithful without losing compassion. Amen."},{"id":"jub-19","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Comfort in Grief","ref":"Jubilees 19:15–20","message":"Lord of compassion, meet everyone carrying grief. Hold us when memories hurt, surround us with faithful people, and teach us to honor those we have lost by living with greater love and integrity. Amen."},{"id":"jub-20","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Blessing for Children","ref":"Jubilees 20:6–10","message":"Father, bless our children and those entrusted to our care. Give them wisdom, protection, humility, and courage. Help us guide them without controlling them and love them without condition. Amen."},{"id":"jub-21a","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Seek God’s Will","ref":"Jubilees 21:2–4","message":"Living God, help me remember You throughout my days and seek Your will with my whole heart. Make me faithful in private, honest in public, and grateful in every season. Amen."},{"id":"jub-21b","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Upright in All Things","ref":"Jubilees 21:23–24","message":"Most High God, make me upright in small matters as well as great ones. Bless the work of my hands, correct every dishonest habit, and let integrity become a quiet testimony to Your rule. Amen."},{"id":"jub-22a","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Strength to Do Righteousness","ref":"Jubilees 22:10","message":"God of all, bless and strengthen me to do what is right before You. Give me courage when righteousness costs something and humility when others recognize the good. Amen."},{"id":"jub-22b","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Cleansed and Forgiven","ref":"Jubilees 22:14","message":"Merciful God, cleanse me from unrighteousness and impurity. Bring hidden sin into the light, lead me to make amends, and help me receive forgiveness with a changed life. Amen."},{"id":"jub-22c","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Help from the Most High","ref":"Jubilees 22:19","message":"Most High God, help me where my strength is insufficient. Bless my home, guide my work, and keep me from believing I must carry every burden alone. Amen."},{"id":"jub-22d","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Preserved from Destruction","ref":"Jubilees 22:23","message":"Lord, preserve me from choices that destroy faith, family, health, or peace. Give me discernment before danger, humility to accept warning, and courage to change direction. Amen."},{"id":"jub-23","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Healing After Decline","ref":"Jubilees 23:26–31","message":"God of restoration, heal communities weakened by violence, deception, and neglect. Raise up people who love truth, protect the vulnerable, and rebuild trust through patient righteousness. Amen."},{"id":"jub-24","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Peace Between Brothers and Sisters","ref":"Jubilees 24:22–25","message":"Father, bring peace where families and communities are divided. Expose manipulation, soften hardened hearts, and help us seek reconciliation without denying truth or justice. Amen."},{"id":"jub-25","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Mother’s and Father’s Prayer","ref":"Jubilees 25:1–3","message":"Lord, hear the prayers of parents and guardians. Give us wisdom to bless, courage to protect, patience to teach, and humility to admit when we are wrong. Amen."},{"id":"jub-30","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Honor and Responsibility","ref":"Jubilees 30:18–23","message":"Holy God, teach me to honor people without excusing wrongdoing. Give leaders accountability, families wisdom, and communities the courage to protect dignity, truth, and justice together. Amen."},{"id":"jub-31","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Blessing of Wisdom","ref":"Jubilees 31:17–20","message":"Lord, grant wisdom that is more valuable than status or wealth. Help me listen before speaking, choose what is just, and use knowledge to serve rather than dominate. Amen."},{"id":"jub-32","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Faithful Worship","ref":"Jubilees 32:19–26","message":"God, make my worship faithful beyond a single moment or place. Let gratitude shape my schedule, generosity shape my resources, and obedience shape the way I live among others. Amen."}];
+  const PRAYER_ROTATION_MS = 3 * 60 * 1000;
+  const PRAYER_ROTATION_EPOCH = Date.UTC(2026, 0, 1, 0, 0, 0);
+  let prayerManualStep = 0;
+  let prayerRenderedKey = '';
+
+  function prayerSeed(value) {
+    let hash = 2166136261;
+    const text = String(value);
+    for (let index = 0; index < text.length; index++) {
+      hash ^= text.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function prayerRandom(seed) {
+    let value = seed >>> 0;
+    return () => {
+      value += 0x6D2B79F5;
+      let result = value;
+      result = Math.imul(result ^ result >>> 15, result | 1);
+      result ^= result + Math.imul(result ^ result >>> 7, result | 61);
+      return ((result ^ result >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function prayerShuffle(items, seed) {
+    const output = [...items];
+    const random = prayerRandom(prayerSeed(seed));
+    for (let index = output.length - 1; index > 0; index--) {
+      const swap = Math.floor(random() * (index + 1));
+      [output[index], output[swap]] = [output[swap], output[index]];
+    }
+    return output;
+  }
+
+  function currentPrayerSlot() {
+    return Math.floor(
+      Math.max(0, Date.now() - PRAYER_ROTATION_EPOCH) /
+      PRAYER_ROTATION_MS
+    );
+  }
+
+  function rotatingPrayerSelection(source, slot) {
+    const effectiveSeed = slot + prayerManualStep * 97;
+
+    if (source !== 'all') {
+      return prayerShuffle(
+        PRAYER_LIBRARY.filter(item => item.source === source),
+        source + ':' + effectiveSeed
+      ).slice(0, 20);
+    }
+
+    const sourceOrder = ['kjv', 'enoch', 'jubilees'];
+    const smallerSource = sourceOrder[Math.abs(effectiveSeed) % sourceOrder.length];
+    const selected = [];
+
+    for (const sourceName of sourceOrder) {
+      const count = sourceName === smallerSource ? 6 : 7;
+      const group = prayerShuffle(
+        PRAYER_LIBRARY.filter(item => item.source === sourceName),
+        sourceName + ':' + effectiveSeed
+      );
+      selected.push(...group.slice(0, count));
+    }
+
+    return prayerShuffle(selected, 'combined:' + effectiveSeed);
+  }
+
+  function renderPrayerLibrary(force=false) {
+    const source = $('prayerSourceFilter').value;
+    const slot = currentPrayerSlot();
+    const key = source + ':' + slot + ':' + prayerManualStep;
+
+    if (!force && key === prayerRenderedKey) return;
+    prayerRenderedKey = key;
+
+    const selection = rotatingPrayerSelection(source, slot);
+    $('prayerTemplateGrid').innerHTML = selection.map(prayer => `
+      <button class="prayer-template" type="button"
+        data-prayer-id="${escapeHtml(prayer.id)}">
+        <span class="prayer-template-title">${escapeHtml(prayer.title)}</span>
+        <span class="prayer-template-ref">
+          ${escapeHtml(prayer.ref)} · ${escapeHtml(prayer.sourceLabel)}
+        </span>
+        <span class="prayer-template-preview">
+          ${escapeHtml(
+            prayer.message.length > 118
+              ? prayer.message.slice(0, 115).trimEnd() + '…'
+              : prayer.message
+          )}
+        </span>
+      </button>
+    `).join('');
+
+    const remaining = PRAYER_ROTATION_MS -
+      ((Date.now() - PRAYER_ROTATION_EPOCH) % PRAYER_ROTATION_MS);
+    const minutes = Math.max(1, Math.ceil(remaining / 60000));
+
+    $('prayerRotationStatus').textContent =
+      selection.length + ' prayer starters shown from ' +
+      PRAYER_LIBRARY.length +
+      ' total. The patterned selection changes automatically in about ' +
+      minutes + ' minute' + (minutes === 1 ? '' : 's') +
+      ', or use “Show another 20.”';
+  }
+
+  $('prayerSourceFilter').addEventListener('change', () => {
+    prayerManualStep = 0;
+    renderPrayerLibrary(true);
+  });
+
+  $('prayerNextBtn').addEventListener('click', () => {
+    prayerManualStep += 1;
+    renderPrayerLibrary(true);
+  });
+
+  $('prayerTemplateGrid').addEventListener('click', event => {
+    const button = event.target.closest('.prayer-template');
+    if (!button) return;
+
+    const prayer = PRAYER_LIBRARY.find(
+      item => item.id === button.dataset.prayerId
+    );
+    if (!prayer) return;
+
+    $('postType').value = 'prayer';
+    $('message').value = prayer.message;
+    $('scriptureRef').value = prayer.ref;
+    updateComposer();
+
+    toast(
+      prayer.title + ' loaded. Review or edit it before signing.',
+      'ok'
+    );
+    $('message').focus();
+  });
+
+  renderPrayerLibrary(true);
+  window.setInterval(() => renderPrayerLibrary(false), 15000);
+
 
   $('clearDraftBtn').addEventListener('click', () => {
     $('message').value = '';
@@ -2162,6 +2802,139 @@
     `;
   }
 
+
+  const TESTIMONY_SHARE_BASE =
+    'https://jesuschristsavestoken.com/verify.html';
+
+  function testimonyShareData(post) {
+    const anchor = '#post-' + String(post.key || '').slice(0, 16);
+    const url = TESTIMONY_SHARE_BASE + anchor;
+    const scripture = post.scripture ? '\n' + post.scripture : '';
+    const message = String(post.message || 'On-chain testimony').trim();
+    const text =
+      message + scripture +
+      '\n\nJesus Christ Saves Token · Sign the Ledger';
+    return {
+      title:'JCS on-chain testimony',
+      text,
+      url
+    };
+  }
+
+  function popupShare(url) {
+    const popup = window.open(
+      url,
+      '_blank',
+      'noopener,noreferrer,width=760,height=680'
+    );
+    if (popup) popup.opener = null;
+    return popup;
+  }
+
+  async function copyTestimonyShare(data, linkOnly=false) {
+    const value = linkOnly ? data.url : data.text + '\n' + data.url;
+    try {
+      await navigator.clipboard.writeText(value);
+      toast(linkOnly ? 'Testimony link copied.' : 'Testimony and link copied.', 'ok');
+      return true;
+    } catch {
+      window.prompt('Copy this testimony:', value);
+      return false;
+    }
+  }
+
+  async function nativeShareTestimony(data) {
+    if (
+      typeof navigator.share === 'function' &&
+      (!navigator.canShare || navigator.canShare(data))
+    ) {
+      try {
+        await navigator.share(data);
+        return true;
+      } catch (error) {
+        if (error?.name === 'AbortError') return false;
+      }
+    }
+    return false;
+  }
+
+  async function shareTestimony(post, platform) {
+    const data = testimonyShareData(post);
+    const encodedUrl = encodeURIComponent(data.url);
+    const xText =
+      data.text.length > 215
+        ? data.text.slice(0, 212).trimEnd() + '…'
+        : data.text;
+
+    if (platform === 'facebook') {
+      popupShare(
+        'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl
+      );
+      return;
+    }
+
+    if (platform === 'x') {
+      popupShare(
+        'https://twitter.com/intent/tweet?text=' +
+        encodeURIComponent(xText) +
+        '&url=' + encodedUrl
+      );
+      return;
+    }
+
+    if (platform === 'instagram') {
+      const shared = await nativeShareTestimony(data);
+      if (!shared) {
+        await copyTestimonyShare(data);
+        popupShare('https://www.instagram.com/');
+        toast(
+          'The testimony was copied. Paste it into Instagram after the site opens.',
+          'ok'
+        );
+      }
+      return;
+    }
+
+    if (platform === 'copy') {
+      await copyTestimonyShare(data, true);
+      return;
+    }
+
+    if (platform === 'all') {
+      /*
+       * Facebook and X receive prepared share pages. Instagram and any other
+       * installed social apps are offered through the device share sheet.
+       */
+      const facebookWindow = popupShare(
+        'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl
+      );
+      const xWindow = popupShare(
+        'https://twitter.com/intent/tweet?text=' +
+        encodeURIComponent(xText) +
+        '&url=' + encodedUrl
+      );
+
+      await copyTestimonyShare(data);
+
+      const shared = await nativeShareTestimony(data);
+      if (!shared) {
+        popupShare('https://www.instagram.com/');
+      }
+
+      if (!facebookWindow || !xWindow) {
+        toast(
+          'A browser popup was blocked. Allow popups or use the individual platform buttons.',
+          'err'
+        );
+      } else {
+        toast(
+          'Facebook and X were opened. Use the share sheet for Instagram or another installed app.',
+          'ok'
+        );
+      }
+    }
+  }
+
   function renderPost(post, index) {
     const author = post.name || post.handle || 'Anonymous believer';
     const handle = post.name && post.handle ? post.handle : '';
@@ -2229,10 +3002,26 @@
             target="_blank" rel="noopener">
             View transaction
           </a>
-          <button class="btn small share-btn" type="button"
-            data-post="${escapeHtml(post.key.slice(0, 16))}">
-            Share
-          </button>
+          <details class="share-menu">
+            <summary class="btn small">Share</summary>
+            <div class="share-options" aria-label="Share this testimony">
+              <button class="btn small share-action" type="button"
+                data-share-platform="facebook"
+                data-share-key="${escapeHtml(post.key)}">Facebook</button>
+              <button class="btn small share-action" type="button"
+                data-share-platform="x"
+                data-share-key="${escapeHtml(post.key)}">X</button>
+              <button class="btn small share-action" type="button"
+                data-share-platform="instagram"
+                data-share-key="${escapeHtml(post.key)}">Instagram</button>
+              <button class="btn small share-action" type="button"
+                data-share-platform="copy"
+                data-share-key="${escapeHtml(post.key)}">Copy link</button>
+              <button class="btn small share-action" type="button"
+                data-share-platform="all"
+                data-share-key="${escapeHtml(post.key)}">All platforms</button>
+            </div>
+          </details>
         </div>
 
         <div class="inline-reply" data-reply-box="${escapeHtml(post.key)}">
@@ -2276,7 +3065,17 @@
     }
 
     $('feed').innerHTML = posts.map(renderPost).join('');
-    if (state.rolling) $('feedViewport').scrollTop = 0;
+    if (location.hash.startsWith('#post-')) {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        window.setTimeout(
+          () => target.scrollIntoView({behavior:'smooth', block:'center'}),
+          80
+        );
+      }
+    } else if (state.rolling) {
+      $('feedViewport').scrollTop = 0;
+    }
   }
 
   function updateStats() {
@@ -2525,19 +3324,17 @@
       return;
     }
 
-    const shareButton = event.target.closest('.share-btn');
+    const shareButton = event.target.closest('.share-action');
     if (shareButton) {
-      const url =
-        location.origin +
-        location.pathname +
-        '#post-' +
-        shareButton.dataset.post;
-      try {
-        await navigator.clipboard.writeText(url);
-        toast('Testimony link copied.', 'ok');
-      } catch {
-        window.prompt('Copy this testimony link:', url);
+      const post = state.posts.find(
+        item => item.key === shareButton.dataset.shareKey
+      );
+      if (!post) {
+        toast('This testimony is no longer available in the current feed.', 'err');
+        return;
       }
+      await shareTestimony(post, shareButton.dataset.sharePlatform);
+      return;
     }
   });
 
@@ -2648,5 +3445,573 @@
   });
 })();
 </script>
-</body>
+<script>
+(() => {
+  'use strict';
+
+  const STREAM_EPOCH_SECONDS = Date.UTC(2026, 0, 1, 0, 0, 0) / 1000;
+  const AUDIO_STORAGE = 'jcs.sacredMedia.v2';
+  const ARCHIVE_BASE = 'https://archive.org';
+
+  const $ = id => document.getElementById(id);
+  const clamp = (value, minimum, maximum) =>
+    Math.min(maximum, Math.max(minimum, value));
+
+  const musicFallback = [
+    {
+      title:'Gregorian Chant Mass · Track 2',
+      url:'https://archive.org/download/GregorianChantMass/02Track2_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 4',
+      url:'https://archive.org/download/GregorianChantMass/04Track4_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 5',
+      url:'https://archive.org/download/GregorianChantMass/05Track5_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 6',
+      url:'https://archive.org/download/GregorianChantMass/06Track6_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Ave Maria · Enrico Caruso archival recording',
+      url:'https://archive.org/download/Caruso_part1/Caruso-AveMaria.mp3',
+      duration:270
+    }
+  ];
+
+  const readingFallback = [
+    {
+      title:'KJV Psalms · Book I',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_01_kjv.mp3',
+      duration:957
+    },
+    {
+      title:'KJV Psalms · Book II',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_02_kjv.mp3',
+      duration:965
+    },
+    {
+      title:'KJV Psalms · Book III',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_03_kjv.mp3',
+      duration:1410
+    },
+    {
+      title:'KJV Psalms · Book IV',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_04_kjv.mp3',
+      duration:1181
+    },
+    {
+      title:'KJV Psalms · Book V',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_05_kjv.mp3',
+      duration:885
+    },
+    {
+      title:'1 Enoch · Chapters I–V',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_128kb.mp3',
+      duration:964
+    },
+    {
+      title:'1 Enoch · Chapters VI–XI',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_128kb.mp3',
+      duration:873
+    },
+    {
+      title:'1 Enoch · Chapters XII–XVI',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_04_charles_128kb.mp3',
+      duration:509
+    },
+    {
+      title:'1 Enoch · Further reading',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_05_charles_128kb.mp3',
+      duration:454
+    },
+    {
+      title:'Book of Jubilees · Opening reading',
+      url:'https://archive.org/download/book_jubilees_2108_librivox/bookofjubilees_01_charles_128kb.mp3',
+      duration:900
+    }
+  ];
+
+  const channels = {
+    music:{
+      audio:$('musicAudio'),
+      now:$('musicNow'),
+      listen:$('musicListen'),
+      mute:$('musicMute'),
+      volume:$('musicVolume'),
+      playlist:musicFallback,
+      seed:117,
+      listenerMuted:false,
+      timer:null
+    },
+    reading:{
+      audio:$('readingAudio'),
+      now:$('readingNow'),
+      listen:$('readingListen'),
+      mute:$('readingMute'),
+      volume:$('readingVolume'),
+      playlist:readingFallback,
+      seed:811,
+      listenerMuted:false,
+      timer:null
+    }
+  };
+
+  let preparationPromise = null;
+  let autoplayUnlocked = false;
+  let unlockInstalled = false;
+
+  function parseDuration(value) {
+    if (Number.isFinite(Number(value)) && Number(value) > 0) {
+      return Number(value);
+    }
+    const parts = String(value || '').trim().split(':').map(Number);
+    if (!parts.length || parts.some(value => !Number.isFinite(value))) return 0;
+    return parts.reduce((total, value) => total * 60 + value, 0);
+  }
+
+  function archiveUrl(identifier, filename) {
+    return ARCHIVE_BASE + '/download/' + encodeURIComponent(identifier) + '/' +
+      String(filename).split('/').map(encodeURIComponent).join('/');
+  }
+
+  function mediaPreference(file) {
+    const format = String(file?.format || '').toLowerCase();
+    if (format.includes('vbr mp3')) return 4;
+    if (format.includes('128kbps mp3')) return 3;
+    if (format.includes('64kbps mp3')) return 2;
+    if (String(file?.name || '').toLowerCase().endsWith('.mp3')) return 1;
+    return 0;
+  }
+
+  async function archiveTracks(identifier, label, filenameFilter=() => true) {
+    const response = await fetch(
+      ARCHIVE_BASE + '/metadata/' + encodeURIComponent(identifier),
+      {cache:'force-cache', credentials:'omit'}
+    );
+    if (!response.ok) {
+      throw new Error('Archive metadata HTTP ' + response.status);
+    }
+
+    const metadata = await response.json();
+    const candidates = (metadata.files || [])
+      .filter(file => mediaPreference(file) > 0)
+      .filter(file => filenameFilter(String(file.name || ''), file));
+
+    const selected = new Map();
+    for (const file of candidates) {
+      const name = String(file.name || '');
+      const key = String(file.original || name)
+        .replace(/_(64kb|128kb)(?=\.mp3$)/i, '')
+        .toLowerCase();
+      const existing = selected.get(key);
+      if (!existing || mediaPreference(file) > mediaPreference(existing)) {
+        selected.set(key, file);
+      }
+    }
+
+    return [...selected.values()]
+      .map((file, index) => ({
+        title:String(file.title || metadata.metadata?.title || label) +
+          (file.track ? ' · ' + file.track : ' · ' + (index + 1)),
+        url:archiveUrl(identifier, file.name),
+        duration:parseDuration(file.length || file.duration) || 300
+      }))
+      .filter(track => track.duration > 0)
+      .sort((first, second) => first.url.localeCompare(second.url));
+  }
+
+  async function preparePlaylists() {
+    if (preparationPromise) return preparationPromise;
+
+    preparationPromise = (async () => {
+      const results = await Promise.allSettled([
+        archiveTracks(
+          'GregorianChantMass',
+          'Gregorian Chant Mass',
+          name => /\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'Caruso_part1',
+          'Ave Maria',
+          name => /ave.?maria.*\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'psalms_kjv_1202_librivox',
+          'King James Psalms',
+          name => /psalms_\d+_kjv.*\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'bookofenoch_1812_librivox',
+          'Book of Enoch · R. H. Charles',
+          name => /bookofenoch_\d+_charles.*\.mp3$/i.test(name) && !/_01_/i.test(name)
+        ),
+        archiveTracks(
+          'book_jubilees_2108_librivox',
+          'Book of Jubilees · R. H. Charles',
+          name => /\.mp3$/i.test(name)
+        )
+      ]);
+
+      const values = results.map(result =>
+        result.status === 'fulfilled' ? result.value : []
+      );
+      const music = [...values[0], ...values[1]].filter(track => track.url);
+      const reading = [...values[2], ...values[3], ...values[4]]
+        .filter(track => track.url);
+
+      if (music.length) channels.music.playlist = music;
+      if (reading.length) channels.reading.playlist = reading;
+    })();
+
+    return preparationPromise;
+  }
+
+  function loadSettings() {
+    /*
+     * Match index.html: both pages use the same station clock, playlist,
+     * channel seeds, and saved volume key. A new page attempts to rejoin the
+     * audible station automatically rather than preserving a page-local pause.
+     */
+    channels.music.listenerMuted = false;
+    channels.reading.listenerMuted = false;
+    try {
+      const saved = JSON.parse(localStorage.getItem(AUDIO_STORAGE) || '{}');
+      channels.music.volume.value = String(
+        clamp(Number(saved.musicVolume ?? 0.18), 0, 1)
+      );
+      channels.reading.volume.value = String(
+        clamp(Number(saved.readingVolume ?? 0.78), 0, 1)
+      );
+    } catch {
+      channels.music.volume.value = '0.18';
+      channels.reading.volume.value = '0.78';
+    }
+  }
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(AUDIO_STORAGE, JSON.stringify({
+        musicVolume:Number(channels.music.volume.value),
+        readingVolume:Number(channels.reading.volume.value)
+      }));
+    } catch {}
+  }
+
+  function synchronizedPosition(channel) {
+    const playlist = channel.playlist.filter(track => Number(track.duration) > 0);
+    const totalDuration = playlist.reduce(
+      (total, track) => total + Number(track.duration),
+      0
+    );
+    if (!playlist.length || totalDuration <= 0) return null;
+
+    const elapsed = Math.max(
+      0,
+      Date.now() / 1000 - STREAM_EPOCH_SECONDS + channel.seed
+    );
+    let position = ((elapsed % totalDuration) + totalDuration) % totalDuration;
+
+    for (let index = 0; index < playlist.length; index++) {
+      const duration = Number(playlist[index].duration);
+      if (position < duration) {
+        return {track:playlist[index], index, offset:position};
+      }
+      position -= duration;
+    }
+
+    return {track:playlist[0], index:0, offset:0};
+  }
+
+  function updateChannelButtons(channel) {
+    channel.listen.disabled = !channel.listenerMuted && !channel.audio.paused;
+    channel.mute.disabled = channel.listenerMuted;
+  }
+
+  function setNowPlaying(channel, target, seek) {
+    const prefix = channel.listenerMuted
+      ? 'Listening paused locally · station continues: '
+      : 'Now playing: ';
+    channel.now.textContent =
+      prefix + target.track.title +
+      ' · current station position ' +
+      Math.floor(seek / 60) + ':' +
+      String(Math.floor(seek % 60)).padStart(2, '0');
+    channel.now.className =
+      'now-playing ' + (channel.listenerMuted ? 'is-muted' : 'is-live');
+    updateChannelButtons(channel);
+  }
+
+  async function loadCurrentPosition(channel, allowMutedFallback=true) {
+    await preparePlaylists();
+    const target = synchronizedPosition(channel);
+    if (!target) throw new Error('No tracks are available for this channel.');
+
+    const audio = channel.audio;
+    const sameTrack = audio.dataset.trackUrl === target.track.url;
+
+    if (!sameTrack) {
+      audio.pause();
+      audio.src = target.track.url;
+      audio.dataset.trackUrl = target.track.url;
+      audio.load();
+    }
+
+    const beginPlayback = async () => {
+      const actualDuration =
+        Number.isFinite(audio.duration) && audio.duration > 0
+          ? audio.duration
+          : Number(target.track.duration);
+      const seek =
+        actualDuration > 1
+          ? target.offset % actualDuration
+          : 0;
+
+      try {
+        audio.currentTime = Math.max(
+          0,
+          Math.min(seek, Math.max(0, actualDuration - 0.25))
+        );
+      } catch {}
+
+      audio.volume = Number(channel.volume.value);
+      audio.muted = channel.listenerMuted;
+
+      try {
+        await audio.play();
+        autoplayUnlocked = autoplayUnlocked || !audio.muted;
+      } catch (error) {
+        if (!allowMutedFallback) throw error;
+        audio.muted = true;
+        await audio.play();
+        installAutoplayUnlock();
+      }
+
+      setNowPlaying(channel, target, seek);
+    };
+
+    if (audio.readyState >= 1) {
+      await beginPlayback();
+    } else {
+      await new Promise((resolve, reject) => {
+        const ready = () => {
+          cleanup();
+          resolve();
+        };
+        const failed = () => {
+          cleanup();
+          reject(new Error('Audio source unavailable.'));
+        };
+        const cleanup = () => {
+          audio.removeEventListener('loadedmetadata', ready);
+          audio.removeEventListener('error', failed);
+        };
+        audio.addEventListener('loadedmetadata', ready, {once:true});
+        audio.addEventListener('error', failed, {once:true});
+      });
+      await beginPlayback();
+    }
+
+    window.clearTimeout(channel.timer);
+    const remaining = Math.max(
+      5,
+      Number(target.track.duration) - target.offset + 1
+    );
+    channel.timer = window.setTimeout(() => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    }, remaining * 1000);
+  }
+
+  function showAudioError(error) {
+    $('audioStatus').textContent =
+      'Sacred audio could not start from this browser or source: ' +
+      (error?.message || error) +
+      '. The station clock remains continuous; use Listen to retry.';
+  }
+
+  async function listenChannel(name) {
+    const channel = channels[name];
+    channel.listenerMuted = false;
+    channel.audio.muted = false;
+    saveSettings();
+
+    try {
+      if (channel.audio.paused) {
+        await loadCurrentPosition(channel, false);
+      } else {
+        channel.audio.volume = Number(channel.volume.value);
+        await channel.audio.play();
+        const target = synchronizedPosition(channel);
+        if (target) setNowPlaying(channel, target, channel.audio.currentTime || target.offset);
+      }
+      $('audioStatus').textContent =
+        'Sacred audio is audible and synchronized to the continuous station clock.';
+    } catch (error) {
+      installAutoplayUnlock();
+      showAudioError(error);
+    }
+  }
+
+  async function muteChannel(name) {
+    const channel = channels[name];
+    channel.listenerMuted = true;
+    channel.audio.muted = true;
+    saveSettings();
+
+    if (channel.audio.paused) {
+      try {
+        await loadCurrentPosition(channel, true);
+      } catch (error) {
+        showAudioError(error);
+      }
+    }
+
+    const target = synchronizedPosition(channel);
+    if (target) {
+      setNowPlaying(channel, target, channel.audio.currentTime || target.offset);
+    }
+    $('audioStatus').textContent =
+      'Listening is paused locally. Both station timelines continue.';
+  }
+
+  async function listenAll() {
+    channels.music.listenerMuted = false;
+    channels.reading.listenerMuted = false;
+    saveSettings();
+    await Promise.allSettled([
+      listenChannel('music'),
+      listenChannel('reading')
+    ]);
+  }
+
+  async function muteAll() {
+    await Promise.allSettled([
+      muteChannel('music'),
+      muteChannel('reading')
+    ]);
+  }
+
+  async function unlockAudio() {
+    if (autoplayUnlocked) return;
+    autoplayUnlocked = true;
+
+    const attempts = Object.values(channels).map(async channel => {
+      if (!channel.listenerMuted) {
+        channel.audio.muted = false;
+        channel.audio.volume = Number(channel.volume.value);
+        if (channel.audio.paused) {
+          await loadCurrentPosition(channel, false);
+        } else {
+          await channel.audio.play();
+        }
+      }
+    });
+
+    await Promise.allSettled(attempts);
+    $('audioStatus').textContent =
+      'Sacred audio enabled. Both channels remain synchronized to the shared station clock.';
+  }
+
+  function installAutoplayUnlock() {
+    if (unlockInstalled) return;
+    unlockInstalled = true;
+
+    const isWalletControl = target => Boolean(
+      target instanceof Element &&
+      target.closest(
+        '#connectBtn, #disconnectBtn, #publishBtn, #mintOnlyBtn, ' +
+        '#resumePublishBtn, .amen-btn, .reply-submit, #signPanel'
+      )
+    );
+
+    const unlock = event => {
+      /* Keep Xaman wallet actions isolated from media autoplay handling. */
+      if (isWalletControl(event?.target)) return;
+      unlockAudio().catch(showAudioError);
+      document.removeEventListener('pointerdown', unlock, true);
+      document.removeEventListener('keydown', unlock, true);
+    };
+
+    document.addEventListener('pointerdown', unlock, true);
+    document.addEventListener('keydown', unlock, true);
+  }
+
+  Object.entries(channels).forEach(([name, channel]) => {
+    channel.listen.addEventListener('click', () => listenChannel(name));
+    channel.mute.addEventListener('click', () => muteChannel(name));
+    channel.volume.addEventListener('input', () => {
+      channel.audio.volume = Number(channel.volume.value);
+      saveSettings();
+    });
+    channel.audio.addEventListener('ended', () => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    });
+    channel.audio.addEventListener('error', () => {
+      window.setTimeout(
+        () => loadCurrentPosition(channel, true).catch(showAudioError),
+        2500
+      );
+    });
+  });
+
+  $('audioListenAll').addEventListener('click', listenAll);
+  $('audioMuteAll').addEventListener('click', muteAll);
+
+  loadSettings();
+
+  // Start both continuous station timelines immediately.
+  Promise.allSettled([
+    loadCurrentPosition(channels.music, true),
+    loadCurrentPosition(channels.reading, true)
+  ]).then(results => {
+    const rejected = results.filter(result => result.status === 'rejected');
+    if (rejected.length === 0) {
+      const mutedByBrowser = Object.values(channels)
+        .some(channel => channel.audio.muted && !channel.listenerMuted);
+
+      if (mutedByBrowser) {
+        $('audioStatus').textContent =
+          'Both station timelines started automatically. Your browser muted audible autoplay; the first click or key press enables sound.';
+        installAutoplayUnlock();
+      } else {
+        $('audioStatus').textContent =
+          'Both sacred channels joined their current continuous station positions automatically.';
+      }
+    } else {
+      showAudioError(rejected[0].reason);
+      installAutoplayUnlock();
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    Object.values(channels).forEach(channel => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    });
+  });
+
+  window.setInterval(() => {
+    Object.values(channels).forEach(channel => {
+      const target = synchronizedPosition(channel);
+      if (!target) return;
+
+      const drift = Math.abs(
+        (channel.audio.currentTime || 0) - target.offset
+      );
+      const wrongTrack =
+        channel.audio.dataset.trackUrl !== target.track.url;
+
+      if (wrongTrack || drift > 20 || channel.audio.paused) {
+        loadCurrentPosition(channel, true).catch(showAudioError);
+      }
+    });
+  }, 30000);
+})();
+</script></body>
 </html>
