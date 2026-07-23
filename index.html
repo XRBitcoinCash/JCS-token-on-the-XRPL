@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.4.1" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.4.1</title>
+<meta content="1.5.0" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.0</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4304,6 +4304,154 @@ a[href$="verify.html"]:focus-visible{
   font-size:.72rem;
   overflow-wrap:anywhere;
 }
+
+
+/* =========================================================
+   Shared JCS header — identical on index.html and verify.html
+   ========================================================= */
+.jcs-unified-header{
+  position:sticky !important;
+  top:0;
+  z-index:1000;
+  width:100%;
+  border-bottom:1px solid rgba(201,152,32,.28) !important;
+  background:rgba(3,10,23,.94) !important;
+  backdrop-filter:blur(18px);
+}
+body.light-mode .jcs-unified-header,
+html[data-theme="light"] .jcs-unified-header{
+  background:rgba(255,255,255,.94) !important;
+}
+.jcs-unified-header .header-inner{
+  width:min(1260px,100%);
+  min-height:64px;
+  margin:0 auto;
+  padding:7px 18px;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:14px;
+  align-items:center;
+}
+.jcs-unified-header .brand{
+  min-width:max-content;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:inherit;
+  text-decoration:none;
+}
+.jcs-unified-header .brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.42);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(201,152,32,.14);
+}
+.jcs-unified-header .brand-copy{display:grid}
+.jcs-unified-header .brand-title{
+  font:900 1rem/1.1 Georgia,"Times New Roman",serif;
+}
+.jcs-unified-header .brand-subtitle{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:.67rem;
+  font-weight:800;
+}
+.jcs-unified-header .header-nav{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.jcs-unified-header .header-nav::-webkit-scrollbar{display:none}
+.jcs-unified-header .nav-link,
+.jcs-unified-header .btn{
+  min-height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:8px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:var(--ink);
+  background:transparent;
+  font-size:.78rem;
+  font-weight:850;
+  line-height:1;
+  text-decoration:none;
+  white-space:nowrap;
+  box-shadow:none;
+}
+.jcs-unified-header .nav-link:hover,
+.jcs-unified-header .nav-link:focus-visible{
+  border-color:var(--line);
+  color:var(--blue,#55a4ff);
+  background:var(--panel-2,var(--surface-2));
+  outline:none;
+  text-decoration:none;
+}
+.jcs-unified-header .header-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.jcs-unified-header .btn{
+  border-color:var(--line);
+  background:var(--panel,var(--surface));
+}
+.jcs-unified-header .btn.blue{
+  border-color:#1458d5;
+  color:#fff;
+  background:linear-gradient(180deg,#2f80ed,#1458d5);
+}
+.jcs-unified-header .btn.danger{
+  border-color:rgba(197,52,77,.45);
+  color:var(--err,#ff7184);
+}
+.jcs-unified-header .wallet-pill{
+  max-width:190px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:750;
+}
+.jcs-unified-header .sign-ledger-gold{
+  border-color:#c99820 !important;
+  color:#111 !important;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b) !important;
+  box-shadow:0 9px 26px rgba(201,152,32,.19) !important;
+}
+.jcs-unified-header .sign-ledger-gold:hover,
+.jcs-unified-header .sign-ledger-gold:focus-visible{
+  color:#111 !important;
+  border-color:#ffe59a !important;
+}
+@media(max-width:1050px){
+  .jcs-unified-header .header-inner{
+    grid-template-columns:auto 1fr;
+  }
+  .jcs-unified-header .header-nav{
+    grid-column:1/-1;
+    justify-content:flex-start;
+  }
+  .jcs-unified-header .header-actions{justify-self:end}
+}
+@media(max-width:700px){
+  .jcs-unified-header{position:static !important}
+  .jcs-unified-header .header-inner{grid-template-columns:1fr}
+  .jcs-unified-header .brand{justify-content:center}
+  .jcs-unified-header .header-actions{justify-self:center;flex-wrap:wrap;justify-content:center}
+  .jcs-unified-header .header-nav{width:100%;justify-content:flex-start}
+  .jcs-unified-header .wallet-pill{max-width:100%}
+}
 </style>
 <script>
 (function(){
@@ -4351,37 +4499,30 @@ a[href$="verify.html"]:focus-visible{
 </head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="site-header" role="banner">
-<div class="header-wrap compact-header-wrap">
-<div class="brand-stack">
-<div class="header-utility-row">
-<button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle compact-theme-toggle" id="themeToggle" type="button">
-<span aria-hidden="true" class="theme-toggle-icon">◐</span>
-<span id="themeToggleText">Light mode</span>
-</button>
-<div class="header-policy-links">
-<a href="about-jcs.html">Vision</a>
-<a class="sign-ledger-gold" href="verify.html">Sign the Ledger</a>
-</div>
-</div>
-<a aria-label="Jesus Christ Saves Token home" class="brand-link" href="https://jesuschristsavestoken.com/">
-<img alt="Jesus Christ Saves Token logo" height="36" src="https://jesuschristsavestoken.com/jcs-logo.png" width="36"/>
-<span>
+<header class="site-header jcs-unified-header">
+<div class="header-inner">
+<a class="brand" href="index.html">
+<img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<span class="brand-copy">
 <span class="brand-title">Jesus Christ Saves Token</span>
+<span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
 </span>
 </a>
-</div>
-<nav aria-label="Primary navigation" class="compact-header-nav">
-<a aria-current="page" class="nav-btn" href="#top">Home</a>
-<a class="nav-btn" href="#trade">Trade</a>
-<a class="nav-btn" href="#open-orders">Orders</a>
-<a class="nav-btn" href="#dex-metrics">DEX Metrics</a>
-<a class="nav-btn" href="#sentinel">Sentinel</a>
-<a class="nav-btn faith-link" href="#scripture">Scripture</a>
-<a class="nav-btn faith-link" href="#sacred-film">Sacred Film</a><a class="nav-btn faith-link" href="#audio">Sacred Audio</a>
-<a class="nav-btn" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
-<a class="nav-btn" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
+<nav aria-label="Primary" class="header-nav">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="about-jcs.html">Vision</a>
+<a class="nav-link sign-ledger-gold" href="verify.html">Sign the Ledger</a>
+<a class="nav-link" href="index.html#trade">Trade</a>
+<a class="nav-link" href="index.html#scripture">Scripture</a>
+<a class="nav-link" href="index.html#sacred-film">Sacred Film</a>
+<a class="nav-link" href="index.html#audio">Sacred Audio</a>
 </nav>
+<div class="header-actions">
+<button aria-label="Change theme" class="btn theme-toggle" id="themeToggle" type="button">◐</button>
+<button class="btn blue" disabled="" id="connectBtn" type="button">Connect Xaman</button>
+<button class="btn danger" hidden="" id="disconnectBtn" type="button">Disconnect</button>
+<span aria-live="polite" class="wallet-pill" id="walletPill">Wallet disconnected</span>
+</div>
 </div>
 </header>
 <main class="container" id="main-content">
@@ -4518,7 +4659,7 @@ a[href$="verify.html"]:focus-visible{
       </div>
 </article>
 </div>
-<p aria-live="polite" class="audio-policy" id="audioStatus">Both continuous station timelines begin when the page opens. Browsers may prevent audible playback until the first click, tap, or key press; that interaction enables both channels while the silent film continues.</p>
+<p aria-live="polite" class="audio-policy" id="audioStatus">Church music and continuous Scripture attempt audible playback as soon as the page opens. The silent film plays independently. If the browser blocks audible autoplay, the first click, tap, or key press enables both audio channels at their current synchronized positions.</p>
 </section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
@@ -4568,7 +4709,7 @@ a[href$="verify.html"]:focus-visible{
 <div class="wallet-identity">
 <div class="wallet-identity-card">
 <span>Wallet</span>
-<strong aria-live="polite" id="walletStatus">Status: Not connected</strong><p class="xaman-redirect-note">Xaman production redirect required for this page: https://jesuschristsavestoken.com/</p>
+<strong aria-live="polite" id="walletStatus">Status: Not connected</strong>
 </div>
 <div class="wallet-identity-card">
 <span>JCS readiness</span>
@@ -5059,7 +5200,7 @@ a[href$="verify.html"]:focus-visible{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.4.1",
+  "release": "1.5.0",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5121,8 +5262,15 @@ a[href$="verify.html"]:focus-visible{
 
   const walletStatus = $('walletStatus');
   const trustlineMsg = $('trustlineMsg');
-  const connectBtn = $('connectWalletBtn');
-  const disconnectBtn = $('disconnectWalletBtn');
+  const headerConnectBtn = $('connectBtn');
+  const headerDisconnectBtn = $('disconnectBtn');
+  const bodyConnectBtn = $('connectWalletBtn');
+  const bodyDisconnectBtn = $('disconnectWalletBtn');
+  const connectButtons = [headerConnectBtn, bodyConnectBtn].filter(Boolean);
+  const disconnectButtons = [headerDisconnectBtn, bodyDisconnectBtn].filter(Boolean);
+  const connectBtn = bodyConnectBtn || headerConnectBtn;
+  const disconnectBtn = bodyDisconnectBtn || headerDisconnectBtn;
+  const walletPill = $('walletPill');
   const setTrustBtn = $('setTrustlineBtn');
   const logEl = $('log');
   const resultBox = $('resultBox');
@@ -5768,8 +5916,23 @@ a[href$="verify.html"]:focus-visible{
     const connected = !!currentAccount;
     const allowTrade = connected && HAS_TRUSTLINE;
 
-    if (connectBtn) connectBtn.disabled = connected;
-    if (disconnectBtn) disconnectBtn.disabled = !connected;
+    connectButtons.forEach((button) => {
+      button.disabled = connected;
+      button.textContent = connected ? 'Xaman connected' : 'Connect Xaman';
+    });
+
+    disconnectButtons.forEach((button) => {
+      button.disabled = !connected;
+    });
+
+    if (headerDisconnectBtn) headerDisconnectBtn.hidden = !connected;
+
+    if (walletPill) {
+      walletPill.textContent = connected
+        ? shortAccount(currentAccount, 9)
+        : 'Wallet disconnected';
+      walletPill.title = connected ? currentAccount : '';
+    }
 
     if (setTrustBtn) {
       setTrustBtn.hidden = !connected;
@@ -5915,213 +6078,120 @@ a[href$="verify.html"]:focus-visible{
     }
   }
 
-  async function waitForXamanAccount(timeoutMs = 30000) {
-    const started = Date.now();
-
-    while (Date.now() - started < timeoutMs) {
-      if (currentAccount) return currentAccount;
-
-      const account = await resolveXamanAccount();
-      if (account) return account;
-
-      await new Promise(resolve => window.setTimeout(resolve, 300));
-    }
-
-    return '';
-  }
-
   async function applyXamanIdentity(event = null) {
     const account = await resolveXamanAccount(event);
     if (!account) return false;
-
     setConnected(account);
     return true;
   }
 
+  function xamanBridgeUrl() {
+    const returnTarget = 'index.html';
+    return (
+      'verify.html?connect=1&return=' +
+      encodeURIComponent(returnTarget)
+    );
+  }
 
-  const XAMAN_PRODUCTION_REDIRECT =
-    'https://jesuschristsavestoken.com/';
-
-  function normalizeXamanBrowserRedirect() {
+  async function beginXamanConnection() {
     try {
-      const url = new URL(window.location.href);
+      const existing = await resolveXamanAccount();
 
-      if (
-        url.origin === 'https://jesuschristsavestoken.com' &&
-        (url.pathname === '/' || url.pathname === '/index.html')
-      ) {
-        window.history.replaceState(
-          window.history.state,
-          document.title,
-          '/'
-        );
+      if (existing) {
+        setConnected(existing);
+        return;
       }
     } catch {}
+
+    try {
+      sessionStorage.setItem(
+        'jcs.xaman.bridge.return',
+        'index.html'
+      );
+    } catch {}
+
+    window.location.assign(xamanBridgeUrl());
   }
 
-  function currentXamanRedirectUrl() {
+  async function disconnectXaman() {
+    window.__jcsManualDisconnect = true;
+
+    disconnectButtons.forEach((button) => {
+      button.disabled = true;
+      button.textContent = 'Disconnecting…';
+    });
+
     try {
-      const url = new URL(window.location.href);
-      url.hash = '';
-      url.search = '';
-      return url.toString();
-    } catch {
-      return window.location.href;
+      await Promise.resolve(xumm?.logout());
+    } catch (error) {
+      console.warn('Xaman logout returned an error:', error);
+    } finally {
+      setDisconnected();
+
+      disconnectButtons.forEach((button) => {
+        button.textContent = 'Disconnect';
+        button.disabled = true;
+      });
     }
   }
-
-  normalizeXamanBrowserRedirect();
 
   if (typeof Xumm !== 'undefined' && XUMM_API_KEY) {
     xumm = new Xumm(XUMM_API_KEY);
-
-    const savedAccount = (() => {
-      try { return localStorage.getItem('jcsWallet'); } catch { return null; }
-    })();
-
     updateWalletButtons();
 
-    if (savedAccount) {
-      setStatus(
-        walletStatus,
-        'Restoring the verified Xaman session for ' + shortAccount(savedAccount) + '…'
-      );
-    }
+    xumm.on('ready', async () => {
+      connectButtons.forEach((button) => {
+        button.disabled = false;
+      });
 
-    xumm.on('logout', () => {
-      window.__jcsManualDisconnect = true;
-      setDisconnected();
-    });
+      const connected = await applyXamanIdentity();
 
-    xumm.on('loggedout', () => {
-      window.__jcsManualDisconnect = true;
-      setDisconnected();
-    });
-
-    xumm.on('retrieving', () => {
-      setStatus(walletStatus, 'Checking for an existing Xaman session…');
+      if (!connected && !currentAccount) {
+        setStatus(walletStatus, 'Status: Not connected');
+      }
     });
 
     xumm.on('success', async (event) => {
-      const connected = await applyXamanIdentity(event);
-      if (!connected) {
-        setStatus(
-          walletStatus,
-          'Xaman authorization succeeded, but the XRPL account is still resolving.'
-        );
-      }
+      await applyXamanIdentity(event);
     });
 
     xumm.on('retrieved', async (event) => {
       await applyXamanIdentity(event);
     });
 
-    xumm.on('ready', async () => {
-      updateWalletButtons();
-      const connected = await applyXamanIdentity();
-      if (!connected && !currentAccount) {
-        setStatus(walletStatus, 'Status: Not connected');
-      }
+    xumm.on('logout', () => {
+      setDisconnected();
+    });
+
+    xumm.on('loggedout', () => {
+      setDisconnected();
     });
 
     xumm.on('error', (error) => {
       setStatus(
         walletStatus,
-        'Xaman connection error: ' + (error?.message || error || 'Unknown error'),
+        'Xaman connection error: ' +
+          (error?.message || error || 'Unknown error'),
         'err'
       );
       console.error('JCS Xaman SDK error:', error);
     });
 
-    window.addEventListener('visibilitychange', () => {
-      if (document.hidden || window.__jcsManualDisconnect) return;
+    window.addEventListener('pageshow', () => {
       applyXamanIdentity().catch(() => {});
     });
 
     window.addEventListener('focus', () => {
-      if (window.__jcsManualDisconnect) return;
       applyXamanIdentity().catch(() => {});
     });
 
-    if (connectBtn) {
-      connectBtn.addEventListener('click', async () => {
-        try {
-          if (currentAccount) {
-            setStatus(walletStatus, 'Already connected: ' + currentAccount, 'ok');
-            return;
-          }
+    connectButtons.forEach((button) => {
+      button.addEventListener('click', beginXamanConnection);
+    });
 
-          window.__jcsManualDisconnect = false;
-          connectBtn.disabled = true;
-          connectBtn.textContent = 'Connecting…';
-          setStatus(
-            walletStatus,
-            'Opening the working JCS Xaman authorization flow…'
-          );
-
-          await xumm.authorize();
-
-          const account = await waitForXamanAccount(30000);
-
-          if (account) {
-            setConnected(account);
-            setStatus(walletStatus, 'Connected: ' + account, 'ok');
-          } else {
-            setStatus(
-              walletStatus,
-              'Xaman opened, but no XRPL account was returned. Confirm the authorization in Xaman and try once more.',
-              'err'
-            );
-          }
-        } catch (error) {
-          const message =
-            error?.message || String(error || 'Authorization was canceled.');
-          const redirectUrl = currentXamanRedirectUrl();
-          const redirectFailure =
-            /redirect|invalid client|access denied/i.test(message);
-
-          setStatus(
-            walletStatus,
-            redirectFailure
-              ? 'Xaman rejected the browser redirect. Add this exact URL to the JCS Proof-of-Faith Origin/Redirect URIs: ' +
-                redirectUrl
-              : 'Wallet connection failed: ' + message,
-            'err'
-          );
-
-          console.error(
-            'Jesus Christ Saves Token Xaman connection failed:',
-            error,
-            {
-              apiKey: XUMM_API_KEY,
-              redirectUrl,
-              requiredProductionRedirect: XAMAN_PRODUCTION_REDIRECT
-            }
-          );
-        } finally {
-          connectBtn.textContent = 'Connect Xaman';
-          updateWalletButtons();
-        }
-      });
-    }
-
-    if (disconnectBtn) {
-      disconnectBtn.addEventListener('click', async () => {
-        window.__jcsManualDisconnect = true;
-        disconnectBtn.disabled = true;
-        disconnectBtn.textContent = 'Disconnecting…';
-
-        try {
-          await Promise.resolve(xumm.logout());
-        } catch (error) {
-          console.warn('Xaman logout returned an error:', error);
-        } finally {
-          setDisconnected();
-          disconnectBtn.textContent = 'Disconnect';
-          disconnectBtn.disabled = true;
-        }
-      });
-    }
+    disconnectButtons.forEach((button) => {
+      button.addEventListener('click', disconnectXaman);
+    });
 
     if (setTrustBtn) {
       setTrustBtn.addEventListener('click', async () => {
