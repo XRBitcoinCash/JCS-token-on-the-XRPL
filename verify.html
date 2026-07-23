@@ -6,9 +6,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#071225" name="theme-color"/>
 <meta content="JCS Sign the Ledger" name="application-name"/>
-<meta content="4.0.0" name="jcs-ledger-release"/>
-<title>Sign the Ledger v4.0.0 · JCS Prayer NFT Social Ledger</title>
-<meta content="Mint JCS-logo prayer NFTs through Xaman and publish numbered prayers, testimonies, replies, and Amen reactions directly to the XRP Ledger." name="description"/>
+<meta content="4.1.0" name="jcs-ledger-release"/>
+<title>Sign the Ledger v4.1.0 · JCS Prayer NFT Social Ledger</title>
+<meta content="Mint JCS prayer NFTs through Xaman, publish validated testimonies and replies to the XRP Ledger, and enter continuous sacred music and Scripture-reading streams." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large" name="robots"/>
@@ -29,24 +29,33 @@
 <link crossorigin="" href="https://xaman.app" rel="preconnect"/>
 <link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
 <meta content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://unpkg.com;
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data: https:;
-      connect-src 'self'
-        https://xumm.app https://*.xumm.app
-        https://oauth2.xumm.app
-        https://xaman.app https://*.xaman.app
-        wss://xumm.app wss://*.xumm.app
-        wss://xaman.app wss://*.xaman.app
-        wss://xrplcluster.com
-        wss://s1.ripple.com
-        wss://s2.ripple.com
-        wss://honeycluster.io;
-      frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app;
-      base-uri 'self';
-      form-action 'self';
-    " http-equiv="Content-Security-Policy"/>
+  default-src 'self';
+  script-src 'self' 'unsafe-inline'
+    https://xumm.app https://*.xumm.app
+    https://xaman.app https://*.xaman.app
+    https://unpkg.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  media-src 'self' blob:
+    https://archive.org https://*.archive.org;
+  connect-src 'self'
+    https://xumm.app https://*.xumm.app
+    https://oauth2.xumm.app
+    https://xaman.app https://*.xaman.app
+    https://archive.org https://*.archive.org
+    wss://xumm.app wss://*.xumm.app
+    wss://xaman.app wss://*.xaman.app
+    wss://xrplcluster.com
+    wss://s1.ripple.com
+    wss://s2.ripple.com
+    wss://honeycluster.io;
+  frame-src 'self'
+    https://xumm.app https://*.xumm.app
+    https://oauth2.xumm.app
+    https://xaman.app https://*.xaman.app;
+  base-uri 'self';
+  form-action 'self';
+" http-equiv="Content-Security-Policy"/>
 <style>
     :root{
       --bg:#f6f8fc;
@@ -682,6 +691,118 @@
   .publish-flow{grid-template-columns:1fr}
   .explain-grid{grid-template-columns:1fr}
 }
+
+
+/* =========================================================
+   Sign the Ledger v4.1.0 · Sacred Audio Sanctuary
+   ========================================================= */
+.audio-sanctuary{
+  margin-top:22px;
+  padding:clamp(22px,4vw,38px);
+  border-color:rgba(201,152,32,.31);
+  background:
+    radial-gradient(circle at 96% 0,rgba(201,152,32,.11),transparent 28rem),
+    var(--surface);
+}
+.audio-intro{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+}
+.audio-intro h2{
+  margin:14px 0 7px;
+  font-size:1.55rem;
+}
+.audio-intro p{
+  max-width:790px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+}
+.audio-master-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:flex-end;
+}
+.audio-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+.audio-channel{
+  min-width:0;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface-2);
+}
+.audio-channel h3{
+  margin:0 0 6px;
+  font-size:1.18rem;
+}
+.audio-channel p{
+  margin:0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
+}
+.audio-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.audio-controls label{
+  color:var(--ink);
+  font-size:.75rem;
+  font-weight:850;
+}
+.audio-controls input[type="range"]{
+  width:auto;
+  min-width:140px;
+  flex:1;
+  accent-color:var(--blue);
+}
+.now-playing{
+  min-height:45px;
+  margin-top:12px;
+  padding:10px 11px;
+  border:1px dashed var(--line);
+  border-radius:10px;
+  color:var(--muted);
+  background:var(--surface);
+  font-size:.76rem;
+  overflow-wrap:anywhere;
+}
+.now-playing.is-live{
+  border-color:rgba(8,125,78,.42);
+  color:var(--green);
+}
+.now-playing.is-muted{
+  border-color:rgba(201,152,32,.38);
+  color:var(--gold);
+}
+.audio-policy{
+  margin:14px 0 0;
+  padding:11px 13px;
+  border-left:4px solid var(--gold);
+  border-radius:10px;
+  color:var(--muted);
+  background:rgba(201,152,32,.07);
+  font-size:.8rem;
+}
+@media(max-width:860px){
+  .audio-intro{display:block}
+  .audio-master-actions{
+    justify-content:flex-start;
+    margin-top:14px;
+  }
+  .audio-grid{grid-template-columns:1fr}
+}
 </style>
 <script>
     (function(){
@@ -700,7 +821,7 @@
   "url": "https://jesuschristsavestoken.com/verify.html",
   "applicationCategory": "SocialNetworkingApplication",
   "operatingSystem": "Any modern browser",
-  "softwareVersion": "4.0.0",
+  "softwareVersion": "4.1.0",
   "isAccessibleForFree": true,
   "description": "A non-custodial JCS prayer NFT and social testimony interface that reads and publishes validated XRP Ledger transactions.",
   "publisher": {
@@ -715,7 +836,10 @@
     "Rolling testimony feed from validated account history",
     "Inline on-ledger replies without modal blur",
     "On-ledger Amen reactions",
-    "Public XRPL WebSocket failover"
+    "Public XRPL WebSocket failover",
+    "Automatic wall-clock synchronized sacred music",
+    "Automatic wall-clock synchronized Scripture readings",
+    "Local listening pause without stopping the shared timeline"
   ]
 }</script>
 </head>
@@ -727,14 +851,14 @@
 <img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
 <span class="brand-copy">
 <span class="brand-title">Sign the Ledger</span>
-<span class="brand-subtitle">JCS prayer NFT social ledger · v4.0.0</span>
+<span class="brand-subtitle">JCS prayer NFT social ledger · sacred audio · v4.1.0</span>
 </span>
 </a>
 <nav aria-label="Primary" class="header-nav">
 <a class="nav-link" href="#compose">Compose</a>
 <a class="nav-link" href="#testimonies">Testimonies</a>
 <a class="nav-link" href="#my-nfts">My NFTs</a>
-<a class="nav-link" href="index.html">JCS Home</a>
+<a class="nav-link" href="#audio">Sacred Audio</a><a class="nav-link" href="index.html">JCS Home</a>
 <a class="nav-link" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
 <a class="nav-link" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
 </nav>
@@ -775,6 +899,64 @@
 </div>
 </div>
 </aside>
+</section><section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
+<div class="audio-intro">
+<div>
+<span class="eyebrow">Continuous wall-clock synchronized streams</span>
+<h2 id="audio-title">Sacred Audio Sanctuary</h2>
+<p>
+        Church music and spoken Scripture automatically join the current point
+        in their continuous station timelines. Pausing your listening only
+        mutes this browser; the station clock continues, and resuming rejoins
+        the current position rather than restarting.
+      </p>
+</div>
+<div class="audio-master-actions">
+<button class="btn primary" id="audioListenAll" type="button">Listen to both channels</button>
+<button class="btn" id="audioMuteAll" type="button">Pause listening</button>
+</div>
+</div>
+<div class="audio-grid">
+<article class="audio-channel">
+<h3>Church Music Radio</h3>
+<p>
+        Gregorian chant, Ave Maria, and suitable public-domain archival sacred
+        recordings. The station begins loading when the page opens.
+      </p>
+<audio autoplay="" id="musicAudio" playsinline="" preload="auto"></audio>
+<div class="audio-controls">
+<button class="btn" id="musicListen" type="button">Listen</button>
+<button class="btn" id="musicMute" type="button">Pause listening</button>
+<label for="musicVolume">Volume</label>
+<input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0.18"/>
+</div>
+<div class="now-playing" id="musicNow">
+        Joining the current church-music station position…
+      </div>
+</article>
+<article class="audio-channel">
+<h3>Continuous Scripture Reading</h3>
+<p>
+        King James Psalms, the Book of Enoch, and the Book of Jubilees from
+        public-domain LibriVox and Internet Archive recordings.
+      </p>
+<audio autoplay="" id="readingAudio" playsinline="" preload="auto"></audio>
+<div class="audio-controls">
+<button class="btn" id="readingListen" type="button">Listen</button>
+<button class="btn" id="readingMute" type="button">Pause listening</button>
+<label for="readingVolume">Volume</label>
+<input id="readingVolume" max="1" min="0" step="0.01" type="range" value="0.78"/>
+</div>
+<div class="now-playing" id="readingNow">
+        Joining the current Scripture-reading station position…
+      </div>
+</article>
+</div>
+<p aria-live="polite" class="audio-policy" id="audioStatus">
+    Both continuous channels are starting. When a browser blocks audible
+    autoplay, the first click or key press on this page enables the sound
+    automatically. The shared station timelines continue regardless.
+  </p>
 </section>
 <section class="social-layout">
 <article class="card composer" id="compose">
@@ -976,11 +1158,10 @@
 <img alt="Scan the Xaman sign request" class="sign-qr" hidden="" id="signQr"/>
 </div>
 </aside>
-
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
-<strong>Jesus Christ Saves Token · Sign the Ledger v4.0.0</strong>
+<strong>Jesus Christ Saves Token · Sign the Ledger v4.1.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
         permanent availability from every public XRPL server, moderate religious
@@ -1002,7 +1183,7 @@
 (() => {
   'use strict';
 
-  const APP_KEY = '9f853ecf-d95f-4e03-8591-e41f91b9f3c5';
+  const APP_KEY = '7737775c-1645-4a4e-a92d-ffe51530a348';
   const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
   const JCS_LOGO = 'https://jesuschristsavestoken.com/jcs-logo.png';
   const APP_TAG = 'JCS_SOCIAL_V4';
@@ -2648,5 +2829,560 @@
   });
 })();
 </script>
-</body>
+<script>
+(() => {
+  'use strict';
+
+  const STREAM_EPOCH_SECONDS = Date.UTC(2026, 0, 1, 0, 0, 0) / 1000;
+  const AUDIO_STORAGE = 'jcs.sacredAudio.v2';
+  const ARCHIVE_BASE = 'https://archive.org';
+
+  const $ = id => document.getElementById(id);
+  const clamp = (value, minimum, maximum) =>
+    Math.min(maximum, Math.max(minimum, value));
+
+  const musicFallback = [
+    {
+      title:'Gregorian Chant Mass · Track 2',
+      url:'https://archive.org/download/GregorianChantMass/02Track2_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 4',
+      url:'https://archive.org/download/GregorianChantMass/04Track4_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 5',
+      url:'https://archive.org/download/GregorianChantMass/05Track5_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Gregorian Chant Mass · Track 6',
+      url:'https://archive.org/download/GregorianChantMass/06Track6_64kb.mp3',
+      duration:300
+    },
+    {
+      title:'Ave Maria · Enrico Caruso archival recording',
+      url:'https://archive.org/download/Caruso_part1/Caruso-AveMaria.mp3',
+      duration:270
+    }
+  ];
+
+  const readingFallback = [
+    {
+      title:'KJV Psalms · Book I',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_01_kjv.mp3',
+      duration:957
+    },
+    {
+      title:'KJV Psalms · Book II',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_02_kjv.mp3',
+      duration:965
+    },
+    {
+      title:'KJV Psalms · Book III',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_03_kjv.mp3',
+      duration:1410
+    },
+    {
+      title:'KJV Psalms · Book IV',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_04_kjv.mp3',
+      duration:1181
+    },
+    {
+      title:'KJV Psalms · Book V',
+      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_05_kjv.mp3',
+      duration:885
+    },
+    {
+      title:'1 Enoch · Chapters I–V',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_128kb.mp3',
+      duration:964
+    },
+    {
+      title:'1 Enoch · Chapters VI–XI',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_128kb.mp3',
+      duration:873
+    },
+    {
+      title:'1 Enoch · Chapters XII–XVI',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_04_charles_128kb.mp3',
+      duration:509
+    },
+    {
+      title:'1 Enoch · Further reading',
+      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_05_charles_128kb.mp3',
+      duration:454
+    },
+    {
+      title:'Book of Jubilees · Opening reading',
+      url:'https://archive.org/download/book_jubilees_2108_librivox/bookofjubilees_01_charles_128kb.mp3',
+      duration:900
+    }
+  ];
+
+  const channels = {
+    music:{
+      audio:$('musicAudio'),
+      now:$('musicNow'),
+      listen:$('musicListen'),
+      mute:$('musicMute'),
+      volume:$('musicVolume'),
+      playlist:musicFallback,
+      seed:117,
+      listenerMuted:false,
+      timer:null
+    },
+    reading:{
+      audio:$('readingAudio'),
+      now:$('readingNow'),
+      listen:$('readingListen'),
+      mute:$('readingMute'),
+      volume:$('readingVolume'),
+      playlist:readingFallback,
+      seed:811,
+      listenerMuted:false,
+      timer:null
+    }
+  };
+
+  let preparationPromise = null;
+  let autoplayUnlocked = false;
+  let unlockInstalled = false;
+
+  function parseDuration(value) {
+    if (Number.isFinite(Number(value)) && Number(value) > 0) {
+      return Number(value);
+    }
+    const parts = String(value || '').trim().split(':').map(Number);
+    if (!parts.length || parts.some(value => !Number.isFinite(value))) return 0;
+    return parts.reduce((total, value) => total * 60 + value, 0);
+  }
+
+  function archiveUrl(identifier, filename) {
+    return ARCHIVE_BASE + '/download/' + encodeURIComponent(identifier) + '/' +
+      String(filename).split('/').map(encodeURIComponent).join('/');
+  }
+
+  function mediaPreference(file) {
+    const format = String(file?.format || '').toLowerCase();
+    if (format.includes('vbr mp3')) return 4;
+    if (format.includes('128kbps mp3')) return 3;
+    if (format.includes('64kbps mp3')) return 2;
+    if (String(file?.name || '').toLowerCase().endsWith('.mp3')) return 1;
+    return 0;
+  }
+
+  async function archiveTracks(identifier, label, filenameFilter=() => true) {
+    const response = await fetch(
+      ARCHIVE_BASE + '/metadata/' + encodeURIComponent(identifier),
+      {cache:'force-cache', credentials:'omit'}
+    );
+    if (!response.ok) {
+      throw new Error('Archive metadata HTTP ' + response.status);
+    }
+
+    const metadata = await response.json();
+    const candidates = (metadata.files || [])
+      .filter(file => mediaPreference(file) > 0)
+      .filter(file => filenameFilter(String(file.name || ''), file));
+
+    const selected = new Map();
+    for (const file of candidates) {
+      const name = String(file.name || '');
+      const key = String(file.original || name)
+        .replace(/_(64kb|128kb)(?=\.mp3$)/i, '')
+        .toLowerCase();
+      const existing = selected.get(key);
+      if (!existing || mediaPreference(file) > mediaPreference(existing)) {
+        selected.set(key, file);
+      }
+    }
+
+    return [...selected.values()]
+      .map((file, index) => ({
+        title:String(file.title || metadata.metadata?.title || label) +
+          (file.track ? ' · ' + file.track : ' · ' + (index + 1)),
+        url:archiveUrl(identifier, file.name),
+        duration:parseDuration(file.length || file.duration) || 300
+      }))
+      .filter(track => track.duration > 0)
+      .sort((first, second) => first.url.localeCompare(second.url));
+  }
+
+  async function preparePlaylists() {
+    if (preparationPromise) return preparationPromise;
+
+    preparationPromise = (async () => {
+      const results = await Promise.allSettled([
+        archiveTracks(
+          'GregorianChantMass',
+          'Gregorian Chant Mass',
+          name => /\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'Caruso_part1',
+          'Ave Maria',
+          name => /ave.?maria.*\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'psalms_kjv_1202_librivox',
+          'King James Psalms',
+          name => /psalms_\d+_kjv.*\.mp3$/i.test(name)
+        ),
+        archiveTracks(
+          'bookofenoch_1812_librivox',
+          'Book of Enoch · R. H. Charles',
+          name => /bookofenoch_\d+_charles.*\.mp3$/i.test(name) && !/_01_/i.test(name)
+        ),
+        archiveTracks(
+          'book_jubilees_2108_librivox',
+          'Book of Jubilees · R. H. Charles',
+          name => /\.mp3$/i.test(name)
+        )
+      ]);
+
+      const values = results.map(result =>
+        result.status === 'fulfilled' ? result.value : []
+      );
+      const music = [...values[0], ...values[1]].filter(track => track.url);
+      const reading = [...values[2], ...values[3], ...values[4]]
+        .filter(track => track.url);
+
+      if (music.length) channels.music.playlist = music;
+      if (reading.length) channels.reading.playlist = reading;
+    })();
+
+    return preparationPromise;
+  }
+
+  function loadSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(AUDIO_STORAGE) || '{}');
+      channels.music.listenerMuted = Boolean(saved.musicMuted);
+      channels.reading.listenerMuted = Boolean(saved.readingMuted);
+      channels.music.volume.value = String(
+        clamp(Number(saved.musicVolume ?? 0.18), 0, 1)
+      );
+      channels.reading.volume.value = String(
+        clamp(Number(saved.readingVolume ?? 0.78), 0, 1)
+      );
+    } catch {
+      channels.music.volume.value = '0.18';
+      channels.reading.volume.value = '0.78';
+    }
+  }
+
+  function saveSettings() {
+    try {
+      localStorage.setItem(AUDIO_STORAGE, JSON.stringify({
+        musicMuted:channels.music.listenerMuted,
+        readingMuted:channels.reading.listenerMuted,
+        musicVolume:Number(channels.music.volume.value),
+        readingVolume:Number(channels.reading.volume.value)
+      }));
+    } catch {}
+  }
+
+  function synchronizedPosition(channel) {
+    const playlist = channel.playlist.filter(track => Number(track.duration) > 0);
+    const totalDuration = playlist.reduce(
+      (total, track) => total + Number(track.duration),
+      0
+    );
+    if (!playlist.length || totalDuration <= 0) return null;
+
+    const elapsed = Math.max(
+      0,
+      Date.now() / 1000 - STREAM_EPOCH_SECONDS + channel.seed
+    );
+    let position = ((elapsed % totalDuration) + totalDuration) % totalDuration;
+
+    for (let index = 0; index < playlist.length; index++) {
+      const duration = Number(playlist[index].duration);
+      if (position < duration) {
+        return {track:playlist[index], index, offset:position};
+      }
+      position -= duration;
+    }
+
+    return {track:playlist[0], index:0, offset:0};
+  }
+
+  function updateChannelButtons(channel) {
+    channel.listen.disabled = !channel.listenerMuted && !channel.audio.paused;
+    channel.mute.disabled = channel.listenerMuted;
+  }
+
+  function setNowPlaying(channel, target, seek) {
+    const prefix = channel.listenerMuted
+      ? 'Listening paused locally · station continues: '
+      : 'Now playing: ';
+    channel.now.textContent =
+      prefix + target.track.title +
+      ' · current station position ' +
+      Math.floor(seek / 60) + ':' +
+      String(Math.floor(seek % 60)).padStart(2, '0');
+    channel.now.className =
+      'now-playing ' + (channel.listenerMuted ? 'is-muted' : 'is-live');
+    updateChannelButtons(channel);
+  }
+
+  async function loadCurrentPosition(channel, allowMutedFallback=true) {
+    await preparePlaylists();
+    const target = synchronizedPosition(channel);
+    if (!target) throw new Error('No tracks are available for this channel.');
+
+    const audio = channel.audio;
+    const sameTrack = audio.dataset.trackUrl === target.track.url;
+
+    if (!sameTrack) {
+      audio.pause();
+      audio.src = target.track.url;
+      audio.dataset.trackUrl = target.track.url;
+      audio.load();
+    }
+
+    const beginPlayback = async () => {
+      const actualDuration =
+        Number.isFinite(audio.duration) && audio.duration > 0
+          ? audio.duration
+          : Number(target.track.duration);
+      const seek =
+        actualDuration > 1
+          ? target.offset % actualDuration
+          : 0;
+
+      try {
+        audio.currentTime = Math.max(
+          0,
+          Math.min(seek, Math.max(0, actualDuration - 0.25))
+        );
+      } catch {}
+
+      audio.volume = Number(channel.volume.value);
+      audio.muted = channel.listenerMuted;
+
+      try {
+        await audio.play();
+        autoplayUnlocked = autoplayUnlocked || !audio.muted;
+      } catch (error) {
+        if (!allowMutedFallback) throw error;
+        audio.muted = true;
+        await audio.play();
+        installAutoplayUnlock();
+      }
+
+      setNowPlaying(channel, target, seek);
+    };
+
+    if (audio.readyState >= 1) {
+      await beginPlayback();
+    } else {
+      await new Promise((resolve, reject) => {
+        const ready = () => {
+          cleanup();
+          resolve();
+        };
+        const failed = () => {
+          cleanup();
+          reject(new Error('Audio source unavailable.'));
+        };
+        const cleanup = () => {
+          audio.removeEventListener('loadedmetadata', ready);
+          audio.removeEventListener('error', failed);
+        };
+        audio.addEventListener('loadedmetadata', ready, {once:true});
+        audio.addEventListener('error', failed, {once:true});
+      });
+      await beginPlayback();
+    }
+
+    window.clearTimeout(channel.timer);
+    const remaining = Math.max(
+      5,
+      Number(target.track.duration) - target.offset + 1
+    );
+    channel.timer = window.setTimeout(() => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    }, remaining * 1000);
+  }
+
+  function showAudioError(error) {
+    $('audioStatus').textContent =
+      'Sacred audio could not start from this browser or source: ' +
+      (error?.message || error) +
+      '. The station clock remains continuous; use Listen to retry.';
+  }
+
+  async function listenChannel(name) {
+    const channel = channels[name];
+    channel.listenerMuted = false;
+    channel.audio.muted = false;
+    saveSettings();
+
+    try {
+      if (channel.audio.paused) {
+        await loadCurrentPosition(channel, false);
+      } else {
+        channel.audio.volume = Number(channel.volume.value);
+        await channel.audio.play();
+        const target = synchronizedPosition(channel);
+        if (target) setNowPlaying(channel, target, channel.audio.currentTime || target.offset);
+      }
+      $('audioStatus').textContent =
+        'Sacred audio is audible and synchronized to the continuous station clock.';
+    } catch (error) {
+      installAutoplayUnlock();
+      showAudioError(error);
+    }
+  }
+
+  async function muteChannel(name) {
+    const channel = channels[name];
+    channel.listenerMuted = true;
+    channel.audio.muted = true;
+    saveSettings();
+
+    if (channel.audio.paused) {
+      try {
+        await loadCurrentPosition(channel, true);
+      } catch (error) {
+        showAudioError(error);
+      }
+    }
+
+    const target = synchronizedPosition(channel);
+    if (target) {
+      setNowPlaying(channel, target, channel.audio.currentTime || target.offset);
+    }
+    $('audioStatus').textContent =
+      'Listening is paused locally. Both station timelines continue.';
+  }
+
+  async function listenAll() {
+    channels.music.listenerMuted = false;
+    channels.reading.listenerMuted = false;
+    saveSettings();
+    await Promise.allSettled([
+      listenChannel('music'),
+      listenChannel('reading')
+    ]);
+  }
+
+  async function muteAll() {
+    await Promise.allSettled([
+      muteChannel('music'),
+      muteChannel('reading')
+    ]);
+  }
+
+  async function unlockAudio() {
+    if (autoplayUnlocked) return;
+    autoplayUnlocked = true;
+
+    const attempts = Object.values(channels).map(async channel => {
+      if (!channel.listenerMuted) {
+        channel.audio.muted = false;
+        channel.audio.volume = Number(channel.volume.value);
+        if (channel.audio.paused) {
+          await loadCurrentPosition(channel, false);
+        } else {
+          await channel.audio.play();
+        }
+      }
+    });
+
+    await Promise.allSettled(attempts);
+    $('audioStatus').textContent =
+      'Sacred audio enabled. Both channels remain synchronized to the shared station clock.';
+  }
+
+  function installAutoplayUnlock() {
+    if (unlockInstalled) return;
+    unlockInstalled = true;
+
+    const unlock = () => {
+      unlockAudio().catch(showAudioError);
+      document.removeEventListener('pointerdown', unlock, true);
+      document.removeEventListener('keydown', unlock, true);
+    };
+
+    document.addEventListener('pointerdown', unlock, true);
+    document.addEventListener('keydown', unlock, true);
+  }
+
+  Object.entries(channels).forEach(([name, channel]) => {
+    channel.listen.addEventListener('click', () => listenChannel(name));
+    channel.mute.addEventListener('click', () => muteChannel(name));
+    channel.volume.addEventListener('input', () => {
+      channel.audio.volume = Number(channel.volume.value);
+      saveSettings();
+    });
+    channel.audio.addEventListener('ended', () => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    });
+    channel.audio.addEventListener('error', () => {
+      window.setTimeout(
+        () => loadCurrentPosition(channel, true).catch(showAudioError),
+        2500
+      );
+    });
+  });
+
+  $('audioListenAll').addEventListener('click', listenAll);
+  $('audioMuteAll').addEventListener('click', muteAll);
+
+  loadSettings();
+
+  // Start both continuous station timelines immediately.
+  Promise.allSettled([
+    loadCurrentPosition(channels.music, true),
+    loadCurrentPosition(channels.reading, true)
+  ]).then(results => {
+    const rejected = results.filter(result => result.status === 'rejected');
+    if (rejected.length === 0) {
+      const mutedByBrowser = Object.values(channels)
+        .some(channel => channel.audio.muted && !channel.listenerMuted);
+
+      if (mutedByBrowser) {
+        $('audioStatus').textContent =
+          'Both station timelines started automatically. Your browser muted audible autoplay; the first click or key press enables sound.';
+        installAutoplayUnlock();
+      } else {
+        $('audioStatus').textContent =
+          'Both sacred channels joined their current continuous station positions automatically.';
+      }
+    } else {
+      showAudioError(rejected[0].reason);
+      installAutoplayUnlock();
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    Object.values(channels).forEach(channel => {
+      loadCurrentPosition(channel, true).catch(showAudioError);
+    });
+  });
+
+  window.setInterval(() => {
+    Object.values(channels).forEach(channel => {
+      const target = synchronizedPosition(channel);
+      if (!target) return;
+
+      const drift = Math.abs(
+        (channel.audio.currentTime || 0) - target.offset
+      );
+      const wrongTrack =
+        channel.audio.dataset.trackUrl !== target.track.url;
+
+      if (wrongTrack || drift > 20 || channel.audio.paused) {
+        loadCurrentPosition(channel, true).catch(showAudioError);
+      }
+    });
+  }, 30000);
+})();
+</script></body>
 </html>
