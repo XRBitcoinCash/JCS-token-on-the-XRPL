@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.5.0" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.0</title>
+<meta content="1.6.0" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.6.0</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4452,6 +4452,9 @@ html[data-theme="light"] .jcs-unified-header{
   .jcs-unified-header .header-nav{width:100%;justify-content:flex-start}
   .jcs-unified-header .wallet-pill{max-width:100%}
 }
+
+#connectBtn,#connectWalletBtn{position:relative;z-index:5;pointer-events:auto!important;cursor:pointer!important;text-decoration:none!important}
+.quick-buy-card{overflow:visible}.quick-buy-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:16px;align-items:start;margin-top:10px}.quick-buy-actions-panel,.quick-buy-metrics-panel{min-width:0}.quick-buy-metrics-panel{padding:15px;border:1px solid rgba(56,189,248,.38);border-radius:15px;background:radial-gradient(circle at 100% 0,rgba(56,189,248,.10),transparent 18rem),var(--panel-2)}.quick-buy-metrics-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.quick-buy-metrics-head h3{margin:3px 0 0;font-size:1.05rem}.quick-buy-metrics-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.quick-buy-metric{min-width:0;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}.quick-buy-metric span{display:block;margin-bottom:4px;color:var(--muted);font-size:.66rem;font-weight:850;letter-spacing:.04em;text-transform:uppercase}.quick-buy-metric strong{display:block;min-width:0;overflow-wrap:anywhere;font-size:.8rem}.quick-buy-metrics-updated{margin:10px 0 0;color:var(--muted);font-size:.72rem}@media(max-width:860px){.quick-buy-layout{grid-template-columns:1fr}}@media(max-width:520px){.quick-buy-metrics-grid{grid-template-columns:1fr}.quick-buy-metrics-head{display:block}#qbRefreshMetrics{width:100%;margin-top:9px}}
 </style>
 <script>
 (function(){
@@ -4519,7 +4522,7 @@ html[data-theme="light"] .jcs-unified-header{
 </nav>
 <div class="header-actions">
 <button aria-label="Change theme" class="btn theme-toggle" id="themeToggle" type="button">◐</button>
-<button class="btn blue" disabled="" id="connectBtn" type="button">Connect Xaman</button>
+<a class="btn blue" data-xaman-connect="verify" href="verify.html" id="connectBtn" role="button">Connect Xaman</a>
 <button class="btn danger" hidden="" id="disconnectBtn" type="button">Disconnect</button>
 <span aria-live="polite" class="wallet-pill" id="walletPill">Wallet disconnected</span>
 </div>
@@ -4629,7 +4632,7 @@ html[data-theme="light"] .jcs-unified-header{
         Gregorian chant, Ave Maria, and suitable public-domain archival sacred
         recordings. Default volume is set to 18 percent.
       </p>
-<audio autoplay="" crossorigin="anonymous" id="musicAudio" playsinline="" preload="auto"></audio>
+<audio crossorigin="anonymous" id="musicAudio" playsinline="" preload="auto"></audio>
 <div class="audio-controls">
 <button class="btn" id="musicStart" type="button">Listen</button>
 <button class="btn" id="musicStop" type="button">Pause listening</button>
@@ -4647,7 +4650,7 @@ html[data-theme="light"] .jcs-unified-header{
         public-domain LibriVox and Internet Archive recordings. Default volume
         is set to 78 percent.
       </p>
-<audio autoplay="" crossorigin="anonymous" id="readingAudio" playsinline="" preload="auto"></audio>
+<audio crossorigin="anonymous" id="readingAudio" playsinline="" preload="auto"></audio>
 <div class="audio-controls">
 <button class="btn" id="readingStart" type="button">Listen</button>
 <button class="btn" id="readingStop" type="button">Pause listening</button>
@@ -4659,7 +4662,7 @@ html[data-theme="light"] .jcs-unified-header{
       </div>
 </article>
 </div>
-<p aria-live="polite" class="audio-policy" id="audioStatus">Church music and continuous Scripture attempt audible playback as soon as the page opens. The silent film plays independently. If the browser blocks audible autoplay, the first click, tap, or key press enables both audio channels at their current synchronized positions.</p>
+<p aria-live="polite" class="audio-policy" id="audioStatus">Church music and Scripture are prepared at their current synchronized positions. Press Listen to begin; resuming rejoins the current continuous timeline.</p>
 </section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
@@ -4699,9 +4702,7 @@ html[data-theme="light"] .jcs-unified-header{
 <div class="label">Scan to download Xaman Wallet</div>
 </div>
 </div>
-<button class="btn glow glow-green" id="connectWalletBtn" type="button">
-          Connect Xaman
-        </button>
+<a class="btn glow glow-green" data-xaman-connect="verify" href="verify.html" id="connectWalletBtn" role="button">Connect Xaman</a>
 <button class="btn glow glow-yellow" hidden="" id="setTrustlineBtn" type="button">
           Add JCS Trustline
         </button>
@@ -4957,8 +4958,8 @@ html[data-theme="light"] .jcs-unified-header{
 <button class="btn" id="btnHealthRetry" type="button">Retry now</button>
 </div>
 </article>
-<article class="card">
-<h2 class="section-title">Quick buy · JCS</h2>
+<article class="card quick-buy-card"><h2 class="section-title">Quick buy · JCS</h2><div class="quick-buy-layout"><div class="quick-buy-actions-panel">
+
 <p class="hint">Pathfinding via XRPL with 2% slippage cap. Requires JCS trustline. Signing in Xaman.</p>
 <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
 <div style="display:flex;align-items:center;gap:6px">
@@ -4987,7 +4988,18 @@ html[data-theme="light"] .jcs-unified-header{
 </p>
 <p class="status" id="buyStatus"></p>
 </div>
-</article>
+</div><aside aria-labelledby="quickBuyMetricsTitle" class="quick-buy-metrics-panel">
+<div class="quick-buy-metrics-head"><div><span class="eyebrow">Validated XRPL data</span><h3 id="quickBuyMetricsTitle">Live Quick Buy Metrics</h3></div><button class="btn small" id="qbRefreshMetrics" type="button">Refresh metrics</button></div>
+<div class="quick-buy-metrics-grid">
+<div class="quick-buy-metric"><span>Spot price</span><strong id="qbMetricSpot">Loading…</strong></div>
+<div class="quick-buy-metric"><span>AMM price</span><strong id="qbMetricAmm">Loading…</strong></div>
+<div class="quick-buy-metric"><span>DEX spread</span><strong id="qbMetricSpread">Loading…</strong></div>
+<div class="quick-buy-metric"><span>Validated ledger</span><strong id="qbMetricLedger">Loading…</strong></div>
+<div class="quick-buy-metric"><span>Ledger hash</span><strong class="mono" id="qbMetricHash">Loading…</strong></div>
+<div class="quick-buy-metric"><span>XRPL endpoint</span><strong class="mono" id="qbMetricServer">Loading…</strong></div>
+<div class="quick-buy-metric"><span>Wallet</span><strong id="qbMetricWallet">Not connected</strong></div>
+<div class="quick-buy-metric"><span>JCS trustline</span><strong id="qbMetricTrustline">Connect Xaman</strong></div>
+</div><p class="quick-buy-metrics-updated">Last updated: <time id="qbMetricUpdated">Waiting for ledger data…</time></p></aside></div></article>
 <article class="card">
 <h2 class="section-title">Results &amp; activity log</h2>
 <div class="hint" id="resultBox">Receipts and messages will appear here.</div>
@@ -5200,7 +5212,7 @@ html[data-theme="light"] .jcs-unified-header{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.5.0",
+  "release": "1.6.0",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5214,7 +5226,7 @@ html[data-theme="light"] .jcs-unified-header{
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '1.4.1';
+  const JCS_RELEASE = '1.6.0';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -5288,6 +5300,16 @@ html[data-theme="light"] .jcs-unified-header{
   const tradeReceiveValue = $('tradeReceiveValue');
   const tradeQuoteNote = $('tradeQuoteNote');
   const quickAmountMode = $('quickAmountMode');
+  const qbMetricSpot = $('qbMetricSpot');
+  const qbMetricAmm = $('qbMetricAmm');
+  const qbMetricSpread = $('qbMetricSpread');
+  const qbMetricLedger = $('qbMetricLedger');
+  const qbMetricHash = $('qbMetricHash');
+  const qbMetricServer = $('qbMetricServer');
+  const qbMetricWallet = $('qbMetricWallet');
+  const qbMetricTrustline = $('qbMetricTrustline');
+  const qbMetricUpdated = $('qbMetricUpdated');
+  const qbRefreshMetrics = $('qbRefreshMetrics');
 
   const xamanSignPanel = $('xamanSignPanel');
   const xamanSignTitle = $('xamanSignTitle');
@@ -5916,9 +5938,11 @@ html[data-theme="light"] .jcs-unified-header{
     const connected = !!currentAccount;
     const allowTrade = connected && HAS_TRUSTLINE;
 
-    connectButtons.forEach((button) => {
-      button.disabled = connected;
-      button.textContent = connected ? 'Xaman connected' : 'Connect Xaman';
+    connectButtons.forEach((control) => {
+      control.textContent = connected ? 'Xaman connected' : 'Connect Xaman';
+      control.setAttribute('aria-disabled', connected ? 'true' : 'false');
+      if (control.tagName === 'A') control.href = connected ? '#wallet' : 'verify.html';
+      else control.disabled = connected;
     });
 
     disconnectButtons.forEach((button) => {
@@ -5932,6 +5956,14 @@ html[data-theme="light"] .jcs-unified-header{
         ? shortAccount(currentAccount, 9)
         : 'Wallet disconnected';
       walletPill.title = connected ? currentAccount : '';
+    }
+
+    if (qbMetricWallet) {
+      qbMetricWallet.textContent = connected ? shortAccount(currentAccount, 12) : 'Not connected';
+      qbMetricWallet.title = connected ? currentAccount : '';
+    }
+    if (qbMetricTrustline) {
+      qbMetricTrustline.textContent = !connected ? 'Connect Xaman' : (HAS_TRUSTLINE ? 'Confirmed on-ledger' : 'Not found');
     }
 
     if (setTrustBtn) {
@@ -6086,11 +6118,7 @@ html[data-theme="light"] .jcs-unified-header{
   }
 
   function xamanBridgeUrl() {
-    const returnTarget = 'index.html';
-    return (
-      'verify.html?connect=1&return=' +
-      encodeURIComponent(returnTarget)
-    );
+    return 'verify.html';
   }
 
   async function beginXamanConnection() {
@@ -6101,13 +6129,6 @@ html[data-theme="light"] .jcs-unified-header{
         setConnected(existing);
         return;
       }
-    } catch {}
-
-    try {
-      sessionStorage.setItem(
-        'jcs.xaman.bridge.return',
-        'index.html'
-      );
     } catch {}
 
     window.location.assign(xamanBridgeUrl());
@@ -6327,7 +6348,6 @@ html[data-theme="light"] .jcs-unified-header{
     }
   } else {
     console.warn('Xaman SDK not loaded — wallet actions disabled.');
-    if (connectBtn) connectBtn.disabled = true;
     if (setTrustBtn) setTrustBtn.disabled = true;
     setStatus(
       trustlineMsg,
@@ -7401,6 +7421,20 @@ html[data-theme="light"] .jcs-unified-header{
       if (spreadEl) spreadEl.textContent = 'Spread: ' + (spread != null ? spread.toFixed(2) + '%' : '—');
       if (ledMiniEl) ledMiniEl.textContent =
         'Ledger: ' + (ledInfo ? ('#' + ledInfo.index + (ledInfo.validated ? ' ✓' : '')) : '—');
+      if (qbMetricSpot) qbMetricSpot.textContent = spot ? spot.toFixed(9) + ' XRP/JCS' : 'Unavailable';
+      if (qbMetricAmm) qbMetricAmm.textContent = ammPx ? ammPx.toFixed(9) + ' XRP/JCS' : 'Unavailable';
+      if (qbMetricSpread) qbMetricSpread.textContent = spread != null ? spread.toFixed(2) + '%' : 'Unavailable';
+      if (qbMetricLedger) qbMetricLedger.textContent = ledInfo ? '#' + ledInfo.index + (ledInfo.validated ? ' · validated' : '') : 'Unavailable';
+      if (qbMetricHash) {
+        qbMetricHash.textContent = ledInfo?.hash ? ledInfo.hash.slice(0,14) + '…' + ledInfo.hash.slice(-10) : 'Unavailable';
+        qbMetricHash.title = ledInfo?.hash || '';
+      }
+      if (qbMetricServer) qbMetricServer.textContent = window.__jcsActiveXrplEndpoint || XRPL_WSS || 'Unavailable';
+      if (qbMetricUpdated) {
+        const now = new Date();
+        qbMetricUpdated.textContent = now.toLocaleTimeString();
+        qbMetricUpdated.dateTime = now.toISOString();
+      }
     } catch {}
   }
 
@@ -7890,7 +7924,16 @@ html[data-theme="light"] .jcs-unified-header{
   }
 
   async function quickTrust() {
-    if (!setTrustBtn) return;
+    if (!currentAccount) {
+      setStatus(buyStatus, 'Connect Xaman first. Opening Sign the Ledger…', 'err');
+      window.location.assign('verify.html');
+      return;
+    }
+    if (!setTrustBtn) {
+      setStatus(buyStatus, 'The JCS trustline control is unavailable.', 'err');
+      return;
+    }
+    setTrustBtn.hidden = false;
     setTrustBtn.click();
   }
 
@@ -8063,6 +8106,16 @@ html[data-theme="light"] .jcs-unified-header{
   }
 
   if (btnRefreshEst) btnRefreshEst.addEventListener('click', () => refreshEstimates());
+  if (qbRefreshMetrics) qbRefreshMetrics.addEventListener('click', async () => {
+    qbRefreshMetrics.disabled = true;
+    qbRefreshMetrics.textContent = 'Refreshing…';
+    try {
+      await Promise.allSettled([refreshSummary(), refreshLedger(), refreshBook(), currentAccount ? refreshEstimates() : Promise.resolve()]);
+    } finally {
+      qbRefreshMetrics.disabled = false;
+      qbRefreshMetrics.textContent = 'Refresh metrics';
+    }
+  });
   if (btnTrustJCS) btnTrustJCS.addEventListener('click', () => quickTrust());
   if (buy1) buy1.addEventListener('click', () => quickBuy(1));
   if (buy25) buy25.addEventListener('click', () => quickBuy(25));
@@ -8289,6 +8342,7 @@ html[data-theme="light"] .jcs-unified-header{
       playlist:fallbackMusic,
       seed:117,
       listenerMuted:false,
+      userStarted:false,
       timer:null
     },
     reading:{
@@ -8300,6 +8354,7 @@ html[data-theme="light"] .jcs-unified-header{
       playlist:fallbackReadings,
       seed:811,
       listenerMuted:false,
+      userStarted:false,
       timer:null
     }
   };
@@ -8583,6 +8638,7 @@ html[data-theme="light"] .jcs-unified-header{
   async function listenChannel(name) {
     const channel = channels[name];
 
+    channel.userStarted = true;
     channel.listenerMuted = false;
     channel.audio.muted = false;
     channel.audio.volume = Number(channel.volume.value);
@@ -8612,29 +8668,19 @@ html[data-theme="light"] .jcs-unified-header{
 
   async function pauseListeningChannel(name) {
     const channel = channels[name];
+    channel.userStarted = false;
     channel.listenerMuted = true;
-    channel.audio.muted = true;
+    channel.audio.pause();
+    channel.audio.muted = false;
     saveMediaSettings();
-
-    if (channel.audio.paused) {
-      try {
-        await loadCurrentAudioPosition(channel,true);
-      } catch (error) {
-        showSacredMediaError(error);
-      }
-    }
-
     const target = synchronizedAudioPosition(channel);
     if (target) {
-      updateChannelDisplay(
-        channel,
-        target,
-        channel.audio.currentTime || target.offset
-      );
+      channel.now.textContent = 'Listening stopped locally · timeline continues: ' + target.track.title + ' · current station position ' + Math.floor(target.offset / 60) + ':' + String(Math.floor(target.offset % 60)).padStart(2, '0');
+      channel.now.className = 'now-playing is-muted';
     }
-
-    $('audioStatus').textContent =
-      'Listening is paused locally. The sacred station timelines continue.';
+    channel.start.disabled = false;
+    channel.stop.disabled = true;
+    $('audioStatus').textContent = 'Listening is stopped locally. Press Listen to rejoin the current sacred-audio position.';
   }
 
   async function listenToBothChannels() {
@@ -8773,66 +8819,36 @@ html[data-theme="light"] .jcs-unified-header{
 
   loadMediaSettings();
   activatePassionFilm();
-
-  Promise.allSettled([
-    loadCurrentAudioPosition(channels.music,true),
-    loadCurrentAudioPosition(channels.reading,true)
-  ]).then(results=>{
-    const rejected = results.filter(result => result.status === 'rejected');
-
-    if (!rejected.length) {
-      const browserMuted = Object.values(channels).some(
-        channel => channel.audio.muted && !channel.listenerMuted
-      );
-
-      if (browserMuted) {
-        $('audioStatus').textContent =
-          'Both sacred station timelines started automatically. If the browser blocks sound, the first click, tap, or key press enables both channels while the silent film continues.';
-        installAutoplayUnlock();
-      } else {
-        $('audioStatus').textContent =
-          'Both sacred channels joined their current synchronized positions automatically.';
-      }
-    } else {
-      showSacredMediaError(rejected[0].reason);
-      installAutoplayUnlock();
-    }
+  Object.values(channels).forEach(channel => {
+    channel.audio.pause();
+    channel.audio.muted = false;
+    channel.userStarted = false;
+    channel.start.disabled = false;
+    channel.stop.disabled = true;
   });
+  $('audioStatus').textContent = 'Church music and Scripture are ready. Press Listen to join the current synchronized position.';
 
   document.addEventListener('visibilitychange',()=>{
     if (document.visibilityState !== 'visible') return;
-
     Object.values(channels).forEach(channel=>{
-      loadCurrentAudioPosition(channel,true).catch(showSacredMediaError);
+      if (channel.userStarted) loadCurrentAudioPosition(channel,true).catch(showSacredMediaError);
     });
-
-    if (passionActive && !passionVideo.paused) {
-      activatePassionFilm();
-    }
+    if (passionActive && !passionVideo.paused) activatePassionFilm();
   });
 
   window.setInterval(()=>{
     Object.values(channels).forEach(channel=>{
+      if (!channel.userStarted) return;
       const target = synchronizedAudioPosition(channel);
       if (!target) return;
-
-      const wrongTrack =
-        channel.audio.dataset.trackUrl !== target.track.url;
-      const drift = Math.abs(
-        (channel.audio.currentTime || 0) - target.offset
-      );
-
-      if (wrongTrack || drift > 20 || channel.audio.paused) {
-        loadCurrentAudioPosition(channel,true).catch(showSacredMediaError);
-      }
+      const wrongTrack = channel.audio.dataset.trackUrl !== target.track.url;
+      const drift = Math.abs((channel.audio.currentTime || 0) - target.offset);
+      if (wrongTrack || drift > 20 || channel.audio.paused) loadCurrentAudioPosition(channel,true).catch(showSacredMediaError);
     });
-
     if (passionActive && !passionVideo.paused) {
       const target = synchronizedPassionPosition();
       const drift = Math.abs((passionVideo.currentTime || 0) - target);
-      if (drift > 15) {
-        activatePassionFilm();
-      }
+      if (drift > 15) activatePassionFilm();
     }
   },30000);
 
