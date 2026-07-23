@@ -1,1186 +1,1983 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <!-- Basic Meta -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✍️ Sign the Ledger — JCS Proof-of-Faith on XRPL</title>
-  <meta name="description" content="Sign the Ledger with Jesus Christ Saves Token (JCS). Record immutable prayers and testimonies on the XRP Ledger (XRPL) — where Christian faith meets blockchain transparency.">
-  <meta name="keywords" content="Sign the Ledger, JCS, Jesus Christ Saves Token, XRPL, immutable prayer, Christian blockchain, crypto faith, decentralized testimony, proof of faith, XRPL prayer ledger">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071225">
+  <meta name="application-name" content="JCS Sign the Ledger">
+  <meta name="jcs-ledger-release" content="2.0.0">
+  <title>Sign the Ledger v2.0.0 · JCS On-Chain Testimony Network</title>
+  <meta name="description" content="Compose, mint, publish, read, reply to, and affirm NFT-backed Christian prayers and testimonies on the XRP Ledger through Xaman.">
+  <meta name="keywords" content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network">
   <meta name="author" content="Jesus Christ Saves Token">
-
-  <!-- Canonical -->
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
   <link rel="canonical" href="https://jesuschristsavestoken.com/verify.html">
-<link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
-
-  <!-- Favicons & App Icons -->
+  <link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
   <link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://jesuschristsavestoken.com/jcs-logo-32.png">
   <link rel="apple-touch-icon" href="https://jesuschristsavestoken.com/jcs-logo-180.png">
-  <meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo-270.png">
-  <meta name="msapplication-TileColor" content="#004e92">
-  <meta name="theme-color" content="#004e92">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jesus Christ Saves Token">
-  <meta property="og:title" content="✍️ Sign the Ledger — Immutable Prayers on XRPL">
-  <meta property="og:description" content="Add your message of faith to the decentralized XRPL ledger. Immutable, eternal, transparent.">
+  <meta property="og:title" content="Sign the Ledger · JCS On-Chain Testimony Network">
+  <meta property="og:description" content="NFT-backed prayers, testimonies, replies, and Amen reactions on the XRP Ledger.">
   <meta property="og:url" content="https://jesuschristsavestoken.com/verify.html">
   <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta property="og:image:alt" content="JCS Proof-of-Faith Logo">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@JesusCS_token">
-  <meta name="twitter:title" content="✍️ Sign the Ledger — JCS Proof-of-Faith">
-  <meta name="twitter:description" content="Bring Christianity to blockchain. Record your prayer immutably on the XRPL with JCS.">
+  <meta name="twitter:title" content="Sign the Ledger · JCS On-Chain Testimony Network">
   <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
 
-  <!-- JSON-LD Structured Data -->
+  <link rel="preconnect" href="https://xaman.app" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://xumm.app https://xaman.app https://unpkg.com;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    connect-src 'self' https://xumm.app https://oauth2.xumm.app https://xaman.app wss://xrplcluster.com;
+    frame-src 'self' https://xumm.app https://oauth2.xumm.app https://xaman.app;
+    base-uri 'self';
+    form-action 'self';
+  ">
+
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --surface:#fff;
+      --surface-2:#f1f5fb;
+      --surface-3:#e9eff8;
+      --ink:#101522;
+      --muted:#607087;
+      --line:#dce3ed;
+      --blue:#1458d5;
+      --blue-2:#0c3e9f;
+      --gold:#c99820;
+      --gold-2:#f3d36f;
+      --green:#087d4e;
+      --red:#c5344d;
+      --orange:#b85f08;
+      --shadow:0 15px 46px rgba(15,23,42,.09);
+      --shadow-lg:0 30px 100px rgba(15,23,42,.15);
+      --radius:20px;
+      --wrap:1260px;
+      --font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color-scheme:light;
+    }
+    html[data-theme="dark"]{
+      --bg:#020713;
+      --surface:#081326;
+      --surface-2:#0d1b32;
+      --surface-3:#132540;
+      --ink:#f6f8fc;
+      --muted:#aebbd0;
+      --line:#253957;
+      --blue:#55a4ff;
+      --blue-2:#2f80ed;
+      --gold:#e0b84d;
+      --gold-2:#ffe59a;
+      --green:#3bd28a;
+      --red:#ff7184;
+      --orange:#ffad58;
+      --shadow:0 17px 52px rgba(0,0,0,.35);
+      --shadow-lg:0 35px 110px rgba(0,0,0,.52);
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% -10%,rgba(224,184,77,.16),transparent 31rem),
+        radial-gradient(circle at 100% 3%,rgba(47,128,237,.14),transparent 36rem),
+        var(--bg);
+      font:14px/1.55 var(--font);
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.16;
+      background-image:
+        linear-gradient(90deg,transparent 49%,rgba(224,184,77,.16) 49%,rgba(224,184,77,.16) 51%,transparent 51%),
+        linear-gradient(transparent 35%,rgba(224,184,77,.16) 35%,rgba(224,184,77,.16) 40%,transparent 40%);
+      background-size:86px 112px;
+      mask-image:radial-gradient(circle at 50% 18%,black,transparent 70%);
+    }
+    a{color:var(--blue);text-decoration:none}
+    a:hover{text-decoration:underline}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    button:disabled{cursor:not-allowed;opacity:.5}
+    .skip-link{
+      position:fixed;left:12px;top:-80px;z-index:9999;
+      padding:10px 14px;border-radius:9px;color:#fff;background:#111;
+    }
+    .skip-link:focus{top:12px}
+    .site-header{
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(201,152,32,.28);
+      background:rgba(255,255,255,.93);
+      backdrop-filter:blur(18px);
+    }
+    html[data-theme="dark"] .site-header{background:rgba(3,10,23,.93)}
+    .header-inner{
+      width:min(var(--wrap),100%);
+      min-height:64px;
+      margin:0 auto;
+      padding:7px 18px;
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      gap:14px;
+      align-items:center;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;
+      min-width:max-content;
+    }
+    .brand img{
+      width:42px;height:42px;object-fit:contain;border:1px solid rgba(201,152,32,.42);
+      border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(201,152,32,.14);
+    }
+    .brand-copy{display:grid}
+    .brand-title{font:900 1rem/1.1 Georgia,"Times New Roman",serif}
+    .brand-subtitle{margin-top:3px;color:var(--muted);font-size:.67rem;font-weight:800}
+    .header-nav{
+      min-width:0;display:flex;align-items:center;justify-content:center;gap:3px;
+      overflow-x:auto;scrollbar-width:none;
+    }
+    .header-nav::-webkit-scrollbar{display:none}
+    .nav-link,.btn{
+      min-height:38px;
+      display:inline-flex;align-items:center;justify-content:center;gap:7px;
+      padding:8px 12px;border:1px solid var(--line);border-radius:10px;
+      color:var(--ink);background:var(--surface);font-size:.78rem;font-weight:850;
+      line-height:1;text-decoration:none;box-shadow:none;
+    }
+    .nav-link{border-color:transparent;background:transparent;white-space:nowrap}
+    .nav-link:hover,.nav-link:focus-visible{
+      border-color:var(--line);color:var(--blue);background:var(--surface-2);outline:none;text-decoration:none;
+    }
+    .btn:hover,.btn:focus-visible{
+      border-color:rgba(20,88,213,.45);color:var(--blue);outline:none;text-decoration:none;
+    }
+    .btn.primary{
+      border-color:var(--gold);
+      color:#111;
+      background:linear-gradient(180deg,#ffe69a,#d5a82b);
+      box-shadow:0 9px 26px rgba(201,152,32,.19);
+    }
+    .btn.blue{
+      border-color:var(--blue);color:#fff;background:linear-gradient(180deg,#2f80ed,#1458d5);
+    }
+    .btn.danger{border-color:rgba(197,52,77,.45);color:var(--red)}
+    .btn.ghost{background:transparent}
+    .btn.small{min-height:31px;padding:6px 9px;font-size:.69rem}
+    .header-actions{display:flex;align-items:center;gap:7px}
+    .theme-toggle{min-width:42px}
+    .wallet-pill{
+      max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+      color:var(--muted);
+    }
+    .container{width:min(var(--wrap),100%);margin:0 auto;padding:26px 18px 70px}
+    .card{
+      border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      min-height:400px;
+      display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+      gap:26px;align-items:center;
+      padding:clamp(30px,6vw,68px);
+      border-color:rgba(201,152,32,.3);
+      background:
+        radial-gradient(circle at 90% 12%,rgba(224,184,77,.23),transparent 24rem),
+        radial-gradient(circle at 8% 90%,rgba(47,128,237,.14),transparent 30rem),
+        var(--surface);
+      box-shadow:var(--shadow-lg);
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:6px 10px;
+      border:1px solid rgba(201,152,32,.42);border-radius:999px;
+      color:#8b6200;background:rgba(201,152,32,.08);
+      font-size:.7rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase;
+    }
+    html[data-theme="dark"] .eyebrow{color:var(--gold-2)}
+    .hero h1{
+      max-width:900px;margin:16px 0 16px;
+      font:900 clamp(2.7rem,6vw,5.5rem)/.96 Georgia,"Times New Roman",serif;
+      letter-spacing:-.052em;
+    }
+    .hero h1 span{color:var(--gold)}
+    .hero-lead{max-width:820px;color:var(--muted);font-size:clamp(1rem,1.8vw,1.18rem);line-height:1.7}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+    .hero-proof{
+      padding:20px;border:1px solid rgba(201,152,32,.32);border-radius:20px;
+      background:linear-gradient(155deg,rgba(201,152,32,.1),transparent 45%),var(--surface-2);
+    }
+    .hero-proof img{
+      width:88px;height:88px;display:block;margin:0 auto 16px;object-fit:contain;
+      border:1px solid rgba(201,152,32,.42);border-radius:22px;background:#fff;
+    }
+    .proof-list{display:grid;gap:9px}
+    .proof-row{padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+    .proof-label{display:block;color:var(--muted);font-size:.65rem;font-weight:900;text-transform:uppercase}
+    .proof-value{display:block;margin-top:3px;font-size:.76rem;font-weight:800;overflow-wrap:anywhere}
+    .social-layout{
+      display:grid;grid-template-columns:minmax(330px,.82fr) minmax(0,1.18fr);
+      gap:20px;align-items:start;margin-top:22px;
+    }
+    .composer{
+      position:sticky;top:84px;padding:22px;
+    }
+    .section-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .section-head h2,.feed-head h2{margin:0;font-size:1.42rem}
+    .section-head p,.feed-head p{margin:6px 0 0;color:var(--muted);font-size:.84rem}
+    .field{margin-top:14px}
+    .field label{
+      display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;
+      color:var(--ink);font-size:.76rem;font-weight:900;
+    }
+    .field-hint{color:var(--muted);font-weight:700}
+    input,textarea,select{
+      width:100%;border:1px solid var(--line);border-radius:11px;
+      color:var(--ink);background:var(--surface-2);outline:none;
+    }
+    input,select{min-height:43px;padding:9px 11px}
+    textarea{min-height:150px;resize:vertical;padding:12px;line-height:1.6}
+    input:focus,textarea:focus,select:focus{
+      border-color:var(--blue);box-shadow:0 0 0 3px rgba(20,88,213,.12);
+    }
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .composer-tools{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .counter{color:var(--muted);font-size:.7rem;font-weight:800}
+    .counter.warn{color:var(--orange)}
+    .counter.bad{color:var(--red)}
+    .draft-state{color:var(--muted);font-size:.7rem}
+    .preview{
+      margin-top:14px;padding:15px;border:1px dashed var(--line);border-radius:14px;
+      background:var(--surface-2);
+    }
+    .preview-label{color:var(--gold);font-size:.66rem;font-weight:950;text-transform:uppercase}
+    .preview-message{
+      margin:9px 0;font-family:Georgia,"Times New Roman",serif;
+      font-size:1.05rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;
+    }
+    .preview-meta{color:var(--muted);font-size:.72rem}
+    .publish-flow{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px;
+    }
+    .flow-step{
+      min-width:0;padding:9px;border:1px solid var(--line);border-radius:10px;
+      color:var(--muted);background:var(--surface-2);font-size:.67rem;font-weight:850;text-align:center;
+    }
+    .flow-step.active{border-color:var(--gold);color:var(--ink);background:rgba(201,152,32,.09)}
+    .flow-step.done{border-color:rgba(8,125,78,.5);color:var(--green);background:rgba(8,125,78,.07)}
+    .publish-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+    .publish-actions .primary{grid-column:1/-1}
+    .status-box{
+      margin-top:13px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;
+      color:var(--muted);background:var(--surface-2);font-size:.78rem;
+    }
+    .status-box.ok{border-color:rgba(8,125,78,.45);color:var(--green)}
+    .status-box.err{border-color:rgba(197,52,77,.45);color:var(--red)}
+    .status-box.warn{border-color:rgba(184,95,8,.45);color:var(--orange)}
+    .pending-publish{
+      margin-top:12px;padding:12px;border:1px solid rgba(201,152,32,.38);
+      border-radius:12px;background:rgba(201,152,32,.07);
+    }
+    .pending-publish strong{display:block}
+    .pending-publish p{margin:5px 0 9px;color:var(--muted);font-size:.75rem}
+    .feed-shell{min-width:0;padding:20px}
+    .feed-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+    .feed-controls{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+    .feed-stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;
+    }
+    .stat{
+      padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2);
+    }
+    .stat span{display:block;color:var(--muted);font-size:.63rem;font-weight:900;text-transform:uppercase}
+    .stat strong{display:block;margin-top:3px;font-size:1rem}
+    .filter-bar{
+      display:grid;grid-template-columns:minmax(0,1fr) 160px 150px;gap:8px;margin-top:14px;
+    }
+    .feed-viewport{
+      position:relative;height:clamp(520px,72vh,850px);overflow-y:auto;overflow-x:hidden;
+      margin-top:14px;padding:4px 8px 16px 2px;scroll-behavior:auto;
+      scrollbar-color:var(--gold) transparent;
+    }
+    .feed-track{display:grid;gap:13px}
+    .post-card{
+      position:relative;padding:17px;border:1px solid var(--line);border-radius:17px;
+      background:
+        radial-gradient(circle at 100% 0,rgba(201,152,32,.08),transparent 15rem),
+        var(--surface-2);
+      box-shadow:0 9px 24px rgba(15,23,42,.05);
+      animation:cascade-in .55s both;
+    }
+    .post-card:nth-child(3n+2){margin-left:10px}
+    .post-card:nth-child(3n+3){margin-left:20px}
+    @keyframes cascade-in{
+      from{opacity:0;transform:translateY(24px) scale(.985)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    .post-top{display:flex;gap:10px;align-items:flex-start}
+    .avatar{
+      width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;
+      border:1px solid rgba(201,152,32,.36);border-radius:50%;
+      color:#111;background:linear-gradient(135deg,#ffe69a,#d5a82b);
+      font-size:.76rem;font-weight:950;
+    }
+    .post-author{min-width:0;flex:1}
+    .author-line{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    .author-name{font-weight:950}
+    .author-handle{color:var(--muted);font-size:.74rem}
+    .post-time{margin-top:2px;color:var(--muted);font-size:.67rem}
+    .badge{
+      display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border:1px solid var(--line);
+      border-radius:999px;color:var(--muted);background:var(--surface);font-size:.6rem;font-weight:900;
+      text-transform:uppercase;letter-spacing:.04em;
+    }
+    .badge.nft{border-color:rgba(201,152,32,.45);color:#8a6200;background:rgba(201,152,32,.08)}
+    html[data-theme="dark"] .badge.nft{color:var(--gold-2)}
+    .badge.verified{border-color:rgba(8,125,78,.45);color:var(--green)}
+    .badge.legacy{border-color:rgba(184,95,8,.42);color:var(--orange)}
+    .post-body{
+      margin:13px 0 12px;font-family:Georgia,"Times New Roman",serif;
+      font-size:1.08rem;line-height:1.58;white-space:pre-wrap;overflow-wrap:anywhere;
+    }
+    .post-ledger{
+      padding:9px;border:1px dashed var(--line);border-radius:9px;color:var(--muted);
+      background:var(--surface);font:650 .62rem/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
+      overflow-wrap:anywhere;
+    }
+    .post-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+    .reply-list{display:grid;gap:7px;margin-top:12px;padding-left:18px;border-left:2px solid rgba(201,152,32,.25)}
+    .reply{
+      padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);
+    }
+    .reply-meta{color:var(--muted);font-size:.65rem}
+    .reply-body{margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.78rem}
+    .empty-state{
+      min-height:300px;display:grid;place-items:center;text-align:center;
+      padding:30px;border:1px dashed var(--line);border-radius:16px;color:var(--muted);
+    }
+    .loading-skeleton{display:grid;gap:12px}
+    .skeleton{
+      height:170px;border-radius:16px;
+      background:linear-gradient(90deg,var(--surface-2),var(--surface-3),var(--surface-2));
+      background-size:200% 100%;animation:shimmer 1.5s infinite;
+    }
+    @keyframes shimmer{to{background-position:-200% 0}}
+    .profile-panel{
+      display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.45fr);
+      gap:18px;margin-top:22px;padding:20px;
+    }
+    .profile-info h2{margin:0}
+    .profile-info p{color:var(--muted)}
+    .profile-wallet{
+      padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;
+    }
+    .nft-list{display:grid;gap:7px;margin-top:10px;max-height:240px;overflow:auto}
+    .nft-item{
+      padding:9px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);
+      font:650 .63rem/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;
+    }
+    .explain-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;
+    }
+    .explain-card{padding:18px}
+    .explain-card h3{margin:0 0 8px}
+    .explain-card p{margin:0;color:var(--muted);font-size:.8rem}
+    .sign-panel{
+      position:fixed;z-index:3000;inset:auto 18px 18px auto;width:min(460px,calc(100% - 36px));
+      padding:18px;border:1px solid rgba(201,152,32,.45);border-radius:18px;
+      background:var(--surface);box-shadow:0 30px 100px rgba(0,0,0,.38);
+    }
+    .sign-panel[hidden]{display:none}
+    .sign-head{display:flex;justify-content:space-between;gap:12px}
+    .sign-head h2{margin:0;font-size:1.05rem}
+    .sign-head p{margin:4px 0 0;color:var(--muted);font-size:.74rem}
+    .security-code{
+      display:block;margin:13px 0;padding:13px;border:2px solid var(--gold);
+      border-radius:13px;color:#5d4300;background:#fff8df;text-align:center;
+      font-size:1.45rem;font-weight:950;letter-spacing:.14em;
+    }
+    html[data-theme="dark"] .security-code{color:var(--gold-2);background:#211a08}
+    .sign-grid{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:14px;align-items:center}
+    .sign-qr{width:150px;height:150px;object-fit:contain;border-radius:13px;background:#fff}
+    .sign-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+    .dialog{
+      width:min(560px,calc(100% - 28px));border:1px solid var(--line);border-radius:18px;
+      color:var(--ink);background:var(--surface);box-shadow:var(--shadow-lg);padding:0;
+    }
+    .dialog::backdrop{background:rgba(0,0,0,.68);backdrop-filter:blur(5px)}
+    .dialog-inner{padding:20px}
+    .dialog h2{margin:0}
+    .dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+    .toast-region{
+      position:fixed;z-index:4000;right:18px;top:84px;width:min(380px,calc(100% - 36px));
+      display:grid;gap:8px;pointer-events:none;
+    }
+    .toast{
+      padding:12px 14px;border:1px solid var(--line);border-radius:12px;
+      color:var(--ink);background:var(--surface);box-shadow:var(--shadow);
+      animation:toast-in .3s both;
+    }
+    .toast.ok{border-color:rgba(8,125,78,.45)}
+    .toast.err{border-color:rgba(197,52,77,.45)}
+    @keyframes toast-in{from{opacity:0;transform:translateX(25px)}}
+    footer{
+      margin-top:35px;padding:26px 18px;border-top:1px solid rgba(201,152,32,.28);
+      color:var(--muted);background:var(--surface);
+    }
+    .footer-inner{width:min(var(--wrap),100%);margin:0 auto}
+    .footer-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+    @media(max-width:980px){
+      .header-inner{grid-template-columns:auto 1fr}.header-nav{grid-column:1/-1;justify-content:flex-start}
+      .header-actions{justify-self:end}
+      .hero,.social-layout,.profile-panel{grid-template-columns:1fr}
+      .composer{position:static}
+      .explain-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:700px){
+      .site-header{position:static}
+      .header-inner{grid-template-columns:1fr}
+      .brand{justify-content:center}
+      .header-actions{justify-self:center}
+      .header-nav{width:100%;justify-content:flex-start}
+      .container{padding:14px 12px 48px}
+      .hero{min-height:auto;padding:28px 20px}
+      .hero h1{font-size:clamp(2.4rem,14vw,4rem)}
+      .social-layout{grid-template-columns:minmax(0,1fr)}
+      .composer,.feed-shell{padding:16px}
+      .form-grid,.filter-bar,.feed-stats,.publish-actions{grid-template-columns:1fr}
+      .publish-actions .primary{grid-column:auto}
+      .post-card:nth-child(n){margin-left:0}
+      .feed-head{display:block}
+      .feed-controls{justify-content:flex-start;margin-top:10px}
+      .feed-viewport{height:680px}
+      .sign-grid{grid-template-columns:1fr}
+      .sign-qr{margin:auto}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important}
+    }
+  </style>
+
+  <script>
+    (function(){
+      try{
+        const saved=localStorage.getItem('jcs-ledger-theme');
+        document.documentElement.dataset.theme=saved==='light'||saved==='dark'?saved:'dark';
+      }catch{
+        document.documentElement.dataset.theme='dark';
+      }
+    })();
+  </script>
+
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Sign the Ledger — JCS Proof-of-Faith",
-    "url": "https://jesuschristsavestoken.com/verify.html",
-    "description": "Sign the Ledger with Jesus Christ Saves Token (JCS). Immutable prayers on the XRP Ledger (XRPL).",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Jesus Christ Saves Token",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://jesuschristsavestoken.com/jcs-logo.png"
-      }
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"JCS Sign the Ledger",
+    "url":"https://jesuschristsavestoken.com/verify.html",
+    "applicationCategory":"SocialNetworkingApplication",
+    "operatingSystem":"Any modern browser",
+    "softwareVersion":"2.0.0",
+    "isAccessibleForFree":true,
+    "description":"An NFT-backed, non-custodial Christian testimony and prayer network using Xaman and the XRP Ledger.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"Jesus Christ Saves Token",
+      "url":"https://jesuschristsavestoken.com/",
+      "logo":"https://jesuschristsavestoken.com/jcs-logo.png"
     }
   }
   </script>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 </head>
 
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
 
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="Jesus Christ Saves Token logo">
+        <span class="brand-copy">
+          <span class="brand-title">Sign the Ledger</span>
+          <span class="brand-subtitle">JCS on-chain testimony network · v2.0.0</span>
+        </span>
+      </a>
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { background:#000428; }
-    body {
-      min-height:100vh; font-family:Montserrat, system-ui, -apple-system, Arial, sans-serif;
-      color:#fff; line-height:1.8; background: radial-gradient(circle at top left,#000428,#004e92);
-    }
-    body::before {
-      content:""; position:fixed; inset:0; z-index:-2;
-      background:url("background-translucent.png") center/cover no-repeat; opacity:.08; pointer-events:none;
-    }
-    a { color:#00d4ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
+      <nav class="header-nav" aria-label="Primary">
+        <a class="nav-link" href="#compose">Compose</a>
+        <a class="nav-link" href="#testimonies">Testimonies</a>
+        <a class="nav-link" href="#my-nfts">My NFTs</a>
+        <a class="nav-link" href="index.html">JCS Home</a>
+        <a class="nav-link" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" target="_blank" rel="noopener">XRBitcoin</a>
+        <a class="nav-link" href="https://xrbitcoincash.com/" target="_blank" rel="noopener">XRBitcoinCash</a>
+      </nav>
 
-    header {
-      position:sticky; top:0; z-index:10;
-      background:rgba(0,0,0,.6); backdrop-filter:blur(6px);
-      padding:14px 24px; display:flex; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    header .title { display:flex; gap:12px; align-items:center; font-weight:700; }
-    header .title img { height:36px; border-radius:6px; }
-    header .actions a {
-      padding:10px 18px; background:#00d4ff; color:#000; border-radius:30px; font-weight:700;
-      box-shadow:0 0 15px rgba(0,212,255,.6); white-space:nowrap;
-    }
-    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,.9); }
-
-    main { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
-    .hero { text-align:center; margin-bottom:36px; }
-    .hero h1 { font-size:2.6rem; text-shadow:0 0 20px rgba(255,255,255,.6); margin-bottom:8px; }
-    .hero p { color:#d5f7ff; max-width:800px; margin:0 auto; }
-    .note { font-size:.9rem; color:#ffedb5; margin-top:8px; text-align:center; }
-
-    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
-
-    .card {
-      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
-      border-radius:14px; padding:16px 16px 18px;
-    }
-    .card h2 { font-size:1.4rem; margin-bottom:10px; text-shadow:0 0 12px rgba(0,212,255,.5); }
-
-    .field { margin-top:12px; position:relative; }
-    .field label { display:block; font-weight:700; margin-bottom:6px; }
-    .field input, .field textarea {
-      width:100%; padding:12px 14px; border:none; border-radius:10px;
-      background:rgba(255,255,255,.1); color:#fff; outline:1px solid rgba(255,255,255,.12);
-    }
-    .help { font-size:.9rem; color:#b9ecff; margin-top:6px; }
-
-    .row { display:flex; gap:12px; }
-    .row .field { flex:1; }
-
-    .buttons { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; align-items:center; }
-    .btn {
-      padding:12px 20px; border:none; border-radius:30px; font-weight:700; cursor:pointer;
-      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,.6);
-    }
-    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,.2); }
-    .btn:disabled { opacity:.6; cursor:not-allowed; }
-
-    @media (max-width:768px){
-      .buttons{ flex-direction:column; gap:14px; }
-      .buttons .btn{ width:100%; max-width:320px; margin:0 auto; padding:14px; font-size:1rem; transition:all .25s ease; }
-      .buttons .btn:hover,.buttons .btn:active{ transform:scale(1.03); box-shadow:0 0 20px rgba(0,212,255,.8); background:#00bfe6; }
-    }
-
-    #disconnectBtn{ background:#800020; color:#fff; box-shadow:0 0 12px rgba(128,0,32,.6); }
-    #disconnectBtn:hover{ transform:scale(1.03); box-shadow:0 0 20px rgba(128,0,32,.9); background:#a00028; }
-
-    .status {
-      margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
-    }
-
-    /* Testimonies card with internal scroll */
-    .testimonies-card { display:flex; flex-direction:column; height:clamp(340px,60vh,520px); }
-    .testimonies-card h2, .testimonies-card .help { flex:0 0 auto; }
-    #feed { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; padding:.5rem; -webkit-overflow-scrolling:touch; }
-
-    .feed { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
-    .item { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; }
-    .item .meta { font-size:.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
-    .item .msg { margin-top:6px; white-space:pre-wrap; }
-
-    footer {
-      background:rgba(0,0,0,.8); padding:18px; text-align:center; font-size:.9rem;
-      border-top:1px solid rgba(255,255,255,.1); margin-top:40px;
-    }
-
-    /* Orb visuals */
-    .message-box{ position:relative; overflow:hidden; z-index:1; }
-    .orb-container{ position:absolute; inset:0; pointer-events:none; z-index:0; }
-    .orb{
-      position:absolute; width:6px; height:6px; border-radius:50%;
-      background:rgba(0,212,255,.9); filter:blur(10px); mix-blend-mode:screen;
-      animation:spiralTight 10s infinite linear, fadeGlow 5s infinite ease-in-out;
-      transform-origin:center;
-    }
-    @keyframes spiralTight{
-      0%{ transform:rotate(0deg) translateX(40px) scale(.9); }
-      25%{ transform:rotate(90deg) translateX(45px) scale(1.1); }
-      50%{ transform:rotate(180deg) translateX(50px) scale(.8); }
-      75%{ transform:rotate(270deg) translateX(45px) scale(1.05); }
-      100%{ transform:rotate(360deg) translateX(40px) scale(.9); }
-    }
-    @keyframes fadeGlow{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
-    .buttons,#xummBtn,#signBtn,#disconnectBtn{ position:relative; z-index:2; }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="title">
-      <img src="jcs-logo.png" alt="JCS logo"/>
-      <span>JCS Proof-of-Faith</span>
-    </div>
-    <div class="actions">
-      <a href="index.html">🏠 Back to Home</a>
+      <div class="header-actions">
+        <button id="themeToggle" class="btn theme-toggle" type="button" aria-label="Change theme">◐</button>
+        <button id="connectBtn" class="btn blue" type="button" disabled>Connect Xaman</button>
+        <button id="disconnectBtn" class="btn danger" type="button" hidden>Disconnect</button>
+        <span id="walletPill" class="wallet-pill" aria-live="polite">Wallet disconnected</span>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>🖋 Sign the Ledger</h1>
-      <p>Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo. Your message is immutable and viewable by anyone.</p>
-      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the collector wallet with your memo and uses the standard XRPL network fee (paid by your wallet).</p>
+  <main id="main" class="container">
+    <section class="card hero">
+      <div>
+        <span class="eyebrow">✝ NFT-backed prayer · testimony · fellowship</span>
+        <h1>Every testimony can become an <span>immutable witness.</span></h1>
+        <p class="hero-lead">
+          Compose a prayer or testimony, mint its proof as an XRPL NFToken in your
+          own wallet, and publish a one-drop registry entry so the community can
+          read it, reply to it, and place an on-ledger Amen beneath it.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#compose">Compose a testimony NFT</a>
+          <a class="btn" href="#testimonies">Enter the rolling testimony stream</a>
+          <a class="btn" href="index.html#audio">Sacred audio sanctuary</a>
+        </div>
+      </div>
+
+      <aside class="hero-proof">
+        <img src="https://jesuschristsavestoken.com/jcs-logo.png" alt="JCS logo">
+        <div class="proof-list">
+          <div class="proof-row">
+            <span class="proof-label">JCS collector and public feed account</span>
+            <span class="proof-value mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</span>
+          </div>
+          <div class="proof-row">
+            <span class="proof-label">Publication model</span>
+            <span class="proof-value">NFT mint + one-drop public registry memo</span>
+          </div>
+          <div class="proof-row">
+            <span class="proof-label">Signing</span>
+            <span class="proof-value">Xaman on XRPL Mainnet · private keys never enter this page</span>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <section class="grid">
-      <!-- Left: Form -->
-      <div class="card">
-        <h2>Compose your on-chain message</h2>
-
-        <div class="field message-box">
-          <label for="message">Message (required)</label>
-          <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
-          <div class="help"><span id="charCount">0</span>/240</div>
-
-          <!-- Orbs -->
-          <div class="orb-container" aria-hidden="true">
-            <!-- 16 orbs -->
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+    <section class="social-layout">
+      <article id="compose" class="card composer">
+        <div class="section-head">
+          <div>
+            <h2>Compose on-chain testimony</h2>
+            <p>Your full message is written into the mint transaction memos and cryptographically anchored by the NFT URI.</p>
           </div>
+          <span class="badge nft">NFT-backed</span>
         </div>
 
-        <div class="row">
+        <div class="form-grid">
           <div class="field">
-            <label for="name">Display name (optional)</label>
-            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D.">
+            <label for="postType">Post type</label>
+            <select id="postType">
+              <option value="prayer">Prayer</option>
+              <option value="testimony">Testimony</option>
+              <option value="praise">Praise report</option>
+              <option value="request">Prayer request</option>
+              <option value="scripture">Scripture reflection</option>
+            </select>
           </div>
           <div class="field">
-            <label for="handle">Handle (optional)</label>
-            <input id="handle" type="text" maxlength="32" placeholder="@yourname">
+            <label for="visibility">Wallet display</label>
+            <select id="visibility">
+              <option value="short">Show shortened wallet</option>
+              <option value="full">Show full wallet</option>
+              <option value="hidden">Hide wallet in this interface</option>
+            </select>
           </div>
         </div>
 
-        <!-- Single status box -->
-        <div id="status" class="status" hidden></div>
+        <div class="field">
+          <label for="message">
+            Message
+            <span class="field-hint">Required · 320 characters</span>
+          </label>
+          <textarea id="message" maxlength="320" placeholder="Write a prayer, testimony, praise report, request, or Scripture reflection. Keep it honest, uplifting, and centered on Christ."></textarea>
+          <div class="composer-tools">
+            <span id="messageCounter" class="counter">0 / 320 characters · 0 bytes</span>
+            <span id="draftState" class="draft-state">Draft saved locally</span>
+          </div>
+        </div>
 
-        <!-- QR code placeholder for desktop -->
-        <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="displayName">Display name <span class="field-hint">Optional</span></label>
+            <input id="displayName" maxlength="40" autocomplete="name" placeholder="Grace · John D.">
+          </div>
+          <div class="field">
+            <label for="handle">Handle <span class="field-hint">Optional</span></label>
+            <input id="handle" maxlength="32" placeholder="@yourname">
+          </div>
+        </div>
 
-        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
+        <div class="field">
+          <label for="scriptureRef">Scripture reference <span class="field-hint">Optional</span></label>
+          <input id="scriptureRef" maxlength="48" placeholder="John 3:16 · Psalm 23 · 1 Enoch 1:8">
+        </div>
 
-        <div class="buttons">
-          <button id="xummBtn" class="btn" disabled>Connect with Xaman</button>
-          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-          <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
+        <div class="preview" aria-live="polite">
+          <div class="preview-label">Post preview</div>
+          <div id="previewMessage" class="preview-message">Your testimony preview will appear here.</div>
+          <div id="previewMeta" class="preview-meta">Prayer · Anonymous</div>
+        </div>
+
+        <div class="publish-flow" aria-label="Publishing steps">
+          <div id="flowConnect" class="flow-step active">1 · Connect</div>
+          <div id="flowMint" class="flow-step">2 · Mint NFT</div>
+          <div id="flowRegister" class="flow-step">3 · Publish feed entry</div>
+        </div>
+
+        <div class="publish-actions">
+          <button id="publishBtn" class="btn primary" type="button" disabled>Mint NFT and publish testimony</button>
+          <button id="mintOnlyBtn" class="btn" type="button" disabled>Mint NFT only</button>
+          <button id="clearDraftBtn" class="btn ghost" type="button">Clear draft</button>
+        </div>
+
+        <div id="composerStatus" class="status-box" aria-live="polite">
+          Connect Xaman to begin. A full public publication requires two approvals:
+          one NFTokenMint and one one-drop registry payment.
+        </div>
+
+        <div id="pendingPublish" class="pending-publish" hidden>
+          <strong>NFT minted but not yet visible in the public feed.</strong>
+          <p id="pendingPublishText"></p>
+          <button id="resumePublishBtn" class="btn primary small" type="button">Publish the pending NFT</button>
+        </div>
+      </article>
+
+      <article id="testimonies" class="card feed-shell">
+        <div class="feed-head">
+          <div>
+            <h2>Recent on-chain testimonies</h2>
+            <p>A live, cascading social stream assembled from validated JCS registry, reply, and Amen transactions.</p>
+          </div>
+          <div class="feed-controls">
+            <button id="rollingToggle" class="btn small" type="button" aria-pressed="true">Pause rolling</button>
+            <button id="refreshFeedBtn" class="btn small" type="button">Refresh</button>
+          </div>
+        </div>
+
+        <div class="feed-stats" aria-label="Network statistics">
+          <div class="stat"><span>Posts</span><strong id="statPosts">—</strong></div>
+          <div class="stat"><span>NFT-backed</span><strong id="statNfts">—</strong></div>
+          <div class="stat"><span>On-ledger Amens</span><strong id="statAmens">—</strong></div>
+          <div class="stat"><span>Wallets</span><strong id="statWallets">—</strong></div>
+        </div>
+
+        <div class="filter-bar">
+          <input id="feedSearch" type="search" placeholder="Search messages, names, handles, wallets…">
+          <select id="feedType" aria-label="Filter post type">
+            <option value="all">All post types</option>
+            <option value="prayer">Prayer</option>
+            <option value="testimony">Testimony</option>
+            <option value="praise">Praise report</option>
+            <option value="request">Prayer request</option>
+            <option value="scripture">Scripture reflection</option>
+            <option value="legacy">Legacy posts</option>
+          </select>
+          <select id="feedSort" aria-label="Sort testimonies">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="amens">Most Amens</option>
+          </select>
+        </div>
+
+        <div id="feedViewport" class="feed-viewport" tabindex="0" aria-label="Rolling on-chain testimony feed">
+          <div id="feed" class="feed-track" aria-live="polite">
+            <div class="loading-skeleton" aria-label="Loading testimonies">
+              <div class="skeleton"></div>
+              <div class="skeleton"></div>
+              <div class="skeleton"></div>
+            </div>
+          </div>
+        </div>
+        <p id="feedStatus" class="status-box">Connecting to the XRP Ledger…</p>
+      </article>
+    </section>
+
+    <section id="my-nfts" class="card profile-panel">
+      <div class="profile-info">
+        <h2>My testimony profile</h2>
+        <p>
+          Your profile name and handle are saved only in this browser until you
+          publish them in a signed transaction. Your wallet remains your identity
+          and Xaman remains the signer.
+        </p>
+        <div id="profileWallet" class="profile-wallet">Connect Xaman to inspect your testimony NFTs.</div>
+      </div>
+      <div>
+        <button id="loadMyNftsBtn" class="btn" type="button" disabled>Load my testimony NFTs</button>
+        <div id="myNftList" class="nft-list">
+          <div class="nft-item">No wallet connected.</div>
         </div>
       </div>
+    </section>
 
-      <!-- Right: Feed -->
-      <div class="card testimonies-card">
-        <h2>Recent On-Chain Testimonies</h2>
-        <div id="feed" class="feed" aria-live="polite"></div>
-        <div class="help">Pulled live from XRPL (filtered for JCS Proof-of-Faith memos).</div>
-      </div>
+    <section class="explain-grid" aria-label="How the network works">
+      <article class="card explain-card">
+        <h3>1 · NFT proof</h3>
+        <p>
+          Your wallet mints an immutable NFToken. The URI contains a JCS testimony
+          identifier, a SHA-256 content commitment, and a short excerpt. The full
+          post is included in the signed mint transaction memos.
+        </p>
+      </article>
+      <article class="card explain-card">
+        <h3>2 · Public registry</h3>
+        <p>
+          A separate one-drop payment to the JCS collector publishes the NFT ID
+          and post fields into the shared feed. This second signature makes public
+          discovery possible without giving the website custody of your NFT.
+        </p>
+      </article>
+      <article class="card explain-card">
+        <h3>3 · Social interaction</h3>
+        <p>
+          Replies and Amen reactions are also one-drop memo transactions. The page
+          groups them beneath their parent NFT or transaction, producing a
+          blockchain-based social stream from public XRPL history.
+        </p>
+      </article>
     </section>
   </main>
 
+  <aside id="signPanel" class="sign-panel" hidden aria-live="polite">
+    <div class="sign-head">
+      <div>
+        <h2 id="signTitle">Review in Xaman</h2>
+        <p id="signStatus">Verify every field before signing.</p>
+      </div>
+      <button id="closeSignPanelBtn" class="btn small" type="button">Close</button>
+    </div>
+    <div id="securityCode" class="security-code">Code: —</div>
+    <div class="sign-grid">
+      <div>
+        <p class="status-box">
+          Do not sign unless this code matches the memo shown in Xaman. Also verify
+          XRPL Mainnet, transaction type, destination, amount, and NFT fields.
+        </p>
+        <div class="sign-actions">
+          <a id="openXamanLink" class="btn blue" href="#" target="_blank" rel="noopener" hidden>Open in Xaman</a>
+        </div>
+      </div>
+      <img id="signQr" class="sign-qr" alt="Scan the Xaman sign request" hidden>
+    </div>
+  </aside>
+
+  <dialog id="replyDialog" class="dialog">
+    <form method="dialog" class="dialog-inner">
+      <h2>Reply on the XRP Ledger</h2>
+      <p class="status-box">This creates a signed one-drop reply memo linked to the parent testimony.</p>
+      <input id="replyParent" type="hidden">
+      <div class="field">
+        <label for="replyMessage">Reply</label>
+        <textarea id="replyMessage" maxlength="220" placeholder="Write an uplifting reply, prayer, or word of encouragement."></textarea>
+      </div>
+      <div class="dialog-actions">
+        <button id="cancelReplyBtn" class="btn" type="button">Cancel</button>
+        <button id="submitReplyBtn" class="btn primary" type="button">Sign reply in Xaman</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+
   <footer>
-    © 2025 Jesus Christ Saves Token. All Rights Reserved.
+    <div class="footer-inner">
+      <strong>Jesus Christ Saves Token · Sign the Ledger v2.0.0</strong>
+      <p>
+        This interface is non-custodial. It does not request secret keys, guarantee
+        permanent availability from every public XRPL server, moderate religious
+        claims, or provide financial advice. Public on-chain content cannot be
+        quietly removed after validation.
+      </p>
+      <p class="mono">Collector: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · XRPL Mainnet</p>
+      <div class="footer-links">
+        <a class="btn small" href="index.html">JCS Home</a>
+        <a class="btn small" href="about-jcs.html">JCS Vision</a>
+        <a class="btn small" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" target="_blank" rel="noopener">XRBitcoin</a>
+        <a class="btn small" href="https://xrbitcoincash.com/" target="_blank" rel="noopener">XRBitcoinCash</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- SDKs (load once) -->
-  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
-  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <script src="https://xaman.app/assets/cdn/xumm.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js" crossorigin="anonymous"></script>
 
-  <!-- App -->
   <script>
-    /**************
-     * CONFIG
-     **************/
-    const APP_KEY     = "7737775c-1645-4a4e-a92d-ffe51530a348"; // Xumm API key
-    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";   // collector/issuer wallet (source of memory)
-    const IDENT_TAG   = "JCS_VERIFY_V1";
-    const XRPL_WSS    = "wss://xrplcluster.com";
+  (() => {
+    'use strict';
 
-    /**************
-     * HELPERS
-     **************/
-    const $ = (id) => document.getElementById(id);
-    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
+    const APP_KEY = '7737775c-1645-4a4e-a92d-ffe51530a348';
+    const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
+    const XRPL_WSS = 'wss://xrplcluster.com';
+    const APP_TAG = 'JCS_SOCIAL_V2';
+    const LEGACY_TAG = 'JCS_VERIFY_V1';
+    const NFT_TAXON = 1246974803;
+    const MAX_URI_BYTES = 256;
+    const DRAFT_KEY = 'jcs.social.draft.v2';
+    const PROFILE_KEY = 'jcs.social.profile.v2';
+    const PENDING_KEY = 'jcs.social.pending.v2';
+    const THEME_KEY = 'jcs-ledger-theme';
 
-    const strToHex = (s="") =>
-      Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
-    const hexToStr = (h="") => {
-      try { return new TextDecoder().decode(new Uint8Array((h.match(/.{1,2}/g)||[]).map(b=>parseInt(b,16)))); }
-      catch { return ""; }
+    const $ = id => document.getElementById(id);
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    const state = {
+      xumm: null,
+      account: '',
+      client: null,
+      clientPromise: null,
+      feedEntries: [],
+      posts: [],
+      rolling: true,
+      rollingHover: false,
+      rollingTimer: null,
+      feedLoading: false,
+      signPurpose: '',
+      pending: null,
+      subscribed: false,
+      refreshTimer: null
     };
-    const rippleToDate = (r) => r ? new Date((r + 946684800)*1000).toLocaleString() : "";
 
-    const setStatus = (msg, type="info") => {
-      const box = $("status");
-      box.hidden = !msg;
-      box.style.background =
-        type==="error"   ? "rgba(255, 102, 102, .18)" :
-        type==="success" ? "rgba(102, 255, 153, .18)" :
-                           "rgba(255,255,255,.08)";
-      box.textContent = msg || "";
-    };
-    const short = (s,n=12) => s && s.length>n ? s.slice(0,n)+"…" : (s||"");
-
-    /**************
-     * ORBS COLOR REACTIVITY
-     **************/
-    (function initOrbs(){
-      const orbs = document.querySelectorAll(".orb");
-      // randomize timings
-      orbs.forEach(orb=>{
-        orb.style.top="50%"; orb.style.left="50%";
-        orb.style.animationDuration = `${8+Math.random()*4}s, ${3+Math.random()*2}s`;
-        orb.style.animationDelay = `${Math.random()*6}s, ${Math.random()*2}s`;
-        orb.style.zIndex = Math.random()>0.6 ? 3 : 1;
-      });
-      const btns = ["xummBtn","signBtn","disconnectBtn"].map($);
-      const center = (el)=>{ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; };
-      const dist = (a,b)=>Math.hypot(a.x-b.x, a.y-b.y);
-      function tick(){
-        const cs = btns.map(center);
-        orbs.forEach(orb=>{
-          const r = orb.getBoundingClientRect();
-          const oc = {x:r.left+r.width/2, y:r.top+r.height/2};
-          const d = cs.map(c=>dist(oc,c));
-          const m = Math.min(...d), i = d.indexOf(m);
-          orb.style.background =
-            i===0 ? "rgba(0,212,255,.9)" :
-            i===1 ? "rgba(0,255,150,.9)" :
-                    "rgba(255,77,109,.9)";
-        });
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })();
-
-    /**************
-     * XUMM SETUP
-     **************/
-    let xumm = null;
-    let connectedAccount = null;
-
-    function initXumm(){
-      if (!window.Xumm){ console.error("Xumm SDK failed to load"); return; }
-      xumm = new Xumm(APP_KEY);
-
-      xumm.on("ready", () => {
-        console.log("✅ Xumm SDK ready");
-        $("xummBtn").disabled = false;
-      });
-
-      xumm.on("success", async () => {
-        connectedAccount = await xumm.user.account;
-        $("xummBtn").textContent = "Connected ✅";
-        $("signBtn").disabled = false;
-        $("disconnectBtn").disabled = false;
-        setStatus(`Connected: ${connectedAccount}`, "success");
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-      });
-
-      xumm.on("logout", () => {
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        setStatus("Disconnected.");
-      });
+    function escapeHtml(value='') {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    async function connectXumm(){
-      // xumm.authorize() opens sign-in (with QR on desktop automatically)
+    function strToHex(value='') {
+      return Array.from(encoder.encode(String(value)))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase();
+    }
+
+    function hexToStr(value='') {
       try {
-        setStatus("Opening Xaman to connect…");
-        await xumm.authorize();
-      } catch (e) {
-        console.warn(e);
-        setStatus("Connection cancelled.", "error");
+        const clean = String(value || '').replace(/[^a-fA-F0-9]/g, '');
+        if (!clean || clean.length % 2) return '';
+        const bytes = new Uint8Array(clean.match(/.{2}/g).map(v => parseInt(v, 16)));
+        return decoder.decode(bytes);
+      } catch {
+        return '';
       }
     }
 
-    /**************
-     * SIGN & SUBMIT PRAYER
-     **************/
-    async function sendPrayer(){
-      setStatus("");
+    function utf8Bytes(value='') {
+      return encoder.encode(String(value)).length;
+    }
 
-      const message = $("message").value.trim();
-      const name    = $("name").value.trim();
-      const handle  = $("handle").value.trim();
+    function truncateUtf8(value, maxBytes) {
+      let output = String(value || '');
+      while (utf8Bytes(output) > maxBytes && output.length) {
+        output = output.slice(0, -1);
+      }
+      return output;
+    }
 
-      if (!message){ setStatus("Please enter a message (required).", "error"); return; }
-      if (!connectedAccount){ setStatus("Please connect your wallet first.", "error"); return; }
+    function normalizeHandle(value='') {
+      const clean = String(value).trim().replace(/\s+/g, '');
+      if (!clean) return '';
+      return clean.startsWith('@') ? clean : '@' + clean;
+    }
 
-      // Build memos
-      const memos = [
-        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) }},
-        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)   }},
-      ];
-      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
-      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
+    function shortAccount(value='', size=8) {
+      const text = String(value || '');
+      if (text.length <= size * 2 + 1) return text;
+      return text.slice(0, size) + '…' + text.slice(-size);
+    }
 
-      // Minimal 1-drop Payment to collector with memos
-      const txjson = { TransactionType:"Payment", Destination:DESTINATION, Amount:"1", Memos:memos };
+    function rippleDateToIso(date) {
+      if (!Number.isFinite(Number(date))) return '';
+      return new Date((Number(date) + 946684800) * 1000).toISOString();
+    }
 
-      try {
-        setStatus("Creating sign request…");
-        const payload = await xumm.payload.create({ txjson });
+    function timeAgo(iso) {
+      if (!iso) return 'Ledger time unavailable';
+      const seconds = Math.max(0, Math.floor((Date.now() - Date.parse(iso)) / 1000));
+      if (seconds < 60) return seconds + 's ago';
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) return minutes + 'm ago';
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) return hours + 'h ago';
+      const days = Math.floor(hours / 24);
+      if (days < 30) return days + 'd ago';
+      return new Date(iso).toLocaleDateString();
+    }
 
-        if (isMobile()){
-          // Mobile: deep link to Xaman
-          window.location.href = payload.next.always;
-        } else {
-          // Desktop: show QR
-          $("xummQr").innerHTML =
-            `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
-              style="max-width:260px;border-radius:12px;box-shadow:0 0 12px rgba(0,212,255,.4)"/>`;
-          $("xummQr").hidden = false;
-          setStatus("Scan the QR with Xaman to sign…");
-        }
+    function initials(name, handle, account) {
+      const source = String(name || handle || account || 'JCS').replace('@', '').trim();
+      const parts = source.split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+      return source.slice(0, 2).toUpperCase();
+    }
 
-        // Poll for result
-        let txHash = null;
-        for (let i=0; i<120; i++){
-          const res = await xumm.payload.get(payload.uuid);
-          if (res?.meta?.resolved){
-            txHash = res?.response?.txid || null;
-            break;
+    function toast(message, type='') {
+      const region = $('toastRegion');
+      const item = document.createElement('div');
+      item.className = 'toast ' + type;
+      item.textContent = message;
+      region.appendChild(item);
+      setTimeout(() => item.remove(), 5200);
+    }
+
+    function setComposerStatus(message, type='') {
+      const node = $('composerStatus');
+      node.textContent = message;
+      node.className = 'status-box ' + type;
+    }
+
+    function setFeedStatus(message, type='') {
+      const node = $('feedStatus');
+      node.textContent = message;
+      node.className = 'status-box ' + type;
+    }
+
+    function setFlow(stage) {
+      const ids = ['flowConnect', 'flowMint', 'flowRegister'];
+      const stageIndex = {connect:0, mint:1, register:2, complete:3}[stage] ?? 0;
+      ids.forEach((id, index) => {
+        const node = $(id);
+        node.classList.toggle('done', index < stageIndex);
+        node.classList.toggle('active', index === stageIndex);
+      });
+      if (stage === 'complete') ids.forEach(id => $(id).classList.add('done'));
+    }
+
+    function updateThemeButton() {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      $('themeToggle').textContent = dark ? '☀' : '◐';
+      $('themeToggle').setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    $('themeToggle').addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem(THEME_KEY, next); } catch {}
+      updateThemeButton();
+    });
+    updateThemeButton();
+
+    async function ensureClient() {
+      if (!window.xrpl?.Client) throw new Error('XRPL library did not load.');
+      if (state.client?.isConnected()) return state.client;
+      if (state.clientPromise) return state.clientPromise;
+
+      state.clientPromise = (async () => {
+        try {
+          if (state.client) {
+            try { await state.client.disconnect(); } catch {}
           }
-          await new Promise(r=>setTimeout(r,1500));
+          state.client = new window.xrpl.Client(XRPL_WSS, {connectionTimeout:10000});
+          await state.client.connect();
+          return state.client;
+        } finally {
+          state.clientPromise = null;
         }
+      })();
+      return state.clientPromise;
+    }
 
-        if (txHash){
-          setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${txHash}`, "success");
-          $("message").value = ""; $("name").value = ""; $("handle").value = "";
-          $("charCount").textContent = "0";
-          $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-          loadFeedSoon();
+    async function xrplRequest(command, params={}) {
+      const client = await ensureClient();
+      return client.request({command, ...params});
+    }
+
+    function updateWalletUi() {
+      const connected = Boolean(state.account);
+      $('connectBtn').hidden = connected;
+      $('disconnectBtn').hidden = !connected;
+      $('publishBtn').disabled = !connected;
+      $('mintOnlyBtn').disabled = !connected;
+      $('loadMyNftsBtn').disabled = !connected;
+      $('walletPill').textContent = connected ? shortAccount(state.account, 7) : 'Wallet disconnected';
+      $('profileWallet').textContent = connected ? state.account : 'Connect Xaman to inspect your testimony NFTs.';
+      setFlow(connected ? 'mint' : 'connect');
+
+      if (connected) {
+        setComposerStatus(
+          'Connected to ' + shortAccount(state.account, 9) +
+          '. Review the preview, then approve the NFT mint and public registry transactions in Xaman.',
+          'ok'
+        );
+      }
+    }
+
+    function initXaman() {
+      if (!window.Xumm) {
+        setComposerStatus('The Xaman SDK did not load. Reload the page before attempting to publish.', 'err');
+        return;
+      }
+
+      state.xumm = new window.Xumm(APP_KEY);
+
+      state.xumm.on('ready', () => {
+        $('connectBtn').disabled = false;
+      });
+
+      state.xumm.on('success', async event => {
+        const nested = event?.data || event || {};
+        const possible =
+          nested.account ||
+          nested.me?.account ||
+          nested.data?.account ||
+          await state.xumm.user.account;
+        if (possible) {
+          state.account = possible;
+          updateWalletUi();
+          loadPending();
+          subscribeToCollector().catch(() => {});
+        }
+      });
+
+      state.xumm.on('logout', () => {
+        state.account = '';
+        updateWalletUi();
+        $('myNftList').innerHTML = '<div class="nft-item">No wallet connected.</div>';
+      });
+    }
+
+    $('connectBtn').addEventListener('click', async () => {
+      if (!state.xumm) return;
+      try {
+        setComposerStatus('Opening Xaman authorization…');
+        await state.xumm.authorize();
+        const account = await state.xumm.user.account;
+        if (account) {
+          state.account = account;
+          updateWalletUi();
+        }
+      } catch (error) {
+        setComposerStatus('Xaman connection was cancelled or failed: ' + (error?.message || error), 'err');
+      }
+    });
+
+    $('disconnectBtn').addEventListener('click', async () => {
+      try { await state.xumm?.logout(); } catch {}
+      state.account = '';
+      updateWalletUi();
+    });
+
+    function profileFromForm() {
+      return {
+        name: $('displayName').value.trim(),
+        handle: normalizeHandle($('handle').value),
+        visibility: $('visibility').value
+      };
+    }
+
+    function draftFromForm() {
+      return {
+        type: $('postType').value,
+        visibility: $('visibility').value,
+        message: $('message').value,
+        name: $('displayName').value,
+        handle: $('handle').value,
+        scripture: $('scriptureRef').value
+      };
+    }
+
+    function saveDraft() {
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(draftFromForm()));
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(profileFromForm()));
+        $('draftState').textContent = 'Draft saved locally · ' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      } catch {
+        $('draftState').textContent = 'Draft could not be saved in this browser';
+      }
+    }
+
+    function loadDraft() {
+      try {
+        const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+        const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+        $('postType').value = draft.type || 'prayer';
+        $('visibility').value = draft.visibility || profile.visibility || 'short';
+        $('message').value = draft.message || '';
+        $('displayName').value = draft.name || profile.name || '';
+        $('handle').value = draft.handle || profile.handle || '';
+        $('scriptureRef').value = draft.scripture || '';
+      } catch {}
+      updateComposer();
+    }
+
+    function postTypeLabel(type) {
+      return {
+        prayer:'Prayer',
+        testimony:'Testimony',
+        praise:'Praise report',
+        request:'Prayer request',
+        scripture:'Scripture reflection',
+        legacy:'Legacy testimony'
+      }[type] || 'Testimony';
+    }
+
+    function updateComposer() {
+      const message = $('message').value;
+      const bytes = utf8Bytes(message);
+      const counter = $('messageCounter');
+      counter.textContent = message.length + ' / 320 characters · ' + bytes + ' bytes';
+      counter.className = 'counter ' + (message.length > 300 ? 'bad' : message.length > 260 ? 'warn' : '');
+
+      const name = $('displayName').value.trim() || 'Anonymous believer';
+      const handle = normalizeHandle($('handle').value);
+      const scripture = $('scriptureRef').value.trim();
+      $('previewMessage').textContent = message.trim() || 'Your testimony preview will appear here.';
+      $('previewMeta').textContent =
+        postTypeLabel($('postType').value) + ' · ' + name +
+        (handle ? ' · ' + handle : '') +
+        (scripture ? ' · ' + scripture : '');
+
+      clearTimeout(updateComposer.saveTimer);
+      updateComposer.saveTimer = setTimeout(saveDraft, 350);
+    }
+
+    ['postType','visibility','message','displayName','handle','scriptureRef'].forEach(id => {
+      $(id).addEventListener('input', updateComposer);
+      $(id).addEventListener('change', updateComposer);
+    });
+
+    $('clearDraftBtn').addEventListener('click', () => {
+      ['message','scriptureRef'].forEach(id => $(id).value = '');
+      $('postType').value = 'prayer';
+      try { localStorage.removeItem(DRAFT_KEY); } catch {}
+      updateComposer();
+      toast('Draft cleared.');
+    });
+
+    async function sha256Hex(value) {
+      const digest = await crypto.subtle.digest('SHA-256', encoder.encode(value));
+      return Array.from(new Uint8Array(digest))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function canonicalPost(post) {
+      return JSON.stringify({
+        v:2,
+        type:post.type,
+        message:post.message,
+        name:post.name,
+        handle:post.handle,
+        scripture:post.scripture,
+        created:post.created
+      });
+    }
+
+    async function preparePost() {
+      if (!state.account) throw new Error('Connect Xaman first.');
+      const post = {
+        type: $('postType').value,
+        message: $('message').value.trim(),
+        name: $('displayName').value.trim(),
+        handle: normalizeHandle($('handle').value),
+        scripture: $('scriptureRef').value.trim(),
+        visibility: $('visibility').value,
+        created: new Date().toISOString(),
+        account: state.account
+      };
+
+      if (!post.message) throw new Error('Write a prayer or testimony first.');
+      if (post.message.length > 320) throw new Error('The message exceeds 320 characters.');
+
+      post.hash = await sha256Hex(canonicalPost(post));
+      const excerpt = encodeURIComponent(post.message.slice(0, 105));
+      const uriBase = 'jcs:testimony:v2:' + post.hash + ':';
+      post.uri = truncateUtf8(uriBase + excerpt, MAX_URI_BYTES);
+
+      if (utf8Bytes(post.uri) > MAX_URI_BYTES) {
+        throw new Error('The NFT URI exceeds the XRPL 256-byte limit.');
+      }
+      return post;
+    }
+
+    function memo(type, value) {
+      if (value === undefined || value === null || value === '') return null;
+      return {
+        Memo: {
+          MemoType: strToHex(type),
+          MemoData: strToHex(String(value))
+        }
+      };
+    }
+
+    function compactMemos(entries) {
+      return entries.filter(Boolean);
+    }
+
+    function securityCode() {
+      return String(Math.floor(100000 + Math.random() * 900000));
+    }
+
+    function closeSignPanel() {
+      $('signPanel').hidden = true;
+      $('signQr').hidden = true;
+      $('signQr').removeAttribute('src');
+      $('openXamanLink').hidden = true;
+      $('openXamanLink').href = '#';
+      $('securityCode').textContent = 'Code: —';
+    }
+
+    $('closeSignPanelBtn').addEventListener('click', closeSignPanel);
+
+    function showSignPanel(created, purpose, code) {
+      const qr =
+        created?.refs?.qr_png ||
+        created?.refs?.qr ||
+        created?.qr_png ||
+        created?.qr ||
+        '';
+      const link =
+        created?.next?.always ||
+        created?.next?.no_push_msg_received ||
+        created?.refs?.deeplink ||
+        created?.deeplink ||
+        '';
+
+      $('signTitle').textContent = purpose;
+      $('signStatus').textContent = 'Compare the six-digit code and inspect every field before signing.';
+      $('securityCode').textContent = 'Code: ' + code;
+      $('signPanel').hidden = false;
+
+      if (qr) {
+        $('signQr').src = qr;
+        $('signQr').hidden = false;
+      }
+      if (link) {
+        $('openXamanLink').href = link;
+        $('openXamanLink').hidden = false;
+      }
+    }
+
+    async function pollPayload(uuid) {
+      for (let index = 0; index < 160; index++) {
+        const details = await state.xumm.payload.get(uuid);
+        if (details?.meta?.resolved) return details;
+        await sleep(1500);
+      }
+      throw new Error('The Xaman request expired before it was resolved.');
+    }
+
+    async function signTransaction(baseTx, purpose) {
+      if (!state.xumm) throw new Error('Xaman is unavailable.');
+      if (!state.account) throw new Error('Connect Xaman first.');
+
+      const code = securityCode();
+      const txjson = {
+        Account: state.account,
+        ...baseTx,
+        Memos: [
+          ...(Array.isArray(baseTx.Memos) ? baseTx.Memos : []),
+          memo('code', code),
+          memo('domain', location.origin + location.pathname)
+        ].filter(Boolean)
+      };
+
+      const request = {
+        txjson,
+        options: {
+          submit: true,
+          force_network: 'MAINNET'
+        }
+      };
+
+      let created;
+      let resolution;
+      let details;
+
+      if (typeof state.xumm.payload.createAndSubscribe === 'function') {
+        const subscription = await state.xumm.payload.createAndSubscribe(
+          request,
+          event => {
+            const data = event?.data || event || {};
+            if (data.signed === true || data.signed === false) return data;
+          }
+        );
+        created = subscription.created;
+        showSignPanel(created, purpose, code);
+        resolution = await subscription.resolved;
+      } else {
+        created = await state.xumm.payload.create(request);
+        showSignPanel(created, purpose, code);
+        details = await pollPayload(created.uuid || created.payload_uuidv4);
+      }
+
+      const uuid = created?.uuid || created?.payload_uuidv4;
+      if (!details && uuid) {
+        try { details = await state.xumm.payload.get(uuid); } catch {}
+      }
+
+      const signed =
+        resolution?.signed ??
+        resolution?.data?.signed ??
+        details?.meta?.signed ??
+        false;
+
+      if (!signed) {
+        throw new Error('The Xaman request was rejected or cancelled.');
+      }
+
+      const txid =
+        details?.response?.txid ||
+        resolution?.txid ||
+        resolution?.data?.txid ||
+        '';
+
+      if (!txid) throw new Error('Xaman signed the request but did not return a transaction ID.');
+      $('signStatus').textContent = 'Signed and submitted to XRPL Mainnet: ' + shortAccount(txid, 10);
+      return {txid, code, created, resolution, details};
+    }
+
+    async function waitForValidatedTransaction(txid) {
+      for (let attempt = 0; attempt < 28; attempt++) {
+        try {
+          const response = await xrplRequest('tx', {transaction:txid, binary:false});
+          if (response?.result?.validated !== false) return response.result;
+        } catch {}
+        await sleep(1500);
+      }
+      throw new Error('The transaction was submitted but validation could not yet be confirmed.');
+    }
+
+    function getMintedNftId(txResult) {
+      const meta = txResult?.meta || txResult?.metaData;
+      if (typeof meta === 'object' && meta?.nftoken_id) return meta.nftoken_id;
+      try {
+        const value = window.xrpl?.getNFTokenID?.(meta);
+        if (value) return value;
+      } catch {}
+      return '';
+    }
+
+    function mintMemos(post) {
+      return compactMemos([
+        memo('app', APP_TAG),
+        memo('kind', 'mint'),
+        memo('type', post.type),
+        memo('msg', post.message),
+        memo('name', post.name),
+        memo('handle', post.handle),
+        memo('scripture', post.scripture),
+        memo('created', post.created),
+        memo('hash', post.hash)
+      ]);
+    }
+
+    function registryMemos(post, nftId, mintTx) {
+      return compactMemos([
+        memo('app', APP_TAG),
+        memo('kind', 'post'),
+        memo('type', post.type),
+        memo('msg', post.message),
+        memo('name', post.name),
+        memo('handle', post.handle),
+        memo('scripture', post.scripture),
+        memo('created', post.created),
+        memo('visibility', post.visibility),
+        memo('hash', post.hash),
+        memo('nft', nftId),
+        memo('minttx', mintTx)
+      ]);
+    }
+
+    function savePending(pending) {
+      state.pending = pending;
+      try { localStorage.setItem(PENDING_KEY, JSON.stringify(pending)); } catch {}
+      renderPending();
+    }
+
+    function clearPending() {
+      state.pending = null;
+      try { localStorage.removeItem(PENDING_KEY); } catch {}
+      renderPending();
+    }
+
+    function loadPending() {
+      try { state.pending = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null'); }
+      catch { state.pending = null; }
+      renderPending();
+    }
+
+    function renderPending() {
+      const box = $('pendingPublish');
+      if (!state.pending?.nftId) {
+        box.hidden = true;
+        return;
+      }
+      box.hidden = false;
+      $('pendingPublishText').textContent =
+        'NFT ' + shortAccount(state.pending.nftId, 9) +
+        ' was minted. Approve the one-drop registry payment to place it in the social feed.';
+    }
+
+    async function mintPost(post) {
+      setFlow('mint');
+      setComposerStatus('Preparing the testimony NFT. Review the NFTokenMint request in Xaman.', 'warn');
+
+      const result = await signTransaction({
+        TransactionType: 'NFTokenMint',
+        NFTokenTaxon: NFT_TAXON,
+        Flags: 0,
+        URI: strToHex(post.uri),
+        Memos: mintMemos(post)
+      }, 'Mint JCS testimony NFT');
+
+      setComposerStatus('Mint transaction submitted. Waiting for validated NFT metadata…', 'warn');
+      const validated = await waitForValidatedTransaction(result.txid);
+      const nftId = getMintedNftId(validated);
+      if (!nftId) {
+        throw new Error(
+          'The mint validated, but the public server did not expose the NFTokenID yet. ' +
+          'Transaction: ' + result.txid
+        );
+      }
+
+      const pending = {post, nftId, mintTx:result.txid, savedAt:Date.now()};
+      savePending(pending);
+      setComposerStatus('Testimony NFT minted successfully: ' + shortAccount(nftId, 10), 'ok');
+      return pending;
+    }
+
+    async function publishRegistry(pending) {
+      if (!pending?.post || !pending?.nftId) throw new Error('No pending NFT publication was found.');
+      setFlow('register');
+      setComposerStatus('NFT minted. Approve the one-drop registry payment to publish it in the public feed.', 'warn');
+
+      const result = await signTransaction({
+        TransactionType: 'Payment',
+        Destination: COLLECTOR,
+        Amount: '1',
+        Memos: registryMemos(pending.post, pending.nftId, pending.mintTx)
+      }, 'Publish testimony to the JCS social ledger');
+
+      await waitForValidatedTransaction(result.txid).catch(() => null);
+      clearPending();
+      setFlow('complete');
+      setComposerStatus('Your NFT-backed testimony is now published to the JCS on-chain feed.', 'ok');
+      toast('Testimony published on the XRP Ledger.', 'ok');
+      $('message').value = '';
+      $('scriptureRef').value = '';
+      try { localStorage.removeItem(DRAFT_KEY); } catch {}
+      updateComposer();
+      await loadFeed(true);
+      return result;
+    }
+
+    async function runPublish(publishToFeed) {
+      $('publishBtn').disabled = true;
+      $('mintOnlyBtn').disabled = true;
+      try {
+        const post = await preparePost();
+        const pending = await mintPost(post);
+        if (publishToFeed) {
+          await publishRegistry(pending);
         } else {
-          setStatus("Signing cancelled or expired.", "error");
+          setComposerStatus(
+            'NFT minted in your wallet. It is not in the public feed until you publish the pending registry entry.',
+            'ok'
+          );
         }
-      } catch(e){
-        console.error(e);
-        setStatus(`Error: ${e?.message || e}`, "error");
+      } catch (error) {
+        setComposerStatus(error?.message || String(error), 'err');
+        toast(error?.message || String(error), 'err');
+      } finally {
+        $('publishBtn').disabled = !state.account;
+        $('mintOnlyBtn').disabled = !state.account;
       }
     }
 
-    function disconnectWallet(){
-      if (xumm){
-        xumm.logout();
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-        setStatus("🔒 Wallet disconnected safely!", "success");
+    $('publishBtn').addEventListener('click', () => runPublish(true));
+    $('mintOnlyBtn').addEventListener('click', () => runPublish(false));
+    $('resumePublishBtn').addEventListener('click', async () => {
+      try { await publishRegistry(state.pending); }
+      catch (error) { setComposerStatus(error?.message || String(error), 'err'); }
+    });
+
+    function parseMemos(memos=[]) {
+      const output = {};
+      for (const item of memos || []) {
+        const source = item?.Memo || {};
+        const type = hexToStr(source.MemoType || '').trim().toLowerCase();
+        const data = hexToStr(source.MemoData || '').trim();
+        if (type) output[type] = data;
       }
+      return output;
     }
 
-    /**************
-     * FEED (XRPL)
-     **************/
-    let xrplClient = null;
-    async function ensureClient(){
-      if (xrplClient && xrplClient.isConnected()) return xrplClient;
-      xrplClient = new xrpl.Client(XRPL_WSS);
-      await xrplClient.connect();
-      return xrplClient;
+    function normalizeAccountTx(entry) {
+      const tx = entry?.tx_json || entry?.tx || entry?.transaction || {};
+      const meta = entry?.meta || entry?.metaData || {};
+      return {
+        tx,
+        meta,
+        hash: tx.hash || tx.Hash || entry?.hash || entry?.tx?.hash || '',
+        date: tx.date ?? entry?.date,
+        validated: entry?.validated !== false
+      };
     }
 
-    function parseMemos(memos=[]){
-      const out = {};
-      for (const m of memos){
-        const memo = m?.Memo || {};
-        const k = (hexToStr(memo.MemoType||"")||"").trim().toLowerCase();
-        const v = (hexToStr(memo.MemoData||"")||"").trim();
-        if (k) out[k]=v;
-      }
-      return out;
-    }
-
-    async function loadFeed(){
-      try{
-        const client = await ensureClient();
-        const resp = await client.request({
-          command: "account_tx",
-          account: DESTINATION,
+    async function fetchCollectorHistory() {
+      const all = [];
+      let marker = undefined;
+      for (let page = 0; page < 4; page++) {
+        const response = await xrplRequest('account_tx', {
+          account: COLLECTOR,
           ledger_index_min: -1,
           ledger_index_max: -1,
-          limit: 50
+          limit: 200,
+          forward: false,
+          marker
         });
+        all.push(...(response?.result?.transactions || []));
+        marker = response?.result?.marker;
+        if (!marker) break;
+      }
+      return all;
+    }
 
-        const items = [];
-        for (const e of (resp.result.transactions||[])){
-          const tx = e.tx || e.transaction || {};
-          if (tx.TransactionType !== "Payment") continue;
-          if (tx.Destination !== DESTINATION) continue;
-          const memos = parseMemos(tx.Memos || []);
-          if (memos.app !== IDENT_TAG) continue;
+    async function parseFeed(entries) {
+      const posts = [];
+      const replies = new Map();
+      const amens = new Map();
 
-          items.push({
-            hash: tx.hash || e.hash || "",
-            account: tx.Account,
-            date: e.tx?.date || e.date,
-            message: memos.msg || "",
-            name: memos.name || "",
-            handle: memos.handle || ""
+      for (const entry of entries) {
+        const normalized = normalizeAccountTx(entry);
+        const tx = normalized.tx;
+        if (!normalized.validated || tx.TransactionType !== 'Payment' || tx.Destination !== COLLECTOR) continue;
+
+        const memos = parseMemos(tx.Memos || []);
+        const app = memos.app || '';
+        const iso = memos.created || rippleDateToIso(normalized.date) || new Date().toISOString();
+
+        if (app === LEGACY_TAG) {
+          posts.push({
+            key: normalized.hash,
+            hash: normalized.hash,
+            mintTx: '',
+            nftId: '',
+            contentHash: '',
+            hashVerified: false,
+            legacy: true,
+            type: 'legacy',
+            message: memos.msg || '',
+            name: memos.name || '',
+            handle: memos.handle || '',
+            scripture: '',
+            visibility: 'short',
+            account: tx.Account || '',
+            created: iso,
+            replies: [],
+            amens: 0
           });
+          continue;
         }
 
-        items.sort((a,b)=> (b.date||0) - (a.date||0));
+        if (app !== APP_TAG) continue;
+        const kind = memos.kind || 'post';
+        const parent = memos.parent || memos.nft || normalized.hash;
 
-        const feed = $("feed");
-        feed.innerHTML = "";
-        if (!items.length){
-          feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
+        if (kind === 'amen') {
+          if (!amens.has(parent)) amens.set(parent, []);
+          amens.get(parent).push({hash:normalized.hash, account:tx.Account || '', created:iso});
+          continue;
+        }
+
+        if (kind === 'reply') {
+          if (!replies.has(parent)) replies.set(parent, []);
+          replies.get(parent).push({
+            hash:normalized.hash,
+            account:tx.Account || '',
+            message:memos.msg || '',
+            name:memos.name || '',
+            handle:memos.handle || '',
+            created:iso
+          });
+          continue;
+        }
+
+        if (kind !== 'post') continue;
+
+        const post = {
+          key: memos.nft || normalized.hash,
+          hash: normalized.hash,
+          mintTx: memos.minttx || '',
+          nftId: memos.nft || '',
+          contentHash: memos.hash || '',
+          hashVerified: false,
+          legacy: false,
+          type: memos.type || 'testimony',
+          message: memos.msg || '',
+          name: memos.name || '',
+          handle: memos.handle || '',
+          scripture: memos.scripture || '',
+          visibility: memos.visibility || 'short',
+          account: tx.Account || '',
+          created: iso,
+          replies: [],
+          amens: 0
+        };
+
+        if (post.contentHash) {
+          const reconstructed = {
+            type: post.type,
+            message: post.message,
+            name: post.name,
+            handle: post.handle,
+            scripture: post.scripture,
+            created: post.created
+          };
+          post.hashVerified = (await sha256Hex(canonicalPost(reconstructed))) === post.contentHash;
+        }
+        posts.push(post);
+      }
+
+      for (const post of posts) {
+        post.replies = (replies.get(post.key) || []).sort((a,b) => Date.parse(a.created) - Date.parse(b.created));
+        post.amens = (amens.get(post.key) || []).length;
+      }
+
+      return posts;
+    }
+
+    function displayWallet(post) {
+      if (post.visibility === 'hidden') return 'Wallet hidden by author';
+      if (post.visibility === 'full') return post.account || 'Unknown wallet';
+      return shortAccount(post.account, 7);
+    }
+
+    function filteredPosts() {
+      const query = $('feedSearch').value.trim().toLowerCase();
+      const type = $('feedType').value;
+      const sort = $('feedSort').value;
+
+      let posts = state.posts.filter(post => {
+        if (type !== 'all' && post.type !== type) return false;
+        if (!query) return true;
+        return [
+          post.message, post.name, post.handle, post.account,
+          post.scripture, post.nftId, post.hash
+        ].join(' ').toLowerCase().includes(query);
+      });
+
+      posts = [...posts].sort((a,b) => {
+        if (sort === 'oldest') return Date.parse(a.created) - Date.parse(b.created);
+        if (sort === 'amens') return b.amens - a.amens || Date.parse(b.created) - Date.parse(a.created);
+        return Date.parse(b.created) - Date.parse(a.created);
+      });
+      return posts;
+    }
+
+    function renderReply(reply) {
+      const label = reply.name || reply.handle || shortAccount(reply.account, 6);
+      return `
+        <div class="reply">
+          <div class="reply-meta">${escapeHtml(label)} · ${escapeHtml(timeAgo(reply.created))} · on-ledger reply</div>
+          <div class="reply-body">${escapeHtml(reply.message)}</div>
+        </div>
+      `;
+    }
+
+    function renderPost(post, index) {
+      const author = post.name || post.handle || 'Anonymous believer';
+      const handle = post.name && post.handle ? post.handle : '';
+      const badges = [
+        `<span class="badge">${escapeHtml(postTypeLabel(post.type))}</span>`,
+        post.nftId ? '<span class="badge nft">NFT-backed</span>' : '<span class="badge legacy">Legacy memo</span>',
+        post.hashVerified ? '<span class="badge verified">Hash verified</span>' : ''
+      ].filter(Boolean).join('');
+
+      const ledgerParts = [
+        'Registry tx: ' + (post.hash || '—'),
+        post.nftId ? 'NFTokenID: ' + post.nftId : '',
+        post.mintTx ? 'Mint tx: ' + post.mintTx : '',
+        'Wallet: ' + displayWallet(post)
+      ].filter(Boolean).join('\n');
+
+      return `
+        <article class="post-card" id="post-${escapeHtml(post.key.slice(0,16))}" style="animation-delay:${Math.min(index * 35, 400)}ms">
+          <div class="post-top">
+            <div class="avatar" aria-hidden="true">${escapeHtml(initials(post.name,post.handle,post.account))}</div>
+            <div class="post-author">
+              <div class="author-line">
+                <span class="author-name">${escapeHtml(author)}</span>
+                ${handle ? `<span class="author-handle">${escapeHtml(handle)}</span>` : ''}
+                ${badges}
+              </div>
+              <div class="post-time">${escapeHtml(timeAgo(post.created))}${post.scripture ? ' · ' + escapeHtml(post.scripture) : ''}</div>
+            </div>
+          </div>
+          <div class="post-body">${escapeHtml(post.message || 'On-chain testimony')}</div>
+          <div class="post-ledger">${escapeHtml(ledgerParts)}</div>
+          <div class="post-actions">
+            <button class="btn small amen-btn" type="button" data-parent="${escapeHtml(post.key)}">Amen on Ledger · ${post.amens}</button>
+            <button class="btn small reply-btn" type="button" data-parent="${escapeHtml(post.key)}">Reply · ${post.replies.length}</button>
+            <a class="btn small" href="https://bithomp.com/explorer/${encodeURIComponent(post.hash)}" target="_blank" rel="noopener">View transaction</a>
+            <button class="btn small share-btn" type="button" data-post="${escapeHtml(post.key.slice(0,16))}">Share</button>
+          </div>
+          ${post.replies.length ? `<div class="reply-list">${post.replies.slice(-5).map(renderReply).join('')}</div>` : ''}
+        </article>
+      `;
+    }
+
+    function renderFeed() {
+      const posts = filteredPosts();
+      const feed = $('feed');
+      if (!posts.length) {
+        feed.innerHTML = `
+          <div class="empty-state">
+            <div>
+              <strong>No matching on-chain testimonies were found.</strong>
+              <p>Change the filters, refresh the feed, or publish the first NFT-backed testimony.</p>
+            </div>
+          </div>`;
+        return;
+      }
+      feed.innerHTML = posts.map(renderPost).join('');
+      if (state.rolling) $('feedViewport').scrollTop = 0;
+    }
+
+    function updateStats() {
+      const wallets = new Set(state.posts.map(post => post.account).filter(Boolean));
+      $('statPosts').textContent = state.posts.length.toLocaleString();
+      $('statNfts').textContent = state.posts.filter(post => post.nftId).length.toLocaleString();
+      $('statAmens').textContent = state.posts.reduce((sum, post) => sum + post.amens, 0).toLocaleString();
+      $('statWallets').textContent = wallets.size.toLocaleString();
+    }
+
+    async function loadFeed(force=false) {
+      if (state.feedLoading && !force) return;
+      state.feedLoading = true;
+      setFeedStatus('Reading validated JCS social transactions from the XRP Ledger…');
+      try {
+        const entries = await fetchCollectorHistory();
+        state.feedEntries = entries;
+        state.posts = await parseFeed(entries);
+        updateStats();
+        renderFeed();
+        setFeedStatus(
+          'Loaded ' + state.posts.length + ' public testimony posts. Live refresh is active.',
+          'ok'
+        );
+      } catch (error) {
+        setFeedStatus('Could not load the testimony network: ' + (error?.message || error), 'err');
+        $('feed').innerHTML = `
+          <div class="empty-state">
+            <div>
+              <strong>The public XRPL server did not return the testimony feed.</strong>
+              <p>Use Refresh after the network connection recovers.</p>
+            </div>
+          </div>`;
+      } finally {
+        state.feedLoading = false;
+      }
+    }
+
+    async function subscribeToCollector() {
+      if (state.subscribed) return;
+      const client = await ensureClient();
+      await client.request({command:'subscribe', accounts:[COLLECTOR]});
+      client.on('transaction', event => {
+        const tx = event?.transaction || event?.tx_json || {};
+        if (tx.Destination === COLLECTOR || tx.Account === COLLECTOR) {
+          clearTimeout(state.refreshTimer);
+          state.refreshTimer = setTimeout(() => loadFeed(true), 1800);
+        }
+      });
+      state.subscribed = true;
+    }
+
+    ['feedSearch','feedType','feedSort'].forEach(id => {
+      $(id).addEventListener(id === 'feedSearch' ? 'input' : 'change', renderFeed);
+    });
+    $('refreshFeedBtn').addEventListener('click', () => loadFeed(true));
+
+    function startRolling() {
+      clearInterval(state.rollingTimer);
+      state.rollingTimer = setInterval(() => {
+        if (!state.rolling || state.rollingHover || document.hidden) return;
+        const viewport = $('feedViewport');
+        if (viewport.scrollHeight <= viewport.clientHeight + 4) return;
+        viewport.scrollTop += 1;
+        if (viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 2) {
+          viewport.scrollTop = 0;
+        }
+      }, 45);
+    }
+
+    $('rollingToggle').addEventListener('click', () => {
+      state.rolling = !state.rolling;
+      $('rollingToggle').textContent = state.rolling ? 'Pause rolling' : 'Resume rolling';
+      $('rollingToggle').setAttribute('aria-pressed', String(state.rolling));
+    });
+    $('feedViewport').addEventListener('pointerenter', () => {state.rollingHover = true});
+    $('feedViewport').addEventListener('pointerleave', () => {state.rollingHover = false});
+    $('feedViewport').addEventListener('focusin', () => {state.rollingHover = true});
+    $('feedViewport').addEventListener('focusout', () => {state.rollingHover = false});
+    startRolling();
+
+    async function socialPayment(kind, parent, message='') {
+      if (!state.account) throw new Error('Connect Xaman before signing an on-ledger interaction.');
+      const profile = profileFromForm();
+      const memos = compactMemos([
+        memo('app', APP_TAG),
+        memo('kind', kind),
+        memo('parent', parent),
+        memo('msg', message),
+        memo('name', profile.name),
+        memo('handle', profile.handle),
+        memo('created', new Date().toISOString())
+      ]);
+      const title = kind === 'amen' ? 'Place an Amen on the XRP Ledger' : 'Publish on-ledger reply';
+      const result = await signTransaction({
+        TransactionType:'Payment',
+        Destination:COLLECTOR,
+        Amount:'1',
+        Memos:memos
+      }, title);
+      await waitForValidatedTransaction(result.txid).catch(() => null);
+      await loadFeed(true);
+      return result;
+    }
+
+    $('feed').addEventListener('click', async event => {
+      const amenButton = event.target.closest('.amen-btn');
+      if (amenButton) {
+        amenButton.disabled = true;
+        try {
+          await socialPayment('amen', amenButton.dataset.parent);
+          toast('Amen recorded on the XRP Ledger.', 'ok');
+        } catch (error) {
+          toast(error?.message || String(error), 'err');
+        } finally {
+          amenButton.disabled = false;
+        }
+        return;
+      }
+
+      const replyButton = event.target.closest('.reply-btn');
+      if (replyButton) {
+        $('replyParent').value = replyButton.dataset.parent;
+        $('replyMessage').value = '';
+        $('replyDialog').showModal();
+        return;
+      }
+
+      const shareButton = event.target.closest('.share-btn');
+      if (shareButton) {
+        const url = location.origin + location.pathname + '#post-' + shareButton.dataset.post;
+        try {
+          await navigator.clipboard.writeText(url);
+          toast('Testimony link copied.', 'ok');
+        } catch {
+          prompt('Copy this testimony link:', url);
+        }
+      }
+    });
+
+    $('cancelReplyBtn').addEventListener('click', () => $('replyDialog').close());
+    $('submitReplyBtn').addEventListener('click', async () => {
+      const parent = $('replyParent').value;
+      const message = $('replyMessage').value.trim();
+      if (!message) {
+        toast('Write a reply first.', 'err');
+        return;
+      }
+      $('submitReplyBtn').disabled = true;
+      try {
+        await socialPayment('reply', parent, message);
+        $('replyDialog').close();
+        toast('Reply published on the XRP Ledger.', 'ok');
+      } catch (error) {
+        toast(error?.message || String(error), 'err');
+      } finally {
+        $('submitReplyBtn').disabled = false;
+      }
+    });
+
+    async function loadMyNfts() {
+      if (!state.account) return;
+      $('myNftList').innerHTML = '<div class="nft-item">Reading account NFTs…</div>';
+      try {
+        const response = await xrplRequest('account_nfts', {
+          account:state.account,
+          ledger_index:'validated',
+          limit:400
+        });
+        const nfts = (response?.result?.account_nfts || [])
+          .map(item => ({
+            id:item.NFTokenID || item.nft_id || '',
+            uri:hexToStr(item.URI || item.uri || '')
+          }))
+          .filter(item => item.uri.startsWith('jcs:testimony:v2:'));
+
+        if (!nfts.length) {
+          $('myNftList').innerHTML = '<div class="nft-item">No JCS testimony NFTs were found in this wallet.</div>';
           return;
         }
 
-        items.slice(0, 20).forEach(it=>{
-          const when = rippleToDate(it.date);
-          const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
-          const signedBy = (it.name || it.handle) ? `<div class="meta">Signed by: ${it.name||""} ${it.handle||""}</div>` : "";
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = `
-            <div class="meta">
-              <span>From: ${short(it.account,14)}</span>
-              <span>• ${when || "pending…"}</span>
-              ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
-            </div>
-            <div class="msg">${(it.message || "").replace(/[<>&]/g, s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
-            ${signedBy}
-          `;
-          feed.appendChild(div);
-        });
-      } catch(e){
-        console.error("Feed load error:", e);
-        $("feed").innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
+        $('myNftList').innerHTML = nfts.slice(0, 40).map(item => `
+          <div class="nft-item">
+            <strong>JCS Testimony NFT</strong><br>
+            ${escapeHtml(item.id)}<br>
+            ${escapeHtml(item.uri)}
+          </div>
+        `).join('');
+      } catch (error) {
+        $('myNftList').innerHTML = '<div class="nft-item">Could not load NFTs: ' + escapeHtml(error?.message || error) + '</div>';
       }
     }
+    $('loadMyNftsBtn').addEventListener('click', loadMyNfts);
 
-    let feedTimer = null;
-    function loadFeedSoon(){
-      clearTimeout(feedTimer);
-      feedTimer = setTimeout(loadFeed, 2500);
-    }
-
-    /**************
-     * BINDINGS
-     **************/
-    document.addEventListener("DOMContentLoaded", ()=>{
-      // init Xumm
-      initXumm();
-
-      // buttons
-      $("xummBtn").addEventListener("click", connectXumm);
-      $("signBtn").addEventListener("click", sendPrayer);
-      $("disconnectBtn").addEventListener("click", disconnectWallet);
-
-      // char counter
-      const msgEl = $("message"), cnt = $("charCount");
-      const updateCnt = ()=>{ cnt.textContent = String(msgEl.value.length); };
-      msgEl.addEventListener("input", updateCnt); updateCnt();
-
-      // load feed and refresh every 60s
-      loadFeed();
-      setInterval(loadFeed, 60000);
+    window.addEventListener('hashchange', () => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) target.scrollIntoView({behavior:'smooth',block:'center'});
     });
-  </script>
-</body>
-</html>  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-</head>
 
+    document.addEventListener('DOMContentLoaded', async () => {
+      loadDraft();
+      loadPending();
+      initXaman();
+      updateWalletUi();
+      updateComposer();
+      await loadFeed();
+      subscribeToCollector().catch(() => {});
+      setInterval(() => loadFeed(), 45000);
+    });
 
-
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { background:#000428; }
-    body {
-      min-height:100vh; font-family:Montserrat, system-ui, -apple-system, Arial, sans-serif;
-      color:#fff; line-height:1.8; background: radial-gradient(circle at top left,#000428,#004e92);
-    }
-    body::before {
-      content:""; position:fixed; inset:0; z-index:-2;
-      background:url("background-translucent.png") center/cover no-repeat; opacity:.08; pointer-events:none;
-    }
-    a { color:#00d4ff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-
-    header {
-      position:sticky; top:0; z-index:10;
-      background:rgba(0,0,0,.6); backdrop-filter:blur(6px);
-      padding:14px 24px; display:flex; justify-content:space-between; align-items:center;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    header .title { display:flex; gap:12px; align-items:center; font-weight:700; }
-    header .title img { height:36px; border-radius:6px; }
-    header .actions a {
-      padding:10px 18px; background:#00d4ff; color:#000; border-radius:30px; font-weight:700;
-      box-shadow:0 0 15px rgba(0,212,255,.6); white-space:nowrap;
-    }
-    header .actions a:hover { background:#fff; box-shadow:0 0 25px rgba(255,255,255,.9); }
-
-    main { max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
-    .hero { text-align:center; margin-bottom:36px; }
-    .hero h1 { font-size:2.6rem; text-shadow:0 0 20px rgba(255,255,255,.6); margin-bottom:8px; }
-    .hero p { color:#d5f7ff; max-width:800px; margin:0 auto; }
-    .note { font-size:.9rem; color:#ffedb5; margin-top:8px; text-align:center; }
-
-    .grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
-
-    .card {
-      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
-      border-radius:14px; padding:16px 16px 18px;
-    }
-    .card h2 { font-size:1.4rem; margin-bottom:10px; text-shadow:0 0 12px rgba(0,212,255,.5); }
-
-    .field { margin-top:12px; position:relative; }
-    .field label { display:block; font-weight:700; margin-bottom:6px; }
-    .field input, .field textarea {
-      width:100%; padding:12px 14px; border:none; border-radius:10px;
-      background:rgba(255,255,255,.1); color:#fff; outline:1px solid rgba(255,255,255,.12);
-    }
-    .help { font-size:.9rem; color:#b9ecff; margin-top:6px; }
-
-    .row { display:flex; gap:12px; }
-    .row .field { flex:1; }
-
-    .buttons { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; align-items:center; }
-    .btn {
-      padding:12px 20px; border:none; border-radius:30px; font-weight:700; cursor:pointer;
-      background:#00d4ff; color:#000; box-shadow:0 0 15px rgba(0,212,255,.6);
-    }
-    .btn.secondary { background:transparent; color:#fff; outline:1px solid rgba(255,255,255,.2); }
-    .btn:disabled { opacity:.6; cursor:not-allowed; }
-
-    @media (max-width:768px){
-      .buttons{ flex-direction:column; gap:14px; }
-      .buttons .btn{ width:100%; max-width:320px; margin:0 auto; padding:14px; font-size:1rem; transition:all .25s ease; }
-      .buttons .btn:hover,.buttons .btn:active{ transform:scale(1.03); box-shadow:0 0 20px rgba(0,212,255,.8); background:#00bfe6; }
-    }
-
-    #disconnectBtn{ background:#800020; color:#fff; box-shadow:0 0 12px rgba(128,0,32,.6); }
-    #disconnectBtn:hover{ transform:scale(1.03); box-shadow:0 0 20px rgba(128,0,32,.9); background:#a00028; }
-
-    .status {
-      margin-top:12px; font-size:.95rem; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.08);
-    }
-
-    /* Testimonies card with internal scroll */
-    .testimonies-card { display:flex; flex-direction:column; height:clamp(340px,60vh,520px); }
-    .testimonies-card h2, .testimonies-card .help { flex:0 0 auto; }
-    #feed { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; padding:.5rem; -webkit-overflow-scrolling:touch; }
-
-    .feed { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
-    .item { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:12px; }
-    .item .meta { font-size:.85rem; color:#cfefff; display:flex; gap:8px; flex-wrap:wrap; }
-    .item .msg { margin-top:6px; white-space:pre-wrap; }
-
-    footer {
-      background:rgba(0,0,0,.8); padding:18px; text-align:center; font-size:.9rem;
-      border-top:1px solid rgba(255,255,255,.1); margin-top:40px;
-    }
-
-    /* Orb visuals */
-    .message-box{ position:relative; overflow:hidden; z-index:1; }
-    .orb-container{ position:absolute; inset:0; pointer-events:none; z-index:0; }
-    .orb{
-      position:absolute; width:6px; height:6px; border-radius:50%;
-      background:rgba(0,212,255,.9); filter:blur(10px); mix-blend-mode:screen;
-      animation:spiralTight 10s infinite linear, fadeGlow 5s infinite ease-in-out;
-      transform-origin:center;
-    }
-    @keyframes spiralTight{
-      0%{ transform:rotate(0deg) translateX(40px) scale(.9); }
-      25%{ transform:rotate(90deg) translateX(45px) scale(1.1); }
-      50%{ transform:rotate(180deg) translateX(50px) scale(.8); }
-      75%{ transform:rotate(270deg) translateX(45px) scale(1.05); }
-      100%{ transform:rotate(360deg) translateX(40px) scale(.9); }
-    }
-    @keyframes fadeGlow{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
-    .buttons,#xummBtn,#signBtn,#disconnectBtn{ position:relative; z-index:2; }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="title">
-      <img src="jcs-logo.png" alt="JCS logo"/>
-      <span>JCS Proof-of-Faith</span>
-    </div>
-    <div class="actions">
-      <a href="index.html">🏠 Back to Home</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1>🖋 Sign the Ledger</h1>
-      <p>Share a short message of faith that’s written to the XRP Ledger (XRPL) as a public memo. Your message is immutable and viewable by anyone.</p>
-      <p class="note">Note: This sends a <strong>1-drop</strong> micro-payment to the collector wallet with your memo and uses the standard XRPL network fee (paid by your wallet).</p>
-    </section>
-
-    <section class="grid">
-      <!-- Left: Form -->
-      <div class="card">
-        <h2>Compose your on-chain message</h2>
-
-        <div class="field message-box">
-          <label for="message">Message (required)</label>
-          <textarea id="message" rows="4" maxlength="240" placeholder="Keep it uplifting. 240 characters max."></textarea>
-          <div class="help"><span id="charCount">0</span>/240</div>
-
-          <!-- Orbs -->
-          <div class="orb-container" aria-hidden="true">
-            <!-- 16 orbs -->
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-            <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="field">
-            <label for="name">Display name (optional)</label>
-            <input id="name" type="text" maxlength="40" placeholder="e.g., Grace • John D.">
-          </div>
-          <div class="field">
-            <label for="handle">Handle (optional)</label>
-            <input id="handle" type="text" maxlength="32" placeholder="@yourname">
-          </div>
-        </div>
-
-        <!-- Single status box -->
-        <div id="status" class="status" hidden></div>
-
-        <!-- QR code placeholder for desktop -->
-        <div id="xummQr" style="margin-top:12px; text-align:center;" hidden></div>
-
-        <div class="help">No private keys are ever requested by this site. Signing happens inside your wallet.</div>
-
-        <div class="buttons">
-          <button id="xummBtn" class="btn" disabled>Connect with Xaman</button>
-          <button id="signBtn" class="btn secondary" disabled>🖊️ Sign & Submit</button>
-          <button id="disconnectBtn" class="btn" disabled>Disconnect</button>
-        </div>
-      </div>
-
-      <!-- Right: Feed -->
-      <div class="card testimonies-card">
-        <h2>Recent On-Chain Testimonies</h2>
-        <div id="feed" class="feed" aria-live="polite"></div>
-        <div class="help">Pulled live from XRPL (filtered for JCS Proof-of-Faith memos).</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Jesus Christ Saves Token. All Rights Reserved.
-  </footer>
-
-  <!-- SDKs (load once) -->
-  <script src="https://xumm.app/assets/cdn/xumm.min.js"></script>
-  <script src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
-
-  <!-- App -->
-  <script>
-    /**************
-     * CONFIG
-     **************/
-    const APP_KEY     = "7737775c-1645-4a4e-a92d-ffe51530a348"; // Xumm API key
-    const DESTINATION = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";   // collector/issuer wallet (source of memory)
-    const IDENT_TAG   = "JCS_VERIFY_V1";
-    const XRPL_WSS    = "wss://xrplcluster.com";
-
-    /**************
-     * HELPERS
-     **************/
-    const $ = (id) => document.getElementById(id);
-    const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
-
-    const strToHex = (s="") =>
-      Array.from(new TextEncoder().encode(s)).map(b=>b.toString(16).padStart(2,"0")).join("");
-    const hexToStr = (h="") => {
-      try { return new TextDecoder().decode(new Uint8Array((h.match(/.{1,2}/g)||[]).map(b=>parseInt(b,16)))); }
-      catch { return ""; }
-    };
-    const rippleToDate = (r) => r ? new Date((r + 946684800)*1000).toLocaleString() : "";
-
-    const setStatus = (msg, type="info") => {
-      const box = $("status");
-      box.hidden = !msg;
-      box.style.background =
-        type==="error"   ? "rgba(255, 102, 102, .18)" :
-        type==="success" ? "rgba(102, 255, 153, .18)" :
-                           "rgba(255,255,255,.08)";
-      box.textContent = msg || "";
-    };
-    const short = (s,n=12) => s && s.length>n ? s.slice(0,n)+"…" : (s||"");
-
-    /**************
-     * ORBS COLOR REACTIVITY
-     **************/
-    (function initOrbs(){
-      const orbs = document.querySelectorAll(".orb");
-      // randomize timings
-      orbs.forEach(orb=>{
-        orb.style.top="50%"; orb.style.left="50%";
-        orb.style.animationDuration = `${8+Math.random()*4}s, ${3+Math.random()*2}s`;
-        orb.style.animationDelay = `${Math.random()*6}s, ${Math.random()*2}s`;
-        orb.style.zIndex = Math.random()>0.6 ? 3 : 1;
-      });
-      const btns = ["xummBtn","signBtn","disconnectBtn"].map($);
-      const center = (el)=>{ const r=el.getBoundingClientRect(); return {x:r.left+r.width/2, y:r.top+r.height/2}; };
-      const dist = (a,b)=>Math.hypot(a.x-b.x, a.y-b.y);
-      function tick(){
-        const cs = btns.map(center);
-        orbs.forEach(orb=>{
-          const r = orb.getBoundingClientRect();
-          const oc = {x:r.left+r.width/2, y:r.top+r.height/2};
-          const d = cs.map(c=>dist(oc,c));
-          const m = Math.min(...d), i = d.indexOf(m);
-          orb.style.background =
-            i===0 ? "rgba(0,212,255,.9)" :
-            i===1 ? "rgba(0,255,150,.9)" :
-                    "rgba(255,77,109,.9)";
-        });
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })();
-
-    /**************
-     * XUMM SETUP
-     **************/
-    let xumm = null;
-    let connectedAccount = null;
-
-    function initXumm(){
-      if (!window.Xumm){ console.error("Xumm SDK failed to load"); return; }
-      xumm = new Xumm(APP_KEY);
-
-      xumm.on("ready", () => {
-        console.log("✅ Xumm SDK ready");
-        $("xummBtn").disabled = false;
-      });
-
-      xumm.on("success", async () => {
-        connectedAccount = await xumm.user.account;
-        $("xummBtn").textContent = "Connected ✅";
-        $("signBtn").disabled = false;
-        $("disconnectBtn").disabled = false;
-        setStatus(`Connected: ${connectedAccount}`, "success");
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-      });
-
-      xumm.on("logout", () => {
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        setStatus("Disconnected.");
-      });
-    }
-
-    async function connectXumm(){
-      // xumm.authorize() opens sign-in (with QR on desktop automatically)
+    window.addEventListener('beforeunload', () => {
       try {
-        setStatus("Opening Xaman to connect…");
-        await xumm.authorize();
-      } catch (e) {
-        console.warn(e);
-        setStatus("Connection cancelled.", "error");
-      }
-    }
-
-    /**************
-     * SIGN & SUBMIT PRAYER
-     **************/
-    async function sendPrayer(){
-      setStatus("");
-
-      const message = $("message").value.trim();
-      const name    = $("name").value.trim();
-      const handle  = $("handle").value.trim();
-
-      if (!message){ setStatus("Please enter a message (required).", "error"); return; }
-      if (!connectedAccount){ setStatus("Please connect your wallet first.", "error"); return; }
-
-      // Build memos
-      const memos = [
-        { Memo: { MemoType: strToHex("app"),    MemoData: strToHex(IDENT_TAG) }},
-        { Memo: { MemoType: strToHex("msg"),    MemoData: strToHex(message)   }},
-      ];
-      if (name)   memos.push({ Memo: { MemoType: strToHex("name"),   MemoData: strToHex(name)   }});
-      if (handle) memos.push({ Memo: { MemoType: strToHex("handle"), MemoData: strToHex(handle) }});
-
-      // Minimal 1-drop Payment to collector with memos
-      const txjson = { TransactionType:"Payment", Destination:DESTINATION, Amount:"1", Memos:memos };
-
-      try {
-        setStatus("Creating sign request…");
-        const payload = await xumm.payload.create({ txjson });
-
-        if (isMobile()){
-          // Mobile: deep link to Xaman
-          window.location.href = payload.next.always;
-        } else {
-          // Desktop: show QR
-          $("xummQr").innerHTML =
-            `<img src="${payload.refs.qr_png}" alt="Scan with Xaman"
-              style="max-width:260px;border-radius:12px;box-shadow:0 0 12px rgba(0,212,255,.4)"/>`;
-          $("xummQr").hidden = false;
-          setStatus("Scan the QR with Xaman to sign…");
-        }
-
-        // Poll for result
-        let txHash = null;
-        for (let i=0; i<120; i++){
-          const res = await xumm.payload.get(payload.uuid);
-          if (res?.meta?.resolved){
-            txHash = res?.response?.txid || null;
-            break;
-          }
-          await new Promise(r=>setTimeout(r,1500));
-        }
-
-        if (txHash){
-          setStatus(`Success! View on Bithomp: https://bithomp.com/explorer/${txHash}`, "success");
-          $("message").value = ""; $("name").value = ""; $("handle").value = "";
-          $("charCount").textContent = "0";
-          $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-          loadFeedSoon();
-        } else {
-          setStatus("Signing cancelled or expired.", "error");
-        }
-      } catch(e){
-        console.error(e);
-        setStatus(`Error: ${e?.message || e}`, "error");
-      }
-    }
-
-    function disconnectWallet(){
-      if (xumm){
-        xumm.logout();
-        connectedAccount = null;
-        $("xummBtn").textContent = "Connect with Xaman";
-        $("signBtn").disabled = true;
-        $("disconnectBtn").disabled = true;
-        $("xummQr").hidden = true; $("xummQr").innerHTML = "";
-        setStatus("🔒 Wallet disconnected safely!", "success");
-      }
-    }
-
-    /**************
-     * FEED (XRPL)
-     **************/
-    let xrplClient = null;
-    async function ensureClient(){
-      if (xrplClient && xrplClient.isConnected()) return xrplClient;
-      xrplClient = new xrpl.Client(XRPL_WSS);
-      await xrplClient.connect();
-      return xrplClient;
-    }
-
-    function parseMemos(memos=[]){
-      const out = {};
-      for (const m of memos){
-        const memo = m?.Memo || {};
-        const k = (hexToStr(memo.MemoType||"")||"").trim().toLowerCase();
-        const v = (hexToStr(memo.MemoData||"")||"").trim();
-        if (k) out[k]=v;
-      }
-      return out;
-    }
-
-    async function loadFeed(){
-      try{
-        const client = await ensureClient();
-        const resp = await client.request({
-          command: "account_tx",
-          account: DESTINATION,
-          ledger_index_min: -1,
-          ledger_index_max: -1,
-          limit: 50
-        });
-
-        const items = [];
-        for (const e of (resp.result.transactions||[])){
-          const tx = e.tx || e.transaction || {};
-          if (tx.TransactionType !== "Payment") continue;
-          if (tx.Destination !== DESTINATION) continue;
-          const memos = parseMemos(tx.Memos || []);
-          if (memos.app !== IDENT_TAG) continue;
-
-          items.push({
-            hash: tx.hash || e.hash || "",
-            account: tx.Account,
-            date: e.tx?.date || e.date,
-            message: memos.msg || "",
-            name: memos.name || "",
-            handle: memos.handle || ""
-          });
-        }
-
-        items.sort((a,b)=> (b.date||0) - (a.date||0));
-
-        const feed = $("feed");
-        feed.innerHTML = "";
-        if (!items.length){
-          feed.innerHTML = `<div class="item"><div class="msg">No on-chain messages yet. Be the first to sign the ledger!</div></div>`;
-          return;
-        }
-
-        items.slice(0, 20).forEach(it=>{
-          const when = rippleToDate(it.date);
-          const link = it.hash ? `https://bithomp.com/explorer/${it.hash}` : "#";
-          const signedBy = (it.name || it.handle) ? `<div class="meta">Signed by: ${it.name||""} ${it.handle||""}</div>` : "";
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = `
-            <div class="meta">
-              <span>From: ${short(it.account,14)}</span>
-              <span>• ${when || "pending…"}</span>
-              ${it.hash ? `<span>• <a href="${link}" target="_blank" rel="noopener">View tx</a></span>` : ""}
-            </div>
-            <div class="msg">${(it.message || "").replace(/[<>&]/g, s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
-            ${signedBy}
-          `;
-          feed.appendChild(div);
-        });
-      } catch(e){
-        console.error("Feed load error:", e);
-        $("feed").innerHTML = `<div class="item"><div class="msg">Couldn’t load the feed right now. Please refresh.</div></div>`;
-      }
-    }
-
-    let feedTimer = null;
-    function loadFeedSoon(){
-      clearTimeout(feedTimer);
-      feedTimer = setTimeout(loadFeed, 2500);
-    }
-
-    /**************
-     * BINDINGS
-     **************/
-    document.addEventListener("DOMContentLoaded", ()=>{
-      // init Xumm
-      initXumm();
-
-      // buttons
-      $("xummBtn").addEventListener("click", connectXumm);
-      $("signBtn").addEventListener("click", sendPrayer);
-      $("disconnectBtn").addEventListener("click", disconnectWallet);
-
-      // char counter
-      const msgEl = $("message"), cnt = $("charCount");
-      const updateCnt = ()=>{ cnt.textContent = String(msgEl.value.length); };
-      msgEl.addEventListener("input", updateCnt); updateCnt();
-
-      // load feed and refresh every 60s
-      loadFeed();
-      setInterval(loadFeed, 60000);
+        if (state.client?.isConnected()) state.client.disconnect();
+      } catch {}
     });
+  })();
   </script>
-<script>
-/**
- * Xaman/Xumm header click shield
- * - Finds wallet iframe(s) and floats an invisible div over the TOP header band.
- * - Blocks clicks/taps on the title/About area that cause 404s.
- * - Does not cover the QR/content area.
- *
- * Tweak HEADER_HEIGHT if needed.
- */
-(function () {
-  // Adjust if you still manage to click the title/About
-  const HEADER_HEIGHT = 72; // px
-
-  // If the widget title bar is taller/shorter on mobile, you can vary by screen width
-  // const HEADER_HEIGHT = matchMedia('(max-width: 640px)').matches ? 80 : 72;
-
-  // Identify candidate iframes
-  function isXamanIframe(el) {
-    if (!(el instanceof HTMLIFrameElement)) return false;
-    const src   = (el.getAttribute('src')   || '').toLowerCase();
-    const title = (el.getAttribute('title') || '').toLowerCase();
-    return /xumm|xaman/.test(src) || /xumm|xaman/.test(title);
-  }
-
-  // Map<iframe, shieldDiv>
-  const shields = new Map();
-
-  function makeShield() {
-    const s = document.createElement('div');
-    // Cover clicks but remain visually invisible
-    Object.assign(s.style, {
-      position: 'fixed',
-      left: '0px',
-      top: '0px',
-      width: '0px',
-      height: '0px',
-      pointerEvents: 'auto',
-      background: 'transparent',
-      zIndex: '2147483646', // just under most cookie banners, above modals
-      // Optional debug tint:
-      // background: 'rgba(255,0,0,0.08)'
-      touchAction: 'none', // block touch gestures
-    });
-
-    // Safety: swallow events
-    ['click','mousedown','mouseup','touchstart','touchend','pointerdown','pointerup'].forEach(evt =>
-      s.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); }, { passive: false })
-    );
-
-    document.body.appendChild(s);
-    return s;
-  }
-
-  function positionShieldOverHeader(ifr) {
-    const rect = ifr.getBoundingClientRect();
-    // Hide if iframe not visible
-    if (rect.width <= 0 || rect.height <= 0) {
-      const sh = shields.get(ifr);
-      if (sh) sh.style.display = 'none';
-      return;
-    }
-
-    let sh = shields.get(ifr);
-    if (!sh) {
-      sh = makeShield();
-      shields.set(ifr, sh);
-    }
-
-    sh.style.display = 'block';
-    sh.style.left   = rect.left + 'px';
-    sh.style.top    = rect.top  + 'px';
-    sh.style.width  = rect.width + 'px';
-    sh.style.height = Math.min(HEADER_HEIGHT, rect.height) + 'px';
-  }
-
-  function hideShield(ifr) {
-    const sh = shields.get(ifr);
-    if (sh) sh.style.display = 'none';
-  }
-
-  function scanIframes() {
-    const nodes = Array.from(document.querySelectorAll('iframe'));
-    const xamanIframes = nodes.filter(isXamanIframe);
-
-    // Position shields over all detected wallet iframes
-    xamanIframes.forEach(positionShieldOverHeader);
-
-    // Hide shields for any iframes that disappeared
-    for (const ifr of shields.keys()) {
-      if (!document.body.contains(ifr) || !xamanIframes.includes(ifr)) hideShield(ifr);
-    }
-  }
-
-  // Continuously track layout/animation changes
-  let ticking = false;
-  function tick() {
-    ticking = false;
-    scanIframes();
-    requestAnimationFrame(tick);
-  }
-
-  // React to DOM changes and resizes
-  const mo = new MutationObserver(() => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } });
-  mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
-
-  window.addEventListener('resize',  () => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }, { passive: true });
-  window.addEventListener('scroll',  () => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }, { passive: true });
-
-  // Also re-run when new iframes are added to start watching their size
-  const ro = new ResizeObserver(entries => {
-    for (const entry of entries) {
-      if (entry.target instanceof HTMLIFrameElement && isXamanIframe(entry.target)) {
-        positionShieldOverHeader(entry.target);
-      }
-    }
-  });
-  const watchFrames = new MutationObserver(() => {
-    document.querySelectorAll('iframe').forEach(ifr => {
-      try { ro.observe(ifr); } catch {}
-    });
-  });
-  watchFrames.observe(document.documentElement, { childList: true, subtree: true });
-
-  // Kick off
-  requestAnimationFrame(tick);
-})();
-</script>
-
 </body>
 </html>
