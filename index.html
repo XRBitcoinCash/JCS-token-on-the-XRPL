@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.5.3" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.3</title>
+<meta content="1.5.4" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.4</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4496,34 +4496,338 @@ html[data-theme="light"] .jcs-unified-header{
     "logo": "https://jesuschristsavestoken.com/jcs-logo.png"
   }
 }</script>
+
+<style id="jcs-xrbc-uniform-header-v154">
+/* =========================================================
+   JCS ecosystem header — XRBitcoinCash compact layout
+   ========================================================= */
+.jcs-ecosystem-header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1000;
+  width:100%;
+  border-bottom:1px solid rgba(56,189,248,.28) !important;
+  background:rgba(3,10,23,.95) !important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+html[data-theme="light"] .jcs-ecosystem-header,
+body.light-mode .jcs-ecosystem-header{
+  background:rgba(255,255,255,.95) !important;
+  border-bottom-color:rgba(20,88,213,.20) !important;
+}
+.jcs-ecosystem-header .compact-header-wrap{
+  width:min(1260px,100%);
+  min-height:58px !important;
+  margin:0 auto;
+  padding:6px 18px !important;
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  align-items:center !important;
+  gap:10px 18px !important;
+  box-sizing:border-box;
+}
+.jcs-ecosystem-header .brand-stack{
+  display:grid;
+  gap:3px;
+  min-width:max-content;
+}
+.jcs-ecosystem-header .header-utility-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.jcs-ecosystem-header .compact-theme-toggle{
+  min-height:24px !important;
+  padding:3px 7px !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  border:1px solid var(--line);
+  border-radius:7px !important;
+  color:var(--muted);
+  background:var(--panel);
+  font-size:.66rem !important;
+  font-weight:850;
+  line-height:1;
+  box-shadow:none !important;
+  cursor:pointer;
+}
+.jcs-ecosystem-header .compact-theme-toggle:hover,
+.jcs-ecosystem-header .compact-theme-toggle:focus-visible{
+  color:var(--blue,#55a4ff);
+  border-color:rgba(56,189,248,.55);
+  outline:none;
+}
+.jcs-ecosystem-header .theme-toggle-icon{font-size:.8rem}
+.jcs-ecosystem-header .header-utility-actions{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+}
+.jcs-ecosystem-header .header-policy-links{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.jcs-ecosystem-header .header-policy-links a{
+  font-size:.64rem;
+  font-weight:850;
+  line-height:1;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.jcs-ecosystem-header .header-policy-links a:hover,
+.jcs-ecosystem-header .header-policy-links a:focus-visible{
+  filter:brightness(1.18);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  outline:none;
+}
+.jcs-ecosystem-header .project-xrbc{color:#72a8ff}
+.jcs-ecosystem-header .project-xrbitcoin{color:#38bdf8}
+.jcs-ecosystem-header .header-wallet-actions{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.jcs-ecosystem-header .header-wallet-btn{
+  min-height:24px;
+  padding:3px 7px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  color:var(--ink);
+  background:var(--panel);
+  font:800 .62rem/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.jcs-ecosystem-header .header-wallet-btn.connect{
+  border-color:#1458d5;
+  color:#fff;
+  background:linear-gradient(180deg,#2f80ed,#1458d5);
+}
+.jcs-ecosystem-header .header-wallet-btn.disconnect{
+  border-color:rgba(197,52,77,.45);
+  color:var(--err,#ff7184);
+}
+.jcs-ecosystem-header .header-wallet-btn:disabled{
+  opacity:.58;
+  cursor:not-allowed;
+}
+.jcs-ecosystem-header .compact-wallet-pill{
+  max-width:112px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:var(--muted);
+  font-size:.60rem;
+  font-weight:750;
+  white-space:nowrap;
+}
+.jcs-ecosystem-header .brand-link{
+  display:flex;
+  align-items:center;
+  gap:8px !important;
+  color:inherit;
+  text-decoration:none;
+}
+.jcs-ecosystem-header .brand-link img{
+  width:36px !important;
+  height:36px !important;
+  flex:0 0 36px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.42);
+  border-radius:10px !important;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(201,152,32,.14);
+}
+.jcs-ecosystem-header .brand-link > .brand-copy{display:grid !important;min-width:0;align-items:initial}
+.jcs-ecosystem-header .brand-title{
+  font:900 .98rem/1.08 Georgia,"Times New Roman",serif !important;
+  white-space:nowrap;
+}
+.jcs-ecosystem-header .brand-subtitle{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:.62rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+.jcs-ecosystem-header .compact-header-nav{
+  min-width:0;
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:2px !important;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.jcs-ecosystem-header .compact-header-nav::-webkit-scrollbar{display:none}
+.jcs-ecosystem-header .compact-header-nav .nav-btn{
+  min-height:30px !important;
+  flex:0 0 auto;
+  padding:5px 7px !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid transparent;
+  border-radius:8px !important;
+  color:var(--muted);
+  background:transparent;
+  font-size:.69rem !important;
+  font-weight:850;
+  line-height:1 !important;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.jcs-ecosystem-header .compact-header-nav .nav-btn:hover,
+.jcs-ecosystem-header .compact-header-nav .nav-btn:focus-visible,
+.jcs-ecosystem-header .compact-header-nav .nav-btn[aria-current="page"]{
+  border-color:var(--line);
+  color:var(--blue,#55a4ff);
+  background:var(--panel-2);
+  outline:none;
+}
+.jcs-ecosystem-header .compact-header-nav .sign-ledger-gold{
+  border-color:#c99820 !important;
+  color:#111 !important;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b) !important;
+  box-shadow:0 7px 20px rgba(201,152,32,.17) !important;
+}
+@media(max-width:1040px){
+  .jcs-ecosystem-header .header-utility-actions{flex-wrap:wrap}
+  .jcs-ecosystem-header .compact-wallet-pill{display:none}
+}
+@media(max-width:820px){
+  .jcs-ecosystem-header{position:static !important}
+  .jcs-ecosystem-header .compact-header-wrap{
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+    padding:10px 12px !important;
+  }
+  .jcs-ecosystem-header .brand-stack{width:100%;min-width:0}
+  .jcs-ecosystem-header .header-utility-row{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+  .jcs-ecosystem-header .header-utility-actions{
+    margin-left:auto;
+    flex-wrap:wrap;
+  }
+  .jcs-ecosystem-header .brand-link{justify-content:center}
+  .jcs-ecosystem-header .compact-header-nav{
+    width:100%;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:5px !important;
+    overflow:visible;
+  }
+  .jcs-ecosystem-header .compact-header-nav .nav-btn{
+    width:100%;
+    min-height:36px !important;
+    font-size:.72rem !important;
+  }
+  .jcs-ecosystem-header .compact-wallet-pill{display:inline-block;max-width:100%}
+}
+@media(max-width:560px){
+  .jcs-ecosystem-header .header-utility-row{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    align-items:start;
+    gap:6px 8px;
+  }
+  .jcs-ecosystem-header .header-utility-actions{
+    width:auto;
+    margin-left:0;
+    display:flex;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:5px 8px;
+  }
+  .jcs-ecosystem-header .header-policy-links{
+    width:auto;
+    justify-content:flex-end;
+    gap:6px 10px;
+  }
+  .jcs-ecosystem-header .header-wallet-actions{
+    width:auto;
+    justify-content:flex-end;
+  }
+  .jcs-ecosystem-header .compact-wallet-pill{display:none}
+  .jcs-ecosystem-header .brand-title{font-size:.92rem !important}
+  .jcs-ecosystem-header .brand-subtitle{font-size:.59rem}
+}
+</style>
 </head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="site-header jcs-unified-header">
-<div class="header-inner">
-<a class="brand" href="index.html">
-<img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
-<span class="brand-copy">
-<span class="brand-title">Jesus Christ Saves Token</span>
-<span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
-</span>
-</a>
-<nav aria-label="Primary" class="header-nav">
-<a class="nav-link" href="index.html">Home</a>
-<a class="nav-link" href="about-jcs.html">Vision</a>
-<a class="nav-link sign-ledger-gold" href="verify.html">Sign the Ledger</a>
-<a class="nav-link" href="index.html#trade">Trade</a>
-<a class="nav-link" href="index.html#scripture">Scripture</a>
-<a class="nav-link" href="index.html#sacred-film">Sacred Film</a>
-<a class="nav-link" href="index.html#audio">Sacred Audio</a>
-</nav>
-<div class="header-actions">
-<button aria-label="Change theme" class="btn theme-toggle" id="themeToggle" type="button">◐</button>
-<button class="btn blue" disabled="" id="connectBtn" type="button">Connect Xaman</button>
-<button class="btn danger" hidden="" id="disconnectBtn" type="button">Disconnect</button>
-<span aria-live="polite" class="wallet-pill" id="walletPill">Wallet disconnected</span>
-</div>
-</div>
+<header class="site-header jcs-ecosystem-header" role="banner">
+  <div class="header-wrap compact-header-wrap">
+    <div class="brand-stack">
+      <div class="header-utility-row">
+        <button
+          aria-label="Switch to light mode"
+          aria-pressed="true"
+          class="theme-toggle compact-theme-toggle"
+          id="themeToggle"
+          title="Switch between light and dark mode"
+          type="button"
+        >
+          <span aria-hidden="true" class="theme-toggle-icon">◐</span>
+          <span id="themeToggleText">Light mode</span>
+        </button>
+
+        <div class="header-utility-actions">
+          <div aria-label="Related XRPL ecosystem projects" class="header-policy-links">
+            <a
+              class="header-project-link project-xrbc"
+              href="https://xrbitcoincash.com/"
+              rel="noopener noreferrer"
+              target="_blank"
+              title="Open the XRBitcoinCash home page"
+            >XRBitcoinCash</a>
+            <a
+              class="header-project-link project-xrbitcoin"
+              href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html"
+              rel="noopener noreferrer"
+              target="_blank"
+              title="Open the XRBitcoin home page"
+            >XRBitcoin</a>
+          </div>
+
+          <div aria-label="Xaman wallet controls" class="header-wallet-actions">
+            <button class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
+            <button class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
+            <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+          </div>
+        </div>
+      </div>
+
+      <a aria-label="Jesus Christ Saves Token home" class="brand-link" href="index.html">
+        <img alt="Jesus Christ Saves Token logo" height="36" src="https://jesuschristsavestoken.com/jcs-logo.png" width="36"/>
+        <span class="brand-copy">
+          <span class="brand-title">Jesus Christ Saves Token</span>
+          <span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
+        </span>
+      </a>
+    </div>
+
+    <nav aria-label="Primary navigation" class="header-nav compact-header-nav">
+      <a aria-current="page" class="nav-btn" href="index.html">Home</a>
+      <a class="nav-btn" href="about-jcs.html">Vision</a>
+      <a class="nav-btn sign-ledger-gold" href="verify.html">Sign the Ledger</a>
+      <a class="nav-btn" href="index.html#trade">Trade</a>
+      <a class="nav-btn" href="index.html#scripture">Scripture</a>
+      <a class="nav-btn" href="index.html#sacred-film">Sacred Film</a>
+      <a class="nav-btn" href="index.html#audio">Sacred Audio</a>
+    </nav>
+  </div>
 </header>
 <main class="container" id="main-content">
 <section aria-labelledby="jcs-title" class="card jcs-hero">
@@ -4579,8 +4883,9 @@ html[data-theme="light"] .jcs-unified-header{
 <span class="public-domain-badge">Public domain</span>
 </div>
 <div class="passion-player-shell" id="passionPlayerShell">
-<video aria-describedby="passionLicense" autoplay="" id="passionVideo" muted="" playsinline="" poster="https://jesuschristsavestoken.com/jcs-logo.png" preload="auto" tabindex="0">
+<video aria-describedby="passionLicense" autoplay="" id="passionVideo" muted="" playsinline="" webkit-playsinline="" poster="https://jesuschristsavestoken.com/jcs-logo.png" preload="metadata" tabindex="0">
 <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.360p.webm" type="video/webm"/>
+<source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.144p.mjpeg.mov" type="video/quicktime"/>
 <source src="https://upload.wikimedia.org/wikipedia/commons/5/53/Vie_et_Passion_du_Christ_%281903%29.webm" type="video/webm"/>
 <source src="https://upload.wikimedia.org/wikipedia/commons/6/6c/La_vie_et_la_passion_de_Jesus_Christ_%281903%29.ogv" type="video/ogg"/>
           Your browser does not support the sacred film stream.
@@ -4627,14 +4932,14 @@ html[data-theme="light"] .jcs-unified-header{
 <h3>Church Music Radio</h3>
 <p>
         Gregorian chant, Ave Maria, and suitable public-domain archival sacred
-        recordings. Default volume is set to 18 percent.
+        recordings. Default volume starts at the minimum (0 percent).
       </p>
 <audio autoplay="" crossorigin="anonymous" id="musicAudio" playsinline="" preload="auto"></audio>
 <div class="audio-controls">
 <button class="btn" id="musicStart" type="button">Listen</button>
 <button class="btn" id="musicStop" type="button">Pause listening</button>
 <label for="musicVolume">Volume</label>
-<input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0.18"/>
+<input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0"/>
 </div>
 <div class="now-playing" id="musicNow">
         Joining the current church-music station position…
@@ -4645,14 +4950,14 @@ html[data-theme="light"] .jcs-unified-header{
 <p>
         King James Psalms, the Book of Enoch, and the Book of Jubilees from
         public-domain LibriVox and Internet Archive recordings. Default volume
-        is set to 78 percent.
+        is set to the maximum (100 percent).
       </p>
 <audio autoplay="" crossorigin="anonymous" id="readingAudio" playsinline="" preload="auto"></audio>
 <div class="audio-controls">
 <button class="btn" id="readingStart" type="button">Listen</button>
 <button class="btn" id="readingStop" type="button">Pause listening</button>
 <label for="readingVolume">Volume</label>
-<input id="readingVolume" max="1" min="0" step="0.01" type="range" value="0.78"/>
+<input id="readingVolume" max="1" min="0" step="0.01" type="range" value="1"/>
 </div>
 <div class="now-playing" id="readingNow">
         Joining the current Scripture-reading station position…
@@ -4671,7 +4976,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Connect once, confirm the exact JCS trustline, then review every transaction inside Xaman.</p>
 </div>
 </div>
-<span class="xaman-ready-badge">Working release · 1.5.3</span>
+<span class="xaman-ready-badge">Working release · 1.5.4</span>
 </div>
 <div aria-label="Wallet readiness" class="wallet-readiness">
 <div class="wallet-step" id="walletStepConnect">
@@ -4733,7 +5038,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Live XRP Ledger pricing with wallet-side review and signing through the working JCS Xaman endpoint.</p>
 </div>
 </div>
-<span class="trade-network-pill">XRPL Mainnet · v1.5.3</span>
+<span class="trade-network-pill">XRPL Mainnet · v1.5.4</span>
 </div>
 <div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="tablist">
 <button aria-selected="true" class="tab buy active" id="buyTab" role="tab" type="button">
@@ -5200,7 +5505,7 @@ html[data-theme="light"] .jcs-unified-header{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.5.3",
+  "release": "1.5.4",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5214,7 +5519,7 @@ html[data-theme="light"] .jcs-unified-header{
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '1.5.3';
+  const JCS_RELEASE = '1.5.4';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -8352,7 +8657,7 @@ html[data-theme="light"] .jcs-unified-header{
 
 
   const ARCHIVE_BASE = 'https://archive.org';
-  const MEDIA_STORAGE = 'jcs.sacredMedia.v2';
+  const MEDIA_STORAGE = 'jcs.sacredMedia.v3';
   const PASSION_DURATION_SECONDS = 2635;
   const PASSION_TITLE = 'Vie et Passion du Christ (1903)';
 
@@ -8545,14 +8850,14 @@ html[data-theme="light"] .jcs-unified-header{
     try {
       const saved = JSON.parse(localStorage.getItem(MEDIA_STORAGE) || '{}');
       channels.music.volume.value = String(
-        clamp(Number(saved.musicVolume ?? 0.18),0,1)
+        clamp(Number(saved.musicVolume ?? 0),0,1)
       );
       channels.reading.volume.value = String(
-        clamp(Number(saved.readingVolume ?? 0.78),0,1)
+        clamp(Number(saved.readingVolume ?? 1),0,1)
       );
     } catch {
-      channels.music.volume.value = '0.18';
-      channels.reading.volume.value = '0.78';
+      channels.music.volume.value = '0';
+      channels.reading.volume.value = '1';
     }
   }
 
@@ -8814,6 +9119,16 @@ html[data-theme="light"] .jcs-unified-header{
   async function activatePassionFilm() {
     passionActive = true;
 
+    passionVideo.defaultMuted = true;
+    passionVideo.muted = true;
+    passionVideo.playsInline = true;
+    passionVideo.setAttribute('playsinline','');
+    passionVideo.setAttribute('webkit-playsinline','');
+
+    if (window.matchMedia('(max-width: 820px), (pointer: coarse)').matches) {
+      passionVideo.controls = true;
+    }
+
     const seek = synchronizedPassionPosition();
     const duration =
       Number.isFinite(passionVideo.duration) && passionVideo.duration > 0
@@ -8925,6 +9240,16 @@ html[data-theme="light"] .jcs-unified-header{
   });
 
   loadMediaSettings();
+
+  passionVideo.defaultMuted = true;
+  passionVideo.muted = true;
+  passionVideo.playsInline = true;
+  passionVideo.setAttribute('playsinline','');
+  passionVideo.setAttribute('webkit-playsinline','');
+  if (window.matchMedia('(max-width: 820px), (pointer: coarse)').matches) {
+    passionVideo.controls = true;
+  }
+
   activatePassionFilm();
 
   Promise.allSettled([
