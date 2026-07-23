@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.4.0" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.4.0</title>
+<meta content="1.4.1" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.4.1</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4297,6 +4297,13 @@ a[href$="verify.html"]:focus-visible{
 @media(max-width:860px){
   .audio-sanctuary .audio-grid{grid-template-columns:1fr}
 }
+
+.xaman-redirect-note{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:.72rem;
+  overflow-wrap:anywhere;
+}
 </style>
 <script>
 (function(){
@@ -4361,7 +4368,6 @@ a[href$="verify.html"]:focus-visible{
 <img alt="Jesus Christ Saves Token logo" height="36" src="https://jesuschristsavestoken.com/jcs-logo.png" width="36"/>
 <span>
 <span class="brand-title">Jesus Christ Saves Token</span>
-
 </span>
 </a>
 </div>
@@ -4373,7 +4379,6 @@ a[href$="verify.html"]:focus-visible{
 <a class="nav-btn" href="#sentinel">Sentinel</a>
 <a class="nav-btn faith-link" href="#scripture">Scripture</a>
 <a class="nav-btn faith-link" href="#sacred-film">Sacred Film</a><a class="nav-btn faith-link" href="#audio">Sacred Audio</a>
-
 <a class="nav-btn" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
 <a class="nav-btn" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
 </nav>
@@ -4512,13 +4517,8 @@ a[href$="verify.html"]:focus-visible{
         Joining the current Scripture-reading station position…
       </div>
 </article>
-
 </div>
-<p aria-live="polite" class="audio-policy" id="audioStatus">
-    Sacred media is starting. Browsers may block audible autoplay before the
-    first interaction; when that occurs, the station timelines still start
-    silently and the first click or key press enables sound.
-  </p>
+<p aria-live="polite" class="audio-policy" id="audioStatus">Both continuous station timelines begin when the page opens. Browsers may prevent audible playback until the first click, tap, or key press; that interaction enables both channels while the silent film continues.</p>
 </section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
@@ -4568,7 +4568,7 @@ a[href$="verify.html"]:focus-visible{
 <div class="wallet-identity">
 <div class="wallet-identity-card">
 <span>Wallet</span>
-<strong aria-live="polite" id="walletStatus">Status: Not connected</strong>
+<strong aria-live="polite" id="walletStatus">Status: Not connected</strong><p class="xaman-redirect-note">Xaman production redirect required for this page: https://jesuschristsavestoken.com/</p>
 </div>
 <div class="wallet-identity-card">
 <span>JCS readiness</span>
@@ -5059,7 +5059,7 @@ a[href$="verify.html"]:focus-visible{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.4.0",
+  "release": "1.4.1",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5073,7 +5073,7 @@ a[href$="verify.html"]:focus-visible{
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '1.4.0';
+  const JCS_RELEASE = '1.4.1';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -5938,6 +5938,40 @@ a[href$="verify.html"]:focus-visible{
     return true;
   }
 
+
+  const XAMAN_PRODUCTION_REDIRECT =
+    'https://jesuschristsavestoken.com/';
+
+  function normalizeXamanBrowserRedirect() {
+    try {
+      const url = new URL(window.location.href);
+
+      if (
+        url.origin === 'https://jesuschristsavestoken.com' &&
+        (url.pathname === '/' || url.pathname === '/index.html')
+      ) {
+        window.history.replaceState(
+          window.history.state,
+          document.title,
+          '/'
+        );
+      }
+    } catch {}
+  }
+
+  function currentXamanRedirectUrl() {
+    try {
+      const url = new URL(window.location.href);
+      url.hash = '';
+      url.search = '';
+      return url.toString();
+    } catch {
+      return window.location.href;
+    }
+  }
+
+  normalizeXamanBrowserRedirect();
+
   if (typeof Xumm !== 'undefined' && XUMM_API_KEY) {
     xumm = new Xumm(XUMM_API_KEY);
 
@@ -6040,12 +6074,30 @@ a[href$="verify.html"]:focus-visible{
             );
           }
         } catch (error) {
+          const message =
+            error?.message || String(error || 'Authorization was canceled.');
+          const redirectUrl = currentXamanRedirectUrl();
+          const redirectFailure =
+            /redirect|invalid client|access denied/i.test(message);
+
           setStatus(
             walletStatus,
-            'Wallet connection failed: ' + (error?.message || error || 'Authorization was canceled.'),
+            redirectFailure
+              ? 'Xaman rejected the browser redirect. Add this exact URL to the JCS Proof-of-Faith Origin/Redirect URIs: ' +
+                redirectUrl
+              : 'Wallet connection failed: ' + message,
             'err'
           );
-          console.error('Jesus Christ Saves Token Xaman connection failed:', error);
+
+          console.error(
+            'Jesus Christ Saves Token Xaman connection failed:',
+            error,
+            {
+              apiKey: XUMM_API_KEY,
+              redirectUrl,
+              requiredProductionRedirect: XAMAN_PRODUCTION_REDIRECT
+            }
+          );
         } finally {
           connectBtn.textContent = 'Connect Xaman';
           updateWalletButtons();
@@ -8356,7 +8408,7 @@ a[href$="verify.html"]:focus-visible{
       autoplayUnlocked = true;
 
       Object.values(channels).forEach(channel => {
-        if (!channel.listenerMuted && !passionActive) {
+        if (!channel.listenerMuted) {
           channel.audio.muted = false;
           channel.audio.volume = Number(channel.volume.value);
           channel.audio.play().catch(()=>{});
@@ -8367,10 +8419,12 @@ a[href$="verify.html"]:focus-visible{
         'Sacred audio enabled. Continuous station positions remain synchronized.';
 
       document.removeEventListener('pointerdown',unlock,true);
+      document.removeEventListener('touchstart',unlock,true);
       document.removeEventListener('keydown',unlock,true);
     };
 
     document.addEventListener('pointerdown',unlock,true);
+    document.addEventListener('touchstart',unlock,true);
     document.addEventListener('keydown',unlock,true);
   }
 
@@ -8404,7 +8458,7 @@ a[href$="verify.html"]:focus-visible{
       } catch {}
 
       audio.volume = Number(channel.volume.value);
-      audio.muted = channel.listenerMuted || passionActive;
+      audio.muted = channel.listenerMuted;
 
       try {
         await audio.play();
@@ -8663,7 +8717,7 @@ a[href$="verify.html"]:focus-visible{
 
       if (browserMuted) {
         $('audioStatus').textContent =
-          'Both sacred station timelines started automatically. The browser muted audible autoplay; the first click or key press enables sound.';
+          'Both sacred station timelines started automatically. If the browser blocks sound, the first click, tap, or key press enables both channels while the silent film continues.';
         installAutoplayUnlock();
       } else {
         $('audioStatus').textContent =
