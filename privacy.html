@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#07101c" name="theme-color"/>
+<meta content="Jesus Christ Saves Token Privacy Policy" name="application-name"/>
+<meta content="1.0.0" name="jcs-privacy-release"/>
+<title>Privacy Policy · Jesus Christ Saves Token</title>
+<meta content="Privacy Policy for the Jesus Christ Saves Token faith ministry and its JCS website, Xaman connection, XRP Ledger prayer NFTs, testimony feed, Scripture, media, and public XRPL tools." name="description"/>
+<meta content="Jesus Christ Saves Token,JCS,Privacy Policy,Christian ministry,XRPL,Xaman,prayer NFT,on-chain testimony,religious privacy" name="keywords"/>
+<meta content="Jesus Christ Saves Token" name="author"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large" name="robots"/>
+<link href="https://jesuschristsavestoken.com/privacy.html" rel="canonical"/>
+<link href="/ai.json" rel="alternate" title="AI Manifest" type="application/json"/>
+<link href="https://jesuschristsavestoken.com/jcs-logo.png" rel="icon" type="image/png"/>
+<link href="https://jesuschristsavestoken.com/jcs-logo-180.png" rel="apple-touch-icon"/>
+<meta content="website" property="og:type"/>
+<meta content="Jesus Christ Saves Token" property="og:site_name"/>
+<meta content="Privacy Policy · Jesus Christ Saves Token" property="og:title"/>
+<meta content="How the JCS faith ministry handles wallet addresses, public XRPL records, prayer NFTs, testimonies, local browser data, and third-party services." property="og:description"/>
+<meta content="https://jesuschristsavestoken.com/privacy.html" property="og:url"/>
+<meta content="https://jesuschristsavestoken.com/jcs-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="@JesusCS_token" name="twitter:site"/>
+<meta content="Privacy Policy · Jesus Christ Saves Token" name="twitter:title"/>
+<meta content="https://jesuschristsavestoken.com/jcs-logo.png" name="twitter:image"/>
+<meta content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: https:;
+  connect-src 'self';
+  frame-src 'none';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+" http-equiv="Content-Security-Policy"/>
+<style>
+:root{
+  --bg:#060b12;
+  --panel:#0b121c;
+  --panel-2:#0e1723;
+  --ink:#eef6ff;
+  --muted:#9db0c5;
+  --line:#233244;
+  --gold:#d7a928;
+  --gold-light:#ffe59a;
+  --blue:#38bdf8;
+  --green:#10b981;
+  --red:#fb7185;
+  --wrap:1120px;
+  --radius:18px;
+  --touch:44px;
+  color-scheme:dark;
+}
+html[data-theme="light"]{
+  --bg:#f4f7fb;
+  --panel:#ffffff;
+  --panel-2:#f1f5f9;
+  --ink:#0f172a;
+  --muted:#52637a;
+  --line:#cbd5e1;
+  --gold:#8a6200;
+  --gold-light:#6b4b00;
+  --blue:#0369a1;
+  --green:#047857;
+  --red:#be123c;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  min-width:0;
+  margin:0;
+  overflow-x:hidden;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 50% -12rem,rgba(215,169,40,.12),transparent 34rem),
+    radial-gradient(circle at 100% 12%,rgba(56,189,248,.08),transparent 30rem),
+    var(--bg);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1.65;
+}
+img{max-width:100%}
+button{font:inherit}
+a{color:#7dd3fc}
+p,li{overflow-wrap:anywhere}
+[hidden]{display:none!important}
+.skip-link{
+  position:fixed;
+  left:12px;
+  top:12px;
+  z-index:9999;
+  transform:translateY(-180%);
+  padding:10px 14px;
+  border-radius:10px;
+  color:#020817;
+  background:#f8fafc;
+  font-weight:900;
+  text-decoration:none;
+}
+.skip-link:focus{transform:translateY(0)}
+.btn{
+  appearance:none;
+  min-height:var(--touch);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  font-size:.92rem;
+  font-weight:850;
+  line-height:1.2;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+}
+.btn:hover,.btn:focus-visible{
+  border-color:#60a5fa;
+  outline:none;
+  text-decoration:none;
+}
+.btn.small{min-height:38px;padding:8px 11px;font-size:.78rem}
+.btn.blue{
+  border-color:#2563eb;
+  color:#fff;
+  background:linear-gradient(180deg,#3b82f6,#1d4ed8);
+}
+.btn.gold{
+  border-color:#c99820;
+  color:#111;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b);
+  box-shadow:0 9px 26px rgba(201,152,32,.18);
+}
+
+/* Unified compact JCS header */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  width:100%;
+  border-bottom:1px solid rgba(201,152,32,.26);
+  background:rgba(2,8,23,.96);
+  backdrop-filter:blur(16px);
+}
+html[data-theme="light"] .site-header{background:rgba(255,255,255,.95)}
+.header-inner{
+  width:min(1260px,100%);
+  min-height:52px;
+  margin:0 auto;
+  padding:5px 10px;
+  display:grid;
+  grid-template-columns:minmax(140px,190px) minmax(0,1fr) auto;
+  gap:6px 9px;
+  align-items:center;
+}
+.brand{
+  min-width:0;
+  max-width:190px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  overflow:hidden;
+  color:inherit;
+  text-decoration:none;
+}
+.brand img{
+  width:30px;
+  height:30px;
+  flex:0 0 30px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.42);
+  border-radius:8px;
+  background:#fff;
+}
+.brand-copy{min-width:0;overflow:hidden}
+.brand-title{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font:900 .78rem/1.05 Georgia,"Times New Roman",serif;
+}
+.brand-subtitle{
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:.52rem;
+  font-weight:800;
+  line-height:1.1;
+}
+.header-nav{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:3px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.header-nav::-webkit-scrollbar{display:none}
+.nav-link{
+  min-height:34px;
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 9px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:var(--ink);
+  background:transparent;
+  font-size:.70rem;
+  font-weight:850;
+  line-height:1;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.nav-link:hover,.nav-link:focus-visible{
+  border-color:var(--line);
+  color:var(--blue);
+  background:var(--panel-2);
+  outline:none;
+  text-decoration:none;
+}
+.sign-ledger-gold{
+  border-color:#c99820!important;
+  color:#111!important;
+  background:linear-gradient(180deg,#ffe69a,#d5a82b)!important;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-self:end;
+  gap:5px;
+}
+.header-actions .btn{
+  min-height:34px;
+  padding:7px 9px;
+  font-size:.70rem;
+}
+.theme-toggle{min-width:36px}
+@media(max-width:1050px){
+  .header-inner{
+    grid-template-columns:minmax(130px,180px) minmax(0,1fr);
+  }
+  .header-nav{grid-column:1/-1;width:100%;order:3}
+}
+@media(max-width:700px){
+  .site-header{position:static}
+  .header-inner{grid-template-columns:minmax(0,1fr) auto}
+  .brand{max-width:145px}
+  .brand-title{font-size:.70rem}
+  .brand-subtitle{display:none}
+  .header-nav{grid-column:1/-1;width:100%;padding-bottom:2px}
+}
+
+/* Policy layout */
+.container{
+  width:min(var(--wrap),100%);
+  margin:0 auto;
+  padding:22px max(14px,env(safe-area-inset-right)) 54px max(14px,env(safe-area-inset-left));
+}
+.card{
+  margin-top:18px;
+  padding:clamp(18px,3vw,28px);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:
+    radial-gradient(circle at 100% 0,rgba(56,189,248,.05),transparent 24rem),
+    linear-gradient(180deg,var(--panel),var(--panel-2));
+  box-shadow:0 18px 44px rgba(0,0,0,.22);
+}
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);
+  gap:24px;
+  align-items:center;
+  border-color:rgba(201,152,32,.38);
+  background:
+    radial-gradient(circle at 92% 10%,rgba(215,169,40,.17),transparent 25rem),
+    radial-gradient(circle at 0 100%,rgba(56,189,248,.09),transparent 28rem),
+    var(--panel);
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  padding:6px 10px;
+  border:1px solid rgba(201,152,32,.45);
+  border-radius:999px;
+  color:var(--gold-light);
+  background:rgba(201,152,32,.08);
+  font-size:.72rem;
+  font-weight:950;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.hero h1{
+  margin:15px 0 12px;
+  font:900 clamp(2.2rem,5vw,4.2rem)/1 Georgia,"Times New Roman",serif;
+  letter-spacing:-.035em;
+}
+.hero h1 span{color:var(--gold-light)}
+.hero p{color:var(--muted)}
+.hero-side{
+  padding:18px;
+  border:1px solid rgba(201,152,32,.34);
+  border-radius:16px;
+  background:var(--panel-2);
+}
+.hero-side img{
+  width:76px;
+  height:76px;
+  display:block;
+  margin:0 auto 12px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.42);
+  border-radius:18px;
+  background:#fff;
+}
+.policy-meta{
+  display:grid;
+  gap:8px;
+}
+.policy-meta div{
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel);
+}
+.policy-meta span{
+  display:block;
+  color:var(--muted);
+  font-size:.66rem;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.policy-meta strong{
+  display:block;
+  margin-top:3px;
+  font-size:.78rem;
+}
+.notice{
+  margin-top:14px;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  color:var(--muted);
+  background:rgba(201,152,32,.07);
+}
+.notice strong{color:var(--ink)}
+.notice.warning{
+  border-left-color:var(--red);
+  background:rgba(251,113,133,.06);
+}
+.toc{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+.toc a{
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  color:var(--ink);
+  background:var(--panel-2);
+  font-size:.8rem;
+  font-weight:800;
+  text-decoration:none;
+}
+.toc a:hover,.toc a:focus-visible{
+  border-color:var(--blue);
+  outline:none;
+}
+.policy-section{
+  scroll-margin-top:90px;
+}
+.policy-section h2{
+  margin:0 0 10px;
+  font-size:clamp(1.35rem,3vw,1.8rem);
+}
+.policy-section h3{
+  margin:20px 0 7px;
+  font-size:1.02rem;
+}
+.policy-section p,.policy-section li{
+  color:var(--muted);
+}
+.policy-section strong{color:var(--ink)}
+.policy-section ul{
+  display:grid;
+  gap:7px;
+  padding-left:22px;
+}
+.definition-grid,.rights-grid,.third-party-grid{
+  display:grid;
+  gap:10px;
+}
+.definition-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.rights-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.third-party-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.info-card{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel-2);
+}
+.info-card h3{margin:0 0 6px}
+.info-card p{margin:0;font-size:.84rem}
+.scripture{
+  max-width:820px;
+  margin:0 auto;
+  padding:18px;
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  color:var(--muted);
+  background:rgba(201,152,32,.07);
+  text-align:center;
+}
+.scripture strong{color:var(--gold-light)}
+.contact-box{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.contact-box a{
+  min-height:64px;
+  display:grid;
+  align-content:center;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--ink);
+  background:var(--panel-2);
+  text-decoration:none;
+}
+.contact-box a:hover,.contact-box a:focus-visible{
+  border-color:var(--blue);
+  outline:none;
+}
+.contact-box strong{display:block}
+.contact-box span{color:var(--muted);font-size:.76rem}
+.site-footer{
+  margin-top:34px;
+  padding:30px 18px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  background:rgba(2,8,23,.72);
+}
+html[data-theme="light"] .site-footer{background:#fff}
+.footer-inner{width:min(var(--wrap),100%);margin:0 auto}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
+.legal-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 14px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  font-size:.78rem;
+}
+.legal-row a{color:var(--muted)}
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .toc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rights-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .container{padding-top:14px}
+  .card{padding:16px;border-radius:15px}
+  .toc,.definition-grid,.rights-grid,.third-party-grid,.contact-box{
+    grid-template-columns:1fr;
+  }
+}
+@media print{
+  .site-header,.site-footer,.skip-link,.btn{display:none!important}
+  body{background:#fff;color:#000}
+  .container{width:100%;padding:0}
+  .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid}
+  p,li{color:#222!important}
+}
+</style>
+<script>
+(function(){
+  try{
+    const saved=localStorage.getItem('jcs-color-mode');
+    document.documentElement.dataset.theme=
+      saved==='light'||saved==='dark' ? saved : 'dark';
+  }catch{
+    document.documentElement.dataset.theme='dark';
+  }
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Jesus Christ Saves Token Privacy Policy",
+  "url":"https://jesuschristsavestoken.com/privacy.html",
+  "dateModified":"2026-07-23",
+  "isPartOf":{
+    "@type":"WebSite",
+    "name":"Jesus Christ Saves Token",
+    "url":"https://jesuschristsavestoken.com/"
+  },
+  "publisher":{
+    "@type":"Organization",
+    "name":"Jesus Christ Saves Token",
+    "url":"https://jesuschristsavestoken.com/",
+    "logo":"https://jesuschristsavestoken.com/jcs-logo.png"
+  }
+}
+</script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="site-header jcs-unified-header">
+<div class="header-inner">
+<a class="brand" href="index.html">
+<img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<span class="brand-copy">
+<span class="brand-title">Jesus Christ Saves Token</span>
+<span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
+</span>
+</a>
+<nav aria-label="Primary" class="header-nav">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="about-jcs.html">Vision</a>
+<a class="nav-link sign-ledger-gold" href="verify.html">Sign the Ledger</a>
+<a class="nav-link" href="index.html#trade">Trade</a>
+<a class="nav-link" href="index.html#scripture">Scripture</a>
+<a class="nav-link" href="index.html#sacred-film">Sacred Film</a>
+<a class="nav-link" href="index.html#audio">Sacred Audio</a>
+</nav>
+<div class="header-actions">
+<button aria-label="Change theme" class="btn theme-toggle" id="themeToggle" type="button">◐</button>
+<a class="btn blue" href="index.html#trade">Open Wallet Portal</a>
+</div>
+</div>
+</header>
+
+<main class="container" id="main-content">
+<section class="card hero">
+<div>
+<span class="eyebrow">✝ Religious ministry privacy policy</span>
+<h1>Privacy, truth, and <span>faithful stewardship.</span></h1>
+<p>
+Jesus Christ Saves Token is operated as a Christ-centered faith ministry and public XRP Ledger
+project. We seek to advance Christian teaching, preserve prayer and testimony, and make
+Christian artifacts more accessible without taking custody of a user’s wallet or private keys.
+This Privacy Policy explains what information may be processed through the JCS website,
+Xaman connection, prayer NFT tools, testimony feed, media, and public-ledger features.
+</p>
+<div class="notice">
+<strong>Our ministry principle:</strong>
+“Providing for honest things, not only in the sight of the Lord, but also in the sight of men.”
+— 2 Corinthians 8:21, King James Version.
+</div>
+</div>
+<aside class="hero-side" aria-label="Privacy policy details">
+<img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<div class="policy-meta">
+<div><span>Effective date</span><strong>July 23, 2026</strong></div>
+<div><span>Policy version</span><strong>1.0.0</strong></div>
+<div><span>Website</span><strong>jesuschristsavestoken.com</strong></div>
+<div><span>Contact</span><strong>jesuschristsaves@gmail.com</strong></div>
+</div>
+</aside>
+</section>
+
+<section class="card">
+<div class="notice warning">
+<strong>Important legal-status statement:</strong>
+JCS describes its mission and activities as a faith-based religious ministry dedicated to
+Christian religious, educational, and outreach purposes. This Privacy Policy does not by itself
+create, prove, or guarantee legal classification as a church, nonprofit corporation, public
+charity, tax-exempt organization, integrated auxiliary, or organization recognized under
+Internal Revenue Code Section 501(c)(3). Those classifications depend on governing documents,
+actual activities, organizational facts, applicable law, and any required governmental process.
+No donation or payment should be treated as tax deductible unless JCS separately provides
+lawful written confirmation.
+</div>
+</section>
+
+<section class="card" aria-labelledby="contents-title">
+<h2 id="contents-title">Policy contents</h2>
+<nav class="toc" aria-label="Privacy Policy contents">
+<a href="#scope">1. Scope and ministry identity</a>
+<a href="#information">2. Information involved</a>
+<a href="#religious-data">3. Religious and sensitive information</a>
+<a href="#purposes">4. How information is used</a>
+<a href="#xrpl">5. XRP Ledger permanence</a>
+<a href="#local-storage">6. Local browser storage</a>
+<a href="#third-parties">7. Third-party services</a>
+<a href="#sharing">8. Sharing and sale of data</a>
+<a href="#retention">9. Retention and deletion</a>
+<a href="#rights">10. Privacy rights</a>
+<a href="#children">11. Children and minors</a>
+<a href="#security">12. Security</a>
+<a href="#international">13. International access</a>
+<a href="#ministry-confidentiality">14. Ministry confidentiality</a>
+<a href="#changes">15. Policy changes</a>
+<a href="#contact">16. Contact</a>
+</nav>
+</section>
+
+<section class="card policy-section" id="scope">
+<h2>1. Scope and ministry identity</h2>
+<p>
+This Policy applies to the website at <strong>jesuschristsavestoken.com</strong> and JCS pages
+that link to it, including the home portal, Vision &amp; Core Values page, Sign the Ledger
+prayer-NFT and testimony interface, wallet connection tools, live XRP Ledger metrics,
+Scripture and media features, and project support links.
+</p>
+<p>
+“JCS,” “Jesus Christ Saves Token,” “the ministry,” “we,” “us,” and “our” refer to the
+faith-based project responsible for those pages. “User,” “you,” and “your” refer to a visitor,
+wallet holder, testimony author, NFT minter, reader, listener, or person interacting with the
+site.
+</p>
+<p>
+The ministry’s religious purpose is to bear witness to Jesus Christ, provide access to Christian
+teaching, preserve prayer and testimony in durable digital forms, and support voluntary
+Christian fellowship and outreach. Technology is a tool of the ministry; it is not salvation,
+a sacrament, a church membership record, or a substitute for Scripture, prayer, fellowship,
+pastoral care, or professional advice.
+</p>
+</section>
+
+<section class="card policy-section" id="information">
+<h2>2. Information involved</h2>
+<div class="definition-grid">
+<article class="info-card">
+<h3>Public wallet and ledger information</h3>
+<p>
+A connected XRP Ledger address, transaction hash, ledger index, transaction type, NFT identifier,
+trustline, token balance, offer, AMM interaction, memo, and other validated XRPL data may be read
+or displayed. This information already exists on a public blockchain.
+</p>
+</article>
+<article class="info-card">
+<h3>Information you deliberately submit</h3>
+<p>
+A prayer, testimony, praise report, prayer request, Scripture reference, optional display name,
+optional handle, reply, Amen reaction, visibility selection, or other content may be processed
+when you choose to create or publish it.
+</p>
+</article>
+<article class="info-card">
+<h3>Local device information</h3>
+<p>
+The browser may store a draft, theme choice, audio volume, listening preference, incomplete
+publication state, or similar settings in local storage on your device. These items are normally
+not transmitted to JCS merely because they are stored locally.
+</p>
+</article>
+<article class="info-card">
+<h3>Technical and hosting information</h3>
+<p>
+The hosting provider, network provider, security service, or browser may automatically process
+an IP address, user agent, date and time, requested page, referring page, error data, or security
+event. JCS does not promise that infrastructure providers keep no logs.
+</p>
+</article>
+<article class="info-card">
+<h3>Communications</h3>
+<p>
+When you email the ministry or contact the project through X or another platform, the message,
+account identifier, address, attachments, and response history may be retained as reasonably
+necessary to answer, document, or protect the ministry.
+</p>
+</article>
+<article class="info-card">
+<h3>No wallet secrets</h3>
+<p>
+JCS does not need and should never request your Xaman secret, family seed, recovery phrase,
+private key, device passcode, or other wallet credential. Do not provide those items to JCS or
+to anyone claiming to represent the ministry.
+</p>
+</article>
+</div>
+</section>
+
+<section class="card policy-section" id="religious-data">
+<h2>3. Religious and sensitive information</h2>
+<p>
+Prayer, testimony, Scripture references, and participation in a Christian ministry may reveal
+or strongly suggest a person’s religious beliefs. In some jurisdictions, information revealing
+religious or philosophical beliefs receives heightened legal protection.
+</p>
+<div class="notice warning">
+<strong>Do not publish when disclosure could place you or another person in danger.</strong>
+This is especially important for people facing religious persecution, governmental monitoring,
+family violence, employment retaliation, social exclusion, or restrictions on Christian worship.
+Use no real name, location, employer, school, congregation, handle, or identifying detail when
+those facts could create risk.
+</div>
+<p>
+By deliberately signing and publishing a prayer, testimony, reply, Amen reaction, or prayer NFT,
+you instruct the wallet and XRP Ledger network to process the information contained in the
+transaction. A public-ledger publication is not private, confidential, anonymous, or erasable.
+A shortened or hidden wallet display on the JCS interface changes only the presentation on that
+page; it does not remove the originating wallet address from XRPL.
+</p>
+</section>
+
+<section class="card policy-section" id="purposes">
+<h2>4. How information is used</h2>
+<p>Information may be processed for the following ministry and operational purposes:</p>
+<ul>
+<li>Connect a wallet through Xaman and display the connected public account.</li>
+<li>Prepare user-requested XRPL transactions for review and voluntary signing.</li>
+<li>Mint prayer NFTs, publish testimony records, display replies, and count Amen reactions.</li>
+<li>Reconstruct the public testimony feed from validated XRP Ledger history.</li>
+<li>Display live DEX, AMM, trustline, supply, ledger, and issuer information.</li>
+<li>Preserve a local draft or incomplete signing flow on the user’s device.</li>
+<li>Provide Scripture, religious education, media, project information, and ministry outreach.</li>
+<li>Answer support, security, legal, or ministry communications.</li>
+<li>Prevent fraud, impersonation, abuse, malicious code, spam, and unauthorized access.</li>
+<li>Comply with lawful obligations and defend the rights, safety, mission, and property of JCS and others.</li>
+<li>Improve accessibility, reliability, mobile usability, and the clarity of warnings and disclosures.</li>
+</ul>
+<p>
+Where applicable law requires a legal basis, processing may rely on your deliberate instruction
+or consent, performance of a requested service, the ministry’s legitimate interest in operating
+and securing the site, compliance with law, protection of vital interests, or other lawful bases
+available to religious and nonprofit activity. Public XRPL data may also be processed because it
+is manifestly public and necessary to provide the ledger-facing service you requested.
+</p>
+</section>
+
+<section class="card policy-section" id="xrpl">
+<h2>5. XRP Ledger permanence and public visibility</h2>
+<p>
+The XRP Ledger is a decentralized public network. A validated transaction can be copied,
+indexed, displayed, archived, analyzed, or redistributed by independent nodes, explorers,
+wallets, applications, researchers, governments, and other persons outside JCS control.
+</p>
+<ul>
+<li><strong>JCS cannot privately erase a validated XRPL transaction.</strong></li>
+<li><strong>Removing a post from the JCS interface would not remove it from XRPL.</strong></li>
+<li><strong>A wallet address is a persistent public identifier and may be linked with other activity.</strong></li>
+<li><strong>Transaction memos may reveal the testimony, Scripture reference, name, handle, or other content submitted.</strong></li>
+<li><strong>NFT metadata and transaction references may remain available after this website changes or closes.</strong></li>
+</ul>
+<p>
+Before signing, review every field in Xaman, including network, transaction type, destination,
+amount, fee, issuer, currency, NFT data, memo, and security challenge. Decline any request that
+does not match what you intended.
+</p>
+</section>
+
+<section class="card policy-section" id="local-storage">
+<h2>6. Cookies and local browser storage</h2>
+<p>
+JCS pages may use browser local storage or similar device storage for functional settings such
+as theme, volume, draft text, a pending NFT publication, or a temporary application state. JCS
+does not presently use those settings to build an advertising profile or sell behavioral data.
+</p>
+<p>
+You can clear local data through your browser settings. Clearing it may remove an unfinished
+draft, pending publication reference, saved display preference, or audio setting. It does not
+erase transactions already validated on XRPL.
+</p>
+<p>
+Third-party services opened or embedded by the site may use their own cookies, storage, tokens,
+or tracking technologies under their own policies.
+</p>
+</section>
+
+<section class="card policy-section" id="third-parties">
+<h2>7. Third-party services</h2>
+<div class="third-party-grid">
+<article class="info-card">
+<h3>Xaman</h3>
+<p>
+Xaman may handle authorization, wallet identity, signing requests, transaction status, and
+application-session information. JCS does not control Xaman’s independent privacy or security
+practices.
+</p>
+</article>
+<article class="info-card">
+<h3>XRP Ledger servers and explorers</h3>
+<p>
+Public WebSocket servers, validators, nodes, Bithomp, XPMarket, Sologenic, and other XRPL
+interfaces may receive queries or display public ledger information.
+</p>
+</article>
+<article class="info-card">
+<h3>Media providers</h3>
+<p>
+YouTube, Internet Archive, Wikimedia, LibriVox, or another media host may receive an IP address,
+browser information, playback request, or cookie data when content is loaded or opened.
+</p>
+</article>
+<article class="info-card">
+<h3>Social platforms</h3>
+<p>
+Facebook, X, Instagram, Telegram, Reddit, LinkedIn, email providers, or a device share sheet may
+process content and identifiers when you deliberately use a sharing feature.
+</p>
+</article>
+<article class="info-card">
+<h3>Reference-price providers</h3>
+<p>
+A service such as CoinGecko may receive a request for an XRP reference price. JCS uses such data
+for informational display and does not control the provider’s logging practices.
+</p>
+</article>
+<article class="info-card">
+<h3>Hosting and security providers</h3>
+<p>
+The domain host, content-delivery network, certificate provider, repository host, or security
+provider may process routine request and security information needed to deliver the site.
+</p>
+</article>
+</div>
+<p>
+Links to third parties are provided for convenience, independent verification, or requested
+functionality. Their terms and policies govern their services.
+</p>
+</section>
+
+<section class="card policy-section" id="sharing">
+<h2>8. Sharing, advertising, and sale of information</h2>
+<p>
+JCS does not intend to sell personal information, rent a mailing list, or provide testimony data
+to advertisers for cross-context behavioral advertising. JCS may disclose information:
+</p>
+<ul>
+<li>At your direction, including when you sign a public transaction or choose a social-sharing platform.</li>
+<li>To technical providers necessary to host, secure, or operate the site.</li>
+<li>When information is already public on XRPL or another public service.</li>
+<li>To investigate fraud, impersonation, security threats, abuse, or harm.</li>
+<li>When reasonably believed necessary to comply with valid law, legal process, or governmental demand.</li>
+<li>To protect the rights, safety, religious mission, property, and lawful interests of JCS or others.</li>
+<li>As part of an organizational restructuring, succession, transfer, or preservation of ministry assets, subject to applicable law.</li>
+</ul>
+<p>
+Because JCS does not intend to sell or share personal information for targeted advertising, a
+“Do Not Sell or Share My Personal Information” transaction is not presently necessary for that
+purpose. A legally valid privacy signal will not be used to override a user’s own deliberate
+instruction to publish a transaction on XRPL.
+</p>
+</section>
+
+<section class="card policy-section" id="retention">
+<h2>9. Retention and deletion</h2>
+<p>
+JCS retains direct communications, security records, operational records, and support history
+only as reasonably necessary for the purpose collected, ministry administration, dispute
+prevention, legal compliance, or protection of the project and its users.
+</p>
+<p>
+Local browser data remains until you clear it, the page clears it, or the browser removes it.
+Third-party providers determine their own retention periods. Public XRPL records may persist
+indefinitely and cannot be deleted by JCS.
+</p>
+<p>
+A request to remove information from a JCS-controlled page will be evaluated where technically
+and legally possible, but removal from the interface does not remove independent copies,
+search results, screenshots, archives, explorer records, or the underlying XRP Ledger entry.
+</p>
+</section>
+
+<section class="card policy-section" id="rights">
+<h2>10. Privacy choices and rights</h2>
+<div class="rights-grid">
+<article class="info-card"><h3>Access</h3><p>Ask whether JCS directly maintains information about you and request a copy where applicable.</p></article>
+<article class="info-card"><h3>Correction</h3><p>Request correction of inaccurate information directly controlled by JCS.</p></article>
+<article class="info-card"><h3>Deletion</h3><p>Request deletion of eligible off-ledger information, subject to legal and security exceptions.</p></article>
+<article class="info-card"><h3>Restriction or objection</h3><p>Object to or request restriction of certain processing where applicable law provides that right.</p></article>
+<article class="info-card"><h3>Portability</h3><p>Request portable information that JCS directly maintains when legally required and technically feasible.</p></article>
+<article class="info-card"><h3>Withdraw consent</h3><p>Withdraw consent for future optional processing, without reversing a transaction already published on XRPL.</p></article>
+</div>
+<p>
+To make a request, email <strong>jesuschristsaves@gmail.com</strong>. Include enough information
+to identify the relevant record without sending a wallet seed, private key, government identity
+document, or unnecessary sensitive information. JCS may need reasonable verification before
+acting on a request.
+</p>
+<p>
+Depending on your location and whether a particular law applies to JCS, you may also have a
+right to complain to a data-protection authority. Nothing in this Policy waives a right that
+cannot lawfully be waived.
+</p>
+</section>
+
+<section class="card policy-section" id="children">
+<h2>11. Children and minors</h2>
+<p>
+The site contains general Christian content but is not designed to knowingly collect personal
+information from children under 13. A child under 13 should not connect a wallet, mint an NFT,
+publish a testimony, submit a name or handle, or contact JCS with personal information without
+a parent or legal guardian’s involvement and any legally required consent.
+</p>
+<p>
+Minors should not publish their age, school, location, congregation, family information,
+photograph, legal name, wallet ownership details, or any fact that could create a safety risk.
+Parents and guardians should understand that public XRPL activity is permanent and visible.
+</p>
+<p>
+A parent or guardian who believes a child submitted off-ledger information directly to JCS may
+contact the ministry for review. JCS cannot delete a validated public blockchain transaction.
+</p>
+</section>
+
+<section class="card policy-section" id="security">
+<h2>12. Security and wallet safety</h2>
+<p>
+JCS uses reasonable technical and organizational measures appropriate to the project’s size and
+functions, but no website, browser, wallet, network, email system, or blockchain interaction is
+guaranteed secure.
+</p>
+<ul>
+<li>Use the official domain and independently verify the JCS issuer.</li>
+<li>Review the Xaman security challenge and every transaction field.</li>
+<li>Never provide a seed, recovery phrase, private key, or device code.</li>
+<li>Use a device, browser, and wallet version that receive security updates.</li>
+<li>Avoid public testimony that reveals dangerous personal information.</li>
+<li>Report suspected impersonation, malicious requests, or security defects promptly.</li>
+</ul>
+<p>
+A security incident may be investigated, contained, documented, and disclosed when required by
+applicable law or reasonably necessary to protect users.
+</p>
+</section>
+
+<section class="card policy-section" id="international">
+<h2>13. International access and persecuted believers</h2>
+<p>
+JCS is accessible across jurisdictions with different privacy, religious-freedom, financial,
+blockchain, and content laws. You are responsible for considering whether access, wallet use,
+public Christian expression, token activity, or publication could expose you to legal or personal
+risk where you live.
+</p>
+<p>
+People in environments hostile to Christianity should prioritize physical safety. Reading written
+content without connecting a wallet may be safer than creating an on-ledger record. A VPN,
+private browser, hidden-wallet display, alias, or shortened address does not guarantee anonymity.
+</p>
+<p>
+Information may be processed in the United States or another country where a service provider,
+node, social platform, or infrastructure operator is located. Those locations may provide
+different legal protections.
+</p>
+</section>
+
+<section class="card policy-section" id="ministry-confidentiality">
+<h2>14. Ministry communications and confidentiality</h2>
+<p>
+A message sent through the website, email, social media, wallet memo, testimony feed, or NFT is
+not automatically a confidential pastoral communication, confession, counseling record,
+attorney-client communication, medical record, or communication protected by clergy-penitent
+privilege.
+</p>
+<p>
+Do not send information requiring secrecy through a public transaction or ordinary email.
+JCS does not promise pastoral counseling, crisis intervention, sacramental care, emergency
+response, or clergy confidentiality through the website.
+</p>
+<p>
+A public prayer request may be read by anyone. When praying for another person, do not disclose
+their private medical, family, legal, financial, location, or identity information without lawful
+authority and their informed permission.
+</p>
+</section>
+
+<section class="card policy-section" id="changes">
+<h2>15. Changes to this Policy</h2>
+<p>
+JCS may revise this Policy to reflect changes in the ministry, website, technology, law,
+third-party services, security practices, or XRP Ledger functions. The effective date and version
+will be updated when material changes are published.
+</p>
+<p>
+Continued use after an update means the revised Policy applies to later use. A policy change
+cannot make a previously validated blockchain transaction private or erasable.
+</p>
+</section>
+
+<section class="card policy-section" id="contact">
+<h2>16. Contact the ministry</h2>
+<p>
+Questions, privacy requests, security reports, and concerns about public content may be directed
+through the following channels:
+</p>
+<div class="contact-box">
+<a href="mailto:jesuschristsaves@gmail.com">
+<strong>Email</strong>
+<span>jesuschristsaves@gmail.com</span>
+</a>
+<a href="https://x.com/JesusCS_token" rel="noopener" target="_blank">
+<strong>Project support on X</strong>
+<span>@JesusCS_token</span>
+</a>
+</div>
+<div class="notice">
+<strong>Do not include a wallet seed, recovery phrase, private key, government identification,
+or unnecessary sensitive information in a privacy request.</strong>
+</div>
+</section>
+
+<section class="card">
+<div class="scripture">
+<strong>“Moreover it is required in stewards, that a man be found faithful.”</strong><br/>
+— 1 Corinthians 4:2, King James Version
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="footer-inner">
+<strong>Jesus Christ Saves Token · JCS</strong>
+<p>
+A Christ-centered, non-custodial XRP Ledger ministry project. Public XRPL activity is permanent
+and should never be treated as confidential.
+</p>
+<div class="footer-links">
+<a class="btn gold small" href="verify.html">Sign the Ledger</a>
+<a class="btn small" href="index.html">JCS Home</a>
+<a class="btn small" href="about-jcs.html">Vision &amp; Core Values</a>
+<a class="btn small" href="terms.html">Terms of Service</a>
+<a class="btn small" href="https://x.com/JesusCS_token" rel="noopener" target="_blank">Support</a>
+</div>
+<div class="legal-row">
+<a aria-current="page" href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms of Service</a>
+<a href="/ai.json">AI Manifest</a>
+<a href="/.well-known/security.txt">Security</a>
+<a href="mailto:jesuschristsaves@gmail.com">Contact</a>
+<span>Effective July 23, 2026 · Version 1.0.0</span>
+<span>© <span id="copyrightYear"></span> Jesus Christ Saves Token</span>
+</div>
+</div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  document.getElementById('copyrightYear').textContent=
+    new Date().getFullYear();
+
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    const next=
+      document.documentElement.dataset.theme==='light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme=next;
+    try{ localStorage.setItem('jcs-color-mode',next); }catch{}
+  });
+})();
+</script>
+</body>
+</html>
