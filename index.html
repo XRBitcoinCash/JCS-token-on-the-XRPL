@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.5.1" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.1</title>
+<meta content="1.5.2" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.2</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4671,7 +4671,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Connect once, confirm the exact JCS trustline, then review every transaction inside Xaman.</p>
 </div>
 </div>
-<span class="xaman-ready-badge">Working release · 1.5.1</span>
+<span class="xaman-ready-badge">Working release · 1.5.2</span>
 </div>
 <div aria-label="Wallet readiness" class="wallet-readiness">
 <div class="wallet-step" id="walletStepConnect">
@@ -4733,7 +4733,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Live XRP Ledger pricing with wallet-side review and signing through the working JCS Xaman endpoint.</p>
 </div>
 </div>
-<span class="trade-network-pill">XRPL Mainnet · v1.5.1</span>
+<span class="trade-network-pill">XRPL Mainnet · v1.5.2</span>
 </div>
 <div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="tablist">
 <button aria-selected="true" class="tab buy active" id="buyTab" role="tab" type="button">
@@ -5200,7 +5200,7 @@ html[data-theme="light"] .jcs-unified-header{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.5.1",
+  "release": "1.5.2",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5214,7 +5214,7 @@ html[data-theme="light"] .jcs-unified-header{
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '1.5.1';
+  const JCS_RELEASE = '1.5.2';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -6095,7 +6095,12 @@ html[data-theme="light"] .jcs-unified-header{
     return true;
   }
 
-  async function beginXamanConnection() {
+  async function beginXamanConnection(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     if (!xumm || !xamanAvailable) {
       setStatus(
         walletStatus,
@@ -6110,20 +6115,33 @@ html[data-theme="light"] .jcs-unified-header{
       return;
     }
 
-    if (xamanAuthorizing) return;
+    if (xamanAuthorizing || currentAccount) return;
 
-    xamanAuthorizing = true;
-    updateWalletButtons();
-    setStatus(walletStatus, 'Opening Xaman authorization…');
+    let authorization;
 
     try {
-      const existing = await resolveXamanAccount();
-      if (existing) {
-        setConnected(existing);
-        return;
-      }
+      /*
+       * IMPORTANT: authorize() must be invoked directly inside the original
+       * user click. Do not await account/session checks before this call or
+       * browsers may block Xaman's authorization window as an unsolicited popup.
+       */
+      authorization = xumm.authorize();
+    } catch (error) {
+      setStatus(
+        walletStatus,
+        'Xaman could not open authorization: ' +
+          (error?.message || error || 'Unknown error'),
+        'err'
+      );
+      return;
+    }
 
-      await xumm.authorize();
+    xamanAuthorizing = true;
+    setStatus(walletStatus, 'Opening Xaman authorization…');
+    updateWalletButtons();
+
+    try {
+      await authorization;
 
       const connected = await applyXamanIdentity();
       if (!connected) {
@@ -8580,7 +8598,18 @@ html[data-theme="light"] .jcs-unified-header{
     if (autoplayUnlockInstalled) return;
     autoplayUnlockInstalled = true;
 
-    const unlock = () => {
+    const isWalletControl = target => Boolean(
+      target instanceof Element &&
+      target.closest(
+        '#connectBtn, #connectWalletBtn, #disconnectBtn, #disconnectWalletBtn, ' +
+        '#setTrustlineBtn, #marketTradeBtn, #placeOfferBtn, #xamanSignPanel'
+      )
+    );
+
+    const unlock = event => {
+      /* Wallet actions must remain isolated from media autoplay. */
+      if (isWalletControl(event?.target)) return;
+
       autoplayUnlocked = true;
 
       Object.values(channels).forEach(channel => {
