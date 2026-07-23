@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
-<meta content="1.5.2" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.2</title>
+<meta content="1.5.3" name="jcs-release"/>
+<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Sacred Media v1.5.3</title>
 <meta content="Official Jesus Christ Saves Token portal with Xaman-authorized JCS trading on the XRP Ledger, live DEX metrics, ten-second Scripture rotation, ten-minute Liquidity Sentinel health, continuous sacred audio, and a synchronized public-domain film of the life and Passion of Jesus Christ." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,DEX,Christian token,Book of Enoch,Book of Jubilees,Ethiopian Bible,King James Bible,sacred music,public domain Jesus film,Passion of Christ film,synchronized sacred video" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -4671,7 +4671,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Connect once, confirm the exact JCS trustline, then review every transaction inside Xaman.</p>
 </div>
 </div>
-<span class="xaman-ready-badge">Working release · 1.5.2</span>
+<span class="xaman-ready-badge">Working release · 1.5.3</span>
 </div>
 <div aria-label="Wallet readiness" class="wallet-readiness">
 <div class="wallet-step" id="walletStepConnect">
@@ -4733,7 +4733,7 @@ html[data-theme="light"] .jcs-unified-header{
 <p>Live XRP Ledger pricing with wallet-side review and signing through the working JCS Xaman endpoint.</p>
 </div>
 </div>
-<span class="trade-network-pill">XRPL Mainnet · v1.5.2</span>
+<span class="trade-network-pill">XRPL Mainnet · v1.5.3</span>
 </div>
 <div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="tablist">
 <button aria-selected="true" class="tab buy active" id="buyTab" role="tab" type="button">
@@ -5200,7 +5200,7 @@ html[data-theme="light"] .jcs-unified-header{
   "xummApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "1.5.2",
+  "release": "1.5.3",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -5214,7 +5214,7 @@ html[data-theme="light"] .jcs-unified-header{
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '1.5.2';
+  const JCS_RELEASE = '1.5.3';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -6865,7 +6865,8 @@ html[data-theme="light"] .jcs-unified-header{
         params: [{
           taker_gets: { currency: CURRENCY_HEX, issuer: ISSUER },
           taker_pays: { currency: 'XRP' },
-          limit: 5
+          limit: 5,
+          ledger_index: 'validated'
         }]
       }),
       xrplRequest({
@@ -6873,7 +6874,8 @@ html[data-theme="light"] .jcs-unified-header{
         params: [{
           taker_gets: { currency: 'XRP' },
           taker_pays: { currency: CURRENCY_HEX, issuer: ISSUER },
-          limit: 5
+          limit: 5,
+          ledger_index: 'validated'
         }]
       })
     ]);
@@ -6903,38 +6905,140 @@ html[data-theme="light"] .jcs-unified-header{
     return { bestAsk, bestBid };
   }
 
-  async function getMarketPrice(side) {
-    try {
-      const ammWrap = await xrplRequest({
+  let ammSnapshotCache = null;
+  let ammSnapshotPromise = null;
+  const AMM_SNAPSHOT_CACHE_MS = 5000;
+
+  function isXrpCurrencyAmount(amount) {
+    return typeof amount === 'string' ||
+      !!(amount && typeof amount === 'object' && amount.currency === 'XRP');
+  }
+
+  function isJcsCurrencyAmount(amount) {
+    return !!(
+      amount &&
+      typeof amount === 'object' &&
+      amount.issuer === ISSUER &&
+      normalizeHexCurrency(amount.currency) === CURRENCY_HEX_NORM
+    );
+  }
+
+  function readJcsAmmReserves(amm) {
+    if (!amm) return null;
+
+    const first = amm.amount;
+    const second = amm.amount2;
+    let reserveXrp = NaN;
+    let reserveJcs = NaN;
+
+    if (isXrpCurrencyAmount(first) && isJcsCurrencyAmount(second)) {
+      reserveXrp = amountToNumber(first);
+      reserveJcs = amountToNumber(second);
+    } else if (isJcsCurrencyAmount(first) && isXrpCurrencyAmount(second)) {
+      reserveJcs = amountToNumber(first);
+      reserveXrp = amountToNumber(second);
+    }
+
+    if (
+      !Number.isFinite(reserveXrp) ||
+      !Number.isFinite(reserveJcs) ||
+      reserveXrp <= 0 ||
+      reserveJcs <= 0
+    ) {
+      return null;
+    }
+
+    return {
+      reserveXrp,
+      reserveJcs,
+      feeRate: Math.max(0, Math.min(0.999999, Number(amm.trading_fee || 0) / 100000))
+    };
+  }
+
+  async function getJcsAmmSnapshot() {
+    const now = Date.now();
+    if (
+      ammSnapshotCache &&
+      now - ammSnapshotCache.cachedAt < AMM_SNAPSHOT_CACHE_MS
+    ) {
+      return ammSnapshotCache.value;
+    }
+
+    if (ammSnapshotPromise) return ammSnapshotPromise;
+
+    ammSnapshotPromise = (async () => {
+      const response = await xrplRequest({
         method: 'amm_info',
-        params: [{ asset: { currency: 'XRP' }, asset2: { currency: CURRENCY_HEX, issuer: ISSUER } }]
+        params: [{
+          asset: { currency: 'XRP' },
+          asset2: { currency: CURRENCY_HEX, issuer: ISSUER },
+          ledger_index: 'validated'
+        }]
       });
-      const amm = ammWrap.result.amm;
-      if (amm && amountEl) {
-        const amt = Number(amountEl.value);
-        const reserveXrp = Number(amm.amount) / XRP_TO_DROPS;
-        const reserveTok = Number(amm.amount2.value);
-        const feeRate = (amm.trading_fee || 0) / 100000;
-        const k = reserveXrp * reserveTok;
-        if (amt > 0 && reserveXrp > 0 && reserveTok > 0) {
-          if (side === 'buy') {
-            const newTok = reserveTok - amt;
-            if (newTok > 0) {
-              const newXrp = k / newTok;
-              let xrpIn = newXrp - reserveXrp;
-              xrpIn += xrpIn * feeRate;
-              return xrpIn / amt;
-            }
-          } else {
-            const newTok = reserveTok + amt;
-            const newXrp = k / newTok;
-            let xrpOut = reserveXrp - newXrp;
-            xrpOut -= xrpOut * feeRate;
-            if (amt > 0) return xrpOut / amt;
-          }
-        }
-      }
-    } catch {}
+
+      const snapshot = readJcsAmmReserves(response?.result?.amm);
+      if (!snapshot) throw new Error('The JCS/XRP AMM reserves are unavailable.');
+
+      ammSnapshotCache = {
+        cachedAt: Date.now(),
+        value: snapshot
+      };
+      return snapshot;
+    })();
+
+    try {
+      return await ammSnapshotPromise;
+    } finally {
+      ammSnapshotPromise = null;
+    }
+  }
+
+  function quoteJcsAmmTrade(side, amountJcs, snapshot) {
+    const amount = Number(amountJcs);
+    if (!snapshot || !Number.isFinite(amount) || amount <= 0) return null;
+
+    const { reserveXrp, reserveJcs, feeRate } = snapshot;
+    const feeMultiplier = 1 - feeRate;
+    if (feeMultiplier <= 0) return null;
+
+    const invariant = reserveXrp * reserveJcs;
+    let totalXrp = NaN;
+
+    if (side === 'buy') {
+      if (amount >= reserveJcs) return null;
+      const effectiveXrpIn = invariant / (reserveJcs - amount) - reserveXrp;
+      totalXrp = effectiveXrpIn / feeMultiplier;
+    } else {
+      const effectiveJcsIn = amount * feeMultiplier;
+      totalXrp = reserveXrp - invariant / (reserveJcs + effectiveJcsIn);
+    }
+
+    if (!Number.isFinite(totalXrp) || totalXrp <= 0) return null;
+
+    return {
+      totalXrp,
+      unitPrice: totalXrp / amount,
+      source: 'AMM'
+    };
+  }
+
+  async function getMarketPrice(side, requestedAmount) {
+    const amount = Number(
+      requestedAmount != null
+        ? requestedAmount
+        : (amountEl && amountEl.value)
+    );
+
+    if (!Number.isFinite(amount) || amount <= 0) return null;
+
+    try {
+      const snapshot = await getJcsAmmSnapshot();
+      const quote = quoteJcsAmmTrade(side, amount, snapshot);
+      if (quote) return quote.unitPrice;
+    } catch (error) {
+      console.warn('JCS AMM quote unavailable; checking the order book.', error);
+    }
+
     const { bestAsk, bestBid } = await getTopOfBook();
     return side === 'buy' ? bestAsk : bestBid;
   }
@@ -7037,113 +7141,86 @@ html[data-theme="light"] .jcs-unified-header{
       try {
         if (!currentAccount) throw new Error('Connect wallet first');
         if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
+
         const side = sideEl.value;
         const amt = Number(amountEl.value);
-        if (!amt || amt <= 0) throw new Error('Enter Amount');
-        const basePx = await getMarketPrice(side);
-        if (!basePx || basePx <= 0) throw new Error('No market price');
+        if (!Number.isFinite(amt) || amt <= 0) throw new Error('Enter Amount');
+
+        setStatus(
+          tradeMsg,
+          'Preparing an AMM/DEX quote from validated XRPL liquidity…'
+        );
+
+        const basePx = await getMarketPrice(side, amt);
+        if (!basePx || basePx <= 0) {
+          throw new Error('No executable AMM or order-book price is available.');
+        }
+
         const slip = SLIPPAGE_PCT / 100;
-        const TF_PARTIAL = 0x00020000;
-
-        async function findPaths(params) {
-          const r = await xrplRequest({ method: 'ripple_path_find', params: [params] });
-          return r.result.alternatives || [];
-        }
-
-        function pickCheapestXrp(alts) {
-          let best = null, bestDrops = Infinity;
-          for (const alt of alts) {
-            const sa = alt.source_amount;
-            let drops = Infinity;
-            if (typeof sa === 'string') drops = Number(sa);
-            else if (sa && sa.currency === 'XRP') drops = Math.round(Number(sa.value) * XRP_TO_DROPS);
-            if (isFinite(drops) && drops < bestDrops) { bestDrops = drops; best = alt; }
-          }
-          if (!best) throw new Error('No XRP path');
-          return { best, drops: bestDrops };
-        }
-
-        function pickCheapestIOU(alts) {
-          let best = null, bestVal = Infinity;
-          for (const alt of alts) {
-            const sa = alt.source_amount;
-            if (
-              sa &&
-              normalizeHexCurrency(sa.currency) === CURRENCY_HEX_NORM &&
-              sa.issuer === ISSUER
-            ) {
-              const v = Number(sa.value);
-              if (isFinite(v) && v < bestVal) { bestVal = v; best = alt; }
-            }
-          }
-          if (!best) throw new Error('No ' + APP_NAME + ' path');
-          return { best, val: bestVal };
-        }
-
+        const estimatedXrp = amt * basePx;
         let tx;
 
         if (side === 'buy') {
-          const destAmt = { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) };
-          const alts = await findPaths({
-            source_account: currentAccount,
-            destination_account: currentAccount,
-            destination_amount: destAmt,
-            source_currencies: [{ currency: 'XRP' }]
-          });
-          const { best, drops } = pickCheapestXrp(alts);
-          const maxDrops = Math.ceil(drops * (1 + slip));
+          const maximumXrp = estimatedXrp * (1 + slip);
+          const maximumDrops = Math.max(1, Math.ceil(maximumXrp * XRP_TO_DROPS));
+
           tx = {
-            TransactionType: 'Payment',
-            Destination: currentAccount,
-            Amount: destAmt,
-            SendMax: String(maxDrops),
-            Flags: TF_PARTIAL,
-            DeliverMin: {
+            TransactionType: 'OfferCreate',
+            TakerGets: String(maximumDrops),
+            TakerPays: {
               currency: CURRENCY_HEX,
               issuer: ISSUER,
-              value: (amt * (1 - slip)).toFixed(6)
+              value: String(amt)
             },
-            Paths: best.paths_computed || best.paths_canonical || []
+            // Fill or Kill: receive the full JCS amount or execute nothing.
+            Flags: 0x00040000
           };
         } else {
-          const estXrp = amt * basePx;
-          const minXrpDrops = Math.floor(estXrp * (1 - slip) * XRP_TO_DROPS);
-          if (minXrpDrops < 1) throw new Error('Amount too small after slippage');
-          const alts = await findPaths({
-            source_account: currentAccount,
-            destination_account: currentAccount,
-            destination_amount: String(minXrpDrops),
-            source_currencies: [{ currency: CURRENCY_HEX, issuer: ISSUER }]
-          });
-          const { best, val } = pickCheapestIOU(alts);
-          if (val > amt) throw new Error('Increase amount for slippage cap');
+          await fetchBalances();
+          if (BAL.jcs + 1e-12 < amt) {
+            throw new Error('The connected wallet does not hold enough JCS.');
+          }
+
+          const minimumXrp = estimatedXrp * (1 - slip);
+          const minimumDrops = Math.max(1, Math.floor(minimumXrp * XRP_TO_DROPS));
+
           tx = {
-            TransactionType: 'Payment',
-            Destination: currentAccount,
-            Amount: String(minXrpDrops),
-            SendMax: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
-            Flags: TF_PARTIAL,
-            DeliverMin: String(minXrpDrops),
-            Paths: best.paths_computed || best.paths_canonical || []
+            TransactionType: 'OfferCreate',
+            TakerGets: {
+              currency: CURRENCY_HEX,
+              issuer: ISSUER,
+              value: String(amt)
+            },
+            TakerPays: String(minimumDrops),
+            // Fill or Kill + Sell: spend the full JCS amount or execute nothing.
+            Flags: 0x00040000 | 0x00080000
           };
         }
 
-        setStatus(tradeMsg, 'Open Xaman to review market swap.');
+        setStatus(
+          tradeMsg,
+          'Open Xaman and review the AMM/DEX market order. XRPL will use the best available order-book, AMM, or combined liquidity.'
+        );
+
         const signed = await signWithSentinel(tx, 'swap');
         const txid = signed && signed.txid;
+
         setStatus(
           tradeMsg,
           txid
-            ? 'Market swap submitted to XRPL Mainnet. Transaction: ' +
+            ? 'AMM/DEX market order submitted to XRPL Mainnet. Transaction: ' +
               txid.slice(0, 10) + '…' + txid.slice(-8)
-            : 'Market swap submitted to XRPL Mainnet.',
+            : 'AMM/DEX market order submitted to XRPL Mainnet.',
           'ok'
         );
+
         setResult(
           txid
-            ? 'Market swap submitted: ' + txid
-            : 'Market swap submitted.'
+            ? 'AMM/DEX market order submitted: ' + txid
+            : 'AMM/DEX market order submitted.'
         );
+
+        ammSnapshotCache = null;
         await Promise.allSettled([refreshAll(), fetchBalances()]);
       } catch (e) {
         setStatus(tradeMsg, 'Error: ' + (e.message || e), 'err');
@@ -7423,7 +7500,8 @@ html[data-theme="light"] .jcs-unified-header{
         params: [{
           taker_gets: { currency: CURRENCY_HEX, issuer: ISSUER },
           taker_pays: { currency: 'XRP' },
-          limit: 5
+          limit: 5,
+          ledger_index: 'validated'
         }]
       }),
       xrplRequest({
@@ -7431,7 +7509,8 @@ html[data-theme="light"] .jcs-unified-header{
         params: [{
           taker_gets: { currency: 'XRP' },
           taker_pays: { currency: CURRENCY_HEX, issuer: ISSUER },
-          limit: 5
+          limit: 5,
+          ledger_index: 'validated'
         }]
       })
     ]);
@@ -7970,28 +8049,14 @@ html[data-theme="light"] .jcs-unified-header{
 
   async function estimateBuy(units) {
     if (!currentAccount) return null;
-    const amt = { currency: CURRENCY_HEX, issuer: ISSUER, value: String(units) };
-    const r = await xrplRequest({
-      method: 'ripple_path_find',
-      params: [{
-        source_account: currentAccount,
-        destination_account: currentAccount,
-        destination_amount: amt,
-        source_currencies: [{ currency: 'XRP' }]
-      }]
-    }).catch(() => null);
-    const alts = r && r.result && r.result.alternatives || [];
-    if (!alts.length) return null;
-    let best = Infinity;
-    for (const a of alts) {
-      const sa = a.source_amount;
-      let drops = Infinity;
-      if (typeof sa === 'string') drops = Number(sa);
-      else if (sa && sa.currency === 'XRP') drops = Math.round(Number(sa.value) * XRP_TO_DROPS);
-      if (isFinite(drops) && drops < best) best = drops;
+
+    try {
+      const price = await getMarketPrice('buy', units);
+      if (!Number.isFinite(price) || price <= 0) return null;
+      return Number(units) * price;
+    } catch {
+      return null;
     }
-    if (!isFinite(best) || best === Infinity) return null;
-    return best / XRP_TO_DROPS;
   }
 
   async function refreshEstimates() {
@@ -8056,87 +8121,43 @@ html[data-theme="light"] .jcs-unified-header{
       if (!currentAccount) throw new Error('Connect Xaman first.');
       if (!await hasTrustline()) throw new Error('Add the JCS trustline first.');
 
-      const amount = {
-        currency: CURRENCY_HEX,
-        issuer: ISSUER,
-        value: String(units)
-      };
-
-      setStatus(buyStatus, 'Finding a validated XRP-to-JCS path…');
-
-      const response = await xrplRequest({
-        method: 'ripple_path_find',
-        params: [{
-          source_account: currentAccount,
-          destination_account: currentAccount,
-          destination_amount: amount,
-          source_currencies: [{ currency: 'XRP' }],
-          ledger_index: 'validated'
-        }]
-      });
-
-      const alternatives = response?.result?.alternatives || [];
-      if (!alternatives.length) {
-        throw new Error('No XRP-to-JCS path is available for this amount.');
+      const requestedJcs = Number(units);
+      if (!Number.isFinite(requestedJcs) || requestedJcs <= 0) {
+        throw new Error('Enter a valid JCS amount.');
       }
 
-      let best = null;
-      let bestDrops = Infinity;
+      setStatus(
+        buyStatus,
+        'Preparing a validated JCS/XRP AMM and DEX quote…'
+      );
 
-      for (const alternative of alternatives) {
-        const sourceAmount = alternative.source_amount;
-        let drops = Infinity;
-
-        if (typeof sourceAmount === 'string') {
-          drops = Number(sourceAmount);
-        } else if (
-          sourceAmount &&
-          sourceAmount.currency === 'XRP'
-        ) {
-          drops = Math.round(
-            Number(sourceAmount.value) * XRP_TO_DROPS
-          );
-        }
-
-        const paths = alternative.paths_computed;
-        const usablePaths =
-          Array.isArray(paths) &&
-          paths.some(path => Array.isArray(path) && path.length > 0);
-
-        if (
-          usablePaths &&
-          Number.isFinite(drops) &&
-          drops > 0 &&
-          drops < bestDrops
-        ) {
-          bestDrops = drops;
-          best = alternative;
-        }
+      const price = await getMarketPrice('buy', requestedJcs);
+      if (!Number.isFinite(price) || price <= 0) {
+        throw new Error('No executable JCS/XRP AMM or order-book price is available.');
       }
 
-      if (!best) {
-        throw new Error(
-          'XRPL returned no usable computed path for this JCS amount.'
-        );
-      }
-
-      const maximumDrops = Math.ceil(
-        bestDrops * (1 + SLIPPAGE_PCT / 100)
+      const estimatedXrp = requestedJcs * price;
+      const maximumXrp = estimatedXrp * (1 + SLIPPAGE_PCT / 100);
+      const maximumDrops = Math.max(
+        1,
+        Math.ceil(maximumXrp * XRP_TO_DROPS)
       );
 
       const transaction = {
-        TransactionType: 'Payment',
-        Destination: currentAccount,
-        Amount: amount,
-        SendMax: String(maximumDrops),
-        Paths: best.paths_computed,
-        Flags: 0x00040000,
-        Memos: []
+        TransactionType: 'OfferCreate',
+        TakerGets: String(maximumDrops),
+        TakerPays: {
+          currency: CURRENCY_HEX,
+          issuer: ISSUER,
+          value: String(requestedJcs)
+        },
+        // Fill or Kill prevents an unfilled remainder from becoming an open order.
+        Flags: 0x00040000
       };
 
       setStatus(
         buyStatus,
-        'Review the exact JCS amount, maximum XRP cost, and computed path in Xaman.'
+        'Review the exact JCS amount and maximum XRP cost in Xaman. XRPL will use the best available AMM, order-book, or combined liquidity.'
       );
 
       const signed = await signWithSentinel(transaction, 'quickbuy');
@@ -8153,12 +8174,8 @@ html[data-theme="light"] .jcs-unified-header{
         'Quick Buy submitted. Waiting for validated XRPL confirmation…'
       );
 
-      const validation = await waitForQuickBuyValidation(txid);
-      const delivered = validation.delivered;
-      const deliveredText =
-        delivered && typeof delivered === 'object'
-          ? delivered.value + ' ' + APP_NAME
-          : units + ' ' + APP_NAME;
+      await waitForQuickBuyValidation(txid);
+      const deliveredText = formatTradeNumber(requestedJcs, 6) + ' ' + APP_NAME;
 
       setStatus(
         buyStatus,
@@ -8168,10 +8185,11 @@ html[data-theme="light"] .jcs-unified-header{
       );
 
       setResult(
-        'Validated Quick Buy · ' + deliveredText +
+        'Validated AMM/DEX Quick Buy · ' + deliveredText +
           ' · Transaction: ' + txid
       );
 
+      ammSnapshotCache = null;
       await Promise.allSettled([
         refreshAll(),
         fetchBalances(),
