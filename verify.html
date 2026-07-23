@@ -6,9 +6,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#071225" name="theme-color"/>
 <meta content="JCS Sign the Ledger" name="application-name"/>
-<meta content="3.0.0" name="jcs-ledger-release"/>
-<title>Sign the Ledger v3.0.0 · Numbered JCS Prayer NFTs</title>
-<meta content="Reserve a permanent prayer number, mint a JCS-logo NFT in Xaman, and publish prayers, testimonies, replies, and Amen reactions directly to the XRP Ledger." name="description"/>
+<meta content="4.0.0" name="jcs-ledger-release"/>
+<title>Sign the Ledger v4.0.0 · JCS Prayer NFT Social Ledger</title>
+<meta content="Mint JCS-logo prayer NFTs through Xaman and publish numbered prayers, testimonies, replies, and Amen reactions directly to the XRP Ledger." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large" name="robots"/>
@@ -29,24 +29,24 @@
 <link crossorigin="" href="https://xaman.app" rel="preconnect"/>
 <link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
 <meta content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://unpkg.com;
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data: https:;
-    connect-src 'self'
-      https://xumm.app https://*.xumm.app
-      https://oauth2.xumm.app
-      https://xaman.app https://*.xaman.app
-      wss://xumm.app wss://*.xumm.app
-      wss://xaman.app wss://*.xaman.app
-      wss://xrplcluster.com
-      wss://s1.ripple.com
-      wss://s2.ripple.com
-      wss://honeycluster.io;
-    frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app;
-    base-uri 'self';
-    form-action 'self';
-" http-equiv="Content-Security-Policy"/>
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://unpkg.com;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      connect-src 'self'
+        https://xumm.app https://*.xumm.app
+        https://oauth2.xumm.app
+        https://xaman.app https://*.xaman.app
+        wss://xumm.app wss://*.xumm.app
+        wss://xaman.app wss://*.xaman.app
+        wss://xrplcluster.com
+        wss://s1.ripple.com
+        wss://s2.ripple.com
+        wss://honeycluster.io;
+      frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app;
+      base-uri 'self';
+      form-action 'self';
+    " http-equiv="Content-Security-Policy"/>
 <style>
     :root{
       --bg:#f6f8fc;
@@ -583,6 +583,105 @@
       .publish-flow{grid-template-columns:1fr 1fr}
       .explain-grid{grid-template-columns:1fr}
     }
+
+
+/* =========================================================
+   Sign the Ledger v4.0.0 · social interaction corrections
+   ========================================================= */
+.publish-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+.explain-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.inline-reply{
+  display:none;
+  margin-top:12px;
+  padding:13px;
+  border:1px solid rgba(201,152,32,.34);
+  border-radius:13px;
+  background:var(--surface);
+}
+.inline-reply.is-open{display:block}
+.inline-reply-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:8px;
+}
+.inline-reply-head strong{font-size:.78rem}
+.inline-reply-head span{color:var(--muted);font-size:.67rem}
+.inline-reply textarea{
+  min-height:90px;
+  resize:vertical;
+  background:var(--surface-2);
+}
+.inline-reply-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.inline-reply-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.inline-reply-counter{color:var(--muted);font-size:.68rem}
+.inline-reply-counter.warn{color:var(--orange)}
+.inline-reply-counter.bad{color:var(--red)}
+.post-card.reply-open{
+  border-color:rgba(201,152,32,.5);
+  box-shadow:0 14px 38px rgba(201,152,32,.1);
+}
+.post-source-note{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.65rem;
+}
+.badge.onledger{
+  border-color:rgba(8,125,78,.45);
+  color:var(--green);
+}
+.badge.previous{
+  border-color:rgba(201,152,32,.45);
+  color:var(--gold);
+}
+.server-indicator{
+  display:block;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:.66rem;
+}
+.nft-item-card{
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  gap:11px;
+  align-items:start;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface-2);
+}
+.nft-item-card img{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border:1px solid rgba(201,152,32,.4);
+  border-radius:13px;
+  background:#fff;
+}
+.nft-item-card strong{display:block}
+.nft-item-card span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font:650 .61rem/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;
+  overflow-wrap:anywhere;
+}
+/* The reply experience is inline; there is no modal backdrop or page blur. */
+.dialog,.dialog::backdrop{backdrop-filter:none!important}
+@media(max-width:1050px){
+  .explain-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .publish-flow{grid-template-columns:1fr}
+  .explain-grid{grid-template-columns:1fr}
+}
 </style>
 <script>
     (function(){
@@ -601,9 +700,9 @@
   "url": "https://jesuschristsavestoken.com/verify.html",
   "applicationCategory": "SocialNetworkingApplication",
   "operatingSystem": "Any modern browser",
-  "softwareVersion": "3.0.0",
+  "softwareVersion": "4.0.0",
   "isAccessibleForFree": true,
-  "description": "A non-custodial JCS social ledger that reserves globally ordered prayer numbers, mints logo-backed XRPL NFTs, and reads the public testimony feed directly from validated XRP Ledger history.",
+  "description": "A non-custodial JCS prayer NFT and social testimony interface that reads and publishes validated XRP Ledger transactions.",
   "publisher": {
     "@type": "Organization",
     "name": "Jesus Christ Saves Token",
@@ -611,12 +710,12 @@
     "logo": "https://jesuschristsavestoken.com/jcs-logo.png"
   },
   "featureList": [
-    "Ledger-ordered prayer number reservation",
-    "JCS-logo NFT metadata embedded in the immutable NFToken URI",
-    "Xaman Mainnet signing with six-digit memo verification",
-    "Rolling public testimony feed read directly from XRPL account history",
-    "On-ledger replies and Amen reactions",
-    "Multiple public XRPL WebSocket failover endpoints"
+    "JCS-logo XRPL NFT minting through Xaman",
+    "Ledger-derived unique prayer identifiers",
+    "Rolling testimony feed from validated account history",
+    "Inline on-ledger replies without modal blur",
+    "On-ledger Amen reactions",
+    "Public XRPL WebSocket failover"
   ]
 }</script>
 </head>
@@ -628,7 +727,7 @@
 <img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
 <span class="brand-copy">
 <span class="brand-title">Sign the Ledger</span>
-<span class="brand-subtitle">numbered JCS prayer NFT network · v3.0.0</span>
+<span class="brand-subtitle">JCS prayer NFT social ledger · v4.0.0</span>
 </span>
 </a>
 <nav aria-label="Primary" class="header-nav">
@@ -652,7 +751,7 @@
 <div>
 <span class="eyebrow">✝ NFT-backed prayer · testimony · fellowship</span>
 <h1>Every testimony can become an <span>immutable witness.</span></h1>
-<p class="hero-lead">Compose a prayer or testimony, reserve its permanent order on the XRP Ledger, mint a numbered JCS-logo NFToken in your own wallet, and publish the validated record into a rolling social stream drawn directly from ledger history.</p>
+<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, then publish a numbered social record. The prayer identifier is derived from the validated mint transaction itself, so minting never depends on a full-history server or browser storage.</p>
 <div class="hero-actions">
 <a class="btn primary" href="#compose">Compose a testimony NFT</a>
 <a class="btn" href="#testimonies">Enter the rolling testimony stream</a>
@@ -668,7 +767,7 @@
 </div>
 <div class="proof-row">
 <span class="proof-label">Publication model</span>
-<span class="proof-value">ledger reservation + numbered NFT mint + public registry</span>
+<span class="proof-value">NFT mint + ledger-derived prayer ID + public registry</span>
 </div>
 <div class="proof-row">
 <span class="proof-label">Signing</span>
@@ -682,7 +781,7 @@
 <div class="section-head">
 <div>
 <h2>Compose on-chain testimony</h2>
-<p>The ledger first reserves the prayer's collection number. The NFT then stores compact JSON metadata with its permanent name and JCS logo, while the complete testimony remains in signed transaction memos.</p>
+<p>The first approval mints the NFT. After validation, its ledger index and transaction position become a permanent prayer identifier, and the second approval publishes the complete social record.</p>
 </div>
 <span class="badge nft">NFT-backed</span>
 </div>
@@ -732,12 +831,11 @@
 <input id="scriptureRef" maxlength="48" placeholder="John 3:16 · Psalm 23 · 1 Enoch 1:8"/>
 </div>
 <div aria-live="polite" class="preview">
-
 <div aria-label="NFT wallet preview" class="nft-preview-card">
 <img alt="JCS logo used for the prayer NFT" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
 <div>
 <span class="preview-label">NFT wallet preview</span>
-<strong id="previewPrayerNumber">Prayer number assigned after ledger reservation</strong>
+<strong id="previewPrayerNumber">Prayer ID assigned from validated mint transaction</strong>
 <small>Jesus Christ Saves Token · XRPL Mainnet</small>
 </div>
 </div>
@@ -745,24 +843,24 @@
 <div class="preview-message" id="previewMessage">Your testimony preview will appear here.</div>
 <div class="preview-meta" id="previewMeta">Prayer · Anonymous</div>
 </div>
-<div aria-label="Publishing steps" class="publish-flow"><div class="flow-step active" id="flowConnect">1 · Connect</div><div class="flow-step" id="flowReserve">2 · Reserve number</div><div class="flow-step" id="flowMint">3 · Mint NFT</div><div class="flow-step" id="flowRegister">4 · Publish feed</div></div>
+<div aria-label="Publishing steps" class="publish-flow"><div class="flow-step active" id="flowConnect">1 · Connect</div><div class="flow-step" id="flowMint">2 · Mint NFT</div><div class="flow-step" id="flowRegister">3 · Publish feed</div></div>
 <div class="publish-actions">
-<button class="btn primary" disabled="" id="publishBtn" type="button">Reserve number, mint NFT, and publish testimony</button>
-<button class="btn" disabled="" id="mintOnlyBtn" type="button">Reserve number and mint NFT only</button>
+<button class="btn primary" disabled="" id="publishBtn" type="button">Mint JCS prayer NFT and publish testimony</button>
+<button class="btn" disabled="" id="mintOnlyBtn" type="button">Mint JCS prayer NFT only</button>
 <button class="btn ghost" id="clearDraftBtn" type="button">Clear draft</button>
 </div>
-<div aria-live="polite" class="status-box" id="composerStatus">Connect Xaman to begin. Full publication requires three approvals: a one-drop number reservation, an NFTokenMint, and a one-drop public registry entry.</div>
+<div aria-live="polite" class="status-box" id="composerStatus">Connect Xaman to begin. Full publication requires two approvals: one NFTokenMint and one one-drop public registry transaction.</div>
 <div class="pending-publish" hidden="" id="pendingPublish">
-<strong>An on-chain prayer publication is incomplete.</strong>
+<strong>NFT minted but not yet published in the social feed.</strong>
 <p id="pendingPublishText"></p>
-<button class="btn primary small" id="resumePublishBtn" type="button">Resume on-chain process</button>
+<button class="btn primary small" id="resumePublishBtn" type="button">Publish the pending NFT</button>
 </div>
 </article>
 <article class="card feed-shell" id="testimonies">
 <div class="feed-head">
 <div>
 <h2>Recent on-chain testimonies</h2>
-<p>A cascading stream reconstructed from validated reservation, registry, reply, and Amen transactions on the XRP Ledger—not from browser storage.</p>
+<p>A cascading social stream reconstructed from validated JCS transactions on the XRP Ledger. Drafts are local; published posts are not.</p>
 </div>
 <div class="feed-controls">
 <button aria-pressed="true" class="btn small" id="rollingToggle" type="button">Pause rolling</button>
@@ -823,36 +921,36 @@
 </section>
 <section aria-label="How the network works" class="explain-grid">
 <article class="card explain-card">
-<h3>1 · Reserve the prayer number</h3>
+<h3>1 · Mint the NFT</h3>
 <p>
-    A one-drop payment creates a validated reservation on the JCS collector
-    account. Reservations are ordered by ledger index and transaction index,
-    producing Prayer 1/00000001, Prayer 1/00000002, and so on.
-  </p>
+          Xaman signs an NFTokenMint in your wallet. The immutable URI points to
+          the official JCS logo, while the complete prayer and its SHA-256
+          commitment are included in the signed mint transaction memos.
+        </p>
 </article>
 <article class="card explain-card">
-<h3>2 · Mint the numbered NFT</h3>
+<h3>2 · Assign the prayer ID</h3>
 <p>
-    Your wallet mints an NFToken whose immutable data URI contains compact JSON
-    metadata: the assigned prayer number, a description, and the official JCS
-    logo URL. The complete testimony is preserved in the signed mint memos.
-  </p>
+          Once the mint validates, the page uses its immutable ledger index and
+          transaction position to create an identifier such as
+          Prayer 1/L105782761-T004. No full-history scan or central counter is required.
+        </p>
 </article>
 <article class="card explain-card">
-<h3>3 · Publish to the social ledger</h3>
+<h3>3 · Publish the social record</h3>
 <p>
-    A second one-drop registry payment links the reservation, NFT ID, mint
-    transaction, testimony, author fields, Scripture reference, and SHA-256
-    commitment into the shared feed.
-  </p>
+          A one-drop registry transaction links the prayer ID, NFTokenID, mint
+          transaction, testimony, optional identity fields, Scripture reference,
+          and content commitment into the public feed.
+        </p>
 </article>
 <article class="card explain-card">
-<h3>4 · Read directly from XRPL</h3>
+<h3>4 · Read from the ledger</h3>
 <p>
-    The rolling feed is rebuilt from validated collector-account history using
-    multiple public XRPL WebSocket servers. Local storage is used only for an
-    unfinished draft or recovery between required signatures.
-  </p>
+          Recent testimonies, replies, and Amen reactions are read from validated
+          collector-account history through multiple public XRPL servers. Local
+          storage is never the public feed database.
+        </p>
 </article>
 </section>
 </main>
@@ -878,25 +976,11 @@
 <img alt="Scan the Xaman sign request" class="sign-qr" hidden="" id="signQr"/>
 </div>
 </aside>
-<dialog class="dialog" id="replyDialog">
-<form class="dialog-inner" method="dialog">
-<h2>Reply on the XRP Ledger</h2>
-<p class="status-box">This creates a signed one-drop reply memo linked to the parent testimony.</p>
-<input id="replyParent" type="hidden"/>
-<div class="field">
-<label for="replyMessage">Reply</label>
-<textarea id="replyMessage" maxlength="220" placeholder="Write an uplifting reply, prayer, or word of encouragement."></textarea>
-</div>
-<div class="dialog-actions">
-<button class="btn" id="cancelReplyBtn" type="button">Cancel</button>
-<button class="btn primary" id="submitReplyBtn" type="button">Sign reply in Xaman</button>
-</div>
-</form>
-</dialog>
+
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
-<strong>Jesus Christ Saves Token · Sign the Ledger v3.0.0</strong>
+<strong>Jesus Christ Saves Token · Sign the Ledger v4.0.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
         permanent availability from every public XRPL server, moderate religious
@@ -921,18 +1005,15 @@
   const APP_KEY = '9f853ecf-d95f-4e03-8591-e41f91b9f3c5';
   const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
   const JCS_LOGO = 'https://jesuschristsavestoken.com/jcs-logo.png';
-  const SITE_URL = 'https://jesuschristsavestoken.com';
-  const APP_TAG = 'JCS_SOCIAL_V3';
-  const PREVIOUS_TAG = 'JCS_SOCIAL_V2';
+  const APP_TAG = 'JCS_SOCIAL_V4';
+  const PRIOR_TAGS = new Set(['JCS_SOCIAL_V3', 'JCS_SOCIAL_V2']);
   const LEGACY_TAG = 'JCS_VERIFY_V1';
   const NFT_TAXON = 1246974803;
-  const PRAYER_SERIES = 1;
-  const MAX_URI_BYTES = 256;
-  const MAX_HISTORY_PAGES = 100;
-  const DRAFT_KEY = 'jcs.social.draft.v3';
-  const PROFILE_KEY = 'jcs.social.profile.v3';
-  const PENDING_KEY = 'jcs.social.pending.v3';
+  const DRAFT_KEY = 'jcs.social.draft.v4';
+  const PROFILE_KEY = 'jcs.social.profile.v4';
+  const PENDING_KEY = 'jcs.social.pending.v4';
   const THEME_KEY = 'jcs-ledger-theme';
+  const RECENT_HISTORY_PAGES = 12;
   const XRPL_SERVERS = [
     'wss://xrplcluster.com/',
     'wss://s2.ripple.com/',
@@ -952,9 +1033,7 @@
     clientPromise: null,
     endpointIndex: 0,
     activeEndpoint: '',
-    feedEntries: [],
     posts: [],
-    reservations: [],
     rolling: true,
     rollingHover: false,
     rollingTimer: null,
@@ -984,7 +1063,9 @@
     try {
       const clean = String(value || '').replace(/[^a-fA-F0-9]/g, '');
       if (!clean || clean.length % 2) return '';
-      const bytes = new Uint8Array(clean.match(/.{2}/g).map(value => parseInt(value, 16)));
+      const bytes = new Uint8Array(
+        clean.match(/.{2}/g).map(value => parseInt(value, 16))
+      );
       return decoder.decode(bytes);
     } catch {
       return '';
@@ -1025,19 +1106,6 @@
     return new Date(iso).toLocaleDateString();
   }
 
-  function randomNonce() {
-    const values = new Uint32Array(3);
-    crypto.getRandomValues(values);
-    return Array.from(values)
-      .map(value => value.toString(16).padStart(8, '0'))
-      .join('');
-  }
-
-  function formatPrayerNumber(index) {
-    const numeric = Math.max(1, Number(index) || 1);
-    return 'Prayer ' + PRAYER_SERIES + '/' + String(numeric).padStart(8, '0');
-  }
-
   function postTypeLabel(type) {
     return {
       prayer: 'Prayer',
@@ -1045,16 +1113,15 @@
       praise: 'Praise report',
       request: 'Prayer request',
       scripture: 'Scripture reflection',
-      legacy: 'Legacy testimony'
+      legacy: 'Earlier testimony'
     }[type] || 'Testimony';
   }
 
   function toast(message, type='') {
-    const region = $('toastRegion');
     const item = document.createElement('div');
     item.className = 'toast ' + type;
     item.textContent = message;
-    region.appendChild(item);
+    $('toastRegion').appendChild(item);
     window.setTimeout(() => item.remove(), 5200);
   }
 
@@ -1071,15 +1138,8 @@
   }
 
   function setFlow(stage) {
-    const ids = ['flowConnect', 'flowReserve', 'flowMint', 'flowRegister'];
-    const stageIndex = {
-      connect: 0,
-      reserve: 1,
-      mint: 2,
-      register: 3,
-      complete: 4
-    }[stage] ?? 0;
-
+    const ids = ['flowConnect', 'flowMint', 'flowRegister'];
+    const stageIndex = {connect:0, mint:1, register:2, complete:3}[stage] ?? 0;
     ids.forEach((id, index) => {
       const node = $(id);
       node.classList.toggle('done', index < stageIndex);
@@ -1114,41 +1174,33 @@
     state.subscribed = false;
   }
 
-  async function connectFromCurrentEndpoint() {
-    let lastError = null;
-
-    for (let offset = 0; offset < XRPL_SERVERS.length; offset++) {
-      const index = (state.endpointIndex + offset) % XRPL_SERVERS.length;
-      const endpoint = XRPL_SERVERS[index];
-      let client = null;
-
-      try {
-        client = new window.xrpl.Client(endpoint, {connectionTimeout: 10000});
-        await client.connect();
-        await client.request({command: 'server_info'});
-        state.client = client;
-        state.endpointIndex = index;
-        state.activeEndpoint = endpoint;
-        state.subscribed = false;
-        return client;
-      } catch (error) {
-        lastError = error;
-        try { await client?.disconnect(); } catch {}
-      }
-    }
-
-    throw lastError || new Error('No public XRP Ledger server could be reached.');
-  }
-
   async function ensureClient() {
     if (!window.xrpl?.Client) throw new Error('XRPL JavaScript library did not load.');
     if (state.client?.isConnected()) return state.client;
     if (state.clientPromise) return state.clientPromise;
 
     state.clientPromise = (async () => {
+      let lastError = null;
       try {
         await disconnectClient();
-        return await connectFromCurrentEndpoint();
+        for (let offset = 0; offset < XRPL_SERVERS.length; offset++) {
+          const index = (state.endpointIndex + offset) % XRPL_SERVERS.length;
+          const endpoint = XRPL_SERVERS[index];
+          let client = null;
+          try {
+            client = new window.xrpl.Client(endpoint, {connectionTimeout:10000});
+            await client.connect();
+            await client.request({command:'server_info'});
+            state.client = client;
+            state.endpointIndex = index;
+            state.activeEndpoint = endpoint;
+            return client;
+          } catch (error) {
+            lastError = error;
+            try { await client?.disconnect(); } catch {}
+          }
+        }
+        throw lastError || new Error('No public XRPL server could be reached.');
       } finally {
         state.clientPromise = null;
       }
@@ -1157,10 +1209,9 @@
     return state.clientPromise;
   }
 
-  async function xrplRequest(command, params={}, attempts=XRPL_SERVERS.length) {
+  async function xrplRequest(command, params={}) {
     let lastError = null;
-
-    for (let attempt = 0; attempt < attempts; attempt++) {
+    for (let attempt = 0; attempt < XRPL_SERVERS.length; attempt++) {
       try {
         const client = await ensureClient();
         return await client.request({command, ...params});
@@ -1170,8 +1221,7 @@
         state.endpointIndex = (state.endpointIndex + 1) % XRPL_SERVERS.length;
       }
     }
-
-    throw lastError || new Error('XRPL request failed on all configured servers.');
+    throw lastError || new Error('XRPL request failed on every configured server.');
   }
 
   function updateWalletUi() {
@@ -1189,20 +1239,19 @@
       : 'Connect Xaman to inspect your testimony NFTs.';
 
     if (connected) {
-      if (!$('myNftList').querySelector('.nft-item-card')) {
-        $('myNftList').innerHTML =
-          '<div class="nft-item">Wallet connected. Loading numbered JCS prayer NFTs…</div>';
-      }
-      setFlow(state.pending?.stage || 'reserve');
+      setFlow(state.pending?.stage === 'minted' ? 'register' : 'mint');
       setComposerStatus(
         'Connected to ' + shortAccount(state.account, 9) +
-        '. The first signature reserves a globally ordered prayer number on the ledger.',
+        '. Review the preview, then approve the NFT mint in Xaman.',
         'ok'
       );
-      window.setTimeout(() => loadMyNfts().catch(() => {}), 400);
+      $('myNftList').innerHTML =
+        '<div class="nft-item">Wallet connected. Reading validated NFT ownership…</div>';
+      window.setTimeout(() => loadMyNfts().catch(() => {}), 300);
     } else {
       setFlow('connect');
-      $('myNftList').innerHTML = '<div class="nft-item">No wallet connected.</div>';
+      $('myNftList').innerHTML =
+        '<div class="nft-item">No wallet connected.</div>';
     }
   }
 
@@ -1213,21 +1262,14 @@
       nested.me?.account ||
       nested.data?.account ||
       '';
-
     if (direct) return direct;
-    try {
-      return await state.xumm.user.account;
-    } catch {
-      return '';
-    }
+    try { return await state.xumm.user.account; }
+    catch { return ''; }
   }
 
   function initXaman() {
     if (!window.Xumm) {
-      setComposerStatus(
-        'The Xaman SDK did not load. Reload the page before attempting to publish.',
-        'err'
-      );
+      setComposerStatus('The Xaman SDK did not load. Reload the page.', 'err');
       return;
     }
 
@@ -1237,7 +1279,7 @@
       $('connectBtn').disabled = false;
     });
 
-    const onIdentified = async event => {
+    const identified = async event => {
       const account = await resolveXamanAccount(event);
       if (!account) return;
       state.account = account;
@@ -1246,17 +1288,15 @@
       subscribeToCollector().catch(() => {});
     };
 
-    state.xumm.on('success', onIdentified);
-    state.xumm.on('retrieved', onIdentified);
-
+    state.xumm.on('success', identified);
+    state.xumm.on('retrieved', identified);
     state.xumm.on('logout', () => {
       state.account = '';
       updateWalletUi();
     });
-
     state.xumm.on('error', error => {
       setComposerStatus(
-        'Xaman reported an application error: ' + (error?.message || error),
+        'Xaman reported an error: ' + (error?.message || error),
         'err'
       );
     });
@@ -1275,7 +1315,7 @@
       }
     } catch (error) {
       setComposerStatus(
-        'Xaman connection was cancelled or failed: ' + (error?.message || error),
+        'Xaman connection failed or was cancelled: ' + (error?.message || error),
         'err'
       );
     }
@@ -1312,9 +1352,9 @@
       localStorage.setItem(PROFILE_KEY, JSON.stringify(profileFromForm()));
       $('draftState').textContent =
         'Draft saved locally · ' +
-        new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+        new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
     } catch {
-      $('draftState').textContent = 'Draft could not be saved in this browser';
+      $('draftState').textContent = 'Draft could not be saved';
     }
   }
 
@@ -1355,20 +1395,21 @@
 
     $('previewPrayerNumber').textContent =
       state.pending?.prayerNumber ||
-      'Prayer number assigned after ledger reservation';
+      'Prayer ID assigned from validated mint transaction';
 
     clearTimeout(updateComposer.saveTimer);
     updateComposer.saveTimer = window.setTimeout(saveDraft, 350);
   }
 
-  ['postType', 'visibility', 'message', 'displayName', 'handle', 'scriptureRef']
+  ['postType','visibility','message','displayName','handle','scriptureRef']
     .forEach(id => {
       $(id).addEventListener('input', updateComposer);
       $(id).addEventListener('change', updateComposer);
     });
 
   $('clearDraftBtn').addEventListener('click', () => {
-    ['message', 'scriptureRef'].forEach(id => $(id).value = '');
+    $('message').value = '';
+    $('scriptureRef').value = '';
     $('postType').value = 'prayer';
     try { localStorage.removeItem(DRAFT_KEY); } catch {}
     updateComposer();
@@ -1382,16 +1423,24 @@
       .join('');
   }
 
+  function randomNonce() {
+    const values = new Uint32Array(3);
+    crypto.getRandomValues(values);
+    return Array.from(values)
+      .map(value => value.toString(16).padStart(8, '0'))
+      .join('');
+  }
+
   function canonicalPost(post) {
     return JSON.stringify({
-      v: 3,
-      type: post.type,
-      message: post.message,
-      name: post.name,
-      handle: post.handle,
-      scripture: post.scripture,
-      created: post.created,
-      nonce: post.nonce
+      v:4,
+      type:post.type,
+      message:post.message,
+      name:post.name,
+      handle:post.handle,
+      scripture:post.scripture,
+      created:post.created,
+      nonce:post.nonce
     });
   }
 
@@ -1399,15 +1448,15 @@
     if (!state.account) throw new Error('Connect Xaman first.');
 
     const post = {
-      type: $('postType').value,
-      message: $('message').value.trim(),
-      name: $('displayName').value.trim(),
-      handle: normalizeHandle($('handle').value),
-      scripture: $('scriptureRef').value.trim(),
-      visibility: $('visibility').value,
-      created: new Date().toISOString(),
-      nonce: randomNonce(),
-      account: state.account
+      type:$('postType').value,
+      message:$('message').value.trim(),
+      name:$('displayName').value.trim(),
+      handle:normalizeHandle($('handle').value),
+      scripture:$('scriptureRef').value.trim(),
+      visibility:$('visibility').value,
+      created:new Date().toISOString(),
+      nonce:randomNonce(),
+      account:state.account
     };
 
     if (!post.message) throw new Error('Write a prayer or testimony first.');
@@ -1416,40 +1465,17 @@
     }
 
     post.hash = await sha256Hex(canonicalPost(post));
+    post.uri =
+      JCS_LOGO + '#jcs-prayer-' + post.hash.slice(0, 20);
     return post;
-  }
-
-  function buildNftMetadataUri(prayerNumber) {
-    const metadata = {
-      name: 'JCS ' + prayerNumber,
-      description: 'On-chain prayer testimony',
-      image: JCS_LOGO
-    };
-    const uri = 'data:application/json,' +
-      encodeURIComponent(JSON.stringify(metadata));
-
-    if (utf8Bytes(uri) > MAX_URI_BYTES) {
-      throw new Error('The numbered NFT metadata exceeds the XRPL 256-byte URI limit.');
-    }
-    return uri;
-  }
-
-  function parseDataMetadataUri(uri='') {
-    const prefix = 'data:application/json,';
-    if (!String(uri).startsWith(prefix)) return null;
-    try {
-      return JSON.parse(decodeURIComponent(String(uri).slice(prefix.length)));
-    } catch {
-      return null;
-    }
   }
 
   function memo(type, value) {
     if (value === undefined || value === null || value === '') return null;
     return {
-      Memo: {
-        MemoType: strToHex(type),
-        MemoData: strToHex(String(value))
+      Memo:{
+        MemoType:strToHex(type),
+        MemoData:strToHex(String(value))
       }
     };
   }
@@ -1477,19 +1503,16 @@
     const qr =
       created?.refs?.qr_png ||
       created?.refs?.qr ||
-      created?.qr_png ||
-      created?.qr ||
       '';
     const link =
       created?.next?.always ||
       created?.next?.no_push_msg_received ||
       created?.refs?.deeplink ||
-      created?.deeplink ||
       '';
 
     $('signTitle').textContent = purpose;
     $('signStatus').textContent =
-      'Payload created. Compare the six-digit code and inspect every field.';
+      'Payload created. Compare the code and inspect every field.';
     $('securityCode').textContent = 'Code: ' + code;
     $('signPanel').hidden = false;
 
@@ -1497,7 +1520,6 @@
       $('signQr').src = qr;
       $('signQr').hidden = false;
     }
-
     if (link) {
       $('openXamanLink').href = link;
       $('openXamanLink').hidden = false;
@@ -1510,32 +1532,21 @@
       if (details?.meta?.resolved) return details;
       await sleep(4000);
     }
-    throw new Error('The Xaman request did not resolve before the recovery timeout.');
-  }
-
-  async function createPayload(request) {
-    const timeout = new Promise((_, reject) => {
-      window.setTimeout(
-        () => reject(new Error(
-          'Xaman did not create the sign request within 25 seconds. ' +
-          'Confirm the production API key and redirect URI.'
-        )),
-        25000
-      );
-    });
-    return Promise.race([state.xumm.payload.create(request), timeout]);
+    throw new Error('The Xaman request did not resolve before timeout.');
   }
 
   async function signTransaction(baseTx, purpose) {
-    if (!state.xumm?.payload) throw new Error('Xaman payload service is unavailable.');
+    if (!state.xumm?.payload) {
+      throw new Error('Xaman payload service is unavailable.');
+    }
     if (!state.account) throw new Error('Connect Xaman first.');
 
     const code = securityCode();
     const returnUrl = location.origin + location.pathname;
     const txjson = {
-      Account: state.account,
+      Account:state.account,
       ...baseTx,
-      Memos: [
+      Memos:[
         ...(Array.isArray(baseTx.Memos) ? baseTx.Memos : []),
         memo('code', code),
         memo('domain', returnUrl)
@@ -1544,68 +1555,55 @@
 
     const request = {
       txjson,
-      options: {
-        submit: true,
-        force_network: 'MAINNET',
-        return_url: {
-          app: returnUrl,
-          web: returnUrl
-        }
+      options:{
+        submit:true,
+        force_network:'MAINNET',
+        return_url:{app:returnUrl, web:returnUrl}
       },
-      custom_meta: {
-        identifier: APP_TAG + ':' + Date.now(),
+      custom_meta:{
+        identifier:APP_TAG + ':' + Date.now(),
         instruction:
-          purpose + '. Match security code ' + code +
+          purpose + '. Match code ' + code +
           ' and verify XRPL Mainnet before signing.'
       }
     };
 
-    const created = await createPayload(request);
-    if (!created) throw new Error('Xaman returned no sign-request payload.');
-
-    showSignPanel(created, purpose, code);
+    let created = null;
     let resolution = null;
     let details = null;
 
-    if (typeof state.xumm.payload.subscribe === 'function') {
-      try {
-        const subscription = await state.xumm.payload.subscribe(
-          created,
-          event => {
-            const data = event?.data || {};
-            if (data.opened) {
-              $('signStatus').textContent = 'Request opened in Xaman.';
-            }
-            if (data.pre_signed) {
-              $('signStatus').textContent = 'Xaman is preparing the signature.';
-            }
-            if (data.dispatched) {
-              $('signStatus').textContent = 'Signed transaction is being submitted.';
-            }
-            if ('signed' in data) return data;
-          }
-        );
-
-        resolution = await Promise.race([
-          subscription.resolved,
-          new Promise((_, reject) => {
-            window.setTimeout(
-              () => reject(new Error('Xaman subscription timed out.')),
-              210000
-            );
-          })
-        ]);
-      } catch (subscriptionError) {
-        $('signStatus').textContent =
-          'Live Xaman status was interrupted. Using limited recovery checks.';
-        details = await pollPayload(created);
-      }
+    if (typeof state.xumm.payload.createAndSubscribe === 'function') {
+      const subscription = await state.xumm.payload.createAndSubscribe(
+        request,
+        event => {
+          const data = event?.data || {};
+          if (data.opened) $('signStatus').textContent = 'Request opened in Xaman.';
+          if (data.pre_signed) $('signStatus').textContent = 'Xaman is preparing the signature.';
+          if (data.dispatched) $('signStatus').textContent = 'Signed transaction is being submitted.';
+          if ('signed' in data) return data;
+        }
+      );
+      created = subscription.created;
+      showSignPanel(created, purpose, code);
+      resolution = await Promise.race([
+        subscription.resolved,
+        new Promise((_, reject) => {
+          window.setTimeout(
+            () => reject(new Error('Xaman signing request timed out.')),
+            210000
+          );
+        })
+      ]);
     } else {
+      created = await state.xumm.payload.create(request);
+      if (!created) throw new Error('Xaman returned no payload.');
+      showSignPanel(created, purpose, code);
       details = await pollPayload(created);
     }
 
     if (!details) {
-      details = await state.xumm.payload.get(created);
+      try { details = await state.xumm.payload.get(created); }
+      catch {}
     }
 
     const signed =
@@ -1625,26 +1623,22 @@
       '';
 
     if (!txid) {
-      throw new Error(
-        'Xaman reported a signature but did not return a transaction ID.'
-      );
+      throw new Error('Xaman signed the request but returned no transaction ID.');
     }
 
     $('signStatus').textContent =
-      'Signed and submitted to XRPL Mainnet: ' + shortAccount(txid, 10);
-    return {txid, code, created, resolution, details};
+      'Signed and submitted: ' + shortAccount(txid, 10);
+    return {txid, code};
   }
 
   async function waitForValidatedTransaction(txid) {
     let lastError = null;
-
     for (let attempt = 0; attempt < 35; attempt++) {
       try {
-        const response = await xrplRequest(
-          'tx',
-          {transaction: txid, binary: false},
-          XRPL_SERVERS.length
-        );
+        const response = await xrplRequest('tx', {
+          transaction:txid,
+          binary:false
+        });
         const result = response?.result || {};
         if (result.validated !== false) {
           const engineResult =
@@ -1661,167 +1655,78 @@
       }
       await sleep(1700);
     }
+    throw lastError || new Error('Transaction validation could not be confirmed.');
+  }
 
-    throw lastError || new Error(
-      'The transaction was submitted but validation could not be confirmed.'
+  function ledgerPrayerNumber(txResult) {
+    const ledgerIndex = Number(
+      txResult?.ledger_index ||
+      txResult?.ledgerIndex ||
+      0
     );
-  }
-
-  function parseMemos(memos=[]) {
-    const output = {};
-    for (const item of memos || []) {
-      const source = item?.Memo || {};
-      const type = hexToStr(source.MemoType || '').trim().toLowerCase();
-      const data = hexToStr(source.MemoData || '').trim();
-      if (type) output[type] = data;
-    }
-    return output;
-  }
-
-  function normalizeAccountTx(entry) {
-    const tx = entry?.tx_json || entry?.tx || entry?.transaction || {};
-    const meta = entry?.meta || entry?.metaData || {};
-    return {
-      tx,
-      meta,
-      hash: tx.hash || tx.Hash || entry?.hash || entry?.tx?.hash || '',
-      date: tx.date ?? entry?.date,
-      ledgerIndex:
-        Number(tx.ledger_index || entry?.ledger_index || entry?.ledgerIndex || 0),
-      txIndex:
-        Number(meta.TransactionIndex ?? meta.transaction_index ?? 0),
-      validated: entry?.validated !== false
-    };
-  }
-
-  async function fetchCollectorHistory() {
-    const all = [];
-    let marker = undefined;
-
-    for (let page = 0; page < MAX_HISTORY_PAGES; page++) {
-      const response = await xrplRequest('account_tx', {
-        account: COLLECTOR,
-        ledger_index_min: -1,
-        ledger_index_max: -1,
-        limit: 200,
-        forward: false,
-        marker
-      });
-
-      all.push(...(response?.result?.transactions || []));
-      marker = response?.result?.marker;
-      if (!marker) return {entries: all, complete: true};
-    }
-
-    return {entries: all, complete: false};
-  }
-
-  function reservationRows(entries) {
-    const rows = [];
-
-    for (const entry of entries) {
-      const normalized = normalizeAccountTx(entry);
-      const tx = normalized.tx;
-
-      if (
-        !normalized.validated ||
-        tx.TransactionType !== 'Payment' ||
-        tx.Destination !== COLLECTOR ||
-        String(tx.Amount) !== '1'
-      ) continue;
-
-      const memos = parseMemos(tx.Memos || []);
-      if (
-        memos.app !== APP_TAG ||
-        memos.kind !== 'reserve' ||
-        !/^[a-f0-9]{64}$/i.test(memos.hash || '') ||
-        !/^[a-f0-9]{24}$/i.test(memos.nonce || '')
-      ) continue;
-
-      rows.push({
-        hash: normalized.hash,
-        account: tx.Account || '',
-        contentHash: memos.hash,
-        nonce: memos.nonce,
-        created: memos.created || rippleDateToIso(normalized.date),
-        ledgerIndex: normalized.ledgerIndex,
-        txIndex: normalized.txIndex
-      });
-    }
-
-    return rows.sort((a, b) =>
-      a.ledgerIndex - b.ledgerIndex ||
-      a.txIndex - b.txIndex ||
-      a.hash.localeCompare(b.hash)
+    const meta = txResult?.meta || txResult?.metaData || {};
+    const txIndex = Number(
+      meta?.TransactionIndex ??
+      meta?.transaction_index ??
+      0
     );
-  }
 
-  async function determinePrayerNumber(reservationTx, nonce) {
-    for (let attempt = 0; attempt < 6; attempt++) {
-      const history = await fetchCollectorHistory();
-      const rows = reservationRows(history.entries);
-      const index = rows.findIndex(
-        row => row.hash === reservationTx || row.nonce === nonce
+    if (ledgerIndex > 0) {
+      return (
+        'Prayer 1/L' +
+        String(ledgerIndex).padStart(9, '0') +
+        '-T' +
+        String(txIndex).padStart(3, '0')
       );
-
-      if (index >= 0) {
-        if (!history.complete) {
-          throw new Error(
-            'The public server returned truncated collector history. ' +
-            'A complete full-history server is required before assigning a prayer number.'
-          );
-        }
-        return {
-          prayerIndex: index + 1,
-          prayerNumber: formatPrayerNumber(index + 1)
-        };
-      }
-      await sleep(2200);
     }
 
-    throw new Error(
-      'The number reservation validated, but it was not found in full ledger history yet.'
-    );
+    const hash =
+      txResult?.hash ||
+      txResult?.tx_json?.hash ||
+      txResult?.tx?.hash ||
+      '';
+    return 'Prayer 1/H' + String(hash).slice(0, 12).toUpperCase();
   }
 
-  function reservationMemos(post) {
-    return compactMemos([
-      memo('app', APP_TAG),
-      memo('kind', 'reserve'),
-      memo('hash', post.hash),
-      memo('nonce', post.nonce),
-      memo('type', post.type),
-      memo('created', post.created)
-    ]);
+  function locateMintedNftId(txResult) {
+    const meta = txResult?.meta || txResult?.metaData || {};
+    const direct =
+      meta?.nftoken_id ||
+      meta?.NFTokenID ||
+      txResult?.nftoken_id ||
+      '';
+    if (direct) return direct;
+    try {
+      return window.xrpl?.getNFTokenID?.(meta) || '';
+    } catch {
+      return '';
+    }
   }
 
-  function mintMemos(post, pending) {
+  function mintMemos(post) {
     return compactMemos([
       memo('app', APP_TAG),
       memo('kind', 'mint'),
-      memo('series', PRAYER_SERIES),
-      memo('number', pending.prayerNumber),
-      memo('index', pending.prayerIndex),
-      memo('reserve', pending.reservationTx),
       memo('type', post.type),
       memo('msg', post.message),
       memo('name', post.name),
       memo('handle', post.handle),
       memo('scripture', post.scripture),
       memo('created', post.created),
+      memo('nonce', post.nonce),
       memo('hash', post.hash),
       memo('image', JCS_LOGO)
     ]);
   }
 
-  function registryMemos(post, pending) {
+  function registryMemos(pending) {
+    const post = pending.post;
     return compactMemos([
       memo('app', APP_TAG),
       memo('kind', 'post'),
-      memo('series', PRAYER_SERIES),
       memo('number', pending.prayerNumber),
-      memo('index', pending.prayerIndex),
-      memo('reserve', pending.reservationTx),
+      memo('ledger', pending.mintLedgerIndex),
+      memo('txindex', pending.mintTransactionIndex),
       memo('type', post.type),
       memo('msg', post.message),
       memo('name', post.name),
@@ -1831,7 +1736,6 @@
       memo('visibility', post.visibility),
       memo('hash', post.hash),
       memo('nft', pending.nftId),
-      memo('nftserial', pending.nftSerial),
       memo('minttx', pending.mintTx),
       memo('image', JCS_LOGO)
     ]);
@@ -1865,245 +1769,148 @@
 
   function renderPending() {
     const box = $('pendingPublish');
-    const pending = state.pending;
-
-    if (!pending?.stage) {
+    if (!state.pending?.nftId) {
       box.hidden = true;
       return;
     }
-
     box.hidden = false;
-    let message = '';
-
-    if (pending.stage === 'reserved') {
-      message =
-        pending.prayerNumber +
-        ' is reserved on-ledger. Resume to mint the numbered JCS-logo NFT.';
-    } else if (pending.stage === 'minted') {
-      message =
-        pending.prayerNumber + ' was minted as NFT ' +
-        shortAccount(pending.nftId, 9) +
-        '. Resume to publish it into the rolling testimony feed.';
-    } else {
-      message = 'Resume the incomplete on-chain prayer process.';
-    }
-
-    $('pendingPublishText').textContent = message;
-    $('resumePublishBtn').textContent =
-      pending.stage === 'minted'
-        ? 'Publish the numbered NFT'
-        : 'Mint the reserved prayer NFT';
-    setFlow(pending.stage === 'reserved' ? 'mint' : 'register');
+    $('pendingPublishText').textContent =
+      state.pending.prayerNumber + ' is already minted as NFT ' +
+      shortAccount(state.pending.nftId, 9) +
+      '. Publish it without minting another NFT.';
+    $('resumePublishBtn').textContent = 'Publish ' + state.pending.prayerNumber;
+    setFlow('register');
   }
 
-  async function reservePrayerNumber(post) {
-    setFlow('reserve');
-    setComposerStatus(
-      'Approve the one-drop reservation. Its validated ledger position permanently assigns the prayer number.',
-      'warn'
-    );
-
-    const result = await signTransaction({
-      TransactionType: 'Payment',
-      Destination: COLLECTOR,
-      Amount: '1',
-      Memos: reservationMemos(post)
-    }, 'Reserve the next JCS prayer number');
-
-    await waitForValidatedTransaction(result.txid);
-    setComposerStatus(
-      'Reservation validated. Calculating its permanent order from full ledger history…',
-      'warn'
-    );
-
-    const numbering = await determinePrayerNumber(result.txid, post.nonce);
-    const pending = {
-      stage: 'reserved',
-      post,
-      reservationTx: result.txid,
-      prayerIndex: numbering.prayerIndex,
-      prayerNumber: numbering.prayerNumber,
-      savedAt: Date.now()
-    };
-
-    savePending(pending);
-    setComposerStatus(
-      numbering.prayerNumber +
-      ' is permanently reserved. The next approval mints its JCS-logo NFT.',
-      'ok'
-    );
-    return pending;
-  }
-
-  async function locateMintedNft(txResult, pending) {
-    const meta = txResult?.meta || txResult?.metaData || {};
-
-    const direct =
-      meta?.nftoken_id ||
-      meta?.NFTokenID ||
-      txResult?.nftoken_id ||
-      '';
-
-    if (direct) return direct;
-
-    try {
-      const parsed = window.xrpl?.getNFTokenID?.(meta);
-      if (parsed) return parsed;
-    } catch {}
-
+  async function findNftByUri(uri) {
     for (let attempt = 0; attempt < 8; attempt++) {
       try {
         const response = await xrplRequest('account_nfts', {
-          account: state.account,
-          ledger_index: 'validated',
-          limit: 400
+          account:state.account,
+          ledger_index:'validated',
+          limit:400
         });
-
-        const match = (response?.result?.account_nfts || []).find(item => {
-          const uri = hexToStr(item.URI || item.uri || '');
-          return (
-            Number(item.NFTokenTaxon ?? item.nft_taxon) === NFT_TAXON &&
-            uri === pending.post.uri
-          );
-        });
-
+        const match = (response?.result?.account_nfts || []).find(item =>
+          hexToStr(item.URI || item.uri || '') === uri
+        );
         const id = match?.NFTokenID || match?.nft_id || '';
         if (id) return id;
       } catch {}
-      await sleep(1800);
+      await sleep(1700);
     }
-
     return '';
   }
 
-  function nftSerialFromId(nftId) {
-    try {
-      const parsed = window.xrpl?.parseNFTokenID?.(nftId);
-      if (Number.isFinite(Number(parsed?.Sequence))) return Number(parsed.Sequence);
-    } catch {}
-
-    try {
-      return parseInt(String(nftId).slice(-8), 16);
-    } catch {
-      return 0;
-    }
-  }
-
-  async function mintReservedPrayer(pending) {
-    if (!pending?.post || !pending?.prayerNumber) {
-      throw new Error('No validated prayer-number reservation was found.');
-    }
-
+  async function mintPost(post) {
     setFlow('mint');
-    const uri = buildNftMetadataUri(pending.prayerNumber);
-    pending.post.uri = uri;
-    savePending(pending);
-
     setComposerStatus(
-      'Review the NFTokenMint request. Xaman should display ' +
-      pending.prayerNumber + ' and the JCS logo metadata.',
+      'Preparing the JCS-logo NFT. Review the NFTokenMint request in Xaman.',
       'warn'
     );
 
     const result = await signTransaction({
-      TransactionType: 'NFTokenMint',
-      NFTokenTaxon: NFT_TAXON,
-      Flags: 0,
-      URI: strToHex(uri),
-      Memos: mintMemos(pending.post, pending)
-    }, 'Mint ' + pending.prayerNumber + ' as a JCS NFT');
+      TransactionType:'NFTokenMint',
+      NFTokenTaxon:NFT_TAXON,
+      Flags:0,
+      URI:strToHex(post.uri),
+      Memos:mintMemos(post)
+    }, 'Mint a JCS prayer NFT');
 
     setComposerStatus(
-      'Mint submitted. Waiting for validated NFToken metadata…',
+      'Mint submitted. Waiting for its validated ledger position and NFTokenID…',
       'warn'
     );
 
     const validated = await waitForValidatedTransaction(result.txid);
-    const nftId = await locateMintedNft(validated, pending);
+    const meta = validated?.meta || validated?.metaData || {};
+    const prayerNumber = ledgerPrayerNumber(validated);
+    const nftId =
+      locateMintedNftId(validated) ||
+      await findNftByUri(post.uri);
 
     if (!nftId) {
       throw new Error(
-        'The mint validated, but the NFTokenID was not yet returned by public XRPL servers. ' +
+        'The mint validated, but the public XRPL server has not returned its NFTokenID yet. ' +
         'Mint transaction: ' + result.txid
       );
     }
 
-    pending.stage = 'minted';
-    pending.nftId = nftId;
-    pending.nftSerial = nftSerialFromId(nftId);
-    pending.mintTx = result.txid;
-    pending.savedAt = Date.now();
-    savePending(pending);
+    const pending = {
+      stage:'minted',
+      post,
+      prayerNumber,
+      nftId,
+      mintTx:result.txid,
+      mintLedgerIndex:Number(validated?.ledger_index || 0),
+      mintTransactionIndex:Number(
+        meta?.TransactionIndex ??
+        meta?.transaction_index ??
+        0
+      ),
+      savedAt:Date.now()
+    };
 
+    savePending(pending);
     setComposerStatus(
-      pending.prayerNumber + ' was minted successfully into ' +
-      shortAccount(state.account, 8) + '.',
+      prayerNumber + ' was minted into your wallet. ' +
+      'The next approval publishes it to the social feed.',
       'ok'
     );
-
     await loadMyNfts().catch(() => {});
     return pending;
   }
 
   async function publishRegistry(pending) {
-    if (!pending?.post || !pending?.nftId) {
-      throw new Error('No minted prayer NFT is waiting for publication.');
+    if (!pending?.nftId) {
+      throw new Error('No minted prayer NFT is awaiting publication.');
     }
 
     setFlow('register');
     setComposerStatus(
-      'Approve the final one-drop registry entry to place ' +
-      pending.prayerNumber + ' in the public rolling feed.',
+      'Approve the one-drop registry transaction to publish ' +
+      pending.prayerNumber + ' in the rolling feed.',
       'warn'
     );
 
     const result = await signTransaction({
-      TransactionType: 'Payment',
-      Destination: COLLECTOR,
-      Amount: '1',
-      Memos: registryMemos(pending.post, pending)
-    }, 'Publish ' + pending.prayerNumber + ' to the JCS testimony ledger');
+      TransactionType:'Payment',
+      Destination:COLLECTOR,
+      Amount:'1',
+      Memos:registryMemos(pending)
+    }, 'Publish ' + pending.prayerNumber);
 
     await waitForValidatedTransaction(result.txid);
     clearPending();
     setFlow('complete');
     setComposerStatus(
       pending.prayerNumber +
-      ' is minted in your wallet and published in the on-ledger testimony feed.',
+      ' is in your wallet and published in the on-ledger social feed.',
       'ok'
     );
-    toast(pending.prayerNumber + ' published on the XRP Ledger.', 'ok');
+    toast(pending.prayerNumber + ' published.', 'ok');
 
     $('message').value = '';
     $('scriptureRef').value = '';
     try { localStorage.removeItem(DRAFT_KEY); } catch {}
     updateComposer();
     await loadFeed(true);
-    return result;
   }
 
   async function runPublish(publishToFeed) {
     $('publishBtn').disabled = true;
     $('mintOnlyBtn').disabled = true;
-
     try {
       let pending = state.pending;
-
       if (!pending) {
         const post = await preparePost();
-        pending = await reservePrayerNumber(post);
+        pending = await mintPost(post);
       }
-
-      if (pending.stage === 'reserved') {
-        pending = await mintReservedPrayer(pending);
-      }
-
-      if (publishToFeed && pending.stage === 'minted') {
+      if (publishToFeed && pending?.nftId) {
         await publishRegistry(pending);
-      } else if (!publishToFeed && pending.stage === 'minted') {
+      } else if (pending?.nftId) {
         setComposerStatus(
           pending.prayerNumber +
-          ' is in your wallet. Use Resume to publish it into the public feed.',
+          ' is minted in your wallet. Use Publish the pending NFT to add it to the feed.',
           'ok'
         );
       }
@@ -2119,31 +1926,74 @@
   $('publishBtn').addEventListener('click', () => runPublish(true));
   $('mintOnlyBtn').addEventListener('click', () => runPublish(false));
   $('resumePublishBtn').addEventListener('click', async () => {
-    try {
-      if (state.pending?.stage === 'reserved') {
-        await mintReservedPrayer(state.pending);
-      } else if (state.pending?.stage === 'minted') {
-        await publishRegistry(state.pending);
-      }
-    } catch (error) {
+    try { await publishRegistry(state.pending); }
+    catch (error) {
       setComposerStatus(error?.message || String(error), 'err');
     }
   });
+
+  function parseMemos(memos=[]) {
+    const output = {};
+    for (const item of memos || []) {
+      const source = item?.Memo || {};
+      const type = hexToStr(source.MemoType || '').trim().toLowerCase();
+      const data = hexToStr(source.MemoData || '').trim();
+      if (type) output[type] = data;
+    }
+    return output;
+  }
+
+  function normalizeAccountTx(entry) {
+    const tx = entry?.tx_json || entry?.tx || entry?.transaction || {};
+    const meta = entry?.meta || entry?.metaData || {};
+    return {
+      tx,
+      meta,
+      hash:tx.hash || tx.Hash || entry?.hash || '',
+      date:tx.date ?? entry?.date,
+      ledgerIndex:Number(
+        tx.ledger_index ||
+        entry?.ledger_index ||
+        0
+      ),
+      txIndex:Number(
+        meta?.TransactionIndex ??
+        meta?.transaction_index ??
+        0
+      ),
+      validated:entry?.validated !== false
+    };
+  }
+
+  async function fetchRecentCollectorHistory() {
+    const entries = [];
+    let marker = undefined;
+    let complete = false;
+
+    for (let page = 0; page < RECENT_HISTORY_PAGES; page++) {
+      const response = await xrplRequest('account_tx', {
+        account:COLLECTOR,
+        ledger_index_min:-1,
+        ledger_index_max:-1,
+        limit:200,
+        forward:false,
+        marker
+      });
+      entries.push(...(response?.result?.transactions || []));
+      marker = response?.result?.marker;
+      if (!marker) {
+        complete = true;
+        break;
+      }
+    }
+
+    return {entries, complete};
+  }
 
   async function parseFeed(entries) {
     const posts = [];
     const replies = new Map();
     const amens = new Map();
-    const reservations = reservationRows(entries);
-    const reservationOrder = new Map(
-      reservations.map((row, index) => [
-        row.hash,
-        {
-          prayerIndex: index + 1,
-          prayerNumber: formatPrayerNumber(index + 1)
-        }
-      ])
-    );
 
     for (const entry of entries) {
       const normalized = normalizeAccountTx(entry);
@@ -2157,48 +2007,44 @@
 
       const memos = parseMemos(tx.Memos || []);
       const app = memos.app || '';
-      const iso =
+      const created =
         memos.created ||
         rippleDateToIso(normalized.date) ||
         new Date().toISOString();
 
       if (app === LEGACY_TAG) {
         posts.push({
-          key: normalized.hash,
-          hash: normalized.hash,
-          mintTx: '',
-          reservationTx: '',
-          nftId: '',
-          nftSerial: 0,
-          prayerNumber: 'Legacy testimony',
-          numberVerified: false,
-          contentHash: '',
-          hashVerified: false,
-          legacy: true,
-          type: 'legacy',
-          message: memos.msg || '',
-          name: memos.name || '',
-          handle: memos.handle || '',
-          scripture: '',
-          visibility: 'short',
-          account: tx.Account || '',
-          created: iso,
-          replies: [],
-          amens: 0
+          key:normalized.hash,
+          hash:normalized.hash,
+          nftId:'',
+          mintTx:'',
+          prayerNumber:'Earlier on-ledger testimony',
+          version:'v1',
+          type:'legacy',
+          message:memos.msg || '',
+          name:memos.name || '',
+          handle:memos.handle || '',
+          scripture:'',
+          visibility:'short',
+          account:tx.Account || '',
+          created,
+          replies:[],
+          amens:0,
+          contentVerified:false
         });
         continue;
       }
 
-      if (app !== APP_TAG && app !== PREVIOUS_TAG) continue;
+      if (app !== APP_TAG && !PRIOR_TAGS.has(app)) continue;
       const kind = memos.kind || 'post';
       const parent = memos.parent || memos.nft || normalized.hash;
 
       if (kind === 'amen') {
         if (!amens.has(parent)) amens.set(parent, []);
         amens.get(parent).push({
-          hash: normalized.hash,
-          account: tx.Account || '',
-          created: iso
+          hash:normalized.hash,
+          account:tx.Account || '',
+          created
         });
         continue;
       }
@@ -2206,70 +2052,48 @@
       if (kind === 'reply') {
         if (!replies.has(parent)) replies.set(parent, []);
         replies.get(parent).push({
-          hash: normalized.hash,
-          account: tx.Account || '',
-          message: memos.msg || '',
-          name: memos.name || '',
-          handle: memos.handle || '',
-          created: iso
+          hash:normalized.hash,
+          account:tx.Account || '',
+          message:memos.msg || '',
+          name:memos.name || '',
+          handle:memos.handle || '',
+          created
         });
         continue;
       }
 
       if (kind !== 'post') continue;
 
-      const reservation = reservationOrder.get(memos.reserve || '');
-      const ledgerNumber = reservation?.prayerNumber || '';
-      const claimedNumber = memos.number || '';
-      const prayerNumber =
-        ledgerNumber ||
-        claimedNumber ||
-        (app === PREVIOUS_TAG ? 'Earlier NFT testimony' : 'Unnumbered testimony');
-
       const post = {
-        key: memos.nft || normalized.hash,
-        hash: normalized.hash,
-        mintTx: memos.minttx || '',
-        reservationTx: memos.reserve || '',
-        nftId: memos.nft || '',
-        nftSerial: Number(memos.nftserial || 0),
-        prayerNumber,
-        numberVerified:
-          Boolean(ledgerNumber) &&
-          (!claimedNumber || ledgerNumber === claimedNumber),
-        contentHash: memos.hash || '',
-        hashVerified: false,
-        legacy: app !== APP_TAG,
-        type: memos.type || 'testimony',
-        message: memos.msg || '',
-        name: memos.name || '',
-        handle: memos.handle || '',
-        scripture: memos.scripture || '',
-        visibility: memos.visibility || 'short',
-        account: tx.Account || '',
-        created: iso,
-        replies: [],
-        amens: 0
+        key:memos.nft || normalized.hash,
+        hash:normalized.hash,
+        nftId:memos.nft || '',
+        mintTx:memos.minttx || '',
+        prayerNumber:
+          memos.number ||
+          (app === APP_TAG
+            ? 'Numbered prayer'
+            : 'Earlier NFT testimony'),
+        version:
+          app === APP_TAG ? 'v4' :
+          app === 'JCS_SOCIAL_V3' ? 'v3' : 'v2',
+        type:memos.type || 'testimony',
+        message:memos.msg || '',
+        name:memos.name || '',
+        handle:memos.handle || '',
+        scripture:memos.scripture || '',
+        visibility:memos.visibility || 'short',
+        account:tx.Account || '',
+        created,
+        replies:[],
+        amens:0,
+        contentHash:memos.hash || '',
+        contentVerified:false
       };
 
       if (post.contentHash && app === APP_TAG) {
-        const reservationRow = reservations.find(
-          row => row.hash === post.reservationTx
-        );
-        const reconstructed = {
-          type: post.type,
-          message: post.message,
-          name: post.name,
-          handle: post.handle,
-          scripture: post.scripture,
-          created: post.created,
-          nonce: reservationRow?.nonce || ''
-        };
-        post.hashVerified =
-          Boolean(reservationRow?.nonce) &&
-          (await sha256Hex(canonicalPost(reconstructed))) === post.contentHash;
+        post.contentVerified = true;
       }
-
       posts.push(post);
     }
 
@@ -2279,7 +2103,6 @@
       post.amens = (amens.get(post.key) || []).length;
     }
 
-    state.reservations = reservations;
     return posts;
   }
 
@@ -2332,7 +2155,7 @@
     return `
       <div class="reply">
         <div class="reply-meta">
-          ${escapeHtml(label)} · ${escapeHtml(timeAgo(reply.created))} · on-ledger reply
+          ${escapeHtml(label)} · ${escapeHtml(timeAgo(reply.created))} · validated on-ledger reply
         </div>
         <div class="reply-body">${escapeHtml(reply.message)}</div>
       </div>
@@ -2342,35 +2165,34 @@
   function renderPost(post, index) {
     const author = post.name || post.handle || 'Anonymous believer';
     const handle = post.name && post.handle ? post.handle : '';
+    const prior = post.version !== 'v4';
+
     const badges = [
       `<span class="prayer-number">${escapeHtml(post.prayerNumber)}</span>`,
       `<span class="badge">${escapeHtml(postTypeLabel(post.type))}</span>`,
       post.nftId
         ? '<span class="badge nft">NFT-backed</span>'
-        : '<span class="badge legacy">Legacy memo</span>',
-      post.numberVerified
-        ? '<span class="badge verified">Number verified</span>'
-        : '',
-      post.hashVerified
-        ? '<span class="badge verified">Content verified</span>'
+        : '<span class="badge onledger">On-ledger memo</span>',
+      prior
+        ? '<span class="badge previous">Earlier format</span>'
+        : '<span class="badge verified">Current format</span>',
+      post.contentVerified
+        ? '<span class="badge verified">Commitment present</span>'
         : ''
     ].filter(Boolean).join('');
 
     const ledgerParts = [
       'Registry tx: ' + (post.hash || '—'),
-      post.reservationTx ? 'Reservation tx: ' + post.reservationTx : '',
       post.nftId ? 'NFTokenID: ' + post.nftId : '',
       post.mintTx ? 'Mint tx: ' + post.mintTx : '',
-      post.nftSerial ? 'Wallet NFT serial: ' + post.nftSerial : '',
       'Wallet: ' + displayWallet(post)
     ].filter(Boolean).join('\n');
 
+    const postId = 'post-' + post.key.slice(0, 16);
+
     return `
-      <article
-        class="post-card"
-        id="post-${escapeHtml(post.key.slice(0, 16))}"
-        style="animation-delay:${Math.min(index * 35, 400)}ms"
-      >
+      <article class="post-card" id="${escapeHtml(postId)}"
+        style="animation-delay:${Math.min(index * 35, 400)}ms">
         <div class="post-top">
           <img class="post-logo" src="${JCS_LOGO}" alt="JCS prayer NFT logo">
           <div class="post-author">
@@ -2385,27 +2207,54 @@
             </div>
           </div>
         </div>
+
         <div class="post-body">${escapeHtml(post.message || 'On-chain testimony')}</div>
         <div class="post-ledger">${escapeHtml(ledgerParts)}</div>
+        <div class="post-source-note">
+          Source: validated XRP Ledger transaction history · format ${escapeHtml(post.version)}
+        </div>
+
         <div class="post-actions">
-          <button class="btn small amen-btn" type="button" data-parent="${escapeHtml(post.key)}">
+          <button class="btn small amen-btn" type="button"
+            data-parent="${escapeHtml(post.key)}">
             Amen on Ledger · ${post.amens}
           </button>
-          <button class="btn small reply-btn" type="button" data-parent="${escapeHtml(post.key)}">
+          <button class="btn small reply-toggle" type="button"
+            data-parent="${escapeHtml(post.key)}"
+            aria-expanded="false">
             Reply · ${post.replies.length}
           </button>
-          <a
-            class="btn small"
+          <a class="btn small"
             href="https://bithomp.com/explorer/${encodeURIComponent(post.hash)}"
-            target="_blank"
-            rel="noopener"
-          >View transaction</a>
-          <button class="btn small share-btn" type="button" data-post="${escapeHtml(post.key.slice(0, 16))}">
+            target="_blank" rel="noopener">
+            View transaction
+          </a>
+          <button class="btn small share-btn" type="button"
+            data-post="${escapeHtml(post.key.slice(0, 16))}">
             Share
           </button>
         </div>
+
+        <div class="inline-reply" data-reply-box="${escapeHtml(post.key)}">
+          <div class="inline-reply-head">
+            <strong>Reply to ${escapeHtml(author)}</strong>
+            <span>Publishes a one-drop XRPL transaction</span>
+          </div>
+          <textarea class="inline-reply-text" maxlength="220"
+            placeholder="Write an uplifting reply, prayer, or word of encouragement."></textarea>
+          <div class="inline-reply-actions">
+            <span class="inline-reply-counter">0 / 220</span>
+            <div class="inline-reply-buttons">
+              <button class="btn small reply-cancel" type="button"
+                data-parent="${escapeHtml(post.key)}">Cancel</button>
+              <button class="btn primary small reply-submit" type="button"
+                data-parent="${escapeHtml(post.key)}">Publish reply in Xaman</button>
+            </div>
+          </div>
+        </div>
+
         ${post.replies.length
-          ? `<div class="reply-list">${post.replies.slice(-5).map(renderReply).join('')}</div>`
+          ? `<div class="reply-list">${post.replies.slice(-8).map(renderReply).join('')}</div>`
           : ''}
       </article>
     `;
@@ -2413,23 +2262,20 @@
 
   function renderFeed() {
     const posts = filteredPosts();
-    const feed = $('feed');
-
     if (!posts.length) {
-      feed.innerHTML = `
+      $('feed').innerHTML = `
         <div class="empty-state">
           <div>
             <strong>No matching validated on-chain testimonies were found.</strong>
             <p>
-              Change the filters, refresh the ledger feed, or publish the first
-              numbered JCS prayer NFT.
+              Change the filters, refresh the ledger feed, or publish a JCS prayer NFT.
             </p>
           </div>
         </div>`;
       return;
     }
 
-    feed.innerHTML = posts.map(renderPost).join('');
+    $('feed').innerHTML = posts.map(renderPost).join('');
     if (state.rolling) $('feedViewport').scrollTop = 0;
   }
 
@@ -2448,25 +2294,27 @@
   async function loadFeed(force=false) {
     if (state.feedLoading && !force) return;
     state.feedLoading = true;
-    setFeedStatus('Reading validated JCS history directly from the XRP Ledger…');
+    setFeedStatus('Reading recent validated JCS history directly from the XRP Ledger…');
 
     try {
-      const history = await fetchCollectorHistory();
-      state.feedEntries = history.entries;
+      const history = await fetchRecentCollectorHistory();
       state.posts = await parseFeed(history.entries);
       updateStats();
       renderFeed();
 
       setFeedStatus(
         'Loaded ' + state.posts.length +
-        ' public testimony posts and ' + state.reservations.length +
-        ' numbered reservations from ' + (state.activeEndpoint || 'XRPL') +
-        (history.complete ? '. Live refresh is active.' : '. History reached the configured page limit.'),
-        history.complete ? 'ok' : 'warn'
+        ' public testimony posts from ' +
+        (state.activeEndpoint || 'XRPL') +
+        '. Live refresh is active.' +
+        (history.complete
+          ? ''
+          : ' The feed intentionally shows recent history without blocking publication on full-history availability.'),
+        'ok'
       );
     } catch (error) {
       setFeedStatus(
-        'Could not load the testimony network from configured XRPL servers: ' +
+        'Could not read the testimony feed from configured XRPL servers: ' +
         (error?.message || error),
         'err'
       );
@@ -2474,7 +2322,7 @@
         <div class="empty-state">
           <div>
             <strong>The public ledger feed is temporarily unavailable.</strong>
-            <p>Press Refresh to try the next configured XRPL server.</p>
+            <p>Press Refresh to try the next XRPL server.</p>
           </div>
         </div>`;
     } finally {
@@ -2485,12 +2333,7 @@
   async function subscribeToCollector() {
     if (state.subscribed) return;
     const client = await ensureClient();
-
-    await client.request({
-      command: 'subscribe',
-      accounts: [COLLECTOR]
-    });
-
+    await client.request({command:'subscribe', accounts:[COLLECTOR]});
     client.on('transaction', event => {
       const tx = event?.transaction || event?.tx_json || {};
       if (tx.Destination === COLLECTOR || tx.Account === COLLECTOR) {
@@ -2498,11 +2341,10 @@
         state.refreshTimer = window.setTimeout(() => loadFeed(true), 1800);
       }
     });
-
     state.subscribed = true;
   }
 
-  ['feedSearch', 'feedType', 'feedSort'].forEach(id => {
+  ['feedSearch','feedType','feedSort'].forEach(id => {
     $(id).addEventListener(
       id === 'feedSearch' ? 'input' : 'change',
       renderFeed
@@ -2522,7 +2364,6 @@
       if (!state.rolling || state.rollingHover || document.hidden) return;
       const viewport = $('feedViewport');
       if (viewport.scrollHeight <= viewport.clientHeight + 4) return;
-
       viewport.scrollTop += 1;
       if (
         viewport.scrollTop + viewport.clientHeight >=
@@ -2556,7 +2397,7 @@
 
   async function socialPayment(kind, parent, message='') {
     if (!state.account) {
-      throw new Error('Connect Xaman before signing an on-ledger interaction.');
+      throw new Error('Connect Xaman before publishing an on-ledger interaction.');
     }
 
     const profile = profileFromForm();
@@ -2576,16 +2417,30 @@
         : 'Publish on-ledger reply';
 
     const result = await signTransaction({
-      TransactionType: 'Payment',
-      Destination: COLLECTOR,
-      Amount: '1',
-      Memos: memos
+      TransactionType:'Payment',
+      Destination:COLLECTOR,
+      Amount:'1',
+      Memos:memos
     }, title);
 
     await waitForValidatedTransaction(result.txid);
     await loadFeed(true);
-    return result;
   }
+
+  $('feed').addEventListener('input', event => {
+    const textarea = event.target.closest('.inline-reply-text');
+    if (!textarea) return;
+    const box = textarea.closest('.inline-reply');
+    const counter = box.querySelector('.inline-reply-counter');
+    counter.textContent = textarea.value.length + ' / 220';
+    counter.className =
+      'inline-reply-counter ' +
+      (textarea.value.length > 210
+        ? 'bad'
+        : textarea.value.length > 185
+          ? 'warn'
+          : '');
+  });
 
   $('feed').addEventListener('click', async event => {
     const amenButton = event.target.closest('.amen-btn');
@@ -2602,11 +2457,71 @@
       return;
     }
 
-    const replyButton = event.target.closest('.reply-btn');
-    if (replyButton) {
-      $('replyParent').value = replyButton.dataset.parent;
-      $('replyMessage').value = '';
-      $('replyDialog').showModal();
+    const toggle = event.target.closest('.reply-toggle');
+    if (toggle) {
+      const card = toggle.closest('.post-card');
+      const box = card.querySelector(
+        '[data-reply-box="' + CSS.escape(toggle.dataset.parent) + '"]'
+      );
+      const opening = !box.classList.contains('is-open');
+
+      document.querySelectorAll('.inline-reply.is-open').forEach(openBox => {
+        if (openBox !== box) {
+          openBox.classList.remove('is-open');
+          openBox.closest('.post-card')?.classList.remove('reply-open');
+          openBox.closest('.post-card')
+            ?.querySelector('.reply-toggle')
+            ?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      box.classList.toggle('is-open', opening);
+      card.classList.toggle('reply-open', opening);
+      toggle.setAttribute('aria-expanded', String(opening));
+      state.rollingHover = opening;
+
+      if (opening) {
+        window.setTimeout(() => box.querySelector('textarea').focus(), 30);
+      }
+      return;
+    }
+
+    const cancel = event.target.closest('.reply-cancel');
+    if (cancel) {
+      const card = cancel.closest('.post-card');
+      const box = cancel.closest('.inline-reply');
+      box.classList.remove('is-open');
+      card.classList.remove('reply-open');
+      card.querySelector('.reply-toggle')?.setAttribute('aria-expanded', 'false');
+      state.rollingHover = false;
+      return;
+    }
+
+    const submit = event.target.closest('.reply-submit');
+    if (submit) {
+      const box = submit.closest('.inline-reply');
+      const textarea = box.querySelector('.inline-reply-text');
+      const message = textarea.value.trim();
+
+      if (!message) {
+        toast('Write a reply first.', 'err');
+        textarea.focus();
+        return;
+      }
+
+      submit.disabled = true;
+      try {
+        await socialPayment('reply', submit.dataset.parent, message);
+        textarea.value = '';
+        box.classList.remove('is-open');
+        box.closest('.post-card')?.classList.remove('reply-open');
+        state.rollingHover = false;
+        toast('Reply published on the XRP Ledger.', 'ok');
+      } catch (error) {
+        toast(error?.message || String(error), 'err');
+      } finally {
+        submit.disabled = false;
+      }
       return;
     }
 
@@ -2617,7 +2532,6 @@
         location.pathname +
         '#post-' +
         shareButton.dataset.post;
-
       try {
         await navigator.clipboard.writeText(url);
         toast('Testimony link copied.', 'ok');
@@ -2627,98 +2541,82 @@
     }
   });
 
-  $('cancelReplyBtn').addEventListener('click', () => {
-    $('replyDialog').close();
-  });
-
-  $('submitReplyBtn').addEventListener('click', async () => {
-    const parent = $('replyParent').value;
-    const message = $('replyMessage').value.trim();
-
-    if (!message) {
-      toast('Write a reply first.', 'err');
-      return;
-    }
-
-    $('submitReplyBtn').disabled = true;
+  function parseNftSerial(nftId) {
     try {
-      await socialPayment('reply', parent, message);
-      $('replyDialog').close();
-      toast('Reply published on the XRP Ledger.', 'ok');
-    } catch (error) {
-      toast(error?.message || String(error), 'err');
-    } finally {
-      $('submitReplyBtn').disabled = false;
-    }
-  });
-
-  function normalizedNft(item) {
-    const id = item.NFTokenID || item.nft_id || '';
-    const uri = hexToStr(item.URI || item.uri || '');
-    const metadata = parseDataMetadataUri(uri);
-    return {
-      id,
-      uri,
-      metadata,
-      taxon: Number(item.NFTokenTaxon ?? item.nft_taxon ?? 0),
-      serial: Number(item.nft_serial ?? nftSerialFromId(id) ?? 0)
-    };
+      const parsed = window.xrpl?.parseNFTokenID?.(nftId);
+      const value =
+        parsed?.Sequence ??
+        parsed?.sequence ??
+        parsed?.nftokenSequence;
+      if (Number.isFinite(Number(value))) return Number(value);
+    } catch {}
+    try { return parseInt(String(nftId).slice(-8), 16); }
+    catch { return 0; }
   }
 
   async function loadMyNfts() {
     if (!state.account) return;
 
     $('myNftList').innerHTML =
-      '<div class="nft-item">Reading validated NFT ownership from the XRP Ledger…</div>';
+      '<div class="nft-item">Reading validated NFT ownership from XRPL…</div>';
 
     try {
       const response = await xrplRequest('account_nfts', {
-        account: state.account,
-        ledger_index: 'validated',
-        limit: 400
+        account:state.account,
+        ledger_index:'validated',
+        limit:400
       });
 
+      const feedByNft = new Map(
+        state.posts
+          .filter(post => post.nftId)
+          .map(post => [post.nftId, post])
+      );
+
       const nfts = (response?.result?.account_nfts || [])
-        .map(normalizedNft)
+        .map(item => {
+          const id = item.NFTokenID || item.nft_id || '';
+          const uri = hexToStr(item.URI || item.uri || '');
+          return {
+            id,
+            uri,
+            taxon:Number(item.NFTokenTaxon ?? item.nft_taxon ?? 0),
+            serial:parseNftSerial(id),
+            post:feedByNft.get(id)
+          };
+        })
         .filter(item =>
           item.taxon === NFT_TAXON ||
-          item.metadata?.name?.startsWith('JCS Prayer ') ||
+          item.uri.startsWith(JCS_LOGO) ||
           item.uri.startsWith('jcs:testimony:v2:')
         );
 
       if (!nfts.length) {
         $('myNftList').innerHTML =
-          '<div class="nft-item">No numbered JCS prayer NFTs were found in this wallet.</div>';
+          '<div class="nft-item">No JCS prayer NFTs were found in this wallet.</div>';
         return;
       }
 
       $('myNftList').innerHTML = nfts
         .sort((a, b) => b.serial - a.serial)
         .slice(0, 60)
-        .map(item => {
-          const name =
-            item.metadata?.name ||
-            'Earlier JCS Testimony NFT';
-          const image =
-            item.metadata?.image ||
-            JCS_LOGO;
-
-          return `
-            <div class="nft-item-card">
-              <img src="${escapeHtml(image)}" alt="JCS prayer NFT logo">
-              <div>
-                <strong>${escapeHtml(name)}</strong>
-                <span>Wallet NFT serial: ${escapeHtml(item.serial)}</span>
-                <span>NFTokenID: ${escapeHtml(item.id)}</span>
-                <span>Metadata is read from the immutable NFT URI.</span>
-              </div>
+        .map(item => `
+          <div class="nft-item-card">
+            <img src="${JCS_LOGO}" alt="JCS prayer NFT logo">
+            <div>
+              <strong>${escapeHtml(item.post?.prayerNumber || 'JCS Prayer NFT')}</strong>
+              <span>Wallet NFT serial: ${escapeHtml(item.serial)}</span>
+              <span>NFTokenID: ${escapeHtml(item.id)}</span>
+              <span>${item.post
+                ? 'Published in the on-ledger testimony feed.'
+                : 'Minted in this wallet; no recent registry entry was matched.'}</span>
             </div>
-          `;
-        })
+          </div>
+        `)
         .join('');
     } catch (error) {
       $('myNftList').innerHTML =
-        '<div class="nft-item">Could not load NFTs from XRPL: ' +
+        '<div class="nft-item">Could not load NFTs: ' +
         escapeHtml(error?.message || error) +
         '</div>';
     }
@@ -2729,7 +2627,7 @@
   window.addEventListener('hashchange', () => {
     const target = document.getElementById(location.hash.slice(1));
     if (target) {
-      target.scrollIntoView({behavior: 'smooth', block: 'center'});
+      target.scrollIntoView({behavior:'smooth', block:'center'});
     }
   });
 
