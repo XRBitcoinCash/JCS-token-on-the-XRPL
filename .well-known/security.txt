@@ -1,5 +1,7 @@
 # Jesus Christ Saves Token (JCS) security contact
 # Please report suspected vulnerabilities privately and responsibly.
+# Do not include seed phrases, private keys, recovery words, wallet passcodes, or other secrets.
+# No paid bug-bounty program is currently offered.
 
 Contact: mailto:jesuschristsaves@gmail.com
 Contact: https://jesuschristsavestoken.com/security.html
