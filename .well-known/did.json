@@ -1,37 +1,19 @@
 {
   "@context": [
     "https://www.w3.org/ns/did/v1",
-    "https://w3id.org/security/suites/ed25519-2020/v1"
+    "https://identity.foundation/.well-known/did-configuration/v1"
   ],
-  "id": "did:web:xrbitcoincash.github.io",
-  "verificationMethod": [
-    {
-      "id": "did:web:xrbitcoincash.github.io#owner",
-      "type": "Ed25519VerificationKey2020",
-      "controller": "did:web:xrbitcoincash.github.io",
-     "publicKeyMultibase": "zYourActualEd25519PublicKey"
-
-    }
-  ],
-  "authentication": [
-    "did:web:xrbitcoincash.github.io#owner"
-  ],
-  "assertionMethod": [
-    "did:web:xrbitcoincash.github.io#owner"
+  "id": "did:web:jesuschristsavestoken.com",
+  "controller": "did:web:jesuschristsavestoken.com",
+  "alsoKnownAs": [
+    "https://jesuschristsavestoken.com/",
+    "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
   ],
   "service": [
     {
-      "id": "did:web:xrbitcoincash.github.io#project",
-      "type": "ProjectPage",
-      "serviceEndpoint": "https://xrbitcoincash.github.io/JCS-token-on-the-XRPL./"
-    },
-    {
-      "id": "did:web:xrbitcoincash.github.io#xrpl",
-      "type": "XRPLAccount",
-      "serviceEndpoint": {
-        "address": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
-        "network": "mainnet"
-      }
+      "id": "did:web:jesuschristsavestoken.com#linked-domain",
+      "type": "LinkedDomains",
+      "serviceEndpoint": "https://jesuschristsavestoken.com"
     }
   ]
 }
