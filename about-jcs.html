@@ -1,1944 +1,2760 @@
 <!DOCTYPE html>
-<html data-theme="dark" lang="en">
+<html lang="en-US" data-theme="dark">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="#07101c" name="theme-color"/>
-<meta content="Jesus Christ Saves Token Vision and Core Values" name="application-name"/>
-<meta content="2.0.1" name="jcs-vision-release"/>
-<title>JCS Vision &amp; Core Values · Jesus Christ Saves Token on XRPL</title>
-<meta content="The living vision and core values of Jesus Christ Saves Token: a Christ-centered, non-custodial XRP Ledger project using prayer NFTs, testimony, Scripture, transparent metrics, and public infrastructure to carry the Gospel across borders and generations." name="description"/>
-<meta content="Jesus Christ Saves Token,JCS,XRPL,XRP Ledger,Jesus Christ,Christian NFT,prayer NFT,on-chain testimony,faith technology,Sign the Ledger,JCS vision" name="keywords"/>
-<meta content="Jesus Christ Saves Token" name="author"/>
-<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
-<link href="https://jesuschristsavestoken.com/about-jcs.html" rel="canonical"/>
-<link href="/ai.json" rel="alternate" title="AI Manifest" type="application/json"/>
-<link href="https://jesuschristsavestoken.com/jcs-logo.png" rel="icon" type="image/png"/>
-<link href="https://jesuschristsavestoken.com/jcs-logo-180.png" rel="apple-touch-icon"/>
-<meta content="website" property="og:type"/>
-<meta content="Jesus Christ Saves Token" property="og:site_name"/>
-<meta content="JCS Vision &amp; Core Values" property="og:title"/>
-<meta content="A living Christ-centered mission statement for prayer NFTs, public testimony, transparent XRPL infrastructure, and safe access to Christian artifacts across borders." property="og:description"/>
-<meta content="https://jesuschristsavestoken.com/about-jcs.html" property="og:url"/>
-<meta content="https://jesuschristsavestoken.com/jcs-logo.png" property="og:image"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="@JesusCS_token" name="twitter:site"/>
-<meta content="JCS Vision &amp; Core Values" name="twitter:title"/>
-<meta content="https://jesuschristsavestoken.com/jcs-logo.png" name="twitter:image"/>
-<link crossorigin="" href="https://xaman.app" rel="preconnect"/>
-<link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
-<link crossorigin="" href="https://api.coingecko.com" rel="preconnect"/>
-<meta content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline'
-    https://xaman.app https://*.xaman.app
-    https://xumm.app https://*.xumm.app
-    https://unpkg.com;
-  style-src 'self' 'unsafe-inline';
-  img-src 'self' data: https:;
-  connect-src 'self'
-    https://api.coingecko.com
-    https://xaman.app https://*.xaman.app
-    https://xumm.app https://*.xumm.app
-    https://oauth2.xumm.app
-    wss://xrplcluster.com
-    wss://s1.ripple.com
-    wss://s2.ripple.com
-    wss://honeycluster.io;
-  frame-src
-    https://www.youtube.com
-    https://www.youtube-nocookie.com
-    https://xaman.app https://*.xaman.app
-    https://xumm.app https://*.xumm.app
-    https://oauth2.xumm.app;
-  base-uri 'self';
-  form-action 'self';
-" http-equiv="Content-Security-Policy"/>
-<style>
-:root{
-  --bg:#060b12;
-  --panel:#0b121c;
-  --panel-2:#0e1723;
-  --ink:#eef6ff;
-  --muted:#9db0c5;
-  --line:#233244;
-  --gold:#d7a928;
-  --gold-light:#ffe59a;
-  --blue:#38bdf8;
-  --green:#10b981;
-  --red:#fb7185;
-  --wrap:1120px;
-  --radius:18px;
-  --touch:44px;
-  color-scheme:dark;
-}
-html[data-theme="light"]{
-  --bg:#f4f7fb;
-  --panel:#ffffff;
-  --panel-2:#f1f5f9;
-  --ink:#0f172a;
-  --muted:#52637a;
-  --line:#cbd5e1;
-  --gold:#9a6d00;
-  --gold-light:#6b4b00;
-  --blue:#0369a1;
-  --green:#047857;
-  --red:#be123c;
-  color-scheme:light;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
-body{
-  min-width:0;
-  margin:0;
-  overflow-x:hidden;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 50% -12rem,rgba(215,169,40,.12),transparent 34rem),
-    radial-gradient(circle at 100% 12%,rgba(56,189,248,.08),transparent 30rem),
-    var(--bg);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size:16px;
-  line-height:1.62;
-}
-img{max-width:100%}
-button,input,select,textarea{font:inherit}
-a{color:#7dd3fc}
-p{overflow-wrap:anywhere}
-[hidden]{display:none!important}
-.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-.skip-link{
-  position:fixed;
-  left:12px;
-  top:12px;
-  z-index:9999;
-  transform:translateY(-180%);
-  padding:10px 14px;
-  border-radius:10px;
-  color:#020817;
-  background:#f8fafc;
-  font-weight:900;
-  text-decoration:none;
-}
-.skip-link:focus{transform:translateY(0)}
-.btn{
-  appearance:none;
-  min-height:var(--touch);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:10px 14px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:var(--ink);
-  background:linear-gradient(180deg,var(--panel),var(--panel-2));
-  font-size:.92rem;
-  font-weight:850;
-  line-height:1.2;
-  text-align:center;
-  text-decoration:none;
-  cursor:pointer;
-}
-.btn:hover:not(:disabled),.btn:focus-visible{
-  border-color:#60a5fa;
-  outline:none;
-  text-decoration:none;
-}
-.btn:disabled{opacity:.48;cursor:not-allowed}
-.btn.small{min-height:38px;padding:8px 11px;font-size:.78rem}
-.btn.blue{
-  border-color:#2563eb;
-  color:#fff;
-  background:linear-gradient(180deg,#3b82f6,#1d4ed8);
-}
-.btn.gold{
-  border-color:#c99820;
-  color:#111;
-  background:linear-gradient(180deg,#ffe69a,#d5a82b);
-  box-shadow:0 9px 26px rgba(201,152,32,.18);
-}
-.btn.danger{border-color:rgba(251,113,133,.48);color:var(--red)}
-.status{color:var(--muted)}
-.status.ok{color:var(--green)}
-.status.err{color:var(--red)}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050916">
+  <meta name="color-scheme" content="dark light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
-/* Unified compact JCS header */
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  width:100%;
-  border-bottom:1px solid rgba(201,152,32,.26);
-  background:rgba(2,8,23,.96);
-  backdrop-filter:blur(16px);
-}
-html[data-theme="light"] .site-header{background:rgba(255,255,255,.95)}
-.jcs-unified-header .header-inner{
-  width:min(1260px,100%);
-  min-height:52px;
-  margin:0 auto;
-  padding:5px 10px;
-  display:grid;
-  grid-template-columns:minmax(140px,190px) minmax(0,1fr) auto;
-  gap:6px 9px;
-  align-items:center;
-}
-.jcs-unified-header .brand{
-  min-width:0;
-  max-width:190px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  overflow:hidden;
-  color:inherit;
-  text-decoration:none;
-}
-.jcs-unified-header .brand img{
-  width:30px;
-  height:30px;
-  flex:0 0 30px;
-  object-fit:contain;
-  border:1px solid rgba(201,152,32,.42);
-  border-radius:8px;
-  background:#fff;
-}
-.brand-copy{min-width:0;overflow:hidden}
-.brand-title{
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font:900 .78rem/1.05 Georgia,"Times New Roman",serif;
-}
-.brand-subtitle{
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  margin-top:2px;
-  color:var(--muted);
-  font-size:.52rem;
-  font-weight:800;
-  line-height:1.1;
-}
-.header-nav{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:3px;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-.header-nav::-webkit-scrollbar{display:none}
-.nav-link{
-  min-height:34px;
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:7px 9px;
-  border:1px solid transparent;
-  border-radius:10px;
-  color:var(--ink);
-  background:transparent;
-  font-size:.70rem;
-  font-weight:850;
-  line-height:1;
-  white-space:nowrap;
-  text-decoration:none;
-}
-.nav-link:hover,.nav-link:focus-visible{
-  border-color:var(--line);
-  color:var(--blue);
-  background:var(--panel-2);
-  outline:none;
-  text-decoration:none;
-}
-.nav-link[aria-current="page"]{
-  border-color:rgba(201,152,32,.6);
-  color:var(--gold-light);
-  background:rgba(201,152,32,.10);
-}
-.sign-ledger-gold{
-  border-color:#c99820!important;
-  color:#111!important;
-  background:linear-gradient(180deg,#ffe69a,#d5a82b)!important;
-}
-.header-actions{
-  display:flex;
-  align-items:center;
-  justify-self:end;
-  gap:5px;
-}
-.header-actions .btn{
-  min-height:34px;
-  padding:7px 9px;
-  font-size:.70rem;
-}
-.theme-toggle{min-width:36px}
-.wallet-pill{
-  max-width:125px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  color:var(--muted);
-  font-size:.64rem;
-}
-@media(max-width:1050px){
-  .jcs-unified-header .header-inner{
-    grid-template-columns:minmax(130px,180px) minmax(0,1fr);
-  }
-  .header-actions{justify-self:end}
-  .header-nav{grid-column:1/-1;width:100%;order:3}
-}
-@media(max-width:700px){
-  .site-header{position:static}
-  .jcs-unified-header .header-inner{
-    grid-template-columns:minmax(0,1fr) auto;
-  }
-  .jcs-unified-header .brand{max-width:145px}
-  .brand-title{font-size:.70rem}
-  .brand-subtitle{display:none}
-  .header-actions{flex-wrap:nowrap}
-  .wallet-pill{display:none}
-  .header-nav{grid-column:1/-1;width:100%;padding-bottom:2px}
-}
+  <title>JCS Vision, Core Values & Fellowship Roadmap | Jesus Christ Saves Token</title>
+  <meta
+    name="description"
+    content="The living vision, safety principles, current application, public XRPL transparency, and Christian social-platform roadmap of Jesus Christ Saves Token (JCS)."
+  >
+  <meta
+    name="keywords"
+    content="Jesus Christ Saves Token,JCS,XRPL,XRP Ledger,Christian social network,prayer NFT,testimony,Scripture,Faith Circles,Prayer Garden,Xaman"
+  >
+  <meta name="author" content="Jesus Christ Saves Token">
+  <meta name="application-name" content="JCS Vision and Fellowship Roadmap">
+  <meta name="jcs-vision-release" content="3.0.0">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
-/* Page system */
-.container{
-  width:min(var(--wrap),100%);
-  margin:0 auto;
-  padding:22px max(14px,env(safe-area-inset-right)) 54px max(14px,env(safe-area-inset-left));
-}
-.card{
-  margin-top:18px;
-  padding:clamp(18px,3vw,28px);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:
-    radial-gradient(circle at 100% 0,rgba(56,189,248,.05),transparent 24rem),
-    linear-gradient(180deg,var(--panel),var(--panel-2));
-  box-shadow:0 18px 44px rgba(0,0,0,.22);
-}
-.hero{
-  position:relative;
-  overflow:hidden;
-  min-height:430px;
-  display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
-  gap:28px;
-  align-items:center;
-  padding:clamp(28px,6vw,66px);
-  border-color:rgba(201,152,32,.38);
-  background:
-    radial-gradient(circle at 92% 10%,rgba(215,169,40,.17),transparent 25rem),
-    radial-gradient(circle at 0 100%,rgba(56,189,248,.09),transparent 28rem),
-    var(--panel);
-}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  width:fit-content;
-  padding:6px 10px;
-  border:1px solid rgba(201,152,32,.45);
-  border-radius:999px;
-  color:var(--gold-light);
-  background:rgba(201,152,32,.08);
-  font-size:.72rem;
-  font-weight:950;
-  letter-spacing:.07em;
-  text-transform:uppercase;
-}
-.hero h1{
-  max-width:780px;
-  margin:17px 0 13px;
-  font:900 clamp(2.45rem,6vw,5rem)/.98 Georgia,"Times New Roman",serif;
-  letter-spacing:-.045em;
-}
-.hero h1 span{color:var(--gold-light)}
-.hero-lead{
-  max-width:800px;
-  margin:0;
-  color:var(--muted);
-  font-size:clamp(1rem,1.7vw,1.16rem);
-  line-height:1.72;
-}
-.hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
-.identity-panel{
-  padding:20px;
-  border:1px solid rgba(201,152,32,.34);
-  border-radius:18px;
-  background:linear-gradient(145deg,rgba(201,152,32,.09),transparent),var(--panel-2);
-}
-.identity-panel img{
-  width:88px;
-  height:88px;
-  display:block;
-  margin:0 auto 15px;
-  object-fit:contain;
-  border:1px solid rgba(201,152,32,.42);
-  border-radius:22px;
-  background:#fff;
-}
-.identity-row{
-  margin-top:8px;
-  padding:10px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:var(--panel);
-}
-.identity-row span{
-  display:block;
-  color:var(--muted);
-  font-size:.66rem;
-  font-weight:900;
-  text-transform:uppercase;
-}
-.identity-row strong{
-  display:block;
-  margin-top:3px;
-  overflow-wrap:anywhere;
-  font-size:.77rem;
-}
-.section-heading{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:14px;
-}
-.section-heading h2{margin:0;font-size:clamp(1.45rem,3vw,2rem)}
-.section-heading p{max-width:780px;margin:5px 0 0;color:var(--muted)}
-.section-badge{
-  display:inline-flex;
-  align-items:center;
-  min-height:32px;
-  padding:5px 9px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  color:var(--muted);
-  background:var(--panel-2);
-  font-size:.7rem;
-  font-weight:850;
-  white-space:nowrap;
-}
-.prose{
-  max-width:900px;
-  margin-inline:auto;
-}
-.prose p{color:var(--muted)}
-.prose strong{color:var(--ink)}
-.statement{
-  padding:16px 18px;
-  border-left:4px solid var(--gold);
-  border-radius:12px;
-  color:var(--muted);
-  background:rgba(201,152,32,.07);
-}
-.statement strong{color:var(--ink)}
-.value-grid,.mission-grid,.path-grid,.trade-grid,.ecosystem-grid{
-  display:grid;
-  gap:12px;
-}
-.value-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.mission-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.path-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.trade-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.ecosystem-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.value-card,.mission-card,.path-card,.trade-card,.ecosystem-link{
-  min-width:0;
-  padding:16px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel-2);
-}
-.value-card h3,.mission-card h3,.path-card h3,.trade-card h3{margin:0 0 7px}
-.value-card p,.mission-card p,.path-card p,.trade-card p{margin:0;color:var(--muted);font-size:.87rem}
-.path-number{
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  margin-bottom:10px;
-  border:1px solid rgba(201,152,32,.48);
-  border-radius:50%;
-  color:#111;
-  background:linear-gradient(180deg,#ffe69a,#d5a82b);
-  font-weight:950;
-}
-.safety-card{
-  border-color:rgba(251,113,133,.36);
-  background:
-    radial-gradient(circle at 100% 0,rgba(251,113,133,.08),transparent 24rem),
-    var(--panel);
-}
-.safety-list{
-  display:grid;
-  gap:9px;
-  margin:14px 0 0;
-  padding:0;
-  list-style:none;
-}
-.safety-list li{
-  padding:11px 12px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  color:var(--muted);
-  background:var(--panel-2);
-}
-.safety-list strong{color:var(--ink)}
-.video-card{padding:clamp(16px,3vw,24px)}
-.video-shell{
-  position:relative;
-  width:min(940px,100%);
-  margin:0 auto;
-  overflow:hidden;
-  border:1px solid rgba(201,152,32,.42);
-  border-radius:17px;
-  background:#000;
-  box-shadow:0 22px 58px rgba(0,0,0,.34);
-}
-.video-shell iframe{
-  width:100%;
-  aspect-ratio:16/9;
-  display:block;
-  border:0;
-  background:#000;
-}
-.video-note{
-  width:min(940px,100%);
-  margin:10px auto 0;
-  color:var(--muted);
-  font-size:.8rem;
-  text-align:center;
-}
+  <link rel="canonical" href="https://jesuschristsavestoken.com/about-jcs.html">
+  <link rel="alternate" hreflang="en-US" href="https://jesuschristsavestoken.com/about-jcs.html">
+  <link rel="alternate" hreflang="x-default" href="https://jesuschristsavestoken.com/about-jcs.html">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./jcs-logo.png">
+  <link rel="apple-touch-icon" href="./jcs-logo.png">
+  <link rel="license" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE">
+  <link rel="alternate" type="application/json" href="./ai.json" title="JCS AI manifest">
+  <link rel="alternate" type="application/json" href="./.well-known/did.json" title="JCS Web DID document">
+  <link rel="alternate" type="text/plain" href="./.well-known/xrp-ledger.toml" title="JCS XRP Ledger metadata">
+  <link rel="security" href="./.well-known/security.txt">
+  <link rel="sitemap" type="application/xml" href="./sitemap.xml">
 
-/* Live metrics */
-.metrics-card{border-color:rgba(56,189,248,.32)}
-.metric-toolbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:12px;
-}
-.metric-status{
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
-  color:var(--muted);
-  font-size:.78rem;
-}
-.live-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#f59e0b;
-  box-shadow:0 0 12px rgba(245,158,11,.6);
-}
-.live-dot.ok{
-  background:var(--green);
-  box-shadow:0 0 12px rgba(16,185,129,.7);
-}
-.metric-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:10px;
-}
-.metric{
-  min-width:0;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--panel-2);
-}
-.metric span{
-  display:block;
-  margin-bottom:5px;
-  color:var(--muted);
-  font-size:.68rem;
-  font-weight:850;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-}
-.metric strong{
-  display:block;
-  overflow-wrap:anywhere;
-  font-size:1rem;
-}
-.metric small{
-  display:block;
-  margin-top:4px;
-  color:var(--muted);
-  font-size:.68rem;
-}
-.market-panels{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  margin-top:12px;
-}
-.market-panel{
-  min-width:0;
-  padding:14px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:var(--panel-2);
-}
-.market-panel h3{margin:0 0 9px;font-size:1rem}
-.table-wrap{
-  width:100%;
-  overflow-x:auto;
-  border:1px solid var(--line);
-  border-radius:10px;
-}
-table{width:100%;border-collapse:collapse}
-th,td{
-  padding:8px 9px;
-  border-bottom:1px solid var(--line);
-  font-size:.74rem;
-  text-align:right;
-}
-th:first-child,td:first-child{text-align:left}
-th{color:var(--muted);background:rgba(148,163,184,.05)}
-.metric-disclosure{
-  margin:12px 0 0;
-  color:var(--muted);
-  font-size:.75rem;
-}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jesus Christ Saves Token">
+  <meta property="og:title" content="JCS Vision, Core Values & Fellowship Roadmap">
+  <meta
+    property="og:description"
+    content="A Christ-centered, non-custodial XRPL project building prayer, testimony, Scripture, service, and privacy-conscious community tools."
+  >
+  <meta property="og:url" content="https://jesuschristsavestoken.com/about-jcs.html">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta property="og:image:alt" content="Jesus Christ Saves Token project emblem">
+  <meta property="og:locale" content="en_US">
 
-/* Roadmap */
-.roadmap{display:grid;gap:10px}
-.roadmap-item{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr);
-  gap:11px;
-  align-items:start;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--panel-2);
-}
-.roadmap-state{
-  min-width:78px;
-  display:inline-flex;
-  justify-content:center;
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:.66rem;
-  font-weight:900;
-  text-transform:uppercase;
-}
-.roadmap-state.live{color:#052e22;background:#6ee7b7}
-.roadmap-state.active{color:#422006;background:#fde68a}
-.roadmap-state.next{color:#172554;background:#bfdbfe}
-.roadmap-item h3{margin:0 0 4px;font-size:.95rem}
-.roadmap-item p{margin:0;color:var(--muted);font-size:.82rem}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@JesusCS_token">
+  <meta name="twitter:title" content="JCS Vision, Core Values & Fellowship Roadmap">
+  <meta
+    name="twitter:description"
+    content="The current JCS application, faith and safety principles, public XRPL transparency, and long-term JCS Fellowship roadmap."
+  >
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta name="twitter:image:alt" content="Jesus Christ Saves Token project emblem">
 
-/* Links and footer */
-.trade-card .btn{width:100%;margin-top:12px}
-.ecosystem-link{
-  min-height:90px;
-  display:grid;
-  align-content:center;
-  gap:3px;
-  color:var(--ink);
-  text-decoration:none;
-}
-.ecosystem-link:hover,.ecosystem-link:focus-visible{
-  border-color:var(--blue);
-  outline:none;
-  text-decoration:none;
-}
-.ecosystem-link strong{font-size:.9rem}
-.ecosystem-link span{color:var(--muted);font-size:.72rem}
-.site-footer{
-  margin-top:34px;
-  padding:30px 18px;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  background:rgba(2,8,23,.72);
-}
-html[data-theme="light"] .site-footer{background:#fff}
-.footer-inner{width:min(var(--wrap),100%);margin:0 auto}
-.footer-inner h2{margin:0;color:var(--ink)}
-.footer-link-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:14px 0;
-}
-.legal-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px 14px;
-  padding-top:14px;
-  border-top:1px solid var(--line);
-  font-size:.78rem;
-}
-.legal-row a{color:var(--muted)}
-.legal-row a:hover{color:var(--blue)}
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://xumm.app;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: blob: https://xumm.app https://xaman.app;
+    connect-src 'self'
+      https://xumm.app https://*.xumm.app
+      https://xaman.app https://*.xaman.app
+      https://oauth2.xumm.app
+      https://api.coingecko.com
+      wss://xumm.app wss://*.xumm.app
+      wss://xaman.app wss://*.xaman.app
+      wss://xrplcluster.com
+      wss://s1.ripple.com
+      wss://s2.ripple.com;
+    frame-src
+      https://www.youtube-nocookie.com
+      https://xumm.app https://*.xumm.app
+      https://xaman.app https://*.xaman.app
+      https://oauth2.xumm.app;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    upgrade-insecure-requests;
+  ">
 
-@media(max-width:920px){
-  .hero{grid-template-columns:1fr}
-  .identity-panel{max-width:640px}
-  .value-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .path-grid,.trade-grid,.ecosystem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:680px){
-  .container{padding-top:14px}
-  .card{padding:16px;border-radius:15px}
-  .hero{min-height:auto;padding:28px 20px}
-  .hero h1{font-size:clamp(2.35rem,14vw,4rem)}
-  .section-heading{display:block}
-  .section-badge{margin-top:9px}
-  .value-grid,.mission-grid,.path-grid,.trade-grid,.ecosystem-grid,.metric-grid,.market-panels{
-    grid-template-columns:1fr;
-  }
-  .roadmap-item{grid-template-columns:1fr}
-  .roadmap-state{width:fit-content}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    scroll-behavior:auto!important;
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-  }
-}
-</style>
-<script>
-(function(){
-  try{
-    const saved=localStorage.getItem('jcs-color-mode');
-    document.documentElement.dataset.theme=
-      saved==='light'||saved==='dark' ? saved : 'dark';
-  }catch{
-    document.documentElement.dataset.theme='dark';
-  }
-})();
-</script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebPage",
-  "name":"JCS Vision and Core Values",
-  "url":"https://jesuschristsavestoken.com/about-jcs.html",
-  "description":"The living Christ-centered vision and core values of Jesus Christ Saves Token on the XRP Ledger.",
-  "isPartOf":{
-    "@type":"WebSite",
-    "name":"Jesus Christ Saves Token",
-    "url":"https://jesuschristsavestoken.com/"
-  },
-  "publisher":{
-    "@type":"Organization",
-    "name":"Jesus Christ Saves Token",
-    "url":"https://jesuschristsavestoken.com/",
-    "logo":"https://jesuschristsavestoken.com/jcs-logo.png"
-  }
-}
-</script>
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('jcs-color-mode');
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark' ? saved : 'dark';
+      } catch {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    }());
+  </script>
 
-<style id="jcs-xrbc-uniform-header-v201">
-/* =========================================================
-   JCS ecosystem header — XRBitcoinCash compact layout
-   Shared with the JCS index page
-   ========================================================= */
-.jcs-ecosystem-header{
-  position:sticky !important;
-  top:0 !important;
-  z-index:1000;
-  width:100%;
-  border-bottom:1px solid rgba(56,189,248,.28) !important;
-  background:rgba(3,10,23,.95) !important;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-html[data-theme="light"] .jcs-ecosystem-header,
-body.light-mode .jcs-ecosystem-header{
-  background:rgba(255,255,255,.95) !important;
-  border-bottom-color:rgba(20,88,213,.20) !important;
-}
-.jcs-ecosystem-header .compact-header-wrap{
-  width:min(1260px,100%);
-  min-height:58px !important;
-  margin:0 auto;
-  padding:6px 18px !important;
-  display:grid !important;
-  grid-template-columns:auto minmax(0,1fr) !important;
-  align-items:center !important;
-  gap:10px 18px !important;
-  box-sizing:border-box;
-}
-.jcs-ecosystem-header .brand-stack{
-  display:grid;
-  gap:3px;
-  min-width:max-content;
-}
-.jcs-ecosystem-header .header-utility-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-.jcs-ecosystem-header .compact-theme-toggle{
-  min-height:24px !important;
-  padding:3px 7px !important;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  border:1px solid var(--line);
-  border-radius:7px !important;
-  color:var(--muted);
-  background:var(--panel);
-  font-size:.66rem !important;
-  font-weight:850;
-  line-height:1;
-  box-shadow:none !important;
-  cursor:pointer;
-}
-.jcs-ecosystem-header .compact-theme-toggle:hover,
-.jcs-ecosystem-header .compact-theme-toggle:focus-visible{
-  color:var(--blue,#55a4ff);
-  border-color:rgba(56,189,248,.55);
-  outline:none;
-}
-.jcs-ecosystem-header .theme-toggle-icon{font-size:.8rem}
-.jcs-ecosystem-header .header-utility-actions{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:7px;
-}
-.jcs-ecosystem-header .header-policy-links{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-.jcs-ecosystem-header .header-policy-links a{
-  font-size:.64rem;
-  font-weight:850;
-  line-height:1;
-  text-decoration:none;
-  white-space:nowrap;
-}
-.jcs-ecosystem-header .header-policy-links a:hover,
-.jcs-ecosystem-header .header-policy-links a:focus-visible{
-  filter:brightness(1.18);
-  text-decoration:underline;
-  text-underline-offset:3px;
-  outline:none;
-}
-.jcs-ecosystem-header .project-xrbc{color:#72a8ff}
-.jcs-ecosystem-header .project-xrbitcoin{color:#38bdf8}
-.jcs-ecosystem-header .header-wallet-actions{
-  min-width:0;
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-.jcs-ecosystem-header .header-wallet-btn{
-  min-height:24px;
-  padding:3px 7px;
-  border:1px solid var(--line);
-  border-radius:7px;
-  color:var(--ink);
-  background:var(--panel);
-  font:800 .62rem/1 system-ui,-apple-system,"Segoe UI",sans-serif;
-  white-space:nowrap;
-  cursor:pointer;
-}
-.jcs-ecosystem-header .header-wallet-btn.connect{
-  border-color:#1458d5;
-  color:#fff;
-  background:linear-gradient(180deg,#2f80ed,#1458d5);
-}
-.jcs-ecosystem-header .header-wallet-btn.disconnect{
-  border-color:rgba(197,52,77,.45);
-  color:var(--red,#ff7184);
-}
-.jcs-ecosystem-header .header-wallet-btn:disabled{
-  opacity:.58;
-  cursor:not-allowed;
-}
-.jcs-ecosystem-header .compact-wallet-pill{
-  max-width:112px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  color:var(--muted);
-  font-size:.60rem;
-  font-weight:750;
-  white-space:nowrap;
-}
-.jcs-ecosystem-header .brand-link{
-  display:flex;
-  align-items:center;
-  gap:8px !important;
-  color:inherit;
-  text-decoration:none;
-}
-.jcs-ecosystem-header .brand-link img{
-  width:36px !important;
-  height:36px !important;
-  flex:0 0 36px;
-  object-fit:contain;
-  border:1px solid rgba(201,152,32,.42);
-  border-radius:10px !important;
-  background:#fff;
-  box-shadow:0 8px 24px rgba(201,152,32,.14);
-}
-.jcs-ecosystem-header .brand-link > .brand-copy{
-  display:grid !important;
-  min-width:0;
-  align-items:initial;
-}
-.jcs-ecosystem-header .brand-title{
-  font:900 .98rem/1.08 Georgia,"Times New Roman",serif !important;
-  white-space:nowrap;
-}
-.jcs-ecosystem-header .brand-subtitle{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:.62rem;
-  font-weight:800;
-  white-space:nowrap;
-}
-.jcs-ecosystem-header .compact-header-nav{
-  min-width:0;
-  display:flex !important;
-  flex-wrap:nowrap !important;
-  align-items:center !important;
-  justify-content:flex-end !important;
-  gap:2px !important;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-.jcs-ecosystem-header .compact-header-nav::-webkit-scrollbar{display:none}
-.jcs-ecosystem-header .compact-header-nav .nav-btn{
-  min-height:30px !important;
-  flex:0 0 auto;
-  padding:5px 7px !important;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid transparent;
-  border-radius:8px !important;
-  color:var(--muted);
-  background:transparent;
-  font-size:.69rem !important;
-  font-weight:850;
-  line-height:1 !important;
-  text-decoration:none;
-  white-space:nowrap;
-}
-.jcs-ecosystem-header .compact-header-nav .nav-btn:hover,
-.jcs-ecosystem-header .compact-header-nav .nav-btn:focus-visible,
-.jcs-ecosystem-header .compact-header-nav .nav-btn[aria-current="page"]{
-  border-color:var(--line);
-  color:var(--blue,#55a4ff);
-  background:var(--panel-2);
-  outline:none;
-}
-.jcs-ecosystem-header .compact-header-nav .sign-ledger-gold{
-  border-color:#c99820 !important;
-  color:#111 !important;
-  background:linear-gradient(180deg,#ffe69a,#d5a82b) !important;
-  box-shadow:0 7px 20px rgba(201,152,32,.17) !important;
-}
-@media(max-width:1040px){
-  .jcs-ecosystem-header .header-utility-actions{flex-wrap:wrap}
-  .jcs-ecosystem-header .compact-wallet-pill{display:none}
-}
-@media(max-width:820px){
-  .jcs-ecosystem-header{position:static !important}
-  .jcs-ecosystem-header .compact-header-wrap{
-    grid-template-columns:1fr !important;
-    gap:8px !important;
-    padding:10px 12px !important;
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://jesuschristsavestoken.com/about-jcs.html#webpage",
+        "url": "https://jesuschristsavestoken.com/about-jcs.html",
+        "name": "JCS Vision, Core Values and Fellowship Roadmap",
+        "description": "The living vision, current application, ethical product principles, public XRP Ledger transparency, and Christian social-platform roadmap of Jesus Christ Saves Token.",
+        "dateModified": "2026-08-27",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "isPartOf": {
+          "@id": "https://jesuschristsavestoken.com/#website"
+        },
+        "about": {
+          "@id": "https://jesuschristsavestoken.com/#project"
+        },
+        "mainEntity": {
+          "@id": "https://jesuschristsavestoken.com/#project"
+        },
+        "license": "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jesuschristsavestoken.com/#website",
+        "url": "https://jesuschristsavestoken.com/",
+        "name": "Jesus Christ Saves Token",
+        "publisher": {
+          "@id": "https://jesuschristsavestoken.com/#project"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://jesuschristsavestoken.com/#project",
+        "name": "Jesus Christ Saves Token",
+        "alternateName": "JCS",
+        "url": "https://jesuschristsavestoken.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jesuschristsavestoken.com/jcs-logo.png"
+        },
+        "sameAs": [
+          "https://x.com/JesusCS_token",
+          "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
+        ],
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "XRP Ledger network",
+            "value": "Mainnet"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "JCS issuer",
+            "value": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Currency code",
+            "value": "JCS"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Web DID",
+            "value": "did:web:jesuschristsavestoken.com"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Custody model",
+            "value": "Non-custodial; users authorize in Xaman"
+          }
+        ]
+      }
+    ]
   }
-  .jcs-ecosystem-header .brand-stack{width:100%;min-width:0}
-  .jcs-ecosystem-header .header-utility-row{
-    justify-content:flex-start;
-    flex-wrap:wrap;
-  }
-  .jcs-ecosystem-header .header-utility-actions{
-    margin-left:auto;
-    flex-wrap:wrap;
-  }
-  .jcs-ecosystem-header .brand-link{justify-content:center}
-  .jcs-ecosystem-header .compact-header-nav{
-    width:100%;
-    display:grid !important;
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:5px !important;
-    overflow:visible;
-  }
-  .jcs-ecosystem-header .compact-header-nav .nav-btn{
-    width:100%;
-    min-height:36px !important;
-    font-size:.72rem !important;
-  }
-  .jcs-ecosystem-header .compact-wallet-pill{display:inline-block;max-width:100%}
-}
-@media(max-width:560px){
-  .jcs-ecosystem-header .header-utility-row{
-    display:grid;
-    grid-template-columns:auto minmax(0,1fr);
-    align-items:start;
-    gap:6px 8px;
-  }
-  .jcs-ecosystem-header .header-utility-actions{
-    width:auto;
-    margin-left:0;
-    display:flex;
-    justify-content:flex-end;
-    flex-wrap:wrap;
-    gap:5px 8px;
-  }
-  .jcs-ecosystem-header .header-policy-links{
-    width:auto;
-    justify-content:flex-end;
-    gap:6px 10px;
-  }
-  .jcs-ecosystem-header .header-wallet-actions{
-    width:auto;
-    justify-content:flex-end;
-  }
-  .jcs-ecosystem-header .compact-wallet-pill{display:none}
-  .jcs-ecosystem-header .brand-title{font-size:.92rem !important}
-  .jcs-ecosystem-header .brand-subtitle{font-size:.59rem}
-}
-</style>
+  </script>
+
+  <style>
+    :root {
+      --vision-max: 1180px;
+      --vision-gold: var(--jcs-gold, #f6c453);
+      --vision-cyan: var(--jcs-cyan, #5bdcff);
+      --vision-green: var(--jcs-green, #34d399);
+      --vision-red: var(--jcs-red, #fb7185);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% -10rem, rgba(246, 196, 83, .13), transparent 34rem),
+        radial-gradient(circle at 100% 16%, rgba(91, 220, 255, .08), transparent 32rem),
+        var(--jcs-bg, #050916);
+    }
+
+    .vision-header .header-wrap {
+      grid-template-columns: minmax(190px, auto) minmax(0, 1fr) auto;
+    }
+
+    .vision-header-actions {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .theme-toggle,
+    .wallet-action {
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 10px;
+      color: var(--jcs-ink, #f7f9ff);
+      background: var(--jcs-surface-2, #0d1d37);
+      font: 800 .76rem/1.1 Inter, ui-sans-serif, system-ui, sans-serif;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible,
+    .wallet-action:hover,
+    .wallet-action:focus-visible {
+      border-color: rgba(91, 220, 255, .58);
+      outline: none;
+    }
+
+    .wallet-action.connect {
+      border-color: rgba(91, 220, 255, .58);
+      color: #06111d;
+      background: linear-gradient(135deg, var(--vision-cyan), #8eeaff);
+    }
+
+    .wallet-action.disconnect {
+      border-color: rgba(251, 113, 133, .5);
+      color: var(--vision-red);
+      background: rgba(251, 113, 133, .06);
+    }
+
+    .wallet-action:disabled {
+      opacity: .52;
+      cursor: not-allowed;
+    }
+
+    .wallet-pill {
+      max-width: 150px;
+      overflow: hidden;
+      color: var(--jcs-muted, #aebdd3);
+      font: 750 .68rem/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .vision-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.32fr) minmax(290px, .68fr);
+      gap: clamp(22px, 4vw, 42px);
+      align-items: center;
+      margin-top: 0;
+      padding: clamp(28px, 6vw, 66px);
+      border-color: rgba(246, 196, 83, .33);
+      background:
+        radial-gradient(circle at 94% 5%, rgba(246, 196, 83, .18), transparent 23rem),
+        radial-gradient(circle at 0 100%, rgba(91, 220, 255, .10), transparent 28rem),
+        linear-gradient(180deg, var(--jcs-surface-2, #0d1d37), var(--jcs-surface, #081224));
+    }
+
+    .vision-hero h1 {
+      max-width: 15ch;
+      margin: 17px 0 15px;
+      font-size: clamp(2.65rem, 7vw, 5.5rem);
+      line-height: .96;
+      letter-spacing: -.055em;
+    }
+
+    .vision-hero h1 span {
+      display: block;
+      color: var(--jcs-gold-soft, #fff1b8);
+    }
+
+    .vision-lead {
+      max-width: 780px;
+      margin: 0;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .release-row,
+    .compact-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .release-row {
+      margin-top: 18px;
+    }
+
+    .identity-panel {
+      padding: 20px;
+      border: 1px solid rgba(246, 196, 83, .32);
+      border-radius: 19px;
+      background:
+        linear-gradient(145deg, rgba(246, 196, 83, .09), transparent 55%),
+        var(--jcs-surface-2, #0d1d37);
+    }
+
+    .identity-panel > img {
+      width: 96px;
+      height: 96px;
+      display: block;
+      margin: 0 auto 16px;
+      object-fit: contain;
+      border: 1px solid rgba(246, 196, 83, .42);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, .22);
+    }
+
+    .identity-row {
+      min-width: 0;
+      margin-top: 9px;
+      padding: 11px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 12px;
+      background: rgba(3, 9, 21, .34);
+    }
+
+    html[data-theme="light"] .identity-row {
+      background: rgba(255, 255, 255, .65);
+    }
+
+    .identity-row > span {
+      display: block;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .68rem;
+      font-weight: 850;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .identity-row strong {
+      display: block;
+      margin-top: 4px;
+      overflow-wrap: anywhere;
+      font-size: .81rem;
+    }
+
+    .identity-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .identity-actions .btn {
+      min-height: 38px;
+      padding: 7px 10px;
+      font-size: .75rem;
+    }
+
+    .section-card {
+      margin-top: 20px;
+    }
+
+    .section-intro {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 17px;
+    }
+
+    .section-intro h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+    }
+
+    .section-intro p {
+      max-width: 780px;
+      margin: 6px 0 0;
+      color: var(--jcs-muted, #aebdd3);
+    }
+
+    .section-tag {
+      flex: 0 0 auto;
+      min-height: 31px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 9px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 999px;
+      color: var(--jcs-muted, #aebdd3);
+      background: var(--jcs-surface-2, #0d1d37);
+      font-size: .7rem;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .mission-statement {
+      max-width: 960px;
+      padding: clamp(18px, 3vw, 26px);
+      border: 1px solid rgba(246, 196, 83, .33);
+      border-left: 5px solid var(--vision-gold);
+      border-radius: 15px;
+      background: rgba(246, 196, 83, .06);
+    }
+
+    .mission-statement p {
+      margin: 0;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: clamp(1rem, 1.8vw, 1.13rem);
+    }
+
+    .mission-statement p + p {
+      margin-top: 12px;
+    }
+
+    .value-grid,
+    .surface-grid,
+    .fellowship-grid,
+    .safety-grid,
+    .directory-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .value-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .surface-grid,
+    .safety-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .fellowship-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .directory-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .value-card,
+    .surface-card,
+    .fellowship-card,
+    .safety-item,
+    .directory-link {
+      min-width: 0;
+      padding: 17px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 14px;
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .value-card,
+    .surface-card,
+    .fellowship-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::after,
+    .fellowship-card::after {
+      content: attr(data-number);
+      position: absolute;
+      right: 8px;
+      bottom: -22px;
+      color: rgba(255, 255, 255, .035);
+      font-size: 6.8rem;
+      font-weight: 950;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    html[data-theme="light"] .value-card::after,
+    html[data-theme="light"] .fellowship-card::after {
+      color: rgba(15, 23, 42, .045);
+    }
+
+    .value-card h3,
+    .surface-card h3,
+    .fellowship-card h3,
+    .safety-item h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .value-card p,
+    .surface-card p,
+    .fellowship-card p,
+    .safety-item p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .87rem;
+    }
+
+    .surface-card .status-pill {
+      margin-bottom: 11px;
+    }
+
+    .surface-card .btn {
+      width: 100%;
+      margin-top: 13px;
+    }
+
+    .status-pill.live {
+      border-color: rgba(52, 211, 153, .45);
+      color: #a7f3d0;
+      background: rgba(52, 211, 153, .08);
+    }
+
+    .status-pill.active {
+      border-color: rgba(250, 204, 21, .46);
+      color: #fef08a;
+      background: rgba(250, 204, 21, .07);
+    }
+
+    .status-pill.planned {
+      border-color: rgba(91, 220, 255, .43);
+      color: #bae6fd;
+      background: rgba(91, 220, 255, .07);
+    }
+
+    html[data-theme="light"] .status-pill.live { color: #047857; }
+    html[data-theme="light"] .status-pill.active { color: #854d0e; }
+    html[data-theme="light"] .status-pill.planned { color: #0369a1; }
+
+    .ethical-charter {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .charter-item {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 12px;
+      border: 1px solid rgba(52, 211, 153, .28);
+      border-radius: 12px;
+      color: var(--jcs-muted, #aebdd3);
+      background: rgba(52, 211, 153, .045);
+      font-size: .84rem;
+      font-weight: 760;
+    }
+
+    .charter-item::before {
+      content: "✓";
+      flex: 0 0 auto;
+      color: var(--vision-green);
+      font-weight: 950;
+    }
+
+    .psychology-note {
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid rgba(91, 220, 255, .3);
+      border-left: 5px solid var(--vision-cyan);
+      border-radius: 13px;
+      background: rgba(91, 220, 255, .045);
+    }
+
+    .psychology-note p {
+      margin: 0;
+      color: var(--jcs-muted, #aebdd3);
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(320px, 1.2fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .media-copy p {
+      color: var(--jcs-muted, #aebdd3);
+    }
+
+    .video-shell {
+      min-height: 310px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(246, 196, 83, .32);
+      border-radius: 17px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(246, 196, 83, .13), transparent 20rem),
+        #020712;
+    }
+
+    .video-placeholder {
+      max-width: 520px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .video-placeholder p {
+      margin: 0 0 14px;
+      color: #c6cfdf;
+    }
+
+    .video-shell iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: 0;
+      background: #000;
+    }
+
+    .metrics-card {
+      border-color: rgba(91, 220, 255, .3);
+    }
+
+    .metrics-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metrics-status-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .8rem;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 10px;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, .62);
+    }
+
+    .live-dot.ok {
+      background: var(--vision-green);
+      box-shadow: 0 0 12px rgba(52, 211, 153, .7);
+    }
+
+    .live-dot.err {
+      background: var(--vision-red);
+      box-shadow: 0 0 12px rgba(251, 113, 133, .7);
+    }
+
+    .metrics-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .auto-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .78rem;
+      font-weight: 760;
+    }
+
+    .auto-control input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--vision-cyan);
+    }
+
+    .privacy-callout {
+      margin: 0 0 14px;
+      padding: 12px 13px;
+      border: 1px solid rgba(52, 211, 153, .28);
+      border-left: 4px solid var(--vision-green);
+      border-radius: 12px;
+      color: var(--jcs-muted, #aebdd3);
+      background: rgba(52, 211, 153, .04);
+      font-size: .8rem;
+    }
+
+    .metric-section {
+      margin-top: 14px;
+      padding: 15px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 15px;
+      background: rgba(3, 9, 21, .28);
+    }
+
+    html[data-theme="light"] .metric-section {
+      background: rgba(255, 255, 255, .56);
+    }
+
+    .metric-section h3 {
+      margin: 0 0 12px;
+      font-size: 1.02rem;
+    }
+
+    .metric-section .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric small {
+      display: block;
+      margin-top: 6px;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .7rem;
+      line-height: 1.4;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .market-panel {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 14px;
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .market-panel h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 11px;
+    }
+
+    .table-wrap table {
+      min-width: 520px;
+    }
+
+    .table-wrap th,
+    .table-wrap td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      font-size: .76rem;
+      text-align: right;
+    }
+
+    .table-wrap th:first-child,
+    .table-wrap td:first-child {
+      text-align: left;
+    }
+
+    .table-wrap th {
+      color: var(--jcs-muted, #aebdd3);
+      background: rgba(148, 163, 184, .05);
+      font-size: .69rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    details.methodology {
+      margin-top: 14px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 13px;
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    details.methodology summary {
+      padding: 13px 15px;
+      cursor: pointer;
+      font-weight: 850;
+    }
+
+    .methodology-body {
+      padding: 0 15px 15px;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .84rem;
+    }
+
+    .methodology-body ul {
+      margin-bottom: 0;
+    }
+
+    .roadmap {
+      display: grid;
+      gap: 10px;
+    }
+
+    .roadmap-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 13px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 13px;
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .roadmap-item h3 {
+      margin: 0 0 5px;
+      font-size: .98rem;
+    }
+
+    .roadmap-item p {
+      margin: 0;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .84rem;
+    }
+
+    .directory-link {
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      color: var(--jcs-ink, #f7f9ff);
+      text-decoration: none;
+    }
+
+    .directory-link:hover,
+    .directory-link:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(91, 220, 255, .5);
+      outline: none;
+      text-decoration: none;
+    }
+
+    .directory-link span {
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .77rem;
+    }
+
+    .safety-card {
+      border-color: rgba(251, 113, 133, .28);
+      background:
+        radial-gradient(circle at 100% 0, rgba(251, 113, 133, .07), transparent 24rem),
+        linear-gradient(180deg, var(--jcs-surface-2, #0d1d37), var(--jcs-surface, #081224));
+    }
+
+    .boundary-list {
+      display: grid;
+      gap: 9px;
+      margin: 15px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .boundary-list li {
+      padding: 11px 12px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 11px;
+      color: var(--jcs-muted, #aebdd3);
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .boundary-list strong {
+      color: var(--jcs-ink, #f7f9ff);
+    }
+
+    .page-status {
+      min-height: 1.45em;
+      margin: 8px 0 0;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .8rem;
+    }
+
+    .page-status.ok { color: var(--vision-green); }
+    .page-status.err { color: var(--vision-red); }
+
+    .site-footer {
+      margin-top: 26px;
+      padding:
+        30px
+        max(16px, env(safe-area-inset-right))
+        calc(34px + env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+      border-top: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      color: var(--jcs-muted, #aebdd3);
+      background: rgba(2, 7, 18, .78);
+    }
+
+    html[data-theme="light"] .site-footer {
+      background: rgba(255, 255, 255, .92);
+    }
+
+    .footer-grid {
+      width: min(100%, var(--vision-max));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: 22px;
+    }
+
+    .footer-grid h2 {
+      margin: 0;
+      color: var(--jcs-ink, #f7f9ff);
+    }
+
+    .footer-links {
+      display: flex;
+      align-content: flex-start;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px 13px;
+    }
+
+    .footer-links a {
+      color: var(--jcs-muted, #aebdd3);
+    }
+
+    .footer-links a:hover {
+      color: var(--vision-cyan);
+    }
+
+    .footer-legal {
+      width: min(100%, var(--vision-max));
+      margin: 20px auto 0;
+      padding-top: 15px;
+      border-top: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      font-size: .78rem;
+    }
+
+    @media (max-width: 1080px) {
+      .vision-header .header-wrap {
+        grid-template-columns: minmax(180px, auto) minmax(0, 1fr);
+      }
+
+      .vision-header-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+      }
+
+      .value-grid,
+      .directory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .fellowship-grid,
+      .surface-grid,
+      .safety-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metric-section .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 840px) {
+      .vision-hero,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .identity-panel {
+        max-width: 650px;
+      }
+
+      .ethical-charter {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .vision-header .header-wrap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .vision-header .brand-link {
+        justify-content: center;
+      }
+
+      .vision-header .header-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      .vision-header .nav-link {
+        width: 100%;
+      }
+
+      .vision-header-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      .wallet-pill {
+        grid-column: 1 / -1;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .vision-hero {
+        padding: 27px 19px;
+      }
+
+      .vision-hero h1 {
+        font-size: clamp(2.55rem, 14vw, 4.2rem);
+      }
+
+      .section-intro {
+        display: block;
+      }
+
+      .section-tag {
+        margin-top: 9px;
+        white-space: normal;
+      }
+
+      .value-grid,
+      .surface-grid,
+      .fellowship-grid,
+      .safety-grid,
+      .directory-grid,
+      .ethical-charter,
+      .metric-section .metrics-grid,
+      .market-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .identity-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-item {
+        grid-template-columns: 1fr;
+      }
+
+      .video-shell {
+        min-height: 240px;
+      }
+
+      .metrics-controls,
+      .metrics-controls .btn,
+      .metrics-controls .auto-control {
+        width: 100%;
+      }
+
+      .metrics-controls .auto-control {
+        justify-content: center;
+      }
+
+      .table-wrap table {
+        min-width: 480px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .hero-actions,
+      .identity-actions,
+      .metrics-controls,
+      .video-shell,
+      .footer-links,
+      .skip-link {
+        display: none !important;
+      }
+
+      body {
+        color: #111;
+        background: #fff;
+      }
+
+      .card,
+      .value-card,
+      .surface-card,
+      .fellowship-card,
+      .safety-item,
+      .directory-link,
+      .roadmap-item,
+      .metric-section,
+      .metric,
+      .market-panel {
+        color: #111;
+        background: #fff;
+        box-shadow: none;
+        border-color: #bbb;
+      }
+    }
+  </style>
 </head>
+
 <body id="top">
-<!-- JCS Vision v2.0.1 · XRBitcoinCash-uniform ecosystem header -->
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="site-header jcs-ecosystem-header" role="banner">
-  <div class="header-wrap compact-header-wrap">
-    <div class="brand-stack">
-      <div class="header-utility-row">
+  <a class="skip-link" href="#main-content">Skip to the JCS vision</a>
+
+  <header class="site-header vision-header" role="banner">
+    <div class="header-wrap">
+      <a class="brand-link" href="./index.html" aria-label="Jesus Christ Saves Token home">
+        <img src="./jcs-logo.png" width="44" height="44" alt="" aria-hidden="true">
+        <span class="brand-copy">
+          <span class="brand-title">Jesus Christ Saves Token</span>
+          <span class="brand-subtitle">Faith · Prayer · Testimony · XRPL</span>
+        </span>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="./index.html">Home</a>
+        <a class="nav-link" href="./about-jcs.html" aria-current="page">Vision</a>
+        <a class="nav-link sign-ledger-btn" href="./verify.html">Sign the Ledger</a>
+        <a class="nav-link" href="./prayer.map.html">Prayer Map</a>
+        <a class="nav-link" href="./index.html#scripture">Scripture</a>
+        <a class="nav-link" href="./security.html">Security</a>
+      </nav>
+
+      <div class="vision-header-actions" aria-label="Page and wallet controls">
         <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
           aria-label="Switch to light mode"
           aria-pressed="true"
-          class="theme-toggle compact-theme-toggle"
-          id="themeToggle"
-          title="Switch between light and dark mode"
-          type="button"
         >
-          <span aria-hidden="true" class="theme-toggle-icon">◐</span>
+          <span aria-hidden="true">◐</span>
           <span id="themeToggleText">Light mode</span>
         </button>
+        <button class="wallet-action connect" id="connectBtn" type="button" disabled>Connect Xaman</button>
+        <button class="wallet-action disconnect" id="disconnectBtn" type="button" hidden>Disconnect</button>
+        <span class="wallet-pill" id="walletPill" aria-live="polite">Wallet disconnected</span>
+      </div>
+    </div>
+  </header>
 
-        <div class="header-utility-actions">
-          <div aria-label="Related XRPL ecosystem projects" class="header-policy-links">
-            <a
-              class="header-project-link project-xrbc"
-              href="https://xrbitcoincash.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-              title="Open the XRBitcoinCash home page"
-            >XRBitcoinCash</a>
-            <a
-              class="header-project-link project-xrbitcoin"
-              href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html"
-              rel="noopener noreferrer"
-              target="_blank"
-              title="Open the XRBitcoin home page"
-            >XRBitcoin</a>
-          </div>
+  <main class="container" id="main-content">
+    <section class="card vision-hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">✝ Living vision · Current application · Responsible growth</span>
+        <h1 id="page-title">Build technology that points <span>beyond itself.</span></h1>
+        <p class="vision-lead">
+          Jesus Christ Saves Token is a Christ-centered, non-custodial XRP Ledger project.
+          Its purpose is to make prayer, testimony, Scripture, public verification, and
+          practical Christian service easier to encounter and preserve—without treating a
+          token, NFT, application, or social platform as a substitute for Jesus Christ,
+          Scripture, prayer, fellowship, church, pastoral care, or personal responsibility.
+        </p>
 
-          <div aria-label="Xaman wallet controls" class="header-wallet-actions">
-            <button class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
-            <button class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
-            <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+        <div class="hero-actions">
+          <a class="btn gold" href="./verify.html">Enter Sign the Ledger</a>
+          <a class="btn" href="#fellowship">Explore JCS Fellowship</a>
+          <a class="btn" href="#live-metrics">Inspect public XRPL data</a>
+          <button class="btn" id="shareVisionBtn" type="button">Share this vision</button>
+        </div>
+
+        <div class="release-row" aria-label="Project characteristics">
+          <span class="badge gold">Vision 3.0.0</span>
+          <span class="badge">XRPL Mainnet</span>
+          <span class="badge">Non-custodial</span>
+          <span class="badge">Public evidence · private dignity</span>
+        </div>
+        <p class="page-status" id="shareStatus" aria-live="polite"></p>
+      </div>
+
+      <aside class="identity-panel" aria-label="Canonical JCS identity">
+        <img src="./jcs-logo.png" width="96" height="96" alt="Jesus Christ Saves Token emblem">
+
+        <div class="identity-row">
+          <span>Issuer</span>
+          <strong class="mono" id="issuerValue">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong>
+        </div>
+        <div class="identity-row">
+          <span>Currency and network</span>
+          <strong>JCS · XRP Ledger Mainnet</strong>
+        </div>
+        <div class="identity-row">
+          <span>Web DID</span>
+          <strong class="mono" id="didValue">did:web:jesuschristsavestoken.com</strong>
+        </div>
+        <div class="identity-row">
+          <span>Canonical domain</span>
+          <strong>jesuschristsavestoken.com</strong>
+        </div>
+
+        <div class="identity-actions">
+          <button class="btn small" type="button" data-copy-target="issuerValue">Copy issuer</button>
+          <button class="btn small" type="button" data-copy-target="didValue">Copy DID</button>
+        </div>
+        <p class="page-status" id="copyStatus" aria-live="polite"></p>
+      </aside>
+    </section>
+
+    <section class="card section-card" id="message" aria-labelledby="message-title">
+      <div class="media-grid">
+        <div class="media-copy">
+          <span class="eyebrow">The message comes first</span>
+          <h2 id="message-title">Technology is a vessel, not the destination.</h2>
+          <p>
+            The written vision is complete without audio or video. The optional message player
+            is not loaded until you choose to load it, reducing automatic third-party requests,
+            saving bandwidth, and allowing discreet reading when sound or media could create risk.
+          </p>
+          <p>
+            Nothing on this page asks you to hold JCS, connect a wallet, mint an NFT, or make a
+            transaction before reading the mission.
+          </p>
+        </div>
+
+        <div class="video-shell" id="videoShell">
+          <div class="video-placeholder" id="videoPlaceholder">
+            <p>
+              Loading the player contacts YouTube’s privacy-enhanced domain. The video does not
+              autoplay and sound remains under your control.
+            </p>
+            <button class="btn gold" id="loadVideoBtn" type="button">Load the optional message video</button>
+            <p class="page-status" id="videoStatus" aria-live="polite"></p>
           </div>
         </div>
       </div>
+    </section>
 
-      <a aria-label="Jesus Christ Saves Token home" class="brand-link" href="index.html">
-        <img alt="Jesus Christ Saves Token logo" height="36" src="https://jesuschristsavestoken.com/jcs-logo.png" width="36"/>
-        <span class="brand-copy">
-          <span class="brand-title">Jesus Christ Saves Token</span>
-          <span class="brand-subtitle">JCS Proof-of-Faith · XRPL Mainnet</span>
-        </span>
-      </a>
+    <section class="card section-card" id="vision" aria-labelledby="vision-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="vision-title">Vision and core values</h2>
+          <p>
+            This is a living statement of intent and responsibility. It is not a technical white
+            paper, securities offering, promise of profit, church charter, or claim of spiritual
+            authority.
+          </p>
+        </div>
+        <span class="section-tag">Christ first · technology second</span>
+      </div>
+
+      <div class="mission-statement">
+        <p>
+          <strong>The mission is Christ; the technology is a tool.</strong> JCS exists to carry
+          testimony about Jesus, preserve prayer and Scripture references in durable digital form,
+          support voluntary fellowship, and make public project activity easier to verify.
+        </p>
+        <p>
+          Every system should protect human dignity, disclose its limitations, minimize private-data
+          exposure, preserve user-controlled authorization, and remain useful even to a visitor who
+          never buys, holds, or trades JCS.
+        </p>
+      </div>
+
+      <div class="value-grid">
+        <article class="value-card" data-number="01">
+          <h3>Christ centered</h3>
+          <p>Features should direct attention toward Jesus Christ rather than speculation, personalities, or technological novelty.</p>
+        </article>
+        <article class="value-card" data-number="02">
+          <h3>Human dignity</h3>
+          <p>Prayer, grief, crisis, disability, poverty, persecution, and testimony must never become engagement bait.</p>
+        </article>
+        <article class="value-card" data-number="03">
+          <h3>Voluntary participation</h3>
+          <p>No prayer, testimony, NFT, transaction, reaction, or public record should occur without a deliberate user action.</p>
+        </article>
+        <article class="value-card" data-number="04">
+          <h3>Non-custodial design</h3>
+          <p>Users review and authorize through Xaman. The website must never request a seed phrase, private key, or wallet passcode.</p>
+        </article>
+        <article class="value-card" data-number="05">
+          <h3>Public transparency</h3>
+          <p>The issuer, token identity, AMM, order books, transactions, and public records should be independently inspectable.</p>
+        </article>
+        <article class="value-card" data-number="06">
+          <h3>Privacy restraint</h3>
+          <p>Public evidence should contain the minimum necessary information. Sensitive communication belongs off the public ledger.</p>
+        </article>
+        <article class="value-card" data-number="07">
+          <h3>Accessible witness</h3>
+          <p>Core text should remain usable without sound, animation, a wallet, a token balance, or a high-powered device.</p>
+        </article>
+        <article class="value-card" data-number="08">
+          <h3>Stewardship over hype</h3>
+          <p>Utility, truth, maintenance, safety, and service take priority over unsupported price, adoption, or partnership claims.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section-card" id="current-platform" aria-labelledby="current-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="current-title">What exists now</h2>
+          <p>
+            JCS is already more than a token landing page, but the current deployment is still
+            primarily a static, client-side application. Live functions and future concepts are
+            separated so visitors can tell what is present from what remains planned.
+          </p>
+        </div>
+        <span class="section-tag">Current application surfaces</span>
+      </div>
+
+      <div class="surface-grid">
+        <article class="surface-card">
+          <span class="status-pill live">Live</span>
+          <h3>JCS faith and XRPL portal</h3>
+          <p>Scripture, sacred media, Xaman-authorized interactions, JCS/XRP market information, and non-custodial transaction review.</p>
+          <a class="btn small" href="./index.html">Open JCS Home</a>
+        </article>
+        <article class="surface-card">
+          <span class="status-pill live">Live</span>
+          <h3>Sign the Ledger</h3>
+          <p>Prayer NFTs, public testimony records, replies, Amen reactions, and explicit Xaman authorization.</p>
+          <a class="btn small gold" href="./verify.html">Open Sign the Ledger</a>
+        </article>
+        <article class="surface-card">
+          <span class="status-pill live">Live</span>
+          <h3>Prayer and Integrity Map</h3>
+          <p>A read-oriented visualization using public XRPL information without requesting wallet secrets.</p>
+          <a class="btn small" href="./prayer.map.html">Open Prayer Map</a>
+        </article>
+        <article class="surface-card">
+          <span class="status-pill live">Live</span>
+          <h3>Identity and discovery</h3>
+          <p>Canonical domain, Web DID, XRP Ledger TOML, AI manifest, sitemap, robots policy, and public source history.</p>
+          <a class="btn small" href="./.well-known/did.json">Open DID document</a>
+        </article>
+        <article class="surface-card">
+          <span class="status-pill live">Live</span>
+          <h3>Privacy, terms, and security</h3>
+          <p>Dedicated policies for public-ledger privacy, responsible use, independent services, and vulnerability reporting.</p>
+          <a class="btn small" href="./security.html">Open Security</a>
+        </article>
+        <article class="surface-card">
+          <span class="status-pill active">Active development</span>
+          <h3>Unified application experience</h3>
+          <p>Shared design, mobile containment, plain-language explanations, metadata consistency, and stronger evidence handling are being applied file by file.</p>
+          <a class="btn small" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL" target="_blank" rel="noopener noreferrer">Review repository</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section-card" id="fellowship" aria-labelledby="fellowship-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="fellowship-title">JCS Fellowship: the social-platform direction</h2>
+          <p>
+            The long-term objective is a purpose-based Christian community—not a copy of conventional
+            social media built around outrage, follower competition, infinite scrolling, or the sale
+            of attention. The following features are planned product direction, not claims of current deployment.
+          </p>
+        </div>
+        <span class="section-tag">Planned · not yet fully deployed</span>
+      </div>
+
+      <div class="fellowship-grid">
+        <article class="fellowship-card" data-number="01">
+          <span class="status-pill planned">Planned</span>
+          <h3>Prayer lifecycle</h3>
+          <p>A request can move from prayer requested, to people committing to pray, to updates, continuing need, respectful closure, or an optional answered-prayer testimony.</p>
+        </article>
+        <article class="fellowship-card" data-number="02">
+          <span class="status-pill planned">Planned</span>
+          <h3>Faith Circles</h3>
+          <p>Small communities for family, local church, Bible study, grief, recovery, veterans, marriage, parenting, ministry projects, and invitation-only prayer.</p>
+        </article>
+        <article class="fellowship-card" data-number="03">
+          <span class="status-pill planned">Planned</span>
+          <h3>Prayer Garden</h3>
+          <p>A symbolic mini-game where prayer, encouragement, updates, Scripture, and acts of service grow a private or shared garden without pay-to-win advantages.</p>
+        </article>
+        <article class="fellowship-card" data-number="04">
+          <span class="status-pill planned">Planned</span>
+          <h3>Scripture Path</h3>
+          <p>Verse-order challenges, passage completion, parable matching, reflection prompts, memory progress, and collaborative reading journeys.</p>
+        </article>
+        <article class="fellowship-card" data-number="05">
+          <span class="status-pill planned">Planned</span>
+          <h3>Acts of Mercy</h3>
+          <p>A privacy-conscious way to offer or request practical help while publishing only the minimum information necessary for safe community response.</p>
+        </article>
+        <article class="fellowship-card" data-number="06">
+          <span class="status-pill planned">Planned</span>
+          <h3>Quiet and Sabbath modes</h3>
+          <p>A finite daily experience with Scripture, a limited number of prayer requests, one act of encouragement, reflection, and a clear stopping point.</p>
+        </article>
+      </div>
+
+      <div class="ethical-charter" aria-label="Ethical engagement charter">
+        <div class="charter-item">No pay-to-pray</div>
+        <div class="charter-item">No pay-to-be-heard</div>
+        <div class="charter-item">No token-weighted theology</div>
+        <div class="charter-item">No wealth-based spiritual rank</div>
+        <div class="charter-item">No outrage-ranking feed</div>
+        <div class="charter-item">No deceptive infinite-scroll design</div>
+        <div class="charter-item">No crisis-post auction or paid priority</div>
+        <div class="charter-item">No private-data publication by default</div>
+        <div class="charter-item">No wallet secret collection</div>
+      </div>
+
+      <div class="psychology-note">
+        <p>
+          <strong>Designed for meaningful return, not compulsive return.</strong> The proposed
+          experience uses belonging, progress, reciprocity, reflection, and completion as design
+          principles. It should reward prayer, learning, encouragement, and service—not anxiety,
+          comparison, outrage, or financial pressure.
+        </p>
+      </div>
+    </section>
+
+    <section class="card section-card safety-card" id="safety" aria-labelledby="safety-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="safety-title">Safety, privacy, and people at risk</h2>
+          <p>
+            Christian expression can carry personal risk. A public blockchain is durable and
+            observable, so technical permanence must never be confused with confidentiality.
+          </p>
+        </div>
+        <span class="section-tag">Safety before publicity</span>
+      </div>
+
+      <div class="safety-grid">
+        <article class="safety-item">
+          <h3>Silent access</h3>
+          <p>Written Scripture, prayer references, safety guidance, and the mission must remain usable without audio, video, or animation.</p>
+        </article>
+        <article class="safety-item">
+          <h3>Identity restraint</h3>
+          <p>Names, locations, handles, medical details, legal matters, and identifying stories should not be placed on-ledger when disclosure could cause harm.</p>
+        </article>
+        <article class="safety-item">
+          <h3>Public versus private</h3>
+          <p>An NFT or transaction can create public evidence of an event. Private support, pastoral discussion, and sensitive communication require separate protected channels.</p>
+        </article>
+      </div>
+
+      <ul class="boundary-list">
+        <li><strong>Public ledger warning:</strong> XRPL accounts, transactions, trust lines, offers, AMMs, NFTs, and memos may remain publicly observable indefinitely.</li>
+        <li><strong>No secret requests:</strong> JCS will never ask for a seed phrase, private key, recovery words, Xaman passcode, or device passcode.</li>
+        <li><strong>No emergency service:</strong> JCS is not an emergency, medical, mental-health, legal, law-enforcement, or crisis-intervention service.</li>
+        <li><strong>No spiritual ranking:</strong> Token holdings, NFT ownership, transaction count, donations, reactions, or account age do not establish faith, authority, truth, or worth.</li>
+      </ul>
+    </section>
+
+    <section class="card section-card metrics-card" id="live-metrics" aria-labelledby="metrics-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="metrics-title">Public XRP Ledger transparency</h2>
+          <p>
+            Read-only metrics for the exact JCS issuer and JCS/XRP market. Wallet connection is not
+            required. Every value is a current public-ledger observation or a disclosed calculation.
+          </p>
+        </div>
+        <span class="section-tag">On demand · validated ledger</span>
+      </div>
+
+      <div class="metrics-toolbar">
+        <div class="metrics-status-row">
+          <span class="live-dot" id="liveDot" aria-hidden="true"></span>
+          <span id="metricsStatus" aria-live="polite">Metrics are idle until you choose to load them.</span>
+          <span id="metricsServer"></span>
+        </div>
+
+        <div class="metrics-controls">
+          <button class="btn blue small" id="refreshMetricsBtn" type="button">Load live metrics</button>
+          <label class="auto-control">
+            <input id="autoRefreshMetrics" type="checkbox">
+            Refresh every 60 seconds while this page is visible
+          </label>
+        </div>
+      </div>
+
+      <p class="privacy-callout">
+        Loading metrics opens a read-only WebSocket connection to a public XRP Ledger server and
+        requests an XRP/USD reference from CoinGecko. No wallet address, prayer, testimony, form
+        entry, or browser identifier is intentionally included in these requests.
+      </p>
+
+      <section class="metric-section" aria-labelledby="network-metrics-title">
+        <h3 id="network-metrics-title">Network and evidence status</h3>
+        <div class="metrics-grid">
+          <article class="metric">
+            <span>Validated ledger</span>
+            <strong id="metricLedger">Not loaded</strong>
+            <small>Latest validated sequence reported by the selected server.</small>
+          </article>
+          <article class="metric">
+            <span>Ledger age</span>
+            <strong id="metricLedgerAge">Not loaded</strong>
+            <small>Seconds since the server’s latest validated ledger closed.</small>
+          </article>
+          <article class="metric">
+            <span>Evidence coverage</span>
+            <strong id="metricCoverage">Not loaded</strong>
+            <small>Successful source groups divided by the source groups attempted.</small>
+          </article>
+          <article class="metric">
+            <span>Last updated</span>
+            <strong id="metricUpdated">Not loaded</strong>
+            <small>Your device time when this report finished.</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="metric-section" aria-labelledby="issuer-metrics-title">
+        <h3 id="issuer-metrics-title">Issuer settings and distribution sample</h3>
+        <div class="metrics-grid">
+          <article class="metric">
+            <span>Issuer domain</span>
+            <strong id="metricDomain">Not loaded</strong>
+            <small>Decoded from the issuer’s AccountRoot Domain field.</small>
+          </article>
+          <article class="metric">
+            <span>Master key</span>
+            <strong id="metricMasterKey">Not loaded</strong>
+            <small>Whether the AccountRoot reports the master key as disabled.</small>
+          </article>
+          <article class="metric">
+            <span>Global Freeze</span>
+            <strong id="metricGlobalFreeze">Not loaded</strong>
+            <small>Current issuer-wide freeze setting.</small>
+          </article>
+          <article class="metric">
+            <span>Clawback</span>
+            <strong id="metricClawback">Not loaded</strong>
+            <small>Whether trust-line clawback authority is enabled.</small>
+          </article>
+          <article class="metric">
+            <span>No Freeze</span>
+            <strong id="metricNoFreeze">Not loaded</strong>
+            <small>Whether individual-freeze authority has been permanently limited.</small>
+          </article>
+          <article class="metric">
+            <span>Require Auth</span>
+            <strong id="metricRequireAuth">Not loaded</strong>
+            <small>Whether trust lines require issuer authorization.</small>
+          </article>
+          <article class="metric">
+            <span>JCS obligations</span>
+            <strong id="metricObligations">Not loaded</strong>
+            <small>Gateway obligations when available; otherwise an observed trust-line sample.</small>
+          </article>
+          <article class="metric">
+            <span>Observed holders</span>
+            <strong id="metricHolders">Not loaded</strong>
+            <small>Positive-balance trust lines in the bounded public sample, not beneficial owners.</small>
+          </article>
+          <article class="metric">
+            <span>Trust lines scanned</span>
+            <strong id="metricTrustlines">Not loaded</strong>
+            <small id="metricTrustlineNote">The scan is bounded to reduce public-server load.</small>
+          </article>
+          <article class="metric">
+            <span>Indicative network value</span>
+            <strong id="metricNetworkValue">Not loaded</strong>
+            <small id="metricNetworkValueNote">Not a valuation, appraisal, reserve attestation, or securities market capitalization.</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="metric-section" aria-labelledby="market-metrics-title">
+        <h3 id="market-metrics-title">AMM and funded order-book structure</h3>
+        <div class="metrics-grid">
+          <article class="metric">
+            <span>AMM XRP reserve</span>
+            <strong id="metricAmmXrp">Not loaded</strong>
+            <small>Public XRP amount held by the JCS/XRP AMM.</small>
+          </article>
+          <article class="metric">
+            <span>AMM JCS reserve</span>
+            <strong id="metricAmmJcs">Not loaded</strong>
+            <small>Public JCS amount held by the JCS/XRP AMM.</small>
+          </article>
+          <article class="metric">
+            <span>AMM trading fee</span>
+            <strong id="metricAmmFee">Not loaded</strong>
+            <small>Converted from XRPL fee units of 1/100,000.</small>
+          </article>
+          <article class="metric">
+            <span>AMM spot</span>
+            <strong id="metricAmmSpot">Not loaded</strong>
+            <small>Reserve ratio in XRP per JCS before trade impact.</small>
+          </article>
+          <article class="metric">
+            <span>10 XRP AMM impact</span>
+            <strong id="metricAmmImpact">Not loaded</strong>
+            <small>Constant-product estimate including the configured AMM fee.</small>
+          </article>
+          <article class="metric">
+            <span>Indicative pool value</span>
+            <strong id="metricPoolValue">Not loaded</strong>
+            <small>Two times the XRP reserve multiplied by the external XRP/USD reference.</small>
+          </article>
+          <article class="metric">
+            <span>Best funded bid</span>
+            <strong id="metricBid">Not loaded</strong>
+            <small>Highest visible funded bid in XRP per JCS.</small>
+          </article>
+          <article class="metric">
+            <span>Best funded ask</span>
+            <strong id="metricAsk">Not loaded</strong>
+            <small>Lowest visible funded ask in XRP per JCS.</small>
+          </article>
+          <article class="metric">
+            <span>Funded spread</span>
+            <strong id="metricSpread">Not loaded</strong>
+            <small>Bid-ask difference divided by the midpoint.</small>
+          </article>
+          <article class="metric">
+            <span>5% bid depth</span>
+            <strong id="metricBidDepth">Not loaded</strong>
+            <small>Visible funded XRP demand within 5% of the best bid.</small>
+          </article>
+          <article class="metric">
+            <span>5% ask depth</span>
+            <strong id="metricAskDepth">Not loaded</strong>
+            <small>Visible funded JCS offered within 5% of the best ask.</small>
+          </article>
+          <article class="metric">
+            <span>Visible makers</span>
+            <strong id="metricMakers">Not loaded</strong>
+            <small>Distinct public accounts in the returned bid and ask samples.</small>
+          </article>
+          <article class="metric">
+            <span>Reference price</span>
+            <strong id="metricPriceXrp">Not loaded</strong>
+            <small id="metricPriceMethod">Two-sided funded midpoint preferred; AMM spot used as fallback.</small>
+          </article>
+          <article class="metric">
+            <span>JCS reference USD</span>
+            <strong id="metricPriceUsd">Not loaded</strong>
+            <small>Reference XRP price multiplied by CoinGecko’s XRP/USD value.</small>
+          </article>
+          <article class="metric">
+            <span>XRP/USD</span>
+            <strong id="metricXrpUsd">Not loaded</strong>
+            <small>External market reference; not an XRPL-native value.</small>
+          </article>
+          <article class="metric">
+            <span>XRP 24-hour change</span>
+            <strong id="metricXrpChange">Not loaded</strong>
+            <small>External CoinGecko reference when available.</small>
+          </article>
+        </div>
+
+        <div class="market-grid">
+          <article class="market-panel">
+            <h3>Funded JCS sell offers</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Maker</th>
+                    <th>JCS</th>
+                    <th>XRP</th>
+                    <th>XRP/JCS</th>
+                  </tr>
+                </thead>
+                <tbody id="askTable">
+                  <tr><td colspan="4">Load metrics to inspect the book.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="market-panel">
+            <h3>Funded JCS buy offers</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Maker</th>
+                    <th>JCS</th>
+                    <th>XRP</th>
+                    <th>XRP/JCS</th>
+                  </tr>
+                </thead>
+                <tbody id="bidTable">
+                  <tr><td colspan="4">Load metrics to inspect the book.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <details class="methodology">
+        <summary>How these metrics are calculated and what they cannot prove</summary>
+        <div class="methodology-body">
+          <ul>
+            <li>All XRPL requests specify or rely on validated-ledger data when the method supports it.</li>
+            <li>Order-book amounts use <code>taker_gets_funded</code> and <code>taker_pays_funded</code> when present, falling back to the full offer only when the offer is not partially funded.</li>
+            <li>Trust-line retrieval is paginated but capped to reduce load. A capped sample is labeled rather than represented as complete.</li>
+            <li>Wallet addresses are not verified real-world identities, and multiple addresses may be controlled by one party.</li>
+            <li>Price, spread, depth, pool value, holder count, and indicative network value can change before another person loads the page.</li>
+            <li>No metric proves faith, truth, legality, solvency, intent, ownership, future price, or future project success.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="card section-card" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="roadmap-title">Living roadmap</h2>
+          <p>
+            The roadmap prioritizes ministry purpose, human safety, privacy, accessibility,
+            technical reliability, and truthful disclosure rather than promotional milestones.
+          </p>
+        </div>
+        <span class="section-tag">Updated as the project is tested</span>
+      </div>
+
+      <div class="roadmap">
+        <article class="roadmap-item">
+          <span class="status-pill live">Live</span>
+          <div>
+            <h3>Canonical JCS identity and public XRPL metadata</h3>
+            <p>The domain, Web DID, security contact, issuer, currency, token metadata, and public source repository are independently inspectable.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill live">Live</span>
+          <div>
+            <h3>Prayer NFT and public testimony application</h3>
+            <p>Sign the Ledger provides explicit Xaman-authorized prayer artifacts, testimony records, replies, and reactions.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill active">Active</span>
+          <div>
+            <h3>File-by-file modernization and security hardening</h3>
+            <p>Identity, styles, documentation, discovery, legal pages, wallet flows, metrics, and mobile behavior are being reviewed in controlled commits.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill active">Active</span>
+          <div>
+            <h3>Plain-language transparency and accessibility</h3>
+            <p>Improve readable disclosures, keyboard use, reduced-motion behavior, narrow-screen containment, language support, and privacy-conscious media loading.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill planned">Planned</span>
+          <div>
+            <h3>JCS Fellowship account and Circle foundation</h3>
+            <p>Add secure accounts, passkeys or wallet identity, invitation controls, blocking, reporting, moderation queues, appeals, and small-group permissions.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill planned">Planned</span>
+          <div>
+            <h3>Private communication and recovery</h3>
+            <p>Design encrypted messages, secure recovery, data minimization, retention controls, abuse reporting, and a clear separation between private content and public evidence.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill planned">Planned</span>
+          <div>
+            <h3>Prayer Garden, Scripture Path, and Acts of Mercy</h3>
+            <p>Build meaningful interactive experiences without pay-to-win, gambling, spiritual ranking, manipulative streaks, or crisis-content monetization.</p>
+          </div>
+        </article>
+        <article class="roadmap-item">
+          <span class="status-pill planned">Planned</span>
+          <div>
+            <h3>Independent review and production operations</h3>
+            <p>Introduce least-privilege services, backups, audit logs, rate limits, incident response, child-safety review, accessibility review, legal review, and independent security testing.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section-card" id="ecosystem" aria-labelledby="ecosystem-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="ecosystem-title">JCS ecosystem directory</h2>
+          <p>Official JCS pages, public identity records, independent market interfaces, and related XRPL development work.</p>
+        </div>
+        <span class="section-tag">Official and independent links</span>
+      </div>
+
+      <div class="directory-grid">
+        <a class="directory-link" href="./index.html"><strong>JCS Home</strong><span>Faith, Scripture, media, wallet, and JCS interaction portal</span></a>
+        <a class="directory-link" href="./verify.html"><strong>Sign the Ledger</strong><span>Prayer NFT, testimony, reply, and reaction application</span></a>
+        <a class="directory-link" href="./prayer.map.html"><strong>Prayer & Integrity Map</strong><span>Read-oriented public XRPL visualization</span></a>
+        <a class="directory-link" href="./metrics.html"><strong>JCS Metrics</strong><span>Earlier standalone market-data surface scheduled for upgrade</span></a>
+        <a class="directory-link" href="./privacy.html"><strong>Privacy Policy</strong><span>Wallet, public-ledger, browser, NFT, and third-party disclosures</span></a>
+        <a class="directory-link" href="./terms.html"><strong>Terms of Service</strong><span>Rules and limitations for JCS website and application use</span></a>
+        <a class="directory-link" href="./security.html"><strong>Security</strong><span>Responsible vulnerability disclosure and project boundaries</span></a>
+        <a class="directory-link" href="./ai.json"><strong>AI Manifest</strong><span>Machine-readable project and resource description</span></a>
+        <a class="directory-link" href="./.well-known/did.json"><strong>Web DID</strong><span>Canonical decentralized identity for the JCS domain</span></a>
+        <a class="directory-link" href="./.well-known/xrp-ledger.toml"><strong>XRPL TOML</strong><span>Issuer, currency, token metadata, URLs, and security boundaries</span></a>
+        <a class="directory-link" href="https://bithomp.com/en/account/JesusChristSaves" target="_blank" rel="noopener noreferrer"><strong>Bithomp</strong><span>Independent issuer and ledger explorer</span></a>
+        <a class="directory-link" href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener noreferrer"><strong>XPMarket</strong><span>Independent JCS market-data interface</span></a>
+        <a class="directory-link" href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" target="_blank" rel="noopener noreferrer"><strong>Sologenic</strong><span>Independent JCS/XRP DEX interface</span></a>
+        <a class="directory-link" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL" target="_blank" rel="noopener noreferrer"><strong>Public repository</strong><span>Version history and publicly viewable source</span></a>
+        <a class="directory-link" href="https://x.com/JesusCS_token" target="_blank" rel="noopener noreferrer"><strong>Official JCS account on X</strong><span>Public project communication</span></a>
+        <a class="directory-link" href="https://xrbitcoincash.com/" target="_blank" rel="noopener noreferrer"><strong>Related XRPL tooling</strong><span>XRBitcoinCash security, auditing, and ledger-analysis ecosystem</span></a>
+      </div>
+    </section>
+
+    <section class="card section-card safety-card" id="boundaries" aria-labelledby="boundaries-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="boundaries-title">Important boundaries</h2>
+          <p>The project’s religious mission does not remove technical, financial, privacy, legal, or human limitations.</p>
+        </div>
+        <span class="section-tag">Read before relying on the project</span>
+      </div>
+
+      <ul class="boundary-list">
+        <li><strong>No custody or brokerage:</strong> JCS webpages do not take possession of user funds or wallet secrets. Independent wallets, markets, and providers operate under their own terms.</li>
+        <li><strong>No financial promise:</strong> JCS is not represented as a stablecoin, insured deposit, ownership interest, guaranteed-return product, or promise of liquidity or listing.</li>
+        <li><strong>No pastoral replacement:</strong> The project is not a church and does not replace Scripture, prayer, fellowship, pastoral care, medical care, mental-health care, or emergency assistance.</li>
+        <li><strong>No endorsement:</strong> References to Ripple, Xaman, XRPL validators, Bithomp, Sologenic, XPMarket, GitHub, CoinGecko, or YouTube do not imply partnership, sponsorship, custody, certification, or approval.</li>
+        <li><strong>As-is operation:</strong> Public servers, APIs, media, wallets, metadata, market routes, and ledger interfaces may fail, change, throttle, cache, or become unavailable.</li>
+        <li><strong>Proprietary source:</strong> Public visibility does not make this repository open source. Review the repository LICENSE before copying, modifying, deploying, training AI systems on, or reusing covered material.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <h2>Jesus Christ Saves Token</h2>
+        <p>
+          A faith-centered, non-custodial XRP Ledger project for Scripture, prayer,
+          testimony, transparent public evidence, and responsible Christian community tools.
+        </p>
+        <p class="mono">Issuer: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · Currency: JCS · XRPL Mainnet</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="./index.html">Home</a>
+        <a href="./verify.html">Sign the Ledger</a>
+        <a href="./prayer.map.html">Prayer Map</a>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+        <a href="./security.html">Security</a>
+        <a href="./.well-known/security.txt">security.txt</a>
+        <a href="./LICENSE">License</a>
+        <a href="mailto:jesuschristsavestoken@gmail.com">General contact</a>
+        <a href="mailto:jesuschristsaves@gmail.com">Security contact</a>
+      </nav>
     </div>
 
-    <nav aria-label="Primary navigation" class="header-nav compact-header-nav">
-      <a class="nav-btn" href="index.html">Home</a>
-      <a aria-current="page" class="nav-btn" href="about-jcs.html">Vision</a>
-      <a class="nav-btn sign-ledger-gold" href="verify.html">Sign the Ledger</a>
-      <a class="nav-btn" href="index.html#trade">Trade</a>
-      <a class="nav-btn" href="index.html#scripture">Scripture</a>
-      <a class="nav-btn" href="index.html#sacred-film">Sacred Film</a>
-      <a class="nav-btn" href="index.html#audio">Sacred Audio</a>
-    </nav>
-  </div>
-</header>
+    <div class="footer-legal">
+      <p>
+        © <span id="copyrightYear"></span> Jesus Christ Saves Token. All Rights Reserved.
+        JCS is not a church, financial adviser, custodian, broker, exchange, emergency service,
+        or guarantee of spiritual, legal, technical, or financial outcomes.
+      </p>
+    </div>
+  </footer>
 
-<main class="container" id="main-content">
-<section class="card hero">
-<div>
-<span class="eyebrow">✝ Vision · Core values · Public XRPL infrastructure</span>
-<h1>Carry the witness of <span>Jesus Christ</span> across borders and generations.</h1>
-<p class="hero-lead">
-Jesus Christ Saves Token is a faith-centered XRP Ledger project built around Jesus of Nazareth,
-whom Christians confess as the Christ. The purpose is not to replace a church, Scripture,
-prayer, fellowship, or pastoral care. The purpose is to use transparent, non-custodial technology
-to preserve testimony, distribute Christian artifacts, and make the Gospel more reachable where
-open Christian expression may carry personal risk.
-</p>
-<div class="hero-actions">
-<a class="btn gold" href="verify.html">Create a prayer or testimony NFT</a>
-<a class="btn" href="#vision">Read the living vision</a>
-<a class="btn" href="#live-metrics">Inspect live XRPL metrics</a>
-</div>
-</div>
-<aside class="identity-panel" aria-label="Verified JCS identity">
-<img alt="Jesus Christ Saves Token logo" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
-<div class="identity-row">
-<span>Issuer</span>
-<strong class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong>
-</div>
-<div class="identity-row">
-<span>Currency</span>
-<strong>JCS · XRP Ledger Mainnet</strong>
-</div>
-<div class="identity-row">
-<span>Project form</span>
-<strong>Faith portal · DEX access · prayer NFTs · on-ledger testimony</strong>
-</div>
-<div class="identity-row">
-<span>Custody</span>
-<strong>Xaman signs in the user’s wallet; private keys never enter this page.</strong>
-</div>
-</aside>
-</section>
+  <script src="https://xumm.app/assets/cdn/xumm.min.js" crossorigin="anonymous"></script>
+  <script>
+  (function () {
+    'use strict';
 
-<section class="card video-card" aria-labelledby="video-title">
-<div class="section-heading">
-<div>
-<h2 id="video-title">The message comes first</h2>
-<p>
-The video begins immediately but remains muted for privacy and browser compatibility.
-Use the player controls only when listening is safe.
-</p>
-</div>
-<span class="section-badge">Autoplay · muted by default</span>
-</div>
-<div class="video-shell">
-<iframe
-  allow="autoplay; encrypted-media; picture-in-picture"
-  allowfullscreen
-  loading="eager"
-  referrerpolicy="strict-origin-when-cross-origin"
-  src="https://www.youtube-nocookie.com/embed/evbHWPSjeeo?autoplay=1&amp;mute=1&amp;playsinline=1&amp;rel=0&amp;modestbranding=1"
-  title="Bible message and the mission behind Jesus Christ Saves Token">
-</iframe>
-</div>
-<p class="video-note">
-The page starts the video muted. Sound is never required to read the complete vision below.
-</p>
-</section>
+    const ISSUER = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
+    const CURRENCY = 'JCS';
+    const XUMM_API_KEY = '7737775c-1645-4a4e-a92d-ffe51530a348';
+    const XRP_TO_DROPS = 1_000_000;
+    const MAX_TRUSTLINE_PAGES = 8;
+    const AUTO_REFRESH_MS = 60_000;
+    const XRPL_SERVERS = [
+      'wss://xrplcluster.com',
+      'wss://s1.ripple.com',
+      'wss://s2.ripple.com'
+    ];
 
-<section class="card" id="vision">
-<div class="section-heading">
-<div>
-<h2>Vision &amp; Core Values</h2>
-<p>
-This is a living statement of intent and responsibility—not a technical white paper,
-a securities offering, or a promise of financial return.
-</p>
-</div>
-<span class="section-badge">Living mission statement</span>
-</div>
-<div class="prose">
-<p class="statement">
-<strong>The mission is Christ; the technology is a tool.</strong>
-JCS exists to carry testimony about Jesus, preserve prayer and Scripture references in durable
-digital form, and invite people into a public record of faith without surrendering custody of
-their wallets or relying on one organization to hold their artifacts.
-</p>
-<p>
-A prayer NFT can serve as a portable Christian artifact inside a person’s wallet: a small,
-verifiable object connected to a prayer, testimony, Scripture reference, and public transaction.
-For someone living where Christian materials are restricted or where open worship can result in
-harassment, exclusion, or persecution, a wallet-held artifact may provide another way to retain
-and share a witness. It is not invisible and it is not automatically anonymous; XRP Ledger
-transactions and wallet addresses are public. The project must therefore place safety,
-informed choice, and honest disclosure ahead of growth.
-</p>
-<p>
-The wider vision is to spread the Gospel and the words of Jesus across lands, languages,
-generations, and circumstances. JCS should make Christian content easier to encounter,
-preserve, verify, and carry while remaining clear that salvation, discipleship, and spiritual
-life do not come from a token or an NFT.
-</p>
-</div>
-<div class="value-grid">
-<article class="value-card">
-<h3>Christ centered</h3>
-<p>Every feature should direct attention toward Jesus Christ rather than toward speculation, personalities, or technological novelty.</p>
-</article>
-<article class="value-card">
-<h3>Safety and human dignity</h3>
-<p>People facing persecution must be able to read silently, avoid publishing identity details, and understand that public-ledger activity can be traced.</p>
-</article>
-<article class="value-card">
-<h3>Non-custodial participation</h3>
-<p>Users review and sign through Xaman. The site should never request a secret, recovery phrase, or private key.</p>
-</article>
-<article class="value-card">
-<h3>Transparent infrastructure</h3>
-<p>Issuer identity, transactions, order books, AMM liquidity, and public records should be independently inspectable on XRPL.</p>
-</article>
-<article class="value-card">
-<h3>Voluntary witness</h3>
-<p>No prayer, testimony, NFT, trade, or social action should occur without a deliberate user choice and wallet approval.</p>
-</article>
-<article class="value-card">
-<h3>Stewardship over hype</h3>
-<p>JCS is not a promise of profit. Utility, accessibility, responsible disclosure, and faithful service take priority over promotional claims.</p>
-</article>
-</div>
-</section>
-
-<section class="card safety-card" id="safety">
-<div class="section-heading">
-<div>
-<h2>Serving people where faith carries risk</h2>
-<p>
-The project’s ministry purpose includes people who may be oppressed, monitored, isolated,
-or persecuted for Christian belief.
-</p>
-</div>
-<span class="section-badge">Safety before publicity</span>
-</div>
-<div class="mission-grid">
-<article class="mission-card">
-<h3>Portable Christian artifacts</h3>
-<p>
-Prayer NFTs can place a durable Christian artifact in the user’s own wallet, connected to a
-testimony or Scripture reference that can persist independently of a single website.
-</p>
-</article>
-<article class="mission-card">
-<h3>Silent access</h3>
-<p>
-The written vision, Scripture, prayer templates, and ledger records must remain useful without
-sound. Media should never be the only path to the message.
-</p>
-</article>
-<article class="mission-card">
-<h3>Identity restraint</h3>
-<p>
-Users should avoid names, locations, handles, or personal details when disclosure could create
-danger. Hiding a wallet in the interface does not remove it from the public ledger.
-</p>
-</article>
-<article class="mission-card">
-<h3>Across languages and generations</h3>
-<p>
-The long-term direction includes accessible translations, varied prayer references, and durable
-formats that can carry the Gospel beyond one region, platform, or moment in time.
-</p>
-</article>
-</div>
-</section>
-
-<section class="card" id="how-it-works">
-<div class="section-heading">
-<div>
-<h2>How the JCS ecosystem carries the mission</h2>
-<p>Each layer has a distinct purpose. No single feature is presented as Christianity itself.</p>
-</div>
-<span class="section-badge">Faith first · technology second</span>
-</div>
-<div class="path-grid">
-<article class="path-card">
-<div class="path-number">1</div>
-<h3>Encounter</h3>
-<p>Visitors can read the vision, Scripture, prayer references, testimony feed, and public project information without holding JCS.</p>
-</article>
-<article class="path-card">
-<div class="path-number">2</div>
-<h3>Preserve</h3>
-<p>A user may mint a JCS-logo prayer NFT carrying a prayer identifier, testimony commitment, and Scripture reference in their own wallet.</p>
-</article>
-<article class="path-card">
-<div class="path-number">3</div>
-<h3>Publish</h3>
-<p>With a separate approval, the testimony can enter the public Sign the Ledger feed through validated XRPL transaction memos.</p>
-</article>
-<article class="path-card">
-<div class="path-number">4</div>
-<h3>Share</h3>
-<p>Public testimony links can be shared through social platforms while the underlying proof remains independently verifiable on XRPL.</p>
-</article>
-</div>
-</section>
-
-<section class="card metrics-card" id="live-metrics">
-<div class="section-heading">
-<div>
-<h2>Live XRP Ledger metrics</h2>
-<p>
-Validated AMM, order-book, trustline, supply, and network information. Values refresh automatically
-and can be independently checked through public explorers.
-</p>
-</div>
-<span class="section-badge">XRPL Mainnet</span>
-</div>
-<div class="metric-toolbar">
-<div class="metric-status">
-<span class="live-dot" id="liveDot"></span>
-<strong id="metricsStatus">Connecting to an XRP Ledger server…</strong>
-<span id="metricsServer"></span>
-</div>
-<button class="btn small" id="refreshMetricsBtn" type="button">Refresh metrics</button>
-</div>
-
-<div class="metric-grid">
-<div class="metric"><span>JCS spot price</span><strong id="metricPriceXrp">—</strong><small>XRP per JCS</small></div>
-<div class="metric"><span>Indicative JCS price</span><strong id="metricPriceUsd">—</strong><small>Uses live XRP/USD reference</small></div>
-<div class="metric"><span>Outstanding JCS</span><strong id="metricSupply">—</strong><small>Calculated from issuer trustlines</small></div>
-<div class="metric"><span>Indicative network value</span><strong id="metricMarketValue">—</strong><small>Outstanding JCS × indicative price</small></div>
-<div class="metric"><span>AMM XRP reserve</span><strong id="metricAmmXrp">—</strong><small>Validated pool balance</small></div>
-<div class="metric"><span>AMM JCS reserve</span><strong id="metricAmmJcs">—</strong><small>Validated pool balance</small></div>
-<div class="metric"><span>AMM trading fee</span><strong id="metricAmmFee">—</strong><small>Pool fee configured on XRPL</small></div>
-<div class="metric"><span>Indicative pool value</span><strong id="metricPoolValue">—</strong><small>Approximate two-sided USD value</small></div>
-<div class="metric"><span>Best DEX bid</span><strong id="metricBid">—</strong><small>XRP per JCS</small></div>
-<div class="metric"><span>Best DEX ask</span><strong id="metricAsk">—</strong><small>XRP per JCS</small></div>
-<div class="metric"><span>Bid/ask spread</span><strong id="metricSpread">—</strong><small>Native XRPL order book</small></div>
-<div class="metric"><span>Trustlines / holders</span><strong id="metricTrustlines">—</strong><small>Lines / positive JCS balances</small></div>
-<div class="metric"><span>Validated ledger</span><strong id="metricLedger">—</strong><small>Latest server validation</small></div>
-<div class="metric"><span>XRP reference price</span><strong id="metricXrpUsd">—</strong><small>External USD reference</small></div>
-<div class="metric"><span>XRP 24-hour change</span><strong id="metricXrpChange">—</strong><small>Reference asset movement</small></div>
-<div class="metric"><span>Last refreshed</span><strong id="metricUpdated">—</strong><small>Local browser time</small></div>
-</div>
-
-<div class="market-panels">
-<article class="market-panel">
-<h3>Top JCS sell offers</h3>
-<div class="table-wrap">
-<table>
-<thead><tr><th>JCS offered</th><th>XRP requested</th><th>XRP / JCS</th></tr></thead>
-<tbody id="askTable"><tr><td colspan="3">Loading…</td></tr></tbody>
-</table>
-</div>
-</article>
-<article class="market-panel">
-<h3>Top JCS buy offers</h3>
-<div class="table-wrap">
-<table>
-<thead><tr><th>JCS requested</th><th>XRP offered</th><th>XRP / JCS</th></tr></thead>
-<tbody id="bidTable"><tr><td colspan="3">Loading…</td></tr></tbody>
-</table>
-</div>
-</article>
-</div>
-<p class="metric-disclosure">
-Metrics are informational estimates, not guarantees or investment advice. Thin liquidity,
-order changes, AMM price impact, network fees, and slippage can cause actual execution to differ.
-“Indicative network value” is not a valuation claim and should not be treated as market capitalization
-in the sense used for regulated securities.
-</p>
-</section>
-
-<section class="card" id="trade-explore">
-<div class="section-heading">
-<div>
-<h2>Trade &amp; independently explore</h2>
-<p>Use the native JCS interface or inspect the same public XRPL asset through independent services.</p>
-</div>
-<span class="section-badge">Non-custodial access</span>
-</div>
-<div class="trade-grid">
-<article class="trade-card">
-<h3>JCS native portal</h3>
-<p>Connect Xaman, review the exact issuer, inspect quotes, and trade through the native XRPL DEX and AMM.</p>
-<a class="btn gold" href="index.html#trade">Open JCS trading</a>
-</article>
-<article class="trade-card">
-<h3>Sologenic</h3>
-<p>Open the JCS/XRP market through an independent XRPL decentralized exchange interface.</p>
-<a class="btn" href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" rel="noopener" target="_blank">Open Sologenic</a>
-</article>
-<article class="trade-card">
-<h3>XPMarket</h3>
-<p>Review JCS token information, charts, trustlines, pools, and other public XRPL data.</p>
-<a class="btn" href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener" target="_blank">Open XPMarket</a>
-</article>
-<article class="trade-card">
-<h3>Bithomp</h3>
-<p>Inspect the issuer account, transactions, trustlines, and validated ledger history.</p>
-<a class="btn" href="https://bithomp.com/en/account/rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener" target="_blank">Open Bithomp</a>
-</article>
-</div>
-</section>
-
-<section class="card" id="roadmap">
-<div class="section-heading">
-<div>
-<h2>Living roadmap</h2>
-<p>The roadmap follows the ministry purpose and operational responsibilities rather than promotional milestones.</p>
-</div>
-<span class="section-badge">Updated as the ecosystem develops</span>
-</div>
-<div class="roadmap">
-<article class="roadmap-item">
-<span class="roadmap-state live">Live</span>
-<div><h3>Public JCS issuer, DEX access, AMM data, and explorer links</h3><p>The asset identity and public market infrastructure can be independently inspected on XRP Ledger Mainnet.</p></div>
-</article>
-<article class="roadmap-item">
-<span class="roadmap-state live">Live</span>
-<div><h3>Sign the Ledger prayer NFT and testimony system</h3><p>Users can create wallet-held prayer artifacts and publish validated public testimony through explicit Xaman approvals.</p></div>
-</article>
-<article class="roadmap-item">
-<span class="roadmap-state active">Active</span>
-<div><h3>Uniform pages, safety controls, sharing, and live transparency</h3><p>The website is being standardized across mobile and desktop with clearer audio choices, social sharing, prayer references, and deeper ledger metrics.</p></div>
-</article>
-<article class="roadmap-item">
-<span class="roadmap-state active">Active</span>
-<div><h3>Terms, privacy, and support documentation</h3><p>Dedicated Terms of Service and Privacy Policy pages are being added for users and Xaman application review.</p></div>
-</article>
-<article class="roadmap-item">
-<span class="roadmap-state next">Next</span>
-<div><h3>Broader language and accessibility support</h3><p>Expand the written Gospel, prayer references, safety guidance, and testimony experience for more languages, devices, and accessibility needs.</p></div>
-</article>
-<article class="roadmap-item">
-<span class="roadmap-state next">Next</span>
-<div><h3>Durable Christian artifact discovery</h3><p>Improve the ability to verify, organize, and share wallet-held prayer NFTs without misrepresenting public-ledger privacy or taking custody of the user’s assets.</p></div>
-</article>
-</div>
-</section>
-
-<section class="card" id="ecosystem">
-<div class="section-heading">
-<div>
-<h2>JCS ecosystem directory</h2>
-<p>Project pages, faith tools, public market interfaces, support, legal documents, and related XRPL projects.</p>
-</div>
-<span class="section-badge">Official and independent links</span>
-</div>
-<div class="ecosystem-grid">
-<a class="ecosystem-link" href="index.html"><strong>JCS Home</strong><span>Main faith, Scripture, media, wallet, and trading portal</span></a>
-<a class="ecosystem-link" href="verify.html"><strong>Sign the Ledger</strong><span>Prayer NFTs and public on-ledger testimony</span></a>
-<a class="ecosystem-link" href="index.html#trade"><strong>JCS Trade</strong><span>Native XRPL DEX and AMM interaction</span></a>
-<a class="ecosystem-link" href="index.html#scripture"><strong>Scripture</strong><span>Rotating written Scripture and faith content</span></a>
-<a class="ecosystem-link" href="index.html#audio"><strong>Sacred Audio</strong><span>Continuous church music and Scripture reading</span></a>
-<a class="ecosystem-link" href="index.html#sacred-film"><strong>Sacred Film</strong><span>Public-domain film presentation on the home page</span></a>
-<a class="ecosystem-link" href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener" target="_blank"><strong>XPMarket</strong><span>Independent JCS charts and XRPL data</span></a>
-<a class="ecosystem-link" href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" rel="noopener" target="_blank"><strong>Sologenic</strong><span>Independent JCS/XRP DEX interface</span></a>
-<a class="ecosystem-link" href="https://bithomp.com/en/account/rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener" target="_blank"><strong>Bithomp</strong><span>Issuer account and transaction explorer</span></a>
-<a class="ecosystem-link" href="https://x.com/JesusCS_token" rel="noopener" target="_blank"><strong>Project Support on X</strong><span>Questions, project notices, and public contact</span></a>
-<a class="ecosystem-link" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank"><strong>XRBitcoin</strong><span>Related XRP Ledger project directory</span></a>
-<a class="ecosystem-link" href="https://xrbitcoincash.com/" rel="noopener" target="_blank"><strong>XRBitcoinCash</strong><span>Related XRP Ledger ecosystem project</span></a>
-<a class="ecosystem-link" href="/ai.json"><strong>AI Manifest</strong><span>Machine-readable project description and provenance</span></a>
-<a class="ecosystem-link" href="security.html" title="Open the JCS security and vulnerability disclosure page"><strong>Security Contact</strong><span>Responsible security reporting information</span></a>
-<a class="ecosystem-link" href="terms.html"><strong>Terms of Service</strong><span>Project terms page being added for users and Xaman</span></a>
-<a class="ecosystem-link" href="privacy.html"><strong>Privacy Policy</strong><span>Project privacy page being added for users and Xaman</span></a>
-</div>
-</section>
-</main>
-
-<footer class="site-footer">
-<div class="footer-inner">
-<h2>Jesus Christ Saves Token · JCS</h2>
-<p>
-A transparent faith-centered XRPL project. JCS is not a church, a promise of profit,
-or a substitute for Scripture, prayer, fellowship, pastoral care, or sound judgment.
-</p>
-<div class="footer-link-row">
-<a class="btn gold small" href="verify.html">Sign the Ledger</a>
-<a class="btn small" href="index.html">JCS Home</a>
-<a class="btn small" href="index.html#trade">Trade</a>
-<a class="btn small" href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener" target="_blank">XPMarket</a>
-<a class="btn small" href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP" rel="noopener" target="_blank">Sologenic</a>
-<a class="btn small" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
-<a class="btn small" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
-</div>
-<p class="mono">Issuer: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · Currency: JCS · XRPL Mainnet</p>
-<div class="legal-row">
-<a href="terms.html">Terms of Service</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="https://x.com/JesusCS_token" rel="noopener" target="_blank">Support</a>
-<a href="mailto:jesuschristsaves@gmail.com">jesuschristsaves@gmail.com</a>
-<a href="/ai.json">AI Manifest</a>
-<a href="security.html" title="Open the JCS security and vulnerability disclosure page">Security</a>
-<span>© <span id="copyrightYear"></span> Jesus Christ Saves Token</span>
-</div>
-</div>
-</footer>
-
-<script crossorigin="anonymous" src="https://xaman.app/assets/cdn/xumm.min.js"></script>
-<script crossorigin="anonymous" src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
-<script>
-(function(){
-  'use strict';
-
-  const $ = id => document.getElementById(id);
-  const ISSUER = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
-  const CURRENCY = 'JCS';
-  const XRP_TO_DROPS = 1000000;
-  const XUMM_API_KEY = '7737775c-1645-4a4e-a92d-ffe51530a348';
-  const XRPL_SERVERS = [
-    'wss://xrplcluster.com',
-    'wss://s1.ripple.com',
-    'wss://s2.ripple.com',
-    'wss://honeycluster.io'
-  ];
-
-  $('copyrightYear').textContent = new Date().getFullYear();
-
-  function updateThemeControl(theme){
-    const dark = theme === 'dark';
-    const button = $('themeToggle');
-    const label = $('themeToggleText');
-    const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-    if(button){
-      button.setAttribute('aria-pressed', String(dark));
-      button.setAttribute(
-        'aria-label',
-        dark ? 'Switch to light mode' : 'Switch to dark mode'
-      );
-      button.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
-    }
-    if(label){
-      label.textContent = dark ? 'Light mode' : 'Dark mode';
-    }
-    if(themeMeta){
-      themeMeta.setAttribute('content', dark ? '#07101c' : '#ffffff');
-    }
-  }
-
-  function setTheme(theme){
-    const normalized = theme === 'light' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = normalized;
-    try{ localStorage.setItem('jcs-color-mode', normalized); }catch{}
-    updateThemeControl(normalized);
-  }
-
-  $('themeToggle').addEventListener('click', () => {
-    setTheme(
-      document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'
-    );
-  });
-
-  updateThemeControl(document.documentElement.dataset.theme || 'dark');
-
-  function shortAccount(account){
-    const value=String(account||'');
-    if(value.length<18) return value||'Wallet disconnected';
-    return value.slice(0,8)+'…'+value.slice(-6);
-  }
-
-  let xumm = null;
-  let currentAccount = '';
-
-  async function applyXamanIdentity(event){
-    try{
-      const candidate =
-        event?.me?.account ||
-        event?.account ||
-        event?.data?.account ||
-        await xumm?.user?.account;
-      const account=String(candidate||'').trim();
-      if(!account) return false;
-
-      currentAccount=account;
-      $('connectBtn').hidden=true;
-      $('disconnectBtn').hidden=false;
-      $('walletPill').textContent=shortAccount(account);
-      $('walletPill').title=account;
-      return true;
-    }catch{
-      return false;
-    }
-  }
-
-  function setDisconnected(){
-    currentAccount='';
-    $('connectBtn').hidden=false;
-    $('disconnectBtn').hidden=true;
-    $('walletPill').textContent='Wallet disconnected';
-    $('walletPill').removeAttribute('title');
-  }
-
-  if(typeof window.Xumm === 'function' && XUMM_API_KEY){
-    xumm=new window.Xumm(XUMM_API_KEY);
-
-    xumm.on('ready', async () => {
-      $('connectBtn').disabled=false;
-      await applyXamanIdentity();
-    });
-    xumm.on('success', applyXamanIdentity);
-    xumm.on('retrieved', applyXamanIdentity);
-    xumm.on('logout', setDisconnected);
-    xumm.on('loggedout', setDisconnected);
-
-    $('connectBtn').addEventListener('click', async () => {
-      try{
-        $('connectBtn').disabled=true;
-        $('connectBtn').textContent='Connecting…';
-        await xumm.authorize();
-        await applyXamanIdentity();
-      }catch(error){
-        console.error('Xaman connection error:',error);
-      }finally{
-        $('connectBtn').textContent='Connect Xaman';
-        $('connectBtn').disabled=false;
-      }
-    });
-
-    $('disconnectBtn').addEventListener('click', async () => {
-      try{ await Promise.resolve(xumm.logout()); }
-      catch(error){ console.warn(error); }
-      setDisconnected();
-    });
-  }
-
-  function normalizeCurrency(value){
-    return String(value||'').toUpperCase().replace(/0+$/,'');
-  }
-
-  function amountNumber(amount){
-    if(typeof amount === 'string') return Number(amount)/XRP_TO_DROPS;
-    if(amount && typeof amount === 'object') return Number(amount.value);
-    return NaN;
-  }
-
-  function isXrpAmount(amount){
-    return typeof amount === 'string' ||
-      (amount && amount.currency === 'XRP');
-  }
-
-  function formatNumber(value, digits=6){
-    if(!Number.isFinite(Number(value))) return 'Unavailable';
-    return Number(value).toLocaleString('en-US',{
-      maximumFractionDigits:digits
-    });
-  }
-
-  function formatUsd(value, digits=6){
-    if(!Number.isFinite(Number(value))) return 'Unavailable';
-    const amount=Number(value);
-    const maximumFractionDigits=
-      amount >= 100 ? 2 :
-      amount >= 1 ? 4 :
-      amount >= .01 ? 6 : 9;
-    return amount.toLocaleString('en-US',{
-      style:'currency',
-      currency:'USD',
-      maximumFractionDigits:Math.min(maximumFractionDigits,digits)
-    });
-  }
-
-  function escapeHtml(value){
-    return String(value??'').replace(/[&<>"']/g,character=>({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
-    }[character]));
-  }
-
-  async function connectLedger(){
-    let lastError=null;
-    for(const server of XRPL_SERVERS){
-      const client=new window.xrpl.Client(server,{connectionTimeout:9000});
-      try{
-        await client.connect();
-        return {client,server};
-      }catch(error){
-        lastError=error;
-        try{ await client.disconnect(); }catch{}
-      }
-    }
-    throw lastError || new Error('No XRP Ledger server was available.');
-  }
-
-  async function fetchWithTimeout(url,timeoutMs=8000){
-    const controller=new AbortController();
-    const timeout=window.setTimeout(()=>controller.abort(),timeoutMs);
-    try{
-      const response=await fetch(url,{signal:controller.signal,cache:'no-store'});
-      if(!response.ok) throw new Error('Reference price request failed.');
-      return await response.json();
-    }finally{
-      window.clearTimeout(timeout);
-    }
-  }
-
-  async function loadIssuerLines(client){
-    const lines=[];
-    let marker=undefined;
-    let pages=0;
-
-    do{
-      const request={
-        command:'account_lines',
-        account:ISSUER,
-        ledger_index:'validated',
-        limit:400
-      };
-      if(marker) request.marker=marker;
-
-      const response=await client.request(request);
-      lines.push(...(response.result.lines||[]));
-      marker=response.result.marker;
-      pages+=1;
-    }while(marker && pages<12);
-
-    return lines.filter(
-      line => normalizeCurrency(line.currency) === normalizeCurrency(CURRENCY)
-    );
-  }
-
-  function extractAmm(amm){
-    if(!amm) return null;
-
-    let xrpReserve=NaN;
-    let tokenReserve=NaN;
-
-    for(const amount of [amm.amount,amm.amount2]){
-      if(isXrpAmount(amount)) xrpReserve=amountNumber(amount);
-      else if(
-        amount &&
-        amount.issuer === ISSUER &&
-        normalizeCurrency(amount.currency) === normalizeCurrency(CURRENCY)
-      ){
-        tokenReserve=amountNumber(amount);
-      }
-    }
-
-    if(!Number.isFinite(xrpReserve) || !Number.isFinite(tokenReserve)){
-      return null;
-    }
-
-    return {
-      xrpReserve,
-      tokenReserve,
-      spot:xrpReserve/tokenReserve,
-      tradingFeePercent:Number(amm.trading_fee||0)/1000,
-      account:amm.account||'',
-      lpToken:amm.lp_token||null
+    const $ = id => document.getElementById(id);
+    const state = {
+      xumm: null,
+      account: '',
+      refreshing: false,
+      metricsLoaded: false,
+      autoTimer: null,
+      lastRefreshAt: 0
     };
-  }
 
-  function offerRow(offer,side){
-    const gets=amountNumber(offer.TakerGets);
-    const pays=amountNumber(offer.TakerPays);
+    const copyrightYear = $('copyrightYear');
+    if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
 
-    if(side==='ask'){
-      const token=gets;
-      const xrp=pays;
-      return {token,xrp,price:xrp/token};
+    function setStatus(id, message, kind) {
+      const node = $(id);
+      if (!node) return;
+      node.textContent = message;
+      node.classList.remove('ok', 'err');
+      if (kind) node.classList.add(kind);
     }
 
-    const xrp=gets;
-    const token=pays;
-    return {token,xrp,price:xrp/token};
-  }
+    function updateThemeControl(theme) {
+      const dark = theme === 'dark';
+      const button = $('themeToggle');
+      const label = $('themeToggleText');
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  function renderBook(rows,target){
-    const valid=rows.filter(
-      row => Number.isFinite(row.token) &&
-        Number.isFinite(row.xrp) &&
-        Number.isFinite(row.price) &&
-        row.token>0 && row.xrp>0
-    ).slice(0,5);
+      if (button) {
+        button.setAttribute('aria-pressed', String(dark));
+        button.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        button.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+      }
+      if (label) label.textContent = dark ? 'Light mode' : 'Dark mode';
+      if (themeMeta) themeMeta.setAttribute('content', dark ? '#050916' : '#f7f9fc');
+    }
 
-    $(target).innerHTML=valid.length
-      ? valid.map(row=>`
-        <tr>
-          <td>${escapeHtml(formatNumber(row.token,6))}</td>
-          <td>${escapeHtml(formatNumber(row.xrp,6))}</td>
-          <td>${escapeHtml(formatNumber(row.price,9))}</td>
-        </tr>
-      `).join('')
-      : '<tr><td colspan="3">No visible offers</td></tr>';
-  }
+    function setTheme(theme) {
+      const normalized = theme === 'light' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = normalized;
+      try { localStorage.setItem('jcs-color-mode', normalized); } catch {}
+      updateThemeControl(normalized);
+    }
 
-  let refreshing=false;
+    $('themeToggle')?.addEventListener('click', () => {
+      setTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light');
+    });
+    updateThemeControl(document.documentElement.dataset.theme || 'dark');
 
-  async function refreshMetrics(){
-    if(refreshing) return;
-    refreshing=true;
-    $('refreshMetricsBtn').disabled=true;
-    $('metricsStatus').textContent='Loading validated XRPL data…';
-    $('liveDot').classList.remove('ok');
+    async function copyText(value) {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return;
+      }
+      const textarea = document.createElement('textarea');
+      textarea.value = value;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand('copy');
+      textarea.remove();
+      if (!ok) throw new Error('Copy was blocked by this browser.');
+    }
 
-    let client=null;
+    document.querySelectorAll('[data-copy-target]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const target = $(button.dataset.copyTarget);
+        if (!target) return;
+        try {
+          await copyText(target.textContent.trim());
+          setStatus('copyStatus', 'Copied to clipboard.', 'ok');
+        } catch (error) {
+          setStatus('copyStatus', error?.message || 'Copy failed.', 'err');
+        }
+      });
+    });
 
-    try{
-      if(!window.xrpl?.Client){
-        throw new Error('The XRPL library did not load.');
+    $('shareVisionBtn')?.addEventListener('click', async () => {
+      const data = {
+        title: 'JCS Vision, Core Values & Fellowship Roadmap',
+        text: 'Read the living vision and Christian social-platform roadmap of Jesus Christ Saves Token.',
+        url: 'https://jesuschristsavestoken.com/about-jcs.html'
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(data);
+          setStatus('shareStatus', 'Share sheet opened.', 'ok');
+        } else {
+          await copyText(data.url);
+          setStatus('shareStatus', 'Vision link copied.', 'ok');
+        }
+      } catch (error) {
+        if (error?.name !== 'AbortError') {
+          setStatus('shareStatus', error?.message || 'Sharing was not available.', 'err');
+        }
+      }
+    });
+
+    $('loadVideoBtn')?.addEventListener('click', () => {
+      const shell = $('videoShell');
+      const placeholder = $('videoPlaceholder');
+      if (!shell || !placeholder || shell.querySelector('iframe')) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/evbHWPSjeeo?rel=0&modestbranding=1&playsinline=1';
+      iframe.title = 'Optional JCS message video';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allow = 'encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+
+      placeholder.remove();
+      shell.appendChild(iframe);
+      setStatus('videoStatus', '', null);
+    });
+
+    function shortAccount(account) {
+      const value = String(account || '');
+      if (value.length < 18) return value || 'Wallet disconnected';
+      return value.slice(0, 8) + '…' + value.slice(-6);
+    }
+
+    async function applyXamanIdentity(event) {
+      try {
+        const candidate =
+          event?.me?.account ||
+          event?.account ||
+          event?.data?.account ||
+          await state.xumm?.user?.account;
+        const account = String(candidate || '').trim();
+        if (!account) return false;
+
+        state.account = account;
+        $('connectBtn').hidden = true;
+        $('disconnectBtn').hidden = false;
+        $('walletPill').textContent = shortAccount(account);
+        $('walletPill').title = account;
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function setDisconnected() {
+      state.account = '';
+      $('connectBtn').hidden = false;
+      $('disconnectBtn').hidden = true;
+      $('walletPill').textContent = 'Wallet disconnected';
+      $('walletPill').removeAttribute('title');
+    }
+
+    function initializeXaman() {
+      const connect = $('connectBtn');
+      if (typeof window.Xumm !== 'function' || !XUMM_API_KEY) {
+        if (connect) {
+          connect.disabled = true;
+          connect.textContent = 'Xaman unavailable';
+        }
+        return;
       }
 
-      const connection=await connectLedger();
-      client=connection.client;
-      $('metricsServer').textContent='· '+connection.server;
+      state.xumm = new window.Xumm(XUMM_API_KEY);
 
-      const [
-        ammResponse,
-        askResponse,
-        bidResponse,
-        serverResponse,
-        issuerLines,
-        xrpReference
-      ]=await Promise.all([
-        client.request({
-          command:'amm_info',
-          asset:{currency:'XRP'},
-          asset2:{currency:CURRENCY,issuer:ISSUER},
-          ledger_index:'validated'
-        }).catch(()=>null),
-        client.request({
-          command:'book_offers',
-          taker_gets:{currency:CURRENCY,issuer:ISSUER},
-          taker_pays:{currency:'XRP'},
-          ledger_index:'validated',
-          limit:10
-        }),
-        client.request({
-          command:'book_offers',
-          taker_gets:{currency:'XRP'},
-          taker_pays:{currency:CURRENCY,issuer:ISSUER},
-          ledger_index:'validated',
-          limit:10
-        }),
-        client.request({command:'server_info'}),
-        loadIssuerLines(client),
-        fetchWithTimeout(
-          'https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true'
-        ).catch(()=>null)
-      ]);
+      state.xumm.on('ready', async () => {
+        connect.disabled = false;
+        await applyXamanIdentity();
+      });
+      state.xumm.on('success', applyXamanIdentity);
+      state.xumm.on('retrieved', applyXamanIdentity);
+      state.xumm.on('logout', setDisconnected);
+      state.xumm.on('loggedout', setDisconnected);
 
-      const amm=extractAmm(ammResponse?.result?.amm);
-      const asks=(askResponse.result.offers||[]).map(
-        offer=>offerRow(offer,'ask')
-      );
-      const bids=(bidResponse.result.offers||[]).map(
-        offer=>offerRow(offer,'bid')
-      );
-
-      const bestAsk=asks.find(row=>Number.isFinite(row.price))?.price;
-      const bestBid=bids.find(row=>Number.isFinite(row.price))?.price;
-      const midpoint=
-        Number.isFinite(bestAsk) && Number.isFinite(bestBid)
-          ? (bestAsk+bestBid)/2
-          : bestAsk || bestBid;
-      const priceXrp=amm?.spot || midpoint;
-
-      const xrpUsd=Number(xrpReference?.ripple?.usd);
-      const xrpChange=Number(xrpReference?.ripple?.usd_24h_change);
-      const priceUsd=
-        Number.isFinite(priceXrp) && Number.isFinite(xrpUsd)
-          ? priceXrp*xrpUsd
-          : NaN;
-
-      let outstanding=0;
-      let holders=0;
-
-      issuerLines.forEach(line=>{
-        const balance=Number(line.balance);
-        if(!Number.isFinite(balance)) return;
-        const held=Math.max(0,-balance);
-        outstanding+=held;
-        if(held>0) holders+=1;
+      connect.addEventListener('click', async () => {
+        try {
+          connect.disabled = true;
+          connect.textContent = 'Connecting…';
+          await state.xumm.authorize();
+          await applyXamanIdentity();
+        } catch (error) {
+          console.info('Xaman connection was not completed:', error);
+          $('walletPill').textContent = 'Connection not completed';
+          $('walletPill').title = error?.message || 'Xaman connection was not completed.';
+          connect.textContent = 'Connect Xaman';
+        } finally {
+          connect.disabled = false;
+          connect.textContent = 'Connect Xaman';
+        }
       });
 
-      const indicativeValue=
-        Number.isFinite(outstanding) && Number.isFinite(priceUsd)
-          ? outstanding*priceUsd
-          : NaN;
-      const poolValue=
-        amm && Number.isFinite(xrpUsd)
-          ? amm.xrpReserve*xrpUsd*2
-          : NaN;
-      const spread=
-        Number.isFinite(bestAsk) &&
-        Number.isFinite(bestBid) &&
-        bestAsk>0
-          ? ((bestAsk-bestBid)/bestAsk)*100
-          : NaN;
-
-      const validatedLedger=
-        serverResponse.result.info?.validated_ledger?.seq ||
-        serverResponse.result.info?.complete_ledgers ||
-        'Unavailable';
-
-      $('metricPriceXrp').textContent=
-        Number.isFinite(priceXrp)
-          ? formatNumber(priceXrp,9)+' XRP'
-          : 'Unavailable';
-      $('metricPriceUsd').textContent=formatUsd(priceUsd,9);
-      $('metricSupply').textContent=
-        Number.isFinite(outstanding)
-          ? formatNumber(outstanding,6)+' JCS'
-          : 'Unavailable';
-      $('metricMarketValue').textContent=formatUsd(indicativeValue,2);
-      $('metricAmmXrp').textContent=
-        amm ? formatNumber(amm.xrpReserve,6)+' XRP' : 'Unavailable';
-      $('metricAmmJcs').textContent=
-        amm ? formatNumber(amm.tokenReserve,6)+' JCS' : 'Unavailable';
-      $('metricAmmFee').textContent=
-        amm ? formatNumber(amm.tradingFeePercent,4)+'%' : 'Unavailable';
-      $('metricPoolValue').textContent=formatUsd(poolValue,2);
-      $('metricBid').textContent=
-        Number.isFinite(bestBid)
-          ? formatNumber(bestBid,9)+' XRP'
-          : 'Unavailable';
-      $('metricAsk').textContent=
-        Number.isFinite(bestAsk)
-          ? formatNumber(bestAsk,9)+' XRP'
-          : 'Unavailable';
-      $('metricSpread').textContent=
-        Number.isFinite(spread)
-          ? formatNumber(spread,4)+'%'
-          : 'Unavailable';
-      $('metricTrustlines').textContent=
-        issuerLines.length.toLocaleString('en-US')+
-        ' / '+holders.toLocaleString('en-US');
-      $('metricLedger').textContent=String(validatedLedger);
-      $('metricXrpUsd').textContent=formatUsd(xrpUsd,4);
-      $('metricXrpChange').textContent=
-        Number.isFinite(xrpChange)
-          ? (xrpChange>=0?'+':'')+formatNumber(xrpChange,2)+'%'
-          : 'Unavailable';
-      $('metricUpdated').textContent=new Date().toLocaleTimeString();
-
-      renderBook(asks,'askTable');
-      renderBook(bids,'bidTable');
-
-      $('metricsStatus').textContent='Live validated metrics loaded';
-      $('liveDot').classList.add('ok');
-    }catch(error){
-      console.error('JCS metrics error:',error);
-      $('metricsStatus').textContent=
-        'Metrics unavailable: '+(error?.message||error);
-      $('metricsServer').textContent='';
-      $('askTable').innerHTML='<tr><td colspan="3">Unavailable</td></tr>';
-      $('bidTable').innerHTML='<tr><td colspan="3">Unavailable</td></tr>';
-    }finally{
-      if(client){
-        try{ await client.disconnect(); }catch{}
-      }
-      refreshing=false;
-      $('refreshMetricsBtn').disabled=false;
+      $('disconnectBtn')?.addEventListener('click', async () => {
+        try { await Promise.resolve(state.xumm.logout()); }
+        catch (error) { console.warn(error); }
+        setDisconnected();
+      });
     }
-  }
 
-  $('refreshMetricsBtn').addEventListener('click',refreshMetrics);
-  refreshMetrics();
-  window.setInterval(refreshMetrics,60000);
-})();
-</script>
+    initializeXaman();
+
+    function normalizeCurrency(value) {
+      return String(value || '').toUpperCase().replace(/0+$/, '');
+    }
+
+    function isXrpAmount(amount) {
+      return typeof amount === 'string' ||
+        (amount && typeof amount === 'object' && amount.currency === 'XRP');
+    }
+
+    function amountNumber(amount) {
+      if (typeof amount === 'string') return Number(amount) / XRP_TO_DROPS;
+      if (amount && typeof amount === 'object') return Number(amount.value);
+      return NaN;
+    }
+
+    function formatNumber(value, digits = 6) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return 'Unavailable';
+      return number.toLocaleString('en-US', { maximumFractionDigits: digits });
+    }
+
+    function formatUsd(value, digits = 6) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return 'Unavailable';
+      const maximumFractionDigits =
+        number >= 100 ? 2 :
+        number >= 1 ? 4 :
+        number >= .01 ? 6 : Math.min(9, digits);
+      return number.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits
+      });
+    }
+
+    function setMetric(id, value) {
+      const node = $(id);
+      if (node) node.textContent = value;
+    }
+
+    function shortMaker(value) {
+      const account = String(value || '');
+      if (account.length < 18) return account || 'Unknown';
+      return account.slice(0, 7) + '…' + account.slice(-5);
+    }
+
+    function decodeHexText(hex) {
+      const value = String(hex || '').trim();
+      if (!value || !/^[0-9A-Fa-f]+$/.test(value) || value.length % 2) return '';
+      try {
+        const bytes = new Uint8Array(value.match(/.{2}/g).map(pair => parseInt(pair, 16)));
+        return new TextDecoder().decode(bytes).replace(/\0+$/g, '').trim();
+      } catch {
+        return '';
+      }
+    }
+
+    class LedgerSocket {
+      constructor(url, timeoutMs = 10_000) {
+        this.url = url;
+        this.timeoutMs = timeoutMs;
+        this.socket = null;
+        this.sequence = 0;
+        this.pending = new Map();
+      }
+
+      connect() {
+        return new Promise((resolve, reject) => {
+          let settled = false;
+          const timer = window.setTimeout(() => {
+            if (settled) return;
+            settled = true;
+            try { this.socket?.close(); } catch {}
+            reject(new Error('Connection timed out.'));
+          }, this.timeoutMs);
+
+          try {
+            this.socket = new WebSocket(this.url);
+          } catch (error) {
+            window.clearTimeout(timer);
+            reject(error);
+            return;
+          }
+
+          this.socket.addEventListener('open', () => {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timer);
+            resolve();
+          });
+
+          this.socket.addEventListener('message', event => {
+            let message;
+            try { message = JSON.parse(event.data); }
+            catch { return; }
+
+            const pending = this.pending.get(String(message.id));
+            if (!pending) return;
+            this.pending.delete(String(message.id));
+            window.clearTimeout(pending.timer);
+
+            if (message.status === 'error' || message.error || message.result?.error) {
+              pending.reject(new Error(
+                message.error_message ||
+                message.error ||
+                message.result?.error_message ||
+                message.result?.error ||
+                'XRPL request failed.'
+              ));
+              return;
+            }
+
+            pending.resolve(message.result || {});
+          });
+
+          this.socket.addEventListener('error', () => {
+            if (!settled) {
+              settled = true;
+              window.clearTimeout(timer);
+              reject(new Error('WebSocket connection failed.'));
+            }
+          });
+
+          this.socket.addEventListener('close', () => {
+            for (const pending of this.pending.values()) {
+              window.clearTimeout(pending.timer);
+              pending.reject(new Error('XRPL connection closed.'));
+            }
+            this.pending.clear();
+          });
+        });
+      }
+
+      request(payload, timeoutMs = 12_000) {
+        if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+          return Promise.reject(new Error('XRPL connection is not open.'));
+        }
+
+        const id = 'jcs-' + (++this.sequence);
+        return new Promise((resolve, reject) => {
+          const timer = window.setTimeout(() => {
+            this.pending.delete(id);
+            reject(new Error('XRPL request timed out.'));
+          }, timeoutMs);
+
+          this.pending.set(id, { resolve, reject, timer });
+          this.socket.send(JSON.stringify({ id, ...payload }));
+        });
+      }
+
+      close() {
+        try { this.socket?.close(1000, 'complete'); } catch {}
+      }
+    }
+
+    async function connectLedger() {
+      let lastError = null;
+
+      for (const server of XRPL_SERVERS) {
+        const connection = new LedgerSocket(server);
+        try {
+          await connection.connect();
+          const serverInfo = await connection.request({ command: 'server_info' });
+          return { connection, server, serverInfo };
+        } catch (error) {
+          lastError = error;
+          connection.close();
+        }
+      }
+
+      throw lastError || new Error('No public XRP Ledger server was available.');
+    }
+
+    async function fetchJson(url, timeoutMs = 8_000) {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, {
+          signal: controller.signal,
+          cache: 'no-store',
+          credentials: 'omit',
+          referrerPolicy: 'no-referrer'
+        });
+        if (!response.ok) throw new Error('External reference request failed.');
+        return await response.json();
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function loadIssuerLines(connection) {
+      const lines = [];
+      let marker;
+      let pages = 0;
+
+      do {
+        const request = {
+          command: 'account_lines',
+          account: ISSUER,
+          ledger_index: 'validated',
+          ignore_default: true,
+          limit: 400
+        };
+        if (marker) request.marker = marker;
+
+        const result = await connection.request(request, 15_000);
+        lines.push(...(result.lines || []));
+        marker = result.marker;
+        pages += 1;
+      } while (marker && pages < MAX_TRUSTLINE_PAGES);
+
+      return {
+        lines: lines.filter(line =>
+          normalizeCurrency(line.currency) === normalizeCurrency(CURRENCY)
+        ),
+        pages,
+        truncated: Boolean(marker)
+      };
+    }
+
+    function extractAmm(amm) {
+      if (!amm) return null;
+
+      let xrpReserve = NaN;
+      let tokenReserve = NaN;
+
+      for (const amount of [amm.amount, amm.amount2]) {
+        if (isXrpAmount(amount)) {
+          xrpReserve = amountNumber(amount);
+        } else if (
+          amount &&
+          amount.issuer === ISSUER &&
+          normalizeCurrency(amount.currency) === normalizeCurrency(CURRENCY)
+        ) {
+          tokenReserve = amountNumber(amount);
+        }
+      }
+
+      if (!(xrpReserve > 0) || !(tokenReserve > 0)) return null;
+
+      const rawFee = Number(amm.trading_fee || 0);
+      const feePercent = rawFee / 1000;
+      const feeFraction = rawFee / 100000;
+
+      return {
+        xrpReserve,
+        tokenReserve,
+        spot: xrpReserve / tokenReserve,
+        rawFee,
+        feePercent,
+        feeFraction
+      };
+    }
+
+    function offerRow(offer, side) {
+      const getsAmount = offer.taker_gets_funded ?? offer.TakerGets;
+      const paysAmount = offer.taker_pays_funded ?? offer.TakerPays;
+      const gets = amountNumber(getsAmount);
+      const pays = amountNumber(paysAmount);
+
+      if (side === 'ask') {
+        const token = gets;
+        const xrp = pays;
+        return {
+          maker: offer.Account || '',
+          token,
+          xrp,
+          price: token > 0 ? xrp / token : NaN
+        };
+      }
+
+      const xrp = gets;
+      const token = pays;
+      return {
+        maker: offer.Account || '',
+        token,
+        xrp,
+        price: token > 0 ? xrp / token : NaN
+      };
+    }
+
+    function validOfferRows(offers, side) {
+      const rows = (offers || [])
+        .map(offer => offerRow(offer, side))
+        .filter(row =>
+          row.token > 0 &&
+          row.xrp > 0 &&
+          Number.isFinite(row.price) &&
+          row.price > 0
+        );
+
+      rows.sort((a, b) => side === 'ask' ? a.price - b.price : b.price - a.price);
+      return rows;
+    }
+
+    function renderBook(targetId, rows, available = true) {
+      const body = $(targetId);
+      if (!body) return;
+      body.replaceChildren();
+
+      const shown = rows.slice(0, 6);
+      if (!shown.length) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 4;
+        cell.textContent = available
+          ? 'No funded offers were returned.'
+          : 'This order-book side was unavailable.';
+        row.appendChild(cell);
+        body.appendChild(row);
+        return;
+      }
+
+      shown.forEach(item => {
+        const row = document.createElement('tr');
+        [
+          shortMaker(item.maker),
+          formatNumber(item.token, 6),
+          formatNumber(item.xrp, 6),
+          formatNumber(item.price, 9)
+        ].forEach(value => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        body.appendChild(row);
+      });
+    }
+
+    function estimateAmmImpact(amm, xrpInput) {
+      if (!amm || !(xrpInput > 0)) return NaN;
+      const effectiveInput = xrpInput * (1 - amm.feeFraction);
+      const output = (amm.tokenReserve * effectiveInput) /
+        (amm.xrpReserve + effectiveInput);
+      if (!(output > 0)) return NaN;
+      const executionPrice = xrpInput / output;
+      return ((executionPrice / amm.spot) - 1) * 100;
+    }
+
+    function gatewayObligation(result) {
+      if (!result || !result.obligations) return NaN;
+      for (const [currency, value] of Object.entries(result.obligations)) {
+        if (normalizeCurrency(currency) === normalizeCurrency(CURRENCY)) {
+          const number = Number(value);
+          return Number.isFinite(number) ? number : NaN;
+        }
+      }
+      return 0;
+    }
+
+    function populateUnavailable() {
+      [
+        'metricLedger', 'metricLedgerAge', 'metricCoverage', 'metricUpdated',
+        'metricDomain', 'metricMasterKey', 'metricGlobalFreeze', 'metricClawback',
+        'metricNoFreeze', 'metricRequireAuth', 'metricObligations', 'metricHolders',
+        'metricTrustlines', 'metricNetworkValue', 'metricAmmXrp', 'metricAmmJcs',
+        'metricAmmFee', 'metricAmmSpot', 'metricAmmImpact', 'metricPoolValue',
+        'metricBid', 'metricAsk', 'metricSpread', 'metricBidDepth', 'metricAskDepth',
+        'metricMakers', 'metricPriceXrp', 'metricPriceUsd', 'metricXrpUsd',
+        'metricXrpChange'
+      ].forEach(id => setMetric(id, 'Unavailable'));
+    }
+
+    async function refreshMetrics() {
+      if (state.refreshing) return;
+
+      state.refreshing = true;
+      $('refreshMetricsBtn').disabled = true;
+      $('refreshMetricsBtn').textContent = 'Loading…';
+      $('metricsStatus').textContent = 'Connecting to a public validated-ledger source…';
+      $('metricsServer').textContent = '';
+      $('liveDot').classList.remove('ok', 'err');
+
+      let connection = null;
+
+      try {
+        const ledger = await connectLedger();
+        connection = ledger.connection;
+        $('metricsServer').textContent = '· ' + ledger.server;
+
+        const requests = {
+          account: connection.request({
+            command: 'account_info',
+            account: ISSUER,
+            ledger_index: 'validated',
+            signer_lists: true
+          }).catch(() => null),
+          amm: connection.request({
+            command: 'amm_info',
+            asset: { currency: 'XRP' },
+            asset2: { currency: CURRENCY, issuer: ISSUER },
+            ledger_index: 'validated'
+          }).catch(() => null),
+          asks: connection.request({
+            command: 'book_offers',
+            taker_gets: { currency: CURRENCY, issuer: ISSUER },
+            taker_pays: { currency: 'XRP' },
+            ledger_index: 'validated',
+            limit: 40
+          }).catch(() => null),
+          bids: connection.request({
+            command: 'book_offers',
+            taker_gets: { currency: 'XRP' },
+            taker_pays: { currency: CURRENCY, issuer: ISSUER },
+            ledger_index: 'validated',
+            limit: 40
+          }).catch(() => null),
+          gateway: connection.request({
+            command: 'gateway_balances',
+            account: ISSUER,
+            ledger_index: 'validated'
+          }).catch(() => null),
+          lines: loadIssuerLines(connection).catch(() => null),
+          xrpUsd: fetchJson(
+            'https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true'
+          ).catch(() => null)
+        };
+
+        const [
+          accountResult,
+          ammResult,
+          askResult,
+          bidResult,
+          gatewayResult,
+          lineResult,
+          xrpReference
+        ] = await Promise.all([
+          requests.account,
+          requests.amm,
+          requests.asks,
+          requests.bids,
+          requests.gateway,
+          requests.lines,
+          requests.xrpUsd
+        ]);
+
+        const sourceStates = [
+          Boolean(ledger.serverInfo?.info),
+          Boolean(accountResult?.account_data),
+          Boolean(ammResult?.amm),
+          Array.isArray(askResult?.offers),
+          Array.isArray(bidResult?.offers),
+          Boolean(lineResult?.lines),
+          Boolean(xrpReference?.ripple)
+        ];
+        const coverage = sourceStates.filter(Boolean).length;
+        const coveragePercent = Math.round((coverage / sourceStates.length) * 100);
+
+        const validatedLedger = ledger.serverInfo?.info?.validated_ledger;
+        setMetric('metricLedger', validatedLedger?.seq
+          ? Number(validatedLedger.seq).toLocaleString('en-US')
+          : 'Unavailable');
+        setMetric('metricLedgerAge', Number.isFinite(Number(validatedLedger?.age))
+          ? Number(validatedLedger.age) + ' seconds'
+          : 'Unavailable');
+        setMetric('metricCoverage', coverage + '/' + sourceStates.length + ' · ' + coveragePercent + '%');
+        setMetric('metricUpdated', new Date().toLocaleTimeString());
+
+        const accountData = accountResult?.account_data || {};
+        const flags = accountResult?.account_flags || {};
+        const decodedDomain = decodeHexText(accountData.Domain);
+        setMetric('metricDomain', decodedDomain || 'Not set');
+        setMetric('metricMasterKey', typeof flags.disableMasterKey === 'boolean'
+          ? (flags.disableMasterKey ? 'Disabled' : 'Enabled')
+          : 'Unavailable');
+        setMetric('metricGlobalFreeze', typeof flags.globalFreeze === 'boolean'
+          ? (flags.globalFreeze ? 'Enabled' : 'Not enabled')
+          : 'Unavailable');
+        setMetric('metricClawback', typeof flags.allowTrustLineClawback === 'boolean'
+          ? (flags.allowTrustLineClawback ? 'Enabled' : 'Not enabled')
+          : 'Unavailable');
+        setMetric('metricNoFreeze', typeof flags.noFreeze === 'boolean'
+          ? (flags.noFreeze ? 'Enabled' : 'Not enabled')
+          : 'Unavailable');
+        setMetric('metricRequireAuth', typeof flags.requireAuthorization === 'boolean'
+          ? (flags.requireAuthorization ? 'Enabled' : 'Not enabled')
+          : 'Unavailable');
+
+        const hasTrustlineEvidence = Array.isArray(lineResult?.lines);
+        const relevantLines = hasTrustlineEvidence ? lineResult.lines : [];
+        let observedObligations = hasTrustlineEvidence ? 0 : NaN;
+        let observedHolders = hasTrustlineEvidence ? 0 : NaN;
+
+        relevantLines.forEach(line => {
+          const balance = Number(line.balance);
+          if (!Number.isFinite(balance)) return;
+          const held = Math.max(0, -balance);
+          observedObligations += held;
+          if (held > 0) observedHolders += 1;
+        });
+
+        const gatewayAmount = gatewayObligation(gatewayResult);
+        const obligations = Number.isFinite(gatewayAmount)
+          ? gatewayAmount
+          : observedObligations;
+        const obligationSource = Number.isFinite(gatewayAmount)
+          ? 'gateway_balances'
+          : hasTrustlineEvidence
+            ? (lineResult.truncated ? 'bounded trust-line sample' : 'trust-line scan')
+            : 'unavailable evidence';
+
+        setMetric('metricObligations', Number.isFinite(obligations)
+          ? formatNumber(obligations, 6) + ' JCS'
+          : 'Unavailable');
+        setMetric('metricHolders', Number.isFinite(observedHolders)
+          ? observedHolders.toLocaleString('en-US') + ' observed'
+          : 'Unavailable');
+        setMetric('metricTrustlines', hasTrustlineEvidence
+          ? relevantLines.length.toLocaleString('en-US')
+          : 'Unavailable');
+        $('metricTrustlineNote').textContent = !hasTrustlineEvidence
+          ? 'Trust-line evidence was unavailable from the selected server.'
+          : lineResult.truncated
+            ? 'Sample capped after ' + lineResult.pages + ' pages; additional trust lines may exist.'
+            : 'Completed in ' + lineResult.pages + ' page(s) from the selected server.';
+
+        const amm = extractAmm(ammResult?.amm);
+        setMetric('metricAmmXrp', amm ? formatNumber(amm.xrpReserve, 6) + ' XRP' : 'Unavailable');
+        setMetric('metricAmmJcs', amm ? formatNumber(amm.tokenReserve, 6) + ' JCS' : 'Unavailable');
+        setMetric('metricAmmFee', amm ? formatNumber(amm.feePercent, 4) + '%' : 'Unavailable');
+        setMetric('metricAmmSpot', amm ? formatNumber(amm.spot, 9) + ' XRP/JCS' : 'Unavailable');
+        const impact = estimateAmmImpact(amm, 10);
+        setMetric('metricAmmImpact', Number.isFinite(impact)
+          ? formatNumber(impact, 4) + '%'
+          : 'Unavailable');
+
+        const asksAvailable = Array.isArray(askResult?.offers);
+        const bidsAvailable = Array.isArray(bidResult?.offers);
+        const asks = validOfferRows(askResult?.offers, 'ask');
+        const bids = validOfferRows(bidResult?.offers, 'bid');
+        renderBook('askTable', asks, asksAvailable);
+        renderBook('bidTable', bids, bidsAvailable);
+
+        const bestAsk = asks[0]?.price;
+        const bestBid = bids[0]?.price;
+        const midpoint = Number.isFinite(bestAsk) && Number.isFinite(bestBid)
+          ? (bestAsk + bestBid) / 2
+          : NaN;
+        const spread = Number.isFinite(midpoint) && midpoint > 0
+          ? ((bestAsk - bestBid) / midpoint) * 100
+          : NaN;
+
+        const bidDepth = Number.isFinite(bestBid)
+          ? bids
+              .filter(row => row.price >= bestBid * .95)
+              .reduce((sum, row) => sum + row.xrp, 0)
+          : NaN;
+        const askDepth = Number.isFinite(bestAsk)
+          ? asks
+              .filter(row => row.price <= bestAsk * 1.05)
+              .reduce((sum, row) => sum + row.token, 0)
+          : NaN;
+        const makers = asksAvailable || bidsAvailable
+          ? new Set([...asks, ...bids].map(row => row.maker).filter(Boolean)).size
+          : NaN;
+
+        setMetric('metricBid', Number.isFinite(bestBid)
+          ? formatNumber(bestBid, 9) + ' XRP/JCS'
+          : 'Unavailable');
+        setMetric('metricAsk', Number.isFinite(bestAsk)
+          ? formatNumber(bestAsk, 9) + ' XRP/JCS'
+          : 'Unavailable');
+        setMetric('metricSpread', Number.isFinite(spread)
+          ? formatNumber(spread, 4) + '%'
+          : 'Unavailable');
+        setMetric('metricBidDepth', Number.isFinite(bidDepth)
+          ? formatNumber(bidDepth, 6) + ' XRP'
+          : 'Unavailable');
+        setMetric('metricAskDepth', Number.isFinite(askDepth)
+          ? formatNumber(askDepth, 6) + ' JCS'
+          : 'Unavailable');
+        setMetric('metricMakers', Number.isFinite(makers)
+          ? makers.toLocaleString('en-US')
+          : 'Unavailable');
+
+        const priceXrp = Number.isFinite(midpoint)
+          ? midpoint
+          : (amm?.spot ?? NaN);
+        const priceMethod = Number.isFinite(midpoint)
+          ? 'Funded bid-ask midpoint.'
+          : (amm ? 'AMM reserve ratio fallback.' : 'No usable price source.');
+        setMetric('metricPriceXrp', Number.isFinite(priceXrp)
+          ? formatNumber(priceXrp, 9) + ' XRP/JCS'
+          : 'Unavailable');
+        $('metricPriceMethod').textContent = priceMethod;
+      
+
+        const xrpUsd = Number(xrpReference?.ripple?.usd);
+        const xrpChange = Number(xrpReference?.ripple?.usd_24h_change);
+        const priceUsd = Number.isFinite(priceXrp) && Number.isFinite(xrpUsd)
+          ? priceXrp * xrpUsd
+          : NaN;
+        const poolValue = amm && Number.isFinite(xrpUsd)
+          ? amm.xrpReserve * xrpUsd * 2
+          : NaN;
+        const networkValue = Number.isFinite(obligations) && Number.isFinite(priceUsd)
+          ? obligations * priceUsd
+          : NaN;
+
+        setMetric('metricPriceUsd', formatUsd(priceUsd, 9));
+        setMetric('metricPoolValue', formatUsd(poolValue, 2));
+        setMetric('metricXrpUsd', formatUsd(xrpUsd, 4));
+        setMetric('metricXrpChange', Number.isFinite(xrpChange)
+          ? (xrpChange >= 0 ? '+' : '') + formatNumber(xrpChange, 2) + '%'
+          : 'Unavailable');
+        setMetric('metricNetworkValue', formatUsd(networkValue, 2));
+        $('metricNetworkValueNote').textContent =
+          'Uses ' + obligationSource + ' and ' + priceMethod.toLowerCase() +
+          ' Not a valuation, appraisal, reserve attestation, or securities market capitalization.';
+
+        state.metricsLoaded = true;
+        state.lastRefreshAt = Date.now();
+        $('metricsStatus').textContent = coveragePercent === 100
+          ? 'Validated public metrics loaded.'
+          : 'Metrics loaded with partial evidence; unavailable sources remain labeled.';
+        $('liveDot').classList.add('ok');
+      } catch (error) {
+        console.info('JCS metrics unavailable:', error);
+        populateUnavailable();
+        renderBook('askTable', [], false);
+        renderBook('bidTable', [], false);
+        $('metricsStatus').textContent = 'Metrics unavailable: ' + (error?.message || error);
+        $('metricsServer').textContent = '';
+        $('liveDot').classList.add('err');
+      } finally {
+        connection?.close();
+        state.refreshing = false;
+        $('refreshMetricsBtn').disabled = false;
+        $('refreshMetricsBtn').textContent = state.metricsLoaded ? 'Refresh metrics' : 'Load live metrics';
+      }
+    }
+
+    function syncAutoRefresh() {
+      if (state.autoTimer) {
+        window.clearInterval(state.autoTimer);
+        state.autoTimer = null;
+      }
+
+      if (!$('autoRefreshMetrics')?.checked) return;
+
+      state.autoTimer = window.setInterval(() => {
+        if (document.visibilityState === 'visible') refreshMetrics();
+      }, AUTO_REFRESH_MS);
+    }
+
+    $('refreshMetricsBtn')?.addEventListener('click', refreshMetrics);
+    $('autoRefreshMetrics')?.addEventListener('change', event => {
+      syncAutoRefresh();
+      if (event.target.checked && !state.metricsLoaded) refreshMetrics();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (
+        document.visibilityState === 'visible' &&
+        $('autoRefreshMetrics')?.checked &&
+        Date.now() - state.lastRefreshAt >= AUTO_REFRESH_MS
+      ) {
+        refreshMetrics();
+      }
+    });
+
+    window.addEventListener('unhandledrejection', event => {
+      console.error('Unhandled promise rejection:', event.reason);
+    });
+
+    window.addEventListener('error', event => {
+      console.error('Unhandled page error:', event.error || event.message);
+    });
+  }());
+  </script>
 </body>
 </html>
