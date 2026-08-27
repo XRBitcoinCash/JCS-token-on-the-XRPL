@@ -1,24 +1,439 @@
-Jesus Christ Saves Token — Proprietary Religious License
-Copyright (c) 2025 Jesus Christ Saves Token Project. All Rights Reserved.
+JESUS CHRIST SAVES TOKEN (JCS)
+PROPRIETARY RELIGIOUS WORKS AND SOFTWARE LICENSE
+Version 2.0 — Qualified Federal Watchdog Exception
+Effective Date: August 27, 2026
+SPDX-License-Identifier: LicenseRef-JCS-Proprietary-Religious-2.0
 
-This repository and its contents are the proprietary property of the
-Jesus Christ Saves Token Project, a religious and faith-based initiative.
+Copyright © 2025–2026 the applicable authors and copyright owners of the
+Jesus Christ Saves Token Project. All Rights Reserved.
 
-All content, including but not limited to source code, design, imagery,
-text, symbols, and digital artifacts, are considered expressions of
-religious faith and spiritual art, protected under applicable copyright
-and religious freedom laws.
+IMPORTANT: THIS IS A PROPRIETARY, SOURCE-AVAILABLE LICENSE. IT IS NOT AN
+OPEN-SOURCE, FREE-SOFTWARE, CREATIVE-COMMONS, PUBLIC-DOMAIN, OR GENERAL
+NONCOMMERCIAL LICENSE.
 
-Permission is granted to view this repository for educational or
-non-commercial religious purposes only. Redistribution, modification,
-or commercial use of any part of this project, including derivative
-works or branding, is strictly prohibited without prior written consent
-from the Jesus Christ Saves Token Project leadership.
+1. PURPOSE AND INTERPRETATION
 
-THE SOFTWARE AND MATERIALS ARE PROVIDED “AS IS”, WITHOUT WARRANTY OF
-ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+This License governs the repository presently identified as:
 
-Use of this repository implies agreement with these terms and respect
-for its religious nature and intention.
+    https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL
 
+and any authorized mirror, release, archive, deployment, or distribution
+that expressly includes this License.
+
+The Jesus Christ Saves Token Project is a religious and faith-centered
+initiative. The religious character and intended spiritual integrity of
+the Covered Materials are material to the Licensor. Nothing in this
+License claims that religious character expands copyright protection
+beyond applicable law.
+
+For purposes of this License, “Licensor” means the applicable author,
+copyright owner, trademark owner, or other rightsholder that owns or is
+authorized to license the relevant Covered Material.
+
+2. COVERED MATERIALS
+
+“Covered Materials” means, only to the extent owned or licensable by the
+Licensor, all original material contained in or distributed with the
+repository, including:
+
+(a) source code, object code, scripts, HTML, CSS, JavaScript, configuration,
+    schemas, data models, software architecture, documentation, and tests;
+
+(b) original user-interface arrangements, visual designs, graphics, artwork,
+    photographs, audio, video, animations, symbols, written material, and
+    digital artifacts;
+
+(c) original metadata, compilations, taxonomies, explanatory text, and
+    selection or arrangement of content; and
+
+(d) JCS-specific branding assets, trade dress, and identifiers, subject to
+    applicable trademark and unfair-competition law.
+
+Covered Materials do not include third-party material, public-domain
+material, facts, ideas, procedures, processes, systems, methods of operation,
+algorithms as such, public XRP Ledger records, or material governed by a
+separate license. Each third-party component remains governed by its own
+license or legal status.
+
+3. OWNERSHIP AND RESERVATION OF RIGHTS
+
+All rights not expressly granted in this License are reserved.
+
+No ownership interest is transferred. Publication, public accessibility,
+wallet compatibility, ledger deployment, use of a public repository, or
+inclusion of source code does not place any Covered Material in the public
+domain and does not create an implied license, estoppel, waiver, partnership,
+agency, endorsement, or joint venture.
+
+Subject to mandatory law and the limited rights separately granted by the
+hosting platform, the Licensor reserves the exclusive rights to reproduce,
+adapt, modify, prepare derivative works from, distribute, publish, display,
+perform, host, deploy, sublicense, commercialize, and authorize use of the
+Covered Materials.
+
+4. LIMITED PUBLIC ACCESS; NO GENERAL USE LICENSE
+
+A person may access and read the public repository and may receive only the
+temporary, incidental copies technically necessary for ordinary browser
+display, security scanning performed by the hosting provider, or operation
+of the hosting service.
+
+That limited access does not grant permission to copy, download for reuse,
+modify, redistribute, publish, mirror, deploy, execute as a service, create
+derivative works, train a model, build a dataset, or otherwise use the
+Covered Materials.
+
+While this repository remains public on GitHub, GitHub’s then-current Terms
+of Service may independently permit GitHub and GitHub users to view, display,
+perform, analyze, archive, and fork public repository content through
+GitHub’s functionality. Any such platform permission arises solely from
+GitHub’s Terms of Service, not from this License, and grants no additional
+off-platform or downstream rights.
+
+5. PROHIBITED USES
+
+Except under Section 6 or separate prior written permission signed by the
+Licensor, no person or entity may, directly or indirectly:
+
+(a) reproduce, copy, download for reuse, republish, mirror, redistribute,
+    transmit, sell, rent, lease, lend, sublicense, donate, or otherwise
+    provide any Covered Material to another person;
+
+(b) modify, translate, adapt, port, rearrange, refactor, combine, transform,
+    or create any derivative work based on any Covered Material;
+
+(c) compile, build, deploy, host, execute, operate, expose through an API,
+    offer as software-as-a-service, embed, frame, white-label, or integrate
+    any Covered Material into another product, website, application, token,
+    NFT, service, repository, or network;
+
+(d) use the Covered Materials for commercial, fundraising, advertising,
+    promotional, political, educational, academic, charitable, nonprofit,
+    ministry, church, journalistic, research, security-research, or other
+    institutional purposes;
+
+(e) scrape, crawl, mine, bulk-download, index for reuse, create embeddings
+    from, include in a corpus or dataset, or use the Covered Materials to
+    train, fine-tune, evaluate, benchmark, retrieve for, augment, or improve
+    any artificial-intelligence, machine-learning, automated code-generation,
+    or similar system;
+
+(f) remove, conceal, alter, falsify, or separate any copyright, provenance,
+    attribution, trademark, security, religious-purpose, or license notice;
+
+(g) use the names “Jesus Christ Saves Token,” “JCS,” associated logos,
+    artwork, trade dress, domain names, social identifiers, or confusingly
+    similar identifiers in a manner that implies source, sponsorship,
+    endorsement, affiliation, certification, or authorization;
+
+(h) mint, tokenize, sell, fractionalize, license, register, claim authorship
+    of, or assert ownership over any Covered Material or derivative artifact;
+
+(i) bypass technical controls, interfere with service operation, obtain
+    secrets or private data, initiate unauthorized wallet transactions, or
+    conduct testing against live systems without legal authority and written
+    authorization; or
+
+(j) use the Covered Materials in a way that is unlawful, deceptive,
+    defamatory, malicious, exploitative, or materially inconsistent with
+    their stated religious and spiritual purpose.
+
+The fact that a proposed use is noncommercial, educational, religious,
+charitable, journalistic, research-oriented, or in the public interest does
+not by itself create permission under this License.
+
+6. SOLE EXPRESS EXCEPTION — QUALIFIED FEDERAL WATCHDOG USE
+
+6.1 Definitions
+
+“Federal Watchdog Authority” means a body of the United States Federal
+Government with lawful audit, oversight, inspection, investigation,
+regulatory, law-enforcement, cybersecurity, consumer-protection,
+accountability, or public-integrity authority. This includes, when acting
+within its lawful jurisdiction, a United States department, agency,
+commission, board, bureau, office, Office of Inspector General, the
+Government Accountability Office, a congressional oversight body, or a
+federal regulatory or law-enforcement authority.
+
+“Federally Authorized Watchdog Organization” means a non-federal
+organization that has been formally designated, certified, commissioned,
+retained, contracted, or expressly authorized by a Federal Watchdog
+Authority for a specific matter.
+
+For purposes of this License, “certified by a Federal Governing Body” means
+that the organization possesses a current and verifiable official written
+instrument identifying, at minimum:
+
+(a) the legal name of the organization;
+(b) the issuing Federal Watchdog Authority;
+(c) the authorized oversight, audit, investigation, or security purpose;
+(d) the material scope of the authorization;
+(e) the effective date or period of authorization; and
+(f) an authorized federal signatory, contract, task order, designation,
+    credential, commission, certification, or equivalent official record.
+
+A self-description, nonprofit status, private certification, professional
+membership, state or local authorization, foreign-government authorization,
+grant funding, press credential, security-research affiliation, or general
+claim of public-interest work does not satisfy this definition.
+
+“Qualified Federal Watchdog” means either:
+
+(a) a Federal Watchdog Authority; or
+(b) a Federally Authorized Watchdog Organization acting strictly within the
+    scope and duration of its verified federal authorization.
+
+“Authorized Federal Purpose” means the specific official audit, oversight,
+inspection, investigation, enforcement, incident-response, cybersecurity,
+consumer-protection, compliance, or public-integrity matter for which the
+Qualified Federal Watchdog has lawful authority.
+
+6.2 Limited Grant
+
+This Section 6 is the Licensor’s express permission to a Qualified Federal
+Watchdog, and to no other person or entity.
+
+Subject to every condition in Section 7, the Licensor grants a Qualified
+Federal Watchdog a royalty-free, nonexclusive, nontransferable,
+nonsublicensable, revocable license, limited to the Authorized Federal
+Purpose, to:
+
+(a) access and download the Covered Materials;
+(b) reproduce and retain secure internal or evidentiary copies;
+(c) inspect, analyze, audit, test, and evaluate the Covered Materials;
+(d) make temporary internal modifications in an isolated test environment
+    solely to reproduce, confirm, mitigate, or document a relevant issue;
+(e) use automated analytical tools, including restricted internal AI tools,
+    solely for the Authorized Federal Purpose and not for general model
+    training or unrelated product development; and
+(f) quote or reproduce only the minimum portions reasonably necessary in an
+    official workpaper, evidentiary record, referral, filing, or report.
+
+7. CONDITIONS OF THE QUALIFIED FEDERAL WATCHDOG EXCEPTION
+
+A Qualified Federal Watchdog exercising Section 6 must:
+
+(a) act only within its lawful jurisdiction and the documented Authorized
+    Federal Purpose;
+
+(b) preserve copyright, provenance, integrity, and license notices on every
+    retained copy where doing so is compatible with evidentiary requirements;
+
+(c) protect nonpublic information, credentials, personal information,
+    encrypted support material, and security-sensitive findings using
+    controls appropriate to the matter;
+
+(d) avoid unauthorized access to wallets, private keys, seed phrases,
+    credentials, funds, production systems, or third-party accounts;
+
+(e) perform invasive, exploitative, or transactional testing only when
+    independently authorized by law and by the relevant system owner;
+
+(f) not commercialize, productize, market, license, publicly deploy, or use
+    the Covered Materials to create an unrelated service, repository,
+    product, dataset, or general-purpose AI model;
+
+(g) not use JCS names, logos, religious artwork, or trade dress except as
+    reasonably necessary to identify the subject of the Authorized Federal
+    Purpose;
+
+(h) not imply endorsement, partnership, sponsorship, certification, or
+    approval by the Licensor;
+
+(i) limit public disclosure of source code and security-sensitive material
+    to what is required by law or reasonably necessary for an official
+    federal record or report;
+
+(j) where lawful and consistent with the integrity of the matter, report
+    security vulnerabilities privately through:
+
+        https://jesuschristsavestoken.com/.well-known/security.txt
+
+(k) retain evidence and records only as authorized or required by applicable
+    law, policy, contract, litigation hold, or records schedule; and
+
+(l) upon reasonable request, provide the Licensor with verifiable proof of
+    eligibility and scope, which may be redacted or confirmed directly by
+    the issuing Federal Watchdog Authority. This requirement does not apply
+    where disclosure is prohibited by law, court order, investigative
+    necessity, or binding federal policy.
+
+The Section 6 license automatically ends when the authorization expires,
+the Authorized Federal Purpose concludes, or a material condition is
+breached. Lawfully required evidentiary and archival retention may continue
+after termination, but no new use is authorized.
+
+8. NO OTHER WATCHDOG OR PUBLIC-INTEREST EXCEPTION
+
+No automatic permission is granted to:
+
+(a) state, territorial, tribal, municipal, local, or foreign governments;
+(b) private investigators, private intelligence firms, advocacy groups,
+    standards bodies, trade associations, self-regulatory organizations,
+    rating organizations, or uncertified watchdog groups;
+(c) universities, schools, researchers, journalists, churches, ministries,
+    charities, foundations, nonprofits, or volunteer organizations;
+(d) cybersecurity companies, independent security researchers, auditors,
+    blockchain analytics firms, artificial-intelligence providers, or
+    software developers; or
+(e) any person claiming educational, religious, charitable, public-interest,
+    whistleblower, consumer-protection, or anti-fraud motives.
+
+Such persons or entities must obtain separate prior written permission from
+the Licensor unless their activity is independently permitted by mandatory
+law.
+
+9. RELIGIOUS CHARACTER; NO THEOLOGICAL OR INSTITUTIONAL ENDORSEMENT
+
+The Covered Materials are expressions associated with a Christian,
+faith-centered project. Permission to access the repository does not confer
+authority to speak for the Licensor, interpret doctrine on its behalf,
+represent a church, conduct ministry under its identity, solicit donations
+under its name, or imply religious, institutional, financial, or technical
+endorsement.
+
+No license is granted to distort, misattribute, or commercially exploit the
+religious artwork, prayers, testimony, Scripture-related presentation, or
+spiritual identity embodied in the Covered Materials.
+
+10. TRADEMARKS, NAMES, DOMAINS, AND BRANDING
+
+No trademark, service-mark, certification-mark, trade-name, logo, domain,
+social-account, publicity, or unfair-competition right is granted.
+
+“Jesus Christ Saves Token,” “JCS,” the JCS logos, associated visual identity,
+and source-identifying elements may be used only for truthful nominative
+reference to the unmodified project, subject to applicable law. No use may
+suggest that a fork, copy, service, token, organization, report, or product
+is official, approved, certified, or endorsed by the Licensor.
+
+11. THIRD-PARTY AND PUBLIC-DOMAIN MATERIAL
+
+The repository may identify, link to, interoperate with, quote, display, or
+include material belonging to third parties or material believed to be in
+the public domain. This License does not claim ownership of such material
+and cannot grant rights the Licensor does not possess.
+
+Separate notices or licenses accompanying a component control that
+component. Public XRP Ledger facts and records remain subject to applicable
+law, provider terms, privacy considerations, and independent verification.
+
+12. CONTRIBUTIONS
+
+No contribution, pull request, issue, comment, attachment, artwork, code,
+or other submission may be made unless the contributor has the legal right
+to submit it.
+
+To the extent GitHub’s Terms of Service or a separate signed contributor
+agreement applies, those terms govern the submission. Acceptance of a
+contribution does not waive this proprietary License or grant the
+contributor rights in other Covered Materials.
+
+13. SECURITY AND CONFIDENTIAL INFORMATION
+
+The public repository must never be treated as a secure location for seed
+phrases, private keys, recovery words, wallet passcodes, credentials,
+personal data, confidential communications, privileged material, or
+security-sensitive secrets.
+
+The responsible-disclosure contact is informational and does not grant a
+general license to copy, modify, exploit, or test the Covered Materials.
+
+14. DISCLAIMER OF WARRANTIES
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COVERED MATERIALS ARE PROVIDED
+“AS IS” AND “AS AVAILABLE,” WITH ALL FAULTS AND WITHOUT WARRANTY OF ANY
+KIND, EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WARRANTIES OF
+TITLE, NON-INFRINGEMENT, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+ACCURACY, SECURITY, AVAILABILITY, COMPATIBILITY, RELIABILITY, QUIET
+ENJOYMENT, OR ERROR-FREE OPERATION.
+
+NO REPRESENTATION OR WARRANTY IS MADE THAT THE COVERED MATERIALS ARE
+COMPLETE, CURRENT, LEGALLY COMPLIANT, SUITABLE FOR PRODUCTION, FREE OF
+VULNERABILITIES, OR APPROPRIATE FOR ANY FINANCIAL, RELIGIOUS, SECURITY,
+INVESTIGATIVE, EVIDENTIARY, OR OTHER PURPOSE.
+
+15. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE LICENSOR AND CONTRIBUTORS SHALL
+NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+PUNITIVE, OR CONSEQUENTIAL DAMAGES; LOSS OF FUNDS, TOKENS, DATA, PROFITS,
+GOODWILL, OR USE; BUSINESS INTERRUPTION; SECURITY INCIDENT; TRANSACTION
+FAILURE; RELIGIOUS OR REPUTATIONAL HARM; OR OTHER LOSS ARISING FROM OR
+RELATING TO ACCESS, USE, INABILITY TO USE, OR RELIANCE ON THE COVERED
+MATERIALS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH LOSS.
+
+Nothing in this License excludes liability that applicable law does not
+permit to be excluded.
+
+16. TERMINATION AND EFFECT OF BREACH
+
+Any permission granted under this License terminates automatically and
+immediately upon material breach.
+
+After termination, the breaching party must cease every unauthorized use
+and delete or destroy copies within its custody or control, except for
+copies that a Qualified Federal Watchdog is legally required to preserve as
+evidence or official records.
+
+Termination does not limit accrued claims, remedies, confidentiality duties,
+evidentiary obligations, attribution requirements, or provisions intended
+by their nature to survive.
+
+17. ENFORCEMENT AND REMEDIES
+
+Unauthorized use may constitute copyright infringement, trademark
+infringement, false designation of origin, breach of license, violation of
+platform terms, or another civil or criminal violation depending on the
+facts and applicable law.
+
+The Licensor reserves the right to use platform takedown procedures and to
+seek any injunction, impoundment, destruction, actual damages, statutory
+damages, infringer’s profits, costs, attorneys’ fees, or other remedy
+available under applicable law. No delay or failure to enforce a provision
+is a waiver.
+
+18. MANDATORY LAW, FAIR USE, AND GOVERNMENT PROCESS
+
+Nothing in this License is intended to prohibit:
+
+(a) fair use or another statutory limitation or exception that applies
+    independently under controlling law;
+(b) lawful government access, compulsory process, subpoena, warrant, court
+    order, records requirement, or other authority that cannot lawfully be
+    restricted by private license; or
+(c) any right or remedy that cannot lawfully be waived.
+
+Any such use exists because of applicable law, not because this License
+grants broader permission.
+
+19. SEVERABILITY; NO WAIVER; ENTIRE LICENSE
+
+If a provision is held invalid or unenforceable, it shall be enforced to
+the maximum lawful extent and severed only as necessary. The remaining
+provisions remain effective.
+
+A waiver is effective only if written and signed by the Licensor and applies
+only to the specific matter identified. No oral statement, silence, course
+of dealing, public availability, failure to object, repository fork, issue
+response, or technical compatibility creates permission.
+
+This document is the entire license for the Covered Materials unless a
+separate written agreement signed by the Licensor expressly supersedes it.
+The version accompanying a particular copy governs that copy.
+
+20. PERMISSION REQUESTS
+
+Requests for a separate written license must identify the requester, exact
+materials, intended use, distribution method, duration, territory, security
+controls, commercial or noncommercial status, and any proposed branding.
+
+Contact:
+
+    jesuschristsavestoken@gmail.com
+
+Security vulnerabilities should be reported through:
+
+    https://jesuschristsavestoken.com/.well-known/security.txt
+
+END OF LICENSE
