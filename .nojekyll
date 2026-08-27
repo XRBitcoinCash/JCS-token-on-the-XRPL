@@ -1,3 +1,23 @@
-git add .nojekyll
-git commit -m "Add nojekyll file for GitHub Pages"
-git push
+.nojekyll
+    GitHub Pages build behavior only
+
+robots.txt
+    Standards-based crawler access rules
+
+sitemap.xml
+    Search-engine URL discovery
+
+ai.json
+    JCS machine-readable project description
+
+llms.txt
+    Emerging AI-agent orientation layer
+
+did.json
+    Decentralized Web identity
+
+xrp-ledger.toml
+    XRPL issuer and token discovery
+
+HTML metadata and JSON-LD
+    Per-page search and semantic identity
