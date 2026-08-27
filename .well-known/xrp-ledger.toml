@@ -9,7 +9,172 @@ network = "mainnet"
 desc = "Official Jesus Christ Saves Token account."
 
 [[CURRENCIES]]
+code = "JCS"# XRP Ledger identity and token metadata for Jesus Christ Saves Token (JCS)
+# Canonical URL: https://jesuschristsavestoken.com/.well-known/xrp-ledger.toml
+#
+# Compatibility layers:
+#   1. XRPL core xrp-ledger.toml fields: METADATA, ACCOUNTS, PRINCIPALS, CURRENCIES
+#   2. XLS-26 token metadata fields: ISSUERS, TOKENS, TOKENS.URLS
+#   3. JCS_* custom tables for project discovery, privacy, security, and hosting context
+#
+# Unknown custom fields are permitted by the XRPL TOML specification and may be
+# ignored by clients that only consume the standard sections.
+
+[METADATA]
+modified = 2026-08-27T00:00:00.000Z
+expires = 2027-08-27T23:59:59.000Z
+
+# ---------------------------------------------------------------------------
+# XRPL CORE ACCOUNT IDENTITY
+# ---------------------------------------------------------------------------
+
+[[ACCOUNTS]]
+address = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+network = "main"
+desc = "Official issuer account for Jesus Christ Saves Token (JCS) on XRP Ledger Mainnet. The account Domain is jesuschristsavestoken.com."
+
+[[PRINCIPALS]]
+name = "Jesus Christ Saves Token"
+email = "jesuschristsavestoken@gmail.com"
+x = "@JesusCS_token"
+github = "XRBitcoinCash"
+security_email = "jesuschristsaves@gmail.com"
+
+[[CURRENCIES]]
 code = "JCS"
+issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+network = "main"
+display_decimals = 6
+name = "Jesus Christ Saves Token"
+desc = "JCS is a faith-centered XRP Ledger issued token supporting a non-custodial website, Scripture and sacred-media access, prayer and testimony NFTs, public-ledger verification, and community tools. JCS is not a stablecoin, bank deposit, church, or promise of profit."
+icon = "https://jesuschristsavestoken.com/jcs-logo.png"
+
+# ---------------------------------------------------------------------------
+# XLS-26 TOKEN METADATA
+# Used by XRPL Meta and compatible wallets, explorers, and trading interfaces.
+# ---------------------------------------------------------------------------
+
+[[ISSUERS]]
+address = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+name = "Jesus Christ Saves Token"
+desc = "Official JCS issuer on XRP Ledger Mainnet. The project is faith-centered, non-custodial, and publicly linked to jesuschristsavestoken.com."
+icon = "https://jesuschristsavestoken.com/jcs-logo.png"
+
+[[TOKENS]]
+issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+currency = "JCS"
+name = "Jesus Christ Saves Token"
+desc = "A faith-centered XRPL token and digital-artifact project for Scripture, prayer, testimony, transparent ledger tools, and voluntary Christian community participation. JCS does not represent a stable value, deposit, ownership right, guaranteed return, or substitute for faith, church, Scripture, prayer, or pastoral care."
+icon = "https://jesuschristsavestoken.com/jcs-logo.png"
+asset_class = "other"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/"
+type = "website"
+title = "Official JCS Website"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/about-jcs.html"
+type = "document"
+title = "JCS Vision and Core Values"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/verify.html"
+type = "website"
+title = "Sign the Ledger — Prayer NFT Social Ledger"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/prayer.map.html"
+type = "website"
+title = "JCS Prayer and Integrity Map"
+
+[[TOKENS.URLS]]
+url = "https://x.com/JesusCS_token"
+type = "social"
+title = "Official JCS Account on X"
+
+[[TOKENS.URLS]]
+url = "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
+type = "document"
+title = "Public Source Repository"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/security.html"
+type = "document"
+title = "Security and Responsible Disclosure"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/privacy.html"
+type = "document"
+title = "Privacy Policy"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/terms.html"
+type = "document"
+title = "Terms of Service"
+
+[[TOKENS.URLS]]
+url = "https://jesuschristsavestoken.com/ai.json"
+type = "document"
+title = "AI and Machine-Readable Project Manifest"
+
+[[TOKENS.URLS]]
+url = "https://bithomp.com/en/account/JesusChristSaves"
+type = "website"
+title = "JCS Issuer on Bithomp — Independent Explorer"
+
+[[TOKENS.URLS]]
+url = "https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+type = "website"
+title = "JCS on XPMarket — Independent Market Data"
+
+[[TOKENS.URLS]]
+url = "https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP"
+type = "website"
+title = "JCS/XRP on Sologenic — Independent DEX Interface"
+
+# ---------------------------------------------------------------------------
+# JCS PROJECT DISCOVERY
+# These custom sections provide additional context to agents and applications.
+# ---------------------------------------------------------------------------
+
+[JCS_IDENTITY]
+domain = "jesuschristsavestoken.com"
+did = "did:web:jesuschristsavestoken.com"
+did_document = "https://jesuschristsavestoken.com/.well-known/did.json"
+issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+currency = "JCS"
+network = "main"
+
+[JCS_APPLICATION]
+home = "https://jesuschristsavestoken.com/"
+vision = "https://jesuschristsavestoken.com/about-jcs.html"
+prayer_social_ledger = "https://jesuschristsavestoken.com/verify.html"
+prayer_integrity_map = "https://jesuschristsavestoken.com/prayer.map.html"
+ai_manifest = "https://jesuschristsavestoken.com/ai.json"
+sitemap = "https://jesuschristsavestoken.com/sitemap.xml"
+robots = "https://jesuschristsavestoken.com/robots.txt"
+
+[JCS_SECURITY]
+security_txt = "https://jesuschristsavestoken.com/.well-known/security.txt"
+security_policy = "https://jesuschristsavestoken.com/security.html"
+privacy_policy = "https://jesuschristsavestoken.com/privacy.html"
+terms_of_service = "https://jesuschristsavestoken.com/terms.html"
+general_contact = "mailto:jesuschristsavestoken@gmail.com"
+security_contact = "mailto:jesuschristsaves@gmail.com"
+bug_bounty = false
+non_custodial = true
+no_private_keys_collected = true
+public_ledger_warning = "XRPL accounts, transactions, trust lines, offers, AMMs, NFTs, and memos may be publicly observable."
+
+[JCS_INFRASTRUCTURE]
+hosting = "GitHub Pages with the jesuschristsavestoken.com custom domain"
+source_repository = "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
+maintainer = "XRBitcoinCash"
+related_xrpl_tooling = "https://xrbitcoincash.com/"
+wallet_authorization = "Xaman"
+ledger_data = "Public XRP Ledger Mainnet data"
+independence_notice = "References to Xaman, Ripple, Bithomp, XPMarket, Sologenic, or other services do not imply endorsement, partnership, custody, or control."
 issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
 network = "mainnet"
 decimals = 6
