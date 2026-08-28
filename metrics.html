@@ -1,149 +1,1425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Token Metrics – JCS</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-<link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
+  <title>JCS Market Monitor | XRP Ledger</title>
+  <meta
+    name="description"
+    content="Read-only JCS/XRP market references for the Jesus Christ Saves Token, with XRP and Bitcoin comparison charts."
+  >
+  <meta name="author" content="Cryptocurrency Community Church of Jesus Christ">
+  <meta name="application-name" content="JCS Market Monitor">
+  <meta name="application-version" content="2.0.0">
+  <meta name="application-mode" content="public-read-only">
+  <meta name="release-date" content="2026-08-28">
+  <meta name="xrpl-network" content="mainnet">
+  <meta name="xrpl-currency" content="JCS">
+  <meta name="xrpl-issuer" content="rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd">
+  <meta name="theme-color" content="#06111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+
+  <link rel="canonical" href="https://jesuschristsavestoken.com/metrics.html">
+  <link rel="icon" href="/jcs-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/jcs-logo-180.png">
+  <link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jesus Christ Saves Token">
+  <meta property="og:title" content="JCS Market Monitor | XRP Ledger">
+  <meta
+    property="og:description"
+    content="Read-only JCS/XRP market context with clearly identified external XRP and Bitcoin reference charts."
+  >
+  <meta property="og:url" content="https://jesuschristsavestoken.com/metrics.html">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta property="og:image:alt" content="Jesus Christ Saves Token logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JCS Market Monitor | XRP Ledger">
+  <meta
+    name="twitter:description"
+    content="Read-only JCS/XRP market references for the Jesus Christ Saves Token."
+  >
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://jesuschristsavestoken.com; font-src 'self' data:; frame-src https://sologenic.org https://*.sologenic.org https://s.tradingview.com https://*.tradingview.com https://www.tradingview-widget.com https://*.tradingview-widget.com; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests"
+  >
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "JCS Market Monitor",
+    "description": "Read-only JCS/XRP market references for the Jesus Christ Saves Token, with XRP and Bitcoin comparison charts.",
+    "url": "https://jesuschristsavestoken.com/metrics.html",
+    "dateModified": "2026-08-28",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Jesus Christ Saves Token",
+      "url": "https://jesuschristsavestoken.com/"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Jesus Christ Saves Token",
+      "identifier": "JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+    }
+  }
+  </script>
 
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      color-scheme: dark;
+      --background: #06111f;
+      --background-deep: #030914;
+      --surface: rgba(11, 27, 45, 0.92);
+      --surface-raised: rgba(16, 38, 61, 0.96);
+      --surface-soft: rgba(71, 217, 255, 0.055);
+      --text: #f5f7fb;
+      --muted: #a8b7c9;
+      --muted-strong: #ced8e4;
+      --gold: #e2b84d;
+      --gold-soft: rgba(226, 184, 77, 0.16);
+      --cyan: #47d9ff;
+      --cyan-soft: rgba(71, 217, 255, 0.14);
+      --success: #69e6a6;
+      --warning: #ffd76a;
+      --border: rgba(226, 184, 77, 0.34);
+      --line: rgba(168, 183, 201, 0.18);
+      --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 11px;
+      --content-width: 1180px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 0;
+      background: var(--background-deep);
+      scroll-behavior: smooth;
+      scroll-padding-top: 7rem;
+    }
+
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top left, #000428, #004e92);
-      color: #fff;
-      overflow-x: hidden;
-      line-height: 1.8;
-      position: relative;
+      min-width: 0;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(0, 78, 146, 0.55), transparent 34rem),
+        radial-gradient(circle at 90% 14%, rgba(226, 184, 77, 0.09), transparent 28rem),
+        linear-gradient(145deg, var(--background-deep), var(--background) 48%, #07192a);
+      line-height: 1.65;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
+
     body::before {
-      content: "";
-      background: url('background-translucent.png') center center no-repeat;
-      background-size: cover;
-      opacity: 0.08;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
     }
 
-    header {
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      padding: 10px 40px;
-      display: flex; justify-content: space-between; align-items: center;
+    img,
+    iframe {
+      max-width: 100%;
     }
-    header a {
-      padding: 10px 20px;
-      background: #00d4ff;
-      color: black;
-      border-radius: 30px;
-      font-weight: bold;
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    a {
+      color: var(--cyan);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: #9aedff;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 1000;
+      padding: 0.75rem 1rem;
+      color: #001018;
+      background: var(--cyan);
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      transform: translateY(-180%);
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      padding:
+        max(0.7rem, env(safe-area-inset-top))
+        max(1rem, env(safe-area-inset-right))
+        0.7rem
+        max(1rem, env(safe-area-inset-left));
+      background: rgba(3, 9, 20, 0.86);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      width: min(100%, var(--content-width));
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      min-width: 0;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
       text-decoration: none;
-      box-shadow: 0 0 15px rgba(0,212,255,0.6);
-    }
-    header a:hover {
-      background: #fff;
-      box-shadow: 0 0 25px rgba(255,255,255,0.8);
     }
 
-    section {
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 2.2em;
-      text-shadow: 0 0 15px rgba(0,212,255,0.6);
+    .brand:hover {
+      color: var(--text);
     }
 
-    /* Uniform card styles */
-    .card {
-      background: rgba(0,0,0,0.6);
-      padding: 15px;
+    .brand-logo {
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,212,255,0.2);
+      box-shadow: 0 0 24px rgba(226, 184, 77, 0.13);
+    }
+
+    .brand-copy {
+      display: grid;
+      min-width: 0;
+      gap: 0.08rem;
+      line-height: 1.2;
+    }
+
+    .brand-title {
+      min-width: 0;
+      overflow: hidden;
+      color: var(--text);
+      font-size: clamp(1rem, 2.3vw, 1.25rem);
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-title-short {
+      display: none;
+    }
+
+    .header-nav {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 500px;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 0.65rem;
     }
-    .card h3 {
+
+    .home-link,
+    .button {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1rem;
+      color: #031018;
+      background: linear-gradient(135deg, var(--cyan), #91edff);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(71, 217, 255, 0.15);
+      font-size: 0.9rem;
+      font-weight: 850;
+      line-height: 1.1;
       text-align: center;
-      margin-bottom: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
     }
-    .card iframe {
-      flex: 1;
+
+    .home-link:hover,
+    .button:hover {
+      color: #031018;
+      background: #c4f6ff;
+      box-shadow: 0 10px 30px rgba(71, 217, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: var(--surface-raised);
+      border-color: var(--border);
+      box-shadow: none;
+    }
+
+    .button.secondary:hover {
+      color: #fff;
+      background: rgba(226, 184, 77, 0.14);
+    }
+
+    .button.small {
+      min-height: 40px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.82rem;
+    }
+
+    main {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3.5rem) 0 4rem;
+    }
+
+    .surface {
+      background: linear-gradient(145deg, var(--surface), rgba(6, 17, 31, 0.94));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(290px, 0.7fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+      padding: clamp(1.4rem, 5vw, 3.4rem);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      position: absolute;
+      top: -8rem;
+      right: -8rem;
+      width: 24rem;
+      height: 24rem;
+      content: "";
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(226, 184, 77, 0.16), transparent 66%);
+    }
+
+    .hero-copy,
+    .identity-card {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0 0 0.8rem;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 1.6rem;
+      height: 1px;
+      content: "";
+      background: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 15ch;
+      margin-bottom: 1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.25rem, 7vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      color: var(--gold);
+    }
+
+    .hero-lead {
+      max-width: 65ch;
+      margin-bottom: 1.4rem;
+      color: var(--muted-strong);
+      font-size: clamp(1rem, 2vw, 1.14rem);
+    }
+
+    .status-chips,
+    .hero-actions,
+    .widget-actions,
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .status-chips {
+      margin: 0 0 1.5rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.38rem 0.7rem;
+      color: var(--muted-strong);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 750;
+    }
+
+    .status-chip::before {
+      width: 0.48rem;
+      height: 0.48rem;
+      content: "";
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(105, 230, 166, 0.45);
+    }
+
+    .status-chip.external::before {
+      background: var(--warning);
+      box-shadow: 0 0 12px rgba(255, 215, 106, 0.35);
+    }
+
+    .identity-card {
+      padding: 1.25rem;
+      background: rgba(3, 9, 20, 0.6);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+    }
+
+    .identity-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .identity-heading img {
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .identity-heading h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .identity-heading p {
+      margin: 0.15rem 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .identity-list {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.55rem 1rem;
+      margin: 0;
+    }
+
+    .identity-list dt {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .identity-list dd {
+      min-width: 0;
+      margin: 0;
+      color: var(--text);
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .issuer-block {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .issuer-label {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .issuer-value {
+      display: block;
+      max-width: 100%;
+      padding: 0.7rem;
+      overflow-wrap: anywhere;
+      color: #d8f7ff;
+      background: rgba(71, 217, 255, 0.07);
+      border: 1px solid rgba(71, 217, 255, 0.18);
+      border-radius: var(--radius-sm);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      user-select: all;
+    }
+
+    .copy-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .copy-button {
+      min-height: 40px;
+      padding: 0.58rem 0.8rem;
+      color: var(--text);
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .copy-button:hover {
+      background: var(--gold-soft);
+    }
+
+    .copy-status {
+      min-height: 1.4em;
+      color: var(--success);
+      font-size: 0.76rem;
+      font-weight: 750;
+    }
+
+    .security-notice {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+      margin: 1.25rem 0 0;
+      padding: 1.2rem clamp(1rem, 3vw, 1.5rem);
+      background: linear-gradient(90deg, var(--gold-soft), rgba(6, 17, 31, 0.76));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .notice-mark {
+      display: inline-grid;
+      width: 2.35rem;
+      height: 2.35rem;
+      place-items: center;
+      color: #07111d;
+      background: var(--gold);
+      border-radius: 50%;
+      font-weight: 950;
+    }
+
+    .security-notice h2 {
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
+    }
+
+    .security-notice p {
+      margin: 0;
+      color: var(--muted-strong);
+      font-size: 0.9rem;
+    }
+
+    .workflow-section,
+    .market-section,
+    .disclosure-section {
+      margin-top: clamp(2.25rem, 6vw, 4.5rem);
+    }
+
+    .section-heading {
+      display: grid;
+      max-width: 760px;
+      gap: 0.35rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 4vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .workflow-step {
+      min-width: 0;
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.17);
+    }
+
+    .step-number {
+      display: inline-grid;
+      width: 2rem;
+      height: 2rem;
+      margin-bottom: 0.8rem;
+      place-items: center;
+      color: #07111d;
+      background: var(--gold);
+      border-radius: 50%;
+      font-size: 0.82rem;
+      font-weight: 950;
+    }
+
+    .workflow-step h3 {
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+    }
+
+    .workflow-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .widget-card {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .widget-card.featured {
+      grid-column: 1 / -1;
+      border-color: var(--border);
+    }
+
+    .widget-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      padding: clamp(1rem, 3vw, 1.4rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .widget-title-wrap {
+      min-width: 0;
+    }
+
+    .provider-label {
+      display: inline-flex;
+      margin-bottom: 0.3rem;
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .widget-head h3 {
+      margin: 0;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      line-height: 1.25;
+    }
+
+    .widget-head p {
+      margin: 0.3rem 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .provider-pill {
+      justify-self: end;
+      padding: 0.38rem 0.65rem;
+      color: var(--muted-strong);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    a.provider-pill:hover {
+      color: var(--text);
+      background: var(--cyan-soft);
+      border-color: rgba(71, 217, 255, 0.34);
+    }
+
+    .widget-frame {
+      position: relative;
+      width: 100%;
+      height: clamp(440px, 63svh, 680px);
+      background:
+        linear-gradient(135deg, rgba(71, 217, 255, 0.04), rgba(226, 184, 77, 0.035)),
+        #050b14;
+    }
+
+    .context-card .widget-frame {
+      height: clamp(330px, 42vw, 450px);
+    }
+
+    .widget-frame iframe {
+      display: block;
       width: 100%;
       height: 100%;
-      border: none;
+      min-height: 0;
+      background: #050b14;
+      border: 0;
     }
 
-    /* Layout wrapper for uniform spacing */
-    #market-widgets {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
+    .widget-footer {
+      display: grid;
+      gap: 0.8rem;
+      padding: 1rem clamp(1rem, 3vw, 1.4rem) 1.2rem;
+      border-top: 1px solid var(--line);
     }
 
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      .card {
-        height: 450px; /* smaller height on phones */
-      }
-      #market-widgets {
-        gap: 25px;
-      }
+    .widget-footer p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
-    footer {
-      background: rgba(0,0,0,0.8);
-      padding: 20px;
+    .disclosure {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .disclosure h2 {
+      margin-bottom: 0.35rem;
+      font-size: 1.15rem;
+    }
+
+    .disclosure p {
+      max-width: 78ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .disclosure-badge {
+      display: inline-grid;
+      min-width: 7rem;
+      min-height: 7rem;
+      place-items: center;
+      padding: 1rem;
+      color: var(--gold);
+      background: var(--gold-soft);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-align: center;
-      font-size: 0.9em;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      text-transform: uppercase;
+    }
+
+    .site-footer {
+      padding:
+        1.5rem
+        max(1rem, env(safe-area-inset-right))
+        max(1.5rem, env(safe-area-inset-bottom))
+        max(1rem, env(safe-area-inset-left));
+      background: rgba(3, 9, 20, 0.88);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      width: min(100%, var(--content-width));
+      margin: 0 auto;
+    }
+
+    .footer-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .footer-copy p + p {
+      margin-top: 0.2rem;
+    }
+
+    .footer-links {
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
+      min-height: 40px;
+      padding: 0.5rem;
+      color: var(--muted-strong);
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .noscript-notice {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 1rem auto;
+      padding: 1rem;
+      color: var(--warning);
+      background: rgba(255, 215, 106, 0.08);
+      border: 1px solid rgba(255, 215, 106, 0.32);
+      border-radius: var(--radius-sm);
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .identity-card {
+        width: 100%;
+      }
+
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-step {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0 0.9rem;
+        align-items: start;
+      }
+
+      .step-number {
+        grid-row: 1 / span 2;
+        margin: 0;
+      }
+
+      .workflow-step h3,
+      .workflow-step p {
+        grid-column: 2;
+      }
+
+      .widget-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .widget-card.featured {
+        grid-column: auto;
+      }
+
+      .context-card .widget-frame {
+        height: clamp(330px, 68svh, 480px);
+      }
+    }
+
+    @media (max-width: 620px) {
+      html {
+        scroll-padding-top: 6rem;
+      }
+
+      .site-header {
+        padding-right: max(0.75rem, env(safe-area-inset-right));
+        padding-left: max(0.75rem, env(safe-area-inset-left));
+      }
+
+      .header-inner {
+        gap: 0.55rem;
+      }
+
+      .brand {
+        gap: 0.55rem;
+      }
+
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+      }
+
+      .brand-title-long,
+      .brand-subtitle {
+        display: none;
+      }
+
+      .brand-title-short {
+        display: inline;
+      }
+
+      .home-link {
+        min-height: 42px;
+        padding: 0.65rem 0.8rem;
+        font-size: 0.82rem;
+      }
+
+      main {
+        width: min(calc(100% - 1.25rem), var(--content-width));
+        padding-top: 1rem;
+      }
+
+      .hero {
+        gap: 1.25rem;
+        padding: 1.15rem;
+        border-radius: 19px;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 15vw, 3.7rem);
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .security-notice {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+
+      .widget-card {
+        border-radius: 19px;
+      }
+
+      .widget-head {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+
+      .provider-pill {
+        justify-self: start;
+      }
+
+      .widget-frame,
+      .context-card .widget-frame {
+        height: clamp(380px, 66svh, 540px);
+      }
+
+      .widget-actions .button {
+        width: 100%;
+      }
+
+      .disclosure {
+        grid-template-columns: 1fr;
+      }
+
+      .disclosure-badge {
+        min-width: 0;
+        min-height: 0;
+        justify-self: start;
+        padding: 0.65rem 0.8rem;
+        border-radius: 999px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .brand-title {
+        font-size: 0.92rem;
+      }
+
+      .home-link {
+        padding-right: 0.68rem;
+        padding-left: 0.68rem;
+      }
+
+      .identity-list {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+      }
+
+      .identity-list dd {
+        margin-bottom: 0.45rem;
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
+
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header>
-  <h1>📊 JCS Live Metrics</h1>
-  <a href="index.html">🏠 Home</a>
-</header>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Jesus Christ Saves Token home">
+        <img
+          class="brand-logo"
+          src="/jcs-logo.png"
+          width="44"
+          height="44"
+          alt=""
+          decoding="async"
+        >
+        <span class="brand-copy">
+          <span class="brand-title">
+            <span class="brand-title-long">Jesus Christ Saves Token · Market Monitor</span>
+            <span class="brand-title-short">JCS Market Monitor</span>
+          </span>
+          <span class="brand-subtitle">Read-only · XRP Ledger Mainnet</span>
+        </span>
+      </a>
 
-<section>
-  <h2>Live Market Data</h2>
-
-  <div id="market-widgets">
-    <!-- JCS Token Chart -->
-    <div class="card">
-      <h3>JCS Token Live Market (Sologenic)</h3>
-      <iframe src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP"></iframe>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a class="home-link" href="index.html">
+          <span aria-hidden="true">⌂</span>
+          <span>Home</span>
+        </a>
+      </nav>
     </div>
+  </header>
 
-    <!-- XRP Chart -->
-    <div class="card">
-      <h3>XRP Live Price Chart</h3>
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:XRPUSDT&interval=60&hidesidetoolbar=1&theme=dark"></iframe>
+  <noscript>
+    <p class="noscript-notice">
+      JavaScript is disabled. The market links remain available, but some embedded provider views may not load.
+    </p>
+  </noscript>
+
+  <main id="main-content">
+    <section class="hero surface" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Faith · Transparency · XRPL Mainnet</p>
+        <h1 id="page-title">JCS Market <span>Monitor</span></h1>
+        <p class="hero-lead">
+          Read-only market context for the Jesus Christ Saves Token on the XRP Ledger,
+          with accurately labeled XRP and Bitcoin reference markets for comparison.
+        </p>
+
+        <ul class="status-chips" aria-label="Page capabilities">
+          <li class="status-chip">Read-only</li>
+          <li class="status-chip">No wallet connection</li>
+          <li class="status-chip">No transaction signing</li>
+          <li class="status-chip external">External provider data</li>
+        </ul>
+
+        <div class="hero-actions">
+          <a class="button" href="#jcs-market">View JCS/XRP market</a>
+          <a class="button secondary" href="#asset-identity">Verify JCS identity</a>
+        </div>
+      </div>
+
+      <aside class="identity-card" id="asset-identity" aria-labelledby="identity-title">
+        <div class="identity-heading">
+          <img
+            src="/jcs-logo.png"
+            width="48"
+            height="48"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          >
+          <div>
+            <h2 id="identity-title">Exact JCS asset identity</h2>
+            <p>Match every field before interacting.</p>
+          </div>
+        </div>
+
+        <dl class="identity-list">
+          <dt>Asset</dt>
+          <dd>Jesus Christ Saves Token</dd>
+
+          <dt>Currency</dt>
+          <dd>JCS</dd>
+
+          <dt>Network</dt>
+          <dd>XRP Ledger Mainnet</dd>
+
+          <dt>Reference pair</dt>
+          <dd>JCS/XRP</dd>
+        </dl>
+
+        <div class="issuer-block">
+          <span class="issuer-label">Issuer address</span>
+          <code class="issuer-value" id="issuerValue">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</code>
+          <div class="copy-row">
+            <button class="copy-button" id="copyIssuer" type="button">Copy issuer</button>
+            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <aside class="security-notice" aria-labelledby="security-title">
+      <span class="notice-mark" aria-hidden="true">!</span>
+      <div>
+        <h2 id="security-title">Verify the asset before you act</h2>
+        <p>
+          Currency symbols are not unique on the XRP Ledger. Confirm the full JCS issuer address
+          before interacting with any market or signing a transaction in Xaman. This page never
+          requests a seed phrase, secret key, recovery words, or wallet connection.
+        </p>
+      </div>
+    </aside>
+
+    <section class="workflow-section" aria-labelledby="workflow-title">
+      <div class="section-heading">
+        <p class="eyebrow">Safe workflow</p>
+        <h2 id="workflow-title">Verify first. Open the provider. Review in Xaman.</h2>
+        <p>
+          Market and wallet actions remain with recognized third-party interfaces; this monitor
+          does not construct or submit an XRPL transaction.
+        </p>
+      </div>
+
+      <div class="workflow-grid">
+        <article class="workflow-step">
+          <span class="step-number" aria-hidden="true">1</span>
+          <h3>Match the issuer</h3>
+          <p>Confirm the full JCS currency and issuer combination shown above.</p>
+        </article>
+
+        <article class="workflow-step">
+          <span class="step-number" aria-hidden="true">2</span>
+          <h3>Open a market provider</h3>
+          <p>Use the permanent Sologenic or XPMarket links if an embedded view is unavailable.</p>
+        </article>
+
+        <article class="workflow-step">
+          <span class="step-number" aria-hidden="true">3</span>
+          <h3>Review every detail</h3>
+          <p>Confirm the asset, amount, destination, fees, and transaction type inside Xaman before signing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="market-section" aria-labelledby="market-title">
+      <div class="section-heading">
+        <p class="eyebrow">External market references</p>
+        <h2 id="market-title">JCS first, broader market context second</h2>
+        <p>
+          The JCS/XRP view is the featured market. XRP/USDT and BTC/USD are separate comparison
+          charts and do not represent the executable JCS price.
+        </p>
+      </div>
+
+      <div class="widget-grid">
+        <article class="widget-card featured" id="jcs-market">
+          <header class="widget-head">
+            <div class="widget-title-wrap">
+              <span class="provider-label">Primary JCS reference</span>
+              <h3>JCS/XRP Order-Book View</h3>
+              <p>Embedded Sologenic market view for the exact JCS asset identified above.</p>
+            </div>
+            <span class="provider-pill">Sologenic</span>
+          </header>
+
+          <div class="widget-frame">
+            <iframe
+              src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet"
+              title="Read-only JCS and XRP market view on Sologenic"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+
+          <footer class="widget-footer">
+            <p>
+              Market view unavailable? Open the JCS/XRP market directly and verify the issuer
+              before proceeding. The embedded view is intentionally restricted to read-only use.
+            </p>
+            <div class="widget-actions">
+              <a
+                class="button small"
+                href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet"
+                target="_blank"
+                rel="noopener noreferrer external"
+              >Open Sologenic</a>
+              <a
+                class="button secondary small"
+                href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+                target="_blank"
+                rel="noopener noreferrer external"
+              >Open XPMarket</a>
+            </div>
+          </footer>
+        </article>
+
+        <article class="widget-card context-card">
+          <header class="widget-head">
+            <div class="widget-title-wrap">
+              <span class="provider-label">Market context</span>
+              <h3>XRP/USDT · Binance Reference</h3>
+              <p>Binance XRP/USDT data displayed through TradingView.</p>
+            </div>
+            <a
+              class="provider-pill"
+              href="https://www.tradingview.com/symbols/XRPUSDT/"
+              target="_blank"
+              rel="noopener noreferrer external"
+              aria-label="Open the XRP to USDT source chart on TradingView"
+            >TradingView ↗</a>
+          </header>
+
+          <div class="widget-frame">
+            <iframe
+              src="https://s.tradingview.com/widgetembed/?symbol=BINANCE%3AXRPUSDT&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark"
+              title="Binance XRP to USDT reference chart from TradingView"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+
+          <footer class="widget-footer">
+            <p>This comparison chart is not the JCS/XRP order book or an executable JCS quote.</p>
+            <div class="widget-actions">
+              <a
+                class="button secondary small"
+                href="https://www.tradingview.com/symbols/XRPUSDT/"
+                target="_blank"
+                rel="noopener noreferrer external"
+              >Open XRP chart</a>
+            </div>
+          </footer>
+        </article>
+
+        <article class="widget-card context-card">
+          <header class="widget-head">
+            <div class="widget-title-wrap">
+              <span class="provider-label">Market context</span>
+              <h3>BTC/USD · Bitstamp Reference</h3>
+              <p>Bitstamp BTC/USD data displayed through TradingView.</p>
+            </div>
+            <a
+              class="provider-pill"
+              href="https://www.tradingview.com/symbols/BTCUSD/"
+              target="_blank"
+              rel="noopener noreferrer external"
+              aria-label="Open the Bitcoin to US dollar source chart on TradingView"
+            >TradingView ↗</a>
+          </header>
+
+          <div class="widget-frame">
+            <iframe
+              src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP%3ABTCUSD&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark"
+              title="Bitstamp Bitcoin to US dollar reference chart from TradingView"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+
+          <footer class="widget-footer">
+            <p>This comparison chart is provided only as broader market context.</p>
+            <div class="widget-actions">
+              <a
+                class="button secondary small"
+                href="https://www.tradingview.com/symbols/BTCUSD/"
+                target="_blank"
+                rel="noopener noreferrer external"
+              >Open Bitcoin chart</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <section class="disclosure-section" aria-labelledby="disclosure-title">
+      <div class="disclosure surface">
+        <div>
+          <h2 id="disclosure-title">External data notice</h2>
+          <p>
+            Embedded market views are operated by Sologenic and TradingView. Provider data may be
+            delayed, incomplete, or temporarily unavailable. Displayed prices may differ from
+            executable XRPL prices after liquidity, spread, slippage, fees, and market movement.
+            External providers' terms and privacy practices apply. This page provides information,
+            not financial advice.
+          </p>
+        </div>
+        <span class="disclosure-badge">Read-only information</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-copy">
+        <p>&copy; <span id="copyrightYear">2026</span> Cryptocurrency Community Church of Jesus Christ. All rights reserved.</p>
+        <p>Read-only information · No custody · No financial advice</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="verify.html">Sign the Ledger</a>
+        <a href="about-jcs.html">JCS Vision</a>
+        <a href="/.well-known/security.txt">Security</a>
+      </nav>
     </div>
+  </footer>
 
-    <!-- Bitcoin Chart -->
-    <div class="card">
-      <h3>Bitcoin Live Chart</h3>
-      <iframe src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP:BTCUSD&interval=60&hidesidetoolbar=1&theme=dark"></iframe>
-    </div>
-  </div>
-</section>
+  <script>
+    (() => {
+      "use strict";
 
-<footer>
-  <p>&copy; 2025 Cryptocurrency Community Church of Jesus Christ. All rights reserved.</p>
-</footer>
+      const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
+      const copyButton = document.getElementById("copyIssuer");
+      const copyStatus = document.getElementById("copyStatus");
+      const year = document.getElementById("copyrightYear");
 
+      if (year) {
+        year.textContent = String(new Date().getUTCFullYear());
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        textArea.style.pointerEvents = "none";
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        const copied = document.execCommand("copy");
+        textArea.remove();
+
+        if (!copied) {
+          throw new Error("Copy command was unavailable.");
+        }
+      }
+
+      if (copyButton && copyStatus) {
+        copyButton.addEventListener("click", async () => {
+          copyButton.disabled = true;
+          copyStatus.textContent = "";
+
+          try {
+            await copyText(issuer);
+            copyButton.textContent = "Issuer copied";
+            copyStatus.textContent = "Exact issuer copied to clipboard.";
+          } catch (error) {
+            copyButton.textContent = "Copy issuer";
+            copyStatus.textContent = "Copy was blocked. Select the issuer address above.";
+          } finally {
+            window.setTimeout(() => {
+              copyButton.disabled = false;
+              copyButton.textContent = "Copy issuer";
+              copyStatus.textContent = "";
+            }, 2600);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
