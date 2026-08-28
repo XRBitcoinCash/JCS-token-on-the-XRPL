@@ -3,37 +3,43 @@
 <html data-theme="dark" lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#071225" name="theme-color"/>
 <meta content="JCS Sign the Ledger" name="application-name"/>
-<meta content="4.2.1" name="jcs-ledger-release"/>
-<title>Sign the Ledger v4.2.1 · JCS Prayer NFT Social Ledger</title>
-<meta content="Mint JCS prayer NFTs through Xaman, publish validated testimonies and replies to the XRP Ledger, and enter continuous sacred music and Scripture-reading streams." name="description"/>
-<meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network" name="keywords"/>
+<meta content="5.0.0" name="jcs-ledger-release"/>
+<title>Sign the Ledger v5.0.0 · JCS Verified Prayer, Social Proof & Map Pulse</title>
+<meta content="Mint JCS prayer NFTs through Xaman, publish validated testimonies, replies and Amen reactions, inspect relay and broad-region prayer signals, export evidence, and prepare user-controlled social shares without claiming wallet geolocation." name="description"/>
+<meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network,prayer map,validated proof,social sharing,relay pulse" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <meta content="index,follow,max-snippet:-1,max-image-preview:large" name="robots"/>
 <link href="https://jesuschristsavestoken.com/verify.html" rel="canonical"/>
-<link href="/ai.json" rel="alternate" title="AI Manifest" type="application/json"/>
+<link href="./ai.json" rel="alternate" title="AI Manifest" type="application/json"/>
+<link href="./.well-known/did.json" rel="alternate" title="JCS Web DID" type="application/json"/>
+<link href="./.well-known/xrp-ledger.toml" rel="alternate" title="JCS XRP Ledger metadata" type="text/plain"/>
+<link href="./.well-known/security.txt" rel="security"/>
+<link href="./sitemap.xml" rel="sitemap" type="application/xml"/>
+<link href="./css/style.css" rel="stylesheet"/>
+<link href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" rel="license"/>
 <link href="https://jesuschristsavestoken.com/jcs-logo.png" rel="icon" type="image/png"/>
-<link href="https://jesuschristsavestoken.com/jcs-logo-180.png" rel="apple-touch-icon"/>
+<link href="https://jesuschristsavestoken.com/jcs-logo.png" rel="apple-touch-icon"/>
 <meta content="website" property="og:type"/>
 <meta content="Jesus Christ Saves Token" property="og:site_name"/>
-<meta content="Sign the Ledger · Numbered JCS Prayer NFTs" property="og:title"/>
-<meta content="Numbered JCS prayer NFTs, rolling on-ledger testimonies, replies, and Amen reactions on the XRP Ledger." property="og:description"/>
+<meta content="Sign the Ledger · Verified JCS Prayer NFTs, Map Pulse & Social Proof" property="og:title"/>
+<meta content="Numbered JCS prayer NFTs, validated testimony records, broad-region prayer signals, relay health, evidence exports, replies, Amen reactions, and user-controlled social sharing." property="og:description"/>
 <meta content="https://jesuschristsavestoken.com/verify.html" property="og:url"/>
 <meta content="https://jesuschristsavestoken.com/jcs-logo.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="@JesusCS_token" name="twitter:site"/>
-<meta content="Sign the Ledger · Numbered JCS Prayer NFTs" name="twitter:title"/>
+<meta content="Sign the Ledger · Verified JCS Prayer NFTs, Map Pulse & Social Proof" name="twitter:title"/>
 <meta content="https://jesuschristsavestoken.com/jcs-logo.png" name="twitter:image"/>
 <link crossorigin="" href="https://xaman.app" rel="preconnect"/>
-<link crossorigin="" href="https://unpkg.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <meta content="
   default-src 'self';
   script-src 'self' 'unsafe-inline'
     https://xumm.app https://*.xumm.app
     https://xaman.app https://*.xaman.app
-    https://unpkg.com;
+    https://cdn.jsdelivr.net;
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: https:;
   media-src 'self' blob:
@@ -595,7 +601,7 @@
 
 
 /* =========================================================
-   Sign the Ledger v4.0.0 · social interaction corrections
+   Sign the Ledger v5.0.0 · social interaction corrections
    ========================================================= */
 .publish-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
 .explain-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -694,7 +700,7 @@
 
 
 /* =========================================================
-   Sign the Ledger v4.2.1 · Sacred Audio Sanctuary
+   Sign the Ledger v5.0.0 · Sacred Audio Sanctuary
    ========================================================= */
 .audio-sanctuary{
   margin-top:22px;
@@ -955,7 +961,7 @@ html[data-theme="light"] .jcs-unified-header{
 
 
 /* =========================================================
-   Sign the Ledger v4.2.1 · prayer rotation and social sharing
+   Sign the Ledger v5.0.0 · prayer rotation and social sharing
    ========================================================= */
 .prayer-library{
   margin-top:14px;
@@ -1075,12 +1081,6 @@ html[data-theme="light"] .jcs-unified-header{
   background:var(--surface);
   box-shadow:var(--shadow);
 }
-.share-action[data-share-platform="all"]{
-  border-color:rgba(201,152,32,.55);
-  color:#111;
-  background:linear-gradient(180deg,#ffe69a,#d5a82b);
-}
-html[data-theme="dark"] .share-action[data-share-platform="all"]{color:#111}
 .post-card:target{
   border-color:var(--gold);
   box-shadow:0 0 0 3px rgba(201,152,32,.15),0 18px 42px rgba(0,0,0,.18);
@@ -1095,7 +1095,7 @@ html[data-theme="dark"] .share-action[data-share-platform="all"]{color:#111}
 
 
 /* =========================================================
-   Sign the Ledger v4.2.1 · stacked composer/feed layout
+   Sign the Ledger v5.0.0 · stacked composer/feed layout
    ========================================================= */
 
 /*
@@ -1219,9 +1219,9 @@ html[data-theme="dark"] .share-action[data-share-platform="all"]{color:#111}
   "url": "https://jesuschristsavestoken.com/verify.html",
   "applicationCategory": "SocialNetworkingApplication",
   "operatingSystem": "Any modern browser",
-  "softwareVersion": "4.2.1",
+  "softwareVersion": "5.0.0",
   "isAccessibleForFree": true,
-  "description": "A non-custodial JCS prayer NFT and social testimony interface that reads and publishes validated XRP Ledger transactions.",
+  "description": "A non-custodial JCS prayer NFT and social testimony interface that publishes and reads validated XRP Ledger transactions, exposes broad-region prayer signals without wallet geolocation, and prepares user-controlled social shares and evidence exports.",
   "publisher": {
     "@type": "Organization",
     "name": "Jesus Christ Saves Token",
@@ -1235,7 +1235,11 @@ html[data-theme="dark"] .share-action[data-share-platform="all"]{color:#111}
     "Inline on-ledger replies without modal blur",
     "On-ledger Amen reactions",
     "Public XRPL WebSocket failover",
-    "Automatic wall-clock synchronized sacred music",
+    "First-interaction sacred audio with complete page-exit suspension",
+    "Broad-region prayer-signal heat view without automatic geolocation",
+    "XRPL relay endpoint latency and validated-ledger pulse",
+    "Local verification evidence and proof-card export",
+    "User-controlled sharing to native device targets and social platform composers",
     "Automatic wall-clock synchronized Scripture readings",
     "Local listening pause without stopping the shared timeline"
   ]
@@ -1512,10 +1516,110 @@ body.light-mode .jcs-ecosystem-header{
   .jcs-ecosystem-header .brand-subtitle{font-size:.59rem}
 }
 </style>
+
+<style id="jcs-verify-v5-upgrade">
+/* =========================================================
+   Sign the Ledger v5.0.0 · verified social proof + map pulse
+   ========================================================= */
+.site-header{position:static!important;top:auto!important}
+.container{max-width:1280px}
+.hero{border-color:rgba(201,152,32,.42)}
+.hero-actions{align-items:stretch}
+.hero-actions .btn{min-height:44px}
+
+.region-disclosure{
+  margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:14px;
+  background:linear-gradient(145deg,rgba(47,128,237,.07),transparent),var(--surface-2)
+}
+.region-disclosure-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px;align-items:start}
+.region-consent{display:flex;gap:9px;align-items:flex-start;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.region-consent input{width:19px;min-height:19px;height:19px;flex:0 0 19px;margin-top:2px}
+.region-consent span{color:var(--muted);font-size:.76rem;line-height:1.5}
+.privacy-boundary{margin:10px 0 0;color:var(--muted);font-size:.72rem}
+.privacy-boundary strong{color:var(--ink)}
+
+.filter-bar{grid-template-columns:minmax(0,1fr) repeat(3,minmax(135px,170px))}
+.feed-stats{grid-template-columns:repeat(5,minmax(0,1fr))}
+.badge.region{border-color:rgba(47,128,237,.45);color:var(--blue);background:rgba(47,128,237,.07)}
+.map-action{border-color:rgba(8,125,78,.42)!important;color:var(--green)!important}
+.bookmark-action[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+
+.map-pulse-card,.evidence-center{margin-top:22px;padding:clamp(18px,3vw,28px)}
+.section-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.section-title-row h2{margin:0;font-size:clamp(1.45rem,3vw,2rem)}
+.section-title-row p{max-width:850px;margin:6px 0 0;color:var(--muted)}
+.map-boundary{
+  margin-top:14px;padding:13px 14px;border:1px solid rgba(201,152,32,.38);border-left:4px solid var(--gold);
+  border-radius:12px;background:rgba(201,152,32,.06);color:var(--muted)
+}
+.map-boundary strong{color:var(--ink)}
+.pulse-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pulse-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}
+.pulse-stat,.region-heat-card,.relay-card,.evidence-card,.evidence-rule{
+  min-width:0;padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2)
+}
+.pulse-stat span,.region-heat-card span,.relay-card span,.evidence-card span{
+  display:block;color:var(--muted);font-size:.66rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase
+}
+.pulse-stat strong,.region-heat-card strong,.relay-card strong,.evidence-card strong{display:block;margin-top:5px;overflow-wrap:anywhere}
+.region-heat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px}
+.region-heat-card{position:relative;overflow:hidden;cursor:pointer;text-align:left;color:var(--ink)}
+.region-heat-card::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:var(--heat,0%);background:linear-gradient(90deg,var(--blue),var(--gold))}
+.region-heat-card:hover,.region-heat-card:focus-visible{border-color:var(--blue);outline:none}
+.region-heat-card small{display:block;margin-top:5px;color:var(--muted)}
+.relay-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.relay-card.ok{border-color:rgba(8,125,78,.42)}
+.relay-card.err{border-color:rgba(197,52,77,.42)}
+.relay-card .relay-line{display:flex;justify-content:space-between;gap:8px;margin-top:5px;color:var(--muted);font-size:.72rem}
+.relay-card code{overflow-wrap:anywhere}
+.map-handoff-status{margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;color:var(--muted);background:var(--surface-2)}
+
+.evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}
+.evidence-card.full{grid-column:span 2}
+.evidence-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.evidence-matrix{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}
+.evidence-rule h3{margin:0;font-size:.94rem}
+.evidence-rule p{margin:6px 0 0;color:var(--muted);font-size:.78rem}
+.evidence-rule.observed{border-top:3px solid var(--green)}
+.evidence-rule.derived{border-top:3px solid var(--blue)}
+.evidence-rule.unknown{border-top:3px solid var(--orange)}
+
+.share-dialog{width:min(820px,calc(100% - 26px));max-height:min(88vh,900px);padding:0;border:1px solid var(--line);border-radius:20px;color:var(--ink);background:var(--surface);box-shadow:var(--shadow-lg)}
+.share-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(5px)}
+.share-dialog-inner{padding:clamp(17px,3vw,25px)}
+.share-dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.share-dialog-head h2{margin:0}
+.share-dialog-head p{margin:5px 0 0;color:var(--muted)}
+.share-proof-preview{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.55fr);gap:13px;margin-top:14px}
+.share-copy-box{padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2);white-space:pre-wrap;overflow-wrap:anywhere}
+.proof-card-preview{width:100%;aspect-ratio:1200/630;border:1px solid var(--line);border-radius:13px;background:#071225;object-fit:contain}
+.share-platform-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.share-platform-grid .btn{width:100%}
+.share-disclosure{margin-top:12px;color:var(--muted);font-size:.74rem}
+.share-status{margin-top:10px;min-height:1.45em;color:var(--muted)}
+
+.latest-proof-callout{margin-top:12px;padding:13px;border:1px solid rgba(8,125,78,.4);border-left:4px solid var(--green);border-radius:12px;background:rgba(8,125,78,.06)}
+.latest-proof-callout[hidden]{display:none!important}
+
+@media(max-width:1040px){
+  .filter-bar{grid-template-columns:minmax(0,1fr) repeat(2,minmax(140px,1fr))}
+  #feedRegion{grid-column:span 1}
+  .region-heat-grid,.pulse-summary,.evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .share-platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .region-disclosure-grid,.filter-bar,.feed-stats,.region-heat-grid,.pulse-summary,.relay-grid,.evidence-grid,.evidence-matrix,.share-proof-preview{grid-template-columns:1fr}
+  .evidence-card.full{grid-column:auto}
+  .share-platform-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-title-row,.share-dialog-head{display:block}
+  .section-title-row .badge,.share-dialog-head .btn{margin-top:9px}
+}
+@media(max-width:430px){.share-platform-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
-<!-- JCS Sign the Ledger v4.2.1 · XRBitcoinCash-uniform ecosystem header -->
+<!-- JCS Sign the Ledger v5.0.0 · XRBitcoinCash-uniform ecosystem header -->
 <header class="site-header jcs-ecosystem-header" role="banner">
   <div class="header-wrap compact-header-wrap">
     <div class="brand-stack">
@@ -1575,19 +1679,22 @@ body.light-mode .jcs-ecosystem-header{
       <a class="nav-btn" href="index.html#scripture">Scripture</a>
       <a class="nav-btn" href="index.html#sacred-film">Sacred Film</a>
       <a class="nav-btn" href="index.html#audio">Sacred Audio</a>
+      <a class="nav-btn" href="prayer.map.html">Prayer Map</a>
     </nav>
   </div>
 </header>
 <main class="container" id="main">
 <section class="card hero">
 <div>
-<span class="eyebrow">✝ NFT-backed prayer · testimony · fellowship</span>
-<h1>Every testimony can become an <span>immutable witness.</span></h1>
-<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, then publish a numbered social record. The prayer identifier is derived from the validated mint transaction itself, so minting never depends on a full-history server or browser storage.</p>
+<span class="eyebrow">✝ NFT-backed prayer · validated social proof · privacy-respecting map pulse</span>
+<h1>Every testimony can become a <span>verified witness.</span></h1>
+<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, publish a numbered social record, inspect the validated evidence, and optionally add only a broad author-declared region to the Prayer Map pulse. XRPL transactions do not contain GPS coordinates, and this page never attempts to infer a wallet holder’s physical location.</p>
 <div class="hero-actions">
 <a class="btn primary" href="#compose">Compose a testimony NFT</a>
 <a class="btn" href="#testimonies">Enter the rolling testimony stream</a>
 <a class="btn" href="index.html#audio">Sacred audio sanctuary</a>
+<a class="btn" href="#map-pulse">Prayer Map pulse</a>
+<a class="btn" href="#verification-center">Verification evidence</a>
 </div>
 </div>
 <aside class="hero-proof">
@@ -1613,10 +1720,7 @@ body.light-mode .jcs-ecosystem-header{
 <span class="eyebrow">Continuous wall-clock synchronized streams</span>
 <h2 id="audio-title">Sacred Audio Sanctuary</h2>
 <p>
-        Church music and spoken Scripture automatically join the current point
-        in their continuous station timelines. Pausing your listening only
-        mutes this browser; the station clock continues, and resuming rejoins
-        the current position rather than restarting.
+        Church music and spoken Scripture remain paused until the first non-wallet interaction. They then join the current point in their continuous station timelines. Both channels stop whenever this page is hidden, blurred, or left, and they require another interaction before resuming.
       </p>
 </div>
 <div class="audio-master-actions">
@@ -1629,9 +1733,9 @@ body.light-mode .jcs-ecosystem-header{
 <h3>Church Music Radio</h3>
 <p>
         Gregorian chant, Ave Maria, and suitable public-domain archival sacred
-        recordings. The station begins loading when the page opens.
+        recordings. The station begins only after the first permitted interaction.
       </p>
-<audio autoplay="" crossorigin="anonymous" id="musicAudio" playsinline="" preload="auto"></audio>
+<audio crossorigin="anonymous" id="musicAudio" playsinline="" preload="metadata"></audio>
 <div class="audio-controls">
 <button class="btn" id="musicListen" type="button">Listen</button>
 <button class="btn" id="musicMute" type="button">Pause listening</button>
@@ -1648,7 +1752,7 @@ body.light-mode .jcs-ecosystem-header{
         King James Psalms, the Book of Enoch, and the Book of Jubilees from
         public-domain LibriVox and Internet Archive recordings.
       </p>
-<audio autoplay="" crossorigin="anonymous" id="readingAudio" playsinline="" preload="auto"></audio>
+<audio crossorigin="anonymous" id="readingAudio" playsinline="" preload="metadata"></audio>
 <div class="audio-controls">
 <button class="btn" id="readingListen" type="button">Listen</button>
 <button class="btn" id="readingMute" type="button">Pause listening</button>
@@ -1661,7 +1765,7 @@ body.light-mode .jcs-ecosystem-header{
 </article>
 </div>
 <p aria-live="polite" class="audio-policy" id="audioStatus">
-    Both continuous channels are joining the same wall-clock station positions used on the JCS home page. If the browser blocks audible autoplay, the first non-wallet click or key press enables sound. No video is loaded on this page.
+    Both sacred channels are paused. The first non-wallet click, tap, or qualifying key press starts them at the current synchronized station positions. Leaving or hiding this page stops playback. No video is loaded on this page.
   </p>
 </section>
 <section class="social-layout">
@@ -1745,6 +1849,36 @@ You may edit the wording before minting or publishing anything.
 <label for="scriptureRef">Scripture reference <span class="field-hint">Optional</span></label>
 <input id="scriptureRef" maxlength="48" placeholder="John 3:16 · Psalm 23 · 1 Enoch 1:8"/>
 </div>
+<div class="region-disclosure">
+  <div class="region-disclosure-grid">
+    <div class="field">
+      <label for="regionCode">Broad Prayer Map region <span class="field-hint">Optional · never automatic</span></label>
+      <select id="regionCode">
+        <option value="none">Do not publish a region</option>
+        <option value="worldwide">Worldwide / not region-specific</option>
+        <option value="north-america">North America</option>
+        <option value="latin-america-caribbean">Latin America &amp; Caribbean</option>
+        <option value="europe">Europe</option>
+        <option value="africa">Africa</option>
+        <option value="middle-east-north-africa">Middle East &amp; North Africa</option>
+        <option value="south-asia">South Asia</option>
+        <option value="east-southeast-asia">East &amp; Southeast Asia</option>
+        <option value="oceania">Oceania</option>
+      </select>
+      <span class="field-hint">The selection is a broad author-declared label, not a detected location.</span>
+    </div>
+    <label class="region-consent" for="regionConsent">
+      <input id="regionConsent" type="checkbox">
+      <span>
+        I understand that selecting a region adds that broad label to public XRPL memos and the JCS Prayer Map handoff. I will not use it to expose a precise address, coordinates, a vulnerable person, or someone else’s location.
+      </span>
+    </label>
+  </div>
+  <p class="privacy-boundary">
+    <strong>Location boundary:</strong> this page does not call the browser Geolocation API, inspect IP location, use Xaman device tracking, or claim that XRPL validators, nodes, transactions, wallets, or NFTs reveal a person’s physical location.
+  </p>
+</div>
+
 <div aria-live="polite" class="preview">
 <div aria-label="NFT wallet preview" class="nft-preview-card">
 <img alt="JCS logo used for the prayer NFT" src="https://jesuschristsavestoken.com/jcs-logo.png"/>
@@ -1758,7 +1892,7 @@ You may edit the wording before minting or publishing anything.
 <div class="preview-message" id="previewMessage">Your testimony preview will appear here.</div>
 <div class="preview-meta" id="previewMeta">Prayer · Anonymous</div>
 </div>
-<div aria-label="Publishing steps" class="publish-flow"><div class="flow-step active" id="flowConnect">1 · Connect</div><div class="flow-step" id="flowMint">2 · Mint NFT</div><div class="flow-step" id="flowRegister">3 · Publish feed</div></div>
+<div aria-label="Publishing steps" class="publish-flow"><div class="flow-step active" id="flowConnect">1 · Connect</div><div class="flow-step" id="flowMint">2 · Mint NFT</div><div class="flow-step" id="flowRegister">3 · Publish feed</div><div class="flow-step" id="flowVerify">4 · Verify &amp; share</div></div>
 <div class="publish-actions">
 <button class="btn primary" disabled="" id="publishBtn" type="button">Mint JCS prayer NFT and publish testimony</button>
 <button class="btn" disabled="" id="mintOnlyBtn" type="button">Mint JCS prayer NFT only</button>
@@ -1787,6 +1921,7 @@ You may edit the wording before minting or publishing anything.
 <div class="stat"><span>NFT-backed</span><strong id="statNfts">—</strong></div>
 <div class="stat"><span>On-ledger Amens</span><strong id="statAmens">—</strong></div>
 <div class="stat"><span>Wallets</span><strong id="statWallets">—</strong></div>
+<div class="stat"><span>Broad regions</span><strong id="statRegions">—</strong></div>
 </div>
 <div class="filter-bar">
 <input id="feedSearch" placeholder="Search messages, names, handles, wallets…" type="search"/>
@@ -1798,6 +1933,19 @@ You may edit the wording before minting or publishing anything.
 <option value="request">Prayer request</option>
 <option value="scripture">Scripture reflection</option>
 <option value="legacy">Legacy posts</option>
+</select>
+<select aria-label="Filter broad Prayer Map region" id="feedRegion">
+<option value="all">All broad regions</option>
+<option value="none">No region published</option>
+<option value="worldwide">Worldwide</option>
+<option value="north-america">North America</option>
+<option value="latin-america-caribbean">Latin America &amp; Caribbean</option>
+<option value="europe">Europe</option>
+<option value="africa">Africa</option>
+<option value="middle-east-north-africa">Middle East &amp; North Africa</option>
+<option value="south-asia">South Asia</option>
+<option value="east-southeast-asia">East &amp; Southeast Asia</option>
+<option value="oceania">Oceania</option>
 </select>
 <select aria-label="Sort testimonies" id="feedSort">
 <option value="newest">Newest first</option>
@@ -1816,6 +1964,81 @@ You may edit the wording before minting or publishing anything.
 </div>
 <p class="status-box" id="feedStatus">Connecting to the XRP Ledger…</p>
 </article>
+</section>
+
+<section class="card map-pulse-card" id="map-pulse" aria-labelledby="map-pulse-title">
+  <div class="section-title-row">
+    <div>
+      <span class="eyebrow">Broad-region prayer heat · XRPL relay pulse · no GPS inference</span>
+      <h2 id="map-pulse-title">Prayer Signal &amp; Relay Pulse</h2>
+      <p>
+        This view counts optional broad region labels found in recent validated JCS registry transactions and separately measures the public XRPL endpoints used by this browser. Relay endpoint names and latency describe network access—not the physical location of a wallet, prayer, validator operator, or person.
+      </p>
+    </div>
+    <span class="badge verified" id="mapPulseBadge">Waiting for feed</span>
+  </div>
+  <div class="map-boundary">
+    <strong>No automatic geolocation:</strong> XRPL transaction fields do not contain a standard GPS field. A user may voluntarily publish one broad region label; otherwise the prayer remains “region not published.” The visual centroid carried in the handoff is only a continent-scale display hint and is never represented as a person’s actual location.
+  </div>
+  <div class="pulse-toolbar">
+    <a class="btn primary" id="openPrayerMapBtn" href="prayer.map.html" target="_blank" rel="noopener">Open Prayer &amp; Integrity Map</a>
+    <button class="btn" id="probeRelaysBtn" type="button">Probe XRPL relay endpoints</button>
+    <button class="btn" id="exportMapSignalsBtn" type="button">Export recent map signals</button>
+    <button class="btn" id="clearMapSignalsBtn" type="button">Clear local handoff queue</button>
+  </div>
+  <div class="pulse-summary">
+    <article class="pulse-stat"><span>Recent posts</span><strong id="mapPostCount">—</strong></article>
+    <article class="pulse-stat"><span>Region-labeled</span><strong id="mapRegionCount">—</strong></article>
+    <article class="pulse-stat"><span>Region not published</span><strong id="mapPrivateCount">—</strong></article>
+    <article class="pulse-stat"><span>Active XRPL relay</span><strong id="mapActiveRelay">—</strong></article>
+  </div>
+  <div class="region-heat-grid" id="regionHeatGrid" aria-live="polite">
+    <article class="region-heat-card"><span>Prayer map</span><strong>No validated feed loaded</strong><small>Refresh the testimony feed.</small></article>
+  </div>
+  <div class="relay-grid" id="relayGrid" aria-live="polite">
+    <article class="relay-card"><span>Relay pulse</span><strong>Not probed</strong><div class="relay-line"><span>Location claim</span><b>None</b></div></article>
+  </div>
+  <div class="map-handoff-status" id="mapHandoffStatus" role="status" aria-live="polite">
+    The page can prepare a privacy-limited handoff through a query string, localStorage queue, and BroadcastChannel. The current Prayer Map can be opened now; its later controlled upgrade should consume this schema directly.
+  </div>
+</section>
+
+<section class="card evidence-center" id="verification-center" aria-labelledby="verification-center-title">
+  <div class="section-title-row">
+    <div>
+      <span class="eyebrow">Observed ledger evidence · derived labels · explicit unknowns</span>
+      <h2 id="verification-center-title">Verification Evidence Center</h2>
+      <p>
+        The latest validated JCS post is summarized here without turning an on-ledger event into a claim about legal identity, truth, authorship, ownership, location, doctrine, or institutional endorsement.
+      </p>
+    </div>
+    <span class="badge" id="latestVerificationBadge">No verified post loaded</span>
+  </div>
+  <div class="latest-proof-callout" id="latestProofCallout" hidden>
+    <strong id="latestProofHeadline">Latest verified post ready.</strong>
+    <p id="latestProofText"></p>
+  </div>
+  <div class="evidence-grid">
+    <article class="evidence-card"><span>Prayer identifier</span><strong id="verifyPrayerNumber">—</strong></article>
+    <article class="evidence-card"><span>Validated registry ledger</span><strong id="verifyLedger">—</strong></article>
+    <article class="evidence-card full"><span>Registry transaction</span><strong class="mono" id="verifyRegistryTx">—</strong></article>
+    <article class="evidence-card full"><span>Mint transaction</span><strong class="mono" id="verifyMintTx">—</strong></article>
+    <article class="evidence-card full"><span>NFTokenID</span><strong class="mono" id="verifyNftId">—</strong></article>
+    <article class="evidence-card full"><span>Content commitment</span><strong class="mono" id="verifyContentHash">—</strong></article>
+    <article class="evidence-card"><span>Broad region</span><strong id="verifyRegion">—</strong></article>
+    <article class="evidence-card"><span>Author wallet display</span><strong id="verifyWallet">—</strong></article>
+  </div>
+  <div class="evidence-actions">
+    <button class="btn primary" id="shareLatestBtn" type="button" disabled>Share latest proof</button>
+    <button class="btn" id="openLatestMapBtn" type="button" disabled>Open latest on Prayer Map</button>
+    <button class="btn" id="copyVerificationBtn" type="button" disabled>Copy proof summary</button>
+    <button class="btn" id="downloadVerificationBtn" type="button" disabled>Download evidence JSON</button>
+  </div>
+  <div class="evidence-matrix">
+    <article class="evidence-rule observed"><h3>Observed</h3><p>Validated transaction hash, ledger index, wallet address, public memos, NFTokenID when returned, and public XRPL timestamps.</p></article>
+    <article class="evidence-rule derived"><h3>Derived</h3><p>Prayer identifier, shortened wallet display, broad-region heat counts, relay latency, and generated social proof card.</p></article>
+    <article class="evidence-rule unknown"><h3>Unknown</h3><p>Real-world identity, actual location, truth of the message, ownership of off-ledger content, intent, legal effect, spiritual authority, and future availability.</p></article>
+  </div>
 </section>
 <section class="card profile-panel" id="my-nfts">
 <div class="profile-info">
@@ -1854,9 +2077,7 @@ You may edit the wording before minting or publishing anything.
 <article class="card explain-card">
 <h3>3 · Publish the social record</h3>
 <p>
-          A one-drop registry transaction links the prayer ID, NFTokenID, mint
-          transaction, testimony, optional identity fields, Scripture reference,
-          and content commitment into the public feed.
+          A one-drop registry transaction links the prayer ID, NFTokenID, mint transaction, testimony, optional identity fields, Scripture reference, content commitment, and an optional broad region label into the public feed.
         </p>
 </article>
 <article class="card explain-card">
@@ -1869,6 +2090,40 @@ You may edit the wording before minting or publishing anything.
 </article>
 </section>
 </main>
+
+<dialog class="share-dialog" id="shareDialog">
+  <div class="share-dialog-inner">
+    <div class="share-dialog-head">
+      <div>
+        <h2>Share a validated JCS proof</h2>
+        <p>Each action opens a platform composer or the device share sheet. Nothing posts automatically and no social OAuth token is stored by this page.</p>
+      </div>
+      <button class="btn small" id="closeShareDialogBtn" type="button">Close</button>
+    </div>
+    <div class="share-proof-preview">
+      <div class="share-copy-box" id="shareCopyPreview">Select a validated testimony from the feed.</div>
+      <canvas class="proof-card-preview" id="shareProofCanvas" width="1200" height="630" aria-label="Generated JCS social proof card preview"></canvas>
+    </div>
+    <div class="share-platform-grid" aria-label="User-controlled share destinations">
+      <button class="btn primary share-platform" data-platform="native" type="button">Device share sheet</button>
+      <button class="btn share-platform" data-platform="x" type="button">X composer</button>
+      <button class="btn share-platform" data-platform="facebook" type="button">Facebook share</button>
+      <button class="btn share-platform" data-platform="linkedin" type="button">LinkedIn share</button>
+      <button class="btn share-platform" data-platform="bluesky" type="button">Bluesky composer</button>
+      <button class="btn share-platform" data-platform="telegram" type="button">Telegram share</button>
+      <button class="btn share-platform" data-platform="whatsapp" type="button">WhatsApp share</button>
+      <button class="btn share-platform" data-platform="reddit" type="button">Reddit submit</button>
+      <button class="btn share-platform" data-platform="email" type="button">Email draft</button>
+      <button class="btn share-platform" data-platform="instagram" type="button">Prepare for Instagram</button>
+      <button class="btn share-platform" data-platform="copy" type="button">Copy proof text</button>
+      <button class="btn share-platform" data-platform="download" type="button">Download proof card</button>
+    </div>
+    <p class="share-disclosure">
+      Instagram does not provide a general static-web auto-post endpoint; its button copies the caption and downloads the proof card. Direct LinkedIn API posting would require separate OAuth authorization and the applicable posting permission. Share dialogs, device targets, and platform availability vary by browser and account.
+    </p>
+    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+  </div>
+</dialog>
 <aside aria-live="polite" class="sign-panel" hidden="" id="signPanel">
 <div class="sign-head">
 <div>
@@ -1894,7 +2149,7 @@ You may edit the wording before minting or publishing anything.
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
-<strong>Jesus Christ Saves Token · Sign the Ledger v4.2.1</strong>
+<strong>Jesus Christ Saves Token · Sign the Ledger v5.0.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
         permanent availability from every public XRPL server, moderate religious
@@ -1905,13 +2160,17 @@ You may edit the wording before minting or publishing anything.
 <div class="footer-links">
 <a class="btn small" href="index.html">JCS Home</a>
 <a class="btn small" href="about-jcs.html">JCS Vision</a>
+<a class="btn small" href="prayer.map.html">Prayer Map</a>
+<a class="btn small" href="privacy.html">Privacy</a>
+<a class="btn small" href="terms.html">Terms</a>
+<a class="btn small" href="security.html">Security</a>
 <a class="btn small" href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html" rel="noopener" target="_blank">XRBitcoin</a>
 <a class="btn small" href="https://xrbitcoincash.com/" rel="noopener" target="_blank">XRBitcoinCash</a>
 </div>
 </div>
 </footer>
 <script crossorigin="anonymous" src="https://xaman.app/assets/cdn/xumm.min.js"></script>
-<script crossorigin="anonymous" src="https://unpkg.com/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/xrpl@5.1.0/build/xrpl-latest-min.js"></script>
 <script>
 (() => {
   'use strict';
@@ -1919,8 +2178,8 @@ You may edit the wording before minting or publishing anything.
   const APP_KEY = '5b8499a9-ae28-4050-ac09-45efa948eced';
   const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
   const JCS_LOGO = 'https://jesuschristsavestoken.com/jcs-logo.png';
-  const APP_TAG = 'JCS_SOCIAL_V4';
-  const PRIOR_TAGS = new Set(['JCS_SOCIAL_V3', 'JCS_SOCIAL_V2']);
+  const APP_TAG = 'JCS_SOCIAL_V5';
+  const PRIOR_TAGS = new Set(['JCS_SOCIAL_V4', 'JCS_SOCIAL_V3', 'JCS_SOCIAL_V2']);
   const LEGACY_TAG = 'JCS_VERIFY_V1';
   const NFT_TAXON = 1246974803;
   const DRAFT_KEY = 'jcs.social.draft.v4';
@@ -1928,6 +2187,23 @@ You may edit the wording before minting or publishing anything.
   const PENDING_KEY = 'jcs.social.pending.v4';
   const THEME_KEY = 'jcs-ledger-theme';
   const RECENT_HISTORY_PAGES = 12;
+  const MAP_SIGNAL_KEY = 'jcs.prayer.map.signals.v1';
+  const MAP_FOCUS_KEY = 'jcs.prayer.map.focus.v1';
+  const BOOKMARK_KEY = 'jcs.social.bookmarks.v1';
+  const SHARE_HISTORY_KEY = 'jcs.social.share.history.v1';
+  const MAP_CHANNEL_NAME = 'jcs-prayer-map';
+  const REGION_DEFINITIONS = {
+    none:{label:'Region not published', centroid:null},
+    worldwide:{label:'Worldwide / not region-specific', centroid:[20,0]},
+    'north-america':{label:'North America', centroid:[43,-105]},
+    'latin-america-caribbean':{label:'Latin America & Caribbean', centroid:[-12,-64]},
+    europe:{label:'Europe', centroid:[52,15]},
+    africa:{label:'Africa', centroid:[2,21]},
+    'middle-east-north-africa':{label:'Middle East & North Africa', centroid:[27,34]},
+    'south-asia':{label:'South Asia', centroid:[22,78]},
+    'east-southeast-asia':{label:'East & Southeast Asia', centroid:[24,112]},
+    oceania:{label:'Oceania', centroid:[-24,135]}
+  };
   const XRPL_SERVERS = [
     'wss://xrplcluster.com/',
     'wss://s2.ripple.com/',
@@ -1954,7 +2230,14 @@ You may edit the wording before minting or publishing anything.
     feedLoading: false,
     pending: null,
     subscribed: false,
-    refreshTimer: null
+    refreshTimer: null,
+    relayInfo: null,
+    relayResults: [],
+    latestVerification: null,
+    sharePostKey: '',
+    mapChannel: null,
+    bookmarks: new Set(),
+    mediaSuspended: true
   };
 
   function escapeHtml(value='') {
@@ -2031,6 +2314,39 @@ You may edit the wording before minting or publishing anything.
     }[type] || 'Testimony';
   }
 
+
+
+  function regionDefinition(code='none') {
+    return REGION_DEFINITIONS[code] || REGION_DEFINITIONS.none;
+  }
+
+  function regionLabel(code='none') {
+    return regionDefinition(code).label;
+  }
+
+  function regionCentroid(code='none') {
+    const centroid = regionDefinition(code).centroid;
+    return Array.isArray(centroid) ? [...centroid] : null;
+  }
+
+  function regionIsPublished(code='none') {
+    return code && code !== 'none';
+  }
+
+  function loadBookmarks() {
+    try {
+      const values = JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]');
+      state.bookmarks = new Set(Array.isArray(values) ? values : []);
+    } catch {
+      state.bookmarks = new Set();
+    }
+  }
+
+  function saveBookmarks() {
+    try { localStorage.setItem(BOOKMARK_KEY, JSON.stringify([...state.bookmarks])); }
+    catch {}
+  }
+
   function toast(message, type='') {
     const item = document.createElement('div');
     item.className = 'toast ' + type;
@@ -2052,8 +2368,8 @@ You may edit the wording before minting or publishing anything.
   }
 
   function setFlow(stage) {
-    const ids = ['flowConnect', 'flowMint', 'flowRegister'];
-    const stageIndex = {connect:0, mint:1, register:2, complete:3}[stage] ?? 0;
+    const ids = ['flowConnect', 'flowMint', 'flowRegister', 'flowVerify'];
+    const stageIndex = {connect:0, mint:1, register:2, verify:3, complete:4}[stage] ?? 0;
     ids.forEach((id, index) => {
       const node = $(id);
       node.classList.toggle('done', index < stageIndex);
@@ -2111,7 +2427,19 @@ You may edit the wording before minting or publishing anything.
           try {
             client = new window.xrpl.Client(endpoint, {connectionTimeout:10000});
             await client.connect();
-            await client.request({command:'server_info'});
+            const relayStarted = performance.now();
+            const serverInfoResponse = await client.request({command:'server_info'});
+            const relayLatency = Math.max(0, Math.round(performance.now() - relayStarted));
+            const info = serverInfoResponse?.result?.info || {};
+            state.relayInfo = {
+              endpoint,
+              latencyMs:relayLatency,
+              buildVersion:info.build_version || '',
+              validatedLedger:info.validated_ledger || null,
+              completeLedgers:info.complete_ledgers || '',
+              recordedAt:new Date().toISOString(),
+              locationClaim:'none'
+            };
             state.client = client;
             state.endpointIndex = index;
             state.activeEndpoint = endpoint;
@@ -2263,7 +2591,9 @@ You may edit the wording before minting or publishing anything.
       message: $('message').value,
       name: $('displayName').value,
       handle: $('handle').value,
-      scripture: $('scriptureRef').value
+      scripture: $('scriptureRef').value,
+      region:$('regionCode').value,
+      regionConsent:$('regionConsent').checked
     };
   }
 
@@ -2289,6 +2619,8 @@ You may edit the wording before minting or publishing anything.
       $('displayName').value = draft.name || profile.name || '';
       $('handle').value = draft.handle || profile.handle || '';
       $('scriptureRef').value = draft.scripture || '';
+      $('regionCode').value = REGION_DEFINITIONS[draft.region] ? draft.region : 'none';
+      $('regionConsent').checked = Boolean(draft.regionConsent && draft.region && draft.region !== 'none');
     } catch {}
     updateComposer();
   }
@@ -2306,13 +2638,15 @@ You may edit the wording before minting or publishing anything.
     const name = $('displayName').value.trim() || 'Anonymous believer';
     const handle = normalizeHandle($('handle').value);
     const scripture = $('scriptureRef').value.trim();
+    const region = $('regionCode').value;
 
     $('previewMessage').textContent =
       message.trim() || 'Your testimony preview will appear here.';
     $('previewMeta').textContent =
       postTypeLabel($('postType').value) + ' · ' + name +
       (handle ? ' · ' + handle : '') +
-      (scripture ? ' · ' + scripture : '');
+      (scripture ? ' · ' + scripture : '') +
+      (regionIsPublished(region) ? ' · ' + regionLabel(region) : '');
 
     $('previewPrayerNumber').textContent =
       state.pending?.prayerNumber ||
@@ -2322,11 +2656,16 @@ You may edit the wording before minting or publishing anything.
     updateComposer.saveTimer = window.setTimeout(saveDraft, 350);
   }
 
-  ['postType','visibility','message','displayName','handle','scriptureRef']
+  ['postType','visibility','message','displayName','handle','scriptureRef','regionCode','regionConsent']
     .forEach(id => {
       $(id).addEventListener('input', updateComposer);
       $(id).addEventListener('change', updateComposer);
     });
+
+  $('regionCode').addEventListener('change', () => {
+    if ($('regionCode').value === 'none') $('regionConsent').checked = false;
+    updateComposer();
+  });
 
 
   const PRAYER_LIBRARY = [{"id":"kjv-ps23","source":"kjv","sourceLabel":"King James Version","title":"The Shepherd’s Guidance","ref":"Psalm 23:1–4","message":"Lord Jesus, shepherd me through every uncertain place. Restore my soul, guide me in righteous paths, and keep fear from ruling my heart. Let Your presence comfort me and make my life a testimony of Your faithful care. Amen."},{"id":"kjv-ps27","source":"kjv","sourceLabel":"King James Version","title":"Light in Fear","ref":"Psalm 27:1","message":"Lord Jesus, be my light and my salvation. When fear rises, remind me that my life is held by You. Give me courage to walk in truth and let my confidence in You become a witness to others. Amen."},{"id":"kjv-ps46","source":"kjv","sourceLabel":"King James Version","title":"Refuge in Trouble","ref":"Psalm 46:1","message":"Father, be my refuge and strength in every trouble. Steady my thoughts, protect those I love, and teach me to trust Your help before I trust my fear. May my calm faith point others toward You. Amen."},{"id":"kjv-ps51","source":"kjv","sourceLabel":"King James Version","title":"A Clean Heart","ref":"Psalm 51:10","message":"Merciful God, create in me a clean heart and renew a faithful spirit within me. Remove bitterness, pride, and hidden sin. Make my words and actions honest, gentle, and centered on Christ. Amen."},{"id":"kjv-ps91","source":"kjv","sourceLabel":"King James Version","title":"Under His Wings","ref":"Psalm 91:1–4","message":"Most High God, keep me beneath Your shelter. Cover my family with mercy, guard our steps, and give us wisdom in danger. Let us rest in Your faithfulness and never forget where our protection comes from. Amen."},{"id":"kjv-ps121","source":"kjv","sourceLabel":"King James Version","title":"Help from the Lord","ref":"Psalm 121:1–2","message":"Lord, I lift my eyes beyond my circumstances and remember that my help comes from You. Strengthen me for today, guide every decision, and keep me from despair. Let gratitude rise before the answer arrives. Amen."},{"id":"kjv-prov3","source":"kjv","sourceLabel":"King James Version","title":"Trust the Path","ref":"Proverbs 3:5–6","message":"Lord Jesus, help me trust You with my whole heart instead of leaning only on what I understand. Direct my path, correct my plans, and teach me to acknowledge You in every choice. Amen."},{"id":"kjv-prov16","source":"kjv","sourceLabel":"King James Version","title":"Commit the Work","ref":"Proverbs 16:3","message":"Father, I commit my work, plans, and responsibilities to You. Purify my motives, establish what is good, and close every path that would lead me away from Your will. May the results honor Christ. Amen."},{"id":"kjv-isa40","source":"kjv","sourceLabel":"King James Version","title":"Renewed Strength","ref":"Isaiah 40:31","message":"Lord, renew my strength while I wait upon You. Lift me above discouragement, help me run without losing heart, and teach me to walk faithfully through ordinary days. Let endurance become part of my testimony. Amen."},{"id":"kjv-isa41","source":"kjv","sourceLabel":"King James Version","title":"Do Not Fear","ref":"Isaiah 41:10","message":"God, when I feel weak or alone, remind me that You are with me. Strengthen me, uphold me, and keep fear from controlling my decisions. Let Your presence make me brave, humble, and compassionate. Amen."},{"id":"kjv-jer29","source":"kjv","sourceLabel":"King James Version","title":"Hope for the Future","ref":"Jeremiah 29:11","message":"Father, I place my future in Your hands. Give me hope without presumption, patience without passivity, and wisdom for the next faithful step. Use every season to draw me closer to Jesus. Amen."},{"id":"kjv-matt5","source":"kjv","sourceLabel":"King James Version","title":"A Light Before Others","ref":"Matthew 5:14–16","message":"Lord Jesus, let Your light be visible through my choices. Help me serve without seeking praise, speak truth with love, and do good that directs attention toward our Father in heaven. Amen."},{"id":"kjv-matt6","source":"kjv","sourceLabel":"King James Version","title":"Teach Us to Pray","ref":"Matthew 6:9–13","message":"Our Father, make Your name holy in my life. Let Your will be done, provide what is needed today, forgive me as I forgive others, and deliver me from temptation and evil. Keep me faithful to Christ. Amen."},{"id":"kjv-matt11","source":"kjv","sourceLabel":"King James Version","title":"Rest for the Weary","ref":"Matthew 11:28–30","message":"Jesus, I bring You my weariness, grief, and heavy burdens. Teach me Your gentle way, quiet the pressure within me, and give my soul true rest. Help me carry only what You have asked of me. Amen."},{"id":"kjv-mark9","source":"kjv","sourceLabel":"King James Version","title":"Help My Unbelief","ref":"Mark 9:24","message":"Lord Jesus, I believe; help the places where doubt still remains. Strengthen my trust without hiding my questions, and let honest faith grow through prayer, obedience, and Your mercy. Amen."},{"id":"kjv-luke1","source":"kjv","sourceLabel":"King James Version","title":"Nothing Is Impossible","ref":"Luke 1:37","message":"God, remind me that no promise of Yours is powerless. Give me courage to obey when the way appears impossible, and keep me from confusing my limits with Yours. May my response be faithful and humble. Amen."},{"id":"kjv-john3","source":"kjv","sourceLabel":"King James Version","title":"Grateful for Salvation","ref":"John 3:16","message":"Father, thank You for loving the world and giving Your Son. Help me receive the life offered through Jesus, share that hope without pride, and treat every person as someone deeply loved by You. Amen."},{"id":"kjv-john14way","source":"kjv","sourceLabel":"King James Version","title":"The Way, Truth, and Life","ref":"John 14:6","message":"Jesus, keep me close to You as the way, the truth, and the life. Correct every false path in me, deepen my love for truth, and let my life openly confess that access to the Father is through You. Amen."},{"id":"kjv-john14peace","source":"kjv","sourceLabel":"King James Version","title":"Christ’s Peace","ref":"John 14:27","message":"Lord Jesus, place Your peace within me—a peace stronger than circumstances. Calm my troubled heart, free me from needless fear, and make me a peacemaker wherever tension and division appear. Amen."},{"id":"kjv-rom8","source":"kjv","sourceLabel":"King James Version","title":"Purpose Through Every Season","ref":"Romans 8:28","message":"Father, work even the difficult parts of my life toward Your good purpose. Keep me from calling evil good, yet give me confidence that nothing surrendered to You is wasted. Shape me into the likeness of Christ. Amen."},{"id":"kjv-rom12","source":"kjv","sourceLabel":"King James Version","title":"Renew My Mind","ref":"Romans 12:2","message":"God, renew my mind so I am not shaped by fear, pride, anger, or the pressure of this world. Teach me to recognize what is good and pleasing to You, and give me courage to live it. Amen."},{"id":"kjv-phil4peace","source":"kjv","sourceLabel":"King James Version","title":"Prayer Instead of Anxiety","ref":"Philippians 4:6–7","message":"Lord, I bring every anxious thought to You with thanksgiving. Guard my heart and mind in Christ, give me wisdom for what I can do, and peace for what I must place in Your hands. Amen."},{"id":"kjv-phil4strength","source":"kjv","sourceLabel":"King James Version","title":"Strength Through Christ","ref":"Philippians 4:13","message":"Jesus, strengthen me for every task You truly place before me. Keep me from pride when I succeed and despair when I struggle. Let Your strength be shown through faithful endurance. Amen."},{"id":"kjv-eph6","source":"kjv","sourceLabel":"King James Version","title":"Stand in God’s Armor","ref":"Ephesians 6:10–11","message":"Lord, make me strong in Your power. Clothe me with truth, righteousness, peace, faith, salvation, and Your Word. Help me stand against deception without becoming hateful toward people. Amen."},{"id":"enoch-1","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Peace for the Righteous","ref":"1 Enoch 1:8","message":"Holy God, establish Your peace in those who seek righteousness. Protect the vulnerable, expose what is false, and let mercy and light guide my conduct. Keep my hope fixed on Your justice. Amen."},{"id":"enoch-2","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Learn from Creation","ref":"1 Enoch 2:1–3","message":"Creator of heaven and earth, teach me to notice the order, faithfulness, and wisdom displayed in Your works. Let creation humble me, steady me, and move me to obey You with reverence. Amen."},{"id":"enoch-5","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Choose the Upright Way","ref":"1 Enoch 5:4–9","message":"Lord, turn me away from stubbornness and toward uprightness. Give me a heart that loves truth, receives correction, and seeks peace. May my life bear fruit worthy of the mercy You have shown me. Amen."},{"id":"enoch-9","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Hear the Cry of the Oppressed","ref":"1 Enoch 9:3–11","message":"Most High God, hear those who suffer under violence, exploitation, and injustice. Raise up truthful witnesses, restrain evil, and show me how to defend the oppressed without becoming consumed by hatred. Amen."},{"id":"enoch-10","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Cleanse What Corrupts","ref":"1 Enoch 10:16–22","message":"God of righteousness, remove what corrupts my heart and community. Break cycles of violence and deception, restore what has been harmed, and teach us to cultivate peace, truth, and faithful stewardship. Amen."},{"id":"enoch-14","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Reverence Before the Throne","ref":"1 Enoch 14:20–25","message":"Lord of glory, fill me with reverence before Your holiness. Keep me from treating sacred things lightly, purify my worship, and help me approach You with humility, gratitude, and awe. Amen."},{"id":"enoch-15","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Remain Within God’s Order","ref":"1 Enoch 15:3–4","message":"Wise God, teach me to respect the boundaries and responsibilities You have given. Keep ambition from becoming rebellion, and help me use every gift in service rather than self-exaltation. Amen."},{"id":"enoch-22","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Hope Beyond Death","ref":"1 Enoch 22:9–13","message":"God of the living, comfort those who grieve and remind us that every life is known to You. Help me live honestly in light of eternity, seek reconciliation quickly, and treasure what cannot be taken away. Amen."},{"id":"enoch-25","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"The Fragrance of Righteousness","ref":"1 Enoch 25:4–6","message":"Lord, make righteousness beautiful in my life. Let my words carry grace, my actions bring healing, and my presence reflect the hope of Your kingdom. Remove every hidden desire to harm or deceive. Amen."},{"id":"enoch-27","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Turn from Hardness","ref":"1 Enoch 27:3–5","message":"Merciful God, do not let my heart grow hard against truth. Give me repentance before consequences force it, compassion before judgment, and wisdom to leave every path that destroys peace. Amen."},{"id":"enoch-39","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Dwell with the Faithful","ref":"1 Enoch 39:4–8","message":"Lord, gather me among those who love righteousness and truth. Help me build fellowship marked by prayer, integrity, and mutual care. Let our community become a refuge rather than a place of pride. Amen."},{"id":"enoch-40","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Mercy, Wisdom, and Intercession","ref":"1 Enoch 40:1–9","message":"God of mercy and wisdom, teach me to pray for others, speak truth, and seek healing. Give me compassion for the broken, courage before evil, and humility in every spiritual responsibility. Amen."},{"id":"enoch-41","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Order in the Heavens","ref":"1 Enoch 41:1–8","message":"Creator, as the heavens follow the order You established, bring order to my thoughts, habits, and relationships. Help me be dependable, disciplined, and peaceful without losing tenderness. Amen."},{"id":"enoch-45","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"A Renewed Earth","ref":"1 Enoch 45:3–6","message":"Lord, awaken hope for the day when corruption is removed and righteousness remains. Until then, make me a faithful caretaker of people and creation, serving Your future kingdom through present obedience. Amen."},{"id":"enoch-46","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Justice Under the Son of Man","ref":"1 Enoch 46:1–6","message":"Righteous God, place every power beneath Your truth. Protect those harmed by arrogance and oppression, and keep me from using influence selfishly. Let my allegiance remain with the justice of heaven. Amen."},{"id":"enoch-48","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"The Name of Hope","ref":"1 Enoch 48:1–7","message":"God of salvation, anchor my hope in the One appointed before the foundations of the world. Let His light guide my choices, His mercy soften my heart, and His truth remain stronger than every deception. Amen."},{"id":"enoch-50","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Repent While Mercy Calls","ref":"1 Enoch 50:1–5","message":"Lord, while mercy is offered, lead me into sincere repentance. Show me what must change, give me courage to make amends, and help me walk in righteousness without returning to old destruction. Amen."},{"id":"enoch-58","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Light and Lasting Peace","ref":"1 Enoch 58:1–6","message":"Father of light, lead me out of confusion and into lasting peace. Let truth brighten my mind, hope strengthen my spirit, and love guide the way I treat every person. Amen."},{"id":"enoch-61","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Praise Before Judgment","ref":"1 Enoch 61:1–13","message":"Most High God, teach me to worship with sincerity and live as one accountable to You. Keep praise from becoming empty words; let it produce justice, humility, and obedience in my daily life. Amen."},{"id":"enoch-62","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Comfort for the Faithful","ref":"1 Enoch 62:13–16","message":"Lord, comfort those who remain faithful through rejection and hardship. Give us endurance without bitterness, hope without denial, and confidence that Your final word is mercy and justice. Amen."},{"id":"enoch-69","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Truth Above Every Power","ref":"1 Enoch 69:26–29","message":"Sovereign God, let truth stand above every throne, institution, and human scheme. Keep me loyal to what is righteous, even when compromise appears easier or more profitable. Amen."},{"id":"enoch-71","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"A Heart Prepared for Glory","ref":"1 Enoch 71:14–17","message":"Holy One, prepare my heart for Your presence. Remove vanity and spiritual pride, deepen my reverence, and help me reflect heavenly compassion in ordinary acts of faithfulness. Amen."},{"id":"enoch-81","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Wisdom for the Appointed Time","ref":"1 Enoch 81:1–10","message":"God of all times and seasons, give me wisdom to recognize my responsibilities today. Keep me from wasting life in fear or speculation; make me attentive, obedient, and ready to serve. Amen."},{"id":"enoch-104","source":"enoch","sourceLabel":"1 Enoch · R. H. Charles","title":"Encouragement for the Righteous","ref":"1 Enoch 104:1–6","message":"Lord, encourage everyone who chooses righteousness when faithfulness feels costly. Record our tears, strengthen our resolve, and help us trust that no act of truth, mercy, or courage is forgotten by You. Amen."},{"id":"jub-1","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Return with the Whole Heart","ref":"Jubilees 1:20–25","message":"Lord, turn my whole heart back to You. Remove divided loyalties, teach me to love You sincerely, and help my family remember Your ways. Let repentance become the beginning of restoration. Amen."},{"id":"jub-2","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Holy Rest","ref":"Jubilees 2:31–33","message":"Creator, teach me the holiness of rest. Free me from endless striving, help me worship with attention, and restore my body, mind, and relationships. Let sacred rest renew my gratitude and obedience. Amen."},{"id":"jub-4","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Walk in Wisdom","ref":"Jubilees 4:17–19","message":"God of wisdom, teach me to walk uprightly in a confused generation. Give me discernment, patience, and courage to preserve what is true while treating others with mercy. Amen."},{"id":"jub-6","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Remember the Covenant","ref":"Jubilees 6:17–22","message":"Faithful God, help me remember Your covenant and the signs of Your mercy. Keep me from forgetting Your goodness when life becomes comfortable, and from doubting it when life becomes difficult. Amen."},{"id":"jub-7","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Teach the Next Generation","ref":"Jubilees 7:20–29","message":"Lord, give parents, elders, and teachers wisdom to guide the next generation. Help us model truth instead of merely demanding it, correct with patience, and pass on faith through consistent love. Amen."},{"id":"jub-10","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Protection from Destructive Influence","ref":"Jubilees 10:1–6","message":"Most High God, protect minds and homes from destructive spiritual influence. Give us discernment, self-control, and courage to reject what corrupts. Fill every empty place with truth and peace. Amen."},{"id":"jub-12","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Leave Idols Behind","ref":"Jubilees 12:19–21","message":"Lord, reveal every idol competing for my trust—money, approval, control, pleasure, or fear. Give me courage to leave them behind and follow You with an undivided heart. Amen."},{"id":"jub-14","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Believe the Promise","ref":"Jubilees 14:20","message":"Faithful God, help me believe Your promise even when fulfillment seems delayed. Keep me obedient in the waiting, grateful for each sign of grace, and patient with the timing I cannot control. Amen."},{"id":"jub-15","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Covenant Written on the Heart","ref":"Jubilees 15:26–27","message":"Lord, let covenant faithfulness reach beyond outward signs and shape my heart. Make my obedience sincere, my worship truthful, and my identity rooted in belonging to You. Amen."},{"id":"jub-17","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Faith Under Testing","ref":"Jubilees 17:15–18","message":"God, when my faith is tested, keep me from panic and resentment. Give me wisdom to distinguish Your leading from harmful impulse, and courage to remain faithful without losing compassion. Amen."},{"id":"jub-19","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Comfort in Grief","ref":"Jubilees 19:15–20","message":"Lord of compassion, meet everyone carrying grief. Hold us when memories hurt, surround us with faithful people, and teach us to honor those we have lost by living with greater love and integrity. Amen."},{"id":"jub-20","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Blessing for Children","ref":"Jubilees 20:6–10","message":"Father, bless our children and those entrusted to our care. Give them wisdom, protection, humility, and courage. Help us guide them without controlling them and love them without condition. Amen."},{"id":"jub-21a","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Seek God’s Will","ref":"Jubilees 21:2–4","message":"Living God, help me remember You throughout my days and seek Your will with my whole heart. Make me faithful in private, honest in public, and grateful in every season. Amen."},{"id":"jub-21b","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Upright in All Things","ref":"Jubilees 21:23–24","message":"Most High God, make me upright in small matters as well as great ones. Bless the work of my hands, correct every dishonest habit, and let integrity become a quiet testimony to Your rule. Amen."},{"id":"jub-22a","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Strength to Do Righteousness","ref":"Jubilees 22:10","message":"God of all, bless and strengthen me to do what is right before You. Give me courage when righteousness costs something and humility when others recognize the good. Amen."},{"id":"jub-22b","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Cleansed and Forgiven","ref":"Jubilees 22:14","message":"Merciful God, cleanse me from unrighteousness and impurity. Bring hidden sin into the light, lead me to make amends, and help me receive forgiveness with a changed life. Amen."},{"id":"jub-22c","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Help from the Most High","ref":"Jubilees 22:19","message":"Most High God, help me where my strength is insufficient. Bless my home, guide my work, and keep me from believing I must carry every burden alone. Amen."},{"id":"jub-22d","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Preserved from Destruction","ref":"Jubilees 22:23","message":"Lord, preserve me from choices that destroy faith, family, health, or peace. Give me discernment before danger, humility to accept warning, and courage to change direction. Amen."},{"id":"jub-23","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Healing After Decline","ref":"Jubilees 23:26–31","message":"God of restoration, heal communities weakened by violence, deception, and neglect. Raise up people who love truth, protect the vulnerable, and rebuild trust through patient righteousness. Amen."},{"id":"jub-24","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Peace Between Brothers and Sisters","ref":"Jubilees 24:22–25","message":"Father, bring peace where families and communities are divided. Expose manipulation, soften hardened hearts, and help us seek reconciliation without denying truth or justice. Amen."},{"id":"jub-25","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Mother’s and Father’s Prayer","ref":"Jubilees 25:1–3","message":"Lord, hear the prayers of parents and guardians. Give us wisdom to bless, courage to protect, patience to teach, and humility to admit when we are wrong. Amen."},{"id":"jub-30","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Honor and Responsibility","ref":"Jubilees 30:18–23","message":"Holy God, teach me to honor people without excusing wrongdoing. Give leaders accountability, families wisdom, and communities the courage to protect dignity, truth, and justice together. Amen."},{"id":"jub-31","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"A Blessing of Wisdom","ref":"Jubilees 31:17–20","message":"Lord, grant wisdom that is more valuable than status or wealth. Help me listen before speaking, choose what is just, and use knowledge to serve rather than dominate. Amen."},{"id":"jub-32","source":"jubilees","sourceLabel":"Book of Jubilees · R. H. Charles","title":"Faithful Worship","ref":"Jubilees 32:19–26","message":"God, make my worship faithful beyond a single moment or place. Let gratitude shape my schedule, generosity shape my resources, and obedience shape the way I live among others. Amen."}];
@@ -2498,12 +2837,13 @@ You may edit the wording before minting or publishing anything.
 
   function canonicalPost(post) {
     return JSON.stringify({
-      v:4,
+      v:5,
       type:post.type,
       message:post.message,
       name:post.name,
       handle:post.handle,
       scripture:post.scripture,
+      region:post.region || 'none',
       created:post.created,
       nonce:post.nonce
     });
@@ -2518,6 +2858,7 @@ You may edit the wording before minting or publishing anything.
       name:$('displayName').value.trim(),
       handle:normalizeHandle($('handle').value),
       scripture:$('scriptureRef').value.trim(),
+      region:$('regionCode').value,
       visibility:$('visibility').value,
       created:new Date().toISOString(),
       nonce:randomNonce(),
@@ -2528,6 +2869,10 @@ You may edit the wording before minting or publishing anything.
     if (post.message.length > 320) {
       throw new Error('The message exceeds 320 characters.');
     }
+    if (regionIsPublished(post.region) && !$('regionConsent').checked) {
+      throw new Error('Confirm the broad-region privacy notice or choose “Do not publish a region.”');
+    }
+    if (!REGION_DEFINITIONS[post.region]) post.region = 'none';
 
     post.hash = await sha256Hex(canonicalPost(post));
     post.uri =
@@ -2777,6 +3122,7 @@ You may edit the wording before minting or publishing anything.
       memo('name', post.name),
       memo('handle', post.handle),
       memo('scripture', post.scripture),
+      memo('region', regionIsPublished(post.region) ? post.region : ''),
       memo('created', post.created),
       memo('nonce', post.nonce),
       memo('hash', post.hash),
@@ -2797,6 +3143,7 @@ You may edit the wording before minting or publishing anything.
       memo('name', post.name),
       memo('handle', post.handle),
       memo('scripture', post.scripture),
+      memo('region', regionIsPublished(post.region) ? post.region : ''),
       memo('created', post.created),
       memo('visibility', post.visibility),
       memo('hash', post.hash),
@@ -2925,6 +3272,255 @@ You may edit the wording before minting or publishing anything.
     return pending;
   }
 
+
+
+  function mapSignalFromPost(post) {
+    const region = post.region || 'none';
+    const centroid = regionCentroid(region);
+    return {
+      schema:'jcs-prayer-map-signal-v1',
+      source:'https://jesuschristsavestoken.com/verify.html',
+      created_at_utc:new Date().toISOString(),
+      prayer_number:post.prayerNumber || '',
+      post_type:post.type || 'testimony',
+      region_code:region,
+      region_label:regionLabel(region),
+      location_source:regionIsPublished(region) ? 'author-declared-broad-region' : 'not-published',
+      display_centroid:centroid ? {
+        lat:centroid[0],
+        lng:centroid[1],
+        accuracy:'continent-scale visual hint only',
+        actual_user_location:false
+      } : null,
+      registry_tx:post.hash || '',
+      registry_ledger_index:Number(post.ledgerIndex || 0),
+      mint_tx:post.mintTx || '',
+      nftoken_id:post.nftId || '',
+      content_commitment:post.contentHash || '',
+      public_url:TESTIMONY_SHARE_BASE + '#post-' + String(post.key || '').slice(0,16),
+      relay_endpoint:state.activeEndpoint || '',
+      relay_endpoint_is_user_location:false,
+      message_in_handoff:false
+    };
+  }
+
+  function readMapSignalQueue() {
+    try {
+      const value = JSON.parse(localStorage.getItem(MAP_SIGNAL_KEY) || '[]');
+      return Array.isArray(value) ? value : [];
+    } catch { return []; }
+  }
+
+  function storeMapSignal(signal) {
+    if (!signal?.registry_tx) return;
+    const queue = readMapSignalQueue()
+      .filter(item => item && item.registry_tx !== signal.registry_tx);
+    queue.unshift(signal);
+    try {
+      localStorage.setItem(MAP_SIGNAL_KEY, JSON.stringify(queue.slice(0,120)));
+      localStorage.setItem(MAP_FOCUS_KEY, JSON.stringify(signal));
+    } catch {}
+    try {
+      if (!state.mapChannel && 'BroadcastChannel' in window) {
+        state.mapChannel = new BroadcastChannel(MAP_CHANNEL_NAME);
+      }
+      state.mapChannel?.postMessage({type:'jcs-prayer-map-signal', signal});
+    } catch {}
+  }
+
+  function mapUrlForPost(post) {
+    const signal = mapSignalFromPost(post);
+    const params = new URLSearchParams({
+      signal:'v1',
+      tx:signal.registry_tx,
+      ledger:String(signal.registry_ledger_index || ''),
+      region:signal.region_code,
+      prayer:signal.prayer_number,
+      source:'verify'
+    });
+    return 'prayer.map.html?' + params.toString();
+  }
+
+  function openMapForPost(post) {
+    const signal = mapSignalFromPost(post);
+    storeMapSignal(signal);
+    $('mapHandoffStatus').textContent =
+      'Prepared privacy-limited map handoff for ' + (post.prayerNumber || 'this post') +
+      '. No message text, GPS coordinate, IP-derived location, or wallet-secret data was placed in the URL.';
+    window.open(mapUrlForPost(post), '_blank', 'noopener,noreferrer');
+  }
+
+  function verificationExport(post) {
+    return {
+      schema:'jcs-verified-social-evidence-v1',
+      generated_at_utc:new Date().toISOString(),
+      application:{name:'JCS Sign the Ledger', release:'5.0.0'},
+      observed:{
+        registry_transaction:post.hash || null,
+        registry_ledger_index:Number(post.ledgerIndex || 0) || null,
+        registry_transaction_index:Number(post.txIndex || 0),
+        mint_transaction:post.mintTx || null,
+        nftoken_id:post.nftId || null,
+        author_wallet:post.account || null,
+        public_message:post.message || null,
+        scripture_reference:post.scripture || null,
+        public_memo_region:regionIsPublished(post.region) ? post.region : null,
+        content_commitment:post.contentHash || null,
+        xrpl_server_used:state.activeEndpoint || null
+      },
+      derived:{
+        prayer_identifier:post.prayerNumber || null,
+        display_wallet:displayWallet(post),
+        region_label:regionLabel(post.region || 'none'),
+        share_url:TESTIMONY_SHARE_BASE + '#post-' + String(post.key || '').slice(0,16),
+        map_handoff:mapSignalFromPost(post)
+      },
+      unknown_or_not_established:[
+        'real-world identity',
+        'actual geographic location',
+        'truth or theological correctness of the message',
+        'authorship or ownership of off-ledger material',
+        'institutional endorsement',
+        'legal effect',
+        'future availability'
+      ]
+    };
+  }
+
+  function renderVerificationCenter(post) {
+    state.latestVerification = post || null;
+    const enabled = Boolean(post?.hash);
+    $('latestVerificationBadge').textContent = enabled
+      ? 'Validated registry evidence loaded'
+      : 'No verified post loaded';
+    $('latestVerificationBadge').className = 'badge ' + (enabled ? 'verified' : '');
+    $('verifyPrayerNumber').textContent = post?.prayerNumber || '—';
+    $('verifyLedger').textContent = post?.ledgerIndex ? Number(post.ledgerIndex).toLocaleString() : '—';
+    $('verifyRegistryTx').textContent = post?.hash || '—';
+    $('verifyMintTx').textContent = post?.mintTx || '—';
+    $('verifyNftId').textContent = post?.nftId || '—';
+    $('verifyContentHash').textContent = post?.contentHash || '—';
+    $('verifyRegion').textContent = post ? regionLabel(post.region || 'none') : '—';
+    $('verifyWallet').textContent = post ? displayWallet(post) : '—';
+    ['shareLatestBtn','openLatestMapBtn','copyVerificationBtn','downloadVerificationBtn']
+      .forEach(id => { $(id).disabled = !enabled; });
+    $('latestProofCallout').hidden = !enabled;
+    if (enabled) {
+      $('latestProofHeadline').textContent = (post.prayerNumber || 'Verified JCS post') + ' is ready for review and sharing.';
+      $('latestProofText').textContent =
+        'Registry transaction ' + shortAccount(post.hash,10) +
+        ' is shown as validated ledger evidence. The content commitment is recorded, but registry memos alone do not independently prove the underlying message or identity.';
+    }
+  }
+
+  function downloadJsonFile(filename, value) {
+    const blob = new Blob([JSON.stringify(value, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function verificationPlainText(post) {
+    const data = verificationExport(post);
+    return [
+      'JCS Sign the Ledger · Validated Proof',
+      'Prayer: ' + (post.prayerNumber || '—'),
+      'Registry transaction: ' + (post.hash || '—'),
+      'Validated ledger: ' + (post.ledgerIndex || '—'),
+      'Mint transaction: ' + (post.mintTx || '—'),
+      'NFTokenID: ' + (post.nftId || '—'),
+      'Content commitment: ' + (post.contentHash || '—'),
+      'Broad region: ' + regionLabel(post.region || 'none'),
+      'Public URL: ' + data.derived.share_url,
+      '',
+      'This proves a public XRPL event under the displayed evidence. It does not prove legal identity, actual location, truth, ownership, endorsement, or spiritual authority.'
+    ].join('\n');
+  }
+
+  function renderPrayerPulse() {
+    const posts = state.posts || [];
+    const counts = {};
+    for (const post of posts) {
+      const code = REGION_DEFINITIONS[post.region] ? post.region : 'none';
+      counts[code] = (counts[code] || 0) + 1;
+    }
+    const published = posts.filter(post => regionIsPublished(post.region)).length;
+    $('mapPostCount').textContent = posts.length.toLocaleString();
+    $('mapRegionCount').textContent = published.toLocaleString();
+    $('mapPrivateCount').textContent = (posts.length - published).toLocaleString();
+    $('mapActiveRelay').textContent = state.activeEndpoint
+      ? state.activeEndpoint.replace(/^wss:\/\//,'').replace(/\/$/,'')
+      : 'Unavailable';
+    $('mapPulseBadge').textContent = posts.length
+      ? 'Validated feed-derived counts'
+      : 'No recent posts';
+    $('mapPulseBadge').className = 'badge ' + (posts.length ? 'verified' : '');
+
+    const max = Math.max(1, ...Object.values(counts));
+    $('regionHeatGrid').innerHTML = Object.entries(REGION_DEFINITIONS)
+      .map(([code, info]) => {
+        const count = counts[code] || 0;
+        const percent = posts.length ? (count / posts.length * 100) : 0;
+        const heat = count / max * 100;
+        return `
+          <button class="region-heat-card" type="button" data-region-filter="${escapeHtml(code)}" style="--heat:${heat.toFixed(1)}%">
+            <span>${escapeHtml(info.label)}</span>
+            <strong>${count.toLocaleString()} signal${count === 1 ? '' : 's'}</strong>
+            <small>${percent.toFixed(1)}% of recent posts · click to filter feed</small>
+          </button>`;
+      }).join('');
+  }
+
+  function relaySummaryCard(result) {
+    const info = result.info || {};
+    const ledger = info.validated_ledger || {};
+    const ok = result.ok;
+    return `
+      <article class="relay-card ${ok ? 'ok' : 'err'}">
+        <span>Public XRPL relay endpoint</span>
+        <strong><code>${escapeHtml(result.endpoint.replace(/^wss:\/\//,'').replace(/\/$/,''))}</code></strong>
+        <div class="relay-line"><span>Status</span><b>${ok ? 'Reachable' : 'Unavailable'}</b></div>
+        <div class="relay-line"><span>Round trip</span><b>${Number.isFinite(result.latencyMs) ? result.latencyMs + ' ms' : '—'}</b></div>
+        <div class="relay-line"><span>Validated ledger</span><b>${ledger.seq ? Number(ledger.seq).toLocaleString() : '—'}</b></div>
+        <div class="relay-line"><span>xrpld build</span><b>${escapeHtml(info.build_version || '—')}</b></div>
+        <div class="relay-line"><span>Physical-location claim</span><b>None</b></div>
+        ${result.error ? `<div class="relay-line"><span>Error</span><b>${escapeHtml(result.error)}</b></div>` : ''}
+      </article>`;
+  }
+
+  async function probeRelay(endpoint) {
+    const started = performance.now();
+    let client = null;
+    try {
+      client = new window.xrpl.Client(endpoint, {connectionTimeout:10000});
+      await client.connect();
+      const response = await client.request({command:'server_info'});
+      return {endpoint, ok:true, latencyMs:Math.round(performance.now()-started), info:response?.result?.info || {}};
+    } catch (error) {
+      return {endpoint, ok:false, latencyMs:Math.round(performance.now()-started), info:{}, error:error?.message || String(error)};
+    } finally {
+      try { if (client?.isConnected()) await client.disconnect(); } catch {}
+    }
+  }
+
+  async function probeRelays() {
+    $('probeRelaysBtn').disabled = true;
+    $('relayGrid').innerHTML = '<article class="relay-card"><span>Relay pulse</span><strong>Testing public endpoints…</strong></article>';
+    const results = await Promise.all(XRPL_SERVERS.map(probeRelay));
+    state.relayResults = results;
+    $('relayGrid').innerHTML = results.map(relaySummaryCard).join('');
+    $('probeRelaysBtn').disabled = false;
+    const reachable = results.filter(result => result.ok).length;
+    $('mapHandoffStatus').textContent =
+      'Relay probe complete: ' + reachable + '/' + results.length +
+      ' endpoints reachable. Endpoint hostnames and latency are network diagnostics, not wallet or user location.';
+  }
+
   async function publishRegistry(pending) {
     if (!pending?.nftId) {
       throw new Error('No minted prayer NFT is awaiting publication.');
@@ -2944,9 +3540,27 @@ You may edit the wording before minting or publishing anything.
       Memos:registryMemos(pending)
     }, 'Publish ' + pending.prayerNumber);
 
-    await waitForValidatedTransaction(result.txid);
+    const registryValidated = await waitForValidatedTransaction(result.txid);
+    const meta = registryValidated?.meta || registryValidated?.metaData || {};
+    const verifiedPost = {
+      ...pending.post,
+      key:pending.nftId || result.txid,
+      hash:result.txid,
+      nftId:pending.nftId,
+      mintTx:pending.mintTx,
+      prayerNumber:pending.prayerNumber,
+      version:'v5',
+      ledgerIndex:Number(registryValidated?.ledger_index || 0),
+      txIndex:Number(meta?.TransactionIndex ?? meta?.transaction_index ?? 0),
+      contentHash:pending.post.hash || '',
+      replies:[],
+      amens:0,
+      contentVerified:Boolean(pending.post.hash)
+    };
+    storeMapSignal(mapSignalFromPost(verifiedPost));
+    renderVerificationCenter(verifiedPost);
     clearPending();
-    setFlow('complete');
+    setFlow('verify');
     setComposerStatus(
       pending.prayerNumber +
       ' is in your wallet and published in the on-ledger social feed.',
@@ -2959,6 +3573,10 @@ You may edit the wording before minting or publishing anything.
     try { localStorage.removeItem(DRAFT_KEY); } catch {}
     updateComposer();
     await loadFeed(true);
+    setFlow('complete');
+    const published = state.posts.find(post => post.hash === verifiedPost.hash) || verifiedPost;
+    renderVerificationCenter(published);
+    openShareCenter(published);
   }
 
   async function runPublish(publishToFeed) {
@@ -3095,7 +3713,10 @@ You may edit the wording before minting or publishing anything.
           created,
           replies:[],
           amens:0,
-          contentVerified:false
+          contentVerified:false,
+          region:'none',
+          ledgerIndex:normalized.ledgerIndex,
+          txIndex:normalized.txIndex
         });
         continue;
       }
@@ -3140,23 +3761,27 @@ You may edit the wording before minting or publishing anything.
             ? 'Numbered prayer'
             : 'Earlier NFT testimony'),
         version:
-          app === APP_TAG ? 'v4' :
+          app === APP_TAG ? 'v5' :
+          app === 'JCS_SOCIAL_V4' ? 'v4' :
           app === 'JCS_SOCIAL_V3' ? 'v3' : 'v2',
         type:memos.type || 'testimony',
         message:memos.msg || '',
         name:memos.name || '',
         handle:memos.handle || '',
         scripture:memos.scripture || '',
+        region:REGION_DEFINITIONS[memos.region] ? memos.region : 'none',
         visibility:memos.visibility || 'short',
         account:tx.Account || '',
         created,
         replies:[],
         amens:0,
         contentHash:memos.hash || '',
-        contentVerified:false
+        contentVerified:false,
+        ledgerIndex:normalized.ledgerIndex,
+        txIndex:normalized.txIndex
       };
 
-      if (post.contentHash && app === APP_TAG) {
+      if (post.contentHash && (app === APP_TAG || app === 'JCS_SOCIAL_V4')) {
         post.contentVerified = true;
       }
       posts.push(post);
@@ -3180,10 +3805,13 @@ You may edit the wording before minting or publishing anything.
   function filteredPosts() {
     const query = $('feedSearch').value.trim().toLowerCase();
     const type = $('feedType').value;
+    const region = $('feedRegion').value;
     const sort = $('feedSort').value;
 
     let posts = state.posts.filter(post => {
       if (type !== 'all' && post.type !== type) return false;
+      const postRegion = REGION_DEFINITIONS[post.region] ? post.region : 'none';
+      if (region !== 'all' && postRegion !== region) return false;
       if (!query) return true;
       return [
         post.prayerNumber,
@@ -3192,6 +3820,7 @@ You may edit the wording before minting or publishing anything.
         post.handle,
         post.account,
         post.scripture,
+        regionLabel(post.region || 'none'),
         post.nftId,
         post.hash
       ].join(' ').toLowerCase().includes(query);
@@ -3235,14 +3864,21 @@ You may edit the wording before minting or publishing anything.
     const anchor = '#post-' + String(post.key || '').slice(0, 16);
     const url = TESTIMONY_SHARE_BASE + anchor;
     const scripture = post.scripture ? '\n' + post.scripture : '';
+    const region = regionIsPublished(post.region)
+      ? '\nBroad region: ' + regionLabel(post.region)
+      : '';
     const message = String(post.message || 'On-chain testimony').trim();
+    const proof = post.hash
+      ? '\nValidated XRPL registry: ' + shortAccount(post.hash, 10)
+      : '';
     const text =
-      message + scripture +
+      message + scripture + region + proof +
       '\n\nJesus Christ Saves Token · Sign the Ledger';
     return {
-      title:'JCS on-chain testimony',
+      title:(post.prayerNumber || 'JCS on-chain testimony') + ' · Sign the Ledger',
       text,
-      url
+      url,
+      post
     };
   }
 
@@ -3250,120 +3886,202 @@ You may edit the wording before minting or publishing anything.
     const popup = window.open(
       url,
       '_blank',
-      'noopener,noreferrer,width=760,height=680'
+      'noopener,noreferrer,width=860,height=720'
     );
     if (popup) popup.opener = null;
     return popup;
   }
 
-  async function copyTestimonyShare(data, linkOnly=false) {
-    const value = linkOnly ? data.url : data.text + '\n' + data.url;
+  async function copyText(value, successMessage='Copied.') {
     try {
       await navigator.clipboard.writeText(value);
-      toast(linkOnly ? 'Testimony link copied.' : 'Testimony and link copied.', 'ok');
+      toast(successMessage, 'ok');
       return true;
     } catch {
-      window.prompt('Copy this testimony:', value);
+      window.prompt('Copy this text:', value);
       return false;
     }
   }
 
-  async function nativeShareTestimony(data) {
-    if (
-      typeof navigator.share === 'function' &&
-      (!navigator.canShare || navigator.canShare(data))
-    ) {
-      try {
-        await navigator.share(data);
-        return true;
-      } catch (error) {
-        if (error?.name === 'AbortError') return false;
+  function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines=5) {
+    const words = String(text || '').split(/\s+/);
+    const lines = [];
+    let line = '';
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+        if (lines.length >= maxLines) break;
+      } else {
+        line = test;
       }
     }
-    return false;
+    if (lines.length < maxLines && line) lines.push(line);
+    if (lines.length === maxLines && words.join(' ').length > lines.join(' ').length) {
+      lines[maxLines - 1] = lines[maxLines - 1].replace(/[.,;:]?$/, '…');
+    }
+    lines.forEach((value, index) => ctx.fillText(value, x, y + index * lineHeight));
+    return y + lines.length * lineHeight;
+  }
+
+  function drawProofCard(post, canvas=$('shareProofCanvas')) {
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, '#020713');
+    gradient.addColorStop(.55, '#0b1d38');
+    gradient.addColorStop(1, '#261c08');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = 'rgba(224,184,77,.72)';
+    ctx.lineWidth = 8;
+    ctx.strokeRect(24, 24, width - 48, height - 48);
+
+    ctx.fillStyle = '#e0b84d';
+    ctx.font = '900 42px Georgia, serif';
+    ctx.fillText('JCS · SIGN THE LEDGER', 70, 86);
+
+    ctx.fillStyle = '#f7f9ff';
+    ctx.font = '900 54px Georgia, serif';
+    ctx.fillText(post.prayerNumber || 'Validated JCS testimony', 70, 160);
+
+    ctx.fillStyle = '#dbe8f8';
+    ctx.font = '600 31px system-ui, sans-serif';
+    const endY = wrapCanvasText(ctx, post.message || 'On-chain testimony', 70, 225, 1060, 45, 5);
+
+    ctx.fillStyle = '#91bde8';
+    ctx.font = '700 24px system-ui, sans-serif';
+    const meta = [
+      post.scripture || '',
+      regionIsPublished(post.region) ? regionLabel(post.region) : 'Region not published'
+    ].filter(Boolean).join(' · ');
+    if (meta) ctx.fillText(meta, 70, Math.min(endY + 28, 465));
+
+    ctx.fillStyle = '#9fb0c5';
+    ctx.font = '600 21px ui-monospace, monospace';
+    ctx.fillText('Registry tx: ' + shortAccount(post.hash || 'Unavailable', 15), 70, 520);
+    ctx.fillText('Validated ledger: ' + (post.ledgerIndex || 'Unavailable'), 70, 554);
+
+    ctx.fillStyle = '#f6c453';
+    ctx.font = '900 24px system-ui, sans-serif';
+    ctx.fillText('XRPL-validated event · not identity or location verification', 70, 595);
+    return canvas;
+  }
+
+  function canvasFile(post) {
+    const canvas = drawProofCard(post);
+    const dataUrl = canvas.toDataURL('image/png');
+    const [meta, base64] = dataUrl.split(',');
+    const mime = /data:([^;]+)/.exec(meta)?.[1] || 'image/png';
+    const binary = atob(base64);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index++) bytes[index] = binary.charCodeAt(index);
+    return new File([bytes], 'jcs-' + (post.prayerNumber || 'verified-proof').replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '.png', {type:mime});
+  }
+
+  function downloadProofCard(post) {
+    const canvas = drawProofCard(post);
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'jcs-' + (post.prayerNumber || 'verified-proof').replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '.png';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
+  function rememberShare(platform, post) {
+    try {
+      const history = JSON.parse(localStorage.getItem(SHARE_HISTORY_KEY) || '[]');
+      const rows = Array.isArray(history) ? history : [];
+      rows.unshift({platform, prayerNumber:post.prayerNumber || '', tx:post.hash || '', openedAt:new Date().toISOString()});
+      localStorage.setItem(SHARE_HISTORY_KEY, JSON.stringify(rows.slice(0,80)));
+    } catch {}
+  }
+
+  function openShareCenter(post) {
+    if (!post) return;
+    state.sharePostKey = post.key;
+    const data = testimonyShareData(post);
+    $('shareCopyPreview').textContent = data.text + '\n' + data.url;
+    $('shareStatus').textContent = 'Choose one destination. The final post remains under your control.';
+    drawProofCard(post);
+    if (typeof $('shareDialog').showModal === 'function') $('shareDialog').showModal();
+    else $('shareDialog').setAttribute('open','');
+  }
+
+  function closeShareCenter() {
+    if ($('shareDialog').open && typeof $('shareDialog').close === 'function') $('shareDialog').close();
+    else $('shareDialog').removeAttribute('open');
   }
 
   async function shareTestimony(post, platform) {
     const data = testimonyShareData(post);
     const encodedUrl = encodeURIComponent(data.url);
-    const xText =
-      data.text.length > 215
-        ? data.text.slice(0, 212).trimEnd() + '…'
-        : data.text;
+    const shortText = data.text.length > 240 ? data.text.slice(0,237).trimEnd() + '…' : data.text;
+    const encodedText = encodeURIComponent(shortText);
+    let opened = null;
 
-    if (platform === 'facebook') {
-      popupShare(
-        'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl
-      );
-      return;
-    }
-
-    if (platform === 'x') {
-      popupShare(
-        'https://twitter.com/intent/tweet?text=' +
-        encodeURIComponent(xText) +
-        '&url=' + encodedUrl
-      );
-      return;
-    }
-
-    if (platform === 'instagram') {
-      const shared = await nativeShareTestimony(data);
-      if (!shared) {
-        await copyTestimonyShare(data);
-        popupShare('https://www.instagram.com/');
-        toast(
-          'The testimony was copied. Paste it into Instagram after the site opens.',
-          'ok'
-        );
+    if (platform === 'native') {
+      const file = canvasFile(post);
+      const withFile = {title:data.title, text:data.text, url:data.url, files:[file]};
+      const basic = {title:data.title, text:data.text, url:data.url};
+      try {
+        if (navigator.canShare?.({files:[file]})) await navigator.share(withFile);
+        else if (typeof navigator.share === 'function') await navigator.share(basic);
+        else throw new Error('Native share is unavailable in this browser.');
+        $('shareStatus').textContent = 'The device share sheet received the proof. Choose the final destination.';
+        rememberShare(platform, post);
+        return;
+      } catch (error) {
+        if (error?.name === 'AbortError') return;
+        $('shareStatus').textContent = error?.message || 'Native share was unavailable.';
+        return;
       }
+    }
+
+    if (platform === 'x') opened = popupShare('https://twitter.com/intent/tweet?text=' + encodedText + '&url=' + encodedUrl);
+    else if (platform === 'facebook') opened = popupShare('https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl);
+    else if (platform === 'linkedin') opened = popupShare('https://www.linkedin.com/sharing/share-offsite/?url=' + encodedUrl);
+    else if (platform === 'bluesky') opened = popupShare('https://bsky.app/intent/compose?text=' + encodeURIComponent(shortText + '\n' + data.url));
+    else if (platform === 'telegram') opened = popupShare('https://t.me/share/url?url=' + encodedUrl + '&text=' + encodedText);
+    else if (platform === 'whatsapp') opened = popupShare('https://wa.me/?text=' + encodeURIComponent(shortText + '\n' + data.url));
+    else if (platform === 'reddit') opened = popupShare('https://www.reddit.com/submit?url=' + encodedUrl + '&title=' + encodeURIComponent(data.title));
+    else if (platform === 'email') {
+      location.href = 'mailto:?subject=' + encodeURIComponent(data.title) + '&body=' + encodeURIComponent(data.text + '\n\n' + data.url);
+      rememberShare(platform, post);
+      $('shareStatus').textContent = 'An email draft was prepared.';
+      return;
+    } else if (platform === 'instagram') {
+      await copyText(data.text + '\n' + data.url, 'Instagram caption copied.');
+      downloadProofCard(post);
+      opened = popupShare('https://www.instagram.com/');
+    } else if (platform === 'copy') {
+      await copyText(data.text + '\n' + data.url, 'Proof text and link copied.');
+      rememberShare(platform, post);
+      $('shareStatus').textContent = 'Proof text copied. Paste it only where you intend to publish it.';
+      return;
+    } else if (platform === 'download') {
+      downloadProofCard(post);
+      rememberShare(platform, post);
+      $('shareStatus').textContent = 'Proof card downloaded locally.';
       return;
     }
 
-    if (platform === 'copy') {
-      await copyTestimonyShare(data, true);
-      return;
-    }
-
-    if (platform === 'all') {
-      /*
-       * Facebook and X receive prepared share pages. Instagram and any other
-       * installed social apps are offered through the device share sheet.
-       */
-      const facebookWindow = popupShare(
-        'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl
-      );
-      const xWindow = popupShare(
-        'https://twitter.com/intent/tweet?text=' +
-        encodeURIComponent(xText) +
-        '&url=' + encodedUrl
-      );
-
-      await copyTestimonyShare(data);
-
-      const shared = await nativeShareTestimony(data);
-      if (!shared) {
-        popupShare('https://www.instagram.com/');
-      }
-
-      if (!facebookWindow || !xWindow) {
-        toast(
-          'A browser popup was blocked. Allow popups or use the individual platform buttons.',
-          'err'
-        );
-      } else {
-        toast(
-          'Facebook and X were opened. Use the share sheet for Instagram or another installed app.',
-          'ok'
-        );
-      }
+    if (opened) {
+      rememberShare(platform, post);
+      $('shareStatus').textContent = 'The ' + platform + ' composer was opened. Review and submit it there.';
+    } else {
+      $('shareStatus').textContent = 'The browser blocked the share window. Allow popups or use Copy proof text.';
     }
   }
 
   function renderPost(post, index) {
     const author = post.name || post.handle || 'Anonymous believer';
     const handle = post.name && post.handle ? post.handle : '';
-    const prior = post.version !== 'v4';
+    const prior = post.version !== 'v5';
 
     const badges = [
       `<span class="prayer-number">${escapeHtml(post.prayerNumber)}</span>`,
@@ -3375,14 +4093,19 @@ You may edit the wording before minting or publishing anything.
         ? '<span class="badge previous">Earlier format</span>'
         : '<span class="badge verified">Current format</span>',
       post.contentVerified
-        ? '<span class="badge verified">Commitment present</span>'
-        : ''
+        ? '<span class="badge verified">Commitment recorded</span>'
+        : '',
+      regionIsPublished(post.region)
+        ? '<span class="badge region">' + escapeHtml(regionLabel(post.region)) + '</span>'
+        : '<span class="badge">Region not published</span>'
     ].filter(Boolean).join('');
 
     const ledgerParts = [
       'Registry tx: ' + (post.hash || '—'),
       post.nftId ? 'NFTokenID: ' + post.nftId : '',
       post.mintTx ? 'Mint tx: ' + post.mintTx : '',
+      post.ledgerIndex ? 'Validated ledger: ' + post.ledgerIndex : '',
+      'Broad region: ' + regionLabel(post.region || 'none'),
       'Wallet: ' + displayWallet(post)
     ].filter(Boolean).join('\n');
 
@@ -3409,7 +4132,7 @@ You may edit the wording before minting or publishing anything.
         <div class="post-body">${escapeHtml(post.message || 'On-chain testimony')}</div>
         <div class="post-ledger">${escapeHtml(ledgerParts)}</div>
         <div class="post-source-note">
-          Source: validated XRP Ledger transaction history · format ${escapeHtml(post.version)}
+          Source: validated XRP Ledger transaction history · format ${escapeHtml(post.version)} · broad region is author-declared only
         </div>
 
         <div class="post-actions">
@@ -3427,26 +4150,15 @@ You may edit the wording before minting or publishing anything.
             target="_blank" rel="noopener">
             View transaction
           </a>
-          <details class="share-menu">
-            <summary class="btn small">Share</summary>
-            <div class="share-options" aria-label="Share this testimony">
-              <button class="btn small share-action" type="button"
-                data-share-platform="facebook"
-                data-share-key="${escapeHtml(post.key)}">Facebook</button>
-              <button class="btn small share-action" type="button"
-                data-share-platform="x"
-                data-share-key="${escapeHtml(post.key)}">X</button>
-              <button class="btn small share-action" type="button"
-                data-share-platform="instagram"
-                data-share-key="${escapeHtml(post.key)}">Instagram</button>
-              <button class="btn small share-action" type="button"
-                data-share-platform="copy"
-                data-share-key="${escapeHtml(post.key)}">Copy link</button>
-              <button class="btn small share-action" type="button"
-                data-share-platform="all"
-                data-share-key="${escapeHtml(post.key)}">All platforms</button>
-            </div>
-          </details>
+          <button class="btn small share-open" type="button"
+            data-share-key="${escapeHtml(post.key)}">Share verified proof</button>
+          <button class="btn small map-action" type="button"
+            data-map-key="${escapeHtml(post.key)}">Open on Prayer Map</button>
+          <button class="btn small bookmark-action" type="button"
+            data-bookmark-key="${escapeHtml(post.key)}"
+            aria-pressed="${state.bookmarks.has(post.key) ? 'true' : 'false'}">
+            ${state.bookmarks.has(post.key) ? 'Bookmarked' : 'Bookmark locally'}
+          </button>
         </div>
 
         <div class="inline-reply" data-reply-box="${escapeHtml(post.key)}">
@@ -3513,6 +4225,9 @@ You may edit the wording before minting or publishing anything.
     $('statAmens').textContent =
       state.posts.reduce((sum, post) => sum + post.amens, 0).toLocaleString();
     $('statWallets').textContent = wallets.size.toLocaleString();
+    $('statRegions').textContent = new Set(
+      state.posts.map(post => post.region).filter(regionIsPublished)
+    ).size.toLocaleString();
   }
 
   async function loadFeed(force=false) {
@@ -3525,6 +4240,13 @@ You may edit the wording before minting or publishing anything.
       state.posts = await parseFeed(history.entries);
       updateStats();
       renderFeed();
+      renderPrayerPulse();
+      const newest = [...state.posts]
+        .filter(post => post.hash)
+        .sort((a,b) => Date.parse(b.created) - Date.parse(a.created))[0] || null;
+      if (!state.latestVerification || newest?.hash === state.latestVerification?.hash) {
+        renderVerificationCenter(newest);
+      }
 
       setFeedStatus(
         'Loaded ' + state.posts.length +
@@ -3568,7 +4290,7 @@ You may edit the wording before minting or publishing anything.
     state.subscribed = true;
   }
 
-  ['feedSearch','feedType','feedSort'].forEach(id => {
+  ['feedSearch','feedType','feedRegion','feedSort'].forEach(id => {
     $(id).addEventListener(
       id === 'feedSearch' ? 'input' : 'change',
       renderFeed
@@ -3749,18 +4471,111 @@ You may edit the wording before minting or publishing anything.
       return;
     }
 
-    const shareButton = event.target.closest('.share-action');
+    const shareButton = event.target.closest('.share-open');
     if (shareButton) {
-      const post = state.posts.find(
-        item => item.key === shareButton.dataset.shareKey
-      );
+      const post = state.posts.find(item => item.key === shareButton.dataset.shareKey);
       if (!post) {
         toast('This testimony is no longer available in the current feed.', 'err');
         return;
       }
-      await shareTestimony(post, shareButton.dataset.sharePlatform);
+      openShareCenter(post);
       return;
     }
+
+    const mapButton = event.target.closest('.map-action');
+    if (mapButton) {
+      const post = state.posts.find(item => item.key === mapButton.dataset.mapKey);
+      if (!post) {
+        toast('This testimony is no longer available in the current feed.', 'err');
+        return;
+      }
+      openMapForPost(post);
+      return;
+    }
+
+    const bookmarkButton = event.target.closest('.bookmark-action');
+    if (bookmarkButton) {
+      const key = bookmarkButton.dataset.bookmarkKey;
+      if (state.bookmarks.has(key)) state.bookmarks.delete(key);
+      else state.bookmarks.add(key);
+      saveBookmarks();
+      renderFeed();
+      toast(state.bookmarks.has(key) ? 'Bookmarked on this device.' : 'Local bookmark removed.', 'ok');
+      return;
+    }
+  });
+
+
+
+  $('closeShareDialogBtn').addEventListener('click', closeShareCenter);
+  $('shareDialog').addEventListener('click', event => {
+    if (event.target === $('shareDialog')) closeShareCenter();
+  });
+  $('shareDialog').addEventListener('cancel', event => {
+    event.preventDefault();
+    closeShareCenter();
+  });
+  document.querySelector('.share-platform-grid').addEventListener('click', async event => {
+    const button = event.target.closest('.share-platform');
+    if (!button) return;
+    const post = state.posts.find(item => item.key === state.sharePostKey) ||
+      (state.latestVerification?.key === state.sharePostKey ? state.latestVerification : null);
+    if (!post) {
+      $('shareStatus').textContent = 'The selected proof is no longer available.';
+      return;
+    }
+    button.disabled = true;
+    try { await shareTestimony(post, button.dataset.platform); }
+    finally { button.disabled = false; }
+  });
+
+  $('regionHeatGrid').addEventListener('click', event => {
+    const card = event.target.closest('[data-region-filter]');
+    if (!card) return;
+    $('feedRegion').value = card.dataset.regionFilter;
+    renderFeed();
+    $('testimonies').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  $('probeRelaysBtn').addEventListener('click', () => probeRelays().catch(error => {
+    $('relayGrid').innerHTML = '<article class="relay-card err"><span>Relay pulse</span><strong>' + escapeHtml(error?.message || String(error)) + '</strong></article>';
+    $('probeRelaysBtn').disabled = false;
+  }));
+
+  $('exportMapSignalsBtn').addEventListener('click', () => {
+    const queue = readMapSignalQueue();
+    downloadJsonFile('jcs-prayer-map-signals-' + Date.now() + '.json', {
+      schema:'jcs-prayer-map-signal-export-v1',
+      exported_at_utc:new Date().toISOString(),
+      signal_count:queue.length,
+      signals:queue,
+      limitation:'Broad author-declared region labels and display centroids are not actual wallet or user locations.'
+    });
+  });
+
+  $('clearMapSignalsBtn').addEventListener('click', () => {
+    try {
+      localStorage.removeItem(MAP_SIGNAL_KEY);
+      localStorage.removeItem(MAP_FOCUS_KEY);
+    } catch {}
+    $('mapHandoffStatus').textContent = 'Local Prayer Map handoff queue cleared. Public XRPL records were not changed.';
+  });
+
+  $('shareLatestBtn').addEventListener('click', () => {
+    if (state.latestVerification) openShareCenter(state.latestVerification);
+  });
+  $('openLatestMapBtn').addEventListener('click', () => {
+    if (state.latestVerification) openMapForPost(state.latestVerification);
+  });
+  $('copyVerificationBtn').addEventListener('click', () => {
+    if (state.latestVerification) copyText(verificationPlainText(state.latestVerification), 'Verification summary copied.');
+  });
+  $('downloadVerificationBtn').addEventListener('click', () => {
+    if (!state.latestVerification) return;
+    downloadJsonFile(
+      'jcs-verification-' + (state.latestVerification.prayerNumber || Date.now()).replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '.json',
+      verificationExport(state.latestVerification)
+    );
   });
 
   function parseNftSerial(nftId) {
@@ -3854,11 +4669,14 @@ You may edit the wording before minting or publishing anything.
   });
 
   document.addEventListener('DOMContentLoaded', async () => {
+    loadBookmarks();
+    renderVerificationCenter(null);
+    renderPrayerPulse();
     loadDraft();
     initXaman();
     updateWalletUi();
     updateComposer();
-    await loadFeed();
+    await loadFeed(true);
     subscribeToCollector().catch(() => {});
     window.setInterval(() => loadFeed(), 45000);
   });
@@ -3991,6 +4809,8 @@ You may edit the wording before minting or publishing anything.
   let preparationPromise = null;
   let autoplayUnlocked = false;
   let unlockInstalled = false;
+  let mediaSuspended = true;
+  let driftTimer = null;
 
   function parseDuration(value) {
     if (Number.isFinite(Number(value)) && Number(value) > 0) {
@@ -4101,8 +4921,8 @@ You may edit the wording before minting or publishing anything.
   function loadSettings() {
     /*
      * Match index.html: both pages use the same station clock, playlist,
-     * channel seeds, and saved volume key. A new page attempts to rejoin the
-     * audible station automatically rather than preserving a page-local pause.
+     * channel seeds, and saved volume key. Playback remains stopped until a
+     * trusted interaction and stops again whenever the page is left or hidden.
      */
     channels.music.listenerMuted = false;
     channels.reading.listenerMuted = false;
@@ -4173,7 +4993,8 @@ You may edit the wording before minting or publishing anything.
     updateChannelButtons(channel);
   }
 
-  async function loadCurrentPosition(channel, allowMutedFallback=true) {
+  async function loadCurrentPosition(channel, allowMutedFallback=true, force=false) {
+    if (mediaSuspended && !force) return;
     await preparePlaylists();
     const target = synchronizedPosition(channel);
     if (!target) throw new Error('No tracks are available for this channel.');
@@ -4249,7 +5070,9 @@ You may edit the wording before minting or publishing anything.
       Number(target.track.duration) - target.offset + 1
     );
     channel.timer = window.setTimeout(() => {
-      loadCurrentPosition(channel, true).catch(showAudioError);
+      if (!mediaSuspended && !document.hidden) {
+        loadCurrentPosition(channel, true).catch(showAudioError);
+      }
     }, remaining * 1000);
   }
 
@@ -4261,6 +5084,7 @@ You may edit the wording before minting or publishing anything.
   }
 
   async function listenChannel(name) {
+    mediaSuspended = false;
     const channel = channels[name];
     channel.listenerMuted = false;
     channel.audio.muted = false;
@@ -4268,7 +5092,7 @@ You may edit the wording before minting or publishing anything.
 
     try {
       if (channel.audio.paused) {
-        await loadCurrentPosition(channel, false);
+        await loadCurrentPosition(channel, false, true);
       } else {
         channel.audio.volume = Number(channel.volume.value);
         await channel.audio.play();
@@ -4287,25 +5111,18 @@ You may edit the wording before minting or publishing anything.
     const channel = channels[name];
     channel.listenerMuted = true;
     channel.audio.muted = true;
+    channel.audio.pause();
+    window.clearTimeout(channel.timer);
+    channel.timer = null;
     saveSettings();
-
-    if (channel.audio.paused) {
-      try {
-        await loadCurrentPosition(channel, true);
-      } catch (error) {
-        showAudioError(error);
-      }
-    }
-
     const target = synchronizedPosition(channel);
-    if (target) {
-      setNowPlaying(channel, target, channel.audio.currentTime || target.offset);
-    }
+    if (target) setNowPlaying(channel, target, target.offset);
     $('audioStatus').textContent =
-      'Listening is paused locally. Both station timelines continue.';
+      'Listening is paused locally. The mathematical station clocks continue without background playback.';
   }
 
   async function listenAll() {
+    mediaSuspended = false;
     channels.music.listenerMuted = false;
     channels.reading.listenerMuted = false;
     saveSettings();
@@ -4323,24 +5140,33 @@ You may edit the wording before minting or publishing anything.
   }
 
   async function unlockAudio() {
-    if (autoplayUnlocked) return;
+    if (document.hidden) return;
     autoplayUnlocked = true;
-
+    mediaSuspended = false;
     const attempts = Object.values(channels).map(async channel => {
       if (!channel.listenerMuted) {
         channel.audio.muted = false;
         channel.audio.volume = Number(channel.volume.value);
-        if (channel.audio.paused) {
-          await loadCurrentPosition(channel, false);
-        } else {
-          await channel.audio.play();
-        }
+        await loadCurrentPosition(channel, false, true);
       }
     });
-
     await Promise.allSettled(attempts);
     $('audioStatus').textContent =
-      'Sacred audio enabled. Both channels remain synchronized to the shared station clock.';
+      'Sacred audio enabled at the current synchronized station positions. Leaving this page stops playback.';
+  }
+
+  function suspendSacredMedia(reason='Page inactive') {
+    mediaSuspended = true;
+    autoplayUnlocked = false;
+    Object.values(channels).forEach(channel => {
+      window.clearTimeout(channel.timer);
+      channel.timer = null;
+      channel.audio.pause();
+      channel.audio.muted = true;
+      updateChannelButtons(channel);
+    });
+    $('audioStatus').textContent = reason + '. Sacred audio stopped. Interact with the visible page to resume.';
+    installAutoplayUnlock();
   }
 
   function installAutoplayUnlock() {
@@ -4358,6 +5184,7 @@ You may edit the wording before minting or publishing anything.
     const unlock = event => {
       /* Keep Xaman wallet actions isolated from media autoplay handling. */
       if (isWalletControl(event?.target)) return;
+      unlockInstalled = false;
       unlockAudio().catch(showAudioError);
       document.removeEventListener('pointerdown', unlock, true);
       document.removeEventListener('keydown', unlock, true);
@@ -4375,11 +5202,12 @@ You may edit the wording before minting or publishing anything.
       saveSettings();
     });
     channel.audio.addEventListener('ended', () => {
-      loadCurrentPosition(channel, true).catch(showAudioError);
+      if (!mediaSuspended && !document.hidden) loadCurrentPosition(channel, true).catch(showAudioError);
     });
     channel.audio.addEventListener('error', () => {
+      if (mediaSuspended || document.hidden) return;
       window.setTimeout(
-        () => loadCurrentPosition(channel, true).catch(showAudioError),
+        () => { if (!mediaSuspended && !document.hidden) loadCurrentPosition(channel, true).catch(showAudioError); },
         2500
       );
     });
@@ -4390,53 +5218,36 @@ You may edit the wording before minting or publishing anything.
 
   loadSettings();
 
-  // Start both continuous station timelines immediately.
-  Promise.allSettled([
-    loadCurrentPosition(channels.music, true),
-    loadCurrentPosition(channels.reading, true)
-  ]).then(results => {
-    const rejected = results.filter(result => result.status === 'rejected');
-    if (rejected.length === 0) {
-      const mutedByBrowser = Object.values(channels)
-        .some(channel => channel.audio.muted && !channel.listenerMuted);
+  // Playback begins only after the first permitted interaction.
+  $('audioStatus').textContent =
+    'Sacred audio is paused. Interact with the page to start both synchronized channels. Leaving, hiding, or blurring this page stops playback.';
+  installAutoplayUnlock();
 
-      if (mutedByBrowser) {
-        $('audioStatus').textContent =
-          'Both station timelines started automatically. Your browser muted audible autoplay; the first click or key press enables sound.';
-        installAutoplayUnlock();
-      } else {
-        $('audioStatus').textContent =
-          'Both sacred channels joined their current continuous station positions automatically.';
-      }
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      suspendSacredMedia('Page hidden');
     } else {
-      showAudioError(rejected[0].reason);
+      $('audioStatus').textContent = 'Page visible. Interact with the page to resume sacred audio.';
       installAutoplayUnlock();
     }
   });
+  window.addEventListener('blur', () => suspendSacredMedia('Window unfocused'));
+  window.addEventListener('pagehide', () => suspendSacredMedia('Page left'));
+  window.addEventListener('beforeunload', () => suspendSacredMedia('Page closing'));
 
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState !== 'visible') return;
-    Object.values(channels).forEach(channel => {
-      loadCurrentPosition(channel, true).catch(showAudioError);
-    });
-  });
-
-  window.setInterval(() => {
+  driftTimer = window.setInterval(() => {
+    if (mediaSuspended || document.hidden || !autoplayUnlocked) return;
     Object.values(channels).forEach(channel => {
       const target = synchronizedPosition(channel);
       if (!target) return;
-
-      const drift = Math.abs(
-        (channel.audio.currentTime || 0) - target.offset
-      );
-      const wrongTrack =
-        channel.audio.dataset.trackUrl !== target.track.url;
-
+      const drift = Math.abs((channel.audio.currentTime || 0) - target.offset);
+      const wrongTrack = channel.audio.dataset.trackUrl !== target.track.url;
       if (wrongTrack || drift > 20 || channel.audio.paused) {
-        loadCurrentPosition(channel, true).catch(showAudioError);
+        loadCurrentPosition(channel, true, true).catch(showAudioError);
       }
     });
   }, 30000);
+
 })();
 </script></body>
 </html>
