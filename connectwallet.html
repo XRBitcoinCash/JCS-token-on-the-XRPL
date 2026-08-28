@@ -1,391 +1,1941 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US" data-theme="dark">
 <head>
-<!-- 
-  ===================================
-  META SECTION — JCS + XAMAN + AI-READY
-  ===================================
--->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050916">
+  <meta name="color-scheme" content="dark light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
-<title>Xaman Wallet Connect · Jesus Christ Saves Token (JCS)</title>
+  <title>JCS Xaman Identity &amp; XRPL Account Readiness</title>
+  <meta name="description" content="Authorize a JCS session through Xaman and inspect a consistent, validated XRP Ledger Mainnet snapshot of the selected account, including XRP reserve context, JCS trustline state, NFTs, account controls, and current ledger-object types.">
+  <meta name="keywords" content="Jesus Christ Saves Token,JCS,Xaman,XRPL,XRP Ledger,wallet connect,SignIn,account readiness,XLS-26,trustline,NFT,Credential,Delegate,MPToken">
+  <meta name="author" content="Jesus Christ Saves Token">
+  <meta name="application-name" content="JCS Xaman Identity and XRPL Account Readiness">
+  <meta name="jcs-wallet-release" content="3.0.0">
+  <meta name="jcs-wallet-mode" content="xaman-authorization-read-only-xrpl">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
-<!-- Canonical & Language -->
-<link rel="canonical" href="https://jesuschristsavestoken.com/connectwallet.html" />
-<link rel="alternate" hreflang="en" href="https://jesuschristsavestoken.com/connectwallet.html" />
+  <link rel="canonical" href="https://jesuschristsavestoken.com/connectwallet.html">
+  <link rel="alternate" hreflang="en-US" href="https://jesuschristsavestoken.com/connectwallet.html">
+  <link rel="alternate" hreflang="x-default" href="https://jesuschristsavestoken.com/connectwallet.html">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./jcs-logo.png">
+  <link rel="apple-touch-icon" href="./jcs-logo.png">
+  <link rel="alternate" type="application/json" href="./ai.json" title="JCS AI manifest">
+  <link rel="alternate" type="application/json" href="./.well-known/did.json" title="JCS Web DID">
+  <link rel="alternate" type="text/plain" href="./.well-known/xrp-ledger.toml" title="JCS XRP Ledger metadata">
+  <link rel="security" href="./.well-known/security.txt">
+  <link rel="sitemap" type="application/xml" href="./sitemap.xml">
+  <link rel="license" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE">
+  <link rel="preconnect" href="https://xumm.app" crossorigin>
 
-<!-- Primary SEO -->
-<meta name="description" content="Connect your Xaman (formerly Xumm) wallet to interact with Jesus Christ Saves Token (JCS) on the XRP Ledger. Non-custodial, open, AI-readable manifest, and verifiable on-ledger." />
-<meta name="keywords" content="Jesus Christ Saves Token, JCS, Xaman, Xumm, XRPL, XRP Ledger, Christian crypto, faith token, connect wallet, non-custodial, AI manifest" />
-<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
-<meta name="theme-color" content="#111111" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jesus Christ Saves Token">
+  <meta property="og:title" content="JCS Xaman Identity &amp; XRPL Account Readiness">
+  <meta property="og:description" content="Xaman authorization plus a read-only validated XRPL account snapshot. No payment, trustline, offer, or NFT transaction is created by connecting.">
+  <meta property="og:url" content="https://jesuschristsavestoken.com/connectwallet.html">
+  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta property="og:image:alt" content="Jesus Christ Saves Token emblem">
+  <meta property="og:locale" content="en_US">
 
-<!-- Open Graph -->
-<meta property="og:locale" content="en_US" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Jesus Christ Saves Token" />
-<meta property="og:title" content="Xaman Wallet Connect · Jesus Christ Saves Token (JCS)" />
-<meta property="og:description" content="Non-custodial XRPL connect for JCS. Transparent, AI-discoverable, and verifiable on-ledger." />
-<meta property="og:url" content="https://jesuschristsavestoken.com/connectwallet.html" />
-<meta property="og:image" content="https://jesuschristsavestoken.com/shroud-bg.jpg" />
-<meta property="og:image:alt" content="Shroud-themed backdrop for JCS Wallet Connect" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@JesusCS_token">
+  <meta name="twitter:title" content="JCS Xaman Identity &amp; XRPL Account Readiness">
+  <meta name="twitter:description" content="Authorize with Xaman and inspect validated XRPL account, JCS trustline, NFT, reserve, authority, and current ledger-object evidence.">
+  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
+  <meta name="twitter:image:alt" content="Jesus Christ Saves Token emblem">
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@JesusCS_token" />
-<meta name="twitter:title" content="Xaman Wallet Connect · Jesus Christ Saves Token (JCS)" />
-<meta name="twitter:description" content="Connect via Xaman to interact with JCS on XRPL — non-custodial and AI-readable." />
-<meta name="twitter:image" content="https://jesuschristsavestoken.com/shroud-bg.jpg" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://xumm.app;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: blob: https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app;
+    connect-src 'self'
+      https://xumm.app https://*.xumm.app
+      https://oauth2.xumm.app
+      https://xaman.app https://*.xaman.app
+      wss://xumm.app wss://*.xumm.app
+      wss://xaman.app wss://*.xaman.app
+      wss://xrplcluster.com
+      wss://s1.ripple.com
+      wss://s2.ripple.com;
+    frame-src
+      https://xumm.app https://*.xumm.app
+      https://oauth2.xumm.app
+      https://xaman.app https://*.xaman.app;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    upgrade-insecure-requests;
+  ">
 
-<!-- AI & XRPL Discoverability -->
-<link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest" />
-<link rel="asset" href="/.well-known/xrpl.toml" type="text/plain" />
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('jcs-color-mode');
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark' ? saved : 'dark';
+      } catch {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    }());
+  </script>
 
-<!-- Favicons & App Icons -->
-<link rel="icon" href="https://jesuschristsavestoken.com/jcs-logo.png" type="image/png" />
-<link rel="icon" type="image/png" sizes="32x32" href="https://jesuschristsavestoken.com/jcs-logo-32.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="https://jesuschristsavestoken.com/jcs-logo-192.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://jesuschristsavestoken.com/jcs-logo-180.png" />
-<meta name="msapplication-TileImage" content="https://jesuschristsavestoken.com/jcs-logo-270.png" />
-<meta name="msapplication-TileColor" content="#111111" />
-
-<!-- Performance: DNS Prefetch / Preconnect -->
-<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="dns-prefetch" href="https://xaman.app" />
-<link rel="preconnect" href="https://xaman.app" crossorigin />
-<link rel="dns-prefetch" href="https://api.coingecko.com" />
-<link rel="dns-prefetch" href="wss://xrplcluster.com" />
-
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Jesus Christ Saves Token",
-  "url": "https://jesuschristsavestoken.com/",
-  "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
-  "sameAs": ["https://x.com/JesusCS_token"],
-  "additionalProperty": [
-    { "@type": "PropertyValue", "name": "XRPL Issuer", "value": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" },
-    { "@type": "PropertyValue", "name": "Currency Code", "value": "JCS" },
-    { "@type": "PropertyValue", "name": "AI Manifest", "value": "https://jesuschristsavestoken.com/ai.json" },
-    { "@type": "PropertyValue", "name": "XRPL TOML", "value": "https://jesuschristsavestoken.com/.well-known/xrpl.toml" }
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": "https://jesuschristsavestoken.com/",
-  "name": "Jesus Christ Saves Token (JCS)",
-  "description": "Faith-based cryptocurrency on the XRPL for believers worldwide.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Jesus Christ Saves Token",
-    "logo": { "@type": "ImageObject", "url": "https://jesuschristsavestoken.com/jcs-logo.png" }
-  },
-  "potentialAction": {
-    "@type": "Action",
-    "name": "Connect via Xaman",
-    "target": "https://jesuschristsavestoken.com/connectwallet.html"
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://jesuschristsavestoken.com/connectwallet.html#webpage",
+        "url": "https://jesuschristsavestoken.com/connectwallet.html",
+        "name": "JCS Xaman Identity and XRPL Account Readiness",
+        "description": "Authorize through Xaman and inspect a read-only, validated XRP Ledger Mainnet snapshot for the selected account.",
+        "dateModified": "2026-08-27",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "isPartOf": { "@id": "https://jesuschristsavestoken.com/#website" },
+        "about": { "@id": "https://jesuschristsavestoken.com/#project" },
+        "mainEntity": { "@id": "https://jesuschristsavestoken.com/connectwallet.html#application" },
+        "license": "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://jesuschristsavestoken.com/connectwallet.html#application",
+        "name": "JCS Xaman Identity and XRPL Account Readiness",
+        "url": "https://jesuschristsavestoken.com/connectwallet.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "JavaScript, WebSocket support, and a modern browser. Xaman is required only for account-control authorization.",
+        "softwareVersion": "3.0.0",
+        "isAccessibleForFree": true,
+        "featureList": [
+          "Xaman browser and xApp authorization through the Universal SDK",
+          "Read-only public-address inspection without wallet authorization",
+          "Single-ledger validated XRP Ledger snapshot",
+          "Live reserve-base and reserve-increment retrieval from server_info",
+          "JCS trustline balance, freeze, authorization, and No Ripple review",
+          "Account authority, flags, signer list, domain, and sponsorship-field review",
+          "Paginated account_lines, account_objects, and account_nfts retrieval",
+          "Protocol-forward ledger-object inventory including new object types returned by the server",
+          "Downloadable local JSON evidence snapshot",
+          "No Payment, TrustSet, OfferCreate, OfferCancel, NFTokenMint, or other XRPL transaction during connection"
+        ],
+        "author": { "@id": "https://jesuschristsavestoken.com/#project" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jesuschristsavestoken.com/#website",
+        "url": "https://jesuschristsavestoken.com/",
+        "name": "Jesus Christ Saves Token",
+        "publisher": { "@id": "https://jesuschristsavestoken.com/#project" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://jesuschristsavestoken.com/#project",
+        "name": "Jesus Christ Saves Token",
+        "alternateName": "JCS",
+        "url": "https://jesuschristsavestoken.com/",
+        "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+        "sameAs": [
+          "https://x.com/JesusCS_token",
+          "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
+        ],
+        "additionalProperty": [
+          { "@type": "PropertyValue", "name": "XRP Ledger network", "value": "Mainnet" },
+          { "@type": "PropertyValue", "name": "JCS issuer", "value": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" },
+          { "@type": "PropertyValue", "name": "Currency code", "value": "JCS" },
+          { "@type": "PropertyValue", "name": "Web DID", "value": "did:web:jesuschristsavestoken.com" }
+        ]
+      }
+    ]
   }
-}
-</script>
+  </script>
 
-<!-- Optional: describe this specific page as a WebApplication -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "JCS · Wallet Connect (Xaman)",
-  "operatingSystem": "Web",
-  "applicationCategory": "FinanceApplication",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "softwareVersion": "1.0",
-  "url": "https://jesuschristsavestoken.com/connectwallet.html",
-  "about": {
-    "@type": "Thing",
-    "name": "Jesus Christ Saves Token (JCS)",
-    "sameAs": "https://jesuschristsavestoken.com/"
+  <style>
+    :root {
+      --wallet-max: 1180px;
+      --wallet-cyan: var(--jcs-cyan, #5bdcff);
+      --wallet-gold: var(--jcs-gold, #f6c453);
+      --wallet-green: var(--jcs-green, #34d399);
+      --wallet-red: var(--jcs-red, #fb7185);
+      --wallet-yellow: var(--jcs-yellow, #facc15);
+    }
+
+    .wallet-page { width: min(100%, var(--wallet-max)); }
+    .wallet-page > section { width: 100%; margin: 18px 0 0; padding: clamp(18px, 3vw, 28px); }
+    .wallet-header .header-wrap { grid-template-columns: minmax(220px, auto) minmax(0, 1fr) auto; }
+
+    .header-actions {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .theme-toggle {
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 10px;
+      color: var(--jcs-ink, #f7f9ff);
+      background: var(--jcs-surface-2, #0d1d37);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .wallet-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr);
+      gap: 26px;
+      align-items: center;
+      overflow: hidden;
+      border-color: rgba(246, 196, 83, .36);
+      background:
+        radial-gradient(circle at 94% 5%, rgba(246, 196, 83, .18), transparent 25rem),
+        radial-gradient(circle at 5% 100%, rgba(91, 220, 255, .09), transparent 30rem),
+        var(--jcs-surface, #081224);
+    }
+
+    .wallet-hero h1 {
+      max-width: 880px;
+      margin: 15px 0 12px;
+      font-size: clamp(2.45rem, 6vw, 5rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .wallet-hero h1 span { color: var(--wallet-gold); }
+    .wallet-lead { max-width: 790px; margin: 0; color: var(--jcs-muted, #aebdd3); font-size: clamp(1rem, 1.8vw, 1.16rem); line-height: 1.7; }
+    .hero-actions, .action-row, .link-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+
+    .official-panel {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid rgba(246, 196, 83, .36);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(246, 196, 83, .08), transparent 54%), var(--jcs-surface-2, #0d1d37);
+    }
+
+    .official-panel img {
+      width: 82px;
+      height: 82px;
+      display: block;
+      margin: 0 auto 14px;
+      object-fit: contain;
+      border: 1px solid rgba(246, 196, 83, .42);
+      border-radius: 21px;
+      background: #fff;
+    }
+
+    .official-row {
+      min-width: 0;
+      margin-top: 8px;
+      padding: 10px 11px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 11px;
+      background: rgba(3, 9, 21, .28);
+    }
+
+    html[data-theme="light"] .official-row { background: var(--jcs-surface, #fff); }
+
+    .official-row span, .data-label {
+      display: block;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .official-row strong, .data-value {
+      display: block;
+      margin-top: 4px;
+      overflow-wrap: anywhere;
+      color: var(--jcs-ink, #f7f9ff);
+      font-size: .8rem;
+    }
+
+    .section-intro { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .section-intro h2 { margin: 0; font-size: clamp(1.42rem, 3vw, 2rem); }
+    .section-intro p { max-width: 810px; margin: 6px 0 0; }
+
+    .readiness-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .readiness-step {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 9px;
+      align-items: center;
+      padding: 11px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 12px;
+      color: var(--jcs-muted, #aebdd3);
+      background: var(--jcs-surface-2, #0d1d37);
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .step-number {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 50%;
+      color: var(--jcs-ink, #f7f9ff);
+      background: var(--jcs-surface, #081224);
+      font-weight: 950;
+    }
+
+    .readiness-step.ready { border-color: rgba(52, 211, 153, .52); color: var(--wallet-green); }
+    .readiness-step.ready .step-number { border-color: var(--wallet-green); color: #032319; background: var(--wallet-green); }
+    .readiness-step.error { border-color: rgba(251, 113, 133, .52); color: var(--wallet-red); }
+
+    .connection-grid, .lookup-grid, .identity-grid, .standards-grid, .boundary-grid { display: grid; gap: 12px; }
+    .connection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 14px; }
+    .lookup-grid { grid-template-columns: minmax(0, 1fr) auto auto; align-items: end; }
+    .identity-grid, .boundary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .standards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .data-card, .standard-card, .boundary-card, .flag-card, .jcs-card {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 13px;
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .data-card p, .standard-card p, .boundary-card p, .flag-card p, .jcs-card p { margin: 6px 0 0; font-size: .84rem; }
+    .field { min-width: 0; }
+    .field label { display: block; margin-bottom: 6px; font-size: .82rem; font-weight: 900; }
+
+    .field input {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 11px;
+      color: var(--jcs-ink, #f7f9ff);
+      background: var(--jcs-surface-2, #0d1d37);
+    }
+
+    .field input:focus { border-color: var(--wallet-cyan); outline: 3px solid rgba(91, 220, 255, .14); outline-offset: 1px; }
+    .field-help { display: block; margin-top: 6px; color: var(--jcs-muted, #aebdd3); font-size: .74rem; }
+
+    .connection-banner {
+      margin-top: 12px;
+      padding: 13px 14px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-left: 4px solid var(--wallet-cyan);
+      border-radius: 12px;
+      background: var(--jcs-surface-2, #0d1d37);
+      overflow-wrap: anywhere;
+    }
+
+    .connection-banner.ok { border-left-color: var(--wallet-green); }
+    .connection-banner.err { border-left-color: var(--wallet-red); }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .snapshot-grid .metric { min-height: 112px; display: grid; align-content: center; }
+    .snapshot-grid .metric strong { font-size: clamp(1.04rem, 2.6vw, 1.4rem); }
+    .snapshot-grid .metric small { display: block; margin-top: 5px; color: var(--jcs-muted, #aebdd3); font-size: .68rem; line-height: 1.35; }
+
+    .evidence-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 13px;
+      padding: 11px 12px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 11px;
+      color: var(--jcs-muted, #aebdd3);
+      background: rgba(3, 9, 21, .24);
+      font-size: .78rem;
+    }
+
+    .jcs-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .jcs-card strong { display: block; margin-top: 5px; overflow-wrap: anywhere; }
+    .flag-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 14px; }
+    .flag-card { min-height: 98px; display: grid; align-content: center; }
+    .flag-card strong { display: block; }
+
+    .flag-state {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 7px;
+      padding: 4px 7px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 999px;
+      color: var(--jcs-muted, #aebdd3);
+      font-size: .68rem;
+      font-weight: 900;
+    }
+
+    .flag-state.active { border-color: rgba(52, 211, 153, .45); color: var(--wallet-green); }
+
+    .table-wrap {
+      width: 100%;
+      margin-top: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table-wrap table { width: 100%; min-width: 690px; border-collapse: collapse; }
+    .table-wrap th, .table-wrap td { padding: 10px 11px; border-bottom: 1px solid var(--jcs-line, rgba(174, 199, 231, .18)); font-size: .79rem; text-align: left; vertical-align: top; }
+    .table-wrap th { color: var(--jcs-muted, #aebdd3); background: rgba(148, 163, 184, .05); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; }
+    .table-wrap tr:last-child td { border-bottom: 0; }
+
+    .type-badge {
+      display: inline-flex;
+      margin-left: 6px;
+      padding: 3px 6px;
+      border: 1px solid rgba(91, 220, 255, .38);
+      border-radius: 999px;
+      color: var(--wallet-cyan);
+      font-size: .61rem;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+
+    .activity-log {
+      min-height: 120px;
+      max-height: 330px;
+      overflow: auto;
+      margin-top: 12px;
+      padding: 13px;
+      border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18));
+      border-radius: 12px;
+      color: var(--jcs-muted, #aebdd3);
+      background: #030813;
+      font: .76rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    html[data-theme="light"] .activity-log { color: #24354b; background: #eef3f8; }
+    details { margin-top: 11px; border: 1px solid var(--jcs-line, rgba(174, 199, 231, .18)); border-radius: 12px; background: var(--jcs-surface-2, #0d1d37); }
+    details summary { padding: 12px 14px; cursor: pointer; font-weight: 900; }
+    .details-body { padding: 0 14px 14px; color: var(--jcs-muted, #aebdd3); font-size: .84rem; }
+    .details-body ul { margin: 9px 0 0; padding-left: 1.2rem; }
+    .details-body li + li { margin-top: 5px; }
+    .site-footer .footer-inner { width: min(100%, var(--wallet-max)); }
+    .footer-links { margin: 14px 0; }
+    .footer-meta { max-width: 940px; margin: 0 auto; font-size: .79rem; }
+
+    @media (max-width: 1040px) {
+      .wallet-header .header-wrap { grid-template-columns: minmax(200px, auto) minmax(0, 1fr); }
+      .header-actions { grid-column: 1 / -1; justify-content: flex-start; }
+      .wallet-hero { grid-template-columns: 1fr; }
+      .official-panel { max-width: 670px; }
+      .snapshot-grid, .jcs-grid, .flag-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .identity-grid, .boundary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .wallet-header .header-wrap { grid-template-columns: 1fr; }
+      .wallet-header .brand-link { justify-content: center; }
+      .wallet-header .header-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+      .wallet-header .nav-link { width: 100%; }
+      .header-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+      .header-actions .badge { grid-column: 1 / -1; width: 100%; }
+      .wallet-page { padding-top: 14px; }
+      .wallet-page > section { padding: 16px; }
+      .wallet-hero { padding: 26px 19px; }
+      .wallet-hero h1 { font-size: clamp(2.55rem, 14vw, 4.2rem); }
+      .section-intro { display: block; }
+      .section-intro .badge { margin-top: 9px; }
+      .readiness-grid, .connection-grid, .lookup-grid, .snapshot-grid, .jcs-grid, .flag-grid, .identity-grid, .standards-grid, .boundary-grid { grid-template-columns: 1fr; }
+      .lookup-grid .btn { width: 100%; }
+      .hero-actions, .action-row, .link-row { display: grid; grid-template-columns: 1fr; }
+      .hero-actions > *, .action-row > *, .link-row > * { width: 100%; }
+      .table-wrap table { min-width: 610px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+
+    @media print {
+      .site-header, .hero-actions, .action-row, .lookup-grid, .footer-links, .activity-log, .skip-link { display: none !important; }
+      body { color: #111; background: #fff; }
+      .card, .data-card, .standard-card, .boundary-card, .flag-card, .jcs-card, .metric { color: #111; background: #fff; box-shadow: none; border-color: #bbb; }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to wallet readiness</a>
+
+  <header class="site-header wallet-header" role="banner">
+    <div class="header-wrap">
+      <a class="brand-link" href="./index.html" aria-label="Jesus Christ Saves Token home">
+        <img src="./jcs-logo.png" width="44" height="44" alt="" aria-hidden="true">
+        <span>
+          <span class="brand-title">Jesus Christ Saves Token</span>
+          <span class="brand-subtitle">Xaman identity · XRPL Mainnet readiness</span>
+        </span>
+      </a>
+
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="./index.html">Home</a>
+        <a class="nav-link" href="./about-jcs.html">Vision</a>
+        <a class="nav-link sign-ledger-btn" href="./verify.html">Sign the Ledger</a>
+        <a class="nav-link" href="./prayer.map.html">Prayer Map</a>
+        <a class="nav-link" href="./connectwallet.html" aria-current="page">Wallet</a>
+        <a class="nav-link" href="./security.html">Security</a>
+      </nav>
+
+      <div class="header-actions" aria-label="Display and connection status">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+          <span aria-hidden="true">◐</span>
+          <span id="themeToggleText">Light mode</span>
+        </button>
+        <span class="badge" id="headerConnectionPill" aria-live="polite">Xaman not connected</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container wallet-page" id="main-content">
+    <section class="card wallet-hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">Xaman authorization · validated XRPL evidence · Mainnet only</span>
+        <h1 id="page-title">Connect once. Inspect what the <span>ledger actually says.</span></h1>
+        <p class="wallet-lead">
+          This page uses the official Xaman browser authorization flow to identify the account
+          the user selects, then reads a consistent snapshot from one validated XRP Ledger.
+          Connecting does not create, sign, or submit a Payment, TrustSet, Offer, NFT, Batch,
+          MPT, credential, delegation, sponsorship, or any other ledger transaction.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn gold" href="#connect">Authorize with Xaman</a>
+          <a class="btn" href="#public-lookup">Inspect a public address</a>
+          <a class="btn" href="#standards">Review standards alignment</a>
+        </div>
+
+        <div class="hero-badges" aria-label="Page characteristics">
+          <span class="badge gold">Release 3.0.0</span>
+          <span class="badge green">XRP Ledger Mainnet</span>
+          <span class="badge">SignIn-only connection</span>
+          <span class="badge">No wallet secret collection</span>
+          <span class="badge">Protocol-forward object inventory</span>
+        </div>
+      </div>
+
+      <aside class="official-panel" aria-label="Official JCS identity">
+        <img src="./jcs-logo.png" alt="Jesus Christ Saves Token emblem">
+        <div class="official-row"><span>JCS issuer</span><strong class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</strong></div>
+        <div class="official-row"><span>Currency and network</span><strong>JCS · XRP Ledger Mainnet</strong></div>
+        <div class="official-row"><span>Canonical Web DID</span><strong class="mono">did:web:jesuschristsavestoken.com</strong></div>
+        <div class="official-row"><span>Machine-readable token metadata</span><strong>/.well-known/xrp-ledger.toml · XLS-26 structure</strong></div>
+      </aside>
+    </section>
+
+    <section class="card" aria-labelledby="security-first-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="security-first-title">Security before connection</h2>
+          <p>
+            Xaman keeps wallet secrets inside the wallet. This page receives the selected public
+            account after authorization and reads public ledger information. It does not ask for
+            recovery words, a family seed, private key, Xaman passcode, device passcode, or remote access.
+          </p>
+        </div>
+        <span class="badge green">Non-custodial</span>
+      </div>
+
+      <div class="boundary-grid">
+        <article class="boundary-card"><strong>Authorization is not a payment</strong><p>Connecting establishes the selected account for this browser session. It does not move XRP or tokens.</p></article>
+        <article class="boundary-card"><strong>Public data remains public</strong><p>Addresses, balances, trust lines, offers, NFTs, objects, and transaction history may be visible to anyone.</p></article>
+        <article class="boundary-card"><strong>Review every later request</strong><p>Other JCS pages may prepare transactions. A user must independently inspect and approve each request in Xaman.</p></article>
+      </div>
+    </section>
+
+    <section class="card" id="connect" aria-labelledby="connect-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="connect-title">Xaman account-control authorization</h2>
+          <p>
+            The Universal SDK selects the appropriate browser, mobile, or xApp authorization path.
+            The account returned by a successful Xaman session is treated as account-control evidence
+            for the session—not as proof of the person’s legal identity or the truth of off-ledger claims.
+          </p>
+        </div>
+        <span class="badge" id="sdkBadge">SDK loading</span>
+      </div>
+
+      <div class="readiness-grid" aria-label="Connection readiness">
+        <div class="readiness-step" id="stepSdk"><span class="step-number">1</span><span>Official Xaman SDK ready</span></div>
+        <div class="readiness-step" id="stepAccount"><span class="step-number">2</span><span>Account authorized</span></div>
+        <div class="readiness-step" id="stepLedger"><span class="step-number">3</span><span>Validated ledger snapshot</span></div>
+        <div class="readiness-step" id="stepJcs"><span class="step-number">4</span><span>JCS relationship checked</span></div>
+      </div>
+
+      <div class="action-row">
+        <button class="btn green" id="connectBtn" type="button" disabled>Connect Xaman</button>
+        <button class="btn danger" id="disconnectBtn" type="button" hidden>Disconnect Xaman</button>
+        <button class="btn" id="refreshBtn" type="button" disabled>Refresh validated snapshot</button>
+        <button class="btn" id="copyAddressBtn" type="button" disabled>Copy selected address</button>
+        <a class="btn" id="xrpscanBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">Open XRPSCAN</a>
+        <a class="btn" id="bithompBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">Open Bithomp</a>
+      </div>
+
+      <div class="connection-banner" id="connectionStatus" role="status" aria-live="polite">
+        Loading the official Xaman browser SDK. Public-address inspection remains available if the SDK is temporarily unavailable.
+      </div>
+
+      <div class="connection-grid">
+        <article class="data-card"><span class="data-label">Xaman-authorized account</span><strong class="data-value mono" id="connectedAccount">Not connected</strong><p id="connectionSource">No Xaman account-control assertion is active.</p></article>
+        <article class="data-card"><span class="data-label">Account currently being inspected</span><strong class="data-value mono" id="selectedAccount">None</strong><p id="selectedSource">Connect Xaman or enter a public account below.</p></article>
+      </div>
+    </section>
+
+    <section class="card" id="public-lookup" aria-labelledby="lookup-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="lookup-title">Read-only public account inspection</h2>
+          <p>
+            Anyone can inspect public ledger state without connecting a wallet. Pasting an address
+            does not prove control of that address. The page does not save the pasted address in its own storage.
+          </p>
+        </div>
+        <span class="badge">No wallet required</span>
+      </div>
+
+      <div class="lookup-grid">
+        <div class="field">
+          <label for="publicAccountInput">Classic XRP Ledger account</label>
+          <input id="publicAccountInput" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="40" placeholder="r..." aria-describedby="publicAccountHelp">
+          <span class="field-help" id="publicAccountHelp">A format check is performed locally. The XRPL account_info result determines whether the account exists in the selected validated ledger.</span>
+        </div>
+        <button class="btn primary" id="inspectPublicBtn" type="button">Inspect public account</button>
+        <button class="btn" id="useConnectedBtn" type="button" disabled>Use connected account</button>
+      </div>
+      <p class="status" id="lookupStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="card" id="snapshot" aria-labelledby="snapshot-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="snapshot-title">Validated account-readiness snapshot</h2>
+          <p>
+            A single validated ledger sequence is selected first. Account, trustline, object, NFT,
+            issuer, and reserve evidence is then requested against that ledger where the method supports it.
+          </p>
+        </div>
+        <span class="badge" id="snapshotBadge">No snapshot</span>
+      </div>
+
+      <div class="snapshot-grid" aria-live="polite">
+        <article class="metric"><span>Validated ledger</span><strong id="metricLedger">—</strong><small id="metricLedgerHash">No evidence loaded</small></article>
+        <article class="metric"><span>Ledger age</span><strong id="metricAge">—</strong><small>Reported by the selected xrpld server</small></article>
+        <article class="metric"><span>XRPL server</span><strong id="metricServer">—</strong><small id="metricBuild">Build unavailable</small></article>
+        <article class="metric"><span>XRP balance</span><strong id="metricBalance">—</strong><small>AccountRoot Balance converted from drops</small></article>
+        <article class="metric"><span>Spendable estimate</span><strong id="metricSpendable">—</strong><small id="metricSpendableNote">Requires reserve evidence</small></article>
+        <article class="metric"><span>Reserve estimate</span><strong id="metricReserve">—</strong><small id="metricReserveNote">Uses live base and owner reserve values</small></article>
+        <article class="metric"><span>OwnerCount</span><strong id="metricOwnerCount">—</strong><small>AccountRoot owner-directory count</small></article>
+        <article class="metric"><span>Next sequence</span><strong id="metricSequence">—</strong><small>Next ordinary transaction sequence</small></article>
+        <article class="metric"><span>Trust lines observed</span><strong id="metricTrustlines">—</strong><small id="metricTrustlinePages">Not queried</small></article>
+        <article class="metric"><span>NFTs observed</span><strong id="metricNfts">—</strong><small id="metricNftPages">Not queried</small></article>
+        <article class="metric"><span>Ledger objects observed</span><strong id="metricObjects">—</strong><small id="metricObjectPages">Not queried</small></article>
+        <article class="metric"><span>Evidence coverage</span><strong id="metricCoverage">0 / 6</strong><small id="metricCoverageNote">No evidence groups loaded</small></article>
+      </div>
+
+      <div class="evidence-strip"><span id="snapshotTime">Snapshot time: —</span><span id="snapshotSource">Source: —</span></div>
+      <div class="connection-banner" id="snapshotStatus" role="status" aria-live="polite">No account snapshot has been requested.</div>
+    </section>
+
+    <section class="card" id="jcs-relationship" aria-labelledby="jcs-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="jcs-title">JCS trustline and issuer relationship</h2>
+          <p>
+            The connected or inspected account is compared with the exact JCS issuer and currency.
+            Missing trustline evidence is not converted into a zero balance when the query fails.
+          </p>
+        </div>
+        <span class="badge" id="jcsBadge">Not checked</span>
+      </div>
+
+      <div class="jcs-grid">
+        <article class="jcs-card"><span class="data-label">JCS trustline</span><strong id="jcsTrustlineState">—</strong><p id="jcsTrustlineDetail">No account evidence loaded.</p></article>
+        <article class="jcs-card"><span class="data-label">JCS balance</span><strong id="jcsBalance">—</strong><p>Balance from the inspected account’s trustline perspective.</p></article>
+        <article class="jcs-card"><span class="data-label">Holder limit</span><strong id="jcsLimit">—</strong><p>Trustline limit reported for the inspected account.</p></article>
+        <article class="jcs-card"><span class="data-label">Issuer-side freeze</span><strong id="jcsFreeze">—</strong><p>Derived from the peer-side freeze field when returned.</p></article>
+        <article class="jcs-card"><span class="data-label">Holder No Ripple</span><strong id="jcsNoRipple">—</strong><p>Trustline setting from the inspected account’s perspective.</p></article>
+        <article class="jcs-card"><span class="data-label">Issuer authorization</span><strong id="jcsAuthorization">—</strong><p>Whether peer authorization is explicitly shown on the trustline.</p></article>
+        <article class="jcs-card"><span class="data-label">Issuer on-ledger domain</span><strong id="issuerDomain">—</strong><p id="issuerDomainNote">Issuer account_info not loaded.</p></article>
+        <article class="jcs-card"><span class="data-label">Issuer authority summary</span><strong id="issuerAuthority">—</strong><p id="issuerAuthorityNote">No issuer-control evidence loaded.</p></article>
+      </div>
+
+      <div class="link-row">
+        <a class="btn small" href="./.well-known/xrp-ledger.toml">Open JCS XRP Ledger TOML</a>
+        <a class="btn small" href="./.well-known/did.json">Open JCS Web DID</a>
+        <a class="btn small" href="https://bithomp.com/en/account/JesusChristSaves" target="_blank" rel="noopener">Open issuer on Bithomp</a>
+        <a class="btn small" href="https://xrpscan.com/account/rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener">Open issuer on XRPSCAN</a>
+        <a class="btn small" href="./index.html#trade">Open JCS main portal</a>
+      </div>
+    </section>
+
+    <section class="card" id="account-controls" aria-labelledby="controls-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="controls-title">Account authority and controls</h2>
+          <p>
+            These are observable account settings, not a security certification. Active and inactive
+            states are reported without assuming that either state is universally good or bad.
+          </p>
+        </div>
+        <span class="badge">AccountRoot evidence</span>
+      </div>
+
+      <div class="identity-grid">
+        <article class="data-card"><span class="data-label">On-ledger domain</span><strong class="data-value" id="accountDomain">—</strong><p>Decoded from the AccountRoot Domain field when present.</p></article>
+        <article class="data-card"><span class="data-label">Regular key</span><strong class="data-value mono" id="accountRegularKey">—</strong><p>Alternative signing key address when configured.</p></article>
+        <article class="data-card"><span class="data-label">Signer list</span><strong class="data-value" id="accountSignerList">—</strong><p id="accountSignerDetail">Multi-signing evidence not loaded.</p></article>
+        <article class="data-card"><span class="data-label">Message key</span><strong class="data-value" id="accountMessageKey">—</strong><p>Public encryption-key field presence only; the key is not interpreted here.</p></article>
+        <article class="data-card"><span class="data-label">Sponsorship fields</span><strong class="data-value" id="accountSponsorship">—</strong><p id="accountSponsorshipDetail">No sponsorship evidence loaded.</p></article>
+        <article class="data-card"><span class="data-label">Special account type</span><strong class="data-value" id="accountSpecialType">—</strong><p>AMM and Vault pseudo-account fields are identified when present.</p></article>
+      </div>
+
+      <div class="flag-grid" id="flagGrid" aria-live="polite">
+        <article class="flag-card"><strong>Account flags</strong><span class="flag-state">No snapshot</span><p>Connect or inspect an account to populate this section.</p></article>
+      </div>
+    </section>
+
+    <section class="card" id="object-inventory" aria-labelledby="objects-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="objects-title">Protocol-forward ledger-object inventory</h2>
+          <p>
+            The inventory groups the raw account_objects response by LedgerEntryType. New object
+            types are shown verbatim instead of being discarded merely because an older page did not know them.
+          </p>
+        </div>
+        <span class="badge" id="objectBadge">No objects loaded</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Observed ledger object types owned by or linked to the inspected account</caption>
+          <thead><tr><th scope="col">LedgerEntryType</th><th scope="col">Observed count</th><th scope="col">Interpretation</th><th scope="col">Evidence note</th></tr></thead>
+          <tbody id="objectTableBody"><tr><td colspan="4">No account_objects evidence loaded.</td></tr></tbody>
+        </table>
+      </div>
+
+      <details>
+        <summary>Why this matters for newer XLS and protocol features</summary>
+        <div class="details-body">
+          <p>
+            Current XRPL servers may return established objects and newer protocol surfaces such as
+            Credential, Delegate, PermissionedDomain, MPToken, MPTokenIssuance, Sponsorship, Vault,
+            Loan, LoanBroker, Oracle, DID, Bridge, and others. Presence is reported as observed
+            ledger state only; it does not establish legal status, identity, solvency, or safe use.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="standards" aria-labelledby="standards-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="standards-title">Xaman and XRP Ledger standards alignment</h2>
+          <p>
+            “Compliant” here means aligned with the identified authorization, metadata, and public
+            ledger interfaces. It is not a regulatory, security-audit, or institutional-certification claim.
+          </p>
+        </div>
+        <span class="badge gold">2026 compatibility pass</span>
+      </div>
+
+      <div class="standards-grid">
+        <article class="standard-card"><strong>Xaman Universal SDK authorization</strong><p>Uses <code>new Xumm(publicApiKey)</code>, <code>authorize()</code>, the <code>success</code> event, <code>user.account</code>, and <code>logout()</code>. No API secret appears in the frontend.</p></article>
+        <article class="standard-card"><strong>Validated XRPL account evidence</strong><p>Selects a validated ledger from <code>server_info</code>, then requests account evidence at that ledger where supported. Unavailable evidence stays unavailable.</p></article>
+        <article class="standard-card"><strong>Paginated account methods</strong><p>Follows returned markers for <code>account_lines</code>, <code>account_objects</code>, and <code>account_nfts</code> within disclosed page caps.</p></article>
+        <article class="standard-card"><strong>XLS-26 token discovery</strong><p>Links to the canonical <code>/.well-known/xrp-ledger.toml</code> route containing JCS issuer, token, icon, description, and application references.</p></article>
+        <article class="standard-card"><strong>Current protocol object tolerance</strong><p>The account-object inventory does not hardcode only the 2025 object set. Unknown or newly returned LedgerEntryType values remain visible in the report.</p></article>
+        <article class="standard-card"><strong>Connection without transaction submission</strong><p>The page does not create a manual SignIn payload or any ledger transaction. Xaman handles browser authorization; XRPL calls are read-only public methods.</p></article>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="evidence-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="evidence-title">Local evidence export</h2>
+          <p>
+            The current snapshot can be downloaded or copied for support and diagnostics. The export
+            contains public account and ledger evidence, page settings, limitations, and retrieval errors.
+            It contains no seed phrase, private key, Xaman passcode, or API secret.
+          </p>
+        </div>
+        <span class="badge">Local browser output</span>
+      </div>
+
+      <div class="action-row">
+        <button class="btn primary" id="downloadSnapshotBtn" type="button" disabled>Download snapshot JSON</button>
+        <button class="btn" id="copySummaryBtn" type="button" disabled>Copy plain summary</button>
+        <button class="btn" id="clearLogBtn" type="button">Clear activity log</button>
+      </div>
+      <pre class="activity-log" id="activityLog" aria-live="polite">JCS Xaman and XRPL readiness page initialized.</pre>
+    </section>
+
+    <section class="card" aria-labelledby="limitations-title">
+      <div class="section-intro">
+        <div>
+          <h2 id="limitations-title">Important limits</h2>
+          <p>
+            Account readiness is a public-data snapshot. It is not proof of legal identity, ownership
+            of off-ledger property, financial suitability, moral character, spiritual standing, or future behavior.
+          </p>
+        </div>
+        <span class="badge red">Read before relying</span>
+      </div>
+
+      <ul class="checklist">
+        <li><strong>No transaction guarantee:</strong> this connection page is read-only and cannot confirm how another page will behave.</li>
+        <li><strong>No identity overclaim:</strong> Xaman authorization proves account control for the session, not a government identity.</li>
+        <li><strong>No reserve overclaim:</strong> spendable XRP is estimated only when ordinary reserve evidence is available; sponsorship can alter responsibility.</li>
+        <li><strong>No privacy overclaim:</strong> hiding an address in the interface does not remove public XRPL records.</li>
+        <li><strong>No availability guarantee:</strong> public XRPL servers and Xaman services may be unavailable, delayed, or rate-limited.</li>
+        <li><strong>No endorsement:</strong> use of Xaman or links to explorers does not imply endorsement, partnership, or shared control.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <h2>Jesus Christ Saves Token</h2>
+      <p>Faith, prayer, testimony, Scripture, service, and transparent technology—without custody of the user’s wallet secret and without treating token ownership as spiritual authority.</p>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./about-jcs.html">Vision</a>
+        <a href="./verify.html">Sign the Ledger</a>
+        <a href="./prayer.map.html">Prayer Map</a>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./terms.html">Terms</a>
+        <a href="./security.html">Security</a>
+        <a href="./.well-known/security.txt">security.txt</a>
+        <a href="./ai.json">AI manifest</a>
+        <a href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+      </div>
+      <div class="footer-meta">
+        <p class="mono">JCS issuer: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · Currency: JCS · Network: XRP Ledger Mainnet</p>
+        <p>© <span id="copyrightYear"></span> Jesus Christ Saves Token. Publicly viewable under a proprietary license.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/json" id="app-config">
+  {
+    "release": "3.0.0",
+    "xamanApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
+    "network": "main",
+    "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+    "currency": "JCS",
+    "canonicalDomain": "jesuschristsavestoken.com",
+    "maxPages": 8,
+    "pageLimit": 400,
+    "requestTimeoutMs": 15000,
+    "xrplServers": [
+      "wss://xrplcluster.com",
+      "wss://s1.ripple.com",
+      "wss://s2.ripple.com"
+    ]
   }
-}
-</script>
+  </script>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://xumm.app/assets/cdn/xumm.min.js" crossorigin="anonymous"></script>
+  <script>
+  (function () {
+    'use strict';
 
-<style>
-/* ============================================================
-   Xaman (Xumm) QR Modal — (FYI: iframe-insulated; harmless to keep)
-   ============================================================ */
-.xumm-about,
-[data-testid="xumm-about"],
-.xumm-modal-header a[href*="about"],
-.xumm-modal-header button[aria-label="About"],
-.xumm-qr-modal a[href*="/about"],
-.xumm-qr a[href*="/about"] { display: none !important; }
+    const $ = id => document.getElementById(id);
+    const config = JSON.parse($('app-config').textContent || '{}');
 
-.xumm-modal-header a.xumm-title,
-.xumm-modal-header a.xumm-title-link,
-.xumm-modal-header h1 a,
-.xumm-modal-header h2 a,
-.xumm-modal-header .xumm-title a,
-.xumm-modal-header .title a,
-.xumm-qr .xumm-title a,
-.xumm-qr .title a,
-.xumm-modal-header > a:first-child,
-.xumm-modal-header .brand a,
-.xumm-modal-header .logo a {
-  pointer-events: none !important;
-  cursor: default !important;
-  text-decoration: none !important;
-  color: inherit !important;
-}
-</style>
+    const state = {
+      sdkReady: false,
+      authorizing: false,
+      connectedAccount: null,
+      selectedAccount: null,
+      selectedSource: 'none',
+      snapshotLoading: false,
+      snapshot: null,
+      xumm: null
+    };
 
-<!-- Xumm/Xaman SDK -->
-<script>
-/**
- * JCS · Xaman Connect (Custom Modal)
- * Desktop: QR + deep link
- * Mobile: direct deep link (no QR)
- * No embedded iframe header; avoids 404.local
- */
+    const MODERN_OBJECT_TYPES = new Set([
+      'Bridge',
+      'Credential',
+      'Delegate',
+      'DID',
+      'Loan',
+      'LoanBroker',
+      'MPToken',
+      'MPTokenIssuance',
+      'Oracle',
+      'PermissionedDomain',
+      'Sponsorship',
+      'Vault'
+    ]);
 
-//////////////////////////////
-// 0) SDK init (unchanged) //
-//////////////////////////////
-const xumm = new Xumm('7737775c-1645-4a4e-a92d-ffe51530a348');
+    const OBJECT_DESCRIPTIONS = {
+      AccountRoot: 'Account settings and XRP balance.',
+      AMM: 'Automated Market Maker definition.',
+      Bridge: 'Cross-chain bridge state.',
+      Check: 'Deferred payment instrument.',
+      Credential: 'Issuer attestation about a subject account.',
+      Delegate: 'Permissions delegated to another account.',
+      DepositPreauth: 'Preauthorization for incoming payments.',
+      DID: 'On-ledger decentralized identifier object.',
+      Escrow: 'Condition- or time-based held funds.',
+      Loan: 'On-ledger lending position or terms.',
+      LoanBroker: 'Lending-protocol broker configuration.',
+      MPToken: 'Multi-Purpose Token holding.',
+      MPTokenIssuance: 'Multi-Purpose Token issuance definition.',
+      NFTokenOffer: 'Offer to buy or sell an NFT.',
+      NFTokenPage: 'Page containing account-held NFTs.',
+      Offer: 'Decentralized-exchange order.',
+      Oracle: 'Published external price data.',
+      PayChannel: 'Payment-channel state.',
+      PermissionedDomain: 'Credential-controlled domain definition.',
+      RippleState: 'Trust line between two accounts.',
+      SignerList: 'Multi-signing configuration.',
+      Sponsorship: 'Reserve-sponsoring relationship.',
+      Ticket: 'Reserved transaction sequence.',
+      Vault: 'Tokenized vault state.',
+      XChainOwnedClaimID: 'Cross-chain claim record.',
+      XChainOwnedCreateAccountClaimID: 'Cross-chain account-creation claim.'
+    };
 
-//////////////////////////////
-// 1) Grab existing elements //
-//////////////////////////////
-const connectWalletButton  = document.getElementById('connectWalletButton');
-const logoutButton         = document.getElementById('logoutButton');
-const walletAddressElement = document.getElementById('walletAddress');
-const statusDiv            = document.getElementById('status');
-const ledgerCounter        = document.getElementById('ledgerCounter');
-const trustlineButton      = document.getElementById('trustlineButton'); // if you wire later
-const buyButton            = document.getElementById('buyButton');       // if you wire later
+    const FLAG_DEFINITIONS = [
+      ['Master key disabled', 'disableMasterKey', 0x00100000],
+      ['Deposit Authorization', 'depositAuth', 0x01000000],
+      ['Require destination tag', 'requireDestinationTag', 0x00020000],
+      ['Disallow incoming XRP', 'disallowIncomingXRP', 0x00080000],
+      ['Default Ripple', 'defaultRipple', 0x00800000],
+      ['No Freeze', 'noFreeze', 0x00200000],
+      ['Global Freeze', 'globalFreeze', 0x00400000],
+      ['Trustline Clawback enabled', 'allowTrustLineClawback', 0x80000000],
+      ['Trustline locking enabled', 'allowTrustLineLocking', 0x40000000],
+      ['Disallow incoming Checks', 'disallowIncomingCheck', 0x08000000],
+      ['Disallow incoming NFT offers', 'disallowIncomingNFTokenOffer', 0x04000000],
+      ['Disallow incoming PayChannels', 'disallowIncomingPayChan', 0x10000000],
+      ['Disallow incoming trust lines', 'disallowIncomingTrustline', 0x20000000],
+      ['Require trustline authorization', 'requireAuthorization', 0x00040000]
+    ];
 
-// Lightweight ledger ticker (kept)
-let ledger = 987654;
-setInterval(() => {
-  ledger += Math.floor(Math.random() * 3);
-  if (ledgerCounter) ledgerCounter.textContent = "Ledger Count: " + ledger.toLocaleString();
-}, 4000);
+    $('copyrightYear').textContent = String(new Date().getFullYear());
 
-/////////////////////////////////////
-// 2) Build a branded custom modal //
-/////////////////////////////////////
-const modal = document.createElement('div');
-modal.id = 'xamanModal';
-Object.assign(modal.style, {
-  display:'none', position:'fixed', inset:'0', background:'rgba(0,0,0,.72)',
-  zIndex:'2147483646', alignItems:'center', justifyContent:'center'
-});
+    function log(message) {
+      const stamp = new Date().toISOString();
+      const node = $('activityLog');
+      node.textContent += `\n[${stamp}] ${message}`;
+      node.scrollTop = node.scrollHeight;
+    }
 
-const panel = document.createElement('div');
-Object.assign(panel.style, {
-  width:'min(520px,92vw)', background:'#0f1115', color:'#fff',
-  borderRadius:'14px', padding:'22px', boxShadow:'0 10px 40px rgba(0,0,0,.6)',
-  border:'1px solid rgba(255,255,255,.06)', fontFamily:'Montserrat,system-ui'
-});
+    function setTheme(theme) {
+      const normalized = theme === 'light' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = normalized;
+      const isDark = normalized === 'dark';
+      $('themeToggleText').textContent = isDark ? 'Light mode' : 'Dark mode';
+      $('themeToggle').setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      $('themeToggle').setAttribute('aria-pressed', String(isDark));
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#050916' : '#f4f7fb');
+      try { localStorage.setItem('jcs-color-mode', normalized); } catch {}
+    }
 
-// Header
-const headerRow = document.createElement('div');
-Object.assign(headerRow.style, { display:'flex', alignItems:'center', justifyContent:'space-between', gap:'12px', marginBottom:'14px' });
+    $('themeToggle').addEventListener('click', () => {
+      setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+    });
+    setTheme(document.documentElement.dataset.theme);
 
-const brand = document.createElement('div');
-Object.assign(brand.style, { display:'flex', alignItems:'center', gap:'10px' });
+    function setStatus(node, text, kind) {
+      node.textContent = text;
+      node.classList.remove('ok', 'err');
+      if (kind) node.classList.add(kind);
+    }
 
-const logo = document.createElement('img');
-logo.src = 'https://xaman.app/favicon.ico';
-logo.alt = 'Xaman';
-logo.width = 20; logo.height = 20;
-logo.style.borderRadius = '4px';
+    function setStep(id, status) {
+      const node = $(id);
+      node.classList.remove('ready', 'error');
+      if (status === 'ready') node.classList.add('ready');
+      if (status === 'error') node.classList.add('error');
+    }
 
-const brandText = document.createElement('div');
-brandText.style.lineHeight = '1.1';
-const brandStrong = document.createElement('strong');
-brandStrong.textContent = 'Connect with Xaman';
-Object.assign(brandStrong.style, { fontWeight:'700', fontSize:'16px' });
-const brandSub = document.createElement('span');
-brandSub.textContent = 'Powered by Xaman (formerly Xumm)';
-Object.assign(brandSub.style, { fontWeight:'500', fontSize:'12px', color:'#9bb3d1', display:'block', marginTop:'2px' });
-brandText.appendChild(brandStrong);
-brandText.appendChild(brandSub);
+    function setSdkState(ready, errorText) {
+      state.sdkReady = ready;
+      $('connectBtn').disabled = !ready || state.authorizing || Boolean(state.connectedAccount);
+      $('sdkBadge').textContent = ready ? 'SDK ready' : (errorText ? 'SDK unavailable' : 'SDK loading');
+      $('sdkBadge').className = 'badge ' + (ready ? 'green' : (errorText ? 'red' : ''));
+      setStep('stepSdk', ready ? 'ready' : (errorText ? 'error' : ''));
+      if (errorText) setStatus($('connectionStatus'), errorText, 'err');
+    }
 
-brand.appendChild(logo);
-brand.appendChild(brandText);
+    function shortAccount(account) {
+      if (!account || account.length < 18) return account || '—';
+      return `${account.slice(0, 9)}…${account.slice(-7)}`;
+    }
 
-const closeBtn = document.createElement('button');
-closeBtn.id = 'xamanClose';
-closeBtn.setAttribute('aria-label','Close');
-closeBtn.textContent = '✕';
-Object.assign(closeBtn.style, { background:'#1b1f2a', color:'#cbd5e1', border:'0', borderRadius:'8px', padding:'6px 10px', cursor:'pointer' });
+    function formatNumber(value, max = 6) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return 'Unavailable';
+      return new Intl.NumberFormat('en-US', { maximumFractionDigits: max }).format(number);
+    }
 
-headerRow.appendChild(brand);
-headerRow.appendChild(closeBtn);
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+    }
 
-// Body
-const body = document.createElement('div');
-body.id = 'xamanModalBody';
-Object.assign(body.style, { display:'grid', gap:'16px', justifyItems:'center', textAlign:'center' });
+    function formatXrp(value, max = 6) {
+      const number = Number(value);
+      return Number.isFinite(number) ? `${formatNumber(number, max)} XRP` : 'Unavailable';
+    }
 
-const qrImg = document.createElement('img');
-qrImg.id = 'xamanQR';
-qrImg.alt = 'Scan this QR with the Xaman app';
-Object.assign(qrImg.style, {
-  width:'280px', height:'280px', objectFit:'contain',
-  background:'#fff', borderRadius:'10px', padding:'8px', display:'none'
-});
+    function classicAddressLooksValid(value) {
+      return /^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(String(value || '').trim());
+    }
 
-const deeplinkA = document.createElement('a');
-deeplinkA.id = 'xamanDeeplink';
-deeplinkA.target = '_blank';
-deeplinkA.rel = 'noopener';
-deeplinkA.textContent = 'Open in Xaman';
-Object.assign(deeplinkA.style, {
-  display:'none', background:'#3b82f6', color:'#fff',
-  textDecoration:'none', padding:'10px 16px', borderRadius:'10px', fontWeight:'700'
-});
+    function hexToUtf8(hex) {
+      if (!hex || typeof hex !== 'string' || hex.length % 2 !== 0) return '';
+      try {
+        const bytes = new Uint8Array(hex.match(/.{1,2}/g).map(part => parseInt(part, 16)));
+        return new TextDecoder('utf-8', { fatal: false }).decode(bytes).replace(/\0+$/g, '');
+      } catch {
+        return '';
+      }
+    }
 
-const modalStatus = document.createElement('div');
-modalStatus.id = 'xamanStatus';
-Object.assign(modalStatus.style, { color:'#b8c7e0', fontSize:'14px' });
-modalStatus.textContent = 'Preparing secure connection…';
+    function updateAccountLinks(account) {
+      const valid = classicAddressLooksValid(account);
+      const xrpscan = $('xrpscanBtn');
+      const bithomp = $('bithompBtn');
 
-const micro = document.createElement('div');
-micro.textContent = 'You’ll review and approve in the Xaman app. We never see your secret keys.';
-Object.assign(micro.style, { color:'#93a4bd', fontSize:'11px' });
+      xrpscan.href = valid ? `https://xrpscan.com/account/${encodeURIComponent(account)}` : '#';
+      bithomp.href = valid ? `https://bithomp.com/en/account/${encodeURIComponent(account)}` : '#';
 
-body.appendChild(qrImg);
-body.appendChild(deeplinkA);
-body.appendChild(modalStatus);
-body.appendChild(micro);
+      for (const link of [xrpscan, bithomp]) {
+        link.setAttribute('aria-disabled', valid ? 'false' : 'true');
+        link.tabIndex = valid ? 0 : -1;
+      }
+    }
 
-panel.appendChild(headerRow);
-panel.appendChild(body);
-modal.appendChild(panel);
-document.body.appendChild(modal);
+    for (const id of ['xrpscanBtn', 'bithompBtn']) {
+      $(id).addEventListener('click', event => {
+        if ($(id).getAttribute('aria-disabled') === 'true') event.preventDefault();
+      });
+    }
 
-// Helpers
-function openModal(){ modal.style.display = 'flex'; }
-function closeModal(){ modal.style.display = 'none'; }
-closeBtn.addEventListener('click', closeModal);
+    function updateConnectionUi() {
+      const connected = Boolean(state.connectedAccount);
+      $('connectedAccount').textContent = state.connectedAccount || 'Not connected';
+      $('connectionSource').textContent = connected
+        ? 'Xaman returned this public account for the active authorization session.'
+        : 'No Xaman account-control assertion is active.';
+      $('headerConnectionPill').textContent = connected
+        ? `Xaman: ${shortAccount(state.connectedAccount)}`
+        : 'Xaman not connected';
+      $('headerConnectionPill').className = 'badge ' + (connected ? 'green' : '');
+      $('connectBtn').hidden = connected;
+      $('connectBtn').disabled = !state.sdkReady || state.authorizing || connected;
+      $('disconnectBtn').hidden = !connected;
+      $('disconnectBtn').disabled = !connected;
+      $('useConnectedBtn').disabled = !connected;
+      setStep('stepAccount', connected ? 'ready' : '');
+    }
 
-//////////////////////////////////////
-// 3) Mobile detection (no QR on mobile)
-//////////////////////////////////////
-function isMobile() {
-  const ua = navigator.userAgent || '';
-  const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone/i.test(ua);
-  const smallScreen = matchMedia && matchMedia('(max-width: 812px)').matches; // phones & many small tablets
-  return mobileUA || smallScreen;
-}
+    function selectAccount(account, source) {
+      state.selectedAccount = account;
+      state.selectedSource = source;
+      $('selectedAccount').textContent = account || 'None';
+      $('selectedSource').textContent =
+        source === 'xaman'
+          ? 'Selected through the active Xaman authorization session.'
+          : source === 'public'
+            ? 'Public-address lookup only; control of this account is not established.'
+            : 'Connect Xaman or enter a public account.';
+      $('refreshBtn').disabled = !account;
+      $('copyAddressBtn').disabled = !account;
+      $('downloadSnapshotBtn').disabled = true;
+      $('copySummaryBtn').disabled = true;
+      updateAccountLinks(account);
+      resetSnapshotDisplay();
+    }
 
-//////////////////////////////////////
-// 4) SDK lifecycle + connect flow //
-//////////////////////////////////////
-xumm.on('ready', () => {
-  if (statusDiv) statusDiv.textContent = 'Xumm SDK loaded and ready.';
-  if (connectWalletButton) connectWalletButton.disabled = false;
-});
+    function resetSnapshotDisplay() {
+      state.snapshot = null;
+      setStep('stepLedger', '');
+      setStep('stepJcs', '');
+      $('snapshotBadge').textContent = 'No snapshot';
+      $('snapshotBadge').className = 'badge';
+      $('jcsBadge').textContent = 'Not checked';
+      $('jcsBadge').className = 'badge';
+      $('objectBadge').textContent = 'No objects loaded';
+      $('objectBadge').className = 'badge';
 
-// SIGN IN payload JSON (this is the only JSON required for connect)
-const SIGNIN_PAYLOAD = { txjson: { TransactionType: 'SignIn' } };
+      const metricIds = [
+        'metricLedger', 'metricAge', 'metricServer', 'metricBalance',
+        'metricSpendable', 'metricReserve', 'metricOwnerCount', 'metricSequence',
+        'metricTrustlines', 'metricNfts', 'metricObjects'
+      ];
+      metricIds.forEach(id => { $(id).textContent = '—'; });
+      $('metricCoverage').textContent = '0 / 6';
+      $('metricCoverageNote').textContent = 'No evidence groups loaded';
+      $('metricLedgerHash').textContent = 'No evidence loaded';
+      $('metricBuild').textContent = 'Build unavailable';
+      $('metricSpendableNote').textContent = 'Requires reserve evidence';
+      $('metricReserveNote').textContent = 'Uses live base and owner reserve values';
+      $('metricTrustlinePages').textContent = 'Not queried';
+      $('metricNftPages').textContent = 'Not queried';
+      $('metricObjectPages').textContent = 'Not queried';
+      $('snapshotTime').textContent = 'Snapshot time: —';
+      $('snapshotSource').textContent = 'Source: —';
+      setStatus($('snapshotStatus'), 'No account snapshot has been requested.');
 
-// Connect handler
-if (connectWalletButton) {
-  connectWalletButton.onclick = async () => {
-    openModal();
-    qrImg.style.display = 'none';
-    deeplinkA.style.display = 'none';
-    modalStatus.textContent = 'Generating SignIn request…';
+      [
+        'jcsTrustlineState', 'jcsBalance', 'jcsLimit', 'jcsFreeze',
+        'jcsNoRipple', 'jcsAuthorization', 'issuerDomain', 'issuerAuthority',
+        'accountDomain', 'accountRegularKey', 'accountSignerList',
+        'accountMessageKey', 'accountSponsorship', 'accountSpecialType'
+      ].forEach(id => { $(id).textContent = '—'; });
 
-    try {
-      const sub = await xumm.payload.createAndSubscribe(
-        SIGNIN_PAYLOAD,
-        evt => {
-          if (evt?.data?.signed === true) modalStatus.textContent = 'Signed. Finalizing…';
-          else if (evt?.data?.signed === false) modalStatus.textContent = 'Request rejected in Xaman.';
-        }
-      );
+      $('jcsTrustlineDetail').textContent = 'No account evidence loaded.';
+      $('issuerDomainNote').textContent = 'Issuer account_info not loaded.';
+      $('issuerAuthorityNote').textContent = 'No issuer-control evidence loaded.';
+      $('accountSignerDetail').textContent = 'Multi-signing evidence not loaded.';
+      $('accountSponsorshipDetail').textContent = 'No sponsorship evidence loaded.';
 
-      const { created, resolved } = sub;
+      $('flagGrid').innerHTML = `
+        <article class="flag-card">
+          <strong>Account flags</strong>
+          <span class="flag-state">No snapshot</span>
+          <p>Connect or inspect an account to populate this section.</p>
+        </article>
+      `;
 
-      // Build the deep link (universal link Xaman provides)
-      const deep = created?.next?.always || created?.refs?.link || '';
-      const qr   = created?.refs?.qr_png || '';
+      $('objectTableBody').innerHTML = '<tr><td colspan="4">No account_objects evidence loaded.</td></tr>';
+    }
 
-      // MOBILE: no QR, go straight to app
-      if (isMobile() && deep) {
-        modalStatus.textContent = 'Opening Xaman…';
-        // try to open in-place (fewer pop-up blockers on mobile)
-        window.location.href = deep;
-        // keep a fallback button in case the OS blocks navigation
-        deeplinkA.href = deep;
-        deeplinkA.style.display = '';
-      } else {
-        // DESKTOP: show QR (and also the deep link button as a backup)
-        if (qr) { qrImg.src = qr; qrImg.style.display = ''; }
-        if (deep) { deeplinkA.href = deep; deeplinkA.style.display = ''; }
-        modalStatus.textContent = 'Scan the QR with Xaman, or click the button.';
+    class XRPLWebSocketClient {
+      constructor(url, timeoutMs) {
+        this.url = url;
+        this.timeoutMs = timeoutMs;
+        this.socket = null;
+        this.nextId = 1;
+        this.pending = new Map();
+        this.apiVersion = 2;
       }
 
-      // Wait for result
-      const outcome = await resolved; // { signed: boolean, ... }
-      if (!outcome?.signed) {
-        modalStatus.textContent = 'Not signed. You can close this window.';
+      async connect() {
+        if (this.socket && this.socket.readyState === WebSocket.OPEN) return;
+
+        await new Promise((resolve, reject) => {
+          const socket = new WebSocket(this.url);
+          const timeout = window.setTimeout(() => {
+            try { socket.close(); } catch {}
+            reject(new Error(`Connection timeout: ${this.url}`));
+          }, this.timeoutMs);
+
+          socket.addEventListener('open', () => {
+            window.clearTimeout(timeout);
+            this.socket = socket;
+            resolve();
+          }, { once: true });
+
+          socket.addEventListener('error', () => {
+            window.clearTimeout(timeout);
+            reject(new Error(`WebSocket connection failed: ${this.url}`));
+          }, { once: true });
+
+          socket.addEventListener('message', event => {
+            let message;
+            try { message = JSON.parse(event.data); } catch { return; }
+
+            const pending = this.pending.get(String(message.id));
+            if (!pending) return;
+
+            this.pending.delete(String(message.id));
+            window.clearTimeout(pending.timeout);
+
+            const result = message.result || {};
+            if (message.status === 'error' || message.error || result.status === 'error' || result.error) {
+              pending.reject(new Error(
+                result.error_message || result.error || message.error_message || message.error || 'XRPL request failed'
+              ));
+              return;
+            }
+
+            pending.resolve(result);
+          });
+
+          socket.addEventListener('close', () => {
+            for (const pending of this.pending.values()) {
+              window.clearTimeout(pending.timeout);
+              pending.reject(new Error('XRPL WebSocket closed before a response was received.'));
+            }
+            this.pending.clear();
+          });
+        });
+      }
+
+      async request(command, params = {}, timeoutMs = this.timeoutMs) {
+        await this.connect();
+        try {
+          return await this._request({ command, api_version: this.apiVersion, ...params }, timeoutMs);
+        } catch (error) {
+          const message = String(error && error.message ? error.message : error).toLowerCase();
+          if (this.apiVersion === 2 && (message.includes('api') || message.includes('version'))) {
+            this.apiVersion = 1;
+            return this._request({ command, ...params }, timeoutMs);
+          }
+          throw error;
+        }
+      }
+
+      _request(payload, timeoutMs) {
+        const id = String(this.nextId++);
+        const message = { id, ...payload };
+
+        return new Promise((resolve, reject) => {
+          const timeout = window.setTimeout(() => {
+            this.pending.delete(id);
+            reject(new Error(`${payload.command} timed out.`));
+          }, timeoutMs);
+
+          this.pending.set(id, { resolve, reject, timeout });
+
+          try {
+            this.socket.send(JSON.stringify(message));
+          } catch (error) {
+            window.clearTimeout(timeout);
+            this.pending.delete(id);
+            reject(error);
+          }
+        });
+      }
+
+      close() {
+        try {
+          if (this.socket && this.socket.readyState <= WebSocket.OPEN) this.socket.close();
+        } catch {}
+        this.socket = null;
+      }
+    }
+
+    async function connectValidatedServer() {
+      const failures = [];
+
+      for (const url of config.xrplServers) {
+        const client = new XRPLWebSocketClient(url, config.requestTimeoutMs);
+        try {
+          log(`Trying XRPL server ${url}`);
+          await client.connect();
+          const result = await client.request('server_info');
+          const info = result.info || {};
+          const validated = info.validated_ledger;
+
+          if (!validated || !Number.isFinite(Number(validated.seq))) {
+            throw new Error('Server did not report a validated ledger.');
+          }
+
+          if (info.amendment_blocked === true) {
+            throw new Error('Server reports amendment_blocked.');
+          }
+
+          if (info.network_id !== undefined && Number(info.network_id) !== 0) {
+            throw new Error(`Server network_id ${info.network_id} is not XRP Ledger Mainnet.`);
+          }
+
+          return { client, url, info, validated };
+        } catch (error) {
+          failures.push(`${url}: ${error.message}`);
+          client.close();
+        }
+      }
+
+      throw new Error(`No validated XRPL Mainnet server was available. ${failures.join(' | ')}`);
+    }
+
+    async function collectPaged(client, command, field, account, ledgerIndex, extra = {}) {
+      const items = [];
+      let marker;
+      let pages = 0;
+
+      do {
+        const request = {
+          account,
+          ledger_index: ledgerIndex,
+          limit: config.pageLimit,
+          ...extra
+        };
+        if (marker) request.marker = marker;
+
+        const result = await client.request(command, request);
+        if (result.validated === false) throw new Error(`${command} returned non-validated evidence.`);
+
+        const batch = Array.isArray(result[field]) ? result[field] : [];
+        items.push(...batch);
+        marker = result.marker;
+        pages += 1;
+      } while (marker && pages < config.maxPages);
+
+      return { items, pages, truncated: Boolean(marker), ledgerIndex };
+    }
+
+    function deriveAccountFlags(accountData, accountFlags) {
+      const numeric = Number(accountData.Flags || 0) >>> 0;
+      const output = {};
+
+      for (const [, key, bit] of FLAG_DEFINITIONS) {
+        if (accountFlags && typeof accountFlags[key] === 'boolean') output[key] = accountFlags[key];
+        else output[key] = Boolean(numeric & (bit >>> 0));
+      }
+
+      return output;
+    }
+
+    function extractSignerList(accountInfoResult) {
+      const root = accountInfoResult.signer_lists;
+      const nested = accountInfoResult.account_data && accountInfoResult.account_data.signer_lists;
+      const lists = Array.isArray(root) ? root : (Array.isArray(nested) ? nested : []);
+      return lists[0] || null;
+    }
+
+    function findJcsLine(lines) {
+      return lines.find(line =>
+        line &&
+        line.account === config.issuer &&
+        String(line.currency || '').toUpperCase() === String(config.currency).toUpperCase()
+      ) || null;
+    }
+
+    function summarizeObjectCounts(objects) {
+      const counts = {};
+      for (const object of objects) {
+        const type = object && object.LedgerEntryType ? String(object.LedgerEntryType) : 'Unknown';
+        counts[type] = (counts[type] || 0) + 1;
+      }
+      return counts;
+    }
+
+    function reserveEstimate(accountData, validatedLedger) {
+      const base = Number(validatedLedger.reserve_base_xrp);
+      const increment = Number(validatedLedger.reserve_inc_xrp);
+      const ownerCount = Number(accountData.OwnerCount || 0);
+
+      const sponsorshipFieldsPresent = [
+        accountData.Sponsor,
+        accountData.SponsoredOwnerCount,
+        accountData.SponsoringOwnerCount,
+        accountData.SponsoringAccountCount
+      ].some(value => value !== undefined && value !== null && String(value) !== '0');
+
+      if (sponsorshipFieldsPresent || !Number.isFinite(base) || !Number.isFinite(increment) || !Number.isFinite(ownerCount)) {
+        return {
+          reserve: null,
+          spendable: null,
+          note: sponsorshipFieldsPresent
+            ? 'Sponsorship fields are present; a simple OwnerCount reserve formula could misstate responsibility.'
+            : 'Live reserve values were unavailable.'
+        };
+      }
+
+      const balance = Number(accountData.Balance || 0) / 1_000_000;
+      const reserve = base + ownerCount * increment;
+      return {
+        reserve,
+        spendable: Number.isFinite(balance) ? Math.max(0, balance - reserve) : null,
+        note: `Base ${formatNumber(base, 6)} XRP + ${ownerCount} × ${formatNumber(increment, 6)} XRP.`
+      };
+    }
+
+    function renderFlags(accountData, accountFlags) {
+      const flags = deriveAccountFlags(accountData, accountFlags);
+      $('flagGrid').innerHTML = FLAG_DEFINITIONS.map(([label, key]) => {
+        const active = Boolean(flags[key]);
+        return `
+          <article class="flag-card">
+            <strong>${label}</strong>
+            <span class="flag-state ${active ? 'active' : ''}">${active ? 'Active' : 'Inactive'}</span>
+            <p>Observed from account_flags or the AccountRoot Flags bitmask.</p>
+          </article>
+        `;
+      }).join('');
+      return flags;
+    }
+
+    function renderObjectTable(counts, objectEvidence) {
+      const entries = Object.entries(counts).sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1];
+        return a[0].localeCompare(b[0]);
+      });
+
+      if (!objectEvidence) {
+        $('objectTableBody').innerHTML = '<tr><td colspan="4">account_objects evidence was unavailable.</td></tr>';
+        $('objectBadge').textContent = 'Objects unavailable';
+        $('objectBadge').className = 'badge red';
         return;
       }
 
-      // On success, fetch account & update UI
-      try {
-        const account = await xumm.user.account;
-        walletAddressElement.textContent = 'Wallet Connected: ' + account;
-        connectWalletButton.style.display = 'none';
-        if (logoutButton) logoutButton.style.display = '';
-        if (statusDiv) statusDiv.textContent = 'Connected successfully via SignIn.';
-      } catch (e) {
-        if (statusDiv) statusDiv.textContent = 'Signed, but unable to fetch account. (Try refresh.)';
-      } finally {
-        closeModal();
+      if (!entries.length) {
+        $('objectTableBody').innerHTML = '<tr><td colspan="4">No ledger objects were returned for the bounded account_objects scan.</td></tr>';
+        $('objectBadge').textContent = '0 objects returned';
+        $('objectBadge').className = 'badge';
+        return;
       }
-    } catch (err) {
-      console.error(err);
-      modalStatus.textContent = 'Error creating SignIn. Please try again.';
+
+      $('objectTableBody').innerHTML = entries.map(([type, count]) => {
+        const modern = MODERN_OBJECT_TYPES.has(type);
+        const description = OBJECT_DESCRIPTIONS[type] || 'Ledger object type returned by the selected server.';
+        return `
+          <tr>
+            <td><code>${escapeHtml(type)}</code>${modern ? '<span class="type-badge">current protocol surface</span>' : ''}</td>
+            <td>${count}</td>
+            <td>${escapeHtml(description)}</td>
+            <td>Observed in the bounded account_objects result; ownership and reserve effects depend on object type.</td>
+          </tr>
+        `;
+      }).join('');
+
+      $('objectBadge').textContent = `${entries.length} type${entries.length === 1 ? '' : 's'} · ${objectEvidence.items.length} object${objectEvidence.items.length === 1 ? '' : 's'}`;
+      $('objectBadge').className = 'badge green';
     }
-  };
-}
 
-//////////////////////////////////////
-// 5) Logout (unchanged semantics)  //
-//////////////////////////////////////
-if (logoutButton) {
-  logoutButton.onclick = () => {
-    xumm.logout();
-    if (statusDiv) statusDiv.textContent = 'Logging out...';
-  };
-}
+    function renderSnapshot(snapshot) {
+      state.snapshot = snapshot;
 
-xumm.on('logout', () => {
-  walletAddressElement.textContent = 'Status: Not connected';
-  if (connectWalletButton) connectWalletButton.style.display = '';
-  if (logoutButton) logoutButton.style.display = 'none';
-  if (statusDiv) statusDiv.textContent = 'You have logged out.';
-});
-</script>
+      const {
+        account, source, server, serverInfo, validatedLedger, accountInfo,
+        linesResult, objectsResult, nftsResult, issuerInfo, errors
+      } = snapshot;
 
+      const accountData = accountInfo.account_data || {};
+      const balanceXrp = Number(accountData.Balance || 0) / 1_000_000;
+      const reserve = reserveEstimate(accountData, validatedLedger);
+      const trustlines = linesResult ? linesResult.items : null;
+      const objects = objectsResult ? objectsResult.items : null;
+      const jcsLine = trustlines ? findJcsLine(trustlines) : null;
+      const objectCounts = objects ? summarizeObjectCounts(objects) : {};
+      const accountFlags = renderFlags(accountData, accountInfo.account_flags || null);
+      const signerList = extractSignerList(accountInfo);
+
+      $('metricLedger').textContent = formatNumber(validatedLedger.seq, 0);
+      $('metricLedgerHash').textContent = validatedLedger.hash ? `${validatedLedger.hash.slice(0, 16)}…` : 'Ledger hash not returned';
+      $('metricAge').textContent = Number.isFinite(Number(validatedLedger.age)) ? `${formatNumber(validatedLedger.age, 0)} sec` : 'Unavailable';
+      $('metricServer').textContent = server.replace(/^wss:\/\//, '');
+      $('metricBuild').textContent = serverInfo.build_version ? `xrpld ${serverInfo.build_version}` : 'Build not reported';
+      $('metricBalance').textContent = formatXrp(balanceXrp);
+      $('metricOwnerCount').textContent = formatNumber(accountData.OwnerCount, 0);
+      $('metricSequence').textContent = formatNumber(accountData.Sequence, 0);
+
+      if (reserve.reserve === null) {
+        $('metricReserve').textContent = 'Not estimated';
+        $('metricSpendable').textContent = 'Not estimated';
+      } else {
+        $('metricReserve').textContent = formatXrp(reserve.reserve);
+        $('metricSpendable').textContent = formatXrp(reserve.spendable);
+      }
+      $('metricReserveNote').textContent = reserve.note;
+      $('metricSpendableNote').textContent = reserve.note;
+
+      if (linesResult) {
+        $('metricTrustlines').textContent = formatNumber(linesResult.items.length, 0);
+        $('metricTrustlinePages').textContent = `${linesResult.pages} page${linesResult.pages === 1 ? '' : 's'}${linesResult.truncated ? ' · capped' : ' · complete to marker end'}`;
+      } else {
+        $('metricTrustlines').textContent = 'Unavailable';
+        $('metricTrustlinePages').textContent = errors.account_lines || 'Query failed';
+      }
+
+      if (nftsResult) {
+        $('metricNfts').textContent = formatNumber(nftsResult.items.length, 0);
+        $('metricNftPages').textContent = `${nftsResult.pages} page${nftsResult.pages === 1 ? '' : 's'}${nftsResult.truncated ? ' · capped' : ' · complete to marker end'}`;
+      } else {
+        $('metricNfts').textContent = 'Unavailable';
+        $('metricNftPages').textContent = errors.account_nfts || 'Query failed';
+      }
+
+      if (objectsResult) {
+        $('metricObjects').textContent = formatNumber(objectsResult.items.length, 0);
+        $('metricObjectPages').textContent = `${objectsResult.pages} page${objectsResult.pages === 1 ? '' : 's'}${objectsResult.truncated ? ' · capped' : ' · complete to marker end'}`;
+      } else {
+        $('metricObjects').textContent = 'Unavailable';
+        $('metricObjectPages').textContent = errors.account_objects || 'Query failed';
+      }
+
+      const evidenceGroups = [Boolean(serverInfo), Boolean(accountInfo), Boolean(linesResult), Boolean(objectsResult), Boolean(nftsResult), Boolean(issuerInfo)];
+      const coverage = evidenceGroups.filter(Boolean).length;
+      $('metricCoverage').textContent = `${coverage} / 6`;
+      $('metricCoverageNote').textContent = coverage === 6 ? 'All requested evidence groups loaded' : `${6 - coverage} evidence group${6 - coverage === 1 ? '' : 's'} unavailable`;
+      $('snapshotBadge').textContent = coverage === 6 ? 'Validated complete request set' : 'Validated partial evidence';
+      $('snapshotBadge').className = 'badge ' + (coverage === 6 ? 'green' : 'gold');
+      $('snapshotTime').textContent = `Snapshot time: ${snapshot.createdAt}`;
+      $('snapshotSource').textContent = `Account source: ${source === 'xaman' ? 'Xaman authorized' : 'public lookup'}`;
+
+      const domain = hexToUtf8(accountData.Domain) || 'Not set';
+      $('accountDomain').textContent = domain;
+      $('accountRegularKey').textContent = accountData.RegularKey || 'Not set';
+      $('accountMessageKey').textContent = accountData.MessageKey ? 'Present' : 'Not set';
+
+      if (signerList) {
+        const entries = Array.isArray(signerList.SignerEntries) ? signerList.SignerEntries : [];
+        $('accountSignerList').textContent = `Quorum ${signerList.SignerQuorum ?? '—'} · ${entries.length} signer${entries.length === 1 ? '' : 's'}`;
+        $('accountSignerDetail').textContent = 'A SignerList was returned by account_info.';
+      } else {
+        $('accountSignerList').textContent = 'Not observed';
+        $('accountSignerDetail').textContent = 'No SignerList was returned for this account snapshot.';
+      }
+
+      const sponsorshipParts = [];
+      if (accountData.Sponsor) sponsorshipParts.push(`account sponsor ${accountData.Sponsor}`);
+      if (accountData.SponsoredOwnerCount) sponsorshipParts.push(`${accountData.SponsoredOwnerCount} sponsored owned object(s)`);
+      if (accountData.SponsoringOwnerCount) sponsorshipParts.push(`${accountData.SponsoringOwnerCount} sponsored object(s) for others`);
+      if (accountData.SponsoringAccountCount) sponsorshipParts.push(`${accountData.SponsoringAccountCount} sponsored account(s)`);
+
+      $('accountSponsorship').textContent = sponsorshipParts.length ? 'Present' : 'Not observed';
+      $('accountSponsorshipDetail').textContent = sponsorshipParts.length ? sponsorshipParts.join(' · ') : 'No current sponsorship fields were returned by account_info.';
+
+      let specialType = 'Ordinary account';
+      if (accountData.AMMID) specialType = 'AMM pseudo-account';
+      if (accountData.VaultID) specialType = 'Vault pseudo-account';
+      $('accountSpecialType').textContent = specialType;
+
+      if (!linesResult) {
+        $('jcsTrustlineState').textContent = 'Unavailable';
+        $('jcsTrustlineDetail').textContent = errors.account_lines || 'account_lines failed.';
+        $('jcsBalance').textContent = 'Unavailable';
+        $('jcsLimit').textContent = 'Unavailable';
+        $('jcsFreeze').textContent = 'Unavailable';
+        $('jcsNoRipple').textContent = 'Unavailable';
+        $('jcsAuthorization').textContent = 'Unavailable';
+        $('jcsBadge').textContent = 'Trustline evidence unavailable';
+        $('jcsBadge').className = 'badge red';
+        setStep('stepJcs', 'error');
+      } else if (!jcsLine) {
+        $('jcsTrustlineState').textContent = 'Not found';
+        $('jcsTrustlineDetail').textContent = `No ${config.currency} trustline to the exact JCS issuer was returned.`;
+        $('jcsBalance').textContent = '0 JCS not assumed';
+        $('jcsLimit').textContent = 'No line';
+        $('jcsFreeze').textContent = 'Not applicable';
+        $('jcsNoRipple').textContent = 'Not applicable';
+        $('jcsAuthorization').textContent = 'Not applicable';
+        $('jcsBadge').textContent = 'No JCS trustline returned';
+        $('jcsBadge').className = 'badge';
+        setStep('stepJcs', 'ready');
+      } else {
+        $('jcsTrustlineState').textContent = 'Present';
+        $('jcsTrustlineDetail').textContent = `Exact issuer ${config.issuer} and currency ${config.currency} matched.`;
+        $('jcsBalance').textContent = `${formatNumber(jcsLine.balance, 12)} JCS`;
+        $('jcsLimit').textContent = formatNumber(jcsLine.limit, 12);
+        $('jcsFreeze').textContent = jcsLine.freeze_peer === true ? 'Frozen by issuer' : 'Not shown frozen';
+        $('jcsNoRipple').textContent = jcsLine.no_ripple === true ? 'Enabled' : 'Not enabled';
+        $('jcsAuthorization').textContent = jcsLine.peer_authorized === true ? 'Explicitly authorized' : 'Not explicitly shown';
+        $('jcsBadge').textContent = 'Exact JCS trustline matched';
+        $('jcsBadge').className = 'badge green';
+        setStep('stepJcs', 'ready');
+      }
+
+      if (issuerInfo) {
+        const issuerData = issuerInfo.account_data || {};
+        const issuerDomain = hexToUtf8(issuerData.Domain) || 'Not set';
+        const issuerFlags = deriveAccountFlags(issuerData, issuerInfo.account_flags || null);
+        const issuerSigner = extractSignerList(issuerInfo);
+        const domainMatch = issuerDomain.toLowerCase() === String(config.canonicalDomain).toLowerCase();
+
+        $('issuerDomain').textContent = issuerDomain;
+        $('issuerDomainNote').textContent = domainMatch ? 'Matches the canonical JCS domain.' : 'Does not exactly match the canonical JCS domain in this snapshot.';
+        $('issuerAuthority').textContent = issuerFlags.disableMasterKey
+          ? (issuerData.RegularKey || issuerSigner ? 'Master disabled; alternate authority observed' : 'Master disabled; no alternate authority returned')
+          : 'Master key not shown disabled';
+        $('issuerAuthorityNote').textContent = `No Freeze ${issuerFlags.noFreeze ? 'active' : 'inactive'} · Global Freeze ${issuerFlags.globalFreeze ? 'active' : 'inactive'} · Clawback ${issuerFlags.allowTrustLineClawback ? 'active' : 'inactive'}.`;
+      } else {
+        $('issuerDomain').textContent = 'Unavailable';
+        $('issuerDomainNote').textContent = errors.issuer_account_info || 'Issuer account_info failed.';
+        $('issuerAuthority').textContent = 'Unavailable';
+        $('issuerAuthorityNote').textContent = 'No issuer-control evidence loaded.';
+      }
+
+      renderObjectTable(objectCounts, objectsResult);
+
+      setStep('stepLedger', 'ready');
+      setStatus(
+        $('snapshotStatus'),
+        coverage === 6
+          ? `Validated ledger ${validatedLedger.seq} loaded successfully for ${account}.`
+          : `Validated ledger ${validatedLedger.seq} loaded with partial evidence. Review unavailable groups below.`,
+        coverage === 6 ? 'ok' : ''
+      );
+
+      state.snapshot.export = {
+        schema: 'jcs-xaman-xrpl-account-readiness-v3',
+        release: config.release,
+        created_at_utc: snapshot.createdAt,
+        account,
+        account_source: source,
+        network: 'XRP Ledger Mainnet',
+        xrpl_server: server,
+        xrpld_build: serverInfo.build_version || null,
+        validated_ledger: validatedLedger,
+        evidence_coverage: { loaded: coverage, requested: 6, errors },
+        account_root: {
+          balance_drops: accountData.Balance || null,
+          balance_xrp: Number.isFinite(balanceXrp) ? balanceXrp : null,
+          owner_count: accountData.OwnerCount ?? null,
+          sequence: accountData.Sequence ?? null,
+          domain: domain === 'Not set' ? null : domain,
+          regular_key: accountData.RegularKey || null,
+          message_key_present: Boolean(accountData.MessageKey),
+          flags: accountFlags,
+          sponsorship: {
+            sponsor: accountData.Sponsor || null,
+            sponsored_owner_count: accountData.SponsoredOwnerCount ?? null,
+            sponsoring_owner_count: accountData.SponsoringOwnerCount ?? null,
+            sponsoring_account_count: accountData.SponsoringAccountCount ?? null
+          }
+        },
+        reserve_estimate: reserve,
+        jcs: {
+          issuer: config.issuer,
+          currency: config.currency,
+          trustline: jcsLine,
+          issuer_account_info_available: Boolean(issuerInfo)
+        },
+        pagination: {
+          account_lines: linesResult ? { count: linesResult.items.length, pages: linesResult.pages, truncated: linesResult.truncated } : null,
+          account_objects: objectsResult ? { count: objectsResult.items.length, pages: objectsResult.pages, truncated: objectsResult.truncated } : null,
+          account_nfts: nftsResult ? { count: nftsResult.items.length, pages: nftsResult.pages, truncated: nftsResult.truncated } : null
+        },
+        ledger_object_counts: objectCounts,
+        limitations: [
+          'Xaman authorization proves account control for the session, not legal identity.',
+          'Public lookup does not prove account control.',
+          'The snapshot is read-only and does not create an XRPL transaction.',
+          'Bounded pagination can truncate very large accounts.',
+          'Reserve estimates are withheld when sponsorship fields could alter responsibility.',
+          'Public and third-party services can be unavailable or inconsistent.'
+        ]
+      };
+
+      $('downloadSnapshotBtn').disabled = false;
+      $('copySummaryBtn').disabled = false;
+      log(`Snapshot rendered for ${account} at validated ledger ${validatedLedger.seq}. Coverage ${coverage}/6.`);
+    }
+
+    async function loadSnapshot(account, source) {
+      if (state.snapshotLoading) return;
+      state.snapshotLoading = true;
+      $('refreshBtn').disabled = true;
+      $('inspectPublicBtn').disabled = true;
+      setStatus($('snapshotStatus'), `Connecting to a validated XRPL server for ${account}…`);
+      $('snapshotBadge').textContent = 'Loading';
+      $('snapshotBadge').className = 'badge gold';
+      log(`Starting validated snapshot for ${account} (${source}).`);
+
+      let client;
+
+      try {
+        const connection = await connectValidatedServer();
+        client = connection.client;
+        const ledgerIndex = Number(connection.validated.seq);
+
+        setStatus($('snapshotStatus'), `Using validated ledger ${ledgerIndex}. Loading account evidence…`);
+
+        const accountInfo = await client.request('account_info', {
+          account,
+          ledger_index: ledgerIndex,
+          signer_lists: true
+        });
+
+        if (accountInfo.validated === false) throw new Error('account_info did not return validated evidence.');
+
+        const optionalTasks = {
+          account_lines: collectPaged(client, 'account_lines', 'lines', account, ledgerIndex),
+          account_objects: collectPaged(client, 'account_objects', 'account_objects', account, ledgerIndex),
+          account_nfts: collectPaged(client, 'account_nfts', 'account_nfts', account, ledgerIndex),
+          issuer_account_info: client.request('account_info', {
+            account: config.issuer,
+            ledger_index: ledgerIndex,
+            signer_lists: true
+          })
+        };
+
+        const keys = Object.keys(optionalTasks);
+        const settled = await Promise.allSettled(keys.map(key => optionalTasks[key]));
+        const values = {};
+        const errors = {};
+
+        settled.forEach((result, index) => {
+          const key = keys[index];
+          if (result.status === 'fulfilled') values[key] = result.value;
+          else errors[key] = result.reason && result.reason.message ? result.reason.message : String(result.reason);
+        });
+
+        const snapshot = {
+          createdAt: new Date().toISOString(),
+          account,
+          source,
+          server: connection.url,
+          serverInfo: connection.info,
+          validatedLedger: connection.validated,
+          accountInfo,
+          linesResult: values.account_lines || null,
+          objectsResult: values.account_objects || null,
+          nftsResult: values.account_nfts || null,
+          issuerInfo: values.issuer_account_info || null,
+          errors
+        };
+
+        renderSnapshot(snapshot);
+      } catch (error) {
+        setStep('stepLedger', 'error');
+        $('snapshotBadge').textContent = 'Snapshot failed';
+        $('snapshotBadge').className = 'badge red';
+        setStatus($('snapshotStatus'), `Snapshot unavailable: ${error.message}`, 'err');
+        log(`Snapshot failed: ${error.message}`);
+      } finally {
+        try { client && client.close(); } catch {}
+        state.snapshotLoading = false;
+        $('refreshBtn').disabled = !state.selectedAccount;
+        $('inspectPublicBtn').disabled = false;
+      }
+    }
+
+    async function adoptXamanAccount(account, reason) {
+      if (!classicAddressLooksValid(account)) {
+        setStatus($('connectionStatus'), 'Xaman did not return a valid classic XRPL account.', 'err');
+        return;
+      }
+
+      const changed = state.connectedAccount !== account;
+      state.connectedAccount = account;
+      updateConnectionUi();
+      selectAccount(account, 'xaman');
+      setStatus(
+        $('connectionStatus'),
+        reason === 'restored' ? `Xaman authorization restored for ${account}.` : `Xaman authorization completed for ${account}.`,
+        'ok'
+      );
+      log(`Xaman account ${reason}: ${account}.`);
+
+      if (changed || !state.snapshot) await loadSnapshot(account, 'xaman');
+    }
+
+    async function readXamanAccount(reason) {
+      try {
+        const account = await Promise.race([
+          state.xumm.user.account,
+          new Promise((_, reject) => window.setTimeout(() => reject(new Error('Xaman account lookup timed out.')), 12000))
+        ]);
+        if (account) await adoptXamanAccount(account, reason);
+      } catch (error) {
+        setStatus($('connectionStatus'), `Xaman authorized, but the account could not be read: ${error.message}`, 'err');
+        log(`Xaman account read failed: ${error.message}`);
+      }
+    }
+
+    function initializeXaman() {
+      if (typeof window.Xumm !== 'function') {
+        setSdkState(false, 'The official Xaman SDK did not load. Public XRPL lookup remains available.');
+        log('Xaman SDK unavailable.');
+        return;
+      }
+
+      try {
+        state.xumm = new window.Xumm(config.xamanApiKey);
+
+        state.xumm.on('ready', () => {
+          setSdkState(true);
+          setStatus($('connectionStatus'), 'Xaman SDK ready. Connect to authorize account control, or use public lookup.');
+          log('Xaman Universal SDK ready.');
+        });
+
+        state.xumm.on('success', () => {
+          state.authorizing = false;
+          updateConnectionUi();
+          readXamanAccount(state.connectedAccount ? 'restored' : 'authorized');
+        });
+
+        state.xumm.on('logout', () => {
+          state.authorizing = false;
+          state.connectedAccount = null;
+          updateConnectionUi();
+          selectAccount(null, 'none');
+          setStatus($('connectionStatus'), 'Xaman authorization ended. No account is selected.');
+          log('Xaman logout event received.');
+        });
+
+        state.xumm.on('error', error => {
+          state.authorizing = false;
+          updateConnectionUi();
+          const message = error && error.message ? error.message : String(error || 'Unknown Xaman error');
+          setStatus($('connectionStatus'), `Xaman error: ${message}`, 'err');
+          log(`Xaman error: ${message}`);
+        });
+      } catch (error) {
+        setSdkState(false, `Xaman SDK initialization failed: ${error.message}`);
+        log(`Xaman SDK initialization failed: ${error.message}`);
+      }
+    }
+
+    $('connectBtn').addEventListener('click', async () => {
+      if (!state.xumm || !state.sdkReady || state.authorizing) return;
+
+      state.authorizing = true;
+      updateConnectionUi();
+      setStatus($('connectionStatus'), 'Opening Xaman authorization. Review the account-selection request in Xaman.');
+      log('Xaman authorize() requested.');
+
+      try {
+        await state.xumm.authorize();
+        if (!state.connectedAccount) await readXamanAccount('authorized');
+      } catch (error) {
+        state.authorizing = false;
+        updateConnectionUi();
+        const message = error && error.message ? error.message : String(error);
+        setStatus($('connectionStatus'), `Xaman authorization did not complete: ${message}`, 'err');
+        log(`Xaman authorization failed or was canceled: ${message}`);
+      }
+    });
+
+    $('disconnectBtn').addEventListener('click', async () => {
+      if (!state.xumm) return;
+      setStatus($('connectionStatus'), 'Ending Xaman authorization…');
+      try {
+        await state.xumm.logout();
+      } catch (error) {
+        log(`Xaman logout call returned: ${error.message}`);
+        state.connectedAccount = null;
+        updateConnectionUi();
+        selectAccount(null, 'none');
+        setStatus($('connectionStatus'), 'Local connection state cleared.');
+      }
+    });
+
+    $('inspectPublicBtn').addEventListener('click', async () => {
+      const account = $('publicAccountInput').value.trim();
+
+      if (!classicAddressLooksValid(account)) {
+        setStatus($('lookupStatus'), 'Enter a classic XRPL address beginning with r. This local check does not verify the checksum.', 'err');
+        return;
+      }
+
+      setStatus($('lookupStatus'), 'Public address selected. This does not prove control of the account.', 'ok');
+      selectAccount(account, 'public');
+      log(`Public account selected: ${account}.`);
+      await loadSnapshot(account, 'public');
+    });
+
+    $('publicAccountInput').addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        $('inspectPublicBtn').click();
+      }
+    });
+
+    $('useConnectedBtn').addEventListener('click', async () => {
+      if (!state.connectedAccount) return;
+      selectAccount(state.connectedAccount, 'xaman');
+      setStatus($('lookupStatus'), 'Returned to the Xaman-authorized account.', 'ok');
+      await loadSnapshot(state.connectedAccount, 'xaman');
+    });
+
+    $('refreshBtn').addEventListener('click', async () => {
+      if (!state.selectedAccount) return;
+      await loadSnapshot(state.selectedAccount, state.selectedSource);
+    });
+
+    $('copyAddressBtn').addEventListener('click', async () => {
+      if (!state.selectedAccount) return;
+      try {
+        await navigator.clipboard.writeText(state.selectedAccount);
+        setStatus($('connectionStatus'), 'Selected account copied.', 'ok');
+      } catch {
+        setStatus($('connectionStatus'), 'Clipboard access was unavailable.', 'err');
+      }
+    });
+
+    $('downloadSnapshotBtn').addEventListener('click', () => {
+      if (!state.snapshot || !state.snapshot.export) return;
+      const text = JSON.stringify(state.snapshot.export, null, 2);
+      const blob = new Blob([text], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `jcs-account-readiness-${state.snapshot.account}-${Date.now()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      log('Snapshot JSON download created locally.');
+    });
+
+    $('copySummaryBtn').addEventListener('click', async () => {
+      if (!state.snapshot || !state.snapshot.export) return;
+      const data = state.snapshot.export;
+      const summary = [
+        'JCS Xaman & XRPL Account Readiness',
+        `Account: ${data.account}`,
+        `Account source: ${data.account_source}`,
+        `Network: ${data.network}`,
+        `Validated ledger: ${data.validated_ledger.seq}`,
+        `XRPL server: ${data.xrpl_server}`,
+        `XRP balance: ${data.account_root.balance_xrp ?? 'Unavailable'}`,
+        `OwnerCount: ${data.account_root.owner_count ?? 'Unavailable'}`,
+        `Trust lines observed: ${data.pagination.account_lines ? data.pagination.account_lines.count : 'Unavailable'}`,
+        `NFTs observed: ${data.pagination.account_nfts ? data.pagination.account_nfts.count : 'Unavailable'}`,
+        `Ledger objects observed: ${data.pagination.account_objects ? data.pagination.account_objects.count : 'Unavailable'}`,
+        `Evidence coverage: ${data.evidence_coverage.loaded}/${data.evidence_coverage.requested}`,
+        `Created: ${data.created_at_utc}`,
+        '',
+        'This is a read-only public-ledger snapshot. It does not prove legal identity, ownership, truth, or future behavior.'
+      ].join('\n');
+
+      try {
+        await navigator.clipboard.writeText(summary);
+        setStatus($('snapshotStatus'), 'Plain summary copied.', 'ok');
+      } catch {
+        setStatus($('snapshotStatus'), 'Clipboard access was unavailable.', 'err');
+      }
+    });
+
+    $('clearLogBtn').addEventListener('click', () => {
+      $('activityLog').textContent = 'Activity log cleared.';
+    });
+
+    window.addEventListener('unhandledrejection', event => {
+      const message = event.reason && event.reason.message ? event.reason.message : String(event.reason || 'Unknown rejection');
+      log(`Unhandled promise rejection: ${message}`);
+    });
+
+    window.addEventListener('error', event => {
+      if (event && event.message) log(`Window error: ${event.message}`);
+    });
+
+    updateConnectionUi();
+    selectAccount(null, 'none');
+    initializeXaman();
+  }());
+  </script>
 </body>
 </html>
-
