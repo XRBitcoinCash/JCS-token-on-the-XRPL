@@ -5,26 +5,47 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#07101c" name="theme-color"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="telephone=no,address=no,email=no" name="format-detection"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="bingbot"/>
 <meta content="Jesus Christ Saves Token" name="application-name"/>
+<meta content="Jesus Christ Saves Token" name="creator"/>
+<meta content="Jesus Christ Saves Token" name="publisher"/>
+<meta content="faith-dex-fellowship" name="jcs-home-mode"/>
 <meta content="2.0.0" name="jcs-release"/>
-<title>Jesus Christ Saves Token · JCS DEX, Scripture &amp; Fellowship v2.0.0</title>
-<meta content="Official Jesus Christ Saves Token portal combining Xaman-authorized, non-custodial JCS/XRP trading on the native XRP Ledger DEX, validated market evidence, Scripture, sacred public-domain media, local prayer tools, and links to the Sign the Ledger social experience." name="description"/>
-<meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,XRP Ledger DEX,AMM,Christian social platform,prayer NFT,testimony,Scripture,sacred audio,public domain Jesus film,JCS Fellowship" name="keywords"/>
+<title>Jesus Christ Saves Token | JCS XRP Ledger Portal</title>
+<meta content="Official JCS portal for non-custodial JCS/XRP trading through Xaman, validated XRPL data, Scripture, sacred media, prayer NFTs and privacy-safe prayer mapping." name="description"/>
+<meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,XRP Ledger DEX,AMM,Christian fellowship tools,prayer NFT,testimony,Scripture,sacred audio,public domain Jesus film,JCS Fellowship" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <link href="https://jesuschristsavestoken.com/" rel="canonical"/>
-<link href="/ai.json" rel="alternate" title="AI Manifest" type="application/json"/>
+<link href="https://jesuschristsavestoken.com/" rel="home"/>
+<link href="https://jesuschristsavestoken.com/" hreflang="en-US" rel="alternate"/>
+<link href="https://jesuschristsavestoken.com/" hreflang="x-default" rel="alternate"/>
+<link href="https://jesuschristsavestoken.com/ai.json" rel="describedby" title="JCS machine-readable site description" type="application/json"/>
+<link href="https://jesuschristsavestoken.com/.well-known/did.json" rel="describedby" title="JCS Web DID" type="application/json"/>
+<link href="https://jesuschristsavestoken.com/.well-known/xrp-ledger.toml" rel="describedby" title="JCS XRP Ledger metadata" type="text/plain"/>
+<link href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" rel="license"/>
 <link href="https://jesuschristsavestoken.com/jcs-logo.png" rel="icon" type="image/png"/>
 <link href="https://jesuschristsavestoken.com/jcs-logo-180.png" rel="apple-touch-icon"/>
 <meta content="website" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
 <meta content="Jesus Christ Saves Token" property="og:site_name"/>
 <meta content="Jesus Christ Saves Token · JCS DEX, Scripture &amp; Fellowship" property="og:title"/>
 <meta content="A Christ-centered XRPL portal with Xaman-authorized JCS trading, validated market context, Scripture, sacred media, and privacy-conscious fellowship tools." property="og:description"/>
 <meta content="https://jesuschristsavestoken.com/" property="og:url"/>
 <meta content="https://jesuschristsavestoken.com/jcs-logo.png" property="og:image"/>
-<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://jesuschristsavestoken.com/jcs-logo.png" property="og:image:secure_url"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="Jesus Christ Saves Token emblem" property="og:image:alt"/>
+<meta content="summary" name="twitter:card"/>
 <meta content="@JesusCS_token" name="twitter:site"/>
 <meta content="Jesus Christ Saves Token · JCS DEX &amp; Fellowship" name="twitter:title"/>
+<meta content="Trade JCS non-custodially through Xaman, inspect XRPL evidence, read Scripture, use sacred media, and enter the JCS prayer and testimony experience." name="twitter:description"/>
 <meta content="https://jesuschristsavestoken.com/jcs-logo.png" name="twitter:image"/>
+<meta content="Jesus Christ Saves Token emblem" name="twitter:image:alt"/>
 <link crossorigin="" href="https://xaman.app" rel="preconnect"/>
 <link crossorigin="" href="https://archive.org" rel="preconnect"/>
 <link crossorigin="" href="https://s1.xrplmeta.org" rel="preconnect"/>
@@ -3606,13 +3627,28 @@ html[data-theme="dark"] .product-showcase-head p{
   font-size:.7rem;
 }
 .icon-star{
+  width:44px;
+  height:44px;
+  display:inline-grid;
+  place-items:center;
+  padding:0;
+  border:1px solid transparent;
+  border-radius:9px;
   cursor:pointer;
   color:#7b8797;
+  background:transparent;
+  font:inherit;
+  font-size:1.05rem;
   user-select:none;
 }
 .icon-star.on{
   color:#d99b18;
   filter:drop-shadow(0 0 5px rgba(217,155,24,.35));
+}
+.icon-star:hover,.icon-star:focus-visible{
+  border-color:var(--blue,#55a4ff);
+  outline:3px solid rgba(85,164,255,.22);
+  outline-offset:1px;
 }
 .delta{
   margin-left:4px;
@@ -4261,8 +4297,7 @@ body.light-mode .public-domain-badge{color:#065f46}
 /* JCS v1.4.0 requested refinements */
 .compact-header-wrap .brand-link > span{display:flex;align-items:center}
 .compact-header-wrap .brand-title{white-space:nowrap}
-.sign-ledger-gold,
-a[href$="verify.html"]{
+.sign-ledger-gold{
   border-color:rgba(250,204,21,.72)!important;
   color:#1f1600!important;
   background:linear-gradient(180deg,#ffe58a,#d6a72a)!important;
@@ -4270,9 +4305,7 @@ a[href$="verify.html"]{
   font-weight:900!important;
 }
 .sign-ledger-gold:hover,
-.sign-ledger-gold:focus-visible,
-a[href$="verify.html"]:hover,
-a[href$="verify.html"]:focus-visible{
+.sign-ledger-gold:focus-visible{
   border-color:#fff0a8!important;
   background:linear-gradient(180deg,#fff0a8,#e2b63d)!important;
 }
@@ -4444,6 +4477,7 @@ html[data-theme="light"] .jcs-unified-header{
 </style>
 <script>
 (function(){
+  document.documentElement.classList.add('js');
   try{
     var saved=localStorage.getItem('jcs-color-mode');
     document.documentElement.setAttribute(
@@ -4460,21 +4494,80 @@ html[data-theme="light"] .jcs-unified-header{
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://jesuschristsavestoken.com/#website",
+      "url": "https://jesuschristsavestoken.com/",
+      "name": "Jesus Christ Saves Token",
+      "alternateName": "JCS on the XRP Ledger",
+      "description": "Official JCS website for non-custodial XRPL tools, Scripture, sacred media, prayer NFTs and privacy-safe prayer mapping.",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://jesuschristsavestoken.com/#project"
+      },
+      "hasPart": [
+        {
+          "@type": "WebPage",
+          "name": "Sign the Ledger",
+          "url": "https://jesuschristsavestoken.com/verify.html"
+        },
+        {
+          "@type": "WebPage",
+          "name": "Christian Pressure and XRPL Prayer Map",
+          "url": "https://jesuschristsavestoken.com/prayer.map.html"
+        },
+        {
+          "@type": "WebPage",
+          "name": "JCS Market Monitor",
+          "url": "https://jesuschristsavestoken.com/metrics.html"
+        },
+        {
+          "@type": "WebPage",
+          "name": "JCS Account Readiness",
+          "url": "https://jesuschristsavestoken.com/connectwallet.html"
+        },
+        {
+          "@type": "AboutPage",
+          "name": "JCS About and Vision",
+          "url": "https://jesuschristsavestoken.com/about-jcs.html"
+        }
+      ]
+    },
+    {
       "@type": "WebPage",
       "@id": "https://jesuschristsavestoken.com/#webpage",
       "url": "https://jesuschristsavestoken.com/",
       "name": "Jesus Christ Saves Token DEX, Scripture and Fellowship Portal",
       "description": "A Christ-centered, non-custodial XRP Ledger portal combining Xaman-authorized JCS trading, public market evidence, Scripture, sacred media and fellowship tools.",
-      "dateModified": "2026-08-28",
+      "dateModified": "2026-08-29",
       "inLanguage": "en-US",
       "isAccessibleForFree": true,
+      "isPartOf": {
+        "@id": "https://jesuschristsavestoken.com/#website"
+      },
       "mainEntity": {
         "@id": "https://jesuschristsavestoken.com/#application"
       },
-      "about": {
+      "about": [
+        {
+          "@id": "https://jesuschristsavestoken.com/#project"
+        },
+        {
+          "@id": "https://jesuschristsavestoken.com/#asset"
+        }
+      ],
+      "publisher": {
         "@id": "https://jesuschristsavestoken.com/#project"
       },
-      "license": "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"
+      "image": "https://jesuschristsavestoken.com/jcs-logo.png",
+      "relatedLink": [
+        "https://jesuschristsavestoken.com/verify.html",
+        "https://jesuschristsavestoken.com/prayer.map.html",
+        "https://jesuschristsavestoken.com/metrics.html",
+        "https://jesuschristsavestoken.com/connectwallet.html",
+        "https://xrbitcoincash.com/",
+        "https://xrbitcoincash.com/xrbitcoin-links.html",
+        "https://xrbitcoincash.com/creature-nft-links.html"
+      ]
     },
     {
       "@type": "WebApplication",
@@ -4485,6 +4578,7 @@ html[data-theme="light"] .jcs-unified-header{
       "operatingSystem": "Web",
       "softwareVersion": "2.0.0",
       "isAccessibleForFree": true,
+      "image": "https://jesuschristsavestoken.com/jcs-logo.png",
       "featureList": [
         "Xaman-authorized non-custodial JCS trustline and XRPL transactions",
         "JCS/XRP AMM and order-book market and limit-order workflow",
@@ -4495,11 +4589,17 @@ html[data-theme="light"] .jcs-unified-header{
         "User-controlled Scripture rotation, next-reading and sharing controls",
         "Local-only prayer journal, daily practice and Prayer Garden preview",
         "Direct access to Sign the Ledger prayer and testimony social functions",
+        "Country-level Christian pressure context and coarse opt-in prayer-focus mapping",
+        "Read-only JCS, XRP and Bitcoin market monitoring",
         "Quiet and Sabbath focus mode"
       ],
       "author": {
         "@id": "https://jesuschristsavestoken.com/#project"
-      }
+      },
+      "publisher": {
+        "@id": "https://jesuschristsavestoken.com/#project"
+      },
+      "license": "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"
     },
     {
       "@type": "Organization",
@@ -4508,35 +4608,40 @@ html[data-theme="light"] .jcs-unified-header{
       "alternateName": "JCS",
       "url": "https://jesuschristsavestoken.com/",
       "logo": "https://jesuschristsavestoken.com/jcs-logo.png",
+      "identifier": "did:web:jesuschristsavestoken.com",
+      "knowsAbout": [
+        "Jesus Christ Saves Token (JCS)",
+        "XRP Ledger Mainnet",
+        "Xaman-authorized non-custodial transactions",
+        "XRPL prayer NFTs",
+        "Privacy-safe coarse prayer mapping"
+      ],
       "sameAs": [
         "https://x.com/JesusCS_token",
         "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"
-      ],
-      "additionalProperty": [
+      ]
+    },
+    {
+      "@type": "Thing",
+      "@id": "https://jesuschristsavestoken.com/#asset",
+      "name": "Jesus Christ Saves Token",
+      "alternateName": "JCS",
+      "description": "JCS is an issued asset on the XRP Ledger Mainnet used by this non-custodial faith, fellowship and prayer-NFT application.",
+      "identifier": [
         {
           "@type": "PropertyValue",
-          "name": "Network",
-          "value": "XRP Ledger Mainnet"
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "Currency",
-          "value": "JCS"
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "Issuer",
+          "propertyID": "XRPL issuer account",
           "value": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
         },
         {
           "@type": "PropertyValue",
-          "name": "Web DID",
-          "value": "did:web:jesuschristsavestoken.com"
+          "propertyID": "XRPL currency code",
+          "value": "JCS"
         },
         {
           "@type": "PropertyValue",
-          "name": "Custody model",
-          "value": "Non-custodial; users review and authorize through Xaman"
+          "propertyID": "Ledger network",
+          "value": "XRP Ledger Mainnet"
         }
       ]
     }
@@ -4810,7 +4915,8 @@ body.light-mode .jcs-ecosystem-header{
   .jcs-ecosystem-header .brand-subtitle{font-size:.59rem}
 }
 </style>
-<meta content="dark light" name="color-scheme"/><meta content="strict-origin-when-cross-origin" name="referrer"/><meta content="faith-dex-fellowship" name="jcs-home-mode"/><link href="./css/style.css" rel="stylesheet"/><link href="./ai.json" rel="alternate" title="JCS AI manifest" type="application/json"/><link href="./.well-known/did.json" rel="alternate" title="JCS Web DID" type="application/json"/><link href="./.well-known/xrp-ledger.toml" rel="alternate" title="JCS XRP Ledger metadata" type="text/plain"/><link href="./.well-known/security.txt" rel="security"/><link href="./sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" rel="license"/><meta content="Jesus Christ Saves Token emblem" property="og:image:alt"/><meta content="en_US" property="og:locale"/><meta content="Trade JCS non-custodially through Xaman, inspect XRPL evidence, read Scripture, use sacred media, and enter the JCS prayer and testimony experience." name="twitter:description"/><meta content="Jesus Christ Saves Token emblem" name="twitter:image:alt"/><style id="jcs-home-v200">
+<link href="./css/style.css" rel="stylesheet"/>
+<style id="jcs-home-v200">
 /* =========================================================
    JCS Home 2.0 — exchange-grade clarity with a distinct faith identity
    No Coinbase trademarks, assets or proprietary code are used.
@@ -5277,39 +5383,309 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   body { color: #111 !important; background: #fff !important; }
   .card, .trade-card, .jcs-content-section, .product-card, .community-action-card, .prompt-card { color: #111 !important; background: #fff !important; box-shadow: none !important; border-color: #bbb !important; }
 }
-</style></head>
+</style>
+<style id="jcs-index-header-v210">
+/* Complete header repair: no clipped navigation, full keyboard access and safe mobile reflow. */
+.jcs-index-header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200;
+  width: 100%;
+  border-bottom: 1px solid var(--home-line) !important;
+  background: color-mix(in srgb, var(--home-surface) 95%, transparent) !important;
+  box-shadow: 0 8px 28px color-mix(in srgb, #020617 10%, transparent) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.jcs-index-header-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    9px
+    max(18px, env(safe-area-inset-left));
+  display: grid;
+  gap: 8px;
+}
+.index-header-top {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.index-brand {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+.index-brand img {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 45%, var(--home-line)) !important;
+  border-radius: 11px !important;
+  background: #fff;
+}
+.index-brand .brand-copy { min-width: 0; display: grid !important; }
+.index-brand .brand-title {
+  overflow: hidden;
+  color: var(--home-ink) !important;
+  font: 900 1rem/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-brand .brand-subtitle {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .63rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-header-utilities,
+.index-page-controls,
+.index-wallet-actions,
+.index-ecosystem-links {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.index-header-utilities { justify-content: flex-end; }
+.index-ecosystem-links { justify-content: flex-end; }
+.index-ecosystem-link,
+.index-control-button,
+.mobile-nav-toggle,
+.jcs-index-header .header-wallet-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 9px;
+  border: 1px solid var(--home-line);
+  border-radius: 9px;
+  color: var(--home-ink);
+  background: var(--home-surface-2);
+  font: 850 .69rem/1.1 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.index-ecosystem-link:hover,
+.index-ecosystem-link:focus-visible,
+.index-control-button:hover,
+.index-control-button:focus-visible,
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:focus-visible,
+.jcs-index-header .header-wallet-btn:hover:not(:disabled),
+.jcs-index-header .header-wallet-btn:focus-visible {
+  border-color: var(--home-blue);
+  color: var(--home-blue);
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 24%, transparent);
+  outline-offset: 2px;
+}
+.index-ecosystem-link.xrbc-link { color: #6e9eff; }
+.index-ecosystem-link.xrbitcoin-link { color: var(--home-cyan); }
+.index-ecosystem-link.creature-link { color: var(--home-gold); }
+.jcs-index-header .header-wallet-btn.connect {
+  border-color: var(--home-blue);
+  color: #fff;
+  background: var(--home-blue);
+}
+.jcs-index-header .header-wallet-btn.disconnect {
+  border-color: color-mix(in srgb, var(--home-red) 50%, var(--home-line));
+  color: var(--home-red);
+}
+.jcs-index-header .header-wallet-btn:disabled { opacity: .58; cursor: not-allowed; }
+.jcs-index-header .compact-wallet-pill {
+  max-width: 130px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mobile-nav-toggle { display: none; cursor: pointer; }
+.mobile-nav-toggle .menu-icon { font-size: 1rem; line-height: 1; }
+.noscript-notice {
+  width: min(1240px, calc(100% - 24px));
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 52%, var(--home-line));
+  border-radius: 12px;
+  color: var(--home-ink);
+  background: var(--home-gold-soft);
+}
+.noscript-notice a { font-weight: 850; }
+.index-primary-nav {
+  min-width: 0;
+  width: 100%;
+  display: flex !important;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  gap: 4px;
+  padding-top: 7px;
+  overflow: visible !important;
+  border-top: 1px solid var(--home-line);
+}
+.index-primary-nav .nav-btn {
+  min-height: 40px !important;
+  flex: 0 1 auto !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  color: var(--home-muted) !important;
+  background: transparent !important;
+  font-size: .73rem !important;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal !important;
+  box-shadow: none !important;
+}
+.index-primary-nav .nav-btn:hover,
+.index-primary-nav .nav-btn:focus-visible,
+.index-primary-nav .nav-btn[aria-current="page"] {
+  border-color: var(--home-line) !important;
+  color: var(--home-blue) !important;
+  background: var(--home-surface-2) !important;
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 22%, transparent);
+  outline-offset: 1px;
+}
+.index-primary-nav .sign-ledger-gold {
+  border-color: color-mix(in srgb, var(--home-gold) 58%, var(--home-line)) !important;
+  color: #171106 !important;
+  background: linear-gradient(180deg, #ffeaa8, #d9ae38) !important;
+}
+.product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.footer-link-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 1080px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px) {
+  .jcs-index-header.site-header { position: static !important; }
+  .index-header-top { grid-template-columns: minmax(0, 1fr) auto; }
+  .mobile-nav-toggle { grid-column: 2; grid-row: 1; }
+  html.js .mobile-nav-toggle { display: inline-flex; }
+  .index-header-utilities {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+  html.js .jcs-index-header:not(.menu-open) .index-header-utilities { display: none; }
+  .index-ecosystem-links { justify-content: flex-start; }
+  .index-primary-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  html.js .jcs-index-header .index-primary-nav:not(.is-open) { display: none !important; }
+  .index-primary-nav .nav-btn { width: 100%; min-height: 44px !important; }
+  .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .jcs-index-header-shell {
+    padding:
+      max(9px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      10px
+      max(12px, env(safe-area-inset-left));
+  }
+  .index-brand .brand-subtitle { display: none; }
+  .index-header-utilities { display: grid; grid-template-columns: 1fr; }
+  .index-ecosystem-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .index-ecosystem-link { min-width: 0; white-space: normal; }
+  .index-page-controls { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .index-control-button { width: 100%; min-height: 44px; }
+  .index-wallet-actions { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .jcs-index-header .header-wallet-btn { width: 100%; min-height: 44px; }
+  .jcs-index-header .compact-wallet-pill { max-width: 100%; text-align: center; }
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .index-brand .brand-title { font-size: .9rem !important; }
+  .index-ecosystem-links,
+  .index-primary-nav,
+  .index-page-controls,
+  .footer-link-groups { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="site-header jcs-home-header" role="banner">
-<div class="header-wrap home-header-wrap">
-<a aria-label="Jesus Christ Saves Token home" class="brand-link home-brand" href="./index.html">
-<img alt="" aria-hidden="true" height="42" src="./jcs-logo.png" width="42"/>
+<header class="site-header jcs-home-header jcs-index-header" role="banner">
+<div class="jcs-index-header-shell">
+<div class="index-header-top">
+<a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
+<img alt="Jesus Christ Saves Token logo" height="40" src="./jcs-logo.png" width="40"/>
 <span class="brand-copy">
 <span class="brand-title">Jesus Christ Saves Token</span>
 <span class="brand-subtitle">Faith · Fellowship · Native XRPL exchange</span>
 </span>
 </a>
-<nav aria-label="Primary navigation" class="header-nav home-header-nav">
-<a aria-current="page" class="nav-btn" href="./index.html">Home</a>
-<a class="nav-btn" href="#trade">Trade</a>
-<a class="nav-btn" href="#fellowship">Fellowship</a>
-<a class="nav-btn" href="#scripture">Scripture</a>
-<a class="nav-btn" href="#sacred-film">Media</a>
-<a class="nav-btn" href="./about-jcs.html">Vision</a>
-<a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
+<span aria-hidden="true" class="menu-icon">☰</span>
+<span class="menu-label">Menu</span>
+</button>
+<div aria-label="Ecosystem, display and wallet controls" class="index-header-utilities">
+<nav aria-label="Related XRPL ecosystem projects" class="index-ecosystem-links">
+<a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+<a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+<a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
 </nav>
-<div aria-label="Page and wallet controls" class="home-header-actions">
-<button aria-pressed="false" class="home-icon-button" id="quietModeBtn" title="Hide exchange tools and pause media" type="button">Quiet mode</button>
-<button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle home-icon-button" id="themeToggle" type="button">
+<div aria-label="Page and Xaman wallet controls" class="index-page-controls">
+<button aria-pressed="false" class="index-control-button" id="quietModeBtn" title="Hide exchange tools and pause media" type="button">Quiet mode</button>
+<button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
 <span aria-hidden="true">◐</span>
 <span id="themeToggleText">Light mode</span>
 </button>
-<button class="header-wallet-btn connect" disabled="" id="connectBtn" type="button">Connect Xaman</button>
-<button class="header-wallet-btn disconnect" hidden="" id="disconnectBtn" type="button">Disconnect</button>
+<div class="index-wallet-actions">
+<button aria-describedby="walletPill" class="header-wallet-btn connect" disabled="" id="connectBtn" type="button">Connect Xaman</button>
+<button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden="" id="disconnectBtn" type="button">Disconnect</button>
 <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
 </div>
 </div>
+</div>
+</div>
+<nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+<a aria-current="page" class="nav-btn" href="./">Home</a>
+<a class="nav-btn" href="#trade">Trade</a>
+<a class="nav-btn" href="#fellowship">Fellowship</a>
+<a class="nav-btn" href="#scripture">Scripture</a>
+<a class="nav-btn" href="#sacred-film">Sacred Film</a>
+<a class="nav-btn" href="#audio">Sacred Audio</a>
+<a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
+<a class="nav-btn" href="./prayer.map.html">Prayer Map</a>
+<a class="nav-btn" href="./metrics.html">Market Monitor</a>
+<a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
+<a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+</nav>
+</div>
 </header>
+<noscript>
+<p class="noscript-notice">JavaScript is disabled. The faith, project, policy and ecosystem information remains readable, but live XRP Ledger data, Xaman connection, trading, media controls and local fellowship tools require JavaScript. You can still open <a href="./verify.html">Sign the Ledger</a>, the <a href="./prayer.map.html">Prayer Map</a> or the read-only <a href="./metrics.html">Market Monitor</a>.</p>
+</noscript>
 <main class="container" id="main-content">
 <section aria-labelledby="jcs-title" class="card index-hero jcs-hero">
 <div class="hero-copy-column">
@@ -5435,6 +5811,18 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <h3>Account Readiness</h3>
 <p>Inspect validated wallet, trustline, reserve, NFT and current ledger-object evidence.</p>
 <span class="product-link">Inspect readiness →</span>
+</a>
+<a class="product-card" href="./prayer.map.html">
+<span aria-hidden="true" class="product-icon">◎</span>
+<h3>Christian Pressure &amp; Prayer Map</h3>
+<p>Compare sourced country-level Christian pressure data with coarse, voluntary prayer-focus regions—never exact signer locations.</p>
+<span class="product-link">Open the prayer map →</span>
+</a>
+<a class="product-card" href="./metrics.html">
+<span aria-hidden="true" class="product-icon">▥</span>
+<h3>JCS Market Monitor</h3>
+<p>Open a read-only view of JCS/XRP market evidence with clearly labeled XRP and Bitcoin reference charts.</p>
+<span class="product-link">Open market monitor →</span>
 </a>
 </div>
 </section>
@@ -5627,11 +6015,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 </div>
 <span class="trade-network-pill">XRPL Mainnet · v2.0.0</span>
 </div>
-<div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="tablist">
-<button aria-selected="true" class="tab buy active" id="buyTab" role="tab" type="button">
+<div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="group">
+<button aria-pressed="true" class="tab buy active" id="buyTab" type="button">
           Buy JCS
         </button>
-<button aria-selected="false" class="tab sell" id="sellTab" role="tab" type="button">
+<button aria-pressed="false" class="tab sell" id="sellTab" type="button">
           Sell JCS
         </button>
 </div>
@@ -5832,16 +6220,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <p class="status" id="healthStatus"></p>
 <div id="healthWrap">
 <table id="healthTable" style="display:none">
+<caption class="sr-only">Liquidity health results for XRP Ledger assets held by the connected public account</caption>
 <thead>
 <tr>
-<th>⭐</th>
-<th>Token / Hex<br/><span class="small">Issuer</span></th>
-<th>Pool</th>
-<th>Reserves<br/><span class="small">XRP / IOU</span></th>
-<th>Fee</th>
-<th>Slippage<br/><span class="small">10 / 100 XRP</span></th>
-<th>Score</th>
-<th>Status</th>
+<th scope="col">Watch</th>
+<th scope="col">Token / Hex<br/><span class="small">Issuer</span></th>
+<th scope="col">Pool</th>
+<th scope="col">Reserves<br/><span class="small">XRP / IOU</span></th>
+<th scope="col">Fee</th>
+<th scope="col">Slippage<br/><span class="small">10 / 100 XRP</span></th>
+<th scope="col">Score</th>
+<th scope="col">Status</th>
 </tr>
 </thead>
 <tbody id="healthBody"></tbody>
@@ -6134,7 +6523,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <h3>How do I trade JCS?</h3>
 <p>
           Trade JCS through XRPL DEX interfaces that show the correct issuer.
-          Use the official Sologenic and XPMarket links here to reduce impersonation risk.
+          Use the
+          <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet" rel="noopener noreferrer" target="_blank">Sologenic JCS/XRP market</a>
+          or the
+          <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" rel="noopener noreferrer" target="_blank">XPMarket JCS profile</a>
+          to reduce impersonation risk, and verify the issuer inside Xaman before signing.
         </p>
 </article>
 <article class="card">
@@ -6160,31 +6553,47 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         of profit or a substitute for Scripture, prayer, fellowship, pastoral care or sound judgment.
       </p>
 <p class="mono">Issuer: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · Currency: JCS · XRP Ledger Mainnet</p>
+<p class="footer-safety-note">Prayer Map regions are coarse, voluntary prayer-focus metadata. XRPL transactions do not reveal a signer’s physical location or the nearest node that processed a mint.</p>
 <p id="dailyBlessing"></p>
 </div>
-<div class="footer-link-groups">
+<nav aria-label="Footer navigation" class="footer-link-groups">
 <div>
 <strong>Application</strong>
+<a href="./">Home</a>
 <a href="./verify.html">Sign the Ledger</a>
 <a href="./prayer.map.html">Prayer Map</a>
+<a href="./metrics.html">Market Monitor</a>
 <a href="./connectwallet.html">Account Readiness</a>
-<a href="./about-jcs.html">Vision</a>
+<a href="./about-jcs.html">About &amp; Vision</a>
 </div>
 <div>
-<strong>Trust and policy</strong>
+<strong>Explore</strong>
+<a href="#trade">Trade</a>
+<a href="#fellowship">Fellowship</a>
+<a href="#scripture">Scripture</a>
+<a href="#sacred-film">Sacred Film</a>
+<a href="#audio">Sacred Audio</a>
+</div>
+<div>
+<strong>Trust &amp; open data</strong>
 <a href="./privacy.html">Privacy</a>
 <a href="./terms.html">Terms</a>
 <a href="./security.html">Security</a>
 <a href="./.well-known/security.txt">security.txt</a>
+<a href="./ai.json">AI manifest</a>
+<a href="./sitemap.xml">XML sitemap</a>
 </div>
 <div>
-<strong>Machine-readable</strong>
-<a href="./ai.json">AI manifest</a>
+<strong>Ecosystem</strong>
+<a href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+<a href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+<a href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+<a href="https://x.com/JesusCS_token" rel="noopener noreferrer" target="_blank">JCS on X</a>
 <a href="./.well-known/did.json">Web DID</a>
 <a href="./.well-known/xrp-ledger.toml">XRPL TOML</a>
-<a href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" rel="noopener" target="_blank">License</a>
+<a href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" rel="noopener noreferrer" target="_blank">Code license</a>
 </div>
-</div>
+</nav>
 </div>
 </footer>
 <script id="app-config" type="application/json">
@@ -7771,12 +8180,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
     if (buyTab) {
       buyTab.classList.toggle('active', side === 'buy');
-      buyTab.setAttribute('aria-selected', side === 'buy' ? 'true' : 'false');
+      buyTab.setAttribute('aria-pressed', side === 'buy' ? 'true' : 'false');
     }
 
     if (sellTab) {
       sellTab.classList.toggle('active', side === 'sell');
-      sellTab.setAttribute('aria-selected', side === 'sell' ? 'true' : 'false');
+      sellTab.setAttribute('aria-pressed', side === 'sell' ? 'true' : 'false');
     }
 
     const tradeCard = $('trade');
@@ -8419,12 +8828,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     wrap.style.overflow = 'auto';
 
     const table = document.createElement('table');
+    const caption = document.createElement('caption');
+    caption.className = 'sr-only';
+    caption.textContent = 'Open JCS orders for the connected public XRP Ledger account';
+    table.appendChild(caption);
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
 
     ['Offer Seq', 'Owner gets', 'Owner pays', 'Price (XRP/JCS)', 'Action']
       .forEach((text) => {
         const th = document.createElement('th');
+        th.scope = 'col';
         th.textContent = text;
         headerRow.appendChild(th);
       });
@@ -8663,7 +9077,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     return (
       '<div style="overflow:auto">' +
         '<table>' +
-          '<thead><tr><th>Side</th><th>Price (XRP/JCS)</th><th>JCS amount</th></tr></thead>' +
+          '<caption class="sr-only">Visible JCS and XRP order-book levels</caption>' +
+          '<thead><tr><th scope="col">Side</th><th scope="col">Price (XRP/JCS)</th><th scope="col">JCS amount</th></tr></thead>' +
           '<tbody>' + rows.join('') + '</tbody>' +
         '</table>' +
       '</div>'
@@ -8822,7 +9237,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     if (state.watchlist.has(key)) state.watchlist.delete(key);
     else state.watchlist.add(key);
     saveWatchlist(state.watchlist);
-    if (starEl) starEl.classList.toggle('on');
+    if (starEl) {
+      const watched = state.watchlist.has(key);
+      const tokenLabel = starEl.dataset.tokenLabel || 'token';
+      starEl.classList.toggle('on', watched);
+      starEl.setAttribute('aria-pressed', String(watched));
+      starEl.setAttribute(
+        'aria-label',
+        watched ? `Remove ${tokenLabel} from watchlist` : `Add ${tokenLabel} to watchlist`
+      );
+    }
     applyFilters();
   }
 
@@ -8985,10 +9409,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           const dRes = deltaBadge(Nnum(r.xrpRes), Nnum(p.xrpRes));
           const d10 = deltaBadge(Nnum(r.slip10Pct), Nnum(p.slip10));
           const d100 = deltaBadge(Nnum(r.slip100Pct), Nnum(p.slip100));
-          const starOn = state.watchlist.has(r.key) ? 'on' : '';
+          const isWatched = state.watchlist.has(r.key);
+          const starOn = isWatched ? 'on' : '';
+          const watchLabel = isWatched
+            ? `Remove ${r.label} from watchlist`
+            : `Add ${r.label} to watchlist`;
           return `
           <tr data-key="${r.key}" data-status="${r.cls}">
-            <td><span class="icon-star ${starOn}" aria-label="Toggle watch">★</span></td>
+            <td><button class="icon-star ${starOn}" type="button" aria-pressed="${isWatched}" aria-label="${escapeHtml(watchLabel)}" data-token-label="${escapeHtml(r.label)}">★</button></td>
             <td>
               <div class="token-project-cell">
                 <img
@@ -10398,8 +10826,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     const source = $(sourceId)?.textContent?.trim() || '';
     const shareText = [text, source, 'Jesus Christ Saves Token'].filter(Boolean).join('\n');
     if (!shareText) return;
+    const shareUrl = new URL(window.location.href);
+    shareUrl.hash = 'scripture';
     try {
-      if (navigator.share) await navigator.share({ title: 'JCS Scripture', text: shareText, url: location.href + '#scripture' });
+      if (navigator.share) await navigator.share({ title: 'JCS Scripture', text: shareText, url: shareUrl.href });
       else await copyText(shareText);
     } catch (error) {
       if (error?.name !== 'AbortError') console.warn('Scripture share unavailable:', error);
@@ -10565,5 +10995,58 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   $('quietModeBtn')?.addEventListener('click', () => setQuietMode(!document.body.classList.contains('quiet-mode')));
   $('sabbathModeBtn')?.addEventListener('click', () => setQuietMode(!document.body.classList.contains('quiet-mode')));
 }());
-</script></body>
+</script>
+<script>
+(() => {
+  'use strict';
+
+  const header = document.querySelector('.jcs-index-header');
+  const toggle = document.getElementById('mobileNavToggle');
+  const nav = document.getElementById('primaryNav');
+  const media = window.matchMedia('(max-width: 980px)');
+  if (!header || !toggle || !nav) return;
+
+  const icon = toggle.querySelector('.menu-icon');
+  const label = toggle.querySelector('.menu-label');
+
+  function setOpen(open, returnFocus = false) {
+    const next = Boolean(open && media.matches);
+    nav.classList.toggle('is-open', next);
+    header.classList.toggle('menu-open', next);
+    toggle.setAttribute('aria-expanded', String(next));
+    toggle.setAttribute('aria-label', next ? 'Close site navigation' : 'Open site navigation');
+    if (icon) icon.textContent = next ? '×' : '☰';
+    if (label) label.textContent = next ? 'Close' : 'Menu';
+    if (returnFocus) toggle.focus();
+  }
+
+  toggle.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  nav.addEventListener('click', event => {
+    if (media.matches && event.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false, true);
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (
+      media.matches &&
+      toggle.getAttribute('aria-expanded') === 'true' &&
+      !header.contains(event.target)
+    ) {
+      setOpen(false);
+    }
+  });
+
+  media.addEventListener?.('change', () => setOpen(false));
+  setOpen(false);
+})();
+</script>
+</body>
 </html>
