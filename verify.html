@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#071225" name="theme-color"/>
 <meta content="JCS Sign the Ledger" name="application-name"/>
-<meta content="5.0.0" name="jcs-ledger-release"/>
-<title>Sign the Ledger v5.0.0 · JCS Verified Prayer, Social Proof & Map Pulse</title>
+<meta content="6.0.0" name="jcs-ledger-release"/>
+<title>Sign the Ledger v6.0.0 · JCS Verified Prayer, Social Proof & Map Network</title>
 <meta content="Mint JCS prayer NFTs through Xaman, publish validated testimonies, replies and Amen reactions, inspect relay and broad-region prayer signals, export evidence, and prepare user-controlled social shares without claiming wallet geolocation." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,Sign the Ledger,XRPL,NFT prayer,on-chain testimony,Xaman,Christian social network,prayer map,validated proof,social sharing,relay pulse" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
@@ -601,7 +601,7 @@
 
 
 /* =========================================================
-   Sign the Ledger v5.0.0 · social interaction corrections
+   Sign the Ledger v6.0.0 · social interaction corrections
    ========================================================= */
 .publish-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
 .explain-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -700,7 +700,7 @@
 
 
 /* =========================================================
-   Sign the Ledger v5.0.0 · Sacred Audio Sanctuary
+   Sign the Ledger v6.0.0 · Sacred Audio Sanctuary
    ========================================================= */
 .audio-sanctuary{
   margin-top:22px;
@@ -961,7 +961,7 @@ html[data-theme="light"] .jcs-unified-header{
 
 
 /* =========================================================
-   Sign the Ledger v5.0.0 · prayer rotation and social sharing
+   Sign the Ledger v6.0.0 · prayer rotation and social sharing
    ========================================================= */
 .prayer-library{
   margin-top:14px;
@@ -1095,7 +1095,7 @@ html[data-theme="light"] .jcs-unified-header{
 
 
 /* =========================================================
-   Sign the Ledger v5.0.0 · stacked composer/feed layout
+   Sign the Ledger v6.0.0 · stacked composer/feed layout
    ========================================================= */
 
 /*
@@ -1219,7 +1219,7 @@ html[data-theme="light"] .jcs-unified-header{
   "url": "https://jesuschristsavestoken.com/verify.html",
   "applicationCategory": "SocialNetworkingApplication",
   "operatingSystem": "Any modern browser",
-  "softwareVersion": "5.0.0",
+  "softwareVersion": "6.0.0",
   "isAccessibleForFree": true,
   "description": "A non-custodial JCS prayer NFT and social testimony interface that publishes and reads validated XRP Ledger transactions, exposes broad-region prayer signals without wallet geolocation, and prepares user-controlled social shares and evidence exports.",
   "publisher": {
@@ -1517,9 +1517,9 @@ body.light-mode .jcs-ecosystem-header{
 }
 </style>
 
-<style id="jcs-verify-v5-upgrade">
+<style id="jcs-verify-v6-upgrade">
 /* =========================================================
-   Sign the Ledger v5.0.0 · verified social proof + map pulse
+   Sign the Ledger v6.0.0 · safe map focus + support network
    ========================================================= */
 .site-header{position:static!important;top:auto!important}
 .container{max-width:1280px}
@@ -1535,12 +1535,19 @@ body.light-mode .jcs-ecosystem-header{
 .region-consent{display:flex;gap:9px;align-items:flex-start;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
 .region-consent input{width:19px;min-height:19px;height:19px;flex:0 0 19px;margin-top:2px}
 .region-consent span{color:var(--muted);font-size:.76rem;line-height:1.5}
+.map-focus-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.map-focus-fields [hidden]{display:none!important}
+.privacy-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.privacy-tier{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font-size:.69rem;line-height:1.45}
+.privacy-tier strong{display:block;color:var(--ink);font-size:.72rem}
+.privacy-tier.recommended{border-color:rgba(8,125,78,.42)}
 .privacy-boundary{margin:10px 0 0;color:var(--muted);font-size:.72rem}
 .privacy-boundary strong{color:var(--ink)}
 
 .filter-bar{grid-template-columns:minmax(0,1fr) repeat(3,minmax(135px,170px))}
 .feed-stats{grid-template-columns:repeat(5,minmax(0,1fr))}
 .badge.region{border-color:rgba(47,128,237,.45);color:var(--blue);background:rgba(47,128,237,.07)}
+.badge.need{border-color:rgba(201,152,32,.45);color:var(--gold);background:rgba(201,152,32,.07)}
 .map-action{border-color:rgba(8,125,78,.42)!important;color:var(--green)!important}
 .bookmark-action[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
 
@@ -1573,6 +1580,11 @@ body.light-mode .jcs-ecosystem-header{
 .relay-card .relay-line{display:flex;justify-content:space-between;gap:8px;margin-top:5px;color:var(--muted);font-size:.72rem}
 .relay-card code{overflow-wrap:anywhere}
 .map-handoff-status{margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;color:var(--muted);background:var(--surface-2)}
+.inline-support-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;margin-top:8px}
+.inline-support-fields label{display:grid;gap:4px;color:var(--muted);font-size:.67rem;font-weight:800}
+.inline-map-optin{display:flex!important;grid-template-columns:none!important;align-items:flex-start;gap:7px;padding:8px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2)}
+.inline-map-optin input{width:17px;height:17px;min-height:17px;flex:0 0 17px;margin:1px 0 0}
+.inline-map-summary{display:block;margin-top:6px;color:var(--muted);font-size:.66rem}
 
 .evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}
 .evidence-card.full{grid-column:span 2}
@@ -1608,7 +1620,7 @@ body.light-mode .jcs-ecosystem-header{
   .share-platform-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media(max-width:700px){
-  .region-disclosure-grid,.filter-bar,.feed-stats,.region-heat-grid,.pulse-summary,.relay-grid,.evidence-grid,.evidence-matrix,.share-proof-preview{grid-template-columns:1fr}
+  .region-disclosure-grid,.map-focus-fields,.privacy-tiers,.inline-support-fields,.filter-bar,.feed-stats,.region-heat-grid,.pulse-summary,.relay-grid,.evidence-grid,.evidence-matrix,.share-proof-preview{grid-template-columns:1fr}
   .evidence-card.full{grid-column:auto}
   .share-platform-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .section-title-row,.share-dialog-head{display:block}
@@ -1619,7 +1631,7 @@ body.light-mode .jcs-ecosystem-header{
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
-<!-- JCS Sign the Ledger v5.0.0 · XRBitcoinCash-uniform ecosystem header -->
+<!-- JCS Sign the Ledger v6.0.0 · XRBitcoinCash-uniform ecosystem header -->
 <header class="site-header jcs-ecosystem-header" role="banner">
   <div class="header-wrap compact-header-wrap">
     <div class="brand-stack">
@@ -1688,7 +1700,7 @@ body.light-mode .jcs-ecosystem-header{
 <div>
 <span class="eyebrow">✝ NFT-backed prayer · validated social proof · privacy-respecting map pulse</span>
 <h1>Every testimony can become a <span>verified witness.</span></h1>
-<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, publish a numbered social record, inspect the validated evidence, and optionally add only a broad author-declared region to the Prayer Map pulse. XRPL transactions do not contain GPS coordinates, and this page never attempts to infer a wallet holder’s physical location.</p>
+<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, publish a numbered social record, inspect the validated evidence, and optionally add a voluntary prayer-focus area to the Prayer Map. The focus is the place the prayer concerns—not the signer’s location. XRPL transactions do not contain GPS coordinates, and this page never attempts to infer a wallet holder’s physical location.</p>
 <div class="hero-actions">
 <a class="btn primary" href="#compose">Compose a testimony NFT</a>
 <a class="btn" href="#testimonies">Enter the rolling testimony stream</a>
@@ -1798,6 +1810,22 @@ body.light-mode .jcs-ecosystem-header{
 </div>
 </div>
 
+<div class="field">
+<label for="needCategory">Prayer or support category <span class="field-hint">Public enum · no address details</span></label>
+<select id="needCategory">
+<option value="prayer">General prayer</option>
+<option value="safety">Safety</option>
+<option value="food">Food or water</option>
+<option value="shelter">Shelter</option>
+<option value="medical">Medical support</option>
+<option value="legal">Legal support</option>
+<option value="relocation">Relocation support</option>
+<option value="pastoral">Pastoral care</option>
+<option value="other">Other</option>
+</select>
+<span class="field-hint">The map may aggregate this category. Never put an exact address, escape route, vulnerable person’s identity, or private medical detail in the public message.</span>
+</div>
+
 <details class="prayer-library" id="prayerLibrary" open>
 <summary>Choose a rotating prayer or testimony starter</summary>
 <div class="prayer-library-body">
@@ -1851,31 +1879,54 @@ You may edit the wording before minting or publishing anything.
 </div>
 <div class="region-disclosure">
   <div class="region-disclosure-grid">
-    <div class="field">
-      <label for="regionCode">Broad Prayer Map region <span class="field-hint">Optional · never automatic</span></label>
-      <select id="regionCode">
-        <option value="none">Do not publish a region</option>
-        <option value="worldwide">Worldwide / not region-specific</option>
-        <option value="north-america">North America</option>
-        <option value="latin-america-caribbean">Latin America &amp; Caribbean</option>
-        <option value="europe">Europe</option>
-        <option value="africa">Africa</option>
-        <option value="middle-east-north-africa">Middle East &amp; North Africa</option>
-        <option value="south-asia">South Asia</option>
-        <option value="east-southeast-asia">East &amp; Southeast Asia</option>
-        <option value="oceania">Oceania</option>
-      </select>
-      <span class="field-hint">The selection is a broad author-declared label, not a detected location.</span>
+    <div>
+      <div class="field">
+        <label for="mapScope">Public Prayer Map focus <span class="field-hint">Optional · never automatic</span></label>
+        <select id="mapScope">
+          <option value="none">Not on the map</option>
+          <option value="region">Broad prayer-focus region — recommended</option>
+          <option value="country">Prayer-focus country — more revealing</option>
+        </select>
+      </div>
+      <div class="map-focus-fields">
+        <div class="field" id="regionField" hidden>
+          <label for="regionCode">Broad prayer-focus region</label>
+          <select id="regionCode">
+            <option value="worldwide">Worldwide / not region-specific</option>
+            <option value="north-america">North America</option>
+            <option value="latin-america-caribbean">Latin America &amp; Caribbean</option>
+            <option value="europe">Europe</option>
+            <option value="africa">Africa</option>
+            <option value="middle-east-north-africa">Middle East &amp; North Africa</option>
+            <option value="south-asia">South Asia</option>
+            <option value="east-southeast-asia">East &amp; Southeast Asia</option>
+            <option value="oceania">Oceania</option>
+          </select>
+        </div>
+        <div class="field" id="countryField" hidden>
+          <label for="countryCode">Prayer-focus country</label>
+          <select id="countryCode">
+            <option value="">Choose the country this prayer concerns</option>
+          </select>
+        </div>
+      </div>
+      <span class="field-hint" id="mapFocusHint">No geographic label will be added to the signed mint or registry transaction.</span>
     </div>
     <label class="region-consent" for="regionConsent">
       <input id="regionConsent" type="checkbox">
       <span>
-        I understand that selecting a region adds that broad label to public XRPL memos and the JCS Prayer Map handoff. I will not use it to expose a precise address, coordinates, a vulnerable person, or someone else’s location.
+        I choose this as the place the prayer concerns—not my current location. I understand the selected focus, wallet transaction, and ledger time are public and permanent, and grouped display reduces exposure but does not make an on-ledger post anonymous.
       </span>
     </label>
   </div>
+  <div class="privacy-tiers" aria-label="Map privacy levels">
+    <div class="privacy-tier"><strong>Not on the map</strong>No signed map-focus fields.</div>
+    <div class="privacy-tier recommended"><strong>Broad region</strong>Public only after at least 5 qualifying records from 5 distinct signing accounts.</div>
+    <div class="privacy-tier"><strong>Country</strong>Public only after at least 10 distinct accounts; extreme-pressure countries require 20.</div>
+  </div>
   <p class="privacy-boundary">
-    <strong>Location boundary:</strong> this page does not call the browser Geolocation API, inspect IP location, use Xaman device tracking, or claim that XRPL validators, nodes, transactions, wallets, or NFTs reveal a person’s physical location.
+    <strong>No radius or node-location claim:</strong> this page never requests GPS, city, postal code, browser/IP location, or Xaman device location. An XRPL relay hostname or latency is only a network diagnostic; it cannot establish the signer’s location or the “nearest node” that processed an NFT.
+    Xaman and public network services may receive ordinary connection data under their own policies; this page does not write that data as a physical-location field on XRPL.
   </p>
 </div>
 
@@ -1921,7 +1972,7 @@ You may edit the wording before minting or publishing anything.
 <div class="stat"><span>NFT-backed</span><strong id="statNfts">—</strong></div>
 <div class="stat"><span>On-ledger Amens</span><strong id="statAmens">—</strong></div>
 <div class="stat"><span>Wallets</span><strong id="statWallets">—</strong></div>
-<div class="stat"><span>Broad regions</span><strong id="statRegions">—</strong></div>
+<div class="stat"><span>Public map areas</span><strong id="statRegions">—</strong></div>
 </div>
 <div class="filter-bar">
 <input id="feedSearch" placeholder="Search messages, names, handles, wallets…" type="search"/>
@@ -1935,8 +1986,8 @@ You may edit the wording before minting or publishing anything.
 <option value="legacy">Legacy posts</option>
 </select>
 <select aria-label="Filter broad Prayer Map region" id="feedRegion">
-<option value="all">All broad regions</option>
-<option value="none">No region published</option>
+<option value="all">All broad-region filters</option>
+<option value="none">No broad-region label / country focus</option>
 <option value="worldwide">Worldwide</option>
 <option value="north-america">North America</option>
 <option value="latin-america-caribbean">Latin America &amp; Caribbean</option>
@@ -1972,24 +2023,24 @@ You may edit the wording before minting or publishing anything.
       <span class="eyebrow">Broad-region prayer heat · XRPL relay pulse · no GPS inference</span>
       <h2 id="map-pulse-title">Prayer Signal &amp; Relay Pulse</h2>
       <p>
-        This view counts optional broad region labels found in recent validated JCS registry transactions and separately measures the public XRPL endpoints used by this browser. Relay endpoint names and latency describe network access—not the physical location of a wallet, prayer, validator operator, or person.
+        This view counts optional prayer-focus labels found in recent validated JCS registry transactions and separately measures the public XRPL endpoints used by this browser. The connected map releases only threshold-qualified area aggregates and community-support connections. Relay endpoint names and latency describe network access—not the physical location of a wallet, prayer, validator operator, or person.
       </p>
     </div>
     <span class="badge verified" id="mapPulseBadge">Waiting for feed</span>
   </div>
   <div class="map-boundary">
-    <strong>No automatic geolocation:</strong> XRPL transaction fields do not contain a standard GPS field. A user may voluntarily publish one broad region label; otherwise the prayer remains “region not published.” The visual centroid carried in the handoff is only a continent-scale display hint and is never represented as a person’s actual location.
+    <strong>No automatic geolocation:</strong> XRPL transaction fields do not contain a standard GPS field. A user may voluntarily publish a broad region or country the prayer concerns; otherwise the focus remains unpublished. The map derives display positions only from static country/region geometry and never represents them as a person’s actual location.
   </div>
   <div class="pulse-toolbar">
     <a class="btn primary" id="openPrayerMapBtn" href="prayer.map.html" target="_blank" rel="noopener">Open Prayer &amp; Integrity Map</a>
     <button class="btn" id="probeRelaysBtn" type="button">Probe XRPL relay endpoints</button>
-    <button class="btn" id="exportMapSignalsBtn" type="button">Export recent map signals</button>
-    <button class="btn" id="clearMapSignalsBtn" type="button">Clear local handoff queue</button>
+    <button class="btn" id="exportMapSignalsBtn" type="button">Export public map summary</button>
+    <button class="btn" id="clearMapSignalsBtn" type="button">Clear local refresh hint</button>
   </div>
   <div class="pulse-summary">
     <article class="pulse-stat"><span>Recent posts</span><strong id="mapPostCount">—</strong></article>
-    <article class="pulse-stat"><span>Region-labeled</span><strong id="mapRegionCount">—</strong></article>
-    <article class="pulse-stat"><span>Region not published</span><strong id="mapPrivateCount">—</strong></article>
+    <article class="pulse-stat"><span>Publicly mapped</span><strong id="mapRegionCount">—</strong></article>
+    <article class="pulse-stat"><span>Not publicly mapped</span><strong id="mapPrivateCount">—</strong></article>
     <article class="pulse-stat"><span>Active XRPL relay</span><strong id="mapActiveRelay">—</strong></article>
   </div>
   <div class="region-heat-grid" id="regionHeatGrid" aria-live="polite">
@@ -1999,7 +2050,7 @@ You may edit the wording before minting or publishing anything.
     <article class="relay-card"><span>Relay pulse</span><strong>Not probed</strong><div class="relay-line"><span>Location claim</span><b>None</b></div></article>
   </div>
   <div class="map-handoff-status" id="mapHandoffStatus" role="status" aria-live="polite">
-    The page can prepare a privacy-limited handoff through a query string, localStorage queue, and BroadcastChannel. The current Prayer Map can be opened now; its later controlled upgrade should consume this schema directly.
+    This page sends a content-free same-browser refresh hint through the query string, localStorage, and BroadcastChannel. The hint contains no wallet, transaction, message, timestamp, or map focus; the Prayer Map re-reads validated XRPL history and applies its own thresholds.
   </div>
 </section>
 
@@ -2025,7 +2076,7 @@ You may edit the wording before minting or publishing anything.
     <article class="evidence-card full"><span>Mint transaction</span><strong class="mono" id="verifyMintTx">—</strong></article>
     <article class="evidence-card full"><span>NFTokenID</span><strong class="mono" id="verifyNftId">—</strong></article>
     <article class="evidence-card full"><span>Content commitment</span><strong class="mono" id="verifyContentHash">—</strong></article>
-    <article class="evidence-card"><span>Broad region</span><strong id="verifyRegion">—</strong></article>
+    <article class="evidence-card"><span>Public map focus</span><strong id="verifyRegion">—</strong></article>
     <article class="evidence-card"><span>Author wallet display</span><strong id="verifyWallet">—</strong></article>
   </div>
   <div class="evidence-actions">
@@ -2077,7 +2128,7 @@ You may edit the wording before minting or publishing anything.
 <article class="card explain-card">
 <h3>3 · Publish the social record</h3>
 <p>
-          A one-drop registry transaction links the prayer ID, NFTokenID, mint transaction, testimony, optional identity fields, Scripture reference, content commitment, and an optional broad region label into the public feed.
+          A one-drop registry transaction links the prayer ID, NFTokenID, mint transaction, testimony, optional identity fields, Scripture reference, content commitment, category, and an optional prayer-focus area into the public feed.
         </p>
 </article>
 <article class="card explain-card">
@@ -2149,7 +2200,7 @@ You may edit the wording before minting or publishing anything.
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
-<strong>Jesus Christ Saves Token · Sign the Ledger v5.0.0</strong>
+<strong>Jesus Christ Saves Token · Sign the Ledger v6.0.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
         permanent availability from every public XRPL server, moderate religious
@@ -2178,10 +2229,11 @@ You may edit the wording before minting or publishing anything.
   const APP_KEY = '5b8499a9-ae28-4050-ac09-45efa948eced';
   const COLLECTOR = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
   const JCS_LOGO = 'https://jesuschristsavestoken.com/jcs-logo.png';
-  const APP_TAG = 'JCS_SOCIAL_V5';
-  const PRIOR_TAGS = new Set(['JCS_SOCIAL_V4', 'JCS_SOCIAL_V3', 'JCS_SOCIAL_V2']);
+  const APP_TAG = 'JCS_SOCIAL_V6';
+  const PRIOR_TAGS = new Set(['JCS_SOCIAL_V5', 'JCS_SOCIAL_V4', 'JCS_SOCIAL_V3', 'JCS_SOCIAL_V2']);
   const LEGACY_TAG = 'JCS_VERIFY_V1';
   const NFT_TAXON = 1246974803;
+  const MAP_POLICY = 'JCS_MAP_1';
   const DRAFT_KEY = 'jcs.social.draft.v4';
   const PROFILE_KEY = 'jcs.social.profile.v4';
   const PENDING_KEY = 'jcs.social.pending.v4';
@@ -2192,6 +2244,19 @@ You may edit the wording before minting or publishing anything.
   const BOOKMARK_KEY = 'jcs.social.bookmarks.v1';
   const SHARE_HISTORY_KEY = 'jcs.social.share.history.v1';
   const MAP_CHANNEL_NAME = 'jcs-prayer-map';
+  const MAP_SCOPES = new Set(['none', 'region', 'country']);
+  const MIN_PUBLIC_REGION_ACCOUNTS = 5;
+  const MIN_PUBLIC_COUNTRY_ACCOUNTS = 10;
+  const MIN_EXTREME_COUNTRY_ACCOUNTS = 20;
+  const EXTREME_COUNTRY_CODES = new Set([
+    'KP','SO','YE','SD','ER','SY','NG','PK','LY','IR','AF','IN','SA','MM','ML'
+  ]);
+  const NEED_CATEGORIES = new Set(['prayer', 'safety', 'food', 'shelter', 'medical', 'legal', 'relocation', 'pastoral', 'other']);
+  const RESPONSE_TYPES = new Set(['prayer', 'encouragement', 'resource', 'practical-help', 'follow-up']);
+  const HASH_256 = /^[A-F0-9]{64}$/;
+  const SENSITIVE_MEMO_KEYS = new Set(['app', 'kind', 'parent', 'map', 'role', 'scope', 'country', 'region', 'policy', 'nft', 'minttx', 'hash']);
+  const FORBIDDEN_LOCATION_MEMOS = new Set(['lat', 'lng', 'latitude', 'longitude', 'gps', 'coords', 'coordinate', 'city', 'postal', 'postcode', 'ip', 'node', 'relay']);
+  const COUNTRY_CODES = new Set(('AD,AE,AF,AG,AI,AL,AM,AO,AR,AS,AT,AU,AW,AX,AZ,BA,BB,BD,BE,BF,BG,BH,BI,BJ,BL,BM,BN,BO,BR,BS,BT,BW,BY,BZ,CA,CD,CF,CG,CH,CI,CK,CL,CM,CN,CO,CR,CU,CV,CW,CY,CZ,DE,DJ,DK,DM,DO,DZ,EC,EE,EG,EH,ER,ES,ET,FI,FJ,FK,FM,FO,FR,GA,GB,GD,GE,GG,GH,GI,GL,GM,GN,GQ,GR,GS,GT,GU,GW,GY,HK,HM,HN,HR,HT,HU,ID,IE,IL,IM,IN,IO,IQ,IR,IS,IT,JE,JM,JO,JP,KE,KG,KH,KI,KM,KN,KP,KR,KW,KY,KZ,LA,LB,LC,LI,LK,LR,LS,LT,LU,LV,LY,MA,MC,MD,ME,MF,MG,MH,MK,ML,MM,MN,MO,MP,MR,MS,MT,MU,MV,MW,MX,MY,MZ,NA,NC,NE,NF,NG,NI,NL,NO,NP,NR,NU,NZ,OM,PA,PE,PF,PG,PH,PK,PL,PM,PN,PR,PS,PT,PW,PY,QA,RO,RS,RU,RW,SA,SB,SC,SD,SE,SG,SH,SI,SK,SL,SM,SN,SO,SR,SS,ST,SV,SX,SY,SZ,TC,TD,TF,TG,TH,TJ,TL,TM,TN,TO,TR,TT,TV,TW,TZ,UA,UG,UM,US,UY,UZ,VA,VC,VE,VG,VI,VN,VU,WF,WS,XK,YE,ZA,ZM,ZW').split(','));
   const REGION_DEFINITIONS = {
     none:{label:'Region not published', centroid:null},
     worldwide:{label:'Worldwide / not region-specific', centroid:[20,0]},
@@ -2290,6 +2355,11 @@ You may edit the wording before minting or publishing anything.
     return new Date((Number(date) + 946684800) * 1000).toISOString();
   }
 
+  function publicDateBucket(value) {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0, 10);
+  }
+
   function timeAgo(iso) {
     if (!iso) return 'Ledger time unavailable';
     const seconds = Math.max(0, Math.floor((Date.now() - Date.parse(iso)) / 1000));
@@ -2331,6 +2401,175 @@ You may edit the wording before minting or publishing anything.
 
   function regionIsPublished(code='none') {
     return code && code !== 'none';
+  }
+
+  const countryNames = (() => {
+    try { return new Intl.DisplayNames([navigator.language || 'en'], {type:'region'}); }
+    catch { return null; }
+  })();
+
+  function countryLabel(code='') {
+    const normalized = String(code || '').toUpperCase();
+    if (!COUNTRY_CODES.has(normalized)) return 'Country not published';
+    try { return countryNames?.of(normalized) || normalized; }
+    catch { return normalized; }
+  }
+
+  function needLabel(code='prayer') {
+    return {
+      prayer:'General prayer', safety:'Safety', food:'Food or water',
+      shelter:'Shelter', medical:'Medical support', legal:'Legal support',
+      relocation:'Relocation support', pastoral:'Pastoral care', other:'Other'
+    }[code] || 'General prayer';
+  }
+
+  function responseLabel(code='encouragement') {
+    return {
+      prayer:'Prayer response', encouragement:'Encouragement',
+      resource:'Resource shared', 'practical-help':'Practical help offered',
+      'follow-up':'Follow-up'
+    }[code] || 'Encouragement';
+  }
+
+  function normalizeMapFocus(value={}) {
+    const requestedScope = String(value.mapScope || value.scope || 'none');
+    const mapScope = MAP_SCOPES.has(requestedScope) ? requestedScope : 'none';
+    const region = REGION_DEFINITIONS[value.region] && value.region !== 'none'
+      ? value.region : 'none';
+    const country = COUNTRY_CODES.has(String(value.country || '').toUpperCase())
+      ? String(value.country).toUpperCase() : '';
+    const optedIn = Boolean(value.mapOptIn ?? value.mapConsent ?? value.regionConsent);
+
+    if (!optedIn || mapScope === 'none') {
+      return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+    }
+    if (mapScope === 'region' && regionIsPublished(region)) {
+      return {mapOptIn:true, mapScope:'region', region, country:''};
+    }
+    if (mapScope === 'country' && country) {
+      return {mapOptIn:true, mapScope:'country', region:'none', country};
+    }
+    return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+  }
+
+  function mapFocusFromMemos(memos, app, expectedRole='prayer-focus') {
+    if ([...FORBIDDEN_LOCATION_MEMOS].some(key => Object.hasOwn(memos, key))) {
+      return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+    }
+    if (app === 'JCS_SOCIAL_V6') {
+      if (
+        memos.map !== '1' ||
+        memos.role !== expectedRole ||
+        memos.policy !== MAP_POLICY
+      ) return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+      if (
+        memos.scope === 'region' && (
+          !REGION_DEFINITIONS[memos.region] ||
+          memos.region === 'none' ||
+          Object.hasOwn(memos, 'country')
+        )
+      ) return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+      if (
+        memos.scope === 'country' && (
+          !COUNTRY_CODES.has(String(memos.country || '').toUpperCase()) ||
+          Object.hasOwn(memos, 'region')
+        )
+      ) return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+      if (memos.scope !== 'region' && memos.scope !== 'country') {
+        return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+      }
+      return normalizeMapFocus({
+        mapOptIn:true,
+        mapScope:memos.scope,
+        region:memos.region,
+        country:memos.country
+      });
+    }
+    if (expectedRole === 'prayer-focus' && REGION_DEFINITIONS[memos.region] && memos.region !== 'none') {
+      return {mapOptIn:true, mapScope:'region', region:memos.region, country:''};
+    }
+    return {mapOptIn:false, mapScope:'none', region:'none', country:''};
+  }
+
+  function mapFocusLabel(value={}) {
+    const focus = normalizeMapFocus({...value, mapOptIn:value.mapOptIn !== false});
+    if (focus.mapScope === 'country') return countryLabel(focus.country) + ' · prayer focus';
+    if (focus.mapScope === 'region') return regionLabel(focus.region) + ' · prayer focus';
+    return 'Map focus not published';
+  }
+
+  function mapFocusIsPublished(value={}) {
+    return normalizeMapFocus({...value, mapOptIn:value.mapOptIn !== false}).mapScope !== 'none';
+  }
+
+  function mapFocusKey(value={}) {
+    const focus = normalizeMapFocus({...value, mapOptIn:value.mapOptIn !== false});
+    if (focus.mapScope === 'country') return 'country:' + focus.country;
+    if (focus.mapScope === 'region') return 'region:' + focus.region;
+    return '';
+  }
+
+  function publicMapThreshold(value={}) {
+    const focus = normalizeMapFocus({...value, mapOptIn:value.mapOptIn !== false});
+    if (focus.mapScope === 'region') return MIN_PUBLIC_REGION_ACCOUNTS;
+    if (focus.mapScope === 'country') {
+      return EXTREME_COUNTRY_CODES.has(focus.country)
+        ? MIN_EXTREME_COUNTRY_ACCOUNTS
+        : MIN_PUBLIC_COUNTRY_ACCOUNTS;
+    }
+    return Number.POSITIVE_INFINITY;
+  }
+
+  function mapFocusCohort(value={}, role='prayer-focus') {
+    const key = mapFocusKey(value);
+    const accounts = new Set();
+    let records = 0;
+    if (!key) return {records, accounts, threshold:Number.POSITIVE_INFINITY};
+    const candidates = role === 'support-focus'
+      ? (state.posts || []).flatMap(post => post.replies || [])
+      : (state.posts || []);
+    for (const candidate of candidates) {
+      if (mapFocusKey(candidate) !== key) continue;
+      records += 1;
+      if (candidate.account) accounts.add(candidate.account);
+    }
+    return {records, accounts, threshold:publicMapThreshold(value)};
+  }
+
+  function mapFocusIsThresholdQualified(value={}, role='prayer-focus') {
+    const cohort = mapFocusCohort(value, role);
+    return cohort.accounts.size >= cohort.threshold;
+  }
+
+  function publicMapFocusLabel(value={}, role='prayer-focus') {
+    if (!mapFocusIsPublished(value)) return 'Map focus not published';
+    if (!mapFocusIsThresholdQualified(value, role)) {
+      return 'Signed map focus · public aggregate suppressed';
+    }
+    const label = mapFocusLabel(value);
+    return role === 'support-focus'
+      ? label.replace('prayer focus', 'support focus')
+      : label;
+  }
+
+  function publicCountFloor(value) {
+    const count = Math.max(0, Number(value) || 0);
+    return count < 5 ? 0 : Math.floor(count / 5) * 5;
+  }
+
+  function populateCountrySelect() {
+    const select = $('countryCode');
+    const fragment = document.createDocumentFragment();
+    [...COUNTRY_CODES]
+      .map(code => ({code, label:countryLabel(code)}))
+      .sort((left, right) => left.label.localeCompare(right.label))
+      .forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.code;
+        option.textContent = item.label + ' (' + item.code + ')';
+        fragment.appendChild(option);
+      });
+    select.appendChild(fragment);
   }
 
   function loadBookmarks() {
@@ -2584,6 +2823,15 @@ You may edit the wording before minting or publishing anything.
     };
   }
 
+  function mapFocusFromForm() {
+    return normalizeMapFocus({
+      mapScope:$('mapScope').value,
+      region:$('regionCode').value,
+      country:$('countryCode').value,
+      mapOptIn:$('regionConsent').checked
+    });
+  }
+
   function draftFromForm() {
     return {
       type: $('postType').value,
@@ -2592,6 +2840,9 @@ You may edit the wording before minting or publishing anything.
       name: $('displayName').value,
       handle: $('handle').value,
       scripture: $('scriptureRef').value,
+      need:$('needCategory').value,
+      mapScope:$('mapScope').value,
+      country:$('countryCode').value,
       region:$('regionCode').value,
       regionConsent:$('regionConsent').checked
     };
@@ -2619,10 +2870,40 @@ You may edit the wording before minting or publishing anything.
       $('displayName').value = draft.name || profile.name || '';
       $('handle').value = draft.handle || profile.handle || '';
       $('scriptureRef').value = draft.scripture || '';
-      $('regionCode').value = REGION_DEFINITIONS[draft.region] ? draft.region : 'none';
-      $('regionConsent').checked = Boolean(draft.regionConsent && draft.region && draft.region !== 'none');
+      $('needCategory').value = NEED_CATEGORIES.has(draft.need) ? draft.need : 'prayer';
+      const legacyRegion = REGION_DEFINITIONS[draft.region] && draft.region !== 'none';
+      $('mapScope').value = MAP_SCOPES.has(draft.mapScope)
+        ? draft.mapScope
+        : (draft.regionConsent && legacyRegion ? 'region' : 'none');
+      $('regionCode').value = legacyRegion ? draft.region : 'worldwide';
+      $('countryCode').value = COUNTRY_CODES.has(String(draft.country || '').toUpperCase())
+        ? String(draft.country).toUpperCase() : '';
+      $('regionConsent').checked = Boolean(
+        draft.regionConsent &&
+        ($('mapScope').value === 'region' || ($('mapScope').value === 'country' && $('countryCode').value))
+      );
     } catch {}
+    updateMapFocusUi();
     updateComposer();
+  }
+
+  function updateMapFocusUi() {
+    const scope = MAP_SCOPES.has($('mapScope').value) ? $('mapScope').value : 'none';
+    $('regionField').hidden = scope !== 'region';
+    $('countryField').hidden = scope !== 'country';
+    $('regionConsent').disabled = scope === 'none';
+    if (scope === 'none') $('regionConsent').checked = false;
+
+    if (scope === 'region') {
+      $('mapFocusHint').textContent =
+        'The signed area describes where the prayer is focused. Public map display requires 5 qualifying records from 5 distinct accounts.';
+    } else if (scope === 'country') {
+      $('mapFocusHint').textContent =
+        'Country focus is more revealing. Public display requires at least 10 distinct accounts, or 20 for an extreme-pressure country.';
+    } else {
+      $('mapFocusHint').textContent =
+        'No geographic label will be added to the signed mint or registry transaction.';
+    }
   }
 
   function updateComposer() {
@@ -2638,7 +2919,8 @@ You may edit the wording before minting or publishing anything.
     const name = $('displayName').value.trim() || 'Anonymous believer';
     const handle = normalizeHandle($('handle').value);
     const scripture = $('scriptureRef').value.trim();
-    const region = $('regionCode').value;
+    const focus = mapFocusFromForm();
+    const need = NEED_CATEGORIES.has($('needCategory').value) ? $('needCategory').value : 'prayer';
 
     $('previewMessage').textContent =
       message.trim() || 'Your testimony preview will appear here.';
@@ -2646,7 +2928,8 @@ You may edit the wording before minting or publishing anything.
       postTypeLabel($('postType').value) + ' · ' + name +
       (handle ? ' · ' + handle : '') +
       (scripture ? ' · ' + scripture : '') +
-      (regionIsPublished(region) ? ' · ' + regionLabel(region) : '');
+      ' · ' + needLabel(need) +
+      (focus.mapScope !== 'none' ? ' · ' + mapFocusLabel(focus) : '');
 
     $('previewPrayerNumber').textContent =
       state.pending?.prayerNumber ||
@@ -2656,14 +2939,14 @@ You may edit the wording before minting or publishing anything.
     updateComposer.saveTimer = window.setTimeout(saveDraft, 350);
   }
 
-  ['postType','visibility','message','displayName','handle','scriptureRef','regionCode','regionConsent']
+  ['postType','needCategory','visibility','message','displayName','handle','scriptureRef','mapScope','regionCode','countryCode','regionConsent']
     .forEach(id => {
       $(id).addEventListener('input', updateComposer);
       $(id).addEventListener('change', updateComposer);
     });
 
-  $('regionCode').addEventListener('change', () => {
-    if ($('regionCode').value === 'none') $('regionConsent').checked = false;
+  $('mapScope').addEventListener('change', () => {
+    updateMapFocusUi();
     updateComposer();
   });
 
@@ -2815,6 +3098,12 @@ You may edit the wording before minting or publishing anything.
     $('message').value = '';
     $('scriptureRef').value = '';
     $('postType').value = 'prayer';
+    $('needCategory').value = 'prayer';
+    $('mapScope').value = 'none';
+    $('regionCode').value = 'worldwide';
+    $('countryCode').value = '';
+    $('regionConsent').checked = false;
+    updateMapFocusUi();
     try { localStorage.removeItem(DRAFT_KEY); } catch {}
     updateComposer();
     toast('Draft cleared.');
@@ -2837,13 +3126,19 @@ You may edit the wording before minting or publishing anything.
 
   function canonicalPost(post) {
     return JSON.stringify({
-      v:5,
+      v:6,
       type:post.type,
       message:post.message,
       name:post.name,
       handle:post.handle,
       scripture:post.scripture,
-      region:post.region || 'none',
+      need:post.need || 'prayer',
+      map:post.mapOptIn ? 1 : 0,
+      role:post.mapOptIn ? 'prayer-focus' : '',
+      scope:post.mapScope || 'none',
+      region:post.mapScope === 'region' ? post.region : 'none',
+      country:post.mapScope === 'country' ? post.country : '',
+      policy:post.mapOptIn ? MAP_POLICY : '',
       created:post.created,
       nonce:post.nonce
     });
@@ -2852,15 +3147,28 @@ You may edit the wording before minting or publishing anything.
   async function preparePost() {
     if (!state.account) throw new Error('Connect Xaman first.');
 
+    const requestedScope = MAP_SCOPES.has($('mapScope').value)
+      ? $('mapScope').value : 'none';
+    if (requestedScope !== 'none' && !$('regionConsent').checked) {
+      throw new Error('Confirm the public Prayer Map disclosure or choose “Not on the map.”');
+    }
+    if (requestedScope === 'country' && !COUNTRY_CODES.has($('countryCode').value)) {
+      throw new Error('Choose the country this prayer concerns, or use a broad region.');
+    }
+    const focus = mapFocusFromForm();
+
     const post = {
+      appTag:APP_TAG,
+      schemaVersion:6,
       type:$('postType').value,
       message:$('message').value.trim(),
       name:$('displayName').value.trim(),
       handle:normalizeHandle($('handle').value),
       scripture:$('scriptureRef').value.trim(),
-      region:$('regionCode').value,
+      need:NEED_CATEGORIES.has($('needCategory').value) ? $('needCategory').value : 'prayer',
+      ...focus,
       visibility:$('visibility').value,
-      created:new Date().toISOString(),
+      created:publicDateBucket(new Date()),
       nonce:randomNonce(),
       account:state.account
     };
@@ -2869,10 +3177,9 @@ You may edit the wording before minting or publishing anything.
     if (post.message.length > 320) {
       throw new Error('The message exceeds 320 characters.');
     }
-    if (regionIsPublished(post.region) && !$('regionConsent').checked) {
-      throw new Error('Confirm the broad-region privacy notice or choose “Do not publish a region.”');
+    if (utf8Bytes(post.message) > 1200) {
+      throw new Error('The message is too large in UTF-8 bytes for a reliable signed memo. Shorten it and try again.');
     }
-    if (!REGION_DEFINITIONS[post.region]) post.region = 'none';
 
     post.hash = await sha256Hex(canonicalPost(post));
     post.uri =
@@ -2892,6 +3199,16 @@ You may edit the wording before minting or publishing anything.
 
   function compactMemos(entries) {
     return entries.filter(Boolean);
+  }
+
+  function memoPayloadBytes(memos=[]) {
+    return memos.reduce((total, item) => {
+      const value = item?.Memo || {};
+      return total + ['MemoType','MemoData','MemoFormat'].reduce((sum, key) => {
+        const hex = String(value[key] || '');
+        return sum + (hex.length % 2 === 0 ? hex.length / 2 : 0);
+      }, 0);
+    }, 0);
   }
 
   function securityCode() {
@@ -2962,6 +3279,9 @@ You may edit the wording before minting or publishing anything.
         memo('domain', returnUrl)
       ].filter(Boolean)
     };
+    if (memoPayloadBytes(txjson.Memos) > 12000) {
+      throw new Error('The signed memo payload exceeds the page safety budget. Shorten the public text or optional fields.');
+    }
 
     const request = {
       txjson,
@@ -3114,16 +3434,23 @@ You may edit the wording before minting or publishing anything.
   }
 
   function mintMemos(post) {
+    const focus = normalizeMapFocus(post);
     return compactMemos([
-      memo('app', APP_TAG),
+      memo('app', post.appTag || APP_TAG),
       memo('kind', 'mint'),
       memo('type', post.type),
       memo('msg', post.message),
       memo('name', post.name),
       memo('handle', post.handle),
       memo('scripture', post.scripture),
-      memo('region', regionIsPublished(post.region) ? post.region : ''),
-      memo('created', post.created),
+      memo('need', NEED_CATEGORIES.has(post.need) ? post.need : 'prayer'),
+      memo('map', focus.mapOptIn ? '1' : ''),
+      memo('role', focus.mapOptIn ? 'prayer-focus' : ''),
+      memo('scope', focus.mapOptIn ? focus.mapScope : ''),
+      memo('region', focus.mapScope === 'region' ? focus.region : ''),
+      memo('country', focus.mapScope === 'country' ? focus.country : ''),
+      memo('policy', focus.mapOptIn ? MAP_POLICY : ''),
+      memo('created', publicDateBucket(post.created)),
       memo('nonce', post.nonce),
       memo('hash', post.hash),
       memo('image', JCS_LOGO)
@@ -3132,8 +3459,14 @@ You may edit the wording before minting or publishing anything.
 
   function registryMemos(pending) {
     const post = pending.post;
+    const schemaVersion = Number(post.schemaVersion || 5);
+    const appTag = post.appTag || (schemaVersion >= 6 ? APP_TAG : 'JCS_SOCIAL_V5');
+    const focus = schemaVersion >= 6 ? normalizeMapFocus(post) : {
+      mapOptIn:regionIsPublished(post.region), mapScope:regionIsPublished(post.region) ? 'region' : 'none',
+      region:post.region || 'none', country:''
+    };
     return compactMemos([
-      memo('app', APP_TAG),
+      memo('app', appTag),
       memo('kind', 'post'),
       memo('number', pending.prayerNumber),
       memo('ledger', pending.mintLedgerIndex),
@@ -3143,8 +3476,14 @@ You may edit the wording before minting or publishing anything.
       memo('name', post.name),
       memo('handle', post.handle),
       memo('scripture', post.scripture),
-      memo('region', regionIsPublished(post.region) ? post.region : ''),
-      memo('created', post.created),
+      memo('need', schemaVersion >= 6 && NEED_CATEGORIES.has(post.need) ? post.need : ''),
+      memo('map', schemaVersion >= 6 && focus.mapOptIn ? '1' : ''),
+      memo('role', schemaVersion >= 6 && focus.mapOptIn ? 'prayer-focus' : ''),
+      memo('scope', schemaVersion >= 6 && focus.mapOptIn ? focus.mapScope : ''),
+      memo('region', focus.mapScope === 'region' ? focus.region : ''),
+      memo('country', schemaVersion >= 6 && focus.mapScope === 'country' ? focus.country : ''),
+      memo('policy', schemaVersion >= 6 && focus.mapOptIn ? MAP_POLICY : ''),
+      memo('created', schemaVersion >= 6 ? publicDateBucket(post.created) : post.created),
       memo('visibility', post.visibility),
       memo('hash', post.hash),
       memo('nft', pending.nftId),
@@ -3172,6 +3511,16 @@ You may edit the wording before minting or publishing anything.
       const pending = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null');
       state.pending =
         pending?.post?.account === state.account ? pending : null;
+      if (state.pending?.post) {
+        const post = state.pending.post;
+        post.schemaVersion = Number(post.schemaVersion || 5);
+        post.appTag = post.appTag || (post.schemaVersion >= 6 ? APP_TAG : 'JCS_SOCIAL_V5');
+        if (post.schemaVersion < 6) {
+          post.mapOptIn = regionIsPublished(post.region);
+          post.mapScope = post.mapOptIn ? 'region' : 'none';
+          post.country = '';
+        }
+      }
     } catch {
       state.pending = null;
     }
@@ -3274,50 +3623,18 @@ You may edit the wording before minting or publishing anything.
 
 
 
-  function mapSignalFromPost(post) {
-    const region = post.region || 'none';
-    const centroid = regionCentroid(region);
+  function mapSignalFromPost(_post) {
     return {
-      schema:'jcs-prayer-map-signal-v1',
-      source:'https://jesuschristsavestoken.com/verify.html',
-      created_at_utc:new Date().toISOString(),
-      prayer_number:post.prayerNumber || '',
-      post_type:post.type || 'testimony',
-      region_code:region,
-      region_label:regionLabel(region),
-      location_source:regionIsPublished(region) ? 'author-declared-broad-region' : 'not-published',
-      display_centroid:centroid ? {
-        lat:centroid[0],
-        lng:centroid[1],
-        accuracy:'continent-scale visual hint only',
-        actual_user_location:false
-      } : null,
-      registry_tx:post.hash || '',
-      registry_ledger_index:Number(post.ledgerIndex || 0),
-      mint_tx:post.mintTx || '',
-      nftoken_id:post.nftId || '',
-      content_commitment:post.contentHash || '',
-      public_url:TESTIMONY_SHARE_BASE + '#post-' + String(post.key || '').slice(0,16),
-      relay_endpoint:state.activeEndpoint || '',
-      relay_endpoint_is_user_location:false,
-      message_in_handoff:false
+      schema:'jcs-prayer-map-refresh-v1',
+      action:'refresh-ledger',
+      ledger_validation_required:true
     };
   }
 
-  function readMapSignalQueue() {
-    try {
-      const value = JSON.parse(localStorage.getItem(MAP_SIGNAL_KEY) || '[]');
-      return Array.isArray(value) ? value : [];
-    } catch { return []; }
-  }
-
   function storeMapSignal(signal) {
-    if (!signal?.registry_tx) return;
-    const queue = readMapSignalQueue()
-      .filter(item => item && item.registry_tx !== signal.registry_tx);
-    queue.unshift(signal);
+    if (signal?.schema !== 'jcs-prayer-map-refresh-v1') return;
     try {
-      localStorage.setItem(MAP_SIGNAL_KEY, JSON.stringify(queue.slice(0,120)));
+      localStorage.removeItem(MAP_SIGNAL_KEY);
       localStorage.setItem(MAP_FOCUS_KEY, JSON.stringify(signal));
     } catch {}
     try {
@@ -3329,14 +3646,8 @@ You may edit the wording before minting or publishing anything.
   }
 
   function mapUrlForPost(post) {
-    const signal = mapSignalFromPost(post);
     const params = new URLSearchParams({
-      signal:'v1',
-      tx:signal.registry_tx,
-      ledger:String(signal.registry_ledger_index || ''),
-      region:signal.region_code,
-      prayer:signal.prayer_number,
-      source:'verify'
+      refresh:'xrpl'
     });
     return 'prayer.map.html?' + params.toString();
   }
@@ -3345,8 +3656,7 @@ You may edit the wording before minting or publishing anything.
     const signal = mapSignalFromPost(post);
     storeMapSignal(signal);
     $('mapHandoffStatus').textContent =
-      'Prepared privacy-limited map handoff for ' + (post.prayerNumber || 'this post') +
-      '. No message text, GPS coordinate, IP-derived location, or wallet-secret data was placed in the URL.';
+      'Sent a content-free same-browser ledger refresh hint. The URL and hint contain no transaction, wallet, NFT, message, timestamp, or location. The map will re-read validated XRPL history and publish only threshold-qualified aggregates.';
     window.open(mapUrlForPost(post), '_blank', 'noopener,noreferrer');
   }
 
@@ -3354,7 +3664,7 @@ You may edit the wording before minting or publishing anything.
     return {
       schema:'jcs-verified-social-evidence-v1',
       generated_at_utc:new Date().toISOString(),
-      application:{name:'JCS Sign the Ledger', release:'5.0.0'},
+      application:{name:'JCS Sign the Ledger', release:'6.0.0'},
       observed:{
         registry_transaction:post.hash || null,
         registry_ledger_index:Number(post.ledgerIndex || 0) || null,
@@ -3364,14 +3674,20 @@ You may edit the wording before minting or publishing anything.
         author_wallet:post.account || null,
         public_message:post.message || null,
         scripture_reference:post.scripture || null,
-        public_memo_region:regionIsPublished(post.region) ? post.region : null,
+        public_need_category:NEED_CATEGORIES.has(post.need) ? post.need : 'prayer',
+        public_map_opt_in:Boolean(post.mapOptIn),
+        public_map_role:post.mapOptIn ? 'prayer-focus' : null,
+        public_map_scope:post.mapOptIn ? post.mapScope : null,
+        public_memo_region:post.mapScope === 'region' ? post.region : null,
+        public_memo_country:post.mapScope === 'country' ? post.country : null,
+        public_map_policy:post.mapOptIn ? MAP_POLICY : null,
         content_commitment:post.contentHash || null,
         xrpl_server_used:state.activeEndpoint || null
       },
       derived:{
         prayer_identifier:post.prayerNumber || null,
         display_wallet:displayWallet(post),
-        region_label:regionLabel(post.region || 'none'),
+        map_focus_label:mapFocusLabel(post),
         share_url:TESTIMONY_SHARE_BASE + '#post-' + String(post.key || '').slice(0,16),
         map_handoff:mapSignalFromPost(post)
       },
@@ -3400,7 +3716,7 @@ You may edit the wording before minting or publishing anything.
     $('verifyMintTx').textContent = post?.mintTx || '—';
     $('verifyNftId').textContent = post?.nftId || '—';
     $('verifyContentHash').textContent = post?.contentHash || '—';
-    $('verifyRegion').textContent = post ? regionLabel(post.region || 'none') : '—';
+    $('verifyRegion').textContent = post ? publicMapFocusLabel(post) : '—';
     $('verifyWallet').textContent = post ? displayWallet(post) : '—';
     ['shareLatestBtn','openLatestMapBtn','copyVerificationBtn','downloadVerificationBtn']
       .forEach(id => { $(id).disabled = !enabled; });
@@ -3435,7 +3751,8 @@ You may edit the wording before minting or publishing anything.
       'Mint transaction: ' + (post.mintTx || '—'),
       'NFTokenID: ' + (post.nftId || '—'),
       'Content commitment: ' + (post.contentHash || '—'),
-      'Broad region: ' + regionLabel(post.region || 'none'),
+      'Public map focus: ' + publicMapFocusLabel(post),
+      'Category: ' + needLabel(post.need || 'prayer'),
       'Public URL: ' + data.derived.share_url,
       '',
       'This proves a public XRPL event under the displayed evidence. It does not prove legal identity, actual location, truth, ownership, endorsement, or spiritual authority.'
@@ -3446,10 +3763,14 @@ You may edit the wording before minting or publishing anything.
     const posts = state.posts || [];
     const counts = {};
     for (const post of posts) {
-      const code = REGION_DEFINITIONS[post.region] ? post.region : 'none';
+      const qualified = mapFocusIsThresholdQualified(post);
+      const code = qualified && post.mapScope === 'country'
+        ? 'country-focus'
+        : (qualified && REGION_DEFINITIONS[post.region] && post.mapScope === 'region'
+          ? post.region : 'none');
       counts[code] = (counts[code] || 0) + 1;
     }
-    const published = posts.filter(post => regionIsPublished(post.region)).length;
+    const published = posts.filter(mapFocusIsThresholdQualified).length;
     $('mapPostCount').textContent = posts.length.toLocaleString();
     $('mapRegionCount').textContent = published.toLocaleString();
     $('mapPrivateCount').textContent = (posts.length - published).toLocaleString();
@@ -3462,16 +3783,21 @@ You may edit the wording before minting or publishing anything.
     $('mapPulseBadge').className = 'badge ' + (posts.length ? 'verified' : '');
 
     const max = Math.max(1, ...Object.values(counts));
-    $('regionHeatGrid').innerHTML = Object.entries(REGION_DEFINITIONS)
+    const pulseAreas = {
+      ...REGION_DEFINITIONS,
+      'country-focus':{label:'Country-level prayer focus'}
+    };
+    $('regionHeatGrid').innerHTML = Object.entries(pulseAreas)
       .map(([code, info]) => {
-        const count = counts[code] || 0;
+        const rawCount = counts[code] || 0;
+        const count = code === 'none' ? rawCount : publicCountFloor(rawCount);
         const percent = posts.length ? (count / posts.length * 100) : 0;
-        const heat = count / max * 100;
+        const heat = rawCount / max * 100;
         return `
-          <button class="region-heat-card" type="button" data-region-filter="${escapeHtml(code)}" style="--heat:${heat.toFixed(1)}%">
+          <button class="region-heat-card" type="button" data-region-filter="${escapeHtml(code === 'country-focus' ? 'none' : code)}" style="--heat:${heat.toFixed(1)}%">
             <span>${escapeHtml(info.label)}</span>
-            <strong>${count.toLocaleString()} signal${count === 1 ? '' : 's'}</strong>
-            <small>${percent.toFixed(1)}% of recent posts · click to filter feed</small>
+            <strong>${count.toLocaleString()}${code === 'none' ? '' : '+'} signal${count === 1 ? '' : 's'}</strong>
+            <small>${percent.toFixed(1)}%${code === 'none' ? '' : ' or more'} of recent posts · click to filter the threshold-safe feed view</small>
           </button>`;
       }).join('');
   }
@@ -3549,7 +3875,7 @@ You may edit the wording before minting or publishing anything.
       nftId:pending.nftId,
       mintTx:pending.mintTx,
       prayerNumber:pending.prayerNumber,
-      version:'v5',
+      version:Number(pending.post.schemaVersion || 5) >= 6 ? 'v6' : 'v5',
       ledgerIndex:Number(registryValidated?.ledger_index || 0),
       txIndex:Number(meta?.TransactionIndex ?? meta?.transaction_index ?? 0),
       contentHash:pending.post.hash || '',
@@ -3617,11 +3943,18 @@ You may edit the wording before minting or publishing anything.
 
   function parseMemos(memos=[]) {
     const output = {};
-    for (const item of memos || []) {
+    const seen = new Set();
+    for (const item of (memos || []).slice(0, 64)) {
       const source = item?.Memo || {};
       const type = hexToStr(source.MemoType || '').trim().toLowerCase();
       const data = hexToStr(source.MemoData || '').trim();
-      if (type) output[type] = data;
+      if (!type || type.length > 64 || utf8Bytes(data) > 4096) continue;
+      if (seen.has(type) && SENSITIVE_MEMO_KEYS.has(type)) {
+        output.__invalid = 'duplicate-' + type;
+        continue;
+      }
+      seen.add(type);
+      output[type] = data;
     }
     return output;
   }
@@ -3632,7 +3965,7 @@ You may edit the wording before minting or publishing anything.
     return {
       tx,
       meta,
-      hash:tx.hash || tx.Hash || entry?.hash || '',
+      hash:String(tx.hash || tx.Hash || entry?.hash || '').toUpperCase(),
       date:tx.date ?? entry?.date,
       ledgerIndex:Number(
         tx.ledger_index ||
@@ -3677,25 +4010,33 @@ You may edit the wording before minting or publishing anything.
     const posts = [];
     const replies = new Map();
     const amens = new Map();
+    const dedupe = new Set();
 
     for (const entry of entries) {
       const normalized = normalizeAccountTx(entry);
       const tx = normalized.tx;
+      const result = normalized.meta?.TransactionResult || normalized.meta?.transaction_result || '';
 
       if (
         !normalized.validated ||
         tx.TransactionType !== 'Payment' ||
-        tx.Destination !== COLLECTOR
+        tx.Destination !== COLLECTOR ||
+        String(tx.Amount || '') !== '1' ||
+        result !== 'tesSUCCESS' ||
+        !HASH_256.test(normalized.hash) ||
+        dedupe.has(normalized.hash)
       ) continue;
 
       const memos = parseMemos(tx.Memos || []);
+      if (memos.__invalid) continue;
       const app = memos.app || '';
       const created =
-        memos.created ||
         rippleDateToIso(normalized.date) ||
-        new Date().toISOString();
+        (memos.created && !Number.isNaN(Date.parse(memos.created)) ? memos.created : '') ||
+        '';
 
       if (app === LEGACY_TAG) {
+        dedupe.add(normalized.hash);
         posts.push({
           key:normalized.hash,
           hash:normalized.hash,
@@ -3722,6 +4063,7 @@ You may edit the wording before minting or publishing anything.
       }
 
       if (app !== APP_TAG && !PRIOR_TAGS.has(app)) continue;
+      dedupe.add(normalized.hash);
       const kind = memos.kind || 'post';
       const parent = memos.parent || memos.nft || normalized.hash;
 
@@ -3735,20 +4077,27 @@ You may edit the wording before minting or publishing anything.
         continue;
       }
 
-      if (kind === 'reply') {
+      if (kind === 'reply' || kind === 'support') {
         if (!replies.has(parent)) replies.set(parent, []);
+        const response = RESPONSE_TYPES.has(memos.response)
+          ? memos.response : (kind === 'support' ? 'practical-help' : 'encouragement');
+        const focus = mapFocusFromMemos(memos, app, 'support-focus');
         replies.get(parent).push({
           hash:normalized.hash,
           account:tx.Account || '',
           message:memos.msg || '',
           name:memos.name || '',
           handle:memos.handle || '',
+          response,
+          ...focus,
           created
         });
         continue;
       }
 
       if (kind !== 'post') continue;
+
+      const focus = mapFocusFromMemos(memos, app, 'prayer-focus');
 
       const post = {
         key:memos.nft || normalized.hash,
@@ -3761,7 +4110,8 @@ You may edit the wording before minting or publishing anything.
             ? 'Numbered prayer'
             : 'Earlier NFT testimony'),
         version:
-          app === APP_TAG ? 'v5' :
+          app === APP_TAG ? 'v6' :
+          app === 'JCS_SOCIAL_V5' ? 'v5' :
           app === 'JCS_SOCIAL_V4' ? 'v4' :
           app === 'JCS_SOCIAL_V3' ? 'v3' : 'v2',
         type:memos.type || 'testimony',
@@ -3769,7 +4119,8 @@ You may edit the wording before minting or publishing anything.
         name:memos.name || '',
         handle:memos.handle || '',
         scripture:memos.scripture || '',
-        region:REGION_DEFINITIONS[memos.region] ? memos.region : 'none',
+        need:NEED_CATEGORIES.has(memos.need) ? memos.need : 'prayer',
+        ...focus,
         visibility:memos.visibility || 'short',
         account:tx.Account || '',
         created,
@@ -3781,16 +4132,23 @@ You may edit the wording before minting or publishing anything.
         txIndex:normalized.txIndex
       };
 
-      if (post.contentHash && (app === APP_TAG || app === 'JCS_SOCIAL_V4')) {
+      if (post.contentHash && (app === APP_TAG || app === 'JCS_SOCIAL_V5' || app === 'JCS_SOCIAL_V4')) {
         post.contentVerified = true;
       }
       posts.push(post);
     }
 
     for (const post of posts) {
-      post.replies = (replies.get(post.key) || [])
+      const aliases = [post.key, post.hash, post.nftId, post.mintTx].filter(Boolean);
+      const replyByHash = new Map();
+      const amenByHash = new Map();
+      aliases.forEach(alias => {
+        (replies.get(alias) || []).forEach(reply => replyByHash.set(reply.hash, reply));
+        (amens.get(alias) || []).forEach(amen => amenByHash.set(amen.hash, amen));
+      });
+      post.replies = [...replyByHash.values()]
         .sort((a, b) => Date.parse(a.created) - Date.parse(b.created));
-      post.amens = (amens.get(post.key) || []).length;
+      post.amens = amenByHash.size;
     }
 
     return posts;
@@ -3810,7 +4168,9 @@ You may edit the wording before minting or publishing anything.
 
     let posts = state.posts.filter(post => {
       if (type !== 'all' && post.type !== type) return false;
-      const postRegion = REGION_DEFINITIONS[post.region] ? post.region : 'none';
+      const postRegion = mapFocusIsThresholdQualified(post) &&
+        post.mapScope === 'region' && REGION_DEFINITIONS[post.region]
+        ? post.region : 'none';
       if (region !== 'all' && postRegion !== region) return false;
       if (!query) return true;
       return [
@@ -3820,7 +4180,8 @@ You may edit the wording before minting or publishing anything.
         post.handle,
         post.account,
         post.scripture,
-        regionLabel(post.region || 'none'),
+        publicMapFocusLabel(post),
+        needLabel(post.need || 'prayer'),
         post.nftId,
         post.hash
       ].join(' ').toLowerCase().includes(query);
@@ -3849,7 +4210,8 @@ You may edit the wording before minting or publishing anything.
     return `
       <div class="reply">
         <div class="reply-meta">
-          ${escapeHtml(label)} · ${escapeHtml(timeAgo(reply.created))} · validated on-ledger reply
+          ${escapeHtml(label)} · ${escapeHtml(timeAgo(reply.created))} · ${escapeHtml(responseLabel(reply.response))} · validated on-ledger reply
+          ${mapFocusIsPublished(reply) ? ' · ' + escapeHtml(publicMapFocusLabel(reply, 'support-focus')) : ''}
         </div>
         <div class="reply-body">${escapeHtml(reply.message)}</div>
       </div>
@@ -3864,8 +4226,8 @@ You may edit the wording before minting or publishing anything.
     const anchor = '#post-' + String(post.key || '').slice(0, 16);
     const url = TESTIMONY_SHARE_BASE + anchor;
     const scripture = post.scripture ? '\n' + post.scripture : '';
-    const region = regionIsPublished(post.region)
-      ? '\nBroad region: ' + regionLabel(post.region)
+    const region = mapFocusIsThresholdQualified(post)
+      ? '\nPrayer focus: ' + publicMapFocusLabel(post)
       : '';
     const message = String(post.message || 'On-chain testimony').trim();
     const proof = post.hash
@@ -3956,7 +4318,8 @@ You may edit the wording before minting or publishing anything.
     ctx.font = '700 24px system-ui, sans-serif';
     const meta = [
       post.scripture || '',
-      regionIsPublished(post.region) ? regionLabel(post.region) : 'Region not published'
+      needLabel(post.need || 'prayer'),
+      publicMapFocusLabel(post)
     ].filter(Boolean).join(' · ');
     if (meta) ctx.fillText(meta, 70, Math.min(endY + 28, 465));
 
@@ -4081,7 +4444,7 @@ You may edit the wording before minting or publishing anything.
   function renderPost(post, index) {
     const author = post.name || post.handle || 'Anonymous believer';
     const handle = post.name && post.handle ? post.handle : '';
-    const prior = post.version !== 'v5';
+    const prior = post.version !== 'v6';
 
     const badges = [
       `<span class="prayer-number">${escapeHtml(post.prayerNumber)}</span>`,
@@ -4095,9 +4458,10 @@ You may edit the wording before minting or publishing anything.
       post.contentVerified
         ? '<span class="badge verified">Commitment recorded</span>'
         : '',
-      regionIsPublished(post.region)
-        ? '<span class="badge region">' + escapeHtml(regionLabel(post.region)) + '</span>'
-        : '<span class="badge">Region not published</span>'
+      '<span class="badge need">' + escapeHtml(needLabel(post.need || 'prayer')) + '</span>',
+      mapFocusIsThresholdQualified(post)
+        ? '<span class="badge region">' + escapeHtml(publicMapFocusLabel(post)) + '</span>'
+        : '<span class="badge">' + escapeHtml(publicMapFocusLabel(post)) + '</span>'
     ].filter(Boolean).join('');
 
     const ledgerParts = [
@@ -4105,7 +4469,8 @@ You may edit the wording before minting or publishing anything.
       post.nftId ? 'NFTokenID: ' + post.nftId : '',
       post.mintTx ? 'Mint tx: ' + post.mintTx : '',
       post.ledgerIndex ? 'Validated ledger: ' + post.ledgerIndex : '',
-      'Broad region: ' + regionLabel(post.region || 'none'),
+      'Public map focus: ' + publicMapFocusLabel(post),
+      'Category: ' + needLabel(post.need || 'prayer'),
       'Wallet: ' + displayWallet(post)
     ].filter(Boolean).join('\n');
 
@@ -4132,7 +4497,7 @@ You may edit the wording before minting or publishing anything.
         <div class="post-body">${escapeHtml(post.message || 'On-chain testimony')}</div>
         <div class="post-ledger">${escapeHtml(ledgerParts)}</div>
         <div class="post-source-note">
-          Source: validated XRP Ledger transaction history · format ${escapeHtml(post.version)} · broad region is author-declared only
+          Source: validated XRP Ledger transaction history · format ${escapeHtml(post.version)} · map focus is voluntary and describes the prayer, not the signer
         </div>
 
         <div class="post-actions">
@@ -4168,6 +4533,23 @@ You may edit the wording before minting or publishing anything.
           </div>
           <textarea class="inline-reply-text" maxlength="220"
             placeholder="Write an uplifting reply, prayer, or word of encouragement."></textarea>
+          <div class="inline-support-fields">
+            <label>
+              Community response type
+              <select class="inline-response-type">
+                <option value="encouragement">Encouragement</option>
+                <option value="prayer">Prayer response</option>
+                <option value="resource">Resource shared</option>
+                <option value="practical-help">Practical help offered</option>
+                <option value="follow-up">Follow-up</option>
+              </select>
+            </label>
+            <label class="inline-map-optin">
+              <input class="inline-map-consent" type="checkbox">
+              <span>Include the composer’s current map focus as the area this response represents. It is not my verified location.</span>
+            </label>
+          </div>
+          <span class="inline-map-summary">Current composer focus: ${escapeHtml(mapFocusLabel(mapFocusFromForm()))}</span>
           <div class="inline-reply-actions">
             <span class="inline-reply-counter">0 / 220</span>
             <div class="inline-reply-buttons">
@@ -4226,7 +4608,12 @@ You may edit the wording before minting or publishing anything.
       state.posts.reduce((sum, post) => sum + post.amens, 0).toLocaleString();
     $('statWallets').textContent = wallets.size.toLocaleString();
     $('statRegions').textContent = new Set(
-      state.posts.map(post => post.region).filter(regionIsPublished)
+      state.posts.map(post => {
+        if (!mapFocusIsThresholdQualified(post)) return '';
+        if (post.mapScope === 'country' && post.country) return 'country:' + post.country;
+        if (post.mapScope === 'region' && regionIsPublished(post.region)) return 'region:' + post.region;
+        return '';
+      }).filter(Boolean)
     ).size.toLocaleString();
   }
 
@@ -4341,12 +4728,21 @@ You may edit the wording before minting or publishing anything.
   });
   startRolling();
 
-  async function socialPayment(kind, parent, message='') {
+  async function socialPayment(kind, parent, message='', options={}) {
     if (!state.account) {
       throw new Error('Connect Xaman before publishing an on-ledger interaction.');
     }
 
     const profile = profileFromForm();
+    const response = RESPONSE_TYPES.has(options.response)
+      ? options.response : 'encouragement';
+    const includeMap = kind !== 'amen' && Boolean(options.includeMap);
+    const focus = includeMap ? mapFocusFromForm() : {
+      mapOptIn:false, mapScope:'none', region:'none', country:''
+    };
+    if (includeMap && focus.mapScope === 'none') {
+      throw new Error('Choose and confirm a composer Prayer Map focus before attaching it to this response.');
+    }
     const memos = compactMemos([
       memo('app', APP_TAG),
       memo('kind', kind),
@@ -4354,13 +4750,20 @@ You may edit the wording before minting or publishing anything.
       memo('msg', message),
       memo('name', profile.name),
       memo('handle', profile.handle),
-      memo('created', new Date().toISOString())
+      memo('response', kind !== 'amen' ? response : ''),
+      memo('map', focus.mapOptIn ? '1' : ''),
+      memo('role', focus.mapOptIn ? 'support-focus' : ''),
+      memo('scope', focus.mapOptIn ? focus.mapScope : ''),
+      memo('region', focus.mapScope === 'region' ? focus.region : ''),
+      memo('country', focus.mapScope === 'country' ? focus.country : ''),
+      memo('policy', focus.mapOptIn ? MAP_POLICY : ''),
+      memo('created', publicDateBucket(new Date()))
     ]);
 
     const title =
       kind === 'amen'
         ? 'Place an Amen on the XRP Ledger'
-        : 'Publish on-ledger reply';
+        : 'Publish ' + responseLabel(response).toLowerCase() + ' on the XRP Ledger';
 
     const result = await signTransaction({
       TransactionType:'Payment',
@@ -4448,6 +4851,8 @@ You may edit the wording before minting or publishing anything.
       const box = submit.closest('.inline-reply');
       const textarea = box.querySelector('.inline-reply-text');
       const message = textarea.value.trim();
+      const response = box.querySelector('.inline-response-type')?.value || 'encouragement';
+      const includeMap = Boolean(box.querySelector('.inline-map-consent')?.checked);
 
       if (!message) {
         toast('Write a reply first.', 'err');
@@ -4457,7 +4862,7 @@ You may edit the wording before minting or publishing anything.
 
       submit.disabled = true;
       try {
-        await socialPayment('reply', submit.dataset.parent, message);
+        await socialPayment('reply', submit.dataset.parent, message, {response, includeMap});
         textarea.value = '';
         box.classList.remove('is-open');
         box.closest('.post-card')?.classList.remove('reply-open');
@@ -4543,13 +4948,36 @@ You may edit the wording before minting or publishing anything.
   }));
 
   $('exportMapSignalsBtn').addEventListener('click', () => {
-    const queue = readMapSignalQueue();
-    downloadJsonFile('jcs-prayer-map-signals-' + Date.now() + '.json', {
-      schema:'jcs-prayer-map-signal-export-v1',
+    const groups = new Map();
+    for (const post of state.posts || []) {
+      if (!mapFocusIsThresholdQualified(post)) continue;
+      const key = mapFocusKey(post);
+      if (!key) continue;
+      const focus = normalizeMapFocus({...post, mapOptIn:true});
+      const group = groups.get(key) || {
+        scope:focus.mapScope,
+        code:focus.mapScope === 'country' ? focus.country : focus.region,
+        records:0,
+        distinctAccounts:new Set(),
+        threshold:publicMapThreshold(focus)
+      };
+      group.records += 1;
+      if (post.account) group.distinctAccounts.add(post.account);
+      groups.set(key, group);
+    }
+    const publicGroups = [...groups.values()].map(group => ({
+      scope:group.scope,
+      code:group.code,
+      records_at_least:publicCountFloor(group.records),
+      distinct_accounts_at_least:publicCountFloor(group.distinctAccounts.size),
+      threshold:group.threshold
+    }));
+    downloadJsonFile('jcs-prayer-map-public-summary-' + Date.now() + '.json', {
+      schema:'jcs-prayer-map-public-summary-v1',
       exported_at_utc:new Date().toISOString(),
-      signal_count:queue.length,
-      signals:queue,
-      limitation:'Broad author-declared region labels and display centroids are not actual wallet or user locations.'
+      group_count:publicGroups.length,
+      groups:publicGroups,
+      limitation:'Only threshold-qualified, five-record-banded prayer-focus aggregates are included. They describe what prayers concern, not wallet or signer locations, and do not guarantee anonymity.'
     });
   });
 
@@ -4558,7 +4986,7 @@ You may edit the wording before minting or publishing anything.
       localStorage.removeItem(MAP_SIGNAL_KEY);
       localStorage.removeItem(MAP_FOCUS_KEY);
     } catch {}
-    $('mapHandoffStatus').textContent = 'Local Prayer Map handoff queue cleared. Public XRPL records were not changed.';
+    $('mapHandoffStatus').textContent = 'Local Prayer Map refresh hint cleared. Public XRPL records were not changed.';
   });
 
   $('shareLatestBtn').addEventListener('click', () => {
@@ -4668,10 +5096,38 @@ You may edit the wording before minting or publishing anything.
     }
   });
 
+  if (typeof globalThis.__JCS_VERIFY_TEST_HOOK__ === 'function') {
+    globalThis.__JCS_VERIFY_TEST_HOOK__({
+      memo,
+      parseMemos,
+      mintMemos,
+      registryMemos,
+      canonicalPost,
+      parseFeed,
+      mapFocusFromMemos,
+      normalizeMapFocus,
+      publicMapFocusLabel,
+      mapFocusIsThresholdQualified,
+      renderPrayerPulse,
+      mapSignalFromPost,
+      mapUrlForPost,
+      state,
+      memoPayloadBytes
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      localStorage.removeItem(MAP_SIGNAL_KEY);
+      const storedHandoff = JSON.parse(localStorage.getItem(MAP_FOCUS_KEY) || 'null');
+      if (storedHandoff && storedHandoff.schema !== 'jcs-prayer-map-refresh-v1') {
+        localStorage.removeItem(MAP_FOCUS_KEY);
+      }
+    } catch {}
     loadBookmarks();
     renderVerificationCenter(null);
     renderPrayerPulse();
+    populateCountrySelect();
     loadDraft();
     initXaman();
     updateWalletUi();
