@@ -1,0 +1,162 @@
+JCS PRAYER MAP v5.0.0 — VALIDATION RECORD
+Generated: 2026-08-31
+
+ARTIFACTS
+---------
+Production HTML: prayer.map.html
+Bytes: 292197
+Logical lines: 3872
+SHA-256: 71363EE0819C7F1AB0C66A2F58161B1D8BFAA4DEBB2F654754DF0FC8BE8EB24C
+
+Machine protocol: jcs-prayer-map-protocol.json
+Bytes: 2659
+SHA-256: 9D4C771D9C790F99BCF0C8B0AE3173B04375C442445A33EF47DB0BDFD33EF30F
+Schema: jcs-prayer-map-protocol-v2
+
+SOURCE / REGRESSION BASIS
+-------------------------
+1. User-supplied Prayer Map v4 source (2026-08-31).
+2. Existing V6 Prayer Map reference used to preserve the already-built JCS_SOCIAL_V6 handoff, country/region privacy thresholds, aggregate support relationships, and content-free BroadcastChannel/localStorage refresh contract.
+3. Sign the Ledger v7 canonical JCS header component.
+4. Existing XRBitcoinCash encrypted-support architecture used as a design reference for browser-local authenticated encryption and local decryption.
+
+REGRESSION PRESERVATION
+-----------------------
+All element IDs from the user-supplied Prayer Map: PRESERVED
+All named JavaScript functions from the user-supplied Prayer Map: PRESERVED
+All element IDs from the existing V6 Prayer Map reference: PRESERVED
+All named JavaScript functions from the existing V6 Prayer Map reference: PRESERVED
+Compatibility wrappers retained for legacy parseCollectorPosts() and aggregatePosts().
+World geometry: unchanged from source/reference.
+WWL 2026 dataset: unchanged from source/reference.
+USCIRF 2026 layer: preserved.
+GDELT layer: preserved.
+XRPL read-only proxy/WebSocket failover: preserved.
+
+CANONICAL HEADER
+----------------
+Header CSS body is byte-identical to the canonical Sign the Ledger v7 JCS header CSS block.
+Prayer Map is the only aria-current primary navigation destination.
+Sign the Ledger remains the gold ecosystem CTA but is not marked current.
+Desktop and collapsed mobile navigation tested.
+Escape closes the mobile navigation.
+Theme control tested.
+Xaman connect/disconnect state tested.
+
+VERIFY → PRAYER MAP CONTRACT
+----------------------------
+Current registry protocol: JCS_SOCIAL_V6
+Collector: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd
+Prayer NFT taxon: 1246974803
+Map policy: JCS_MAP_1
+Refresh handoff schema: jcs-prayer-map-refresh-v1
+Allowed handoff fields only: schema, action, ledger_validation_required
+Handoff contains no wallet, transaction hash, NFT ID, prayer text, timestamp, map focus, country, region, GPS or other location payload.
+Prayer Map independently rereads validated XRPL history after a handoff.
+
+PUBLIC MAP PRIVACY
+------------------
+Broad region publication: >= 5 distinct signing accounts.
+Country publication: >= 10 distinct signing accounts.
+Extreme-pressure country publication: >= 20 distinct signing accounts.
+Aggregate support relationships: thresholded at >= 10 plus applicable endpoint thresholds, distinct responders and distinct parent prayers.
+Public counts are rounded down to 5-record bands.
+No wallet geolocation, IP geolocation, relay geolocation, node geolocation or transaction-route geolocation.
+Aggregate support curves are explicitly not travel, escape, extraction, safe-corridor or transaction routes.
+
+PRIVATE CAPSULE v1
+------------------
+Default: local-only.
+Encryption: AES-256-GCM authenticated encryption.
+Key: 256 random bits.
+IV: 96 random bits.
+Authentication tag: 128 bits.
+Fingerprint: SHA-256 of canonical encrypted envelope.
+Plaintext padded to 512-byte buckets before encryption to reduce exact-length leakage.
+Transport package contains ciphertext/envelope + SHA-256 only.
+Key card is separate from the transport package.
+Private backup contains both and is explicitly marked private.
+Local decrypter verifies the SHA-256 fingerprint before AES-GCM decryption.
+No plaintext or recovery key is intentionally written to XRPL.
+
+OPTIONAL NEUTRAL NFT RECEIPT
+----------------------------
+Default: disabled until encrypted package exists, recovery material is saved, wallet is connected, and public-linkability acknowledgement is checked.
+Transaction: NFTokenMint
+Dedicated receipt taxon: 1245926211
+URI format: jcs:receipt:v1:<64-char-envelope-sha256>
+Public memo keys allowed by implementation: app, kind, hash, code, domain
+Excluded from public receipt: plaintext, recovery key, contact, private label, prayer text, map focus, country, region, exact location and route data.
+A public receipt is never used as a Prayer Map marker.
+The page warns high-risk users to skip public minting when wallet linkability is unsafe.
+
+STATIC / INTEGRITY RESULTS
+--------------------------
+Passed: 55
+Failed: 0
+Duplicate IDs: 0
+Missing user-source IDs: 0
+Missing user-source named functions: 0
+Missing literal DOM targets: 0
+Broken internal fragments: 0
+Broken label targets: 0
+Embedded JSON/JSON-LD errors: 0
+JavaScript syntax errors: 0
+
+CONTROLLED CHROMIUM RESULTS
+---------------------------
+Passed: 33
+Failed: 0
+Viewport coverage: 1466x900, 768x900, 390x844, 320x780
+Horizontal overflow: 0 at all tested widths
+Page errors: 0
+Console errors: 0
+
+CONTROLLED LIVE-DATA SCENARIO
+-----------------------------
+Mock validated JCS_SOCIAL_V6 public prayer records: 21
+Threshold-qualified public prayer groups produced: 2
+  - Europe broad region
+  - United States country focus
+Mock threshold-qualified aggregate support relationships: 1
+Latest mock validated ledger: 110,000,050
+Verify-page BroadcastChannel refresh signal: accepted and refresh completed.
+
+CONTROLLED PRIVATE-CAPSULE SCENARIO
+-----------------------------------
+Browser-local encrypt: PASS
+Ciphertext transport contains no test plaintext/contact: PASS
+Separate key card: PASS
+Local decrypt recovered original test message/contact: PASS
+Mock Xaman connection: PASS
+Exactly one NFT payload created: PASS
+Receipt taxon: PASS
+Neutral URI: PASS
+Public memo keys exactly app/kind/hash/code/domain: PASS
+No message/contact/private label/region/country in mock receipt tx: PASS
+Mock validated tesSUCCESS: PASS
+Receipt evidence download enabled after validation: PASS
+
+TEST-HARNESS LIMITS
+-------------------
+No real Xaman wallet authorization, signature, NFTokenMint or Mainnet transaction was performed.
+No real endangered or persecuted person's information was used.
+Controlled Chromium runs in an opaque local test context; Web Crypto was bridged to Python AES-GCM/SHA-256 only for the test harness. The production HTML itself uses the browser's native window.crypto.subtle API and contains no cryptographic polyfill.
+XRPL, Xaman and GDELT responses in the controlled browser test were mocked. Live production behavior must be checked after deployment.
+The private capsule is not an emergency service, rescue service, anonymity network, secure-drop service, or legal/compliance certification.
+
+RESEARCH / SOURCE BASIS
+-----------------------
+Open Doors World Watch List 2026 / methodology — annual Christian-specific pressure dataset.
+USCIRF 2026 recommendations — independent all-faith religious-freedom concern layer.
+W3C cryptography guidance — authenticated encryption / AES-GCM.
+XRPL NFToken documentation — immutable URI and 256-byte URI limit.
+Access Now Digital Security Helpline — specialist digital-security resource for at-risk civil society and human-rights defenders.
+
+COMMIT PATHS
+------------
+prayer.map.html
+jcs-prayer-map-protocol.json
+prayer-map-validation.txt
+
+If prayer.map.html or jcs-prayer-map-protocol.json changes, regenerate this validation record so its hashes remain bound to the exact deployed artifacts.
