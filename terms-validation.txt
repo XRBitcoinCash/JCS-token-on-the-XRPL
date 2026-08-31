@@ -1,0 +1,48 @@
+XRBitcoinCash Terms of Use v2.0.0 — Static Validation
+==================================================================
+File: terms.html
+Bytes: 82482
+Lines: 819
+SHA-256: 902BBBDB1714FA2D65DD1B772ED0DF20ADBCD706D1030C6CF04CCFE99ABA301F
+
+PASS  doctype
+PASS  complete_html
+PASS  duplicate_ids_zero
+PASS  internal_fragments_resolve
+PASS  literal_dom_refs_resolve
+PASS  embedded_json_valid
+PASS  inline_javascript_syntax
+PASS  canonical_header_css_byte_identical
+PASS  canonical_nav_exact_20 — ['Home', 'Trade', 'Wallet', 'Orders', 'Live Metrics', 'Sentinel', 'Liquidity Scanner', 'Forensics', 'Ecosystem', 'Order Manager', 'Audit', 'Risk Lens', 'Value Path', 'Watchtower', 'Bridge Integrity', 'Tokenization', 'Advanced', 'Readiness', 'Settlement', 'White Paper']
+PASS  terms_is_active_legal_control — ['Terms']
+PASS  primary_nav_has_no_false_active_page
+PASS  legacy_compact_header_absent
+PASS  section_count_31 — 31
+PASS  seven_gate_manifest_exact — [('Bridge Integrity advanced analysis', 10), ('Extended Audit', 50), ('Sentinel Forensics', 150), ('Risk Lens', 150), ('Value Path', 400), ('Watchtower', 1000), ('Advanced Asset Tokenization', 2500)]
+PASS  effective_date_2026_08_31
+PASS  xrbc_issuer_exact
+PASS  xrbc_currency_exact
+PASS  gate_browser_not_server_boundary
+PASS  signed_not_validated
+PASS  bridge_no_execution
+PASS  readiness_candidate_firewall
+PASS  local_asset_vault
+PASS  evidence_nft_limit
+PASS  settlement_destination_tag
+PASS  settlement_receipt_limit
+PASS  xrbitcoin_separate_asset
+PASS  quote_passport
+PASS  trade_compass
+PASS  support_no_secrets
+PASS  genius_current
+PASS  clarity_pending
+PASS  counsel_review
+PASS  gate_text_bridge_integrity_advanced_analysis
+PASS  gate_text_extended_audit
+PASS  gate_text_sentinel_forensics
+PASS  gate_text_risk_lens
+PASS  gate_text_value_path
+PASS  gate_text_watchtower
+PASS  gate_text_advanced_asset_tokenization
+
+Result: 39 passed / 0 failed
