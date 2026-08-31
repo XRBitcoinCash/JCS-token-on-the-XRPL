@@ -1,1425 +1,689 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="dark" lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#07101c" name="theme-color"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1" name="robots"/>
+<meta content="Jesus Christ Saves Token" name="application-name"/>
+<meta content="3.0.0" name="application-version"/>
+<meta content="network-observatory-read-only" name="application-mode"/>
+<meta content="XRPL Mainnet" name="xrpl-network"/>
+<meta content="JCS" name="xrpl-currency"/>
+<meta content="rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" name="xrpl-issuer"/>
+<title>JCS Network Observatory | Communication, XRPL &amp; Market Metrics</title>
+<meta name="description" content="Live, read-only JCS network observatory combining validated XRP Ledger telemetry, JCS communication and prayer-network metrics, trust-line and liquidity conditions, optional privacy-limited wallet context, and clearly separated external market references."/>
+<link rel="canonical" href="https://jesuschristsavestoken.com/metrics.html"/>
+<link rel="icon" href="./jcs-logo.png" type="image/png"/>
+<link rel="apple-touch-icon" href="./jcs-logo-180.png"/>
+<link rel="alternate" type="application/json" href="./ai.json" title="AI Manifest"/>
+<link rel="alternate" type="application/json" href="./jcs-metrics-protocol.json" title="JCS Metrics Protocol"/>
+<link rel="security" href="./.well-known/security.txt"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Jesus Christ Saves Token"/>
+<meta property="og:title" content="JCS Network Observatory"/>
+<meta property="og:description" content="Validated-ledger JCS communications, token, liquidity and network metrics with privacy boundaries and external market context kept separate."/>
+<meta property="og:url" content="https://jesuschristsavestoken.com/metrics.html"/>
+<meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="JCS Network Observatory"/>
+<meta name="twitter:description" content="Read-only JCS communications, XRPL and market telemetry."/>
+<meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s1.ripple.com wss://s2.ripple.com wss://honeycluster.io; frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app https://sologenic.org https://*.sologenic.org https://s.tradingview.com https://*.tradingview.com https://www.tradingview-widget.com https://*.tradingview-widget.com; upgrade-insecure-requests"/>
+<script>(function(){document.documentElement.classList.add('js');try{const s=localStorage.getItem('jcs-ledger-theme');document.documentElement.dataset.theme=(s==='light'||s==='dark')?s:'dark'}catch(_e){document.documentElement.dataset.theme='dark'}})();</script>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"JCS Network Observatory",
+  "url":"https://jesuschristsavestoken.com/metrics.html",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"Any modern browser",
+  "softwareVersion":"3.0.0",
+  "isAccessibleForFree":true,
+  "description":"A read-only observatory for validated XRP Ledger, JCS communication, prayer-network, trust-line and liquidity metrics with optional privacy-limited account context.",
+  "publisher":{"@type":"Organization","name":"Jesus Christ Saves Token","url":"https://jesuschristsavestoken.com/","logo":"https://jesuschristsavestoken.com/jcs-logo.png"},
+  "featureList":["Validated-ledger health and fee telemetry","JCS public prayer and testimony communication metrics","Replies, support responses and Amen metrics","Privacy-threshold Prayer Map cohort metrics","JCS issuer trust-line and obligation metrics","JCS/XRP AMM and funded order-book metrics","Optional JCS-only wallet footprint","Machine-readable observatory snapshot export","Third-party market context kept separate from executable JCS data"]
+}</script>
+<style>
+:root{
+  --bg:#f4f7fb;--panel:#fff;--panel-2:#f8fafc;--panel-3:#eef3f8;--ink:#0b1018;--muted:#5b6575;--line:#dfe5ed;
+  --blue:#1652f0;--cyan:#0ea5e9;--green:#087f5b;--red:#c7354f;--gold:#b7791f;--gold-soft:#fff7df;--orange:#b85f08;
+  --shadow:0 18px 52px rgba(15,23,42,.09);--radius:18px;--wrap:1360px;color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#07101c;--panel:#0d1827;--panel-2:#111f31;--panel-3:#15263b;--ink:#f5f8ff;--muted:#9eabc0;--line:#25364d;
+  --blue:#5c94ff;--cyan:#31c2f5;--green:#43d6a1;--red:#ff7187;--gold:#e1b750;--gold-soft:#261f10;--orange:#ffad58;
+  --shadow:0 20px 58px rgba(0,0,0,.36);color-scheme:dark;
+}
+*{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth;background:var(--bg)}body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--ink);background:radial-gradient(circle at 7% -10%,color-mix(in srgb,var(--blue) 14%,transparent),transparent 30rem),radial-gradient(circle at 98% 8%,color-mix(in srgb,var(--gold) 12%,transparent),transparent 32rem),var(--bg);font:14px/1.58 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}.skip-link{position:fixed;left:12px;top:-90px;z-index:9999;padding:10px 14px;border-radius:9px;background:#111;color:#fff}.skip-link:focus{top:12px}
+:root{
+  --home-bg:#f4f7fb;--home-surface:#ffffff;--home-surface-2:#f8fafc;--home-surface-3:#eef3f8;
+  --home-ink:#0b1018;--home-muted:#5b6575;--home-line:#dfe5ed;--home-blue:#1652f0;
+  --home-cyan:#0ea5e9;--home-green:#087f5b;--home-red:#c7354f;--home-gold:#b7791f;--home-gold-soft:#fff7df;
+}
+html[data-theme="dark"]{
+  --home-bg:#07101c;--home-surface:#0d1827;--home-surface-2:#111f31;--home-surface-3:#15263b;
+  --home-ink:#f5f8ff;--home-muted:#9eabc0;--home-line:#25364d;--home-blue:#5c94ff;
+  --home-cyan:#31c2f5;--home-green:#43d6a1;--home-red:#ff7187;--home-gold:#e1b750;--home-gold-soft:#261f10;
+}
 
-  <title>JCS Market Monitor | XRP Ledger</title>
-  <meta
-    name="description"
-    content="Read-only JCS/XRP market references for the Jesus Christ Saves Token, with XRP and Bitcoin comparison charts."
-  >
-  <meta name="author" content="Cryptocurrency Community Church of Jesus Christ">
-  <meta name="application-name" content="JCS Market Monitor">
-  <meta name="application-version" content="2.0.0">
-  <meta name="application-mode" content="public-read-only">
-  <meta name="release-date" content="2026-08-28">
-  <meta name="xrpl-network" content="mainnet">
-  <meta name="xrpl-currency" content="JCS">
-  <meta name="xrpl-issuer" content="rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd">
-  <meta name="theme-color" content="#06111f">
-  <meta name="color-scheme" content="dark">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+/* Complete header repair: no clipped navigation, full keyboard access and safe mobile reflow. */
+.jcs-index-header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200;
+  width: 100%;
+  border-bottom: 1px solid var(--home-line) !important;
+  background: color-mix(in srgb, var(--home-surface) 95%, transparent) !important;
+  box-shadow: 0 8px 28px color-mix(in srgb, #020617 10%, transparent) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.jcs-index-header-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    9px
+    max(18px, env(safe-area-inset-left));
+  display: grid;
+  gap: 8px;
+}
+.index-header-top {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.index-brand {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+.index-brand img {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 45%, var(--home-line)) !important;
+  border-radius: 11px !important;
+  background: #fff;
+}
+.index-brand .brand-copy { min-width: 0; display: grid !important; }
+.index-brand .brand-title {
+  overflow: hidden;
+  color: var(--home-ink) !important;
+  font: 900 1rem/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-brand .brand-subtitle {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .63rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-header-utilities,
+.index-page-controls,
+.index-wallet-actions,
+.index-ecosystem-links {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.index-header-utilities { justify-content: flex-end; }
+.index-ecosystem-links { justify-content: flex-end; }
+.index-ecosystem-link,
+.index-control-button,
+.mobile-nav-toggle,
+.jcs-index-header .header-wallet-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 9px;
+  border: 1px solid var(--home-line);
+  border-radius: 9px;
+  color: var(--home-ink);
+  background: var(--home-surface-2);
+  font: 850 .69rem/1.1 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.index-ecosystem-link:hover,
+.index-ecosystem-link:focus-visible,
+.index-control-button:hover,
+.index-control-button:focus-visible,
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:focus-visible,
+.jcs-index-header .header-wallet-btn:hover:not(:disabled),
+.jcs-index-header .header-wallet-btn:focus-visible {
+  border-color: var(--home-blue);
+  color: var(--home-blue);
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 24%, transparent);
+  outline-offset: 2px;
+}
+.index-ecosystem-link.xrbc-link { color: #6e9eff; }
+.index-ecosystem-link.xrbitcoin-link { color: var(--home-cyan); }
+.index-ecosystem-link.creature-link { color: var(--home-gold); }
+.jcs-index-header .header-wallet-btn.connect {
+  border-color: var(--home-blue);
+  color: #fff;
+  background: var(--home-blue);
+}
+.jcs-index-header .header-wallet-btn.disconnect {
+  border-color: color-mix(in srgb, var(--home-red) 50%, var(--home-line));
+  color: var(--home-red);
+}
+.jcs-index-header .header-wallet-btn:disabled { opacity: .58; cursor: not-allowed; }
+.jcs-index-header .compact-wallet-pill {
+  max-width: 130px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mobile-nav-toggle { display: none; cursor: pointer; }
+.mobile-nav-toggle .menu-icon { font-size: 1rem; line-height: 1; }
+.noscript-notice {
+  width: min(1240px, calc(100% - 24px));
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 52%, var(--home-line));
+  border-radius: 12px;
+  color: var(--home-ink);
+  background: var(--home-gold-soft);
+}
+.noscript-notice a { font-weight: 850; }
+.index-primary-nav {
+  min-width: 0;
+  width: 100%;
+  display: flex !important;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  gap: 4px;
+  padding-top: 7px;
+  overflow: visible !important;
+  border-top: 1px solid var(--home-line);
+}
+.index-primary-nav .nav-btn {
+  min-height: 40px !important;
+  flex: 0 1 auto !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  color: var(--home-muted) !important;
+  background: transparent !important;
+  font-size: .73rem !important;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal !important;
+  box-shadow: none !important;
+}
+.index-primary-nav .nav-btn:hover,
+.index-primary-nav .nav-btn:focus-visible,
+.index-primary-nav .nav-btn[aria-current="page"] {
+  border-color: var(--home-line) !important;
+  color: var(--home-blue) !important;
+  background: var(--home-surface-2) !important;
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 22%, transparent);
+  outline-offset: 1px;
+}
+.index-primary-nav .sign-ledger-gold {
+  border-color: color-mix(in srgb, var(--home-gold) 58%, var(--home-line)) !important;
+  color: #171106 !important;
+  background: linear-gradient(180deg, #ffeaa8, #d9ae38) !important;
+}
+.product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.footer-link-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
-  <link rel="canonical" href="https://jesuschristsavestoken.com/metrics.html">
-  <link rel="icon" href="/jcs-logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="/jcs-logo-180.png">
-  <link rel="alternate" type="application/json" href="/ai.json" title="AI Manifest">
+@media (max-width: 1080px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Jesus Christ Saves Token">
-  <meta property="og:title" content="JCS Market Monitor | XRP Ledger">
-  <meta
-    property="og:description"
-    content="Read-only JCS/XRP market context with clearly identified external XRP and Bitcoin reference charts."
-  >
-  <meta property="og:url" content="https://jesuschristsavestoken.com/metrics.html">
-  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta property="og:image:alt" content="Jesus Christ Saves Token logo">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JCS Market Monitor | XRP Ledger">
-  <meta
-    name="twitter:description"
-    content="Read-only JCS/XRP market references for the Jesus Christ Saves Token."
-  >
-  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://jesuschristsavestoken.com; font-src 'self' data:; frame-src https://sologenic.org https://*.sologenic.org https://s.tradingview.com https://*.tradingview.com https://www.tradingview-widget.com https://*.tradingview-widget.com; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests"
-  >
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "JCS Market Monitor",
-    "description": "Read-only JCS/XRP market references for the Jesus Christ Saves Token, with XRP and Bitcoin comparison charts.",
-    "url": "https://jesuschristsavestoken.com/metrics.html",
-    "dateModified": "2026-08-28",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Jesus Christ Saves Token",
-      "url": "https://jesuschristsavestoken.com/"
-    },
-    "about": {
-      "@type": "Thing",
-      "name": "Jesus Christ Saves Token",
-      "identifier": "JCS:rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
-    }
+@media (max-width: 980px) {
+  .jcs-index-header.site-header { position: static !important; }
+  .index-header-top { grid-template-columns: minmax(0, 1fr) auto; }
+  .mobile-nav-toggle { grid-column: 2; grid-row: 1; }
+  html.js .mobile-nav-toggle { display: inline-flex; }
+  .index-header-utilities {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
   }
-  </script>
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --background: #06111f;
-      --background-deep: #030914;
-      --surface: rgba(11, 27, 45, 0.92);
-      --surface-raised: rgba(16, 38, 61, 0.96);
-      --surface-soft: rgba(71, 217, 255, 0.055);
-      --text: #f5f7fb;
-      --muted: #a8b7c9;
-      --muted-strong: #ced8e4;
-      --gold: #e2b84d;
-      --gold-soft: rgba(226, 184, 77, 0.16);
-      --cyan: #47d9ff;
-      --cyan-soft: rgba(71, 217, 255, 0.14);
-      --success: #69e6a6;
-      --warning: #ffd76a;
-      --border: rgba(226, 184, 77, 0.34);
-      --line: rgba(168, 183, 201, 0.18);
-      --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 11px;
-      --content-width: 1180px;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    html {
-      min-width: 0;
-      background: var(--background-deep);
-      scroll-behavior: smooth;
-      scroll-padding-top: 7rem;
-    }
-
-    body {
-      min-width: 0;
-      min-height: 100vh;
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(0, 78, 146, 0.55), transparent 34rem),
-        radial-gradient(circle at 90% 14%, rgba(226, 184, 77, 0.09), transparent 28rem),
-        linear-gradient(145deg, var(--background-deep), var(--background) 48%, #07192a);
-      line-height: 1.65;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    body::before {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      content: "";
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-      background-size: 36px 36px;
-      mask-image: linear-gradient(to bottom, black, transparent 82%);
-    }
-
-    img,
-    iframe {
-      max-width: 100%;
-    }
-
-    button,
-    a {
-      font: inherit;
-    }
-
-    a {
-      color: var(--cyan);
-      text-decoration-thickness: 0.08em;
-      text-underline-offset: 0.18em;
-    }
-
-    a:hover {
-      color: #9aedff;
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--cyan);
-      outline-offset: 4px;
-    }
-
-    .skip-link {
-      position: fixed;
-      top: 0.75rem;
-      left: 0.75rem;
-      z-index: 1000;
-      padding: 0.75rem 1rem;
-      color: #001018;
-      background: var(--cyan);
-      border-radius: var(--radius-sm);
-      font-weight: 800;
-      transform: translateY(-180%);
-      transition: transform 160ms ease;
-    }
-
-    .skip-link:focus {
-      transform: translateY(0);
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width: 100%;
-      padding:
-        max(0.7rem, env(safe-area-inset-top))
-        max(1rem, env(safe-area-inset-right))
-        0.7rem
-        max(1rem, env(safe-area-inset-left));
-      background: rgba(3, 9, 20, 0.86);
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .header-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 1rem;
-      width: min(100%, var(--content-width));
-      margin: 0 auto;
-    }
-
-    .brand {
-      display: inline-flex;
-      min-width: 0;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .brand:hover {
-      color: var(--text);
-    }
-
-    .brand-logo {
-      flex: 0 0 auto;
-      width: 44px;
-      height: 44px;
-      object-fit: cover;
-      background: var(--surface-raised);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 0 24px rgba(226, 184, 77, 0.13);
-    }
-
-    .brand-copy {
-      display: grid;
-      min-width: 0;
-      gap: 0.08rem;
-      line-height: 1.2;
-    }
-
-    .brand-title {
-      min-width: 0;
-      overflow: hidden;
-      color: var(--text);
-      font-size: clamp(1rem, 2.3vw, 1.25rem);
-      font-weight: 850;
-      letter-spacing: -0.02em;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 0.73rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .brand-title-short {
-      display: none;
-    }
-
-    .header-nav {
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center;
-      gap: 0.65rem;
-    }
-
-    .home-link,
-    .button {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      padding: 0.7rem 1rem;
-      color: #031018;
-      background: linear-gradient(135deg, var(--cyan), #91edff);
-      border: 1px solid transparent;
-      border-radius: 999px;
-      box-shadow: 0 8px 24px rgba(71, 217, 255, 0.15);
-      font-size: 0.9rem;
-      font-weight: 850;
-      line-height: 1.1;
-      text-align: center;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    }
-
-    .home-link:hover,
-    .button:hover {
-      color: #031018;
-      background: #c4f6ff;
-      box-shadow: 0 10px 30px rgba(71, 217, 255, 0.24);
-      transform: translateY(-1px);
-    }
-
-    .button.secondary {
-      color: var(--text);
-      background: var(--surface-raised);
-      border-color: var(--border);
-      box-shadow: none;
-    }
-
-    .button.secondary:hover {
-      color: #fff;
-      background: rgba(226, 184, 77, 0.14);
-    }
-
-    .button.small {
-      min-height: 40px;
-      padding: 0.6rem 0.85rem;
-      font-size: 0.82rem;
-    }
-
-    main {
-      width: min(calc(100% - 2rem), var(--content-width));
-      margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 3.5rem) 0 4rem;
-    }
-
-    .surface {
-      background: linear-gradient(145deg, var(--surface), rgba(6, 17, 31, 0.94));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-    }
-
-    .hero {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(290px, 0.7fr);
-      gap: clamp(1.5rem, 4vw, 3rem);
-      align-items: center;
-      padding: clamp(1.4rem, 5vw, 3.4rem);
-      overflow: hidden;
-    }
-
-    .hero::after {
-      position: absolute;
-      top: -8rem;
-      right: -8rem;
-      width: 24rem;
-      height: 24rem;
-      content: "";
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(226, 184, 77, 0.16), transparent 66%);
-    }
-
-    .hero-copy,
-    .identity-card {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin: 0 0 0.8rem;
-      color: var(--gold);
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      width: 1.6rem;
-      height: 1px;
-      content: "";
-      background: var(--gold);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      max-width: 15ch;
-      margin-bottom: 1rem;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.25rem, 7vw, 5rem);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-      text-wrap: balance;
-    }
-
-    h1 span {
-      color: var(--gold);
-    }
-
-    .hero-lead {
-      max-width: 65ch;
-      margin-bottom: 1.4rem;
-      color: var(--muted-strong);
-      font-size: clamp(1rem, 2vw, 1.14rem);
-    }
-
-    .status-chips,
-    .hero-actions,
-    .widget-actions,
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem;
-    }
-
-    .status-chips {
-      margin: 0 0 1.5rem;
-      padding: 0;
-      list-style: none;
-    }
-
-    .status-chip {
-      display: inline-flex;
-      min-height: 32px;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.38rem 0.7rem;
-      color: var(--muted-strong);
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 750;
-    }
-
-    .status-chip::before {
-      width: 0.48rem;
-      height: 0.48rem;
-      content: "";
-      background: var(--success);
-      border-radius: 50%;
-      box-shadow: 0 0 12px rgba(105, 230, 166, 0.45);
-    }
-
-    .status-chip.external::before {
-      background: var(--warning);
-      box-shadow: 0 0 12px rgba(255, 215, 106, 0.35);
-    }
-
-    .identity-card {
-      padding: 1.25rem;
-      background: rgba(3, 9, 20, 0.6);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-    }
-
-    .identity-heading {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .identity-heading img {
-      flex: 0 0 auto;
-      width: 48px;
-      height: 48px;
-      object-fit: cover;
-      background: var(--surface-raised);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .identity-heading h2 {
-      margin: 0;
-      font-size: 1.05rem;
-      line-height: 1.25;
-    }
-
-    .identity-heading p {
-      margin: 0.15rem 0 0;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .identity-list {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.55rem 1rem;
-      margin: 0;
-    }
-
-    .identity-list dt {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
-    .identity-list dd {
-      min-width: 0;
-      margin: 0;
-      color: var(--text);
-      font-size: 0.84rem;
-      font-weight: 800;
-      text-align: right;
-    }
-
-    .issuer-block {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .issuer-label {
-      display: block;
-      margin-bottom: 0.4rem;
-      color: var(--muted);
-      font-size: 0.73rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .issuer-value {
-      display: block;
-      max-width: 100%;
-      padding: 0.7rem;
-      overflow-wrap: anywhere;
-      color: #d8f7ff;
-      background: rgba(71, 217, 255, 0.07);
-      border: 1px solid rgba(71, 217, 255, 0.18);
-      border-radius: var(--radius-sm);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 0.78rem;
-      line-height: 1.45;
-      user-select: all;
-    }
-
-    .copy-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.7rem;
-      margin-top: 0.7rem;
-    }
-
-    .copy-button {
-      min-height: 40px;
-      padding: 0.58rem 0.8rem;
-      color: var(--text);
-      background: var(--surface-raised);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .copy-button:hover {
-      background: var(--gold-soft);
-    }
-
-    .copy-status {
-      min-height: 1.4em;
-      color: var(--success);
-      font-size: 0.76rem;
-      font-weight: 750;
-    }
-
-    .security-notice {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 1rem;
-      align-items: start;
-      margin: 1.25rem 0 0;
-      padding: 1.2rem clamp(1rem, 3vw, 1.5rem);
-      background: linear-gradient(90deg, var(--gold-soft), rgba(6, 17, 31, 0.76));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .notice-mark {
-      display: inline-grid;
-      width: 2.35rem;
-      height: 2.35rem;
-      place-items: center;
-      color: #07111d;
-      background: var(--gold);
-      border-radius: 50%;
-      font-weight: 950;
-    }
-
-    .security-notice h2 {
-      margin-bottom: 0.2rem;
-      font-size: 1rem;
-    }
-
-    .security-notice p {
-      margin: 0;
-      color: var(--muted-strong);
-      font-size: 0.9rem;
-    }
-
-    .workflow-section,
-    .market-section,
-    .disclosure-section {
-      margin-top: clamp(2.25rem, 6vw, 4.5rem);
-    }
-
-    .section-heading {
-      display: grid;
-      max-width: 760px;
-      gap: 0.35rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      font-size: clamp(1.55rem, 4vw, 2.4rem);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      text-wrap: balance;
-    }
-
-    .section-heading p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .workflow-step {
-      min-width: 0;
-      padding: 1.25rem;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.17);
-    }
-
-    .step-number {
-      display: inline-grid;
-      width: 2rem;
-      height: 2rem;
-      margin-bottom: 0.8rem;
-      place-items: center;
-      color: #07111d;
-      background: var(--gold);
-      border-radius: 50%;
-      font-size: 0.82rem;
-      font-weight: 950;
-    }
-
-    .workflow-step h3 {
-      margin-bottom: 0.35rem;
-      font-size: 1rem;
-    }
-
-    .workflow-step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .widget-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-
-    .widget-card {
-      min-width: 0;
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-    }
-
-    .widget-card.featured {
-      grid-column: 1 / -1;
-      border-color: var(--border);
-    }
-
-    .widget-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1rem;
-      align-items: center;
-      padding: clamp(1rem, 3vw, 1.4rem);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .widget-title-wrap {
-      min-width: 0;
-    }
-
-    .provider-label {
-      display: inline-flex;
-      margin-bottom: 0.3rem;
-      color: var(--gold);
-      font-size: 0.7rem;
-      font-weight: 850;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .widget-head h3 {
-      margin: 0;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      line-height: 1.25;
-    }
-
-    .widget-head p {
-      margin: 0.3rem 0 0;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .provider-pill {
-      justify-self: end;
-      padding: 0.38rem 0.65rem;
-      color: var(--muted-strong);
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    a.provider-pill:hover {
-      color: var(--text);
-      background: var(--cyan-soft);
-      border-color: rgba(71, 217, 255, 0.34);
-    }
-
-    .widget-frame {
-      position: relative;
-      width: 100%;
-      height: clamp(440px, 63svh, 680px);
-      background:
-        linear-gradient(135deg, rgba(71, 217, 255, 0.04), rgba(226, 184, 77, 0.035)),
-        #050b14;
-    }
-
-    .context-card .widget-frame {
-      height: clamp(330px, 42vw, 450px);
-    }
-
-    .widget-frame iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-      background: #050b14;
-      border: 0;
-    }
-
-    .widget-footer {
-      display: grid;
-      gap: 0.8rem;
-      padding: 1rem clamp(1rem, 3vw, 1.4rem) 1.2rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .widget-footer p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .disclosure {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1.5rem;
-      align-items: center;
-      padding: clamp(1.25rem, 4vw, 2rem);
-    }
-
-    .disclosure h2 {
-      margin-bottom: 0.35rem;
-      font-size: 1.15rem;
-    }
-
-    .disclosure p {
-      max-width: 78ch;
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .disclosure-badge {
-      display: inline-grid;
-      min-width: 7rem;
-      min-height: 7rem;
-      place-items: center;
-      padding: 1rem;
-      color: var(--gold);
-      background: var(--gold-soft);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .site-footer {
-      padding:
-        1.5rem
-        max(1rem, env(safe-area-inset-right))
-        max(1.5rem, env(safe-area-inset-bottom))
-        max(1rem, env(safe-area-inset-left));
-      background: rgba(3, 9, 20, 0.88);
-      border-top: 1px solid var(--line);
-    }
-
-    .footer-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1rem;
-      align-items: center;
-      width: min(100%, var(--content-width));
-      margin: 0 auto;
-    }
-
-    .footer-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .footer-copy p + p {
-      margin-top: 0.2rem;
-    }
-
-    .footer-links {
-      justify-content: flex-end;
-    }
-
-    .footer-links a {
-      min-height: 40px;
-      padding: 0.5rem;
-      color: var(--muted-strong);
-      font-size: 0.78rem;
-      font-weight: 750;
-    }
-
-    .noscript-notice {
-      width: min(calc(100% - 2rem), var(--content-width));
-      margin: 1rem auto;
-      padding: 1rem;
-      color: var(--warning);
-      background: rgba(255, 215, 106, 0.08);
-      border: 1px solid rgba(255, 215, 106, 0.32);
-      border-radius: var(--radius-sm);
-    }
-
-    @media (max-width: 860px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .identity-card {
-        width: 100%;
-      }
-
-      .workflow-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .workflow-step {
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
-        gap: 0 0.9rem;
-        align-items: start;
-      }
-
-      .step-number {
-        grid-row: 1 / span 2;
-        margin: 0;
-      }
-
-      .workflow-step h3,
-      .workflow-step p {
-        grid-column: 2;
-      }
-
-      .widget-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .widget-card.featured {
-        grid-column: auto;
-      }
-
-      .context-card .widget-frame {
-        height: clamp(330px, 68svh, 480px);
-      }
-    }
-
-    @media (max-width: 620px) {
-      html {
-        scroll-padding-top: 6rem;
-      }
-
-      .site-header {
-        padding-right: max(0.75rem, env(safe-area-inset-right));
-        padding-left: max(0.75rem, env(safe-area-inset-left));
-      }
-
-      .header-inner {
-        gap: 0.55rem;
-      }
-
-      .brand {
-        gap: 0.55rem;
-      }
-
-      .brand-logo {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-      }
-
-      .brand-title-long,
-      .brand-subtitle {
-        display: none;
-      }
-
-      .brand-title-short {
-        display: inline;
-      }
-
-      .home-link {
-        min-height: 42px;
-        padding: 0.65rem 0.8rem;
-        font-size: 0.82rem;
-      }
-
-      main {
-        width: min(calc(100% - 1.25rem), var(--content-width));
-        padding-top: 1rem;
-      }
-
-      .hero {
-        gap: 1.25rem;
-        padding: 1.15rem;
-        border-radius: 19px;
-      }
-
-      h1 {
-        font-size: clamp(2.2rem, 15vw, 3.7rem);
-      }
-
-      .hero-actions .button {
-        width: 100%;
-      }
-
-      .security-notice {
-        grid-template-columns: 1fr;
-        gap: 0.7rem;
-      }
-
-      .widget-card {
-        border-radius: 19px;
-      }
-
-      .widget-head {
-        grid-template-columns: 1fr;
-        gap: 0.65rem;
-      }
-
-      .provider-pill {
-        justify-self: start;
-      }
-
-      .widget-frame,
-      .context-card .widget-frame {
-        height: clamp(380px, 66svh, 540px);
-      }
-
-      .widget-actions .button {
-        width: 100%;
-      }
-
-      .disclosure {
-        grid-template-columns: 1fr;
-      }
-
-      .disclosure-badge {
-        min-width: 0;
-        min-height: 0;
-        justify-self: start;
-        padding: 0.65rem 0.8rem;
-        border-radius: 999px;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-links {
-        justify-content: flex-start;
-      }
-    }
-
-    @media (max-width: 350px) {
-      .brand-title {
-        font-size: 0.92rem;
-      }
-
-      .home-link {
-        padding-right: 0.68rem;
-        padding-left: 0.68rem;
-      }
-
-      .identity-list {
-        grid-template-columns: 1fr;
-        gap: 0.1rem;
-      }
-
-      .identity-list dd {
-        margin-bottom: 0.45rem;
-        text-align: left;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-    }
-  </style>
+  html.js .jcs-index-header:not(.menu-open) .index-header-utilities { display: none; }
+  .index-ecosystem-links { justify-content: flex-start; }
+  .index-primary-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  html.js .jcs-index-header .index-primary-nav:not(.is-open) { display: none !important; }
+  .index-primary-nav .nav-btn { width: 100%; min-height: 44px !important; }
+  .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .jcs-index-header-shell {
+    padding:
+      max(9px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      10px
+      max(12px, env(safe-area-inset-left));
+  }
+  .index-brand .brand-subtitle { display: none; }
+  .index-header-utilities { display: grid; grid-template-columns: 1fr; }
+  .index-ecosystem-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .index-ecosystem-link { min-width: 0; white-space: normal; }
+  .index-page-controls { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .index-control-button { width: 100%; min-height: 44px; }
+  .index-wallet-actions { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .jcs-index-header .header-wallet-btn { width: 100%; min-height: 44px; }
+  .jcs-index-header .compact-wallet-pill { max-width: 100%; text-align: center; }
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .index-brand .brand-title { font-size: .9rem !important; }
+  .index-ecosystem-links,
+  .index-primary-nav,
+  .index-page-controls,
+  .footer-link-groups { grid-template-columns: 1fr !important; }
+}
+
+/* Final JCS 2.1 header refinements shared with the current portal. */
+.jcs-index-header.site-header{position:sticky!important;top:0!important;z-index:1200;width:100%;display:block!important;margin:0!important;padding:0!important;border:0!important;border-bottom:1px solid var(--home-line)!important;border-radius:0!important;background:color-mix(in srgb,var(--home-surface) 95%,transparent)!important;box-shadow:0 8px 28px color-mix(in srgb,#020617 10%,transparent)!important;overflow:visible!important}
+html[data-theme="dark"] .jcs-index-header.site-header{background:rgba(7,16,28,.95)!important;box-shadow:0 8px 30px rgba(0,0,0,.30)!important}
+.jcs-index-header-shell{width:min(1360px,100%)}
+.index-header-top{grid-template-columns:minmax(250px,auto) minmax(0,1fr);gap:12px 20px}
+.index-legal-links{min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px}
+.index-legal-links a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;border:1px solid var(--home-line);border-radius:9px;color:var(--home-ink);background:var(--home-surface-2);font:850 .69rem/1.1 system-ui,sans-serif;text-align:center;text-decoration:none;white-space:nowrap}
+.index-legal-links a:hover,.index-legal-links a:focus-visible{border-color:var(--home-blue);color:var(--home-blue);outline:3px solid color-mix(in srgb,var(--home-blue) 20%,transparent);outline-offset:2px}
+.sanctuary-control[aria-pressed="true"]{border-color:var(--home-gold)!important;color:var(--home-gold)!important;background:var(--home-gold-soft)!important}
+.exchange-control[aria-pressed="true"]{border-color:var(--home-blue)!important;color:#fff!important;background:var(--home-blue)!important}
+@media(max-width:980px){.index-legal-links{justify-content:flex-start}}
+@media(max-width:640px){
+  .index-page-controls .theme-toggle{grid-column:1/-1}
+  .index-wallet-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jcs-index-header .compact-wallet-pill{grid-column:1/-1;max-width:100%;text-align:center}
+  .index-legal-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .index-legal-links a{min-width:0;min-height:44px;white-space:normal}
+}
+@media(max-width:430px){.index-page-controls,.index-wallet-actions,.index-legal-links{grid-template-columns:1fr!important}}
+.main-wrap{width:min(var(--wrap),100%);margin:0 auto;padding:26px 18px 72px}.surface{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow)}.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr);gap:24px;align-items:center;padding:clamp(26px,5vw,52px);background:radial-gradient(circle at 90% 8%,color-mix(in srgb,var(--gold) 18%,transparent),transparent 22rem),radial-gradient(circle at 4% 100%,color-mix(in srgb,var(--cyan) 9%,transparent),transparent 28rem),var(--panel)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 9px;border:1px solid color-mix(in srgb,var(--cyan) 42%,var(--line));border-radius:999px;color:var(--cyan);font-size:.68rem;font-weight:950;letter-spacing:.07em;text-transform:uppercase}.hero h1{max-width:900px;margin:14px 0;font:900 clamp(2.7rem,6vw,5.35rem)/.97 Georgia,"Times New Roman",serif;letter-spacing:-.05em}.hero h1 span{color:var(--gold)}.hero-lead{max-width:830px;color:var(--muted);font-size:clamp(1rem,1.8vw,1.17rem);line-height:1.72}.actions,.status-row,.toolbar,.metric-actions,.wallet-actions,.footer-links{display:flex;flex-wrap:wrap;gap:8px}.actions{margin-top:20px}.button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:var(--panel-2);font-weight:850;text-decoration:none}.button:hover,.button:focus-visible{border-color:var(--blue);color:var(--blue);outline:3px solid color-mix(in srgb,var(--blue) 20%,transparent);outline-offset:2px;text-decoration:none}.button.primary{border-color:var(--gold);color:#171106;background:linear-gradient(180deg,#ffeaa8,#d9ae38)}.button.blue{border-color:var(--blue);color:#fff;background:var(--blue)}.button.small{min-height:34px;padding:6px 9px;font-size:.72rem}.status-row{margin-top:15px}.status-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2);color:var(--muted);font-size:.67rem;font-weight:850}.status-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}.status-chip.warn::before{background:var(--gold)}.status-chip.err::before{background:var(--red)}
+.identity-card{padding:19px;border:1px solid var(--line);border-radius:17px;background:var(--panel-2)}.identity-head{display:flex;gap:11px;align-items:center}.identity-head img{width:54px;height:54px;border:1px solid color-mix(in srgb,var(--gold) 42%,var(--line));border-radius:13px;background:#fff}.identity-head h2{margin:0;font-size:1.05rem}.identity-head p{margin:3px 0 0;color:var(--muted);font-size:.72rem}.identity-list{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 12px;margin:14px 0 0}.identity-list dt{color:var(--muted);font-size:.7rem;font-weight:850}.identity-list dd{min-width:0;margin:0;text-align:right;font-weight:850;overflow-wrap:anywhere}.issuer-value{display:block;margin-top:12px;padding:9px;border:1px solid color-mix(in srgb,var(--cyan) 28%,var(--line));border-radius:10px;background:var(--panel);font:650 .68rem/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;user-select:all}.copy-status{color:var(--green);font-size:.68rem}
+.truth-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px;padding:12px}.truth-item{padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel-2)}.truth-item strong{display:block;font-size:.76rem}.truth-item span{display:block;margin-top:3px;color:var(--muted);font-size:.68rem}.truth-item.observed{border-top:3px solid var(--green)}.truth-item.derived{border-top:3px solid var(--cyan)}.truth-item.external{border-top:3px solid var(--gold)}
+.section{margin-top:24px}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}.section-head h2{margin:0;font-size:clamp(1.35rem,3vw,2rem)}.section-head p{max-width:850px;margin:5px 0 0;color:var(--muted)}.section-kicker{display:block;margin-bottom:5px;color:var(--cyan);font-size:.65rem;font-weight:950;letter-spacing:.07em;text-transform:uppercase}.freshness{flex:0 0 auto;padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--panel-2);font-size:.66rem;font-weight:850}.freshness.ok{border-color:color-mix(in srgb,var(--green) 48%,var(--line));color:var(--green)}.freshness.warn{border-color:color-mix(in srgb,var(--gold) 48%,var(--line));color:var(--gold)}.freshness.err{border-color:color-mix(in srgb,var(--red) 48%,var(--line));color:var(--red)}
+.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.metric{min-width:0;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.metric .label{display:block;color:var(--muted);font-size:.64rem;font-weight:950;letter-spacing:.05em;text-transform:uppercase}.metric strong{display:block;margin-top:5px;font-size:clamp(1.05rem,2.2vw,1.45rem);line-height:1.12;overflow-wrap:anywhere}.metric small{display:block;margin-top:5px;color:var(--muted);font-size:.66rem;line-height:1.42}.metric.observed{border-top:3px solid var(--green)}.metric.derived{border-top:3px solid var(--cyan)}.metric.privacy{border-top:3px solid var(--gold)}.metric.error{border-top:3px solid var(--red)}
+.goal-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:10px}.goal-card{padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--panel-2)}.goal-card strong{display:block}.goal-card .goal-value{margin-top:6px;font-size:1.08rem;font-weight:950}.goal-card p{margin:5px 0 0;color:var(--muted);font-size:.68rem}.goal-bar{height:7px;margin-top:9px;overflow:hidden;border-radius:999px;background:var(--panel-3)}.goal-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--green));width:0}.goal-card.reach .goal-bar{display:none}.note{margin-top:10px;padding:11px 12px;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:11px;color:var(--muted);background:var(--panel-2);font-size:.72rem}.note strong{color:var(--ink)}
+.telemetry-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.telemetry-panel{padding:16px}.telemetry-panel h3{margin:0}.telemetry-panel>p{margin:5px 0 12px;color:var(--muted);font-size:.75rem}.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.settings-list{display:grid;gap:7px}.setting{display:flex;justify-content:space-between;gap:12px;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);font-size:.72rem}.setting span{color:var(--muted)}.setting b{text-align:right}.setting.ok b{color:var(--green)}.setting.warn b{color:var(--gold)}.setting.bad b{color:var(--red)}
+.spark-card{margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel-2)}.spark-head{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.67rem}.spark{width:100%;height:52px;margin-top:6px;display:block}.spark polyline{fill:none;stroke:var(--cyan);stroke-width:2;vector-effect:non-scaling-stroke}.spark .baseline{stroke:var(--line);stroke-width:1}
+.wallet-panel{padding:16px}.wallet-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.wallet-empty{padding:16px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);background:var(--panel-2)}
+.market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.market-card{overflow:hidden}.market-card.featured{grid-column:1/-1}.market-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:15px;border-bottom:1px solid var(--line)}.market-head h3{margin:0}.market-head p{margin:4px 0 0;color:var(--muted);font-size:.72rem}.provider-pill{padding:4px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.65rem;font-weight:850;white-space:nowrap}.widget-frame{height:clamp(360px,55vh,620px);background:#050b14}.market-card:not(.featured) .widget-frame{height:clamp(300px,42vh,450px)}.widget-frame iframe{display:block;width:100%;height:100%;border:0}.market-foot{padding:12px 15px;border-top:1px solid var(--line)}.market-foot p{margin:0;color:var(--muted);font-size:.72rem}
+.snapshot-panel{padding:16px}.snapshot-status{margin-top:9px;color:var(--muted);font:650 .66rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}.method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.method-card{padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--panel-2)}.method-card strong{display:block}.method-card p{margin:5px 0 0;color:var(--muted);font-size:.7rem}
+body.metrics-sanctuary-mode .market-heavy,body.metrics-sanctuary-mode .ledger-deep{display:none!important}body.metrics-ledger-focus .external-heavy,body.metrics-ledger-focus .faith-context{display:none!important}
+.site-footer{margin-top:34px;padding:25px 18px;border-top:1px solid var(--line);background:var(--panel)}.footer-inner{width:min(var(--wrap),100%);margin:0 auto;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.footer-copy p{margin:0;color:var(--muted);font-size:.72rem}.footer-copy p+p{margin-top:3px}
+@media(max-width:1100px){.metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.goal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.wallet-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.hero,.telemetry-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.market-grid{grid-template-columns:1fr}.market-card.featured{grid-column:auto}.truth-strip{grid-template-columns:1fr}.footer-inner{display:block}.footer-links{margin-top:12px}}
+@media(max-width:560px){.main-wrap{padding:14px 12px 48px}.hero{padding:22px 17px}.hero h1{font-size:clamp(2.35rem,14vw,4rem)}.metric-grid,.goal-grid,.mini-grid,.wallet-grid,.method-grid{grid-template-columns:1fr}.section-head{display:block}.freshness{display:inline-flex;margin-top:8px}.market-head{display:block}.provider-pill{display:inline-flex;margin-top:8px}.actions .button,.toolbar .button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style>
+<script type="application/json" id="jcsMetricsProtocol">{
+  "schema": "jcs-network-observatory-protocol-v1",
+  "release": "3.0.0",
+  "effective": "2026-08-31",
+  "canonical": "https://jesuschristsavestoken.com/metrics.html",
+  "network": "XRPL Mainnet",
+  "asset": {
+    "currency": "JCS",
+    "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
+  },
+  "communication": {
+    "collector": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+    "current_protocol": "JCS_SOCIAL_V6",
+    "accepted_protocols": [
+      "JCS_SOCIAL_V6",
+      "JCS_SOCIAL_V5",
+      "JCS_SOCIAL_V4",
+      "JCS_SOCIAL_V3",
+      "JCS_SOCIAL_V2",
+      "JCS_VERIFY_V1"
+    ],
+    "prayer_nft_taxon": 1246974803,
+    "private_capsule_receipt_taxon": 1245926211
+  },
+  "refresh": {
+    "core_xrpl_seconds": 20,
+    "communications_seconds": 60,
+    "issuer_trustlines_seconds": 300,
+    "relay_probe_seconds": 300
+  },
+  "public_map_thresholds": {
+    "broad_region_distinct_accounts": 5,
+    "country_distinct_accounts": 10,
+    "extreme_pressure_country_distinct_accounts": 20
+  },
+  "metric_classes": {
+    "observed": "Read directly from validated XRP Ledger data.",
+    "derived": "Calculated locally from observed records; not a protocol fact by itself.",
+    "external": "Displayed from an identified third-party provider and not treated as an executable JCS quote."
+  },
+  "privacy_boundaries": [
+    "No GPS, IP, browser, Xaman device or relay endpoint is used to infer a person's location.",
+    "Private Capsule plaintext and recovery keys are intentionally not measurable by this observatory.",
+    "Optional wallet inspection is limited to the JCS trust line, JCS prayer NFT taxon, Private Capsule receipt taxon and already-public JCS communication activity.",
+    "This page creates no Xaman transaction payloads."
+  ],
+  "no_composite_impact_score": true
+}</script>
 </head>
-
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Jesus Christ Saves Token home">
-        <img
-          class="brand-logo"
-          src="/jcs-logo.png"
-          width="44"
-          height="44"
-          alt=""
-          decoding="async"
-        >
+<body id="top">
+<a class="skip-link" href="#main-content">Skip to metrics</a>
+<header class="site-header jcs-home-header jcs-index-header" role="banner">
+  <div class="jcs-index-header-shell">
+    <div class="index-header-top">
+      <a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
+        <img alt="" height="40" src="./jcs-logo.png" width="40"/>
         <span class="brand-copy">
-          <span class="brand-title">
-            <span class="brand-title-long">Jesus Christ Saves Token · Market Monitor</span>
-            <span class="brand-title-short">JCS Market Monitor</span>
-          </span>
-          <span class="brand-subtitle">Read-only · XRP Ledger Mainnet</span>
+          <span class="brand-title">Jesus Christ Saves Token</span>
+          <span class="brand-subtitle">JCS · Faith · Fellowship · Native XRPL exchange</span>
         </span>
       </a>
 
-      <nav class="header-nav" aria-label="Primary navigation">
-        <a class="home-link" href="index.html">
-          <span aria-hidden="true">⌂</span>
-          <span>Home</span>
-        </a>
-      </nav>
+      <button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
+        <span aria-hidden="true" class="menu-icon">☰</span>
+        <span class="menu-label">Menu</span>
+      </button>
+
+      <div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
+        <nav aria-label="Related XRP Ledger ecosystem projects" class="index-ecosystem-links">
+          <a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+          <a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+          <a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+        </nav>
+
+        <div aria-label="Prayer workspace and display controls" class="index-page-controls">
+          <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Reduce market and deep-ledger panels while keeping JCS communication goals prominent" type="button">Sanctuary mode</button>
+          <button aria-pressed="false" class="index-control-button exchange-control" id="ledgerFocusBtn" title="Focus on validated XRPL, JCS asset, liquidity and evidence metrics" type="button">Ledger focus</button>
+          <button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
+            <span aria-hidden="true" id="themeToggleIcon">◐</span>
+            <span id="themeToggleText">Light mode</span>
+          </button>
+        </div>
+
+        <div aria-label="Xaman wallet controls" class="index-wallet-actions">
+          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
+          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
+          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+        </div>
+
+        <nav aria-label="Project policies and support" class="index-legal-links">
+          <a href="./terms.html">Terms</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./security.html">Security</a>
+          <a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a>
+          <a href="./ai.json">AI Manifest</a>
+        </nav>
+      </div>
     </div>
-  </header>
 
-  <noscript>
-    <p class="noscript-notice">
-      JavaScript is disabled. The market links remain available, but some embedded provider views may not load.
-    </p>
-  </noscript>
-
-  <main id="main-content">
-    <section class="hero surface" aria-labelledby="page-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Faith · Transparency · XRPL Mainnet</p>
-        <h1 id="page-title">JCS Market <span>Monitor</span></h1>
-        <p class="hero-lead">
-          Read-only market context for the Jesus Christ Saves Token on the XRP Ledger,
-          with accurately labeled XRP and Bitcoin reference markets for comparison.
-        </p>
-
-        <ul class="status-chips" aria-label="Page capabilities">
-          <li class="status-chip">Read-only</li>
-          <li class="status-chip">No wallet connection</li>
-          <li class="status-chip">No transaction signing</li>
-          <li class="status-chip external">External provider data</li>
-        </ul>
-
-        <div class="hero-actions">
-          <a class="button" href="#jcs-market">View JCS/XRP market</a>
-          <a class="button secondary" href="#asset-identity">Verify JCS identity</a>
-        </div>
-      </div>
-
-      <aside class="identity-card" id="asset-identity" aria-labelledby="identity-title">
-        <div class="identity-heading">
-          <img
-            src="/jcs-logo.png"
-            width="48"
-            height="48"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          >
-          <div>
-            <h2 id="identity-title">Exact JCS asset identity</h2>
-            <p>Match every field before interacting.</p>
-          </div>
-        </div>
-
-        <dl class="identity-list">
-          <dt>Asset</dt>
-          <dd>Jesus Christ Saves Token</dd>
-
-          <dt>Currency</dt>
-          <dd>JCS</dd>
-
-          <dt>Network</dt>
-          <dd>XRP Ledger Mainnet</dd>
-
-          <dt>Reference pair</dt>
-          <dd>JCS/XRP</dd>
-        </dl>
-
-        <div class="issuer-block">
-          <span class="issuer-label">Issuer address</span>
-          <code class="issuer-value" id="issuerValue">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</code>
-          <div class="copy-row">
-            <button class="copy-button" id="copyIssuer" type="button">Copy issuer</button>
-            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <aside class="security-notice" aria-labelledby="security-title">
-      <span class="notice-mark" aria-hidden="true">!</span>
-      <div>
-        <h2 id="security-title">Verify the asset before you act</h2>
-        <p>
-          Currency symbols are not unique on the XRP Ledger. Confirm the full JCS issuer address
-          before interacting with any market or signing a transaction in Xaman. This page never
-          requests a seed phrase, secret key, recovery words, or wallet connection.
-        </p>
-      </div>
-    </aside>
-
-    <section class="workflow-section" aria-labelledby="workflow-title">
-      <div class="section-heading">
-        <p class="eyebrow">Safe workflow</p>
-        <h2 id="workflow-title">Verify first. Open the provider. Review in Xaman.</h2>
-        <p>
-          Market and wallet actions remain with recognized third-party interfaces; this monitor
-          does not construct or submit an XRPL transaction.
-        </p>
-      </div>
-
-      <div class="workflow-grid">
-        <article class="workflow-step">
-          <span class="step-number" aria-hidden="true">1</span>
-          <h3>Match the issuer</h3>
-          <p>Confirm the full JCS currency and issuer combination shown above.</p>
-        </article>
-
-        <article class="workflow-step">
-          <span class="step-number" aria-hidden="true">2</span>
-          <h3>Open a market provider</h3>
-          <p>Use the permanent Sologenic or XPMarket links if an embedded view is unavailable.</p>
-        </article>
-
-        <article class="workflow-step">
-          <span class="step-number" aria-hidden="true">3</span>
-          <h3>Review every detail</h3>
-          <p>Confirm the asset, amount, destination, fees, and transaction type inside Xaman before signing.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="market-section" aria-labelledby="market-title">
-      <div class="section-heading">
-        <p class="eyebrow">External market references</p>
-        <h2 id="market-title">JCS first, broader market context second</h2>
-        <p>
-          The JCS/XRP view is the featured market. XRP/USDT and BTC/USD are separate comparison
-          charts and do not represent the executable JCS price.
-        </p>
-      </div>
-
-      <div class="widget-grid">
-        <article class="widget-card featured" id="jcs-market">
-          <header class="widget-head">
-            <div class="widget-title-wrap">
-              <span class="provider-label">Primary JCS reference</span>
-              <h3>JCS/XRP Order-Book View</h3>
-              <p>Embedded Sologenic market view for the exact JCS asset identified above.</p>
-            </div>
-            <span class="provider-pill">Sologenic</span>
-          </header>
-
-          <div class="widget-frame">
-            <iframe
-              src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet"
-              title="Read-only JCS and XRP market view on Sologenic"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
-          </div>
-
-          <footer class="widget-footer">
-            <p>
-              Market view unavailable? Open the JCS/XRP market directly and verify the issuer
-              before proceeding. The embedded view is intentionally restricted to read-only use.
-            </p>
-            <div class="widget-actions">
-              <a
-                class="button small"
-                href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet"
-                target="_blank"
-                rel="noopener noreferrer external"
-              >Open Sologenic</a>
-              <a
-                class="button secondary small"
-                href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"
-                target="_blank"
-                rel="noopener noreferrer external"
-              >Open XPMarket</a>
-            </div>
-          </footer>
-        </article>
-
-        <article class="widget-card context-card">
-          <header class="widget-head">
-            <div class="widget-title-wrap">
-              <span class="provider-label">Market context</span>
-              <h3>XRP/USDT · Binance Reference</h3>
-              <p>Binance XRP/USDT data displayed through TradingView.</p>
-            </div>
-            <a
-              class="provider-pill"
-              href="https://www.tradingview.com/symbols/XRPUSDT/"
-              target="_blank"
-              rel="noopener noreferrer external"
-              aria-label="Open the XRP to USDT source chart on TradingView"
-            >TradingView ↗</a>
-          </header>
-
-          <div class="widget-frame">
-            <iframe
-              src="https://s.tradingview.com/widgetembed/?symbol=BINANCE%3AXRPUSDT&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark"
-              title="Binance XRP to USDT reference chart from TradingView"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
-          </div>
-
-          <footer class="widget-footer">
-            <p>This comparison chart is not the JCS/XRP order book or an executable JCS quote.</p>
-            <div class="widget-actions">
-              <a
-                class="button secondary small"
-                href="https://www.tradingview.com/symbols/XRPUSDT/"
-                target="_blank"
-                rel="noopener noreferrer external"
-              >Open XRP chart</a>
-            </div>
-          </footer>
-        </article>
-
-        <article class="widget-card context-card">
-          <header class="widget-head">
-            <div class="widget-title-wrap">
-              <span class="provider-label">Market context</span>
-              <h3>BTC/USD · Bitstamp Reference</h3>
-              <p>Bitstamp BTC/USD data displayed through TradingView.</p>
-            </div>
-            <a
-              class="provider-pill"
-              href="https://www.tradingview.com/symbols/BTCUSD/"
-              target="_blank"
-              rel="noopener noreferrer external"
-              aria-label="Open the Bitcoin to US dollar source chart on TradingView"
-            >TradingView ↗</a>
-          </header>
-
-          <div class="widget-frame">
-            <iframe
-              src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP%3ABTCUSD&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark"
-              title="Bitstamp Bitcoin to US dollar reference chart from TradingView"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              sandbox="allow-scripts allow-same-origin"
-            ></iframe>
-          </div>
-
-          <footer class="widget-footer">
-            <p>This comparison chart is provided only as broader market context.</p>
-            <div class="widget-actions">
-              <a
-                class="button secondary small"
-                href="https://www.tradingview.com/symbols/BTCUSD/"
-                target="_blank"
-                rel="noopener noreferrer external"
-              >Open Bitcoin chart</a>
-            </div>
-          </footer>
-        </article>
-      </div>
-    </section>
-
-    <section class="disclosure-section" aria-labelledby="disclosure-title">
-      <div class="disclosure surface">
-        <div>
-          <h2 id="disclosure-title">External data notice</h2>
-          <p>
-            Embedded market views are operated by Sologenic and TradingView. Provider data may be
-            delayed, incomplete, or temporarily unavailable. Displayed prices may differ from
-            executable XRPL prices after liquidity, spread, slippage, fees, and market movement.
-            External providers' terms and privacy practices apply. This page provides information,
-            not financial advice.
-          </p>
-        </div>
-        <span class="disclosure-badge">Read-only information</span>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-copy">
-        <p>&copy; <span id="copyrightYear">2026</span> Cryptocurrency Community Church of Jesus Christ. All rights reserved.</p>
-        <p>Read-only information · No custody · No financial advice</p>
-      </div>
-
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="verify.html">Sign the Ledger</a>
-        <a href="about-jcs.html">JCS Vision</a>
-        <a href="/.well-known/security.txt">Security</a>
-      </nav>
+    <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+      <a class="nav-btn" href="./">Home</a>
+      <a class="nav-btn" href="./#trade">Trade</a>
+      <a class="nav-btn" href="./#fellowship">Fellowship</a>
+      <a class="nav-btn" href="./#scripture">Scripture</a>
+      <a class="nav-btn" href="./#sacred-film">Sacred Film</a>
+      <a class="nav-btn" href="./#audio">Sacred Audio</a>
+      <a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
+      <a class="nav-btn" href="./prayer.map.html">Prayer Map</a>
+      <a aria-current="page" class="nav-btn" href="./metrics.html">Market Monitor</a>
+      <a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
+      <a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+    </nav>
+  </div>
+</header>
+<noscript><p class="noscript-notice">JavaScript is disabled. Asset identity and external market links remain readable, but live XRPL, communication, liquidity and optional wallet metrics require JavaScript.</p></noscript>
+<main class="main-wrap" id="main-content">
+<section class="surface hero" aria-labelledby="page-title">
+  <div>
+    <span class="eyebrow">Validated ledger · faith communications · market structure</span>
+    <h1 id="page-title">JCS Network <span>Observatory</span></h1>
+    <p class="hero-lead">Measure what the project is actually doing on the XRP Ledger: public prayers and testimonies, replies and Amens, privacy-threshold Prayer Map activity, JCS trust-line participation, issued obligations, ledger health, AMM liquidity and funded order-book conditions. External charts remain context—not the source of truth for JCS.</p>
+    <div class="status-row" aria-label="Observatory boundaries">
+      <span class="status-chip" id="liveStatusChip">Validated-ledger data</span>
+      <span class="status-chip">Read-only by default</span>
+      <span class="status-chip">No transaction payloads</span>
+      <span class="status-chip warn">External charts separated</span>
     </div>
-  </footer>
+    <div class="actions">
+      <a class="button primary" href="#communication-pulse">Communication pulse</a>
+      <a class="button" href="#xrpl-operating-layer">XRPL operating layer</a>
+      <a class="button" href="#jcs-market">JCS/XRP market</a>
+      <button class="button" id="refreshAllBtn" type="button">Refresh all live metrics</button>
+    </div>
+  </div>
+  <aside class="identity-card" id="asset-identity" aria-labelledby="identity-title">
+    <div class="identity-head"><img src="./jcs-logo.png" alt="" width="54" height="54"/><div><h2 id="identity-title">Exact JCS identity</h2><p>Do not identify an issued asset by ticker alone.</p></div></div>
+    <dl class="identity-list"><dt>Asset</dt><dd>Jesus Christ Saves Token</dd><dt>Currency</dt><dd>JCS</dd><dt>Network</dt><dd>XRPL Mainnet</dd><dt>Collector</dt><dd>Same verified account</dd><dt>Mode</dt><dd>Read-only observatory</dd></dl>
+    <code class="issuer-value" id="issuerValue">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</code>
+    <div class="actions"><button class="button small" id="copyIssuer" type="button">Copy issuer</button><span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span></div>
+  </aside>
+</section>
+<section class="truth-strip surface" aria-label="Metric truth classes">
+  <article class="truth-item observed"><strong>Observed</strong><span>Read from a validated XRP Ledger version or validated account history.</span></article>
+  <article class="truth-item derived"><strong>Derived</strong><span>Calculated locally from observed records, such as response coverage, funded spread or cohort qualification.</span></article>
+  <article class="truth-item external"><strong>External context</strong><span>Third-party market/reference information. It never replaces JCS issuer identity or validated XRPL evidence.</span></article>
+</section>
 
-  <script>
-    (() => {
-      "use strict";
+<section class="section faith-context" id="communication-pulse">
+  <div class="section-head"><div><span class="section-kicker">Communication goals · public ledger evidence</span><h2>Faith communication pulse</h2><p>These measurements describe the public JCS communication network reconstructed from validated one-drop registry, reply, support and Amen transactions. They do not score faith, sincerity or spiritual impact.</p></div><span class="freshness" id="commFreshness">Waiting for XRPL</span></div>
+  <div class="metric-grid">
+    <article class="metric observed"><span class="label">Public prayers / testimonies</span><strong id="metricPosts">—</strong><small id="metricPostsNote">Validated registry posts</small></article>
+    <article class="metric observed"><span class="label">Distinct participating wallets</span><strong id="metricWallets">—</strong><small>Public communication participants only</small></article>
+    <article class="metric observed"><span class="label">On-ledger Amens</span><strong id="metricAmens">—</strong><small>Validated one-drop Amen records</small></article>
+    <article class="metric observed"><span class="label">Replies + support</span><strong id="metricReplies">—</strong><small id="metricRepliesNote">Validated response records</small></article>
+    <article class="metric derived"><span class="label">Response coverage</span><strong id="metricResponseCoverage">—</strong><small>Posts with at least one matched Amen/reply/support record</small></article>
+    <article class="metric derived"><span class="label">Current V6 protocol share</span><strong id="metricV6Share">—</strong><small>Current-format posts among recognized public posts</small></article>
+    <article class="metric derived"><span class="label">Evidence-hash coverage</span><strong id="metricHashCoverage">—</strong><small>Posts carrying a 64-hex content commitment</small></article>
+    <article class="metric privacy"><span class="label">Public Prayer Map groups</span><strong id="metricMapGroups">—</strong><small>Only groups meeting distinct-wallet privacy thresholds</small></article>
+    <article class="metric observed"><span class="label">Recent 30-day posts</span><strong id="metricCurrent30">—</strong><small id="metricCurrent30Note">Compared with preceding 30 days</small></article>
+    <article class="metric observed"><span class="label">Latest public communication</span><strong id="metricLatestActivity">—</strong><small>Ledger timestamp from recognized JCS public activity</small></article>
+    <article class="metric privacy"><span class="label">Map focus not publicly qualified</span><strong id="metricSuppressedMap">—</strong><small>Opt-in prayer records whose group remains below its public cohort threshold</small></article>
+    <article class="metric privacy"><span class="label">Private Capsule plaintext telemetry</span><strong>Unavailable by design</strong><small>The observatory cannot count or read local encrypted messages or recovery keys.</small></article>
+  </div>
+  <div class="goal-grid" aria-label="JCS communication goal lens">
+    <article class="goal-card reach"><strong>Reach</strong><div class="goal-value" id="goalReach">—</div><p>Distinct public signing wallets; no numerical reach target is assumed.</p><div class="goal-bar" aria-hidden="true"><span id="goalReachBar"></span></div></article>
+    <article class="goal-card"><strong>Response</strong><div class="goal-value" id="goalResponse">—</div><p>Share of public posts with a matched public interaction.</p><div class="goal-bar"><span id="goalResponseBar"></span></div></article>
+    <article class="goal-card"><strong>Evidence</strong><div class="goal-value" id="goalEvidence">—</div><p>Content-commitment coverage across public posts.</p><div class="goal-bar"><span id="goalEvidenceBar"></span></div></article>
+    <article class="goal-card"><strong>Privacy discipline</strong><div class="goal-value" id="goalPrivacy">0 exact-location fields</div><p>Map cohorts are thresholded; exact participant location is not an accepted public metric.</p><div class="goal-bar"><span style="width:100%"></span></div></article>
+    <article class="goal-card"><strong>Relay resilience</strong><div class="goal-value" id="goalResilience">—</div><p>Public XRPL endpoints reachable during the most recent probe.</p><div class="goal-bar"><span id="goalResilienceBar"></span></div></article>
+  </div>
+  <div class="note"><strong>No composite impact score:</strong> reach, response, evidence, privacy and network resilience remain separate measurements. A larger count is not automatically better, and none of these metrics measures religious truth, effectiveness of prayer, identity or human safety.</div>
+</section>
 
-      const issuer = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
-      const copyButton = document.getElementById("copyIssuer");
-      const copyStatus = document.getElementById("copyStatus");
-      const year = document.getElementById("copyrightYear");
+<section class="section" id="xrpl-operating-layer">
+  <div class="section-head"><div><span class="section-kicker">XRPL Mainnet · validated state</span><h2>XRPL operating layer</h2><p>Ledger health and JCS issuer conditions are refreshed independently of the public communication scan. Trust-line enumeration is slower and refreshes less often.</p></div><span class="freshness" id="coreFreshness">Waiting for XRPL</span></div>
+  <div class="metric-grid">
+    <article class="metric observed"><span class="label">Validated ledger</span><strong id="metricLedger">—</strong><small id="metricLedgerAge">Close age unavailable</small></article>
+    <article class="metric observed"><span class="label">XRPL server state</span><strong id="metricServerState">—</strong><small id="metricServerBuild">Build unavailable</small></article>
+    <article class="metric observed"><span class="label">Server load factor</span><strong id="metricLoadFactor">—</strong><small>Local server/network load multiplier</small></article>
+    <article class="metric observed"><span class="label">Base transaction fee</span><strong id="metricBaseFee">—</strong><small>Validated-ledger base fee; actual required fee can scale with load</small></article>
+    <article class="metric observed"><span class="label">Base account reserve</span><strong id="metricReserveBase">—</strong><small id="metricReserveInc">Owner reserve unavailable</small></article>
+    <article class="metric observed ledger-deep"><span class="label">JCS trust lines</span><strong id="metricTrustlines">—</strong><small id="metricTrustlinesNote">Issuer-side validated trust-line scan</small></article>
+    <article class="metric observed ledger-deep"><span class="label">JCS issued obligations</span><strong id="metricObligations">—</strong><small>Derived from negative issuer-side JCS balances across enumerated trust lines</small></article>
+    <article class="metric observed"><span class="label">Issuer owner objects</span><strong id="metricIssuerObjects">—</strong><small>AccountRoot OwnerCount</small></article>
+  </div>
+  <div class="telemetry-grid" style="margin-top:12px">
+    <article class="surface telemetry-panel ledger-deep"><h3>Issuer controls</h3><p>Current AccountRoot flag state. These are ledger settings, not legal classifications.</p><div class="settings-list">
+      <div class="setting" id="settingDefaultRipple"><span>Default Ripple</span><b>—</b></div>
+      <div class="setting" id="settingGlobalFreeze"><span>Global Freeze</span><b>—</b></div>
+      <div class="setting" id="settingNoFreeze"><span>No Freeze</span><b>—</b></div>
+      <div class="setting" id="settingRequireAuth"><span>Require Authorization</span><b>—</b></div>
+      <div class="setting" id="settingMaster"><span>Master key disabled</span><b>—</b></div>
+      <div class="setting"><span>Transfer rate</span><b id="settingTransferRate">—</b></div>
+    </div></article>
+    <article class="surface telemetry-panel"><h3>Session network pulse</h3><p>Small in-browser trends for the current session only; nothing is uploaded.</p><div class="spark-card"><div class="spark-head"><span>Validated-ledger close age</span><b id="sparkLedgerLabel">—</b></div><svg class="spark" id="sparkLedger" viewBox="0 0 240 52" preserveAspectRatio="none"><line class="baseline" x1="0" y1="51" x2="240" y2="51"></line><polyline points=""></polyline></svg></div><div class="spark-card"><div class="spark-head"><span>JCS/XRP funded spread</span><b id="sparkSpreadLabel">—</b></div><svg class="spark" id="sparkSpread" viewBox="0 0 240 52" preserveAspectRatio="none"><line class="baseline" x1="0" y1="51" x2="240" y2="51"></line><polyline points=""></polyline></svg></div></article>
+  </div>
+</section>
 
-      if (year) {
-        year.textContent = String(new Date().getUTCFullYear());
-      }
+<section class="section" id="liquidity-metrics">
+  <div class="section-head"><div><span class="section-kicker">JCS/XRP · decentralized liquidity</span><h2>JCS market structure</h2><p>AMM and order-book metrics come from the XRP Ledger. If a venue or side is unavailable, the page reports unavailable rather than inventing a price.</p></div><span class="freshness" id="marketFreshness">Waiting for XRPL</span></div>
+  <div class="metric-grid">
+    <article class="metric observed"><span class="label">AMM XRP reserve</span><strong id="metricAmmXrp">—</strong><small>Validated AMM reserve</small></article>
+    <article class="metric observed"><span class="label">AMM JCS reserve</span><strong id="metricAmmJcs">—</strong><small>Validated AMM reserve</small></article>
+    <article class="metric observed"><span class="label">AMM fee</span><strong id="metricAmmFee">—</strong><small>XRPL AMM trading fee</small></article>
+    <article class="metric derived"><span class="label">AMM reserve ratio</span><strong id="metricAmmPrice">—</strong><small>XRP per JCS from reserve ratio; not a guaranteed execution quote</small></article>
+    <article class="metric derived"><span class="label">Best funded bid</span><strong id="metricBid">—</strong><small>XRP per JCS, funded order book</small></article>
+    <article class="metric derived"><span class="label">Best funded ask</span><strong id="metricAsk">—</strong><small>XRP per JCS, funded order book</small></article>
+    <article class="metric derived"><span class="label">Funded spread</span><strong id="metricSpread">—</strong><small>Best ask minus best bid divided by midpoint</small></article>
+    <article class="metric derived"><span class="label">Top-book JCS depth</span><strong id="metricDepth">—</strong><small id="metricDepthNote">Funded JCS across the sampled bid and ask books</small></article>
+  </div>
+</section>
 
-      async function copyText(text) {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-          return;
-        }
+<section class="section" id="personal-footprint">
+  <div class="section-head"><div><span class="section-kicker">Optional · account-only · no signing</span><h2>My JCS footprint</h2><p>Connecting Xaman is optional. This panel looks only for the JCS trust line, JCS prayer NFTs, neutral Private-Capsule receipt NFTs and this wallet’s already-public JCS communication records. It does not enumerate unrelated assets.</p></div><span class="freshness" id="walletFreshness">Wallet disconnected</span></div>
+  <div class="surface wallet-panel"><div id="walletEmpty" class="wallet-empty">Use the canonical header’s Connect Xaman button if you want account-specific JCS context. No transaction request can be created from this page.</div><div id="walletMetrics" hidden><div class="wallet-grid">
+    <article class="metric observed"><span class="label">JCS balance</span><strong id="walletJcsBalance">—</strong><small id="walletJcsLimit">Trust-line limit unavailable</small></article>
+    <article class="metric observed"><span class="label">JCS prayer NFTs</span><strong id="walletPrayerNfts">—</strong><small>Taxon 1246974803 only</small></article>
+    <article class="metric observed"><span class="label">Private Capsule receipts</span><strong id="walletCapsuleReceipts">—</strong><small>Neutral receipt taxon 1245926211 only</small></article>
+    <article class="metric derived"><span class="label">Public JCS communications</span><strong id="walletPublicComms">—</strong><small id="walletPublicCommsNote">Already-public collector history only</small></article>
+  </div></div></div>
+</section>
 
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.setAttribute("readonly", "");
-        textArea.style.position = "fixed";
-        textArea.style.opacity = "0";
-        textArea.style.pointerEvents = "none";
-        document.body.appendChild(textArea);
-        textArea.select();
+<section class="section research-heavy" id="privacy-metrics">
+  <div class="section-head"><div><span class="section-kicker">Safety objective · measurable restraint</span><h2>Privacy and communications boundaries</h2><p>Some of the most important project metrics are intentionally absences: data that the architecture refuses to centralize or infer.</p></div></div>
+  <div class="method-grid">
+    <article class="method-card"><strong>Exact location inference</strong><p><b>0 accepted fields.</b> No GPS, IP, browser, Xaman device, relay hostname or transaction route is treated as a person’s physical location.</p></article>
+    <article class="method-card"><strong>Prayer Map release thresholds</strong><p>Broad region: 5 distinct wallets. Country: 10. Extreme-pressure country: 20. The metrics page applies the same cohort rules.</p></article>
+    <article class="method-card"><strong>Private Capsule measurement</strong><p>Plaintext, keys and private delivery success are intentionally not centrally measurable. Only a user-chosen neutral receipt can become public.</p></article>
+    <article class="method-card"><strong>Wallet minimization</strong><p>Optional wallet inspection is JCS-scoped. Unrelated trust lines, NFTs and holdings are not listed or scored.</p></article>
+    <article class="method-card"><strong>Map versus identity</strong><p>Prayer-focus labels describe what a prayer concerns. They are not evidence that a signer lives in, traveled through or is physically present in that area.</p></article>
+    <article class="method-card"><strong>No spiritual KPI</strong><p>The page does not rank prayer effectiveness, religious worth, salvation, doctrine or human urgency using blockchain activity.</p></article>
+  </div>
+</section>
 
-        const copied = document.execCommand("copy");
-        textArea.remove();
+<section class="section market-heavy external-heavy" id="market-title-section" aria-labelledby="market-title">
+  <div class="section-head"><div><span class="section-kicker">External provider context</span><h2 id="market-title">Market references</h2><p>The original market views are preserved below. JCS/XRP is primary; XRP/USDT and BTC/USD are broader comparison charts and are never presented as executable JCS prices.</p></div></div>
+  <div class="market-grid">
+    <article class="surface market-card featured" id="jcs-market"><header class="market-head"><div><h3>JCS/XRP Order-Book View</h3><p>Embedded Sologenic view for the exact issuer shown above.</p></div><span class="provider-pill">Sologenic · external</span></header><div class="widget-frame"><iframe src="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet" title="Read-only JCS and XRP market view on Sologenic" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe></div><footer class="market-foot"><p>Verify the full issuer before interacting. <a href="https://sologenic.org/trade?market=JCS%2BrPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd%2FXRP&amp;network=mainnet" target="_blank" rel="noopener noreferrer external">Open Sologenic</a> · <a href="https://xpmarket.com/token/JCS-rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd" target="_blank" rel="noopener noreferrer external">Open XPMarket</a></p></footer></article>
+    <article class="surface market-card"><header class="market-head"><div><h3>XRP/USDT reference</h3><p>Binance XRP/USDT through TradingView.</p></div><span class="provider-pill">TradingView · external</span></header><div class="widget-frame"><iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE%3AXRPUSDT&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark" title="Binance XRP to USDT reference chart from TradingView" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin"></iframe></div><footer class="market-foot"><p>Context only. <a href="https://www.tradingview.com/symbols/XRPUSDT/" target="_blank" rel="noopener noreferrer external">Open source chart</a></p></footer></article>
+    <article class="surface market-card"><header class="market-head"><div><h3>BTC/USD reference</h3><p>Bitstamp BTC/USD through TradingView.</p></div><span class="provider-pill">TradingView · external</span></header><div class="widget-frame"><iframe src="https://s.tradingview.com/widgetembed/?symbol=BITSTAMP%3ABTCUSD&amp;interval=60&amp;hidesidetoolbar=1&amp;theme=dark" title="Bitstamp Bitcoin to US dollar reference chart from TradingView" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin"></iframe></div><footer class="market-foot"><p>Broader market context only. <a href="https://www.tradingview.com/symbols/BTCUSD/" target="_blank" rel="noopener noreferrer external">Open source chart</a></p></footer></article>
+  </div>
+</section>
 
-        if (!copied) {
-          throw new Error("Copy command was unavailable.");
-        }
-      }
+<section class="section" id="evidence-export">
+  <div class="section-head"><div><span class="section-kicker">Machine-readable evidence</span><h2>Observatory snapshot</h2><p>Export the current observed and derived state as JSON. The export labels unavailable values and carries a SHA-256 digest when Web Crypto is available.</p></div></div>
+  <div class="surface snapshot-panel"><div class="toolbar"><button class="button primary" id="downloadSnapshotBtn" type="button">Download metrics snapshot</button><button class="button" id="copySummaryBtn" type="button">Copy plain-language summary</button><button class="button" id="downloadProtocolBtn" type="button">Download metrics protocol JSON</button></div><div class="snapshot-status" id="snapshotStatus">No snapshot exported yet.</div></div>
+</section>
 
-      if (copyButton && copyStatus) {
-        copyButton.addEventListener("click", async () => {
-          copyButton.disabled = true;
-          copyStatus.textContent = "";
+<section class="section research-heavy" id="workflow-section" aria-labelledby="workflow-title"><div class="section-head"><div><span class="section-kicker">Interpretation workflow</span><h2 id="workflow-title">Observe first. Derive carefully. Keep external context separate.</h2></div></div><div class="method-grid"><article class="method-card"><strong>1 · Validate the source</strong><p>Ledger facts come from validated XRPL responses. A disconnected or stale source is labeled rather than silently replaced with a favorable value.</p></article><article class="method-card"><strong>2 · Preserve scope</strong><p>Communication records, token obligations, AMM reserves and order books answer different questions. They are not merged into a single success score.</p></article><article class="method-card"><strong>3 · Review the limitation</strong><p>Market liquidity can change immediately. Communication counts cannot establish identity, truth, spiritual effect or safety. External providers have their own terms and data quality.</p></article></div></section>
 
-          try {
-            await copyText(issuer);
-            copyButton.textContent = "Issuer copied";
-            copyStatus.textContent = "Exact issuer copied to clipboard.";
-          } catch (error) {
-            copyButton.textContent = "Copy issuer";
-            copyStatus.textContent = "Copy was blocked. Select the issuer address above.";
-          } finally {
-            window.setTimeout(() => {
-              copyButton.disabled = false;
-              copyButton.textContent = "Copy issuer";
-              copyStatus.textContent = "";
-            }, 2600);
-          }
-        });
-      }
-    })();
-  </script>
+<aside class="section surface snapshot-panel" id="security-title" aria-labelledby="disclosure-title"><h2 id="disclosure-title" style="margin-top:0">Security, market and interpretation notice</h2><p style="color:var(--muted);margin-bottom:0">Currency symbols are not unique on XRPL. Verify the full JCS issuer before interacting. The Metrics page is informational and creates no Xaman transaction payloads. Public XRPL records are durable, but live server responses, AMM reserves, order books, account flags and trust-line counts can change. External charts can be delayed or unavailable. Metrics do not constitute financial advice, investment ratings, legal identity verification, a guarantee of liquidity, proof of prayer effectiveness, proof of persecution status, or proof of real-world location.</p></aside>
+</main>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-copy"><p>&copy; <span id="copyrightYear">2026</span> Cryptocurrency Community Church of Jesus Christ. All rights reserved.</p><p>JCS Network Observatory v3.0.0 · Read-only metrics · No custody · No transaction signing</p></div><nav class="footer-links" aria-label="Footer navigation"><a href="./">Home</a><a href="./verify.html">Sign the Ledger</a><a href="./prayer.map.html">Prayer Map</a><a href="./about-jcs.html">About &amp; Vision</a><a href="./.well-known/security.txt">Security</a></nav></div></footer>
+<script crossorigin="anonymous" src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+<script>
+(()=>{
+'use strict';
+const ISSUER='rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd',COLLECTOR=ISSUER,CURRENCY='JCS',APP_KEY='5b8499a9-ae28-4050-ac09-45efa948eced';
+const APP_TAGS=new Set(['JCS_SOCIAL_V6','JCS_SOCIAL_V5','JCS_SOCIAL_V4','JCS_SOCIAL_V3','JCS_SOCIAL_V2']);
+const LEGACY_TAG='JCS_VERIFY_V1',MAP_POLICY='JCS_MAP_1',PRAYER_TAXON=1246974803,CAPSULE_TAXON=1245926211;
+const XRPL_SERVERS=['wss://xrplcluster.com/','wss://s2.ripple.com/','wss://honeycluster.io/','wss://s1.ripple.com/'];
+const PROXY='https://xrbitcoincash-github-io.onrender.com/',THEME_KEY='jcs-ledger-theme',FOCUS_KEY='jcs.metrics.focus.v1',MAP_CHANNEL='jcs-prayer-map';
+const EXTREME_COUNTRIES=new Set(['KP','SO','YE','SD','ER','SY','NG','PK','LY','IR','AF','IN','SA','MM','ML']);
+const REGION_CODES=new Set(['worldwide','north-america','latin-america-caribbean','europe','africa','middle-east-north-africa','south-asia','east-southeast-asia','oceania']);
+const HASH256=/^[A-F0-9]{64}$/;const $=id=>document.getElementById(id);const encoder=new TextEncoder();const decoder=new TextDecoder();
+const state={transport:null,endpoint:'',xumm:null,account:'',core:null,market:null,issuer:null,trust:null,communications:null,probes:[],ledgerHistory:[],spreadHistory:[],refreshing:false,commTimer:null,coreTimer:null,trustTimer:null,probeTimer:null,mapChannel:null};
+function fmt(value,max=6){const n=Number(value);if(!Number.isFinite(n))return 'Unavailable';return new Intl.NumberFormat(undefined,{maximumFractionDigits:max}).format(n)}
+function pct(value,digits=1){const n=Number(value);return Number.isFinite(n)?n.toFixed(digits)+'%':'Unavailable'}
+function short(value,size=8){const s=String(value||'');return s.length>size*2+1?s.slice(0,size)+'…'+s.slice(-size):s}
+function rippleIso(value){const n=Number(value);if(!Number.isFinite(n))return '';return new Date((n+946684800)*1000).toISOString()}
+function timeAgo(iso){if(!iso||Number.isNaN(Date.parse(iso)))return 'Unavailable';const s=Math.max(0,Math.floor((Date.now()-Date.parse(iso))/1000));if(s<60)return s+'s ago';const m=Math.floor(s/60);if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';return Math.floor(h/24)+'d ago'}
+function hexToText(value=''){try{const clean=String(value).replace(/[^A-Fa-f0-9]/g,'');if(!clean||clean.length%2)return '';const bytes=new Uint8Array(clean.match(/.{2}/g).map(x=>parseInt(x,16)));return decoder.decode(bytes)}catch{return ''}}
+function parseMemos(items=[]){const out={};for(const item of (items||[]).slice(0,64)){const m=item?.Memo||{};const type=hexToText(m.MemoType||'').trim().toLowerCase();const data=hexToText(m.MemoData||'').trim();if(type&&type.length<=64&&encoder.encode(data).length<=4096)out[type]=data}return out}
+function normalizeAccountTx(entry){const tx=entry?.tx_json||entry?.tx||entry?.transaction||{};const meta=entry?.meta||entry?.metaData||{};return{tx,meta,hash:String(tx.hash||tx.Hash||entry?.hash||'').toUpperCase(),validated:entry?.validated!==false,date:tx.date??entry?.date,ledgerIndex:Number(tx.ledger_index||entry?.ledger_index||0)}}
+class WsRpc{constructor(url){this.url=url;this.ws=null;this.id=1;this.pending=new Map();this.listeners=new Set()}async connect(){await new Promise((resolve,reject)=>{let done=false;const timer=setTimeout(()=>{try{this.ws?.close()}catch{}reject(new Error('XRPL connection timeout'))},9000);try{this.ws=new WebSocket(this.url)}catch(e){clearTimeout(timer);reject(e);return}this.ws.addEventListener('open',()=>{if(done)return;done=true;clearTimeout(timer);resolve()},{once:true});this.ws.addEventListener('error',()=>{if(!done){done=true;clearTimeout(timer);reject(new Error('XRPL endpoint unavailable'))}},{once:true});this.ws.addEventListener('message',e=>{let p;try{p=JSON.parse(e.data)}catch{return}if(p.id&&this.pending.has(p.id)){const pending=this.pending.get(p.id);this.pending.delete(p.id);clearTimeout(pending.timer);if(p.error||p.status==='error'||p.result?.error)pending.reject(new Error(p.error_message||p.result?.error_message||p.error||p.result?.error));else pending.resolve(p.result||p);return}for(const fn of this.listeners){try{fn(p)}catch{}}});this.ws.addEventListener('close',()=>{for(const p of this.pending.values()){clearTimeout(p.timer);p.reject(new Error('XRPL connection closed'))}this.pending.clear()})});return this}call(command,params={}){return new Promise((resolve,reject)=>{if(!this.ws||this.ws.readyState!==WebSocket.OPEN){reject(new Error('XRPL socket not connected'));return}const id=this.id++,timer=setTimeout(()=>{this.pending.delete(id);reject(new Error('XRPL request timeout'))},11000);this.pending.set(id,{resolve,reject,timer});this.ws.send(JSON.stringify({id,command,api_version:2,...params}))})}on(fn){this.listeners.add(fn)}close(){try{this.ws?.close()}catch{}}}
+async function connectTransport(){if(state.transport?.ws?.readyState===WebSocket.OPEN)return state.transport;if(state.transport)state.transport.close();let last;for(const url of XRPL_SERVERS){try{const c=await new WsRpc(url).connect();state.transport=c;state.endpoint=url;c.on(handleStreamEvent);try{await c.call('subscribe',{streams:['ledger'],accounts:[COLLECTOR]})}catch{}return c}catch(e){last=e}}throw last||new Error('No XRPL WebSocket endpoint available')}
+async function proxyCall(command,params={}){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),11000);try{const r=await fetch(PROXY,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',redirect:'error',referrerPolicy:'no-referrer',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({method:command,params:[params]}),signal:controller.signal});if(!r.ok)throw new Error('Proxy HTTP '+r.status);const p=await r.json();const result=p?.result&&typeof p.result==='object'?p.result:p;if(!result||result.error||result.status==='error')throw new Error(result?.error_message||result?.error||'Proxy XRPL request failed');return result}finally{clearTimeout(timer)}}
+async function rpc(command,params={}){let last;for(let i=0;i<2;i++){try{const c=await connectTransport();return await c.call(command,params)}catch(e){last=e;state.transport?.close();state.transport=null}}try{state.endpoint='existing Render read-only proxy';return await proxyCall(command,params)}catch(e){throw last||e}}
+function handleStreamEvent(event){if(event?.type==='ledgerClosed'||event?.ledger_index){clearTimeout(state.coreTimer);state.coreTimer=setTimeout(()=>refreshCore(false),1200)}const tx=event?.transaction||event?.tx_json;if(tx&&(tx.Account===COLLECTOR||tx.Destination===COLLECTOR)){clearTimeout(state.commTimer);state.commTimer=setTimeout(()=>refreshCommunications(false),2200)}}
+function setFresh(id,text,stateName=''){const el=$(id);if(!el)return;el.textContent=text;el.className='freshness '+stateName}
+function pushHistory(list,value,max=36){const n=Number(value);if(!Number.isFinite(n))return;list.push(n);if(list.length>max)list.splice(0,list.length-max)}
+function renderSpark(id,list,labelId,suffix=''){const svg=$(id),poly=svg?.querySelector('polyline');if(!svg||!poly||!list.length)return;const min=Math.min(...list),max=Math.max(...list),range=Math.max(.0000001,max-min),w=240,h=48;const pts=list.map((v,i)=>{const x=list.length===1?w:i/(list.length-1)*w;const y=h-(v-min)/range*(h-4);return x.toFixed(1)+','+Math.max(2,y).toFixed(1)}).join(' ');poly.setAttribute('points',pts);$(labelId).textContent=fmt(list.at(-1),4)+suffix}
+function amountNumber(value){if(typeof value==='string')return Number(value)/1e6;if(value&&typeof value==='object')return Number(value.value);return NaN}
+function funded(offer,side){const canonical=side==='taker_gets'?'TakerGets':'TakerPays';return offer?.[side+'_funded']??offer?.[canonical]}
+function priceFromOffer(offer,mode){if(!offer)return NaN;if(mode==='ask'){const jcs=amountNumber(funded(offer,'taker_gets')),xrp=amountNumber(funded(offer,'taker_pays'));return jcs>0?xrp/jcs:NaN}else{const xrp=amountNumber(funded(offer,'taker_gets')),jcs=amountNumber(funded(offer,'taker_pays'));return jcs>0?xrp/jcs:NaN}}
+function sumBook(offers,mode){let jcs=0,xrp=0;for(const o of (offers||[]).slice(0,40)){if(mode==='ask'){jcs+=Math.max(0,amountNumber(funded(o,'taker_gets'))||0);xrp+=Math.max(0,amountNumber(funded(o,'taker_pays'))||0)}else{jcs+=Math.max(0,amountNumber(funded(o,'taker_pays'))||0);xrp+=Math.max(0,amountNumber(funded(o,'taker_gets'))||0)}}return{jcs,xrp}}
+function parseAmm(amm){if(!amm)return null;const a=amm.amount??amm.Amount,b=amm.amount2??amm.Amount2;if(a==null||b==null)return null;const aXrp=typeof a==='string',bXrp=typeof b==='string';let xrp,jcs;if(aXrp&&!bXrp){xrp=amountNumber(a);jcs=amountNumber(b)}else if(bXrp&&!aXrp){xrp=amountNumber(b);jcs=amountNumber(a)}else return null;return{xrp,jcs,fee:Number(amm.trading_fee??amm.TradingFee??0)}}
+function updateSetting(id,value,kind=''){const el=$(id);if(!el)return;el.className='setting '+kind;const b=el.querySelector('b');if(b)b.textContent=value}
+async function refreshCore(showBusy=true){if(showBusy)setFresh('coreFreshness','Refreshing…','warn');try{const [server,account,ammR,askR,bidR]=await Promise.allSettled([
+ rpc('server_info',{}),rpc('account_info',{account:ISSUER,ledger_index:'validated'}),rpc('amm_info',{asset:{currency:'XRP'},asset2:{currency:CURRENCY,issuer:ISSUER},ledger_index:'validated'}),rpc('book_offers',{taker_gets:{currency:CURRENCY,issuer:ISSUER},taker_pays:{currency:'XRP'},ledger_index:'validated',limit:40}),rpc('book_offers',{taker_gets:{currency:'XRP'},taker_pays:{currency:CURRENCY,issuer:ISSUER},ledger_index:'validated',limit:40})]);
+ const info=server.status==='fulfilled'?(server.value.info||server.value):null;if(!info)throw new Error('server_info unavailable');const v=info.validated_ledger||info.closed_ledger||{};const age=Number(v.age);state.core={ledger:Number(v.seq||0),age,serverState:info.server_state||'unknown',build:info.build_version||info.rippled_version||info.clio_version||'unknown',load:Number(info.load_factor),baseFee:Number(v.base_fee_xrp),reserveBase:Number(v.reserve_base_xrp),reserveInc:Number(v.reserve_inc_xrp),endpoint:state.endpoint};
+ $('metricLedger').textContent=state.core.ledger?state.core.ledger.toLocaleString():'Unavailable';$('metricLedgerAge').textContent=Number.isFinite(age)?'Closed '+fmt(age,0)+'s ago':'Close age unavailable';$('metricServerState').textContent=state.core.serverState;$('metricServerBuild').textContent='Build '+state.core.build+' · '+String(state.endpoint||'').replace(/^wss:\/\//,'').replace(/\/$/,'');$('metricLoadFactor').textContent=fmt(state.core.load,3);$('metricBaseFee').textContent=Number.isFinite(state.core.baseFee)?fmt(state.core.baseFee,8)+' XRP':'Unavailable';$('metricReserveBase').textContent=Number.isFinite(state.core.reserveBase)?fmt(state.core.reserveBase,4)+' XRP':'Unavailable';$('metricReserveInc').textContent=Number.isFinite(state.core.reserveInc)?'Owner reserve '+fmt(state.core.reserveInc,4)+' XRP each':'Owner reserve unavailable';pushHistory(state.ledgerHistory,age);renderSpark('sparkLedger',state.ledgerHistory,'sparkLedgerLabel','s');
+ if(account.status==='fulfilled'){const r=account.value,data=r.account_data||{},flags=r.account_flags||{};state.issuer={ownerCount:Number(data.OwnerCount||0),transferRate:Number(data.TransferRate||1000000000),flags};$('metricIssuerObjects').textContent=fmt(state.issuer.ownerCount,0);updateSetting('settingDefaultRipple',flags.defaultRipple?'Enabled':'Disabled',flags.defaultRipple?'ok':'warn');updateSetting('settingGlobalFreeze',flags.globalFreeze?'Enabled':'Not enabled',flags.globalFreeze?'bad':'ok');updateSetting('settingNoFreeze',flags.noFreeze?'Enabled':'Not enabled',flags.noFreeze?'ok':'warn');updateSetting('settingRequireAuth',flags.requireAuthorization?'Required':'Not required',flags.requireAuthorization?'warn':'ok');updateSetting('settingMaster',flags.disableMasterKey?'Disabled':'Enabled',flags.disableMasterKey?'ok':'warn');$('settingTransferRate').textContent=state.issuer.transferRate&&state.issuer.transferRate!==1000000000?(((state.issuer.transferRate/1000000000)-1)*100).toFixed(3)+'%':'0% / none observed'}
+ const amm=ammR.status==='fulfilled'?parseAmm(ammR.value.amm||ammR.value):null;const askOffers=askR.status==='fulfilled'?(askR.value.offers||[]):[],bidOffers=bidR.status==='fulfilled'?(bidR.value.offers||[]):[];const ask=priceFromOffer(askOffers[0],'ask'),bid=priceFromOffer(bidOffers[0],'bid'),mid=Number.isFinite(ask)&&Number.isFinite(bid)?(ask+bid)/2:NaN,spread=Number.isFinite(mid)&&mid>0?(ask-bid)/mid*100:NaN,askDepth=sumBook(askOffers,'ask'),bidDepth=sumBook(bidOffers,'bid');state.market={amm,ask,bid,spread,askDepth,bidDepth};$('metricAmmXrp').textContent=amm?fmt(amm.xrp,6)+' XRP':'Unavailable';$('metricAmmJcs').textContent=amm?fmt(amm.jcs,6)+' JCS':'Unavailable';$('metricAmmFee').textContent=amm?fmt(amm.fee/1000,3)+'%':'Unavailable';$('metricAmmPrice').textContent=amm&&amm.jcs>0?fmt(amm.xrp/amm.jcs,9)+' XRP/JCS':'Unavailable';$('metricBid').textContent=Number.isFinite(bid)?fmt(bid,9)+' XRP/JCS':'Unavailable';$('metricAsk').textContent=Number.isFinite(ask)?fmt(ask,9)+' XRP/JCS':'Unavailable';$('metricSpread').textContent=Number.isFinite(spread)?pct(spread,2):'Unavailable';const booksAvailable=askR.status==='fulfilled'||bidR.status==='fulfilled';$('metricDepth').textContent=booksAvailable?fmt(askDepth.jcs+bidDepth.jcs,4)+' JCS':'Unavailable';$('metricDepthNote').textContent=booksAvailable?'Sampled funded ask '+fmt(askDepth.jcs,4)+' + bid '+fmt(bidDepth.jcs,4)+' JCS':'No funded order-book response available';pushHistory(state.spreadHistory,spread);renderSpark('sparkSpread',state.spreadHistory,'sparkSpreadLabel','%');setFresh('marketFreshness','Live XRPL · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),'ok');setFresh('coreFreshness','Validated · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),'ok');$('liveStatusChip').textContent='Validated ledger '+(state.core.ledger?state.core.ledger.toLocaleString():'live')
+ }catch(e){setFresh('coreFreshness','XRPL unavailable','err');setFresh('marketFreshness','Market data unavailable','err');$('liveStatusChip').textContent='XRPL source unavailable'} }
+async function enumerateTrustlines(){let marker,lines=[],complete=false;for(let page=0;page<24;page++){const p={account:ISSUER,ledger_index:'validated',limit:400};if(marker!==undefined)p.marker=marker;const r=await rpc('account_lines',p);lines.push(...(r.lines||[]));marker=r.marker;if(!marker){complete=true;break}}const jcs=lines.filter(l=>String(l.currency||'').toUpperCase()===CURRENCY);const obligations=jcs.reduce((sum,l)=>{const b=Number(l.balance);return sum+(Number.isFinite(b)&&b<0?-b:0)},0);return{count:jcs.length,obligations,complete}}
+async function refreshTrustlines(){try{setFresh('coreFreshness','Refreshing trust lines…','warn');state.trust=await enumerateTrustlines();$('metricTrustlines').textContent=(state.trust.complete?'':'≥ ')+state.trust.count.toLocaleString();$('metricTrustlinesNote').textContent=state.trust.complete?'Complete validated issuer-side scan':'Bounded scan; additional trust lines may exist';$('metricObligations').textContent=fmt(state.trust.obligations,8)+' JCS';setFresh('coreFreshness','Validated · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),'ok')}catch(e){$('metricTrustlines').textContent='Unavailable';$('metricObligations').textContent='Unavailable'}}
+function mapFocus(memos,app){if(app==='JCS_SOCIAL_V6'){if(memos.map!=='1'||memos.role!=='prayer-focus'||memos.policy!==MAP_POLICY)return null;if(memos.scope==='region'&&REGION_CODES.has(memos.region))return{scope:'region',code:memos.region};if(memos.scope==='country'&&/^[A-Z]{2}$/.test(String(memos.country||'').toUpperCase()))return{scope:'country',code:String(memos.country).toUpperCase()};return null}if(memos.region&&REGION_CODES.has(memos.region)&&memos.region!=='none')return{scope:'region',code:memos.region};return null}
+function focusThreshold(focus){if(!focus)return Infinity;if(focus.scope==='region')return 5;if(focus.scope==='country')return EXTREME_COUNTRIES.has(focus.code)?20:10;return Infinity}
+async function scanCollector(){const entries=[];let marker,complete=false;for(let page=0;page<20;page++){const p={account:COLLECTOR,ledger_index_min:-1,ledger_index_max:-1,limit:200,forward:false};if(marker!==undefined)p.marker=marker;const r=await rpc('account_tx',p);entries.push(...(r.transactions||[]));marker=r.marker;if(!marker){complete=true;break}}return{entries,complete}}
+function parseCommunications(entries,complete){const posts=[],interactions=[];const participants=new Set();for(const raw of entries){const n=normalizeAccountTx(raw),tx=n.tx,result=n.meta?.TransactionResult||n.meta?.transaction_result||'';if(!n.validated||tx.TransactionType!=='Payment'||tx.Destination!==COLLECTOR||String(tx.Amount||'')!=='1'||(result&&result!=='tesSUCCESS')||!HASH256.test(n.hash))continue;const memos=parseMemos(tx.Memos||[]),app=memos.app||'';if(app!==LEGACY_TAG&&!APP_TAGS.has(app))continue;const account=tx.Account||'';if(account)participants.add(account);const created=rippleIso(n.date)||(memos.created&&!Number.isNaN(Date.parse(memos.created))?new Date(memos.created).toISOString():'');if(app===LEGACY_TAG){posts.push({key:n.hash,hash:n.hash,app,account,created,focus:null,contentHash:'',aliases:[n.hash]});continue}const kind=memos.kind||'post';if(kind==='post'){const focus=mapFocus(memos,app);const aliases=[memos.nft,n.hash,memos.minttx].filter(Boolean);posts.push({key:memos.nft||n.hash,hash:n.hash,app,account,created,focus,contentHash:String(memos.hash||'').toUpperCase(),aliases})}else if(kind==='amen'||kind==='reply'||kind==='support'){interactions.push({kind,parent:memos.parent||memos.nft||'',account,created,hash:n.hash})}}
+ const alias=new Map();posts.forEach((p,i)=>p.aliases.forEach(a=>alias.set(a,i)));const touched=new Set();let amens=0,replies=0,support=0;for(const i of interactions){if(i.kind==='amen')amens++;else if(i.kind==='support')support++;else replies++;const idx=alias.get(i.parent);if(idx!==undefined)touched.add(idx)}const groups=new Map();for(const p of posts){if(!p.focus)continue;const key=p.focus.scope+':'+p.focus.code,group=groups.get(key)||{...p.focus,accounts:new Set(),records:0};group.records++;if(p.account)group.accounts.add(p.account);groups.set(key,group)}const qualified=[...groups.values()].filter(g=>g.accounts.size>=focusThreshold(g));const qualifiedKeys=new Set(qualified.map(g=>g.scope+':'+g.code));const opted=posts.filter(p=>p.focus).length,qualifiedRecords=posts.filter(p=>p.focus&&qualifiedKeys.has(p.focus.scope+':'+p.focus.code)).length,suppressed=opted-qualifiedRecords;const currentPosts=posts.filter(p=>p.app==='JCS_SOCIAL_V6').length,hashed=posts.filter(p=>HASH256.test(p.contentHash)).length;const now=Date.now(),start30=now-30*864e5,start60=now-60*864e5;let current30=0,previous30=0;for(const p of posts){const t=Date.parse(p.created);if(!Number.isFinite(t))continue;if(t>=start30)current30++;else if(t>=start60)previous30++}const latest=[...posts,...interactions].map(x=>x.created).filter(Boolean).sort().at(-1)||'';return{posts,interactions,participants,complete,amens,replies,support,responseCoverage:posts.length?touched.size/posts.length*100:0,v6Share:posts.length?currentPosts/posts.length*100:0,hashCoverage:posts.length?hashed/posts.length*100:0,qualifiedGroups:qualified.length,optedMap:opted,suppressedMap:suppressed,current30,previous30,latest}}
+function renderCommunications(c){state.communications=c;$('metricPosts').textContent=c.posts.length.toLocaleString();$('metricPostsNote').textContent=(c.complete?'Complete':'Bounded')+' recognized collector history';$('metricWallets').textContent=c.participants.size.toLocaleString();$('metricAmens').textContent=c.amens.toLocaleString();$('metricReplies').textContent=(c.replies+c.support).toLocaleString();$('metricRepliesNote').textContent=c.replies+' replies · '+c.support+' support responses';$('metricResponseCoverage').textContent=pct(c.responseCoverage,1);$('metricV6Share').textContent=pct(c.v6Share,1);$('metricHashCoverage').textContent=pct(c.hashCoverage,1);$('metricMapGroups').textContent=c.qualifiedGroups.toLocaleString();$('metricCurrent30').textContent=c.current30.toLocaleString();const delta=c.previous30?((c.current30-c.previous30)/c.previous30*100):NaN;$('metricCurrent30Note').textContent='Prior 30 days '+c.previous30+(Number.isFinite(delta)?' · '+(delta>=0?'+':'')+delta.toFixed(1)+'%':' · stable percentage unavailable');$('metricLatestActivity').textContent=c.latest?timeAgo(c.latest):'Unavailable';$('metricSuppressedMap').textContent=c.suppressedMap.toLocaleString();$('goalReach').textContent=c.participants.size.toLocaleString()+' wallets';$('goalResponse').textContent=pct(c.responseCoverage,1);$('goalEvidence').textContent=pct(c.hashCoverage,1);$('goalReachBar').style.width=c.participants.size?'100%':'0%';$('goalResponseBar').style.width=Math.min(100,c.responseCoverage)+'%';$('goalEvidenceBar').style.width=Math.min(100,c.hashCoverage)+'%';setFresh('commFreshness',(c.complete?'Complete':'Bounded')+' validated history · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),c.complete?'ok':'warn');updateWalletFromCommunications()}
+async function refreshCommunications(showBusy=true){if(showBusy)setFresh('commFreshness','Reading validated collector history…','warn');try{const scan=await scanCollector();renderCommunications(parseCommunications(scan.entries,scan.complete))}catch(e){setFresh('commFreshness','Communication history unavailable','err')}}
+async function probeOne(url){let c;const start=performance.now();try{c=await new WsRpc(url).connect();const r=await c.call('server_info',{});return{url,ok:true,ms:Math.round(performance.now()-start),ledger:Number(r.info?.validated_ledger?.seq||r.validated_ledger?.seq||0)}}catch(e){return{url,ok:false,ms:null,error:e.message}}finally{c?.close()}}
+async function probeRelays(){const results=await Promise.all(XRPL_SERVERS.map(probeOne));state.probes=results;const ok=results.filter(x=>x.ok).length;$('goalResilience').textContent=ok+'/'+XRPL_SERVERS.length+' endpoints';$('goalResilienceBar').style.width=ok/XRPL_SERVERS.length*100+'%'}
+function updateWalletFromCommunications(){if(!state.account||!state.communications)return;const c=state.communications,posts=c.posts.filter(x=>x.account===state.account).length,interactions=c.interactions.filter(x=>x.account===state.account).length;$('walletPublicComms').textContent=(posts+interactions).toLocaleString();$('walletPublicCommsNote').textContent=posts+' posts · '+interactions+' public interactions'}
+async function loadWalletMetrics(){if(!state.account)return;setFresh('walletFreshness','Reading JCS-only account context…','warn');try{const [linesR,nftsR]=await Promise.allSettled([rpc('account_lines',{account:state.account,peer:ISSUER,ledger_index:'validated',limit:400}),rpc('account_nfts',{account:state.account,ledger_index:'validated',limit:400})]);let balance='No JCS trust line',limit='';if(linesR.status==='fulfilled'){const line=(linesR.value.lines||[]).find(l=>String(l.currency||'').toUpperCase()===CURRENCY&&l.account===ISSUER);if(line){balance=fmt(line.balance,8)+' JCS';limit='Trust-line limit '+fmt(line.limit,8)+' JCS'+(line.freeze||line.freeze_peer?' · freeze flag present':'')}}$('walletJcsBalance').textContent=balance;$('walletJcsLimit').textContent=limit||'No JCS trust line found';if(nftsR.status==='fulfilled'){let prayer=0,capsule=0;for(const n of (nftsR.value.account_nfts||[])){const tax=Number(n.NFTokenTaxon??n.nft_taxon??0);if(tax===PRAYER_TAXON)prayer++;if(tax===CAPSULE_TAXON)capsule++}$('walletPrayerNfts').textContent=prayer.toLocaleString();$('walletCapsuleReceipts').textContent=capsule.toLocaleString()}updateWalletFromCommunications();$('walletEmpty').hidden=true;$('walletMetrics').hidden=false;setFresh('walletFreshness','JCS-only account context loaded','ok')}catch(e){setFresh('walletFreshness','Wallet metrics unavailable','err')}}
+function updateHeaderWallet(){const connected=Boolean(state.account);$('connectBtn').hidden=connected;$('disconnectBtn').hidden=!connected;$('walletPill').textContent=connected?short(state.account,7):'Wallet disconnected';if(!connected){$('walletEmpty').hidden=false;$('walletMetrics').hidden=true;setFresh('walletFreshness','Wallet disconnected','')}}
+async function resolveAccount(event={}){const d=event?.data||event||{},direct=d.account||d.me?.account||d.data?.account||'';if(direct)return direct;try{return await state.xumm.user.account}catch{return ''}}
+function initXaman(){if(!window.Xumm){$('connectBtn').disabled=true;return}state.xumm=new window.Xumm(APP_KEY);state.xumm.on('ready',()=>{$('connectBtn').disabled=false});const identified=async e=>{const a=await resolveAccount(e);if(a){state.account=a;updateHeaderWallet();loadWalletMetrics()}};state.xumm.on('success',identified);state.xumm.on('retrieved',identified);state.xumm.on('logout',()=>{state.account='';updateHeaderWallet()});state.xumm.on('error',()=>setFresh('walletFreshness','Xaman connection error','err'));$('connectBtn').addEventListener('click',async()=>{try{await state.xumm.authorize();const a=await resolveAccount();if(a){state.account=a;updateHeaderWallet();loadWalletMetrics()}}catch{setFresh('walletFreshness','Connection cancelled','warn')}});$('disconnectBtn').addEventListener('click',async()=>{try{await state.xumm.logout()}catch{}state.account='';updateHeaderWallet()})}
+function protocolValue(){try{return JSON.parse($('jcsMetricsProtocol').textContent)}catch{return null}}
+async function sha256(text){if(!crypto?.subtle)return '';const d=await crypto.subtle.digest('SHA-256',encoder.encode(text));return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase()}
+function snapshotValue(){const c=state.communications||{},m=state.market||{},core=state.core||{},t=state.trust||{};return{schema:'jcs-network-observatory-snapshot-v1',generated_at_utc:new Date().toISOString(),network:'XRPL Mainnet',source_endpoint:state.endpoint||null,observed:{validated_ledger:core.ledger||null,ledger_close_age_seconds:Number.isFinite(core.age)?core.age:null,server_state:core.serverState||null,server_build:core.build||null,load_factor:Number.isFinite(core.load)?core.load:null,base_fee_xrp:Number.isFinite(core.baseFee)?core.baseFee:null,reserve_base_xrp:Number.isFinite(core.reserveBase)?core.reserveBase:null,reserve_inc_xrp:Number.isFinite(core.reserveInc)?core.reserveInc:null,jcs_trustlines:Number.isInteger(t.count)?t.count:null,jcs_trustline_scan_complete:Boolean(t.complete),jcs_issued_obligations:Number.isFinite(t.obligations)?t.obligations:null,public_posts:c.posts?.length??null,public_participating_wallets:c.participants?.size??null,amens:c.amens??null,replies:c.replies??null,support_responses:c.support??null,latest_public_communication:c.latest||null,amm_xrp:m.amm?.xrp??null,amm_jcs:m.amm?.jcs??null,amm_trading_fee:m.amm?.fee??null,best_bid_xrp_per_jcs:Number.isFinite(m.bid)?m.bid:null,best_ask_xrp_per_jcs:Number.isFinite(m.ask)?m.ask:null},derived:{response_coverage_percent:Number.isFinite(c.responseCoverage)?c.responseCoverage:null,current_v6_post_share_percent:Number.isFinite(c.v6Share)?c.v6Share:null,content_hash_coverage_percent:Number.isFinite(c.hashCoverage)?c.hashCoverage:null,public_map_groups:c.qualifiedGroups??null,map_optins_below_public_threshold:c.suppressedMap??null,funded_spread_percent:Number.isFinite(m.spread)?m.spread:null,sampled_jcs_book_depth:Number.isFinite(m.askDepth?.jcs)&&Number.isFinite(m.bidDepth?.jcs)?m.askDepth.jcs+m.bidDepth.jcs:null},privacy:{exact_location_inference:'not accepted',private_capsule_plaintext_telemetry:'unavailable by design',unrelated_wallet_asset_enumeration:'not performed'},limitations:['No metric establishes identity, spiritual effect, truth, persecution status or physical location.','Order books, AMM reserves, fees and server state can change immediately.','Bounded account history or trust-line scans are labeled when incomplete.','External provider charts are not included as observed XRPL metrics.']}}
+function downloadJson(name,value){const blob=new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+async function exportSnapshot(){const snap=snapshotValue(),canonical=JSON.stringify(snap),digest=await sha256(canonical);snap.sha256=digest||null;downloadJson('jcs-network-observatory-'+Date.now()+'.json',snap);$('snapshotStatus').textContent='Snapshot exported'+(digest?' · SHA-256 '+digest:' · digest unavailable in this browser context')}
+function summaryText(){const c=state.communications||{},core=state.core||{},m=state.market||{};return['JCS Network Observatory','Validated ledger: '+(core.ledger||'Unavailable'),'Public posts: '+(c.posts?.length??'Unavailable'),'Participating wallets: '+(c.participants?.size??'Unavailable'),'Amens: '+(c.amens??'Unavailable'),'Replies/support: '+((c.replies??0)+(c.support??0)),'Response coverage: '+(Number.isFinite(c.responseCoverage)?pct(c.responseCoverage,1):'Unavailable'),'Public Prayer Map groups: '+(c.qualifiedGroups??'Unavailable'),'JCS trust lines: '+(state.trust?.count??'Unavailable'),'JCS obligations: '+(Number.isFinite(state.trust?.obligations)?fmt(state.trust.obligations,8)+' JCS':'Unavailable'),'AMM ratio: '+(m.amm&&m.amm.jcs>0?fmt(m.amm.xrp/m.amm.jcs,9)+' XRP/JCS':'Unavailable'),'Funded spread: '+(Number.isFinite(m.spread)?pct(m.spread,2):'Unavailable'),'Boundary: no metric proves identity, location, prayer effectiveness, persecution status or investment quality.'].join('\n')}
+async function copyText(text){if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return}const ta=document.createElement('textarea');ta.value=text;ta.readOnly=true;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();if(!document.execCommand('copy'))throw new Error('copy unavailable');ta.remove()}
+async function refreshAll(){if(state.refreshing)return;state.refreshing=true;$('refreshAllBtn').disabled=true;$('refreshAllBtn').textContent='Refreshing…';await Promise.allSettled([refreshCore(true),refreshCommunications(true),refreshTrustlines(),probeRelays()]);if(state.account)await loadWalletMetrics();state.refreshing=false;$('refreshAllBtn').disabled=false;$('refreshAllBtn').textContent='Refresh all live metrics'}
+// Canonical header behavior.
+const header=document.querySelector('.jcs-index-header'),toggle=$('mobileNavToggle'),nav=$('primaryNav'),media=matchMedia('(max-width:980px)');if(header&&toggle&&nav){const icon=toggle.querySelector('.menu-icon'),label=toggle.querySelector('.menu-label');const setOpen=(open,focus=false)=>{const next=Boolean(open&&media.matches);nav.classList.toggle('is-open',next);header.classList.toggle('menu-open',next);toggle.setAttribute('aria-expanded',String(next));toggle.setAttribute('aria-label',next?'Close site navigation':'Open site navigation');if(icon)icon.textContent=next?'×':'☰';if(label)label.textContent=next?'Close':'Menu';if(focus)toggle.focus()};toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(media.matches&&e.target.closest('a'))setOpen(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true')setOpen(false,true)});document.addEventListener('click',e=>{if(media.matches&&toggle.getAttribute('aria-expanded')==='true'&&!header.contains(e.target))setOpen(false)});media.addEventListener?.('change',()=>setOpen(false));setOpen(false)}
+function updateTheme(){const dark=document.documentElement.dataset.theme!=='light';$('themeToggleIcon').textContent=dark?'☀':'◐';$('themeToggleText').textContent=dark?'Light mode':'Dark mode';$('themeToggle').setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');$('themeToggle').setAttribute('aria-pressed',String(dark))}$('themeToggle').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(THEME_KEY,next)}catch{}updateTheme()});updateTheme();
+const sanctuary=$('quietModeBtn'),ledger=$('ledgerFocusBtn');function setMode(mode){const s=mode==='sanctuary',l=mode==='ledger';document.body.classList.toggle('metrics-sanctuary-mode',s);document.body.classList.toggle('metrics-ledger-focus',l);sanctuary.setAttribute('aria-pressed',String(s));ledger.setAttribute('aria-pressed',String(l));sanctuary.textContent=s?'Exit sanctuary':'Sanctuary mode';ledger.textContent=l?'Exit ledger focus':'Ledger focus';try{localStorage.setItem(FOCUS_KEY,mode)}catch{}}sanctuary.addEventListener('click',()=>setMode(document.body.classList.contains('metrics-sanctuary-mode')?'full':'sanctuary'));ledger.addEventListener('click',()=>setMode(document.body.classList.contains('metrics-ledger-focus')?'full':'ledger'));try{const v=localStorage.getItem(FOCUS_KEY);setMode(v==='sanctuary'||v==='ledger'?v:'full')}catch{setMode('full')}
+$('copyIssuer').addEventListener('click',async()=>{try{await copyText(ISSUER);$('copyStatus').textContent='Exact issuer copied.'}catch{$('copyStatus').textContent='Copy blocked; select the issuer above.'}setTimeout(()=>{$('copyStatus').textContent=''},2400)});$('downloadSnapshotBtn').addEventListener('click',exportSnapshot);$('copySummaryBtn').addEventListener('click',async()=>{try{await copyText(summaryText());$('snapshotStatus').textContent='Plain-language summary copied.'}catch{$('snapshotStatus').textContent='Copy blocked by this browser.'}});$('downloadProtocolBtn').addEventListener('click',()=>{const v=protocolValue();if(v)downloadJson('jcs-metrics-protocol.json',v)});$('refreshAllBtn').addEventListener('click',refreshAll);$('copyrightYear').textContent=String(new Date().getUTCFullYear());
+function schedule(){setInterval(()=>{if(document.visibilityState==='visible')refreshCore(false)},20000);setInterval(()=>{if(document.visibilityState==='visible')refreshCommunications(false)},60000);setInterval(()=>{if(document.visibilityState==='visible')refreshTrustlines()},300000);setInterval(()=>{if(document.visibilityState==='visible')probeRelays()},300000)}
+function initMapRefresh(){try{if('BroadcastChannel'in window){state.mapChannel=new BroadcastChannel(MAP_CHANNEL);state.mapChannel.addEventListener('message',e=>{if(e.data?.type==='jcs-prayer-map-signal'&&e.data?.signal?.schema==='jcs-prayer-map-refresh-v1'){clearTimeout(state.commTimer);state.commTimer=setTimeout(()=>refreshCommunications(false),1800)}})}}catch{}window.addEventListener('storage',e=>{if(e.key==='jcs.prayer.map.focus.v1')setTimeout(()=>refreshCommunications(false),1800)})}
+async function boot(){updateHeaderWallet();initXaman();initMapRefresh();await Promise.allSettled([refreshCore(true),refreshCommunications(true),probeRelays()]);refreshTrustlines();schedule()}
+if(typeof globalThis.__JCS_METRICS_TEST_HOOK__==='function')globalThis.__JCS_METRICS_TEST_HOOK__({parseMemos,parseCommunications,parseAmm,priceFromOffer,sumBook,snapshotValue,state,ISSUER,CURRENCY,PRAYER_TAXON,CAPSULE_TAXON});
+boot();window.addEventListener('beforeunload',()=>{try{state.transport?.close();state.mapChannel?.close()}catch{}});
+})();
+</script>
 </body>
 </html>
