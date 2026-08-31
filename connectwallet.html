@@ -7,12 +7,12 @@
   <meta name="color-scheme" content="dark light">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <title>JCS Xaman Identity &amp; XRPL Account Readiness</title>
-  <meta name="description" content="Authorize a JCS session through Xaman and inspect a consistent, validated XRP Ledger Mainnet snapshot of the selected account, including XRP reserve context, JCS trustline state, NFTs, account controls, and current ledger-object types.">
+  <title>JCS Account Readiness | Xaman Identity, JCS Relationship &amp; XRPL Evidence</title>
+  <meta name="description" content="Authorize a JCS session through Xaman or inspect a public XRPL account without a wallet. Review a pinned validated-ledger snapshot, JCS trustline and communication relationship, prayer and Private Capsule NFT context, reserve posture, account controls, protocol objects, evidence coverage, and local SHA-256 evidence export.">
   <meta name="keywords" content="Jesus Christ Saves Token,JCS,Xaman,XRPL,XRP Ledger,wallet connect,SignIn,account readiness,XLS-26,trustline,NFT,Credential,Delegate,MPToken">
   <meta name="author" content="Jesus Christ Saves Token">
   <meta name="application-name" content="JCS Xaman Identity and XRPL Account Readiness">
-  <meta name="jcs-wallet-release" content="3.0.0">
+  <meta name="jcs-wallet-release" content="4.0.0">
   <meta name="jcs-wallet-mode" content="xaman-authorization-read-only-xrpl">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
@@ -23,6 +23,7 @@
   <link rel="icon" type="image/png" href="./jcs-logo.png">
   <link rel="apple-touch-icon" href="./jcs-logo.png">
   <link rel="alternate" type="application/json" href="./ai.json" title="JCS AI manifest">
+  <link rel="alternate" type="application/json" href="./jcs-account-readiness-protocol.json" title="JCS Account Readiness Protocol">
   <link rel="alternate" type="application/json" href="./.well-known/did.json" title="JCS Web DID">
   <link rel="alternate" type="text/plain" href="./.well-known/xrp-ledger.toml" title="JCS XRP Ledger metadata">
   <link rel="security" href="./.well-known/security.txt">
@@ -48,7 +49,7 @@
 
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://xumm.app;
+    script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app;
     style-src 'self' 'unsafe-inline';
     img-src 'self' data: blob: https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app;
     connect-src 'self'
@@ -59,7 +60,9 @@
       wss://xaman.app wss://*.xaman.app
       wss://xrplcluster.com
       wss://s1.ripple.com
-      wss://s2.ripple.com;
+      wss://s2.ripple.com
+      wss://honeycluster.io
+      https://xrbitcoincash-github-io.onrender.com;
     frame-src
       https://xumm.app https://*.xumm.app
       https://oauth2.xumm.app
@@ -72,6 +75,7 @@
 
   <script>
     (function () {
+      document.documentElement.classList.add('js');
       try {
         const saved = localStorage.getItem('jcs-color-mode');
         document.documentElement.dataset.theme =
@@ -92,7 +96,7 @@
         "url": "https://jesuschristsavestoken.com/connectwallet.html",
         "name": "JCS Xaman Identity and XRPL Account Readiness",
         "description": "Authorize through Xaman and inspect a read-only, validated XRP Ledger Mainnet snapshot for the selected account.",
-        "dateModified": "2026-08-27",
+        "dateModified": "2026-08-31",
         "inLanguage": "en-US",
         "isAccessibleForFree": true,
         "isPartOf": { "@id": "https://jesuschristsavestoken.com/#website" },
@@ -108,7 +112,7 @@
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
         "browserRequirements": "JavaScript, WebSocket support, and a modern browser. Xaman is required only for account-control authorization.",
-        "softwareVersion": "3.0.0",
+        "softwareVersion": "4.0.0",
         "isAccessibleForFree": true,
         "featureList": [
           "Xaman browser and xApp authorization through the Universal SDK",
@@ -151,6 +155,75 @@
       }
     ]
   }
+  </script>
+
+
+  <script type="application/json" id="jcsAccountReadinessProtocol">
+{
+  "schema": "jcs-account-readiness-protocol-v1",
+  "release": "4.0.0",
+  "effective": "2026-08-31",
+  "canonical": "https://jesuschristsavestoken.com/connectwallet.html",
+  "network": "XRP Ledger Mainnet",
+  "jcs": {
+    "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+    "currency": "JCS",
+    "prayer_nft_taxon": 1246974803,
+    "private_capsule_receipt_taxon": 1245926211,
+    "communication_protocols": [
+      "JCS_SOCIAL_V6",
+      "JCS_SOCIAL_V5",
+      "JCS_SOCIAL_V4",
+      "JCS_SOCIAL_V3",
+      "JCS_SOCIAL_V2",
+      "JCS_VERIFY_V1"
+    ],
+    "map_policy": "JCS_MAP_1"
+  },
+  "authorization": {
+    "provider": "Xaman Universal SDK",
+    "purpose": "public-account control assertion for the current browser session",
+    "does_not_establish": [
+      "legal identity",
+      "off-ledger ownership",
+      "truth of claims",
+      "spiritual standing"
+    ]
+  },
+  "transaction_boundary": "This page creates no XRPL transaction payloads.",
+  "evidence_groups": [
+    "server_info",
+    "account_info",
+    "account_lines",
+    "account_objects",
+    "account_nfts",
+    "issuer_account_info",
+    "bounded account_tx"
+  ],
+  "snapshot_policy": {
+    "pin_to_validated_ledger": true,
+    "account_tx_max_ledger": "selected validated ledger",
+    "sha256_export": true,
+    "bounded_pagination_disclosed": true
+  },
+  "fallbacks": {
+    "websocket": [
+      "wss://xrplcluster.com",
+      "wss://s1.ripple.com",
+      "wss://s2.ripple.com",
+      "wss://honeycluster.io"
+    ],
+    "read_only_proxy": "https://xrbitcoincash-github-io.onrender.com"
+  },
+  "privacy": {
+    "public_lookup_stored_by_page": false,
+    "private_capsule_plaintext_read": false,
+    "private_capsule_keys_read": false,
+    "exact_location_inference": false,
+    "unrelated_asset_contents_exposed_in_jcs_lens": false
+  },
+  "interpretation_boundary": "Readiness labels are local interpretations of observed ledger state, not security certification, identity verification, legal classification, investment advice, spiritual measurement, or execution guarantees."
+}
   </script>
 
   <style>
@@ -482,45 +555,354 @@
       .card, .data-card, .standard-card, .boundary-card, .flag-card, .jcs-card, .metric { color: #111; background: #fff; box-shadow: none; border-color: #bbb; }
     }
   </style>
+
+  <style id="jcs-canonical-header-v210">
+:root{
+  --home-bg:#f4f7fb;--home-surface:#ffffff;--home-surface-2:#f8fafc;--home-surface-3:#eef3f8;
+  --home-ink:#0b1018;--home-muted:#5b6575;--home-line:#dfe5ed;--home-blue:#1652f0;
+  --home-cyan:#0ea5e9;--home-green:#087f5b;--home-red:#c7354f;--home-gold:#b7791f;--home-gold-soft:#fff7df;
+}
+html[data-theme="dark"]{
+  --home-bg:#07101c;--home-surface:#0d1827;--home-surface-2:#111f31;--home-surface-3:#15263b;
+  --home-ink:#f5f8ff;--home-muted:#9eabc0;--home-line:#25364d;--home-blue:#5c94ff;
+  --home-cyan:#31c2f5;--home-green:#43d6a1;--home-red:#ff7187;--home-gold:#e1b750;--home-gold-soft:#261f10;
+}
+
+/* Complete header repair: no clipped navigation, full keyboard access and safe mobile reflow. */
+.jcs-index-header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200;
+  width: 100%;
+  border-bottom: 1px solid var(--home-line) !important;
+  background: color-mix(in srgb, var(--home-surface) 95%, transparent) !important;
+  box-shadow: 0 8px 28px color-mix(in srgb, #020617 10%, transparent) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.jcs-index-header-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    9px
+    max(18px, env(safe-area-inset-left));
+  display: grid;
+  gap: 8px;
+}
+.index-header-top {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.index-brand {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+.index-brand img {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 45%, var(--home-line)) !important;
+  border-radius: 11px !important;
+  background: #fff;
+}
+.index-brand .brand-copy { min-width: 0; display: grid !important; }
+.index-brand .brand-title {
+  overflow: hidden;
+  color: var(--home-ink) !important;
+  font: 900 1rem/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-brand .brand-subtitle {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .63rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-header-utilities,
+.index-page-controls,
+.index-wallet-actions,
+.index-ecosystem-links {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.index-header-utilities { justify-content: flex-end; }
+.index-ecosystem-links { justify-content: flex-end; }
+.index-ecosystem-link,
+.index-control-button,
+.mobile-nav-toggle,
+.jcs-index-header .header-wallet-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 9px;
+  border: 1px solid var(--home-line);
+  border-radius: 9px;
+  color: var(--home-ink);
+  background: var(--home-surface-2);
+  font: 850 .69rem/1.1 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.index-ecosystem-link:hover,
+.index-ecosystem-link:focus-visible,
+.index-control-button:hover,
+.index-control-button:focus-visible,
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:focus-visible,
+.jcs-index-header .header-wallet-btn:hover:not(:disabled),
+.jcs-index-header .header-wallet-btn:focus-visible {
+  border-color: var(--home-blue);
+  color: var(--home-blue);
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 24%, transparent);
+  outline-offset: 2px;
+}
+.index-ecosystem-link.xrbc-link { color: #6e9eff; }
+.index-ecosystem-link.xrbitcoin-link { color: var(--home-cyan); }
+.index-ecosystem-link.creature-link { color: var(--home-gold); }
+.jcs-index-header .header-wallet-btn.connect {
+  border-color: var(--home-blue);
+  color: #fff;
+  background: var(--home-blue);
+}
+.jcs-index-header .header-wallet-btn.disconnect {
+  border-color: color-mix(in srgb, var(--home-red) 50%, var(--home-line));
+  color: var(--home-red);
+}
+.jcs-index-header .header-wallet-btn:disabled { opacity: .58; cursor: not-allowed; }
+.jcs-index-header .compact-wallet-pill {
+  max-width: 130px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mobile-nav-toggle { display: none; cursor: pointer; }
+.mobile-nav-toggle .menu-icon { font-size: 1rem; line-height: 1; }
+.noscript-notice {
+  width: min(1240px, calc(100% - 24px));
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 52%, var(--home-line));
+  border-radius: 12px;
+  color: var(--home-ink);
+  background: var(--home-gold-soft);
+}
+.noscript-notice a { font-weight: 850; }
+.index-primary-nav {
+  min-width: 0;
+  width: 100%;
+  display: flex !important;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  gap: 4px;
+  padding-top: 7px;
+  overflow: visible !important;
+  border-top: 1px solid var(--home-line);
+}
+.index-primary-nav .nav-btn {
+  min-height: 40px !important;
+  flex: 0 1 auto !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  color: var(--home-muted) !important;
+  background: transparent !important;
+  font-size: .73rem !important;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal !important;
+  box-shadow: none !important;
+}
+.index-primary-nav .nav-btn:hover,
+.index-primary-nav .nav-btn:focus-visible,
+.index-primary-nav .nav-btn[aria-current="page"] {
+  border-color: var(--home-line) !important;
+  color: var(--home-blue) !important;
+  background: var(--home-surface-2) !important;
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 22%, transparent);
+  outline-offset: 1px;
+}
+.index-primary-nav .sign-ledger-gold {
+  border-color: color-mix(in srgb, var(--home-gold) 58%, var(--home-line)) !important;
+  color: #171106 !important;
+  background: linear-gradient(180deg, #ffeaa8, #d9ae38) !important;
+}
+.product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.footer-link-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 1080px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px) {
+  .jcs-index-header.site-header { position: static !important; }
+  .index-header-top { grid-template-columns: minmax(0, 1fr) auto; }
+  .mobile-nav-toggle { grid-column: 2; grid-row: 1; }
+  html.js .mobile-nav-toggle { display: inline-flex; }
+  .index-header-utilities {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+  html.js .jcs-index-header:not(.menu-open) .index-header-utilities { display: none; }
+  .index-ecosystem-links { justify-content: flex-start; }
+  .index-primary-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  html.js .jcs-index-header .index-primary-nav:not(.is-open) { display: none !important; }
+  .index-primary-nav .nav-btn { width: 100%; min-height: 44px !important; }
+  .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .jcs-index-header-shell {
+    padding:
+      max(9px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      10px
+      max(12px, env(safe-area-inset-left));
+  }
+  .index-brand .brand-subtitle { display: none; }
+  .index-header-utilities { display: grid; grid-template-columns: 1fr; }
+  .index-ecosystem-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .index-ecosystem-link { min-width: 0; white-space: normal; }
+  .index-page-controls { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .index-control-button { width: 100%; min-height: 44px; }
+  .index-wallet-actions { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .jcs-index-header .header-wallet-btn { width: 100%; min-height: 44px; }
+  .jcs-index-header .compact-wallet-pill { max-width: 100%; text-align: center; }
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .index-brand .brand-title { font-size: .9rem !important; }
+  .index-ecosystem-links,
+  .index-primary-nav,
+  .index-page-controls,
+  .footer-link-groups { grid-template-columns: 1fr !important; }
+}
+
+/* Final JCS 2.1 header refinements shared with the current portal. */
+.jcs-index-header.site-header{position:sticky!important;top:0!important;z-index:1200;width:100%;display:block!important;margin:0!important;padding:0!important;border:0!important;border-bottom:1px solid var(--home-line)!important;border-radius:0!important;background:color-mix(in srgb,var(--home-surface) 95%,transparent)!important;box-shadow:0 8px 28px color-mix(in srgb,#020617 10%,transparent)!important;overflow:visible!important}
+html[data-theme="dark"] .jcs-index-header.site-header{background:rgba(7,16,28,.95)!important;box-shadow:0 8px 30px rgba(0,0,0,.30)!important}
+.jcs-index-header-shell{width:min(1360px,100%)}
+.index-header-top{grid-template-columns:minmax(250px,auto) minmax(0,1fr);gap:12px 20px}
+.index-legal-links{min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px}
+.index-legal-links a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;border:1px solid var(--home-line);border-radius:9px;color:var(--home-ink);background:var(--home-surface-2);font:850 .69rem/1.1 system-ui,sans-serif;text-align:center;text-decoration:none;white-space:nowrap}
+.index-legal-links a:hover,.index-legal-links a:focus-visible{border-color:var(--home-blue);color:var(--home-blue);outline:3px solid color-mix(in srgb,var(--home-blue) 20%,transparent);outline-offset:2px}
+.sanctuary-control[aria-pressed="true"]{border-color:var(--home-gold)!important;color:var(--home-gold)!important;background:var(--home-gold-soft)!important}
+.exchange-control[aria-pressed="true"]{border-color:var(--home-blue)!important;color:#fff!important;background:var(--home-blue)!important}
+@media(max-width:980px){.index-legal-links{justify-content:flex-start}}
+@media(max-width:640px){
+  .index-page-controls .theme-toggle{grid-column:1/-1}
+  .index-wallet-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jcs-index-header .compact-wallet-pill{grid-column:1/-1;max-width:100%;text-align:center}
+  .index-legal-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .index-legal-links a{min-width:0;min-height:44px;white-space:normal}
+}
+@media(max-width:430px){.index-page-controls,.index-wallet-actions,.index-legal-links{grid-template-columns:1fr!important}}
+
+
+/* Account Readiness v4.0 additions. */
+*,*::before,*::after{box-sizing:border-box}
+.wallet-page-v4{--wallet-max:1260px;min-width:0}
+.wallet-page-v4>section{min-width:0}
+body.wallet-sanctuary-mode #object-inventory,
+body.wallet-sanctuary-mode #standards,
+body.wallet-sanctuary-mode .protocol-deep,
+body.wallet-sanctuary-mode .activity-log{display:none!important}
+body.wallet-ledger-focus .faith-soft{display:none!important}
+.readiness-lens-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.readiness-lens{min-width:0;padding:14px;border:1px solid var(--jcs-line,rgba(174,199,231,.18));border-radius:13px;background:var(--jcs-surface-2,#0d1d37)}
+.readiness-lens span{display:block;color:var(--jcs-muted,#aebdd3);font-size:.67rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.readiness-lens strong{display:block;margin-top:5px;overflow-wrap:anywhere;font-size:1rem}
+.readiness-lens small{display:block;margin-top:5px;color:var(--jcs-muted,#aebdd3);font-size:.7rem;line-height:1.42}
+.readiness-lens.ok{border-top:3px solid var(--wallet-green)}.readiness-lens.warn{border-top:3px solid var(--wallet-gold)}.readiness-lens.err{border-top:3px solid var(--wallet-red)}.readiness-lens.info{border-top:3px solid var(--wallet-cyan)}
+.evidence-digest{margin-top:10px;padding:10px 12px;border:1px solid var(--jcs-line,rgba(174,199,231,.18));border-radius:10px;background:rgba(3,9,21,.24);font:650 .7rem/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere;color:var(--jcs-muted,#aebdd3)}
+.workflow-bridge-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.workflow-bridge{padding:14px;border:1px solid var(--jcs-line,rgba(174,199,231,.18));border-radius:13px;background:var(--jcs-surface-2,#0d1d37)}.workflow-bridge strong{display:block}.workflow-bridge p{margin:5px 0 10px;color:var(--jcs-muted,#aebdd3);font-size:.76rem}.workflow-bridge a{font-weight:850}
+.receiving-note{margin-top:12px;padding:12px;border-left:4px solid var(--wallet-cyan);border-radius:10px;background:var(--jcs-surface-2,#0d1d37);color:var(--jcs-muted,#aebdd3);font-size:.78rem}.receiving-note strong{color:var(--jcs-ink,#f7f9ff)}
+@media(max-width:1040px){.readiness-lens-grid,.workflow-bridge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.readiness-lens-grid,.workflow-bridge-grid{grid-template-columns:1fr}.index-wallet-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.compact-wallet-pill{grid-column:1/-1}}
+@media(max-width:340px){.index-header-top{grid-template-columns:minmax(0,1fr) 36px;gap:6px}.mobile-nav-toggle .menu-label{display:none}.mobile-nav-toggle{min-width:36px;width:36px;padding-inline:6px}.index-brand{gap:7px}.index-brand img{width:36px!important;height:36px!important;flex-basis:36px}.index-brand .brand-title{font-size:.82rem!important}}
+
+  </style>
 </head>
 
 <body id="top">
   <a class="skip-link" href="#main-content">Skip to wallet readiness</a>
 
-  <header class="site-header wallet-header" role="banner">
-    <div class="header-wrap">
-      <a class="brand-link" href="./index.html" aria-label="Jesus Christ Saves Token home">
-        <img src="./jcs-logo.png" width="44" height="44" alt="" aria-hidden="true">
-        <span>
-          <span class="brand-title">Jesus Christ Saves Token</span>
-          <span class="brand-subtitle">Xaman identity · XRPL Mainnet readiness</span>
-        </span>
-      </a>
-
-      <nav class="header-nav" aria-label="Primary navigation">
-        <a class="nav-link" href="./index.html">Home</a>
-        <a class="nav-link" href="./about-jcs.html">Vision</a>
-        <a class="nav-link sign-ledger-btn" href="./verify.html">Sign the Ledger</a>
-        <a class="nav-link" href="./prayer.map.html">Prayer Map</a>
-        <a class="nav-link" href="./connectwallet.html" aria-current="page">Wallet</a>
-        <a class="nav-link" href="./security.html">Security</a>
-      </nav>
-
-      <div class="header-actions" aria-label="Display and connection status">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
-          <span aria-hidden="true">◐</span>
-          <span id="themeToggleText">Light mode</span>
-        </button>
-        <span class="badge" id="headerConnectionPill" aria-live="polite">Xaman not connected</span>
+  <header class="site-header jcs-home-header jcs-index-header" role="banner">
+    <div class="jcs-index-header-shell">
+      <div class="index-header-top">
+        <a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
+          <img alt="" height="40" src="./jcs-logo.png" width="40">
+          <span class="brand-copy"><span class="brand-title">Jesus Christ Saves Token</span><span class="brand-subtitle">JCS · Faith · Fellowship · Native XRPL exchange</span></span>
+        </a>
+        <button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button"><span aria-hidden="true" class="menu-icon">☰</span><span class="menu-label">Menu</span></button>
+        <div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
+          <nav aria-label="Related XRP Ledger ecosystem projects" class="index-ecosystem-links">
+            <a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+            <a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+            <a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+          </nav>
+          <div aria-label="Readiness workspace and display controls" class="index-page-controls">
+            <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Reduce deep protocol detail while keeping account safety and JCS relationship evidence visible" type="button">Sanctuary mode</button>
+            <button aria-pressed="false" class="index-control-button exchange-control" id="ledgerFocusBtn" title="Focus on validated XRPL account, trustline, reserve and protocol evidence" type="button">Ledger focus</button>
+            <button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button"><span aria-hidden="true" id="themeToggleIcon">◐</span><span id="themeToggleText">Light mode</span></button>
+          </div>
+          <div aria-label="Xaman wallet controls" class="index-wallet-actions">
+            <button aria-describedby="headerConnectionPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
+            <button aria-describedby="headerConnectionPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
+            <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="headerConnectionPill">Xaman not connected</span>
+          </div>
+          <nav aria-label="Project policies and support" class="index-legal-links">
+            <a href="./terms.html">Terms</a><a href="./privacy.html">Privacy</a><a href="./security.html">Security</a><a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a><a href="./ai.json">AI Manifest</a>
+          </nav>
+        </div>
       </div>
+      <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+        <a class="nav-btn" href="./">Home</a><a class="nav-btn" href="./#trade">Trade</a><a class="nav-btn" href="./#fellowship">Fellowship</a><a class="nav-btn" href="./#scripture">Scripture</a><a class="nav-btn" href="./#sacred-film">Sacred Film</a><a class="nav-btn" href="./#audio">Sacred Audio</a><a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a><a class="nav-btn" href="./prayer.map.html">Prayer Map</a><a class="nav-btn" href="./metrics.html">Market Monitor</a><a aria-current="page" class="nav-btn" href="./connectwallet.html">Account Readiness</a><a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+      </nav>
     </div>
   </header>
 
-  <main class="container wallet-page" id="main-content">
+  <main class="container wallet-page wallet-page-v4" id="main-content">
     <section class="card wallet-hero" aria-labelledby="page-title">
       <div>
         <span class="eyebrow">Xaman authorization · validated XRPL evidence · Mainnet only</span>
-        <h1 id="page-title">Connect once. Inspect what the <span>ledger actually says.</span></h1>
+        <h1 id="page-title">Connect once. Inspect the account. <span>Understand its JCS relationship.</span></h1>
         <p class="wallet-lead">
           This page uses the official Xaman browser authorization flow to identify the account
           the user selects, then reads a consistent snapshot from one validated XRP Ledger.
@@ -535,7 +917,7 @@
         </div>
 
         <div class="hero-badges" aria-label="Page characteristics">
-          <span class="badge gold">Release 3.0.0</span>
+          <span class="badge gold">Release 4.0.0</span>
           <span class="badge green">XRP Ledger Mainnet</span>
           <span class="badge">SignIn-only connection</span>
           <span class="badge">No wallet secret collection</span>
@@ -593,10 +975,11 @@
       </div>
 
       <div class="action-row">
-        <button class="btn green" id="connectBtn" type="button" disabled>Connect Xaman</button>
-        <button class="btn danger" id="disconnectBtn" type="button" hidden>Disconnect Xaman</button>
+        <button class="btn green" id="connectWorkspaceBtn" type="button" disabled>Connect Xaman</button>
+        <button class="btn danger" id="disconnectWorkspaceBtn" type="button" hidden>Disconnect Xaman</button>
         <button class="btn" id="refreshBtn" type="button" disabled>Refresh validated snapshot</button>
         <button class="btn" id="copyAddressBtn" type="button" disabled>Copy selected address</button>
+        <button class="btn" id="resetInspectionBtn" type="button">Reset inspection</button>
         <a class="btn" id="xrpscanBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">Open XRPSCAN</a>
         <a class="btn" id="bithompBtn" href="#" target="_blank" rel="noopener" aria-disabled="true">Open Bithomp</a>
       </div>
@@ -659,10 +1042,11 @@
         <article class="metric"><span>Trust lines observed</span><strong id="metricTrustlines">—</strong><small id="metricTrustlinePages">Not queried</small></article>
         <article class="metric"><span>NFTs observed</span><strong id="metricNfts">—</strong><small id="metricNftPages">Not queried</small></article>
         <article class="metric"><span>Ledger objects observed</span><strong id="metricObjects">—</strong><small id="metricObjectPages">Not queried</small></article>
-        <article class="metric"><span>Evidence coverage</span><strong id="metricCoverage">0 / 6</strong><small id="metricCoverageNote">No evidence groups loaded</small></article>
+        <article class="metric"><span>Evidence coverage</span><strong id="metricCoverage">0 / 7</strong><small id="metricCoverageNote">No evidence groups loaded</small></article>
       </div>
 
       <div class="evidence-strip"><span id="snapshotTime">Snapshot time: —</span><span id="snapshotSource">Source: —</span></div>
+      <div class="evidence-digest" id="snapshotDigest">Evidence SHA-256: generated after a validated snapshot is assembled.</div>
       <div class="connection-banner" id="snapshotStatus" role="status" aria-live="polite">No account snapshot has been requested.</div>
     </section>
 
@@ -698,7 +1082,28 @@
       </div>
     </section>
 
-    <section class="card" id="account-controls" aria-labelledby="controls-title">
+    <section class="card faith-soft" id="ecosystem-readiness" aria-labelledby="ecosystem-readiness-title">
+      <div class="section-intro"><div><h2 id="ecosystem-readiness-title">JCS ecosystem readiness lens</h2><p>This local interpretation layer connects the same validated account evidence to the broader JCS project: token receipt, prayer NFTs, Private Capsule neutral receipts, public prayer/testimony activity and Prayer Map participation. It is not a security score, identity proof, or guarantee that a later transaction will succeed.</p></div><span class="badge" id="ecosystemReadinessBadge">Waiting for snapshot</span></div>
+      <div class="readiness-lens-grid">
+        <article class="readiness-lens info" id="lensControl"><span>Account-control evidence</span><strong id="lensControlValue">Not established</strong><small id="lensControlNote">Public lookup never proves wallet control.</small></article>
+        <article class="readiness-lens" id="lensReceive"><span>JCS receiving posture</span><strong id="lensReceiveValue">—</strong><small id="lensReceiveNote">Requires JCS trustline evidence.</small></article>
+        <article class="readiness-lens" id="lensSend"><span>JCS balance posture</span><strong id="lensSendValue">—</strong><small id="lensSendNote">Positive balance does not guarantee a future payment path.</small></article>
+        <article class="readiness-lens" id="lensReserve"><span>XRP reserve margin</span><strong id="lensReserveValue">—</strong><small id="lensReserveNote">Uses the same live reserve evidence as the snapshot.</small></article>
+        <article class="readiness-lens info"><span>JCS prayer NFTs held</span><strong id="lensPrayerNfts">—</strong><small>Taxon 1246974803 only.</small></article>
+        <article class="readiness-lens info"><span>Private Capsule receipts</span><strong id="lensCapsuleReceipts">—</strong><small>Neutral receipt taxon 1245926211 only; plaintext and recovery keys are never read.</small></article>
+        <article class="readiness-lens info"><span>Public JCS communications</span><strong id="lensPublicComms">—</strong><small id="lensPublicCommsNote">Bounded validated account history up to the selected ledger.</small></article>
+        <article class="readiness-lens info"><span>Prayer Map focus publications</span><strong id="lensMapFocus">—</strong><small>Counts this account's public opt-in focus records; it does not expose exact location.</small></article>
+      </div>
+      <div class="receiving-note"><strong>Interpretation boundary:</strong> a trustline, token balance, NFT, public prayer record, DID, credential or other ledger object proves only the observed ledger state. It does not establish legal identity, spiritual authority, persecution status, off-ledger ownership, safety, authenticity or future behavior.</div>
+      <div class="workflow-bridge-grid" aria-label="JCS workflow bridges">
+        <article class="workflow-bridge"><strong>Sign the Ledger</strong><p>Create the public prayer/testimony record and optional prayer NFT through explicit Xaman approvals.</p><a href="./verify.html">Open Sign the Ledger →</a></article>
+        <article class="workflow-bridge"><strong>Prayer Map</strong><p>View threshold-qualified prayer-focus aggregates without inferring a participant's physical location.</p><a href="./prayer.map.html">Open Prayer Map →</a></article>
+        <article class="workflow-bridge"><strong>Network Observatory</strong><p>Compare project-wide communications, privacy discipline, XRPL health and JCS market structure.</p><a href="./metrics.html">Open Metrics →</a></article>
+        <article class="workflow-bridge"><strong>Main JCS portal</strong><p>Return to faith, fellowship and separately disclosed exchange tools.</p><a href="./#trade">Open portal →</a></article>
+      </div>
+    </section>
+
+    <section class="card protocol-deep" id="account-controls" aria-labelledby="controls-title">
       <div class="section-intro">
         <div>
           <h2 id="controls-title">Account authority and controls</h2>
@@ -724,7 +1129,7 @@
       </div>
     </section>
 
-    <section class="card" id="object-inventory" aria-labelledby="objects-title">
+    <section class="card protocol-deep" id="object-inventory" aria-labelledby="objects-title">
       <div class="section-intro">
         <div>
           <h2 id="objects-title">Protocol-forward ledger-object inventory</h2>
@@ -757,7 +1162,7 @@
       </details>
     </section>
 
-    <section class="card" id="standards" aria-labelledby="standards-title">
+    <section class="card protocol-deep" id="standards" aria-labelledby="standards-title">
       <div class="section-intro">
         <div>
           <h2 id="standards-title">Xaman and XRP Ledger standards alignment</h2>
@@ -795,9 +1200,10 @@
       <div class="action-row">
         <button class="btn primary" id="downloadSnapshotBtn" type="button" disabled>Download snapshot JSON</button>
         <button class="btn" id="copySummaryBtn" type="button" disabled>Copy plain summary</button>
+        <button class="btn" id="copyDigestBtn" type="button" disabled>Copy evidence SHA-256</button>
         <button class="btn" id="clearLogBtn" type="button">Clear activity log</button>
       </div>
-      <pre class="activity-log" id="activityLog" aria-live="polite">JCS Xaman and XRPL readiness page initialized.</pre>
+      <pre class="activity-log" id="activityLog" aria-live="polite">JCS Account Readiness v4 initialized.</pre>
     </section>
 
     <section class="card" aria-labelledby="limitations-title">
@@ -848,7 +1254,7 @@
 
   <script type="application/json" id="app-config">
   {
-    "release": "3.0.0",
+    "release": "4.0.0",
     "xamanApiKey": "7737775c-1645-4a4e-a92d-ffe51530a348",
     "network": "main",
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
@@ -857,10 +1263,13 @@
     "maxPages": 8,
     "pageLimit": 400,
     "requestTimeoutMs": 15000,
+    "communicationPages": 4,
+    "proxyUrl": "https://xrbitcoincash-github-io.onrender.com",
     "xrplServers": [
       "wss://xrplcluster.com",
       "wss://s1.ripple.com",
-      "wss://s2.ripple.com"
+      "wss://s2.ripple.com",
+      "wss://honeycluster.io"
     ]
   }
   </script>
@@ -872,6 +1281,12 @@
 
     const $ = id => document.getElementById(id);
     const config = JSON.parse($('app-config').textContent || '{}');
+    const JCS_SOCIAL_TAGS = new Set(['JCS_SOCIAL_V6','JCS_SOCIAL_V5','JCS_SOCIAL_V4','JCS_SOCIAL_V3','JCS_SOCIAL_V2']);
+    const JCS_LEGACY_TAG = 'JCS_VERIFY_V1';
+    const PRAYER_NFT_TAXON = 1246974803;
+    const CAPSULE_RECEIPT_TAXON = 1245926211;
+    const JCS_MAP_POLICY = 'JCS_MAP_1';
+    const encoder = new TextEncoder();
 
     const state = {
       sdkReady: false,
@@ -959,6 +1374,7 @@
       document.documentElement.dataset.theme = normalized;
       const isDark = normalized === 'dark';
       $('themeToggleText').textContent = isDark ? 'Light mode' : 'Dark mode';
+       if ($('themeToggleIcon')) $('themeToggleIcon').textContent = isDark ? '☀' : '◐';
       $('themeToggle').setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
       $('themeToggle').setAttribute('aria-pressed', String(isDark));
       document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#050916' : '#f4f7fb');
@@ -990,6 +1406,7 @@
       $('sdkBadge').className = 'badge ' + (ready ? 'green' : (errorText ? 'red' : ''));
       setStep('stepSdk', ready ? 'ready' : (errorText ? 'error' : ''));
       if (errorText) setStatus($('connectionStatus'), errorText, 'err');
+      updateConnectionUi();
     }
 
     function shortAccount(account) {
@@ -1062,6 +1479,8 @@
       $('connectBtn').disabled = !state.sdkReady || state.authorizing || connected;
       $('disconnectBtn').hidden = !connected;
       $('disconnectBtn').disabled = !connected;
+      if ($('connectWorkspaceBtn')) { $('connectWorkspaceBtn').hidden = connected; $('connectWorkspaceBtn').disabled = !state.sdkReady || state.authorizing || connected; }
+      if ($('disconnectWorkspaceBtn')) { $('disconnectWorkspaceBtn').hidden = !connected; $('disconnectWorkspaceBtn').disabled = !connected; }
       $('useConnectedBtn').disabled = !connected;
       setStep('stepAccount', connected ? 'ready' : '');
     }
@@ -1101,7 +1520,7 @@
         'metricTrustlines', 'metricNfts', 'metricObjects'
       ];
       metricIds.forEach(id => { $(id).textContent = '—'; });
-      $('metricCoverage').textContent = '0 / 6';
+      $('metricCoverage').textContent = '0 / 7';
       $('metricCoverageNote').textContent = 'No evidence groups loaded';
       $('metricLedgerHash').textContent = 'No evidence loaded';
       $('metricBuild').textContent = 'Build unavailable';
@@ -1113,6 +1532,10 @@
       $('snapshotTime').textContent = 'Snapshot time: —';
       $('snapshotSource').textContent = 'Source: —';
       setStatus($('snapshotStatus'), 'No account snapshot has been requested.');
+       state.snapshotDigest = '';
+       if ($('snapshotDigest')) $('snapshotDigest').textContent = 'Evidence SHA-256: generated after a validated snapshot is assembled.';
+       if ($('copyDigestBtn')) $('copyDigestBtn').disabled = true;
+       resetEcosystemLens();
 
       [
         'jcsTrustlineState', 'jcsBalance', 'jcsLimit', 'jcsFreeze',
@@ -1136,6 +1559,170 @@
       `;
 
       $('objectTableBody').innerHTML = '<tr><td colspan="4">No account_objects evidence loaded.</td></tr>';
+    }
+
+
+    function resetEcosystemLens() {
+      const pairs = [
+        ['lensControlValue','Not established'],['lensReceiveValue','—'],['lensSendValue','—'],['lensReserveValue','—'],
+        ['lensPrayerNfts','—'],['lensCapsuleReceipts','—'],['lensPublicComms','—'],['lensMapFocus','—']
+      ];
+      pairs.forEach(([id,value]) => { if ($(id)) $(id).textContent = value; });
+      if ($('lensControlNote')) $('lensControlNote').textContent = 'Public lookup never proves wallet control.';
+      if ($('lensReceiveNote')) $('lensReceiveNote').textContent = 'Requires JCS trustline evidence.';
+      if ($('lensSendNote')) $('lensSendNote').textContent = 'Positive balance does not guarantee a future payment path.';
+      if ($('lensReserveNote')) $('lensReserveNote').textContent = 'Uses the same live reserve evidence as the snapshot.';
+      if ($('lensPublicCommsNote')) $('lensPublicCommsNote').textContent = 'Bounded validated account history up to the selected ledger.';
+      if ($('ecosystemReadinessBadge')) { $('ecosystemReadinessBadge').textContent = 'Waiting for snapshot'; $('ecosystemReadinessBadge').className = 'badge'; }
+      ['lensControl','lensReceive','lensSend','lensReserve'].forEach(id => { const n=$(id); if(n){n.classList.remove('ok','warn','err');} });
+    }
+
+    function utf8MemoMap(items) {
+      const out = {};
+      for (const entry of (Array.isArray(items) ? items.slice(0,64) : [])) {
+        const memo = entry && entry.Memo && typeof entry.Memo === 'object' ? entry.Memo : {};
+        const type = hexToUtf8(memo.MemoType || '').trim().toLowerCase();
+        const data = hexToUtf8(memo.MemoData || '').trim();
+        if (type && type.length <= 64 && encoder.encode(data).length <= 4096) out[type] = data;
+      }
+      return out;
+    }
+
+    async function collectAccountTransactions(client, account, ledgerIndex) {
+      const items = [];
+      let marker;
+      let pages = 0;
+      const pageCap = Math.max(1, Math.min(8, Number(config.communicationPages) || 4));
+      do {
+        const request = { account, ledger_index_min: -1, ledger_index_max: ledgerIndex, binary:false, forward:false, limit:200 };
+        if (marker) request.marker = marker;
+        const result = await client.request('account_tx', request);
+        if (result.validated === false) throw new Error('account_tx returned non-validated evidence.');
+        items.push(...(Array.isArray(result.transactions) ? result.transactions : []));
+        marker = result.marker;
+        pages += 1;
+      } while (marker && pages < pageCap);
+      return { items, pages, truncated:Boolean(marker), ledgerIndex };
+    }
+
+    function summarizeJcsCommunications(txEvidence, account) {
+      if (!txEvidence) return null;
+      const summary = { posts:0, amens:0, replies:0, support:0, mapFocus:0, recognized:0 };
+      for (const entry of txEvidence.items || []) {
+        const tx = entry && (entry.tx_json || entry.tx || entry.transaction) || {};
+        const meta = entry && (entry.meta || entry.metaData) || {};
+        if (entry && entry.validated === false) continue;
+        if (tx.TransactionType !== 'Payment' || tx.Account !== account || tx.Destination !== config.issuer || String(tx.Amount || '') !== '1') continue;
+        const result = meta.TransactionResult || meta.transaction_result || '';
+        if (result && result !== 'tesSUCCESS') continue;
+        const memos = utf8MemoMap(tx.Memos || []);
+        const app = memos.app || '';
+        if (app !== JCS_LEGACY_TAG && !JCS_SOCIAL_TAGS.has(app)) continue;
+        summary.recognized += 1;
+        if (app === JCS_LEGACY_TAG) { summary.posts += 1; continue; }
+        const kind = memos.kind || 'post';
+        if (kind === 'post') {
+          summary.posts += 1;
+          if (memos.map === '1' && memos.role === 'prayer-focus' && memos.policy === JCS_MAP_POLICY) summary.mapFocus += 1;
+        } else if (kind === 'amen') summary.amens += 1;
+        else if (kind === 'support') summary.support += 1;
+        else if (kind === 'reply') summary.replies += 1;
+      }
+      return summary;
+    }
+
+    function countJcsNfts(nftEvidence) {
+      if (!nftEvidence) return null;
+      let prayers = 0, capsules = 0;
+      for (const nft of nftEvidence.items || []) {
+        const taxon = Number(nft.NFTokenTaxon ?? nft.nft_taxon ?? 0);
+        if (taxon === PRAYER_NFT_TAXON) prayers += 1;
+        if (taxon === CAPSULE_RECEIPT_TAXON) capsules += 1;
+      }
+      return { prayers, capsules };
+    }
+
+    function setLensState(id, kind) {
+      const node = $(id); if (!node) return;
+      node.classList.remove('ok','warn','err');
+      if (kind) node.classList.add(kind);
+    }
+
+    function renderEcosystemLens(snapshot, reserve, jcsLine, issuerFlags) {
+      const control = snapshot.source === 'xaman';
+      $('lensControlValue').textContent = control ? 'Xaman-authorized session' : 'Public lookup only';
+      $('lensControlNote').textContent = control ? 'Account control was asserted by the active Xaman session; legal identity is not established.' : 'The address is public ledger input; control is not established.';
+      setLensState('lensControl', control ? 'ok' : 'warn');
+
+      if (!snapshot.linesResult) {
+        $('lensReceiveValue').textContent = 'Unavailable'; $('lensReceiveNote').textContent = snapshot.errors.account_lines || 'Trustline evidence unavailable.'; setLensState('lensReceive','err');
+        $('lensSendValue').textContent = 'Unavailable'; setLensState('lensSend','err');
+      } else if (!jcsLine) {
+        $('lensReceiveValue').textContent = 'JCS trustline required'; $('lensReceiveNote').textContent = 'No exact JCS trustline to the issuer was returned.'; setLensState('lensReceive','warn');
+        $('lensSendValue').textContent = 'No JCS line observed'; $('lensSendNote').textContent = 'A sendable JCS balance is not inferred without the trustline.'; setLensState('lensSend','warn');
+      } else {
+        const balance = Number(jcsLine.balance), limit = Number(jcsLine.limit), frozen = jcsLine.freeze_peer === true;
+        const requireAuth = Boolean(issuerFlags && issuerFlags.requireAuthorization);
+        const authorized = jcsLine.peer_authorized === true;
+        const remaining = Number.isFinite(limit) && Number.isFinite(balance) ? limit - balance : NaN;
+        if (frozen) { $('lensReceiveValue').textContent = 'Issuer freeze observed'; $('lensReceiveNote').textContent = 'The trustline shows peer-side freeze; do not assume receipt or movement is available.'; setLensState('lensReceive','err'); }
+        else if (requireAuth && !authorized) { $('lensReceiveValue').textContent = 'Issuer authorization not shown'; $('lensReceiveNote').textContent = 'The issuer account requires authorization and this line does not explicitly show peer authorization.'; setLensState('lensReceive','warn'); }
+        else if (Number.isFinite(remaining) && remaining <= 0) { $('lensReceiveValue').textContent = 'Trustline capacity exhausted'; $('lensReceiveNote').textContent = 'Observed balance is at or above the reported holder limit.'; setLensState('lensReceive','warn'); }
+        else { $('lensReceiveValue').textContent = 'Trustline present'; $('lensReceiveNote').textContent = Number.isFinite(remaining) ? 'Approx. remaining line capacity '+formatNumber(Math.max(0,remaining),8)+' JCS; future payment paths still require independent review.' : 'No blocking condition was derived from returned trustline fields.'; setLensState('lensReceive','ok'); }
+        if (Number.isFinite(balance) && balance > 0 && !frozen) { $('lensSendValue').textContent = formatNumber(balance,8)+' JCS observed'; $('lensSendNote').textContent = 'Positive trustline balance observed; liquidity, fees and destination conditions are separate.'; setLensState('lensSend','ok'); }
+        else { $('lensSendValue').textContent = Number.isFinite(balance) ? formatNumber(balance,8)+' JCS observed' : 'Balance unavailable'; $('lensSendNote').textContent = frozen ? 'Issuer freeze is shown on the trustline.' : 'No positive JCS balance is inferred.'; setLensState('lensSend','warn'); }
+      }
+
+      if (reserve && Number.isFinite(reserve.spendable)) { $('lensReserveValue').textContent = formatXrp(reserve.spendable); $('lensReserveNote').textContent = 'Estimated after live base + owner reserve; sponsorship-sensitive cases remain withheld.'; setLensState('lensReserve', reserve.spendable > 0 ? 'ok' : 'warn'); }
+      else { $('lensReserveValue').textContent = 'Not estimated'; $('lensReserveNote').textContent = reserve?.note || 'Reserve evidence unavailable.'; setLensState('lensReserve','warn'); }
+
+      const nfts = countJcsNfts(snapshot.nftsResult);
+      $('lensPrayerNfts').textContent = nfts ? String(nfts.prayers) : 'Unavailable';
+      $('lensCapsuleReceipts').textContent = nfts ? String(nfts.capsules) : 'Unavailable';
+      const comm = summarizeJcsCommunications(snapshot.txResult, snapshot.account);
+      $('lensPublicComms').textContent = comm ? String(comm.recognized) : 'Unavailable';
+      $('lensPublicCommsNote').textContent = comm ? `${comm.posts} posts · ${comm.amens} Amens · ${comm.replies} replies · ${comm.support} support responses${snapshot.txResult.truncated ? ' · bounded scan' : ''}` : (snapshot.errors.account_tx || 'Communication history unavailable.');
+      $('lensMapFocus').textContent = comm ? String(comm.mapFocus) : 'Unavailable';
+      const evidenceLoaded = [snapshot.serverInfo,snapshot.accountInfo,snapshot.linesResult,snapshot.objectsResult,snapshot.nftsResult,snapshot.issuerInfo,snapshot.txResult].filter(Boolean).length;
+      const issues = !snapshot.linesResult || (jcsLine && jcsLine.freeze_peer === true) || evidenceLoaded < 6;
+      $('ecosystemReadinessBadge').textContent = issues ? 'Review limitations' : 'JCS relationship evidence loaded';
+      $('ecosystemReadinessBadge').className = 'badge ' + (issues ? 'gold' : 'green');
+    }
+
+    async function sha256Hex(text) {
+      if (!window.crypto || !window.crypto.subtle) return '';
+      const digest = await window.crypto.subtle.digest('SHA-256', encoder.encode(String(text || '')));
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+    }
+
+    async function refreshSnapshotDigest() {
+      if (!state.snapshot || !state.snapshot.export) return '';
+      const copy = JSON.parse(JSON.stringify(state.snapshot.export));
+      delete copy.snapshot_sha256;
+      const digest = await sha256Hex(JSON.stringify(copy));
+      state.snapshotDigest = digest;
+      state.snapshot.export.snapshot_sha256 = digest || null;
+      if ($('snapshotDigest')) $('snapshotDigest').textContent = digest ? 'Evidence SHA-256: '+digest : 'Evidence SHA-256 unavailable in this browser context.';
+      if ($('copyDigestBtn')) $('copyDigestBtn').disabled = !digest;
+      return digest;
+    }
+
+    class XRPLProxyClient {
+      constructor(url, timeoutMs){ this.url=url; this.timeoutMs=timeoutMs; this.apiVersion=2; }
+      async connect(){ return; }
+      async request(command, params={}){
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+        try {
+          const response = await fetch(this.url,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',redirect:'error',referrerPolicy:'no-referrer',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({method:command,params:[params]}),signal:controller.signal});
+          if(!response.ok) throw new Error('Read-only proxy HTTP '+response.status);
+          const payload = await response.json();
+          const result = payload && payload.result && typeof payload.result === 'object' ? payload.result : payload;
+          if(!result || result.error || result.status === 'error') throw new Error(result && (result.error_message || result.error) || 'Read-only proxy request failed.');
+          return result;
+        } finally { clearTimeout(timeout); }
+      }
+      close(){}
     }
 
     class XRPLWebSocketClient {
@@ -1275,7 +1862,19 @@
         }
       }
 
-      throw new Error(`No validated XRPL Mainnet server was available. ${failures.join(' | ')}`);
+      if (config.proxyUrl) {
+        const client = new XRPLProxyClient(config.proxyUrl, config.requestTimeoutMs);
+        try {
+          log('Trying existing read-only Render proxy fallback.');
+          const result = await client.request('server_info');
+          const info = result.info || result || {};
+          const validated = info.validated_ledger;
+          if (!validated || !Number.isFinite(Number(validated.seq))) throw new Error('Proxy did not report a validated ledger.');
+          if (info.network_id !== undefined && Number(info.network_id) !== 0) throw new Error(`Proxy network_id ${info.network_id} is not XRP Ledger Mainnet.`);
+          return { client, url:'existing Render read-only proxy', info, validated };
+        } catch (error) { failures.push('proxy: '+error.message); }
+      }
+      throw new Error(`No validated XRPL Mainnet source was available. ${failures.join(' | ')}`);
     }
 
     async function collectPaged(client, command, field, account, ledgerIndex, extra = {}) {
@@ -1428,7 +2027,7 @@
 
       const {
         account, source, server, serverInfo, validatedLedger, accountInfo,
-        linesResult, objectsResult, nftsResult, issuerInfo, errors
+        linesResult, objectsResult, nftsResult, issuerInfo, txResult, errors
       } = snapshot;
 
       const accountData = accountInfo.account_data || {};
@@ -1484,12 +2083,12 @@
         $('metricObjectPages').textContent = errors.account_objects || 'Query failed';
       }
 
-      const evidenceGroups = [Boolean(serverInfo), Boolean(accountInfo), Boolean(linesResult), Boolean(objectsResult), Boolean(nftsResult), Boolean(issuerInfo)];
+      const evidenceGroups = [Boolean(serverInfo), Boolean(accountInfo), Boolean(linesResult), Boolean(objectsResult), Boolean(nftsResult), Boolean(issuerInfo), Boolean(txResult)];
       const coverage = evidenceGroups.filter(Boolean).length;
-      $('metricCoverage').textContent = `${coverage} / 6`;
-      $('metricCoverageNote').textContent = coverage === 6 ? 'All requested evidence groups loaded' : `${6 - coverage} evidence group${6 - coverage === 1 ? '' : 's'} unavailable`;
-      $('snapshotBadge').textContent = coverage === 6 ? 'Validated complete request set' : 'Validated partial evidence';
-      $('snapshotBadge').className = 'badge ' + (coverage === 6 ? 'green' : 'gold');
+      $('metricCoverage').textContent = `${coverage} / 7`;
+      $('metricCoverageNote').textContent = coverage === 7 ? 'All requested evidence groups loaded' : `${7 - coverage} evidence group${7 - coverage === 1 ? '' : 's'} unavailable`;
+      $('snapshotBadge').textContent = coverage === 7 ? 'Validated complete request set' : 'Validated partial evidence';
+      $('snapshotBadge').className = 'badge ' + (coverage === 7 ? 'green' : 'gold');
       $('snapshotTime').textContent = `Snapshot time: ${snapshot.createdAt}`;
       $('snapshotSource').textContent = `Account source: ${source === 'xaman' ? 'Xaman authorized' : 'public lookup'}`;
 
@@ -1581,14 +2180,14 @@
       setStep('stepLedger', 'ready');
       setStatus(
         $('snapshotStatus'),
-        coverage === 6
+        coverage === 7
           ? `Validated ledger ${validatedLedger.seq} loaded successfully for ${account}.`
           : `Validated ledger ${validatedLedger.seq} loaded with partial evidence. Review unavailable groups below.`,
-        coverage === 6 ? 'ok' : ''
+        coverage === 7 ? 'ok' : ''
       );
 
       state.snapshot.export = {
-        schema: 'jcs-xaman-xrpl-account-readiness-v3',
+        schema: 'jcs-xaman-xrpl-account-readiness-v4',
         release: config.release,
         created_at_utc: snapshot.createdAt,
         account,
@@ -1597,7 +2196,7 @@
         xrpl_server: server,
         xrpld_build: serverInfo.build_version || null,
         validated_ledger: validatedLedger,
-        evidence_coverage: { loaded: coverage, requested: 6, errors },
+        evidence_coverage: { loaded: coverage, requested: 7, errors },
         account_root: {
           balance_drops: accountData.Balance || null,
           balance_xrp: Number.isFinite(balanceXrp) ? balanceXrp : null,
@@ -1624,9 +2223,15 @@
         pagination: {
           account_lines: linesResult ? { count: linesResult.items.length, pages: linesResult.pages, truncated: linesResult.truncated } : null,
           account_objects: objectsResult ? { count: objectsResult.items.length, pages: objectsResult.pages, truncated: objectsResult.truncated } : null,
-          account_nfts: nftsResult ? { count: nftsResult.items.length, pages: nftsResult.pages, truncated: nftsResult.truncated } : null
+          account_nfts: nftsResult ? { count: nftsResult.items.length, pages: nftsResult.pages, truncated: nftsResult.truncated } : null,
+           account_tx: txResult ? { count: txResult.items.length, pages: txResult.pages, truncated: txResult.truncated } : null
         },
-        ledger_object_counts: objectCounts,
+        jcs_ecosystem: {
+          prayer_nfts: countJcsNfts(nftsResult)?.prayers ?? null,
+          private_capsule_receipts: countJcsNfts(nftsResult)?.capsules ?? null,
+          public_communication_summary: summarizeJcsCommunications(txResult, account)
+        },
+         ledger_object_counts: objectCounts,
         limitations: [
           'Xaman authorization proves account control for the session, not legal identity.',
           'Public lookup does not prove account control.',
@@ -1637,9 +2242,11 @@
         ]
       };
 
+      renderEcosystemLens(snapshot, reserve, jcsLine, issuerInfo ? deriveAccountFlags(issuerInfo.account_data || {}, issuerInfo.account_flags || null) : null);
+      refreshSnapshotDigest().catch(error => log('Snapshot digest unavailable: ' + error.message));
       $('downloadSnapshotBtn').disabled = false;
       $('copySummaryBtn').disabled = false;
-      log(`Snapshot rendered for ${account} at validated ledger ${validatedLedger.seq}. Coverage ${coverage}/6.`);
+      log(`Snapshot rendered for ${account} at validated ledger ${validatedLedger.seq}. Coverage ${coverage}/7.`);
     }
 
     async function loadSnapshot(account, source) {
@@ -1673,6 +2280,7 @@
           account_lines: collectPaged(client, 'account_lines', 'lines', account, ledgerIndex),
           account_objects: collectPaged(client, 'account_objects', 'account_objects', account, ledgerIndex),
           account_nfts: collectPaged(client, 'account_nfts', 'account_nfts', account, ledgerIndex),
+          account_tx: collectAccountTransactions(client, account, ledgerIndex),
           issuer_account_info: client.request('account_info', {
             account: config.issuer,
             ledger_index: ledgerIndex,
@@ -1688,7 +2296,10 @@
         settled.forEach((result, index) => {
           const key = keys[index];
           if (result.status === 'fulfilled') values[key] = result.value;
-          else errors[key] = result.reason && result.reason.message ? result.reason.message : String(result.reason);
+          else {
+            errors[key] = result.reason && result.reason.message ? result.reason.message : String(result.reason);
+            log(`Evidence group ${key} unavailable: ${errors[key]}`);
+          }
         });
 
         const snapshot = {
@@ -1703,6 +2314,7 @@
           objectsResult: values.account_objects || null,
           nftsResult: values.account_nfts || null,
           issuerInfo: values.issuer_account_info || null,
+          txResult: values.account_tx || null,
           errors
         };
 
@@ -1755,6 +2367,11 @@
     }
 
     function initializeXaman() {
+      if (window.top !== window.self) {
+        setSdkState(false, 'Xaman authorization is disabled inside embedded frames. Open this page directly to connect; public XRPL inspection remains available.');
+        log('Embedded frame detected; Xaman authorization disabled.');
+        return;
+      }
       if (typeof window.Xumm !== 'function') {
         setSdkState(false, 'The official Xaman SDK did not load. Public XRPL lookup remains available.');
         log('Xaman SDK unavailable.');
@@ -1770,7 +2387,9 @@
           log('Xaman Universal SDK ready.');
         });
 
-        state.xumm.on('success', () => {
+        state.xumm.on('retrieved', () => { state.authorizing = false; updateConnectionUi(); readXamanAccount('restored'); });
+
+         state.xumm.on('success', () => {
           state.authorizing = false;
           updateConnectionUi();
           readXamanAccount(state.connectedAccount ? 'restored' : 'authorized');
@@ -1785,6 +2404,15 @@
           log('Xaman logout event received.');
         });
 
+        state.xumm.on('loggedout', () => {
+          state.authorizing = false;
+          state.connectedAccount = null;
+          updateConnectionUi();
+          selectAccount(null, 'none');
+          setStatus($('connectionStatus'), 'Xaman authorization ended. No account is selected.');
+          log('Xaman loggedout event received.');
+        });
+
         state.xumm.on('error', error => {
           state.authorizing = false;
           updateConnectionUi();
@@ -1792,13 +2420,23 @@
           setStatus($('connectionStatus'), `Xaman error: ${message}`, 'err');
           log(`Xaman error: ${message}`);
         });
+
+        const restoreXamanAccount = () => {
+          if (state.authorizing || !state.xumm) return;
+          readXamanAccount(state.connectedAccount ? 'restored' : 'restored').catch(() => {});
+        };
+        window.addEventListener('focus', restoreXamanAccount);
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') restoreXamanAccount(); });
       } catch (error) {
         setSdkState(false, `Xaman SDK initialization failed: ${error.message}`);
         log(`Xaman SDK initialization failed: ${error.message}`);
       }
     }
 
-    $('connectBtn').addEventListener('click', async () => {
+    $('connectWorkspaceBtn')?.addEventListener('click', () => $('connectBtn').click());
+     $('disconnectWorkspaceBtn')?.addEventListener('click', () => $('disconnectBtn').click());
+
+     $('connectBtn').addEventListener('click', async () => {
       if (!state.xumm || !state.sdkReady || state.authorizing) return;
 
       state.authorizing = true;
@@ -1860,7 +2498,9 @@
       await loadSnapshot(state.connectedAccount, 'xaman');
     });
 
-    $('refreshBtn').addEventListener('click', async () => {
+    $('resetInspectionBtn')?.addEventListener('click', () => { selectAccount(null,'none'); $('publicAccountInput').value=''; setStatus($('lookupStatus'),'Inspection reset. Xaman authorization, if active, remains connected.'); log('Account inspection reset.'); });
+
+     $('refreshBtn').addEventListener('click', async () => {
       if (!state.selectedAccount) return;
       await loadSnapshot(state.selectedAccount, state.selectedSource);
     });
@@ -1906,6 +2546,10 @@
         `NFTs observed: ${data.pagination.account_nfts ? data.pagination.account_nfts.count : 'Unavailable'}`,
         `Ledger objects observed: ${data.pagination.account_objects ? data.pagination.account_objects.count : 'Unavailable'}`,
         `Evidence coverage: ${data.evidence_coverage.loaded}/${data.evidence_coverage.requested}`,
+         `JCS prayer NFTs: ${data.jcs_ecosystem?.prayer_nfts ?? 'Unavailable'}`,
+         `Private Capsule receipts: ${data.jcs_ecosystem?.private_capsule_receipts ?? 'Unavailable'}`,
+         `Public JCS communications: ${data.jcs_ecosystem?.public_communication_summary?.recognized ?? 'Unavailable'}`,
+         `Evidence SHA-256: ${data.snapshot_sha256 || state.snapshotDigest || 'Unavailable'}`,
         `Created: ${data.created_at_utc}`,
         '',
         'This is a read-only public-ledger snapshot. It does not prove legal identity, ownership, truth, or future behavior.'
@@ -1919,7 +2563,9 @@
       }
     });
 
-    $('clearLogBtn').addEventListener('click', () => {
+    $('copyDigestBtn')?.addEventListener('click', async () => { if (!state.snapshotDigest) return; try { await navigator.clipboard.writeText(state.snapshotDigest); setStatus($('snapshotStatus'),'Evidence SHA-256 copied.','ok'); } catch { setStatus($('snapshotStatus'),'Clipboard access was unavailable.','err'); } });
+
+     $('clearLogBtn').addEventListener('click', () => {
       $('activityLog').textContent = 'Activity log cleared.';
     });
 
@@ -1932,10 +2578,26 @@
       if (event && event.message) log(`Window error: ${event.message}`);
     });
 
+    if (typeof globalThis.__JCS_READINESS_TEST_HOOK__ === 'function') {
+      globalThis.__JCS_READINESS_TEST_HOOK__({ collectAccountTransactions, summarizeJcsCommunications, countJcsNfts, reserveEstimate, renderEcosystemLens, state, config });
+    }
     updateConnectionUi();
     selectAccount(null, 'none');
     initializeXaman();
   }());
+  </script>
+
+  <script id="jcs-readiness-v4-shell-behavior">
+  (()=>{
+    'use strict';
+    const header=document.querySelector('.jcs-index-header'),toggle=document.getElementById('mobileNavToggle'),nav=document.getElementById('primaryNav'),media=matchMedia('(max-width:980px)');
+    if(header&&toggle&&nav){const icon=toggle.querySelector('.menu-icon'),label=toggle.querySelector('.menu-label');const setOpen=(open,focus=false)=>{const next=Boolean(open&&media.matches);nav.classList.toggle('is-open',next);header.classList.toggle('menu-open',next);toggle.setAttribute('aria-expanded',String(next));toggle.setAttribute('aria-label',next?'Close site navigation':'Open site navigation');if(icon)icon.textContent=next?'×':'☰';if(label)label.textContent=next?'Close':'Menu';if(focus)toggle.focus()};toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(media.matches&&e.target.closest('a'))setOpen(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true')setOpen(false,true)});document.addEventListener('click',e=>{if(media.matches&&toggle.getAttribute('aria-expanded')==='true'&&!header.contains(e.target))setOpen(false)});media.addEventListener?.('change',()=>setOpen(false));setOpen(false)}
+    const sanctuary=document.getElementById('quietModeBtn'),ledger=document.getElementById('ledgerFocusBtn'),key='jcs.account.readiness.focus.v4';
+    const setMode=mode=>{const s=mode==='sanctuary',l=mode==='ledger';document.body.classList.toggle('wallet-sanctuary-mode',s);document.body.classList.toggle('wallet-ledger-focus',l);sanctuary?.setAttribute('aria-pressed',String(s));ledger?.setAttribute('aria-pressed',String(l));if(sanctuary)sanctuary.textContent=s?'Exit sanctuary':'Sanctuary mode';if(ledger)ledger.textContent=l?'Exit ledger focus':'Ledger focus';try{localStorage.setItem(key,mode)}catch{}};
+    sanctuary?.addEventListener('click',()=>setMode(document.body.classList.contains('wallet-sanctuary-mode')?'full':'sanctuary'));
+    ledger?.addEventListener('click',()=>setMode(document.body.classList.contains('wallet-ledger-focus')?'full':'ledger'));
+    try{const saved=localStorage.getItem(key);setMode(saved==='sanctuary'||saved==='ledger'?saved:'full')}catch{setMode('full')}
+  })();
   </script>
 </body>
 </html>
