@@ -1,258 +1,301 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07101c">
-  <meta name="color-scheme" content="dark">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <title>JCS Vision &amp; Core Values — Jesus Christ Saves Token</title>
-  <meta
-    name="description"
-    content="This compatibility route directs visitors to the current Jesus Christ Saves Token Vision and Core Values page."
-  >
-
-  <!--
-    /about/ is retained as a compatibility route.
-    The authoritative JCS mission page remains /about-jcs.html.
-  -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="https://jesuschristsavestoken.com/about-jcs.html">
-  <meta http-equiv="refresh" content="0; url=../about-jcs.html">
-
-  <link rel="icon" type="image/png" href="../jcs-logo.png">
-  <link rel="apple-touch-icon" href="../jcs-logo.png">
-
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Jesus Christ Saves Token">
-  <meta property="og:title" content="JCS Vision &amp; Core Values">
-  <meta
-    property="og:description"
-    content="The Christ-centered mission, values, community direction, and non-custodial XRP Ledger foundation of Jesus Christ Saves Token."
-  >
-  <meta property="og:url" content="https://jesuschristsavestoken.com/about-jcs.html">
-  <meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta property="og:image:alt" content="Jesus Christ Saves Token project emblem">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@JesusCS_token">
-  <meta name="twitter:title" content="JCS Vision &amp; Core Values">
-  <meta
-    name="twitter:description"
-    content="The current mission and values page for Jesus Christ Saves Token on the XRP Ledger."
-  >
-  <meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png">
-  <meta name="twitter:image:alt" content="Jesus Christ Saves Token project emblem">
-
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'none';
-    style-src 'unsafe-inline';
-    img-src 'self';
-    base-uri 'none';
-    form-action 'none';
-  ">
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #060b12;
-      --panel: #0b121c;
-      --panel-2: #0e1723;
-      --ink: #eef6ff;
-      --muted: #9db0c5;
-      --line: #2a3a4e;
-      --gold: #d7a928;
-      --gold-light: #ffe59a;
-      --blue: #7dd3fc;
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      min-height: 100%;
-      margin: 0;
-    }
-
-    body {
-      min-width: 0;
-      display: grid;
-      place-items: center;
-      padding:
-        calc(22px + env(safe-area-inset-top, 0px))
-        calc(16px + env(safe-area-inset-right, 0px))
-        calc(22px + env(safe-area-inset-bottom, 0px))
-        calc(16px + env(safe-area-inset-left, 0px));
-      overflow-x: hidden;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 50% -8rem, rgba(215, 169, 40, .16), transparent 31rem),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, .08), transparent 28rem),
-        var(--bg);
-    }
-
-    main {
-      width: min(100%, 680px);
-      padding: clamp(24px, 6vw, 48px);
-      overflow: hidden;
-      border: 1px solid rgba(215, 169, 40, .32);
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 100% 0%, rgba(125, 211, 252, .08), transparent 24rem),
-        linear-gradient(180deg, var(--panel), var(--panel-2));
-      box-shadow: 0 28px 80px rgba(0, 0, 0, .42);
-      text-align: center;
-    }
-
-    .brand {
-      display: inline-grid;
-      place-items: center;
-      width: 76px;
-      height: 76px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(215, 169, 40, .5);
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 12px 34px rgba(215, 169, 40, .18);
-    }
-
-    .brand img {
-      display: block;
-      width: 64px;
-      height: 64px;
-      object-fit: contain;
-      border-radius: 15px;
-    }
-
-    .eyebrow {
-      margin: 0 0 9px;
-      color: var(--gold-light);
-      font-size: .75rem;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 8vw, 3.7rem);
-      line-height: 1.02;
-      letter-spacing: -.035em;
-      text-wrap: balance;
-    }
-
-    p {
-      margin: 15px auto 0;
-      max-width: 54ch;
-      color: var(--muted);
-      line-height: 1.65;
-      overflow-wrap: anywhere;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 26px;
-    }
-
-    a {
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 17px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      color: var(--ink);
-      background: var(--panel-2);
-      font-weight: 850;
-      line-height: 1.2;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    a.primary {
-      border-color: var(--gold);
-      color: #171006;
-      background: linear-gradient(180deg, var(--gold-light), var(--gold));
-    }
-
-    a:hover,
-    a:focus-visible {
-      border-color: var(--blue);
-      outline: 3px solid rgba(125, 211, 252, .3);
-      outline-offset: 3px;
-    }
-
-    .route-note {
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      font-size: .8rem;
-    }
-
-    @media (max-width: 520px) {
-      main {
-        padding: 25px 18px;
-        border-radius: 19px;
-      }
-
-      .actions {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-
-      .actions a {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#07101c"/>
+<meta name="color-scheme" content="dark light"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<meta name="robots" content="noindex,follow,max-snippet:-1,max-image-preview:large"/>
+<meta name="application-name" content="JCS Project Charter Compatibility Route"/>
+<meta name="jcs-about-compat-release" content="2.0.0"/>
+<title>JCS Project Charter & Compatibility Route | Jesus Christ Saves Token</title>
+<meta name="description" content="Compatibility route and compact project charter for Jesus Christ Saves Token: mission, current JCS application surfaces, privacy and safety principles, XRP Ledger architecture, roadmap, licensing, legal boundaries, and authoritative project links."/>
+<link rel="canonical" href="https://jesuschristsavestoken.com/about-jcs.html"/>
+<link rel="icon" type="image/png" href="/jcs-logo.png"/>
+<link rel="apple-touch-icon" href="/jcs-logo.png"/>
+<link rel="alternate" type="application/json" href="/ai.json" title="JCS AI manifest"/>
+<link rel="alternate" type="application/json" href="/.well-known/did.json" title="JCS Web DID"/>
+<link rel="alternate" type="text/plain" href="/.well-known/xrp-ledger.toml" title="JCS XRP Ledger metadata"/>
+<link rel="security" href="/.well-known/security.txt"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+<link rel="license" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Jesus Christ Saves Token"/>
+<meta property="og:title" content="JCS Project Charter & Vision"/>
+<meta property="og:description" content="The Christ-centered mission, current application ecosystem, safety model, XRP Ledger architecture, roadmap, legal boundaries, and licensing posture of Jesus Christ Saves Token."/>
+<meta property="og:url" content="https://jesuschristsavestoken.com/about-jcs.html"/>
+<meta property="og:image" content="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<meta property="og:image:alt" content="Jesus Christ Saves Token project emblem"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@JesusCS_token"/>
+<meta name="twitter:title" content="JCS Project Charter & Vision"/>
+<meta name="twitter:description" content="Mission, current JCS tools, prayer and privacy architecture, XRPL transparency, roadmap, legal boundaries, and licensing."/>
+<meta name="twitter:image" content="https://jesuschristsavestoken.com/jcs-logo.png"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; upgrade-insecure-requests"/>
+<script>(function(){document.documentElement.classList.add('js');try{const saved=localStorage.getItem('jcs-ledger-theme')||localStorage.getItem('jcs-color-mode');document.documentElement.dataset.theme=(saved==='light'||saved==='dark')?saved:'dark'}catch(_e){document.documentElement.dataset.theme='dark'}})();</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"WebPage","@id":"https://jesuschristsavestoken.com/about/#webpage","url":"https://jesuschristsavestoken.com/about/","name":"JCS Project Charter Compatibility Route","description":"Compatibility route summarizing the current Jesus Christ Saves Token mission, application ecosystem, safety architecture, roadmap, legal boundaries and licensing posture.","dateModified":"2026-08-31","inLanguage":"en-US","isPartOf":{"@id":"https://jesuschristsavestoken.com/#website"},"about":{"@id":"https://jesuschristsavestoken.com/#project"},"mainEntityOfPage":{"@id":"https://jesuschristsavestoken.com/about-jcs.html"}},
+    {"@type":"WebSite","@id":"https://jesuschristsavestoken.com/#website","url":"https://jesuschristsavestoken.com/","name":"Jesus Christ Saves Token"},
+    {"@type":"Organization","@id":"https://jesuschristsavestoken.com/#project","name":"Jesus Christ Saves Token","alternateName":"JCS","url":"https://jesuschristsavestoken.com/","logo":"https://jesuschristsavestoken.com/jcs-logo.png","identifier":"did:web:jesuschristsavestoken.com","sameAs":["https://x.com/JesusCS_token","https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL"],"additionalProperty":[{"@type":"PropertyValue","name":"XRP Ledger network","value":"Mainnet"},{"@type":"PropertyValue","name":"JCS issuer","value":"rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd"},{"@type":"PropertyValue","name":"Custody model","value":"Non-custodial"}]}
+  ]
+}
+</script>
+<style>
+:root{
+  --home-bg:#f4f7fb;--home-surface:#fff;--home-surface-2:#f8fafc;--home-surface-3:#eef3f8;--home-ink:#0b1018;--home-muted:#5b6575;--home-line:#dfe5ed;
+  --home-blue:#1652f0;--home-cyan:#0ea5e9;--home-green:#087f5b;--home-red:#c7354f;--home-gold:#b7791f;--home-gold-soft:#fff7df;
+  --bg:var(--home-bg);--panel:var(--home-surface);--panel2:var(--home-surface-2);--ink:var(--home-ink);--muted:var(--home-muted);--line:var(--home-line);
+  --shadow:0 18px 56px rgba(15,23,42,.09);--wrap:1280px;color-scheme:light
+}
+html[data-theme="dark"]{
+  --home-bg:#07101c;--home-surface:#0d1827;--home-surface-2:#111f31;--home-surface-3:#15263b;--home-ink:#f5f8ff;--home-muted:#9eabc0;--home-line:#25364d;
+  --home-blue:#5c94ff;--home-cyan:#31c2f5;--home-green:#43d6a1;--home-red:#ff7187;--home-gold:#e1b750;--home-gold-soft:#261f10;
+  --bg:var(--home-bg);--panel:var(--home-surface);--panel2:var(--home-surface-2);--ink:var(--home-ink);--muted:var(--home-muted);--line:var(--home-line);--shadow:0 22px 64px rgba(0,0,0,.34);color-scheme:dark
+}
+*{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth;background:var(--bg)}body{margin:0;min-height:100vh;overflow-x:hidden;color:var(--ink);background:radial-gradient(circle at 8% -5%,color-mix(in srgb,var(--home-blue) 13%,transparent),transparent 30rem),radial-gradient(circle at 95% 6%,color-mix(in srgb,var(--home-gold) 11%,transparent),transparent 30rem),var(--bg);font:14px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--home-blue);text-decoration:none}a:hover{text-decoration:underline}button{font:inherit;cursor:pointer}:focus-visible{outline:3px solid color-mix(in srgb,var(--home-blue) 55%,transparent);outline-offset:3px}.skip-link{position:fixed;left:12px;top:-90px;z-index:9999;padding:10px 14px;border-radius:9px;background:#111;color:#fff}.skip-link:focus{top:12px}
+/* Canonical JCS ecosystem header */
+.jcs-index-header.site-header{position:sticky!important;top:0!important;z-index:1200;width:100%;display:block!important;margin:0!important;padding:0!important;border:0!important;border-bottom:1px solid var(--home-line)!important;border-radius:0!important;background:color-mix(in srgb,var(--home-surface) 95%,transparent)!important;box-shadow:0 8px 28px color-mix(in srgb,#020617 10%,transparent)!important;overflow:visible!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+html[data-theme="dark"] .jcs-index-header.site-header{background:rgba(7,16,28,.95)!important;box-shadow:0 8px 30px rgba(0,0,0,.30)!important}.jcs-index-header-shell{width:min(1360px,100%);margin:0 auto;padding:max(8px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 9px max(18px,env(safe-area-inset-left));display:grid;gap:8px}.index-header-top{min-width:0;display:grid;grid-template-columns:minmax(250px,auto) minmax(0,1fr);align-items:center;gap:12px 20px}.index-brand{min-width:0;display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none}.index-brand img{width:40px!important;height:40px!important;flex:0 0 40px;object-fit:contain;border:1px solid color-mix(in srgb,var(--home-gold) 48%,var(--home-line))!important;border-radius:11px!important;background:#fff;box-shadow:0 8px 24px color-mix(in srgb,var(--home-gold) 15%,transparent)}.index-brand .brand-copy{min-width:0;display:grid!important}.index-brand .brand-title{overflow:hidden;color:var(--home-ink)!important;font:900 1rem/1.08 Georgia,"Times New Roman",serif!important;text-overflow:ellipsis;white-space:nowrap}.index-brand .brand-subtitle{margin-top:3px;overflow:hidden;color:var(--home-muted);font-size:.63rem;font-weight:800;text-overflow:ellipsis;white-space:nowrap}.index-header-utilities,.index-ecosystem-links,.index-page-controls,.index-wallet-actions,.index-legal-links{min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:6px}.index-header-utilities,.index-ecosystem-links,.index-legal-links{justify-content:flex-end}.index-ecosystem-link,.index-control-button,.index-legal-links a,.mobile-nav-toggle,.jcs-index-header .header-wallet-btn{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;border:1px solid var(--home-line);border-radius:9px;color:var(--home-ink);background:var(--home-surface-2);font:850 .69rem/1.1 Inter,ui-sans-serif,system-ui,sans-serif;text-align:center;text-decoration:none;white-space:nowrap}.index-ecosystem-link:hover,.index-ecosystem-link:focus-visible,.index-control-button:hover,.index-control-button:focus-visible,.index-legal-links a:hover,.index-legal-links a:focus-visible,.mobile-nav-toggle:hover,.mobile-nav-toggle:focus-visible,.jcs-index-header .header-wallet-btn:hover{border-color:var(--home-blue);color:var(--home-blue);outline:3px solid color-mix(in srgb,var(--home-blue) 20%,transparent);outline-offset:2px}.index-ecosystem-link.xrbc-link{color:#72a8ff}.index-ecosystem-link.xrbitcoin-link{color:var(--home-cyan)}.index-ecosystem-link.creature-link{color:var(--home-gold)}.sanctuary-control[aria-pressed="true"]{border-color:var(--home-gold)!important;color:var(--home-gold)!important;background:var(--home-gold-soft)!important}.exchange-control[aria-pressed="true"]{border-color:var(--home-blue)!important;color:#fff!important;background:var(--home-blue)!important}.jcs-index-header .header-wallet-btn.connect{border-color:var(--home-blue);color:#fff;background:var(--home-blue)}.jcs-index-header .compact-wallet-pill{max-width:128px;overflow:hidden;color:var(--home-muted);font-size:.62rem;text-overflow:ellipsis;white-space:nowrap}.mobile-nav-toggle{display:none;cursor:pointer}.mobile-nav-toggle .menu-icon{font-size:1rem;line-height:1}.index-primary-nav{min-width:0;width:100%;display:flex!important;align-items:stretch;justify-content:center!important;flex-wrap:wrap!important;gap:4px!important;padding-top:7px;overflow:visible!important;border-top:1px solid var(--home-line)}.index-primary-nav .nav-btn{min-width:0!important;min-height:40px!important;max-width:none!important;flex:0 1 auto!important;display:inline-flex!important;align-items:center;justify-content:center;padding:8px 10px!important;border:1px solid transparent!important;border-radius:9px!important;color:var(--home-muted)!important;background:transparent!important;font-size:.72rem!important;font-weight:850;line-height:1.2!important;text-align:center;text-decoration:none;white-space:normal!important;box-shadow:none!important}.index-primary-nav .nav-btn:hover,.index-primary-nav .nav-btn:focus-visible,.index-primary-nav .nav-btn[aria-current="page"]{border-color:var(--home-line)!important;color:var(--home-blue)!important;background:var(--home-surface-2)!important;outline:3px solid color-mix(in srgb,var(--home-blue) 18%,transparent);outline-offset:1px}.index-primary-nav .sign-ledger-gold{border-color:color-mix(in srgb,var(--home-gold) 58%,var(--home-line))!important;color:#171106!important;background:linear-gradient(180deg,#ffeaa8,#d9ae38)!important}
+/* page */
+main{width:min(calc(100% - 28px),var(--wrap));margin:0 auto;padding:26px 0 70px}.surface{border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}.route-banner{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--home-gold) 43%,var(--line));border-left:5px solid var(--home-gold);border-radius:15px;background:var(--home-gold-soft)}.route-banner strong{display:block}.route-banner p{margin:4px 0 0;color:var(--muted)}.route-banner .route-actions{display:flex;flex-wrap:wrap;gap:7px;flex:0 0 auto}.btn{min-height:40px;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:var(--panel2);font-weight:850;text-decoration:none}.btn:hover,.btn:focus-visible{border-color:var(--home-blue);color:var(--home-blue);text-decoration:none}.btn.primary{border-color:var(--home-gold);color:#171106;background:linear-gradient(180deg,#ffeaa8,#d9ae38)}.btn.blue{border-color:var(--home-blue);color:#fff;background:var(--home-blue)}
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:22px;margin-top:16px;padding:clamp(24px,5vw,52px);background:radial-gradient(circle at 95% 0,color-mix(in srgb,var(--home-gold) 15%,transparent),transparent 26rem),radial-gradient(circle at 5% 100%,color-mix(in srgb,var(--home-cyan) 9%,transparent),transparent 28rem),var(--panel)}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid color-mix(in srgb,var(--home-cyan) 40%,var(--line));border-radius:999px;color:var(--home-cyan);font-size:.68rem;font-weight:950;letter-spacing:.07em;text-transform:uppercase}.hero h1{max-width:900px;margin:14px 0 12px;font:900 clamp(2.7rem,6vw,5.4rem)/.97 Georgia,"Times New Roman",serif;letter-spacing:-.052em}.hero h1 span{color:var(--home-gold)}.hero-lead{max-width:820px;color:var(--muted);font-size:clamp(1rem,1.8vw,1.17rem);line-height:1.72}.actions,.chip-row{display:flex;flex-wrap:wrap;gap:8px}.actions{margin-top:19px}.chip-row{margin-top:15px}.chip{padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--panel2);font-size:.67rem;font-weight:850}.identity{padding:19px;border:1px solid color-mix(in srgb,var(--home-gold) 35%,var(--line));border-radius:17px;background:var(--panel2)}.identity-head{display:flex;gap:11px;align-items:center}.identity-head img{width:62px;height:62px;border:1px solid color-mix(in srgb,var(--home-gold) 45%,var(--line));border-radius:15px;background:#fff}.identity h2{margin:0;font-size:1.1rem}.identity p{margin:4px 0 0;color:var(--muted);font-size:.74rem}.identity dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 12px;margin:15px 0 0}.identity dt{color:var(--muted);font-size:.68rem;font-weight:900;text-transform:uppercase}.identity dd{margin:0;text-align:right;font-weight:850;overflow-wrap:anywhere}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.section{margin-top:22px;padding:clamp(20px,3.4vw,34px)}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:15px}.section-head h2{margin:0;font-size:clamp(1.5rem,3.4vw,2.45rem);letter-spacing:-.03em}.section-head p{max-width:850px;margin:6px 0 0;color:var(--muted)}.section-label{flex:0 0 auto;padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--panel2);font-size:.67rem;font-weight:850}.grid-2,.grid-3,.grid-4{display:grid;gap:10px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{min-width:0;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.card h3{margin:0;font-size:1rem}.card p{margin:6px 0 0;color:var(--muted);font-size:.78rem}.card ul{margin:8px 0 0;padding-left:1.15rem;color:var(--muted);font-size:.76rem}.card li+li{margin-top:5px}.card.gold{border-top:3px solid var(--home-gold)}.card.blue{border-top:3px solid var(--home-blue)}.card.green{border-top:3px solid var(--home-green)}.card.red{border-top:3px solid var(--home-red)}
+.path{display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;align-items:start}.path-num{width:34px;height:34px;display:grid;place-items:center;border:1px solid color-mix(in srgb,var(--home-gold) 50%,var(--line));border-radius:11px;color:#171106;background:linear-gradient(180deg,#ffeaa8,#d9ae38);font-weight:950}.app-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.app-card{display:grid;gap:8px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--panel2)}.app-card h3{margin:0}.app-card p{margin:0;color:var(--muted);font-size:.76rem}.app-meta{display:flex;flex-wrap:wrap;gap:5px}.app-meta span{padding:3px 6px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.61rem;font-weight:850}.app-card .btn{margin-top:auto;width:max-content}.boundary-table{width:100%;border-collapse:collapse}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:13px}.boundary-table{min-width:850px}.boundary-table th,.boundary-table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:.76rem}.boundary-table th{color:var(--muted);background:var(--panel2);font-size:.67rem;text-transform:uppercase;letter-spacing:.04em}.boundary-table tr:last-child td{border-bottom:0}.notice{margin-top:12px;padding:12px 13px;border:1px solid var(--line);border-left:4px solid var(--home-gold);border-radius:11px;color:var(--muted);background:var(--panel2);font-size:.76rem}.notice strong{color:var(--ink)}.notice.danger{border-left-color:var(--home-red)}.notice.info{border-left-color:var(--home-blue)}.notice.good{border-left-color:var(--home-green)}
+.roadmap{display:grid;gap:8px}.roadmap-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}.roadmap-row strong{font-size:.78rem}.roadmap-row span{color:var(--muted);font-size:.76rem}.policy-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.policy-links a{display:grid;place-items:center;min-height:52px;padding:9px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);font-weight:850;text-align:center}.project-quote{margin:0;padding:20px;border:1px solid color-mix(in srgb,var(--home-gold) 34%,var(--line));border-radius:15px;background:var(--home-gold-soft);font:700 clamp(1.05rem,2vw,1.35rem)/1.55 Georgia,"Times New Roman",serif}.project-quote small{display:block;margin-top:8px;color:var(--muted);font:600 .72rem/1.4 Inter,system-ui,sans-serif}.footer{margin-top:28px;padding:24px 0 38px;border-top:1px solid var(--line);color:var(--muted)}.footer-shell{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:start}.footer-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.footer-links a{font-size:.74rem;font-weight:800}
+body.about-sanctuary .technical-heavy,body.about-sanctuary .legal-heavy{display:none!important}body.about-ledger .faith-heavy,body.about-ledger .roadmap-heavy{display:none!important}
+@media(max-width:1080px){.app-grid,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}.policy-links{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:980px){.jcs-index-header.site-header{position:static!important}.index-header-top{grid-template-columns:minmax(0,1fr) auto}.mobile-nav-toggle{grid-column:2;grid-row:1}html.js .mobile-nav-toggle{display:inline-flex}.index-header-utilities{grid-column:1/-1;grid-row:2;justify-content:flex-start}html.js .jcs-index-header:not(.menu-open) .index-header-utilities{display:none}.index-ecosystem-links,.index-legal-links{justify-content:flex-start}.index-primary-nav{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px!important}html.js .jcs-index-header .index-primary-nav:not(.is-open){display:none!important}.index-primary-nav .nav-btn{width:100%!important;min-height:44px!important}.hero{grid-template-columns:1fr}.footer-shell{grid-template-columns:1fr}.footer-links{justify-content:flex-start}}
+@media(max-width:680px){main{width:min(calc(100% - 20px),var(--wrap));padding-top:14px}.route-banner,.section-head{display:block}.route-banner .route-actions{margin-top:10px}.grid-2,.grid-3,.grid-4,.app-grid,.policy-links{grid-template-columns:1fr}.roadmap-row{grid-template-columns:1fr}.hero{padding:22px 17px}.hero h1{font-size:clamp(2.45rem,14vw,4rem)}.identity dl{grid-template-columns:1fr}.identity dd{text-align:left}.actions .btn{width:100%}.section-label{display:inline-flex;margin-top:8px}.jcs-index-header-shell{padding:max(9px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left))}.index-brand .brand-subtitle{display:none}.index-header-utilities{display:grid;grid-template-columns:1fr}.index-ecosystem-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.index-page-controls{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.index-page-controls .theme-toggle{grid-column:1/-1}.index-control-button,.jcs-index-header .header-wallet-btn{width:100%;min-height:44px}.index-wallet-actions{width:100%;display:grid;grid-template-columns:1fr}.index-legal-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.index-legal-links a{min-width:0;min-height:44px;white-space:normal}.jcs-index-header .compact-wallet-pill{max-width:100%;text-align:center}}
+@media(max-width:430px){.index-brand .brand-title{font-size:.9rem!important}.index-ecosystem-links,.index-page-controls,.index-legal-links,.index-primary-nav{grid-template-columns:1fr!important}.index-page-controls .theme-toggle{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+@media print{.jcs-index-header,.route-banner .route-actions,.actions,.policy-links,.footer-links{display:none!important}body{background:#fff;color:#111}.surface,.card,.app-card,.roadmap-row,.notice,.project-quote{box-shadow:none;background:#fff;color:#111;border-color:#bbb}.hero{margin-top:0}.route-banner{border-color:#bbb;background:#fff}.footer{border-color:#bbb}}
+</style>
 </head>
-<body>
-  <main aria-labelledby="page-title">
-    <div class="brand" aria-hidden="true">
-      <img src="../jcs-logo.png" width="64" height="64" alt="">
-    </div>
-
-    <p class="eyebrow">Jesus Christ Saves Token</p>
-    <h1 id="page-title">Vision &amp; Core Values</h1>
-
-    <p>
-      The JCS About route now points to the project’s current Christ-centered mission,
-      community direction, prayer and testimony work, non-custodial XRPL foundation,
-      and public transparency commitments.
-    </p>
-
-    <div class="actions">
-      <a class="primary" href="../about-jcs.html">Open Vision &amp; Core Values</a>
-      <a href="../index.html">Return to JCS Home</a>
-    </div>
-
-    <p class="route-note">
-      You should be redirected automatically. This compatibility page remains in place
-      so older bookmarks to <strong>/about/</strong> do not lead to an unrelated website
-      or a missing page.
-    </p>
-  </main>
+<body id="top">
+<a class="skip-link" href="#main-content">Skip to project charter</a>
+<header class="site-header jcs-home-header jcs-index-header" role="banner">
+<div class="jcs-index-header-shell">
+<div class="index-header-top">
+<a aria-label="Jesus Christ Saves Token home" class="index-brand" href="/">
+<img alt="" height="40" src="/jcs-logo.png" width="40"/>
+<span class="brand-copy"><span class="brand-title">Jesus Christ Saves Token</span><span class="brand-subtitle">JCS · Faith · Fellowship · Native XRPL exchange</span></span>
+</a>
+<button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button"><span aria-hidden="true" class="menu-icon">☰</span><span class="menu-label">Menu</span></button>
+<div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
+<nav aria-label="Related XRP Ledger ecosystem projects" class="index-ecosystem-links">
+<a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+<a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+<a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+</nav>
+<div aria-label="Charter focus and display controls" class="index-page-controls">
+<button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Focus on mission, faith, safety and current ministry surfaces" type="button">Sanctuary mode</button>
+<button aria-pressed="false" class="index-control-button exchange-control" id="exchangeFocusBtn" title="Focus on XRP Ledger architecture, application boundaries and technical evidence" type="button">Ledger focus</button>
+<button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button"><span aria-hidden="true">◐</span><span id="themeToggleText">Light mode</span></button>
+</div>
+<div class="index-wallet-actions" aria-label="Xaman entry point"><a class="header-wallet-btn connect" href="/connectwallet.html#connect">Connect Xaman</a><span class="wallet-pill compact-wallet-pill">Read-only charter</span></div>
+<nav aria-label="Project policies and support" class="index-legal-links">
+<a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a><a href="/ai.json">AI Manifest</a>
+</nav>
+</div>
+</div>
+<nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+<a class="nav-btn" href="/">Home</a><a class="nav-btn" href="/#trade">Trade</a><a class="nav-btn" href="/#fellowship">Fellowship</a><a class="nav-btn" href="/#scripture">Scripture</a><a class="nav-btn" href="/#sacred-film">Sacred Film</a><a class="nav-btn" href="/#audio">Sacred Audio</a><a class="nav-btn sign-ledger-gold" href="/verify.html">Sign the Ledger</a><a class="nav-btn" href="/prayer.map.html">Prayer Map</a><a class="nav-btn" href="/metrics.html">Market Monitor</a><a class="nav-btn" href="/connectwallet.html">Account Readiness</a><a aria-current="page" class="nav-btn" href="/about-jcs.html">About &amp; Vision</a>
+</nav>
+</div>
+</header>
+<main id="main-content">
+<section class="route-banner" aria-label="Compatibility route status">
+<div><strong>/about/ compatibility route · authoritative mission remains /about-jcs.html</strong><p>This page intentionally keeps the old folder route useful while summarizing the current project. If this summary ever conflicts with the authoritative Vision, Terms, Privacy, Security or LICENSE documents, those documents control their respective subjects.</p></div>
+<div class="route-actions"><a class="btn primary" href="/about-jcs.html">Open authoritative Vision</a><a class="btn" href="#project-charter">Read project charter</a></div>
+</section>
+<section class="surface hero faith-heavy" id="project-charter" aria-labelledby="page-title">
+<div><span class="eyebrow">Christ centered · non-custodial · privacy conscious · verifiable</span><h1 id="page-title">Technology as a vessel.<span>Faith and human dignity first.</span></h1><p class="hero-lead">Jesus Christ Saves Token is a Christ-centered XRP Ledger application ecosystem built to make Scripture, prayer, testimony, service, fellowship and transparent public evidence easier to encounter and preserve—without making token ownership, wallet balances or blockchain participation a measure of spiritual worth.</p><div class="actions"><a class="btn primary" href="/about-jcs.html">Vision &amp; Core Values</a><a class="btn blue" href="/verify.html">Sign the Ledger</a><a class="btn" href="/prayer.map.html">Prayer Map</a><a class="btn" href="/metrics.html">Network Observatory</a></div><div class="chip-row"><span class="chip">No pay-to-pray</span><span class="chip">No token-weighted theology</span><span class="chip">No custody of wallet secrets</span><span class="chip">Public evidence ≠ spiritual authority</span></div></div>
+<aside class="identity" aria-label="Official JCS identity"><div class="identity-head"><img src="/jcs-logo.png" alt="" width="62" height="62"/><div><h2>Official JCS identity</h2><p>Verify the complete identity, not the ticker alone.</p></div></div><dl><dt>Asset</dt><dd>Jesus Christ Saves Token</dd><dt>Symbol</dt><dd>JCS</dd><dt>Network</dt><dd>XRP Ledger Mainnet</dd><dt>Issuer</dt><dd class="mono">rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd</dd><dt>Domain</dt><dd>jesuschristsavestoken.com</dd><dt>Web DID</dt><dd class="mono">did:web:jesuschristsavestoken.com</dd><dt>Custody</dt><dd>Non-custodial</dd></dl></aside>
+</section>
+<section class="surface section faith-heavy" id="mission">
+<div class="section-head"><div><h2>What the project is trying to build</h2><p>The goal is not to make a blockchain substitute for Christianity. The goal is to build durable, transparent and privacy-conscious tools that can carry Christian content, prayer evidence, fellowship and service across platforms while keeping user agency intact.</p></div><span class="section-label">Mission before mechanics</span></div>
+<div class="grid-3"><article class="card gold"><h3>Christ centered</h3><p>Every feature should direct attention toward Jesus Christ rather than speculation, personalities or technological novelty.</p></article><article class="card green"><h3>Safety and human dignity</h3><p>Core prayer, Scripture and safety resources should not depend on wealth, token ownership or public self-identification.</p></article><article class="card blue"><h3>Non-custodial participation</h3><p>Users review and authorize wallet actions through Xaman. JCS pages should never request a seed phrase, recovery phrase or private key.</p></article><article class="card blue"><h3>Transparent infrastructure</h3><p>Issuer identity, public transactions, market structure and ledger evidence should remain independently inspectable.</p></article><article class="card green"><h3>Voluntary witness</h3><p>Prayer, testimony, NFT, trading and public social actions require deliberate user choice; passive browsing should remain available.</p></article><article class="card gold"><h3>Stewardship over hype</h3><p>JCS is not a promise of profit. Utility, clarity, safety, responsible disclosure and service take priority over promotional claims.</p></article></div>
+<blockquote class="project-quote" style="margin-top:12px">“And the Word became code, and the code dwelt among us.”<small>Creative JCS project language. It is not a quotation from Scripture and is not a replacement for Scripture, prayer, church, pastoral care or faith in Jesus Christ.</small></blockquote>
+</section>
+<section class="surface section technical-heavy" id="applications">
+<div class="section-head"><div><h2>Current JCS application ecosystem</h2><p>Each surface has a different purpose and risk boundary. The project intentionally separates read-only evidence, public religious content, local/private processing and ledger-changing actions.</p></div><span class="section-label">Current deployment</span></div>
+<div class="app-grid">
+<article class="app-card"><h3>Main Portal</h3><div class="app-meta"><span>Faith</span><span>DEX</span><span>Xaman</span></div><p>Scripture, sacred media, fellowship tools and a non-custodial JCS/XRP exchange workflow in one portal, with sacred and financial actions deliberately separated.</p><a class="btn" href="/">Open portal</a></article>
+<article class="app-card"><h3>Sign the Ledger</h3><div class="app-meta"><span>NFT</span><span>Prayer</span><span>Public registry</span></div><p>Composes prayer/testimony records, mints user-controlled prayer NFTs and publishes validated public registry evidence through deliberate Xaman approvals.</p><a class="btn" href="/verify.html">Open Sign the Ledger</a></article>
+<article class="app-card"><h3>Prayer Map</h3><div class="app-meta"><span>Threshold privacy</span><span>XRPL</span><span>Context</span></div><p>Shows threshold-qualified broad prayer groups beside independently labeled Christian-pressure, religious-freedom and media context without inferring a participant's real-world location.</p><a class="btn" href="/prayer.map.html">Open Prayer Map</a></article>
+<article class="app-card"><h3>Private Capsule</h3><div class="app-meta"><span>Local encryption</span><span>Optional receipt</span></div><p>Browser-local AES-GCM encrypted transport plus separate recovery-key material. An optional neutral NFT can anchor only a fingerprint—not plaintext, routes, exact locations or the key.</p><a class="btn" href="/prayer.map.html#private-capsule">Open capsule tools</a></article>
+<article class="app-card"><h3>Network Observatory</h3><div class="app-meta"><span>Read-only</span><span>Metrics</span><span>Privacy</span></div><p>Measures public JCS communications, validated ledger health, trust-line and liquidity conditions, and privacy restraints without creating a composite spiritual-impact score.</p><a class="btn" href="/metrics.html">Open Observatory</a></article>
+<article class="app-card"><h3>Account Readiness</h3><div class="app-meta"><span>Read-only</span><span>Xaman identity</span><span>Evidence</span></div><p>Uses Xaman account-control authorization or public address lookup to inspect a pinned validated-ledger snapshot, JCS relationship, NFTs, flags and protocol objects without creating a signing payload.</p><a class="btn" href="/connectwallet.html">Open Account Readiness</a></article>
+<article class="app-card"><h3>Machine-readable identity</h3><div class="app-meta"><span>DID</span><span>TOML</span><span>AI</span></div><p>Web DID, XRPL TOML, AI manifest, robots policy, sitemap and security.txt provide stable identity, discovery and responsible-disclosure surfaces.</p><a class="btn" href="/ai.json">Open AI manifest</a></article>
+<article class="app-card"><h3>Policy & licensing</h3><div class="app-meta"><span>Terms</span><span>Privacy</span><span>Security</span></div><p>Dedicated legal, privacy, security and proprietary-license documents define the project boundaries more authoritatively than this summary route.</p><a class="btn" href="#legal">Review boundaries</a></article>
+<article class="app-card"><h3>Independent verification</h3><div class="app-meta"><span>Explorers</span><span>Markets</span><span>Public XRPL</span></div><p>Bithomp, XRPSCAN, XPMarket, Sologenic and public XRPL servers may be used for independent context. They are separate services and are not controlled by JCS.</p><a class="btn" href="https://bithomp.com/en/account/JesusChristSaves" target="_blank" rel="noopener noreferrer">Verify issuer</a></article>
+</div>
+</section>
+<section class="surface section faith-heavy" id="ethical-access">
+<div class="section-head"><div><h2>Ethical access principles</h2><p>The project direction rejects financial or engagement mechanisms that would turn spiritual participation into a paywall, popularity contest or urgency loop.</p></div><span class="section-label">Human dignity boundary</span></div>
+<div class="grid-3"><article class="card green"><h3>No pay-to-pray</h3><p>Basic prayer participation, Scripture access and safety resources should not require a token purchase.</p></article><article class="card green"><h3>No pay-to-be-heard</h3><p>Money or token balances should not buy spiritual priority, crisis priority or doctrinal authority.</p></article><article class="card green"><h3>No token-weighted theology</h3><p>Wallet balances do not determine truth, faithfulness, salvation, religious leadership or personal dignity.</p></article><article class="card gold"><h3>No outrage engine</h3><p>The long-term social direction should favor finite, meaningful interactions over compulsive scrolling, artificial urgency and engagement extraction.</p></article><article class="card gold"><h3>Optional utility stays optional</h3><p>Future token utility may support evidence, customization, creator tools or reusable access, but not basic spiritual participation or emergency resources.</p></article><article class="card blue"><h3>Quiet and Sabbath design</h3><p>The platform should be able to tell people that they have done enough for the day and help them leave the screen.</p></article></div>
+</section>
+<section class="surface section faith-heavy technical-heavy" id="safety">
+<div class="section-head"><div><h2>Safety for people whose faith may carry risk</h2><p>Public blockchain transparency can conflict with personal safety. JCS therefore treats location restraint, silent access and user-controlled disclosure as core product requirements rather than optional polish.</p></div><span class="section-label">Safety before publicity</span></div>
+<div class="grid-2"><article class="card red"><h3>Do not infer physical location</h3><p>Wallets, nodes, relays, browsers, Xaman devices, transaction routes, prayer text and public keys must not be interpreted as a person's physical location. Prayer Map labels describe a prayer focus, not where the signer lives.</p></article><article class="card red"><h3>No public extraction routes</h3><p>The public map must not publish escape routes, safe-house locations, movement plans or individual travel paths. Thresholded lines represent aggregate support relationships only.</p></article><article class="card blue"><h3>Private Capsule is local-first</h3><p>Private Capsule can encrypt a limited message locally, but it is not a guarantee against malware, hostile extensions, device compromise, physical coercion or mistakes in key handling.</p></article><article class="card gold"><h3>Public XRPL records persist</h3><p>A wallet address, transaction, memo, NFT or public registry entry can remain visible even if the website later changes. JCS cannot privately erase a validated XRPL transaction.</p></article></div>
+<div class="notice danger"><strong>High-risk boundary:</strong> JCS is not an evacuation service, clandestine-operations platform, emergency dispatcher or replacement for qualified high-risk digital-security assistance. People in immediate danger should avoid publishing exact locations, routes, safe houses, identity documents or operational plans through a public blockchain workflow.</div>
+</section>
+<section class="surface section roadmap-heavy" id="roadmap">
+<div class="section-head"><div><h2>Where the project is headed</h2><p>The current deployment is primarily a static client-side foundation. A durable Christian social network requires separate backend and trust infrastructure. These are design goals, not guaranteed features or delivery dates.</p></div><span class="section-label">Open-ended roadmap</span></div>
+<div class="roadmap"><div class="roadmap-row"><strong>Identity & sessions</strong><span>Passkeys, Xaman and DID-based identity options, recovery and carefully scoped account/session services.</span></div><div class="roadmap-row"><strong>Faith Circles</strong><span>Permissioned small-group prayer, study and service spaces with clear moderation and membership boundaries.</span></div><div class="roadmap-row"><strong>Private messaging</strong><span>Dedicated message encryption, key recovery and delivery infrastructure separated from the public ledger and static frontend.</span></div><div class="roadmap-row"><strong>Moderation & safety</strong><span>Blocking, reporting, appeals, abuse prevention, rate limiting, anti-spam, child-safety review and incident-response workflows.</span></div><div class="roadmap-row"><strong>Acts of Mercy</strong><span>Privacy-conscious ways to request or offer practical assistance while revealing only the minimum necessary information.</span></div><div class="roadmap-row"><strong>Scripture Path</strong><span>Reading journeys, memory exercises, reflection prompts and collaborative study milestones without gambling or pay-to-win mechanics.</span></div><div class="roadmap-row"><strong>Durability</strong><span>Backups, audit logs, account recovery, accessible translations, cross-device continuity, media storage and content-safety controls.</span></div><div class="roadmap-row"><strong>Least privilege</strong><span>Privileged services should be introduced as separate components; secrets and sensitive authorization logic should not be pushed into the static GitHub Pages frontend.</span></div></div>
+</section>
+<section class="surface section legal-heavy" id="legal">
+<div class="section-head"><div><h2>Legal, application and reliance boundaries</h2><p>This section summarizes important project-wide disclosures. It is intentionally conservative. The current Terms, Privacy Policy, Security page and repository LICENSE control their respective subjects and should be read directly.</p></div><span class="section-label">Summary · not legal advice</span></div>
+<div class="table-wrap"><table class="boundary-table"><thead><tr><th>Area</th><th>What the project can do</th><th>What it does not establish or guarantee</th></tr></thead><tbody>
+<tr><td>Religious mission</td><td>Describe a Christ-centered religious, educational and outreach purpose.</td><td>This page does not independently create or prove church status, nonprofit status, public-charity status, tax exemption or recognition under Internal Revenue Code Section 501(c)(3).</td></tr>
+<tr><td>Wallet authorization</td><td>Xaman can return a public XRPL account selected or controlled for a session.</td><td>Session account control is not government identity, legal identity, moral character, pastoral authority or truth of an off-ledger claim.</td></tr>
+<tr><td>XRPL transactions</td><td>Interactive pages can prepare transaction requests for independent Xaman review and later verify validated results.</td><td>No signature, submission or UI success message guarantees a desired economic result. Validated ledger records can be irreversible and public.</td></tr>
+<tr><td>JCS token / markets</td><td>Provide token identity, liquidity, market and ledger context and non-custodial transaction tools.</td><td>No promise of profit, liquidity, price, market capitalization, availability, adoption, appreciation, suitability or investment return.</td></tr>
+<tr><td>NFTs & hashes</td><td>Timestamp or bind a technical fingerprint and create user-controlled digital artifacts.</td><td>An NFT, hash or timestamp does not automatically prove authorship, truth, legal ownership, copyright, authenticity, regulatory compliance, pastoral authority or legal effect.</td></tr>
+<tr><td>Prayer / testimony</td><td>Allow voluntary public religious records and local-first private tools.</td><td>Blockchain activity does not measure salvation, prayer effectiveness, doctrinal truth, sincerity, human worth or divine response.</td></tr>
+<tr><td>Prayer Map</td><td>Display threshold-qualified prayer-focus groups beside separately sourced context.</td><td>Map activity does not prove where a signer lives, that an incident occurred at a marker, or that prayer caused a change in real-world conditions.</td></tr>
+<tr><td>Private Capsule</td><td>Encrypt selected content locally and optionally anchor a neutral public fingerprint.</td><td>Not zero-risk, not zero-knowledge against every provider or endpoint, not safe against a compromised device, and not an emergency or covert-operations service.</td></tr>
+<tr><td>Account Readiness</td><td>Inspect a validated public ledger snapshot and JCS-specific account relationship.</td><td>No security certification, solvency opinion, identity certification, financial suitability determination or prediction of future behavior.</td></tr>
+<tr><td>Metrics / AI / automation</td><td>Calculate observed and derived indicators and expose machine-readable project descriptions.</td><td>Derived values, automated classifications and AI interpretations may be incomplete, stale or wrong and must not be promoted into unsupported factual, legal, financial or spiritual claims.</td></tr>
+<tr><td>Third parties</td><td>Link or interoperate with XRPL, Xaman, GitHub, explorers, exchanges, market-data, media, mapping and research services.</td><td>No endorsement, partnership, custody, sponsorship, certification, shared control, availability guarantee or adoption of those providers' terms by JCS.</td></tr>
+<tr><td>Future roadmap</td><td>Describe intended design directions and experiments.</td><td>No roadmap item is a contractual promise, warranty, delivery date, funding commitment or guarantee that the feature will ship.</td></tr>
+</tbody></table></div>
+<div class="notice"><strong>No composite impact score:</strong> prayer counts, wallet participation, market activity, map cohorts, response rates and ledger metrics remain separate observations. JCS does not combine them into a score of faith, spiritual effect, human worth, safety or project success.</div>
+<div class="notice"><strong>No professional-advice boundary:</strong> project content and software are informational and experimental. They are not financial, investment, legal, tax, accounting, medical, mental-health, emergency-response, pastoral or cybersecurity advice. Obtain qualified professional advice where appropriate.</div>
+<div class="notice danger"><strong>Use at your own risk:</strong> software defects, browser behavior, third-party outages, public-ledger immutability, phishing, malware, market volatility, liquidity failure, fees, slippage, user error, regulatory change and other events can cause loss, exposure or unexpected results. Review every Xaman request and decline anything that does not match your intent.</div>
+</section>
+<section class="surface section legal-heavy" id="license">
+<div class="section-head"><div><h2>Licensing and intellectual-property boundary</h2><p>Public source visibility is not the same thing as open-source permission. This route summarizes the current repository LICENSE; it does not replace or amend it.</p></div><span class="section-label">Source-visible · proprietary</span></div>
+<div class="grid-3"><article class="card gold"><h3>All rights reserved</h3><p>Covered JCS material is proprietary. It is not automatically licensed as open source, free software, Creative Commons, public domain or a general noncommercial license merely because the repository can be viewed.</p></article><article class="card red"><h3>No automatic reuse grant</h3><p>Absent permission or an applicable legal right, public access does not grant permission to copy, modify, redistribute, deploy, white-label, build derivative works, or use covered material for datasets or AI/model training.</p></article><article class="card blue"><h3>Narrow watchdog exception</h3><p>The LICENSE contains a specifically defined Qualified Federal Watchdog exception for authorized federal oversight purposes, subject to scope, duration and safeguards. It is not a general research or public-interest license.</p></article><article class="card green"><h3>Third-party material excluded</h3><p>JCS ownership claims do not override third-party copyrights, public-domain status, platform rights, open standards, public XRPL records or other rights that belong to someone else.</p></article><article class="card green"><h3>Statutory rights preserved</h3><p>The LICENSE preserves non-waivable legal rights, fair use where applicable, compulsory process and other rights independently supplied by law.</p></article><article class="card gold"><h3>No implied affiliation</h3><p>Use of JCS names, logos or code does not create endorsement, certification, sponsorship, partnership, regulatory approval, wallet authority or the right to act on behalf of JCS.</p></article></div>
+<div class="actions"><a class="btn primary" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Read complete LICENSE</a><a class="btn" href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL" target="_blank" rel="noopener noreferrer">View source repository</a></div>
+<div class="notice info"><strong>License-summary boundary:</strong> the complete repository LICENSE controls licensing rights and restrictions. This webpage is a convenience summary and is not a legal opinion or a court determination that any clause is enforceable.</div>
+</section>
+<section class="surface section legal-heavy" id="policies">
+<div class="section-head"><div><h2>Authoritative trust, policy and machine-readable records</h2><p>Use the source appropriate to the question. Mission language should not override legal terms; UI summaries should not override validated ledger facts.</p></div></div>
+<div class="policy-links"><a href="/about-jcs.html">Vision & Roadmap</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a><a href="/.well-known/security.txt">security.txt</a><a href="/ai.json">AI Manifest</a><a href="/.well-known/did.json">Web DID</a><a href="/.well-known/xrp-ledger.toml">XRPL TOML</a><a href="/sitemap.xml">Sitemap</a><a href="https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a></div>
+<div class="notice good"><strong>Authority order:</strong> use <code>about-jcs.html</code> for the living mission and roadmap; Terms for contractual terms; Privacy for privacy disclosures; Security and <code>security.txt</code> for security; the repository LICENSE for reuse rights; and validated XRP Ledger data for ledger facts.</div>
+</section>
+<section class="surface section" id="charter-export">
+<div class="section-head"><div><h2>Machine-readable project charter</h2><p>Download a compact JSON description of the compatibility route, project identity, current surfaces, ethical-access rules, roadmap boundaries, license posture and source hierarchy.</p></div><span class="section-label">No wallet required</span></div><div class="actions"><button class="btn primary" id="downloadCharterBtn" type="button">Download charter JSON</button><button class="btn" id="copyIssuerBtn" type="button">Copy JCS issuer</button><span id="actionStatus" aria-live="polite" style="align-self:center;color:var(--muted);font-size:.72rem"></span></div>
+</section>
+<footer class="footer"><div class="footer-shell"><div><strong>Jesus Christ Saves Token</strong><p style="margin:5px 0 0">A Christ-centered, non-custodial XRP Ledger application. JCS is not a church by software declaration, a promise of profit, or a substitute for Scripture, prayer, fellowship, pastoral care, professional help or sound judgment.</p><p class="mono" style="margin:5px 0 0">Issuer: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd · Currency: JCS · XRP Ledger Mainnet</p></div><nav class="footer-links" aria-label="Footer links"><a href="/">Home</a><a href="/about-jcs.html">Vision</a><a href="/verify.html">Sign the Ledger</a><a href="/prayer.map.html">Prayer Map</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="/security.html">Security</a></nav></div></footer>
+</main>
+<script type="application/json" id="jcsAboutCompatibilityCharter">{
+  "schema": "jcs-about-compatibility-charter-v1",
+  "release": "2.0.0",
+  "effective": "2026-08-31",
+  "route": "/about/",
+  "canonical": "https://jesuschristsavestoken.com/about-jcs.html",
+  "project": {
+    "name": "Jesus Christ Saves Token",
+    "symbol": "JCS",
+    "network": "XRP Ledger Mainnet",
+    "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
+    "domain": "jesuschristsavestoken.com",
+    "web_did": "did:web:jesuschristsavestoken.com",
+    "custody": "non-custodial"
+  },
+  "mission": "Use transparent technology as a vessel for prayer, testimony, Scripture, service, and Christian community without placing wallet custody, spiritual worth, or personal dignity under the control of a token balance.",
+  "ethical_access": [
+    "No pay-to-pray",
+    "No pay-to-be-heard",
+    "No token-weighted theology",
+    "No wealth-based spiritual ranking",
+    "No paid priority for crisis or pastoral needs",
+    "No engagement design built around outrage or compulsive scrolling"
+  ],
+  "current_surfaces": [
+    {
+      "name": "Main Portal",
+      "path": "/",
+      "mode": "faith + fellowship + non-custodial XRPL interaction"
+    },
+    {
+      "name": "Sign the Ledger",
+      "path": "/verify.html",
+      "mode": "prayer/testimony NFT + validated public registry"
+    },
+    {
+      "name": "Prayer Map",
+      "path": "/prayer.map.html",
+      "mode": "thresholded public prayer evidence + independent persecution context + local Private Capsule"
+    },
+    {
+      "name": "Network Observatory",
+      "path": "/metrics.html",
+      "mode": "read-only JCS communications, XRPL, privacy and market telemetry"
+    },
+    {
+      "name": "Account Readiness",
+      "path": "/connectwallet.html",
+      "mode": "Xaman account-control authorization + read-only validated XRPL snapshot"
+    },
+    {
+      "name": "Vision & Core Values",
+      "path": "/about-jcs.html",
+      "mode": "authoritative mission, safety and roadmap"
+    },
+    {
+      "name": "Terms",
+      "path": "/terms.html",
+      "mode": "contractual terms and risk allocation"
+    },
+    {
+      "name": "Privacy",
+      "path": "/privacy.html",
+      "mode": "privacy and public-ledger disclosure"
+    },
+    {
+      "name": "Security",
+      "path": "/security.html",
+      "mode": "security model and responsible disclosure"
+    },
+    {
+      "name": "AI Manifest",
+      "path": "/ai.json",
+      "mode": "machine-readable project identity and discovery"
+    }
+  ],
+  "roadmap_boundaries": [
+    "Future features are goals, not promises or guaranteed delivery dates.",
+    "Durable social infrastructure should be least-privilege and separate from the static frontend.",
+    "Core Scripture, basic prayer participation, safety resources and human dignity should not depend on token ownership."
+  ],
+  "license": {
+    "status": "source-visible proprietary; all rights reserved subject to the LICENSE",
+    "not_open_source": true,
+    "qualified_federal_watchdog_exception": true,
+    "third_party_and_public_domain_exclusions": true,
+    "statutory_rights_preserved": true,
+    "url": "https://github.com/XRBitcoinCash/JCS-token-on-the-XRPL/blob/main/LICENSE"
+  },
+  "authority_order": [
+    "/about-jcs.html for mission and roadmap",
+    "/terms.html for Terms of Service",
+    "/privacy.html for privacy disclosures",
+    "/security.html and /.well-known/security.txt for security disclosures",
+    "repository LICENSE for licensing rights and restrictions",
+    "validated XRP Ledger data for ledger facts"
+  ]
+}</script>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),root=document.documentElement,THEME='jcs-ledger-theme',MODE='jcs-about-compat-mode-v1';
+const header=document.querySelector('.jcs-index-header'),toggle=$('mobileNavToggle'),nav=$('primaryNav'),media=matchMedia('(max-width:980px)');
+if(header&&toggle&&nav){const icon=toggle.querySelector('.menu-icon'),label=toggle.querySelector('.menu-label');const setOpen=(open,focus=false)=>{const next=Boolean(open&&media.matches);nav.classList.toggle('is-open',next);header.classList.toggle('menu-open',next);toggle.setAttribute('aria-expanded',String(next));toggle.setAttribute('aria-label',next?'Close site navigation':'Open site navigation');if(icon)icon.textContent=next?'×':'☰';if(label)label.textContent=next?'Close':'Menu';if(focus)toggle.focus()};toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(media.matches&&e.target.closest('a'))setOpen(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true')setOpen(false,true)});document.addEventListener('click',e=>{if(media.matches&&toggle.getAttribute('aria-expanded')==='true'&&!header.contains(e.target))setOpen(false)});media.addEventListener?.('change',()=>setOpen(false));setOpen(false)}
+function updateTheme(){const dark=root.dataset.theme!=='light';$('themeToggleText').textContent=dark?'Light mode':'Dark mode';$('themeToggle').setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');$('themeToggle').setAttribute('aria-pressed',String(dark));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#07101c':'#f4f7fb')}
+$('themeToggle').addEventListener('click',()=>{const next=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=next;try{localStorage.setItem(THEME,next);localStorage.setItem('jcs-color-mode',next)}catch{}updateTheme()});updateTheme();
+const sanctuary=$('quietModeBtn'),ledger=$('exchangeFocusBtn');function setMode(mode){const s=mode==='sanctuary',l=mode==='ledger';document.body.classList.toggle('about-sanctuary',s);document.body.classList.toggle('about-ledger',l);sanctuary.setAttribute('aria-pressed',String(s));ledger.setAttribute('aria-pressed',String(l));sanctuary.textContent=s?'Exit sanctuary':'Sanctuary mode';ledger.textContent=l?'Exit ledger focus':'Ledger focus';try{localStorage.setItem(MODE,mode)}catch{}}sanctuary.addEventListener('click',()=>setMode(document.body.classList.contains('about-sanctuary')?'full':'sanctuary'));ledger.addEventListener('click',()=>setMode(document.body.classList.contains('about-ledger')?'full':'ledger'));try{const v=localStorage.getItem(MODE);setMode(v==='sanctuary'||v==='ledger'?v:'full')}catch{setMode('full')}
+function manifest(){try{return JSON.parse($('jcsAboutCompatibilityCharter').textContent)}catch{return null}}
+function downloadJson(name,value){const b=new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
+$('downloadCharterBtn').addEventListener('click',()=>{const v=manifest();if(!v)return;$('actionStatus').textContent='Charter JSON created locally.';downloadJson('jcs-about-compatibility-charter-v1.json',v)});
+async function copyText(text){if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return}const ta=document.createElement('textarea');ta.value=text;ta.readOnly=true;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();if(!ok)throw new Error('copy unavailable')}
+$('copyIssuerBtn').addEventListener('click',async()=>{try{await copyText('rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd');$('actionStatus').textContent='Exact JCS issuer copied.'}catch{$('actionStatus').textContent='Copy blocked; select the issuer from the identity panel.'}});
+})();
+</script>
 </body>
 </html>
