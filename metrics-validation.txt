@@ -1,0 +1,95 @@
+JCS NETWORK OBSERVATORY · METRICS VALIDATION RECORD
+===================================================
+
+Artifact: metrics.html
+Release: 3.0.0
+Validated: 2026-08-31
+Bytes: 92,221
+Logical lines: 689
+SHA-256: EBA445069963357737143296CD92C94B5AF3A1EF98F0675FF0228145F5DDB142
+
+Companion protocol: jcs-metrics-protocol.json
+Protocol SHA-256: E3B7280CFBE78C08B93C63CC2B3BA0A92716C225CD175B2C79BDC360904E4473
+
+SOURCE / REGRESSION BOUNDARY
+----------------------------
+- Rebuilt from the supplied JCS Market Monitor v2.0.0 source.
+- All 13 source element IDs are retained.
+- Original Sologenic JCS/XRP, TradingView XRP/USDT and TradingView BTC/USD reference views are retained.
+- Exact JCS issuer remains rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd.
+- Canonical JCS header CSS is copied byte-for-byte from the current Prayer Map / Sign the Ledger shell; Market Monitor alone is current.
+
+STATIC / INTEGRITY VALIDATION
+-----------------------------
+Passed: 32
+Failed: 0
+- Duplicate IDs: 0
+- Missing source IDs: 0
+- Missing literal DOM references: 0
+- Embedded JSON / JSON-LD: valid
+- Inline JavaScript syntax: valid
+- Canonical navigation: Home · Trade · Fellowship · Scripture · Sacred Film · Sacred Audio · Sign the Ledger · Prayer Map · Market Monitor · Account Readiness · About & Vision
+- No Xaman payload creation API is present on this page.
+
+CONTROLLED BROWSER VALIDATION
+-----------------------------
+Passed: 31
+Failed: 0
+Tested viewport widths: 1466, 768, 390, 320 pixels.
+- Zero horizontal overflow at all tested widths.
+- Mobile menu opens and Escape closes it.
+- Sanctuary and Ledger Focus modes switch without changing data.
+- Optional Xaman connection loads only JCS-scoped account context.
+- Test harness detected zero Xaman payload access.
+- Protocol JSON and observatory snapshot downloads execute.
+- No page errors or console errors in the controlled harness.
+
+CONTROLLED XRPL FIXTURE RESULTS
+-------------------------------
+The runtime test used mocked read-only XRPL/Xaman responses; these values are NOT production JCS metrics.
+- Public JCS posts: 17
+- On-ledger Amens: 5
+- Replies/support: 4
+- Threshold-qualified Prayer Map groups: 2
+- Validated ledger: 110,001,000
+- JCS trust lines: 3
+- Derived issued obligations: 1,750 JCS
+- AMM fixture: 100 XRP / 5,000 JCS
+- Best funded bid fixture: 0.019 XRP/JCS
+- Best funded ask fixture: 0.020 XRP/JCS
+- Funded spread fixture: 5.13%
+- Relay fixture: 4/4 configured endpoints reachable
+- Connected-wallet fixture: 123.45 JCS, 2 JCS prayer NFTs, 1 Private Capsule receipt
+
+LIVE DATA / TRUTH BOUNDARIES
+----------------------------
+Production values are fetched dynamically. Missing live data remains unavailable; the page must not substitute a favorable estimate.
+
+Observed / queried XRPL surfaces:
+- server_info
+- account_info
+- account_lines
+- account_tx
+- account_nfts
+- amm_info
+- book_offers
+
+Derived metrics include:
+- response coverage
+- current V6 protocol share
+- content-hash coverage
+- threshold-qualified Prayer Map groups
+- JCS issued obligations derived from issuer-side negative JCS trust-line balances
+- AMM reserve ratio
+- funded bid / ask and spread
+- sampled top-book JCS depth
+
+Privacy boundaries:
+- No GPS, IP, browser, Xaman-device or relay endpoint is accepted as a person's location.
+- Private Capsule plaintext and keys are intentionally not measurable.
+- Optional wallet inspection does not enumerate unrelated assets.
+- This page creates no signing payloads or transactions.
+
+IMPORTANT TEST LIMITATION
+-------------------------
+The controlled browser harness mocked XRPL, Xaman and external network responses. No real Xaman authorization, transaction signing, JCS trade, trust-line change, NFT mint or Mainnet submission was performed. The live production page should be checked after deployment against jesuschristsavestoken.com.
