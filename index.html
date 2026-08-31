@@ -15,9 +15,9 @@
 <meta content="Jesus Christ Saves Token" name="creator"/>
 <meta content="Jesus Christ Saves Token" name="publisher"/>
 <meta content="faith-dex-fellowship" name="jcs-home-mode"/>
-<meta content="2.0.0" name="jcs-release"/>
-<title>Jesus Christ Saves Token | JCS XRP Ledger Portal</title>
-<meta content="Official JCS portal for non-custodial JCS/XRP trading through Xaman, validated XRPL data, Scripture, sacred media, prayer NFTs and privacy-safe prayer mapping." name="description"/>
+<meta content="2.1.0" name="jcs-release"/>
+<title>Jesus Christ Saves Token | Faith, Fellowship &amp; Verified XRPL Exchange</title>
+<meta content="Official Jesus Christ Saves Token portal combining purpose-separated faith and fellowship tools with non-custodial JCS/XRP trading through Xaman, validated XRPL evidence, Scripture, sacred media, prayer NFTs, privacy-safe prayer mapping and local evidence exports." name="description"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,XRP Ledger DEX,AMM,Christian fellowship tools,prayer NFT,testimony,Scripture,sacred audio,public domain Jesus film,JCS Fellowship" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <link href="https://jesuschristsavestoken.com/" rel="canonical"/>
@@ -4538,7 +4538,7 @@ html[data-theme="light"] .jcs-unified-header{
       "url": "https://jesuschristsavestoken.com/",
       "name": "Jesus Christ Saves Token DEX, Scripture and Fellowship Portal",
       "description": "A Christ-centered, non-custodial XRP Ledger portal combining Xaman-authorized JCS trading, public market evidence, Scripture, sacred media and fellowship tools.",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-31",
       "inLanguage": "en-US",
       "isAccessibleForFree": true,
       "isPartOf": {
@@ -4576,7 +4576,7 @@ html[data-theme="light"] .jcs-unified-header{
       "url": "https://jesuschristsavestoken.com/",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web",
-      "softwareVersion": "2.0.0",
+      "softwareVersion": "2.1.0",
       "isAccessibleForFree": true,
       "image": "https://jesuschristsavestoken.com/jcs-logo.png",
       "featureList": [
@@ -5631,56 +5631,247 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .footer-link-groups { grid-template-columns: 1fr !important; }
 }
 </style>
+
+<style id="jcs-upgrade-v210">
+/* =========================================================
+   JCS 2.1 — canonical ecosystem header + purpose separation
+   ========================================================= */
+.jcs-index-header.site-header{
+  position:sticky!important;top:0!important;z-index:1200;width:100%;
+  display:block!important;margin:0!important;padding:0!important;border:0!important;
+  border-bottom:1px solid var(--home-line)!important;border-radius:0!important;
+  background:color-mix(in srgb,var(--home-surface) 95%,transparent)!important;
+  box-shadow:0 8px 28px color-mix(in srgb,#020617 10%,transparent)!important;
+  overflow:visible!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+html[data-theme="dark"] .jcs-index-header.site-header{
+  border-color:var(--home-line)!important;background:rgba(7,16,28,.95)!important;
+  box-shadow:0 8px 30px rgba(0,0,0,.30)!important
+}
+.jcs-index-header-shell{
+  width:min(1360px,100%);margin:0 auto;
+  padding:max(8px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 9px max(18px,env(safe-area-inset-left));
+  display:grid;gap:8px
+}
+.index-header-top{min-width:0;display:grid;grid-template-columns:minmax(250px,auto) minmax(0,1fr);align-items:center;gap:12px 20px}
+.index-brand{min-width:0;display:inline-flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
+.index-brand img{width:40px!important;height:40px!important;flex:0 0 40px;object-fit:contain;border:1px solid color-mix(in srgb,var(--home-gold) 48%,var(--home-line))!important;border-radius:11px!important;background:#fff;box-shadow:0 8px 24px color-mix(in srgb,var(--home-gold) 15%,transparent)}
+.index-brand .brand-copy{min-width:0;display:grid!important}
+.index-brand .brand-title{overflow:hidden;color:var(--home-ink)!important;font:900 1rem/1.08 Georgia,"Times New Roman",serif!important;text-overflow:ellipsis;white-space:nowrap}
+.index-brand .brand-subtitle{margin-top:3px;overflow:hidden;color:var(--home-muted);font-size:.63rem;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+.index-header-utilities,.index-ecosystem-links,.index-page-controls,.index-wallet-actions,.index-legal-links{min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.index-header-utilities{justify-content:flex-end}.index-ecosystem-links,.index-legal-links{justify-content:flex-end}
+.index-ecosystem-link,.index-control-button,.index-legal-links a,.mobile-nav-toggle,.jcs-index-header .header-wallet-btn{
+  min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;
+  border:1px solid var(--home-line);border-radius:9px;color:var(--home-ink);background:var(--home-surface-2);
+  font:850 .69rem/1.1 Inter,ui-sans-serif,system-ui,sans-serif;text-align:center;text-decoration:none;white-space:nowrap
+}
+.index-ecosystem-link:hover,.index-ecosystem-link:focus-visible,.index-control-button:hover,.index-control-button:focus-visible,
+.index-legal-links a:hover,.index-legal-links a:focus-visible,.mobile-nav-toggle:hover,.mobile-nav-toggle:focus-visible,
+.jcs-index-header .header-wallet-btn:hover:not(:disabled),.jcs-index-header .header-wallet-btn:focus-visible{
+  border-color:var(--home-blue);color:var(--home-blue);outline:3px solid color-mix(in srgb,var(--home-blue) 20%,transparent);outline-offset:2px
+}
+.index-ecosystem-link.xrbc-link{color:#72a8ff}.index-ecosystem-link.xrbitcoin-link{color:var(--home-cyan)}.index-ecosystem-link.creature-link{color:var(--home-gold)}
+.sanctuary-control[aria-pressed="true"]{border-color:var(--home-gold)!important;color:var(--home-gold)!important;background:var(--home-gold-soft)!important}
+.exchange-control[aria-pressed="true"]{border-color:var(--home-blue)!important;color:#fff!important;background:var(--home-blue)!important}
+.jcs-index-header .header-wallet-btn.connect{border-color:var(--home-blue);color:#fff;background:var(--home-blue)}
+.jcs-index-header .header-wallet-btn.disconnect{border-color:color-mix(in srgb,var(--home-red) 50%,var(--home-line));color:var(--home-red)}
+.jcs-index-header .header-wallet-btn:disabled{opacity:.58;cursor:not-allowed}
+.jcs-index-header .compact-wallet-pill{max-width:128px;overflow:hidden;color:var(--home-muted);font-size:.62rem;text-overflow:ellipsis;white-space:nowrap}
+.mobile-nav-toggle{display:none;cursor:pointer}.mobile-nav-toggle .menu-icon{font-size:1rem;line-height:1}
+.index-primary-nav{
+  min-width:0;width:100%;display:flex!important;align-items:stretch;justify-content:center!important;flex-wrap:wrap!important;
+  gap:4px!important;padding-top:7px;overflow:visible!important;border-top:1px solid var(--home-line)
+}
+.index-primary-nav .nav-btn{
+  min-width:0!important;min-height:40px!important;max-width:none!important;flex:0 1 auto!important;display:inline-flex!important;
+  align-items:center;justify-content:center;padding:8px 10px!important;border:1px solid transparent!important;border-radius:9px!important;
+  color:var(--home-muted)!important;background:transparent!important;font-size:.72rem!important;font-weight:850;line-height:1.2!important;
+  text-align:center;text-decoration:none;white-space:normal!important;box-shadow:none!important
+}
+.index-primary-nav .nav-btn:hover,.index-primary-nav .nav-btn:focus-visible,.index-primary-nav .nav-btn[aria-current="page"]{
+  border-color:var(--home-line)!important;color:var(--home-blue)!important;background:var(--home-surface-2)!important;
+  outline:3px solid color-mix(in srgb,var(--home-blue) 18%,transparent);outline-offset:1px
+}
+.index-primary-nav .sign-ledger-gold{border-color:color-mix(in srgb,var(--home-gold) 58%,var(--home-line))!important;color:#171106!important;background:linear-gradient(180deg,#ffeaa8,#d9ae38)!important}
+
+/* Purpose separation */
+body.exchange-focus #scripture,
+body.exchange-focus #sacred-film,
+body.exchange-focus #audio,
+body.exchange-focus #fellowship,
+body.exchange-focus #about,
+body.exchange-focus #mission{display:none!important}
+body.exchange-focus .media-entry-notice{display:none!important}
+body.exchange-focus .index-hero{min-height:430px}
+body.exchange-focus .index-hero .hero-actions a[href="#fellowship"],
+body.exchange-focus .index-hero .hero-actions a[href="./verify.html"]{display:none!important}
+
+.mode-boundary{
+  margin-top:18px;padding:13px 14px;border:1px solid color-mix(in srgb,var(--home-gold) 36%,var(--home-line));
+  border-left:4px solid var(--home-gold);border-radius:13px;background:var(--home-surface-2)
+}
+.mode-boundary strong{display:block}.mode-boundary p{margin:5px 0 0;color:var(--home-muted);font-size:.82rem}
+
+/* JCS Integrity Desk */
+.integrity-desk{margin-top:22px!important;padding:clamp(22px,4vw,36px)!important;border-color:color-mix(in srgb,var(--home-blue) 25%,var(--home-line))!important}
+.integrity-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
+.integrity-head h2{margin:6px 0 0;font-size:clamp(1.65rem,4vw,2.7rem);letter-spacing:-.035em}
+.integrity-head p{max-width:780px;margin:8px 0 0;color:var(--home-muted)}
+.integrity-status{display:inline-flex;min-height:34px;align-items:center;padding:6px 10px;border:1px solid color-mix(in srgb,var(--home-green) 42%,var(--home-line));border-radius:999px;color:var(--home-green);background:color-mix(in srgb,var(--home-green) 7%,transparent);font-size:.72rem;font-weight:900;white-space:nowrap}
+.integrity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.integrity-card{min-width:0;padding:14px;border:1px solid var(--home-line);border-radius:14px;background:var(--home-surface-2)}
+.integrity-card span{display:block;color:var(--home-muted);font-size:.68rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.integrity-card strong{display:block;margin-top:6px;overflow-wrap:anywhere}
+.integrity-card p{margin:7px 0 0;color:var(--home-muted);font-size:.78rem}
+.integrity-console{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:12px}
+.integrity-console>div{min-width:0;padding:11px;border:1px solid var(--home-line);border-radius:12px;background:var(--home-surface)}
+.integrity-console span{display:block;color:var(--home-muted);font-size:.65rem;font-weight:900;text-transform:uppercase}
+.integrity-console strong{display:block;margin-top:5px;overflow-wrap:anywhere;font-size:.78rem}
+.integrity-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.intent-options{display:flex;align-items:flex-start;gap:8px;margin-top:12px;color:var(--home-muted);font-size:.76rem}
+.intent-options input{width:20px;height:20px;min-height:20px;flex:0 0 20px}
+#intentPassportStatus{margin-top:9px;color:var(--home-muted);font-size:.76rem}
+.trade-primary-actions{grid-template-columns:minmax(0,1fr) minmax(0,.6fr)!important}
+.trade-primary-actions .btn{width:100%}
+
+/* Private journal shoulder-surfing shield */
+.fellowship-composer.journal-shielded #privatePrayerJournal{filter:blur(9px);pointer-events:none;user-select:none}
+.fellowship-composer.journal-shielded #privatePrayerJournal::selection{background:transparent}
+.journal-shield-note{margin-top:8px;color:var(--home-muted);font-size:.72rem}
+
+/* Media must start from an explicit media action unless visitor opts in. */
+.media-consent{
+  display:flex;align-items:flex-start;gap:9px;margin:13px 0 0;padding:11px 12px;border:1px solid var(--home-line);
+  border-radius:12px;color:var(--home-muted);background:var(--home-surface-2);font-size:.78rem
+}
+.media-consent input{width:20px;height:20px;min-height:20px;flex:0 0 20px;margin-top:1px}
+.media-consent strong{display:block;color:var(--home-ink)}
+.media-consent span{display:block;margin-top:2px}
+
+/* Anti-pressure / calm market behavior */
+.market-item strong,.dashboard-value strong,.trade-stat strong{font-variant-numeric:tabular-nums}
+.market-item,.trade-stat,.dashboard-metric{transition:none!important}
+.amen-burst{display:none!important}
+.trade-faith-boundary{margin-top:12px;padding:11px 12px;border:1px solid color-mix(in srgb,var(--home-gold) 34%,var(--home-line));border-left:4px solid var(--home-gold);border-radius:11px;color:var(--home-muted);background:var(--home-surface-2);font-size:.78rem}
+.trade-faith-boundary strong{color:var(--home-ink)!important}
+
+/* WCAG-oriented target/focus consistency */
+.jcs-index-header button,.jcs-index-header a,.jcs-content-section button,.jcs-module-section button{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--home-blue) 60%,transparent)!important;outline-offset:3px!important
+}
+
+@media(max-width:1100px){
+  .integrity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .integrity-console{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:980px){
+  .jcs-index-header.site-header{position:static!important}
+  .index-header-top{grid-template-columns:minmax(0,1fr) auto}
+  .mobile-nav-toggle{grid-column:2;grid-row:1}
+  html.js .mobile-nav-toggle{display:inline-flex}
+  .index-header-utilities{grid-column:1/-1;grid-row:2;justify-content:flex-start}
+  html.js .jcs-index-header:not(.menu-open) .index-header-utilities{display:none}
+  .index-ecosystem-links,.index-legal-links{justify-content:flex-start}
+  .index-primary-nav{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px!important}
+  html.js .jcs-index-header .index-primary-nav:not(.is-open){display:none!important}
+  .index-primary-nav .nav-btn{width:100%!important;min-height:44px!important}
+}
+@media(max-width:720px){
+  .integrity-head{align-items:flex-start;flex-direction:column}
+  .integrity-grid,.integrity-console{grid-template-columns:1fr}
+  .trade-primary-actions{grid-template-columns:1fr!important}
+}
+@media(max-width:640px){
+  .jcs-index-header-shell{padding:max(9px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left))}
+  .index-brand .brand-subtitle{display:none}
+  .index-header-utilities{display:grid;grid-template-columns:1fr}
+  .index-ecosystem-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .index-ecosystem-link{min-width:0;white-space:normal}
+  .index-page-controls{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .index-page-controls .theme-toggle{grid-column:1/-1}
+  .index-control-button{width:100%;min-height:44px}
+  .index-wallet-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jcs-index-header .header-wallet-btn{width:100%;min-height:44px}
+  .jcs-index-header .compact-wallet-pill{grid-column:1/-1;max-width:100%;text-align:center}
+  .index-legal-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .index-legal-links a{min-width:0;min-height:44px;white-space:normal}
+}
+@media(max-width:430px){
+  .index-brand .brand-title{font-size:.9rem!important}
+  .index-ecosystem-links,.index-page-controls,.index-wallet-actions,.index-legal-links,.index-primary-nav{grid-template-columns:1fr!important}
+  .index-page-controls .theme-toggle,.jcs-index-header .compact-wallet-pill{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .jcs-index-header *,.jcs-index-header *::before,.jcs-index-header *::after{scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
+
 </head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header jcs-home-header jcs-index-header" role="banner">
 <div class="jcs-index-header-shell">
-<div class="index-header-top">
-<a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
-<img alt="Jesus Christ Saves Token logo" height="40" src="./jcs-logo.png" width="40"/>
-<span class="brand-copy">
-<span class="brand-title">Jesus Christ Saves Token</span>
-<span class="brand-subtitle">Faith · Fellowship · Native XRPL exchange</span>
-</span>
-</a>
-<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
-<span aria-hidden="true" class="menu-icon">☰</span>
-<span class="menu-label">Menu</span>
-</button>
-<div aria-label="Ecosystem, display and wallet controls" class="index-header-utilities">
-<nav aria-label="Related XRPL ecosystem projects" class="index-ecosystem-links">
-<a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
-<a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
-<a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
-</nav>
-<div aria-label="Page and Xaman wallet controls" class="index-page-controls">
-<button aria-pressed="false" class="index-control-button" id="quietModeBtn" title="Hide exchange tools and pause media" type="button">Quiet mode</button>
-<button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
-<span aria-hidden="true">◐</span>
-<span id="themeToggleText">Light mode</span>
-</button>
-<div class="index-wallet-actions">
-<button aria-describedby="walletPill" class="header-wallet-btn connect" disabled="" id="connectBtn" type="button">Connect Xaman</button>
-<button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden="" id="disconnectBtn" type="button">Disconnect</button>
-<span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
-</div>
-</div>
-</div>
-</div>
-<nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
-<a aria-current="page" class="nav-btn" href="./">Home</a>
-<a class="nav-btn" href="#trade">Trade</a>
-<a class="nav-btn" href="#fellowship">Fellowship</a>
-<a class="nav-btn" href="#scripture">Scripture</a>
-<a class="nav-btn" href="#sacred-film">Sacred Film</a>
-<a class="nav-btn" href="#audio">Sacred Audio</a>
-<a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
-<a class="nav-btn" href="./prayer.map.html">Prayer Map</a>
-<a class="nav-btn" href="./metrics.html">Market Monitor</a>
-<a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
-<a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
-</nav>
+  <div class="index-header-top">
+    <a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
+      <img alt="" height="40" src="./jcs-logo.png" width="40"/>
+      <span class="brand-copy">
+        <span class="brand-title">Jesus Christ Saves Token</span>
+        <span class="brand-subtitle">JCS · Faith · Fellowship · Native XRPL exchange</span>
+      </span>
+    </a>
+
+    <button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
+      <span aria-hidden="true" class="menu-icon">☰</span>
+      <span class="menu-label">Menu</span>
+    </button>
+
+    <div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
+      <nav aria-label="Related XRP Ledger ecosystem projects" class="index-ecosystem-links">
+        <a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+        <a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+        <a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+      </nav>
+
+      <div aria-label="Portal focus and display controls" class="index-page-controls">
+        <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Hide market and exchange tools so the page becomes a faith and fellowship space" type="button">Sanctuary mode</button>
+        <button aria-pressed="false" class="index-control-button exchange-control" id="exchangeFocusBtn" title="Hide sacred media and fellowship tools while using the exchange" type="button">Exchange focus</button>
+        <button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
+          <span aria-hidden="true">◐</span>
+          <span id="themeToggleText">Light mode</span>
+        </button>
+      </div>
+
+      <div class="index-wallet-actions" aria-label="Xaman wallet controls">
+        <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled="" id="connectBtn" type="button">Connect Xaman</button>
+        <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden="" id="disconnectBtn" type="button">Disconnect</button>
+        <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+      </div>
+
+      <nav aria-label="Project policies and support" class="index-legal-links">
+        <a href="./terms.html">Terms</a>
+        <a href="./privacy.html">Privacy</a>
+        <a href="./security.html">Security</a>
+        <a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a>
+        <a href="./ai.json">AI Manifest</a>
+      </nav>
+    </div>
+  </div>
+
+  <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+    <a aria-current="page" class="nav-btn" href="./">Home</a>
+    <a class="nav-btn" href="#trade">Trade</a>
+    <a class="nav-btn" href="#fellowship">Fellowship</a>
+    <a class="nav-btn" href="#scripture">Scripture</a>
+    <a class="nav-btn" href="#sacred-film">Sacred Film</a>
+    <a class="nav-btn" href="#audio">Sacred Audio</a>
+    <a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
+    <a class="nav-btn" href="./prayer.map.html">Prayer Map</a>
+    <a class="nav-btn" href="./metrics.html">Market Monitor</a>
+    <a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
+    <a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+  </nav>
 </div>
 </header>
 <noscript>
@@ -5714,6 +5905,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <span>Xaman review before signing</span>
 <span>Validated-ledger confirmation</span>
 <span>No private-key collection</span>
+</div>
+<div class="mode-boundary" id="faithFinanceBoundary">
+  <strong>Faith and finance are intentionally separated.</strong>
+  <p>Prayer, Scripture, testimony, daily practice and fellowship activity never unlock trades, discounts, market status or spiritual ranking. Trading activity never changes prayer visibility, fellowship standing or access to faith content.</p>
 </div>
 <div aria-live="polite" class="media-entry-notice" id="mediaExperiencePill" role="status">
       Sacred audio and the silent film begin after the first click, tap or qualifying key press.
@@ -5779,7 +5974,62 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <strong id="homeJcsBalance">Connect Xaman</strong>
 <small>Public trustline balance after authorization</small>
 </article>
-</section><section aria-labelledby="home-products-title" class="card home-product-showcase">
+</section>
+<section aria-labelledby="integrity-title" class="card integrity-desk" id="integrity-desk">
+  <div class="integrity-head">
+    <div>
+      <span class="eyebrow">JCS-specific user protection · evidence before action</span>
+      <h2 id="integrity-title">A faith-centered exchange should make restraint easier—not trading more compulsive.</h2>
+      <p>JCS separates sacred participation from financial action, keeps the exact issuer visible, exposes market-evidence freshness, distinguishes signing from validation, and can create a local pre-sign intent record before Xaman opens.</p>
+    </div>
+    <span class="integrity-status" id="integritySystemState">Public XRPL evidence · non-custodial</span>
+  </div>
+
+  <div class="integrity-grid">
+    <article class="integrity-card">
+      <span>Faith boundary</span>
+      <strong>No spiritual reward for trading</strong>
+      <p>Prayer, Scripture, Amen reactions, journal activity and NFTs do not improve pricing, access, ranking or financial status.</p>
+    </article>
+    <article class="integrity-card">
+      <span>Transaction boundary</span>
+      <strong>Signed is not validated</strong>
+      <p>Financial actions are not reported as final merely because Xaman signed or submitted them. Final state requires validated XRPL evidence.</p>
+    </article>
+    <article class="integrity-card">
+      <span>Market boundary</span>
+      <strong>Quotes are snapshots</strong>
+      <p>Order-book and AMM references can move between preview and validation. The current 2% protection and Fill-or-Kill behavior remain visible before signing.</p>
+    </article>
+    <article class="integrity-card">
+      <span>Privacy boundary</span>
+      <strong>Private reflection stays local</strong>
+      <p>The prayer journal and local practice state remain browser-local unless the visitor deliberately uses a separate public on-ledger workflow.</p>
+    </article>
+  </div>
+
+  <div class="integrity-console" aria-label="Current JCS evidence state">
+    <div><span>Portal mode</span><strong id="integrityPortalMode">Full portal</strong></div>
+    <div><span>Wallet</span><strong id="integrityWalletState">Not connected</strong></div>
+    <div><span>Ledger</span><strong id="integrityLedgerState">Awaiting validated evidence</strong></div>
+    <div><span>Quote freshness</span><strong id="integrityQuoteAge">Awaiting market evidence</strong></div>
+    <div><span>Last validated receipt</span><strong id="integrityLastReceipt">None this browser session</strong></div>
+  </div>
+
+  <label class="intent-options">
+    <input id="intentIncludeWallet" type="checkbox"/>
+    <span><strong>Optional wallet binding.</strong> Include the connected public XRPL address in the local pre-sign intent passport. Leave unchecked for a wallet-neutral record.</span>
+  </label>
+
+  <div class="integrity-actions">
+    <button class="btn" id="downloadJcsIntentBtn" type="button">Download Pre-Sign Intent Passport</button>
+    <button class="btn" id="downloadLatestReceiptBtn" type="button" disabled>Download Latest Validated Receipt</button>
+    <a class="btn" href="./metrics.html">Open Read-Only Market Monitor</a>
+    <a class="btn" href="./.well-known/xrp-ledger.toml">Verify JCS XRPL Metadata</a>
+  </div>
+  <p id="intentPassportStatus" role="status" aria-live="polite">The intent passport is local evidence only. It never creates, signs or submits an XRPL transaction.</p>
+</section>
+<section aria-labelledby="home-products-title" class="card home-product-showcase">
 <div class="product-showcase-head">
 <div>
 <span class="eyebrow">One application · distinct responsibilities</span>
@@ -5940,6 +6190,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 </article>
 </div>
 <p aria-live="polite" class="audio-policy" id="audioStatus">Sacred media is ready but does not play on page load. The first click, tap or qualifying key press starts both audio channels and the muted public-domain film. Media pauses when the page becomes hidden, loses focus or is left, and waits for another interaction before resuming.</p>
+<label class="media-consent" for="mediaInteractionOptIn">
+  <input id="mediaInteractionOptIn" type="checkbox"/>
+  <span><strong>Optional interaction-resume mode.</strong> If enabled, sacred media may resume after the next deliberate page interaction. By default, trading, wallet and navigation clicks never start sacred audio or film.</span>
+</label>
 </section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
@@ -5951,7 +6205,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <p>Connect once, confirm the exact JCS trustline, then review every transaction inside Xaman.</p>
 </div>
 </div>
-<span class="xaman-ready-badge">Working release · 2.0.0</span>
+<span class="xaman-ready-badge">Working release · 2.1.0</span>
 </div>
 <div aria-label="Wallet readiness" class="wallet-readiness">
 <div class="wallet-step" id="walletStepConnect">
@@ -6013,7 +6267,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <p>Live XRP Ledger pricing with wallet-side review and signing through the working JCS Xaman endpoint.</p>
 </div>
 </div>
-<span class="trade-network-pill">XRPL Mainnet · v2.0.0</span>
+<span class="trade-network-pill">XRPL Mainnet · v2.1.0</span>
 </div>
 <div aria-label="Choose buy or sell" class="tabset trade-side-tabs" role="group">
 <button aria-pressed="true" class="tab buy active" id="buyTab" type="button">
@@ -6095,7 +6349,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <button class="btn trade-primary-button" disabled="" id="marketTradeBtn" type="button">
           Review Buy in Xaman
         </button>
+<button class="btn" id="downloadTradeIntentBtn" type="button">Save Pre-Sign Intent</button>
 </div>
+<div class="trade-faith-boundary"><strong>Financial decision boundary:</strong> this exchange does not use prayer activity, Scripture engagement, NFTs, reactions or spiritual participation to pressure, rank, reward or personalize a trade.</div>
 <div aria-label="Trade preview protections" class="exchange-disclosure-grid">
 <div><span>Execution source</span><strong>XRPL order book, AMM or combined liquidity</strong></div>
 <div><span>Market protection</span><strong>2% maximum estimate drift · Fill or Kill</strong></div>
@@ -6401,10 +6657,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 <div class="journal-actions">
 <button class="btn primary" id="saveJournalBtn" type="button">Save privately</button>
 <button class="btn" id="exportJournalBtn" type="button">Export local copy</button>
+<button class="btn" id="journalShieldBtn" aria-pressed="false" type="button">Shield private note</button>
 <button class="btn danger" id="clearJournalBtn" type="button">Delete local note</button>
 <a class="btn sign-ledger-gold" href="./verify.html">Create a public prayer or testimony</a>
 </div>
-<p aria-live="polite" class="status" id="journalStatus"></p>
+<p class="journal-shield-note">Screen shield only hides the note visually. It does not hide the site from browser history, the network, device administrators or other software.</p><p aria-live="polite" class="status" id="journalStatus"></p>
 </article>
 <article class="card practice-card">
 <div class="practice-head">
@@ -6602,7 +6859,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   "xummApiKey": "5b8499a9-ae28-4050-ac09-45efa948eced",
   "appName": "Jesus Christ Saves Token",
   "sentinelPrefix": "JCS",
-  "release": "2.0.0",
+  "release": "2.1.0",
   "asset": {
     "issuer": "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd",
     "currencyHex": "JCS"
@@ -6726,7 +6983,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 (function () {
   'use strict';
 
-  const JCS_RELEASE = '2.0.0';
+  const JCS_RELEASE = '2.1.0';
 
   window.addEventListener('error', (event) => {
     console.error('Jesus Christ Saves Token runtime error:', event.error || event.message);
@@ -7702,6 +7959,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     throw new Error('The Xaman signing request timed out.');
   }
 
+  let xamanPayloadInFlight = false;
+
   async function createAndResolveXamanPayload(
     request,
     onEvent,
@@ -7710,37 +7969,45 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     if (!xumm?.payload) {
       throw new Error('Xaman payload service is unavailable.');
     }
+    if (xamanPayloadInFlight) {
+      throw new Error('A Xaman request is already active. Complete, reject or close the current request before creating another.');
+    }
 
-    if (typeof xumm.payload.createAndSubscribe === 'function') {
-      const subscription = await xumm.payload.createAndSubscribe(
-        request,
-        onEvent
-      );
-      const created = subscription?.created;
+    xamanPayloadInFlight = true;
+    try {
+      if (typeof xumm.payload.createAndSubscribe === 'function') {
+        const subscription = await xumm.payload.createAndSubscribe(
+          request,
+          onEvent
+        );
+        const created = subscription?.created;
+        if (!created) throw new Error('Xaman returned no payload.');
+        onCreated?.(created);
+
+        const resolution = await withTimeout(
+          subscription.resolved,
+          210000,
+          'The Xaman signing request timed out.'
+        );
+
+        let details = null;
+        try { details = await xumm.payload.get(created); } catch {}
+        return { created, resolution, details };
+      }
+
+      const created = await xumm.payload.create(request);
       if (!created) throw new Error('Xaman returned no payload.');
       onCreated?.(created);
 
-      const resolution = await withTimeout(
-        subscription.resolved,
-        210000,
-        'The Xaman signing request timed out.'
-      );
-
-      let details = null;
-      try { details = await xumm.payload.get(created); } catch {}
-      return { created, resolution, details };
+      const details = await pollXamanPayload(created);
+      return {
+        created,
+        resolution: { signed: details?.meta?.signed === true },
+        details
+      };
+    } finally {
+      xamanPayloadInFlight = false;
     }
-
-    const created = await xumm.payload.create(request);
-    if (!created) throw new Error('Xaman returned no payload.');
-    onCreated?.(created);
-
-    const details = await pollXamanPayload(created);
-    return {
-      created,
-      resolution: { signed: details?.meta?.signed === true },
-      details
-    };
   }
 
   function xamanPayloadWasSigned(resolution, details) {
@@ -8632,19 +8899,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         setStatus(tradeMsg, 'Open Xaman to review limit order.');
         const signed = await signWithSentinel(tx, 'offer');
         const txid = signed && signed.txid;
+        if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
+        setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
+        await waitForQuickBuyValidation(txid);
         setStatus(
           tradeMsg,
-          txid
-            ? 'Limit order submitted to XRPL Mainnet. Transaction: ' +
-              txid.slice(0, 10) + '…' + txid.slice(-8)
-            : 'Limit order submitted to XRPL Mainnet.',
+          'Limit order transaction validated on XRPL Mainnet · ' +
+            txid.slice(0, 10) + '…' + txid.slice(-8),
           'ok'
         );
-        setResult(
-          txid
-            ? 'Limit order submitted: ' + txid
-            : 'Limit order submitted.'
-        );
+        setResult('Validated limit-order transaction: ' + txid);
+        document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
+          detail: { kind:'limit-order', txid, side, amountJcs:amt, referencePriceXrpPerJcs:px }
+        }));
         await Promise.allSettled([refreshAll(), fetchBalances()]);
       } catch (e) {
         setStatus(tradeMsg, 'Error: ' + (e.message || e), 'err');
@@ -8720,21 +8987,22 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
         const signed = await signWithSentinel(tx, 'swap');
         const txid = signed && signed.txid;
+        if (!txid) throw new Error('Xaman returned no transaction ID for the market order.');
+
+        setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
+        await waitForQuickBuyValidation(txid);
 
         setStatus(
           tradeMsg,
-          txid
-            ? 'AMM/DEX market order submitted to XRPL Mainnet. Transaction: ' +
-              txid.slice(0, 10) + '…' + txid.slice(-8)
-            : 'AMM/DEX market order submitted to XRPL Mainnet.',
+          'AMM/DEX market transaction validated on XRPL Mainnet · ' +
+            txid.slice(0, 10) + '…' + txid.slice(-8),
           'ok'
         );
 
-        setResult(
-          txid
-            ? 'AMM/DEX market order submitted: ' + txid
-            : 'AMM/DEX market order submitted.'
-        );
+        setResult('Validated AMM/DEX market transaction: ' + txid);
+        document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
+          detail: { kind:'market-swap', txid, side, amountJcs:amt, referencePriceXrpPerJcs:basePx }
+        }));
 
         ammSnapshotCache = null;
         await Promise.allSettled([refreshAll(), fetchBalances()]);
@@ -8944,12 +9212,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     try {
       const tx = { TransactionType: 'OfferCancel', OfferSequence: Number(seq) };
       const signed = await signWithSentinel(tx, 'cancel');
-      setOffersStatus(
-        signed && signed.txid
-          ? 'Cancel submitted: ' + signed.txid.slice(0, 10) + '…'
-          : 'Cancel ' + seq + ' submitted.',
-        'ok'
-      );
+      const txid = signed && signed.txid;
+      if (!txid) throw new Error('Xaman returned no transaction ID for the cancellation.');
+      setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
+      await waitForQuickBuyValidation(txid);
+      setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
+      document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
+        detail: { kind:'offer-cancel', txid, offerSequence:Number(seq) }
+      }));
       await fetchOffers(currentAccount);
     } catch (e) {
       setOffersStatus('Cancel error: ' + (e.message || e), 'err');
@@ -9627,7 +9897,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
           params: [{ transaction: txid, binary: false }]
         });
         const result = response?.result || {};
-        if (result.validated === false) {
+        if (result.validated !== true) {
           await new Promise(resolve => window.setTimeout(resolve, 1400));
           continue;
         }
@@ -9723,6 +9993,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
         'Validated AMM/DEX Quick Buy · ' + deliveredText +
           ' · Transaction: ' + txid
       );
+      document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
+        detail: { kind:'quick-buy', txid, side:'buy', amountJcs:requestedJcs, referencePriceXrpPerJcs:price }
+      }));
 
       ammSnapshotCache = null;
       await Promise.allSettled([
@@ -10192,13 +10465,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     }
   }
 
+  function mediaInteractionResumeAllowed() {
+    const control = $('mediaInteractionOptIn');
+    return Boolean(control && control.checked);
+  }
+
   function installAutoplayUnlock() {
-    if (autoplayUnlockInstalled) return;
+    if (!mediaInteractionResumeAllowed() || autoplayUnlockInstalled) return;
     autoplayUnlockInstalled = true;
 
     const unlock = event => {
       if (event && event.isTrusted === false) return;
       if (event?.type === 'keydown' && ['Escape', 'Tab', 'Shift', 'Control', 'Alt', 'Meta'].includes(event.key)) return;
+      if (!mediaInteractionResumeAllowed()) return;
 
       autoplayUnlockInstalled = false;
       document.removeEventListener('pointerdown', unlock, true);
@@ -10330,6 +10609,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
   async function listenChannel(name) {
     const channel = channels[name];
+    mediaExperienceStarted = true;
+    mediaSessionActive = true;
+    lifecycleSuspended = false;
+    autoplayUnlocked = true;
 
     channel.listenerMuted = false;
     channel.audio.muted = false;
@@ -10399,6 +10682,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   }
 
   async function activatePassionFilm() {
+    mediaExperienceStarted = true;
+    mediaSessionActive = true;
+    lifecycleSuspended = false;
+    autoplayUnlocked = true;
     passionActive = true;
 
     passionVideo.defaultMuted = true;
@@ -10550,15 +10837,34 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     );
   });
 
+  const mediaInteractionOptIn = $('mediaInteractionOptIn');
+  try {
+    if (mediaInteractionOptIn) {
+      mediaInteractionOptIn.checked =
+        localStorage.getItem('jcs.mediaInteractionResume.v1') === 'true';
+      mediaInteractionOptIn.addEventListener('change', () => {
+        try { localStorage.setItem('jcs.mediaInteractionResume.v1', String(mediaInteractionOptIn.checked)); } catch {}
+        if (mediaInteractionOptIn.checked) {
+          updateMediaExperienceStatus('Interaction-resume enabled. Sacred media will start or resume only after your next deliberate interaction.');
+          installAutoplayUnlock();
+        } else {
+          updateMediaExperienceStatus('Sacred media is manual. Use Listen or Watch; trading and navigation clicks will not start it.');
+        }
+      });
+    }
+  } catch {}
+
   updateMediaExperienceStatus(
-    'Sacred audio and the muted film begin after the first click, tap or qualifying key press.'
+    mediaInteractionOptIn?.checked
+      ? 'Interaction-resume is enabled. Sacred media waits for your next deliberate interaction.'
+      : 'Sacred media is manual. Use Listen or Watch; trading and navigation clicks will not start it.'
   );
   installAutoplayUnlock();
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) suspendSacredExperience('Page hidden');
     else {
-      updateMediaExperienceStatus('Page active. Interact with the page to resume sacred media.');
+      updateMediaExperienceStatus(mediaInteractionResumeAllowed() ? 'Page active. Interact with the page to resume sacred media.' : 'Page active. Sacred media remains paused until you choose Listen or Watch.');
       installAutoplayUnlock();
     }
   });
@@ -10995,6 +11301,225 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   $('quietModeBtn')?.addEventListener('click', () => setQuietMode(!document.body.classList.contains('quiet-mode')));
   $('sabbathModeBtn')?.addEventListener('click', () => setQuietMode(!document.body.classList.contains('quiet-mode')));
 }());
+</script>
+<script id="jcs-integrity-v210">
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const ISSUER = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
+  const NETWORK = 'XRP Ledger Mainnet';
+  const RECEIPT_KEY = 'jcs.validatedReceipts.v1';
+  let lastEvidenceAt = 0;
+
+  function safeJsonRead(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; } catch { return fallback; }
+  }
+  function safeJsonWrite(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; }
+  }
+  function clean(value) { return String(value ?? '').trim(); }
+  function numberFrom(text) {
+    const match = String(text || '').replace(/,/g,'').match(/-?\d+(?:\.\d+)?/);
+    return match ? Number(match[0]) : null;
+  }
+  function setPortalMode(mode) {
+    const exchange = mode === 'exchange';
+    document.body.classList.toggle('exchange-focus', exchange);
+    const exchangeBtn = $('exchangeFocusBtn');
+    exchangeBtn?.setAttribute('aria-pressed', String(exchange));
+    if (exchangeBtn) exchangeBtn.textContent = exchange ? 'Exit exchange focus' : 'Exchange focus';
+
+    if (exchange && document.body.classList.contains('quiet-mode')) {
+      $('quietModeBtn')?.click();
+    }
+    if (!exchange && mode === 'full') {
+      document.body.classList.remove('exchange-focus');
+      exchangeBtn?.setAttribute('aria-pressed','false');
+      if (exchangeBtn) exchangeBtn.textContent = 'Exchange focus';
+    }
+    try { localStorage.setItem('jcs.portalFocus.v1', exchange ? 'exchange' : 'full'); } catch {}
+    updateIntegrity();
+  }
+
+  $('exchangeFocusBtn')?.addEventListener('click', () => {
+    setPortalMode(document.body.classList.contains('exchange-focus') ? 'full' : 'exchange');
+  });
+  ['quietModeBtn','sabbathModeBtn'].forEach(id => {
+    $(id)?.addEventListener('click', () => {
+      if (document.body.classList.contains('exchange-focus')) setPortalMode('full');
+      window.setTimeout(updateIntegrity,0);
+    });
+  });
+
+  try {
+    if (localStorage.getItem('jcs.portalFocus.v1') === 'exchange') setPortalMode('exchange');
+  } catch {}
+
+  // Private-note screen shield. It is intentionally a visual control only.
+  const journalCard = $('privatePrayerJournal')?.closest('.fellowship-composer');
+  function setJournalShield(active) {
+    if (!journalCard) return;
+    journalCard.classList.toggle('journal-shielded', active);
+    const btn = $('journalShieldBtn');
+    btn?.setAttribute('aria-pressed', String(active));
+    if (btn) btn.textContent = active ? 'Reveal private note' : 'Shield private note';
+  }
+  $('journalShieldBtn')?.addEventListener('click', () => {
+    setJournalShield(!journalCard?.classList.contains('journal-shielded'));
+  });
+  window.addEventListener('blur', () => setJournalShield(true));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) setJournalShield(true);
+  });
+
+  function evidenceText(id, fallback='Unavailable') {
+    const text = clean($(id)?.textContent);
+    return text && text !== '—' ? text : fallback;
+  }
+  function noteEvidenceChange() {
+    const candidates = ['tradeLivePrice','homeLedgerState','jcsSpot','jcsAmm','jcsSpread','tradeQuoteNote'];
+    if (candidates.some(id => {
+      const v = clean($(id)?.textContent);
+      return v && v !== '—' && !/loading|awaiting|unavailable/i.test(v);
+    })) lastEvidenceAt = Date.now();
+    updateIntegrity();
+  }
+  ['tradeLivePrice','homeLedgerState','jcsSpot','jcsAmm','jcsSpread','tradeQuoteNote','walletPill'].forEach(id => {
+    const node = $(id);
+    if (node) new MutationObserver(noteEvidenceChange).observe(node,{childList:true,subtree:true,characterData:true});
+  });
+
+  function updateIntegrity() {
+    const mode = document.body.classList.contains('quiet-mode')
+      ? 'Sanctuary mode'
+      : document.body.classList.contains('exchange-focus')
+        ? 'Exchange focus'
+        : 'Full portal';
+    if ($('integrityPortalMode')) $('integrityPortalMode').textContent = mode;
+    if ($('integrityWalletState')) $('integrityWalletState').textContent =
+      clean($('walletPill')?.textContent) || 'Not connected';
+    if ($('integrityLedgerState')) $('integrityLedgerState').textContent =
+      evidenceText('homeLedgerState','Awaiting validated evidence');
+
+    if ($('integrityQuoteAge')) {
+      if (!lastEvidenceAt) $('integrityQuoteAge').textContent = 'Awaiting market evidence';
+      else {
+        const sec = Math.max(0, Math.round((Date.now()-lastEvidenceAt)/1000));
+        $('integrityQuoteAge').textContent = sec < 2 ? 'Just refreshed' : `${sec}s since observed change`;
+      }
+    }
+
+    const receipts = safeJsonRead(RECEIPT_KEY, []);
+    const latest = Array.isArray(receipts) ? receipts[0] : null;
+    if ($('integrityLastReceipt')) {
+      $('integrityLastReceipt').textContent = latest?.txid
+        ? `${latest.kind} · ${latest.txid.slice(0,10)}…`
+        : 'None this browser session';
+    }
+    if ($('downloadLatestReceiptBtn')) $('downloadLatestReceiptBtn').disabled = !latest;
+  }
+  window.setInterval(updateIntegrity,1000);
+  updateIntegrity();
+
+  async function sha256Hex(text) {
+    if (!crypto?.subtle) return '';
+    const bytes = new TextEncoder().encode(String(text));
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+  }
+  function canonicalIntentRecord() {
+    const side = clean($('side')?.value) || 'buy';
+    const amountJcs = Number($('amount')?.value || 0) || null;
+    const price = Number($('price')?.value || 0) || numberFrom($('tradeLivePrice')?.textContent);
+    const estimatedXrp = amountJcs && price ? amountJcs * price : null;
+    const includeWallet = Boolean($('intentIncludeWallet')?.checked);
+    return {
+      schema:'jcs-pre-sign-intent-v1',
+      created_at_utc:new Date().toISOString(),
+      purpose:'Local pre-sign evidence record only; does not create, sign or submit a transaction.',
+      network:NETWORK,
+      asset:{name:'Jesus Christ Saves Token',symbol:'JCS',issuer:ISSUER},
+      wallet:includeWallet ? (clean(window.__jcsWallet) || null) : null,
+      intent:{side,amount_jcs:amountJcs,reference_price_xrp_per_jcs:price||null,estimated_xrp_total:estimatedXrp},
+      protections:{
+        xaman_review_required:true,
+        six_digit_verification_memo:true,
+        market_estimate_drift_cap_percent:2,
+        market_order_fill_or_kill:true,
+        finality_required:'validated ledger + tesSUCCESS'
+      },
+      observed_ui:{
+        ledger:evidenceText('homeLedgerState',null),
+        spot:evidenceText('jcsSpot',null),
+        amm:evidenceText('jcsAmm',null),
+        spread:evidenceText('jcsSpread',null),
+        quote_note:evidenceText('tradeQuoteNote',null),
+        observed_at_utc:lastEvidenceAt ? new Date(lastEvidenceAt).toISOString() : null
+      },
+      faith_finance_boundary:'Prayer, Scripture, testimony, daily practice and fellowship activity do not unlock, rank, reward, discount or personalize financial actions.',
+      limitation:'Market data can change after this record is created. Verify the exact transaction in Xaman and the final result on a validated XRP Ledger.'
+    };
+  }
+  function downloadJson(filename, value) {
+    const blob = new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1200);
+  }
+  async function downloadIntent() {
+    const record = canonicalIntentRecord();
+    const canonical = JSON.stringify(record);
+    const hash = await sha256Hex(canonical);
+    const out = {...record, sha256:hash || null};
+    downloadJson(`jcs-pre-sign-intent-${Date.now()}.json`, out);
+    if ($('intentPassportStatus')) {
+      $('intentPassportStatus').textContent = hash
+        ? `Local intent passport downloaded · SHA-256 ${hash.slice(0,16)}…`
+        : 'Local intent passport downloaded. Web Crypto digest was unavailable in this browser.';
+    }
+  }
+  $('downloadJcsIntentBtn')?.addEventListener('click', downloadIntent);
+  $('downloadTradeIntentBtn')?.addEventListener('click', downloadIntent);
+
+  document.addEventListener('jcs:validated-transaction', event => {
+    const detail = event.detail || {};
+    if (!detail.txid) return;
+    const record = {
+      schema:'jcs-validated-transaction-receipt-v1',
+      validated_at_utc:new Date().toISOString(),
+      network:NETWORK,
+      asset:{symbol:'JCS',issuer:ISSUER},
+      ...detail,
+      limitation:'This receipt records a validated transaction reference. Transaction metadata must still be interpreted in context to determine the exact ledger effect.'
+    };
+    const list = safeJsonRead(RECEIPT_KEY, []);
+    const next = [record, ...(Array.isArray(list)?list:[]).filter(item=>item?.txid!==record.txid)].slice(0,10);
+    safeJsonWrite(RECEIPT_KEY,next);
+    updateIntegrity();
+  });
+  $('downloadLatestReceiptBtn')?.addEventListener('click', () => {
+    const list = safeJsonRead(RECEIPT_KEY, []);
+    const latest = Array.isArray(list) ? list[0] : null;
+    if (latest) downloadJson(`jcs-validated-receipt-${latest.txid}.json`,latest);
+  });
+
+  // Keep visible mode label aligned with existing quiet-mode implementation.
+  const quiet = $('quietModeBtn');
+  if (quiet) {
+    const observer = new MutationObserver(() => {
+      if (!document.body.classList.contains('quiet-mode') && !document.body.classList.contains('exchange-focus')) {
+        quiet.textContent='Sanctuary mode';
+        quiet.setAttribute('aria-pressed','false');
+      } else if (document.body.classList.contains('quiet-mode')) {
+        quiet.textContent='Exit sanctuary mode';
+      }
+      updateIntegrity();
+    });
+    observer.observe(document.body,{attributes:true,attributeFilter:['class']});
+  }
+})();
 </script>
 <script>
 (() => {
