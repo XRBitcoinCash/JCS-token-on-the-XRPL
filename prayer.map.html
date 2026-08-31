@@ -1,22 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html data-theme="dark" lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
   <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#07101c">
+  <meta name="application-name" content="JCS Prayer Map">
+  <meta name="jcs-prayer-map-release" content="5.0.0">
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; upgrade-insecure-requests"
+    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
   >
-  <title>Christian Pressure &amp; XRPL Prayer Map</title>
-  <meta
-    name="description"
-    content="A resilient global map comparing sourced Christian-persecution pressure, official religious-freedom concern, current media signals, and privacy-preserving XRPL prayer records."
-  >
+  <title>JCS Prayer Map v5.0.0 · Verified Prayer Signals, Christian Pressure &amp; Private Capsule</title>
+  <meta name="description" content="JCS Prayer Map: live validated XRPL prayer and support aggregates, sourced Christian-pressure evidence, privacy thresholds, Verify-page synchronization, and a local encrypted Private Capsule with an optional neutral NFT fingerprint receipt.">
 
   <!--
-    JCS Prayer Map v4.0.0
+    JCS Prayer Map v5.0.0
 
     Evidence layers stay separate:
       1. Open Doors World Watch List 2026 Christian-specific annual scores.
@@ -26,12 +26,20 @@
 
     No wallet, validator, node, IP address, browser location, Xaman profile, name,
     prayer text, or transaction route is geolocated. Only an explicitly published
-    broad-region memo can place an XRPL prayer record on the map.
+    voluntary prayer-focus memo can contribute an XRPL record to a thresholded map aggregate.
 
     Geometry: Natural Earth v5.1.1, public domain, topology-preserving simplification.
     Topology generation notes are retained with the project source. Made with Natural Earth.
   -->
 
+
+  <link rel="canonical" href="https://jesuschristsavestoken.com/prayer.map.html">
+  <link rel="alternate" type="application/json" title="JCS Prayer Map protocol" href="./jcs-prayer-map-protocol.json">
+  <link rel="alternate" type="application/json" title="JCS AI Manifest" href="./ai.json">
+  <link rel="security" href="./.well-known/security.txt">
+  <link rel="sitemap" type="application/xml" href="./sitemap.xml">
+  <link rel="icon" type="image/png" href="./jcs-logo.png">
+  <script>(function(){document.documentElement.classList.add('js');try{const s=localStorage.getItem('jcs-ledger-theme');document.documentElement.dataset.theme=(s==='light'||s==='dark')?s:'dark'}catch(_e){document.documentElement.dataset.theme='dark'}})();</script>
   <style>
     :root {
       color-scheme: dark;
@@ -364,6 +372,30 @@
       stroke: #8ce3ff;
       stroke-width: 2.2;
       vector-effect: non-scaling-stroke;
+    }
+
+    .support-edge {
+      fill: none;
+      stroke: #4da8df;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+      opacity: 0.78;
+      pointer-events: stroke;
+    }
+
+    .support-edge[data-level="high"] { stroke: var(--high); }
+    .support-edge[data-level="very-high"] { stroke: var(--very-high); }
+    .support-edge[data-level="extreme"] { stroke: var(--extreme); }
+    .support-edge:focus,
+    .support-edge:hover { opacity: 1; stroke-width: 3.4; outline: none; }
+
+    .support-endpoint {
+      fill: rgba(36, 184, 126, 0.2);
+      stroke: #72f0bb;
+      stroke-width: 1.8;
+      vector-effect: non-scaling-stroke;
+      pointer-events: none;
     }
 
     .prayer-count {
@@ -940,27 +972,427 @@
       }
     }
   </style>
+<style id="jcs-prayer-map-canonical-header-v500">
+:root{
+  --home-bg:#f4f7fb;--home-surface:#ffffff;--home-surface-2:#f8fafc;--home-surface-3:#eef3f8;
+  --home-ink:#0b1018;--home-muted:#5b6575;--home-line:#dfe5ed;--home-blue:#1652f0;
+  --home-cyan:#0ea5e9;--home-green:#087f5b;--home-red:#c7354f;--home-gold:#b7791f;--home-gold-soft:#fff7df;
+}
+html[data-theme="dark"]{
+  --home-bg:#07101c;--home-surface:#0d1827;--home-surface-2:#111f31;--home-surface-3:#15263b;
+  --home-ink:#f5f8ff;--home-muted:#9eabc0;--home-line:#25364d;--home-blue:#5c94ff;
+  --home-cyan:#31c2f5;--home-green:#43d6a1;--home-red:#ff7187;--home-gold:#e1b750;--home-gold-soft:#261f10;
+}
+
+/* Complete header repair: no clipped navigation, full keyboard access and safe mobile reflow. */
+.jcs-index-header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200;
+  width: 100%;
+  border-bottom: 1px solid var(--home-line) !important;
+  background: color-mix(in srgb, var(--home-surface) 95%, transparent) !important;
+  box-shadow: 0 8px 28px color-mix(in srgb, #020617 10%, transparent) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.jcs-index-header-shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding:
+    max(8px, env(safe-area-inset-top))
+    max(18px, env(safe-area-inset-right))
+    9px
+    max(18px, env(safe-area-inset-left));
+  display: grid;
+  gap: 8px;
+}
+.index-header-top {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) minmax(0, 2fr);
+  gap: 12px;
+  align-items: center;
+}
+.index-brand {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: inherit;
+  text-decoration: none;
+}
+.index-brand img {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 40px;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 45%, var(--home-line)) !important;
+  border-radius: 11px !important;
+  background: #fff;
+}
+.index-brand .brand-copy { min-width: 0; display: grid !important; }
+.index-brand .brand-title {
+  overflow: hidden;
+  color: var(--home-ink) !important;
+  font: 900 1rem/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-brand .brand-subtitle {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .63rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-header-utilities,
+.index-page-controls,
+.index-wallet-actions,
+.index-ecosystem-links {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.index-header-utilities { justify-content: flex-end; }
+.index-ecosystem-links { justify-content: flex-end; }
+.index-ecosystem-link,
+.index-control-button,
+.mobile-nav-toggle,
+.jcs-index-header .header-wallet-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 9px;
+  border: 1px solid var(--home-line);
+  border-radius: 9px;
+  color: var(--home-ink);
+  background: var(--home-surface-2);
+  font: 850 .69rem/1.1 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.index-ecosystem-link:hover,
+.index-ecosystem-link:focus-visible,
+.index-control-button:hover,
+.index-control-button:focus-visible,
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:focus-visible,
+.jcs-index-header .header-wallet-btn:hover:not(:disabled),
+.jcs-index-header .header-wallet-btn:focus-visible {
+  border-color: var(--home-blue);
+  color: var(--home-blue);
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 24%, transparent);
+  outline-offset: 2px;
+}
+.index-ecosystem-link.xrbc-link { color: #6e9eff; }
+.index-ecosystem-link.xrbitcoin-link { color: var(--home-cyan); }
+.index-ecosystem-link.creature-link { color: var(--home-gold); }
+.jcs-index-header .header-wallet-btn.connect {
+  border-color: var(--home-blue);
+  color: #fff;
+  background: var(--home-blue);
+}
+.jcs-index-header .header-wallet-btn.disconnect {
+  border-color: color-mix(in srgb, var(--home-red) 50%, var(--home-line));
+  color: var(--home-red);
+}
+.jcs-index-header .header-wallet-btn:disabled { opacity: .58; cursor: not-allowed; }
+.jcs-index-header .compact-wallet-pill {
+  max-width: 130px;
+  overflow: hidden;
+  color: var(--home-muted);
+  font-size: .62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mobile-nav-toggle { display: none; cursor: pointer; }
+.mobile-nav-toggle .menu-icon { font-size: 1rem; line-height: 1; }
+.noscript-notice {
+  width: min(1240px, calc(100% - 24px));
+  margin: 14px auto 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 52%, var(--home-line));
+  border-radius: 12px;
+  color: var(--home-ink);
+  background: var(--home-gold-soft);
+}
+.noscript-notice a { font-weight: 850; }
+.index-primary-nav {
+  min-width: 0;
+  width: 100%;
+  display: flex !important;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  gap: 4px;
+  padding-top: 7px;
+  overflow: visible !important;
+  border-top: 1px solid var(--home-line);
+}
+.index-primary-nav .nav-btn {
+  min-height: 40px !important;
+  flex: 0 1 auto !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  color: var(--home-muted) !important;
+  background: transparent !important;
+  font-size: .73rem !important;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal !important;
+  box-shadow: none !important;
+}
+.index-primary-nav .nav-btn:hover,
+.index-primary-nav .nav-btn:focus-visible,
+.index-primary-nav .nav-btn[aria-current="page"] {
+  border-color: var(--home-line) !important;
+  color: var(--home-blue) !important;
+  background: var(--home-surface-2) !important;
+  outline: 3px solid color-mix(in srgb, var(--home-blue) 22%, transparent);
+  outline-offset: 1px;
+}
+.index-primary-nav .sign-ledger-gold {
+  border-color: color-mix(in srgb, var(--home-gold) 58%, var(--home-line)) !important;
+  color: #171106 !important;
+  background: linear-gradient(180deg, #ffeaa8, #d9ae38) !important;
+}
+.product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.footer-link-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 1080px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px) {
+  .jcs-index-header.site-header { position: static !important; }
+  .index-header-top { grid-template-columns: minmax(0, 1fr) auto; }
+  .mobile-nav-toggle { grid-column: 2; grid-row: 1; }
+  html.js .mobile-nav-toggle { display: inline-flex; }
+  .index-header-utilities {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+  html.js .jcs-index-header:not(.menu-open) .index-header-utilities { display: none; }
+  .index-ecosystem-links { justify-content: flex-start; }
+  .index-primary-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  html.js .jcs-index-header .index-primary-nav:not(.is-open) { display: none !important; }
+  .index-primary-nav .nav-btn { width: 100%; min-height: 44px !important; }
+  .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .jcs-index-header-shell {
+    padding:
+      max(9px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      10px
+      max(12px, env(safe-area-inset-left));
+  }
+  .index-brand .brand-subtitle { display: none; }
+  .index-header-utilities { display: grid; grid-template-columns: 1fr; }
+  .index-ecosystem-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .index-ecosystem-link { min-width: 0; white-space: normal; }
+  .index-page-controls { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .index-control-button { width: 100%; min-height: 44px; }
+  .index-wallet-actions { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .jcs-index-header .header-wallet-btn { width: 100%; min-height: 44px; }
+  .jcs-index-header .compact-wallet-pill { max-width: 100%; text-align: center; }
+  .product-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .index-brand .brand-title { font-size: .9rem !important; }
+  .index-ecosystem-links,
+  .index-primary-nav,
+  .index-page-controls,
+  .footer-link-groups { grid-template-columns: 1fr !important; }
+}
+
+/* Final JCS 2.1 header refinements shared with the current portal. */
+.jcs-index-header.site-header{position:sticky!important;top:0!important;z-index:1200;width:100%;display:block!important;margin:0!important;padding:0!important;border:0!important;border-bottom:1px solid var(--home-line)!important;border-radius:0!important;background:color-mix(in srgb,var(--home-surface) 95%,transparent)!important;box-shadow:0 8px 28px color-mix(in srgb,#020617 10%,transparent)!important;overflow:visible!important}
+html[data-theme="dark"] .jcs-index-header.site-header{background:rgba(7,16,28,.95)!important;box-shadow:0 8px 30px rgba(0,0,0,.30)!important}
+.jcs-index-header-shell{width:min(1360px,100%)}
+.index-header-top{grid-template-columns:minmax(250px,auto) minmax(0,1fr);gap:12px 20px}
+.index-legal-links{min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px}
+.index-legal-links a{min-height:36px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;border:1px solid var(--home-line);border-radius:9px;color:var(--home-ink);background:var(--home-surface-2);font:850 .69rem/1.1 system-ui,sans-serif;text-align:center;text-decoration:none;white-space:nowrap}
+.index-legal-links a:hover,.index-legal-links a:focus-visible{border-color:var(--home-blue);color:var(--home-blue);outline:3px solid color-mix(in srgb,var(--home-blue) 20%,transparent);outline-offset:2px}
+.sanctuary-control[aria-pressed="true"]{border-color:var(--home-gold)!important;color:var(--home-gold)!important;background:var(--home-gold-soft)!important}
+.exchange-control[aria-pressed="true"]{border-color:var(--home-blue)!important;color:#fff!important;background:var(--home-blue)!important}
+@media(max-width:980px){.index-legal-links{justify-content:flex-start}}
+@media(max-width:640px){
+  .index-page-controls .theme-toggle{grid-column:1/-1}
+  .index-wallet-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jcs-index-header .compact-wallet-pill{grid-column:1/-1;max-width:100%;text-align:center}
+  .index-legal-links{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .index-legal-links a{min-width:0;min-height:44px;white-space:normal}
+}
+@media(max-width:430px){.index-page-controls,.index-wallet-actions,.index-legal-links{grid-template-columns:1fr!important}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":["WebApplication","Dataset"],"name":"JCS Prayer Map","url":"https://jesuschristsavestoken.com/prayer.map.html","softwareVersion":"5.0.0","applicationCategory":"DataVisualizationApplication","isAccessibleForFree":true,"description":"Privacy-thresholded visualization of validated JCS prayer records on XRPL alongside separately sourced Christian-pressure and religious-freedom evidence.","publisher":{"@type":"Organization","name":"Jesus Christ Saves Token","url":"https://jesuschristsavestoken.com/"},"measurementTechnique":["Validated XRP Ledger account_tx scan","NFTokenMint validation","thresholded distinct-account aggregation","Open Doors World Watch List 2026","USCIRF 2026 recommendations"],"distribution":{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://jesuschristsavestoken.com/jcs-prayer-map-protocol.json"}}</script>
+<script id="jcsPrayerMapProtocol" type="application/json">{"schema":"jcs-prayer-map-protocol-v2","release":"5.0.0","canonical":"https://jesuschristsavestoken.com/prayer.map.html","network":"XRPL Mainnet","collector":"rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd","prayerNftTaxon":1246974803,"acceptedRegistryTags":["JCS_SOCIAL_V6","JCS_SOCIAL_V5","JCS_SOCIAL_V4","JCS_SOCIAL_V3","JCS_SOCIAL_V2"],"currentRegistryTag":"JCS_SOCIAL_V6","mapPolicy":"JCS_MAP_1","publicThresholds":{"broadRegionDistinctAccounts":5,"countryDistinctAccounts":10,"extremePressureCountryDistinctAccounts":20,"supportConnectionDistinctAccounts":10,"publicCountsRoundedDownTo":5},"handoff":{"schema":"jcs-prayer-map-refresh-v1","allowedFields":["schema","action","ledger_validation_required"],"action":"refresh-ledger","ledgerValidationRequired":true,"containsRecordIdentifiers":false,"containsLocation":false,"containsMessage":false},"mapRules":{"noGpsInference":true,"noIpGeolocation":true,"noWalletGeolocation":true,"noRelayGeolocation":true,"noTransactionRouteGeolocation":true,"publicMarkersAreThresholdedAggregates":true,"supportConnectionsAreAggregateNotRoutes":true},"privateCapsule":{"schema":"jcs-private-capsule-v1","transportSchema":"jcs-private-capsule-transport-v1","keySchema":"jcs-private-capsule-key-v1","backupSchema":"jcs-private-capsule-backup-v1","encryption":"AES-256-GCM","ivBits":96,"tagBits":128,"fingerprint":"SHA-256","paddingBucketBytes":512,"defaultMode":"local-only","publicReceipt":{"optional":true,"transactionType":"NFTokenMint","taxon":1245926211,"uriPattern":"jcs:receipt:v1:<sha256>","publicFields":["app","kind","hash","code","domain"],"forbiddenPublicFields":["plaintext","recoveryKey","exactLocation","route","identity","contact","prayerText","country","region"]},"warning":"A public NFT links the submitting wallet to a neutral receipt event. High-risk users should prefer local-only encryption and a trusted off-ledger channel."},"sources":{"christianPressure":"Open Doors World Watch List 2026","religiousFreedom":"USCIRF 2026 recommendations","mediaContext":"GDELT GEO 2.0 optional seven-day signals","prayerEvidence":"Validated XRP Ledger account_tx and NFTokenMint verification"}}</script>
+
+<style id="jcs-prayer-map-v500">
+/* Prayer Map v5.0 · canonical JCS shell + live prayer network + private capsule */
+html[data-theme="light"]{
+  --bg:#eef5fb;--surface:#ffffff;--surface-2:#f4f8fc;--surface-3:#e5eef7;--line:rgba(42,74,103,.20);--line-strong:rgba(42,74,103,.38);
+  --ink:#0b1724;--muted:#52677a;--faint:#71889c;--blue:#166bb7;--blue-2:#1652f0;--gold:#9b6b10;--green:#087f5b;--amber:#b85f08;--red:#be3249;
+  --neutral-country:#c9d9e7;--ocean:#d8edf7;--shadow:0 18px 52px rgba(15,23,42,.13);color-scheme:light;
+}
+html[data-theme="light"] body{background:#eef5fb}
+html[data-theme="light"] #world-map>rect{fill:#d8edf7}
+html[data-theme="light"] .map-toolbar,html[data-theme="light"] .map-actions .button,html[data-theme="light"] .map-caption,html[data-theme="light"] .map-tooltip{background:rgba(255,255,255,.94);color:var(--ink)}
+html[data-theme="light"] .country{stroke:rgba(42,74,103,.42)}
+html[data-theme="light"] .analysis-panel{background:var(--surface)}
+html[data-theme="light"] .panel-section{background:rgba(255,255,255,.92)}
+html[data-theme="light"] .search-label input{background:#fff;color:var(--ink)}
+html[data-theme="light"] .country-button{background:#f7fafc;color:var(--ink)}
+html[data-theme="light"] .score-track{background:#d7e2ec}
+
+body{height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr)}
+.app{height:auto!important;min-height:0!important;grid-template-rows:minmax(0,1fr)!important}
+.workspace{min-height:0}
+.jcs-index-header{grid-row:1}
+.jcs-index-header [hidden]{display:none!important}
+.map-intro{border-color:rgba(86,200,255,.34);background:linear-gradient(145deg,rgba(86,200,255,.07),transparent),rgba(14,31,49,.78)}
+html[data-theme="light"] .map-intro{background:linear-gradient(145deg,rgba(22,107,183,.07),transparent),#fff}
+.map-intro .eyebrow{display:inline-flex;padding:4px 8px;border:1px solid rgba(86,200,255,.34);border-radius:999px;color:var(--blue);font-size:.64rem;font-weight:950;letter-spacing:.06em;text-transform:uppercase}
+.map-intro h1{margin:9px 0 5px;font-size:1.28rem;line-height:1.15}.map-intro p{margin:0;color:var(--muted);font-size:.76rem}
+.map-intro-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}.map-intro-actions .button,.map-intro-actions .link-button{min-height:36px;padding:7px 10px;font-size:.7rem}
+.integrity-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:11px}
+.integrity-cell{padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.integrity-cell span{display:block;color:var(--muted);font-size:.58rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.integrity-cell strong{display:block;margin-top:3px;font-size:.72rem;overflow-wrap:anywhere}
+.map-toolbar-note{margin:1px 0 5px;color:var(--faint);font-size:.65rem;line-height:1.35}.map-toolbar h2{font-size:.73rem}
+.map-actions{flex-wrap:wrap;justify-content:flex-end}.map-actions .button{white-space:nowrap}
+.public-focus-list{display:grid;gap:7px;margin-top:10px}.public-focus-item{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.public-focus-item strong{display:block;font-size:.76rem}.public-focus-item span{display:block;margin-top:2px;color:var(--muted);font-size:.65rem}.public-focus-item.empty{color:var(--muted)}
+
+.capsule-section{border-color:rgba(85,214,158,.34);background:linear-gradient(145deg,rgba(85,214,158,.055),transparent),rgba(14,31,49,.78)}
+html[data-theme="light"] .capsule-section{background:linear-gradient(145deg,rgba(8,127,91,.05),transparent),#fff}
+.capsule-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.capsule-head h3{margin:0;font-size:1rem}.capsule-head p{margin:5px 0 0;color:var(--muted);font-size:.72rem;line-height:1.45}
+.capsule-state{padding:3px 7px;border:1px solid rgba(85,214,158,.44);border-radius:999px;color:var(--green);font-size:.6rem;font-weight:900;white-space:nowrap}
+.safety-banner{margin-top:10px;padding:10px;border:1px solid rgba(255,209,102,.35);border-left:4px solid var(--gold);border-radius:10px;background:rgba(255,209,102,.06);color:var(--muted);font-size:.69rem;line-height:1.45}.safety-banner strong{color:var(--ink)}
+.capsule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.capsule-field{display:grid;gap:5px}.capsule-field.full{grid-column:1/-1}.capsule-field label{color:var(--ink);font-size:.68rem;font-weight:850}.capsule-field small{color:var(--faint);font-size:.62rem}
+.capsule-field input,.capsule-field textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:#071421;color:var(--ink);padding:8px 9px;outline:none}.capsule-field textarea{min-height:110px;resize:vertical}
+html[data-theme="light"] .capsule-field input,html[data-theme="light"] .capsule-field textarea{background:#fff}
+.capsule-field input:focus,.capsule-field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 16%,transparent)}
+.capsule-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.capsule-actions .button{min-height:36px;padding:7px 10px;font-size:.68rem}.capsule-actions .safe{border-color:rgba(85,214,158,.5);background:rgba(85,214,158,.08)}.capsule-actions .public{border-color:rgba(255,209,102,.5);background:rgba(255,209,102,.08)}
+.capsule-output{margin-top:10px;padding:10px;border:1px dashed var(--line);border-radius:10px;background:var(--surface-2);color:var(--muted);font:650 .62rem/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto}.capsule-output[hidden]{display:none}
+.capsule-check{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:9px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:.66rem}.capsule-check input{width:17px;height:17px;flex:0 0 17px;margin-top:1px}
+.capsule-decrypt{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.capsule-decrypt h4{margin:0;font-size:.78rem}.capsule-decrypt p{margin:4px 0 0;color:var(--muted);font-size:.66rem}
+.capsule-resource-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.capsule-resource{padding:9px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2)}.capsule-resource strong{display:block;font-size:.69rem}.capsule-resource p{margin:3px 0 6px;color:var(--muted);font-size:.63rem}.capsule-resource a{font-size:.65rem;font-weight:850}
+.capsule-sign-panel{position:fixed;z-index:4000;right:18px;bottom:18px;width:min(450px,calc(100% - 36px));padding:16px;border:1px solid rgba(255,209,102,.46);border-radius:16px;background:var(--surface);box-shadow:0 30px 100px rgba(0,0,0,.5)}.capsule-sign-panel[hidden]{display:none}.capsule-sign-panel h3{margin:0}.capsule-sign-panel p{margin:5px 0;color:var(--muted);font-size:.72rem}.capsule-code{margin:10px 0;padding:11px;border:2px solid var(--gold);border-radius:11px;text-align:center;font-size:1.25rem;font-weight:950;letter-spacing:.13em}.capsule-sign-actions{display:flex;flex-wrap:wrap;gap:7px}.capsule-sign-actions a,.capsule-sign-actions button{font-size:.68rem}
+.capsule-qr{width:140px;height:140px;margin-top:9px;border-radius:10px;background:#fff;object-fit:contain}.capsule-qr[hidden]{display:none}
+
+body.map-sanctuary-mode .research-heavy{display:none!important}
+body.map-ledger-focus .research-heavy{display:none!important}
+body.map-ledger-focus #media-layer{display:none!important}
+body.map-ledger-focus #world-map .country{fill:var(--neutral-country)!important}
+body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .uscirf-swl{stroke:rgba(146,190,220,.42)!important;stroke-width:.55!important;stroke-dasharray:none!important}
+
+@media(max-width:1100px){.integrity-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.capsule-grid{grid-template-columns:1fr}.capsule-field.full{grid-column:auto}}
+@media(max-width:920px){body{height:auto;display:block;overflow:auto}.app{height:auto!important;min-height:100vh!important}.workspace{grid-template-rows:minmax(620px,72vh) auto}.map-actions{top:258px}.analysis-panel{overflow:visible}}
+@media(max-width:640px){.integrity-strip,.capsule-resource-grid{grid-template-columns:1fr}.map-actions{top:272px;right:9px;left:9px;justify-content:flex-end}.map-actions .button{min-height:36px;padding:6px 8px;font-size:.68rem}.capsule-head{display:block}.capsule-state{display:inline-flex;margin-top:7px}}
+@media(max-width:430px){.map-actions{top:300px}.capsule-actions{display:grid}.capsule-actions .button{width:100%}}
+</style>
 </head>
 
-<body>
-  <a class="skip-link" href="#analysis-panel">Skip to statistics and sources</a>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-  <main class="app">
-    <header class="topbar">
-      <div class="brand">
-        <h1>Christian Pressure &amp; XRPL Prayer Map</h1>
-        <p>Published evidence · current media signals · validated, privacy-preserving prayer records</p>
+<header class="site-header jcs-home-header jcs-index-header" role="banner">
+  <div class="jcs-index-header-shell">
+    <div class="index-header-top">
+      <a aria-label="Jesus Christ Saves Token home" class="index-brand" href="./">
+        <img alt="" height="40" src="./jcs-logo.png" width="40"/>
+        <span class="brand-copy">
+          <span class="brand-title">Jesus Christ Saves Token</span>
+          <span class="brand-subtitle">JCS · Faith · Fellowship · Native XRPL exchange</span>
+        </span>
+      </a>
+
+      <button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
+        <span aria-hidden="true" class="menu-icon">☰</span>
+        <span class="menu-label">Menu</span>
+      </button>
+
+      <div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
+        <nav aria-label="Related XRP Ledger ecosystem projects" class="index-ecosystem-links">
+          <a class="index-ecosystem-link xrbc-link" href="https://xrbitcoincash.com/" rel="noopener noreferrer" target="_blank">XRBitcoinCash</a>
+          <a class="index-ecosystem-link xrbitcoin-link" href="https://xrbitcoincash.com/xrbitcoin-links.html" rel="noopener noreferrer" target="_blank">XRBitcoin</a>
+          <a class="index-ecosystem-link creature-link" href="https://xrbitcoincash.com/creature-nft-links.html" rel="noopener noreferrer" target="_blank">Creature NFT</a>
+        </nav>
+
+        <div aria-label="Prayer workspace and display controls" class="index-page-controls">
+          <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Reduce research-heavy panels and keep prayer, support and the map prominent" type="button">Sanctuary mode</button>
+          <button aria-pressed="false" class="index-control-button exchange-control" id="ledgerFocusBtn" title="Focus the map on validated XRPL prayer, support and evidence layers" type="button">Ledger focus</button>
+          <button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
+            <span aria-hidden="true" id="themeToggleIcon">◐</span>
+            <span id="themeToggleText">Light mode</span>
+          </button>
+        </div>
+
+        <div aria-label="Xaman wallet controls" class="index-wallet-actions">
+          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
+          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
+          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+        </div>
+
+        <nav aria-label="Project policies and support" class="index-legal-links">
+          <a href="./terms.html">Terms</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="./security.html">Security</a>
+          <a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a>
+          <a href="./ai.json">AI Manifest</a>
+        </nav>
       </div>
-      <div class="top-actions">
-        <a class="link-button" href="verify.html">Sign or verify a prayer</a>
-        <button class="button" id="refresh-button" type="button">Refresh live layers</button>
-      </div>
-    </header>
+    </div>
+
+    <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
+      <a class="nav-btn" href="./">Home</a>
+      <a class="nav-btn" href="./#trade">Trade</a>
+      <a class="nav-btn" href="./#fellowship">Fellowship</a>
+      <a class="nav-btn" href="./#scripture">Scripture</a>
+      <a class="nav-btn" href="./#sacred-film">Sacred Film</a>
+      <a class="nav-btn" href="./#audio">Sacred Audio</a>
+      <a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
+      <a aria-current="page" class="nav-btn" href="./prayer.map.html">Prayer Map</a>
+      <a class="nav-btn" href="./metrics.html">Market Monitor</a>
+      <a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
+      <a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+    </nav>
+  </div>
+</header>
+  <noscript><p class="noscript-notice">JavaScript is disabled. The annual evidence remains readable, but live XRPL refresh, Prayer Map synchronization, Xaman receipt minting and local encryption/decryption require JavaScript.</p></noscript>
+
+  <main class="app" id="main">
 
     <div class="workspace">
       <section class="map-shell" aria-label="Interactive global evidence map">
         <div class="map-toolbar" aria-label="Map layers">
-          <h2>Independent map layers</h2>
+          <h2>Prayer Map layers</h2>
+          <p class="map-toolbar-note" id="handoff-status">Waiting for validated XRPL refresh or Verify-page handoff.</p>
           <label class="layer-switch">
             <input id="pressure-toggle" type="checkbox" checked>
             <strong>Christian pressure</strong>
@@ -981,9 +1413,16 @@
             <strong>XRPL prayer records</strong>
             <span class="layer-state" id="xrpl-map-state">Cached</span>
           </label>
+          <label class="layer-switch">
+            <input id="network-toggle" type="checkbox" checked>
+            <strong>Aggregate support</strong>
+            <span class="layer-state" id="network-map-state">0 links</span>
+          </label>
         </div>
 
         <div class="map-actions" aria-label="Map controls">
+          <button class="button" id="refresh-button" type="button">Refresh live layers</button>
+          <button class="button" id="export-live-button" type="button">Export live map JSON</button>
           <button class="button" id="reset-map-button" type="button">Reset view</button>
         </div>
 
@@ -999,13 +1438,14 @@
             Countries are colored by the Open Doors World Watch List 2026 score.
             Gold outlines show USCIRF 2026 recommendations. Amber diamonds are optional
             current media-location signals. Blue circles are thresholded, voluntarily
-            published broad-region XRPL prayer records.
+            published prayer-focus aggregates. Colored curves are thresholded aggregate support relationships; they are not travel, extraction, escape, transaction or participant-location routes.
           </desc>
           <rect width="1000" height="500" fill="#071a2a"></rect>
           <g id="grid-layer" aria-hidden="true"></g>
           <g id="country-layer"></g>
           <g class="map-group" id="media-layer" aria-label="Current media signals"></g>
-          <g class="map-group" id="prayer-layer" aria-label="Thresholded XRPL prayer regions"></g>
+          <g class="map-group" id="network-layer" aria-label="Thresholded aggregate community-support connections"></g>
+          <g class="map-group" id="prayer-layer" aria-label="Thresholded XRPL prayer-focus areas"></g>
         </svg>
 
         <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div>
@@ -1017,7 +1457,23 @@
       </section>
 
       <aside class="analysis-panel" id="analysis-panel" tabindex="-1" aria-label="Statistics, methods, and sources">
-        <section class="panel-section">
+        <section class="panel-section map-intro">
+          <span class="eyebrow">JCS Prayer Map v5 · live XRPL evidence · privacy thresholds</span>
+          <h1>Prayer, pressure &amp; verified support signals</h1>
+          <p>Sign the Ledger publishes the validated registry record; this page independently re-reads XRPL and releases only threshold-qualified prayer/support aggregates. Annual persecution research, official religious-freedom concern, media attention and prayer activity remain separate measurements.</p>
+          <div class="map-intro-actions">
+            <a class="link-button" href="./verify.html">Sign or map a prayer</a>
+            <button class="button" id="download-protocol-button" type="button">Download map protocol JSON</button>
+          </div>
+          <div class="integrity-strip" aria-label="Map integrity state">
+            <div class="integrity-cell"><span>Registry protocol</span><strong>JCS_SOCIAL_V6</strong></div>
+            <div class="integrity-cell"><span>Public map groups</span><strong id="public-area-count">0</strong></div>
+            <div class="integrity-cell"><span>Latest XRPL ledger</span><strong id="last-ledger-index">—</strong></div>
+            <div class="integrity-cell"><span>Last XRPL snapshot</span><strong id="last-xrpl-refresh">Audited fallback</strong></div>
+          </div>
+        </section>
+
+        <section class="panel-section overview-section">
           <h2>What this map can establish</h2>
           <p class="lede">
             The country layer summarizes published research about pressure and violence
@@ -1042,19 +1498,35 @@
               <small>Prayer / testimony registry</small>
             </div>
             <div class="metric">
-              <span>Mapped broad region</span>
+              <span>Map-focus labeled</span>
               <strong id="mapped-count">0</strong>
               <small>Voluntarily published only</small>
             </div>
             <div class="metric">
-              <span>NFT region not published</span>
+              <span>NFT map focus not published</span>
               <strong id="unlocated-count">7</strong>
               <small>Counted, never guessed</small>
+            </div>
+            <div class="metric">
+              <span>Community responses</span>
+              <strong id="response-count">0</strong>
+              <small>Replies with a resolved parent</small>
+            </div>
+            <div class="metric">
+              <span>Public support relationships</span>
+              <strong id="connection-count">0</strong>
+              <small>Aggregate threshold met</small>
             </div>
           </div>
         </section>
 
         <section class="panel-section">
+          <h3>Public prayer groups now visible on the map</h3>
+          <p class="method-note">Only threshold-qualified groups appear here. Counts are rounded down to five-record bands; no wallet, message, exact time, NFT owner or transaction hash is exposed.</p>
+          <div class="public-focus-list" id="public-focus-list"><div class="public-focus-item empty">No threshold-qualified prayer groups are present in the fallback snapshot.</div></div>
+        </section>
+
+        <section class="panel-section research-heavy">
           <h3>Source health &amp; freshness</h3>
           <div class="source-grid">
             <article class="source-card">
@@ -1088,7 +1560,7 @@
           </div>
         </section>
 
-        <section class="panel-section">
+        <section class="panel-section research-heavy">
           <h3>Map key</h3>
           <ul class="legend-list">
             <li class="legend-item"><span class="swatch extreme" aria-hidden="true"></span><span><strong>Extreme:</strong> WWL score 81–100</span></li>
@@ -1098,11 +1570,12 @@
             <li class="legend-item"><span class="swatch cpc" aria-hidden="true"></span><span><strong>Solid gold:</strong> USCIRF recommended CPC</span></li>
             <li class="legend-item"><span class="swatch swl" aria-hidden="true"></span><span><strong>Dashed gold:</strong> USCIRF recommended Special Watch List</span></li>
             <li class="legend-item"><span class="swatch media" aria-hidden="true"></span><span><strong>Amber diamond:</strong> automated seven-day media-location signal</span></li>
-            <li class="legend-item"><span class="swatch prayer" aria-hidden="true"></span><span><strong>Blue circle:</strong> public broad region with at least five XRPL records</span></li>
+            <li class="legend-item"><span class="swatch prayer" aria-hidden="true"></span><span><strong>Blue circle:</strong> threshold-qualified prayer-focus aggregate</span></li>
+            <li class="legend-item"><span class="swatch" style="background:#4da8df" aria-hidden="true"></span><span><strong>Colored curve:</strong> thresholded aggregate support relationship; never a travel, escape, extraction or transaction route</span></li>
           </ul>
         </section>
 
-        <section class="panel-section" aria-live="polite">
+        <section class="panel-section research-heavy" aria-live="polite">
           <h3>Selected country</h3>
           <div class="detail-title">
             <strong id="detail-country">North Korea</strong>
@@ -1146,12 +1619,12 @@
           </div>
         </section>
 
-        <section class="panel-section">
+        <section class="panel-section research-heavy">
           <h3>Statistical reading</h3>
           <ul class="analysis-list" id="analysis-list"></ul>
         </section>
 
-        <section class="panel-section">
+        <section class="panel-section research-heavy">
           <h3>World Watch List 2026 · all 50</h3>
           <label class="search-label" for="country-search">
             Find a ranked country
@@ -1160,15 +1633,72 @@
           <ol class="country-list" id="country-list"></ol>
         </section>
 
-        <section class="panel-section">
+        <section class="panel-section capsule-section" id="private-capsule">
+          <div class="capsule-head">
+            <div>
+              <h3>Private Capsule · local encrypted communication</h3>
+              <p>Create an encrypted message in this browser, send the ciphertext package through a channel you trust, and give the recovery key separately. The optional NFT is a neutral fingerprint receipt only; it is never a map marker.</p>
+            </div>
+            <span class="capsule-state" id="capsule-state">Local-only by default</span>
+          </div>
+          <div class="safety-banner"><strong>High-risk safety boundary:</strong> do not enter escape routes, safe-house addresses, current GPS/location, identity documents, passwords, seed phrases, private keys, names of vulnerable third parties or operational movement plans. If a public wallet link could put someone at risk, do not mint the optional receipt—use local encryption only.</div>
+          <div class="capsule-grid">
+            <div class="capsule-field full">
+              <label for="capsule-message">Private message</label>
+              <textarea id="capsule-message" maxlength="2400" placeholder="Write only the minimum information necessary for prayer, pastoral care, digital-safety help, or general support. Avoid exact locations and operational travel details."></textarea>
+              <small>The plaintext is encrypted locally. Message length is padded into 512-byte buckets before encryption to reduce exact-length leakage.</small>
+            </div>
+            <div class="capsule-field">
+              <label for="capsule-contact">Private reply/contact note · optional</label>
+              <input id="capsule-contact" maxlength="160" placeholder="An alias or private contact method, if appropriate">
+            </div>
+            <div class="capsule-field">
+              <label for="capsule-label">Private case label · optional</label>
+              <input id="capsule-label" maxlength="80" placeholder="Pastoral support · digital safety · prayer">
+            </div>
+          </div>
+          <label class="capsule-check"><input id="capsule-safety-ack" type="checkbox"><span>I understand this page is not an emergency service, does not hide a compromised device, and cannot make a public blockchain transaction anonymous. I have removed exact routes/locations and secret credentials.</span></label>
+          <div class="capsule-actions">
+            <button class="button safe" id="capsule-encrypt" type="button">Encrypt private capsule</button>
+            <button class="button" id="capsule-download-transport" type="button" disabled>Download ciphertext JSON</button>
+            <button class="button" id="capsule-download-key" type="button" disabled>Download key card</button>
+            <button class="button" id="capsule-download-backup" type="button" disabled>Download private backup</button>
+          </div>
+          <div class="capsule-output" id="capsule-output" hidden></div>
+          <label class="capsule-check"><input id="capsule-public-ack" type="checkbox" disabled><span>I saved the private recovery material and understand that minting creates a permanent public wallet-linked receipt. The NFT contains only a neutral fingerprint/code/domain—not the message, key, map focus, country, region or route.</span></label>
+          <div class="capsule-actions">
+            <button class="button public" id="capsule-mint" type="button" disabled>Optional · mint neutral fingerprint NFT</button>
+            <button class="button" id="capsule-download-receipt" type="button" disabled>Download receipt evidence</button>
+          </div>
+          <div class="capsule-decrypt">
+            <h4>Local decrypter</h4>
+            <p>Paste the ciphertext transport JSON and the separate key card. Decryption happens locally; neither value is submitted to JCS, XRPL or the map.</p>
+            <div class="capsule-grid">
+              <div class="capsule-field full"><label for="capsule-transport-input">Ciphertext transport JSON</label><textarea id="capsule-transport-input" placeholder="Paste jcs-private-capsule-transport-v1 JSON"></textarea></div>
+              <div class="capsule-field full"><label for="capsule-key-input">Key card JSON</label><textarea id="capsule-key-input" placeholder="Paste jcs-private-capsule-key-v1 JSON"></textarea></div>
+            </div>
+            <div class="capsule-actions"><button class="button safe" id="capsule-decrypt" type="button">Decrypt locally</button><button class="button" id="capsule-clear" type="button">Clear private fields</button></div>
+            <div class="capsule-output" id="capsule-decrypt-output" hidden></div>
+          </div>
+          <div class="capsule-resource-grid">
+            <article class="capsule-resource"><strong>Digital-security emergency</strong><p>For human-rights defenders and civil society under digital threat, use a specialist service rather than relying on this experimental page.</p><a href="https://www.accessnow.org/help/" target="_blank" rel="noopener noreferrer">Access Now Digital Security Helpline</a></article>
+            <article class="capsule-resource"><strong>Persecution research &amp; prayer context</strong><p>Country conditions and prayer guidance should come from the current source dossier, not from a map score alone.</p><a href="https://www.opendoors.org/en-US/research-reports/country-dossiers/" target="_blank" rel="noopener noreferrer">Open Doors country dossiers</a></article>
+          </div>
+        </section>
+
+        <section class="panel-section research-heavy">
           <details>
             <summary>Location and privacy rules</summary>
             <ul>
-              <li>Existing NFT and registry records without a structured region remain visible in totals as “region not published.”</li>
+              <li>Existing NFT and registry records without a structured focus remain visible in totals as “map focus not published.”</li>
               <li>No location is inferred from an XRPL node, validator, wallet, transaction route, name, prayer text, IP address, browser, or Xaman device.</li>
-              <li>Current JCS V5 records may contain one author-declared continent-scale region in a signed public memo.</li>
-              <li>Public circles require at least five records. Wallets, transaction hashes, NFT owners, exact times, and prayer text are never shown on this map.</li>
-              <li>A future verification form should ask for the prayer’s broad focus—not a vulnerable person’s physical location.</li>
+              <li>JCS V6 records may contain one voluntary prayer-focus or support-focus country/region in signed public memos. It describes what the record concerns, not where the signer is.</li>
+              <li>Broad regions require at least 5 distinct signing accounts; countries require 10, and extreme-pressure countries require 20. Connections require qualifying source and destination groups, distinct parent prayers, and distinct responders.</li>
+              <li>Published area and connection totals are rounded down to five-record bands so a live refresh does not identify a single new contribution.</li>
+              <li>Support curves are descriptive aggregate relationships only. They must never be interpreted as travel paths, extraction routes, safe corridors, movement plans, or transaction routing.</li>
+              <li>These thresholds reduce casual exposure but cannot make public ledger activity anonymous. The map never uses a mileage-radius or synthetic personal coordinate.</li>
+              <li>Public circles require the applicable distinct-account threshold. Wallets, transaction hashes, NFT owners, exact times, and prayer text are never shown on this map.</li>
+              <li>The connected verification form asks for the prayer’s broad focus—not a vulnerable person’s physical location.</li>
             </ul>
           </details>
 
@@ -1176,7 +1706,8 @@
             <summary>How the XRPL reader works</summary>
             <ul>
               <li>Scans validated <code>account_tx</code> history for the JCS collector <code>rPU6…RyYKd</code>.</li>
-              <li>Accepts JCS V1–V5 public post registry payments and parses only allowlisted memo fields.</li>
+              <li>Accepts JCS V1–V6 public post registry payments and parses only allowlisted memo fields.</li>
+              <li>Resolves V6 community replies to parent prayer records, then releases only aggregate links that satisfy both endpoint and diversity thresholds.</li>
               <li>Recognizes the current prayer NFT taxon <code>1246974803</code> and verifies referenced mint transactions when live transport permits.</li>
               <li>Uses four public WebSocket endpoints in sequence, then the existing read-only Render proxy as a fallback.</li>
               <li>Replaces the embedded audited snapshot only if the immutable ledger totals do not regress.</li>
@@ -1193,6 +1724,12 @@
             </ul>
           </details>
 
+          <details>
+            <summary>Machine-readable map contract</summary>
+            <p>The page publishes <code>jcs-prayer-map-protocol-v2</code> so Verify, future JCS tools, auditors and AI systems can distinguish prayer registry tags, privacy thresholds, refresh handoffs, map display rules and the separate Private Capsule protocol.</p>
+            <button class="button" id="download-protocol-button-secondary" type="button">Download protocol JSON</button>
+          </details>
+
           <div class="source-links" aria-label="Primary sources">
             <a href="https://www.opendoors.org/en-US/persecution/countries/" target="_blank" rel="noopener noreferrer">Open Doors World Watch List 2026 countries</a>
             <a href="https://www.opendoors.org/persecution/Top_50_Poster_Map-WWL2026-ODI.pdf" target="_blank" rel="noopener noreferrer">Open Doors 2026 scores and map (PDF)</a>
@@ -1201,10 +1738,13 @@
             <a href="https://www.uscirf.gov/news-room/releases-statements/uscirf-releases-2026-annual-report-exposes-egregious-religious" target="_blank" rel="noopener noreferrer">USCIRF 2026 Annual Report release</a>
             <a href="https://blog.gdeltproject.org/gdelt-geo-2-0-api-debuts/" target="_blank" rel="noopener noreferrer">GDELT GEO 2.0 documentation</a>
             <a href="https://xrpl.org/docs/references/http-websocket-apis/public-api-methods/account-methods/account_tx" target="_blank" rel="noopener noreferrer">XRPL account_tx documentation</a>
+            <a href="https://xrpl.org/docs/references/protocol/data-types/nftoken" target="_blank" rel="noopener noreferrer">XRPL NFToken / immutable URI limits</a>
+            <a href="https://www.w3.org/TR/security-guidelines-cryptography/" target="_blank" rel="noopener noreferrer">W3C cryptography guidance · authenticated encryption</a>
+            <a href="https://www.accessnow.org/help/" target="_blank" rel="noopener noreferrer">Access Now Digital Security Helpline</a>
           </div>
           <p class="method-note">
             WWL data © Open Doors International, used with attribution. Geometry made
-            with Natural Earth (public domain). Page data edition: 2026-08-28.
+            with Natural Earth (public domain). Annual evidence edition: 2026 · Prayer Map interface v5.0.0 · live XRPL layer refreshes independently.
           </p>
         </section>
 
@@ -1212,6 +1752,15 @@
       </aside>
     </div>
   </main>
+
+
+<aside class="capsule-sign-panel" id="capsuleSignPanel" hidden aria-live="polite">
+  <h3>Review neutral receipt in Xaman</h3>
+  <p id="capsuleSignText">Verify every field before signing.</p>
+  <div class="capsule-code" id="capsuleSignCode">Code: —</div>
+  <div class="capsule-sign-actions"><a class="button" id="capsuleXamanLink" href="#" target="_blank" rel="noopener" hidden>Open in Xaman</a><button class="button" id="capsuleSignClose" type="button">Close</button></div>
+  <img class="capsule-qr" id="capsuleQr" alt="Xaman signing QR" hidden>
+</aside>
 
   <script>
   (() => {
@@ -1223,19 +1772,29 @@
     const DEFAULT_VIEWBOX = [0, 0, MAP_WIDTH, MAP_HEIGHT];
     const COLLECTOR = "rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd";
     const NFT_TAXON = 1246974803;
-    const APP_TAGS = new Set(["JCS_SOCIAL_V5", "JCS_SOCIAL_V4", "JCS_SOCIAL_V3", "JCS_SOCIAL_V2"]);
+    const APP_TAGS = new Set(["JCS_SOCIAL_V6", "JCS_SOCIAL_V5", "JCS_SOCIAL_V4", "JCS_SOCIAL_V3", "JCS_SOCIAL_V2"]);
     const LEGACY_TAG = "JCS_VERIFY_V1";
-    const MIN_PUBLIC_REGION_COUNT = 5;
+    const MAP_POLICY = "JCS_MAP_1";
+    const MIN_PUBLIC_REGION_ACCOUNTS = 5;
+    const MIN_PUBLIC_COUNTRY_ACCOUNTS = 10;
+    const MIN_EXTREME_COUNTRY_ACCOUNTS = 20;
+    const MIN_PUBLIC_EDGE_ACCOUNTS = 10;
     const XRPL_PAGE_LIMIT = 200;
     const XRPL_MAX_PAGES = 12;
     const REQUEST_TIMEOUT_MS = 12000;
     const MEDIA_REFRESH_MS = 20 * 60 * 1000;
-    const XRPL_CACHE_KEY = "jcs.prayer.map.xrpl.aggregate.v4";
-    const MEDIA_CACHE_KEY = "jcs.prayer.map.media.aggregate.v4";
-    const CACHE_SCHEMA = 4;
+    const XRPL_CACHE_KEY = "jcs.prayer.map.xrpl.aggregate.v6";
+    const MEDIA_CACHE_KEY = "jcs.prayer.map.media.aggregate.v6";
+    const CACHE_SCHEMA = 6;
     const OPTIONAL_PROXY = "https://xrbitcoincash-github-io.onrender.com/";
     const OPTIONAL_MEDIA_PROXY = "https://xrbitcoincash-github-io.onrender.com/prayer-map/media-signals";
     const HASH_256 = /^[A-F0-9]{64}$/;
+    const MAP_SIGNAL_KEY = "jcs.prayer.map.signals.v1";
+    const MAP_FOCUS_KEY = "jcs.prayer.map.focus.v1";
+    const MAP_CHANNEL_NAME = "jcs-prayer-map";
+    const RESPONSE_TYPES = new Set(["prayer", "encouragement", "resource", "practical-help", "follow-up"]);
+    const SENSITIVE_MEMO_KEYS = new Set(["app", "kind", "parent", "map", "role", "scope", "country", "region", "policy", "nft", "minttx", "hash"]);
+    const FORBIDDEN_LOCATION_MEMOS = new Set(["lat", "lng", "latitude", "longitude", "gps", "coords", "coordinate", "city", "postal", "postcode", "ip", "node", "relay"]);
 
     const REGION_DEFINITIONS = {
       none: { label: "Region not published", centroid: null },
@@ -1337,6 +1896,11 @@
       mappedNfts: 0,
       unlocatedNfts: 7,
       regions: {},
+      countries: {},
+      focusGroups: [],
+      supportGroups: [],
+      connections: [],
+      interactionTotals: { replies: 0, supports: 0, amens: 0, mappedResponses: 0, resolvedResponses: 0, publicConnections: 0 },
       byMonth: {},
       byDay: {},
       latestLedger: null,
@@ -1353,6 +1917,7 @@
       grid: document.getElementById("grid-layer"),
       countries: document.getElementById("country-layer"),
       mediaLayer: document.getElementById("media-layer"),
+      networkLayer: document.getElementById("network-layer"),
       prayerLayer: document.getElementById("prayer-layer"),
       tooltip: document.getElementById("map-tooltip"),
       refresh: document.getElementById("refresh-button"),
@@ -1361,8 +1926,10 @@
       uscirfToggle: document.getElementById("uscirf-toggle"),
       mediaToggle: document.getElementById("media-toggle"),
       prayerToggle: document.getElementById("prayer-toggle"),
+      networkToggle: document.getElementById("network-toggle"),
       mediaMapState: document.getElementById("media-map-state"),
       xrplMapState: document.getElementById("xrpl-map-state"),
+      networkMapState: document.getElementById("network-map-state"),
       mediaStatus: document.getElementById("media-status"),
       xrplStatus: document.getElementById("xrpl-status"),
       mediaSourceNote: document.getElementById("media-source-note"),
@@ -1372,6 +1939,8 @@
       recordCount: document.getElementById("record-count"),
       mappedCount: document.getElementById("mapped-count"),
       unlocatedCount: document.getElementById("unlocated-count"),
+      responseCount: document.getElementById("response-count"),
+      connectionCount: document.getElementById("connection-count"),
       caption: document.getElementById("map-caption-text"),
       detailCountry: document.getElementById("detail-country"),
       detailRank: document.getElementById("detail-rank"),
@@ -1389,7 +1958,13 @@
       analysisList: document.getElementById("analysis-list"),
       countrySearch: document.getElementById("country-search"),
       countryList: document.getElementById("country-list"),
-      live: document.getElementById("live-status")
+      live: document.getElementById("live-status"),
+      handoffStatus: document.getElementById("handoff-status"),
+      publicAreaCount: document.getElementById("public-area-count"),
+      lastLedgerIndex: document.getElementById("last-ledger-index"),
+      lastXrplRefresh: document.getElementById("last-xrpl-refresh"),
+      publicFocusList: document.getElementById("public-focus-list"),
+      exportLive: document.getElementById("export-live-button")
     };
 
     const WWL_BY_ISO = new Map(WWL_2026.map(function (item) { return [item.iso3, item]; }));
@@ -1399,11 +1974,16 @@
       selectedIso3: "PRK",
       countryElements: new Map(),
       countryNames: new Map(),
+      countryCenters: new Map(),
+      countryIso2ToIso3: new Map(),
       nameToIso: new Map(),
       decodedArcs: new Map(),
       media: [],
       mediaByIso: new Map(),
       xrpl: EMBEDDED_XRPL_SNAPSHOT,
+      network: { posts: [], interactions: [] },
+      mapChannel: null,
+      pendingRefreshHint: false,
       refreshSequence: 0,
       refreshing: false,
       currentViewBox: DEFAULT_VIEWBOX.slice()
@@ -1440,6 +2020,84 @@
       if (level === "very-high") return "Very high";
       if (level === "high") return "High";
       return "Not ranked";
+    }
+
+    function resolveCountryIso3(code) {
+      const normalized = String(code || "").trim().toUpperCase();
+      if (/^[A-Z]{2}$/.test(normalized)) return state.countryIso2ToIso3.get(normalized) || "";
+      if (/^[A-Z]{3}$/.test(normalized) && state.countryElements.has(normalized)) return normalized;
+      return "";
+    }
+
+    function normalizeLedgerFocus(memos, app, expectedRole) {
+      if (Array.from(FORBIDDEN_LOCATION_MEMOS).some(function (key) { return Object.hasOwn(memos, key); })) return null;
+      if (app === "JCS_SOCIAL_V6") {
+        if (memos.map !== "1" || memos.role !== expectedRole || memos.policy !== MAP_POLICY) return null;
+        if (
+          memos.scope === "region" &&
+          REGION_DEFINITIONS[memos.region] &&
+          memos.region !== "none" &&
+          !Object.hasOwn(memos, "country")
+        ) {
+          return { scope: "region", code: memos.region };
+        }
+        if (memos.scope === "country" && !Object.hasOwn(memos, "region")) {
+          const iso3 = resolveCountryIso3(memos.country);
+          if (iso3) return { scope: "country", code: iso3 };
+        }
+        return null;
+      }
+      if (
+        app === "JCS_SOCIAL_V5" &&
+        expectedRole === "prayer-focus" &&
+        REGION_DEFINITIONS[memos.region] &&
+        memos.region !== "none"
+      ) {
+        return { scope: "region", code: memos.region };
+      }
+      return null;
+    }
+
+    function focusKey(focus) {
+      return focus && (focus.scope === "region" || focus.scope === "country")
+        ? focus.scope + ":" + focus.code : "";
+    }
+
+    function focusLabel(focus) {
+      if (!focus) return "Map focus not published";
+      if (focus.scope === "country") return (state.countryNames.get(focus.code) || focus.code) + " prayer focus";
+      return (REGION_DEFINITIONS[focus.code] && REGION_DEFINITIONS[focus.code].label || focus.code) + " prayer focus";
+    }
+
+    function focusLevel(focus) {
+      if (!focus || focus.scope !== "country") return "not-ranked";
+      const wwl = WWL_BY_ISO.get(focus.code);
+      return wwl ? levelForScore(wwl.score) : "not-ranked";
+    }
+
+    function publicThresholdForFocus(focus) {
+      if (!focus) return Number.POSITIVE_INFINITY;
+      if (focus.scope === "region") return MIN_PUBLIC_REGION_ACCOUNTS;
+      const wwl = WWL_BY_ISO.get(focus.code);
+      return wwl && wwl.score >= 81
+        ? MIN_EXTREME_COUNTRY_ACCOUNTS
+        : MIN_PUBLIC_COUNTRY_ACCOUNTS;
+    }
+
+    function publicCountFloor(value) {
+      const count = Math.max(0, Number(value) || 0);
+      return count < 5 ? 0 : Math.floor(count / 5) * 5;
+    }
+
+    function focusPoint(focus) {
+      if (!focus) return null;
+      if (focus.scope === "country") {
+        const center = state.countryCenters.get(focus.code);
+        return center ? [center.x, center.y] : null;
+      }
+      const definition = REGION_DEFINITIONS[focus.code];
+      if (!definition || !definition.centroid || focus.code === "worldwide") return null;
+      return project([definition.centroid[1], definition.centroid[0]]);
     }
 
     function uscirfLabel(iso3) {
@@ -1560,6 +2218,7 @@
       geometries.forEach(function (geometry) {
         const properties = geometry.properties || {};
         const iso3 = String(properties.iso3 || properties.adm0 || properties.mapId || "").toUpperCase();
+        const rawIso2 = iso3 === "TWN" ? "TW" : String(properties.iso2 || "").toUpperCase();
         const name = String(properties.name || iso3 || "Unidentified area");
         if (!iso3 || iso3 === "ATA") return;
 
@@ -1594,10 +2253,27 @@
         path.addEventListener("focus", function () { showCountryTooltip(iso3, null); });
         path.addEventListener("blur", hideTooltip);
 
-        state.countryElements.set(iso3, path);
-        state.countryNames.set(iso3, name);
-        addNameAlias(name, iso3);
         dom.countries.appendChild(path);
+        let representativeArea = 0;
+        try {
+          const box = path.getBBox();
+          representativeArea = Math.max(0, box.width * box.height);
+          const previous = state.countryCenters.get(iso3);
+          if (!previous || representativeArea > previous.area) {
+            state.countryCenters.set(iso3, {
+              x: box.x + box.width / 2,
+              y: box.y + box.height / 2,
+              area: representativeArea
+            });
+            state.countryElements.set(iso3, path);
+            state.countryNames.set(iso3, name);
+          }
+        } catch (_error) {
+          if (!state.countryElements.has(iso3)) state.countryElements.set(iso3, path);
+          if (!state.countryNames.has(iso3)) state.countryNames.set(iso3, name);
+        }
+        if (/^[A-Z]{2}$/.test(rawIso2)) state.countryIso2ToIso3.set(rawIso2, iso3);
+        addNameAlias(name, iso3);
       });
 
       WWL_2026.forEach(function (item) { addNameAlias(item.name, item.iso3); });
@@ -1676,6 +2352,24 @@
       ]);
     }
 
+    function zoomToFocus(focus) {
+      if (!focus) return;
+      if (focus.scope === "country") {
+        zoomToCountry(focus.code);
+        return;
+      }
+      const point = focusPoint(focus);
+      if (!point) return;
+      const width = 320;
+      const height = 210;
+      setViewBox([
+        Math.max(0, Math.min(MAP_WIDTH - width, point[0] - width / 2)),
+        Math.max(0, Math.min(MAP_HEIGHT - height, point[1] - height / 2)),
+        width,
+        height
+      ]);
+    }
+
     function formatSigned(value) {
       if (!Number.isFinite(value)) return "Unavailable";
       if (value === 0) return "No score change";
@@ -1720,13 +2414,25 @@
       const media = state.mediaByIso.get(iso3);
       dom.detailMedia.textContent = media ? mediaDisplay(media) : (state.media.length ? "No returned signal" : "Unavailable");
 
-      if (wwl && wwl.prayerRegion) {
-        const count = Number(state.xrpl.regions[wwl.prayerRegion] || 0);
-        dom.detailPrayer.textContent = count + " record" + (count === 1 ? "" : "s") + " in " + REGION_DEFINITIONS[wwl.prayerRegion].label;
-        dom.detailPrayerNote.textContent = "Broad category only; not a country location";
+      const publicCountry = (state.xrpl.focusGroups || []).find(function (group) {
+        return group.scope === "country" && group.code === iso3;
+      });
+      if (publicCountry) {
+        dom.detailPrayer.textContent = "At least " + publicCountry.count + " threshold-qualified country-focus records";
+        dom.detailPrayerNote.textContent = "At least " + publicCountry.distinctAccounts + " distinct signing accounts; focus is not signer location";
+      } else if (wwl && wwl.prayerRegion) {
+        const publicRegion = (state.xrpl.focusGroups || []).find(function (group) {
+          return group.scope === "region" && group.code === wwl.prayerRegion;
+        });
+        dom.detailPrayer.textContent = publicRegion
+          ? "At least " + publicRegion.count + " public records in " + REGION_DEFINITIONS[wwl.prayerRegion].label
+          : "No threshold-qualified country focus";
+        dom.detailPrayerNote.textContent = publicRegion
+          ? "Broad regional aggregate only; not a country or signer location"
+          : "No country location is inferred";
       } else {
-        dom.detailPrayer.textContent = "No country location claimed";
-        dom.detailPrayerNote.textContent = "XRPL labels are broader than this country";
+        dom.detailPrayer.textContent = "No threshold-qualified country focus";
+        dom.detailPrayerNote.textContent = "No country location is inferred";
       }
 
       announce("Selected " + name + ".");
@@ -1807,6 +2513,7 @@
         ? Math.round((current30 - previous30) / previous30 * 100) + "% change"
         : "not enough records for a stable percentage";
       appendAnalysis(" " + current30 + " public records in the recent 30-day bucket and " + previous30 + " in the preceding bucket; " + comparison + ".", "XRPL timing:");
+      appendAnalysis(" " + Number(state.xrpl.interactionTotals.resolvedResponses || 0) + " community replies resolve to a parsed parent prayer; " + Number(state.xrpl.connections.length || 0) + " aggregate support connections currently satisfy every public threshold. These are community responses, not proof that a prayer was divinely answered.", "Support network:");
       appendAnalysis(" Country scores, media attention density, and prayer records remain on separate scales. They are never added into a single “impact” score.", "No causal index:");
     }
 
@@ -1857,8 +2564,14 @@
       if (!Number.isInteger(value.verifiedNfts) || value.verifiedNfts < EMBEDDED_XRPL_SNAPSHOT.verifiedNfts) return false;
       if (value.publicRecords > 10000000 || value.verifiedNfts > 10000000) return false;
       if (!Number.isInteger(value.mappedRecords) || value.mappedRecords < 0 || value.mappedRecords > value.publicRecords) return false;
-      if (!Number.isInteger(value.unlocatedNfts) || value.unlocatedNfts < 0 || value.unlocatedNfts > value.verifiedNfts) return false;
+      if (!Number.isInteger(value.mappedNfts) || value.mappedNfts < 0 || value.mappedNfts > value.verifiedNfts) return false;
+      if (!Number.isInteger(value.unlocatedNfts) || value.unlocatedNfts !== value.verifiedNfts - value.mappedNfts) return false;
       if (!value.regions || typeof value.regions !== "object") return false;
+      if (!value.countries || typeof value.countries !== "object") return false;
+      if (!Array.isArray(value.focusGroups) || value.focusGroups.length > 500) return false;
+      if (!Array.isArray(value.supportGroups) || value.supportGroups.length > 500) return false;
+      if (!Array.isArray(value.connections) || value.connections.length > 2000) return false;
+      if (!value.interactionTotals || typeof value.interactionTotals !== "object") return false;
       if (!value.byMonth || typeof value.byMonth !== "object") return false;
       if (!value.byDay || typeof value.byDay !== "object") return false;
       const regionEntries = Object.entries(value.regions);
@@ -1866,6 +2579,46 @@
       if (!regionEntries.every(function (entry) {
         return entry[0] !== "none" && Boolean(REGION_DEFINITIONS[entry[0]]) && Number.isInteger(entry[1]) && entry[1] >= 0 && entry[1] <= value.publicRecords;
       })) return false;
+      const countryEntries = Object.entries(value.countries);
+      if (countryEntries.length > 300 || !countryEntries.every(function (entry) {
+        return /^[A-Z]{3}$/.test(entry[0]) && state.countryElements.has(entry[0]) && Number.isInteger(entry[1]) && entry[1] >= 0 && entry[1] <= value.publicRecords;
+      })) return false;
+      if (regionEntries.concat(countryEntries).reduce(function (sum, entry) { return sum + entry[1]; }, 0) > value.mappedRecords) return false;
+      function validFocusGroup(group) {
+        if (!group || !["region", "country"].includes(group.scope)) return false;
+        if (group.scope === "region" && (!REGION_DEFINITIONS[group.code] || group.code === "none" || group.code === "worldwide")) return false;
+        if (group.scope === "country" && (!/^[A-Z]{3}$/.test(group.code) || !state.countryElements.has(group.code))) return false;
+        return Number.isInteger(group.count) && group.count >= 0 && group.count <= 10000000 &&
+          Number.isInteger(group.distinctAccounts) && group.distinctAccounts >= 0 && group.distinctAccounts <= group.count &&
+          Number.isInteger(group.threshold) && group.threshold === publicThresholdForFocus({ scope: group.scope, code: group.code }) &&
+          group.distinctAccounts >= group.threshold &&
+          ["extreme", "very-high", "high", "not-ranked"].includes(group.level);
+      }
+      if (!value.focusGroups.every(validFocusGroup) || !value.supportGroups.every(validFocusGroup)) return false;
+      if (regionEntries.length + countryEntries.length !== value.focusGroups.length) return false;
+      if (!value.focusGroups.every(function (group) {
+        const source = group.scope === "region" ? value.regions : value.countries;
+        return source[group.code] === group.count;
+      })) return false;
+      if (!value.connections.every(function (edge) {
+        if (!edge || !edge.source || !edge.target) return false;
+        const validEndpoint = function (focus) {
+          return focus && ["region", "country"].includes(focus.scope) && (
+            focus.scope === "region"
+              ? Boolean(REGION_DEFINITIONS[focus.code] && focus.code !== "none" && focus.code !== "worldwide")
+              : Boolean(/^[A-Z]{3}$/.test(focus.code) && state.countryElements.has(focus.code))
+          );
+        };
+        const threshold = Math.max(MIN_PUBLIC_EDGE_ACCOUNTS, publicThresholdForFocus(edge.source), publicThresholdForFocus(edge.target));
+        return validEndpoint(edge.source) && validEndpoint(edge.target) && edge.level === focusLevel(edge.source) &&
+          Number.isInteger(edge.count) && edge.count >= 0 && edge.count <= 10000000 &&
+          Number.isInteger(edge.distinctResponders) && edge.distinctResponders >= threshold && edge.distinctResponders <= edge.count &&
+          Number.isInteger(edge.distinctPrayers) && edge.distinctPrayers >= threshold && edge.distinctPrayers <= edge.count;
+      })) return false;
+      if (!["replies", "supports", "amens", "mappedResponses", "resolvedResponses", "publicConnections"].every(function (key) {
+        return Number.isInteger(value.interactionTotals[key]) && value.interactionTotals[key] >= 0 && value.interactionTotals[key] <= 10000000;
+      })) return false;
+      if (value.interactionTotals.publicConnections !== value.connections.length) return false;
       const dayEntries = Object.entries(value.byDay);
       if (dayEntries.length > 10000 || !dayEntries.every(function (entry) {
         return /^\d{4}-\d{2}-\d{2}$/.test(entry[0]) && Number.isInteger(entry[1]) && entry[1] >= 0 && entry[1] <= value.publicRecords;
@@ -1889,26 +2642,19 @@
 
     function renderPrayerMarkers() {
       dom.prayerLayer.replaceChildren();
-      const regionEntries = Object.keys(state.xrpl.regions || {}).map(function (code) {
-        return [code, Number(state.xrpl.regions[code] || 0)];
-      }).filter(function (entry) {
-        return REGION_DEFINITIONS[entry[0]] && REGION_DEFINITIONS[entry[0]].centroid && entry[1] >= MIN_PUBLIC_REGION_COUNT;
-      });
-
-      regionEntries.forEach(function (entry) {
-        const code = entry[0];
-        const count = entry[1];
-        const center = REGION_DEFINITIONS[code].centroid;
-        const point = project([center[1], center[0]]);
+      (state.xrpl.focusGroups || []).forEach(function (entry) {
+        const focus = { scope: entry.scope, code: entry.code };
+        const point = focusPoint(focus);
+        if (!point) return;
         const group = createSvg("g", {
           tabindex: "0",
           role: "img",
-          "aria-label": REGION_DEFINITIONS[code].label + ": " + count + " public XRPL prayer records"
+          "aria-label": focusLabel(focus) + ": at least " + entry.count + " records from at least " + entry.distinctAccounts + " distinct signing accounts"
         });
         const circle = createSvg("circle", {
           cx: point[0],
           cy: point[1],
-          r: Math.min(22, 8 + Math.sqrt(count) * 2.1),
+          r: Math.min(22, 8 + Math.sqrt(entry.count) * 2.1),
           class: "prayer-marker"
         });
         const text = createSvg("text", {
@@ -1916,20 +2662,142 @@
           y: point[1] + 3,
           class: "prayer-count"
         });
-        text.textContent = String(count);
-        group.append(circle, text);
+        text.textContent = String(entry.count) + "+";
+        const title = createSvg("title");
+        title.textContent = focusLabel(focus) + ": at least " + entry.count + " public records; threshold " + entry.threshold + " distinct accounts. Counts are shown in five-record bands.";
+        group.append(title, circle, text);
         dom.prayerLayer.appendChild(group);
       });
+    }
+
+    function renderNetworkConnections() {
+      dom.networkLayer.replaceChildren();
+      (state.xrpl.connections || []).forEach(function (edge, index) {
+        const sourcePoint = focusPoint(edge.source);
+        const targetPoint = focusPoint(edge.target);
+        if (!sourcePoint || !targetPoint) return;
+        const samePoint = Math.hypot(sourcePoint[0] - targetPoint[0], sourcePoint[1] - targetPoint[1]) < 4;
+        let pathData;
+        if (samePoint) {
+          pathData = "M" + sourcePoint[0] + "," + sourcePoint[1] +
+            " c-24,-30 36,-44 38,-4 c2,27 -31,29 -38,4";
+        } else {
+          const midpointX = (sourcePoint[0] + targetPoint[0]) / 2;
+          const midpointY = (sourcePoint[1] + targetPoint[1]) / 2 - Math.min(70, 18 + Math.abs(targetPoint[0] - sourcePoint[0]) * 0.08);
+          pathData = "M" + sourcePoint[0] + "," + sourcePoint[1] +
+            " Q" + midpointX + "," + midpointY + " " + targetPoint[0] + "," + targetPoint[1];
+        }
+        const label = focusLabel(edge.source) + " to " +
+          focusLabel(edge.target).replace("prayer focus", "support focus") +
+          ": at least " + edge.count + " aggregate community responses from at least " +
+          edge.distinctResponders + " responders across at least " + edge.distinctPrayers + " prayers";
+        const path = createSvg("path", {
+          d: pathData,
+          class: "support-edge",
+          tabindex: "0",
+          role: "img",
+          "aria-label": label,
+          "data-level": edge.level,
+          "data-edge-index": index,
+          style: "stroke-width:" + Math.min(7, 1.7 + Math.sqrt(edge.count) * 0.35)
+        });
+        const title = createSvg("title");
+        title.textContent = label + ". Line color reflects the source area’s independent WWL band, not participant safety or location.";
+        path.appendChild(title);
+        const endpoint = createSvg("circle", {
+          cx: targetPoint[0], cy: targetPoint[1],
+          r: Math.min(12, 4 + Math.sqrt(edge.count) * 0.8),
+          class: "support-endpoint"
+        });
+        dom.networkLayer.append(path, endpoint);
+      });
+    }
+
+    function renderPublicFocusGroups() {
+      const groups = Array.isArray(state.xrpl.focusGroups) ? state.xrpl.focusGroups : [];
+      dom.publicAreaCount.textContent = groups.length.toLocaleString();
+      if (!groups.length) {
+        dom.publicFocusList.innerHTML = '<div class="public-focus-item empty">No threshold-qualified prayer groups are public in the current aggregate. Labeled records can exist while remaining suppressed.</div>';
+        return;
+      }
+      dom.publicFocusList.innerHTML = groups.map(function (group) {
+        const label = group.scope === 'country'
+          ? (state.countryNames.get(group.code) || group.code)
+          : (REGION_DEFINITIONS[group.code] && REGION_DEFINITIONS[group.code].label || group.code);
+        return '<div class="public-focus-item"><strong>' + escapeMapHtml(label) + '</strong><span>' +
+          escapeMapHtml(group.scope) + ' · at least ' + Number(group.count || 0).toLocaleString() +
+          ' records · at least ' + Number(group.distinctAccounts || 0).toLocaleString() +
+          ' distinct signing accounts · threshold ' + Number(group.threshold || 0).toLocaleString() + '</span></div>';
+      }).join('');
+    }
+
+    function escapeMapHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    function publicMapExport() {
+      return {
+        schema: 'jcs-prayer-map-public-export-v2',
+        generated_at_utc: new Date().toISOString(),
+        release: '5.0.0',
+        network: 'XRPL Mainnet',
+        collector: COLLECTOR,
+        xrpl: {
+          public_records: state.xrpl.publicRecords,
+          verified_prayer_nfts: state.xrpl.verifiedNfts,
+          map_focus_labeled_records: state.xrpl.mappedRecords,
+          public_focus_groups: state.xrpl.focusGroups,
+          public_support_groups: state.xrpl.supportGroups,
+          public_support_connections: state.xrpl.connections,
+          interaction_totals: state.xrpl.interactionTotals,
+          latest_ledger: state.xrpl.latestLedger,
+          complete_scan: state.xrpl.complete,
+          endpoint: state.xrpl.endpoint,
+          fetched_at_utc: state.xrpl.fetchedAt
+        },
+        evidence_context: {
+          wwl_edition: 2026,
+          uscirf_edition: 2026,
+          media_signal_count: state.media.length,
+          media_is_automated_context_not_verified_incidents: true
+        },
+        privacy: {
+          records_are_aggregated: true,
+          counts_are_banded: true,
+          no_wallets: true,
+          no_transaction_hashes: true,
+          no_prayer_text: true,
+          no_exact_times: true,
+          no_geolocation_inference: true,
+          support_connections_are_aggregate_not_routes: true
+        }
+      };
+    }
+
+    function downloadMapJson(filename, value) {
+      const blob = new Blob([JSON.stringify(value, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+      URL.revokeObjectURL(url);
     }
 
     function applyXrplAggregate(aggregate, sourceState) {
       state.xrpl = aggregate;
       dom.nftCount.textContent = aggregate.verifiedNfts.toLocaleString();
+      dom.publicAreaCount.textContent = (aggregate.focusGroups || []).length.toLocaleString();
+      dom.lastLedgerIndex.textContent = aggregate.latestLedger ? Number(aggregate.latestLedger).toLocaleString() : 'Unavailable';
+      dom.lastXrplRefresh.textContent = formatDateTime(aggregate.fetchedAt);
       dom.recordCount.textContent = aggregate.publicRecords.toLocaleString();
       dom.mappedCount.textContent = aggregate.mappedRecords.toLocaleString();
       dom.unlocatedCount.textContent = aggregate.unlocatedNfts.toLocaleString();
+      dom.responseCount.textContent = aggregate.interactionTotals.resolvedResponses.toLocaleString();
+      dom.connectionCount.textContent = aggregate.connections.length.toLocaleString();
       dom.nftCountNote.textContent = sourceState === "ready" ? "Validated ledger history" : "Audited XRPL snapshot";
       dom.xrplMapState.textContent = sourceState === "ready" ? "Live" : "Cached";
+      dom.networkMapState.textContent = aggregate.connections.length + " link" + (aggregate.connections.length === 1 ? "" : "s");
 
       const ledgerText = aggregate.latestLedger ? " through ledger " + Number(aggregate.latestLedger).toLocaleString() : "";
       const bounded = aggregate.complete ? "" : " · newest bounded history";
@@ -1938,9 +2806,12 @@
         aggregate.endpoint + ledgerText + bounded + " · " + formatDateTime(aggregate.fetchedAt) + ".";
 
       setStatus(dom.xrplStatus, sourceState === "ready" ? "Live" : "Cached", sourceState);
+      renderNetworkConnections();
       renderPrayerMarkers();
+      renderPublicFocusGroups();
       renderAnalysis();
       selectCountry(state.selectedIso3, false);
+      if (sourceState === "ready") tryApplyMapHandoff();
     }
 
     function hexToUtf8(value) {
@@ -1958,11 +2829,18 @@
 
     function parseMemos(memos) {
       const output = Object.create(null);
+      const seen = new Set();
       (Array.isArray(memos) ? memos.slice(0, 64) : []).forEach(function (item) {
         const memo = item && item.Memo && typeof item.Memo === "object" ? item.Memo : {};
         const type = hexToUtf8(memo.MemoType || "").trim().toLowerCase();
         const data = hexToUtf8(memo.MemoData || "").trim();
-        if (type && type.length <= 64 && data.length <= 4096) output[type] = data;
+        if (!type || type.length > 64 || data.length > 4096) return;
+        if (seen.has(type) && SENSITIVE_MEMO_KEYS.has(type)) {
+          output.__invalid = "duplicate-" + type;
+          return;
+        }
+        seen.add(type);
+        output[type] = data;
       });
       return output;
     }
@@ -1988,8 +2866,9 @@
       return Number.isNaN(date.getTime()) ? "" : date.toISOString();
     }
 
-    function parseCollectorPosts(entries) {
+    function parseCollectorNetwork(entries) {
       const posts = [];
+      const interactions = [];
       const dedupe = new Set();
 
       (entries || []).forEach(function (entry) {
@@ -1997,28 +2876,50 @@
         const tx = normalized.tx;
         const result = normalized.meta.TransactionResult || normalized.meta.transaction_result || "";
         if (!normalized.validated || tx.TransactionType !== "Payment" || tx.Destination !== COLLECTOR) return;
-        if (result && result !== "tesSUCCESS") return;
+        if (result !== "tesSUCCESS") return;
         if (String(tx.Amount || "") !== "1") return;
         if (!HASH_256.test(normalized.hash) || dedupe.has(normalized.hash)) return;
 
         const memos = parseMemos(tx.Memos);
+        if (memos.__invalid) return;
         const app = memos.app || "";
         const isLegacy = app === LEGACY_TAG;
         if (!isLegacy && !APP_TAGS.has(app)) return;
-        if (!isLegacy && (memos.kind || "post") !== "post") return;
+        const kind = isLegacy ? "post" : (memos.kind || "post");
+        if (!["post", "reply", "support", "amen"].includes(kind)) return;
 
         dedupe.add(normalized.hash);
-        const region = REGION_DEFINITIONS[memos.region] && memos.region !== "none" ? memos.region : "none";
         const mintTx = HASH_256.test(String(memos.minttx || "").toUpperCase()) ? String(memos.minttx).toUpperCase() : "";
         const nftId = HASH_256.test(String(memos.nft || "").toUpperCase()) ? String(memos.nft).toUpperCase() : "";
-        const created = memos.created && !Number.isNaN(Date.parse(memos.created))
-          ? new Date(memos.created).toISOString()
-          : rippleDateToIso(normalized.date);
+        const created = rippleDateToIso(normalized.date) || (
+          memos.created && !Number.isNaN(Date.parse(memos.created))
+            ? new Date(memos.created).toISOString() : ""
+        );
+        const account = String(tx.Account || "").slice(0, 64);
+
+        if (kind !== "post") {
+          const parent = String(memos.parent || memos.nft || "").toUpperCase();
+          interactions.push({
+            hash: normalized.hash,
+            app: app,
+            kind: kind,
+            parent: HASH_256.test(parent) ? parent : "",
+            account: account,
+            response: RESPONSE_TYPES.has(memos.response)
+              ? memos.response
+              : (kind === "support" ? "practical-help" : "encouragement"),
+            focus: kind === "amen" ? null : normalizeLedgerFocus(memos, app, "support-focus"),
+            created: created,
+            ledgerIndex: normalized.ledgerIndex
+          });
+          return;
+        }
 
         posts.push({
           registryHash: normalized.hash,
           app: app,
-          region: region,
+          account: account,
+          focus: isLegacy ? null : normalizeLedgerFocus(memos, app, "prayer-focus"),
           mintTx: mintTx,
           nftId: nftId,
           created: created,
@@ -2026,7 +2927,12 @@
         });
       });
 
-      return posts;
+      return { posts: posts, interactions: interactions };
+    }
+
+    /* Compatibility wrapper retained from Prayer Map v4. */
+    function parseCollectorPosts(entries) {
+      return parseCollectorNetwork(entries).posts;
     }
 
     class WebSocketRpc {
@@ -2223,13 +3129,14 @@
       };
     }
 
-    function validPrayerMint(result, expectedHash, expectedId) {
+    function validPrayerMint(result, expectedHash, expectedId, expectedAccount) {
       const normalized = normalizeTxResult(result);
       const tx = normalized.tx;
       const transactionResult = normalized.meta.TransactionResult || normalized.meta.transaction_result || "";
       if (!normalized.validated || tx.TransactionType !== "NFTokenMint") return false;
-      if (transactionResult && transactionResult !== "tesSUCCESS") return false;
+      if (transactionResult !== "tesSUCCESS") return false;
       if (Number(tx.NFTokenTaxon) !== NFT_TAXON) return false;
+      if (expectedAccount && tx.Account !== expectedAccount) return false;
       if (normalized.hash && normalized.hash !== expectedHash) return false;
       const returnedId = String(
         normalized.meta.nftoken_id ||
@@ -2245,7 +3152,7 @@
       const verified = new Map(KNOWN_PRAYER_NFTS.map(function (item) { return [item.tx, item]; }));
       const claims = new Map();
       posts.forEach(function (post) {
-        if (post.mintTx && post.nftId) claims.set(post.mintTx, { tx: post.mintTx, id: post.nftId, region: post.region });
+        if (post.mintTx && post.nftId) claims.set(post.mintTx, { tx: post.mintTx, id: post.nftId, focus: post.focus, account: post.account });
       });
       const pending = Array.from(claims.values()).filter(function (claim) { return !verified.has(claim.tx); }).slice(0, 80);
 
@@ -2256,7 +3163,7 @@
         }));
         results.forEach(function (result, index) {
           const claim = batch[index];
-          if (result.status === "fulfilled" && validPrayerMint(result.value, claim.tx, claim.id)) {
+          if (result.status === "fulfilled" && validPrayerMint(result.value, claim.tx, claim.id, claim.account)) {
             verified.set(claim.tx, claim);
           }
         });
@@ -2264,15 +3171,65 @@
       return verified;
     }
 
-    function aggregatePosts(posts, verified, latestLedger, complete, endpoint) {
+    function aggregateNetwork(posts, interactions, verified, latestLedger, complete, endpoint) {
       const regions = Object.create(null);
+      const countries = Object.create(null);
       const byMonth = Object.create(null);
       const byDay = Object.create(null);
       const postByMint = new Map();
+      const prayerGroups = new Map();
+      const supportGroups = new Map();
+      const aliases = new Map();
+      const ambiguousAliases = new Set();
+
+      function addAlias(alias, post) {
+        if (!alias || ambiguousAliases.has(alias)) return;
+        if (aliases.has(alias) && aliases.get(alias) !== post) {
+          aliases.delete(alias);
+          ambiguousAliases.add(alias);
+          return;
+        }
+        aliases.set(alias, post);
+      }
+
+      function addGroup(target, focus, account) {
+        const key = focusKey(focus);
+        if (!key) return;
+        let group = target.get(key);
+        if (!group) {
+          group = { focus: focus, count: 0, accounts: new Set() };
+          target.set(key, group);
+        }
+        group.count += 1;
+        if (account) group.accounts.add(account);
+      }
+
+      function publicGroups(source) {
+        return Array.from(source.values()).filter(function (group) {
+          return group.accounts.size >= publicThresholdForFocus(group.focus) && Boolean(focusPoint(group.focus));
+        }).map(function (group) {
+          return {
+            scope: group.focus.scope,
+            code: group.focus.code,
+            count: publicCountFloor(group.count),
+            distinctAccounts: publicCountFloor(group.accounts.size),
+            threshold: publicThresholdForFocus(group.focus),
+            level: focusLevel(group.focus)
+          };
+        }).sort(function (left, right) { return right.count - left.count; });
+      }
 
       posts.forEach(function (post) {
-        if (post.region !== "none") regions[post.region] = Number(regions[post.region] || 0) + 1;
+        if (post.focus) {
+          addGroup(prayerGroups, post.focus, post.account);
+        }
         if (post.mintTx) postByMint.set(post.mintTx, post);
+        addAlias(post.registryHash, post);
+        const claim = post.mintTx && verified.get(post.mintTx);
+        if (claim && (!claim.id || claim.id === post.nftId)) {
+          addAlias(post.nftId, post);
+          addAlias(post.mintTx, post);
+        }
         if (post.created && !Number.isNaN(Date.parse(post.created))) {
           const month = post.created.slice(0, 7);
           const day = post.created.slice(0, 10);
@@ -2281,11 +3238,94 @@
         }
       });
 
-      const mappedRecords = Object.keys(regions).reduce(function (total, key) { return total + Number(regions[key] || 0); }, 0);
+      const edgeGroups = new Map();
+      const seenResponsePairs = new Set();
+      const interactionTotals = {
+        replies: 0,
+        supports: 0,
+        amens: 0,
+        mappedResponses: 0,
+        resolvedResponses: 0,
+        publicConnections: 0
+      };
+
+      interactions.forEach(function (interaction) {
+        if (interaction.kind === "amen") {
+          interactionTotals.amens += 1;
+          return;
+        }
+        interactionTotals.replies += 1;
+        if (interaction.kind === "support" || interaction.response === "resource" || interaction.response === "practical-help") {
+          interactionTotals.supports += 1;
+        }
+        if (!interaction.parent || ambiguousAliases.has(interaction.parent)) return;
+        const parentPost = aliases.get(interaction.parent);
+        if (!parentPost) return;
+        interactionTotals.resolvedResponses += 1;
+        if (!parentPost.focus || !interaction.focus) return;
+        interactionTotals.mappedResponses += 1;
+        addGroup(supportGroups, interaction.focus, interaction.account);
+
+        const sourceKey = focusKey(parentPost.focus);
+        const targetKey = focusKey(interaction.focus);
+        const pairKey = sourceKey + ">" + targetKey;
+        const uniqueKey = pairKey + "|" + interaction.account + "|" + parentPost.registryHash;
+        if (seenResponsePairs.has(uniqueKey)) return;
+        seenResponsePairs.add(uniqueKey);
+
+        let edge = edgeGroups.get(pairKey);
+        if (!edge) {
+          edge = {
+            source: parentPost.focus,
+            target: interaction.focus,
+            count: 0,
+            responders: new Set(),
+            parents: new Set()
+          };
+          edgeGroups.set(pairKey, edge);
+        }
+        edge.count += 1;
+        if (interaction.account) edge.responders.add(interaction.account);
+        edge.parents.add(parentPost.registryHash);
+      });
+
+      const focusGroups = publicGroups(prayerGroups);
+      focusGroups.forEach(function (group) {
+        if (group.scope === "region") regions[group.code] = group.count;
+        if (group.scope === "country") countries[group.code] = group.count;
+      });
+      const publicSupportGroups = publicGroups(supportGroups);
+      const publicPrayerKeys = new Set(focusGroups.map(function (group) { return group.scope + ":" + group.code; }));
+      const publicSupportKeys = new Set(publicSupportGroups.map(function (group) { return group.scope + ":" + group.code; }));
+      const connections = Array.from(edgeGroups.values()).filter(function (edge) {
+        const sourceKey = focusKey(edge.source);
+        const targetKey = focusKey(edge.target);
+        const threshold = Math.max(
+          MIN_PUBLIC_EDGE_ACCOUNTS,
+          publicThresholdForFocus(edge.source),
+          publicThresholdForFocus(edge.target)
+        );
+        return publicPrayerKeys.has(sourceKey) &&
+          publicSupportKeys.has(targetKey) &&
+          edge.responders.size >= threshold &&
+          edge.parents.size >= threshold;
+      }).map(function (edge) {
+        return {
+          source: { scope: edge.source.scope, code: edge.source.code },
+          target: { scope: edge.target.scope, code: edge.target.code },
+          count: publicCountFloor(edge.count),
+          distinctResponders: publicCountFloor(edge.responders.size),
+          distinctPrayers: publicCountFloor(edge.parents.size),
+          level: focusLevel(edge.source)
+        };
+      }).sort(function (left, right) { return right.count - left.count; });
+      interactionTotals.publicConnections = connections.length;
+
+      const mappedRecords = posts.filter(function (post) { return Boolean(post.focus); }).length;
       let mappedNfts = 0;
       verified.forEach(function (_claim, mintTx) {
         const post = postByMint.get(mintTx);
-        if (post && post.region !== "none") mappedNfts += 1;
+        if (post && post.focus) mappedNfts += 1;
       });
 
       return {
@@ -2296,6 +3336,11 @@
         mappedNfts: mappedNfts,
         unlocatedNfts: Math.max(0, verified.size - mappedNfts),
         regions: regions,
+        countries: countries,
+        focusGroups: focusGroups,
+        supportGroups: publicSupportGroups,
+        connections: connections,
+        interactionTotals: interactionTotals,
         byMonth: byMonth,
         byDay: byDay,
         latestLedger: latestLedger || null,
@@ -2306,6 +3351,11 @@
       };
     }
 
+    /* Compatibility wrapper retained from Prayer Map v4. */
+    function aggregatePosts(posts, verified, latestLedger, complete, endpoint) {
+      return aggregateNetwork(posts, [], verified, latestLedger, complete, endpoint);
+    }
+
     async function refreshXrpl(sequence) {
       setStatus(dom.xrplStatus, "Loading", "loading");
       dom.xrplMapState.textContent = "Loading";
@@ -2313,14 +3363,15 @@
       try {
         connected = await connectAndScan();
         if (sequence !== state.refreshSequence) return;
-        const posts = parseCollectorPosts(connected.scan.entries);
-        if (posts.length < EMBEDDED_XRPL_SNAPSHOT.publicRecords) {
+        const network = parseCollectorNetwork(connected.scan.entries);
+        if (network.posts.length < EMBEDDED_XRPL_SNAPSHOT.publicRecords) {
           throw new Error("The live scan returned fewer immutable registry records than the audited snapshot.");
         }
 
-        const verified = await verifyNewClaims(posts, connected.transport);
-        const aggregate = aggregatePosts(
-          posts,
+        const verified = await verifyNewClaims(network.posts, connected.transport);
+        const aggregate = aggregateNetwork(
+          network.posts,
+          network.interactions,
           verified,
           connected.scan.latestLedger,
           connected.scan.complete,
@@ -2328,6 +3379,7 @@
         );
         if (!validXrplAggregate(aggregate)) throw new Error("The live XRPL aggregate failed validation.");
         if (sequence !== state.refreshSequence) return;
+        state.network = network;
         writeCache(XRPL_CACHE_KEY, aggregate);
         applyXrplAggregate(aggregate, "ready");
         announce("Live XRPL history loaded: " + aggregate.publicRecords + " public records and " + aggregate.verifiedNfts + " verified prayer NFTs.");
@@ -2341,9 +3393,68 @@
           applyXrplAggregate(EMBEDDED_XRPL_SNAPSHOT, "cached");
           dom.xrplSourceNote.textContent = "Live refresh unavailable; audited Aug. 28, 2026 XRPL snapshot retained. Other map layers remain current.";
         }
+        if (state.pendingRefreshHint) {
+          dom.caption.textContent = "Verification handoff received · live XRPL refresh unavailable, so the last validated aggregate remains visible";
+          announce("Prayer Map refresh could not reach XRPL; the last validated aggregate was retained.");
+          state.pendingRefreshHint = false;
+        }
       } finally {
         if (connected && connected.transport) connected.transport.close();
       }
+    }
+
+    function validHandoffSignal(signal) {
+      return signal &&
+        signal.schema === "jcs-prayer-map-refresh-v1" &&
+        signal.action === "refresh-ledger" &&
+        signal.ledger_validation_required === true &&
+        Object.keys(signal).every(function (key) {
+          return ["schema", "action", "ledger_validation_required"].includes(key);
+        });
+    }
+
+    function queueMapHandoff(signal, refresh) {
+      if (!validHandoffSignal(signal)) return false;
+      state.pendingRefreshHint = true;
+      dom.caption.textContent = "Verification page connected · refreshing validated XRPL aggregates without a record identifier or location handoff";
+      if (dom.handoffStatus) dom.handoffStatus.textContent = "Verify-page signal received · rereading validated XRPL history.";
+      if (refresh) refreshAll();
+      return true;
+    }
+
+    function tryApplyMapHandoff() {
+      if (!state.pendingRefreshHint) return;
+      dom.caption.textContent = "Verification handoff complete · validated, threshold-qualified XRPL aggregates refreshed without targeting an individual record";
+      if (dom.handoffStatus) dom.handoffStatus.textContent = "Verify handoff complete · current threshold-qualified prayer groups are displayed.";
+      announce("Validated Prayer Map aggregates refreshed from a content-free verification-page hint.");
+      state.pendingRefreshHint = false;
+    }
+
+    function initMapHandoff() {
+      try {
+        const params = new URLSearchParams(location.search);
+        const stored = JSON.parse(localStorage.getItem(MAP_FOCUS_KEY) || "null");
+        if (stored && !validHandoffSignal(stored)) {
+          localStorage.removeItem(MAP_FOCUS_KEY);
+        }
+        if (params.get("refresh") === "xrpl" || params.get("handoff") === "v2" || params.get("source") === "verify") {
+          queueMapHandoff(stored, false);
+        }
+        // Earlier handoffs retained transaction and focus data. They are not needed
+        // for an aggregate refresh and are deliberately removed during migration.
+        localStorage.removeItem(MAP_SIGNAL_KEY);
+        localStorage.removeItem(MAP_FOCUS_KEY);
+      } catch (_error) {}
+      try {
+        if ("BroadcastChannel" in window) {
+          state.mapChannel = new BroadcastChannel(MAP_CHANNEL_NAME);
+          state.mapChannel.addEventListener("message", function (event) {
+            if (event.data && event.data.type === "jcs-prayer-map-signal") {
+              queueMapHandoff(event.data.signal, true);
+            }
+          });
+        }
+      } catch (_error) {}
     }
 
     function geometryCenter(geometry) {
@@ -2560,8 +3671,14 @@
       dom.prayerToggle.addEventListener("change", function () {
         dom.prayerLayer.hidden = !dom.prayerToggle.checked;
       });
+      dom.networkToggle.addEventListener("change", function () {
+        dom.networkLayer.hidden = !dom.networkToggle.checked;
+      });
       dom.resetMap.addEventListener("click", resetView);
       dom.refresh.addEventListener("click", refreshAll);
+      dom.exportLive.addEventListener("click", function () {
+        downloadMapJson('jcs-prayer-map-live-' + Date.now() + '.json', publicMapExport());
+      });
       dom.countrySearch.addEventListener("input", function () { renderCountryList(dom.countrySearch.value); });
       document.addEventListener("visibilitychange", function () {
         if (document.visibilityState === "visible") {
@@ -2572,11 +3689,15 @@
     }
 
     function start() {
+      try {
+        localStorage.removeItem("jcs.prayer.map.xrpl.aggregate.v5");
+      } catch (_error) {}
       renderGrid();
       renderCountries();
       renderCountryList("");
       renderAnalysis();
       bindControls();
+      initMapHandoff();
 
       const cachedXrpl = readCache(XRPL_CACHE_KEY, validXrplAggregate);
       applyXrplAggregate(cachedXrpl || EMBEDDED_XRPL_SNAPSHOT, "cached");
@@ -2591,6 +3712,20 @@
       }, MEDIA_REFRESH_MS);
     }
 
+    if (typeof globalThis.__JCS_MAP_TEST_HOOK__ === "function") {
+      globalThis.__JCS_MAP_TEST_HOOK__({
+        parseMemos: parseMemos,
+        parseCollectorNetwork: parseCollectorNetwork,
+        aggregateNetwork: aggregateNetwork,
+        normalizeLedgerFocus: normalizeLedgerFocus,
+        publicThresholdForFocus: publicThresholdForFocus,
+        validXrplAggregate: validXrplAggregate,
+        validPrayerMint: validPrayerMint,
+        publicMapExport: publicMapExport,
+        state: state
+      });
+    }
+
     try {
       start();
     } catch (error) {
@@ -2601,5 +3736,137 @@
     }
   })();
   </script>
+<script crossorigin="anonymous" src="https://xaman.app/assets/cdn/xumm.min.js"></script>
+
+<script id="jcs-prayer-map-header-and-capsule-v500">
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const enc = new TextEncoder();
+  const dec = new TextDecoder();
+  const THEME_KEY = 'jcs-ledger-theme';
+  const FOCUS_KEY = 'jcs.prayer.map.focus.mode.v1';
+  const APP_KEY = '5b8499a9-ae28-4050-ac09-45efa948eced';
+  const CAPSULE_TAXON = 1245926211; // mnemonic JCSC namespace; distinct from prayer NFT taxon
+  const CAPSULE_APP = 'JCS_CAPSULE_V1';
+  const CAPSULE_AAD = 'JCS_PRIVATE_CAPSULE_V1|LOCAL_FIRST|NO_LOCATION';
+  const XRPL_SERVERS = ['wss://xrplcluster.com/','wss://s2.ripple.com/','wss://honeycluster.io/','wss://s1.ripple.com/'];
+  const capsule = {xumm:null, account:'', pack:null, receipt:null, pending:false, recoverySaved:false};
+
+  function bytesToB64u(bytes){let s='';for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+  function b64uToBytes(text){let s=String(text||'').replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const raw=atob(s);const out=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)out[i]=raw.charCodeAt(i);return out}
+  async function sha256HexBytes(bytes){const d=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase()}
+  async function sha256HexText(text){return sha256HexBytes(enc.encode(text))}
+  function randomBytes(n){const v=new Uint8Array(n);crypto.getRandomValues(v);return v}
+  function downloadJson(name,value){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
+  function strHex(value){return [...enc.encode(String(value))].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase()}
+  function short(v,n=8){v=String(v||'');return v.length>n*2+1?v.slice(0,n)+'…'+v.slice(-n):v}
+  function setCapsuleStatus(text,type=''){const n=$('capsule-state');if(n){n.textContent=text;n.style.color=type==='err'?'var(--red)':type==='warn'?'var(--gold)':'var(--green)'}}
+  function showCapsuleOutput(text){const n=$('capsule-output');n.hidden=false;n.textContent=text}
+  function canonicalEnvelope(envelope){return JSON.stringify({v:envelope.v,alg:envelope.alg,iv:envelope.iv,aad:envelope.aad,ct:envelope.ct})}
+
+  async function paddedPlaintext(message, contact, label){
+    const core={schema:'jcs-private-capsule-message-v1',message:String(message||''),contact:String(contact||''),label:String(label||'')};
+    let text=JSON.stringify({...core,pad:''});
+    const bucket=512; const initial=enc.encode(text).length; const target=Math.ceil(Math.max(initial,1)/bucket)*bucket;
+    const needed=Math.max(0,target-initial-16);
+    if(needed){core.pad=bytesToB64u(randomBytes(Math.ceil(needed*0.72)))}else core.pad='';
+    return enc.encode(JSON.stringify(core));
+  }
+
+  async function encryptCapsule(message, contact='', label=''){
+    if(!crypto?.subtle) throw new Error('Web Crypto is unavailable. Use a current secure browser context.');
+    if(!String(message||'').trim()) throw new Error('Write the private message first.');
+    const keyBytes=randomBytes(32), iv=randomBytes(12), aad=enc.encode(CAPSULE_AAD);
+    const key=await crypto.subtle.importKey('raw',keyBytes,{name:'AES-GCM'},false,['encrypt']);
+    const plain=await paddedPlaintext(message,contact,label);
+    const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:aad,tagLength:128},key,plain));
+    const envelope={v:1,alg:'A256GCM',iv:bytesToB64u(iv),aad:bytesToB64u(aad),ct:bytesToB64u(ct)};
+    const envelopeJson=canonicalEnvelope(envelope); const hash=await sha256HexText(envelopeJson);
+    return {
+      hash,envelope,key:bytesToB64u(keyBytes),
+      transport:{schema:'jcs-private-capsule-transport-v1',envelope_sha256:hash,envelope,public_receipt_expected:false},
+      keyCard:{schema:'jcs-private-capsule-key-v1',envelope_sha256:hash,recovery_key:bytesToB64u(keyBytes),warning:'Keep this separate from the ciphertext when practical. Never publish this key to XRPL.'}
+    };
+  }
+
+  async function decryptCapsule(transportValue,keyValue){
+    const transport=typeof transportValue==='string'?JSON.parse(transportValue):transportValue;
+    const keyCard=typeof keyValue==='string'?JSON.parse(keyValue):keyValue;
+    if(transport?.schema!=='jcs-private-capsule-transport-v1') throw new Error('Unsupported ciphertext package.');
+    if(keyCard?.schema!=='jcs-private-capsule-key-v1') throw new Error('Unsupported key card.');
+    const envelope=transport.envelope; if(!envelope||envelope.v!==1||envelope.alg!=='A256GCM')throw new Error('Unsupported encrypted envelope.');
+    const actual=await sha256HexText(canonicalEnvelope(envelope));
+    if(actual!==String(transport.envelope_sha256||'').toUpperCase()||actual!==String(keyCard.envelope_sha256||'').toUpperCase())throw new Error('Ciphertext fingerprint mismatch.');
+    const rawKey=b64uToBytes(keyCard.recovery_key); if(rawKey.length!==32)throw new Error('Recovery key is not 256 bits.');
+    const key=await crypto.subtle.importKey('raw',rawKey,{name:'AES-GCM'},false,['decrypt']);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64uToBytes(envelope.iv),additionalData:b64uToBytes(envelope.aad),tagLength:128},key,b64uToBytes(envelope.ct));
+    const value=JSON.parse(dec.decode(plain)); if(value?.schema!=='jcs-private-capsule-message-v1')throw new Error('Decrypted payload schema is unsupported.');
+    delete value.pad; return {fingerprint:actual,...value};
+  }
+
+  function updateCapsuleButtons(){
+    const has=Boolean(capsule.pack); $('capsule-download-transport').disabled=!has; $('capsule-download-key').disabled=!has; $('capsule-download-backup').disabled=!has;
+    $('capsule-public-ack').disabled=!has; const canMint=has&&capsule.recoverySaved&&$('capsule-public-ack').checked&&Boolean(capsule.account)&&!capsule.pending;
+    $('capsule-mint').disabled=!canMint; $('capsule-download-receipt').disabled=!capsule.receipt;
+  }
+
+  $('capsule-encrypt')?.addEventListener('click',async()=>{
+    try{
+      if(!$('capsule-safety-ack').checked)throw new Error('Confirm the high-risk safety boundary first.');
+      capsule.pack=await encryptCapsule($('capsule-message').value,$('capsule-contact').value,$('capsule-label').value); capsule.receipt=null; capsule.recoverySaved=false; $('capsule-public-ack').checked=false;
+      showCapsuleOutput('Encrypted locally.\nEnvelope SHA-256: '+capsule.pack.hash+'\nCiphertext package and recovery key are separate. Download/save the key before considering a public receipt.');
+      setCapsuleStatus('Encrypted · local only'); updateCapsuleButtons();
+    }catch(e){setCapsuleStatus('Encryption error','err');showCapsuleOutput(e.message||String(e))}
+  });
+  $('capsule-download-transport')?.addEventListener('click',()=>{if(capsule.pack)downloadJson('jcs-private-capsule-'+capsule.pack.hash.slice(0,12)+'.json',capsule.pack.transport)});
+  $('capsule-download-key')?.addEventListener('click',()=>{if(!capsule.pack)return;downloadJson('jcs-private-capsule-key-'+capsule.pack.hash.slice(0,12)+'.json',capsule.pack.keyCard);capsule.recoverySaved=true;setCapsuleStatus('Key card saved · local only');updateCapsuleButtons()});
+  $('capsule-download-backup')?.addEventListener('click',()=>{if(!capsule.pack)return;downloadJson('jcs-private-capsule-private-backup-'+capsule.pack.hash.slice(0,12)+'.json',{schema:'jcs-private-capsule-backup-v1',transport:capsule.pack.transport,keyCard:capsule.pack.keyCard,warning:'Private backup contains both ciphertext and key. Do not publish or send as the normal transport package.'});capsule.recoverySaved=true;setCapsuleStatus('Private backup saved');updateCapsuleButtons()});
+  $('capsule-public-ack')?.addEventListener('change',updateCapsuleButtons);
+  $('capsule-decrypt')?.addEventListener('click',async()=>{try{const value=await decryptCapsule($('capsule-transport-input').value,$('capsule-key-input').value);const out=$('capsule-decrypt-output');out.hidden=false;out.textContent='Fingerprint: '+value.fingerprint+'\n\nMessage:\n'+value.message+'\n\nPrivate contact note:\n'+(value.contact||'—')+'\n\nPrivate label:\n'+(value.label||'—');setCapsuleStatus('Decrypted locally')}catch(e){const out=$('capsule-decrypt-output');out.hidden=false;out.textContent='Decryption failed: '+(e.message||e);setCapsuleStatus('Decryption error','err')}});
+  $('capsule-clear')?.addEventListener('click',()=>{['capsule-message','capsule-contact','capsule-label','capsule-transport-input','capsule-key-input'].forEach(id=>{if($(id))$(id).value=''});$('capsule-decrypt-output').hidden=true;$('capsule-output').hidden=true;capsule.pack=null;capsule.receipt=null;capsule.recoverySaved=false;$('capsule-public-ack').checked=false;$('capsule-safety-ack').checked=false;setCapsuleStatus('Local-only by default');updateCapsuleButtons()});
+
+  // Canonical header menu.
+  const header=document.querySelector('.jcs-index-header'),toggle=$('mobileNavToggle'),nav=$('primaryNav'),media=matchMedia('(max-width:980px)');
+  if(header&&toggle&&nav){const icon=toggle.querySelector('.menu-icon'),label=toggle.querySelector('.menu-label');const setOpen=(open,focus=false)=>{const next=Boolean(open&&media.matches);nav.classList.toggle('is-open',next);header.classList.toggle('menu-open',next);toggle.setAttribute('aria-expanded',String(next));toggle.setAttribute('aria-label',next?'Close site navigation':'Open site navigation');if(icon)icon.textContent=next?'×':'☰';if(label)label.textContent=next?'Close':'Menu';if(focus)toggle.focus()};toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(media.matches&&e.target.closest('a'))setOpen(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true')setOpen(false,true)});document.addEventListener('click',e=>{if(media.matches&&toggle.getAttribute('aria-expanded')==='true'&&!header.contains(e.target))setOpen(false)});media.addEventListener?.('change',()=>setOpen(false));setOpen(false)}
+
+  // Theme.
+  function updateTheme(){const dark=document.documentElement.dataset.theme!=='light';$('themeToggleIcon').textContent=dark?'☀':'◐';$('themeToggleText').textContent=dark?'Light mode':'Dark mode';$('themeToggle').setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');$('themeToggle').setAttribute('aria-pressed',String(dark));}
+  $('themeToggle')?.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem(THEME_KEY,next)}catch{}updateTheme()});updateTheme();
+
+  // Map focus modes.
+  const sanctuary=$('quietModeBtn'),ledger=$('ledgerFocusBtn');
+  function setMode(mode){const s=mode==='sanctuary',l=mode==='ledger';document.body.classList.toggle('map-sanctuary-mode',s);document.body.classList.toggle('map-ledger-focus',l);sanctuary?.setAttribute('aria-pressed',String(s));ledger?.setAttribute('aria-pressed',String(l));if(sanctuary)sanctuary.textContent=s?'Exit sanctuary':'Sanctuary mode';if(ledger)ledger.textContent=l?'Exit ledger focus':'Ledger focus';try{localStorage.setItem(FOCUS_KEY,mode)}catch{}}
+  sanctuary?.addEventListener('click',()=>setMode(document.body.classList.contains('map-sanctuary-mode')?'full':'sanctuary'));ledger?.addEventListener('click',()=>setMode(document.body.classList.contains('map-ledger-focus')?'full':'ledger'));try{const v=localStorage.getItem(FOCUS_KEY);setMode(v==='sanctuary'||v==='ledger'?v:'full')}catch{setMode('full')}
+
+  // Protocol downloads.
+  function protocolValue(){try{return JSON.parse($('jcsPrayerMapProtocol').textContent)}catch{return null}}
+  function downloadProtocol(){const v=protocolValue();if(v)downloadJson('jcs-prayer-map-protocol.json',v)}
+  $('download-protocol-button')?.addEventListener('click',downloadProtocol);$('download-protocol-button-secondary')?.addEventListener('click',downloadProtocol);
+
+  // Xaman wallet for optional neutral receipt only.
+  function updateWallet(){const connected=Boolean(capsule.account);$('connectBtn').hidden=connected;$('disconnectBtn').hidden=!connected;$('walletPill').textContent=connected?short(capsule.account,7):'Wallet disconnected';updateCapsuleButtons()}
+  async function resolveAccount(event={}){const d=event?.data||event||{};const direct=d.account||d.me?.account||d.data?.account||'';if(direct)return direct;try{return await capsule.xumm.user.account}catch{return ''}}
+  function initXaman(){if(!window.Xumm){$('connectBtn').disabled=true;return}capsule.xumm=new window.Xumm(APP_KEY);capsule.xumm.on('ready',()=>{$('connectBtn').disabled=false});const identified=async e=>{const a=await resolveAccount(e);if(a){capsule.account=a;updateWallet()}};capsule.xumm.on('success',identified);capsule.xumm.on('retrieved',identified);capsule.xumm.on('logout',()=>{capsule.account='';updateWallet()});capsule.xumm.on('error',()=>setCapsuleStatus('Xaman error','err'))}
+  $('connectBtn')?.addEventListener('click',async()=>{try{await capsule.xumm?.authorize();const a=await resolveAccount();if(a){capsule.account=a;updateWallet()}}catch(e){setCapsuleStatus('Xaman connection cancelled','warn')}});
+  $('disconnectBtn')?.addEventListener('click',async()=>{try{await capsule.xumm?.logout()}catch{}capsule.account='';updateWallet()});
+
+  function memo(type,value){return value?{Memo:{MemoType:strHex(type),MemoData:strHex(String(value))}}:null}
+  function code6(){return String(Math.floor(100000+Math.random()*900000))}
+  async function rpc(command,params={}){let last;for(const url of XRPL_SERVERS){let ws;try{const result=await new Promise((resolve,reject)=>{let done=false,id=1;const timer=setTimeout(()=>{try{ws?.close()}catch{}reject(new Error('XRPL timeout'))},12000);ws=new WebSocket(url);ws.addEventListener('open',()=>ws.send(JSON.stringify({id,command,api_version:2,...params})),{once:true});ws.addEventListener('message',e=>{let p;try{p=JSON.parse(e.data)}catch{return}if(p.id!==id)return;clearTimeout(timer);done=true;try{ws.close()}catch{}if(p.error||p.status==='error'||p.result?.error)reject(new Error(p.error_message||p.result?.error_message||p.error||p.result?.error));else resolve(p.result||p)});ws.addEventListener('error',()=>{if(!done){clearTimeout(timer);reject(new Error('XRPL endpoint unavailable'))}})});return result}catch(e){last=e;try{ws?.close()}catch{}}}throw last||new Error('No XRPL endpoint available')}
+  async function waitTx(txid){let last;for(let i=0;i<35;i++){try{const r=await rpc('tx',{transaction:txid,binary:false});if(r.validated!==false){const result=r.meta?.TransactionResult||r.metaData?.TransactionResult||'';if(result!=='tesSUCCESS')throw new Error('XRPL result '+(result||'unknown'));return r}}catch(e){last=e}await new Promise(r=>setTimeout(r,1700))}throw last||new Error('Validated result not confirmed')}
+  function locateNft(r){return String(r?.meta?.nftoken_id||r?.meta?.NFTokenID||r?.metaData?.nftoken_id||r?.metaData?.NFTokenID||r?.nftoken_id||'').toUpperCase()}
+  async function findNft(uri){for(let i=0;i<7;i++){try{const r=await rpc('account_nfts',{account:capsule.account,ledger_index:'validated',limit:400});const hit=(r.account_nfts||[]).find(n=>{try{const raw=n.URI||n.uri||'';let s='';for(let j=0;j<raw.length;j+=2)s+=String.fromCharCode(parseInt(raw.slice(j,j+2),16));return s===uri}catch{return false}});const id=hit?.NFTokenID||hit?.nft_id;if(id)return id}catch{}await new Promise(r=>setTimeout(r,1600))}return ''}
+  function showSign(created,code){const panel=$('capsuleSignPanel'),qr=created?.refs?.qr_png||created?.refs?.qr||'',link=created?.next?.always||created?.next?.no_push_msg_received||created?.refs?.deeplink||'';$('capsuleSignCode').textContent='Code: '+code;$('capsuleSignText').textContent='Compare this code and verify NFTokenMint, taxon '+CAPSULE_TAXON+', URI fingerprint and Mainnet. No plaintext or map focus should be present.';if(link){$('capsuleXamanLink').href=link;$('capsuleXamanLink').hidden=false}else $('capsuleXamanLink').hidden=true;if(qr){$('capsuleQr').src=qr;$('capsuleQr').hidden=false}else $('capsuleQr').hidden=true;panel.hidden=false}
+  $('capsuleSignClose')?.addEventListener('click',()=>{$('capsuleSignPanel').hidden=true});
+  async function signReceipt(){if(!capsule.xumm?.payload)throw new Error('Xaman payload service unavailable.');if(!capsule.account)throw new Error('Connect Xaman first.');if(!capsule.pack)throw new Error('Encrypt the capsule first.');if(capsule.pending)throw new Error('A Xaman request is already active.');const hash=capsule.pack.hash,uri='jcs:receipt:v1:'+hash,code=code6(),domain=location.origin+location.pathname;capsule.pending=true;updateCapsuleButtons();try{const request={txjson:{TransactionType:'NFTokenMint',Account:capsule.account,NFTokenTaxon:CAPSULE_TAXON,Flags:0,URI:strHex(uri),Memos:[memo('app',CAPSULE_APP),memo('kind','receipt'),memo('hash',hash),memo('code',code),memo('domain',domain)].filter(Boolean)},options:{submit:true,force_network:'MAINNET',return_url:{app:domain,web:domain}},custom_meta:{identifier:CAPSULE_APP+':'+Date.now(),instruction:'Neutral encrypted-capsule fingerprint receipt. Match code '+code+'; verify there is no plaintext, key, location or route.'}};let created,resolution,details;if(typeof capsule.xumm.payload.createAndSubscribe==='function'){const sub=await capsule.xumm.payload.createAndSubscribe(request,e=>{if('signed' in (e?.data||{}))return e.data});created=sub.created;showSign(created,code);resolution=await Promise.race([sub.resolved,new Promise((_,rej)=>setTimeout(()=>rej(new Error('Xaman request timed out')),210000))]);try{details=await capsule.xumm.payload.get(created)}catch{}}else{created=await capsule.xumm.payload.create(request);showSign(created,code);for(let i=0;i<45;i++){details=await capsule.xumm.payload.get(created);if(details?.meta?.resolved)break;await new Promise(r=>setTimeout(r,4000))}}const signed=resolution?.signed??resolution?.data?.signed??details?.meta?.signed??false;if(!signed)throw new Error('Xaman request rejected or cancelled.');const txid=details?.response?.txid||resolution?.txid||resolution?.data?.txid||'';if(!/^[A-Fa-f0-9]{64}$/.test(txid))throw new Error('Signed request returned no valid transaction hash.');setCapsuleStatus('Receipt submitted · waiting for validation','warn');const validated=await waitTx(txid);let nftId=locateNft(validated);if(!nftId)nftId=await findNft(uri);capsule.receipt={schema:'jcs-private-capsule-receipt-evidence-v1',generated_at_utc:new Date().toISOString(),network:'XRPL Mainnet',account:capsule.account,transaction:txid,nftoken_id:nftId||null,nft_taxon:CAPSULE_TAXON,uri,envelope_sha256:hash,verification_code:code,limitation:'Public receipt proves only that the displayed wallet authorized a validated NFT carrying this neutral fingerprint. It does not prove identity, location, message truth, urgency, persecution status or successful private delivery.'};$('capsuleSignPanel').hidden=true;setCapsuleStatus('Validated neutral receipt');showCapsuleOutput('Validated NFT receipt created.\nTransaction: '+txid+'\nNFTokenID: '+(nftId||'indexing not returned yet')+'\nEnvelope SHA-256: '+hash+'\n\nThe Private Capsule itself and recovery key remain off-ledger.');updateCapsuleButtons()}finally{capsule.pending=false;updateCapsuleButtons()}}
+  $('capsule-mint')?.addEventListener('click',async()=>{try{await signReceipt()}catch(e){setCapsuleStatus('Receipt error','err');showCapsuleOutput(e.message||String(e));capsule.pending=false;updateCapsuleButtons()}});
+  $('capsule-download-receipt')?.addEventListener('click',()=>{if(capsule.receipt)downloadJson('jcs-private-capsule-receipt-'+capsule.receipt.transaction.slice(0,12)+'.json',capsule.receipt)});
+
+  updateWallet(); updateCapsuleButtons(); initXaman();
+  if(typeof globalThis.__JCS_CAPSULE_TEST_HOOK__==='function')globalThis.__JCS_CAPSULE_TEST_HOOK__({encryptCapsule,decryptCapsule,canonicalEnvelope,capsule,CAPSULE_TAXON,CAPSULE_APP});
+})();
+</script>
+
 </body>
 </html>
