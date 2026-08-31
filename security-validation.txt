@@ -1,0 +1,65 @@
+JCS SECURITY PAGE VALIDATION
+
+File: security.html
+Release: 3.0.0
+Effective: 2026-08-31
+Bytes: 70,741
+Lines: 578
+SHA-256: 94AF11F52EBBD813CA4460DFDE294CBAA585D45C7AAB6240182FF2C6522AC95C
+
+Companion protocol: jcs-security-vulnerability-disclosure-v1.json
+Protocol SHA-256: E5F9D9683A3940C1790E8B4439B80E235EE0C9DCED9D030E75A0CA331940CBA4
+
+SOURCE REGRESSION
+- Original security-page IDs found: 20
+- Missing original IDs: 0
+- Canonical JCS header CSS byte-identical to current about-jcs.html: YES
+
+STATIC / INTEGRITY
+- Passed: 30 / 30
+- Duplicate IDs: 0
+- Internal fragments resolve: PASS
+- JSON / JSON-LD parse: PASS
+- Inline JavaScript syntax: PASS
+- Security active in legal header row: PASS
+- Primary navigation destinations: 11
+- Xaman SDK loaded on security page: NO
+- createAndSubscribe present: NO
+- Transaction-construction path present: NO
+- CSP connect-src: none
+
+CONTROLLED CHROMIUM
+- Passed: 20 / 20
+- Viewports: 1466x900, 768x900, 390x844, 320x780
+- Horizontal overflow: 0 at all tested widths
+- Mobile menu open/close and Escape: PASS
+- Theme toggle: PASS
+- Sanctuary mode: PASS
+- Ledger focus: PASS
+- Machine-readable protocol download: PASS
+- Page errors: 0
+- Console errors: 0
+
+SECURITY ARCHITECTURE CHECKS
+- High-risk Christian / persecuted-believer stop-testing rule present.
+- Prayer Map no-location-inference rule present.
+- Private Capsule plaintext/key public-ledger prohibition present.
+- Transaction integrity section covers explicit wallet review, one active intent, stale-request reset, six-digit challenge where applicable, and validated-ledger finality.
+- Project-wide surface threat model covers Main Portal, Sign the Ledger, Prayer Map, Private Capsule, Network Observatory and Account Readiness.
+- Incident-response lifecycle and evidence-minimization rules present.
+- Deployment/supply-chain hardening section present.
+- Legal-process cross-reference to Privacy v3 present.
+- Narrow research assurance is explicitly separated from proprietary LICENSE reuse rights.
+
+REFERENCE FRAMEWORKS USED FOR DRAFTING / ALIGNMENT
+- RFC 9116 security.txt: https://www.rfc-editor.org/rfc/rfc9116.html
+- NIST SP 800-61 Rev. 3: https://csrc.nist.gov/pubs/sp/800/61/r3/final
+- CISA Secure by Design: https://www.cisa.gov/securebydesign
+- DOJ Vulnerability Disclosure Policy: https://www.justice.gov/jmd/vulnerability-disclosure-policy
+- FIRST CVSS v4.0: https://www.first.org/cvss/v4.0/
+- OWASP Content Security Policy Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+
+TEST BOUNDARY
+- Browser validation was local/controlled.
+- No real Xaman authorization, wallet signature, XRPL transaction, exploit, external-service request, or production vulnerability test was performed.
+- This is drafting and engineering validation, not a security certification, penetration-test report, legal opinion, or guarantee that the system is free of vulnerabilities.
