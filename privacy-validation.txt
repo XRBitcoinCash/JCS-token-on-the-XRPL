@@ -1,0 +1,96 @@
+JCS PRIVACY / RELIGIOUS SAFETY / LEGAL PROCESS VALIDATION
+Generated: 2026-08-31
+
+Production target: privacy.html
+Release: 3.0.0
+Bytes: 78410
+Lines: 633
+SHA-256: 4CF266EDAB3FDCBC9A295C8CABA90DC6BA6FBA9F7714306D20FF18AAE55EDC25
+
+Machine-readable policy: jcs-privacy-legal-process-v1.json
+Bytes: 3288
+SHA-256: ACF325037931EB79B1351766F8AF356880DE61061EC69F08E9A164822631D07D
+
+SOURCE PRESERVATION
+- Supplied Privacy v1 source IDs preserved: 21/21.
+- Original policy subjects retained: scope, information, religious data, purposes,
+  XRPL permanence, local storage, third parties, sharing, retention, rights,
+  children, security, international access, ministry confidentiality, changes,
+  contact, theme and copyright state.
+- Canonical JCS v4 header CSS core copied from the current About page and retained.
+- Privacy is active in the legal/policy row; no primary application nav item is
+  falsely marked current.
+
+MAJOR V3 ADDITIONS
+- High-risk Christian safety essentials.
+- Data minimization, purpose limitation and least-disclosure principles.
+- Current Sign the Ledger / Prayer Map / Private Capsule / Observatory / Account
+  Readiness privacy boundaries.
+- Prayer Map threshold disclosure: broad region 5, country 10, high-risk 20.
+- Private Capsule AES-256-GCM / key-separation / optional neutral receipt boundary.
+- Explicit no exact-location inference policy.
+- Explicit no hidden decryption backdoor / no new surveillance-record policy.
+- Legal process workflow: authenticate, identify authority, map data held, narrow,
+  preserve objections, disclose minimum responsive data, protect transmission,
+  document response.
+- Preservation / litigation-hold policy.
+- User-notice / transparency policy where legally permitted.
+- Emergency request threshold and documentation.
+- Civil subpoena / government / foreign-demand distinction.
+- Clergy-privilege / attorney-client / medical-record non-overclaim.
+- Source authority and research reference section.
+- Machine-readable jcs-privacy-legal-process-v1 contract and download control.
+- Sanctuary mode, Ledger focus, theme, print/save, safety-summary copy helper.
+- Privacy page intentionally does not load Xaman SDK or create transactions.
+
+STATIC VALIDATION
+Passed: 16 / 16
+- Duplicate IDs: 0
+- Broken local fragments: 0
+- Inline JavaScript syntax: PASS
+- JSON / JSON-LD parsing: PASS
+- Canonical 11-item JCS primary nav: PASS
+- Privacy legal-row active state: PASS
+- No Xaman SDK: PASS
+- No transaction payload creation: PASS
+- Legal-process sections present: PASS
+- High-risk / Prayer Map / Private Capsule sections present: PASS
+- Original source IDs preserved: PASS
+
+CONTROLLED CHROMIUM VALIDATION
+Passed: 24 / 24
+- 1466 x 900: PASS
+- 768 x 900: PASS
+- 390 x 844: PASS
+- 320 x 780: PASS
+- Horizontal overflow: 0 at tested widths
+- Mobile menu open / Escape close: PASS
+- Theme toggle: PASS
+- Sanctuary mode: PASS
+- Ledger focus: PASS
+- Machine-readable policy JSON parse/download: PASS
+- Page errors: 0
+- Console errors: 0
+
+LEGAL / POLICY RESEARCH USED FOR DRAFTING
+- FTC Data Security: collect only what is needed, protect it, dispose securely.
+- NIST Privacy Framework: risk-based privacy management.
+- California Attorney General CCPA guidance: sensitive personal information can
+  include religious or philosophical beliefs.
+- GDPR Article 9: religious or philosophical beliefs are special-category data.
+- Federal Rule of Civil Procedure 45: applicable subpoena objections, protected
+  matter, undue burden and modification/quashing procedures.
+- 18 U.S.C. Chapter 121 / Section 2703: compelled disclosure and preservation rules
+  for covered electronic communication / remote computing services. The page does
+  NOT assert that every JCS feature is legally classified as a covered service.
+
+IMPORTANT LIMITATION
+This is a policy / drafting / technical consistency validation, not a legal opinion,
+not a court determination, and not a promise to resist a binding lawful order.
+Applicable legal obligations depend on jurisdiction, JCS organizational facts,
+service classification, data category, legal instrument and counsel review.
+Public XRPL records remain independently obtainable from the network.
+
+CONTROLLED TEST BOUNDARY
+No real Xaman authorization, signing request, wallet transaction, legal demand,
+subpoena response, government disclosure or production of user data occurred.
