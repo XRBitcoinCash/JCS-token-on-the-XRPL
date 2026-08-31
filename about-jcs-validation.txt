@@ -1,0 +1,79 @@
+JCS ABOUT / VISION PAGE VALIDATION
+Generated: 2026-08-31
+
+Production file: about-jcs.html
+Release: 4.0.0
+Bytes: 150734
+Lines: 4536
+SHA-256: E660FCF36709BA5FF4760983ECEA9B29DA8C52A96BCA4F56017E48C0EA8BC5A3
+
+Machine-readable companion:
+jcs-about-project-charter-v1.json
+SHA-256: 05D3B2AFF2743DC8F6947AD113658BC8360878F5CB80246C8DF7CE017C2BB99D
+
+SOURCE PRESERVATION
+- Original about-jcs.html element IDs preserved: PASS
+- Original named JavaScript functions preserved: PASS
+- Existing optional video, Xaman authorization, live XRPL metrics, issuer/trustline/AMM/order-book logic, roadmap, directory, sharing and evidence controls retained: PASS
+
+CANONICAL JCS HEADER
+- Current two-tier JCS header present: PASS
+- Related XRPL projects: XRBitcoinCash / XRBitcoin / Creature NFT: PASS
+- Sanctuary mode / Ledger focus / Theme: PASS
+- Xaman connect-disconnect state: PASS
+- Terms / Privacy / Security / Support / AI Manifest: PASS
+- Primary nav count: 11
+- About & Vision is the only active nav destination: PASS
+- Mobile menu opens and Escape closes: PASS
+
+CURRENT-SCOPE UPDATES
+- JCS operating charter: PASS
+- Current surface map includes Sign the Ledger v7, Prayer Map v5, Network Observatory v3 and Account Readiness v4: PASS
+- Private Capsule classified experimental rather than a mature private-message service: PASS
+- Public Evidence / Private Dignity architecture: PASS
+- Current roadmap distinguishes live / experimental / active / planned: PASS
+- Source-authority hierarchy and controlling-document summary: PASS
+- Proprietary/source-visible license disclosure + Qualified Federal Watchdog summary: PASS
+- Consolidated application/legal/privacy/safety boundaries: PASS
+- Machine-readable charter embedded + downloadable: PASS
+
+STATIC / INTEGRITY TESTS
+Passed: 32
+Failed: 0
+- Duplicate IDs: 0
+- Missing original IDs: 0
+- Missing original named functions: 0
+- Broken internal fragment links: 0
+- Missing literal JavaScript DOM targets: 0
+- Embedded JSON / JSON-LD parse errors: 0
+- Inline JavaScript syntax errors: 0
+- Xaman transaction-payload creation paths on About page: 0
+
+CONTROLLED BROWSER TESTS
+Passed: 37
+Failed: 0
+Viewports:
+- 1466 x 900
+- 768 x 900
+- 390 x 844
+- 320 x 780
+
+Verified in controlled Chromium:
+- zero horizontal overflow at all four sizes
+- About & Vision active state
+- desktop/mobile header behavior
+- mobile menu open and Escape close
+- theme switch
+- Sanctuary mode hides deep market/technical panels
+- Ledger focus hides optional message/fellowship panels
+- controlled Xaman authorization updates the wallet pill
+- project-charter JSON download
+- zero page errors
+- zero console errors
+
+TEST BOUNDARIES
+- Xaman was stubbed in the controlled browser test. No real wallet authorization was performed.
+- No live XRPL metric requests were executed in the controlled browser harness. Existing metric code was preserved and syntax/DOM-validated.
+- No Payment, TrustSet, OfferCreate, OfferCancel, NFTokenMint or other signing payload is created by this About page.
+- Legal and licensing text is a project-facing summary. Current Terms, Privacy Policy, Security documentation and the complete repository LICENSE control their respective subjects.
+- This validation is technical/drafting validation, not a legal opinion, security certification, financial audit or regulatory determination.
