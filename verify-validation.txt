@@ -1,0 +1,139 @@
+JCS SIGN THE LEDGER — RELEASE VALIDATION
+========================================
+Artifact: verify.html
+Interface release: 7.0.0
+On-ledger social protocol retained: JCS_SOCIAL_V6
+Validated Prayer Map handoff protocol: jcs-prayer-map-refresh-v1
+Network: XRP Ledger Mainnet
+Generated: 2026-08-31
+
+ARTIFACT IDENTITY
+-----------------
+Bytes: 262,481
+Logical lines: 6,190
+SHA-256: 7910C433925DBAD5D97F703610D114CAC678B487C0BF666D8E9B0AAECAEB74FD
+
+SOURCE-PRESERVATION CHECK
+-------------------------
+Original source element IDs: 125
+Original named JavaScript functions: 137
+Original element IDs missing from rebuilt file: 0
+Original named JavaScript functions missing from rebuilt file: 0
+
+Critical constants preserved:
+- Xaman API key: preserved
+- Collector/account: rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd
+- NFT taxon: 1246974803
+- On-ledger application tag: JCS_SOCIAL_V6
+- Map policy: JCS_MAP_1
+- Map BroadcastChannel: jcs-prayer-map
+- Map local-storage protocol keys: preserved
+- Region public threshold: 5 distinct signing accounts
+- Country public threshold: 10 distinct signing accounts
+- Extreme-pressure-country threshold: 20 distinct signing accounts
+
+STATIC / CROSS-FILE VALIDATION
+------------------------------
+37 / 37 checks passed.
+
+Verified:
+- Complete HTML document.
+- Release metadata = 7.0.0.
+- Embedded JSON / JSON-LD parse successfully.
+- All inline JavaScript blocks pass node --check.
+- Duplicate element IDs: 0.
+- Missing literal JavaScript DOM targets: 0.
+- Missing same-page fragment targets: 0.
+- All original source IDs preserved.
+- All original named functions preserved.
+- Canonical JCS header structure present.
+- Canonical primary-navigation order present.
+- Sign the Ledger is the only aria-current page.
+- Five-stage Connect → Mint → Registry → Map → Verify workflow present.
+- Mint-only path explicitly states that Prayer Map publication remains pending.
+- Map handoff is scheduled only after the registry transaction has validated.
+- Verify page and prayer.map.html use the same jcs-prayer-map-refresh-v1 contract.
+- Prayer Map accepts only schema, action and ledger_validation_required in the handoff object.
+- Region/country/extreme-country privacy thresholds match between verify.html and prayer.map.html.
+- Forbidden location memo controls remain present.
+
+CONTROLLED CHROMIUM VALIDATION
+------------------------------
+46 / 46 checks passed.
+
+Responsive sizes tested:
+- 1466 × 900
+- 768 × 900
+- 390 × 844
+- 320 × 780
+
+Verified at tested sizes:
+- No horizontal page overflow.
+- Canonical JCS header renders.
+- Sign the Ledger remains the active destination.
+- Prayer Map publication-route panel renders.
+- Release metadata reads 7.0.0.
+- Theme toggle changes dark/light state.
+- Mobile navigation opens below 980px.
+- Escape closes mobile navigation.
+- Page errors: 0.
+- Console errors: 0.
+
+CONTROLLED TWO-APPROVAL PUBLICATION TEST
+----------------------------------------
+A mocked Xaman/XRPL harness exercised the actual page workflow without making a real wallet or Mainnet request.
+
+Input map focus: Europe / broad region
+Displayed privacy threshold: 5 distinct signing accounts
+Mint-only label: “Mint NFT only · map publication pending”
+
+Observed transaction requests:
+1. NFTokenMint
+2. Payment to rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd
+
+Controlled ledger responses:
+- Mint transaction: validated tesSUCCESS
+- Registry transaction: validated tesSUCCESS
+- Mock NFTokenID returned
+- Five publication stages completed
+- Verification Evidence Center populated
+- Prayer Map action enabled
+
+Stored map handoff after validated registry:
+{
+  "schema": "jcs-prayer-map-refresh-v1",
+  "action": "refresh-ledger",
+  "ledger_validation_required": true
+}
+
+No wallet, transaction hash, NFTokenID, message, timestamp, region, country or physical-location value is placed in the cross-page refresh hint. The Prayer Map independently re-reads validated XRPL history and applies its own publication thresholds.
+
+INDEXING-LAG PROTECTION
+-----------------------
+After a registry transaction validates, verify.html:
+- writes the content-free refresh contract for a later Prayer Map open;
+- broadcasts the same content-free contract immediately if a Prayer Map tab is already open;
+- repeats BroadcastChannel refresh hints after 3.5, 9 and 18 seconds to tolerate public-server indexing delay;
+- provides Prayer Map links using refresh=xrpl&source=verify&handoff=v2;
+- never transmits the individual prayer record through the handoff itself.
+
+IMPORTANT MINT-ONLY BOUNDARY
+----------------------------
+A standalone NFTokenMint is wallet-held evidence but is not discoverable by the Prayer Map's collector-history scanner. The map-connected path requires the separately validated one-drop public registry transaction. The rebuilt UI makes this distinction explicit and preserves the existing pending-publication recovery workflow so an already-minted NFT can be published later without minting a duplicate.
+
+TEST-HARNESS BOUNDARY
+---------------------
+No real Xaman authorization, signature, NFTokenMint, Payment, XRP movement or Mainnet transaction was performed.
+
+The controlled browser harness used mocked Xaman and XRPL responses. Because the harness executes injected HTML in an opaque test document, test-only localStorage, BroadcastChannel and WebCrypto-digest shims were supplied to exercise workflow state. Those shims are NOT included in production verify.html. The production page continues to use browser Web Crypto, real BroadcastChannel/localStorage where available, Xaman, and configured XRPL public servers.
+
+RELEASE RESULT
+--------------
+PASS — commit-ready controlled release candidate.
+Production follow-up after deployment:
+1. Connect a real Xaman wallet.
+2. Publish one non-sensitive test prayer with broad-region opt-in.
+3. Confirm NFTokenMint validation.
+4. Confirm registry Payment validation.
+5. Open prayer.map.html and verify that it re-reads current XRPL history.
+6. Confirm the prayer contributes only according to the Prayer Map threshold rules.
