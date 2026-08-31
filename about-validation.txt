@@ -1,0 +1,98 @@
+JCS /about/ PROJECT CHARTER COMPATIBILITY ROUTE VALIDATION
+Generated: 2026-08-31
+
+Production target: about/index.html
+Artifact source file: about-index.html
+Release: 2.0.0
+Bytes: 58,046
+Lines: 301
+SHA-256: 27F2B93EF8DD70E822AB5B096E2068B45BB77CF70D8AE2173F213CBF81695BE8
+
+PURPOSE
+- Preserve the legacy /about/ route without a zero-second redirect.
+- Keep /about-jcs.html as the canonical and authoritative mission/roadmap page.
+- Provide a compact project charter summarizing the current JCS ecosystem,
+  safety/privacy architecture, roadmap, legal/application boundaries, and
+  proprietary-license posture.
+- Preserve noindex,follow on the compatibility route to avoid competing with
+  the canonical Vision page.
+
+SOURCE-GROUNDING REVIEW
+- Current JCS project README: mission, source-visible/proprietary status,
+  current static-app limitations, ethical access, roadmap and third-party boundaries.
+- Current JCS Terms: religious-ministry description does not independently prove
+  church/nonprofit/501(c)(3)/tax-exempt legal status; interactive use and third-party
+  boundaries remain controlled by Terms.
+- Current JCS Privacy Policy: public XRPL records cannot be privately erased;
+  wallet addresses and public memo/NFT data can persist; local-storage and
+  third-party-provider disclosures retained as project-wide boundaries.
+- Current repository LICENSE: proprietary/all-rights-reserved posture; no automatic
+  open-source, noncommercial, AI-training, copying, modification, redistribution,
+  deployment or derivative-work grant; narrow Qualified Federal Watchdog exception;
+  third-party/public-domain exclusions and statutory rights preserved.
+- Current JCS portal/header pattern: canonical two-tier JCS ecosystem navigation.
+
+STRUCTURAL / STATIC VALIDATION
+Passed: 34 / 34
+Failed: 0
+- Complete HTML document: PASS
+- /about-jcs.html canonical: PASS
+- noindex,follow compatibility policy: PASS
+- Zero-second meta refresh removed: PASS
+- Duplicate element IDs: 0
+- Internal fragment targets: PASS
+- Canonical JCS primary navigation order: PASS
+- About & Vision is the only active primary destination: PASS
+- JSON-LD parses: PASS
+- Embedded machine-readable charter parses: PASS
+- JavaScript syntax: PASS
+- Literal DOM references: PASS
+- Mission / ethical-access / licensing / application-disclaimer markers: PASS
+
+CONTROLLED CHROMIUM VALIDATION
+Passed: 43 / 43
+Failed: 0
+Viewports:
+- 1466 x 900
+- 768 x 900
+- 390 x 844
+- 320 x 780
+Verified:
+- No horizontal overflow at all tested sizes.
+- About & Vision remains the active primary navigation item.
+- Canonical mobile navigation opens and Escape closes it.
+- Sanctuary mode toggles.
+- Ledger focus toggles.
+- Theme switching toggles.
+- Machine-readable charter parses in runtime.
+- No JavaScript page errors.
+- No material console errors in the controlled harness.
+
+CONTENT / SAFETY BOUNDARIES
+- No pay-to-pray / no pay-to-be-heard / no token-weighted theology.
+- No composite spiritual-impact score.
+- No public extraction routes or individual movement-plan publication.
+- Private Capsule described as local-first encryption, not a high-risk guarantee.
+- Public XRPL immutability and wallet-address persistence disclosed.
+- NFTs/hashes described as technical evidence, not automatic proof of truth,
+  identity, legal ownership, authenticity, regulatory compliance or pastoral authority.
+- Xaman account authorization described as session account-control evidence,
+  not legal identity.
+- Market data described as informational and not a promise of profit/liquidity.
+- Future roadmap described as goals rather than contractual delivery promises.
+- Page expressly defers to Terms, Privacy, Security and LICENSE for controlling text.
+- Licensing summary expressly states it is not a legal opinion or enforceability ruling.
+
+DEPLOYMENT NOTE
+Replace the repository file:
+  about/index.html
+with the provided about-index.html contents (or rename it to index.html inside /about/).
+Commit about-validation.txt with the HTML if you are maintaining per-page validation records.
+The JSON charter can be committed either in /about/ or at a root machine-readable path;
+this validation package places it beside the compatibility route for convenience.
+
+TEST LIMITS
+- The controlled browser test did not submit a wallet authorization or XRPL transaction.
+- This route intentionally contains no Xaman SDK transaction workflow.
+- Root-relative links and project assets should be checked once on the deployed HTTPS origin.
+- This validation is a technical/content consistency check, not legal advice or a legal opinion.
