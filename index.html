@@ -16,8 +16,9 @@
 <meta content="Jesus Christ Saves Token" name="publisher"/>
 <meta content="faith-dex-fellowship" name="jcs-home-mode"/>
 <meta content="2.1.0" name="jcs-release"/>
-<title>Jesus Christ Saves Token | Faith, Fellowship &amp; Verified XRPL Exchange</title>
-<meta content="Official Jesus Christ Saves Token portal combining purpose-separated faith and fellowship tools with non-custodial JCS/XRP trading through Xaman, validated XRPL evidence, Scripture, sacred media, prayer NFTs, privacy-safe prayer mapping and local evidence exports." name="description"/>
+<title>Jesus Christ Saves Token | Global Christian Watch, Faith &amp; Verified XRPL Exchange</title>
+<meta content="Jesus Christ Saves Token combines a live Christian persecution and religious-freedom watch, verified aid and advocacy pathways, Scripture, sacred media, prayer tools, privacy-safe mapping, and a purpose-separated non-custodial JCS/XRP exchange through Xaman." name="description"/>
+<meta content="1.0.0" name="jcs-global-christian-watch-release"/>
 <meta content="Jesus Christ Saves Token,JCS,XRPL,Xaman,XRP Ledger DEX,AMM,Christian fellowship tools,prayer NFT,testimony,Scripture,sacred audio,public domain Jesus film,JCS Fellowship" name="keywords"/>
 <meta content="Jesus Christ Saves Token" name="author"/>
 <link href="https://jesuschristsavestoken.com/" rel="canonical"/>
@@ -5808,6 +5809,164 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 </style>
 
+
+<style id="jcs-global-christian-watch-v100">
+/* =========================================================
+   JCS Global Christian Watch v1.0
+   Public, read-only attraction/intelligence layer.
+   Existing JCS faith, fellowship, XRPL and Xaman systems remain underneath.
+   ========================================================= */
+:root{
+  --ww-bg:#02040a;
+  --ww-surface:#07101e;
+  --ww-surface-2:#0b1728;
+  --ww-surface-3:#10243b;
+  --ww-ink:#f8fbff;
+  --ww-muted:#aab7ca;
+  --ww-line:rgba(158,188,231,.19);
+  --ww-gold:#e9bd51;
+  --ww-gold-2:#ffe7a1;
+  --ww-blue:#5da8ff;
+  --ww-cyan:#44d7ff;
+  --ww-green:#5ce0a9;
+  --ww-red:#ff7187;
+  --ww-orange:#ffac66;
+  --ww-max:1440px;
+  --ww-shadow:0 28px 90px rgba(0,0,0,.48);
+}
+html.jcs-world-watch-ready .jcs-index-header{display:none!important}
+body.exchange-focus #jcs-world-watch{display:none!important}
+
+#jcs-world-watch{
+  position:relative;
+  z-index:4;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  overflow:hidden;
+  color:var(--ww-ink);
+  background:
+    radial-gradient(circle at 14% 2%,rgba(233,189,81,.18),transparent 31rem),
+    radial-gradient(circle at 89% 10%,rgba(68,215,255,.15),transparent 34rem),
+    linear-gradient(155deg,#01030a 0%,#050b16 46%,#02050d 100%);
+  border-bottom:1px solid rgba(233,189,81,.22);
+  isolation:isolate;
+}
+#jcs-world-watch::before{
+  content:"";position:absolute;inset:0;z-index:-3;pointer-events:none;opacity:.32;
+  background-image:
+    linear-gradient(rgba(255,255,255,.026) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.026) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,#000 0 82%,transparent);
+}
+#jcs-world-watch::after{
+  content:"✝";position:absolute;right:-1vw;top:-10rem;z-index:-2;
+  color:rgba(233,189,81,.035);font:900 clamp(30rem,58vw,64rem)/1 Georgia,serif;
+  transform:rotate(-4deg);pointer-events:none;user-select:none;
+}
+.ww-shell{width:min(var(--ww-max),100%);margin:0 auto;padding:0 max(18px,env(safe-area-inset-right)) 84px max(18px,env(safe-area-inset-left))}
+.ww-live-rail .ww-shell{padding-bottom:0!important}
+.ww-live-rail{width:100%;overflow:hidden;border-bottom:1px solid var(--ww-line);background:rgba(1,4,12,.72);backdrop-filter:blur(12px)}
+.ww-live-inner{display:flex;align-items:center;gap:16px;min-width:100%;padding:10px 0;overflow:hidden}
+.ww-ticker-track{display:flex;align-items:center;gap:16px;width:max-content;min-width:max-content;animation:wwTicker 48s linear infinite}
+.ww-ticker-track:hover{animation-play-state:paused}
+.ww-live-label{position:sticky;left:0;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(255,113,135,.35);border-radius:999px;color:#ffd5dc;background:rgba(116,18,42,.66);font-size:.7rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.ww-live-label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ww-red);box-shadow:0 0 16px var(--ww-red);animation:wwPulse 1.7s ease-in-out infinite}
+.ww-ticker-item{display:inline-flex;align-items:center;gap:8px;max-width:520px;color:#dfe9f8;font-size:.78rem;font-weight:780;white-space:nowrap;text-decoration:none}
+.ww-ticker-item::before{content:"✦";color:var(--ww-gold);font-size:.65rem}
+.ww-ticker-placeholder{color:var(--ww-muted);font-size:.78rem}
+
+.ww-tools-button{position:fixed;top:max(14px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:5000;min-height:46px;display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid rgba(93,168,255,.58);border-radius:14px;color:#fff;background:rgba(4,13,27,.92);box-shadow:0 12px 34px rgba(0,0,0,.36),0 0 22px rgba(93,168,255,.14);font:900 .78rem/1 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(14px)}
+.ww-tools-button:hover,.ww-tools-button:focus-visible{border-color:var(--ww-gold);outline:3px solid rgba(233,189,81,.22);outline-offset:2px}
+.ww-tools-drawer{position:fixed;top:72px;right:max(16px,env(safe-area-inset-right));z-index:4999;width:min(410px,calc(100vw - 28px));max-height:calc(100vh - 94px);overflow:auto;padding:14px;border:1px solid rgba(93,168,255,.34);border-radius:18px;background:rgba(4,11,22,.97);box-shadow:0 26px 82px rgba(0,0,0,.52);backdrop-filter:blur(18px)}
+.ww-tools-drawer[hidden]{display:none!important}
+.ww-tools-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--ww-line)}
+.ww-tools-head strong{color:var(--ww-ink)!important}.ww-tools-head span{display:block;margin-top:3px;color:var(--ww-muted);font-size:.72rem}
+.ww-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:11px}
+.ww-tools-grid a,.ww-tools-grid button{min-height:44px;display:flex;align-items:center;justify-content:center;padding:9px;border:1px solid var(--ww-line);border-radius:11px;color:#e9f2ff;background:var(--ww-surface-2);font:850 .73rem/1.2 system-ui,sans-serif;text-decoration:none;text-align:center;cursor:pointer}
+.ww-tools-grid a:hover,.ww-tools-grid a:focus-visible,.ww-tools-grid button:hover,.ww-tools-grid button:focus-visible{border-color:var(--ww-blue);color:#fff;outline:none}
+.ww-tools-grid .gold{border-color:rgba(233,189,81,.48);color:var(--ww-gold-2);background:rgba(233,189,81,.07)}
+.ww-tools-wallet{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.ww-tools-state{grid-column:1/-1;padding:8px 9px;color:var(--ww-muted);font-size:.7rem;text-align:center;overflow-wrap:anywhere}
+
+.ww-hero{min-height:760px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr);gap:clamp(34px,5vw,80px);align-items:center;padding:clamp(70px,8vw,120px) 0 72px}
+.ww-kicker{display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid rgba(233,189,81,.34);border-radius:999px;color:var(--ww-gold-2);background:rgba(233,189,81,.07);font:900 .72rem/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.11em;text-transform:uppercase}
+.ww-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ww-green);box-shadow:0 0 14px var(--ww-green)}
+.ww-hero h1{max-width:920px;margin:24px 0 20px;color:#fff!important;font:900 clamp(3.6rem,8.7vw,8.6rem)/.84 Georgia,"Times New Roman",serif!important;letter-spacing:-.073em;text-wrap:balance}
+.ww-hero h1 span{display:block;color:transparent;background:linear-gradient(100deg,var(--ww-gold-2),var(--ww-gold) 32%,var(--ww-cyan) 64%,var(--ww-blue));-webkit-background-clip:text;background-clip:text}
+.ww-lede{max-width:790px;margin:0;color:#c4d1e4;font-size:clamp(1.04rem,1.9vw,1.28rem);line-height:1.68}
+.ww-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.ww-action{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border:1px solid var(--ww-line);border-radius:13px;color:#eef6ff;background:rgba(255,255,255,.045);font-weight:900;text-decoration:none;cursor:pointer}
+.ww-action.primary{border-color:transparent;color:#111;background:linear-gradient(135deg,var(--ww-gold-2),var(--ww-gold));box-shadow:0 15px 34px rgba(233,189,81,.17)}
+.ww-action.blue{border-color:rgba(93,168,255,.55);background:rgba(93,168,255,.09)}
+.ww-action:hover,.ww-action:focus-visible{transform:translateY(-2px);border-color:var(--ww-gold);outline:none}
+.ww-trust-row{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:23px;color:#9fb0c6;font-size:.78rem;font-weight:780}
+.ww-trust-row span::before{content:"✓";margin-right:6px;color:var(--ww-green);font-weight:950}
+.ww-faith-line{margin-top:20px;padding:13px 15px;border:1px solid rgba(233,189,81,.26);border-left:4px solid var(--ww-gold);border-radius:13px;color:#b9c7da;background:rgba(233,189,81,.045);font-size:.8rem;line-height:1.55}
+.ww-faith-line strong{color:#fff!important}
+
+.ww-orbit{position:relative;min-height:620px;display:grid;place-items:center}
+.ww-orbit-core{position:relative;width:min(100%,540px);aspect-ratio:1;border:1px solid rgba(233,189,81,.24);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at center,rgba(233,189,81,.15),rgba(68,215,255,.055) 32%,rgba(3,8,18,.34) 57%,transparent 72%);box-shadow:inset 0 0 80px rgba(68,215,255,.07),0 0 70px rgba(233,189,81,.08)}
+.ww-orbit-core::before,.ww-orbit-core::after{content:"";position:absolute;border:1px solid rgba(93,168,255,.2);border-radius:50%;animation:wwSpin 28s linear infinite}
+.ww-orbit-core::before{inset:9%}.ww-orbit-core::after{inset:23%;animation-direction:reverse;animation-duration:19s;border-color:rgba(233,189,81,.2)}
+.ww-cross{position:relative;z-index:2;color:var(--ww-gold-2);font:900 clamp(9rem,18vw,14rem)/1 Georgia,serif;text-shadow:0 0 32px rgba(233,189,81,.25),0 0 80px rgba(68,215,255,.13);animation:wwBreathe 5s ease-in-out infinite}
+.ww-orbit-node{position:absolute;z-index:3;width:122px;min-height:72px;display:grid;align-content:center;padding:10px;border:1px solid var(--ww-line);border-radius:14px;color:#fff;background:rgba(5,14,29,.88);box-shadow:0 12px 34px rgba(0,0,0,.3);backdrop-filter:blur(12px);text-align:center}
+.ww-orbit-node span{display:block;color:var(--ww-muted);font-size:.62rem;font-weight:900;text-transform:uppercase}.ww-orbit-node strong{display:block;margin-top:4px;color:#fff!important;font-size:.82rem}.ww-node-a{left:-2%;top:17%}.ww-node-b{right:-4%;top:26%}.ww-node-c{left:6%;bottom:10%}.ww-node-d{right:3%;bottom:8%}
+.ww-orbit-status{position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);z-index:4;width:min(88%,460px);padding:12px 14px;border:1px solid rgba(92,224,169,.28);border-radius:14px;color:#c6f7e2;background:rgba(5,27,23,.82);font-size:.76rem;text-align:center;box-shadow:0 12px 36px rgba(0,0,0,.32)}
+
+.ww-section{padding:72px 0 0}
+.ww-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:24px}
+.ww-section-head h2{max-width:900px;margin:8px 0 0;color:#fff!important;font-size:clamp(2.2rem,5vw,4.6rem)!important;line-height:.98;letter-spacing:-.05em}
+.ww-section-head p{max-width:750px;margin:9px 0 0;color:var(--ww-muted)}
+.ww-section-actions{display:flex;flex-wrap:wrap;gap:8px}
+.ww-mini-button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border:1px solid var(--ww-line);border-radius:11px;color:#e8f2ff;background:var(--ww-surface-2);font-weight:850;text-decoration:none;cursor:pointer}
+.ww-mini-button:hover,.ww-mini-button:focus-visible{border-color:var(--ww-blue);outline:none}
+
+.ww-pulse-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.ww-pulse-card{min-width:0;padding:16px;border:1px solid var(--ww-line);border-radius:16px;background:linear-gradient(165deg,rgba(93,168,255,.07),rgba(6,16,31,.86));box-shadow:0 15px 42px rgba(0,0,0,.19)}
+.ww-pulse-card span{display:block;color:var(--ww-muted);font-size:.66rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.ww-pulse-card strong{display:block;margin-top:7px;color:#fff!important;font-size:clamp(1.15rem,2.4vw,1.7rem);overflow-wrap:anywhere}.ww-pulse-card small{display:block;margin-top:5px;color:#8495ad;font-size:.67rem}
+.ww-pulse-card.alert{border-color:rgba(255,113,135,.3);background:linear-gradient(165deg,rgba(255,113,135,.09),rgba(6,16,31,.86))}
+.ww-pulse-card.hope{border-color:rgba(92,224,169,.3);background:linear-gradient(165deg,rgba(92,224,169,.07),rgba(6,16,31,.86))}
+
+.ww-intel-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(330px,.65fr);gap:14px;margin-top:14px}
+.ww-feed-panel,.ww-signal-panel,.ww-source-panel,.ww-safety-panel{border:1px solid var(--ww-line);border-radius:20px;background:rgba(6,15,29,.83);box-shadow:var(--ww-shadow);backdrop-filter:blur(14px)}
+.ww-feed-panel{padding:14px}.ww-feed-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 4px 13px}.ww-feed-toolbar strong{color:#fff!important}.ww-feed-toolbar span{display:block;margin-top:3px;color:var(--ww-muted);font-size:.7rem}
+.ww-feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.ww-news-card{min-width:0;display:flex;flex-direction:column;padding:14px;border:1px solid var(--ww-line);border-radius:14px;color:#e9f2ff;background:rgba(255,255,255,.025)}
+.ww-news-meta{display:flex;flex-wrap:wrap;gap:6px 9px;color:#8292a9;font-size:.65rem;font-weight:800}.ww-news-meta .event{color:var(--ww-gold-2)}
+.ww-news-card h3{margin:9px 0 7px;color:#fff!important;font-size:.94rem!important;line-height:1.35}.ww-news-card p{margin:0;color:var(--ww-muted);font-size:.74rem;line-height:1.5}.ww-news-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:12px}.ww-news-actions a,.ww-news-actions button{min-height:35px;display:inline-flex;align-items:center;justify-content:center;padding:7px 9px;border:1px solid var(--ww-line);border-radius:9px;color:#cfe6ff;background:var(--ww-surface-2);font:850 .67rem/1.1 system-ui,sans-serif;text-decoration:none;cursor:pointer}.ww-news-actions a:hover,.ww-news-actions button:hover{border-color:var(--ww-blue)}
+.ww-feed-empty{grid-column:1/-1;padding:24px;border:1px dashed var(--ww-line);border-radius:14px;color:var(--ww-muted);text-align:center}
+
+.ww-signal-panel{padding:18px}.ww-signal-panel h3{margin:0;color:#fff!important}.ww-signal-panel>p{margin:6px 0 0;color:var(--ww-muted);font-size:.78rem}.ww-chart{position:relative;height:190px;margin-top:16px;overflow:hidden;border:1px solid var(--ww-line);border-radius:15px;background:linear-gradient(rgba(93,168,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(93,168,255,.08) 1px,transparent 1px),rgba(3,10,21,.72);background-size:100% 38px,52px 100%,100% 100%}.ww-chart svg{width:100%;height:100%}.ww-chart-line{fill:none;stroke:var(--ww-gold);stroke-width:3;vector-effect:non-scaling-stroke}.ww-chart-fill{fill:rgba(233,189,81,.09)}
+.ww-event-list{display:grid;gap:8px;margin-top:14px}.ww-event-row{display:grid;grid-template-columns:minmax(100px,.7fr) minmax(0,1.3fr) auto;gap:9px;align-items:center}.ww-event-row span{color:var(--ww-muted);font-size:.72rem}.ww-event-track{height:8px;overflow:hidden;border-radius:999px;background:#101d2d}.ww-event-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ww-blue),var(--ww-cyan))}.ww-event-row strong{color:#fff!important;font-size:.72rem}
+
+.ww-org-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.ww-org-card{min-width:0;display:flex;flex-direction:column;padding:17px;border:1px solid var(--ww-line);border-radius:17px;color:#fff;background:linear-gradient(160deg,rgba(17,36,59,.88),rgba(5,14,28,.92));text-decoration:none;transition:transform .18s ease,border-color .18s ease}.ww-org-card:hover,.ww-org-card:focus-visible{transform:translateY(-3px);border-color:rgba(233,189,81,.56);outline:none}.ww-org-tag{width:fit-content;padding:5px 7px;border:1px solid rgba(233,189,81,.28);border-radius:999px;color:var(--ww-gold-2);background:rgba(233,189,81,.06);font-size:.61rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}.ww-org-card h3{margin:14px 0 7px;color:#fff!important;font-size:1rem!important}.ww-org-card p{margin:0;color:var(--ww-muted);font-size:.75rem;line-height:1.5}.ww-org-link{margin-top:auto;padding-top:15px;color:var(--ww-cyan);font-size:.7rem;font-weight:900}.ww-org-card.featured{border-color:rgba(233,189,81,.36);background:radial-gradient(circle at 100% 0,rgba(233,189,81,.12),transparent 18rem),linear-gradient(160deg,rgba(17,36,59,.88),rgba(5,14,28,.92))}
+
+.ww-action-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:14px}.ww-source-panel,.ww-safety-panel{padding:20px}.ww-source-panel h3,.ww-safety-panel h3{margin:0;color:#fff!important}.ww-source-panel p,.ww-safety-panel p{color:var(--ww-muted);font-size:.8rem}.ww-source-list{display:grid;gap:8px;margin-top:14px}.ww-source-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px;border:1px solid var(--ww-line);border-radius:12px;background:rgba(255,255,255,.025)}.ww-source-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;color:#07101b;background:linear-gradient(135deg,var(--ww-gold-2),var(--ww-gold));font-weight:950}.ww-source-copy strong{display:block;color:#fff!important;font-size:.79rem}.ww-source-copy span{display:block;margin-top:3px;color:var(--ww-muted);font-size:.67rem}.ww-source-item a{color:var(--ww-cyan);font-size:.68rem;font-weight:900;text-decoration:none}.ww-safety-panel{border-color:rgba(255,172,102,.3);background:radial-gradient(circle at 100% 0,rgba(255,172,102,.10),transparent 22rem),rgba(6,15,29,.83)}.ww-safety-list{display:grid;gap:8px;margin:14px 0 0;padding:0;list-style:none}.ww-safety-list li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px;color:#c7d3e4;font-size:.76rem}.ww-safety-list li::before{content:"✦";color:var(--ww-orange);font-weight:950}
+
+.ww-transition{margin-top:74px;padding:30px;border:1px solid rgba(93,168,255,.24);border-radius:22px;background:linear-gradient(135deg,rgba(93,168,255,.08),rgba(233,189,81,.05));text-align:center}.ww-transition span{display:block;color:var(--ww-muted);font:.72rem/1.2 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase}.ww-transition h2{margin:10px 0 8px;color:#fff!important;font-size:clamp(1.8rem,4vw,3.2rem)!important}.ww-transition p{max-width:920px;margin:0 auto;color:var(--ww-muted)}.ww-down{display:block;margin-top:14px;color:var(--ww-gold);font-size:2rem;animation:wwDown 1.8s ease-in-out infinite}
+
+@keyframes wwTicker{from{transform:translateX(0)}to{transform:translateX(-38%)}}
+@keyframes wwPulse{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes wwSpin{to{transform:rotate(360deg)}}
+@keyframes wwBreathe{0%,100%{transform:scale(.96);filter:brightness(.9)}50%{transform:scale(1.035);filter:brightness(1.13)}}
+@keyframes wwDown{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(7px);opacity:1}}
+
+@media(max-width:1120px){
+  .ww-hero{grid-template-columns:1fr;min-height:auto}.ww-orbit{min-height:560px}.ww-orbit-core{max-width:520px}
+  .ww-pulse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.ww-org-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:850px){
+  .ww-shell{padding-left:14px;padding-right:14px}.ww-hero{padding-top:92px}.ww-intel-grid,.ww-action-grid{grid-template-columns:1fr}.ww-section-head{align-items:flex-start;flex-direction:column}.ww-feed{grid-template-columns:1fr}.ww-orbit-node{width:108px}.ww-node-a{left:0}.ww-node-b{right:0}
+}
+@media(max-width:620px){
+  .ww-shell{padding-left:12px;padding-right:12px;padding-bottom:58px}.ww-hero{padding:82px 0 48px;gap:22px}.ww-hero h1{font-size:clamp(3.1rem,17vw,5.1rem)!important}.ww-lede{font-size:1rem}.ww-hero-actions{display:grid;grid-template-columns:1fr}.ww-action{width:100%}.ww-orbit{min-height:420px}.ww-orbit-core{width:min(92vw,390px)}.ww-cross{font-size:8rem}.ww-orbit-node{width:96px;min-height:60px;padding:7px}.ww-orbit-node span{font-size:.54rem}.ww-orbit-node strong{font-size:.68rem}.ww-node-a{left:-1%;top:13%}.ww-node-b{right:-1%;top:20%}.ww-node-c{left:3%;bottom:8%}.ww-node-d{right:2%;bottom:5%}.ww-orbit-status{bottom:-34px;width:94%;font-size:.67rem}.ww-section{padding-top:58px}.ww-pulse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ww-org-grid{grid-template-columns:1fr}.ww-tools-grid{grid-template-columns:1fr}.ww-tools-wallet{grid-template-columns:1fr}.ww-tools-state{grid-column:auto}.ww-tools-button{top:10px;right:10px}.ww-tools-drawer{top:64px;right:10px;width:calc(100vw - 20px)}.ww-section-head h2{font-size:clamp(2rem,10vw,3rem)!important}.ww-transition{padding:22px 15px}.ww-source-item{grid-template-columns:auto minmax(0,1fr)}.ww-source-item a{grid-column:2}
+}
+@media(max-width:380px){.ww-pulse-grid{grid-template-columns:1fr}.ww-orbit-node{display:none}.ww-orbit{min-height:350px}}
+@media(prefers-reduced-motion:reduce){.ww-ticker-track,.ww-live-label::before,.ww-orbit-core::before,.ww-orbit-core::after,.ww-cross,.ww-down{animation:none!important}}
+</style>
+
 </head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -5878,6 +6037,107 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <p class="noscript-notice">JavaScript is disabled. The faith, project, policy and ecosystem information remains readable, but live XRP Ledger data, Xaman connection, trading, media controls and local fellowship tools require JavaScript. You can still open <a href="./verify.html">Sign the Ledger</a>, the <a href="./prayer.map.html">Prayer Map</a> or the read-only <a href="./metrics.html">Market Monitor</a>.</p>
 </noscript>
 <main class="container" id="main-content">
+
+<section id="jcs-world-watch" aria-labelledby="ww-title">
+  <button class="ww-tools-button" id="wwToolsButton" type="button" aria-controls="wwToolsDrawer" aria-expanded="false"><span aria-hidden="true">☰</span> Tools</button>
+  <aside class="ww-tools-drawer" id="wwToolsDrawer" hidden aria-label="JCS tools and ecosystem navigation">
+    <div class="ww-tools-head"><div><strong>JCS Tools</strong><span>Faith, evidence, wallet and ecosystem controls</span></div><button class="ww-mini-button" id="wwToolsClose" type="button">Close</button></div>
+    <div class="ww-tools-grid">
+      <a class="gold" href="#jcs-world-watch">Christian Watch</a><a href="#scripture">Scripture</a>
+      <a href="#fellowship">Fellowship</a><a href="./verify.html">Sign the Ledger</a>
+      <a href="./prayer.map.html">Prayer Map</a><a href="#trade">JCS / XRP Exchange</a>
+      <a href="./metrics.html">Market Monitor</a><a href="./connectwallet.html">Account Readiness</a>
+      <a href="./about-jcs.html">About &amp; Vision</a><a href="#sacred-film">Sacred Film</a>
+      <a href="#audio">Sacred Audio</a><a href="#integrity-desk">Integrity Desk</a>
+      <button id="wwSanctuaryProxy" type="button">Sanctuary Mode</button><button id="wwExchangeProxy" type="button">Exchange Focus</button>
+      <button id="wwThemeProxy" type="button">Switch Theme</button><a href="https://xrbitcoincash.com/" target="_blank" rel="noopener noreferrer">XRBitcoinCash</a>
+      <a href="https://xrbitcoincash.com/xrbitcoin-links.html" target="_blank" rel="noopener noreferrer">XRBitcoin</a><a href="https://xrbitcoincash.com/creature-nft-links.html" target="_blank" rel="noopener noreferrer">Creature NFT</a>
+      <div class="ww-tools-wallet"><button class="gold" id="wwConnectProxy" type="button">Connect Xaman</button><button id="wwDisconnectProxy" type="button">Disconnect</button></div>
+      <div class="ww-tools-state" id="wwWalletProxyState">Wallet disconnected</div>
+    </div>
+  </aside>
+
+  <div class="ww-live-rail" aria-label="Live Christian freedom headline ticker"><div class="ww-shell"><div class="ww-live-inner" id="wwTicker"><span class="ww-live-label">Live world watch</span><span class="ww-ticker-placeholder">Loading current Christian persecution and religious-freedom reports…</span></div></div></div>
+
+  <div class="ww-shell">
+    <section class="ww-hero">
+      <div>
+        <span class="ww-kicker">Jesus Christ Saves · Global Christian Watch · public-source intelligence</span>
+        <h1 id="ww-title">Stand with the <span>persecuted Church.</span></h1>
+        <p class="ww-lede">A live, source-linked Christian freedom desk layered above the existing JCS faith and XRPL system. Follow current reports of imprisonment, abduction, attacks, displacement and releases; open established organizations that provide relief, legal help, advocacy and freedom-focused support; pray without exposing vulnerable people; and preserve a timestamped local evidence snapshot when a story matters.</p>
+        <div class="ww-hero-actions">
+          <a class="ww-action primary" href="#ww-live-intel">Open live Christian watch</a>
+          <a class="ww-action blue" href="#ww-help-network">Find organizations helping now</a>
+          <a class="ww-action" href="./prayer.map.html">Open Christian Pressure &amp; Prayer Map</a>
+          <a class="ww-action" href="#fellowship">Pray privately on this device</a>
+        </div>
+        <div class="ww-trust-row"><span>Public sources linked</span><span>No vulnerable-person geolocation</span><span>No JCS purchase required</span><span>No claim of affiliation with listed organizations</span></div>
+        <div class="ww-faith-line"><strong>Faith before finance.</strong> The persecution watch, prayer resources and aid links are open whether or not a visitor owns JCS. This page does not route donations, coordinate clandestine extraction, or ask endangered people to publish names, precise locations, travel routes or underground-church details.</div>
+      </div>
+      <div class="ww-orbit" aria-label="Christian freedom watch visual">
+        <div class="ww-orbit-core"><div class="ww-cross" aria-hidden="true">✝</div>
+          <div class="ww-orbit-node ww-node-a"><span>Prayer</span><strong>Stand with them</strong></div>
+          <div class="ww-orbit-node ww-node-b"><span>Evidence</span><strong>Verify reports</strong></div>
+          <div class="ww-orbit-node ww-node-c"><span>Action</span><strong>Open trusted aid</strong></div>
+          <div class="ww-orbit-node ww-node-d"><span>Privacy</span><strong>Protect identities</strong></div>
+        </div>
+        <div class="ww-orbit-status" id="wwOrbitStatus">Connecting to current public reporting feeds…</div>
+      </div>
+    </section>
+
+    <section class="ww-section" id="ww-live-intel" aria-labelledby="ww-intel-title">
+      <div class="ww-section-head"><div><span class="ww-kicker">Global persecution pulse · automatically refreshed</span><h2 id="ww-intel-title">See the pressure. Keep the source attached.</h2><p>The live layer summarizes recent public reporting. Counts describe the retrieved headline set—not the total number of persecuted Christians or verified global incidents.</p></div><div class="ww-section-actions"><button class="ww-mini-button" id="wwRefresh" type="button">Refresh reports</button><button class="ww-mini-button" id="wwDownloadEvidence" type="button">Save evidence snapshot</button></div></div>
+      <div class="ww-pulse-grid" aria-label="Live Christian freedom metrics">
+        <article class="ww-pulse-card"><span>Reports loaded</span><strong id="wwReportCount">—</strong><small>Current feed sample</small></article>
+        <article class="ww-pulse-card"><span>Countries detected</span><strong id="wwCountryCount">—</strong><small>Headline / summary mentions</small></article>
+        <article class="ww-pulse-card alert"><span>Detention / prison signals</span><strong id="wwDetentionCount">—</strong><small>Keyword-classified reports</small></article>
+        <article class="ww-pulse-card alert"><span>Abduction signals</span><strong id="wwAbductionCount">—</strong><small>Kidnap / captive / hostage terms</small></article>
+        <article class="ww-pulse-card alert"><span>Attack / killing signals</span><strong id="wwAttackCount">—</strong><small>Violence-related terms</small></article>
+        <article class="ww-pulse-card hope"><span>Release / freedom signals</span><strong id="wwReleaseCount">—</strong><small>Release / acquittal / freedom terms</small></article>
+      </div>
+      <div class="ww-intel-grid">
+        <article class="ww-feed-panel">
+          <div class="ww-feed-toolbar"><div><strong>Current Christian freedom reports</strong><span id="wwFeedStatus">Waiting for public-source data…</span></div><a class="ww-mini-button" href="https://www.uscirf.gov/annual-reports" target="_blank" rel="noopener noreferrer">USCIRF annual reports ↗</a></div>
+          <div class="ww-feed" id="wwFeed"><div class="ww-feed-empty">Loading current reports…</div></div>
+        </article>
+        <aside class="ww-signal-panel">
+          <h3>Seven-day reporting signal</h3><p>A simple count of the retrieved reports by publication day. It is an activity signal, not a persecution severity index.</p>
+          <div class="ww-chart" id="wwTrendChart" aria-label="Recent reporting trend chart"></div>
+          <div class="ww-event-list" id="wwEventList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="ww-section" id="ww-help-network" aria-labelledby="ww-help-title">
+      <div class="ww-section-head"><div><span class="ww-kicker">Independent aid, freedom and advocacy network</span><h2 id="ww-help-title">From prayer to practical help.</h2><p>These organizations are independent of JCS. Their roles differ: some deliver relief, some provide legal or financial assistance, some campaign for prisoners and people in bondage, and others document abuses or advocate with governments. Open the official organization before donating or sharing sensitive information.</p></div></div>
+      <div class="ww-org-grid">
+        <a class="ww-org-card featured" href="https://www.csi-int.org/campaigns/free-the-captives/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Freedom · anti-slavery · prisoners</span><h3>Christian Solidarity International</h3><p>Its “Free the Captives” work campaigns for people imprisoned or held as slaves because of faith and includes legal and financial support plus work addressing debt bondage.</p><span class="ww-org-link">Open Free the Captives ↗</span></a>
+        <a class="ww-org-card" href="https://www.opendoorsus.org/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Relief · Bibles · local churches</span><h3>Open Doors</h3><p>Supports persecuted Christians through local churches with Bibles, training, emergency relief, long-term support, prayer and advocacy.</p><span class="ww-org-link">Open official site ↗</span></a>
+        <a class="ww-org-card" href="https://persecution.org/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Assistance · reporting · advocacy</span><h3>International Christian Concern</h3><p>Publishes persecution reporting and operates assistance projects for Christians in hostile environments, alongside advocacy and awareness work.</p><span class="ww-org-link">Open ICC ↗</span></a>
+        <a class="ww-org-card" href="https://acninternational.org/projects/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Emergency aid · local church projects</span><h3>Aid to the Church in Need</h3><p>Funds church-led projects and emergency assistance in regions affected by conflict, displacement, poverty and persecution.</p><span class="ww-org-link">Open current projects ↗</span></a>
+        <a class="ww-org-card" href="https://www.barnabasaid.org/us/latest-needs/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Practical aid · legal help · displacement</span><h3>Barnabas Aid</h3><p>Channels support to locally initiated Christian projects and publishes current appeals for legal aid, displacement support, livelihoods, education and emergency needs.</p><span class="ww-org-link">Open latest needs ↗</span></a>
+        <a class="ww-org-card" href="https://www.cswusa.org/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Religious freedom · advocacy</span><h3>Christian Solidarity Worldwide</h3><p>Documents freedom-of-religion violations, supports affected communities and advocates with governments and international institutions.</p><span class="ww-org-link">Open CSW ↗</span></a>
+        <a class="ww-org-card" href="https://www.uscirf.gov/" target="_blank" rel="noopener noreferrer"><span class="ww-org-tag">Independent U.S. monitoring · policy</span><h3>USCIRF</h3><p>The U.S. Commission on International Religious Freedom monitors global religious-freedom conditions and publishes country findings and policy recommendations. It is a monitoring body, not a relief charity.</p><span class="ww-org-link">Open USCIRF ↗</span></a>
+        <a class="ww-org-card" href="./prayer.map.html"><span class="ww-org-tag">JCS · read-oriented prayer context</span><h3>Christian Pressure &amp; Prayer Map</h3><p>Open the existing JCS country-level pressure context and coarse voluntary prayer-focus map without exposing a signer’s precise physical location.</p><span class="ww-org-link">Open JCS Prayer Map →</span></a>
+      </div>
+    </section>
+
+    <section class="ww-section" aria-labelledby="ww-action-title">
+      <div class="ww-section-head"><div><span class="ww-kicker">Evidence + action boundaries</span><h2 id="ww-action-title">Help without turning vulnerable people into content.</h2></div></div>
+      <div class="ww-action-grid">
+        <article class="ww-source-panel"><h3>Source discipline</h3><p>The live feed may include preliminary reporting. For serious claims, open the source, compare independent reporting, and preserve the publication date and URL before repeating details.</p><div class="ww-source-list">
+          <div class="ww-source-item"><span class="ww-source-mark">OD</span><div class="ww-source-copy"><strong>Open Doors World Watch context</strong><span>Persecuted-Christian field support and annual global trends.</span></div><a href="https://www.opendoorsus.org/persecution/trends" target="_blank" rel="noopener noreferrer">Open ↗</a></div>
+          <div class="ww-source-item"><span class="ww-source-mark">IC</span><div class="ww-source-copy"><strong>ICC Global Persecution Index</strong><span>Current country analysis, testimonies, reports and response work.</span></div><a href="https://persecution.org/reports/" target="_blank" rel="noopener noreferrer">Open ↗</a></div>
+          <div class="ww-source-item"><span class="ww-source-mark">US</span><div class="ww-source-copy"><strong>USCIRF 2026 reporting</strong><span>Independent U.S. government monitoring of severe religious-freedom violations.</span></div><a href="https://www.uscirf.gov/annual-reports" target="_blank" rel="noopener noreferrer">Open ↗</a></div>
+        </div></article>
+        <aside class="ww-safety-panel"><h3>Protect the persecuted before publishing</h3><p>This portal is not an emergency extraction service. When a person may face retaliation, public exposure can make a bad situation worse.</p><ul class="ww-safety-list"><li>Do not publish precise locations, escape routes, safe-house information, underground-church meeting points or the identities of vulnerable converts.</li><li>Use an organization’s official secure contact channel for sensitive cases rather than a public prayer wall, social post or blockchain memo.</li><li>Do not assume a headline is verified because it is emotionally compelling. Confirm dates, names, location and source.</li><li>Do not send JCS, XRP or any cryptocurrency to an address merely because someone claims it belongs to a ministry or rescue effort. Verify through the organization’s official domain.</li></ul></aside>
+      </div>
+    </section>
+
+    <div class="ww-transition"><span>Attraction + awareness layer complete</span><h2>The full JCS system begins below.</h2><p>Continue into Scripture, sacred media, fellowship, Sign the Ledger, the Prayer Map, verified XRPL evidence, Xaman connection and the non-custodial JCS/XRP exchange. The faith layer and financial layer remain deliberately separated.</p><span class="ww-down" aria-hidden="true">↓</span></div>
+  </div>
+</section>
+
 <section aria-labelledby="jcs-title" class="card index-hero jcs-hero">
 <div class="hero-copy-column">
 <div class="hero-topline">
@@ -11573,5 +11833,226 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   setOpen(false);
 })();
 </script>
+
+<script id="jcs-global-christian-watch-runtime-v100">
+(() => {
+  'use strict';
+  document.documentElement.classList.add('jcs-world-watch-ready');
+
+  const $ = id => document.getElementById(id);
+  const drawer = $('wwToolsDrawer');
+  const toolsButton = $('wwToolsButton');
+  const closeButton = $('wwToolsClose');
+  const feedNode = $('wwFeed');
+  const ticker = $('wwTicker');
+  const feedStatus = $('wwFeedStatus');
+  const orbitStatus = $('wwOrbitStatus');
+  const CACHE_KEY = 'jcs.globalChristianWatch.v1';
+  const CACHE_MS = 15 * 60 * 1000;
+
+  const ORGS = [
+    {name:'Christian Solidarity International', role:'Free the Captives / anti-slavery / prisoners', url:'https://www.csi-int.org/campaigns/free-the-captives/'},
+    {name:'Open Doors', role:'Relief / Bibles / local church support', url:'https://www.opendoorsus.org/'},
+    {name:'International Christian Concern', role:'Assistance / reporting / advocacy', url:'https://persecution.org/'},
+    {name:'Aid to the Church in Need', role:'Emergency aid / church projects', url:'https://acninternational.org/projects/'},
+    {name:'Barnabas Aid', role:'Practical aid / legal help / displacement', url:'https://www.barnabasaid.org/us/latest-needs/'},
+    {name:'Christian Solidarity Worldwide', role:'Religious-freedom advocacy', url:'https://www.cswusa.org/'},
+    {name:'USCIRF', role:'Independent monitoring / policy', url:'https://www.uscirf.gov/'}
+  ];
+
+  const COUNTRY_MAP = {
+    'North Korea':'Asia-Pacific','China':'Asia-Pacific','India':'Asia-Pacific','Pakistan':'Asia-Pacific','Bangladesh':'Asia-Pacific','Myanmar':'Asia-Pacific','Burma':'Asia-Pacific','Vietnam':'Asia-Pacific','Laos':'Asia-Pacific','Indonesia':'Asia-Pacific','Malaysia':'Asia-Pacific','Nepal':'Asia-Pacific','Sri Lanka':'Asia-Pacific','Bhutan':'Asia-Pacific','Afghanistan':'Asia-Pacific',
+    'Nigeria':'Africa','Sudan':'Africa','Eritrea':'Africa','Somalia':'Africa','Kenya':'Africa','Mozambique':'Africa','Congo':'Africa','DRC':'Africa','Democratic Republic of the Congo':'Africa','Burkina Faso':'Africa','Cameroon':'Africa','Ethiopia':'Africa','Libya':'Africa','Egypt':'Africa','Uganda':'Africa','Tanzania':'Africa','Niger':'Africa','Mali':'Africa','Central African Republic':'Africa',
+    'Iran':'Middle East','Iraq':'Middle East','Syria':'Middle East','Saudi Arabia':'Middle East','Turkey':'Middle East','Lebanon':'Middle East','Israel':'Middle East','Gaza':'Middle East','Yemen':'Middle East','Qatar':'Middle East','Jordan':'Middle East',
+    'Cuba':'Americas','Nicaragua':'Americas','Mexico':'Americas','Colombia':'Americas','Venezuela':'Americas','Haiti':'Americas','United States':'Americas',
+    'Russia':'Europe/Central Asia','Ukraine':'Europe/Central Asia','Armenia':'Europe/Central Asia','Azerbaijan':'Europe/Central Asia','Kazakhstan':'Europe/Central Asia','Kyrgyzstan':'Europe/Central Asia','Tajikistan':'Europe/Central Asia','Turkmenistan':'Europe/Central Asia','Uzbekistan':'Europe/Central Asia'
+  };
+
+  const EVENT_RULES = [
+    {key:'Detention / prison', prop:'detention', re:/\b(arrest|arrested|detain|detained|detention|prison|prisoner|jailed|imprison|sentence|sentenced|blasphemy charge|charged)\b/i},
+    {key:'Abduction / captivity', prop:'abduction', re:/\b(abduct|abducted|kidnap|kidnapped|captive|captivity|hostage|enslaved|slavery|bondage)\b/i},
+    {key:'Attack / killing', prop:'attack', re:/\b(attack|attacked|assault|assaulted|killed|murdered|slain|massacre|bomb|burned|violence|beaten)\b/i},
+    {key:'Release / freedom', prop:'release', re:/\b(released|release|freed|freeing|acquitted|acquittal|rescued|liberated|freedom restored)\b/i}
+  ];
+
+  function setDrawer(open){
+    if(!drawer || !toolsButton) return;
+    drawer.hidden = !open;
+    toolsButton.setAttribute('aria-expanded', String(open));
+  }
+  toolsButton?.addEventListener('click', () => setDrawer(drawer?.hidden ?? true));
+  closeButton?.addEventListener('click', () => setDrawer(false));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') setDrawer(false); });
+  drawer?.addEventListener('click', e => { if(e.target.closest('a[href]')) setDrawer(false); });
+
+  function clickOriginal(id){ const n=$(id); if(n && !n.disabled) n.click(); }
+  $('wwThemeProxy')?.addEventListener('click',()=>clickOriginal('themeToggle'));
+  $('wwSanctuaryProxy')?.addEventListener('click',()=>{clickOriginal('quietModeBtn');setDrawer(false);});
+  $('wwExchangeProxy')?.addEventListener('click',()=>{clickOriginal('exchangeFocusBtn');setDrawer(false);});
+  $('wwConnectProxy')?.addEventListener('click',()=>{ const a=$('connectBtn'), b=$('connectWalletBtn'); (a && !a.disabled ? a : b)?.click(); });
+  $('wwDisconnectProxy')?.addEventListener('click',()=>{ const a=$('disconnectBtn'), b=$('disconnectWalletBtn'); (a && !a.hidden && !a.disabled ? a : b)?.click(); });
+
+  function syncProxyWallet(){
+    const source=$('walletPill'); const state=$('wwWalletProxyState');
+    if(state) state.textContent = source?.textContent?.trim() || 'Wallet disconnected';
+    const c=$('wwConnectProxy'), d=$('wwDisconnectProxy');
+    const headerConnect=$('connectBtn'), headerDisconnect=$('disconnectBtn');
+    if(c) c.disabled = Boolean(headerConnect?.disabled);
+    if(d) d.disabled = Boolean(headerDisconnect?.hidden || headerDisconnect?.disabled);
+  }
+  const walletPill=$('walletPill');
+  if(walletPill && typeof MutationObserver==='function') new MutationObserver(syncProxyWallet).observe(walletPill,{childList:true,subtree:true,characterData:true});
+  window.addEventListener('jcs:wallet-change',syncProxyWallet);
+  setTimeout(syncProxyWallet,600);
+
+  function stripHtml(value){
+    const tmp=document.createElement('div'); tmp.innerHTML=String(value||''); return (tmp.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function safeUrl(value){ try{const u=new URL(value); return u.protocol==='https:'?u.href:'';}catch{return '';} }
+  function fmtDate(value){
+    const d=new Date(value); if(!Number.isFinite(d.getTime())) return 'Date unavailable';
+    return d.toLocaleString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  }
+  function ageText(value){
+    const d=new Date(value); if(!Number.isFinite(d.getTime())) return '';
+    const diff=Math.max(0,Date.now()-d.getTime()); const h=Math.floor(diff/36e5); if(h<1) return '<1h ago'; if(h<24) return h+'h ago'; const days=Math.floor(h/24); return days+'d ago';
+  }
+  function detectCountries(text){
+    const found=[]; const hay=' '+String(text||'').toLowerCase()+' ';
+    for(const country of Object.keys(COUNTRY_MAP)) if(hay.includes(country.toLowerCase())) found.push(country);
+    return [...new Set(found)];
+  }
+  function classify(text){
+    const out={detention:false,abduction:false,attack:false,release:false,labels:[]};
+    EVENT_RULES.forEach(rule=>{ if(rule.re.test(text)){out[rule.prop]=true;out.labels.push(rule.key);} });
+    return out;
+  }
+  function normalizePublished(value){
+    const raw=String(value||'').trim();
+    const m=raw.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/);
+    if(m) return `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}Z`;
+    return raw;
+  }
+  function normalizedArticle(item){
+    const title=stripHtml(item.title||'Untitled report').slice(0,260);
+    const description=stripHtml(item.description||item.content||'').slice(0,420);
+    const link=safeUrl(item.link||item.url||'');
+    const published=normalizePublished(item.pubDate||item.published||item.seendate||item.date||'');
+    let source=stripHtml(item.author||item.source||item.domain||'');
+    if(!source && link){try{source=new URL(link).hostname.replace(/^www\./,'');}catch{}}
+    const text=title+' '+description;
+    return {title,description,link,published,source,countries:detectCountries(text),event:classify(text)};
+  }
+
+  async function fetchRss2Json(){
+    const query='("Christian persecution" OR "persecuted Christians" OR "Christian prisoners" OR "religious freedom" OR "church attack" OR "Christian abducted") when:7d';
+    const rss='https://news.google.com/rss/search?q='+encodeURIComponent(query)+'&hl=en-US&gl=US&ceid=US:en';
+    const url='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss);
+    const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),9000);
+    try{
+      const res=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store',credentials:'omit',signal:controller.signal});
+      if(!res.ok) throw new Error('RSS HTTP '+res.status);
+      const data=await res.json(); if(!Array.isArray(data.items)||!data.items.length) throw new Error('RSS returned no reports');
+      return {provider:'Google News RSS via RSS2JSON',url:rss,items:data.items.map(normalizedArticle).filter(x=>x.link).slice(0,24)};
+    }finally{clearTimeout(timer);}
+  }
+  async function fetchGdelt(){
+    const query='("Christian persecution" OR "persecuted Christians" OR "religious freedom")';
+    const url='https://api.gdeltproject.org/api/v2/doc/doc?query='+encodeURIComponent(query)+'&mode=ArtList&maxrecords=30&format=json&sort=HybridRel&timespan=7d';
+    const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),9000);
+    try{
+      const res=await fetch(url,{headers:{Accept:'application/json'},cache:'no-store',credentials:'omit',signal:controller.signal});
+      if(!res.ok) throw new Error('GDELT HTTP '+res.status);
+      const data=await res.json(); const rows=Array.isArray(data.articles)?data.articles:[]; if(!rows.length) throw new Error('GDELT returned no reports');
+      return {provider:'GDELT global news index',url,items:rows.map(normalizedArticle).filter(x=>x.link).slice(0,24)};
+    }finally{clearTimeout(timer);}
+  }
+  function readCache(){
+    try{const x=JSON.parse(localStorage.getItem(CACHE_KEY)||'null'); if(x&&Date.now()-x.savedAt<CACHE_MS&&Array.isArray(x.items)&&x.items.length)return x;}catch{} return null;
+  }
+  function writeCache(data){try{localStorage.setItem(CACHE_KEY,JSON.stringify({...data,savedAt:Date.now()}));}catch{}}
+
+  function makeButton(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);return b;}
+  function addPrayerFocus(article){
+    const journal=$('privatePrayerJournal');
+    if(!journal){location.hash='fellowship';return;}
+    const prompt='Prayer focus: '+article.title+'\nSource: '+(article.link||'public report');
+    const current=journal.value.trim();
+    journal.value=(current?current+'\n\n':'')+prompt;
+    journal.dispatchEvent(new Event('input',{bubbles:true}));
+    $('fellowship')?.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>journal.focus({preventScroll:true}),500);
+  }
+  function renderTicker(items){
+    if(!ticker) return; ticker.replaceChildren();
+    const live=document.createElement('span'); live.className='ww-live-label'; live.textContent='Live world watch'; ticker.appendChild(live);
+    const track=document.createElement('div'); track.className='ww-ticker-track';
+    const rows=[...items.slice(0,12),...items.slice(0,12)];
+    rows.forEach(item=>{const a=document.createElement('a');a.className='ww-ticker-item';a.href=item.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title;track.appendChild(a);});
+    if(!rows.length){const e=document.createElement('span');e.className='ww-ticker-placeholder';e.textContent='Current feed unavailable · official organization links remain active below';track.appendChild(e);}
+    ticker.appendChild(track);
+  }
+  function renderFeed(items){
+    feedNode?.replaceChildren();
+    if(!feedNode||!items.length){if(feedNode){const e=document.createElement('div');e.className='ww-feed-empty';e.textContent='No current reports were returned. Use the organization directory below for direct official updates.';feedNode.appendChild(e);}return;}
+    items.slice(0,12).forEach(article=>{
+      const card=document.createElement('article');card.className='ww-news-card';
+      const meta=document.createElement('div');meta.className='ww-news-meta';
+      const date=document.createElement('span');date.textContent=fmtDate(article.published)+(article.published?' · '+ageText(article.published):'');meta.appendChild(date);
+      if(article.source){const s=document.createElement('span');s.textContent=article.source;meta.appendChild(s);}
+      if(article.event.labels[0]){const ev=document.createElement('span');ev.className='event';ev.textContent=article.event.labels[0];meta.appendChild(ev);}
+      const h=document.createElement('h3');h.textContent=article.title;
+      const p=document.createElement('p');p.textContent=article.description||'Open the original report for full context and verification.';
+      const actions=document.createElement('div');actions.className='ww-news-actions';
+      const a=document.createElement('a');a.href=article.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open source ↗';actions.appendChild(a);
+      actions.appendChild(makeButton('Pray locally',()=>addPrayerFocus(article)));
+      card.append(meta,h,p,actions);feedNode.appendChild(card);
+    });
+  }
+  function renderTrend(items){
+    const chart=$('wwTrendChart'); if(!chart) return;
+    const days=Array.from({length:7},(_,i)=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-(6-i));return d;});
+    const counts=days.map((d,i)=>{const next=new Date(d);next.setDate(next.getDate()+1);return items.filter(x=>{const t=new Date(x.published).getTime();return Number.isFinite(t)&&t>=d.getTime()&&t<next.getTime();}).length;});
+    const max=Math.max(1,...counts); const points=counts.map((v,i)=>[i*(420/6),155-(v/max)*120]);
+    const line=points.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+    const fill=line+' L420,180 L0,180 Z';
+    chart.innerHTML='<svg viewBox="0 0 420 180" preserveAspectRatio="none" role="img" aria-label="Reports by day"><path class="ww-chart-fill" d="'+fill+'"></path><path class="ww-chart-line" d="'+line+'"></path></svg>';
+  }
+  function renderStats(items){
+    const countries=new Set(); const counts={detention:0,abduction:0,attack:0,release:0};
+    items.forEach(a=>{a.countries.forEach(c=>countries.add(c));Object.keys(counts).forEach(k=>{if(a.event[k])counts[k]++;});});
+    const values={wwReportCount:items.length,wwCountryCount:countries.size,wwDetentionCount:counts.detention,wwAbductionCount:counts.abduction,wwAttackCount:counts.attack,wwReleaseCount:counts.release};
+    Object.entries(values).forEach(([id,v])=>{if($(id))$(id).textContent=String(v);});
+    const eventList=$('wwEventList'); if(eventList){eventList.replaceChildren(); const defs=[['Detention / prison',counts.detention],['Abduction / captivity',counts.abduction],['Attack / killing',counts.attack],['Release / freedom',counts.release]]; const max=Math.max(1,...defs.map(x=>x[1])); defs.forEach(([label,v])=>{const row=document.createElement('div');row.className='ww-event-row';const s=document.createElement('span');s.textContent=label;const t=document.createElement('div');t.className='ww-event-track';const i=document.createElement('i');i.style.width=(v/max*100).toFixed(1)+'%';t.appendChild(i);const strong=document.createElement('strong');strong.textContent=String(v);row.append(s,t,strong);eventList.appendChild(row);});}
+    renderTrend(items);
+  }
+  function render(data,fromCache=false){
+    const items=(data.items||[]).map(normalizedArticle).filter(x=>x.link);
+    renderTicker(items);renderFeed(items);renderStats(items);
+    const stamp=new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+    if(feedStatus) feedStatus.textContent=(fromCache?'Cached · ':'')+(data.provider||'Public feed')+' · '+items.length+' reports · updated '+stamp;
+    if(orbitStatus) orbitStatus.textContent=items.length?('Live public reporting connected · '+items.length+' reports in current sample · '+(data.provider||'source')):'No public reports returned; direct organization links remain available.';
+    window.__jcsChristianWatch={...data,items,renderedAt:new Date().toISOString()};
+  }
+  async function refresh(force=false){
+    if(!force){const cached=readCache();if(cached){render(cached,true);return;}}
+    if(feedStatus) feedStatus.textContent='Refreshing current public reports…'; if(orbitStatus) orbitStatus.textContent='Refreshing public Christian freedom reporting…';
+    let data=null; const errors=[];
+    for(const loader of [fetchGdelt,fetchRss2Json]){try{data=await loader();if(data?.items?.length)break;}catch(e){errors.push(e?.message||String(e));}}
+    if(!data){data={provider:'Direct organization links only',url:'',items:[]}; if(feedStatus) feedStatus.textContent='Live feed unavailable. Official organization links below remain active.'; console.info('JCS Christian Watch feed fallbacks:',errors);}
+    writeCache(data);render(data,false);
+  }
+  $('wwRefresh')?.addEventListener('click',()=>refresh(true));
+  $('wwDownloadEvidence')?.addEventListener('click',()=>{
+    const d=window.__jcsChristianWatch||{provider:'No feed loaded',url:'',items:[]};
+    const snapshot={schema:'jcs-christian-watch-evidence-v1',created_at:new Date().toISOString(),notice:'Public reporting snapshot. Not a verified incident registry. No wallet or private prayer data included.',provider:d.provider||'',feed_url:d.url||'',organizations:ORGS,reports:(d.items||[]).map(a=>({title:a.title,source:a.source,published:a.published,link:a.link,countries:a.countries,event_labels:a.event?.labels||[]}))};
+    const blob=new Blob([JSON.stringify(snapshot,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='jcs-christian-watch-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  });
+
+  window.JCSChristianWatch=Object.freeze({refresh,render,addPrayerFocus});
+  refresh(false).catch(err=>{console.warn('JCS Christian Watch failed:',err);});
+})();
+</script>
+
 </body>
 </html>
