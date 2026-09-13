@@ -124,14 +124,14 @@
     const attempt = primaryVideo.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => {
-        setPrimaryStatus('Loading JESUS in this card…');
+        if (!primaryPlaying) setPrimaryStatus('Loading JESUS in this card…');
         return true;
       }).catch(error => {
         if (error?.name === 'NotAllowedError') {
           primaryVideo.muted = true;
           primaryVideo.defaultMuted = true;
           return Promise.resolve(primaryVideo.play()).then(() => {
-            setPrimaryStatus('Loading JESUS muted… Tap the player’s sound control when playback begins.');
+            if (!primaryPlaying) setPrimaryStatus('Loading JESUS muted… Tap the player’s sound control when playback begins.');
             return true;
           }).catch(() => {
             updatePrimaryState(false);
@@ -166,7 +166,7 @@
       if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
     });
     primaryVideo.addEventListener('canplay', () => {
-      if (primaryPlaying) setPrimaryStatus('JESUS is ready to play in this card…');
+      if (primaryPlaying && primaryVideo.paused) setPrimaryStatus('JESUS is ready to play in this card…');
     });
     primaryVideo.addEventListener('playing', () => {
       if (!primaryPlaying) updatePrimaryState(true);
