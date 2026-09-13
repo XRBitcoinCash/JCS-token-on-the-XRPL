@@ -24,7 +24,9 @@ Run `npm ci && npm test` with a current supported Node.js runtime. These depende
 - JavaScript syntax, local resources, unique IDs, local anchors and diff whitespace: passing.
 - The public CoinGecko reference endpoint returned HTTP 200 with CORS permission during development.
 
-The checks simulate ledger and wallet results; they do not establish live transaction execution. The remote preview browser could not reach the local workspace, so visual rendering on a real phone, actual Xaman signing and provider video playback remain release checks. No successful visual/browser QA is claimed.
+Release verification on September 13, 2026 confirmed that the public homepage and its published assets matched the merged source. A desktop browser loaded real validated ledger and JCS/XRP pool data, collected multiple chart observations at the minute interval, and opened the liquidity tab. The official trailer player loaded; the silent companion played and the shared pause control stopped it. No application console errors were observed. The chart observation text now uses the theme foreground color, and its interactive controls are no longer nested in an image role.
+
+The automated checks simulate ledger and wallet results; they do not establish live transaction execution. A physical phone, actual Xaman signing and successful modern-trailer playback remain unverified. No wallet transaction was submitted.
 
 ## Primary references
 

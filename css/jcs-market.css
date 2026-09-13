@@ -3,5 +3,5 @@
 #jcsComparisonChart .comparison-empty{display:grid;place-content:center;min-height:210px;margin:0;padding:24px;text-align:center;font-size:.88rem;line-height:1.65}
 .comparison-inspector-label{display:block;font-size:.7rem;color:var(--muted);margin:8px 0 0}
 #comparisonObservation{width:100%;min-height:44px;accent-color:#dfc180}
-.comparison-observation{display:block;min-height:36px;font-variant-numeric:tabular-nums;font-size:.72rem;line-height:1.5;color:var(--text,#edf0f4)}
+.comparison-observation{display:block;min-height:36px;font-variant-numeric:tabular-nums;font-size:.72rem;line-height:1.5;color:var(--home-ink,#20332e)}
 #jcsChartStatus{font-size:.73rem;line-height:1.5;color:var(--muted);min-height:2em}
