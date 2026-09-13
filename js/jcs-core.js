@@ -184,22 +184,97 @@
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   let xamanReturnFocus = null;
   let xamanHasRequest = false;
+  let activeXamanPayload = null;
+  let xamanResetTimer = null;
+  let xamanResetDeadline = 0;
+  let xamanAbortController = null;
+  const XAMAN_RESET_DELAY = 10000;
+
+  function clearXamanResetTimer() {
+    if (xamanResetTimer) window.clearInterval(xamanResetTimer);
+    xamanResetTimer = null;
+    xamanResetDeadline = 0;
+  }
+
+  function finishXamanReset(reason) {
+    const payload = activeXamanPayload;
+    clearXamanResetTimer();
+    try {
+      const cancel = xumm?.payload?.cancel;
+      if (payload?.uuid && typeof cancel === 'function') Promise.resolve(cancel(payload.uuid)).catch(() => {});
+    } catch {}
+    try { xamanAbortController?.abort(); } catch {}
+    xamanAbortController = null;
+    xamanHasRequest = false;
+    activeXamanPayload = null;
+    if (xamanSignPanel) {
+      if (typeof xamanSignPanel.close === 'function' && xamanSignPanel.open) xamanSignPanel.close();
+      xamanSignPanel.removeAttribute('open');
+      xamanSignPanel.hidden = true;
+    }
+    setXamanSignStatus('Xaman request canceled. Controls are available again.', 'canceled');
+    if (xamanReopenPanel) {
+      xamanReopenPanel.hidden = true;
+      xamanReopenPanel.textContent = 'Xaman request reset';
+    }
+    document.dispatchEvent(new CustomEvent('jcs:signing-reset', {
+      detail: { reason: reason || 'Xaman request canceled.' }
+    }));
+  }
+
+  function scheduleXamanReset(reason = 'Xaman request canceled.') {
+    const state = xamanSignStatus?.dataset.state;
+    if (!xamanHasRequest || !['pending', 'opened'].includes(state)) return false;
+    clearXamanResetTimer();
+    xamanResetDeadline = Date.now() + XAMAN_RESET_DELAY;
+    const update = () => {
+      const remaining = Math.max(0, xamanResetDeadline - Date.now());
+      if (remaining <= 0) {
+        finishXamanReset(reason);
+        return;
+      }
+      const seconds = Math.ceil(remaining / 1000);
+      setXamanSignStatus(reason + ' Controls reset in ' + seconds + ' seconds…', 'canceling');
+      if (xamanSignHelp) xamanSignHelp.textContent = 'The old request will be canceled if it is still pending.';
+      if (xamanClosePanel) {
+        xamanClosePanel.textContent = 'Canceling…';
+        xamanClosePanel.disabled = true;
+      }
+      if (xamanReopenPanel) {
+        xamanReopenPanel.hidden = false;
+        xamanReopenPanel.textContent = 'Xaman reset in ' + seconds + 's';
+      }
+      document.dispatchEvent(new CustomEvent('jcs:signing-countdown', {
+        detail: { remaining: seconds, reason }
+      }));
+    };
+    update();
+    xamanResetTimer = window.setInterval(update, 250);
+    return true;
+  }
 
   function setXamanSignStatus(message, state) {
     if (!xamanSignStatus) return;
     xamanSignStatus.textContent = message;
     xamanSignStatus.dataset.state = state || '';
-    if (['signed', 'rejected', 'expired', 'error'].includes(state)) {
+    const terminal = ['signed', 'rejected', 'expired', 'error', 'canceled'];
+    if (terminal.includes(state)) {
+      clearXamanResetTimer();
       if (xamanOpenPayload) { xamanOpenPayload.hidden = true; xamanOpenPayload.removeAttribute('href'); }
       if (xamanPayloadQr) { xamanPayloadQr.hidden = true; xamanPayloadQr.removeAttribute('src'); }
       if (xamanQrArea) xamanQrArea.hidden = true;
       if (xamanShowQr) xamanShowQr.hidden = true;
       setSecurityCodeDisplay(null);
-      if (xamanClosePanel) xamanClosePanel.textContent = 'Close';
+      if (xamanClosePanel) {
+        xamanClosePanel.textContent = 'Close';
+        xamanClosePanel.disabled = false;
+      }
       if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman result';
       if (xamanSignHelp) xamanSignHelp.textContent = state === 'signed'
         ? 'The request was signed. The page checks the XRP Ledger separately before reporting a successful transaction.'
-        : 'Check the request outcome in Xaman before starting again. Hiding this window does not cancel a wallet request.';
+        : state === 'canceled'
+          ? 'The request was canceled and the controls are available again.'
+          : 'Check the request outcome in Xaman before starting again. Hiding this window does not cancel a wallet request.';
     }
   }
 
@@ -216,8 +291,10 @@
     focusTarget?.focus({ preventScroll: true });
   }
 
-  // Hide is deliberately not Cancel: an already-open request can still be signed in Xaman.
+  // Hiding a pending request starts a deliberate ten-second cancellation/reset window.
   function closeXamanSignPanel() {
+    const state = xamanSignStatus?.dataset.state;
+    if (['pending', 'opened'].includes(state)) scheduleXamanReset('Xaman request canceled.');
     if (xamanSignPanel) {
       if (typeof xamanSignPanel.close === 'function' && xamanSignPanel.open) xamanSignPanel.close();
       xamanSignPanel.removeAttribute('open');
@@ -243,6 +320,8 @@
     if (!xamanSignPanel) throw new Error('The signing dialog is unavailable.');
     const uuid = String(created?.uuid || created?.payload_uuidv4 || '');
     if (!/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(uuid)) throw new Error('Xaman returned an invalid request identifier.');
+    clearXamanResetTimer();
+    activeXamanPayload = { uuid, purpose };
     const deepLink = officialXamanUrl(created?.next?.always, uuid) || 'https://xumm.app/sign/' + uuid;
     const qr = officialXamanUrl(created?.refs?.qr_png, uuid);
     const labels = {
@@ -254,7 +333,7 @@
     xamanReturnFocus = document.activeElement;
     xamanHasRequest = true;
     if (xamanSignTitle) xamanSignTitle.textContent = labels[purpose] || 'Review in Xaman';
-    if (xamanClosePanel) xamanClosePanel.textContent = 'Hide';
+    if (xamanClosePanel) { xamanClosePanel.textContent = 'Hide'; xamanClosePanel.disabled = false; }
     if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman request';
     if (xamanSignHelp) xamanSignHelp.textContent = 'Hiding this window keeps the request active. Complete or reject it in Xaman, then return to this page.';
     if (xamanSignSummary) {
@@ -1036,6 +1115,17 @@
     if (!xumm?.payload) throw new Error('Xaman payload service is unavailable.');
     if (xamanPayloadInFlight) throw new Error('A Xaman request is already active. Complete or reject it in Xaman before creating another.');
     xamanPayloadInFlight = true;
+    const controller = typeof AbortController === 'function' ? new AbortController() : null;
+    xamanAbortController = controller;
+    const aborted = controller
+      ? new Promise((_, reject) => controller.signal.addEventListener('abort', () => {
+          const error = new Error('Xaman request canceled. Controls are available again.');
+          error.definitelyNotSubmitted = true;
+          error.jcsSigningReset = true;
+          reject(error);
+        }, { once: true }))
+      : new Promise(() => {});
+    const raceAbort = value => controller ? Promise.race([Promise.resolve(value), aborted]) : Promise.resolve(value);
     let subscription = null;
     try {
       const receive = event => {
@@ -1049,29 +1139,31 @@
       };
       let created;
       if (typeof xumm.payload.create === 'function' && typeof xumm.payload.subscribe === 'function') {
-        // Show the QR/deeplink immediately; a delayed status WebSocket must not hide the handoff.
-        created = await xumm.payload.create(request, true);
+        created = await raceAbort(xumm.payload.create(request, true));
         if (!created) throw new Error('Xaman returned no payload.');
         onCreated?.(created);
-        subscription = await withTimeout(xumm.payload.subscribe(created, receive), 20000,
+        subscription = await withTimeout(raceAbort(xumm.payload.subscribe(created, receive)), 20000,
           'The request is in Xaman, but its status connection could not open. Check this request in Xaman.');
       } else if (typeof xumm.payload.createAndSubscribe === 'function') {
-        subscription = await xumm.payload.createAndSubscribe(request, receive);
+        subscription = await raceAbort(xumm.payload.createAndSubscribe(request, receive));
         created = subscription?.created;
         if (!created) throw new Error('Xaman returned no payload.');
         onCreated?.(created);
       } else throw new Error('Xaman live signing status is unavailable. Reload the page before trying again.');
       if (!subscription?.resolved) throw new Error('Xaman returned no signing-status subscription.');
-      const resolution = await withTimeout(subscription.resolved, 210000,
+      const resolution = await withTimeout(raceAbort(subscription.resolved), 210000,
         'Signing status timed out. Check this request in Xaman before starting another.');
       let details = null;
-      try { details = await xumm.payload.get(created); } catch {}
+      try { details = await raceAbort(xumm.payload.get(created)); } catch (error) {
+        if (error?.jcsSigningReset) throw error;
+      }
       return { created, resolution, details };
     } catch (error) {
-      setXamanSignStatus(error?.message || 'The signing request could not be completed. Check Xaman.', 'error');
+      if (!error?.jcsSigningReset) setXamanSignStatus(error?.message || 'The signing request could not be completed. Check Xaman.', 'error');
       throw error;
     } finally {
       try { subscription?.websocket?.close(); } catch {}
+      if (xamanAbortController === controller) xamanAbortController = null;
       xamanPayloadInFlight = false;
     }
   }
@@ -1478,6 +1570,14 @@
   const placeOfferBtn = $('placeOfferBtn');
   const marketBtn = $('marketTradeBtn');
   const tradeMsg = $('tradeMsg');
+
+  document.addEventListener('jcs:signing-reset', event => {
+    signingRequestActive = false;
+    xamanPayloadInFlight = false;
+    updateWalletButtons();
+    const target = $('tradeMsg') || $('buyStatus') || $('offersStatus');
+    if (target) setStatus(target, (event.detail?.reason || 'Xaman request canceled.') + ' Controls reset. Review again when ready.', 'err');
+  });
 
   function updateExplainer(side) {
     const buyNote = document.querySelector('#sideExplain .note.buy');
