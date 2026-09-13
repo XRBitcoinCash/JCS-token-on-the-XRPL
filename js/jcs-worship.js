@@ -115,10 +115,11 @@
   }
 
   function updateControls() {
-    const active = Object.values(channels).some(channel => channel.wanted);
+    const filmActive = Boolean(window.__jcsFilmPlaying);
+    const active = Object.values(channels).some(channel => channel.wanted) || filmActive;
     const master = $('audioStartAll');
     if (master) {
-      master.textContent = active ? 'Pause worship audio' : 'Play worship audio';
+      master.textContent = active ? 'Pause all media' : 'Play all three';
       master.setAttribute('aria-pressed', String(active));
     }
     if ($('audioStopAll')) $('audioStopAll').disabled = !active;
@@ -161,8 +162,9 @@
     updateControls();
   }
 
-  function pauseAll(message = 'Audio paused. Choose Listen whenever you are ready.') {
+  function pauseAll(message = 'Media paused. Choose Play all three whenever you are ready.') {
     Object.values(channels).forEach(pauseChannel);
+    window.__jcsPauseFilm?.(message);
     status(message);
   }
 
@@ -219,9 +221,13 @@
   }
 
   function startAll() {
-    // Each call reaches play() synchronously, preserving one deliberate gesture
-    // for both channels. A rejected channel does not stop the other channel.
+    if (isQuiet()) {
+      status('Turn off Quiet mode before starting the three media channels.');
+      return;
+    }
+    // Reach every native play() call from the same deliberate user gesture.
     Object.values(channels).forEach(channel => { void listenChannel(channel); });
+    window.__jcsStartFilm?.({ group: 'all' });
   }
 
   let saved = {};
@@ -259,11 +265,17 @@
   });
 
   $('audioStartAll')?.addEventListener('click', () => {
-    if (Object.values(channels).some(channel => channel.wanted)) pauseAll();
+    const active = Object.values(channels).some(channel => channel.wanted) || Boolean(window.__jcsFilmPlaying);
+    if (active) pauseAll();
     else startAll();
   });
   $('audioStopAll')?.addEventListener('click', () => pauseAll());
-  document.addEventListener('jcs:film-start', () => pauseAll('Worship audio paused while you watch the film.'));
+  document.addEventListener('jcs:film-start', event => {
+    if (event.detail?.group === 'all') return;
+    Object.values(channels).forEach(pauseChannel);
+    status('Worship audio paused while you watch the film.');
+  });
+  document.addEventListener('jcs:film-state', () => updateControls());
   window.__jcsStartSacredMedia = startAll;
   window.__jcsSuspendSacredMedia = (reason = 'Media paused') => {
     pauseAll(reason + '. Choose Listen to resume.');
@@ -277,7 +289,7 @@
   // No focus/blur handler: interacting with the embedded film moves focus to
   // its iframe, which must not stop playback or restart a previously paused track.
   updateControls();
-  status('Choose Play worship audio, or Listen to either channel.');
+  status('Choose Play all three, or Listen to either audio channel.');
 
   const blessings = [
     'May every ledger entry remind you that Jesus Christ never changes.',
