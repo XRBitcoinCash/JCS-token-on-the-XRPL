@@ -5804,7 +5804,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .jcs-index-header *,.jcs-index-header *::before,.jcs-index-header *::after{scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
 </style>
-<link href="./css/jcs-renewal.css" rel="stylesheet"/><link href="./css/jcs-market.css" rel="stylesheet"/><link href="./css/jcs-liquidity.css" rel="stylesheet"/><link href="./css/jcs-signing.css" rel="stylesheet"/></head>
+<link href="./css/jcs-renewal.css" rel="stylesheet"/><link href="./css/jcs-market.css" rel="stylesheet"/><link href="./css/jcs-liquidity.css" rel="stylesheet"/><link href="./css/jcs-signing.css" rel="stylesheet"/><link href="./css/jcs-nft.css" rel="stylesheet"/></head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header jcs-home-header jcs-index-header" role="banner">
@@ -5912,7 +5912,24 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <button class="dashboard-copy" id="copyIssuerBtn" type="button">Copy issuer</button>
 </div>
 </aside>
-</section><nav aria-labelledby="home-products-title" class="home-product-showcase sanctuary-paths"><div class="path-heading"><span class="eyebrow">A rhythm for the day</span><h2 id="home-products-title">Pause. Connect. Put faith into practice.</h2></div><div class="sanctuary-path-grid"><a class="sanctuary-path" href="#scripture"><span class="path-number">01 / WORSHIP</span><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M32 8v48M18 24h28M11 54h42"></path><circle cx="32" cy="24" r="20"></circle></svg><h3>Be still.</h3><p>Scripture, sacred film and music for a quiet moment.</p><span class="path-link">Enter worship <span aria-hidden="true">↗</span></span></a><a class="sanctuary-path" href="#fellowship"><span class="path-number">02 / FELLOWSHIP</span><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M32 53C17 44 7 35 9 24c2-14 20-17 23-3 4-14 21-11 23 3 2 11-8 20-23 29Z"></path><path d="M22 33h20M32 25v17"></path></svg><h3>Grow together.</h3><p>A private prayer journal and small acts of daily care.</p><span class="path-link">Enter fellowship <span aria-hidden="true">↗</span></span></a><a class="sanctuary-path" href="#trade"><span class="path-number">03 / STEWARDSHIP</span><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M10 23h44l-9-9M54 41H10l9 9M32 9v7M32 48v7"></path><path d="M26 30h12M32 24v18"></path></svg><h3>Use JCS.</h3><p>Trade, manage liquidity and explore wallet-held NFTs.</p><span class="path-link">Open exchange <span aria-hidden="true">↗</span></span></a></div><div class="path-secondary"><a href="./verify.html">Sign the Ledger ↗</a><a href="./prayer.map.html">Prayer map ↗</a><a href="./connectwallet.html">Wallet readiness ↗</a><a href="./metrics.html">Market monitor ↗</a></div></nav>
+</section><nav aria-labelledby="home-products-title" class="home-product-showcase sanctuary-paths">
+  <div class="path-heading"><span class="eyebrow">A rhythm for the day</span><h2 id="home-products-title">A place for faith and daily life.</h2></div>
+  <div class="sanctuary-path-grid">
+    <a class="sanctuary-path" href="#sacred-film" aria-labelledby="worship-lane-title">
+      <span class="path-emblem" aria-hidden="true"><span class="path-number">01</span><svg viewBox="0 0 64 64"><path d="M32 8v48M18 24h28M11 54h42"></path><circle cx="32" cy="24" r="20"></circle></svg></span>
+      <div class="path-copy"><h3 id="worship-lane-title">Worship</h3><p>Scripture, film, sacred reading and audio for a quiet moment.</p><span class="path-link">Enter worship <span aria-hidden="true">↗</span></span></div>
+    </a>
+    <a class="sanctuary-path" href="#fellowship" aria-labelledby="fellowship-lane-title">
+      <span class="path-emblem" aria-hidden="true"><span class="path-number">02</span><svg viewBox="0 0 64 64"><path d="M32 53C17 44 7 35 9 24c2-14 20-17 23-3 4-14 21-11 23 3 2 11-8 20-23 29Z"></path><path d="M22 33h20M32 25v17"></path></svg></span>
+      <div class="path-copy"><h3 id="fellowship-lane-title">Fellowship</h3><p>A private prayer journal and small acts of daily care.</p><span class="path-link">Enter fellowship <span aria-hidden="true">↗</span></span></div>
+    </a>
+    <a class="sanctuary-path" href="#trade" aria-labelledby="stewardship-lane-title">
+      <span class="path-emblem" aria-hidden="true"><span class="path-number">03</span><svg viewBox="0 0 64 64"><path d="M10 23h44l-9-9M54 41H10l9 9M32 9v7M32 48v7"></path><path d="M26 30h12M32 24v18"></path></svg></span>
+      <div class="path-copy"><h3 id="stewardship-lane-title">Stewardship</h3><p>Trade JCS, manage liquidity and explore the NFTs in your wallet.</p><span class="path-link">Open exchange <span aria-hidden="true">↗</span></span></div>
+    </a>
+  </div>
+  <div class="path-secondary"><a href="./verify.html">Sign the Ledger ↗</a><a href="./prayer.map.html">Prayer map ↗</a><a href="./connectwallet.html">Wallet readiness ↗</a><a href="./metrics.html">Market monitor ↗</a></div>
+</nav>
 <section aria-labelledby="integrity-title" class="card integrity-desk" id="integrity-desk"><details><summary>Ledger evidence &amp; transaction records</summary>
 <div class="integrity-head">
 <div>
@@ -5963,39 +5980,42 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 <p aria-live="polite" id="intentPassportStatus" role="status">The intent passport is local evidence only. It never creates, signs or submits an XRPL transaction.</p>
 </details></section>
-<section aria-label="Rotating Scripture and ancient Christian readings" class="faith-stream-grid" id="scripture">
-<article class="card scripture-stage">
-<div class="scripture-kicker" id="scriptureKicker">Loading public-domain reading…</div>
-<blockquote id="scriptureText">Loading…</blockquote>
-<div id="scriptureSource">A new selection appears every 60 seconds.</div>
-<div aria-label="Scripture stream controls" class="scripture-actions">
-<button aria-pressed="false" class="btn small" id="scripturePauseToggle" type="button">Pause rotation</button>
-<button class="btn small" id="scriptureNextBtn" type="button">Next reading</button>
-<button class="btn small" id="scriptureCopyBtn" type="button">Copy reading</button>
-</div></article>
-<article class="card words-jesus-card">
-<div class="scripture-kicker">Words of Jesus · King James Version</div>
-<blockquote id="jesusWords">Loading…</blockquote>
-<div id="jesusWordsSource">A synchronized selection changes every 60 seconds.</div>
-<p class="hint">
-      The reading library combines Proverbs from the KJV with public-domain
-      R. H. Charles translations of 1 Enoch and Jubilees, a work preserved in
-      the Ethiopian tradition. Canon status differs among Christian traditions.
-    </p>
-<div class="scripture-actions">
-<button class="btn small" id="jesusWordsCopyBtn" type="button">Copy the current words of Jesus</button>
-</div></article>
+<section aria-labelledby="sacred-film-title" class="card sacred-film-section" id="sacred-film">
+  <div class="section-heading"><div><span class="eyebrow">Worship · watch, read, listen, reflect</span><h2 id="sacred-film-title">Make room for what matters.</h2><p>Begin with Christ’s story. Stay for a passage, a moment of music, or a private reflection.</p></div></div>
+  <nav class="worship-wayfinding" aria-label="Worship sections"><a href="#watch">Watch</a><a href="#scripture">Read</a><a href="#audio">Listen</a><a href="#reflect">Reflect</a></nav>
+  <div class="watch-layout" id="watch">
+    <article class="jesus-film-feature" aria-labelledby="jesus-film-title">
+      <div class="film-feature-art" aria-hidden="true"><span>✝</span></div>
+      <div class="film-feature-copy"><span class="eyebrow">Watch · the full film</span><h3 id="jesus-film-title">JESUS</h3><p class="film-feature-subtitle">The life of Christ through the Gospel of Luke.</p><p>Follow the story from his birth to the resurrection. Watch the complete 128-minute film, or choose a chapter at your own pace.</p><a class="worship-primary-link" id="jesusFilmWatch" href="https://www.jesusfilm.org/watch/jesus.html" rel="noopener noreferrer" target="_blank">Watch the full film <span aria-hidden="true">↗</span></a><p class="film-provider-note">Opens Jesus Film Project · language, chapter and subtitle choices available there.</p></div>
+    </article>
+    <aside class="watch-companions" aria-label="Further viewing">
+      <article class="worship-resource"><span class="eyebrow">Understand the story</span><h3>BibleProject</h3><p>Explore the Bible’s themes and books with illustrated teaching from BibleProject.</p><a href="https://bibleproject.com/explore/" rel="noopener noreferrer" target="_blank">Explore on BibleProject ↗</a><p class="resource-credit">Videos created by <a href="https://bibleproject.com/" rel="noopener noreferrer" target="_blank">BibleProject</a>. Viewing takes place on their official site.</p></article>
+      <article class="worship-resource passion-viewing-option"><span class="eyebrow">Another telling</span><h3>The Passion of the Christ</h3><p>See official viewing options for Mel Gibson’s film. Availability and price depend on your region.</p><a href="https://tv.apple.com/us/movie/the-passion-of-the-christ/umc.cmc.mgujro54bpxhcmhk57tgbbpz" rel="noopener noreferrer" target="_blank">Check Apple TV viewing options ↗</a></article>
+    </aside>
+  </div>
+  <details class="heritage-film" id="heritageFilm"><summary>A film from the archives · 1903 silent telling</summary><div class="heritage-film-body"><figure id="passionPlayerShell"><video aria-describedby="passionLicense" controls="" id="passionVideo" muted="" playsinline="" preload="none" tabindex="0">
+    <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.360p.webm" type="video/webm"/>
+    <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.144p.mjpeg.mov" type="video/quicktime"/>
+    <source src="https://upload.wikimedia.org/wikipedia/commons/5/53/Vie_et_Passion_du_Christ_%281903%29.webm" type="video/webm"/>
+    Your browser cannot play this film. Use the Wikimedia source link to watch.
+  </video><figcaption>Vie et Passion du Christ · 1903 · silent film</figcaption></figure><div><h3>An early expression of faith on film.</h3><p>This historic presentation is a separate, optional viewing. Use the film’s own play and pause controls.</p><p id="passionLicense"><a href="https://commons.wikimedia.org/wiki/File:Vie_et_Passion_du_Christ_(1903).webm" rel="noopener noreferrer" target="_blank">View the film and public-domain source on Wikimedia Commons ↗</a></p><p class="media-status" id="filmStatus" role="status">The historic film begins only when you press its play button.</p></div></div></details>
 </section>
-<section aria-labelledby="sacred-film-title" class="card sacred-film-section" id="sacred-film"><div class="section-heading"><div><span class="eyebrow">A moment of contemplation</span><h2 id="sacred-film-title">The story at the heart of our faith.</h2><p>Watch the official <em>The Passion of the Christ</em> trailer alongside a silent, historic telling of Christ’s life.</p></div></div><div class="film-stage"><div class="modern-film"><div id="modernPassionPlayer"><div class="film-placeholder"><span aria-hidden="true" class="film-cross">✝</span><span class="eyebrow">The Passion of the Christ</span><h3>Love. Sacrifice. Redemption.</h3><p>Official trailer · 2004 film</p></div></div></div><figure class="silent-companion" id="passionPlayerShell"><video aria-describedby="passionLicense" id="passionVideo" muted="" playsinline="" poster="./jcs-logo.png" preload="none" tabindex="0" webkit-playsinline="">
-<source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.360p.webm" type="video/webm"/>
-<source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.144p.mjpeg.mov" type="video/quicktime"/>
-<source src="https://upload.wikimedia.org/wikipedia/commons/5/53/Vie_et_Passion_du_Christ_%281903%29.webm" type="video/webm"/>
-<source src="https://upload.wikimedia.org/wikipedia/commons/6/6c/La_vie_et_la_passion_de_Jesus_Christ_%281903%29.ogv" type="video/ogg"/>
-          Your browser does not support the sacred film stream.
-        </video><figcaption>1903 silent film · public domain</figcaption></figure></div><div class="film-actions"><button class="btn primary-faith" id="filmPlayBoth" type="button"><span aria-hidden="true">▶</span> Play both films</button><button class="btn" id="filmPauseBoth" type="button">Pause both</button><a class="film-full-link" href="https://tv.apple.com/us/movie/the-passion-of-the-christ/umc.cmc.mgujro54bpxhcmhk57tgbbpz" rel="noopener noreferrer" target="_blank">Find the full film on Apple TV ↗</a></div><p class="media-status" id="filmStatus" role="status">The trailer has sound; the historic companion stays muted. Playback begins when you press play.</p><details class="film-sources"><summary>Film sources &amp; viewing options</summary><p>The modern player embeds the official trailer. Full-film availability and rental or purchase options depend on your region. <a href="https://www.youtube.com/watch?v=itiY6yl8mS4" rel="noopener noreferrer" target="_blank">Watch the official trailer on YouTube ↗</a></p><p id="passionLicense">Historic companion: <a href="https://commons.wikimedia.org/wiki/File:Vie_et_Passion_du_Christ_(1903).webm" rel="noopener noreferrer" target="_blank">Wikimedia Commons · <em>Vie et Passion du Christ</em> (1903)</a>, marked public domain.</p></details></section><section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
+<section aria-labelledby="reading-title" class="faith-stream-grid" id="scripture">
+  <div class="reading-heading"><span class="eyebrow">Read · a passage for today</span><h2 id="reading-title">Words to carry with you.</h2><p>Read slowly. A new selection appears every 60 seconds; pause it whenever you want to stay.</p></div>
+  <article class="card scripture-stage">
+    <div class="scripture-kicker" id="scriptureKicker">Still waters · World English Bible</div><blockquote id="scriptureText">“He makes me lie down in green pastures. He leads me beside still waters. He restores my soul.”</blockquote><div id="scriptureSource">Psalm 23:2–3a · World English Bible</div><a class="reading-context-link" id="scriptureContext" href="https://ebible.org/engwebp/PSA023.htm" rel="noopener noreferrer" target="_blank">Read the full chapter ↗</a>
+    <div aria-label="Scripture stream controls" class="scripture-actions"><button aria-pressed="false" class="btn small" id="scripturePauseToggle" type="button">Pause rotation</button><button class="btn small" id="scriptureNextBtn" type="button">Next reading</button><button class="btn small" id="scriptureCopyBtn" type="button">Copy reading</button></div>
+  </article>
+  <article class="card words-jesus-card">
+    <div class="scripture-kicker">Words of Jesus · World English Bible</div><blockquote id="jesusWords">“Come to me, all you who labor and are heavily burdened, and I will give you rest.”</blockquote><div id="jesusWordsSource">Matthew 11:28 · World English Bible</div><a class="reading-context-link" id="jesusWordsContext" href="https://ebible.org/engwebp/MAT11.htm" rel="noopener noreferrer" target="_blank">Read the full chapter ↗</a><div class="scripture-actions"><button class="btn small" id="jesusWordsCopyBtn" type="button">Copy these words of Jesus</button></div>
+  </article>
+  <div class="reading-library"><article class="worship-resource"><span class="eyebrow">Sacred reading · Christian classic</span><h3>The Imitation of Christ</h3><p>Thomas à Kempis on humility, prayer and the inner life. Begin with Book I and read a little at a time.</p><a href="https://www.gutenberg.org/ebooks/1653" rel="noopener noreferrer" target="_blank">Read at Project Gutenberg ↗</a></article><article class="worship-resource"><span class="eyebrow">Sacred reading · Christian allegory</span><h3>The Pilgrim’s Progress</h3><p>John Bunyan’s story of perseverance and faith, offered as literature alongside Scripture.</p><a href="https://www.ccel.org/ccel/bunyan/pilgrim.html" rel="noopener noreferrer" target="_blank">Read at the Christian Classics Ethereal Library ↗</a></article></div>
+  <p class="reading-sources">Scripture uses the <a href="https://ebible.org/engwebp/copyright.htm" rel="noopener noreferrer" target="_blank">public-domain World English Bible</a>. Prefer traditional wording? <a href="https://www.biblegateway.com/versions/King-James-Version-KJV-Bible/" rel="noopener noreferrer" target="_blank">Explore the King James Version</a> (public domain in the U.S.).</p>
+</section>
+<section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
 <div class="audio-intro">
 <div>
-<span class="jcs-eyebrow">Settle into the sacred</span>
+<span class="jcs-eyebrow">Listen · settle into the sacred</span>
 <h2 id="audio-title">A little space to listen.</h2>
 <p>Choose church music, spoken Scripture, or both. Each channel has its own volume; pause whenever you need quiet.</p>
 </div>
@@ -6008,28 +6028,29 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <article class="audio-channel listening-card">
 <span aria-hidden="true" class="listening-symbol">♫</span><h3>Sacred music</h3>
 <p>Chant, hymns and archival sacred recordings.</p>
-<audio crossorigin="anonymous" id="musicAudio" playsinline="" preload="metadata"></audio>
+<audio id="musicAudio" playsinline="" preload="none"></audio>
 <button class="listen-button" id="musicStart" type="button"><span aria-hidden="true">▶</span><span>Listen</span></button><div class="audio-controls listening-footer">
 <button class="btn" id="musicStop" type="button">Pause</button>
 <label for="musicVolume">Volume</label>
 <input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0.35"/>
 </div>
-<div class="now-playing" id="musicNow">Ready when you are.</div>
+<div class="now-playing" id="musicNow">Ready when you are.</div><a class="audio-source-link" href="https://archive.org/details/GregorianChantMass" target="_blank" rel="noopener noreferrer">Recording source ↗</a>
 </article>
 <article class="audio-channel listening-card">
 <span aria-hidden="true" class="listening-symbol">✝</span><h3>Spoken Scripture</h3>
-<p>Psalms and readings from the public-domain library.</p>
-<audio crossorigin="anonymous" id="readingAudio" playsinline="" preload="metadata"></audio>
+<p>Book of Psalms · King James Version, read by LibriVox volunteers.</p>
+<audio id="readingAudio" playsinline="" preload="none"></audio>
 <button class="listen-button" id="readingStart" type="button"><span aria-hidden="true">▶</span><span>Listen</span></button><div class="audio-controls listening-footer">
 <button class="btn" id="readingStop" type="button">Pause</button>
 <label for="readingVolume">Volume</label>
 <input id="readingVolume" max="1" min="0" step="0.01" type="range" value="0.8"/>
 </div>
-<div class="now-playing" id="readingNow">Ready when you are.</div>
+<div class="now-playing" id="readingNow">Ready when you are.</div><a class="audio-source-link" href="https://archive.org/details/psalms_kjv_1202_librivox" target="_blank" rel="noopener noreferrer">LibriVox recording source ↗</a>
 </article>
 </div>
 <p aria-live="polite" class="audio-policy" id="audioStatus">Nothing plays until you choose Listen. Audio pauses when you leave the page.</p>
 </section>
+<section class="card reflection-section" id="reflect" aria-labelledby="reflection-title"><span class="eyebrow">Reflect · take a quiet moment</span><h2 id="reflection-title">Let the reading become a prayer.</h2><p id="reflectionPrompt">Where could you make room for rest and kindness today?</p><a class="worship-primary-link" href="#privatePrayerJournal" id="reflectJournalLink">Open my private journal <span aria-hidden="true">↗</span></a><p class="reflection-privacy">Your writing stays in this browser. Opening the journal does not change or publish your note.</p></section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
 <div class="wallet-card-head">
@@ -6561,7 +6582,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
 
 
-<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script defer="" src="./js/xrpl-client.js"></script><script defer="" src="./js/jcs-market.js"></script><script defer="" src="./js/jcs-theme.js"></script><script defer="" src="./js/jcs-worship.js"></script><script defer="" src="./js/jcs-film.js"></script><script defer="" src="./js/jcs-fellowship.js"></script><script defer="" src="./js/jcs-integrity.js"></script><script defer="" src="./js/jcs-core.js"></script><script defer="" src="./js/jcs-header.js"></script><script defer="" src="./js/jcs-liquidity.js"></script><script id="jcs-home-manifest" type="application/json">{
+<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script defer="" src="./js/xrpl-client.js"></script><script defer="" src="./js/jcs-market.js"></script><script defer="" src="./js/jcs-theme.js"></script><script defer="" src="./js/jcs-worship.js"></script><script defer="" src="./js/jcs-film.js"></script><script defer="" src="./js/jcs-fellowship.js"></script><script defer="" src="./js/jcs-integrity.js"></script><script defer="" src="./js/jcs-core.js"></script><script defer="" src="./js/jcs-header.js"></script><script defer="" src="./js/jcs-liquidity.js"></script><script defer="" src="./js/jcs-nft.js"></script><script id="jcs-home-manifest" type="application/json">{
   "schema": "jcs-home-v3",
   "name": "Jesus Christ Saves Token",
   "network": "XRPL Mainnet",
@@ -6593,10 +6614,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     "signing": "User reviews each transaction in Xaman",
     "success_requires": "Matching validated transaction with tesSUCCESS"
   },
-  "nfts": "Read connected wallet NFTs; separate prayer/testimony creation page",
+  "nfts": "Validated wallet NFT gallery, optional separately signed transaction receipt NFTs, and owner-reviewed XRP sell offers",
   "private_journal": "Browser-local storage",
   "media": {
-    "modern_film": "Official distributor trailer; full-film viewing through provider",
+    "primary_film": "JESUS full film via official Jesus Film Project viewing link",
+    "teaching_companion": "BibleProject official site, with attribution",
+    "passion": "External official viewing options only",
+    "scripture": "World English Bible, canonical readings, 60-second rotation",
     "silent_companion": "1903 public-domain film",
     "playback": "Explicit user controls"
   }

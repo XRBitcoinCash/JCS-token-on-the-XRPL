@@ -1,0 +1,44 @@
+/* Wallet records stay readable on narrow screens; long ledger identifiers wrap as data. */
+#trade .jcs-receipt-actions { margin: 1.25rem 0 2rem; padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid rgba(215,189,118,.5); border-radius: 18px; background: var(--liq-surface); }
+#trade .jcs-receipt-actions[hidden], #trade .jcs-nft-review[hidden], #trade #jcsNftMore[hidden] { display: none; }
+#trade .jcs-receipt-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+#trade .jcs-receipt-heading h3, #trade .jcs-nft-review h3, #trade .jcs-nft-review h4 { margin: .4rem 0 1rem; font-size: 1.25rem; word-break: normal; overflow-wrap: normal; }
+#trade .jcs-nft-actions { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1rem 0; }
+#trade .jcs-nft-actions .btn { white-space: normal; min-height: 46px; line-height: 1.4; }
+#trade .jcs-nft-review { padding: clamp(1rem, 2vw, 1.5rem); margin: 1.25rem 0; border: 1px solid var(--liq-line); border-radius: 14px; background: var(--liq-raised); min-width: 0; }
+#trade .jcs-nft-review label { display: block; font-weight: 650; margin: 1rem 0 .5rem; }
+#trade .jcs-nft-review select { width: 100%; max-width: 32rem; padding: .8rem; border-radius: 10px; color: var(--liq-ink); background: var(--liq-surface); }
+#trade .jcs-nft-review pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .78rem; background: var(--liq-surface); padding: 1rem; border-radius: 10px; line-height: 1.6; }
+#trade .jcs-nft-review details { margin: 1rem 0; }
+#trade .jcs-nft-review summary { cursor: pointer; padding: .75rem 0; }
+#trade .jcs-nft-id { display: block; font-family: ui-monospace, monospace; font-size: .8rem; line-height: 1.65; overflow-wrap: anywhere; word-break: break-word; white-space: normal; max-width: 100%; }
+#trade .jcs-nft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+#trade .jcs-nft-card { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; min-width: 0; padding: 1.25rem; background: var(--liq-surface); border: 1px solid var(--liq-line); border-radius: 15px; }
+#trade .jcs-nft-card h3 { font-size: 1.15rem; margin: 0; word-break: normal; overflow-wrap: normal; }
+#trade .jcs-nft-details { margin: 0; max-width: 100%; width: 100%; }
+#trade .jcs-nft-details > div { padding: .6rem 0; border-bottom: 1px solid var(--liq-line); }
+#trade .jcs-nft-details dt { font-size: .73rem; color: var(--liq-muted); }
+#trade .jcs-nft-details dd { font-size: .8rem; margin: .2rem 0 0; overflow-wrap: anywhere; line-height: 1.6; font-family: ui-monospace, monospace; }
+#trade .jcs-nft-card .btn { min-height: 44px; }
+#trade #jcsNftMore { margin: 1.2rem 0; }
+#trade #jcsNftSalePreview { margin-top: 1rem; }
+#trade #jcsNftSaleStatus, #trade #jcsReceiptStatus { overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  #trade .jcs-nft-actions { display: grid; grid-template-columns: 1fr; }
+  #trade .jcs-nft-actions .btn, #trade .jcs-nft-card .btn { width: 100%; }
+  #trade .jcs-nft-review .jcs-readout > div { display: block; }
+  #trade .jcs-nft-review .jcs-readout dd { text-align: left; margin: .35rem 0; overflow-wrap: anywhere; }
+  #trade .jcs-receipt-heading .jcs-pool-badge { white-space: normal; }
+}
+
+#trade .jcs-receipt-actions, #trade .jcs-nft-review, #trade .jcs-nft-card { color: var(--liq-ink); }
+#trade .jcs-nft-review .jcs-readout > div { display:flex; justify-content:space-between; gap:1rem; padding:.7rem 0; border-bottom:1px solid var(--liq-line); }
+#trade .jcs-nft-review .jcs-readout dd { margin:0; text-align:right; overflow-wrap:anywhere; max-width:60%; }
+#trade #jcsNftSale .jcs-amount-field { display:grid; grid-template-columns:minmax(0,1fr) 64px; align-items:center; border:1px solid var(--liq-line); border-radius:12px; background:var(--liq-raised); overflow:hidden; }
+#trade #jcsNftSale .jcs-amount-field input { min-width:0; width:100%; background:transparent; color:var(--liq-ink); border:0; padding:1rem; font-size:1.25rem; }
+#trade #jcsNftSale .jcs-amount-field span { white-space:nowrap; word-break:keep-all; text-align:center; color:var(--liq-gold); }
+
+@media (max-width: 560px) {
+  #trade .jcs-nft-review .jcs-readout > div { display: block; }
+  #trade .jcs-nft-review .jcs-readout dd { text-align: left; max-width: 100%; margin: .35rem 0; }
+}

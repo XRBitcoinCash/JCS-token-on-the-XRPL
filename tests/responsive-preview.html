@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>JCS responsive layout checks</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 16px; background: #07111b; color: #eef2ed; font: 15px/1.5 system-ui,sans-serif; }
+    .controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+    select,button { font: inherit; padding: 9px 12px; }
+    iframe { display: block; width: 375px; height: 900px; border: 1px solid #a99970; background: #07111b; }
+    pre { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Homepage layout checks</h1>
+  <p>Development preview of the real homepage. No wallet is connected or simulated.</p>
+  <div class="controls">
+    <label>Viewport width <select id="width"><option>320</option><option selected>375</option><option>768</option><option>1280</option></select></label>
+    <label>Section <select id="section"><option value=".sanctuary-paths">Entry lanes</option><option value="#sacred-film">Watch</option><option value="#scripture">Read</option><option value="#audio">Listen</option><option value="#trade">Stewardship</option></select></label>
+    <button id="check" type="button">Run all width checks</button>
+  </div>
+  <pre id="result" role="status">Loading the homepage…</pre>
+  <iframe id="preview" src="../index.html" title="JCS homepage at selected viewport width"></iframe>
+  <script>
+    const frame = document.getElementById('preview');
+    const width = document.getElementById('width');
+    const section = document.getElementById('section');
+    const result = document.getElementById('result');
+    const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    async function show() {
+      frame.style.width = width.value + 'px';
+      await settle();
+      frame.contentDocument.querySelector(section.value)?.scrollIntoView({ block: 'start' });
+    }
+    width.addEventListener('change', show);
+    section.addEventListener('change', show);
+    frame.addEventListener('load', async () => { await frame.contentDocument.fonts.ready; await show(); result.textContent = 'Ready. Select a width and section, or run the layout checks.'; });
+    document.getElementById('check').addEventListener('click', async () => {
+      const results = [];
+      for (const size of [320,375,768,1280]) {
+        frame.style.width = size + 'px';
+        await settle();
+        const doc = frame.contentDocument;
+        const cards = [...doc.querySelectorAll('.sanctuary-path')];
+        const titles = cards.map(card => {
+          const title = card.querySelector('h3');
+          const range = doc.createRange(); range.selectNodeContents(title);
+          const lines = new Set([...range.getClientRects()].filter(r => r.width > 0).map(r => Math.round(r.top))).size;
+          const box = title.getBoundingClientRect();
+          return { text: title.textContent.trim(), lines, width: Math.round(box.width), fits: title.scrollWidth <= title.clientWidth + 1 };
+        });
+        const fits = cards.every(card => { const rect = card.getBoundingClientRect(); return rect.left >= 0 && rect.right <= size + 1; });
+        results.push({ viewport: size, pass: cards.length === 3 && fits && titles.every(title => title.lines === 1 && title.fits), titles });
+      }
+      await show();
+      result.textContent = JSON.stringify(results, null, 2);
+      result.dataset.passed = String(results.every(r => r.pass));
+    });
+  </script>
+</body>
+</html>

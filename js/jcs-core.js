@@ -248,7 +248,8 @@
     const labels = {
       trust: 'Add JCS trustline', offer: 'Review JCS limit order', swap: 'Review JCS market swap',
       cancel: 'Cancel JCS order', quickbuy: 'Review JCS quick buy',
-      'liquidity-add': 'Approve liquidity deposit', 'liquidity-remove': 'Approve liquidity withdrawal'
+      'liquidity-add': 'Approve liquidity deposit', 'liquidity-remove': 'Approve liquidity withdrawal',
+      'nft-mint': 'Mint your optional receipt NFT', 'nft-sell': 'Review NFT sell offer'
     };
     xamanReturnFocus = document.activeElement;
     xamanHasRequest = true;
@@ -265,6 +266,11 @@
       if (transaction.TransactionType === 'AMMDeposit') {
         rows.push(['Maximum XRP', exactXrp(transaction.Amount)], ['Maximum JCS', String(transaction.Amount2?.value || '') + ' JCS']);
       } else if (transaction.TransactionType === 'AMMWithdraw') rows.push(['LP tokens to redeem', String(transaction.LPTokenIn?.value || '')]);
+      else if (transaction.TransactionType === 'NFTokenMint') {
+        rows.push(['Action', 'Mint one receipt NFT in your wallet'], ['Transfer setting', 'Transferable flag disabled; issuer transfers remain possible'], ['Metadata', 'Receipt details become public on the XRP Ledger']);
+      } else if (transaction.TransactionType === 'NFTokenCreateOffer') {
+        rows.push(['NFT', transaction.NFTokenID], ['Sale price', exactXrp(transaction.Amount)], ['Action', 'Create an offer; ownership changes only when a buyer accepts']);
+      }
       if (transaction.Fee) rows.push(['Network fee', exactXrp(transaction.Fee)]);
       if (transaction.LastLedgerSequence) rows.push(['Last eligible ledger', '#' + transaction.LastLedgerSequence]);
       xamanSignSummary.replaceChildren(...rows.map(([label, value]) => {
@@ -749,6 +755,7 @@
   let currentAccount = null;
   let HAS_TRUSTLINE = false;
   let APP_INITIALIZED = false;
+  let signingRequestActive = false;
   const BAL = { xrp: 0, jcs: 0 };
 
   function scheduleAppRefresh() {
@@ -1308,6 +1315,14 @@
   }
 
   async function signWithSentinel(baseTx, purpose) {
+    if (signingRequestActive) {
+      const error = new Error('Another request is already awaiting your review in Xaman.');
+      error.definitelyNotSubmitted = true;
+      throw error;
+    }
+    signingRequestActive = true;
+    let payloadAttempted = false;
+    try {
     if (!xumm) throw new Error('Xaman SDK is not available.');
 
     const account =
@@ -1316,6 +1331,7 @@
       await xumm.user.account;
 
     if (!account) throw new Error('Connect Xaman first.');
+    if (baseTx.Account && baseTx.Account !== account) throw new Error('Your connected wallet changed. Review again.');
 
     const code = genCode();
     const memos = buildSentinelMemos(code);
@@ -1327,6 +1343,14 @@
         ...memos
       ]
     };
+    if (purpose === 'nft-mint' || purpose === 'nft-sell') {
+      // Conservatively include every field header, variable-length prefix and array marker.
+      const memoBytes = 2 + txjson.Memos.reduce((total, item) => total + 2 + Object.values(item.Memo).reduce((size, value) => {
+        const bytes = String(value).length / 2;
+        return size + bytes + (bytes >= 193 ? 3 : 2);
+      }, 0), 0);
+      if (memoBytes > 1024) throw new Error('Receipt metadata is too large to fit with the Xaman verification memos.');
+    }
 
     setStatus(
       walletStatus,
@@ -1347,6 +1371,8 @@
       }
     };
 
+    const reviewedTxjson = JSON.parse(JSON.stringify(txjson));
+    payloadAttempted = true;
     const { resolution, details: payloadDetails } =
       await createAndResolveXamanPayload(
         request,
@@ -1380,7 +1406,11 @@
     if (!xamanPayloadWasSigned(resolution, payloadDetails)) {
       setXamanSignStatus('The request was not signed.', 'rejected');
       setSecurityCodeDisplay(null);
-      throw new Error('The Xaman request was not signed.');
+      const error = new Error('The Xaman request was not signed.');
+      error.definitelyNotSubmitted = resolution?.signed === false || resolution?.data?.signed === false ||
+        (payloadDetails?.meta?.resolved === true && payloadDetails?.meta?.signed === false);
+      error.outcomeUnknown = !error.definitelyNotSubmitted;
+      throw error;
     }
 
     setXamanSignStatus('Signed in Xaman. Checking the returned transaction details…', 'signed');
@@ -1395,7 +1425,9 @@
     ) {
       setSecurityCodeDisplay(null);
       setXamanSignStatus('The request was not dispatched to XRPL Mainnet. Check its outcome in Xaman.', 'error');
-      throw new Error('The request was not dispatched to XRPL Mainnet.');
+      const error = new Error('The request was not dispatched to XRPL Mainnet.');
+      error.outcomeUnknown = true;
+      throw error;
     }
 
     const txid =
@@ -1407,9 +1439,11 @@
     if (!txid) {
       setXamanSignStatus('Xaman reported a signature without a transaction ID. Check the outcome in your wallet before starting again.', 'error');
       setSecurityCodeDisplay(null);
-      throw new Error(
+      const error = new Error(
         'Xaman signed the request but returned no transaction ID.'
       );
+      error.outcomeUnknown = true;
+      throw error;
     }
 
     setXamanSignStatus(
@@ -1425,8 +1459,13 @@
     return {
       resolution,
       payloadDetails,
-      txid
+      txid,
+      txjson: reviewedTxjson
     };
+    } catch (error) {
+      if (!payloadAttempted) error.definitelyNotSubmitted = true;
+      throw error;
+    } finally { signingRequestActive = false; }
   }
 
   const sideEl = $('side');
@@ -1960,7 +1999,7 @@
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
         setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
-        await waitForQuickBuyValidation(txid);
+        const receipt = await waitForQuickBuyValidation(txid);
         setStatus(
           tradeMsg,
           'Limit order transaction validated on XRPL Mainnet · ' +
@@ -1969,7 +2008,7 @@
         );
         setResult('Validated limit-order transaction: ' + txid);
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-          detail: { kind:'limit-order', txid, side, amountJcs:amt, referencePriceXrpPerJcs:px }
+          detail: validatedReceiptDetail(receipt, { kind:'limit-order', txid, side, amountJcs:amt, referencePriceXrpPerJcs:px })
         }));
         await Promise.allSettled([refreshAll({ force: true }), fetchBalances()]);
       } catch (e) {
@@ -2049,7 +2088,7 @@
         if (!txid) throw new Error('Xaman returned no transaction ID for the market order.');
 
         setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
-        await waitForQuickBuyValidation(txid);
+        const receipt = await waitForQuickBuyValidation(txid);
 
         setStatus(
           tradeMsg,
@@ -2060,7 +2099,7 @@
 
         setResult('Validated AMM/DEX market transaction: ' + txid);
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-          detail: { kind:'market-swap', txid, side, amountJcs:amt, referencePriceXrpPerJcs:basePx }
+          detail: validatedReceiptDetail(receipt, { kind:'market-swap', txid, side, amountJcs:amt, referencePriceXrpPerJcs:basePx })
         }));
 
         ammSnapshotCache = null;
@@ -2968,12 +3007,20 @@
           await new Promise(resolve => window.setTimeout(resolve, 1400));
           continue;
         }
+        const reportedHash = String(result.hash || result.tx_json?.hash || '');
+        if (reportedHash.toUpperCase() !== String(txid).toUpperCase()) {
+          const error = new Error('The ledger response could not be matched to the submitted transaction.');
+          error.responseMismatch = true;
+          throw error;
+        }
         const metadata = result.meta || result.metaData || {};
         const transactionResult =
           metadata.TransactionResult || metadata.transaction_result;
         if (transactionResult !== 'tesSUCCESS') {
           const error = new Error('The validated XRPL transaction did not succeed: ' + (transactionResult || 'missing result code'));
-          error.finalLedgerResult = true;
+          // Only a matching, validated ledger failure is a definite non-mint.
+          error.finalLedgerResult = /^tec[A-Z0-9_]+$/.test(String(transactionResult || ''));
+          error.responseMismatch = !error.finalLedgerResult;
           throw error;
         }
         return {
@@ -2981,7 +3028,7 @@
           delivered: metadata.delivered_amount || metadata.DeliveredAmount || null
         };
       } catch (error) {
-        if (error.finalLedgerResult) throw error;
+        if (error.finalLedgerResult || error.responseMismatch) throw error;
         lastError = error;
       }
       await new Promise(resolve => window.setTimeout(resolve, 1400));
@@ -2989,6 +3036,21 @@
     throw lastError || new Error(
       'The transaction was submitted, but validation is not confirmed yet. Check the transaction ID before trying again.'
     );
+  }
+
+  function validatedReceiptDetail(receipt, detail) {
+    const result = receipt.transaction;
+    const transaction = result.tx_json || result;
+    const meta = result.meta || result.metaData || {};
+    const ledgerIndex = Number(result.ledger_index || transaction.ledger_index);
+    const rippleDate = Number(transaction.date ?? result.date);
+    return {
+      ...detail, validated: true, network: 'XRPL Mainnet', account: transaction.Account,
+      ledgerIndex, transaction, meta,
+      validated_at_utc: Number.isFinite(rippleDate)
+        ? new Date((rippleDate + 946684800) * 1000).toISOString()
+        : result.close_time_iso || new Date().toISOString()
+    };
   }
 
   async function quickBuy(units) {
@@ -3049,7 +3111,7 @@
         'Quick Buy submitted. Waiting for validated XRPL confirmation…'
       );
 
-      await waitForQuickBuyValidation(txid);
+      const receipt = await waitForQuickBuyValidation(txid);
       const deliveredText = formatTradeNumber(requestedJcs, 6) + ' ' + APP_NAME;
 
       setStatus(
@@ -3064,7 +3126,7 @@
           ' · Transaction: ' + txid
       );
       document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-        detail: { kind:'quick-buy', txid, side:'buy', amountJcs:requestedJcs, referencePriceXrpPerJcs:price }
+        detail: validatedReceiptDetail(receipt, { kind:'market-swap', legacyKind:'quick-buy', txid, side:'buy', amountJcs:requestedJcs, referencePriceXrpPerJcs:price })
       }));
 
       ammSnapshotCache = null;
@@ -3090,9 +3152,232 @@
   if (buy100) buy100.addEventListener('click', () => quickBuy(100));
 
   let liquiditySigning = false;
+  let nftSigning = false;
+  const RECEIPT_NFT_TAXON = 20260913;
+  const RECEIPT_NFT_SCHEMA = 'jcs-validated-receipt-nft-v1';
+
+  function decodeNftHex(hex) {
+    if (typeof hex !== 'string' || !/^(?:[A-F0-9]{2})+$/i.test(hex)) throw new Error('Invalid NFT hexadecimal data.');
+    try { return decodeURIComponent(hex.replace(/../g, byte => '%' + byte)); }
+    catch { throw new Error('NFT metadata must be valid UTF-8.'); }
+  }
+
+  function sameNftValue(a, b) {
+    if (a && b && typeof a === 'object' && typeof b === 'object') {
+      return Object.keys(a).length === Object.keys(b).length && Object.keys(a).every(key => sameNftValue(a[key], b[key]));
+    }
+    return a === b;
+  }
+
+  async function readOwnedNfts(account, ledgerIndex) {
+    let marker, pages = 0;
+    const nfts = [], seen = new Set();
+    do {
+      const response = await xrplRequest({ method: 'account_nfts', params: [{
+        account, ledger_index: ledgerIndex, limit: 400, ...(marker ? { marker } : {})
+      }] });
+      const result = response.result || {};
+      if (result.validated !== true || Number(result.ledger_index) !== ledgerIndex ||
+          (result.account && result.account !== account) || !Array.isArray(result.account_nfts)) {
+        throw new Error('NFT ownership could not be verified at the selected validated ledger.');
+      }
+      nfts.push(...result.account_nfts);
+      marker = result.marker;
+      if (marker) {
+        const key = JSON.stringify(marker);
+        if (seen.has(key) || ++pages >= 100) throw new Error('NFT ownership pagination could not be completed.');
+        seen.add(key);
+      }
+    } while (marker);
+    return nfts;
+  }
+
+  async function verifyNftReceiptSource(metadata, account) {
+    const response = await xrplRequest({ method: 'tx', params: [{ transaction: metadata.source_transaction, binary: false }] });
+    const result = response.result || {}, tx = result.tx_json || result;
+    const meta = result.meta || result.metaData || {};
+    if (result.validated !== true || meta.TransactionResult !== 'tesSUCCESS' ||
+        String(result.hash || tx.hash || '').toUpperCase() !== metadata.source_transaction || tx.Account !== account) {
+      throw new Error('The source receipt is not a successful validated transaction from this wallet.');
+    }
+    const isJcs = amount => amount && typeof amount === 'object' &&
+      amount.currency === CURRENCY_HEX && amount.issuer === ISSUER;
+    const pair = (a, b) => (typeof a === 'string' && isJcs(b)) || (isJcs(a) && typeof b === 'string');
+    let kind;
+    if (tx.TransactionType === 'AMMDeposit' || tx.TransactionType === 'AMMWithdraw') {
+      if (!((tx.Asset?.currency === 'XRP' && isJcs(tx.Asset2)) || (tx.Asset2?.currency === 'XRP' && isJcs(tx.Asset)))) {
+        throw new Error('The source transaction does not use the JCS/XRP pool.');
+      }
+      kind = tx.TransactionType === 'AMMDeposit' ? 'add-liquidity' : 'withdraw-liquidity';
+    } else if (tx.TransactionType === 'OfferCreate' && pair(tx.TakerGets, tx.TakerPays)) {
+      kind = Number(tx.Flags || 0) & (0x00020000 | 0x00040000) ? 'market-swap' : 'limit-order';
+    } else if (tx.TransactionType === 'Payment' && tx.Destination === account && pair(tx.Amount, tx.SendMax)) {
+      kind = 'market-swap';
+    } else throw new Error('Only JCS/XRP trade and liquidity receipts can be minted here.');
+    if (metadata.source_kind !== kind || metadata.ledger_index !== Number(result.ledger_index)) {
+      throw new Error('Receipt metadata does not match the validated source transaction.');
+    }
+    const sourceLedger = (await xrplRequest({ method: 'ledger', params: [{ ledger_index: Number(result.ledger_index) }] })).result || {};
+    if (sourceLedger.validated !== true || Number(sourceLedger.ledger_index) !== Number(result.ledger_index)) throw new Error('The source ledger time could not be verified.');
+    const ledgerDate = Number(sourceLedger.ledger?.close_time ?? tx.date ?? result.date);
+    if (!Number.isInteger(ledgerDate) || ledgerDate < 0 || metadata.validated_at_utc !== new Date((ledgerDate + 946684800) * 1000).toISOString()) {
+      throw new Error('Receipt date differs from the ledger date.');
+    }
+    if (metadata.wallet !== account && metadata.wallet !== account.slice(0, 5) + '…' + account.slice(-5)) {
+      throw new Error('Receipt wallet does not match the source transaction.');
+    }
+    const amounts = {};
+    for (const key of ['Amount', 'Amount2', 'SendMax', 'DeliverMin', 'TakerPays', 'TakerGets', 'LPTokenIn', 'LPTokenOut']) {
+      if (typeof tx[key] === 'string' && tx[key].length <= 100) amounts[key + '_drops'] = tx[key];
+      else if (tx[key] && typeof tx[key].value === 'string' && tx[key].value.length <= 100) amounts[key] = tx[key].value;
+    }
+    if (!sameNftValue(metadata.amounts, amounts)) throw new Error('Receipt amount limits differ from the validated source transaction.');
+    return { result, transaction: tx };
+  }
+
+  async function submitNft(transaction) {
+    if (nftSigning || liquiditySigning || signingRequestActive || xamanPayloadInFlight) {
+      const error = new Error('Another request is already awaiting your review.');
+      error.definitelyNotSubmitted = true;
+      throw error;
+    }
+    nftSigning = true;
+    let submittedTxid, receiptValidated = false, signingStarted = false;
+    try {
+      // Snapshot caller data before any asynchronous work or signing interaction.
+      transaction = JSON.parse(JSON.stringify(transaction));
+      const account = currentAccount;
+      if (!account || transaction.Account !== account) throw new Error('Your connected wallet changed. Review again.');
+      const mint = transaction.TransactionType === 'NFTokenMint';
+      const sell = transaction.TransactionType === 'NFTokenCreateOffer';
+      const allowed = new Set(['TransactionType', 'Account', 'Flags', 'Fee', 'LastLedgerSequence',
+        ...(mint ? ['NFTokenTaxon', 'URI', 'Memos'] : ['NFTokenID', 'Amount', 'Expiration'])]);
+      if ((!mint && !sell) || Object.keys(transaction).some(key => !allowed.has(key))) throw new Error('Unexpected NFT transaction type or field.');
+      if (!/^\d+$/.test(transaction.Fee) || Number(transaction.Fee) < 1 || Number(transaction.Fee) > 10000 ||
+          !Number.isInteger(transaction.LastLedgerSequence)) throw new Error('A bounded fee and ledger expiry are required.');
+      let metadata;
+      if (mint) {
+        if (transaction.Flags !== 0 || transaction.NFTokenTaxon !== RECEIPT_NFT_TAXON ||
+            typeof transaction.URI !== 'string' || transaction.URI.length > 512) throw new Error('Unsupported receipt NFT settings or URI length.');
+        const uri = decodeNftHex(transaction.URI);
+        if (!uri.startsWith('data:application/json,')) throw new Error('A self-contained JSON receipt URI is required.');
+        const pointer = JSON.parse(decodeURIComponent(uri.slice('data:application/json,'.length)));
+        if (Object.keys(pointer).length !== 3 || pointer.schema !== RECEIPT_NFT_SCHEMA || pointer.network !== 'XRPL Mainnet' ||
+            !/^[A-F0-9]{64}$/.test(pointer.source_transaction || '')) throw new Error('Invalid receipt URI metadata.');
+        const memos = transaction.Memos;
+        if (!Array.isArray(memos) || memos.length !== 1 || Object.keys(memos[0]).length !== 1 ||
+            !memos[0].Memo || Object.keys(memos[0].Memo).length !== 2 ||
+            decodeNftHex(memos[0].Memo.MemoType) !== 'application/json' || memos[0].Memo.MemoData?.length > 1500) {
+          throw new Error('One JSON receipt memo of at most 750 bytes is required.');
+        }
+        metadata = JSON.parse(decodeNftHex(memos[0].Memo.MemoData));
+        const keys = ['schema', 'network', 'source_transaction', 'source_kind', 'validated_at_utc', 'wallet', 'jcs_issuer', 'asset', 'amounts', 'ledger_index', 'disclaimer'];
+        if (!metadata || Object.keys(metadata).some(key => !keys.includes(key)) ||
+            metadata.schema !== pointer.schema || metadata.network !== pointer.network || metadata.source_transaction !== pointer.source_transaction ||
+            metadata.jcs_issuer !== ISSUER || metadata.asset !== 'JCS/XRP' ||
+            !Number.isInteger(metadata.ledger_index) || !Number.isFinite(Date.parse(metadata.validated_at_utc)) ||
+            metadata.disclaimer !== 'Receipt only; not a spiritual reward or investment guarantee.') {
+          throw new Error('Receipt memo is incomplete or differs from its URI.');
+        }
+        await verifyNftReceiptSource(metadata, account);
+      } else if (transaction.Flags !== 1 || !/^[A-F0-9]{64}$/.test(transaction.NFTokenID || '') ||
+          typeof transaction.Amount !== 'string' || !/^\d+$/.test(transaction.Amount) ||
+          BigInt(transaction.Amount) < 1n || BigInt(transaction.Amount) > 100000000000000000n ||
+          !Number.isInteger(transaction.Expiration) || transaction.Expiration <= Math.floor(Date.now() / 1000) - 946684800 ||
+          transaction.Expiration > Math.floor(Date.now() / 1000) - 946684800 + 7 * 86400) {
+        throw new Error('Use a positive XRP sell price and an offer expiry within seven days.');
+      }
+      const ledger = await getLedgerSummary(), ledgerIndex = Number(ledger.index);
+      if (!ledger.validated || !Number.isInteger(ledgerIndex) || transaction.LastLedgerSequence <= ledgerIndex || transaction.LastLedgerSequence > ledgerIndex + 25) {
+        throw new Error('This NFT review has expired. Prepare it again.');
+      }
+      const [accountResponse, serverResponse, feeResponse] = await Promise.all([
+        xrplRequest({ method: 'account_info', params: [{ account, ledger_index: ledgerIndex }] }),
+        xrplRequest({ method: 'server_info', params: [{}] }),
+        xrplRequest({ method: 'fee', params: [{}] })
+      ]);
+      const ar = accountResponse.result || {}, info = ar.account_data || {};
+      const reserve = serverResponse.result?.info?.validated_ledger || {};
+      const base = Number(reserve.reserve_base_xrp), increment = Number(reserve.reserve_inc_xrp);
+      const openFee = Number(feeResponse.result?.drops?.open_ledger_fee);
+      if (ar.validated !== true || Number(ar.ledger_index) !== ledgerIndex || (info.Account && info.Account !== account) ||
+          !/^\d+$/.test(info.Balance || '') || !Number.isInteger(info.OwnerCount) || info.OwnerCount < 0 ||
+          !Number.isFinite(base) || base <= 0 || !Number.isFinite(increment) || increment <= 0 ||
+          !Number.isFinite(openFee) || openFee <= 0 || Number(transaction.Fee) < openFee) {
+        throw new Error('Current wallet reserves and network fee could not be verified. Refresh the review.');
+      }
+      const reservedDrops = BigInt(Math.ceil((base + (info.OwnerCount + (mint ? 2 : 1)) * increment + 1) * 1000000));
+      if (BigInt(info.Balance) < reservedDrops + BigInt(transaction.Fee)) throw new Error('Insufficient XRP for the fee, possible new ledger objects and wallet reserve buffer.');
+      const owned = await readOwnedNfts(account, ledgerIndex);
+      if (sell) {
+        const nft = owned.find(item => item.NFTokenID === transaction.NFTokenID);
+        if (!nft) throw new Error('This wallet does not own that NFT at the validated ledger.');
+        if (Number(nft.NFTokenTaxon) === RECEIPT_NFT_TAXON && !(Number(nft.Flags || 0) & 8)) throw new Error('Receipt NFTs are records; this page does not create sell offers for them.');
+        if (!(Number(nft.Flags || 0) & 8) && nft.Issuer !== account) throw new Error('This NFT cannot be transferred by the connected wallet.');
+      } else {
+        if (owned.some(nft => nft.Issuer === account && Number(nft.NFTokenTaxon) === RECEIPT_NFT_TAXON &&
+            String(nft.URI || '').toUpperCase() === transaction.URI.toUpperCase())) {
+          throw new Error('This wallet already owns a receipt NFT for this transaction.');
+        }
+      }
+      if (currentAccount !== account) throw new Error('Your connected wallet changed. Review again.');
+      signingStarted = true;
+      const signed = await signWithSentinel(transaction, mint ? 'nft-mint' : 'nft-sell');
+      if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
+      submittedTxid = signed.txid.toUpperCase();
+      const receipt = await waitForQuickBuyValidation(submittedTxid);
+      const result = receipt.transaction, actual = result.tx_json || result, meta = result.meta || result.metaData || {};
+      receiptValidated = true;
+      const expected = signed.txjson;
+      const envelope = new Set(['Sequence', 'SigningPubKey', 'TxnSignature', 'Signers', 'hash', 'date', 'ledger_index', 'inLedger',
+        'validated', 'meta', 'metaData', 'ctid', 'ledger_hash', 'close_time_iso']);
+      if (!expected || Object.keys(actual).some(key => !(key in expected) && !envelope.has(key)) ||
+          !Object.keys(expected).every(key => key === 'Flags'
+            ? (Number(actual.Flags || 0) & 0x7fffffff) === expected.Flags
+            : sameNftValue(expected[key], actual[key]))) {
+        throw new Error('The validated NFT transaction differs from the reviewed request. Inspect transaction ' + submittedTxid + '.');
+      }
+      const confirmedLedger = Number(result.ledger_index);
+      if (!Number.isInteger(confirmedLedger) || confirmedLedger > transaction.LastLedgerSequence || confirmedLedger <= ledgerIndex) {
+        throw new Error('The NFT transaction ledger does not match this review.');
+      }
+      const output = { txid: submittedTxid, validated: true, ledgerIndex: confirmedLedger, transaction: { ...actual, hash: submittedTxid }, meta };
+      if (mint) {
+        const after = await readOwnedNfts(account, confirmedLedger);
+        const priorIds = new Set(owned.map(nft => nft.NFTokenID));
+        const fresh = after.filter(nft => !priorIds.has(nft.NFTokenID) && /^[A-F0-9]{64}$/.test(nft.NFTokenID || '') &&
+          nft.Issuer === account && Number(nft.NFTokenTaxon) === RECEIPT_NFT_TAXON && Number(nft.Flags || 0) === 0 &&
+          String(nft.URI || '').toUpperCase() === transaction.URI.toUpperCase());
+        if (fresh.length !== 1 || (meta.nftoken_id && String(meta.nftoken_id).toUpperCase() !== fresh[0].NFTokenID)) {
+          throw new Error('Mint validated, but the new NFT identity could not be verified. Refresh My NFTs before trying again.');
+        }
+        output.nftId = fresh[0].NFTokenID;
+      } else {
+        const nodes = (meta.AffectedNodes || []).map(item => item.CreatedNode).filter(Boolean);
+        const offer = nodes.find(node => node.LedgerEntryType === 'NFTokenOffer' && /^[A-F0-9]{64}$/.test(node.LedgerIndex || '') &&
+          node.NewFields?.Owner === account && node.NewFields?.NFTokenID === transaction.NFTokenID && node.NewFields?.Amount === transaction.Amount);
+        if (!offer) throw new Error('The NFT sell offer identifier could not be verified. Check the validated transaction before trying again.');
+        output.offerId = offer.LedgerIndex;
+      }
+      setXamanSignStatus(mint ? 'Receipt NFT validated on XRPL Mainnet.' : 'NFT sell offer validated on XRPL Mainnet.', 'validated');
+      return output;
+    } catch (error) {
+      error.signingStarted = signingStarted;
+      if (!signingStarted) error.definitelyNotSubmitted = true;
+      if (signingStarted && !error.definitelyNotSubmitted && !error.finalLedgerResult) error.requiresReconciliation = true;
+      if (submittedTxid) {
+        error.txid = submittedTxid;
+        error.unconfirmed = !receiptValidated && !error.finalLedgerResult;
+        error.requiresReconciliation = !error.finalLedgerResult;
+      }
+      throw error;
+    } finally { nftSigning = false; }
+  }
+
   window.JCSWallet = Object.freeze({
     getAccount: () => currentAccount,
     request: xrplRequest,
+    submitNft,
     async submitLiquidity(transaction) {
       if (liquiditySigning) throw new Error('A liquidity request is already awaiting your review.');
       const account = currentAccount;
@@ -3152,7 +3437,10 @@
           throw new Error('The validated transaction differs from the reviewed request. Inspect transaction ' + signed.txid + ' before doing anything else.');
         }
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-          detail: { kind: deposit ? 'liquidity-add' : 'liquidity-remove', txid: signed.txid }
+          detail: validatedReceiptDetail(receipt, {
+            kind: deposit ? 'add-liquidity' : 'withdraw-liquidity',
+            legacyKind: deposit ? 'liquidity-add' : 'liquidity-remove', txid: signed.txid
+          })
         }));
         await refreshAll({ force: true });
         return { txid: signed.txid, validated: true, ledgerIndex: receipt.transaction.ledger_index };

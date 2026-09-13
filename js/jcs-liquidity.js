@@ -143,7 +143,7 @@
   nftPanel.hidden = true;
   nftPanel.setAttribute('role', 'tabpanel');
   nftPanel.setAttribute('aria-labelledby', 'jcsTabNfts');
-  nftPanel.innerHTML = '<div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Held in your wallet</span><h2>My NFTs</h2></div><button class="btn" id="jcsNftRefresh" type="button">Refresh NFTs</button></div><p class="jcs-tool-copy">See the NFTs your connected wallet holds on the validated XRP Ledger. Artwork is loaded only when you choose it.</p><a class="btn" href="./verify.html">Create a prayer or testimony record ↗</a><p role="status" aria-live="polite" id="jcsNftStatus" class="jcs-tool-status">Connect Xaman to view your NFTs.</p><div class="jcs-nft-grid" id="jcsNftGrid"></div>';
+  nftPanel.innerHTML = '<div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Held in your wallet</span><h2>My NFTs</h2></div><button class="btn" id="jcsNftRefresh" type="button">Refresh NFTs</button></div><p class="jcs-tool-copy">See NFT identifiers, issuers and published metadata for the NFTs your connected wallet holds on the validated XRP Ledger.</p><p class="jcs-tool-small">After a confirmed trade or liquidity action, you can choose to mint a separate personal receipt NFT.</p><p role="status" aria-live="polite" id="jcsNftStatus" class="jcs-tool-status">Connect Xaman to view your NFTs.</p><div class="jcs-nft-grid" id="jcsNftGrid"></div>';
   trade.appendChild(nftPanel);
 
   function status(message, error = false) {
@@ -431,80 +431,12 @@
   }));
   byId('jcsPoolRefresh').addEventListener('click', () => { invalidateReview(); refreshPool(); });
 
-  function safeUrl(input) {
-    try {
-      let text = String(input || '');
-      if (/^ipfs:\/\/(?:ipfs\/)?[a-zA-Z0-9]+(?:\/[^\s]*)?$/.test(text)) text = 'https://ipfs.io/ipfs/' + text.replace(/^ipfs:\/\/(?:ipfs\/)?/, '');
-      const url = new URL(text);
-      if (url.protocol !== 'https:' || url.username || url.password || url.port || !url.hostname.includes('.') ||
-          /(^\d+\.\d+\.\d+\.\d+$|:|(^|\.)(localhost|local|internal|test|invalid)$)/i.test(url.hostname)) return null;
-      return url.href;
-    } catch { return null; }
-  }
-  function decodeUri(hex) {
-    if (!/^(?:[A-Fa-f0-9]{2}){1,2048}$/.test(hex || '')) return null;
-    try { return safeUrl(new TextDecoder('utf-8', { fatal: true }).decode(Uint8Array.from(hex.match(/../g), pair => parseInt(pair, 16)))); } catch { return null; }
-  }
-  async function loadMetadata(url, card, button) {
-    button.disabled = true; button.textContent = 'Loading artwork…';
-    const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 8000);
-    try {
-      const response = await fetch(url, { signal: controller.signal, credentials: 'omit', referrerPolicy: 'no-referrer', redirect: 'error' });
-      if (!response.ok || !/json/i.test(response.headers.get('content-type') || '') || Number(response.headers.get('content-length') || 0) > 131072) throw new Error('Metadata unavailable.');
-      if (!response.body) throw new Error('Metadata unavailable.');
-      const reader = response.body.getReader(); let total = 0, text = ''; const decoder = new TextDecoder();
-      while (true) { const next = await reader.read(); if (next.done) break; total += next.value.byteLength; if (total > 131072) { await reader.cancel(); throw new Error('Metadata is too large.'); } text += decoder.decode(next.value, { stream: true }); }
-      text += decoder.decode(); const metadata = JSON.parse(text);
-      if (typeof metadata.name === 'string') card.querySelector('h3').textContent = metadata.name.slice(0, 100);
-      const imageUrl = safeUrl(metadata.image || metadata.image_url);
-      if (!imageUrl) throw new Error('No supported artwork URL.');
-      const img = doc.createElement('img'); img.alt = typeof metadata.name === 'string' ? metadata.name.slice(0, 100) : 'NFT artwork'; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer';
-      img.onload = () => { card.querySelector('.jcs-nft-art').replaceChildren(img); button.textContent = 'Artwork loaded'; };
-      img.onerror = () => { button.textContent = 'Artwork unavailable'; };
-      img.src = imageUrl;
-    } catch { button.textContent = 'Artwork unavailable'; }
-    finally { clearTimeout(timer); }
-  }
-  let nftLoading = false;
-  async function refreshNfts() {
-    if (nftLoading) return;
-    const account = api.getAccount(), token = generation;
-    const grid = byId('jcsNftGrid'), message = byId('jcsNftStatus');
-    grid.replaceChildren();
-    if (!account) { message.textContent = 'Connect Xaman above to view your NFTs.'; return; }
-    nftLoading = true; byId('jcsNftRefresh').disabled = true; message.textContent = 'Reading your NFTs from the validated ledger…';
-    try {
-      const ledger = verified(await request('ledger', { ledger_index: 'validated' })); const ledgerIndex = Number(ledger.ledger_index);
-      let marker, items = [];
-      for (let page = 0; page < 5; page++) {
-        const result = verified(await request('account_nfts', { account, ledger_index: ledgerIndex, limit: 100, ...(marker ? { marker } : {}) }), ledgerIndex);
-        if (!Array.isArray(result.account_nfts)) throw new Error('The ledger returned no NFT list.');
-        items.push(...result.account_nfts); marker = result.marker; if (!marker) break;
-      }
-      if (token !== generation || account !== api.getAccount()) return;
-      items = items.filter(item => /^[A-F0-9]{64}$/i.test(item.NFTokenID || ''));
-      message.textContent = items.length ? items.length + ' NFT(s)' + (marker ? ' shown; this wallet has more. Open its explorer for the full collection.' : ' in this wallet.') + ' Verified at ledger #' + ledgerIndex + '.' : 'This wallet currently holds no NFTs.';
-      for (const item of items) {
-        const card = doc.createElement('article'); card.className = 'jcs-nft-card';
-        card.innerHTML = '<div class="jcs-nft-art" aria-hidden="true"><span>✦</span></div><h3>NFT ' + escapeText(item.NFTokenID.slice(0, 6)) + '…' + escapeText(item.NFTokenID.slice(-6)) + '</h3><p class="jcs-tool-small">' + (item.Issuer === asset.issuer ? 'JCS issuer' : 'Wallet collectible') + '</p>';
-        const explorer = doc.createElement('a'); explorer.href = 'https://livenet.xrpl.org/nft/' + item.NFTokenID; explorer.textContent = 'View ledger record ↗'; explorer.target = '_blank'; explorer.rel = 'noopener noreferrer'; card.appendChild(explorer);
-        const uri = decodeUri(item.URI);
-        if (uri) {
-          const allowedMetadata = new Set([location.origin, 'https://ipfs.io', 'https://xrbitcoincash-github-io.onrender.com']);
-          if (allowedMetadata.has(new URL(uri).origin)) {
-            const button = doc.createElement('button'); button.type = 'button'; button.className = 'btn'; button.textContent = 'Load artwork';
-            button.addEventListener('click', () => loadMetadata(uri, card, button)); card.appendChild(button);
-          } else {
-            const metadataLink = doc.createElement('a'); metadataLink.href = uri; metadataLink.textContent = 'Open metadata ↗'; metadataLink.target = '_blank';
-            metadataLink.rel = 'noopener noreferrer'; card.appendChild(metadataLink);
-          }
-        }
-        grid.appendChild(card);
-      }
-    } catch (error) { if (token === generation) message.textContent = 'NFTs could not be loaded: ' + (error.message || error); }
-    finally { nftLoading = false; byId('jcsNftRefresh').disabled = false; if (token !== generation && active === 'nfts') refreshNfts(); }
+  function refreshNfts() {
+    if (root.JCSNft) return root.JCSNft.refresh();
+    byId('jcsNftStatus').textContent = 'NFT tools are loading. Try Refresh NFTs in a moment.';
   }
   byId('jcsNftRefresh').addEventListener('click', refreshNfts);
+  doc.addEventListener('jcs:open-nfts', () => { activate('nfts'); byId('jcsTabNfts').focus(); });
   function activate(name) {
     active = name;
     const panels = { trade: tradePanel, liquidity: liquidityPanel, nfts: nftPanel };

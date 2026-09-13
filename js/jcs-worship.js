@@ -2,8 +2,21 @@
   'use strict';
 
   const ROTATION_MS = 60000;
-  const PASSAGES = [{"group": "Proverbs · King James Version", "ref": "Proverbs 1:7", "text": "The fear of the LORD is the beginning of knowledge: but fools despise wisdom and instruction."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 3:5–6", "text": "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 4:23", "text": "Keep thy heart with all diligence; for out of it are the issues of life."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 9:10", "text": "The fear of the LORD is the beginning of wisdom: and the knowledge of the holy is understanding."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 10:12", "text": "Hatred stirreth up strifes: but love covereth all sins."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 11:25", "text": "The liberal soul shall be made fat: and he that watereth shall be watered also himself."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 15:1", "text": "A soft answer turneth away wrath: but grievous words stir up anger."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 16:3", "text": "Commit thy works unto the LORD, and thy thoughts shall be established."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 16:9", "text": "A man's heart deviseth his way: but the LORD directeth his steps."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 18:10", "text": "The name of the LORD is a strong tower: the righteous runneth into it, and is safe."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 19:17", "text": "He that hath pity upon the poor lendeth unto the LORD; and that which he hath given will he pay him again."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 27:17", "text": "Iron sharpeneth iron; so a man sharpeneth the countenance of his friend."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:1", "text": "The words of the blessing of Enoch, wherewith he blessed the elect and righteous."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:4", "text": "The Holy Great One will come forth from His dwelling."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:8", "text": "But with the righteous He will make peace, and will protect the elect, and mercy shall be upon them."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:8", "text": "And light shall appear unto them, and He will make peace with them."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:2", "text": "Throughout all the days of my life I have remembered the Lord, and sought with all my heart to do His will."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:4", "text": "He is the living God, and He is holy and faithful, and He is righteous beyond all."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:23", "text": "Observe the ordinance of the Most High God, and do His will and be upright in all things."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:24", "text": "And He will bless thee in all thy deeds, and will raise up from thee the plant of righteousness."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:10", "text": "May the God of all bless thee and strengthen thee to do righteousness, and His will before Him."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:14", "text": "May He cleanse thee from all unrighteousness and impurity, that thou mayest be forgiven."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:19", "text": "May the Most High God help thee, and the God of heaven bless thee."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:23", "text": "Fear not, and be not dismayed: may the Most High God preserve thee from destruction."}];
-  const JESUS_WORDS = [{"ref": "John 14:6", "text": "I am the way, the truth, and the life: no man cometh unto the Father, but by me."}, {"ref": "Matthew 11:28", "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."}, {"ref": "John 8:12", "text": "I am the light of the world: he that followeth me shall not walk in darkness."}, {"ref": "Matthew 5:9", "text": "Blessed are the peacemakers: for they shall be called the children of God."}, {"ref": "Matthew 6:33", "text": "Seek ye first the kingdom of God, and his righteousness."}, {"ref": "John 10:11", "text": "I am the good shepherd: the good shepherd giveth his life for the sheep."}, {"ref": "John 11:25", "text": "I am the resurrection, and the life."}, {"ref": "Luke 11:9", "text": "Ask, and it shall be given you; seek, and ye shall find."}, {"ref": "Matthew 28:20", "text": "Lo, I am with you alway, even unto the end of the world."}, {"ref": "Mark 16:15", "text": "Go ye into all the world, and preach the gospel to every creature."}];
+  // Canonical, public-domain World English Bible selections. Full-chapter
+  // links retain context; Christian classics are clearly separate in the page.
+  const PASSAGES = [
+    { group: 'Still waters', ref: 'Psalm 23:2–3a', text: 'He makes me lie down in green pastures. He leads me beside still waters. He restores my soul.', url: 'https://ebible.org/engwebp/PSA023.htm', reflection: 'Where could you make room for rest and kindness today?' },
+    { group: 'Trust', ref: 'Proverbs 3:5–6', text: 'Trust in the LORD with all your heart, and don’t lean on your own understanding. In all your ways acknowledge him, and he will make your paths straight.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'What uncertainty could you bring honestly to God in prayer?' },
+    { group: 'Kindness and truth', ref: 'Proverbs 3:3', text: 'Don’t let kindness and truth forsake you. Bind them around your neck. Write them on the tablet of your heart.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'What would kindness and truth look like in one conversation today?' },
+    { group: 'Care for a neighbor', ref: 'Proverbs 3:27', text: 'Don’t withhold good from those to whom it is due, when it is in the power of your hand to do it.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'Who could receive one practical act of care from you today?' }
+  ];
+  const JESUS_WORDS = [
+    { ref: 'Matthew 11:28', text: 'Come to me, all you who labor and are heavily burdened, and I will give you rest.', url: 'https://ebible.org/engwebp/MAT11.htm' },
+    { ref: 'Matthew 5:9', text: 'Blessed are the peacemakers, for they shall be called children of God.', url: 'https://ebible.org/engwebp/MAT05.htm' },
+    { ref: 'Matthew 5:7', text: 'Blessed are the merciful, for they shall obtain mercy.', url: 'https://ebible.org/engwebp/MAT05.htm' },
+    { ref: 'John 15:12', text: 'This is my commandment, that you love one another, even as I have loved you.', url: 'https://ebible.org/engwebp/JHN15.htm' },
+    { ref: 'John 14:27', text: 'Peace I leave with you. My peace I give to you; not as the world gives, I give to you. Don’t let your heart be troubled, neither let it be fearful.', url: 'https://ebible.org/engwebp/JHN14.htm' }
+  ];
 
   const $ = id => document.getElementById(id);
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -25,18 +38,26 @@
     if (passageIndex !== lastPassageIndex) {
       lastPassageIndex = passageIndex;
       const item = PASSAGES[passageIndex];
-      if ($('scriptureKicker')) $('scriptureKicker').textContent = item.group;
+      if ($('scriptureKicker')) $('scriptureKicker').textContent = item.group + ' · World English Bible';
       if ($('scriptureText')) $('scriptureText').textContent = '“' + item.text + '”';
-      if ($('scriptureSource')) $('scriptureSource').textContent = item.ref + ' · Public-domain translation';
+      if ($('scriptureSource')) $('scriptureSource').textContent = item.ref + ' · World English Bible';
+      if ($('scriptureContext')) $('scriptureContext').href = item.url;
+      if ($('reflectionPrompt')) $('reflectionPrompt').textContent = item.reflection;
     }
 
     if (jesusIndex !== lastJesusIndex) {
       lastJesusIndex = jesusIndex;
       const item = JESUS_WORDS[jesusIndex];
       if ($('jesusWords')) $('jesusWords').textContent = '“' + item.text + '”';
-      if ($('jesusWordsSource')) $('jesusWordsSource').textContent = item.ref + ' · King James Version';
+      if ($('jesusWordsSource')) $('jesusWordsSource').textContent = item.ref + ' · World English Bible';
+      if ($('jesusWordsContext')) $('jesusWordsContext').href = item.url;
     }
   }
+
+  $('reflectJournalLink')?.addEventListener('click', () => {
+    // Preserve existing writing and its explicit Save control.
+    $('privatePrayerJournal')?.focus({ preventScroll: true });
+  });
 
   window.__jcsRenderScriptureStreams = () => renderScriptureStreams(true);
   renderScriptureStreams(true);
@@ -47,62 +68,26 @@
     {
       title:'Gregorian Chant Mass · Track 2',
       url:'https://archive.org/download/GregorianChantMass/02Track2_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 4',
       url:'https://archive.org/download/GregorianChantMass/04Track4_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 5',
       url:'https://archive.org/download/GregorianChantMass/05Track5_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 6',
       url:'https://archive.org/download/GregorianChantMass/06Track6_64kb.mp3',
-      duration:300
-    },
-    {
-      title:'Ave Maria · Enrico Caruso archival recording',
-      url:'https://archive.org/download/Caruso_part1/Caruso-AveMaria.mp3',
-      duration:270
     }
   ];
 
-  const fallbackReadings = [
-    {
-      title:'King James Psalms · Book I',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_01_kjv.mp3',
-      duration:957
-    },
-    {
-      title:'King James Psalms · Book II',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_02_kjv.mp3',
-      duration:965
-    },
-    {
-      title:'King James Psalms · Book III',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_03_kjv.mp3',
-      duration:1410
-    },
-    {
-      title:'Book of Enoch · Opening reading',
-      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_128kb.mp3',
-      duration:964
-    },
-    {
-      title:'Book of Enoch · Further reading',
-      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_128kb.mp3',
-      duration:873
-    },
-    {
-      title:'Book of Jubilees · Opening reading',
-      url:'https://archive.org/download/book_jubilees_2108_librivox/bookofjubilees_01_charles_128kb.mp3',
-      duration:900
-    }
-  ];
+  const psalmRanges = ['1–11', '12–21', '22–31', '32–37', '38–45', '46–55', '56–66', '67–72', '73–78', '79–88', '89–96', '97–105', '106–115', '116–119', '120–138', '139–150'];
+  const fallbackReadings = psalmRanges.map((range, index) => ({
+    title: 'Psalms ' + range + ' · KJV · LibriVox',
+    url: 'https://archive.org/download/psalms_kjv_1202_librivox/psalms_' + String(index + 1).padStart(2, '0') + '_kjv.mp3'
+  }));
 
 
   const MEDIA_STORAGE = 'jcs.sacredMedia.v3';
@@ -187,6 +172,7 @@
       status(document.hidden ? 'Return to this page and choose Listen.' : 'Turn off Quiet mode before starting audio.');
       return;
     }
+    document.dispatchEvent(new CustomEvent('jcs:pause-media'));
     const audio = channel.audio;
     const request = ++channel.request;
     channel.wanted = true;

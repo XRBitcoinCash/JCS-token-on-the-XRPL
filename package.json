@@ -4,7 +4,7 @@
   "version": "3.0.0",
   "description": "Development checks only; the site is served as static HTML/CSS/JS.",
   "scripts": {
-    "test": "node tests/liquidity.test.cjs && node tests/liquidity-integration.cjs && node tests/liquidity-bridge.cjs && node tests/market.cjs && node tests/page-integration.cjs && node tests/xaman-signing.cjs"
+    "test": "node tests/liquidity.test.cjs && node tests/liquidity-integration.cjs && node tests/liquidity-bridge.cjs && node tests/market.cjs && node tests/page-integration.cjs && node tests/xaman-signing.cjs && node tests/homepage-media.cjs && node tests/nft.cjs && node tests/nft-bridge.cjs"
   },
   "devDependencies": {
     "jsdom": "30.0.1"

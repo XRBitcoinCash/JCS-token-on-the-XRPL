@@ -4,6 +4,7 @@ const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const dom=new JSDOM(html,{url:'https://jesuschristsavestoken.com/',runScripts:'outside-only',pretendToBeVisual:true});
 const w=dom.window,errors=[], requests=[], intervals=[];
+w.TextEncoder=TextEncoder;w.TextDecoder=TextDecoder;
 let now=Date.now(), seq=100000001, price=.00004;
 const RealDate=Date; w.Date=class extends RealDate{constructor(...v){super(...(v.length?v:[now]));}static now(){return now}};
 w.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
