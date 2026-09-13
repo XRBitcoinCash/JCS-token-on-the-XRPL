@@ -17,7 +17,7 @@
     return n;
   };
   function recentUsd() {
-    return usd && Date.now()-usd.observedAt < MAX_AGE &&
+    return usd && number(usd.xrp) && number(usd.rlusd) && Date.now()-usd.observedAt < MAX_AGE &&
       Date.now()-usd.providerAt < MAX_AGE && Date.now()-usd.providerAt > -60000;
   }
   async function prices() {
@@ -27,27 +27,27 @@
     usdTask = (async () => {
       const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 10000);
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple,bitcoin&vs_currencies=usd&include_last_updated_at=true', {credentials:'omit', signal:controller.signal});
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple-usd,ripple&vs_currencies=usd&include_last_updated_at=true', {credentials:'omit', signal:controller.signal});
         if (!response.ok) throw new Error('Reference prices unavailable');
         const data = await response.json();
-        if (!number(data.ripple?.usd) || !number(data.bitcoin?.usd) || !number(data.ripple?.last_updated_at) || !number(data.bitcoin?.last_updated_at)) throw new Error('Incomplete reference prices');
-        const providerAt = Math.min(data.ripple.last_updated_at, data.bitcoin.last_updated_at)*1000;
+        if (!number(data.ripple?.usd) || !number(data['ripple-usd']?.usd) || !number(data.ripple?.last_updated_at) || !number(data['ripple-usd']?.last_updated_at)) throw new Error('Incomplete reference prices');
+        const providerAt = Math.min(data.ripple.last_updated_at, data['ripple-usd'].last_updated_at)*1000;
         if (Date.now()-providerAt >= MAX_AGE || providerAt-Date.now() > 60000) throw new Error('Reference prices are stale');
-        usd = {xrp:Number(data.ripple.usd), btc:Number(data.bitcoin.usd), observedAt:Date.now(), providerAt:Math.min(data.ripple.last_updated_at, data.bitcoin.last_updated_at)*1000, provider:'CoinGecko'};
+        usd = {xrp:Number(data.ripple.usd), rlusd:Number(data['ripple-usd'].usd), observedAt:Date.now(), providerAt, provider:'CoinGecko'};
       } catch {
         // Public spot-price fallback; preserve provenance rather than mixing providers.
         try {
           const fallbackController = new AbortController();
           const fallbackTimeout = setTimeout(() => fallbackController.abort(), 10000);
           try {
-            const values = await Promise.all(['XRP','BTC'].map(async asset => {
+            const values = await Promise.all(['XRP','RLUSD'].map(async asset => {
               const r = await fetch(`https://api.coinbase.com/v2/prices/${asset}-USD/spot`, {credentials:'omit', signal:fallbackController.signal});
               if (!r.ok) throw new Error('Reference unavailable');
               const body = await r.json();
               if (body.data?.currency !== 'USD' || !number(body.data?.amount)) throw new Error('Invalid reference');
               return Number(body.data.amount);
             }));
-            usd = {xrp:values[0], btc:values[1], observedAt:Date.now(), providerAt:Date.now(), provider:'Coinbase spot (observed)'};
+            usd = {xrp:values[0], rlusd:values[1], observedAt:Date.now(), providerAt:Date.now(), provider:'Coinbase spot (observed)'};
           } finally { clearTimeout(fallbackTimeout); }
         } catch { /* Native XRPL evidence remains available without a USD reference. */ }
       }
@@ -75,21 +75,23 @@
     const host = $('jcsComparisonChart');
     if (!host) return;
     host.replaceChildren();
+    host.classList.toggle('has-live-data', series.length > 0);
+    host.dataset.observations = String(series.length);
     if (series.length < 2) {
       const message = document.createElement('p');
       message.className = 'comparison-empty';
-      message.textContent = series.length ? 'First observation recorded. The comparison appears after the next 60-second update.' : 'Waiting for current JCS, XRP and Bitcoin prices. The chart starts with this visit.';
+      message.textContent = series.length ? 'First observation recorded. The comparison appears after the next 60-second update.' : 'Waiting for current JCS, XRP and RLUSD prices. The chart starts with this visit.';
       host.append(message);
       return;
     }
     const W=500,H=245,L=54,R=13,T=17,B=36, start=series[0], end=series.at(-1);
-    const keys = [['jcs','JCS','#dfc180'],['xrp','XRP','#8cbae0'],['btc','Bitcoin','#bca3d6']];
+    const keys = [['jcs','JCS','#dfc180'],['xrp','XRP','#8cbae0'],['rlusd','RLUSD','#86d7c2']];
     const percentages = series.flatMap(s=>keys.map(([key])=>(s[key]/start[key]-1)*100));
     let min = Math.min(0,...percentages), max = Math.max(0,...percentages);
     const pad = Math.max((max-min)*.15,.02); min-=pad; max+=pad;
     const x = s=>L+(s.at-start.at)/(end.at-start.at)*(W-L-R);
     const y = p=>T+(max-p)/(max-min)*(H-T-B);
-    const svg = svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Percentage price change since the first observation this visit: JCS, XRP and Bitcoin in US dollars.'});
+    const svg = svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Percentage price change since the first observation this visit: JCS, XRP and RLUSD in US dollars.'});
     for(let i=0;i<4;i++) {
       const p=min+(max-min)*i/3, py=y(p);
       svg.append(svgNode('line',{x1:L,x2:W-R,y1:py,y2:py,stroke:'currentColor',opacity:'.12'}));
@@ -109,7 +111,7 @@
     const label=document.createElement('label'); label.htmlFor='comparisonObservation';label.className='comparison-inspector-label';label.textContent='Inspect an observation';
     const slider=document.createElement('input');slider.type='range';slider.id='comparisonObservation';slider.min='0';slider.max=String(series.length-1);slider.value=slider.max;slider.step='1';
     const out=document.createElement('output');out.setAttribute('for',slider.id);out.className='comparison-observation';
-    const inspect=()=>{const s=series[Number(slider.value)];out.textContent=`${stamp(s.at)} · JCS $${fmt(s.jcs)} · XRP $${fmt(s.xrp,6)} · BTC $${fmt(s.btc,7)}`;slider.setAttribute('aria-valuetext',out.textContent);};
+    const inspect=()=>{const s=series[Number(slider.value)];out.textContent=`${stamp(s.at)} · JCS ${fmt(s.jcs)} · XRP ${fmt(s.xrp,6)} · RLUSD ${fmt(s.rlusd,6)}`;slider.setAttribute('aria-valuetext',out.textContent);};
     slider.addEventListener('input',inspect);inspect();host.append(label,slider,out);
   }
   async function onSnapshot(event) {
@@ -131,11 +133,11 @@
     set('jcsProjectPrice','$'+fmt(jcs));
     set('jcsProjectMarketcap',supply!=null ? '$'+fmt(supply*jcs,6) : 'Unavailable');
     if (series.length && series.at(-1).provider !== usd.provider) series.length=0;
-    const point={at:observedAt,jcs,xrp:usd.xrp,btc:usd.btc,ledger:s.ledgerIndex,provider:usd.provider};
+    const point={at:observedAt,jcs,xrp:usd.xrp,rlusd:usd.rlusd,ledger:s.ledgerIndex,provider:usd.provider};
     if (!series.length || point.at-series.at(-1).at>=55000) {
       series.push(point); if(series.length>240)series.shift();renderChart();
     }
-    chartStatus(`${series.length} observation${series.length===1?'':'s'} this visit · updated ${stamp(observedAt)} · ${usd.provider} ${stamp(usd.providerAt)}`);
+    chartStatus(`${series.length} observation${series.length===1?'':'s'} this visit · updated ${stamp(observedAt)} · ${usd.provider} · live window`);
   }
   window.addEventListener('jcs:market-snapshot',e=>{onSnapshot(e).catch(()=>chartStatus('Market comparison temporarily unavailable.'));});
   $('jcsChartReset')?.addEventListener('click',()=>{series.length=0;renderChart();chartStatus('Session chart reset. Waiting for the next market update.');});
