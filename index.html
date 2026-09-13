@@ -8341,6 +8341,11 @@ body.exchange-focus #jcs-world-watch{display:none!important}
 #trade .jcs-receipt-preview #jcsReceiptArtwork[data-verified="true"] + div {
   grid-column: 1 / -1; grid-row: 1;
 }
+.jcs-receipt-service { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 16px 0 22px; padding: 14px; border: 1px solid rgba(210,180,111,.25); border-radius: 12px; }
+.jcs-receipt-service [role="status"] { flex: 1 1 280px; min-width: 0; }
+.jcs-receipt-service [data-state="unavailable"] { color: #edd391; }
+.jcs-receipt-service [data-state="ready"] { color: #b8d7c7; }
+.jcs-receipt-service small { flex-basis: 100%; opacity: .72; }
 
 </style>
 </head>
@@ -9100,7 +9105,7 @@ body.exchange-focus #jcs-world-watch{display:none!important}
 
 
 
-<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-render-v3">
+<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-render-v5">
 (function () {
   let homepageStarted = false;
   function reportJcsModuleError(name, error) {
@@ -12058,7 +12063,7 @@ try {
     updateWalletButtons();
   }
 
-  async function signWithSentinel(baseTx, purpose) {
+  async function signWithSentinel(baseTx, purpose, onRequest) {
     if (signingRequestActive) {
       const error = new Error('Another request is already awaiting your review in Xaman.');
       error.definitelyNotSubmitted = true;
@@ -12144,7 +12149,15 @@ try {
 
           if ('signed' in eventData) return eventData;
         },
-        (created) => showXamanSignRequest(created, code, purpose, txjson)
+        (created) => {
+          if (typeof onRequest === 'function') {
+            const uuid = String(created?.uuid || created?.payload_uuidv4 || '');
+            if (/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(uuid)) {
+              try { onRequest({ uuid }); } catch (error) { console.warn('Could not remember the Xaman request:', error); }
+            }
+          }
+          showXamanSignRequest(created, code, purpose, txjson);
+        }
       );
 
     if (!xamanPayloadWasSigned(resolution, payloadDetails)) {
@@ -13909,6 +13922,21 @@ try {
 
   let liquiditySigning = false;
   let nftSigning = false;
+
+  function matchesReviewedLedgerWindow(reviewedExpiry, walletExpiry, reviewLedger, confirmedLedger) {
+    // Match the working XRBC/Xaman flow: Xaman may extend an absolute signing
+    // deadline while its request is open. A hash-matched, successful ledger
+    // result can land after the original deadline, provided every economic
+    // field still matches and the final deadline uses the supported offset.
+    // This validates a completed transaction; it never refreshes an old review
+    // or submits a new request. Original requests remain bounded at preflight.
+    const uint32 = value => Number.isInteger(value) && value > 0 && value <= 0xffffffff;
+    return [reviewedExpiry, walletExpiry, reviewLedger, confirmedLedger].every(uint32) &&
+      reviewedExpiry > reviewLedger && reviewedExpiry <= reviewLedger + 25 &&
+      confirmedLedger > reviewLedger && walletExpiry >= reviewedExpiry &&
+      walletExpiry >= confirmedLedger && walletExpiry <= confirmedLedger + 150;
+  }
+
   const RECEIPT_NFT_TAXON = 20260913;
   const RECEIPT_NFT_SCHEMA = 'jcs-validated-receipt-nft-v1';
   const RECEIPT_METADATA_URL = 'https://jesuschristsavestoken.com/jcs-receipt-nft-v1.json';
@@ -14088,7 +14116,7 @@ try {
     return { result, transaction: tx };
   }
 
-  async function submitNft(transaction) {
+  async function submitNft(transaction, onRequest) {
     if (nftSigning || liquiditySigning || signingRequestActive || xamanPayloadInFlight) {
       const error = new Error('Another request is already awaiting your review.');
       error.definitelyNotSubmitted = true;
@@ -14178,7 +14206,7 @@ try {
       }
       if (currentAccount !== account) throw new Error('Your connected wallet changed. Review again.');
       signingStarted = true;
-      const signed = await signWithSentinel(transaction, mint ? 'nft-mint' : 'nft-sell');
+      const signed = await signWithSentinel(transaction, mint ? 'nft-mint' : 'nft-sell', onRequest);
       if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
       submittedTxid = signed.txid.toUpperCase();
       const receipt = await waitForQuickBuyValidation(submittedTxid);
@@ -14188,13 +14216,13 @@ try {
       const envelope = new Set(['Sequence', 'SigningPubKey', 'TxnSignature', 'Signers', 'hash', 'date', 'ledger_index', 'inLedger',
         'validated', 'meta', 'metaData', 'ctid', 'ledger_hash', 'close_time_iso', 'status']);
       if (!expected || Object.keys(actual).some(key => !(key in expected) && !envelope.has(key)) ||
-          !Object.keys(expected).every(key => key === 'Flags'
+          !Object.keys(expected).filter(key => key !== 'LastLedgerSequence').every(key => key === 'Flags'
             ? (Number(actual.Flags || 0) & 0x7fffffff) === expected.Flags
             : sameNftValue(expected[key], actual[key]))) {
         throw new Error('The validated NFT transaction differs from the reviewed request. Inspect transaction ' + submittedTxid + '.');
       }
       const confirmedLedger = Number(result.ledger_index);
-      if (!Number.isInteger(confirmedLedger) || confirmedLedger > transaction.LastLedgerSequence || confirmedLedger <= ledgerIndex) {
+      if (!matchesReviewedLedgerWindow(transaction.LastLedgerSequence, actual.LastLedgerSequence, ledgerIndex, confirmedLedger)) {
         throw new Error('The NFT transaction ledger does not match this review.');
       }
       const output = { txid: submittedTxid, validated: true, ledgerIndex: confirmedLedger, transaction: { ...actual, hash: submittedTxid }, meta };
@@ -14230,10 +14258,35 @@ try {
     } finally { nftSigning = false; }
   }
 
+  async function getNftRequest(uuid, expected) {
+    if (!/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(uuid || '') ||
+        !currentAccount || expected?.TransactionType !== 'NFTokenMint' || expected.Account !== currentAccount) {
+      throw new Error('Connect the original wallet to check this receipt request.');
+    }
+    if (typeof xumm?.payload?.get !== 'function') throw new Error('Xaman request status is unavailable. Check the request in Xaman.');
+    const account = currentAccount;
+    expected = JSON.parse(JSON.stringify(expected));
+    const details = await withTimeout(xumm.payload.get(uuid, true), 20000, 'Xaman request status timed out. No new mint request was created.');
+    if (currentAccount !== account) throw new Error('Your wallet changed while checking the mint request.');
+    const meta = details?.meta, tx = details?.payload?.txjson;
+    if (!meta || !tx || (meta.uuid && meta.uuid.toLowerCase() !== uuid.toLowerCase()) ||
+        !Object.keys(expected).every(key => key === 'LastLedgerSequence' || (key === 'Memos'
+          ? Array.isArray(tx.Memos) && expected.Memos.every(wanted => tx.Memos.some(actual => sameNftValue(wanted.Memo, actual.Memo)))
+          : sameNftValue(expected[key], tx[key])))) {
+      throw new Error('The Xaman request does not match this saved receipt mint. No new request was created.');
+    }
+    const node = details.response?.dispatched_nodetype;
+    if (node && !String(node).toUpperCase().includes('MAINNET')) throw new Error('This request was not dispatched to XRPL Mainnet.');
+    const txid = details.response?.txid;
+    return { uuid, resolved: meta.resolved === true, signed: typeof meta.signed === 'boolean' ? meta.signed : null,
+      expired: meta.expired === true, txid: /^[A-F0-9]{64}$/i.test(txid || '') ? txid.toUpperCase() : null };
+  }
+
   window.JCSWallet = Object.freeze({
     getAccount: () => currentAccount,
     request: xrplRequest,
     submitNft,
+    getNftRequest,
     async submitLiquidity(transaction) {
       if (liquiditySigning) throw new Error('A liquidity request is already awaiting your review.');
       // Keep the reviewed request independent of caller/SDK mutations while Xaman is open.
@@ -14317,7 +14370,9 @@ try {
         if (!reviewed || Object.keys(transaction).some(key => !sameField(transaction[key], reviewed[key], key))) {
           throw new Error('The Xaman review could not be matched to the original liquidity request. Inspect transaction ' + signed.txid + '.');
         }
-        const different = Object.keys(reviewed).filter(key => !sameField(reviewed[key], actual[key], key));
+        // Verify Xaman's supported deadline extension separately while keeping
+        // the reviewed account, amounts, pool, fee and sentinel memo exact.
+        const different = Object.keys(reviewed).filter(key => key !== 'LastLedgerSequence' && !sameField(reviewed[key], actual[key], key));
         for (const key of ['Amount', 'Amount2', 'LPTokenIn', 'LPTokenOut', 'EPrice']) {
           if (!(key in reviewed) && key in actual) different.push(key);
         }
@@ -14327,7 +14382,7 @@ try {
           throw error;
         }
         const confirmedLedger = Number(receipt.transaction.ledger_index || actual.ledger_index);
-        if (!Number.isInteger(confirmedLedger) || confirmedLedger <= Number(last.index) || confirmedLedger > transaction.LastLedgerSequence) {
+        if (!matchesReviewedLedgerWindow(transaction.LastLedgerSequence, actual.LastLedgerSequence, Number(last.index), confirmedLedger)) {
           throw new Error('The validated transaction is outside the reviewed ledger window. Inspect transaction ' + signed.txid + '.');
         }
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
@@ -14925,10 +14980,12 @@ try {
   const METADATA_URL = 'https://jesuschristsavestoken.com/jcs-receipt-nft-v1.json'; // Read legacy receipt NFTs.
   const BACKEND_URL = 'https://xrbitcoincash-github-io.onrender.com';
   const RECEIPT_ROUTE = '/api/jcs-receipts-v1';
+  const RECEIPT_RELEASE = 'jcs-nft-render-v5';
   const DISPLAY_METADATA = Object.freeze({ schema: 'jcs-receipt-display-v1', name: 'JCS Transaction Receipt',
     description: 'A personal record of a validated JCS/XRP transaction. The source transaction and full receipt details are recorded in the NFT mint transaction memo. Historical receipt only; not a claim to pool funds, a spiritual reward, or an investment guarantee.',
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
   const HASH = /^[A-F0-9]{64}$/i;
+  const PAYLOAD_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
   const KIND = { 'market-swap': 'market-swap', 'quick-buy': 'market-swap', 'limit-order': 'limit-order', 'liquidity-add': 'add-liquidity', 'add-liquidity': 'add-liquidity', 'liquidity-remove': 'withdraw-liquidity', 'withdraw-liquidity': 'withdraw-liquidity' };
   const TYPE = { Payment: 'market-swap', OfferCreate: 'limit-order', AMMDeposit: 'add-liquidity', AMMWithdraw: 'withdraw-liquidity' };
   const KIND_LABEL = { 'market-swap': 'Buy / sell transaction', 'limit-order': 'Limit order created', 'add-liquidity': 'Liquidity added', 'withdraw-liquidity': 'Liquidity withdrawn' };
@@ -15008,7 +15065,7 @@ try {
     return { TransactionType: 'NFTokenCreateOffer', Account: account, NFTokenID: nft.NFTokenID, Amount: drops(price), Flags: 1,
       Expiration: expires, Fee: String(fee), LastLedgerSequence: lastLedger };
   }
-  function confirmedResult(result, transaction) {
+  function confirmedResult(result, transaction, reviewedLedger, recovery = false) {
     if (result?.validated !== true || !HASH.test(result.txid || '') || !Number.isSafeInteger(Number(result.ledgerIndex))) throw new Error('The NFT transaction has not been confirmed on the validated ledger.');
     const tx = result.transaction?.tx_json || result.transaction;
     const meta = result.meta || result.transaction?.meta;
@@ -15016,10 +15073,20 @@ try {
     const actualHash = result.transaction?.hash || tx.hash;
     if (!HASH.test(actualHash || '') || actualHash.toUpperCase() !== result.txid.toUpperCase()) throw new Error('The NFT transaction hash does not match the ledger result.');
     for (const key of Object.keys(transaction)) {
+      if (key === 'LastLedgerSequence') continue;
       if (key === 'Memos') {
         if (!transaction.Memos.every(expected => (tx.Memos || []).some(actual => actual.Memo && Object.keys(actual.Memo).length === Object.keys(expected.Memo).length && Object.keys(expected.Memo).every(key => actual.Memo[key] === expected.Memo[key])))) throw new Error('The receipt metadata differs from the reviewed request.');
       } else if (key === 'Flags' ? (Number(tx.Flags) & 0x7fffffff) !== transaction.Flags : tx[key] !== transaction[key]) throw new Error('The NFT transaction differs from the reviewed request.');
     }
+    const originalExpiry = transaction.LastLedgerSequence, walletExpiry = tx.LastLedgerSequence, confirmedLedger = Number(result.ledgerIndex);
+    const uint32 = value => Number.isInteger(value) && value > 0 && value <= 0xffffffff;
+    // Use the same completed-transaction policy as XRBC and the wallet bridge.
+    // A delayed Xaman signature may extend the deadline; it cannot shorten it,
+    // change the reviewed NFT fields, or exceed the supported 150-ledger offset.
+    if (![originalExpiry, walletExpiry, confirmedLedger].every(uint32) || walletExpiry < originalExpiry || walletExpiry < confirmedLedger || walletExpiry > confirmedLedger + 150) throw new Error('The NFT transaction ledger expiry is invalid.');
+    const reviewLedger = Number(reviewedLedger);
+    if (Number.isSafeInteger(reviewLedger) && (!uint32(reviewLedger) || originalExpiry <= reviewLedger || originalExpiry > reviewLedger + 25 || confirmedLedger <= reviewLedger)) throw new Error('The NFT transaction ledger does not match this review.');
+    if (confirmedLedger > originalExpiry) return { ...result, reviewWindowChanged: true };
     return result;
   }
   function validDisplayMetadata(value) {
@@ -15040,9 +15107,11 @@ try {
   receiptEntry.id = 'jcsReceiptEntry'; receiptEntry.className = 'jcs-receipt-entry'; receiptEntry.setAttribute('aria-labelledby', 'jcsReceiptEntryHeading');
   receiptEntry.innerHTML = `<div class="jcs-receipt-entry-heading"><img src="jcs-logo.png" alt="" width="52" height="52"><div><span class="jcs-tool-eyebrow">Keep your transaction record</span><h3 id="jcsReceiptEntryHeading">Create an NFT receipt</h3></div></div>
     <p class="jcs-tool-small">After a JCS buy, sale, liquidity deposit or withdrawal, your confirmed transaction appears here. You can also find an earlier transaction by its hash.</p>
+    <div class="jcs-receipt-service"><span id="jcsReceiptServiceStatus" class="jcs-tool-small" role="status" aria-live="polite">Checking NFT receipt service…</span><button type="button" class="btn" id="jcsReceiptServiceCheck">Check NFT service</button><small id="jcsReceiptRelease">Receipt tools v5</small></div>
     <form id="jcsReceiptLookup"><label for="jcsReceiptLookupHash">Earlier transaction hash</label><div class="jcs-receipt-lookup-row"><input id="jcsReceiptLookupHash" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" placeholder="Paste the 64-character transaction hash" aria-describedby="jcsReceiptLookupStatus"><button type="submit" class="btn" id="jcsReceiptLookupCheck">Check transaction</button></div></form>
     <p id="jcsReceiptLookupStatus" class="jcs-tool-small" role="status" aria-live="polite"></p>`;
   trade.querySelector('.jcs-exchange-tabs').insertAdjacentElement('afterend', receiptEntry);
+  receiptEntry.dataset.release = RECEIPT_RELEASE;
   const receiptPanel = doc.createElement('section');
   receiptPanel.id = 'jcsReceiptActions'; receiptPanel.className = 'jcs-receipt-actions'; receiptPanel.hidden = false;
   receiptPanel.setAttribute('aria-labelledby', 'jcsReceiptHeading');
@@ -15187,12 +15256,50 @@ try {
       lookupStatus(error.pendingSource ? 'Confirmation is pending. Recheck this same hash shortly.' : 'The transaction could not be verified. Check the hash and connected wallet.');
     } }
   }
+  let serviceCheck = null;
+  function showServiceStatus(ready, explanation = '') {
+    const element = byId('jcsReceiptServiceStatus');
+    element.dataset.state = ready ? 'ready' : 'unavailable';
+    element.textContent = ready ? 'NFT receipt service ready. Completed transactions can be used without making another deposit.'
+      : 'NFT minting is unavailable. ' + explanation + ' Your completed transaction can be used when the service is ready; no new deposit is needed.';
+  }
+  function validateService(readiness) {
+    if (readiness.ready !== true || readiness.service !== 'jcs-receipts-v1' || readiness.schema !== receipts.SCHEMA || readiness.receiptPolicy !== receipts.POLICY || readiness.publicBase !== BACKEND_URL) throw new Error('The JCS receipt route is not ready on the service.');
+  }
+  function checkReceiptService() {
+    if (serviceCheck) return serviceCheck;
+    byId('jcsReceiptServiceCheck').disabled = true;
+    const controller = new AbortController(), timeout = root.setTimeout(() => controller.abort(), 20000);
+    serviceCheck = (async () => {
+      try {
+        const url = BACKEND_URL + RECEIPT_ROUTE + '/status.json';
+        const response = await root.fetch(url, { credentials: 'omit', cache: 'no-store', redirect: 'error', signal: controller.signal });
+        if (response.status === 404) throw new Error('The existing Render service needs the JCS receipt update (HTTP 404).');
+        if (!response.ok) throw new Error('The receipt service returned HTTP ' + (response.status || 'error') + '.');
+        if (response.url !== url || (response.headers.get('content-type') || '').toLowerCase().split(';')[0].trim() !== 'application/json') throw new Error('The receipt service returned an unexpected response.');
+        const text = await response.text();
+        if (encoder.encode(text).length > 65536) throw new Error('The receipt service response is too large.');
+        validateService(JSON.parse(text));
+        showServiceStatus(true);
+      } catch (error) {
+        showServiceStatus(false, error.name === 'AbortError' ? 'The service check timed out. Retry the check.' : error.message || 'The service could not be reached.');
+      } finally { root.clearTimeout(timeout); byId('jcsReceiptServiceCheck').disabled = false; serviceCheck = null; }
+    })();
+    return serviceCheck;
+  }
+  byId('jcsReceiptServiceCheck').addEventListener('click', checkReceiptService);
   async function verifyDisplayMetadata(selected, digest) {
     const expected = receipts.metadata(BACKEND_URL, selected.record, digest), urls = receipts.urls(BACKEND_URL, selected.record, digest);
     const controller = new AbortController(), timeout = root.setTimeout(() => controller.abort(), 20000);
+    let serviceReady = false;
     const fetchExact = async (url, type) => {
       const response = await root.fetch(url, { credentials: 'omit', cache: 'no-store', redirect: 'error', signal: controller.signal });
-      if (!response.ok || response.url !== url || (response.headers.get('content-type') || '').toLowerCase().split(';')[0].trim() !== type) throw new Error('The receipt service did not return the expected ' + type + ' file.');
+      if (response.status === 404) throw new Error(url.endsWith('/status.json')
+        ? 'The JCS receipt endpoint is not deployed on the backend (HTTP 404). The existing Render service needs the JCS receipt update.'
+        : 'The receipt service is ready, but this transaction’s metadata or artwork is currently unavailable (HTTP 404). Retry this same receipt shortly.');
+      if (!response.ok) throw new Error('The receipt service returned HTTP ' + (response.status || 'error') + '. Please retry after the service is available.');
+      if (response.url !== url) throw new Error('The receipt service returned an unexpected address.');
+      if ((response.headers.get('content-type') || '').toLowerCase().split(';')[0].trim() !== type) throw new Error('The receipt service did not return the expected ' + type + ' file.');
       return response;
     };
     const readJSON = async url => {
@@ -15202,7 +15309,7 @@ try {
     };
     try {
       const readiness = await readJSON(BACKEND_URL + RECEIPT_ROUTE + '/status.json');
-      if (readiness.ready !== true || readiness.service !== 'jcs-receipts-v1' || readiness.schema !== receipts.SCHEMA || readiness.receiptPolicy !== receipts.POLICY || readiness.publicBase !== BACKEND_URL) throw new Error('The JCS receipt route is not ready on the service.');
+      validateService(readiness); serviceReady = true; showServiceStatus(true);
       const metadata = await readJSON(urls.metadata);
       if (receipts.stable(metadata) !== receipts.stable(expected)) throw new Error('Published receipt metadata does not match the independently verified ledger record.');
       const response = await fetchExact(urls.image, 'image/png');
@@ -15213,7 +15320,8 @@ try {
       if (width < 1 || width > 4096 || height < 1 || height > 4096) throw new Error('The receipt artwork dimensions are invalid.');
       return { metadata, urls };
     } catch (error) {
-      throw new Error('Your transaction is verified, but its NFT artwork service is not ready. ' + (error.message || '') + ' The existing Render service must include the JCS receipt update. You can download the verified JSON now and retry minting after the service is ready.');
+      if (!serviceReady) showServiceStatus(false, error.message || 'The service could not be reached.');
+      throw new Error('Your transaction is verified, but its receipt artwork could not be verified. ' + (error.message || '') + ' You can download the verified JSON now and retry this receipt. No new deposit is needed.');
     } finally { root.clearTimeout(timeout); }
   }
   async function preflight(account, extraObjects = 2) {
@@ -15259,12 +15367,26 @@ try {
   }
   async function checkSavedMint(record, selected, account, token) {
     status('Checking the earlier mint request on the ledger…');
+    if (!HASH.test(record.txid || '') && PAYLOAD_ID.test(record.payloadId || '') && typeof api.getNftRequest === 'function') {
+      const payload = await api.getNftRequest(record.payloadId, record.transaction);
+      assertAccount(account, token);
+      if (!payload || payload.uuid !== record.payloadId) throw new Error('The earlier Xaman request could not be identified. A second mint has not been created.');
+      if (payload.signed === true && HASH.test(payload.txid || '')) {
+        saved = record = { ...record, txid: payload.txid.toUpperCase(), status: 'unconfirmed' };
+        remember(account, selected.txid, saved);
+      } else if (payload.resolved === true && payload.signed === false) {
+        saved = null; remember(account, selected.txid, null); byId('jcsReceiptMint').textContent = 'Mint receipt NFT';
+        status('Xaman confirms that the earlier request was resolved without a signature. You can review a new receipt mint.'); return;
+      }
+    }
     if (!HASH.test(record.txid || '')) {
       const current = Number(verified(await request('ledger', { ledger_index: 'validated' })).ledger_index);
-      const minimum = Number(record.firstLedger), maximum = Number(record.lastLedger);
-      if (!Number.isSafeInteger(minimum) || !Number.isSafeInteger(maximum) || minimum < 1 || maximum < minimum || current <= maximum) {
-        await refresh();
-        throw new Error('An earlier mint request may still be open in Xaman. Check it in the app. This page will check the ledger again after the request expires; no second request has been created.');
+      assertAccount(account, token);
+      const minimum = Number(record.firstLedger), maximum = current;
+      // Xaman can replace LastLedgerSequence. Search through the current ledger;
+      // the original review's deadline cannot prove an unknown request expired.
+      if (!Number.isSafeInteger(minimum) || minimum < 1 || maximum < minimum) {
+        throw new Error('An earlier mint request may still be open in Xaman. Its outcome is unknown; no second request has been created.');
       }
       let marker, complete = false;
       for (let page = 0; page < 20; page++) {
@@ -15278,29 +15400,31 @@ try {
           if (tx.Account !== account || tx.TransactionType !== 'NFTokenMint' || safeUri(tx.URI)?.metadata?.source_transaction !== selected.txid) continue;
           const hash = entry.hash || tx.hash;
           if (!HASH.test(hash || '')) continue;
-          saved = { ...record, txid: hash, status: 'unconfirmed' }; remember(account, selected.txid, saved);
+          saved = { ...record, txid: hash.toUpperCase(), status: 'unconfirmed' }; remember(account, selected.txid, saved);
           return checkSavedMint(saved, selected, account, token);
         }
         marker = history.marker; if (!marker) { complete = true; break; }
       }
       if (!complete) throw new Error('The complete request history could not be checked. Check Xaman before trying again.');
-      saved = null; remember(account, selected.txid, null); byId('jcsReceiptMint').textContent = 'Mint receipt NFT';
-      status('The earlier request expired, and its complete ledger window contains no matching mint. You can review a new receipt mint.'); return;
+      throw new Error('An earlier mint request has no verified outcome yet. Check or reject that request in Xaman, then check here again. Its original review deadline alone cannot release another mint.');
     }
     let result;
     try { result = await request('tx', { transaction: record.txid, binary: false }); }
-    catch (error) { if (/txnNotFound|^Transaction not found\.?$/i.test(error.message || '') && Number.isSafeInteger(record.firstLedger) && Number.isSafeInteger(record.lastLedger)) return checkSavedMint({ ...record, txid: null }, selected, account, token); throw error; }
+    catch (error) { if (error.code === 'txnNotFound' || /txnNotFound|^Transaction not found\.?$/i.test(error.message || '')) throw new Error('The signed mint transaction is not available from this ledger server yet. Its outcome remains unknown; no second mint has been created.'); throw error; }
     assertAccount(account, token);
     if (result.validated !== true) throw new Error('That mint is still unconfirmed. Check Xaman and retry this status check; a second mint has not been created.');
     const tx = result.tx_json || result;
     const uri = safeUri(tx.URI);
     if ((result.hash || tx.hash)?.toUpperCase() !== record.txid.toUpperCase() || tx.TransactionType !== 'NFTokenMint' || tx.Account !== account || uri?.metadata?.source_transaction !== selected.txid) throw new Error('The earlier transaction does not match this receipt. Inspect its ledger record.');
-    if (result.meta?.TransactionResult !== 'tesSUCCESS') { saved = null; remember(account, selected.txid, null); byId('jcsReceiptMint').textContent = 'Mint receipt NFT'; throw new Error('The earlier mint did not succeed. You can now review a new mint request.'); }
+    const meta = result.meta || result.metaData;
+    if (/^tec[A-Z0-9_]+$/.test(meta?.TransactionResult || '')) { saved = null; remember(account, selected.txid, null); byId('jcsReceiptMint').textContent = 'Mint receipt NFT'; throw new Error('The earlier mint did not succeed. You can now review a new mint request.'); }
+    if (meta?.TransactionResult !== 'tesSUCCESS') throw new Error('The earlier mint result is incomplete. Its outcome remains unknown; no second mint has been created.');
     if (!record.transaction) throw new Error('The original mint review is unavailable. Inspect this transaction in Xaman before taking another action.');
-    confirmedResult({ txid: record.txid, validated: true, ledgerIndex: Number(result.ledger_index), transaction: { ...tx, hash: result.hash || tx.hash }, meta: result.meta }, record.transaction);
+    const confirmed = confirmedResult({ txid: record.txid, validated: true, ledgerIndex: Number(result.ledger_index), transaction: { ...tx, hash: result.hash || tx.hash }, meta }, record.transaction, record.firstLedger, true);
+    saved = { ...record, status: 'validated' }; remember(account, selected.txid, saved);
     byId('jcsReceiptMint').disabled = true; byId('jcsReceiptMint').textContent = 'Receipt mint confirmed';
     byId('jcsReceiptPreviewState').textContent = 'Receipt NFT mint confirmed';
-    status('Receipt NFT mint confirmed at ledger #' + result.ledger_index + '. Open My NFTs to view your wallet.');
+    status('Receipt NFT mint confirmed at ledger #' + result.ledger_index + '. ' + (confirmed.reviewWindowChanged ? 'Xaman used a later ledger window than the original review. The NFT exists; no second mint will be created. ' : '') + 'Open My NFTs to view your wallet.');
   }
   byId('jcsReceiptLookup').addEventListener('submit', async event => {
     event.preventDefault(); if (signing) return;
@@ -15328,8 +15452,13 @@ try {
       if (existing) { saved = existing; throw new Error('Another mint request already exists for this receipt. Check its ledger status first.'); }
       saved = pendingRecord = { status: 'awaiting-signature', firstLedger: review.index, lastLedger: review.transaction.LastLedgerSequence, transaction: review.transaction };
       remember(review.account, review.source.txid, saved);
-      let result = await api.submitNft(review.transaction);
-      try { result = confirmedResult(result, review.transaction); }
+      let result = await api.submitNft(review.transaction, request => {
+        if (!PAYLOAD_ID.test(request?.uuid || '')) return;
+        pendingRecord = { ...pendingRecord, payloadId: request.uuid.toLowerCase() };
+        remember(review.account, review.source.txid, pendingRecord);
+        if (review.token === version && api.getAccount() === review.account) saved = pendingRecord;
+      });
+      try { result = confirmedResult(result, review.transaction, review.index); }
       catch (error) { error.txid = result?.txid; error.requiresReconciliation = true; throw error; }
       const confirmed = { ...pendingRecord, txid: result.txid, status: 'validated' }; remember(review.account, review.source.txid, confirmed);
       if (review.token !== version || api.getAccount() !== review.account) return;
@@ -15420,7 +15549,7 @@ try {
       const index = Number(verified(await request('ledger', { ledger_index: 'validated' })).ledger_index);
       await checkOwnership(review.transaction.NFTokenID, review.account, index); assertAccount(review.account, review.token);
       byId('jcsNftSaleStatus').textContent = 'Review this sell offer in Xaman. Waiting for signature and ledger confirmation…';
-      const result = confirmedResult(await api.submitNft(review.transaction), review.transaction);
+      const result = confirmedResult(await api.submitNft(review.transaction), review.transaction, review.index);
       if (review.token !== version) return;
       saleReview = null; byId('jcsNftSaleReview').hidden = true;
       byId('jcsNftSaleStatus').textContent = 'Sell offer created at ledger #' + result.ledgerIndex + '. It has not sold yet. Transaction: ' + result.txid;
@@ -15450,7 +15579,7 @@ try {
     byId('jcsReceiptLookupHash').value = ''; byId('jcsReceiptLookupHash').removeAttribute('aria-invalid'); resetReceiptPanel(); updateEntry(); restoreReceipt();
   });
   root.JCSNft = Object.freeze({ refresh });
-  resetReceiptPanel(); updateEntry(); restoreReceipt();
+  resetReceiptPanel(); updateEntry(); checkReceiptService(); restoreReceipt();
   }
 
   let startupState = 'waiting', startupTimer = null, deadline = 0;
