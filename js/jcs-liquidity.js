@@ -160,6 +160,14 @@
     byId('jcsPoolRefresh').disabled = value || signing;
     liquidityPanel.querySelectorAll('[data-action], [data-percent], [data-deposit-percent], #jcsDepositXrp, #jcsDepositJcs, #jcsWithdrawPercent, #jcsMatchDeposit').forEach(control => { control.disabled = signing; });
   }
+
+  document.addEventListener('jcs:signing-reset', event => {
+    if (!signing && !loading) return;
+    signing = false;
+    invalidateReview();
+    setBusy(false);
+    status((event.detail?.reason || 'Xaman request canceled.') + ' Liquidity controls reset. Review the amounts again when ready.', true);
+  });
   async function request(method, params = {}) {
     const response = await api.request({ method, params: [params] });
     return response?.result || {};
