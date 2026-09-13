@@ -52,3 +52,17 @@ test('token conversion never rounds up across tiny and large ledger values', () 
     assert.ok(cmp(decimal(tokenValue(decimal(value))), decimal(value)) <= 0);
   }
 });
+
+
+test('editable JCS maximum caps the transaction and uses the smaller proportional LP estimate', () => {
+  const matched = buildDeposit(pool, '1', asset);
+  const tokenLimited = buildDeposit(pool, '1', asset, '100000');
+  assert.equal(tokenLimited.transaction.Amount, '1000000');
+  assert.equal(tokenLimited.transaction.Amount2.value, '100000');
+  assert.ok(cmp(decimal(tokenLimited.lp), decimal(matched.lp)) < 0);
+  const xrpLimited = buildDeposit(pool, '1', asset, '500000');
+  assert.equal(xrpLimited.transaction.Amount2.value, '500000');
+  assert.ok(cmp(decimal(xrpLimited.lp), decimal(matched.lp)) >= 0);
+  assert.equal(xrpLimited.transaction.Flags, 1048576);
+  for (const invalid of ['', '0', '-1', 'Infinity']) assert.throws(() => buildDeposit(pool, '1', asset, invalid));
+});

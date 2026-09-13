@@ -36,11 +36,12 @@
     if (drops <= 0n || drops > 100000000000000000n) throw new Error('Enter an XRP amount between 0.000001 and 100 billion.');
     return drops.toString();
   }
-  function buildDeposit(pool, inputXrp, asset) {
+  function buildDeposit(pool, inputXrp, asset, maximumJcs) {
     const drops = xrpDrops(inputXrp);
     const ratio = div(decimal(drops), positive(pool.xrpDrops));
-    const jcs = tokenValue(mul(positive(pool.jcs), ratio));
-    const actualRatio = div(decimal(jcs), positive(pool.jcs));
+    const jcs = maximumJcs == null ? tokenValue(mul(positive(pool.jcs), ratio)) : tokenValue(positive(maximumJcs));
+    const tokenRatio = div(decimal(jcs), positive(pool.jcs));
+    const actualRatio = cmp(ratio, tokenRatio) < 0 ? ratio : tokenRatio;
     return {
       transaction: { TransactionType: 'AMMDeposit', Asset: { currency: 'XRP' }, Asset2: { ...asset }, Flags: 1048576,
         Amount: drops, Amount2: { ...asset, value: jcs } },
@@ -78,7 +79,7 @@
   const xrpText = drops => fmt(Number(drops) / 1000000);
   const exactXrp = drops => { const value = BigInt(drops); return (value / 1000000n).toString() + ((value % 1000000n) ? '.' + (value % 1000000n).toString().padStart(6, '0').replace(/0+$/, '') : ''); };
   const escapeText = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  let snapshot = null, review = null, loading = false, signing = false, active = 'trade', generation = 0, reviewVersion = 0;
+  let snapshot = null, review = null, loading = false, signing = false, active = 'trade', generation = 0, reviewVersion = 0, manualJcs = false;
 
   const tradePanel = doc.createElement('div');
   tradePanel.id = 'jcsTradePanel';
@@ -99,18 +100,42 @@
   liquidityPanel.setAttribute('role', 'tabpanel');
   liquidityPanel.setAttribute('aria-labelledby', 'jcsTabLiquidity');
   liquidityPanel.innerHTML = `
-    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Manage your pool share</span><h2>JCS / XRP liquidity</h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
-    <p class="jcs-tool-copy">Your liquidity stays on the XRP Ledger. Connect the same wallet you used elsewhere to manage its existing pool share here. Switching websites does not move your funds.</p>
-    <div class="jcs-pool-stats"><div><span>XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span>JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div><div><span>Your pool share</span><strong id="jcsPoolShare">Connect wallet</strong></div></div>
-    <p class="jcs-tool-small" id="jcsPoolEvidence">Checking the current validated ledger…</p>
-    <div class="jcs-liquidity-form"><label for="jcsLiquidityAction">What would you like to do?</label><select id="jcsLiquidityAction"><option value="deposit">Add XRP and JCS</option><option value="withdraw">Withdraw my XRP and JCS</option></select>
-      <div id="jcsDepositInput"><label for="jcsDepositXrp">Maximum XRP to add</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositHelp"><span>XRP</span></div><p class="jcs-tool-small" id="jcsDepositHelp">The review calculates the matching JCS amount. You need both assets in your wallet.</p></div>
-      <div id="jcsWithdrawInput" hidden><label for="jcsWithdrawPercent">Percentage of your pool share to withdraw</label><div class="jcs-amount-field"><input id="jcsWithdrawPercent" type="text" inputmode="decimal" value="25" autocomplete="off"><span>%</span></div><div class="jcs-percentage-options"><button type="button" data-percent="25">25%</button><button type="button" data-percent="50">50%</button><button type="button" data-percent="100">100%</button></div></div>
-      <button class="btn primary" type="button" id="jcsLiquidityPreview">Review amounts</button>
+    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Native XRP Ledger pool</span><h2>JCS / XRP liquidity</h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
+    <p class="jcs-tool-copy">Add both assets to receive pool-share tokens, or redeem your existing share. Connect the same wallet you used elsewhere: your liquidity is already on the XRP Ledger.</p>
+    <div class="jcs-liquidity-workspace">
+      <div class="jcs-liquidity-overview">
+        <section class="jcs-pool-card" aria-labelledby="jcsPoolTitle"><div class="jcs-card-heading"><h3 id="jcsPoolTitle">Pool overview</h3><span class="jcs-pool-badge">JCS / XRP</span></div>
+          <div class="jcs-pool-stats"><div><span>XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span>JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div></div>
+          <dl class="jcs-readout"><div><dt>Pool rate</dt><dd id="jcsPoolRate">—</dd></div><div><dt>Pool trading fee</dt><dd id="jcsPoolFee">—</dd></div><div><dt>Total LP tokens</dt><dd id="jcsPoolTotalLP">—</dd></div></dl>
+          <p class="jcs-tool-small" id="jcsPoolEvidence">Checking the current validated ledger…</p>
+        </section>
+        <section class="jcs-position-card" aria-labelledby="jcsPositionTitle"><div class="jcs-card-heading"><h3 id="jcsPositionTitle">Your position</h3><span class="jcs-pool-badge" id="jcsWalletState">Wallet not connected</span></div>
+          <div class="jcs-position-share"><strong id="jcsPoolShare">—</strong><span>of this pool</span></div>
+          <dl class="jcs-readout"><div><dt>Your LP tokens</dt><dd id="jcsWalletLP">—</dd></div><div><dt>Estimated XRP in your share</dt><dd id="jcsPositionXrp">—</dd></div><div><dt>Estimated JCS in your share</dt><dd id="jcsPositionJcs">—</dd></div></dl>
+          <p class="jcs-tool-small">LP tokens are your claim on the pool. The amounts above change with trading activity.</p>
+        </section>
+        <details class="jcs-ledger-details"><summary>Wallet balances &amp; exact ledger details</summary><dl class="jcs-readout" id="jcsLiquidityDetails"><div><dt>Wallet</dt><dd>Connect Xaman to see your balances.</dd></div></dl></details>
+      </div>
+      <section class="jcs-liquidity-order" aria-labelledby="jcsOrderTitle"><span class="jcs-tool-eyebrow">Manage liquidity</span><h3 id="jcsOrderTitle">Your next move</h3>
+        <div class="jcs-action-tabs" role="group" aria-label="Liquidity action"><button type="button" id="jcsActionDeposit" data-action="deposit" aria-pressed="true"><strong>Add liquidity</strong><span>Put both assets in</span></button><button type="button" id="jcsActionWithdraw" data-action="withdraw" aria-pressed="false"><strong>Withdraw liquidity</strong><span>Redeem your pool share</span></button></div>
+        <select id="jcsLiquidityAction" hidden aria-label="Liquidity action"><option value="deposit">Add XRP and JCS</option><option value="withdraw">Withdraw my XRP and JCS</option></select>
+        <div class="jcs-liquidity-form">
+          <div id="jcsDepositInput"><p class="jcs-action-explanation">Set the maximum of each asset to deposit. The pool uses both in its current proportion and may use less of one.</p>
+            <label for="jcsDepositXrp">Maximum XRP to deposit</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositXrpAvailable"><span>XRP</span></div><p class="jcs-balance-hint" id="jcsDepositXrpAvailable">Connect your wallet to see available XRP.</p>
+            <label for="jcsDepositJcs">Maximum JCS to deposit</label><div class="jcs-amount-field"><input id="jcsDepositJcs" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositJcsAvailable jcsDepositHelp"><span>JCS</span></div><p class="jcs-balance-hint" id="jcsDepositJcsAvailable">Connect your wallet to see available JCS.</p>
+            <div class="jcs-percentage-options" role="group" aria-label="Use available balance"><button type="button" data-deposit-percent="25">25%</button><button type="button" data-deposit-percent="50">50%</button><button type="button" data-deposit-percent="75">75%</button><button type="button" data-deposit-percent="100">Max</button></div>
+            <button class="btn jcs-match-amount" type="button" id="jcsMatchDeposit">Match JCS to XRP</button><p class="jcs-tool-small" id="jcsDepositHelp">JCS matches XRP automatically until you edit JCS. Balance shortcuts allow for wallet reserves, the network fee and an extra 1 XRP buffer.</p>
+          </div>
+          <div id="jcsWithdrawInput" hidden><p class="jcs-action-explanation">Choose how much of your position to redeem. XRP and JCS return to the same wallet.</p><label for="jcsWithdrawPercent">Percentage of your pool share</label><div class="jcs-amount-field"><input id="jcsWithdrawPercent" type="text" inputmode="decimal" value="25" autocomplete="off"><span>%</span></div><div class="jcs-percentage-options" role="group" aria-label="Share to withdraw"><button type="button" data-percent="25">25%</button><button type="button" data-percent="50">50%</button><button type="button" data-percent="75">75%</button><button type="button" data-percent="100">100%</button></div></div>
+          <div class="jcs-amount-preview"><span class="jcs-tool-eyebrow">Estimated outcome</span><dl class="jcs-readout" id="jcsLiquidityEstimate"><div><dt>LP tokens received</dt><dd>Enter an amount</dd></div></dl><p class="jcs-tool-small" id="jcsEstimateNote">Review refreshes the ledger and checks your balances before signing.</p></div>
+          <button class="btn primary" type="button" id="jcsLiquidityPreview">Preview deposit</button>
+        </div>
+        <div class="jcs-liquidity-review" id="jcsLiquidityReview" hidden><h3>Review your request</h3><dl id="jcsLiquidityReviewRows"></dl><p class="jcs-tool-small" id="jcsLiquidityReviewNote"></p><label class="jcs-review-accept"><input type="checkbox" id="jcsLiquidityAccept"><span>I have checked these amounts and understand that my pool share can change in value.</span></label><button class="btn primary" type="button" id="jcsLiquiditySign" disabled>Review &amp; sign in Xaman</button></div>
+        <p role="status" aria-live="polite" id="jcsLiquidityStatus" class="jcs-tool-status">Connect Xaman above to add or withdraw liquidity.</p>
+        <p class="jcs-tool-small jcs-signing-hint">Desktop: scan the signing QR with Xaman. Phone: open the request in the Xaman app. Nothing moves until you approve it.</p>
+      </section>
     </div>
-    <div class="jcs-liquidity-review" id="jcsLiquidityReview" hidden><h3>Review before opening Xaman</h3><dl id="jcsLiquidityReviewRows"></dl><p class="jcs-tool-small" id="jcsLiquidityReviewNote"></p><label class="jcs-review-accept"><input type="checkbox" id="jcsLiquidityAccept"><span>I have checked these amounts and understand that my pool share can change in value.</span></label><button class="btn primary" type="button" id="jcsLiquiditySign" disabled>Review in Xaman</button></div>
-    <p role="status" aria-live="polite" id="jcsLiquidityStatus" class="jcs-tool-status">Connect Xaman above to add or withdraw liquidity.</p>
-    <p class="jcs-tool-small">Adding both assets earns LP tokens representing your pool share. Withdrawing redeems those tokens to return both assets to your wallet. Their proportions change as people trade; returns are not guaranteed.</p>`;
+    <p class="jcs-tool-small jcs-liquidity-footnote">Pool-share values and asset proportions can change; returns are not guaranteed. Pool trading fees are paid by swaps, separately from the XRP network fee for your deposit or withdrawal.</p>`;
   trade.appendChild(liquidityPanel);
   const nftPanel = doc.createElement('div');
   nftPanel.id = 'jcsNftsPanel';
@@ -133,6 +158,7 @@
     loading = value;
     byId('jcsLiquidityPreview').disabled = value || signing;
     byId('jcsPoolRefresh').disabled = value || signing;
+    liquidityPanel.querySelectorAll('[data-action], [data-percent], [data-deposit-percent], #jcsDepositXrp, #jcsDepositJcs, #jcsWithdrawPercent, #jcsMatchDeposit').forEach(control => { control.disabled = signing; });
   }
   async function request(method, params = {}) {
     const response = await api.request({ method, params: [params] });
@@ -200,24 +226,85 @@
     if (account !== api.getAccount()) throw new Error('Your wallet changed. Refresh and review again.');
     return data;
   }
+  function readout(rows) {
+    return rows.map(([label, value]) => '<div><dt>' + escapeText(label) + '</dt><dd>' + escapeText(value) + '</dd></div>').join('');
+  }
+  function depositAvailable(data, buffer = 0n) {
+    if (!data?.wallet) return 0n;
+    const amount = BigInt(data.wallet.xrpDrops) - data.wallet.reserveDrops - data.wallet.newLineReserve - BigInt(data.wallet.fee) - buffer;
+    return amount > 0n ? amount : 0n;
+  }
+  function depositInput() {
+    return { xrp: byId('jcsDepositXrp').value.trim(), jcs: manualJcs ? byId('jcsDepositJcs').value.trim() : null };
+  }
+  function matchDeposit() {
+    if (manualJcs) return;
+    try { byId('jcsDepositJcs').value = buildDeposit(snapshot.pool, byId('jcsDepositXrp').value.trim(), asset).jcs; }
+    catch { byId('jcsDepositJcs').value = ''; }
+  }
+  function renderEstimate() {
+    const mode = byId('jcsLiquidityAction').value;
+    const label = mode === 'deposit' ? 'LP tokens received' : 'LP tokens redeemed';
+    let rows = [[label, 'Enter an amount']];
+    try {
+      if (!snapshot) throw new Error('Pool unavailable');
+      const input = depositInput();
+      const built = mode === 'deposit' ? buildDeposit(snapshot.pool, input.xrp, asset, input.jcs) : buildWithdrawal(snapshot.pool, snapshot.wallet?.lp || '0', byId('jcsWithdrawPercent').value.trim(), asset);
+      rows = [[label, fmt(built.lp, 10)]];
+      if (mode === 'deposit') {
+        const ratio = div(decimal(built.lp), positive(snapshot.pool.totalLP));
+        const consumedXrp = mul(positive(snapshot.pool.xrpDrops), ratio);
+        rows.unshift(['Estimated XRP used', xrpText((consumedXrp.n / consumedXrp.d).toString()) + ' XRP'], ['Estimated JCS used', fmt(tokenValue(mul(positive(snapshot.pool.jcs), ratio)), 10) + ' JCS']);
+        if (snapshot.wallet) rows.push(['Your share after deposit', fmt((Number(snapshot.wallet.lp) + Number(built.lp)) / (Number(snapshot.pool.totalLP) + Number(built.lp)) * 100, 6) + '%']);
+      } else {
+        rows.unshift(['Estimated XRP returned', xrpText(built.xrpDrops) + ' XRP'], ['Estimated JCS returned', fmt(built.jcs, 10) + ' JCS']);
+      }
+      rows.push(['Network fee', snapshot.wallet ? exactXrp(snapshot.wallet.fee) + ' XRP' : 'Connect wallet']);
+    } catch { if (mode === 'withdraw' && snapshot?.wallet && cmp(decimal(snapshot.wallet.lp), decimal('0')) <= 0) rows = [[label, 'No LP tokens in this wallet']]; }
+    byId('jcsLiquidityEstimate').innerHTML = readout(rows);
+  }
+  function clearWalletReadout() {
+    byId('jcsWalletState').textContent = 'Wallet not connected';
+    for (const id of ['jcsPoolShare', 'jcsWalletLP', 'jcsPositionXrp', 'jcsPositionJcs']) byId(id).textContent = '—';
+    byId('jcsDepositXrpAvailable').textContent = 'Connect your wallet to see available XRP.';
+    byId('jcsDepositJcsAvailable').textContent = 'Connect your wallet to see available JCS.';
+    byId('jcsLiquidityDetails').innerHTML = readout([['Wallet', 'Connect Xaman to see your balances.']]);
+    renderEstimate();
+  }
   function renderSnapshot(data) {
     snapshot = data;
     byId('jcsPoolXrp').textContent = xrpText(data.pool.xrpDrops) + ' XRP';
-    byId('jcsPoolJcs').textContent = fmt(data.pool.jcs) + ' JCS';
-    byId('jcsPoolShare').textContent = data.wallet ? fmt(Number(data.wallet.lp) / Number(data.pool.totalLP) * 100, 5) + '%' : 'Connect wallet';
-    byId('jcsPoolEvidence').textContent = 'Verified at ledger #' + data.ledgerIndex + ' · ' + new Date(data.fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + (data.wallet ? ' · Your LP tokens: ' + fmt(data.wallet.lp) : '');
+    byId('jcsPoolJcs').textContent = fmt(data.pool.jcs, 9) + ' JCS';
+    byId('jcsPoolRate').textContent = '1 XRP ≈ ' + fmt(Number(data.pool.jcs) * 1000000 / Number(data.pool.xrpDrops), 8) + ' JCS';
+    byId('jcsPoolFee').textContent = Number.isInteger(data.pool.tradingFee) ? fmt(data.pool.tradingFee / 1000, 5) + '%' : 'Unavailable';
+    byId('jcsPoolTotalLP').textContent = fmt(data.pool.totalLP, 10);
+    byId('jcsPoolEvidence').textContent = 'Verified ledger #' + data.ledgerIndex + ' · ' + new Date(data.fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' · Refreshes every 60 seconds';
+    const details = [['Pool XRP balance', exactXrp(data.pool.xrpDrops) + ' XRP'], ['Pool JCS balance', data.pool.jcs + ' JCS'], ['Total LP tokens', data.pool.totalLP], ['JCS issuer', asset.issuer], ['Pool account', data.pool.account], ['Validated ledger', '#' + data.ledgerIndex]];
+    if (data.wallet) {
+      const share = Number(data.wallet.lp) / Number(data.pool.totalLP);
+      byId('jcsPoolShare').textContent = fmt(share * 100, 6) + '%';
+      byId('jcsWalletState').textContent = 'Wallet connected';
+      byId('jcsWalletLP').textContent = fmt(data.wallet.lp, 10);
+      byId('jcsPositionXrp').textContent = fmt(Number(data.pool.xrpDrops) / 1000000 * share, 9) + ' XRP';
+      byId('jcsPositionJcs').textContent = fmt(Number(data.pool.jcs) * share, 9) + ' JCS';
+      byId('jcsDepositXrpAvailable').textContent = 'Available after reserve & fee: ' + exactXrp(depositAvailable(data)) + ' XRP';
+      byId('jcsDepositJcsAvailable').textContent = 'Available: ' + fmt(data.wallet.jcs, 10) + ' JCS';
+      details.unshift(['Connected wallet', data.account], ['Wallet XRP balance', exactXrp(data.wallet.xrpDrops) + ' XRP'], ['Wallet JCS balance', data.wallet.jcs + ' JCS'], ['Wallet LP tokens', data.wallet.lp], ['Required wallet reserve', exactXrp(data.wallet.reserveDrops) + ' XRP'], ['Possible new LP-line reserve', exactXrp(data.wallet.newLineReserve) + ' XRP'], ['Network fee', exactXrp(data.wallet.fee) + ' XRP']);
+    } else clearWalletReadout();
+    byId('jcsLiquidityDetails').innerHTML = readout(details);
+    matchDeposit(); renderEstimate();
   }
   async function refreshPool() {
     if (loading || signing) return;
     setBusy(true);
     const token = generation;
     try { const next = await loadSnapshot(); if (token !== generation) return; renderSnapshot(next); status(next.account ? 'Pool and wallet balances are ready. Choose an amount to review.' : 'Connect Xaman above to manage an existing pool share.'); }
-    catch (error) { if (token === generation) { snapshot = null; status(error.message || String(error), true); byId('jcsPoolEvidence').textContent = 'Live pool check unavailable. Refresh to retry.'; } }
+    catch (error) { if (token === generation) { snapshot = null; clearWalletReadout(); byId('jcsWalletState').textContent = api.getAccount() ? 'Wallet check unavailable' : 'Wallet not connected'; status(error.message || String(error), true); byId('jcsPoolEvidence').textContent = 'Live pool check unavailable. Any pool figures above are from the previous check. Refresh to retry.'; } }
     finally { setBusy(false); if (token !== generation && active === 'liquidity') refreshPool(); }
   }
   function operation(data, mode, input) {
     if (!data.wallet || !data.account) throw new Error('Connect Xaman first.');
-    const built = mode === 'deposit' ? buildDeposit(data.pool, input, asset) : buildWithdrawal(data.pool, data.wallet.lp, input, asset);
+    const built = mode === 'deposit' ? buildDeposit(data.pool, input.xrp, asset, input.jcs) : buildWithdrawal(data.pool, data.wallet.lp, input, asset);
     const fee = BigInt(data.wallet.fee);
     if (mode === 'deposit') {
       const needed = BigInt(built.xrpDrops) + data.wallet.reserveDrops + data.wallet.newLineReserve + fee;
@@ -237,7 +324,8 @@
     const rows = [[mode === 'deposit' ? 'Maximum XRP added' : 'Estimated XRP returned', exactXrp(built.xrpDrops) + ' XRP'],
       [mode === 'deposit' ? 'Maximum JCS added' : 'Estimated JCS returned', built.jcs + ' JCS'],
       [mode === 'deposit' ? 'Estimated LP tokens received' : 'LP tokens redeemed', built.lp], ['Network fee', exactXrp(data.wallet.fee) + ' XRP'], ['Wallet', data.account]];
-    byId('jcsLiquidityReviewRows').innerHTML = rows.map(([label, value]) => '<div><dt>' + escapeText(label) + '</dt><dd>' + escapeText(value) + '</dd></div>').join('');
+    rows.splice(rows.length - 1, 0, ['Verified ledger', '#' + data.ledgerIndex]);
+    byId('jcsLiquidityReviewRows').innerHTML = readout(rows);
     byId('jcsLiquidityReviewNote').textContent = mode === 'deposit'
       ? 'These are hard maximum inputs. XRPL adds both assets in the current pool proportion and may use less of one. LP tokens are estimated; this deposit mode cannot enforce a minimum LP output. The review expires after 60 seconds.'
       : 'Both assets return to this wallet in the pool’s proportion at execution. These are estimates: proportional redemption cannot enforce minimum XRP/JCS outputs. We recheck the pool before Xaman and use a short transaction expiry.';
@@ -250,7 +338,7 @@
     if (loading || signing) return;
     invalidateReview(); setBusy(true);
     const mode = byId('jcsLiquidityAction').value;
-    const input = byId(mode === 'deposit' ? 'jcsDepositXrp' : 'jcsWithdrawPercent').value.trim();
+    const input = mode === 'deposit' ? depositInput() : byId('jcsWithdrawPercent').value.trim();
     const token = generation, version = reviewVersion;
     try { const data = await loadSnapshot(true); if (token !== generation || version !== reviewVersion) { status('The wallet or amount changed. Review the current amount again.'); return; } renderSnapshot(data); showReview(data, operation(data, mode, input), mode, input); }
     catch (error) { status(error.message || String(error), true); }
@@ -311,12 +399,36 @@
     }
     finally { signing = false; setBusy(false); }
   });
-  ['jcsDepositXrp', 'jcsWithdrawPercent'].forEach(id => byId(id).addEventListener('input', invalidateReview));
-  byId('jcsLiquidityAction').addEventListener('change', () => {
-    invalidateReview(); const deposit = byId('jcsLiquidityAction').value === 'deposit';
+  byId('jcsDepositXrp').addEventListener('input', () => { invalidateReview(); matchDeposit(); renderEstimate(); });
+  byId('jcsDepositJcs').addEventListener('input', () => { manualJcs = true; invalidateReview(); renderEstimate(); });
+  byId('jcsWithdrawPercent').addEventListener('input', () => { invalidateReview(); renderEstimate(); });
+  function selectAction(mode) {
+    if (signing) return;
+    invalidateReview(); const deposit = mode === 'deposit';
+    byId('jcsLiquidityAction').value = mode;
     byId('jcsDepositInput').hidden = !deposit; byId('jcsWithdrawInput').hidden = deposit;
-  });
-  liquidityPanel.querySelectorAll('[data-percent]').forEach(button => button.addEventListener('click', () => { byId('jcsWithdrawPercent').value = button.dataset.percent; invalidateReview(); }));
+    liquidityPanel.querySelectorAll('[data-action]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.action === mode)));
+    byId('jcsLiquidityPreview').textContent = deposit ? 'Preview deposit' : 'Preview withdrawal';
+    renderEstimate();
+  }
+  byId('jcsLiquidityAction').addEventListener('change', () => selectAction(byId('jcsLiquidityAction').value));
+  liquidityPanel.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => selectAction(button.dataset.action)));
+  byId('jcsMatchDeposit').addEventListener('click', () => { manualJcs = false; invalidateReview(); matchDeposit(); renderEstimate(); if (!snapshot) status('Refresh the pool before matching the amounts.'); });
+  liquidityPanel.querySelectorAll('[data-percent]').forEach(button => button.addEventListener('click', () => { byId('jcsWithdrawPercent').value = button.dataset.percent; invalidateReview(); renderEstimate(); }));
+  liquidityPanel.querySelectorAll('[data-deposit-percent]').forEach(button => button.addEventListener('click', () => {
+    invalidateReview();
+    try {
+      if (!snapshot?.wallet || snapshot.account !== api.getAccount()) throw new Error('Connect your wallet and refresh the pool before using balance shortcuts.');
+      const available = depositAvailable(snapshot, 1000000n);
+      const tokenLimited = mul(div(positive(snapshot.wallet.jcs), positive(snapshot.pool.jcs)), positive(snapshot.pool.xrpDrops));
+      const limitedDrops = tokenLimited.n / tokenLimited.d;
+      const maxDrops = available < limitedDrops ? available : limitedDrops;
+      const chosen = maxDrops * BigInt(button.dataset.depositPercent) / 100n;
+      if (chosen <= 0n) throw new Error('There is not enough available XRP and JCS after reserves and the 1 XRP buffer.');
+      byId('jcsDepositXrp').value = exactXrp(chosen); manualJcs = false; matchDeposit(); renderEstimate();
+      status('Amounts matched to your available XRP and JCS. Preview to refresh and check them.');
+    } catch (error) { status(error.message || String(error), true); }
+  }));
   byId('jcsPoolRefresh').addEventListener('click', () => { invalidateReview(); refreshPool(); });
 
   function safeUrl(input) {
@@ -410,7 +522,7 @@
       if (target !== undefined) { event.preventDefault(); buttons[target].focus(); activate(buttons[target].dataset.panel); }
     });
   });
-  doc.addEventListener('jcs:wallet-changed', () => { generation++; snapshot = null; invalidateReview(); byId('jcsNftGrid').replaceChildren(); byId('jcsPoolShare').textContent = '—'; if (active === 'liquidity') refreshPool(); if (active === 'nfts') refreshNfts(); });
+  doc.addEventListener('jcs:wallet-changed', () => { generation++; snapshot = null; invalidateReview(); byId('jcsNftGrid').replaceChildren(); clearWalletReadout(); if (active === 'liquidity') refreshPool(); if (active === 'nfts') refreshNfts(); });
   root.setInterval(() => { if (doc.visibilityState === 'visible' && active === 'liquidity' && !review && !signing) refreshPool(); }, 60000);
   // Pool data loads when its tab is first opened; the main market has its own immediate refresh.
 })(typeof window !== 'undefined' ? window : globalThis);

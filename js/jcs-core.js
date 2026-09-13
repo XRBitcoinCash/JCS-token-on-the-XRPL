@@ -175,88 +175,139 @@
     return value.slice(0, 8) + '…' + value.slice(-6);
   }
 
+  const xamanReopenPanel = $('xamanReopenPanel');
+  const xamanShowQr = $('xamanShowQr');
+  const xamanQrArea = $('xamanQrArea');
+  const xamanSignSummary = $('xamanSignSummary');
+  const xamanSignHelp = $('xamanSignHelp');
+  const xamanMobile = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  let xamanReturnFocus = null;
+  let xamanHasRequest = false;
+
   function setXamanSignStatus(message, state) {
     if (!xamanSignStatus) return;
     xamanSignStatus.textContent = message;
     xamanSignStatus.dataset.state = state || '';
+    if (['signed', 'rejected', 'expired', 'error'].includes(state)) {
+      if (xamanOpenPayload) { xamanOpenPayload.hidden = true; xamanOpenPayload.removeAttribute('href'); }
+      if (xamanPayloadQr) { xamanPayloadQr.hidden = true; xamanPayloadQr.removeAttribute('src'); }
+      if (xamanQrArea) xamanQrArea.hidden = true;
+      if (xamanShowQr) xamanShowQr.hidden = true;
+      setSecurityCodeDisplay(null);
+      if (xamanClosePanel) xamanClosePanel.textContent = 'Close';
+      if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman result';
+      if (xamanSignHelp) xamanSignHelp.textContent = state === 'signed'
+        ? 'The request was signed. The page checks the XRP Ledger separately before reporting a successful transaction.'
+        : 'Check the request outcome in Xaman before starting again. Hiding this window does not cancel a wallet request.';
+    }
   }
 
-  function closeXamanSignPanel() {
-    if (xamanSignPanel) xamanSignPanel.hidden = true;
-    if (xamanPayloadQr) {
-      xamanPayloadQr.hidden = true;
-      xamanPayloadQr.removeAttribute('src');
-    }
-    if (xamanQrPlaceholder) xamanQrPlaceholder.hidden = false;
-    if (xamanOpenPayload) {
-      xamanOpenPayload.hidden = true;
-      xamanOpenPayload.setAttribute('href', '#');
-    }
-    setSecurityCodeDisplay(null);
-  }
-
-  function showXamanSignRequest(created, code, purpose) {
-    if (!xamanSignPanel) return;
-
-    const qr =
-      created?.refs?.qr_png ||
-      created?.refs?.qr ||
-      created?.qr_png ||
-      created?.qr ||
-      '';
-
-    const deepLink =
-      created?.next?.always ||
-      created?.next?.no_push_msg_received ||
-      created?.refs?.deeplink ||
-      created?.deeplink ||
-      '';
-
-    if (xamanSignTitle) {
-      const labels = {
-        trust: 'Add JCS trustline',
-        offer: 'Review JCS limit order',
-        swap: 'Review JCS market swap',
-        cancel: 'Cancel JCS order',
-        quickbuy: 'Review JCS quick buy',
-        'liquidity-add': 'Review JCS liquidity deposit',
-        'liquidity-remove': 'Review JCS liquidity withdrawal'
-      };
-      xamanSignTitle.textContent = labels[purpose] || 'Review in Xaman';
-    }
-
-    if (xamanPayloadQr) {
-      if (qr) {
-        xamanPayloadQr.src = qr;
-        xamanPayloadQr.hidden = false;
-        if (xamanQrPlaceholder) xamanQrPlaceholder.hidden = true;
-      } else {
-        xamanPayloadQr.hidden = true;
-        if (xamanQrPlaceholder) xamanQrPlaceholder.hidden = false;
-      }
-    }
-
-    if (xamanOpenPayload) {
-      if (deepLink) {
-        xamanOpenPayload.href = deepLink;
-        xamanOpenPayload.hidden = false;
-      } else {
-        xamanOpenPayload.hidden = true;
-      }
-    }
-
-    setSecurityCodeDisplay(code);
-    setXamanSignStatus(
-      'Verify the six-digit code and every transaction field before signing.',
-      'pending'
-    );
+  function openXamanSignPanel() {
+    if (!xamanSignPanel || !xamanHasRequest) return;
     xamanSignPanel.hidden = false;
-    xamanSignPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (!xamanSignPanel.open) {
+      if (typeof xamanSignPanel.showModal === 'function') xamanSignPanel.showModal();
+      else xamanSignPanel.setAttribute('open', '');
+    }
+    if (xamanReopenPanel) xamanReopenPanel.hidden = true;
+    const focusTarget = xamanMobile && xamanOpenPayload && !xamanOpenPayload.hidden
+      ? xamanOpenPayload : xamanSignTitle;
+    focusTarget?.focus({ preventScroll: true });
   }
 
-  if (xamanClosePanel) {
-    xamanClosePanel.addEventListener('click', closeXamanSignPanel);
+  // Hide is deliberately not Cancel: an already-open request can still be signed in Xaman.
+  function closeXamanSignPanel() {
+    if (xamanSignPanel) {
+      if (typeof xamanSignPanel.close === 'function' && xamanSignPanel.open) xamanSignPanel.close();
+      xamanSignPanel.removeAttribute('open');
+      xamanSignPanel.hidden = true;
+    }
+    if (xamanReopenPanel) xamanReopenPanel.hidden = !xamanHasRequest;
+    if (xamanReturnFocus?.isConnected && !xamanReturnFocus.closest('[hidden]')) xamanReturnFocus.focus({ preventScroll: true });
   }
+
+  function officialXamanUrl(value, uuid) {
+    try {
+      const url = new URL(String(value || ''));
+      if (url.protocol !== 'https:' || !['xumm.app', 'xaman.app'].includes(url.hostname) ||
+          url.username || url.password || (url.port && url.port !== '443') ||
+          !url.pathname.startsWith('/sign/' + uuid)) return '';
+      const suffix = url.pathname.slice(('/sign/' + uuid).length);
+      if (suffix && !/^(?:[/_?])/.test(suffix)) return '';
+      return url.href;
+    } catch { return ''; }
+  }
+
+  function showXamanSignRequest(created, code, purpose, transaction = {}) {
+    if (!xamanSignPanel) throw new Error('The signing dialog is unavailable.');
+    const uuid = String(created?.uuid || created?.payload_uuidv4 || '');
+    if (!/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(uuid)) throw new Error('Xaman returned an invalid request identifier.');
+    const deepLink = officialXamanUrl(created?.next?.always, uuid) || 'https://xumm.app/sign/' + uuid;
+    const qr = officialXamanUrl(created?.refs?.qr_png, uuid);
+    const labels = {
+      trust: 'Add JCS trustline', offer: 'Review JCS limit order', swap: 'Review JCS market swap',
+      cancel: 'Cancel JCS order', quickbuy: 'Review JCS quick buy',
+      'liquidity-add': 'Approve liquidity deposit', 'liquidity-remove': 'Approve liquidity withdrawal'
+    };
+    xamanReturnFocus = document.activeElement;
+    xamanHasRequest = true;
+    if (xamanSignTitle) xamanSignTitle.textContent = labels[purpose] || 'Review in Xaman';
+    if (xamanClosePanel) xamanClosePanel.textContent = 'Hide';
+    if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman request';
+    if (xamanSignHelp) xamanSignHelp.textContent = 'Hiding this window keeps the request active. Complete or reject it in Xaman, then return to this page.';
+    if (xamanSignSummary) {
+      const rows = [['Network', 'XRP Ledger · Mainnet'], ['Wallet', transaction.Account || currentAccount || 'Connected wallet']];
+      const exactXrp = value => {
+        if (!/^\d+$/.test(String(value))) return String(value);
+        const n = BigInt(value); return (n / 1000000n).toString() + '.' + (n % 1000000n).toString().padStart(6, '0') + ' XRP';
+      };
+      if (transaction.TransactionType === 'AMMDeposit') {
+        rows.push(['Maximum XRP', exactXrp(transaction.Amount)], ['Maximum JCS', String(transaction.Amount2?.value || '') + ' JCS']);
+      } else if (transaction.TransactionType === 'AMMWithdraw') rows.push(['LP tokens to redeem', String(transaction.LPTokenIn?.value || '')]);
+      if (transaction.Fee) rows.push(['Network fee', exactXrp(transaction.Fee)]);
+      if (transaction.LastLedgerSequence) rows.push(['Last eligible ledger', '#' + transaction.LastLedgerSequence]);
+      xamanSignSummary.replaceChildren(...rows.map(([label, value]) => {
+        const row = document.createElement('div'), term = document.createElement('dt'), detail = document.createElement('dd');
+        term.textContent = label; detail.textContent = value; row.append(term, detail); return row;
+      }));
+    }
+    if (xamanPayloadQr) {
+      xamanPayloadQr.hidden = !qr;
+      xamanPayloadQr.removeAttribute('src');
+      if (qr) xamanPayloadQr.src = qr;
+    }
+    if (xamanQrPlaceholder) {
+      xamanQrPlaceholder.hidden = !!qr;
+      xamanQrPlaceholder.textContent = 'QR unavailable. Use Open in Xaman to open the official signing page.';
+    }
+    if (xamanQrArea) xamanQrArea.hidden = xamanMobile;
+    if (xamanShowQr) { xamanShowQr.hidden = !xamanMobile; xamanShowQr.setAttribute('aria-expanded', 'false'); }
+    if (xamanOpenPayload) {
+      xamanOpenPayload.href = deepLink;
+      xamanOpenPayload.target = xamanMobile ? '_self' : '_blank';
+      xamanOpenPayload.textContent = xamanMobile ? 'Open in Xaman to sign' : 'Open Xaman signing page';
+      xamanOpenPayload.hidden = false;
+    }
+    setSecurityCodeDisplay(code);
+    setXamanSignStatus(xamanMobile
+      ? 'Tap Open in Xaman to review and sign this exact request. Return here afterward for the ledger result.'
+      : 'Scan this QR code with Xaman on your phone, then review and sign. A wallet notification may also arrive.', 'pending');
+    openXamanSignPanel();
+  }
+
+  xamanClosePanel?.addEventListener('click', closeXamanSignPanel);
+  xamanReopenPanel?.addEventListener('click', openXamanSignPanel);
+  xamanSignPanel?.addEventListener('cancel', event => { event.preventDefault(); closeXamanSignPanel(); });
+  xamanShowQr?.addEventListener('click', () => {
+    if (!xamanQrArea) return;
+    xamanQrArea.hidden = !xamanQrArea.hidden;
+    xamanShowQr.setAttribute('aria-expanded', String(!xamanQrArea.hidden));
+  });
+  xamanPayloadQr?.addEventListener('error', () => {
+    xamanPayloadQr.hidden = true;
+    if (xamanQrPlaceholder) { xamanQrPlaceholder.hidden = false; xamanQrPlaceholder.textContent = 'The QR image could not load. Open the Xaman signing page instead.'; }
+  });
 
   function toDrops(xrp) {
     return Math.round(Number(xrp) * XRP_TO_DROPS).toString();
@@ -972,62 +1023,48 @@
     }
   }
 
-  async function pollXamanPayload(created) {
-    for (let attempt = 0; attempt < 45; attempt += 1) {
-      const details = await xumm.payload.get(created);
-      if (details?.meta?.resolved) return details;
-      await new Promise((resolve) => window.setTimeout(resolve, 4000));
-    }
-    throw new Error('The Xaman signing request timed out.');
-  }
-
   let xamanPayloadInFlight = false;
 
-  async function createAndResolveXamanPayload(
-    request,
-    onEvent,
-    onCreated
-  ) {
-    if (!xumm?.payload) {
-      throw new Error('Xaman payload service is unavailable.');
-    }
-    if (xamanPayloadInFlight) {
-      throw new Error('A Xaman request is already active. Complete, reject or close the current request before creating another.');
-    }
-
+  async function createAndResolveXamanPayload(request, onEvent, onCreated) {
+    if (!xumm?.payload) throw new Error('Xaman payload service is unavailable.');
+    if (xamanPayloadInFlight) throw new Error('A Xaman request is already active. Complete or reject it in Xaman before creating another.');
     xamanPayloadInFlight = true;
+    let subscription = null;
     try {
-      if (typeof xumm.payload.createAndSubscribe === 'function') {
-        const subscription = await xumm.payload.createAndSubscribe(
-          request,
-          onEvent
-        );
-        const created = subscription?.created;
+      const receive = event => {
+        const data = event?.data || event || {};
+        if (data.signed === true) setXamanSignStatus('Signed in Xaman. Checking the transaction details…', 'signed');
+        if (data.expired === true && !('signed' in data)) {
+          setXamanSignStatus('This request has expired. If you already opened it in Xaman, check its outcome there before trying again.', 'expired');
+          return data;
+        }
+        return onEvent?.(event);
+      };
+      let created;
+      if (typeof xumm.payload.create === 'function' && typeof xumm.payload.subscribe === 'function') {
+        // Show the QR/deeplink immediately; a delayed status WebSocket must not hide the handoff.
+        created = await xumm.payload.create(request, true);
         if (!created) throw new Error('Xaman returned no payload.');
         onCreated?.(created);
-
-        const resolution = await withTimeout(
-          subscription.resolved,
-          210000,
-          'The Xaman signing request timed out.'
-        );
-
-        let details = null;
-        try { details = await xumm.payload.get(created); } catch {}
-        return { created, resolution, details };
-      }
-
-      const created = await xumm.payload.create(request);
-      if (!created) throw new Error('Xaman returned no payload.');
-      onCreated?.(created);
-
-      const details = await pollXamanPayload(created);
-      return {
-        created,
-        resolution: { signed: details?.meta?.signed === true },
-        details
-      };
+        subscription = await withTimeout(xumm.payload.subscribe(created, receive), 20000,
+          'The request is in Xaman, but its status connection could not open. Check this request in Xaman.');
+      } else if (typeof xumm.payload.createAndSubscribe === 'function') {
+        subscription = await xumm.payload.createAndSubscribe(request, receive);
+        created = subscription?.created;
+        if (!created) throw new Error('Xaman returned no payload.');
+        onCreated?.(created);
+      } else throw new Error('Xaman live signing status is unavailable. Reload the page before trying again.');
+      if (!subscription?.resolved) throw new Error('Xaman returned no signing-status subscription.');
+      const resolution = await withTimeout(subscription.resolved, 210000,
+        'Signing status timed out. Check this request in Xaman before starting another.');
+      let details = null;
+      try { details = await xumm.payload.get(created); } catch {}
+      return { created, resolution, details };
+    } catch (error) {
+      setXamanSignStatus(error?.message || 'The signing request could not be completed. Check Xaman.', 'error');
+      throw error;
     } finally {
+      try { subscription?.websocket?.close(); } catch {}
       xamanPayloadInFlight = false;
     }
   }
@@ -1164,14 +1201,12 @@
           );
           setStatus(trustlineMsg, 'Preparing the Xaman trustline request…');
 
-          const returnUrl = location.origin + location.pathname;
           const request = {
             txjson,
             options: {
               submit: true,
-              expire: 300,
-              force_network: 'MAINNET',
-              return_url: { app: returnUrl, web: returnUrl }
+              expire: 3,
+              force_network: 'MAINNET'
             },
             custom_meta: {
               instruction:
@@ -1189,7 +1224,7 @@
                   eventMessage ||
                   {};
 
-                if ('opened' in eventData) {
+                if (eventData.opened === true) {
                   setStatus(
                     trustlineMsg,
                     'The trustline request is open in Xaman. Verify the code and details.'
@@ -1210,7 +1245,7 @@
 
                 if ('signed' in eventData) return eventData;
               },
-              (created) => showXamanSignRequest(created, code, 'trust')
+              (created) => showXamanSignRequest(created, code, 'trust', txjson)
             );
 
           if (!xamanPayloadWasSigned(result, details)) {
@@ -1298,14 +1333,12 @@
       'Verify code ' + code + ' and every transaction field in Xaman.'
     );
 
-    const returnUrl = location.origin + location.pathname;
     const request = {
       txjson,
       options: {
         submit: true,
-        expire: 300,
-        force_network: 'MAINNET',
-        return_url: { app: returnUrl, web: returnUrl }
+        expire: 3,
+        force_network: 'MAINNET'
       },
       custom_meta: {
         instruction:
@@ -1323,7 +1356,7 @@
             eventMessage ||
             {};
 
-          if ('opened' in eventData) {
+          if (eventData.opened === true) {
             setStatus($('tradeMsg'), 'The request is open in Xaman. Verify the code and details.');
             setXamanSignStatus(
               'The request is open in Xaman. Verify the code and details.',
@@ -1341,7 +1374,7 @@
 
           if ('signed' in eventData) return eventData;
         },
-        (created) => showXamanSignRequest(created, code, purpose)
+        (created) => showXamanSignRequest(created, code, purpose, txjson)
       );
 
     if (!xamanPayloadWasSigned(resolution, payloadDetails)) {
@@ -1349,6 +1382,8 @@
       setSecurityCodeDisplay(null);
       throw new Error('The Xaman request was not signed.');
     }
+
+    setXamanSignStatus('Signed in Xaman. Checking the returned transaction details…', 'signed');
 
     const nodeType =
       payloadDetails?.response?.dispatched_nodetype ||
@@ -1359,6 +1394,7 @@
       !String(nodeType).toUpperCase().includes('MAINNET')
     ) {
       setSecurityCodeDisplay(null);
+      setXamanSignStatus('The request was not dispatched to XRPL Mainnet. Check its outcome in Xaman.', 'error');
       throw new Error('The request was not dispatched to XRPL Mainnet.');
     }
 
@@ -1369,6 +1405,7 @@
       '';
 
     if (!txid) {
+      setXamanSignStatus('Xaman reported a signature without a transaction ID. Check the outcome in your wallet before starting again.', 'error');
       setSecurityCodeDisplay(null);
       throw new Error(
         'Xaman signed the request but returned no transaction ID.'

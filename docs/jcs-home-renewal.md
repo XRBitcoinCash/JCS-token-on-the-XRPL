@@ -16,10 +16,11 @@ The modern film is the distributor’s official trailer, not a hosted copy of th
 
 Run `npm ci && npm test` with a current supported Node.js runtime. These dependencies are for development checks only; the site still deploys as static files.
 
-- Exact decimal/XRP/LP arithmetic and bounds: 5 passing tests.
-- Mocked financial UI flows and failure guards: 13 passing scenarios.
+- Exact decimal/XRP/LP arithmetic and bounds: 6 passing tests.
+- Mocked financial UI flows and failure guards: 18 passing scenarios.
 - Core transaction/account/finality verification: 9 passing scenarios.
 - Market observation, stale data, fallback and refresh behavior: passing.
+- Desktop/mobile signing dialog and payload lifecycle: 8 passing scenarios.
 - Full-page initialization, initial refresh, subsequent minute update, chart and removals: 14 passing assertions.
 - JavaScript syntax, local resources, unique IDs, local anchors and diff whitespace: passing.
 - The public CoinGecko reference endpoint returned HTTP 200 with CORS permission during development.
@@ -27,6 +28,16 @@ Run `npm ci && npm test` with a current supported Node.js runtime. These depende
 Release verification on September 13, 2026 confirmed that the public homepage and its published assets matched the merged source. A desktop browser loaded real validated ledger and JCS/XRP pool data, collected multiple chart observations at the minute interval, and opened the liquidity tab. The official trailer player loaded; the silent companion played and the shared pause control stopped it. No application console errors were observed. The chart observation text now uses the theme foreground color, and its interactive controls are no longer nested in an image role.
 
 The automated checks simulate ledger and wallet results; they do not establish live transaction execution. A physical phone, actual Xaman signing and successful modern-trailer playback remain unverified. No wallet transaction was submitted.
+
+## Liquidity and signing repair
+
+The liquidity workspace now provides a pool overview, wallet position, balances, network reserve and fee details, two editable maximum deposit amounts, balance percentages, and an LP/share estimate before review. The existing native two-asset deposit and proportional withdrawal modes are retained. Balance shortcuts account for both assets, reserve requirements, the fee and an extra 1 XRP buffer. Full amounts and ledger identities remain available in the details section.
+
+The signing dialog is a direct child of the page body, outside the exchange tabs. This fixes the defect where selecting Liquidity hid the signing interface inside the Trade tab. Desktop always displays the provider QR, including when a push notification was delivered. Mobile uses a deliberate same-device Open in Xaman link; an optional QR supports a second phone. Hiding and reopening preserves the same pending request. Terminal outcomes remove the old QR and link.
+
+The preferred SDK path creates the request and immediately displays its QR/link before subscribing to status updates. The compatible create-and-subscribe path is retained. Requests use a three-minute provider opening window, while the existing transaction ledger deadline remains unchanged. Return URLs are omitted so wallet handoff does not replace the original page and lose its in-memory review. Actual signatures and funds are never simulated as live results.
+
+Regression coverage includes exact input caps, reserve-limited presets, preservation of reviewed amounts, visible signing from the Liquidity tab, desktop push/no-push, phone handoff, duplicate submissions, hide/reopen, rejection, expiry, missing transaction results and ledger-confirmed completion with a fake wallet. A real wallet signature is still a user-device check.
 
 ## Primary references
 
@@ -38,3 +49,6 @@ The automated checks simulate ledger and wallet results; they do not establish l
 - [Official distributor Passion trailer](https://www.youtube.com/watch?v=itiY6yl8mS4)
 - [Official film information](https://www.20thcenturystudios.com/movies/the-passion-of-the-christ)
 - [YouTube player API](https://developers.google.com/youtube/iframe_api_reference)
+
+- [Xaman browser signing flows](https://docs.xaman.dev/js-ts-sdk/examples-user-stories/sign-requests-payloads/browser)
+- [Xaman payload creation and provider QR](https://docs.xaman.dev/js-ts-sdk/sdk-syntax/xumm.payload/create)

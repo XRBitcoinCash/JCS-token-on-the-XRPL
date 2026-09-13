@@ -5804,7 +5804,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .jcs-index-header *,.jcs-index-header *::before,.jcs-index-header *::after{scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
 </style>
-<link href="./css/jcs-renewal.css" rel="stylesheet"/><link href="./css/jcs-market.css" rel="stylesheet"/><link href="./css/jcs-liquidity.css" rel="stylesheet"/></head>
+<link href="./css/jcs-renewal.css" rel="stylesheet"/><link href="./css/jcs-market.css" rel="stylesheet"/><link href="./css/jcs-liquidity.css" rel="stylesheet"/><link href="./css/jcs-signing.css" rel="stylesheet"/></head>
 <body id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header jcs-home-header jcs-index-header" role="banner">
@@ -6220,30 +6220,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <p aria-live="polite" class="status trade-status-modern" id="tradeMsg">
         Connect Xaman and confirm the JCS trustline to begin.
       </p>
-<div aria-live="polite" class="xaman-sign-panel" hidden="" id="xamanSignPanel">
-<div class="xaman-sign-grid">
-<div class="xaman-sign-copy">
-<h3 id="xamanSignTitle">Review in Xaman</h3>
-<p id="xamanSignStatus">Open Xaman on this device or scan the QR code with your phone.</p>
-<p class="xaman-code-instruction" id="xamanCodeInstruction">
-              Do not sign until the six-digit code below matches the verification memo shown in Xaman.
-            </p>
-<div aria-label="Xaman six-digit verification code" aria-live="assertive" class="xaman-sign-code" hidden="" id="xamanSecurityCode" role="status"></div>
-<div class="xaman-sign-actions">
-<a class="btn glow glow-green" hidden="" href="#" id="xamanOpenPayload" rel="noopener noreferrer" target="_blank">
-                Open in Xaman
-              </a>
-<button class="btn" id="xamanClosePanel" type="button">Close</button>
-</div>
-</div>
-<div class="xaman-sign-qr">
-<img alt="Scan with Xaman to review and sign" height="200" hidden="" id="xamanPayloadQr" width="200"/>
-<div class="xaman-sign-qr-placeholder" id="xamanQrPlaceholder">
-              The Xaman sign-request QR code will appear here.
-            </div>
-</div>
-</div>
-</div>
 <select hidden="" id="side">
 <option selected="" value="buy">Buy</option>
 <option value="sell">Sell</option>
@@ -6624,5 +6600,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     "silent_companion": "1903 public-domain film",
     "playback": "Explicit user controls"
   }
-}</script></body>
+}</script>
+<dialog aria-modal="true" aria-labelledby="xamanSignTitle" aria-describedby="xamanSignStatus" class="xaman-sign-panel" hidden="" id="xamanSignPanel">
+<div class="xaman-sign-heading"><span class="xaman-sign-eyebrow">Your approval · Xaman</span><button class="btn" id="xamanClosePanel" type="button">Hide</button></div>
+<h2 id="xamanSignTitle" tabindex="-1">Review in Xaman</h2>
+<p aria-live="polite" id="xamanSignStatus">Scan the QR code or open this request in Xaman.</p>
+<div class="xaman-sign-grid">
+<div class="xaman-sign-copy">
+<dl class="xaman-sign-summary" id="xamanSignSummary"></dl>
+<p class="xaman-code-instruction" id="xamanCodeInstruction">Match this code with the verification memo in Xaman, then check the amounts before signing.</p>
+<div aria-label="Xaman six-digit verification code" aria-live="polite" class="xaman-sign-code" hidden="" id="xamanSecurityCode" role="status"></div>
+<div class="xaman-sign-actions"><a class="btn" hidden="" href="#" id="xamanOpenPayload" rel="noopener noreferrer" target="_blank">Open in Xaman</a><button class="btn" hidden="" id="xamanShowQr" type="button" aria-expanded="false" aria-controls="xamanQrArea">Use another phone · show QR</button></div>
+<p class="xaman-sign-help" id="xamanSignHelp">Hiding this window keeps the request active. Complete or reject it in Xaman.</p>
+</div>
+<div class="xaman-sign-qr" id="xamanQrArea"><img alt="Scan this request with Xaman to review and sign" height="240" hidden="" id="xamanPayloadQr" width="240"/><div class="xaman-sign-qr-placeholder" id="xamanQrPlaceholder">Preparing the Xaman QR code…</div><p>Open Xaman on your phone and scan.</p></div>
+</div>
+</dialog>
+<button class="btn xaman-sign-reopen" hidden="" id="xamanReopenPanel" type="button">View Xaman request</button>
+</body>
 </html>

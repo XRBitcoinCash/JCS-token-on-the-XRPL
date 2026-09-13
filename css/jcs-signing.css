@@ -1,0 +1,28 @@
+/* Shared signing dialog: outside every exchange tab, including Liquidity. */
+#xamanSignPanel[hidden],#xamanSignPanel [hidden],#xamanReopenPanel[hidden]{display:none!important}
+#xamanSignPanel{position:fixed;inset:0;box-sizing:border-box;margin:auto;width:min(780px,calc(100% - 28px));max-width:none;max-height:calc(100dvh - 32px);overflow:auto;padding:26px;border:1px solid #bcaa78;border-radius:22px;background:var(--home-surface,#0c1826)!important;color:var(--home-ink,#edf1f4);box-shadow:0 24px 100px #0008;z-index:10000;text-align:left}
+#xamanSignPanel::backdrop{background:#02090ddd;backdrop-filter:blur(5px)}
+#xamanSignPanel:not([open]){display:none}
+#xamanSignPanel *{box-sizing:border-box}
+#xamanSignPanel .xaman-sign-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+#xamanSignPanel .xaman-sign-eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:750;color:var(--home-gold,#947332)}
+#xamanSignPanel h2{font:500 clamp(25px,4vw,33px)/1.2 Georgia,serif;color:inherit;margin:20px 0 12px;letter-spacing:-.025em}
+#xamanSignStatus{padding:12px 14px;margin:0 0 20px;border:1px solid var(--home-line,#ffffff20);border-radius:11px;font-size:14px;line-height:1.65;overflow-wrap:anywhere;background:var(--home-surface-2,#ffffff05)}
+#xamanSignPanel .xaman-sign-grid{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:24px;align-items:start}
+#xamanSignPanel .xaman-sign-copy{min-width:0}
+#xamanSignPanel .xaman-sign-summary{margin:0 0 18px;font-size:13px}
+#xamanSignPanel .xaman-sign-summary>div{display:grid;grid-template-columns:minmax(85px,.7fr) minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--home-line,#ffffff16)}
+#xamanSignPanel dt{color:var(--home-muted,#627069)}
+#xamanSignPanel dd{margin:0;text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;color:inherit}
+#xamanSignPanel .xaman-code-instruction,#xamanSignPanel .xaman-sign-help{font-size:12px;line-height:1.65;color:var(--home-muted,#627069)}
+#xamanSignPanel #xamanSecurityCode{font-size:clamp(15px,3.5vw,20px)!important;padding:13px!important;letter-spacing:.045em!important;overflow-wrap:anywhere;min-width:0}
+#xamanSignPanel .xaman-sign-actions{display:flex;flex-direction:column;gap:10px;align-items:stretch;margin-top:16px}
+#xamanSignPanel .btn{min-height:46px;font-size:14px;white-space:normal;text-align:center;justify-content:center}
+#xamanSignPanel #xamanOpenPayload{background:#cfb578!important;border-color:#cfb578!important;color:#14211b!important;font-weight:750;text-decoration:none}
+#xamanSignPanel .xaman-sign-qr{margin:0;display:block;width:264px;max-width:100%;padding:12px;background:#fff;border-radius:14px;min-height:0;border:0;color:#24312b}
+#xamanSignPanel .xaman-sign-qr img{width:240px;max-width:100%;height:auto;aspect-ratio:1;object-fit:contain;display:block;border:0;border-radius:0;background:#fff}
+#xamanSignPanel .xaman-sign-qr p{font-size:12px;text-align:center;margin:12px 0 2px;line-height:1.5;color:#24312b}
+#xamanSignPanel .xaman-sign-qr-placeholder{min-height:200px;display:grid;place-items:center;text-align:center;padding:14px;color:#24312b;font-size:14px}
+#xamanSignPanel .btn:focus-visible,#xamanReopenPanel:focus-visible{outline:3px solid #bc9f60;outline-offset:3px}
+#xamanReopenPanel{position:fixed;bottom:max(18px,env(safe-area-inset-bottom));left:18px;z-index:9998;min-height:48px;padding:12px 18px;max-width:calc(100% - 36px);background:#cfb578!important;border:1px solid #a58b51;color:#14211b!important;box-shadow:0 6px 25px #0005;font-weight:750}
+@media(max-width:620px){#xamanSignPanel{width:calc(100% - 20px);padding:18px;border-radius:17px}#xamanSignPanel .xaman-sign-grid{grid-template-columns:minmax(0,1fr);gap:18px}#xamanSignPanel .xaman-sign-qr{margin-inline:auto}#xamanSignPanel .xaman-sign-eyebrow{font-size:10px}#xamanSignPanel h2{margin-top:16px}}
