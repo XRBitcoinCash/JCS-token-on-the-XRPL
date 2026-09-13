@@ -8579,6 +8579,132 @@ body.exchange-focus #jcs-world-watch{display:none!important}
   }
 }
 
+
+
+/* 2026 media polish: unified listening, sacred atmosphere, and readable source notes. */
+html{background:#07111f!important}
+body{
+  isolation:isolate!important;
+  position:relative!important;
+  background:
+    radial-gradient(ellipse at 14% 8%,rgba(117,201,239,.13),transparent 31rem),
+    radial-gradient(ellipse at 88% 22%,rgba(182,160,235,.10),transparent 28rem),
+    linear-gradient(135deg,#06101e 0%,#0b1825 48%,#071219 100%)!important;
+}
+body::before{
+  content:""!important;position:fixed!important;inset:-18%!important;z-index:-2!important;pointer-events:none!important;
+  background:
+    radial-gradient(ellipse at 20% 22%,rgba(130,205,245,.16),transparent 29%),
+    radial-gradient(ellipse at 75% 16%,rgba(164,145,219,.15),transparent 25%),
+    radial-gradient(ellipse at 54% 86%,rgba(218,186,121,.08),transparent 32%),
+    conic-gradient(from 210deg at 50% 50%,transparent 0 22%,rgba(89,171,208,.08) 30%,transparent 43%,rgba(204,182,235,.06) 63%,transparent 80%);
+  filter:blur(28px) saturate(110%);
+  animation:jcsHolyFlow 34s ease-in-out infinite alternate;
+}
+body::after{
+  content:""!important;position:fixed!important;inset:0!important;z-index:-1!important;pointer-events:none!important;
+  background:
+    linear-gradient(180deg,rgba(4,11,22,.30),rgba(4,11,22,.70)),
+    url("/jcs-logo.png") center 7%/min(36vw,520px) auto no-repeat;
+  opacity:.16;filter:grayscale(.55) sepia(.15) contrast(.92);
+}
+@keyframes jcsHolyFlow{0%{transform:translate3d(-2%,-1%,0) scale(1.02)}50%{transform:translate3d(1%,2%,0) scale(1.07)}100%{transform:translate3d(3%,-1%,0) scale(1.04)}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none!important}}
+
+#main-content .jesus-film-card{
+  position:relative!important;overflow:hidden!important;
+  border-color:rgba(130,205,245,.38)!important;
+  background:linear-gradient(135deg,rgba(23,48,67,.94),rgba(13,33,40,.98))!important;
+  box-shadow:0 0 0 1px rgba(130,205,245,.10),0 0 34px rgba(87,187,242,.12)!important;
+}
+#main-content .jesus-film-card::before{
+  content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;
+  background:radial-gradient(ellipse at 72% 4%,rgba(152,222,255,.19),transparent 48%),radial-gradient(ellipse at 8% 86%,rgba(110,155,217,.11),transparent 42%);
+}
+#main-content .jesus-film-card>*{position:relative;z-index:1}
+#main-content .jesus-film-card .film-kicker{
+  font-family:"UnifrakturCook","UnifrakturMaguntia","Old English Text MT",Georgia,serif!important;
+  letter-spacing:.12em!important;color:#b9e9ff!important;text-shadow:0 0 18px rgba(96,199,255,.38)!important;
+}
+#main-content .jesus-film-card h3{
+  font-family:"UnifrakturCook","UnifrakturMaguntia","Old English Text MT",Georgia,serif!important;
+  letter-spacing:-.02em!important;text-shadow:0 0 22px rgba(145,217,255,.23)!important;
+}
+#main-content .jesus-film-card .jcs-film-embed{margin:22px 0 16px!important;padding:16px!important}
+#main-content .jesus-film-card .jcs-film-video{min-height:300px!important;border-color:rgba(147,216,255,.30)!important;box-shadow:inset 0 0 36px rgba(73,131,177,.10)!important}
+#main-content .jesus-film-card .film-player-status{padding:0 4px!important}
+#main-content .film-sources{
+  width:min(900px,100%)!important;margin:24px auto 0!important;padding:0 28px!important;text-align:center!important;
+  border-color:rgba(223,193,128,.28)!important;
+}
+#main-content .film-sources summary{padding:16px 0!important;color:var(--home-gold)!important;text-align:center!important}
+#main-content .film-sources p{margin:12px auto!important;max-width:70ch!important;color:var(--home-gold)!important;line-height:1.65!important}
+#main-content .film-sources a{color:var(--home-blue)!important}
+
+#main-content #audio .audio-master-actions{display:flex!important;justify-content:flex-end!important}
+#main-content #audio .unified-media-toggle{min-width:120px!important;min-height:48px!important;letter-spacing:.03em!important}
+#main-content #audio .listen-button,
+#main-content #audio #musicStop,
+#main-content #audio #readingStop,
+#main-content #audio #filmStart,
+#main-content #audio #filmStop{display:none!important}
+#main-content #audio .listening-symbol{
+  color:hsl(var(--holy-hue,42deg) 68% 72%)!important;transition:color .8s ease,filter .8s ease!important;
+}
+#main-content #audio .audio-channel .listen-disc{
+  width:108px!important;height:108px!important;display:grid!important;place-items:center!important;
+  margin:22px auto 28px!important;border-radius:50%!important;
+  border:1px solid hsl(var(--holy-hue,42deg) 68% 72% / .78)!important;
+  background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.08),rgba(8,22,21,.9) 68%)!important;
+  color:hsl(var(--holy-hue,42deg) 68% 72%)!important;
+  box-shadow:0 0 0 7px rgba(121,191,224,.08),0 0 18px rgba(121,191,224,.11)!important;
+  font-size:.74rem!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+  transition:color .8s ease,border-color .8s ease,box-shadow .8s ease,transform .8s ease!important;
+}
+#main-content #audio .film-disc{margin-top:14px!important;margin-bottom:18px!important}
+#main-content #audio.is-playing .listen-disc,
+#main-content #audio.is-playing .listening-symbol{
+  animation:jcsHolyPulse 3.6s ease-in-out infinite alternate!important;
+  filter:drop-shadow(0 0 10px hsl(var(--holy-hue,42deg) 68% 72% / .32))!important;
+}
+#main-content #audio.is-playing .audio-channel:nth-child(2) .listen-disc{animation-delay:-1.1s!important}
+#main-content #audio.is-playing .audio-channel:nth-child(3) .listen-disc{animation-delay:-2.2s!important}
+@keyframes jcsHolyPulse{
+  0%{transform:scale(.97);box-shadow:0 0 0 6px rgba(121,191,224,.08),0 0 12px rgba(121,191,224,.10)}
+  100%{transform:scale(1.04);box-shadow:0 0 0 12px rgba(221,193,128,.10),0 0 30px rgba(121,191,224,.25)}
+}
+@media(prefers-reduced-motion:reduce){
+  #main-content #audio.is-playing .listen-disc,#main-content #audio.is-playing .listening-symbol{animation:none!important}
+}
+#main-content .comparison-chart{
+  position:relative!important;min-height:250px!important;padding:18px 14px 12px!important;
+  border:1px solid rgba(134,215,194,.24)!important;
+  background:linear-gradient(145deg,rgba(21,49,45,.76),rgba(7,25,29,.92))!important;
+}
+#main-content .comparison-chart.has-live-data::after{
+  content:"LIVE"!important;position:absolute!important;top:10px!important;right:12px!important;
+  padding:3px 7px!important;border:1px solid rgba(134,215,194,.35)!important;border-radius:999px!important;
+  color:#86d7c2!important;font-size:.54rem!important;letter-spacing:.12em!important;
+  animation:jcsChartPulse 2.4s ease-in-out infinite alternate!important;
+}
+#main-content .chart-series.rlusd::before{background:#86d7c2!important}
+#main-content .comparison-inspector-label{
+  display:block!important;margin-top:14px!important;color:var(--home-gold)!important;
+  font-size:.72rem!important;letter-spacing:.04em!important;text-align:center!important;
+}
+#main-content #comparisonObservation{accent-color:#dfc180!important;width:100%!important}
+#main-content .comparison-observation{
+  display:block!important;margin-top:8px!important;text-align:center!important;font-variant-numeric:tabular-nums!important;
+}
+@keyframes jcsChartPulse{0%{opacity:.55}100%{opacity:1}}
+@media(max-width:640px){
+  #main-content .film-sources{padding:0 18px!important}
+  #main-content .jesus-film-card .jcs-film-video{min-height:190px!important}
+  #main-content #audio .audio-master-actions{justify-content:flex-start!important}
+  #main-content #audio .unified-media-toggle{width:100%!important}
+  #main-content #audio .audio-channel .listen-disc{width:94px!important;height:94px!important}
+}
+
 </style><style data-source="css/jcs-market.css">
 #jcsComparisonChart{min-height:210px;color:var(--muted,#b5b7bf);border-block:1px solid var(--line,#283345);margin:18px 0;padding:10px 0}
 #jcsComparisonChart svg{display:block;width:100%;height:auto;overflow:visible}
@@ -8849,7 +8975,7 @@ body.exchange-focus #jcs-world-watch{display:none!important}
 <span>JCS price reference</span>
 <strong id="homeMarketPrice">Loading validated market evidence…</strong>
 </div>
-<div class="dashboard-chart comparison-chart" id="jcsComparisonChart"><p>Waiting for real market observations…</p></div><div aria-label="Chart series" class="chart-legend"><span class="chart-series jcs">JCS / USD</span><span class="chart-series xrp">XRP / USD</span><span class="chart-series btc">BTC / USD</span></div><p aria-live="polite" class="chart-status" id="jcsChartStatus">Changes are measured from the first observation in this session.</p><button class="chart-reset" id="jcsChartReset" type="button">Reset session chart</button>
+<div class="dashboard-chart comparison-chart" id="jcsComparisonChart"><p>Waiting for real JCS, XRP and RLUSD market observations…</p></div><div aria-label="Chart series" class="chart-legend"><span class="chart-series jcs">JCS / USD</span><span class="chart-series xrp">XRP / USD</span><span class="chart-series rlusd">RLUSD / USD</span></div><p aria-live="polite" class="chart-status" id="jcsChartStatus">Validated JCS, XRP and RLUSD observations move this window in real time.</p><button class="chart-reset" id="jcsChartReset" type="button">Reset session chart</button>
 <div class="dashboard-metrics">
 <div class="dashboard-metric"><span>Pool price</span><strong id="homeAmmState">—</strong></div>
 <div class="dashboard-metric"><span>Validated ledger</span><strong id="homeLedgerState">—</strong></div>
@@ -8969,11 +9095,10 @@ Your browser does not support the in-page JESUS film player. Use the official so
 <div>
 <span class="jcs-eyebrow">Settle into the sacred</span>
 <h2 id="audio-title">A little space to listen.</h2>
-<p>Choose music, spoken Scripture, the public-domain film, or Play all three. One deliberate tap starts the available in-page channels together.</p>
+<p>Press one button to start music, spoken Scripture and the public-domain film together. Press it again to pause every channel.</p>
 </div>
 <div class="audio-master-actions">
-<button class="btn primary-faith" id="audioStartAll" type="button">Play all three</button>
-<button class="btn" id="audioStopAll" type="button">Pause all</button>
+<button aria-pressed="false" class="btn primary-faith unified-media-toggle" id="audioStartAll" type="button" aria-label="Play all listening channels">Play</button>
 </div>
 </div>
 <div class="audio-grid sacred-media-grid">
@@ -8981,9 +9106,8 @@ Your browser does not support the in-page JESUS film player. Use the official so
 <span aria-hidden="true" class="listening-symbol">♫</span><h3>Sacred music</h3>
 <p>Chant, hymns and archival sacred recordings.</p>
 <audio id="musicAudio" playsinline="" preload="metadata"></audio>
-<button class="listen-button" id="musicStart" type="button"><span aria-hidden="true">▶</span><span>Listen</span></button>
+<span class="listen-disc" aria-hidden="true">Listen</span>
 <div class="audio-controls listening-footer">
-<button class="btn" id="musicStop" type="button">Pause</button>
 <label for="musicVolume">Volume</label>
 <input id="musicVolume" max="1" min="0" step="0.01" type="range" value="0.35"/>
 </div>
@@ -8993,9 +9117,8 @@ Your browser does not support the in-page JESUS film player. Use the official so
 <span aria-hidden="true" class="listening-symbol">✝</span><h3>Spoken Scripture</h3>
 <p>Psalms and readings from the public-domain library.</p>
 <audio id="readingAudio" playsinline="" preload="metadata"></audio>
-<button class="listen-button" id="readingStart" type="button"><span aria-hidden="true">▶</span><span>Listen</span></button>
+<span class="listen-disc" aria-hidden="true">Listen</span>
 <div class="audio-controls listening-footer">
-<button class="btn" id="readingStop" type="button">Pause</button>
 <label for="readingVolume">Volume</label>
 <input id="readingVolume" max="1" min="0" step="0.01" type="range" value="0.8"/>
 </div>
@@ -9005,7 +9128,7 @@ Your browser does not support the in-page JESUS film player. Use the official so
 <span aria-hidden="true" class="listening-symbol">✝</span><h3>The Passion of the Christ · 1903</h3>
 <p>Public-domain silent film, playing in this card as the listening companion.</p>
 <div class="jcs-inline-film">
-<video aria-describedby="passionLicense" controls="" id="passionVideo" playsinline="" poster="./jcs-logo.png" preload="metadata" tabindex="0" webkit-playsinline="">
+<video aria-describedby="passionLicense" id="passionVideo" playsinline="" poster="./jcs-logo.png" preload="metadata" tabindex="0" webkit-playsinline="">
 <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.360p.webm" type="video/webm"/>
 <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Vie_et_Passion_du_Christ_%281903%29.webm/Vie_et_Passion_du_Christ_%281903%29.webm.144p.mjpeg.mov" type="video/quicktime"/>
 <source src="https://upload.wikimedia.org/wikipedia/commons/5/53/Vie_et_Passion_du_Christ_%281903%29.webm" type="video/webm"/>
@@ -9013,15 +9136,14 @@ Your browser does not support the in-page JESUS film player. Use the official so
 Your browser does not support the public-domain film stream.
 </video>
 </div>
-<button class="listen-button film-button" id="filmStart" type="button"><span aria-hidden="true">▶</span><span>Play film</span></button>
+<span class="listen-disc film-disc" aria-hidden="true">Film</span>
 <div class="audio-controls listening-footer film-controls">
-<button class="btn" id="filmStop" type="button" disabled="">Pause</button>
 <span class="film-channel-label">Public-domain companion</span>
 </div>
 <div class="now-playing" id="filmNow">Ready when you are.</div>
 </article>
 </div>
-<p aria-live="polite" class="audio-policy" id="audioStatus">Nothing plays until you choose Play all three or Listen to a channel. Audio and film pause when you leave the page.</p>
+<p aria-live="polite" class="audio-policy" id="audioStatus">Press Play to start every listening channel together. Press Pause to stop them all; channels pause when you leave the page.</p>
 </section>
 <section aria-label="Jesus Christ Saves Token wallet connection" class="jcs-module-section">
 <article class="card wallet-card jcs-wallet-card">
@@ -9923,7 +10045,7 @@ try {
     return n;
   };
   function recentUsd() {
-    return usd && Date.now()-usd.observedAt < MAX_AGE &&
+    return usd && number(usd.xrp) && number(usd.rlusd) && Date.now()-usd.observedAt < MAX_AGE &&
       Date.now()-usd.providerAt < MAX_AGE && Date.now()-usd.providerAt > -60000;
   }
   async function prices() {
@@ -9933,27 +10055,27 @@ try {
     usdTask = (async () => {
       const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 10000);
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple,bitcoin&vs_currencies=usd&include_last_updated_at=true', {credentials:'omit', signal:controller.signal});
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple-usd,ripple&vs_currencies=usd&include_last_updated_at=true', {credentials:'omit', signal:controller.signal});
         if (!response.ok) throw new Error('Reference prices unavailable');
         const data = await response.json();
-        if (!number(data.ripple?.usd) || !number(data.bitcoin?.usd) || !number(data.ripple?.last_updated_at) || !number(data.bitcoin?.last_updated_at)) throw new Error('Incomplete reference prices');
-        const providerAt = Math.min(data.ripple.last_updated_at, data.bitcoin.last_updated_at)*1000;
+        if (!number(data.ripple?.usd) || !number(data['ripple-usd']?.usd) || !number(data.ripple?.last_updated_at) || !number(data['ripple-usd']?.last_updated_at)) throw new Error('Incomplete reference prices');
+        const providerAt = Math.min(data.ripple.last_updated_at, data['ripple-usd'].last_updated_at)*1000;
         if (Date.now()-providerAt >= MAX_AGE || providerAt-Date.now() > 60000) throw new Error('Reference prices are stale');
-        usd = {xrp:Number(data.ripple.usd), btc:Number(data.bitcoin.usd), observedAt:Date.now(), providerAt:Math.min(data.ripple.last_updated_at, data.bitcoin.last_updated_at)*1000, provider:'CoinGecko'};
+        usd = {xrp:Number(data.ripple.usd), rlusd:Number(data['ripple-usd'].usd), observedAt:Date.now(), providerAt, provider:'CoinGecko'};
       } catch {
         // Public spot-price fallback; preserve provenance rather than mixing providers.
         try {
           const fallbackController = new AbortController();
           const fallbackTimeout = setTimeout(() => fallbackController.abort(), 10000);
           try {
-            const values = await Promise.all(['XRP','BTC'].map(async asset => {
+            const values = await Promise.all(['XRP','RLUSD'].map(async asset => {
               const r = await fetch(`https://api.coinbase.com/v2/prices/${asset}-USD/spot`, {credentials:'omit', signal:fallbackController.signal});
               if (!r.ok) throw new Error('Reference unavailable');
               const body = await r.json();
               if (body.data?.currency !== 'USD' || !number(body.data?.amount)) throw new Error('Invalid reference');
               return Number(body.data.amount);
             }));
-            usd = {xrp:values[0], btc:values[1], observedAt:Date.now(), providerAt:Date.now(), provider:'Coinbase spot (observed)'};
+            usd = {xrp:values[0], rlusd:values[1], observedAt:Date.now(), providerAt:Date.now(), provider:'Coinbase spot (observed)'};
           } finally { clearTimeout(fallbackTimeout); }
         } catch { /* Native XRPL evidence remains available without a USD reference. */ }
       }
@@ -9981,21 +10103,23 @@ try {
     const host = $('jcsComparisonChart');
     if (!host) return;
     host.replaceChildren();
+    host.classList.toggle('has-live-data', series.length > 0);
+    host.dataset.observations = String(series.length);
     if (series.length < 2) {
       const message = document.createElement('p');
       message.className = 'comparison-empty';
-      message.textContent = series.length ? 'First observation recorded. The comparison appears after the next 60-second update.' : 'Waiting for current JCS, XRP and Bitcoin prices. The chart starts with this visit.';
+      message.textContent = series.length ? 'First observation recorded. The comparison appears after the next 60-second update.' : 'Waiting for current JCS, XRP and RLUSD prices. The chart starts with this visit.';
       host.append(message);
       return;
     }
     const W=500,H=245,L=54,R=13,T=17,B=36, start=series[0], end=series.at(-1);
-    const keys = [['jcs','JCS','#dfc180'],['xrp','XRP','#8cbae0'],['btc','Bitcoin','#bca3d6']];
+    const keys = [['jcs','JCS','#dfc180'],['xrp','XRP','#8cbae0'],['rlusd','RLUSD','#86d7c2']];
     const percentages = series.flatMap(s=>keys.map(([key])=>(s[key]/start[key]-1)*100));
     let min = Math.min(0,...percentages), max = Math.max(0,...percentages);
     const pad = Math.max((max-min)*.15,.02); min-=pad; max+=pad;
     const x = s=>L+(s.at-start.at)/(end.at-start.at)*(W-L-R);
     const y = p=>T+(max-p)/(max-min)*(H-T-B);
-    const svg = svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Percentage price change since the first observation this visit: JCS, XRP and Bitcoin in US dollars.'});
+    const svg = svgNode('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Percentage price change since the first observation this visit: JCS, XRP and RLUSD in US dollars.'});
     for(let i=0;i<4;i++) {
       const p=min+(max-min)*i/3, py=y(p);
       svg.append(svgNode('line',{x1:L,x2:W-R,y1:py,y2:py,stroke:'currentColor',opacity:'.12'}));
@@ -10015,7 +10139,7 @@ try {
     const label=document.createElement('label'); label.htmlFor='comparisonObservation';label.className='comparison-inspector-label';label.textContent='Inspect an observation';
     const slider=document.createElement('input');slider.type='range';slider.id='comparisonObservation';slider.min='0';slider.max=String(series.length-1);slider.value=slider.max;slider.step='1';
     const out=document.createElement('output');out.setAttribute('for',slider.id);out.className='comparison-observation';
-    const inspect=()=>{const s=series[Number(slider.value)];out.textContent=`${stamp(s.at)} · JCS $${fmt(s.jcs)} · XRP $${fmt(s.xrp,6)} · BTC $${fmt(s.btc,7)}`;slider.setAttribute('aria-valuetext',out.textContent);};
+    const inspect=()=>{const s=series[Number(slider.value)];out.textContent=`${stamp(s.at)} · JCS ${fmt(s.jcs)} · XRP ${fmt(s.xrp,6)} · RLUSD ${fmt(s.rlusd,6)}`;slider.setAttribute('aria-valuetext',out.textContent);};
     slider.addEventListener('input',inspect);inspect();host.append(label,slider,out);
   }
   async function onSnapshot(event) {
@@ -10037,11 +10161,11 @@ try {
     set('jcsProjectPrice','$'+fmt(jcs));
     set('jcsProjectMarketcap',supply!=null ? '$'+fmt(supply*jcs,6) : 'Unavailable');
     if (series.length && series.at(-1).provider !== usd.provider) series.length=0;
-    const point={at:observedAt,jcs,xrp:usd.xrp,btc:usd.btc,ledger:s.ledgerIndex,provider:usd.provider};
+    const point={at:observedAt,jcs,xrp:usd.xrp,rlusd:usd.rlusd,ledger:s.ledgerIndex,provider:usd.provider};
     if (!series.length || point.at-series.at(-1).at>=55000) {
       series.push(point); if(series.length>240)series.shift();renderChart();
     }
-    chartStatus(`${series.length} observation${series.length===1?'':'s'} this visit · updated ${stamp(observedAt)} · ${usd.provider} ${stamp(usd.providerAt)}`);
+    chartStatus(`${series.length} observation${series.length===1?'':'s'} this visit · updated ${stamp(observedAt)} · ${usd.provider} · live window`);
   }
   window.addEventListener('jcs:market-snapshot',e=>{onSnapshot(e).catch(()=>chartStatus('Market comparison temporarily unavailable.'));});
   $('jcsChartReset')?.addEventListener('click',()=>{series.length=0;renderChart();chartStatus('Session chart reset. Waiting for the next market update.');});
@@ -10126,8 +10250,21 @@ try {
   'use strict';
 
   const ROTATION_MS = 60000;
-  const PASSAGES = [{"group": "Proverbs · King James Version", "ref": "Proverbs 1:7", "text": "The fear of the LORD is the beginning of knowledge: but fools despise wisdom and instruction."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 3:5–6", "text": "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 4:23", "text": "Keep thy heart with all diligence; for out of it are the issues of life."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 9:10", "text": "The fear of the LORD is the beginning of wisdom: and the knowledge of the holy is understanding."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 10:12", "text": "Hatred stirreth up strifes: but love covereth all sins."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 11:25", "text": "The liberal soul shall be made fat: and he that watereth shall be watered also himself."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 15:1", "text": "A soft answer turneth away wrath: but grievous words stir up anger."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 16:3", "text": "Commit thy works unto the LORD, and thy thoughts shall be established."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 16:9", "text": "A man's heart deviseth his way: but the LORD directeth his steps."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 18:10", "text": "The name of the LORD is a strong tower: the righteous runneth into it, and is safe."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 19:17", "text": "He that hath pity upon the poor lendeth unto the LORD; and that which he hath given will he pay him again."}, {"group": "Proverbs · King James Version", "ref": "Proverbs 27:17", "text": "Iron sharpeneth iron; so a man sharpeneth the countenance of his friend."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:1", "text": "The words of the blessing of Enoch, wherewith he blessed the elect and righteous."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:4", "text": "The Holy Great One will come forth from His dwelling."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:8", "text": "But with the righteous He will make peace, and will protect the elect, and mercy shall be upon them."}, {"group": "1 Enoch · R. H. Charles", "ref": "1 Enoch 1:8", "text": "And light shall appear unto them, and He will make peace with them."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:2", "text": "Throughout all the days of my life I have remembered the Lord, and sought with all my heart to do His will."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:4", "text": "He is the living God, and He is holy and faithful, and He is righteous beyond all."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:23", "text": "Observe the ordinance of the Most High God, and do His will and be upright in all things."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 21:24", "text": "And He will bless thee in all thy deeds, and will raise up from thee the plant of righteousness."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:10", "text": "May the God of all bless thee and strengthen thee to do righteousness, and His will before Him."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:14", "text": "May He cleanse thee from all unrighteousness and impurity, that thou mayest be forgiven."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:19", "text": "May the Most High God help thee, and the God of heaven bless thee."}, {"group": "Book of Jubilees · R. H. Charles", "ref": "Jubilees 22:23", "text": "Fear not, and be not dismayed: may the Most High God preserve thee from destruction."}];
-  const JESUS_WORDS = [{"ref": "John 14:6", "text": "I am the way, the truth, and the life: no man cometh unto the Father, but by me."}, {"ref": "Matthew 11:28", "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."}, {"ref": "John 8:12", "text": "I am the light of the world: he that followeth me shall not walk in darkness."}, {"ref": "Matthew 5:9", "text": "Blessed are the peacemakers: for they shall be called the children of God."}, {"ref": "Matthew 6:33", "text": "Seek ye first the kingdom of God, and his righteousness."}, {"ref": "John 10:11", "text": "I am the good shepherd: the good shepherd giveth his life for the sheep."}, {"ref": "John 11:25", "text": "I am the resurrection, and the life."}, {"ref": "Luke 11:9", "text": "Ask, and it shall be given you; seek, and ye shall find."}, {"ref": "Matthew 28:20", "text": "Lo, I am with you alway, even unto the end of the world."}, {"ref": "Mark 16:15", "text": "Go ye into all the world, and preach the gospel to every creature."}];
+  // Canonical, public-domain World English Bible selections. Full-chapter
+  // links retain context; Christian classics are clearly separate in the page.
+  const PASSAGES = [
+    { group: 'Still waters', ref: 'Psalm 23:2–3a', text: 'He makes me lie down in green pastures. He leads me beside still waters. He restores my soul.', url: 'https://ebible.org/engwebp/PSA023.htm', reflection: 'Where could you make room for rest and kindness today?' },
+    { group: 'Trust', ref: 'Proverbs 3:5–6', text: 'Trust in the LORD with all your heart, and don’t lean on your own understanding. In all your ways acknowledge him, and he will make your paths straight.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'What uncertainty could you bring honestly to God in prayer?' },
+    { group: 'Kindness and truth', ref: 'Proverbs 3:3', text: 'Don’t let kindness and truth forsake you. Bind them around your neck. Write them on the tablet of your heart.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'What would kindness and truth look like in one conversation today?' },
+    { group: 'Care for a neighbor', ref: 'Proverbs 3:27', text: 'Don’t withhold good from those to whom it is due, when it is in the power of your hand to do it.', url: 'https://ebible.org/engwebp/PRO03.htm', reflection: 'Who could receive one practical act of care from you today?' }
+  ];
+  const JESUS_WORDS = [
+    { ref: 'Matthew 11:28', text: 'Come to me, all you who labor and are heavily burdened, and I will give you rest.', url: 'https://ebible.org/engwebp/MAT11.htm' },
+    { ref: 'Matthew 5:9', text: 'Blessed are the peacemakers, for they shall be called children of God.', url: 'https://ebible.org/engwebp/MAT05.htm' },
+    { ref: 'Matthew 5:7', text: 'Blessed are the merciful, for they shall obtain mercy.', url: 'https://ebible.org/engwebp/MAT05.htm' },
+    { ref: 'John 15:12', text: 'This is my commandment, that you love one another, even as I have loved you.', url: 'https://ebible.org/engwebp/JHN15.htm' },
+    { ref: 'John 14:27', text: 'Peace I leave with you. My peace I give to you; not as the world gives, I give to you. Don’t let your heart be troubled, neither let it be fearful.', url: 'https://ebible.org/engwebp/JHN14.htm' }
+  ];
 
   const $ = id => document.getElementById(id);
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -10149,18 +10286,26 @@ try {
     if (passageIndex !== lastPassageIndex) {
       lastPassageIndex = passageIndex;
       const item = PASSAGES[passageIndex];
-      if ($('scriptureKicker')) $('scriptureKicker').textContent = item.group;
+      if ($('scriptureKicker')) $('scriptureKicker').textContent = item.group + ' · World English Bible';
       if ($('scriptureText')) $('scriptureText').textContent = '“' + item.text + '”';
-      if ($('scriptureSource')) $('scriptureSource').textContent = item.ref + ' · Public-domain translation';
+      if ($('scriptureSource')) $('scriptureSource').textContent = item.ref + ' · World English Bible';
+      if ($('scriptureContext')) $('scriptureContext').href = item.url;
+      if ($('reflectionPrompt')) $('reflectionPrompt').textContent = item.reflection;
     }
 
     if (jesusIndex !== lastJesusIndex) {
       lastJesusIndex = jesusIndex;
       const item = JESUS_WORDS[jesusIndex];
       if ($('jesusWords')) $('jesusWords').textContent = '“' + item.text + '”';
-      if ($('jesusWordsSource')) $('jesusWordsSource').textContent = item.ref + ' · King James Version';
+      if ($('jesusWordsSource')) $('jesusWordsSource').textContent = item.ref + ' · World English Bible';
+      if ($('jesusWordsContext')) $('jesusWordsContext').href = item.url;
     }
   }
+
+  $('reflectJournalLink')?.addEventListener('click', () => {
+    // Preserve existing writing and its explicit Save control.
+    $('privatePrayerJournal')?.focus({ preventScroll: true });
+  });
 
   window.__jcsRenderScriptureStreams = () => renderScriptureStreams(true);
   renderScriptureStreams(true);
@@ -10171,62 +10316,26 @@ try {
     {
       title:'Gregorian Chant Mass · Track 2',
       url:'https://archive.org/download/GregorianChantMass/02Track2_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 4',
       url:'https://archive.org/download/GregorianChantMass/04Track4_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 5',
       url:'https://archive.org/download/GregorianChantMass/05Track5_64kb.mp3',
-      duration:300
     },
     {
       title:'Gregorian Chant Mass · Track 6',
       url:'https://archive.org/download/GregorianChantMass/06Track6_64kb.mp3',
-      duration:300
-    },
-    {
-      title:'Ave Maria · Enrico Caruso archival recording',
-      url:'https://archive.org/download/Caruso_part1/Caruso-AveMaria.mp3',
-      duration:270
     }
   ];
 
-  const fallbackReadings = [
-    {
-      title:'King James Psalms · Book I',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_01_kjv.mp3',
-      duration:957
-    },
-    {
-      title:'King James Psalms · Book II',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_02_kjv.mp3',
-      duration:965
-    },
-    {
-      title:'King James Psalms · Book III',
-      url:'https://archive.org/download/psalms_kjv_1202_librivox/psalms_03_kjv.mp3',
-      duration:1410
-    },
-    {
-      title:'Book of Enoch · Opening reading',
-      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_128kb.mp3',
-      duration:964
-    },
-    {
-      title:'Book of Enoch · Further reading',
-      url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_128kb.mp3',
-      duration:873
-    },
-    {
-      title:'Book of Jubilees · Opening reading',
-      url:'https://archive.org/download/book_jubilees_2108_librivox/bookofjubilees_01_charles_128kb.mp3',
-      duration:900
-    }
-  ];
+  const psalmRanges = ['1–11', '12–21', '22–31', '32–37', '38–45', '46–55', '56–66', '67–72', '73–78', '79–88', '89–96', '97–105', '106–115', '116–119', '120–138', '139–150'];
+  const fallbackReadings = psalmRanges.map((range, index) => ({
+    title: 'Psalms ' + range + ' · KJV · LibriVox',
+    url: 'https://archive.org/download/psalms_kjv_1202_librivox/psalms_' + String(index + 1).padStart(2, '0') + '_kjv.mp3'
+  }));
 
 
   const MEDIA_STORAGE = 'jcs.sacredMedia.v3';
@@ -10253,13 +10362,40 @@ try {
     return document.hidden || document.body.classList.contains('quiet-mode');
   }
 
+  let holyPulseTimer = null;
+
+  function updateHolyVisual(active) {
+    const root = $('audio');
+    if (!root) return;
+    root.classList.toggle('is-playing', active);
+    root.dataset.mediaState = active ? 'playing' : 'paused';
+    if (active && !holyPulseTimer) {
+      const tick = () => {
+        const symbols = [...root.querySelectorAll('.listening-symbol, .listen-disc')];
+        const baseHues = [42, 198, 276];
+        symbols.forEach((symbol, index) => {
+          const hue = baseHues[index % baseHues.length] + Math.floor(Math.random() * 28) - 14;
+          symbol.style.setProperty('--holy-hue', hue + 'deg');
+        });
+        holyPulseTimer = window.setTimeout(tick, 1400 + Math.floor(Math.random() * 2200));
+      };
+      tick();
+    } else if (!active && holyPulseTimer) {
+      window.clearTimeout(holyPulseTimer);
+      holyPulseTimer = null;
+      root.querySelectorAll('.listening-symbol, .listen-disc').forEach(symbol => symbol.style.removeProperty('--holy-hue'));
+    }
+  }
+
   function updateControls() {
     const filmActive = Boolean(window.__jcsFilmPlaying);
     const active = Object.values(channels).some(channel => channel.wanted) || filmActive;
     const master = $('audioStartAll');
+    updateHolyVisual(active);
     if (master) {
-      master.textContent = active ? 'Pause all media' : 'Play all three';
+      master.textContent = active ? 'Pause' : 'Play';
       master.setAttribute('aria-pressed', String(active));
+      master.setAttribute('aria-label', active ? 'Pause all listening channels' : 'Play all listening channels');
     }
     if ($('audioStopAll')) $('audioStopAll').disabled = !active;
     Object.values(channels).forEach(channel => {
@@ -10313,6 +10449,7 @@ try {
       status(document.hidden ? 'Return to this page and choose Listen.' : 'Turn off Quiet mode before starting audio.');
       return;
     }
+    document.dispatchEvent(new CustomEvent('jcs:pause-media'));
     const audio = channel.audio;
     const request = ++channel.request;
     channel.wanted = true;
@@ -10424,10 +10561,9 @@ try {
     else renderScriptureStreams(false);
   });
   window.addEventListener('pagehide', () => window.__jcsSuspendSacredMedia('Page closed'));
-  // No focus/blur handler: interacting with the embedded film moves focus to
-  // its iframe, which must not stop playback or restart a previously paused track.
+  // Keep the unified listening control stable while media is playing.
   updateControls();
-  status('Choose Play all three, or Listen to either audio channel.');
+  status('Choose Play to start all listening channels together.');
 
   const blessings = [
     'May every ledger entry remind you that Jesus Christ never changes.',
@@ -10447,6 +10583,7 @@ try {
   window.setInterval(rotateBlessing,60000);
 
 })();
+
 } catch (error) { reportJcsModuleError("js/jcs-worship.js", error); }
 
 try {
@@ -10502,7 +10639,7 @@ try {
     primaryPlaying = Boolean(playing);
     if (primaryStart) {
       primaryStart.disabled = primaryPlaying;
-      primaryStart.textContent = primaryPlaying ? 'JESUS is playing' : 'Play JESUS here';
+      primaryStart.textContent = primaryPlaying ? 'JESUS is loading…' : 'Play JESUS here';
     }
     updateOverallState('jesus');
   };
@@ -10536,7 +10673,7 @@ try {
     }
     if (heritage) heritage.open = true;
     film.autoplay = false;
-    film.controls = true;
+    film.controls = Boolean(filmStart);
     film.playsInline = true;
     film.preload = 'metadata';
     film.dataset.jcsPlayGroup = options.group === 'all' ? 'all' : 'film';
@@ -10558,7 +10695,7 @@ try {
           });
         }
         updateFilmState(false);
-        const message = 'The public-domain film could not load. Use the Wikimedia source listed above.';
+        const message = 'The public-domain film could not load. Press Play again when the channel is ready.';
         say(message);
         if (filmNow) filmNow.textContent = message;
         return false;
@@ -10573,17 +10710,18 @@ try {
     primaryVideo.playsInline = true;
     primaryVideo.muted = false;
     primaryVideo.defaultMuted = false;
+    if (primaryVideo.readyState === 0) primaryVideo.load();
     const attempt = primaryVideo.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => {
-        setPrimaryStatus('JESUS is playing in this card. Use the player controls for sound and full screen.');
+        setPrimaryStatus('Loading JESUS in this card…');
         return true;
       }).catch(error => {
         if (error?.name === 'NotAllowedError') {
           primaryVideo.muted = true;
           primaryVideo.defaultMuted = true;
           return Promise.resolve(primaryVideo.play()).then(() => {
-            setPrimaryStatus('JESUS is playing muted. Tap the player’s sound control to hear it.');
+            setPrimaryStatus('Loading JESUS muted… Tap the player’s sound control when playback begins.');
             return true;
           }).catch(() => {
             updatePrimaryState(false);
@@ -10611,7 +10749,32 @@ try {
       }
       updatePrimaryState(true);
       document.dispatchEvent(new CustomEvent('jcs:film-start', { detail: { group: 'jesus' } }));
+      setPrimaryStatus('JESUS is starting in this card…');
+      say('The full JESUS film is starting in this card.');
+    });
+    primaryVideo.addEventListener('loadeddata', () => {
+      if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
+    });
+    primaryVideo.addEventListener('canplay', () => {
+      if (primaryPlaying) setPrimaryStatus('JESUS is ready to play in this card…');
+    });
+    primaryVideo.addEventListener('playing', () => {
+      if (!primaryPlaying) updatePrimaryState(true);
+      if (primaryStart) primaryStart.textContent = 'JESUS is playing';
+      setPrimaryStatus('JESUS is playing in this card. Use the player controls for sound and full screen.');
       say('The full JESUS film is playing in this card.');
+    });
+    primaryVideo.addEventListener('timeupdate', () => {
+      if (primaryPlaying && primaryVideo.currentTime > 0.05) {
+        if (primaryStart) primaryStart.textContent = 'JESUS is playing';
+        setPrimaryStatus('JESUS is playing in this card. Use the player controls for sound and full screen.');
+      }
+    });
+    primaryVideo.addEventListener('waiting', () => {
+      if (primaryPlaying) setPrimaryStatus('JESUS is buffering in this card…');
+    });
+    primaryVideo.addEventListener('stalled', () => {
+      if (primaryPlaying) setPrimaryStatus('JESUS stream is waiting for the next segment…');
     });
     primaryVideo.addEventListener('pause', () => {
       updatePrimaryState(false);
@@ -10630,7 +10793,7 @@ try {
 
   if (film) {
     film.autoplay = false;
-    film.controls = true;
+    film.controls = Boolean(filmStart);
     film.playsInline = true;
     film.preload = 'metadata';
     film.removeAttribute('crossorigin');
@@ -10659,7 +10822,7 @@ try {
     });
     film.addEventListener('error', () => {
       updateFilmState(false);
-      say('The public-domain film could not load. Use the Wikimedia source listed above.');
+      say('The public-domain film could not load. Press Play again when the channel is ready.');
       if (filmNow) filmNow.textContent = 'Film unavailable. Use the Wikimedia source above.';
     });
     heritage?.addEventListener('toggle', () => {
@@ -10684,7 +10847,7 @@ try {
   window.__jcsFilmPlaying = false;
   updateOverallState('initial');
   if (primaryVideo) setPrimaryStatus('Press Play JESUS here or use the video controls to begin.');
-  say('Choose Play all three, Listen to a channel, or Play JESUS here.');
+  say('Choose Play to start the listening channels together, or Play JESUS here.');
 })();
 
 } catch (error) { reportJcsModuleError("js/jcs-film.js", error); }
