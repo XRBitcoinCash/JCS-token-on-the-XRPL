@@ -56,16 +56,32 @@
     if (heritage) heritage.open = true;
     film.autoplay = false;
     film.controls = true;
-    film.muted = true;
-    film.defaultMuted = true;
+    // A deliberate Play/Play all tap may request sound. If the browser still
+    // rejects audible playback, retry muted and leave the native unmute control
+    // available; autoplay with sound cannot be forced by a page.
+    const requestSound = options.muted !== true;
+    film.muted = !requestSound;
+    film.defaultMuted = !requestSound;
     film.playsInline = true;
     film.dataset.jcsPlayGroup = options.group === 'all' ? 'all' : 'film';
     updateFilmState(true);
     const attempt = film.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => true).catch(error => {
-        updateFilmState(false);
         const blocked = error?.name === 'NotAllowedError';
+        if (blocked && requestSound) {
+          film.muted = true;
+          film.defaultMuted = true;
+          const retry = film.play();
+          return Promise.resolve(retry).then(() => true).catch(() => {
+            updateFilmState(false);
+            const message = 'Your browser blocked playback. Press Play film again or use the film controls below.';
+            say(message);
+            if (filmNow) filmNow.textContent = message;
+            return false;
+          });
+        }
+        updateFilmState(false);
         const message = blocked
           ? 'Your browser blocked playback. Press Play film again to allow the silent companion.'
           : 'The film could not load. Use the Wikimedia source link below.';
