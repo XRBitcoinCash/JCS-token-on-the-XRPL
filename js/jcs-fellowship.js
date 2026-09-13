@@ -178,9 +178,63 @@
     URL.revokeObjectURL(url);
   });
 
-  // Daily practice and Prayer Garden.
-  let practice = safeRead(STORAGE.practice, { date: todayKey(), items: {} });
-  if (practice.date !== todayKey()) practice = { date: todayKey(), items: {} };
+  // Daily practice and Prayer Garden. A practice record is device-local and
+  // expires after one rolling day of inactivity (and at the next calendar day).
+  const PRACTICE_WINDOW_MS = 24 * 60 * 60 * 1000;
+  const newPracticeRecord = () => {
+    const now = Date.now();
+    return { date: todayKey(), items: {}, startedAt: now, lastTouchedAt: now };
+  };
+  const practiceIsStale = value => {
+    const lastTouched = Number(value?.lastTouchedAt || value?.startedAt || 0);
+    return !value || value.date !== todayKey() || !Number.isFinite(lastTouched) ||
+      lastTouched <= 0 || Date.now() - lastTouched >= PRACTICE_WINDOW_MS ||
+      !value.items || typeof value.items !== 'object' || Array.isArray(value.items);
+  };
+  let practice = safeRead(STORAGE.practice, null);
+  if (practiceIsStale(practice)) {
+    practice = newPracticeRecord();
+    safeWrite(STORAGE.practice, practice);
+  }
+
+  function practiceResetHint() {
+    let hint = $('practiceResetHint');
+    if (!hint) {
+      hint = document.createElement('p');
+      hint.id = 'practiceResetHint';
+      hint.className = 'hint practice-reset-hint';
+      hint.setAttribute('aria-live', 'polite');
+      const head = $('practiceProgress')?.closest('.practice-head');
+      head?.insertAdjacentElement('afterend', hint);
+    }
+    return hint;
+  }
+
+  function formatPracticeRemaining(ms) {
+    const totalMinutes = Math.max(1, Math.ceil(ms / 60000));
+    if (totalMinutes >= 120) return Math.ceil(totalMinutes / 60) + ' hours';
+    return totalMinutes + ' minutes';
+  }
+
+  function updatePracticeHint() {
+    const hint = practiceResetHint();
+    if (!hint) return;
+    const lastTouched = Number(practice.lastTouchedAt || practice.startedAt);
+    const remaining = PRACTICE_WINDOW_MS - (Date.now() - lastTouched);
+    hint.textContent = remaining > 0
+      ? 'This daily practice resets in ' + formatPracticeRemaining(remaining) + '.'
+      : 'Daily practice is ready to reset.';
+  }
+
+  function refreshPracticeFromClock() {
+    if (practiceIsStale(practice)) {
+      practice = newPracticeRecord();
+      safeWrite(STORAGE.practice, practice);
+      renderPractice();
+      return;
+    }
+    updatePracticeHint();
+  }
 
   function renderPractice() {
     const buttons = [...document.querySelectorAll('.practice-toggle')];
@@ -191,27 +245,35 @@
       button.classList.toggle('active', active);
       if (active) completed += 1;
     });
-    if ($('practiceProgress')) $('practiceProgress').textContent = `${completed} / ${buttons.length}`;
+    if ($('practiceProgress')) $('practiceProgress').textContent = completed + ' / ' + buttons.length;
     const garden = $('prayerGarden');
     if (garden) {
       garden.dataset.growth = String(completed);
-      garden.setAttribute('aria-label', `Prayer Garden with ${completed} of ${buttons.length} local daily actions completed`);
+      garden.setAttribute('aria-label', 'Prayer Garden with ' + completed + ' of ' + buttons.length + ' local daily actions completed');
     }
+    updatePracticeHint();
   }
 
   document.querySelectorAll('.practice-toggle').forEach(button => {
     button.addEventListener('click', () => {
       const key = button.dataset.practice;
       practice.items[key] = !practice.items[key];
+      practice.lastTouchedAt = Date.now();
       safeWrite(STORAGE.practice, practice);
       renderPractice();
     });
   });
   $('resetPracticeBtn')?.addEventListener('click', () => {
-    practice = { date: todayKey(), items: {} };
+    practice = newPracticeRecord();
     safeWrite(STORAGE.practice, practice);
     renderPractice();
   });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') refreshPracticeFromClock();
+  });
+  window.addEventListener('pageshow', refreshPracticeFromClock);
+  window.addEventListener('focus', refreshPracticeFromClock);
+  window.setInterval(refreshPracticeFromClock, 60000);
   renderPractice();
 
   // Local prompt reactions: deliberately not presented as global social counts.
