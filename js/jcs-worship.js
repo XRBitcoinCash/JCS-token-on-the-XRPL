@@ -114,13 +114,40 @@
     return document.hidden || document.body.classList.contains('quiet-mode');
   }
 
+  let holyPulseTimer = null;
+
+  function updateHolyVisual(active) {
+    const root = $('audio');
+    if (!root) return;
+    root.classList.toggle('is-playing', active);
+    root.dataset.mediaState = active ? 'playing' : 'paused';
+    if (active && !holyPulseTimer) {
+      const tick = () => {
+        const symbols = [...root.querySelectorAll('.listening-symbol, .listen-disc')];
+        const baseHues = [42, 198, 276];
+        symbols.forEach((symbol, index) => {
+          const hue = baseHues[index % baseHues.length] + Math.floor(Math.random() * 28) - 14;
+          symbol.style.setProperty('--holy-hue', hue + 'deg');
+        });
+        holyPulseTimer = window.setTimeout(tick, 1400 + Math.floor(Math.random() * 2200));
+      };
+      tick();
+    } else if (!active && holyPulseTimer) {
+      window.clearTimeout(holyPulseTimer);
+      holyPulseTimer = null;
+      root.querySelectorAll('.listening-symbol, .listen-disc').forEach(symbol => symbol.style.removeProperty('--holy-hue'));
+    }
+  }
+
   function updateControls() {
     const filmActive = Boolean(window.__jcsFilmPlaying);
     const active = Object.values(channels).some(channel => channel.wanted) || filmActive;
     const master = $('audioStartAll');
+    updateHolyVisual(active);
     if (master) {
-      master.textContent = active ? 'Pause all media' : 'Play all three';
+      master.textContent = active ? 'Pause' : 'Play';
       master.setAttribute('aria-pressed', String(active));
+      master.setAttribute('aria-label', active ? 'Pause all listening channels' : 'Play all listening channels');
     }
     if ($('audioStopAll')) $('audioStopAll').disabled = !active;
     Object.values(channels).forEach(channel => {
@@ -286,10 +313,9 @@
     else renderScriptureStreams(false);
   });
   window.addEventListener('pagehide', () => window.__jcsSuspendSacredMedia('Page closed'));
-  // No focus/blur handler: interacting with the embedded film moves focus to
-  // its iframe, which must not stop playback or restart a previously paused track.
+  // Keep the unified listening control stable while media is playing.
   updateControls();
-  status('Choose Play all three, or Listen to either audio channel.');
+  status('Choose Play to start all listening channels together.');
 
   const blessings = [
     'May every ledger entry remind you that Jesus Christ never changes.',
