@@ -11636,6 +11636,7 @@ try {
     const account = String(acct || '').trim();
     if (!account) return;
 
+    const accountChanged = currentAccount !== account;
     currentAccount = account;
     window.__jcsWallet = account;
     window.__jcsManualDisconnect = false;
@@ -11647,7 +11648,11 @@ try {
 
     refreshTrustline().catch(() => {});
     if ($('healthStatus')) refreshHealth().catch(() => {});
-    document.dispatchEvent(new CustomEvent('jcs:wallet-changed', { detail: { account } }));
+    // Xaman emits ready/success/retrieved again when a signing request is
+    // opened or the page regains focus. Do not make an unchanged identity look
+    // like a wallet switch: receipt and signing reviews are account-bound, but
+    // they must survive an identity refresh for the same wallet.
+    if (accountChanged) document.dispatchEvent(new CustomEvent('jcs:wallet-changed', { detail: { account } }));
     scheduleAppRefresh();
   }
 
@@ -15101,8 +15106,8 @@ try {
   const { api, trade, gallery, config, receipts } = dependencies;
   const byId = id => doc.getElementById(id);
   const message = byId('jcsNftStatus');
-  let version = 0, source = null, prepared = null, signing = false, loading = false, saved = null, collection = new Map(), pageState = null;
-  let receiptSequence = 0, preparationSequence = 0;
+  let version = 0, source = null, prepared = null, signing = false, preparing = false, loading = false, saved = null, collection = new Map(), pageState = null;
+  let receiptSequence = 0, preparationSequence = 0, observedAccount = api.getAccount() || null;
   const receiptEntry = doc.createElement('section');
   receiptEntry.id = 'jcsReceiptEntry'; receiptEntry.className = 'jcs-receipt-entry'; receiptEntry.setAttribute('aria-labelledby', 'jcsReceiptEntryHeading');
   receiptEntry.innerHTML = `<div class="jcs-receipt-entry-heading"><img src="jcs-logo.png" alt="" width="52" height="52"><div><span class="jcs-tool-eyebrow">Keep your transaction record</span><h3 id="jcsReceiptEntryHeading">Create an NFT receipt</h3></div></div>
@@ -15214,7 +15219,11 @@ try {
       validatedAt: record.validated_at_utc, record };
   }
   async function acceptReceipt(detail, retryPending = false) {
-    if (!HASH.test(detail?.txid || '') || (detail.kind !== undefined && !KIND[detail.kind]) || signing) return;
+    // A wallet identity refresh can arrive while Render metadata or the fee
+    // preflight is still being prepared. It is not a new source transaction;
+    // resetting the panel here used to erase the review just as it became
+    // ready (and could make the Xaman handoff appear to flash and vanish).
+    if (!HASH.test(detail?.txid || '') || (detail.kind !== undefined && !KIND[detail.kind]) || signing || preparing) return;
     const token = version, sequence = ++receiptSequence, account = api.getAccount();
     if (!account || (detail.account && detail.account !== account)) { updateEntry(); return; }
     source = null; prepared = null; saved = null; receiptPanel.hidden = false; receiptPanel.dataset.state = 'checking'; byId('jcsReceiptReview').hidden = true;
@@ -15337,8 +15346,9 @@ try {
     return { fee: feeDrops, lastLedger: index + 20, index, extraReserve: extraObjects * Number(extraReserve) / 1000000, createdAt: Date.now() };
   }
   async function prepareMint() {
-    if (!source || signing) return;
+    if (!source || signing || preparing) return;
     const account = api.getAccount(), token = version, selected = source, sequence = ++preparationSequence;
+    preparing = true;
     byId('jcsReceiptMint').disabled = true; byId('jcsReceiptSign').disabled = true; prepared = null;
     try {
       if (saved) { await checkSavedMint(saved, selected, account, token); return; }
@@ -15360,10 +15370,15 @@ try {
       row(readout, 'JCS moved', selected.record.assetA.value + ' JCS'); row(readout, 'XRP moved', selected.record.assetB.value + ' XRP (network fee excluded)');
       if (selected.record.lp) row(readout, selected.record.kind === 'deposit' ? 'LP tokens received' : 'LP tokens redeemed', selected.record.lp.value);
       row(readout, 'Network fee', Number(limits.fee) / 1000000 + ' XRP'); row(readout, 'Possible extra account reserve', limits.extraReserve + ' XRP (held in your wallet)'); row(readout, 'Available balance buffer', '1 XRP kept available'); row(readout, 'NFT issuer', account); row(readout, 'Taxon', String(TAXON));
-      byId('jcsReceiptReview').hidden = false; byId('jcsReceiptSign').disabled = false;
+      const review = byId('jcsReceiptReview'); review.hidden = false; byId('jcsReceiptSign').disabled = false;
+      // The review is below the receipt action row. Bring the complete NFT
+      // preview into view so a click never looks like a disappearing popup.
+      if (typeof review.scrollIntoView === 'function') review.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const heading = review.querySelector('h4');
+      if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); }
       status('Your receipt artwork and metadata are verified. Review them below. Minting requires a separate signature in Xaman.');
     } catch (error) { if (token === version && sequence === preparationSequence) status(error.message || String(error)); }
-    finally { if (token === version && sequence === preparationSequence && byId('jcsReceiptMint').textContent !== 'Receipt mint confirmed') byId('jcsReceiptMint').disabled = false; }
+    finally { if (token === version && sequence === preparationSequence && byId('jcsReceiptMint').textContent !== 'Receipt mint confirmed') byId('jcsReceiptMint').disabled = false; preparing = false; }
   }
   async function checkSavedMint(record, selected, account, token) {
     status('Checking the earlier mint request on the ledger…');
@@ -15574,7 +15589,15 @@ try {
     const record = records.find(item => KIND[item.kind] && HASH.test(item.txid || '') && (!item.account || item.account === account));
     if (record) await acceptReceipt(record);
   }
-  doc.addEventListener('jcs:wallet-changed', () => {
+  doc.addEventListener('jcs:wallet-changed', event => {
+    const detailAccount = event?.detail && Object.prototype.hasOwnProperty.call(event.detail, 'account') ? event.detail.account : api.getAccount();
+    const nextAccount = detailAccount ? String(detailAccount) : null;
+    // Xaman emits identity refreshes on focus/retrieved/success. An unchanged
+    // account is not a wallet change and must not reset an active receipt or
+    // signing review. A real account transition still clears all account-bound
+    // state below.
+    if (nextAccount === observedAccount) { updateEntry(); return; }
+    observedAccount = nextAccount;
     version++; receiptSequence++; preparationSequence++; source = null; prepared = null; saved = null; sale.hidden = true; saleReview = null; saleNft = null; collection.clear(); gallery.replaceChildren(); more.hidden = true; pageState = null;
     byId('jcsReceiptLookupHash').value = ''; byId('jcsReceiptLookupHash').removeAttribute('aria-invalid'); resetReceiptPanel(); updateEntry(); restoreReceipt();
   });
