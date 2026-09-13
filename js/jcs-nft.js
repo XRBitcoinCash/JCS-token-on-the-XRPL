@@ -592,6 +592,17 @@
     } catch (error) { if (review.token === version) { byId('jcsNftSaleStatus').textContent = (error.unconfirmed ? 'Offer submitted; ledger confirmation is unavailable. Check this transaction before creating another offer: ' + error.txid + '. ' : '') + (error.message || String(error)); saleReview = null; byId('jcsNftSaleReview').hidden = true; } }
     finally { signing = false; byId('jcsNftSaleSign').disabled = false; byId('jcsNftSalePrice').disabled = false; }
   });
+  doc.addEventListener('jcs:signing-reset', event => {
+    if (!signing && !preparing && !saleReview) return;
+    signing = false;
+    preparing = false;
+    if (byId('jcsReceiptLookupCheck')) byId('jcsReceiptLookupCheck').disabled = !api.getAccount();
+    if (byId('jcsReceiptSign')) byId('jcsReceiptSign').disabled = !prepared;
+    if (byId('jcsReceiptMint')) byId('jcsReceiptMint').disabled = false;
+    if (byId('jcsNftSaleSign')) byId('jcsNftSaleSign').disabled = !saleReview;
+    if (byId('jcsNftSalePrice')) byId('jcsNftSalePrice').disabled = false;
+    status((event.detail?.reason || 'Xaman request canceled.') + ' NFT controls reset. Review again when ready.');
+  });
   doc.addEventListener('jcs:validated-transaction', event => acceptReceipt(event.detail));
   doc.addEventListener('jcs:submitted-transaction', event => {
     const detail = event.detail, account = api.getAccount();
