@@ -478,3 +478,28 @@ body.exchange-focus #jcs-world-watch{display:none!important}
   .film-watch-card h3{font-size:1.45rem!important}
   .heritage-film{padding:12px 14px}
 }
+
+/* Media controls v1: readable in-page player shell, three-channel card grid,
+   and a quiet rolling reset hint for daily fellowship. */
+.jcs-film-embed{width:100%;margin:16px 0 6px;padding:12px;border:1px solid var(--home-line);border-radius:10px;background:var(--home-bg)}
+.jcs-film-embed-poster{display:flex;align-items:center;gap:10px;min-height:54px;color:var(--home-muted);font-size:.72rem}
+.jcs-film-embed-poster img{width:48px;height:48px;object-fit:contain;border-radius:50%}
+.jcs-film-embed .btn{width:100%;min-height:44px!important}
+.jcs-film-frame{display:block;width:100%;min-height:300px;margin-top:12px;border:1px solid var(--home-line);border-radius:8px;background:#050705}
+.film-player-status{margin:10px 0 0!important;font-size:.7rem!important;line-height:1.5;color:var(--home-muted)}
+.jesus-film-card .film-full-link{display:block;margin-top:8px;font-size:.7rem;color:var(--home-blue)}
+.jesus-film-card .film-note{margin-top:12px}
+.audio-grid.sacred-media-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}
+.film-audio-channel{background:linear-gradient(180deg,rgba(199,171,119,.08),var(--home-bg))!important}
+.film-audio-channel>p{min-height:56px!important}
+.film-controls{grid-template-columns:auto minmax(0,1fr)!important;text-align:left}
+.film-channel-label{font-size:.64rem;color:var(--home-muted);white-space:nowrap}
+.practice-reset-hint{margin:8px 0 0!important;font-size:.7rem!important;color:var(--home-muted)}
+@media(max-width:980px){
+  .audio-grid.sacred-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:640px){
+  .audio-grid.sacred-media-grid{grid-template-columns:1fr!important}
+  .jcs-film-frame{min-height:240px}
+  .jcs-film-embed{padding:10px}
+}
