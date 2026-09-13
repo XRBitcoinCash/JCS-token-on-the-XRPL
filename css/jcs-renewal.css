@@ -432,3 +432,49 @@ body.exchange-focus #jcs-world-watch{display:none!important}
 #jcsComparisonChart svg{display:block!important;width:100%!important;height:auto!important;max-width:100%;overflow:visible}
 .chart-series.jcs::before{background:#dfc180}.chart-series.xrp::before{background:#8cbae0}.chart-series.btc::before{background:#bca3d6}
 #jcsChartReset,#copyIssuerBtn{min-height:44px!important;padding-top:12px!important;padding-bottom:12px!important}
+
+/* Card hierarchy repair: keep the short heading above its description at every
+   zoom level. The earlier narrow grid let each heading collapse to one letter
+   per line. */
+.sanctuary-path-grid{align-items:stretch}
+.sanctuary-path{display:flex!important;flex-direction:column;align-items:flex-start;min-width:0;padding:clamp(24px,3vw,36px)}
+.sanctuary-path h3{display:block!important;width:100%;max-width:none!important;min-width:0;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
+.sanctuary-path p{width:100%;max-width:32rem!important}
+.sanctuary-path .path-link{width:100%;margin-top:auto}
+.stewardship-path{background:linear-gradient(180deg,rgba(199,171,119,.08),transparent 72%)}
+.stewardship-path h3{text-align:center;padding-inline:clamp(8px,5vw,56px);font-size:clamp(2rem,5vw,3.5rem)!important;letter-spacing:-.02em}
+@media(max-width:1000px){
+  .sanctuary-path-grid{grid-template-columns:1fr}
+  .sanctuary-path+.sanctuary-path{border-left:0;border-top:1px solid var(--home-line)}
+  .sanctuary-path{padding:24px}
+  .sanctuary-path svg{width:38px;height:38px;margin:16px 0 12px}
+  .sanctuary-path p{font-size:.82rem;max-width:42rem!important}
+}
+@media(max-width:430px){
+  .sanctuary-path{padding:22px 18px}
+  .sanctuary-path h3,.stewardship-path h3{font-size:1.9rem!important;padding-inline:10px}
+  .sanctuary-path p{font-size:.78rem}
+}
+/* Rights-safe media layout: an official full-film link is primary; the
+   public-domain heritage film remains an explicit, user-started companion. */
+.film-watch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:4px 0 16px}
+.film-watch-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:22px;border:1px solid var(--home-line);border-radius:12px;background:var(--home-surface-2)}
+.film-watch-card h3{font:400 clamp(1.35rem,2.4vw,2rem)/1.2 Georgia,serif!important;margin:9px 0 9px!important;color:var(--home-ink)}
+.film-watch-card p{font-size:.78rem;line-height:1.6;color:var(--home-muted);margin:0 0 18px;max-width:38rem}
+.film-watch-card .btn{min-height:46px;border-radius:7px!important;font-size:.72rem!important}
+.film-kicker{color:var(--home-gold);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.film-note{display:block;margin-top:11px;color:var(--home-muted);font-size:.64rem;line-height:1.5}
+.passion-viewing-option{background:linear-gradient(180deg,rgba(199,171,119,.08),var(--home-surface-2))}
+.passion-viewing-option .film-full-link{margin:0;padding:10px 0;font-size:.72rem;color:var(--home-blue)}
+.heritage-film{margin-top:16px;padding:15px 18px;border:1px solid var(--home-line);border-radius:11px;background:var(--home-bg)}
+.heritage-film>summary{padding:8px 0;min-height:44px;font-size:.78rem;color:var(--home-ink)}
+.heritage-film .silent-companion{position:relative!important;inset:auto!important;width:min(520px,100%)!important;min-width:0!important;max-width:none!important;margin:12px 0 0!important;box-shadow:none!important}
+.heritage-film .silent-companion video{max-height:none!important}
+.heritage-film .film-note{margin:10px 0 0}
+.sacred-film-section>.film-sources{margin-top:15px}
+@media(max-width:760px){
+  .film-watch-grid{grid-template-columns:1fr;gap:10px}
+  .film-watch-card{padding:19px}
+  .film-watch-card h3{font-size:1.45rem!important}
+  .heritage-film{padding:12px 14px}
+}
