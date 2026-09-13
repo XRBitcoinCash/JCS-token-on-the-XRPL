@@ -839,3 +839,128 @@ body.exchange-focus #jcs-world-watch{display:none!important}
     min-height:190px!important;
   }
 }
+
+
+/* 2026 media polish: unified listening, sacred atmosphere, and readable source notes. */
+html{background:#07111f!important}
+body{
+  isolation:isolate!important;
+  position:relative!important;
+  background:
+    radial-gradient(ellipse at 14% 8%,rgba(117,201,239,.13),transparent 31rem),
+    radial-gradient(ellipse at 88% 22%,rgba(182,160,235,.10),transparent 28rem),
+    linear-gradient(135deg,#06101e 0%,#0b1825 48%,#071219 100%)!important;
+}
+body::before{
+  content:""!important;position:fixed!important;inset:-18%!important;z-index:-2!important;pointer-events:none!important;
+  background:
+    radial-gradient(ellipse at 20% 22%,rgba(130,205,245,.16),transparent 29%),
+    radial-gradient(ellipse at 75% 16%,rgba(164,145,219,.15),transparent 25%),
+    radial-gradient(ellipse at 54% 86%,rgba(218,186,121,.08),transparent 32%),
+    conic-gradient(from 210deg at 50% 50%,transparent 0 22%,rgba(89,171,208,.08) 30%,transparent 43%,rgba(204,182,235,.06) 63%,transparent 80%);
+  filter:blur(28px) saturate(110%);
+  animation:jcsHolyFlow 34s ease-in-out infinite alternate;
+}
+body::after{
+  content:""!important;position:fixed!important;inset:0!important;z-index:-1!important;pointer-events:none!important;
+  background:
+    linear-gradient(180deg,rgba(4,11,22,.30),rgba(4,11,22,.70)),
+    url("/jcs-logo.png") center 7%/min(36vw,520px) auto no-repeat;
+  opacity:.16;filter:grayscale(.55) sepia(.15) contrast(.92);
+}
+@keyframes jcsHolyFlow{0%{transform:translate3d(-2%,-1%,0) scale(1.02)}50%{transform:translate3d(1%,2%,0) scale(1.07)}100%{transform:translate3d(3%,-1%,0) scale(1.04)}}
+@media(prefers-reduced-motion:reduce){body::before{animation:none!important}}
+
+#main-content .jesus-film-card{
+  position:relative!important;overflow:hidden!important;
+  border-color:rgba(130,205,245,.38)!important;
+  background:linear-gradient(135deg,rgba(23,48,67,.94),rgba(13,33,40,.98))!important;
+  box-shadow:0 0 0 1px rgba(130,205,245,.10),0 0 34px rgba(87,187,242,.12)!important;
+}
+#main-content .jesus-film-card::before{
+  content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;
+  background:radial-gradient(ellipse at 72% 4%,rgba(152,222,255,.19),transparent 48%),radial-gradient(ellipse at 8% 86%,rgba(110,155,217,.11),transparent 42%);
+}
+#main-content .jesus-film-card>*{position:relative;z-index:1}
+#main-content .jesus-film-card .film-kicker{
+  font-family:"UnifrakturCook","UnifrakturMaguntia","Old English Text MT",Georgia,serif!important;
+  letter-spacing:.12em!important;color:#b9e9ff!important;text-shadow:0 0 18px rgba(96,199,255,.38)!important;
+}
+#main-content .jesus-film-card h3{
+  font-family:"UnifrakturCook","UnifrakturMaguntia","Old English Text MT",Georgia,serif!important;
+  letter-spacing:-.02em!important;text-shadow:0 0 22px rgba(145,217,255,.23)!important;
+}
+#main-content .jesus-film-card .jcs-film-embed{margin:22px 0 16px!important;padding:16px!important}
+#main-content .jesus-film-card .jcs-film-video{min-height:300px!important;border-color:rgba(147,216,255,.30)!important;box-shadow:inset 0 0 36px rgba(73,131,177,.10)!important}
+#main-content .jesus-film-card .film-player-status{padding:0 4px!important}
+#main-content .film-sources{
+  width:min(900px,100%)!important;margin:24px auto 0!important;padding:0 28px!important;text-align:center!important;
+  border-color:rgba(223,193,128,.28)!important;
+}
+#main-content .film-sources summary{padding:16px 0!important;color:var(--home-gold)!important;text-align:center!important}
+#main-content .film-sources p{margin:12px auto!important;max-width:70ch!important;color:var(--home-gold)!important;line-height:1.65!important}
+#main-content .film-sources a{color:var(--home-blue)!important}
+
+#main-content #audio .audio-master-actions{display:flex!important;justify-content:flex-end!important}
+#main-content #audio .unified-media-toggle{min-width:120px!important;min-height:48px!important;letter-spacing:.03em!important}
+#main-content #audio .listen-button,
+#main-content #audio #musicStop,
+#main-content #audio #readingStop,
+#main-content #audio #filmStart,
+#main-content #audio #filmStop{display:none!important}
+#main-content #audio .listening-symbol{
+  color:hsl(var(--holy-hue,42deg) 68% 72%)!important;transition:color .8s ease,filter .8s ease!important;
+}
+#main-content #audio .audio-channel .listen-disc{
+  width:108px!important;height:108px!important;display:grid!important;place-items:center!important;
+  margin:22px auto 28px!important;border-radius:50%!important;
+  border:1px solid hsl(var(--holy-hue,42deg) 68% 72% / .78)!important;
+  background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.08),rgba(8,22,21,.9) 68%)!important;
+  color:hsl(var(--holy-hue,42deg) 68% 72%)!important;
+  box-shadow:0 0 0 7px rgba(121,191,224,.08),0 0 18px rgba(121,191,224,.11)!important;
+  font-size:.74rem!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+  transition:color .8s ease,border-color .8s ease,box-shadow .8s ease,transform .8s ease!important;
+}
+#main-content #audio .film-disc{margin-top:14px!important;margin-bottom:18px!important}
+#main-content #audio.is-playing .listen-disc,
+#main-content #audio.is-playing .listening-symbol{
+  animation:jcsHolyPulse 3.6s ease-in-out infinite alternate!important;
+  filter:drop-shadow(0 0 10px hsl(var(--holy-hue,42deg) 68% 72% / .32))!important;
+}
+#main-content #audio.is-playing .audio-channel:nth-child(2) .listen-disc{animation-delay:-1.1s!important}
+#main-content #audio.is-playing .audio-channel:nth-child(3) .listen-disc{animation-delay:-2.2s!important}
+@keyframes jcsHolyPulse{
+  0%{transform:scale(.97);box-shadow:0 0 0 6px rgba(121,191,224,.08),0 0 12px rgba(121,191,224,.10)}
+  100%{transform:scale(1.04);box-shadow:0 0 0 12px rgba(221,193,128,.10),0 0 30px rgba(121,191,224,.25)}
+}
+@media(prefers-reduced-motion:reduce){
+  #main-content #audio.is-playing .listen-disc,#main-content #audio.is-playing .listening-symbol{animation:none!important}
+}
+#main-content .comparison-chart{
+  position:relative!important;min-height:250px!important;padding:18px 14px 12px!important;
+  border:1px solid rgba(134,215,194,.24)!important;
+  background:linear-gradient(145deg,rgba(21,49,45,.76),rgba(7,25,29,.92))!important;
+}
+#main-content .comparison-chart.has-live-data::after{
+  content:"LIVE"!important;position:absolute!important;top:10px!important;right:12px!important;
+  padding:3px 7px!important;border:1px solid rgba(134,215,194,.35)!important;border-radius:999px!important;
+  color:#86d7c2!important;font-size:.54rem!important;letter-spacing:.12em!important;
+  animation:jcsChartPulse 2.4s ease-in-out infinite alternate!important;
+}
+#main-content .chart-series.rlusd::before{background:#86d7c2!important}
+#main-content .comparison-inspector-label{
+  display:block!important;margin-top:14px!important;color:var(--home-gold)!important;
+  font-size:.72rem!important;letter-spacing:.04em!important;text-align:center!important;
+}
+#main-content #comparisonObservation{accent-color:#dfc180!important;width:100%!important}
+#main-content .comparison-observation{
+  display:block!important;margin-top:8px!important;text-align:center!important;font-variant-numeric:tabular-nums!important;
+}
+@keyframes jcsChartPulse{0%{opacity:.55}100%{opacity:1}}
+@media(max-width:640px){
+  #main-content .film-sources{padding:0 18px!important}
+  #main-content .jesus-film-card .jcs-film-video{min-height:190px!important}
+  #main-content #audio .audio-master-actions{justify-content:flex-start!important}
+  #main-content #audio .unified-media-toggle{width:100%!important}
+  #main-content #audio .audio-channel .listen-disc{width:94px!important;height:94px!important}
+}
