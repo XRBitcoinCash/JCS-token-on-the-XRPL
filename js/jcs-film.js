@@ -1,27 +1,35 @@
 (function () {
   'use strict';
 
-  const JESUS_URL = 'https://www.jesusfilm.org/watch/jesus.html';
   const film = document.getElementById('passionVideo');
-  const heritage = document.getElementById('heritageFilm');
-  const status = document.getElementById('filmStatus');
-  const primaryFrame = document.getElementById('jesusFilmFrame');
+  const primaryVideo = document.getElementById('jesusFilmVideo');
   const primaryStart = document.getElementById('jesusFilmStart');
   const primaryStatus = document.getElementById('jesusFilmPlayerStatus');
   const filmStart = document.getElementById('filmStart');
   const filmStop = document.getElementById('filmStop');
   const filmNow = document.getElementById('filmNow');
-  const primaryFallback = document.getElementById('jesusFilmWatch');
-  if (!film && !primaryFrame && !filmStart) return;
+  const status = document.getElementById('filmStatus');
+  const heritage = document.getElementById('heritageFilm');
+  if (!film && !primaryVideo && !filmStart && !primaryStart) return;
 
   let filmPlaying = false;
-  let primaryLoadTimer = null;
+  let primaryPlaying = false;
 
-  const say = message => { if (status) status.textContent = message; };
-  const setPrimaryStatus = message => { if (primaryStatus) primaryStatus.textContent = message; };
+  const say = message => {
+    if (status) status.textContent = message;
+  };
+  const setPrimaryStatus = message => {
+    if (primaryStatus) primaryStatus.textContent = message;
+  };
+  const updateOverallState = (channel = 'film') => {
+    const playing = Boolean(filmPlaying || primaryPlaying);
+    window.__jcsFilmPlaying = playing;
+    document.dispatchEvent(new CustomEvent('jcs:film-state', {
+      detail: { playing, channel, primaryPlaying, filmPlaying }
+    }));
+  };
   const updateFilmState = playing => {
     filmPlaying = Boolean(playing);
-    window.__jcsFilmPlaying = filmPlaying;
     if (filmStart) {
       filmStart.disabled = filmPlaying;
       const label = filmStart.querySelector('span:last-child');
@@ -35,15 +43,35 @@
         : (film?.currentTime ? 'Paused · public-domain 1903 Passion companion.' : 'Ready when you are.');
       filmNow.className = filmPlaying ? 'now-playing is-live' : 'now-playing is-muted';
     }
-    document.dispatchEvent(new CustomEvent('jcs:film-state', { detail: { playing: filmPlaying } }));
+    updateOverallState('heritage');
+  };
+  const updatePrimaryState = playing => {
+    primaryPlaying = Boolean(playing);
+    if (primaryStart) {
+      primaryStart.disabled = primaryPlaying;
+      primaryStart.textContent = primaryPlaying ? 'JESUS is playing' : 'Play JESUS here';
+    }
+    updateOverallState('jesus');
   };
 
-  function pauseFilm(message = 'Film paused. Press Play film to continue.') {
+  function pauseHeritage(message = 'Film paused. Press Play film to continue.') {
     if (film) {
       film.pause();
       film.dataset.jcsPlayGroup = '';
     }
     updateFilmState(false);
+    if (message) say(message);
+  }
+
+  function pausePrimary(message = 'JESUS paused. Press Play JESUS here to continue.') {
+    if (primaryVideo) primaryVideo.pause();
+    updatePrimaryState(false);
+    if (message) setPrimaryStatus(message);
+  }
+
+  function pauseAllMedia(message = 'Media paused. Press play when you are ready.') {
+    if (filmPlaying || film?.currentTime) pauseHeritage('');
+    if (primaryPlaying || primaryVideo?.currentTime) pausePrimary('');
     if (message) say(message);
   }
 
@@ -56,35 +84,28 @@
     if (heritage) heritage.open = true;
     film.autoplay = false;
     film.controls = true;
-    // A deliberate Play/Play all tap may request sound. If the browser still
-    // rejects audible playback, retry muted and leave the native unmute control
-    // available; autoplay with sound cannot be forced by a page.
+    film.playsInline = true;
+    film.preload = 'metadata';
+    film.dataset.jcsPlayGroup = options.group === 'all' ? 'all' : 'film';
     const requestSound = options.muted !== true;
     film.muted = !requestSound;
     film.defaultMuted = !requestSound;
-    film.playsInline = true;
-    film.dataset.jcsPlayGroup = options.group === 'all' ? 'all' : 'film';
-    updateFilmState(true);
     const attempt = film.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => true).catch(error => {
-        const blocked = error?.name === 'NotAllowedError';
-        if (blocked && requestSound) {
+        if (error?.name === 'NotAllowedError' && requestSound) {
           film.muted = true;
           film.defaultMuted = true;
-          const retry = film.play();
-          return Promise.resolve(retry).then(() => true).catch(() => {
+          return Promise.resolve(film.play()).then(() => true).catch(() => {
             updateFilmState(false);
-            const message = 'Your browser blocked playback. Press Play film again or use the film controls below.';
+            const message = 'Your browser blocked playback. Press Play film again or use the video controls.';
             say(message);
             if (filmNow) filmNow.textContent = message;
             return false;
           });
         }
         updateFilmState(false);
-        const message = blocked
-          ? 'Your browser blocked playback. Press Play film again to allow the silent companion.'
-          : 'The film could not load. Use the Wikimedia source link below.';
+        const message = 'The public-domain film could not load. Use the Wikimedia source listed above.';
         say(message);
         if (filmNow) filmNow.textContent = message;
         return false;
@@ -94,106 +115,121 @@
   }
 
   function startPrimary() {
-    if (!primaryFrame) return false;
-    primaryFrame.hidden = false;
-    if (primaryFrame.dataset.loaded !== 'true') {
-      primaryFrame.src = JESUS_URL;
-      primaryFrame.dataset.loaded = 'loading';
-      setPrimaryStatus('Loading the official JESUS player in this card. Use its own play and sound controls.');
-      window.clearTimeout(primaryLoadTimer);
-      primaryLoadTimer = window.setTimeout(() => {
-        if (primaryFrame.dataset.loaded !== 'ready') {
-          setPrimaryStatus('The official player did not load inside this card. Use the on-page fallback below.');
-          if (primaryFallback) primaryFallback.hidden = false;
+    if (!primaryVideo) return Promise.resolve(false);
+    primaryVideo.controls = true;
+    primaryVideo.playsInline = true;
+    primaryVideo.muted = false;
+    primaryVideo.defaultMuted = false;
+    const attempt = primaryVideo.play();
+    if (attempt && typeof attempt.then === 'function') {
+      return attempt.then(() => {
+        setPrimaryStatus('JESUS is playing in this card. Use the player controls for sound and full screen.');
+        return true;
+      }).catch(error => {
+        if (error?.name === 'NotAllowedError') {
+          primaryVideo.muted = true;
+          primaryVideo.defaultMuted = true;
+          return Promise.resolve(primaryVideo.play()).then(() => {
+            setPrimaryStatus('JESUS is playing muted. Tap the player’s sound control to hear it.');
+            return true;
+          }).catch(() => {
+            updatePrimaryState(false);
+            setPrimaryStatus('The JESUS film could not start. Press play on the video to retry.');
+            return false;
+          });
         }
-      }, 12000);
-    } else {
-      setPrimaryStatus('The official JESUS player is ready. Use its play and sound controls.');
+        updatePrimaryState(false);
+        setPrimaryStatus('The JESUS film could not load in this card. Try the video controls again.');
+        return false;
+      });
     }
-    if (primaryStart) {
-      primaryStart.textContent = 'JESUS player ready';
-      primaryStart.disabled = true;
-    }
-    say('The official JESUS player is ready in the page. Press its play button and enable sound there if requested.');
-    return true;
+    return Promise.resolve(true);
   }
 
-  if (primaryFrame) {
-    primaryFrame.hidden = true;
-    primaryFrame.addEventListener('load', () => {
-      primaryFrame.dataset.loaded = 'ready';
-      window.clearTimeout(primaryLoadTimer);
-      setPrimaryStatus('Official JESUS player loaded. Press its play button and enable sound there if requested.');
-      if (primaryStart) {
-        primaryStart.textContent = 'JESUS player ready';
-        primaryStart.disabled = true;
+  if (primaryVideo) {
+    primaryVideo.autoplay = false;
+    primaryVideo.controls = true;
+    primaryVideo.playsInline = true;
+    primaryVideo.preload = 'metadata';
+    primaryVideo.addEventListener('play', () => {
+      if (document.hidden) {
+        pausePrimary('Page hidden. Press Play JESUS here when you return.');
+        return;
       }
+      updatePrimaryState(true);
+      document.dispatchEvent(new CustomEvent('jcs:film-start', { detail: { group: 'jesus' } }));
+      say('The full JESUS film is playing in this card.');
     });
-    primaryFrame.addEventListener('error', () => {
-      primaryFrame.dataset.loaded = 'error';
-      setPrimaryStatus('The official player could not be embedded here. Use the authorized player link below.');
-      if (primaryFallback) primaryFallback.hidden = false;
-      if (primaryStart) {
-        primaryStart.textContent = 'Retry official player';
-        primaryStart.disabled = false;
-      }
+    primaryVideo.addEventListener('pause', () => {
+      updatePrimaryState(false);
+      if (primaryVideo.currentTime > 0) setPrimaryStatus('JESUS paused. Press play on the video or the button to continue.');
+    });
+    primaryVideo.addEventListener('ended', () => {
+      updatePrimaryState(false);
+      setPrimaryStatus('The full JESUS film has ended. Press play to watch it again.');
+      say('The full JESUS film has ended.');
+    });
+    primaryVideo.addEventListener('error', () => {
+      updatePrimaryState(false);
+      setPrimaryStatus('The JESUS stream could not load in this browser. Press play to retry or use the film source link.');
     });
   }
 
   if (film) {
     film.autoplay = false;
     film.controls = true;
-    film.defaultMuted = true;
-    film.muted = true;
     film.playsInline = true;
-    film.preload = 'none';
+    film.preload = 'metadata';
     film.removeAttribute('crossorigin');
     film.pause();
     film.addEventListener('play', () => {
-      if (document.hidden) { pauseFilm('Page hidden. Press Play film when you return.'); return; }
+      if (document.hidden) {
+        pauseHeritage('Page hidden. Press Play film when you return.');
+        return;
+      }
       updateFilmState(true);
       const group = film.dataset.jcsPlayGroup === 'all' ? 'all' : 'film';
       film.dataset.jcsPlayGroup = '';
       document.dispatchEvent(new CustomEvent('jcs:film-start', { detail: { group } }));
       say(group === 'all'
-        ? 'Music, Scripture, and the public-domain film companion are playing.'
-        : 'Playing the public-domain 1903 Passion companion. Use its controls to pause or view full screen.');
+        ? 'Music, Scripture, and the public-domain 1903 film are playing.'
+        : 'The public-domain 1903 Passion film is playing in the listening card.');
     });
     film.addEventListener('pause', () => {
       updateFilmState(false);
-      if (filmNow) filmNow.textContent = 'Paused · public-domain 1903 Passion companion.';
+      if (film.currentTime > 0 && filmNow) filmNow.textContent = 'Paused · public-domain 1903 Passion companion.';
     });
     film.addEventListener('ended', () => {
       updateFilmState(false);
-      say('The public-domain film companion has ended.');
+      say('The public-domain 1903 film has ended.');
       if (filmNow) filmNow.textContent = 'Film ended. Press Play film to start again.';
     });
     film.addEventListener('error', () => {
       updateFilmState(false);
-      say('This film could not load. Use the Wikimedia source link to watch there.');
-      if (filmNow) filmNow.textContent = 'Film unavailable. Use the Wikimedia source link below.';
+      say('The public-domain film could not load. Use the Wikimedia source listed above.');
+      if (filmNow) filmNow.textContent = 'Film unavailable. Use the Wikimedia source above.';
     });
     heritage?.addEventListener('toggle', () => {
-      if (!heritage.open) pauseFilm('Historic film closed. Press Play film when you are ready.');
+      if (!heritage.open) pauseHeritage('Historic film closed. Press Play film when you are ready.');
     });
   }
 
-  primaryStart?.addEventListener('click', startPrimary);
+  primaryStart?.addEventListener('click', () => { void startPrimary(); });
   filmStart?.addEventListener('click', () => { void startHeritage({ group: 'film' }); });
-  filmStop?.addEventListener('click', () => pauseFilm());
+  filmStop?.addEventListener('click', () => pauseHeritage());
   document.getElementById('sacred-film')?.querySelectorAll('a[target="_blank"]').forEach(link => {
-    link.addEventListener('click', () => {
-      if (filmPlaying) pauseFilm('Film paused while the selected provider opens.');
-    });
+    link.addEventListener('click', () => pauseAllMedia('Media paused while the source opens.'));
   });
-  document.addEventListener('jcs:pause-media', () => pauseFilm('Film paused. Press Play film to continue.'));
+  document.addEventListener('jcs:pause-media', () => pauseAllMedia('Media paused. Press play when you are ready.'));
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) pauseFilm('Page hidden. Press Play film when you return.');
+    if (document.hidden) pauseAllMedia('Page hidden. Press play when you return.');
   });
-  window.addEventListener('pagehide', () => pauseFilm('Film paused.'));
+  window.addEventListener('pagehide', () => pauseAllMedia('Media paused.'));
+
   window.__jcsStartFilm = options => startHeritage(options || {});
-  window.__jcsPauseFilm = message => pauseFilm(message || 'Film paused.');
+  window.__jcsPauseFilm = message => pauseAllMedia(message || 'Media paused.');
   window.__jcsFilmPlaying = false;
-  updateFilmState(false);
-  say('Choose Start JESUS film here for the official player, or Play film for the public-domain companion.');
+  updateOverallState('initial');
+  if (primaryVideo) setPrimaryStatus('Press Play JESUS here or use the video controls to begin.');
+  say('Choose Play all three, Listen to a channel, or Play JESUS here.');
 })();
