@@ -8333,6 +8333,15 @@ body.exchange-focus #jcs-world-watch{display:none!important}
   #trade .jcs-nft-review .jcs-readout dd { text-align: left; max-width: 100%; margin: .35rem 0; }
 }
 
+/* The verified, transaction-specific receipt is a document image, not a logo. */
+#trade .jcs-receipt-preview #jcsReceiptArtwork[data-verified="true"] {
+  grid-column: 1 / -1; grid-row: 2; justify-self: center;
+  width: 100%; max-width: 800px; height: auto; border-radius: 8px;
+}
+#trade .jcs-receipt-preview #jcsReceiptArtwork[data-verified="true"] + div {
+  grid-column: 1 / -1; grid-row: 1;
+}
+
 </style>
 </head>
 <body id="top">
@@ -9091,7 +9100,7 @@ body.exchange-focus #jcs-world-watch{display:none!important}
 
 
 
-<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-complete-v2">
+<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-render-v3">
 (function () {
   let homepageStarted = false;
   function reportJcsModuleError(name, error) {
@@ -9106,6 +9115,231 @@ body.exchange-focus #jcs-world-watch{display:none!important}
     if (homepageStarted) return;
     homepageStarted = true;
     try {
+try {
+// Bundled from backend/jcs-receipt-core.js
+/* JCS receipt contract v1. Browser + Node; ledger facts only. Decimal/effect
+ * normalization follows the existing XRBC Render receipt service. */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.JCS_RECEIPTS = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const SCHEMA = 'jcs-validated-receipt-nft-v1', POLICY = 'jcs-personal-receipt-v1';
+  const TAXON = 20260913, BASE = 'https://xrbitcoincash-github-io.onrender.com';
+  const ISSUER = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
+  const JCS = Object.freeze({currency:'JCS', issuer:ISSUER}), XRP = Object.freeze({currency:'XRP'});
+  const HASH = /^[A-Fa-f0-9]{64}$/, ADDRESS = /^r[1-9A-HJ-NP-Za-km-z]{24,34}$/;
+  const SCALE = 10n ** 96n, DROP = SCALE / 1000000n;
+  const NOTICE = 'Personal historical transaction receipt only. No LP ownership, pool share, spiritual reward, investment guarantee, or redemption rights. Not for resale. No wallet connection or payment is needed to view.';
+  const fail = message => { throw new Error(message); };
+  const abs = value => value < 0n ? -value : value;
+  function dec(value) {
+    if (typeof value === 'bigint') return value;
+    const s = String(value).trim(), m = /^(-?)(\d+)(?:\.(\d*))?(?:[eE]([+-]?\d{1,3}))?$/.exec(s);
+    if (s.length > 220 || !m) return fail('Invalid receipt decimal.');
+    const places = 96 + Number(m[4] || 0) - (m[3] || '').length;
+    if (places < 0 || places > 192) return fail('Unsupported receipt precision.');
+    const n = BigInt(m[2] + (m[3] || '')) * 10n ** BigInt(places) * (m[1] ? -1n : 1n);
+    if (abs(n) >= 10n ** 192n) return fail('Receipt amount exceeds ledger range.');
+    return n;
+  }
+  function decimal(value) {
+    const n = dec(value), digits = abs(n).toString().padStart(97, '0'), fraction = digits.slice(-96).replace(/0+$/, '');
+    return (n < 0n ? '-' : '') + digits.slice(0, -96) + (fraction ? '.' + fraction : '');
+  }
+  function stable(value) {
+    if (Array.isArray(value)) return '[' + value.map(stable).join(',') + ']';
+    if (value && typeof value === 'object') return '{' + Object.keys(value).sort().map(k => JSON.stringify(k) + ':' + stable(value[k])).join(',') + '}';
+    return JSON.stringify(value);
+  }
+  function currency(value) {
+    if (typeof value !== 'string') return '';
+    if (/^[A-Fa-f0-9]{40}$/.test(value)) {
+      // XRPL standard three-letter codes have an equivalent 160-bit encoding.
+      if (/^0{24}[A-Fa-f0-9]{6}0{10}$/.test(value)) {
+        const code = String.fromCharCode(...value.slice(24, 30).match(/../g).map(x => parseInt(x, 16)));
+        if (/^[\x21-\x7e]{3}$/.test(code)) return code;
+      }
+      return value.toUpperCase();
+    }
+    return value;
+  }
+  const same = (a,b) => !!a && !!b && currency(a.currency) === currency(b.currency) && (a.issuer || '') === (b.issuer || '');
+  const issue = amount => typeof amount === 'string' ? XRP : amount;
+  const pair = (a,b) => (same(a,JCS) && same(b,XRP)) || (same(b,JCS) && same(a,XRP));
+  const hex = value => Array.from(new TextEncoder().encode(value), b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+  function unhex(value) {
+    if (typeof value !== 'string' || value.length % 2 || !/^[A-Fa-f0-9]*$/.test(value)) return fail('Invalid hexadecimal URI.');
+    return new TextDecoder('utf-8', {fatal:true}).decode(Uint8Array.from(value.match(/../g) || [], b => parseInt(b,16)));
+  }
+  function effects(meta, account, lp) {
+    if (!Array.isArray(meta?.AffectedNodes) || meta.AffectedNodes.length > 10000) return fail('Validated transaction metadata is unavailable.');
+    const result = {jcs:0n,xrp:0n,lp:0n,accountSeen:false};
+    for (const wrapper of meta.AffectedNodes) {
+      const n = wrapper.ModifiedNode || wrapper.CreatedNode || wrapper.DeletedNode;
+      if (!n) continue;
+      const created = !!wrapper.CreatedNode, deleted = !!wrapper.DeletedNode;
+      const f = n.FinalFields || n.NewFields || {}, before = n.PreviousFields || {};
+      if (n.LedgerEntryType === 'AccountRoot' && f.Account === account) {
+        result.accountSeen = true;
+        const old = created ? 0n : BigInt(before.Balance ?? f.Balance ?? '0');
+        const after = deleted ? 0n : BigInt(f.Balance ?? '0');
+        result.xrp += (after - old) * DROP;
+      }
+      if (n.LedgerEntryType !== 'RippleState') continue;
+      const low = f.LowLimit?.issuer, high = f.HighLimit?.issuer;
+      if (low !== account && high !== account) continue;
+      const peer = low === account ? high : low, sign = low === account ? 1n : -1n;
+      const asset = {currency:f.Balance?.currency || f.LowLimit?.currency, issuer:peer};
+      const old = created ? 0n : dec(before.Balance?.value ?? f.Balance?.value ?? '0');
+      const after = deleted ? 0n : dec(f.Balance?.value ?? '0');
+      const delta = (after - old) * sign;
+      if (same(asset,JCS)) result.jcs += delta;
+      else if (lp && same(asset,lp)) result.lp += delta;
+      else if (delta !== 0n) return fail('The source wallet moved an asset outside the JCS/XRP receipt pair.');
+    }
+    if (!result.accountSeen) return fail('The source account balance change is missing.');
+    return result;
+  }
+  function poolToken(tx,meta) {
+    let found = null;
+    const include = candidate => {
+      if (!ADDRESS.test(candidate?.issuer || '') || !/^03[A-Fa-f0-9]{38}$/.test(candidate?.currency || '')) return fail('Invalid pool token identity.');
+      const next = {currency:candidate.currency.toUpperCase(), issuer:candidate.issuer};
+      if (found && !same(found,next)) return fail('Pool token identities disagree.');
+      found = next;
+    };
+    if (tx.LPTokenIn) include(tx.LPTokenIn);
+    if (tx.LPTokenOut) include(tx.LPTokenOut);
+    for (const wrapper of meta.AffectedNodes || []) {
+      const n = wrapper.ModifiedNode || wrapper.CreatedNode || wrapper.DeletedNode;
+      const f = n?.FinalFields || n?.NewFields || {};
+      if (n?.LedgerEntryType === 'AMM' && pair(f.Asset,f.Asset2) && f.LPTokenBalance) include(f.LPTokenBalance);
+      if (n?.LedgerEntryType === 'RippleState' && /^03[A-Fa-f0-9]{38}$/.test(f.Balance?.currency || '')) {
+        const low = f.LowLimit?.issuer, high = f.HighLimit?.issuer;
+        if (low === tx.Account || high === tx.Account) include({currency:f.Balance.currency,issuer:low === tx.Account ? high : low});
+      }
+    }
+    if (!found) return fail('The validated pool token identity is missing.');
+    return found;
+  }
+  function confirmedTime(result,tx) {
+    const rippleDate = tx.date ?? result.date;
+    if (Number.isInteger(rippleDate) && rippleDate >= 0 && rippleDate <= 4294967295) return new Date((rippleDate + 946684800) * 1000).toISOString();
+    if (typeof result.close_time_iso === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(result.close_time_iso) && Number.isFinite(Date.parse(result.close_time_iso))) return new Date(result.close_time_iso).toISOString();
+    return null;
+  }
+  function fromLedger(raw, expectedHash) {
+    const result = raw?.result || raw;
+    if (!result || !HASH.test(expectedHash || '')) return fail('Invalid source transaction hash.');
+    const tx = result.tx_json || result, meta = result.meta;
+    if (String(result.hash || tx.hash || '').toUpperCase() !== expectedHash.toUpperCase()) return fail('Receipt transaction hash mismatch.');
+    if (result.validated !== true || meta?.TransactionResult !== 'tesSUCCESS') return fail('A receipt requires a successful validated transaction.');
+    if (!ADDRESS.test(tx.Account || '') || tx.Account === ISSUER) return fail('Invalid source transaction wallet.');
+    const ledger = result.ledger_index ?? tx.ledger_index;
+    if (!Number.isInteger(ledger) || ledger < 1 || ledger > 4294967295) return fail('Invalid validated ledger index.');
+    const time = confirmedTime(result,tx);
+    if (time === null) return fail('The confirmed ledger time is unavailable.');
+    if (!/^\d{1,18}$/.test(tx.Fee || '') || BigInt(tx.Fee) < 1n) return fail('Invalid source network fee.');
+    const type = tx.TransactionType, isAmm = type === 'AMMDeposit' || type === 'AMMWithdraw';
+    let sourceKind, lp = null;
+    if (isAmm) {
+      if (!pair(tx.Asset,tx.Asset2)) return fail('The liquidity transaction is not for the pinned JCS/XRP pool.');
+      lp = poolToken(tx,meta);
+      sourceKind = type === 'AMMDeposit' ? 'add-liquidity' : 'withdraw-liquidity';
+    } else if (type === 'Payment') {
+      if (tx.Destination !== tx.Account || !pair(issue(tx.Amount ?? tx.DeliverMax),issue(tx.SendMax))) return fail('Only self-directed JCS/XRP exchange payments qualify.');
+      sourceKind = 'market-swap';
+    } else if (type === 'OfferCreate') {
+      if (!pair(issue(tx.TakerGets),issue(tx.TakerPays))) return fail('The order is not for the pinned JCS/XRP pair.');
+      sourceKind = (Number(tx.Flags || 0) >>> 0) & (0x20000 | 0x40000) ? 'market-swap' : 'limit-order';
+    } else return fail('Only JCS/XRP trades and liquidity transactions qualify.');
+    const e = effects(meta,tx.Account,lp), fee = BigInt(tx.Fee) * DROP;
+    const xrp = e.xrp + fee, jcs = e.jcs;
+    let direction, execution;
+    if (isAmm) {
+      const deposit = type === 'AMMDeposit';
+      if (deposit ? (jcs > 0n || xrp > 0n || (jcs === 0n && xrp === 0n) || e.lp <= 0n) : (jcs < 0n || xrp < 0n || (jcs === 0n && xrp === 0n) || e.lp >= 0n)) return fail('Validated liquidity movements have unexpected directions.');
+      direction = deposit ? 'deposit' : 'withdraw'; execution = 'validated-liquidity';
+    } else {
+      const traded = (jcs > 0n && xrp < 0n) || (jcs < 0n && xrp > 0n);
+      if (!traded && !(sourceKind === 'limit-order' && jcs === 0n && xrp === 0n)) return fail('Validated exchange movements do not show a JCS/XRP trade.');
+      direction = traded ? (jcs > 0n ? 'buy' : 'sell') : (same(issue(tx.TakerPays),JCS) ? 'buy' : 'sell');
+      execution = traded ? 'executed' : 'order-record-only';
+    }
+    const asset = (identity,symbol,value) => ({...identity,symbol,value:decimal(abs(value)),wallet_delta:decimal(value)});
+    return {schema:SCHEMA,network:'XRPL Mainnet',source_transaction:expectedHash.toUpperCase(),transactionHash:expectedHash.toUpperCase(),source_kind:sourceKind,
+      transaction_type:type,validated_at_utc:time,ledger,account:tx.Account,kind:direction,execution,pair:'XRP',asset:'JCS/XRP',jcs_issuer:ISSUER,
+      assetA:asset(JCS,'JCS',jcs),assetB:asset(XRP,'XRP',xrp),lp:lp ? {...lp,value:decimal(abs(e.lp)),wallet_delta:decimal(e.lp)} : null,
+      feeXrp:decimal(fee),amountBasis:'validated wallet movements excluding XRP network fee',disclaimer:NOTICE};
+  }
+  function assertRecord(record) {
+    if (!record || record.schema !== SCHEMA || record.network !== 'XRPL Mainnet' || !HASH.test(record.source_transaction || '') || record.transactionHash !== record.source_transaction || !ADDRESS.test(record.account || '') || record.jcs_issuer !== ISSUER || record.asset !== 'JCS/XRP' || record.pair !== 'XRP') return fail('Invalid JCS receipt record.');
+    if (!['market-swap','limit-order','add-liquidity','withdraw-liquidity'].includes(record.source_kind) || !['buy','sell','deposit','withdraw'].includes(record.kind)) return fail('Invalid receipt source kind.');
+    if (!Number.isInteger(record.ledger) || record.ledger < 1 || !same(record.assetA,JCS) || !same(record.assetB,XRP) || record.assetA.symbol !== 'JCS' || record.assetB.symbol !== 'XRP') return fail('Invalid receipt ledger or asset identity.');
+    for (const a of [record.assetA,record.assetB,...(record.lp ? [record.lp] : [])]) {
+      if (dec(a.value) < 0n || decimal(dec(a.value)) !== a.value || decimal(abs(dec(a.wallet_delta))) !== a.value) return fail('Invalid receipt amount.');
+    }
+    if (record.lp && (!ADDRESS.test(record.lp.issuer || '') || !/^03[A-F0-9]{38}$/.test(record.lp.currency || ''))) return fail('Invalid receipt pool identity.');
+    if (dec(record.feeXrp) <= 0n || decimal(record.feeXrp) !== record.feeXrp) return fail('Invalid receipt fee.');
+    return record;
+  }
+  function urls(base,record,digest) {
+    assertRecord(record);
+    if (!/^[a-f0-9]{64}$/.test(digest || '')) return fail('Invalid receipt digest.');
+    const b = new URL(base);
+    if (b.protocol !== 'https:' || b.username || b.password || b.search || b.hash || b.pathname !== '/') return fail('Receipt service requires an HTTPS origin.');
+    const path = b.origin + '/api/jcs-receipts-v1/' + record.source_transaction;
+    const metadata = path + '.json?d=' + digest, image = path + '.png?d=' + digest;
+    if (new TextEncoder().encode(metadata).length > 256) return fail('NFT URI exceeds the XRPL 256-byte limit.');
+    return {metadata,image};
+  }
+  function metadata(base,record,digest) {
+    const u = urls(base,record,digest), labels = {buy:'purchase',sell:'sale',deposit:'liquidity deposit',withdraw:'liquidity withdrawal'};
+    const title = record.execution === 'order-record-only' ? 'limit order record - no fill' : labels[record.kind] + ' receipt';
+    return {name:'JCS / XRP ' + title,description:NOTICE + ' Actual wallet amounts: ' + record.assetA.value + ' JCS and ' + record.assetB.value + ' XRP. ' + (record.execution === 'order-record-only' ? 'The validated order did not exchange assets in this transaction.' : 'Source transaction: ' + record.source_transaction + '.'),
+      image:u.image,external_url:'https://livenet.xrpl.org/transactions/' + record.source_transaction,
+      attributes:[{trait_type:'Action',value:record.source_kind},{trait_type:'Execution',value:record.execution},{trait_type:'JCS amount',value:record.assetA.value},{trait_type:'XRP amount',value:record.assetB.value},
+        ...(record.lp ? [{trait_type:'LP tokens ' + (record.kind === 'deposit' ? 'received' : 'redeemed'),value:record.lp.value}] : []),
+        {trait_type:'Ledger',value:record.ledger},{trait_type:'Transaction',value:record.source_transaction},{trait_type:'Purpose',value:'Personal historical record - not for resale'}],
+      properties:{receipt_policy:POLICY,transaction_url:'https://livenet.xrpl.org/transactions/' + record.source_transaction,transfer_controls:'No transferable flag, royalty, sale offer, or delegated issuer. XRPL issuer exceptions still apply.'},
+      jcs:{receipt:record,sha256:digest,receipt_policy:POLICY}};
+  }
+  function buildMint(account,record,digest,base=BASE) {
+    if (account !== record.account) return fail('Connect the wallet that made the source transaction.');
+    const uri = urls(base,record,digest).metadata;
+    const data = 'APP=JCS_RECEIPT|SOURCE=' + record.source_transaction + '|SHA256=' + digest + '|RECEIPT=PERSONAL_HISTORICAL|NOT_FOR_RESALE=1';
+    return {TransactionType:'NFTokenMint',Account:account,NFTokenTaxon:TAXON,Flags:0,URI:hex(uri),
+      Memos:[{Memo:{MemoType:hex('JCS_RECEIPT'),MemoFormat:hex('text/plain'),MemoData:hex(data)}}]};
+  }
+  function parsePointer(encoded,base=BASE) {
+    const value = /^https:\/\//.test(encoded || '') ? encoded : unhex(encoded);
+    const u = new URL(value), b = new URL(base);
+    if (b.protocol !== 'https:' || b.pathname !== '/' || b.username || b.password || b.search || b.hash || u.origin !== b.origin || u.username || u.password || u.hash) return fail('NFT URI does not identify the JCS receipt service.');
+    const m = /^\/api\/jcs-receipts-v1\/([A-F0-9]{64})\.json$/.exec(u.pathname);
+    if (!m || !/^\?d=[a-f0-9]{64}$/.test(u.search)) return fail('Invalid JCS receipt URI.');
+    return {transactionHash:m[1],source_transaction:m[1],digest:u.search.slice(3),url:value};
+  }
+  async function digest(record) {
+    assertRecord(record);
+    const bytes = new TextEncoder().encode(stable(record));
+    if (!globalThis.crypto?.subtle) return fail('Secure SHA-256 is unavailable in this context.');
+    return Array.from(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',bytes)), b => b.toString(16).padStart(2,'0')).join('');
+  }
+  function assertMint(tx,record,digest,base=BASE) {
+    const expected = buildMint(record.account,record,digest,base);
+    const optional = ['Fee','Sequence','LastLedgerSequence','NetworkID'];
+    if (Object.keys(tx).some(k => !(k in expected) && !optional.includes(k)) || Object.keys(expected).some(k => stable(tx[k]) !== stable(expected[k]))) return fail('NFT receipt signing request changed.');
+    if (tx.Fee !== undefined && (!/^\d+$/.test(tx.Fee) || BigInt(tx.Fee) < 1n || BigInt(tx.Fee) > 10000n)) return fail('NFT mint network fee is invalid.');
+    for (const key of ['Sequence','LastLedgerSequence']) if (tx[key] !== undefined && (!Number.isInteger(tx[key]) || tx[key] < 1 || tx[key] > 4294967295)) return fail('NFT mint sequence/deadline is invalid.');
+    if (tx.NetworkID !== undefined && tx.NetworkID !== 0) return fail('NFT receipt requires Mainnet.');
+    return true;
+  }
+  return Object.freeze({SCHEMA,POLICY,RECEIPT_POLICY_V3:POLICY,TAXON,BASE,ISSUER,JCS,XRP,NOTICE,fromLedger,assertRecord,confirmedTime,stable,urls,metadata,metadataV3:metadata,hex,unhex,buildMint,mintPayload:buildMint,assertMint,parsePointer,receiptUriSource:(base,encoded)=>parsePointer(encoded,base),digest,decimal,dec,same});
+});
+
+} catch (error) { reportJcsModuleError("backend/jcs-receipt-core.js", error); }
+
 try {
 // Bundled from js/xrpl-client.js
 (function () {
@@ -12508,6 +12742,10 @@ try {
         const signed = await signWithSentinel(tx, 'offer');
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
+        if (!/^[A-F0-9]{64}$/i.test(txid)) throw new Error('Xaman returned an invalid transaction ID for the limit order.');
+        document.dispatchEvent(new CustomEvent('jcs:submitted-transaction', {
+          detail: { txid, account: signed.txjson?.Account, kind: 'limit-order', network: 'XRPL Mainnet', validated: false }
+        }));
         setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
         const receipt = await waitForQuickBuyValidation(txid);
         setStatus(
@@ -12596,6 +12834,10 @@ try {
         const signed = await signWithSentinel(tx, 'swap');
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the market order.');
+        if (!/^[A-F0-9]{64}$/i.test(txid)) throw new Error('Xaman returned an invalid transaction ID for the market order.');
+        document.dispatchEvent(new CustomEvent('jcs:submitted-transaction', {
+          detail: { txid, account: signed.txjson?.Account, kind: 'market-swap', network: 'XRPL Mainnet', validated: false }
+        }));
 
         setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
         const receipt = await waitForQuickBuyValidation(txid);
@@ -13615,6 +13857,10 @@ try {
           'Xaman did not return a transaction ID for the Quick Buy.'
         );
       }
+      if (!/^[A-F0-9]{64}$/i.test(txid)) throw new Error('Xaman returned an invalid transaction ID for the Quick Buy.');
+      document.dispatchEvent(new CustomEvent('jcs:submitted-transaction', {
+        detail: { txid, account: signed.txjson?.Account, kind: 'market-swap', network: 'XRPL Mainnet', validated: false }
+      }));
 
       setStatus(
         buyStatus,
@@ -13692,6 +13938,17 @@ try {
   function receiptNftPointer(hex) {
     try {
       const uri = decodeNftHex(hex);
+      const R = window.JCS_RECEIPTS;
+      if (R) {
+        const url = new URL(uri);
+        const path = /^\/api\/jcs-receipts-v1\/([A-F0-9]{64})\.json$/.exec(url.pathname);
+        const digest = url.searchParams.get('d');
+        if (url.origin === R.BASE && !url.username && !url.password && !url.hash && path &&
+            /^[a-f0-9]{64}$/.test(digest || '') && url.search === '?d=' + digest) {
+          return { schema: R.SCHEMA, network: 'XRPL Mainnet', source_transaction: path[1],
+            receipt_policy: R.POLICY, sha256: digest };
+        }
+      }
       if (uri.startsWith(RECEIPT_METADATA_URL + '#tx=')) {
         const hash = uri.slice((RECEIPT_METADATA_URL + '#tx=').length);
         return /^[A-F0-9]{64}$/.test(hash) ? { schema: RECEIPT_NFT_SCHEMA, network: 'XRPL Mainnet', source_transaction: hash } : null;
@@ -13722,6 +13979,47 @@ try {
       if (error.name === 'AbortError') throw new Error('Receipt metadata verification timed out. Try again; no mint request was created.');
       throw error;
     } finally { clearTimeout(timer); }
+  }
+
+  async function verifyRenderNftReceipt(transaction, pointer, account) {
+    const R = window.JCS_RECEIPTS;
+    if (!R || !window.crypto?.subtle) throw new Error('Receipt verification is unavailable. Open this page using HTTPS.');
+    const response = await xrplRequest({ method: 'tx', params: [{ transaction: pointer.source_transaction, binary: false }] });
+    let result = response.result;
+    const sourceTx = result?.tx_json || result;
+    if (!Number.isInteger(sourceTx?.date ?? result?.date) && !result?.close_time_iso && result?.validated === true && Number.isInteger(result.ledger_index)) {
+      const ledger = (await xrplRequest({ method: 'ledger', params: [{ ledger_index: result.ledger_index }] })).result;
+      if (ledger?.validated !== true || Number(ledger.ledger_index) !== result.ledger_index || !Number.isInteger(ledger.ledger?.close_time)) throw new Error('The source ledger date could not be verified.');
+      result = { ...result, date: ledger.ledger.close_time };
+    }
+    const record = R.fromLedger(result, pointer.source_transaction);
+    if (record.account !== account) throw new Error('Connect the wallet that made the source transaction.');
+    const bytes = new TextEncoder().encode(R.stable(record));
+    const sha256 = Array.from(new Uint8Array(await window.crypto.subtle.digest('SHA-256', bytes)), b => b.toString(16).padStart(2, '0')).join('');
+    if (pointer.sha256 !== sha256) throw new Error('The receipt digest differs from the validated ledger record.');
+    R.assertMint(transaction, record, sha256, R.BASE);
+    const urls = R.urls(R.BASE, record, sha256), expected = R.metadata(R.BASE, record, sha256);
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 20000);
+    const options = { signal: controller.signal, credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' };
+    try {
+      const published = await fetch(urls.metadata, options);
+      if (!published.ok || (published.url && published.url !== urls.metadata) || !/^application\/json\b/i.test(published.headers.get('content-type') || '')) {
+        throw new Error('The JCS receipt route is unavailable on the existing Render service. Deploy the supplied xrpl-proxy/server.js, then retry. No NFT request was created.');
+      }
+      const text = await published.text();
+      if (new TextEncoder().encode(text).length > 32768 || !sameNftValue(JSON.parse(text), expected)) throw new Error('The Render receipt metadata differs from the independently verified ledger record.');
+      const image = await fetch(urls.image, options);
+      if (!image.ok || (image.url && image.url !== urls.image) || !/^image\/png\b/i.test(image.headers.get('content-type') || '') || Number(image.headers.get('content-length') || 0) > 5000000) throw new Error('The Render receipt image is not ready. Try again before minting.');
+      const png = new Uint8Array(await image.arrayBuffer()), signature = [137,80,78,71,13,10,26,10];
+      if (png.length < 33 || png.length > 5000000 || !signature.every((byte,index) => png[index] === byte) ||
+          String.fromCharCode(...png.slice(12,16)) !== 'IHDR') throw new Error('The Render service did not return a supported receipt PNG.');
+      const header = new DataView(png.buffer, png.byteOffset, png.byteLength), width = header.getUint32(16), height = header.getUint32(20);
+      if (!width || !height || width > 4096 || height > 4096) throw new Error('The Render receipt image has unsupported dimensions.');
+    } catch (error) {
+      if (error.name === 'AbortError') throw new Error('The receipt service timed out. Try again; no NFT request was created.');
+      throw error;
+    } finally { clearTimeout(timer); }
+    return record;
   }
 
   async function readOwnedNfts(account, ledgerIndex) {
@@ -13817,6 +14115,9 @@ try {
         const uri = decodeNftHex(transaction.URI);
         const pointer = receiptNftPointer(transaction.URI);
         if (!pointer) throw new Error('Invalid JCS receipt URI metadata.');
+        if (pointer.receipt_policy && pointer.receipt_policy === window.JCS_RECEIPTS?.POLICY) {
+          metadata = await verifyRenderNftReceipt(transaction, pointer, account);
+        } else {
         const memos = transaction.Memos;
         if (!Array.isArray(memos) || memos.length !== 1 || Object.keys(memos[0]).length !== 1 ||
             !memos[0].Memo || Object.keys(memos[0].Memo).length !== 2 ||
@@ -13834,6 +14135,7 @@ try {
         }
         await verifyNftReceiptSource(metadata, account);
         await verifyNftPublication(uri);
+        }
       } else if (transaction.Flags !== 1 || !/^[A-F0-9]{64}$/.test(transaction.NFTokenID || '') ||
           typeof transaction.Amount !== 'string' || !/^\d+$/.test(transaction.Amount) ||
           BigInt(transaction.Amount) < 1n || BigInt(transaction.Amount) > 100000000000000000n ||
@@ -13884,7 +14186,7 @@ try {
       receiptValidated = true;
       const expected = signed.txjson;
       const envelope = new Set(['Sequence', 'SigningPubKey', 'TxnSignature', 'Signers', 'hash', 'date', 'ledger_index', 'inLedger',
-        'validated', 'meta', 'metaData', 'ctid', 'ledger_hash', 'close_time_iso']);
+        'validated', 'meta', 'metaData', 'ctid', 'ledger_hash', 'close_time_iso', 'status']);
       if (!expected || Object.keys(actual).some(key => !(key in expected) && !envelope.has(key)) ||
           !Object.keys(expected).every(key => key === 'Flags'
             ? (Number(actual.Flags || 0) & 0x7fffffff) === expected.Flags
@@ -13934,6 +14236,8 @@ try {
     submitNft,
     async submitLiquidity(transaction) {
       if (liquiditySigning) throw new Error('A liquidity request is already awaiting your review.');
+      // Keep the reviewed request independent of caller/SDK mutations while Xaman is open.
+      transaction = JSON.parse(JSON.stringify(transaction));
       const account = currentAccount;
       if (!account || transaction.Account !== account) throw new Error('Your connected wallet changed. Review again.');
       const allowed = new Set(['TransactionType', 'Account', 'Asset', 'Asset2', 'Amount', 'Amount2', 'LPTokenIn', 'Flags', 'Fee', 'LastLedgerSequence']);
@@ -13961,9 +14265,14 @@ try {
       let submittedTxid = null;
       let receiptValidated = false;
       try {
-        const signed = await signWithSentinel(transaction, deposit ? 'liquidity-add' : 'liquidity-remove');
+        const signed = await signWithSentinel(JSON.parse(JSON.stringify(transaction)), deposit ? 'liquidity-add' : 'liquidity-remove');
         if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
         submittedTxid = signed.txid;
+        // This is a recovery hint, never proof of success: receipt tools must re-query the ledger.
+        document.dispatchEvent(new CustomEvent('jcs:submitted-transaction', {
+          detail: { txid: signed.txid, account, kind: deposit ? 'add-liquidity' : 'withdraw-liquidity',
+            network: 'XRPL Mainnet', validated: false }
+        }));
         const receipt = await waitForQuickBuyValidation(signed.txid);
         const actual = receipt.transaction.tx_json || receipt.transaction;
         const confirmedHash = String(receipt.transaction.hash || actual.hash || '');
@@ -13979,16 +14288,47 @@ try {
           while (digits.length > 1 && digits.endsWith('0')) { digits = digits.slice(0, -1); exponent++; }
           return digits === '0' ? '0' : match[1] + digits + 'e' + exponent;
         };
-        const same = (a, b) => {
-          if (a && b && typeof a === 'object' && typeof b === 'object') {
-            return Object.keys(a).every(key => same(a[key], b[key]));
+        const currencyBytes = value => {
+          const text = String(value || '');
+          if (/^[0-9A-Fa-f]{40}$/.test(text)) return text.toUpperCase();
+          if (/^[A-Za-z0-9?!@#$%^&*<>(){}\[\]|]{3}$/.test(text) && text !== 'XRP') {
+            return '0'.repeat(24) + Array.from(text, char => char.charCodeAt(0).toString(16).padStart(2, '0')).join('').toUpperCase() + '0'.repeat(10);
           }
-          return normalizedDecimal(a) === normalizedDecimal(b);
+          return text;
         };
-        if (!Object.keys(transaction).every(key => key === 'Flags'
-          ? (Number(actual[key]) & 0x7fffffff) === transaction[key]
-          : same(transaction[key], actual[key]))) {
-          throw new Error('The validated transaction differs from the reviewed request. Inspect transaction ' + signed.txid + ' before doing anything else.');
+        const same = (a, b, key) => {
+          if (a && b && typeof a === 'object' && typeof b === 'object') {
+            return Array.isArray(a) === Array.isArray(b) && Object.keys(a).length === Object.keys(b).length &&
+              Object.keys(a).every(name => Object.prototype.hasOwnProperty.call(b, name) && same(a[name], b[name], name));
+          }
+          if (key === 'currency') return currencyBytes(a) === currencyBytes(b);
+          if (key === 'value' || key === 'Amount' || key === 'Fee') {
+            return typeof a === 'string' && typeof b === 'string' && normalizedDecimal(a) === normalizedDecimal(b);
+          }
+          if (/^Memo(?:Data|Format|Type)$/.test(key || '')) {
+            return typeof a === 'string' && typeof b === 'string' && a.toUpperCase() === b.toUpperCase();
+          }
+          return a === b;
+        };
+        const sameField = (expected, found, key) => key === 'Flags'
+          ? Number.isInteger(found) && found >= 0 && found <= 0xffffffff && (found & 0x7fffffff) === expected
+          : same(expected, found, key);
+        const reviewed = signed.txjson;
+        if (!reviewed || Object.keys(transaction).some(key => !sameField(transaction[key], reviewed[key], key))) {
+          throw new Error('The Xaman review could not be matched to the original liquidity request. Inspect transaction ' + signed.txid + '.');
+        }
+        const different = Object.keys(reviewed).filter(key => !sameField(reviewed[key], actual[key], key));
+        for (const key of ['Amount', 'Amount2', 'LPTokenIn', 'LPTokenOut', 'EPrice']) {
+          if (!(key in reviewed) && key in actual) different.push(key);
+        }
+        if (different.length) {
+          const error = new Error('The validated transaction differs from the reviewed request in ' + different.join(', ') + '. Inspect transaction ' + signed.txid + ' before doing anything else.');
+          error.mismatchFields = different;
+          throw error;
+        }
+        const confirmedLedger = Number(receipt.transaction.ledger_index || actual.ledger_index);
+        if (!Number.isInteger(confirmedLedger) || confirmedLedger <= Number(last.index) || confirmedLedger > transaction.LastLedgerSequence) {
+          throw new Error('The validated transaction is outside the reviewed ledger window. Inspect transaction ' + signed.txid + '.');
         }
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
           detail: validatedReceiptDetail(receipt, {
@@ -13996,8 +14336,11 @@ try {
             legacyKind: deposit ? 'liquidity-add' : 'liquidity-remove', txid: signed.txid
           })
         }));
-        await refreshAll({ force: true });
-        return { txid: signed.txid, validated: true, ledgerIndex: receipt.transaction.ledger_index };
+        // The ledger receipt is final even when a later balance/pool refresh is unavailable.
+        let refreshWarning = null;
+        try { await refreshAll({ force: true }); }
+        catch { refreshWarning = 'The transaction is confirmed. Refresh the pool to retrieve its latest balances.'; }
+        return { txid: signed.txid, validated: true, ledgerIndex: confirmedLedger, refreshWarning };
       } catch (error) {
         if (submittedTxid) {
           error.txid = submittedTxid;
@@ -14484,6 +14827,10 @@ try {
       invalidateReview();
       status('Confirmed on the XRP Ledger. ' + (accepted.mode === 'deposit' ? 'Your pool share has been updated.' : 'Your redeemed XRP and JCS have returned to your wallet.'));
       const link = doc.createElement('a'); link.href = 'https://livenet.xrpl.org/transactions/' + result.txid; link.textContent = ' View transaction ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer'; byId('jcsLiquidityStatus').appendChild(link);
+      const receiptLink = doc.createElement('a'); receiptLink.href = '#jcsReceiptActions';
+      receiptLink.textContent = ' Create or view your NFT receipt';
+      byId('jcsLiquidityStatus').appendChild(doc.createElement('br'));
+      byId('jcsLiquidityStatus').appendChild(receiptLink);
       try { renderSnapshot(await loadSnapshot(true)); }
       catch {
         snapshot = null;
@@ -14498,6 +14845,10 @@ try {
         const link = doc.createElement('a'); link.href = 'https://livenet.xrpl.org/transactions/' + error.txid;
         link.textContent = ' Check transaction ' + error.txid + ' ↗'; link.target = '_blank'; link.rel = 'noopener noreferrer';
         byId('jcsLiquidityStatus').appendChild(link);
+        const receiptLink = doc.createElement('a'); receiptLink.href = '#jcsReceiptActions';
+        receiptLink.textContent = ' Check receipt verification';
+        byId('jcsLiquidityStatus').appendChild(doc.createElement('br'));
+        byId('jcsLiquidityStatus').appendChild(receiptLink);
       }
     }
     finally { signing = false; setBusy(false); }
@@ -14571,7 +14922,9 @@ try {
   'use strict';
   const SCHEMA = 'jcs-validated-receipt-nft-v1', NETWORK = 'XRPL Mainnet', TAXON = 20260913;
   const ISSUER = 'rPU6sXCNzsjcTUEmgJQ5SxDUzY2y1RyYKd';
-  const METADATA_URL = 'https://jesuschristsavestoken.com/jcs-receipt-nft-v1.json';
+  const METADATA_URL = 'https://jesuschristsavestoken.com/jcs-receipt-nft-v1.json'; // Read legacy receipt NFTs.
+  const BACKEND_URL = 'https://xrbitcoincash-github-io.onrender.com';
+  const RECEIPT_ROUTE = '/api/jcs-receipts-v1';
   const DISPLAY_METADATA = Object.freeze({ schema: 'jcs-receipt-display-v1', name: 'JCS Transaction Receipt',
     description: 'A personal record of a validated JCS/XRP transaction. The source transaction and full receipt details are recorded in the NFT mint transaction memo. Historical receipt only; not a claim to pool funds, a spiritual reward, or an investment guarantee.',
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
@@ -14594,6 +14947,15 @@ try {
       const hash = text.slice((METADATA_URL + '#tx=').length);
       return HASH.test(hash) ? { text, href: text, metadata: { schema: SCHEMA, network: NETWORK, source_transaction: hash.toUpperCase() } } : null;
     }
+    try {
+      const url = new URL(text);
+      const match = url.pathname.match(/^\/api\/jcs-receipts-v1\/([A-Fa-f0-9]{64})\.json$/);
+      if (url.origin === BACKEND_URL && match) {
+        const digest = url.searchParams.get('d');
+        if (!/^[a-f0-9]{64}$/.test(digest || '') || url.searchParams.size !== 1 || url.hash) return null;
+        return { text, href: url.href, metadata: { schema: SCHEMA, network: NETWORK, source_transaction: match[1].toUpperCase(), sha256: digest } };
+      }
+    } catch {}
     if (text.startsWith('data:application/json,')) {
       try { const metadata = JSON.parse(decodeURIComponent(text.slice(22))); if (metadata.schema === SCHEMA && metadata.network === NETWORK && HASH.test(metadata.source_transaction)) return { text, metadata }; } catch {}
       return null;
@@ -14655,7 +15017,7 @@ try {
     if (!HASH.test(actualHash || '') || actualHash.toUpperCase() !== result.txid.toUpperCase()) throw new Error('The NFT transaction hash does not match the ledger result.');
     for (const key of Object.keys(transaction)) {
       if (key === 'Memos') {
-        if (!transaction.Memos.every(expected => (tx.Memos || []).some(actual => JSON.stringify(actual.Memo) === JSON.stringify(expected.Memo)))) throw new Error('The receipt metadata differs from the reviewed request.');
+        if (!transaction.Memos.every(expected => (tx.Memos || []).some(actual => actual.Memo && Object.keys(actual.Memo).length === Object.keys(expected.Memo).length && Object.keys(expected.Memo).every(key => actual.Memo[key] === expected.Memo[key])))) throw new Error('The receipt metadata differs from the reviewed request.');
       } else if (key === 'Flags' ? (Number(tx.Flags) & 0x7fffffff) !== transaction.Flags : tx[key] !== transaction[key]) throw new Error('The NFT transaction differs from the reviewed request.');
     }
     return result;
@@ -14664,13 +15026,12 @@ try {
     return value && !Array.isArray(value) && Object.keys(value).length === Object.keys(DISPLAY_METADATA).length &&
       Object.entries(DISPLAY_METADATA).every(([key, expected]) => Object.prototype.hasOwnProperty.call(value, key) && value[key] === expected);
   }
-  if (typeof module !== 'undefined' && module.exports) { module.exports = { hex, unhex, safeUri, buildMetadata, buildMint, buildSell, confirmedResult, drops, validDisplayMetadata, METADATA_URL, DISPLAY_METADATA }; return; }
+  if (typeof module !== 'undefined' && module.exports) { module.exports = { hex, unhex, safeUri, buildMetadata, buildMint, buildSell, confirmedResult, drops, validDisplayMetadata, METADATA_URL, DISPLAY_METADATA, BACKEND_URL }; return; }
   const doc = root.document;
   if (!doc || root.JCSReceiptStartup) return;
 
   function startReceiptTools(dependencies) {
-  const { api, trade, gallery, config } = dependencies;
-  const currency = String(config.asset.currencyHex).toUpperCase();
+  const { api, trade, gallery, config, receipts } = dependencies;
   const byId = id => doc.getElementById(id);
   const message = byId('jcsNftStatus');
   let version = 0, source = null, prepared = null, signing = false, loading = false, saved = null, collection = new Map(), pageState = null;
@@ -14686,13 +15047,13 @@ try {
   receiptPanel.id = 'jcsReceiptActions'; receiptPanel.className = 'jcs-receipt-actions'; receiptPanel.hidden = false;
   receiptPanel.setAttribute('aria-labelledby', 'jcsReceiptHeading');
   receiptPanel.innerHTML = `<div class="jcs-receipt-heading"><div><span class="jcs-tool-eyebrow">Your ledger record</span><h3 id="jcsReceiptHeading">Transaction receipt</h3></div><span class="jcs-pool-badge" id="jcsReceiptNetwork"></span></div>
-    <div class="jcs-receipt-preview"><img src="jcs-logo.png" alt="Jesus Christ Saves Token receipt artwork" width="112" height="112"><div><span class="jcs-tool-eyebrow" id="jcsReceiptPreviewState">Receipt preview · not minted</span><h4 id="jcsReceiptActionLabel">JCS transaction</h4><p id="jcsReceiptConfirmation" class="jcs-tool-small"></p></div></div>
+    <div class="jcs-receipt-preview"><img id="jcsReceiptArtwork" src="jcs-logo.png" alt="Jesus Christ Saves Token receipt artwork" width="112" height="112"><div><span class="jcs-tool-eyebrow" id="jcsReceiptPreviewState">Receipt preview · not minted</span><h4 id="jcsReceiptActionLabel">JCS transaction</h4><p id="jcsReceiptConfirmation" class="jcs-tool-small"></p></div></div>
     <p id="jcsReceiptStatus" role="status" aria-live="polite"></p><a id="jcsReceiptHash" class="jcs-nft-id" target="_blank" rel="noopener noreferrer" hidden></a>
     <p class="jcs-tool-small" id="jcsReceiptMeaning">An optional personal record of your transaction. Minting is a separate network transaction with its own fee.</p>
     <div class="jcs-nft-actions"><button type="button" class="btn primary" id="jcsReceiptMint" aria-describedby="jcsReceiptStatus" disabled>Mint receipt NFT</button><button type="button" class="btn" id="jcsReceiptDownload" aria-describedby="jcsReceiptStatus" disabled>Download receipt JSON</button><button type="button" class="btn" id="jcsReceiptOpenNfts">Open My NFTs</button></div>
-    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">Your receipt uses the shared JCS artwork shown above. Its permanent URI identifies the source transaction. The complete JSON below is stored in the mint transaction memo on the ledger. Amount fields are transaction limits, not proof of a particular fill.</p>
-      <label for="jcsReceiptPrivacy">Wallet shown in receipt metadata</label><select id="jcsReceiptPrivacy"><option value="masked">Masked address</option><option value="public">Full address</option></select><p class="jcs-tool-small">The signing account and source transaction remain public on the XRP Ledger, even with a masked metadata address.</p>
-      <dl class="jcs-readout" id="jcsMintReadout"></dl><details><summary>Receipt JSON &amp; permanent URI</summary><pre id="jcsReceiptJson"></pre><code class="jcs-nft-id" id="jcsReceiptUri"></code></details>
+    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">Your receipt has its own artwork and metadata on the existing receipt service. The values come from the validated transaction. Its URI and verification digest are included in the separate mint request.</p>
+      <p class="jcs-tool-small">The receipt includes the public signing wallet and source transaction. It contains no private journal or worship activity.</p>
+      <a id="jcsReceiptImageLink" target="_blank" rel="noopener noreferrer">Open full receipt artwork ↗</a><dl class="jcs-readout" id="jcsMintReadout"></dl><details><summary>Receipt JSON &amp; permanent URI</summary><pre id="jcsReceiptJson"></pre><code class="jcs-nft-id" id="jcsReceiptUri"></code></details>
       <p class="jcs-tool-small">Personal receipt: general transfer flag off. XRPL still permits transfers involving its original issuer. This receipt is not a spiritual reward or an investment guarantee.</p>
       <div class="jcs-nft-actions"><button type="button" class="btn" id="jcsReceiptPreviewDownload">Download reviewed JSON</button><button type="button" class="btn primary" id="jcsReceiptSign">Review &amp; sign mint in Xaman</button><button type="button" class="btn" id="jcsReceiptCancel">Close review</button></div></div>`;
   receiptEntry.insertAdjacentElement('afterend', receiptPanel);
@@ -14701,7 +15062,7 @@ try {
   sale.innerHTML = `<h3>Create an NFT sell offer</h3><p class="jcs-tool-small">This lists an NFT you own at an XRP price for 24 hours. A listing does not mean it has sold. A buyer must accept the offer on the ledger.</p><code id="jcsNftSaleId" class="jcs-nft-id"></code><label for="jcsNftSalePrice">Asking price in XRP</label><div class="jcs-amount-field"><input id="jcsNftSalePrice" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00"><span>XRP</span></div><button type="button" class="btn" id="jcsNftSalePreview">Review sell offer</button><div id="jcsNftSaleReview" hidden><dl class="jcs-readout" id="jcsNftSaleRows"></dl><button type="button" class="btn primary" id="jcsNftSaleSign">Review &amp; sign offer in Xaman</button></div><p id="jcsNftSaleStatus" role="status" aria-live="polite"></p><button type="button" class="btn" id="jcsNftSaleClose">Close offer review</button>`;
   gallery.before(sale);
   let saleNft = null, saleReview = null;
-  const request = async (method, params = {}) => { const response = await api.request({ method, params: [params] }); const result = response?.result; if (!result || result.error) throw new Error(result?.error_message || 'The ledger did not return usable data.'); return result; };
+  const request = async (method, params = {}) => { const response = await api.request({ method, params: [params] }); const result = response?.result; if (!result || result.error) { const error = new Error(result?.error_message || 'The ledger did not return usable data.'); error.code = result?.error; throw error; } return result; };
   const verified = (result, index) => { if (result.validated !== true || !Number.isSafeInteger(Number(result.ledger_index)) || (index && Number(result.ledger_index) !== index)) throw new Error('The ledger could not verify this data. Refresh and try again.'); return result; };
   function status(text) { byId('jcsReceiptStatus').textContent = text; }
   function lookupStatus(text) { byId('jcsReceiptLookupStatus').textContent = text; }
@@ -14725,6 +15086,8 @@ try {
     byId('jcsReceiptMint').disabled = true;
     byId('jcsReceiptDownload').disabled = true;
     byId('jcsReceiptSign').disabled = true;
+    byId('jcsReceiptArtwork').src = 'jcs-logo.png';
+    byId('jcsReceiptArtwork').removeAttribute('data-verified'); byId('jcsReceiptImageLink').removeAttribute('href');
     byId('jcsReceiptJson').textContent = '';
     byId('jcsReceiptUri').textContent = '';
     byId('jcsMintReadout').replaceChildren();
@@ -14745,60 +15108,112 @@ try {
   }
   function download(metadata) {
     const url = URL.createObjectURL(new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' }));
-    const a = doc.createElement('a'); a.href = url; a.download = 'jcs-receipt-' + metadata.source_transaction + '.json'; a.click(); root.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    const a = doc.createElement('a'); a.href = url; a.download = 'jcs-receipt-' + (metadata.source_transaction || metadata.jcs?.receipt?.source_transaction) + '.json'; a.click(); root.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function rememberCandidate(detail, account) {
+    try {
+      const values = JSON.parse(root.localStorage.getItem('jcs.receiptCandidates.v1') || '[]');
+      const record = { txid: detail.txid.toUpperCase(), account, ...(detail.kind ? { kind: detail.kind } : {}) };
+      root.localStorage.setItem('jcs.receiptCandidates.v1', JSON.stringify([record, ...(Array.isArray(values) ? values : []).filter(value => value?.txid !== record.txid)].slice(0, 10)));
+    } catch {}
+  }
+  function forgetCandidate(txid, account) {
+    try {
+      const values = JSON.parse(root.localStorage.getItem('jcs.receiptCandidates.v1') || '[]');
+      if (Array.isArray(values)) root.localStorage.setItem('jcs.receiptCandidates.v1', JSON.stringify(values.filter(value => value?.txid !== txid || value?.account !== account)));
+    } catch {}
   }
   async function verifySource(detail, account) {
     if (!HASH.test(detail.txid || '') || (detail.kind !== undefined && !KIND[detail.kind])) throw new Error('This is not a supported trade or liquidity receipt.');
-    const result = verified(await request('tx', { transaction: detail.txid, binary: false }));
+    let result;
+    try { result = await request('tx', { transaction: detail.txid, binary: false }); }
+    catch (error) { if (error.code === 'txnNotFound' || /txnNotFound|^Transaction not found\.?$/i.test(error.message || '')) error.pendingSource = true; throw error; }
+    if (result.validated !== true) { const error = new Error('The transaction is still waiting for ledger validation.'); error.pendingSource = true; throw error; }
     const tx = result.tx_json || result;
-    const hash = result.hash || tx.hash;
-    if (!HASH.test(hash || '') || hash.toUpperCase() !== detail.txid.toUpperCase() || result.meta?.TransactionResult !== 'tesSUCCESS') throw new Error('The source transaction has not validated successfully.');
     const kind = sourceKind(tx);
     if (tx.Account !== account || !kind || (detail.kind !== undefined && kind !== KIND[detail.kind])) throw new Error('The source transaction does not match this wallet or a supported buy, sale or liquidity action.');
-    const isJcs = amount => amount && typeof amount === 'object' && amount.currency === currency && amount.issuer === ISSUER;
-    const native = value => typeof value === 'string' && /^\d+$/.test(value);
-    const pair = (a, b) => (isJcs(a) && native(b)) || (native(a) && isJcs(b));
-    const validPair = tx.TransactionType === 'OfferCreate' ? pair(tx.TakerGets, tx.TakerPays) : tx.TransactionType === 'Payment' ? tx.Destination === account && pair(tx.Amount, tx.SendMax) :
-      (isJcs(tx.Asset) && tx.Asset2?.currency === 'XRP' && Object.keys(tx.Asset2).length === 1) || (isJcs(tx.Asset2) && tx.Asset?.currency === 'XRP' && Object.keys(tx.Asset).length === 1);
-    if (!validPair) throw new Error('The source transaction does not use the configured JCS/XRP pair.');
-    const ledger = await request('ledger', { ledger_index: Number(result.ledger_index) }); verified(ledger, Number(result.ledger_index));
-    const close = ledger.ledger?.close_time ?? result.date;
-    if (!Number.isInteger(close) || close < 0) throw new Error('The ledger did not supply the confirmation time.');
-    return { txid: hash.toUpperCase(), kind, transaction: tx, ledgerIndex: Number(result.ledger_index), validatedAt: new Date((close + 946684800) * 1000).toISOString() };
+    const hasIsoTime = typeof result.close_time_iso === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(result.close_time_iso) && Number.isFinite(Date.parse(result.close_time_iso));
+    if (!Number.isInteger(tx.date ?? result.date) && !hasIsoTime) {
+      const ledger = verified(await request('ledger', { ledger_index: Number(result.ledger_index) }), Number(result.ledger_index));
+      result = { ...result, date: ledger.ledger?.close_time };
+    }
+    // The shared browser/backend contract derives real balance changes from
+    // AffectedNodes. Reviewed transaction limits are never receipt amounts.
+    const record = receipts.fromLedger(result, detail.txid.toUpperCase());
+    if (record.account !== account) throw new Error('Connect the wallet that made the source transaction.');
+    return { txid: record.source_transaction, kind: record.source_kind, transaction: tx, ledgerIndex: record.ledger,
+      validatedAt: record.validated_at_utc, record };
   }
-  async function acceptReceipt(detail) {
+  async function acceptReceipt(detail, retryPending = false) {
     if (!HASH.test(detail?.txid || '') || (detail.kind !== undefined && !KIND[detail.kind]) || signing) return;
     const token = version, sequence = ++receiptSequence, account = api.getAccount();
-    if (!account) { updateEntry(); return; }
+    if (!account || (detail.account && detail.account !== account)) { updateEntry(); return; }
     source = null; prepared = null; saved = null; receiptPanel.hidden = false; receiptPanel.dataset.state = 'checking'; byId('jcsReceiptReview').hidden = true;
+    byId('jcsReceiptArtwork').src = 'jcs-logo.png'; byId('jcsReceiptArtwork').removeAttribute('data-verified'); byId('jcsReceiptImageLink').removeAttribute('href');
     byId('jcsReceiptPreviewState').textContent = 'Receipt preview · not minted';
     byId('jcsReceiptActionLabel').textContent = 'Checking transaction'; byId('jcsReceiptConfirmation').textContent = '';
-    byId('jcsReceiptMint').disabled = true; byId('jcsReceiptDownload').disabled = true; byId('jcsReceiptHash').textContent = detail.txid; byId('jcsReceiptHash').hidden = false;
+    byId('jcsReceiptMint').disabled = true; byId('jcsReceiptSign').disabled = true; byId('jcsReceiptDownload').disabled = true; byId('jcsReceiptHash').textContent = detail.txid; byId('jcsReceiptHash').hidden = false;
     byId('jcsReceiptHash').href = 'https://livenet.xrpl.org/transactions/' + detail.txid;
-    byId('jcsReceiptNetwork').textContent = 'Checking ledger'; status('Checking the confirmed transaction before offering an NFT receipt…');
+    byId('jcsReceiptNetwork').textContent = 'Checking ledger'; status('Checking the transaction on the XRP Ledger before preparing its receipt…');
     try {
-      const result = await verifySource(detail, account); assertAccount(account, token); if (sequence !== receiptSequence) return;
-      source = result; saved = readSaved(account, source.txid); rememberSource(source); receiptPanel.dataset.state = 'verified';
+      let result;
+      const delays = retryPending ? [0, 1000, 2000, 4000, 6000] : [0];
+      for (let attempt = 0; attempt < delays.length; attempt++) {
+        if (delays[attempt]) await new Promise(resolve => root.setTimeout(resolve, delays[attempt]));
+        assertAccount(account, token); if (sequence !== receiptSequence) return;
+        try { result = await verifySource(detail, account); break; }
+        catch (error) {
+          assertAccount(account, token); if (sequence !== receiptSequence) return;
+          if (!error.pendingSource || attempt === delays.length - 1) throw error;
+          status('Transaction submitted. Waiting for validated ledger evidence before enabling receipt actions…');
+        }
+      }
+      assertAccount(account, token); if (sequence !== receiptSequence) return;
+      source = result; saved = readSaved(account, source.txid); rememberSource(source); forgetCandidate(source.txid, account); receiptPanel.dataset.state = 'verified';
       byId('jcsReceiptLookupHash').value = source.txid;
       byId('jcsReceiptActionLabel').textContent = KIND_LABEL[source.kind];
-      byId('jcsReceiptConfirmation').textContent = 'Validated ledger #' + source.ledgerIndex + ' · ' + new Date(source.validatedAt).toLocaleString();
+      const amounts = source.record.assetA.value + ' JCS · ' + source.record.assetB.value + ' XRP' + (source.record.lp ? ' · ' + source.record.lp.value + ' LP tokens' : '');
+      byId('jcsReceiptConfirmation').textContent = amounts + ' · Validated ledger #' + source.ledgerIndex + ' · ' + new Date(source.validatedAt).toLocaleString();
       byId('jcsReceiptNetwork').textContent = NETWORK + ' · ledger #' + source.ledgerIndex;
-      byId('jcsReceiptMeaning').textContent = source.kind === 'limit-order' ? 'This records the creation of a limit order. It does not prove that the order filled. Minting is a separate optional transaction.' : 'This records a confirmed trade or liquidity action. Minting is a separate optional transaction with its own network fee.';
+      byId('jcsReceiptMeaning').textContent = source.kind === 'limit-order' ? 'This records the limit order transaction and any amounts exchanged in that transaction. It does not prove that the remaining order filled. Minting is a separate optional transaction.' : 'This receipt records actual wallet movements from the confirmed transaction. It conveys no ownership of liquidity or redemption rights. Minting is a separate optional transaction.';
       byId('jcsReceiptMint').textContent = saved ? 'Check receipt mint on ledger' : 'Mint receipt NFT';
       byId('jcsReceiptMint').disabled = false; byId('jcsReceiptDownload').disabled = false;
       lookupStatus('Transaction verified. Your receipt actions are ready below.');
-      status('Transaction confirmed. You can download its JSON record or choose to create a separate receipt NFT.');
-    } catch (error) { if (token === version && sequence === receiptSequence) { receiptPanel.dataset.state = 'error'; byId('jcsReceiptNetwork').textContent = 'Verification unavailable'; byId('jcsReceiptActionLabel').textContent = 'Receipt not verified'; status(error.message || String(error)); lookupStatus('The transaction could not be verified. Check the hash and connected wallet.'); } }
+      status('Transaction confirmed. Download its JSON record or choose Mint receipt NFT to prepare its artwork and separate Xaman request.');
+    } catch (error) { if (token === version && sequence === receiptSequence) {
+      receiptPanel.dataset.state = error.pendingSource ? 'pending' : 'error'; byId('jcsReceiptNetwork').textContent = error.pendingSource ? 'Awaiting validation' : 'Verification unavailable';
+      byId('jcsReceiptActionLabel').textContent = error.pendingSource ? 'Transaction awaiting confirmation' : 'Receipt not verified';
+      status((error.message || String(error)) + (error.pendingSource ? ' Your transaction hash is saved. Choose Check transaction to retry; no second transaction will be submitted.' : ''));
+      lookupStatus(error.pendingSource ? 'Confirmation is pending. Recheck this same hash shortly.' : 'The transaction could not be verified. Check the hash and connected wallet.');
+    } }
   }
-  async function verifyDisplayMetadata() {
-    const controller = new AbortController(), timeout = root.setTimeout(() => controller.abort(), 10000);
+  async function verifyDisplayMetadata(selected, digest) {
+    const expected = receipts.metadata(BACKEND_URL, selected.record, digest), urls = receipts.urls(BACKEND_URL, selected.record, digest);
+    const controller = new AbortController(), timeout = root.setTimeout(() => controller.abort(), 20000);
+    const fetchExact = async (url, type) => {
+      const response = await root.fetch(url, { credentials: 'omit', cache: 'no-store', redirect: 'error', signal: controller.signal });
+      if (!response.ok || response.url !== url || (response.headers.get('content-type') || '').toLowerCase().split(';')[0].trim() !== type) throw new Error('The receipt service did not return the expected ' + type + ' file.');
+      return response;
+    };
+    const readJSON = async url => {
+      const response = await fetchExact(url, 'application/json'), text = await response.text();
+      if (encoder.encode(text).length > 65536) throw new Error('The receipt metadata response is too large.');
+      return JSON.parse(text);
+    };
     try {
-      const response = await root.fetch(METADATA_URL, { credentials: 'omit', cache: 'no-store', redirect: 'error', signal: controller.signal });
-      if (!response.ok || response.url !== METADATA_URL || !/^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') || '')) throw new Error('Metadata is unavailable.');
-      const text = await response.text();
-      if (encoder.encode(text).length > 4096 || !validDisplayMetadata(JSON.parse(text))) throw new Error('The published metadata does not match this JCS receipt.');
-    } catch {
-      throw new Error('Receipt artwork metadata is not ready. Upload jcs-receipt-nft-v1.json and jcs-logo.png to the site root, then choose Mint receipt NFT again. You can download the receipt JSON now.');
+      const readiness = await readJSON(BACKEND_URL + RECEIPT_ROUTE + '/status.json');
+      if (readiness.ready !== true || readiness.service !== 'jcs-receipts-v1' || readiness.schema !== receipts.SCHEMA || readiness.receiptPolicy !== receipts.POLICY || readiness.publicBase !== BACKEND_URL) throw new Error('The JCS receipt route is not ready on the service.');
+      const metadata = await readJSON(urls.metadata);
+      if (receipts.stable(metadata) !== receipts.stable(expected)) throw new Error('Published receipt metadata does not match the independently verified ledger record.');
+      const response = await fetchExact(urls.image, 'image/png');
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      const signature = [137,80,78,71,13,10,26,10];
+      if (bytes.length < 33 || bytes.length > 5000000 || !signature.every((byte, index) => bytes[index] === byte) || String.fromCharCode(...bytes.slice(12, 16)) !== 'IHDR') throw new Error('The receipt artwork is not a valid PNG.');
+      const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), width = view.getUint32(16), height = view.getUint32(20);
+      if (width < 1 || width > 4096 || height < 1 || height > 4096) throw new Error('The receipt artwork dimensions are invalid.');
+      return { metadata, urls };
+    } catch (error) {
+      throw new Error('Your transaction is verified, but its NFT artwork service is not ready. ' + (error.message || '') + ' The existing Render service must include the JCS receipt update. You can download the verified JSON now and retry minting after the service is ready.');
     } finally { root.clearTimeout(timeout); }
   }
   async function preflight(account, extraObjects = 2) {
@@ -14815,25 +15230,32 @@ try {
   }
   async function prepareMint() {
     if (!source || signing) return;
-    const account = api.getAccount(), token = version, selected = source, sequence = ++preparationSequence, privacy = byId('jcsReceiptPrivacy').value;
+    const account = api.getAccount(), token = version, selected = source, sequence = ++preparationSequence;
     byId('jcsReceiptMint').disabled = true; byId('jcsReceiptSign').disabled = true; prepared = null;
     try {
       if (saved) { await checkSavedMint(saved, selected, account, token); return; }
-      status('Checking the published receipt artwork, preparing your JSON and checking the network fee…');
-      const metadata = buildMetadata(selected, privacy);
-      await verifyDisplayMetadata(); assertAccount(account, token); if (source !== selected || sequence !== preparationSequence || privacy !== byId('jcsReceiptPrivacy').value) return;
-      const limits = await preflight(account); assertAccount(account, token); if (source !== selected || sequence !== preparationSequence || privacy !== byId('jcsReceiptPrivacy').value) return;
-      const transaction = buildMint(metadata, account, limits.fee, limits.lastLedger);
-      // Create the complete JSON artifact before exposing the mint confirmation.
+      status('Preparing your transaction artwork and checking its published metadata against the validated ledger…');
+      const digest = await receipts.digest(selected.record);
+      assertAccount(account, token); if (source !== selected || sequence !== preparationSequence) return;
+      const published = await verifyDisplayMetadata(selected, digest);
+      assertAccount(account, token); if (source !== selected || sequence !== preparationSequence) return;
+      const limits = await preflight(account);
+      assertAccount(account, token); if (source !== selected || sequence !== preparationSequence) return;
+      const transaction = { ...receipts.buildMint(account, selected.record, digest, BACKEND_URL), Fee: String(limits.fee), LastLedgerSequence: limits.lastLedger };
+      receipts.assertMint(transaction, selected.record, digest, BACKEND_URL);
+      const metadata = published.metadata;
       const artifact = new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' });
-      prepared = { metadata, artifact, transaction, account, token, source: selected, ...limits };
+      prepared = { metadata, artifact, transaction, account, token, source: selected, digest, ...limits };
       byId('jcsReceiptJson').textContent = JSON.stringify(metadata, null, 2); byId('jcsReceiptUri').textContent = unhex(transaction.URI);
+      byId('jcsReceiptArtwork').src = published.urls.image; byId('jcsReceiptArtwork').dataset.verified = 'true'; byId('jcsReceiptImageLink').href = published.urls.image;
       const readout = byId('jcsMintReadout'); readout.replaceChildren();
+      row(readout, 'JCS moved', selected.record.assetA.value + ' JCS'); row(readout, 'XRP moved', selected.record.assetB.value + ' XRP (network fee excluded)');
+      if (selected.record.lp) row(readout, selected.record.kind === 'deposit' ? 'LP tokens received' : 'LP tokens redeemed', selected.record.lp.value);
       row(readout, 'Network fee', Number(limits.fee) / 1000000 + ' XRP'); row(readout, 'Possible extra account reserve', limits.extraReserve + ' XRP (held in your wallet)'); row(readout, 'Available balance buffer', '1 XRP kept available'); row(readout, 'NFT issuer', account); row(readout, 'Taxon', String(TAXON));
       byId('jcsReceiptReview').hidden = false; byId('jcsReceiptSign').disabled = false;
-      status('Your receipt is ready to review. Minting requires another signature in Xaman.');
-    } catch (error) { if (token === version) status(error.message || String(error)); }
-    finally { if (token === version && sequence === preparationSequence) byId('jcsReceiptMint').disabled = false; }
+      status('Your receipt artwork and metadata are verified. Review them below. Minting requires a separate signature in Xaman.');
+    } catch (error) { if (token === version && sequence === preparationSequence) status(error.message || String(error)); }
+    finally { if (token === version && sequence === preparationSequence && byId('jcsReceiptMint').textContent !== 'Receipt mint confirmed') byId('jcsReceiptMint').disabled = false; }
   }
   async function checkSavedMint(record, selected, account, token) {
     status('Checking the earlier mint request on the ledger…');
@@ -14891,38 +15313,41 @@ try {
     finally { if (token === version) byId('jcsReceiptLookupCheck').disabled = signing || !api.getAccount(); }
   });
   byId('jcsReceiptMint').addEventListener('click', prepareMint);
-  byId('jcsReceiptPrivacy').addEventListener('change', () => { if (!signing) prepareMint(); });
-  byId('jcsReceiptDownload').addEventListener('click', () => { if (source) { try { download(buildMetadata(source, byId('jcsReceiptPrivacy').value)); } catch (error) { status(error.message); } } });
+  byId('jcsReceiptDownload').addEventListener('click', () => { if (source) { try { download(source.record); } catch (error) { status(error.message); } } });
   byId('jcsReceiptPreviewDownload').addEventListener('click', () => { if (prepared) download(prepared.metadata); });
   byId('jcsReceiptOpenNfts').addEventListener('click', () => doc.dispatchEvent(new root.CustomEvent('jcs:open-nfts')));
   byId('jcsReceiptCancel').addEventListener('click', () => { if (!signing) { preparationSequence++; prepared = null; byId('jcsReceiptReview').hidden = true; } });
   byId('jcsReceiptSign').addEventListener('click', async () => {
     if (!prepared || signing) return;
-    const review = prepared; signing = true; byId('jcsReceiptLookupCheck').disabled = true; byId('jcsReceiptSign').disabled = true; byId('jcsReceiptMint').disabled = true; byId('jcsReceiptPrivacy').disabled = true;
+    const review = prepared; let pendingRecord = null; signing = true; byId('jcsReceiptLookupCheck').disabled = true; byId('jcsReceiptSign').disabled = true; byId('jcsReceiptMint').disabled = true;
     try {
       assertAccount(review.account, review.token);
       if (Date.now() - review.createdAt > 60000) throw new Error('The fee review expired. Select Mint receipt NFT to review again.');
       status('Review this separate NFT mint in Xaman. Waiting for your signature and ledger confirmation…');
       const existing = readSaved(review.account, review.source.txid);
       if (existing) { saved = existing; throw new Error('Another mint request already exists for this receipt. Check its ledger status first.'); }
-      saved = { status: 'awaiting-signature', firstLedger: review.index, lastLedger: review.transaction.LastLedgerSequence, transaction: review.transaction };
+      saved = pendingRecord = { status: 'awaiting-signature', firstLedger: review.index, lastLedger: review.transaction.LastLedgerSequence, transaction: review.transaction };
       remember(review.account, review.source.txid, saved);
       let result = await api.submitNft(review.transaction);
       try { result = confirmedResult(result, review.transaction); }
       catch (error) { error.txid = result?.txid; error.requiresReconciliation = true; throw error; }
-      const confirmed = { ...saved, txid: result.txid, status: 'validated' }; remember(review.account, review.source.txid, confirmed);
+      const confirmed = { ...pendingRecord, txid: result.txid, status: 'validated' }; remember(review.account, review.source.txid, confirmed);
       if (review.token !== version || api.getAccount() !== review.account) return;
       saved = confirmed; byId('jcsReceiptReview').hidden = true; byId('jcsReceiptMint').textContent = 'Check receipt mint on ledger';
       byId('jcsReceiptPreviewState').textContent = 'Receipt NFT mint confirmed';
       status('Receipt NFT mint confirmed at ledger #' + result.ledgerIndex + '. ' + (result.nftId ? 'NFT ID: ' + result.nftId + '.' : 'Open My NFTs to view the new record.'));
       prepared = null; await refresh();
     } catch (error) {
+      let outcome = pendingRecord || readSaved(review.account, review.source.txid);
       if (HASH.test(error.txid || '') && (error.unconfirmed || error.requiresReconciliation)) {
-        saved = { ...saved, txid: error.txid, status: 'unconfirmed' }; remember(review.account, review.source.txid, saved);
-      } else if (error.definitelyNotSubmitted || error.finalLedgerResult) { saved = null; remember(review.account, review.source.txid, null); }
-      else if (saved) { saved = { ...saved, status: 'unknown' }; remember(review.account, review.source.txid, saved); }
-      if (review.token === version) { status((error.unconfirmed ? 'Mint submitted, but confirmation is not available. ' : '') + (error.message || String(error))); if (saved) byId('jcsReceiptMint').textContent = 'Check receipt mint on ledger'; }
-    } finally { signing = false; byId('jcsReceiptLookupCheck').disabled = !api.getAccount(); if (review.token === version) { byId('jcsReceiptMint').disabled = false; byId('jcsReceiptPrivacy').disabled = false; byId('jcsReceiptSign').disabled = !!saved; } }
+        outcome = { ...outcome, txid: error.txid, status: 'unconfirmed' }; remember(review.account, review.source.txid, outcome);
+      } else if (error.definitelyNotSubmitted || error.finalLedgerResult) { outcome = null; remember(review.account, review.source.txid, null); }
+      else if (outcome) { outcome = { ...outcome, status: 'unknown' }; remember(review.account, review.source.txid, outcome); }
+      if (review.token === version && api.getAccount() === review.account) {
+        saved = outcome; status((error.unconfirmed ? 'Mint submitted, but confirmation is not available. ' : '') + (error.message || String(error)));
+        if (saved) byId('jcsReceiptMint').textContent = 'Check receipt mint on ledger';
+      }
+    } finally { signing = false; byId('jcsReceiptLookupCheck').disabled = !api.getAccount(); if (review.token === version) { byId('jcsReceiptMint').disabled = false; byId('jcsReceiptSign').disabled = !!saved; } }
   });
   function addCard(item) {
     const card = doc.createElement('article'); card.className = 'jcs-nft-card';
@@ -14934,7 +15359,7 @@ try {
     card.append(title, readout);
     const link = doc.createElement('a'); link.className = 'btn'; link.href = 'https://livenet.xrpl.org/nft/' + item.NFTokenID; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'View ledger record ↗'; card.appendChild(link);
     if (uri?.href) { const metadata = doc.createElement('a'); metadata.href = uri.href; metadata.target = '_blank'; metadata.rel = 'noopener noreferrer'; metadata.textContent = 'Open published metadata ↗'; card.appendChild(metadata); }
-    if (uri?.metadata) { const note = doc.createElement('p'); note.className = 'jcs-tool-small'; note.textContent = 'JCS receipt identity. The full JSON is preserved in the original mint transaction memo.'; card.appendChild(note); }
+    if (uri?.metadata) { const note = doc.createElement('p'); note.className = 'jcs-tool-small'; note.textContent = uri?.metadata?.sha256 ? 'JCS receipt. Its published artwork and JSON describe this source transaction; the verification digest is recorded in the mint memo.' : 'Legacy JCS receipt. Its full JSON is preserved in the original mint transaction memo.'; card.appendChild(note); }
     if (!personalReceipt(item) && ((Number(item.Flags) & 8) || item.Issuer === api.getAccount())) {
       const button = doc.createElement('button'); button.type = 'button'; button.className = 'btn'; button.textContent = 'Create sell offer';
       button.addEventListener('click', () => { if (signing) return; saleNft = item; saleReview = null; byId('jcsNftSaleId').textContent = item.NFTokenID; byId('jcsNftSalePrice').value = ''; byId('jcsNftSaleReview').hidden = true; byId('jcsNftSaleStatus').textContent = ''; sale.hidden = false; byId('jcsNftSalePrice').focus(); }); card.appendChild(button);
@@ -15003,7 +15428,17 @@ try {
     finally { signing = false; byId('jcsNftSaleSign').disabled = false; byId('jcsNftSalePrice').disabled = false; }
   });
   doc.addEventListener('jcs:validated-transaction', event => acceptReceipt(event.detail));
+  doc.addEventListener('jcs:submitted-transaction', event => {
+    const detail = event.detail, account = api.getAccount();
+    if (!account || detail?.account !== account || !HASH.test(detail.txid || '') || (detail.kind !== undefined && !KIND[detail.kind]) || (detail.network && detail.network !== NETWORK)) return;
+    rememberCandidate(detail, account);
+    acceptReceipt(detail, true);
+  });
   async function restoreReceipt() {
+    const connected = api.getAccount(); if (!connected) return;
+    let candidates; try { candidates = JSON.parse(root.localStorage.getItem('jcs.receiptCandidates.v1') || '[]'); } catch {}
+    const candidate = Array.isArray(candidates) && candidates.find(item => item?.account === connected && HASH.test(item.txid || '') && (!item.kind || KIND[item.kind]));
+    if (candidate) { await acceptReceipt(candidate, true); return; }
     let records; try { records = JSON.parse(root.localStorage.getItem('jcs.validatedReceipts.v1') || '[]'); } catch { return; }
     if (!Array.isArray(records)) return;
     const account = api.getAccount(); if (!account) return;
@@ -15012,7 +15447,7 @@ try {
   }
   doc.addEventListener('jcs:wallet-changed', () => {
     version++; receiptSequence++; preparationSequence++; source = null; prepared = null; saved = null; sale.hidden = true; saleReview = null; saleNft = null; collection.clear(); gallery.replaceChildren(); more.hidden = true; pageState = null;
-    byId('jcsReceiptPrivacy').disabled = false; byId('jcsReceiptLookupHash').value = ''; byId('jcsReceiptLookupHash').removeAttribute('aria-invalid'); resetReceiptPanel(); updateEntry(); restoreReceipt();
+    byId('jcsReceiptLookupHash').value = ''; byId('jcsReceiptLookupHash').removeAttribute('aria-invalid'); resetReceiptPanel(); updateEntry(); restoreReceipt();
   });
   root.JCSNft = Object.freeze({ refresh });
   resetReceiptPanel(); updateEntry(); restoreReceipt();
@@ -15069,8 +15504,10 @@ try {
           const element = doc.getElementById(id);
           return element && panel.contains(element);
         })) throw new Error('The exchange tabs and NFT gallery are not ready.');
+    const receipts = root.JCS_RECEIPTS;
+    if (!receipts || ['fromLedger', 'stable', 'urls', 'metadata', 'mintPayload'].some(name => typeof receipts[name] !== 'function')) throw new Error('The JCS receipt service module is not ready.');
     api.getAccount();
-    return { api, trade, gallery, config };
+    return { api, trade, gallery, config, receipts };
   }
 
   function finishStartup() {
@@ -15184,7 +15621,7 @@ try {
     ],
     "source_requirement": "Successfully validated transaction from the connected wallet and configured JCS/XRP pair",
     "minting": "Optional NFTokenMint with a separate reviewed Xaman signing request",
-    "metadata": "jcs-receipt-nft-v1.json plus source hash in URI and full receipt JSON in mint memo",
+    "metadata": "Existing XRBitcoinCash Render backend /api/jcs-receipts-v1: ledger-derived JSON and PNG, SHA-256 digest in NFT URI and signed memo",
     "wallet_inventory": "account_nfts at a validated ledger",
     "empty_state": "Mint and JSON buttons visible and disabled until source verification"
   },
