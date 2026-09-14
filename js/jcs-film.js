@@ -35,52 +35,51 @@
   };
   const preparePrimarySource = () => {
     if (!primaryVideo) return Promise.resolve(false);
+    const HlsCtor = window.Hls;
+    if (HlsCtor && typeof HlsCtor.isSupported === 'function' && HlsCtor.isSupported()) {
+      try {
+        primaryHlsRetried = false;
+        primaryHls = new HlsCtor({
+          enableWorker: true,
+          lowLatencyMode: false,
+          backBufferLength: 60
+        });
+        primarySourceMode = 'hls.js';
+        const events = HlsCtor.Events || {};
+        if (events.MANIFEST_PARSED) {
+          primaryHls.on(events.MANIFEST_PARSED, () => {
+            if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
+          });
+        }
+        if (events.ERROR) {
+          primaryHls.on(events.ERROR, (_event, data) => {
+            if (!data?.fatal || !primaryHls) return;
+            if (data.type === HlsCtor.ErrorTypes?.NETWORK_ERROR && !primaryHlsRetried) {
+              primaryHlsRetried = true;
+              primaryHls.startLoad();
+              return;
+            }
+            if (data.type === HlsCtor.ErrorTypes?.MEDIA_ERROR) {
+              primaryHls.recoverMediaError();
+              return;
+            }
+            usePrimaryMp4();
+            setPrimaryStatus('The adaptive JESUS stream could not load; trying the direct film file…');
+          });
+        }
+        primaryHls.attachMedia(primaryVideo);
+        primaryHls.loadSource(PRIMARY_HLS_URL);
+        return Promise.resolve(true);
+      } catch {
+        destroyPrimaryHls();
+      }
+    }
     if (canPlayNativeHls(primaryVideo)) {
       primaryVideo.src = PRIMARY_HLS_URL;
       primarySourceMode = 'native-hls';
       return Promise.resolve(true);
     }
-    const HlsCtor = window.Hls;
-    if (!HlsCtor || typeof HlsCtor.isSupported !== 'function' || !HlsCtor.isSupported()) {
-      return Promise.resolve(false);
-    }
-    try {
-      primaryHlsRetried = false;
-      primaryHls = new HlsCtor({
-        enableWorker: true,
-        lowLatencyMode: false,
-        backBufferLength: 60
-      });
-      primarySourceMode = 'hls.js';
-      const events = HlsCtor.Events || {};
-      if (events.MANIFEST_PARSED) {
-        primaryHls.on(events.MANIFEST_PARSED, () => {
-          if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
-        });
-      }
-      if (events.ERROR) {
-        primaryHls.on(events.ERROR, (_event, data) => {
-          if (!data?.fatal || !primaryHls) return;
-          if (data.type === HlsCtor.ErrorTypes?.NETWORK_ERROR && !primaryHlsRetried) {
-            primaryHlsRetried = true;
-            primaryHls.startLoad();
-            return;
-          }
-          if (data.type === HlsCtor.ErrorTypes?.MEDIA_ERROR) {
-            primaryHls.recoverMediaError();
-            return;
-          }
-          usePrimaryMp4();
-          setPrimaryStatus('The adaptive JESUS stream could not load; trying the direct film file…');
-        });
-      }
-      primaryHls.attachMedia(primaryVideo);
-      primaryHls.loadSource(PRIMARY_HLS_URL);
-      return Promise.resolve(true);
-    } catch {
-      usePrimaryMp4();
-      return Promise.resolve(false);
-    }
+    return Promise.resolve(false);
   };
   if (!film && !primaryVideo && !filmStart && !primaryStart) return;
 
