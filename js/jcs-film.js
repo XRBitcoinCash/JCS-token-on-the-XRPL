@@ -10,6 +10,78 @@
   const filmNow = document.getElementById('filmNow');
   const status = document.getElementById('filmStatus');
   const heritage = document.getElementById('heritageFilm');
+  const PRIMARY_PLAYBACK_ID = 'Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o';
+  const PRIMARY_HLS_URL = 'https://stream.mux.com/' + PRIMARY_PLAYBACK_ID + '.m3u8?redundant_streams=true';
+  const PRIMARY_MP4_URL = 'https://stream.mux.com/' + PRIMARY_PLAYBACK_ID + '/medium.mp4';
+  let primaryHls = null;
+  let primarySourceMode = 'mp4';
+  let primaryHlsRetried = false;
+  const canPlayNativeHls = video => Boolean(
+    video?.canPlayType?.('application/vnd.apple.mpegurl') ||
+    video?.canPlayType?.('application/x-mpegURL')
+  );
+  const destroyPrimaryHls = () => {
+    if (!primaryHls) return;
+    try { primaryHls.destroy(); } catch {}
+    primaryHls = null;
+  };
+  const usePrimaryMp4 = () => {
+    if (!primaryVideo) return false;
+    destroyPrimaryHls();
+    primarySourceMode = 'mp4';
+    primaryVideo.src = PRIMARY_MP4_URL;
+    primaryVideo.load();
+    return true;
+  };
+  const preparePrimarySource = () => {
+    if (!primaryVideo) return Promise.resolve(false);
+    if (canPlayNativeHls(primaryVideo)) {
+      primaryVideo.src = PRIMARY_HLS_URL;
+      primarySourceMode = 'native-hls';
+      return Promise.resolve(true);
+    }
+    const HlsCtor = window.Hls;
+    if (!HlsCtor || typeof HlsCtor.isSupported !== 'function' || !HlsCtor.isSupported()) {
+      return Promise.resolve(false);
+    }
+    try {
+      primaryHlsRetried = false;
+      primaryHls = new HlsCtor({
+        enableWorker: true,
+        lowLatencyMode: false,
+        backBufferLength: 60
+      });
+      primarySourceMode = 'hls.js';
+      const events = HlsCtor.Events || {};
+      if (events.MANIFEST_PARSED) {
+        primaryHls.on(events.MANIFEST_PARSED, () => {
+          if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
+        });
+      }
+      if (events.ERROR) {
+        primaryHls.on(events.ERROR, (_event, data) => {
+          if (!data?.fatal || !primaryHls) return;
+          if (data.type === HlsCtor.ErrorTypes?.NETWORK_ERROR && !primaryHlsRetried) {
+            primaryHlsRetried = true;
+            primaryHls.startLoad();
+            return;
+          }
+          if (data.type === HlsCtor.ErrorTypes?.MEDIA_ERROR) {
+            primaryHls.recoverMediaError();
+            return;
+          }
+          usePrimaryMp4();
+          setPrimaryStatus('The adaptive JESUS stream could not load; trying the direct film file…');
+        });
+      }
+      primaryHls.attachMedia(primaryVideo);
+      primaryHls.loadSource(PRIMARY_HLS_URL);
+      return Promise.resolve(true);
+    } catch {
+      usePrimaryMp4();
+      return Promise.resolve(false);
+    }
+  };
   if (!film && !primaryVideo && !filmStart && !primaryStart) return;
 
   let filmPlaying = false;
@@ -120,7 +192,6 @@
     primaryVideo.playsInline = true;
     primaryVideo.muted = false;
     primaryVideo.defaultMuted = false;
-    if (primaryVideo.readyState === 0) primaryVideo.load();
     const attempt = primaryVideo.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => {
@@ -151,7 +222,7 @@
     primaryVideo.autoplay = false;
     primaryVideo.controls = true;
     primaryVideo.playsInline = true;
-    primaryVideo.preload = 'metadata';
+    primaryVideo.preload = 'auto';
     primaryVideo.addEventListener('play', () => {
       if (document.hidden) {
         pausePrimary('Page hidden. Press Play JESUS here when you return.');
@@ -199,6 +270,7 @@
       updatePrimaryState(false);
       setPrimaryStatus('The JESUS stream could not load in this browser. Press play to retry or use the film source link.');
     });
+    void preparePrimarySource();
   }
 
   if (film) {
