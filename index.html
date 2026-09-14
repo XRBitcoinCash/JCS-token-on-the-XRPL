@@ -50,7 +50,7 @@
 <link crossorigin="" href="https://archive.org" rel="preconnect"/>
 <link crossorigin="" href="https://s1.xrplmeta.org" rel="preconnect"/>
 <meta content="default-src 'self' ;
-      script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://www.youtube.com https://s.ytimg.com;
+      script-src 'self' 'unsafe-inline' https://xumm.app https://*.xumm.app https://xaman.app https://*.xaman.app https://www.youtube.com https://s.ytimg.com https://cdn.jsdelivr.net;
       style-src 'self' 'unsafe-inline' ;
       img-src 'self' data: blob: https: ;
       media-src 'self' data: blob: https://archive.org https://*.archive.org https://stream.mux.com https://commons.wikimedia.org https://upload.wikimedia.org ;
@@ -63,7 +63,8 @@
         https://api.coingecko.com
         wss://xumm.app wss://*.xumm.app
         wss://xaman.app wss://*.xaman.app
-        wss://xrplcluster.com wss://s1.ripple.com wss://s2.ripple.com https://api.coinbase.com https://ipfs.io https://xrbitcoincash-github-io.onrender.com;
+        wss://xrplcluster.com wss://s1.ripple.com wss://s2.ripple.com https://api.coinbase.com https://ipfs.io https://stream.mux.com https://xrbitcoincash-github-io.onrender.com;
+      worker-src 'self' blob: ;
       frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app https://www.youtube.com https://www.youtube-nocookie.com https://www.jesusfilm.org https://*.jesusfilm.org;
       object-src 'none' ;
       base-uri 'self' ;
@@ -9076,7 +9077,7 @@ body::after{
 <div class="jcs-film-embed-poster"><img src="./jcs-logo.png" alt="" width="48" height="48"><span>Official full film · 128 minutes</span></div>
 <video aria-describedby="jesusFilmPlayerStatus" class="jcs-film-video" controls="" playsinline="" preload="metadata" poster="https://image.mux.com/Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o/thumbnail.webp?time=2&amp;width=1280" id="jesusFilmVideo">
 <source src="https://stream.mux.com/Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o/medium.mp4" type="video/mp4"/>
-<source src="https://stream.mux.com/Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o.m3u8" type="application/x-mpegURL"/>
+<source src="https://stream.mux.com/Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o.m3u8?redundant_streams=true" type="application/x-mpegURL"/>
 Your browser does not support the in-page JESUS film player. Use the official source link below.
 </video>
 <p aria-live="polite" class="film-player-status" id="jesusFilmPlayerStatus">Press Play JESUS here or use the video controls to begin.</p>
@@ -9676,7 +9677,7 @@ Your browser does not support the public-domain film stream.
 
 
 
-<script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-render-v5">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.7.2/dist/hls.min.js"></script><script defer="" src="https://xaman.app/assets/cdn/xumm.min.js"></script><script id="jcs-manual-nft-bundle" data-release="jcs-nft-render-v5">
 (function () {
   let homepageStarted = false;
   function reportJcsModuleError(name, error) {
@@ -10600,6 +10601,78 @@ try {
   const filmNow = document.getElementById('filmNow');
   const status = document.getElementById('filmStatus');
   const heritage = document.getElementById('heritageFilm');
+  const PRIMARY_PLAYBACK_ID = 'Dl8dRUL01MKAdzv7XtfvvUj1jVYq029z2TS9TGeH8Xj00o';
+  const PRIMARY_HLS_URL = 'https://stream.mux.com/' + PRIMARY_PLAYBACK_ID + '.m3u8?redundant_streams=true';
+  const PRIMARY_MP4_URL = 'https://stream.mux.com/' + PRIMARY_PLAYBACK_ID + '/medium.mp4';
+  let primaryHls = null;
+  let primarySourceMode = 'mp4';
+  let primaryHlsRetried = false;
+  const canPlayNativeHls = video => Boolean(
+    video?.canPlayType?.('application/vnd.apple.mpegurl') ||
+    video?.canPlayType?.('application/x-mpegURL')
+  );
+  const destroyPrimaryHls = () => {
+    if (!primaryHls) return;
+    try { primaryHls.destroy(); } catch {}
+    primaryHls = null;
+  };
+  const usePrimaryMp4 = () => {
+    if (!primaryVideo) return false;
+    destroyPrimaryHls();
+    primarySourceMode = 'mp4';
+    primaryVideo.src = PRIMARY_MP4_URL;
+    primaryVideo.load();
+    return true;
+  };
+  const preparePrimarySource = () => {
+    if (!primaryVideo) return Promise.resolve(false);
+    if (canPlayNativeHls(primaryVideo)) {
+      primaryVideo.src = PRIMARY_HLS_URL;
+      primarySourceMode = 'native-hls';
+      return Promise.resolve(true);
+    }
+    const HlsCtor = window.Hls;
+    if (!HlsCtor || typeof HlsCtor.isSupported !== 'function' || !HlsCtor.isSupported()) {
+      return Promise.resolve(false);
+    }
+    try {
+      primaryHlsRetried = false;
+      primaryHls = new HlsCtor({
+        enableWorker: true,
+        lowLatencyMode: false,
+        backBufferLength: 60
+      });
+      primarySourceMode = 'hls.js';
+      const events = HlsCtor.Events || {};
+      if (events.MANIFEST_PARSED) {
+        primaryHls.on(events.MANIFEST_PARSED, () => {
+          if (!primaryPlaying) setPrimaryStatus('JESUS is ready. Press play to begin this card.');
+        });
+      }
+      if (events.ERROR) {
+        primaryHls.on(events.ERROR, (_event, data) => {
+          if (!data?.fatal || !primaryHls) return;
+          if (data.type === HlsCtor.ErrorTypes?.NETWORK_ERROR && !primaryHlsRetried) {
+            primaryHlsRetried = true;
+            primaryHls.startLoad();
+            return;
+          }
+          if (data.type === HlsCtor.ErrorTypes?.MEDIA_ERROR) {
+            primaryHls.recoverMediaError();
+            return;
+          }
+          usePrimaryMp4();
+          setPrimaryStatus('The adaptive JESUS stream could not load; trying the direct film file…');
+        });
+      }
+      primaryHls.attachMedia(primaryVideo);
+      primaryHls.loadSource(PRIMARY_HLS_URL);
+      return Promise.resolve(true);
+    } catch {
+      usePrimaryMp4();
+      return Promise.resolve(false);
+    }
+  };
   if (!film && !primaryVideo && !filmStart && !primaryStart) return;
 
   let filmPlaying = false;
@@ -10710,7 +10783,6 @@ try {
     primaryVideo.playsInline = true;
     primaryVideo.muted = false;
     primaryVideo.defaultMuted = false;
-    if (primaryVideo.readyState === 0) primaryVideo.load();
     const attempt = primaryVideo.play();
     if (attempt && typeof attempt.then === 'function') {
       return attempt.then(() => {
@@ -10741,7 +10813,7 @@ try {
     primaryVideo.autoplay = false;
     primaryVideo.controls = true;
     primaryVideo.playsInline = true;
-    primaryVideo.preload = 'metadata';
+    primaryVideo.preload = 'auto';
     primaryVideo.addEventListener('play', () => {
       if (document.hidden) {
         pausePrimary('Page hidden. Press Play JESUS here when you return.');
@@ -10789,6 +10861,7 @@ try {
       updatePrimaryState(false);
       setPrimaryStatus('The JESUS stream could not load in this browser. Press play to retry or use the film source link.');
     });
+    void preparePrimarySource();
   }
 
   if (film) {
@@ -10849,6 +10922,7 @@ try {
   if (primaryVideo) setPrimaryStatus('Press Play JESUS here or use the video controls to begin.');
   say('Choose Play to start the listening channels together, or Play JESUS here.');
 })();
+
 
 } catch (error) { reportJcsModuleError("js/jcs-film.js", error); }
 
