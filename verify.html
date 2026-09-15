@@ -2016,6 +2016,35 @@ html[data-theme="dark"] .jcs-care{--jcs-care-accent:#ffe59a;--jcs-care-tint:rgba
 @media print{.jcs-care{color:#111;background:#fff;--jcs-care-accent:#333}.jcs-care button,.jcs-care .jcs-care-feedback{display:none!important}.jcs-care-guide{box-shadow:none}.jcs-care-guide .jcs-care-box{break-inside:avoid}}
 </style>
 
+<style id="jcs-wallet-access-style">
+
+/* JCS wallet access repair 1.0.1. Page-local: no shared stylesheet changes. */
+#jcs-wallet-bar{min-width:0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;padding:12px 14px;border:1px solid var(--home-line,var(--line));border-left:3px solid var(--gold,#c99820);border-radius:12px;background:var(--home-surface-2,var(--surface-2));color:var(--home-ink,var(--ink));scroll-margin-top:20px}
+#jcs-wallet-bar .jcs-wallet-bar-copy{flex:1 1 240px;min-width:0}
+#jcs-wallet-bar .jcs-wallet-bar-copy>strong{display:block;font:850 11px/1.5 system-ui,sans-serif;letter-spacing:.08em}
+#jcs-wallet-bar .jcs-wallet-bar-copy>strong span{font-weight:600;letter-spacing:0;color:var(--home-muted,var(--muted))}
+#jcs-wallet-bar p{margin:4px 0 0;font:400 12px/1.55 system-ui,sans-serif;max-width:70ch;overflow-wrap:anywhere}
+#jcs-wallet-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;width:auto;min-width:0}
+#jcs-wallet-bar #walletPill{display:block;max-width:180px;font:600 12px/1.5 ui-monospace,Consolas,monospace;text-align:left;grid-column:auto}
+#jcs-wallet-composer{min-width:0;margin:18px 0;padding:18px;border:1px solid var(--line);border-left:3px solid var(--gold,#c99820);border-radius:12px;background:var(--surface-2);color:var(--ink);display:grid;gap:12px}
+#jcs-wallet-composer strong{font-size:15px;line-height:1.5}
+#jcs-wallet-composer p{margin:5px 0 0;font:400 13px/1.65 var(--font,system-ui,sans-serif);overflow-wrap:anywhere}
+#jcsWalletAccount{display:block;max-width:100%;margin-top:8px;padding:6px 8px;font:12px/1.6 ui-monospace,Consolas,monospace;white-space:normal;overflow-wrap:anywhere;word-break:break-all;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+#jcs-wallet-composer .jcs-wallet-composer-actions{display:flex;gap:8px;flex-wrap:wrap}
+#jcs-wallet-composer .jcs-wallet-boundary{padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+#jcs-wallet-bar #connectBtn,#jcsWalletConnect,#jcs-wallet-bar #disconnectBtn,#jcsWalletDisconnect,#jcsWalletReload{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;width:auto;padding:10px 15px;border:1px solid var(--line);border-radius:9px;font:750 13px/1.5 system-ui,sans-serif;white-space:normal;text-align:center;cursor:pointer;touch-action:manipulation;box-shadow:none;transform:none}
+#jcs-wallet-bar #connectBtn,#jcsWalletConnect{color:#fff!important;background:#1458d5!important;border-color:#1458d5!important}
+#jcs-wallet-bar #disconnectBtn,#jcsWalletDisconnect,#jcsWalletReload{color:var(--ink);background:var(--surface);border-color:var(--line)}
+#jcs-wallet-bar button:disabled,#jcs-wallet-composer button:disabled{opacity:.65;cursor:not-allowed}
+#jcs-wallet-bar button:hover:not(:disabled),#jcs-wallet-composer button:hover:not(:disabled){box-shadow:0 0 0 2px var(--gold,#c99820)}
+#jcs-wallet-bar button:focus-visible,#jcs-wallet-composer button:focus-visible{outline:3px solid var(--gold,#c99820)!important;outline-offset:3px!important}
+#jcs-wallet-bar[data-state="error"] #jcsWalletStatus,#jcs-wallet-composer[data-state="error"] #jcsWalletComposerStatus{color:var(--red,#c5344d)}
+#jcs-wallet-bar [hidden],#jcs-wallet-composer [hidden]{display:none!important}
+@media(max-width:980px){.jcs-index-header .index-header-top{grid-template-columns:minmax(0,1fr) auto!important}#jcs-wallet-bar .jcs-wallet-bar-copy{flex-basis:100%}#jcs-wallet-actions{justify-content:flex-start;width:100%}}
+@media(max-width:480px){#jcs-wallet-bar{padding:11px;gap:9px}#jcs-wallet-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:5px}#jcs-wallet-bar #connectBtn,#jcs-wallet-bar #disconnectBtn{width:100%}#jcs-wallet-bar #walletPill{max-width:100%;text-align:center}#jcs-wallet-composer{padding:14px}#jcs-wallet-composer .jcs-wallet-composer-actions>button{width:100%}}
+@media print{#jcs-wallet-bar,#jcs-wallet-composer{display:none!important}}
+</style>
+<meta name="jcs-wallet-ui-release" content="1.0.1"/>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -2052,11 +2081,6 @@ html[data-theme="dark"] .jcs-care{--jcs-care-accent:#ffe59a;--jcs-care-tint:rgba
           </button>
         </div>
 
-        <div aria-label="Xaman wallet controls" class="index-wallet-actions">
-          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
-          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
-          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
-        </div>
 
         <nav aria-label="Project policies and support" class="index-legal-links">
           <a href="./terms.html">Terms</a>
@@ -2066,6 +2090,21 @@ html[data-theme="dark"] .jcs-care{--jcs-care-accent:#ffe59a;--jcs-care-tint:rgba
           <a href="./ai.json">AI Manifest</a>
         </nav>
       </div>
+    </div>
+
+
+    <!-- Wallet controls must stay outside #jcsHeaderUtilities: that area collapses below 980px. -->
+    <div id="jcs-wallet-bar" class="jcs-wallet-bar" role="group" aria-label="Wallet connection" data-state="loading">
+      <div class="jcs-wallet-bar-copy">
+        <strong>YOUR WALLET <span>· Xaman</span></strong>
+        <p id="jcsWalletStatus" role="status">Loading the Xaman connection service…</p>
+      </div>
+        <div aria-label="Xaman wallet controls" class="index-wallet-actions" id="jcs-wallet-actions">
+          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect wallet · Xaman</button>
+          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
+          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+        </div>
+      <button id="jcsWalletReload" class="jcs-wallet-reload" type="button" hidden>Reload page</button>
     </div>
 
     <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
@@ -2198,6 +2237,19 @@ html[data-theme="dark"] .jcs-care{--jcs-care-accent:#ffe59a;--jcs-care-tint:rgba
 <p>The first approval mints the NFT. After validation, its ledger index and transaction position become a permanent prayer identifier, and the second approval publishes the complete social record.</p>
 </div>
 <span class="badge nft">NFT-backed</span>
+</div>
+
+<div id="jcs-wallet-composer" class="jcs-wallet-composer" role="group" aria-labelledby="jcsWalletComposerTitle">
+  <div>
+    <strong id="jcsWalletComposerTitle">Connect your wallet before minting</strong>
+    <p id="jcsWalletComposerStatus" role="status">Loading the Xaman connection service…</p>
+    <code id="jcsWalletAccount" hidden></code>
+  </div>
+  <div class="jcs-wallet-composer-actions">
+    <button id="jcsWalletConnect" class="jcs-wallet-connect" type="button" aria-describedby="jcsWalletComposerStatus" disabled>Connect wallet · Xaman</button>
+    <button id="jcsWalletDisconnect" class="jcs-wallet-disconnect" type="button" aria-describedby="jcsWalletComposerStatus" hidden>Disconnect wallet</button>
+  </div>
+  <p class="jcs-wallet-boundary">Connecting is an account sign-in, not an NFT mint or payment. Review each later request separately in Xaman. Never enter a recovery phrase or private key here.</p>
 </div>
 <div class="jcs-care jcs-care-inline">
   <details><summary>Your wallet and your words</summary><p>A standard Xaman SignIn authenticates the account; it does not itself mint an NFT or send a payment. Later ledger actions require separate review.</p><p><strong>Mint-only is not private.</strong> This version includes the complete prayer and its content hash in the public NFT mint transaction memos. Publishing the shared registry is a second transaction.</p><p><a href="#jcs-care-wallet" data-jcs-care-open="jcs-care-wallet">Read the signing guide</a> · <a href="#jcs-care-privacy" data-jcs-care-open="jcs-care-privacy">Review public-record privacy</a></p></details>
@@ -3355,7 +3407,61 @@ You may edit the wording before minting or publishing anything.
     throw lastError || new Error('XRPL request failed on every configured server.');
   }
 
+  // One wallet session and one authorization path for both visible entrypoints.
+  // No seed inputs, new SDK, proxy, signing payload, or persistent session store.
+  const walletUi = {
+    ready:false, busy:false, disconnecting:false, acceptIdentity:true,
+    generation:0, needsReload:false, tone:'loading',
+    message:'Loading the Xaman connection service…', readyTimer:null
+  };
+
+  function syncWalletConnectionUi() {
+    const connected = Boolean(state.account);
+    const busy = walletUi.busy;
+    const text = walletUi.disconnecting ? 'Disconnecting this page from Xaman…'
+      : walletUi.tone === 'error' ? walletUi.message
+      : connected ? 'Wallet connected. NFT minting and registry publication still require separate approvals.'
+      : busy ? 'Waiting for Xaman sign-in. Check the Xaman authorization window and approve only the account you intend to use.'
+      : walletUi.message;
+    const tone = walletUi.tone === 'error' ? 'error' : connected ? 'connected' : busy ? 'pending' : walletUi.tone;
+    for (const id of ['connectBtn','jcsWalletConnect']) {
+      const button = $(id);
+      if (!button) continue;
+      button.hidden = connected;
+      button.disabled = busy || !walletUi.ready;
+      button.textContent = busy ? 'Connecting…' : 'Connect wallet · Xaman';
+      button.setAttribute('aria-busy', String(busy));
+    }
+    for (const id of ['disconnectBtn','jcsWalletDisconnect']) {
+      const button = $(id);
+      if (!button) continue;
+      button.hidden = !connected;
+      button.disabled = busy;
+      button.textContent = walletUi.disconnecting ? 'Disconnecting…' : 'Disconnect wallet';
+    }
+    for (const id of ['jcsWalletStatus','jcsWalletComposerStatus']) {
+      if ($(id)) $(id).textContent = text;
+    }
+    for (const id of ['jcs-wallet-bar','jcs-wallet-composer']) {
+      if ($(id)) $(id).dataset.state = tone;
+    }
+    if ($('jcsWalletComposerTitle')) $('jcsWalletComposerTitle').textContent = connected ? 'Wallet connected to this page' : 'Connect your wallet before minting';
+    if ($('jcsWalletAccount')) {
+      $('jcsWalletAccount').hidden = !connected;
+      $('jcsWalletAccount').textContent = connected ? state.account : '';
+    }
+    if ($('jcsWalletReload')) $('jcsWalletReload').hidden = !walletUi.needsReload;
+  }
+
+  function walletNotice(message, tone='ready', needsReload=false) {
+    walletUi.message = message;
+    walletUi.tone = tone;
+    walletUi.needsReload = needsReload;
+    syncWalletConnectionUi();
+  }
+
   function updateWalletUi() {
+    syncWalletConnectionUi();
     const connected = Boolean(state.account);
     $('connectBtn').hidden = connected;
     $('disconnectBtn').hidden = !connected;
@@ -3400,63 +3506,122 @@ You may edit the wording before minting or publishing anything.
 
   function initXaman() {
     if (!window.Xumm) {
-      setComposerStatus('The Xaman SDK did not load. Reload the page.', 'err');
+      const message = 'The Xaman connection library did not load. Check your connection or content-blocker settings, then reload this page.';
+      walletNotice(message, 'error', true);
+      setComposerStatus(message, 'err');
       return;
     }
 
-    state.xumm = new window.Xumm(APP_KEY);
-
-    state.xumm.on('ready', () => {
-      $('connectBtn').disabled = false;
-    });
-
-    const identified = async event => {
-      const account = await resolveXamanAccount(event);
-      if (!account) return;
-      state.account = account;
-      loadPending();
-      updateWalletUi();
-      subscribeToCollector().catch(() => {});
-    };
-
-    state.xumm.on('success', identified);
-    state.xumm.on('retrieved', identified);
-    state.xumm.on('logout', () => {
-      state.account = '';
-      updateWalletUi();
-    });
-    state.xumm.on('error', error => {
-      setComposerStatus(
-        'Xaman reported an error: ' + (error?.message || error),
-        'err'
-      );
-    });
-  }
-
-  $('connectBtn').addEventListener('click', async () => {
-    if (!state.xumm) return;
     try {
-      setComposerStatus('Opening Xaman authorization…');
-      await state.xumm.authorize();
-      const account = await resolveXamanAccount();
-      if (account) {
+      state.xumm = new window.Xumm(APP_KEY);
+      walletUi.readyTimer = window.setTimeout(() => {
+        if (!walletUi.ready && !state.account) {
+          walletNotice('Xaman is taking longer to initialize. Check your connection or content-blocker settings, then reload this page if needed.', 'loading', true);
+        }
+      }, 15000);
+
+      state.xumm.on('ready', () => {
+        window.clearTimeout(walletUi.readyTimer);
+        walletUi.ready = true;
+        walletNotice('Ready to connect. Choose Connect wallet and review the account sign-in in Xaman.');
+      });
+
+      const identified = async event => {
+        const generation = walletUi.generation;
+        const account = await resolveXamanAccount(event);
+        if (!account || walletUi.disconnecting || !walletUi.acceptIdentity || generation !== walletUi.generation) return;
         state.account = account;
+        walletNotice('Wallet connected.', 'connected');
         loadPending();
         updateWalletUi();
+        subscribeToCollector().catch(() => {});
+      };
+
+      state.xumm.on('success', identified);
+      state.xumm.on('retrieved', identified);
+      state.xumm.on('logout', () => {
+        walletUi.acceptIdentity = false;
+        walletUi.generation += 1;
+        if (!walletUi.disconnecting) walletUi.busy = false;
+        state.account = '';
+        walletNotice('Wallet disconnected from this page. Connect again when you are ready.');
+        updateWalletUi();
+      });
+      state.xumm.on('error', error => {
+        const message = 'Xaman reported an error: ' + String(error?.message || error || 'Connection unavailable').slice(0, 240);
+        walletNotice(message, 'error', true);
+        setComposerStatus(message, 'err');
+      });
+    } catch (error) {
+      window.clearTimeout(walletUi.readyTimer);
+      walletUi.ready = false;
+      state.xumm = null;
+      const message = 'Xaman could not initialize: ' + String(error?.message || error || 'Connection unavailable').slice(0, 240) + '. Reload this page to retry.';
+      walletNotice(message, 'error', true);
+      setComposerStatus(message, 'err');
+    }
+  }
+
+  async function connectWallet() {
+    if (!state.xumm || !walletUi.ready || walletUi.busy || state.account) return;
+    walletUi.busy = true;
+    walletUi.acceptIdentity = true;
+    const generation = ++walletUi.generation;
+    walletNotice('Opening Xaman authorization…', 'pending');
+    try {
+      setComposerStatus('Opening Xaman authorization…');
+      // Called directly in the user's click stack; retain the existing SDK flow.
+      await state.xumm.authorize();
+      if (generation !== walletUi.generation || !walletUi.acceptIdentity) return;
+      const account = await resolveXamanAccount();
+      if (generation !== walletUi.generation || !walletUi.acceptIdentity) return;
+      if (account) {
+        state.account = account;
+        walletNotice('Wallet connected.', 'connected');
+        loadPending();
+        updateWalletUi();
+      } else {
+        walletNotice('No wallet connection was confirmed. Choose Connect wallet to try again.', 'error');
+        setComposerStatus('No wallet connection was confirmed. You can try connecting again.', 'err');
       }
     } catch (error) {
-      setComposerStatus(
-        'Xaman connection failed or was cancelled: ' + (error?.message || error),
-        'err'
-      );
+      if (generation === walletUi.generation) {
+        const message = 'Xaman connection was not completed: ' + String(error?.message || error || 'Cancelled or unavailable').slice(0, 240) + '. Check the authorization window before trying again.';
+        walletNotice(message, 'error');
+        setComposerStatus(message, 'err');
+      }
+    } finally {
+      if (generation === walletUi.generation) {
+        walletUi.busy = false;
+        syncWalletConnectionUi();
+      }
     }
-  });
+  }
 
-  $('disconnectBtn').addEventListener('click', async () => {
-    try { await state.xumm?.logout(); } catch {}
+  async function disconnectWallet() {
+    if (walletUi.busy || !state.account) return;
+    walletUi.disconnecting = true;
+    walletUi.busy = true;
+    walletUi.acceptIdentity = false;
+    walletUi.generation += 1;
+    syncWalletConnectionUi();
+    let logoutConfirmed = true;
+    try { await state.xumm?.logout(); } catch { logoutConfirmed = false; }
     state.account = '';
+    walletUi.busy = false;
+    walletUi.disconnecting = false;
+    if (!logoutConfirmed) walletUi.ready = false;
+    walletNotice(logoutConfirmed
+      ? 'Wallet disconnected from this page. Your prayer draft has not been cleared.'
+      : 'Disconnected from this page, but Xaman session logout could not be confirmed. Reload the page before reconnecting.',
+      logoutConfirmed ? 'ready' : 'error', !logoutConfirmed);
     updateWalletUi();
-  });
+    setComposerStatus(walletUi.message, logoutConfirmed ? '' : 'err');
+  }
+
+  for (const id of ['connectBtn','jcsWalletConnect']) $(id)?.addEventListener('click', connectWallet);
+  for (const id of ['disconnectBtn','jcsWalletDisconnect']) $(id)?.addEventListener('click', disconnectWallet);
+  $('jcsWalletReload')?.addEventListener('click', () => window.location.reload());
 
   function profileFromForm() {
     return {
@@ -6311,7 +6476,7 @@ You may edit the wording before minting or publishing anything.
     const isWalletControl = target => Boolean(
       target instanceof Element &&
       target.closest(
-        '#connectBtn, #disconnectBtn, #publishBtn, #mintOnlyBtn, ' +
+        '#connectBtn, #disconnectBtn, #jcsWalletConnect, #jcsWalletDisconnect, #jcsWalletReload, #publishBtn, #mintOnlyBtn, ' +
         '#resumePublishBtn, .amen-btn, .reply-submit, #signPanel'
       )
     );
