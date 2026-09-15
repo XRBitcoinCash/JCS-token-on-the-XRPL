@@ -1943,6 +1943,79 @@ body.verify-ledger-focus .hero h1{font-size:clamp(2.2rem,5vw,4rem)}
 @media(max-width:900px){.map-route-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.map-route-head{display:block}.map-route-badge{margin-top:9px}.map-route-flow,.map-route-metrics,.publish-flow{grid-template-columns:1fr!important}}
 </style>
+
+<style id="jcs-care-content-style">
+/* JCS content pack 1.0.0: all rules are restricted to the added guidance. */
+.jcs-care{--jcs-care-accent:#7a5312;--jcs-care-tint:rgba(201,152,32,.07);color:var(--ink,#142238);font:400 15px/1.75 var(--font,system-ui,sans-serif);min-width:0;overflow-wrap:anywhere}
+html[data-theme="dark"] .jcs-care{--jcs-care-accent:#ffe59a;--jcs-care-tint:rgba(224,184,77,.08)}
+.jcs-care *{box-sizing:border-box}
+.jcs-care [hidden]{display:none!important}
+.jcs-care p{margin:0 0 14px;max-width:78ch}
+.jcs-care p:last-child{margin-bottom:0}
+.jcs-care h2,.jcs-care h3,.jcs-care h4{color:var(--ink,#142238);line-height:1.25;margin:0 0 14px}
+.jcs-care h2{font:700 clamp(1.7rem,3vw,2.4rem)/1.17 Georgia,"Times New Roman",serif;letter-spacing:-.025em}
+.jcs-care h3{font-size:1.02rem}
+.jcs-care h4{font-size:.95rem}
+.jcs-care a{color:var(--blue,#1458d5);text-decoration:underline;text-underline-offset:3px}
+.jcs-care a:hover{text-decoration-thickness:2px}
+.jcs-care :is(a,button,summary):focus-visible{outline:3px solid var(--blue,#1458d5)!important;outline-offset:4px!important}
+.jcs-care .jcs-care-kicker{color:var(--jcs-care-accent);font:800 11px/1.6 var(--font,system-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+.jcs-care .jcs-care-muted{color:var(--muted,#607087)}
+.jcs-care .jcs-care-small{font-size:13px;line-height:1.7}
+.jcs-care .jcs-care-rule{padding:15px 18px;border-left:3px solid var(--gold,#c99820);background:var(--jcs-care-tint);border-radius:0 8px 8px 0;margin:18px 0}
+.jcs-care .jcs-care-rule strong{color:var(--ink,#142238)}
+.jcs-care .jcs-care-links{display:flex;gap:8px 12px;flex-wrap:wrap;margin-top:14px}
+.jcs-care .jcs-care-links a{display:inline-flex;align-items:center;min-height:44px;padding:7px 12px;border:1px solid var(--line,#dce3ed);border-radius:8px;background:var(--surface,#fff);font-size:13px;font-weight:700;text-decoration:none}
+.jcs-care .jcs-care-links a:hover{border-color:var(--gold,#c99820);text-decoration:underline}
+.jcs-care-welcome{margin-top:20px}
+.jcs-care-welcome .jcs-care-motto{font:700 1rem/1.55 Georgia,"Times New Roman",serif;color:var(--jcs-care-accent);max-width:38ch}
+.jcs-care-quick{margin:20px 0;padding:22px 26px;border:1px solid var(--line,#dce3ed);border-radius:16px;background:var(--surface,#fff)}
+.jcs-care-quick .jcs-care-quick-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}
+.jcs-care-quick h2{font-size:1.3rem}
+.jcs-care-quick .jcs-care-rule{margin:0}
+.jcs-care-inline{padding:14px 16px;margin:16px 0;border:1px solid var(--line,#dce3ed);border-radius:12px;background:var(--surface-2,#f1f5fb);font-size:13px;line-height:1.7}
+.jcs-care-inline summary{cursor:pointer;padding:5px 0;min-height:34px;font-weight:750;color:var(--jcs-care-accent)}
+.jcs-care-inline details[open] summary{margin-bottom:12px}
+.jcs-care-feed{margin:15px 0;padding:14px 16px;border-left:3px solid var(--gold,#c99820);background:var(--jcs-care-tint);font-size:13px}
+.jcs-care-guide{margin:24px 0 0;padding:clamp(20px,4vw,38px);border:1px solid var(--line,#dce3ed);border-radius:20px;background:var(--surface,#fff);box-shadow:var(--shadow)}
+.jcs-care-guide .jcs-care-intro{max-width:78ch;margin-bottom:26px;color:var(--muted,#607087)}
+.jcs-care-guide details.jcs-care-panel{border:1px solid var(--line,#dce3ed);border-radius:12px;margin:12px 0;background:var(--surface-2,#f1f5fb);scroll-margin-top:160px}
+.jcs-care-guide .jcs-care-panel>summary{display:flex;align-items:center;gap:14px;min-height:74px;padding:18px 20px;cursor:pointer;list-style:none;color:var(--ink,#142238)}
+.jcs-care-guide summary::-webkit-details-marker{display:none}
+.jcs-care-guide .jcs-care-number{display:inline-grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border:1px solid var(--line,#dce3ed);border-radius:50%;color:var(--jcs-care-accent);font:700 11px/1 ui-monospace,Consolas,monospace}
+.jcs-care-guide .jcs-care-summary-copy{flex:1;min-width:0}
+.jcs-care-guide .jcs-care-summary-copy strong{display:block;font-size:1rem;line-height:1.4}
+.jcs-care-guide .jcs-care-summary-copy small{display:block;color:var(--muted,#607087);font-size:12px;margin-top:3px;line-height:1.5}
+.jcs-care-guide .jcs-care-panel>summary:after{content:'+';font-size:22px;color:var(--jcs-care-accent)}
+.jcs-care-guide .jcs-care-panel[open]>summary:after{content:'−'}
+.jcs-care-guide .jcs-care-panel[open]>summary{border-bottom:1px solid var(--line,#dce3ed)}
+.jcs-care-guide .jcs-care-panel-body{padding:clamp(16px,3vw,26px)}
+.jcs-care-guide .jcs-care-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.jcs-care-guide .jcs-care-box{padding:19px;border:1px solid var(--line,#dce3ed);border-radius:10px;background:var(--surface,#fff);min-width:0}
+.jcs-care-guide .jcs-care-box p{font-size:14px}
+.jcs-care-guide .jcs-care-wide{grid-column:1/-1}
+.jcs-care-guide .jcs-care-prayer summary{cursor:pointer;min-height:52px;font-size:14px;font-weight:750;line-height:1.5;display:flex;gap:12px;align-items:center}
+.jcs-care-guide .jcs-care-prayer summary:after{content:'+';margin-left:auto;color:var(--jcs-care-accent)}
+.jcs-care-guide .jcs-care-prayer[open] summary:after{content:'−'}
+.jcs-care-guide .jcs-care-prayer[open] summary{margin-bottom:14px}
+.jcs-care-guide .jcs-care-prayer p{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:1.85}
+.jcs-care-guide .jcs-care-copy-row{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;margin-top:16px}
+.jcs-care-guide button.jcs-care-copy{font:700 12px/1.5 var(--font,system-ui,sans-serif);color:var(--ink,#142238);background:var(--surface-2,#f1f5fb);padding:10px 14px;min-height:44px;border:1px solid var(--line,#dce3ed);border-radius:8px;cursor:pointer}
+.jcs-care-guide button.jcs-care-copy:hover{border-color:var(--gold,#c99820)}
+.jcs-care-guide .jcs-care-count{color:var(--muted,#607087);font:12px/1.5 ui-monospace,Consolas,monospace}
+.jcs-care-guide .jcs-care-feedback{font:12px/1.6 var(--font,system-ui,sans-serif)!important;color:var(--muted,#607087);margin-top:8px;min-height:1.6em}
+.jcs-care-guide .jcs-care-sources{font-size:12px;line-height:1.9;margin-top:20px;padding-top:16px;border-top:1px solid var(--line,#dce3ed)}
+.jcs-care-guide .jcs-care-states{display:grid;gap:12px;margin:16px 0}
+.jcs-care-guide .jcs-care-states div{padding:12px 0;border-bottom:1px solid var(--line,#dce3ed)}
+.jcs-care-guide .jcs-care-states dt{font-weight:750;margin-bottom:4px}
+.jcs-care-guide .jcs-care-states dd{margin:0;font-size:14px}
+.jcs-care-closing{padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line,#dce3ed)}
+.jcs-care-closing h2{font-size:1.6rem;max-width:35ch}
+@media(max-width:700px){.jcs-care-quick{padding:18px}.jcs-care-quick .jcs-care-quick-top,.jcs-care-guide .jcs-care-grid{grid-template-columns:1fr}.jcs-care-guide .jcs-care-panel>summary{padding:15px 13px;gap:10px}.jcs-care-guide .jcs-care-box{padding:15px}.jcs-care-guide .jcs-care-summary-copy strong{font-size:15px}.jcs-care-guide details.jcs-care-panel{scroll-margin-top:130px}.jcs-care-guide .jcs-care-links a{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.jcs-care{scroll-behavior:auto}.jcs-care *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{.jcs-care{color:#111;background:#fff;--jcs-care-accent:#333}.jcs-care button,.jcs-care .jcs-care-feedback{display:none!important}.jcs-care-guide{box-shadow:none}.jcs-care-guide .jcs-care-box{break-inside:avoid}}
+</style>
+
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -2017,8 +2090,12 @@ body.verify-ledger-focus .hero h1{font-size:clamp(2.2rem,5vw,4rem)}
 <section class="card hero">
 <div>
 <span class="eyebrow">✝ NFT-backed prayer · validated social proof · privacy-respecting map pulse</span>
-<h1>Every testimony can become a <span>verified witness.</span></h1>
-<p class="hero-lead">Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, publish a numbered registry record, and let the Prayer Map independently re-read that validated XRPL history. Optionally add a voluntary prayer-focus area that is released only under the map’s privacy thresholds. The focus is the place the prayer concerns—not the signer’s location. XRPL transactions do not contain GPS coordinates, and this page never attempts to infer a wallet holder’s physical location.</p>
+<h1>Offer a prayer.<br/><span>Leave a witness.</span></h1>
+<p class="hero-lead">Bring a prayer, a word of thanksgiving, or a testimony of what you believe God has done in your life. JCS brings Christian remembrance and digital technology together—not to place a price on faith, but to offer a meaningful way to express it.</p>
+<div class="jcs-care jcs-care-welcome">
+  <p>Come with gratitude, uncertainty, grief, hope, or simply a willingness to pray for someone else. You do not need impressive words.</p>
+  <p class="jcs-care-motto">The ledger can preserve your words.<br/>It does not measure your faith.</p>
+</div>
 <div class="hero-actions">
 <a class="btn primary" href="#compose">Compose a testimony NFT</a>
 <a class="btn" href="#testimonies">Enter the rolling testimony stream</a>
@@ -2044,7 +2121,22 @@ body.verify-ledger-focus .hero h1{font-size:clamp(2.2rem,5vw,4rem)}
 </div>
 </div>
 </aside>
-</section><section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
+</section>
+
+<section class="jcs-care jcs-care-quick" aria-labelledby="jcs-care-quick-title">
+  <div class="jcs-care-quick-top">
+    <div><p class="jcs-care-kicker">Prayer comes first</p><h2 id="jcs-care-quick-title">Understand the record before you create it.</h2><p>Publishing a digital record is a separate choice. A wallet requirement belongs to a technical feature—not to your relationship with God.</p></div>
+    <div class="jcs-care-rule"><p><strong>Never share wallet secrets.</strong><br/>Review every request inside Xaman. SignIn, NFT minting, and publishing a registry record are different actions.</p></div>
+  </div>
+  <div class="jcs-care-links" aria-label="Prayer and wallet guidance">
+    <a href="#jcs-care-wallet" data-jcs-care-open="jcs-care-wallet">How signing works</a>
+    <a href="#jcs-care-relic" data-jcs-care-open="jcs-care-relic">What is a digital relic?</a>
+    <a href="#jcs-care-prayers" data-jcs-care-open="jcs-care-prayers">Ten prayer starters</a>
+    <a href="#jcs-care-privacy" data-jcs-care-open="jcs-care-privacy">Before you publish</a>
+  </div>
+  <details class="jcs-care-inline"><summary>How this page records a witness</summary><p>Compose a prayer or testimony, mint a JCS-logo NFToken in your own wallet, publish a numbered registry record, and let the Prayer Map independently re-read that validated XRPL history. Optionally add a voluntary prayer-focus area that is released only under the map’s privacy thresholds. The focus is the place the prayer concerns—not the signer’s location. XRPL transactions do not contain GPS coordinates, and this page never attempts to infer a wallet holder’s physical location.</p></details>
+</section>
+<section aria-labelledby="audio-title" class="card audio-sanctuary" id="audio">
 <div class="audio-intro">
 <div>
 <span class="eyebrow">Continuous wall-clock synchronized streams</span>
@@ -2106,6 +2198,10 @@ body.verify-ledger-focus .hero h1{font-size:clamp(2.2rem,5vw,4rem)}
 <p>The first approval mints the NFT. After validation, its ledger index and transaction position become a permanent prayer identifier, and the second approval publishes the complete social record.</p>
 </div>
 <span class="badge nft">NFT-backed</span>
+</div>
+<div class="jcs-care jcs-care-inline">
+  <details><summary>Your wallet and your words</summary><p>A standard Xaman SignIn authenticates the account; it does not itself mint an NFT or send a payment. Later ledger actions require separate review.</p><p><strong>Mint-only is not private.</strong> This version includes the complete prayer and its content hash in the public NFT mint transaction memos. Publishing the shared registry is a second transaction.</p><p><a href="#jcs-care-wallet" data-jcs-care-open="jcs-care-wallet">Read the signing guide</a> · <a href="#jcs-care-privacy" data-jcs-care-open="jcs-care-privacy">Review public-record privacy</a></p></details>
+  <p style="margin-top:10px"><a href="#jcs-care-prayers" data-jcs-care-open="jcs-care-prayers">Need words? Browse ten original guided prayers.</a></p>
 </div>
 <div class="form-grid">
 <div class="field">
@@ -2284,6 +2380,12 @@ You may edit the wording before minting or publishing anything.
 <div class="preview-message" id="previewMessage">Your testimony preview will appear here.</div>
 <div class="preview-meta" id="previewMeta">Prayer · Anonymous</div>
 </div>
+
+<div class="jcs-care jcs-care-inline" id="jcs-care-publication-notice">
+  <p><strong>Share a witness, not someone’s private life.</strong> Remove identifying or sensitive details and review the exact text before signing. Shortening or hiding a wallet in this interface does not hide its public ledger history.</p>
+  <p><strong>Minting already publishes the prayer in transaction memos.</strong> “Mint NFT only” skips the shared registry step; it does not create a private prayer record.</p>
+  <p class="jcs-care-small">Treat public transaction content as lasting. Removing a website entry or burning an NFT does not erase historical transaction records or copies. <a href="#jcs-care-privacy" data-jcs-care-open="jcs-care-privacy">Read the publication guide.</a></p>
+</div>
 <div aria-label="Publishing steps" class="publish-flow"><div class="flow-step active" id="flowConnect">1 · Connect</div><div class="flow-step" id="flowMint">2 · Mint NFT</div><div class="flow-step" id="flowRegister">3 · Publish registry</div><div class="flow-step" id="flowMap">4 · Refresh map</div><div class="flow-step" id="flowVerify">5 · Verify &amp; share</div></div>
 <div class="publish-actions">
 <button class="btn primary" disabled="" id="publishBtn" type="button">Mint NFT + publish to the Prayer Map network</button>
@@ -2308,6 +2410,7 @@ You may edit the wording before minting or publishing anything.
 <button class="btn small" id="refreshFeedBtn" type="button">Refresh</button>
 </div>
 </div>
+<div class="jcs-care jcs-care-feed"><p><strong>Pray with care. Respond with kindness.</strong> A response count is not a measure of faith. Use encouragement honestly, respect privacy, and never pressure someone for money or wallet access. <a href="#jcs-care-fellowship" data-jcs-care-open="jcs-care-fellowship">Fellowship guidance and reply prompts.</a></p></div>
 <div aria-label="Network statistics" class="feed-stats">
 <div class="stat"><span>Posts</span><strong id="statPosts">—</strong></div>
 <div class="stat"><span>NFT-backed</span><strong id="statNfts">—</strong></div>
@@ -2481,6 +2584,95 @@ You may edit the wording before minting or publishing anything.
         </p>
 </article>
 </section>
+
+<!-- BEGIN JCS CONTENT PACK 1.0.0 / 2026-09-15 / presentation and local copy only -->
+<section class="jcs-care jcs-care-guide" id="jcs-care-guide" aria-labelledby="jcs-care-guide-title">
+<p class="jcs-care-kicker">A companion to Sign the Ledger</p>
+<h2 id="jcs-care-guide-title">Learn. Pray. Witness.</h2>
+<p class="jcs-care-intro">A place for clear explanations, words to begin with, and thoughtful participation. Open only what you need. The guidance is readable without connecting a wallet.</p>
+<details class="jcs-care-panel" id="jcs-care-wallet">
+  <summary><span class="jcs-care-number" aria-hidden="true">01</span><span class="jcs-care-summary-copy"><strong>Understand what you are approving</strong><small>SignIn, NFT minting, registry publication, and confirmation.</small></span></summary>
+  <div class="jcs-care-panel-body">
+<p>A standard Xaman <strong>SignIn</strong> authenticates an account without submitting a transaction to the XRP Ledger. It is not itself a payment or an NFT mint, and it does not approve later transactions on your behalf.</p>
+<p>A later request may authorize an actual ledger transaction. Read it inside Xaman before approving. Check the transaction type, selected account, network, amount, destination where applicable, NFT fields, and fee. <strong>Do not sign a request you do not understand—even when the website looks familiar.</strong></p>
+<div class="jcs-care-grid">
+  <article class="jcs-care-box"><h3>Connecting identifies the account.</h3><p>SignIn is an authentication step. It should not be confused with creating or publishing a prayer NFT.</p></article>
+  <article class="jcs-care-box"><h3>Minting creates the NFT.</h3><p><code>NFTokenMint</code> creates a non-fungible token. In this version, the signed mint transaction also contains the prayer text in public memos.</p></article>
+  <article class="jcs-care-box"><h3>Full publication has two approvals.</h3><p>After the mint validates, the separate one-drop registry transaction links the NFT and prayer record to the shared feed. The Prayer Map re-reads the validated registry and applies its display thresholds.</p></article>
+  <article class="jcs-care-box"><h3>Signing is not final confirmation.</h3><p>For a ledger action, successful completion requires a successful result in a validated ledger. A signature, pending screen, or provisional result is not final confirmation.</p></article>
+</div>
+<div class="jcs-care-rule"><p><strong>Technical costs are not a price on prayer.</strong> Ledger transactions have network costs, and NFT ownership can affect reserve requirements. Review the current request and any separately disclosed charges. These technical conditions do not measure spiritual value.</p></div>
+<p>Never enter your seed phrase, Secret Numbers, recovery phrase, or private key into this website or send them to someone offering support. Those secrets can give another person control of your account.</p>
+<details class="jcs-care-box"><summary>What the existing transaction stages mean</summary>
+  <p class="jcs-care-small jcs-care-muted">These are explanations, not live status messages.</p>
+  <dl class="jcs-care-states">
+    <div><dt>Before wallet sign-in</dt><dd>Review the SignIn request in Xaman. Connecting and minting are different actions.</dd></div>
+    <div><dt>Before public submission</dt><dd>Pause and review: are these words safe for anyone to read?</dd></div>
+    <div><dt>Awaiting wallet approval</dt><dd>Review the request in Xaman. Approve only the action you intended.</dd></div>
+    <div><dt>Checking the submitted transaction</dt><dd>Your signature alone does not confirm completion.</dd></div>
+    <div><dt>Outcome not confirmed</dt><dd>Check the original request and transaction history before trying again. Do not assume an unconfirmed outcome means the transaction failed.</dd></div>
+    <div><dt>Successful, validated NFT mint</dt><dd>The NFT mint is confirmed. Check any separate registry-publication step before assuming the full process is complete.</dd></div>
+  </dl>
+</details>
+<p class="jcs-care-sources">Technical references: <a href="https://docs.xaman.dev/concepts/special-transaction-types/signin" target="_blank" rel="noopener noreferrer">Xaman SignIn</a> · <a href="https://help.xaman.app/app/getting-started-with-xaman/self-custody-101-staying-safe-with-xaman" target="_blank" rel="noopener noreferrer">Xaman safety guidance</a> · <a href="https://xrpl.org/docs/references/protocol/transactions/types/nftokenmint" target="_blank" rel="noopener noreferrer">NFTokenMint</a> · <a href="https://xrpl.org/docs/references/protocol/transactions/transaction-results" target="_blank" rel="noopener noreferrer">XRPL transaction results</a></p>
+</div>
+</details>
+<details class="jcs-care-panel" id="jcs-care-relic">
+  <summary><span class="jcs-care-number" aria-hidden="true">02</span><span class="jcs-care-summary-copy"><strong>What is a digital relic?</strong><small>Remembrance and witness—not spiritual status.</small></span></summary>
+  <div class="jcs-care-panel-body">
+<h3>A keepsake of faith—not a certificate of holiness.</h3>
+<p>For JCS, <strong>digital relic</strong> is a devotional description of a contemporary digital artifact: a prayer, testimony, or remembrance associated with a ledger record.</p>
+<p>Think of it as a keepsake of a moment of faith. It may help someone remember what they prayed, what they were thankful for, or why they chose to speak about Christ.</p>
+<p>The term does not mean that the NFT is an ancient object, an authenticated relic of a saint, or an object with supernatural power. It does not certify holiness, confer salvation, or make one person’s prayer more important than another’s.</p>
+<div class="jcs-care-rule"><p><strong>Its intended meaning is remembrance and witness—not spiritual status.</strong></p></div>
+<div class="jcs-care-grid">
+  <article class="jcs-care-box"><h3>What does the record establish?</h3><p>An NFT provides a unique ledger identifier and a record that can be examined independently. Its history can establish technical facts about the token and related transactions—not the truth of every associated statement.</p><p>“I believe this prayer was answered” is a participant’s testimony. Recording it does not independently prove a miracle, divine intervention, or a person’s spiritual condition.</p></article>
+  <article class="jcs-care-box"><h3>Where is this page’s prayer stored?</h3><p>In this version, the complete prayer and its SHA-256 commitment are included in the public mint transaction memos. A separate registry transaction is used for full publication. The NFT URI points to the JCS logo.</p><p>The referenced image is separate from the ledger history. A token’s existence does not guarantee that an image, website, or public history provider will remain available.</p></article>
+</div>
+<p class="jcs-care-small jcs-care-muted" style="margin-top:18px">A digital artifact of Christian prayer and remembrance, associated with a verifiable ledger record. A witness to what you chose to express—not a certificate of spiritual truth.</p>
+<p class="jcs-care-sources">Read the <a href="#verification-center">Verification Evidence Center</a> and the page’s existing <a href="#compose">mint and registry explanation</a>. Protocol reference: <a href="https://xrpl.org/docs/references/protocol/transactions/types/nftokenmint" target="_blank" rel="noopener noreferrer">NFTokenMint and its URI</a>.</p>
+</div>
+</details>
+<details class="jcs-care-panel" id="jcs-care-privacy">
+  <summary><span class="jcs-care-number" aria-hidden="true">03</span><span class="jcs-care-summary-copy"><strong>Share thoughtfully. Protect one another.</strong><small>Public mint memos, wallet visibility, and voluntary map focus.</small></span></summary>
+  <div class="jcs-care-panel-body">
+<h3>Share a witness, not someone’s private life.</h3>
+<p>Public XRP Ledger transactions can be inspected by others. A wallet address is not the same as a person’s name, but public activity and the details someone shares may allow others to connect the two. Do not assume a wallet-linked post is anonymous.</p>
+<p>Before publishing, remove information that could expose you or someone else: full names, exact addresses, children’s identifying details, confidential confessions, private medical information, or the location of a vulnerable person or congregation. Ask permission before sharing another person’s identifiable story.</p>
+<div class="jcs-care-rule"><p><strong>Mint-only does not mean private.</strong> This version writes the prayer into the mint transaction memos. Hiding a wallet in the interface and suppressing a map aggregate do not remove the underlying signed transaction from public history.</p></div>
+<div class="jcs-care-grid">
+  <article class="jcs-care-box"><h3>Publication is a choice.</h3><p>You may pray without publishing. A private prayer is not less sincere because it does not appear on a wall, receive responses, or become an NFT.</p><p>Jesus’ teaching in Matthew 6 distinguishes sincere prayer from religious performance done for an audience. Give yourself space to decide whether these words should become public.</p></article>
+  <article class="jcs-care-box"><h3>Protect vulnerable people.</h3><p>A broad location or a shortened name is not a promise of anonymity. The Prayer Map’s optional focus describes the place a prayer concerns—not the signer’s location.</p><p>When public expression could put someone at risk, choose private prayer rather than a public record.</p></article>
+</div>
+<h3 style="margin-top:22px">Before you continue</h3>
+<p>Review the exact words and details you are about to publish. Treat anything placed in a public transaction as information that may remain accessible. Removing it from a website or burning the NFT does not erase the historical transaction or retrieve copies already made by others.</p>
+<p><strong>A personal review:</strong> “I understand that this action may create a public record. I have reviewed the content and removed information that could expose me or another person.”</p>
+<p class="jcs-care-small jcs-care-muted">This is reading guidance, not an additional consent control or a claim that consent has been recorded. The existing wallet review and map-focus confirmation remain unchanged. Browser drafts are not a confidential or encrypted vault; use care on shared devices.</p>
+<p class="jcs-care-sources"><a href="privacy.html">JCS privacy policy</a> · <a href="security.html">JCS security policy</a> · <a href="https://bible.usccb.org/bible/matthew/6" target="_blank" rel="noopener noreferrer">Matthew 6</a></p>
+</div>
+</details>
+<details class="jcs-care-panel" id="jcs-care-prayers">
+  <summary><span class="jcs-care-number" aria-hidden="true">04</span><span class="jcs-care-summary-copy"><strong>Ten original guided prayers</strong><small>Read quietly, adapt the wording, or copy a prayer to use deliberately.</small></span></summary>
+  <div class="jcs-care-panel-body"><p>These are newly written devotional prayers, <strong>not quotations from Scripture</strong>. Use them as starting points, change the words, or pray them without publishing anything.</p><p class="jcs-care-small jcs-care-muted">Each original prayer below fits this page’s existing 320-character message limit. Copying does not change your draft, connect a wallet, or publish anything. Paste deliberately into the composer and review before signing.</p><div class="jcs-care-grid"><details class="jcs-care-box jcs-care-prayer"><summary>When You Do Not Know What to Say</summary><p id="jcs-care-prayer-1">Lord Jesus, I do not know how to put everything into words. You know the burdens I carry and the questions I have not spoken. Help me begin honestly. Give me enough peace for this moment and enough courage for the next step. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-1" aria-label="Copy prayer: When You Do Not Know What to Say" hidden>Copy prayer</button><span class="jcs-care-count">230 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Peace in Anxiety</summary><p id="jcs-care-prayer-2">Heavenly Father, my thoughts are restless, and I am trying to carry more than I can manage alone. Help me slow down, recognize what is within my responsibility, and release what I cannot control. Guide me toward wise support and steady my heart in Your love. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-2" aria-label="Copy prayer: Peace in Anxiety" hidden>Copy prayer</button><span class="jcs-care-count">264 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Healing and Strength</summary><p id="jcs-care-prayer-3">Lord Jesus, I bring before You those who are sick, exhausted, or living with pain. Grant comfort, strength, and wise care. Support those who treat them and those who stand beside them. Help us remain compassionate through uncertainty and present to one another in suffering. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-3" aria-label="Copy prayer: Healing and Strength" hidden>Copy prayer</button><span class="jcs-care-count">280 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Grief and Remembrance</summary><p id="jcs-care-prayer-4">Merciful Father, I miss someone whose absence has changed my world. Receive my sorrow without requiring me to hide it. Help me remember with love, rest when I am weary, and accept the care of others. Walk with me through the days I cannot yet imagine. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-4" aria-label="Copy prayer: Grief and Remembrance" hidden>Copy prayer</button><span class="jcs-care-count">257 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Family and Relationships</summary><p id="jcs-care-prayer-5">Lord, bring patience, honesty, and kindness into our relationships. Help us listen before answering and repair the harm we have caused. Where there is danger, guide us toward safety and wise boundaries. Teach us to love without control, manipulation, or fear. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-5" aria-label="Copy prayer: Family and Relationships" hidden>Copy prayer</button><span class="jcs-care-count">265 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Guidance and Discernment</summary><p id="jcs-care-prayer-6">Heavenly Father, help me recognize the difference between what I want and what is wise. Give me patience before I act, humility when I am corrected, and courage to choose what is right. Let my decisions reflect love, truth, and responsibility toward others. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-6" aria-label="Copy prayer: Guidance and Discernment" hidden>Copy prayer</button><span class="jcs-care-count">263 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Thanksgiving</summary><p id="jcs-care-prayer-7">Lord Jesus, thank You for the kindness I have received, the strength that carried me, and the ordinary gifts I too easily overlook. Keep gratitude alive in me. Show me how to turn what I have received into encouragement, generosity, and practical care for someone else. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-7" aria-label="Copy prayer: Thanksgiving" hidden>Copy prayer</button><span class="jcs-care-count">275 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Forgiveness and a New Beginning</summary><p id="jcs-care-prayer-8">Merciful God, help me face my wrongs honestly. Give me courage to apologize, make amends where I can, and change the behavior that has harmed others. Keep me from using faith as an excuse to avoid responsibility. Lead me toward a life shaped by Your grace. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-8" aria-label="Copy prayer: Forgiveness and a New Beginning" hidden>Copy prayer</button><span class="jcs-care-count">262 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Those Persecuted for Their Faith</summary><p id="jcs-care-prayer-9">Lord Jesus, remember those who face threats, isolation, imprisonment, or violence because of their faith. Protect the vulnerable and strengthen those who care for them. Guide us toward help that does not expose them to greater danger. Turn hearts away from hatred and toward mercy. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-9" aria-label="Copy prayer: Those Persecuted for Their Faith" hidden>Copy prayer</button><span class="jcs-care-count">287 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details><details class="jcs-care-box jcs-care-prayer"><summary>Praying for Someone Else</summary><p id="jcs-care-prayer-10">Father, I bring before You someone whose burdens I cannot fully understand. Help me listen without judgment and support without taking control. Give them strength for today, trustworthy people beside them, and the help they need. Teach me to be faithful in both prayer and action. Amen.</p><div class="jcs-care-copy-row"><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-prayer-10" aria-label="Copy prayer: Praying for Someone Else" hidden>Copy prayer</button><span class="jcs-care-count">286 / 320 characters</span></div><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></details></div><p style="margin-top:20px"><a href="#compose">Return to your prayer composer</a>. The existing rotating Scripture-source library is separate and has not been replaced.</p></div>
+</details>
+<details class="jcs-care-panel" id="jcs-care-fellowship">
+  <summary><span class="jcs-care-number" aria-hidden="true">05</span><span class="jcs-care-summary-copy"><strong>Fellowship, replies, and encouragement</strong><small>Respond honestly. Respect privacy. Let care extend beyond a comment.</small></span></summary>
+  <div class="jcs-care-panel-body"><h3>Pray with care. Respond with kindness.</h3><p>Behind a prayer request is a person—not a statistic, a wallet balance, or an opportunity to promote something.</p><p>Read with compassion. Respond honestly. Do not assume you know why someone is suffering or tell them that hardship proves a lack of faith. Where you can offer appropriate practical help, let your concern extend beyond a comment.</p><p>Galatians 6 emphasizes carrying one another’s burdens, while Romans 12 connects Christian community with sincere love, hospitality, generosity, and perseverance in prayer.</p><h3>Responses you can adapt</h3><p class="jcs-care-small jcs-care-muted">Use a response only when it honestly reflects your intention. Copying a response is not an on-ledger Amen or reply.</p><div class="jcs-care-grid"><article class="jcs-care-box"><h4>For someone asking for strength</h4><p id="jcs-care-reply-1">I will keep this concern in prayer today. May you find strength for the next step and trustworthy support beside you.</p><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-reply-1" aria-label="Copy response: For someone asking for strength" hidden>Copy response</button><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></article><article class="jcs-care-box"><h4>For someone sharing grief</h4><p id="jcs-care-reply-2">Thank you for sharing this remembrance. I am sorry for your loss, and I will pray for comfort for you and those who loved them.</p><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-reply-2" aria-label="Copy response: For someone sharing grief" hidden>Copy response</button><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></article><article class="jcs-care-box"><h4>For a testimony of gratitude</h4><p id="jcs-care-reply-3">Thank you for sharing what this has meant to you. May your gratitude become encouragement for someone facing a difficult season.</p><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-reply-3" aria-label="Copy response: For a testimony of gratitude" hidden>Copy response</button><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></article><article class="jcs-care-box"><h4>When you do not have an answer</h4><p id="jcs-care-reply-4">I do not have an explanation for what you are experiencing, but I can listen and pray with you.</p><button class="jcs-care-copy" type="button" data-jcs-care-copy="jcs-care-reply-4" aria-label="Copy response: When you do not have an answer" hidden>Copy response</button><p class="jcs-care-feedback" data-jcs-care-feedback role="status" aria-live="polite" aria-atomic="true"></p></article></div><div class="jcs-care-rule"><p><strong>Let an “Amen” express sincere encouragement.</strong> A response count is not a measure of anyone’s faith or the importance of their prayer.</p></div><h3>A prompt for a later testimony</h3><p>What has changed since you first prayed about this? What are you thankful for? What remains difficult? Describe what you personally experienced, and distinguish what you know from what you believe or hope.</p><h3>Community boundaries</h3><p>Do not use prayer requests to pressure people for money, wallet access, private contact details, or public disclosure. Do not promise guaranteed healing, wealth, or spiritual favor. Respect another person’s decision not to share more.</p><p class="jcs-care-sources"><a href="https://bible.usccb.org/bible/galatians/6" target="_blank" rel="noopener noreferrer">Galatians 6</a> · <a href="https://bible.usccb.org/bible/romans/12" target="_blank" rel="noopener noreferrer">Romans 12</a> · <a href="#testimonies">Return to the prayer wall</a></p></div>
+</details>
+<details class="jcs-care-panel" id="jcs-care-learning">
+  <summary><span class="jcs-care-number" aria-hidden="true">06</span><span class="jcs-care-summary-copy"><strong>Learn, pray, and reflect</strong><small>Short readings on prayer, testimony, community, and remembrance.</small></span></summary>
+  <div class="jcs-care-panel-body"><div class="jcs-care-grid">
+<article class="jcs-care-box"><h3>Prayer is not a performance.</h3><p>Prayer does not require polished language, a public audience, or an impressive story. In Matthew 6, Jesus teaches prayer without making public recognition its purpose and gives His followers a model centered on God, daily needs, forgiveness, and deliverance.</p><p>Begin with what is true: what you are thankful for, what troubles you, where you need guidance, and whom you want to remember. A few sincere words can be a beginning.</p></article>
+<article class="jcs-care-box"><h3>Why pray together?</h3><p>Christian fellowship makes room for shared prayer, learning, encouragement, and practical care. Acts 2 describes believers gathering around teaching, prayer, shared meals, and attention to one another’s needs.</p><p>An online prayer space can support those habits, but it should point toward real concern for people. A thoughtful response matters most when it comes from someone willing to listen, remain present, or help responsibly.</p></article>
+<article class="jcs-care-box"><h3>What is a testimony?</h3><p>In this community, a testimony is your account of what you have experienced and how you understand it in relation to your faith.</p><p>Speak honestly and in your own voice. You do not need to exaggerate suffering or claim certainty you do not possess. “I believe,” “I experienced,” and “I am still trying to understand” can all be truthful beginnings. A testimony may include gratitude and unresolved difficulty at the same time.</p></article>
+<article class="jcs-care-box"><h3>When the outcome is not what you hoped for.</h3><p>You do not need to manufacture an uplifting ending. You may say that you are still waiting, disappointed, confused, or grieving.</p><p>This community should make room for honest uncertainty rather than rewarding only stories with a clear resolution. Seek trustworthy people who can listen without blaming you. Let prayer accompany appropriate practical support and professional care—not become a reason to refuse them.</p></article>
+<article class="jcs-care-box jcs-care-wide"><h3>Remembering without turning faith into a competition.</h3><p>A digital keepsake may help you remember a prayer or a meaningful moment. It should not become a ranking system for holiness.</p><p>JCS’s stated principles reject wealth-based spiritual ranking and token-weighted theology. A person’s dignity must not rise or fall with their holdings, activity, or visibility. Let the record serve remembrance. Let your treatment of others express what matters.</p></article>
+</div><p class="jcs-care-sources">Scripture references: <a href="https://bible.usccb.org/bible/matthew/6" target="_blank" rel="noopener noreferrer">Matthew 6</a> · <a href="https://bible.usccb.org/bible/acts/2" target="_blank" rel="noopener noreferrer">Acts 2</a>. Project principles: <a href="about-jcs.html">JCS Vision &amp; Core Values</a>. These reflections are devotional guidance, not a replacement for Scripture or pastoral care.</p></div>
+</details>
+<p class="jcs-care-small jcs-care-muted" style="margin-top:22px">No wallet is required to read these guides or copy the supplied text. Publishing, replies, and on-ledger reactions still follow the existing wallet-approval flows. Need help? Use <a href="security.html">JCS security guidance</a> or <a href="https://xrbitcoincash.com/support.html" target="_blank" rel="noopener noreferrer">official project support</a>; never send wallet secrets.</p>
+</section>
+<!-- END JCS CONTENT PACK -->
+
 </main>
 
 <dialog class="share-dialog" id="shareDialog">
@@ -2541,6 +2733,12 @@ You may edit the wording before minting or publishing anything.
 <div aria-live="polite" class="toast-region" id="toastRegion"></div>
 <footer>
 <div class="footer-inner">
+
+<div class="jcs-care jcs-care-closing">
+<p class="jcs-care-kicker">Faith before technology</p>
+<h2>A record of witness.<br/>Not a measure of faith.</h2>
+<p>JCS uses technology to support prayer, remembrance, and Christian fellowship. It does not replace Scripture, a faith community, pastoral care, or appropriate professional support. Participate thoughtfully, protect one another’s privacy, and review every wallet action before approving it.</p>
+</div>
 <strong>Jesus Christ Saves Token · Sign the Ledger v7.0.0</strong>
 <p>
         This interface is non-custodial. It does not request secret keys, guarantee
@@ -6186,5 +6384,74 @@ You may edit the wording before minting or publishing anything.
   }, 30000);
 
 })();
-</script></body>
+</script>
+<script id="jcs-care-content-script">
+/* JCS content pack: isolated reading navigation and explicit clipboard copies.
+   No ledger calls, wallet actions, draft writes, storage, polling or dependencies. */
+(function () {
+  'use strict';
+  const guide = document.getElementById('jcs-care-guide');
+  if (!guide) return;
+
+  function openGuide(id) {
+    if (typeof id !== 'string' || !id.startsWith('jcs-care-')) return;
+    const target = document.getElementById(id);
+    if (!target || !guide.contains(target)) return;
+    let node = target;
+    while (node && node !== guide) {
+      if (node.tagName === 'DETAILS') node.open = true;
+      node = node.parentElement;
+    }
+  }
+  // Leave navigation and existing hash handlers intact; only expand our panels.
+  document.querySelectorAll('[data-jcs-care-open]').forEach(function (link) {
+    link.addEventListener('click', function () { openGuide(link.dataset.jcsCareOpen); });
+  });
+  window.addEventListener('hashchange', function () { openGuide(location.hash.slice(1)); });
+  openGuide(location.hash.slice(1));
+
+  function selectForManualCopy(node, status) {
+    const selection = window.getSelection();
+    if (!selection) {
+      status.textContent = 'Clipboard unavailable. Select the text above and copy it manually.';
+      return;
+    }
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    status.textContent = 'Text selected. Copy it manually with Ctrl+C, Command+C, or your device’s Copy command. Nothing was published.';
+  }
+  guide.querySelectorAll('[data-jcs-care-copy]').forEach(function (button) {
+    button.hidden = false;
+  });
+  guide.addEventListener('click', async function (event) {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest('button[data-jcs-care-copy]');
+    if (!button || !guide.contains(button) || button.disabled) return;
+    const id = button.dataset.jcsCareCopy;
+    if (!id || !id.startsWith('jcs-care-')) return;
+    const text = document.getElementById(id);
+    const box = button.closest('.jcs-care-box');
+    const status = box && box.querySelector('[data-jcs-care-feedback]');
+    if (!text || !guide.contains(text) || !status) return;
+    button.disabled = true;
+    status.textContent = '';
+    try {
+      if (window.isSecureContext && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(text.textContent.trim());
+        status.textContent = 'Text copied. Your draft is unchanged; nothing was published.';
+      } else {
+        selectForManualCopy(text, status);
+      }
+    } catch (_) {
+      selectForManualCopy(text, status);
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
 </html>
