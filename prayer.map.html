@@ -8,11 +8,12 @@
   <meta name="theme-color" content="#07101c">
   <meta name="application-name" content="JCS Prayer Map">
   <meta name="jcs-prayer-map-release" content="5.0.0">
+  <meta name="jcs-prayer-map-interface" content="5.1.0">
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
+    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.frankfurter.dev https://api.exchange.coinbase.com https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; frame-src 'self' https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
   >
-  <title>JCS Prayer Map v5.0.0 · Verified Prayer Signals, Christian Pressure &amp; Private Capsule</title>
+  <title>JCS Prayer Map · Global Clarity, Prayer Evidence &amp; Current Reporting</title>
   <meta name="description" content="JCS Prayer Map: live validated XRPL prayer and support aggregates, sourced Christian-pressure evidence, privacy thresholds, Verify-page synchronization, and a local encrypted Private Capsule with an optional neutral NFT fingerprint receipt.">
 
   <!--
@@ -1316,9 +1317,64 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 @media(max-width:640px){.integrity-strip,.capsule-resource-grid{grid-template-columns:1fr}.map-actions{top:272px;right:9px;left:9px;justify-content:flex-end}.map-actions .button{min-height:36px;padding:6px 8px;font-size:.68rem}.capsule-head{display:block}.capsule-state{display:inline-flex;margin-top:7px}}
 @media(max-width:430px){.map-actions{top:300px}.capsule-actions{display:grid}.capsule-actions .button{width:100%}}
 </style>
+<style id="jcs-map-clarity-style">
+/* JCS clarity v5.1: scoped additions, original map/capsule rules retained. */
+.jcs-locale-controls{display:flex;flex-wrap:wrap;gap:8px;max-width:100%;align-items:end}
+.jcs-locale-controls label,.jcs-pulse-controls label,.jcs-reference-field{display:grid;gap:4px;font-size:.75rem;color:var(--muted);min-width:0}
+.jcs-locale-controls select,.jcs-pulse-controls select,.jcs-reference-field input{font:inherit;font-size:16px;min-height:44px;max-width:100%;min-width:0;border:1px solid var(--line-strong);border-radius:8px;padding:7px 9px;color:var(--ink);background:var(--surface)}
+.jcs-locale-controls select{max-width:150px}.jcs-locale-controls label{font-size:.65rem}
+.map-shell{display:grid;grid-template-rows:auto minmax(200px,1fr) auto auto;overflow:hidden}
+.jcs-map-controls{display:flex;flex-wrap:wrap;align-items:start;justify-content:space-between;gap:8px;padding:10px;border-bottom:1px solid var(--line);background:var(--surface);z-index:25}
+.jcs-map-controls .map-actions{position:static;display:flex;flex-wrap:wrap;margin-inline-start:auto}
+.jcs-map-controls .map-actions .button{min-height:44px;white-space:normal}
+.jcs-map-controls .map-toolbar{position:static;top:auto;left:auto;display:block;width:auto;max-width:100%;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);box-shadow:none;backdrop-filter:none}
+.jcs-map-controls .map-toolbar summary{padding:10px 14px;min-height:44px;cursor:pointer;color:var(--ink);font-weight:850;list-style:none;font-size:.85rem}
+.jcs-map-controls .map-toolbar summary::-webkit-details-marker{display:none}
+.jcs-map-controls .map-toolbar[open]{width:100%;order:2}
+.jcs-layer-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px 14px;padding:0 14px 12px}
+.jcs-layer-body .map-toolbar-note{grid-column:1/-1}.jcs-layer-body .layer-switch{min-height:44px}
+#world-map{height:100%;min-height:0;max-height:100%;grid-row:2;overflow:hidden}
+.map-caption{position:static;margin:0;padding:7px 12px;border:0;border-radius:0;border-top:1px solid var(--line);font-size:.68rem;grid-row:4}
+.jcs-global-strip{grid-row:3;border-top:1px solid var(--line);background:var(--surface);padding:10px 14px;min-width:0}
+.jcs-global-strip>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.8rem}.jcs-global-strip p{margin:3px 0 0;font-size:.73rem;color:var(--muted)}
+.jcs-dot{width:9px;height:9px;border-radius:100%;display:inline-block;background:var(--gold);flex:0 0 9px}.jcs-global-strip[data-fresh="true"] .jcs-dot{background:var(--green)}
+#jcs-global-state{margin-inline-start:auto;font-size:.7rem;color:var(--muted)}
+.jcs-global-strip.is-new{animation:jcs-evidence-arrived 1.7s ease-out 1}
+@keyframes jcs-evidence-arrived{0%{box-shadow:inset 0 0 0 2px var(--blue)}100%{box-shadow:inset 0 0 0 0 transparent}}
+.media-marker[role="button"]{pointer-events:all;cursor:pointer}.media-marker:focus{stroke:var(--gold);stroke-width:3}
+.jcs-news-marker{cursor:pointer;stroke:var(--blue);fill:var(--surface);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.jcs-news-marker:focus,.jcs-news-marker:hover{stroke:var(--gold);stroke-width:3;outline:none}.jcs-news-marker text{fill:var(--ink);stroke:none;font-size:7px;font-weight:900;text-anchor:middle;pointer-events:none}
+.jcs-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.jcs-card-head h2{margin:0}.jcs-source-badge{font-size:.62rem;padding:3px 7px;border:1px solid var(--line);border-radius:999px;color:var(--blue)}
+.jcs-kicker{color:var(--blue);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800}.jcs-clarity-guide h2{margin:8px 0}
+.jcs-clarity-guide p,.jcs-world-pulse p,.jcs-currency-reference p{font-size:.78rem;line-height:1.6;color:var(--muted);margin:9px 0}.jcs-quiet{font-size:.7rem!important;color:var(--muted)}
+.jcs-pulse-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.jcs-full{grid-column:1/-1}
+.jcs-action-row{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.jcs-action-row button,.jcs-currency-reference button{min-height:44px;font-size:.77rem}
+.jcs-check{display:flex;gap:9px;align-items:start;font-size:.72rem;color:var(--muted);margin-top:8px}.jcs-check input{width:18px;height:18px;flex:0 0 18px}
+#jcs-news-status,#jcs-reference-status{min-height:1.5em;overflow-wrap:anywhere}.jcs-news-card{padding:12px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.jcs-news-card h3{margin:0;font-size:.88rem;text-transform:none;letter-spacing:0;line-height:1.5}.jcs-news-card h3 a{color:var(--ink)}
+.jcs-news-card .jcs-news-meta{font-size:.68rem;color:var(--muted);margin:6px 0}.jcs-news-card .jcs-country-chip{font-size:.72rem;min-height:44px;border:1px solid var(--line);background:var(--surface-2);color:var(--blue);border-radius:8px;padding:7px 9px;margin:3px 5px 0 0;cursor:pointer}
+.jcs-source-links{display:flex;flex-wrap:wrap;gap:8px 12px;font-size:.72rem;margin-top:12px}.jcs-reference-value{display:block;margin-top:12px;font-size:1.3rem;overflow-wrap:anywhere}.jcs-reference-field{margin-top:12px}
+.jcs-currency-reference details{padding-top:0;border-top:0}.jcs-currency-reference summary{min-height:44px}
+.jcs-localized-original{font-size:.7rem;color:var(--muted)}
+html[lang="ar"] .analysis-panel>section:not(.jcs-clarity-guide):not(.jcs-world-pulse):not(.jcs-currency-reference){direction:ltr;text-align:left}html[lang="ar"] .jcs-locale-controls{direction:rtl}html[lang="ar"] .jcs-world-pulse select{direction:rtl}
+.analysis-panel :is(code,pre,textarea),#walletPill,#capsuleSignCode,#capsuleSignText{unicode-bidi:isolate;direction:ltr}
+.jcs-news-card h3{direction:auto;unicode-bidi:plaintext}.jcs-news-meta{unicode-bidi:plaintext}
+@media(max-width:1100px){.workspace{grid-template-columns:minmax(0,1fr) minmax(330px,370px)}.jcs-layer-body{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:920px){body{display:block;height:auto;overflow:auto}.app{min-height:0!important}.workspace{display:block}.map-shell{height:570px;min-height:460px;max-height:none}.jcs-layer-body{grid-template-columns:repeat(2,minmax(0,1fr))}.map-shell:has(.jcs-layer-disclosure[open]){height:auto;grid-template-rows:auto 350px auto auto}.analysis-panel{overflow:visible}}
+@media(max-width:640px){.jcs-map-controls{gap:6px}.jcs-map-controls .map-actions{gap:5px}.jcs-map-controls .map-actions .button{padding:6px 8px;font-size:.69rem}.jcs-layer-body{grid-template-columns:1fr}.map-shell{height:520px;min-height:0}.map-caption{font-size:.64rem}.jcs-global-strip{padding:9px 11px}.jcs-global-strip p{font-size:.72rem}.jcs-locale-controls{display:grid;grid-template-columns:1fr 1fr;grid-column:1/-1}.jcs-locale-controls select{max-width:none;width:100%}.jcs-card-head{align-items:flex-start;flex-direction:column}.panel-section{min-width:0}}
+@media(prefers-reduced-motion:reduce){.jcs-global-strip.is-new{animation:none!important}.jcs-news-marker{transition:none!important}}
+
+.jcs-news-arrived{animation:jcs-news-arrival 1.8s ease-out 1}@keyframes jcs-news-arrival{0%,45%{opacity:.35}25%,70%,100%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.jcs-news-arrived{animation:none!important}}
+body.map-ledger-focus #jcs-news-layer,body.map-ledger-focus .jcs-world-pulse,body.map-sanctuary-mode .jcs-world-pulse{display:none!important}
+
+.jcs-world-pulse [hidden],.jcs-currency-reference [hidden]{display:none!important}
+.jcs-clarity-guide>details{border-top:0;padding-top:0}.jcs-clarity-guide summary{min-height:32px;color:var(--ink);font-size:.85rem}.jcs-clarity-guide h2{margin-top:12px}
+
+</style>
 </head>
 
-<body id="top">
+<body id="top" lang="en">
   <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header jcs-home-header jcs-index-header" role="banner">
@@ -1334,7 +1390,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 
       <button aria-controls="jcsHeaderUtilities primaryNav" aria-expanded="false" aria-label="Open site navigation" class="mobile-nav-toggle" id="mobileNavToggle" type="button">
         <span aria-hidden="true" class="menu-icon">☰</span>
-        <span class="menu-label">Menu</span>
+        <span class="menu-label"><span data-jcs-key="menu">Menu</span></span>
       </button>
 
       <div aria-label="Ecosystem, focus, wallet and policy controls" class="index-header-utilities" id="jcsHeaderUtilities">
@@ -1345,42 +1401,51 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         </nav>
 
         <div aria-label="Prayer workspace and display controls" class="index-page-controls">
-          <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Reduce research-heavy panels and keep prayer, support and the map prominent" type="button">Sanctuary mode</button>
-          <button aria-pressed="false" class="index-control-button exchange-control" id="ledgerFocusBtn" title="Focus the map on validated XRPL prayer, support and evidence layers" type="button">Ledger focus</button>
+          <div class="jcs-locale-controls" aria-label="Presentation preferences">
+            <label><span data-jcs-key="language">Language</span><select id="jcs-language" translate="no" aria-label="Language">
+              <option value="en">English</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="zh-Hans">简体中文</option><option value="ar">العربية</option>
+            </select></label>
+            <label><span data-jcs-key="currency">Display currency</span><select id="jcs-currency" translate="no" aria-label="Display currency">
+              <option>USD</option><option>EUR</option><option>GBP</option><option>CAD</option><option>AUD</option><option>JPY</option><option>CHF</option><option>CNY</option><option>INR</option><option>BRL</option><option>KRW</option>
+            </select></label>
+          </div>
+
+          <button aria-pressed="false" class="index-control-button sanctuary-control" id="quietModeBtn" title="Reduce research-heavy panels and keep prayer, support and the map prominent" type="button"><span data-jcs-key="sanctuary">Sanctuary mode</span></button>
+          <button aria-pressed="false" class="index-control-button exchange-control" id="ledgerFocusBtn" title="Focus the map on validated XRPL prayer, support and evidence layers" type="button"><span data-jcs-key="ledgerFocus">Ledger focus</span></button>
           <button aria-label="Switch to light mode" aria-pressed="true" class="theme-toggle index-control-button" id="themeToggle" type="button">
             <span aria-hidden="true" id="themeToggleIcon">◐</span>
-            <span id="themeToggleText">Light mode</span>
+            <span id="themeToggleText"><span data-jcs-key="light">Light mode</span></span>
           </button>
         </div>
 
         <div aria-label="Xaman wallet controls" class="index-wallet-actions">
-          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button">Connect Xaman</button>
-          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button">Disconnect</button>
-          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill">Wallet disconnected</span>
+          <button aria-describedby="walletPill" class="header-wallet-btn connect" disabled id="connectBtn" type="button"><span data-jcs-key="connect">Connect Xaman</span></button>
+          <button aria-describedby="walletPill" class="header-wallet-btn disconnect" hidden id="disconnectBtn" type="button"><span data-jcs-key="disconnect">Disconnect</span></button>
+          <span aria-live="polite" class="wallet-pill compact-wallet-pill" id="walletPill"><span data-jcs-key="walletDisconnected">Wallet disconnected</span></span>
         </div>
 
         <nav aria-label="Project policies and support" class="index-legal-links">
-          <a href="./terms.html">Terms</a>
-          <a href="./privacy.html">Privacy</a>
-          <a href="./security.html">Security</a>
-          <a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank">Support</a>
+          <a href="./terms.html"><span data-jcs-key="terms">Terms</span></a>
+          <a href="./privacy.html"><span data-jcs-key="privacy">Privacy</span></a>
+          <a href="./security.html"><span data-jcs-key="security">Security</span></a>
+          <a href="https://xrbitcoincash.com/support.html" rel="noopener noreferrer" target="_blank"><span data-jcs-key="support">Support</span></a>
           <a href="./ai.json">AI Manifest</a>
         </nav>
       </div>
     </div>
 
     <nav aria-label="Primary navigation" class="index-primary-nav" id="primaryNav">
-      <a class="nav-btn" href="./">Home</a>
-      <a class="nav-btn" href="./#trade">Trade</a>
-      <a class="nav-btn" href="./#fellowship">Fellowship</a>
-      <a class="nav-btn" href="./#scripture">Scripture</a>
-      <a class="nav-btn" href="./#sacred-film">Sacred Film</a>
-      <a class="nav-btn" href="./#audio">Sacred Audio</a>
-      <a class="nav-btn sign-ledger-gold" href="./verify.html">Sign the Ledger</a>
-      <a aria-current="page" class="nav-btn" href="./prayer.map.html">Prayer Map</a>
-      <a class="nav-btn" href="./metrics.html">Market Monitor</a>
-      <a class="nav-btn" href="./connectwallet.html">Account Readiness</a>
-      <a class="nav-btn" href="./about-jcs.html">About &amp; Vision</a>
+      <a class="nav-btn" href="./"><span data-jcs-key="home">Home</span></a>
+      <a class="nav-btn" href="./#trade"><span data-jcs-key="trade">Trade</span></a>
+      <a class="nav-btn" href="./#fellowship"><span data-jcs-key="fellowship">Fellowship</span></a>
+      <a class="nav-btn" href="./#scripture"><span data-jcs-key="scripture">Scripture</span></a>
+      <a class="nav-btn" href="./#sacred-film"><span data-jcs-key="film">Sacred Film</span></a>
+      <a class="nav-btn" href="./#audio"><span data-jcs-key="audio">Sacred Audio</span></a>
+      <a class="nav-btn sign-ledger-gold" href="./verify.html"><span data-jcs-key="signLedger">Sign the Ledger</span></a>
+      <a aria-current="page" class="nav-btn" href="./prayer.map.html"><span data-jcs-key="prayerMap">Prayer Map</span></a>
+      <a class="nav-btn" href="./metrics.html"><span data-jcs-key="marketMonitor">Market Monitor</span></a>
+      <a class="nav-btn" href="./connectwallet.html"><span data-jcs-key="readiness">Account Readiness</span></a>
+      <a class="nav-btn" href="./about-jcs.html"><span data-jcs-key="vision">About &amp; Vision</span></a>
     </nav>
   </div>
 </header>
@@ -1390,42 +1455,45 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 
     <div class="workspace">
       <section class="map-shell" aria-label="Interactive global evidence map">
-        <div class="map-toolbar" aria-label="Map layers">
-          <h2>Prayer Map layers</h2>
+        <div class="jcs-map-controls">
+        <details class="map-toolbar jcs-layer-disclosure" id="jcs-layers" aria-label="Map layers">
+          <summary><span data-jcs-key="layers">Map layers</span><span aria-hidden="true"> ▾</span></summary>
+          <div class="jcs-layer-body">
           <p class="map-toolbar-note" id="handoff-status">Waiting for validated XRPL refresh or Verify-page handoff.</p>
           <label class="layer-switch">
             <input id="pressure-toggle" type="checkbox" checked>
-            <strong>Christian pressure</strong>
+            <strong><span data-jcs-key="pressure">Christian pressure</span></strong>
             <span class="layer-state">WWL 2026</span>
           </label>
           <label class="layer-switch">
             <input id="uscirf-toggle" type="checkbox" checked>
-            <strong>Official concern</strong>
+            <strong><span data-jcs-key="concern">Official concern</span></strong>
             <span class="layer-state">USCIRF 2026</span>
           </label>
           <label class="layer-switch">
             <input id="media-toggle" type="checkbox" checked>
-            <strong>Current media signals</strong>
-            <span class="layer-state" id="media-map-state">Loading</span>
+            <strong><span data-jcs-key="mediaSignals">Current media signals</span></strong>
+            <span class="layer-state" id="media-map-state"><span data-jcs-key="loading">Loading</span></span>
           </label>
           <label class="layer-switch">
             <input id="prayer-toggle" type="checkbox" checked>
-            <strong>XRPL prayer records</strong>
-            <span class="layer-state" id="xrpl-map-state">Cached</span>
+            <strong><span data-jcs-key="prayerRecords">XRPL prayer records</span></strong>
+            <span class="layer-state" id="xrpl-map-state"><span data-jcs-key="cached">Cached</span></span>
           </label>
           <label class="layer-switch">
             <input id="network-toggle" type="checkbox" checked>
-            <strong>Aggregate support</strong>
+            <strong><span data-jcs-key="aggregateSupport">Aggregate support</span></strong>
             <span class="layer-state" id="network-map-state">0 links</span>
           </label>
         </div>
-
+        </details>
         <div class="map-actions" aria-label="Map controls">
-          <button class="button" id="refresh-button" type="button">Refresh live layers</button>
-          <button class="button" id="export-live-button" type="button">Export live map JSON</button>
-          <button class="button" id="reset-map-button" type="button">Reset view</button>
+          <button class="button" id="refresh-button" type="button"><span data-jcs-key="refreshLayers">Refresh live layers</span></button>
+          <button class="button" id="export-live-button" type="button"><span data-jcs-key="exportMap">Export live map JSON</span></button>
+          <button class="button" id="reset-map-button" type="button"><span data-jcs-key="resetView">Reset view</span></button>
         </div>
 
+        </div>
         <svg
           id="world-map"
           viewBox="0 0 1000 500"
@@ -1437,7 +1505,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           <desc id="map-description">
             Countries are colored by the Open Doors World Watch List 2026 score.
             Gold outlines show USCIRF 2026 recommendations. Amber diamonds are optional
-            current media-location signals. Blue circles are thresholded, voluntarily
+            current media-location signals. Numbered squares show country mentions in reporting headlines, not verified incident locations. Blue circles are thresholded, voluntarily
             published prayer-focus aggregates. Colored curves are thresholded aggregate support relationships; they are not travel, extraction, escape, transaction or participant-location routes.
           </desc>
           <rect width="1000" height="500" fill="#071a2a"></rect>
@@ -1445,10 +1513,17 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           <g id="country-layer"></g>
           <g class="map-group" id="media-layer" aria-label="Current media signals"></g>
           <g class="map-group" id="network-layer" aria-label="Thresholded aggregate community-support connections"></g>
+          <g class="map-group" id="jcs-news-layer" aria-label="Country mentions in reporting; not incident locations"></g>
           <g class="map-group" id="prayer-layer" aria-label="Thresholded XRPL prayer-focus areas"></g>
         </svg>
 
         <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div>
+
+
+        <div class="jcs-global-strip" id="jcs-global-strip" aria-label="Global public prayer evidence">
+          <div><span class="jcs-dot" aria-hidden="true"></span><strong data-jcs-key="globalLedger">Global Prayer Ledger</strong><span id="jcs-global-state"></span></div>
+          <p id="jcs-global-counts"></p><p id="jcs-global-explanation"></p>
+        </div>
 
         <div class="map-caption">
           <span id="map-caption-text"><strong>Baseline ready:</strong> 50 ranked countries · 2026 edition</span>
@@ -1457,24 +1532,63 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
       </section>
 
       <aside class="analysis-panel" id="analysis-panel" tabindex="-1" aria-label="Statistics, methods, and sources">
+        <section class="panel-section jcs-clarity-guide" id="jcs-clarity-guide">
+          <details id="jcs-guide-details"><summary data-jcs-key="clarityTitle"><span data-jcs-key="clarityTitle">Prayer, evidence &amp; understanding</span></summary>
+          <h2 data-jcs-key="guideTitle">Four layers. Different kinds of evidence.</h2>
+          <p data-jcs-key="guide">Annual research describes country conditions. Reporting helps you explore recent developments. XRPL confirms public records, not their truth or the location of a person. No map marker means no qualifying public group—not no prayers.</p>
+          <p class="jcs-quiet" data-jcs-key="translationNote">Interface and guide translations are provided for convenience. Original research, detailed protocols, security instructions and news titles remain in their source language. Review the original before signing.</p>
+          <p class="jcs-quiet" data-jcs-key="privacyGuide">Never share exact locations, escape routes, wallet secrets or identifying details about vulnerable people. Prayer focus is not a participant location. Private Capsule contents stay outside this map.</p>
+          </details>
+        </section>
+        <section class="panel-section jcs-currency-reference">
+          <details id="jcs-reference-details"><summary data-jcs-key="currencyReference">Currency reference · no payment</summary>
+            <p data-jcs-key="currencyGuide">Convert a reference XRP amount into your display currency. This is not a fee quote, a donation request or a value assigned to prayer. Changing the currency cannot change a transaction.</p>
+            <label class="jcs-reference-field"><span data-jcs-key="xrpAmount">Reference XRP amount</span><input id="jcs-reference-xrp" type="text" inputmode="decimal" value="1" maxlength="24" dir="ltr" translate="no" autocomplete="off"></label>
+            <p class="jcs-quiet" data-jcs-key="numberHint">Use a decimal point, without grouping separators. No amount is sent to the data providers.</p>
+            <strong id="jcs-reference-value" class="jcs-reference-value" dir="ltr" translate="no">—</strong>
+            <p id="jcs-reference-status" role="status"></p>
+            <p id="jcs-reference-source" class="jcs-quiet" dir="auto"></p>
+            <button class="button" id="jcs-reference-refresh" type="button" data-jcs-key="refreshReference">Refresh reference rates</button>
+            <p class="jcs-quiet" data-jcs-key="ratePrivacy">Rates load only when this panel is opened or refreshed. Coinbase supplies an XRP/USD reference; Frankfurter supplies dated ECB foreign-exchange references. Providers receive ordinary network requests, not your wallet, message or entered amount.</p>
+            <p class="jcs-quiet" data-jcs-key="rateLimit">Daily FX references are not executable prices. Missing or old rates stay unavailable. Countries, counts and pressure scores are never converted into money.</p>
+          </details>
+        </section>
+        <section class="panel-section jcs-world-pulse" id="jcs-world-pulse" aria-labelledby="jcs-pulse-heading">
+          <div class="jcs-card-head"><h2 id="jcs-pulse-heading" data-jcs-key="worldPulse">World Pulse</h2><span class="jcs-source-badge" data-jcs-key="mediaDiscovery">Media discovery</span></div>
+          <p data-jcs-key="newsGuide">Recent reporting is a starting point, not a verified incident feed. Markers show country names mentioned in headlines. Publisher location is never used as the event location.</p>
+          <div class="jcs-pulse-controls">
+            <label><span data-jcs-key="scope">Scope</span><select id="jcs-news-scope"><option value="global" data-jcs-key="world">World</option><option value="country" data-jcs-key="selectedCountry">Selected country</option></select></label>
+            <label><span data-jcs-key="timeWindow">Search window</span><select id="jcs-news-window"><option value="24h" data-jcs-key="day">24 hours</option><option value="7d" selected data-jcs-key="week">7 days</option></select></label>
+            <label class="jcs-full"><span data-jcs-key="topic">Topic</span><select id="jcs-news-topic"><option value="freedom" data-jcs-key="freedomTopic"><span data-jcs-key="freedomTopic">Religious freedom &amp; Christian communities</span></option><option value="response" data-jcs-key="responseTopic"><span data-jcs-key="responseTopic">Humanitarian response &amp; assistance</span></option></select></label>
+          </div>
+          <p id="jcs-news-selection" class="jcs-quiet"></p>
+          <div class="jcs-action-row"><button class="button" id="jcs-news-load" type="button" data-jcs-key="loadReports">Load latest reports</button><button class="button" id="jcs-news-stop" type="button" hidden data-jcs-key="stop">Stop</button></div>
+          <label class="jcs-check"><input id="jcs-news-auto" type="checkbox"><span data-jcs-key="autoNews">Recheck reporting every 15 minutes while visible</span></label>
+          <p id="jcs-news-status" role="status" aria-live="polite"></p>
+          <p id="jcs-news-provenance" class="jcs-quiet"></p>
+          <div id="jcs-news-list"></div>
+          <p class="jcs-quiet" data-jcs-key="newsLimits">Headlines and first-seen times come from GDELT. A match can be incomplete, duplicated or wrong. No matches does not prove that nothing happened. No full articles or private data are copied here.</p>
+          <div class="jcs-source-links"><a href="https://www.opendoors.org/en-US/persecution/countries/" target="_blank" rel="noopener noreferrer" data-jcs-key="countryResearch">Country research</a><a href="https://www.uscirf.gov/" target="_blank" rel="noopener noreferrer" data-jcs-key="freedomResearch">Religious-freedom research</a><a href="https://reliefweb.int/updates" target="_blank" rel="noopener noreferrer" data-jcs-key="humanitarianReports">Humanitarian reports</a></div>
+        </section>
+
         <section class="panel-section map-intro">
           <span class="eyebrow">JCS Prayer Map v5 · live XRPL evidence · privacy thresholds</span>
-          <h1>Prayer, pressure &amp; verified support signals</h1>
+          <h1><span data-jcs-key="mapTitle">Prayer, pressure &amp; verified support signals</span></h1>
           <p>Sign the Ledger publishes the validated registry record; this page independently re-reads XRPL and releases only threshold-qualified prayer/support aggregates. Annual persecution research, official religious-freedom concern, media attention and prayer activity remain separate measurements.</p>
           <div class="map-intro-actions">
-            <a class="link-button" href="./verify.html">Sign or map a prayer</a>
-            <button class="button" id="download-protocol-button" type="button">Download map protocol JSON</button>
+            <a class="link-button" href="./verify.html"><span data-jcs-key="signPrayer">Sign or map a prayer</span></a>
+            <button class="button" id="download-protocol-button" type="button"><span data-jcs-key="protocolDownload">Download map protocol JSON</span></button>
           </div>
           <div class="integrity-strip" aria-label="Map integrity state">
-            <div class="integrity-cell"><span>Registry protocol</span><strong>JCS_SOCIAL_V6</strong></div>
-            <div class="integrity-cell"><span>Public map groups</span><strong id="public-area-count">0</strong></div>
-            <div class="integrity-cell"><span>Latest XRPL ledger</span><strong id="last-ledger-index">—</strong></div>
-            <div class="integrity-cell"><span>Last XRPL snapshot</span><strong id="last-xrpl-refresh">Audited fallback</strong></div>
+            <div class="integrity-cell"><span><span data-jcs-key="registryProtocol">Registry protocol</span></span><strong>JCS_SOCIAL_V6</strong></div>
+            <div class="integrity-cell"><span><span data-jcs-key="groups">Public map groups</span></span><strong id="public-area-count">0</strong></div>
+            <div class="integrity-cell"><span><span data-jcs-key="latestLedger">Latest XRPL ledger</span></span><strong id="last-ledger-index">—</strong></div>
+            <div class="integrity-cell"><span><span data-jcs-key="lastSnapshot">Last XRPL snapshot</span></span><strong id="last-xrpl-refresh">Audited fallback</strong></div>
           </div>
         </section>
 
         <section class="panel-section overview-section">
-          <h2>What this map can establish</h2>
+          <h2><span data-jcs-key="establish">What this map can establish</span></h2>
           <p class="lede">
             The country layer summarizes published research about pressure and violence
             affecting Christians. The ledger layer proves that qualifying prayer records
@@ -1488,32 +1602,32 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 
           <div class="metric-grid" aria-label="XRPL prayer metrics">
             <div class="metric">
-              <span>Verified prayer NFTs</span>
+              <span><span data-jcs-key="nfts">Verified prayer NFTs</span></span>
               <strong id="nft-count">7</strong>
               <small id="nft-count-note">Audited XRPL snapshot</small>
             </div>
             <div class="metric">
-              <span>Public XRPL records</span>
+              <span><span data-jcs-key="publicRecords">Public XRPL records</span></span>
               <strong id="record-count">21</strong>
               <small>Prayer / testimony registry</small>
             </div>
             <div class="metric">
-              <span>Map-focus labeled</span>
+              <span><span data-jcs-key="mapped">Map-focus labeled</span></span>
               <strong id="mapped-count">0</strong>
               <small>Voluntarily published only</small>
             </div>
             <div class="metric">
-              <span>NFT map focus not published</span>
+              <span><span data-jcs-key="unpublished">NFT map focus not published</span></span>
               <strong id="unlocated-count">7</strong>
               <small>Counted, never guessed</small>
             </div>
             <div class="metric">
-              <span>Community responses</span>
+              <span><span data-jcs-key="responses">Community responses</span></span>
               <strong id="response-count">0</strong>
               <small>Replies with a resolved parent</small>
             </div>
             <div class="metric">
-              <span>Public support relationships</span>
+              <span><span data-jcs-key="relationships">Public support relationships</span></span>
               <strong id="connection-count">0</strong>
               <small>Aggregate threshold met</small>
             </div>
@@ -1521,39 +1635,39 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         </section>
 
         <section class="panel-section">
-          <h3>Public prayer groups now visible on the map</h3>
+          <h3><span data-jcs-key="visibleGroups">Public prayer groups now visible on the map</span></h3>
           <p class="method-note">Only threshold-qualified groups appear here. Counts are rounded down to five-record bands; no wallet, message, exact time, NFT owner or transaction hash is exposed.</p>
           <div class="public-focus-list" id="public-focus-list"><div class="public-focus-item empty">No threshold-qualified prayer groups are present in the fallback snapshot.</div></div>
         </section>
 
         <section class="panel-section research-heavy">
-          <h3>Source health &amp; freshness</h3>
+          <h3><span data-jcs-key="sourceHealth">Source health &amp; freshness</span></h3>
           <div class="source-grid">
             <article class="source-card">
               <div class="source-head">
-                <strong>Christian pressure</strong>
-                <span class="status-pill" data-state="ready">Embedded</span>
+                <strong><span data-jcs-key="pressure">Christian pressure</span></strong>
+                <span class="status-pill" data-state="ready"><span data-jcs-key="embedded">Embedded</span></span>
               </div>
               <p>Open Doors WWL 2026 · score and rank · reporting period Oct. 1, 2024–Sept. 30, 2025.</p>
             </article>
             <article class="source-card">
               <div class="source-head">
                 <strong>Official religious-freedom concern</strong>
-                <span class="status-pill" data-state="ready">Embedded</span>
+                <span class="status-pill" data-state="ready"><span data-jcs-key="embedded">Embedded</span></span>
               </div>
               <p>USCIRF 2026 CPC and Special Watch List recommendations · conditions during 2025 · all faiths.</p>
             </article>
             <article class="source-card">
               <div class="source-head">
-                <strong>Current media signals</strong>
-                <span class="status-pill" id="media-status" data-state="loading">Loading</span>
+                <strong><span data-jcs-key="mediaSignals">Current media signals</span></strong>
+                <span class="status-pill" id="media-status" data-state="loading"><span data-jcs-key="loading">Loading</span></span>
               </div>
               <p id="media-source-note">Checking the keyless GDELT seven-day country feed, which updates about every 15 minutes. Failure does not affect other layers.</p>
             </article>
             <article class="source-card">
               <div class="source-head">
                 <strong>XRPL prayer registry</strong>
-                <span class="status-pill" id="xrpl-status" data-state="cached">Cached</span>
+                <span class="status-pill" id="xrpl-status" data-state="cached"><span data-jcs-key="cached">Cached</span></span>
               </div>
               <p id="xrpl-source-note">Audited snapshot from Aug. 28, 2026. A live collector scan is starting.</p>
             </article>
@@ -1561,8 +1675,9 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         </section>
 
         <section class="panel-section research-heavy">
-          <h3>Map key</h3>
+          <h3><span data-jcs-key="mapKey">Map key</span></h3>
           <ul class="legend-list">
+            <li class="legend-item"><span class="swatch" style="border:2px solid var(--blue);background:var(--surface);text-align:center" aria-hidden="true">#</span><span>Numbered square: country mentioned in reporting headlines; not a verified incident location.</span></li>
             <li class="legend-item"><span class="swatch extreme" aria-hidden="true"></span><span><strong>Extreme:</strong> WWL score 81–100</span></li>
             <li class="legend-item"><span class="swatch very-high" aria-hidden="true"></span><span><strong>Very high:</strong> WWL score 61–80</span></li>
             <li class="legend-item"><span class="swatch high" aria-hidden="true"></span><span><strong>High:</strong> WWL score 41–60</span></li>
@@ -1576,7 +1691,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         </section>
 
         <section class="panel-section research-heavy" aria-live="polite">
-          <h3>Selected country</h3>
+          <h3><span data-jcs-key="selectedCountry">Selected country</span></h3>
           <div class="detail-title">
             <strong id="detail-country">North Korea</strong>
             <span id="detail-rank">WWL rank 1</span>
@@ -1588,7 +1703,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
               <small id="detail-score-note">Christian-specific pressure score</small>
             </div>
             <div class="detail-cell">
-              <span>Annual change</span>
+              <span><span data-jcs-key="annualChange">Annual change</span></span>
               <strong id="detail-change">−1 point</strong>
               <small>Compared with WWL 2025 score</small>
             </div>
@@ -1599,7 +1714,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
             </div>
             <div class="detail-cell">
               <span>Current media signal</span>
-              <strong id="detail-media">Loading</strong>
+              <strong id="detail-media"><span data-jcs-key="loading">Loading</span></strong>
               <small>GDELT locations mentioned near fixed terms</small>
             </div>
             <div class="detail-cell">
@@ -1608,7 +1723,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
               <small id="detail-prayer-note">Only broad signed labels are used</small>
             </div>
             <div class="detail-cell">
-              <span>Interpretation</span>
+              <span><span data-jcs-key="interpretation">Interpretation</span></span>
               <strong>Concurrent evidence only</strong>
               <small>No causal conclusion</small>
             </div>
@@ -1620,15 +1735,15 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         </section>
 
         <section class="panel-section research-heavy">
-          <h3>Statistical reading</h3>
+          <h3><span data-jcs-key="statistics">Statistical reading</span></h3>
           <ul class="analysis-list" id="analysis-list"></ul>
         </section>
 
         <section class="panel-section research-heavy">
           <h3>World Watch List 2026 · all 50</h3>
-          <label class="search-label" for="country-search">
+          <label class="search-label" for="country-search"><span data-jcs-key="countrySearch">
             Find a ranked country
-            <input id="country-search" type="search" autocomplete="off" placeholder="Search country name">
+            </span><input id="country-search" type="search" autocomplete="off" placeholder="Search country name">
           </label>
           <ol class="country-list" id="country-list"></ol>
         </section>
@@ -1636,16 +1751,16 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         <section class="panel-section capsule-section" id="private-capsule">
           <div class="capsule-head">
             <div>
-              <h3>Private Capsule · local encrypted communication</h3>
+              <h3><span data-jcs-key="capsule">Private Capsule · local encrypted communication</span></h3>
               <p>Create an encrypted message in this browser, send the ciphertext package through a channel you trust, and give the recovery key separately. The optional NFT is a neutral fingerprint receipt only; it is never a map marker.</p>
             </div>
-            <span class="capsule-state" id="capsule-state">Local-only by default</span>
+            <span class="capsule-state" id="capsule-state"><span data-jcs-key="localOnly">Local-only by default</span></span>
           </div>
           <div class="safety-banner"><strong>High-risk safety boundary:</strong> do not enter escape routes, safe-house addresses, current GPS/location, identity documents, passwords, seed phrases, private keys, names of vulnerable third parties or operational movement plans. If a public wallet link could put someone at risk, do not mint the optional receipt—use local encryption only.</div>
           <div class="capsule-grid">
             <div class="capsule-field full">
-              <label for="capsule-message">Private message</label>
-              <textarea id="capsule-message" maxlength="2400" placeholder="Write only the minimum information necessary for prayer, pastoral care, digital-safety help, or general support. Avoid exact locations and operational travel details."></textarea>
+              <label for="capsule-message"><span data-jcs-key="privateMessage">Private message</span></label>
+              <textarea translate="no" dir="ltr" id="capsule-message" maxlength="2400" placeholder="Write only the minimum information necessary for prayer, pastoral care, digital-safety help, or general support. Avoid exact locations and operational travel details."></textarea>
               <small>The plaintext is encrypted locally. Message length is padded into 512-byte buckets before encryption to reduce exact-length leakage.</small>
             </div>
             <div class="capsule-field">
@@ -1659,25 +1774,25 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           </div>
           <label class="capsule-check"><input id="capsule-safety-ack" type="checkbox"><span>I understand this page is not an emergency service, does not hide a compromised device, and cannot make a public blockchain transaction anonymous. I have removed exact routes/locations and secret credentials.</span></label>
           <div class="capsule-actions">
-            <button class="button safe" id="capsule-encrypt" type="button">Encrypt private capsule</button>
-            <button class="button" id="capsule-download-transport" type="button" disabled>Download ciphertext JSON</button>
-            <button class="button" id="capsule-download-key" type="button" disabled>Download key card</button>
-            <button class="button" id="capsule-download-backup" type="button" disabled>Download private backup</button>
+            <button class="button safe" id="capsule-encrypt" type="button"><span data-jcs-key="encrypt">Encrypt private capsule</span></button>
+            <button class="button" id="capsule-download-transport" type="button" disabled><span data-jcs-key="downloadCipher">Download ciphertext JSON</span></button>
+            <button class="button" id="capsule-download-key" type="button" disabled><span data-jcs-key="downloadKey">Download key card</span></button>
+            <button class="button" id="capsule-download-backup" type="button" disabled><span data-jcs-key="downloadBackup">Download private backup</span></button>
           </div>
           <div class="capsule-output" id="capsule-output" hidden></div>
           <label class="capsule-check"><input id="capsule-public-ack" type="checkbox" disabled><span>I saved the private recovery material and understand that minting creates a permanent public wallet-linked receipt. The NFT contains only a neutral fingerprint/code/domain—not the message, key, map focus, country, region or route.</span></label>
           <div class="capsule-actions">
             <button class="button public" id="capsule-mint" type="button" disabled>Optional · mint neutral fingerprint NFT</button>
-            <button class="button" id="capsule-download-receipt" type="button" disabled>Download receipt evidence</button>
+            <button class="button" id="capsule-download-receipt" type="button" disabled><span data-jcs-key="receipt">Download receipt evidence</span></button>
           </div>
           <div class="capsule-decrypt">
             <h4>Local decrypter</h4>
             <p>Paste the ciphertext transport JSON and the separate key card. Decryption happens locally; neither value is submitted to JCS, XRPL or the map.</p>
             <div class="capsule-grid">
-              <div class="capsule-field full"><label for="capsule-transport-input">Ciphertext transport JSON</label><textarea id="capsule-transport-input" placeholder="Paste jcs-private-capsule-transport-v1 JSON"></textarea></div>
-              <div class="capsule-field full"><label for="capsule-key-input">Key card JSON</label><textarea id="capsule-key-input" placeholder="Paste jcs-private-capsule-key-v1 JSON"></textarea></div>
+              <div class="capsule-field full"><label for="capsule-transport-input">Ciphertext transport JSON</label><textarea translate="no" dir="ltr" id="capsule-transport-input" placeholder="Paste jcs-private-capsule-transport-v1 JSON"></textarea></div>
+              <div class="capsule-field full"><label for="capsule-key-input">Key card JSON</label><textarea translate="no" dir="ltr" id="capsule-key-input" placeholder="Paste jcs-private-capsule-key-v1 JSON"></textarea></div>
             </div>
-            <div class="capsule-actions"><button class="button safe" id="capsule-decrypt" type="button">Decrypt locally</button><button class="button" id="capsule-clear" type="button">Clear private fields</button></div>
+            <div class="capsule-actions"><button class="button safe" id="capsule-decrypt" type="button"><span data-jcs-key="decrypt">Decrypt locally</span></button><button class="button" id="capsule-clear" type="button"><span data-jcs-key="clearPrivate">Clear private fields</span></button></div>
             <div class="capsule-output" id="capsule-decrypt-output" hidden></div>
           </div>
           <div class="capsule-resource-grid">
@@ -1688,7 +1803,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 
         <section class="panel-section research-heavy">
           <details>
-            <summary>Location and privacy rules</summary>
+            <summary><span data-jcs-key="privacyRules">Location and privacy rules</span></summary>
             <ul>
               <li>Existing NFT and registry records without a structured focus remain visible in totals as “map focus not published.”</li>
               <li>No location is inferred from an XRPL node, validator, wallet, transaction route, name, prayer text, IP address, browser, or Xaman device.</li>
@@ -1703,19 +1818,19 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           </details>
 
           <details>
-            <summary>How the XRPL reader works</summary>
+            <summary><span data-jcs-key="reader">How the XRPL reader works</span></summary>
             <ul>
-              <li>Scans validated <code>account_tx</code> history for the JCS collector <code>rPU6…RyYKd</code>.</li>
+              <li>Scans validated <code translate="no" dir="ltr">account_tx</code> history for the JCS collector <code translate="no" dir="ltr">rPU6…RyYKd</code>.</li>
               <li>Accepts JCS V1–V6 public post registry payments and parses only allowlisted memo fields.</li>
               <li>Resolves V6 community replies to parent prayer records, then releases only aggregate links that satisfy both endpoint and diversity thresholds.</li>
-              <li>Recognizes the current prayer NFT taxon <code>1246974803</code> and verifies referenced mint transactions when live transport permits.</li>
+              <li>Recognizes the current prayer NFT taxon <code translate="no" dir="ltr">1246974803</code> and verifies referenced mint transactions when live transport permits.</li>
               <li>Uses four public WebSocket endpoints in sequence, then the existing read-only Render proxy as a fallback.</li>
               <li>Replaces the embedded audited snapshot only if the immutable ledger totals do not regress.</li>
             </ul>
           </details>
 
           <details>
-            <summary>Evidence limits</summary>
+            <summary><span data-jcs-key="limits">Evidence limits</span></summary>
             <ul>
               <li>WWL is Christian-specific advocacy research. Scores measure pressure in five life spheres plus violence; compare scores, not rank movement alone.</li>
               <li>USCIRF recommendations cover freedom of religion or belief for all faiths and are not a Christian-persecution score.</li>
@@ -1725,9 +1840,9 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           </details>
 
           <details>
-            <summary>Machine-readable map contract</summary>
-            <p>The page publishes <code>jcs-prayer-map-protocol-v2</code> so Verify, future JCS tools, auditors and AI systems can distinguish prayer registry tags, privacy thresholds, refresh handoffs, map display rules and the separate Private Capsule protocol.</p>
-            <button class="button" id="download-protocol-button-secondary" type="button">Download protocol JSON</button>
+            <summary><span data-jcs-key="contract">Machine-readable map contract</span></summary>
+            <p>The page publishes <code translate="no" dir="ltr">jcs-prayer-map-protocol-v2</code> so Verify, future JCS tools, auditors and AI systems can distinguish prayer registry tags, privacy thresholds, refresh handoffs, map display rules and the separate Private Capsule protocol.</p>
+            <button class="button" id="download-protocol-button-secondary" type="button"><span data-jcs-key="protocol">Download protocol JSON</span></button>
           </details>
 
           <div class="source-links" aria-label="Primary sources">
@@ -1758,7 +1873,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
   <h3>Review neutral receipt in Xaman</h3>
   <p id="capsuleSignText">Verify every field before signing.</p>
   <div class="capsule-code" id="capsuleSignCode">Code: —</div>
-  <div class="capsule-sign-actions"><a class="button" id="capsuleXamanLink" href="#" target="_blank" rel="noopener" hidden>Open in Xaman</a><button class="button" id="capsuleSignClose" type="button">Close</button></div>
+  <div class="capsule-sign-actions"><a class="button" id="capsuleXamanLink" href="#" target="_blank" rel="noopener" hidden><span data-jcs-key="openXaman">Open in Xaman</span></a><button class="button" id="capsuleSignClose" type="button"><span data-jcs-key="close">Close</span></button></div>
   <img class="capsule-qr" id="capsuleQr" alt="Xaman signing QR" hidden>
 </aside>
 
@@ -2436,6 +2551,8 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
       }
 
       announce("Selected " + name + ".");
+      try { document.dispatchEvent(new CustomEvent("jcs:map-country-selected", {detail:{iso3:iso3,name:name}})); } catch (_) {}
+
     }
 
     function renderCountryList(query) {
@@ -2784,7 +2901,35 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
       URL.revokeObjectURL(url);
     }
 
+
+    // Interface-only bridge: public aggregate counts and boundary geometry, never participant data.
+    function publishClarityState() {
+      try {
+        const a = state.xrpl;
+        const packet = {
+          records: a.publicRecords, nfts: a.verifiedNfts,
+          groups: (a.focusGroups || []).length, connections: (a.connections || []).length,
+          asOf: a.fetchedAt, ledger: a.latestLedger || null, complete: a.complete === true,
+          sourceState: state.claritySourceState || "cached", embedded: a.snapshot === true
+        };
+        document.dispatchEvent(new CustomEvent("jcs:public-map-summary", { detail: packet }));
+      } catch (_) { /* Presentation cannot interrupt ledger verification. */ }
+    }
+    function publishClarityCountries() {
+      try {
+        const countries = [];
+        state.countryNames.forEach(function (name, iso3) {
+          const path = state.countryElements.get(iso3); if (!path) return;
+          const box = path.getBBox();
+          const iso2 = Array.from(state.countryIso2ToIso3.entries()).find(function(pair){ return pair[1] === iso3; });
+          countries.push({iso3: iso3, name: name, iso2: iso2 ? iso2[0] : null, x: box.x + box.width / 2, y: box.y + box.height / 2});
+        });
+        document.dispatchEvent(new CustomEvent("jcs:map-country-catalog", {detail: countries}));
+      } catch (_) { /* No private fallback and no geolocation. */ }
+    }
+
     function applyXrplAggregate(aggregate, sourceState) {
+      state.claritySourceState = sourceState;
       state.xrpl = aggregate;
       dom.nftCount.textContent = aggregate.verifiedNfts.toLocaleString();
       dom.publicAreaCount.textContent = (aggregate.focusGroups || []).length.toLocaleString();
@@ -2812,6 +2957,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
       renderAnalysis();
       selectCountry(state.selectedIso3, false);
       if (sourceState === "ready") tryApplyMapHandoff();
+      publishClarityState();
     }
 
     function hexToUtf8(value) {
@@ -3391,7 +3537,7 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
           dom.xrplSourceNote.textContent = "Live refresh failed; last validated aggregate retained from " + formatDateTime(cached.fetchedAt) + ".";
         } else {
           applyXrplAggregate(EMBEDDED_XRPL_SNAPSHOT, "cached");
-          dom.xrplSourceNote.textContent = "Live refresh unavailable; audited Aug. 28, 2026 XRPL snapshot retained. Other map layers remain current.";
+          dom.xrplSourceNote.textContent = "Live refresh unavailable; audited Aug. 28, 2026 XRPL snapshot retained. Other map layers retain their own source status.";
         }
         if (state.pendingRefreshHint) {
           dom.caption.textContent = "Verification handoff received · live XRPL refresh unavailable, so the last validated aggregate remains visible";
@@ -3578,8 +3724,17 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
             "L" + (point[0] + size) + "," + point[1] +
             "L" + point[0] + "," + (point[1] + size) +
             "L" + (point[0] - size) + "," + point[1] + "Z",
-          class: "media-marker"
+          class: "media-marker", tabindex: signal.iso3 ? "0" : "-1", role: signal.iso3 ? "button" : "img",
+          "aria-label": "Automated media mention: " + (state.countryNames.get(signal.iso3) || "unresolved country")
         });
+        if (signal.iso3 && state.countryElements.has(signal.iso3)) {
+          const choose = function () {
+            selectCountry(signal.iso3, false);
+            document.dispatchEvent(new CustomEvent("jcs:open-country-reporting", {detail:{iso3:signal.iso3,name:state.countryNames.get(signal.iso3)}}));
+          };
+          diamond.addEventListener("click", choose);
+          diamond.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " "){e.preventDefault();choose();} });
+        }
         dom.mediaLayer.appendChild(diamond);
       });
       selectCountry(state.selectedIso3, false);
@@ -3618,7 +3773,8 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
         }
         if (sequence !== state.refreshSequence) return;
         const signals = normalizeMediaPayload(payload);
-        if (!signals.length) throw new Error("The current GDELT query returned no usable country signals.");
+        // An empty, valid feature list is distinct from a failed fetch.
+        if (!payload || !Array.isArray(payload.features)) throw new Error("Invalid GDELT geographic response.");
         const aggregate = {
           schema: CACHE_SCHEMA,
           signals: signals,
@@ -3659,6 +3815,11 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
     }
 
     function bindControls() {
+      document.addEventListener("jcs:request-public-map", function(){ publishClarityCountries(); publishClarityState(); });
+      document.addEventListener("jcs:choose-map-country", function(e){
+        const iso = e.detail && e.detail.iso3;
+        if (typeof iso === "string" && state.countryElements.has(iso)) selectCountry(iso, true);
+      });
       dom.pressureToggle.addEventListener("change", function () {
         dom.map.classList.toggle("pressure-hidden", !dom.pressureToggle.checked);
       });
@@ -3868,5 +4029,354 @@ body.map-ledger-focus #world-map .uscirf-cpc,body.map-ledger-focus #world-map .u
 })();
 </script>
 
+<script id="jcs-clarity-dictionary" type="application/json">{"language":{"en":"Language","es":"Idioma","fr":"Langue","de":"Sprache","pt":"Idioma","ja":"言語","ko":"언어","zh-Hans":"语言","ar":"اللغة"},"currency":{"en":"Display currency","es":"Moneda de referencia","fr":"Devise d’affichage","de":"Anzeigewährung","pt":"Moeda de referência","ja":"表示通貨","ko":"표시 통화","zh-Hans":"显示货币","ar":"عملة العرض"},"layers":{"en":"Map layers","es":"Capas del mapa","fr":"Couches de la carte","de":"Kartenebenen","pt":"Camadas do mapa","ja":"地図レイヤー","ko":"지도 레이어","zh-Hans":"地图图层","ar":"طبقات الخريطة"},"worldPulse":{"en":"World Pulse","es":"Pulso mundial","fr":"Échos du monde","de":"Weltgeschehen","pt":"Pulso mundial","ja":"世界の動き","ko":"세계 소식","zh-Hans":"世界动态","ar":"نبض العالم"},"mediaDiscovery":{"en":"Media discovery","es":"Hallazgos en medios","fr":"Repérage médiatique","de":"Medienrecherche","pt":"Descoberta em mídia","ja":"報道の検索結果","ko":"보도 검색 결과","zh-Hans":"媒体检索","ar":"رصد إعلامي"},"scope":{"en":"Scope","es":"Ámbito","fr":"Périmètre","de":"Bereich","pt":"Âmbito","ja":"対象範囲","ko":"범위","zh-Hans":"范围","ar":"النطاق"},"world":{"en":"World","es":"Mundo","fr":"Monde","de":"Welt","pt":"Mundo","ja":"世界","ko":"전 세계","zh-Hans":"全球","ar":"العالم"},"selectedCountry":{"en":"Selected country","es":"País seleccionado","fr":"Pays sélectionné","de":"Ausgewähltes Land","pt":"País selecionado","ja":"選択した国","ko":"선택한 국가","zh-Hans":"所选国家","ar":"الدولة المختارة"},"timeWindow":{"en":"Search window","es":"Período de búsqueda","fr":"Période de recherche","de":"Suchzeitraum","pt":"Período de pesquisa","ja":"検索期間","ko":"검색 기간","zh-Hans":"检索时段","ar":"الفترة الزمنية"},"day":{"en":"24 hours","es":"24 horas","fr":"24 heures","de":"24 Stunden","pt":"24 horas","ja":"24時間","ko":"24시간","zh-Hans":"24小时","ar":"24 ساعة"},"week":{"en":"7 days","es":"7 días","fr":"7 jours","de":"7 Tage","pt":"7 dias","ja":"7日間","ko":"7일","zh-Hans":"7天","ar":"7 أيام"},"topic":{"en":"Topic","es":"Tema","fr":"Sujet","de":"Thema","pt":"Tema","ja":"テーマ","ko":"주제","zh-Hans":"主题","ar":"الموضوع"},"freedomTopic":{"en":"Religious freedom & Christian communities","es":"Libertad religiosa y comunidades cristianas","fr":"Liberté religieuse et communautés chrétiennes","de":"Religionsfreiheit und christliche Gemeinschaften","pt":"Liberdade religiosa e comunidades cristãs","ja":"信教の自由とキリスト教共同体","ko":"종교의 자유와 기독교 공동체","zh-Hans":"宗教自由与基督徒社群","ar":"الحرية الدينية والمجتمعات المسيحية"},"responseTopic":{"en":"Humanitarian response & assistance","es":"Respuesta y asistencia humanitaria","fr":"Réponse et aide humanitaires","de":"Humanitäre Hilfe und Maßnahmen","pt":"Resposta e assistência humanitária","ja":"人道対応と支援","ko":"인도주의 대응과 지원","zh-Hans":"人道响应与援助","ar":"الاستجابة والمساعدة الإنسانية"},"loadReports":{"en":"Load latest reports","es":"Cargar informes recientes","fr":"Charger les articles récents","de":"Aktuelle Berichte laden","pt":"Carregar notícias recentes","ja":"最新の報道を読み込む","ko":"최신 보도 불러오기","zh-Hans":"加载近期报道","ar":"تحميل أحدث التقارير"},"stop":{"en":"Stop","es":"Detener","fr":"Arrêter","de":"Stopp","pt":"Parar","ja":"停止","ko":"중지","zh-Hans":"停止","ar":"إيقاف"},"autoNews":{"en":"Recheck reporting every 15 minutes while visible","es":"Revisar cada 15 minutos mientras la página esté visible","fr":"Vérifier toutes les 15 minutes lorsque la page est visible","de":"Bei sichtbarer Seite alle 15 Minuten prüfen","pt":"Verificar a cada 15 minutos enquanto a página estiver visível","ja":"ページの表示中は15分ごとに再確認","ko":"페이지가 보이는 동안 15분마다 확인","zh-Hans":"页面可见时每15分钟检查","ar":"إعادة الفحص كل 15 دقيقة أثناء عرض الصفحة"},"countryResearch":{"en":"Country research","es":"Investigación por país","fr":"Études par pays","de":"Länderberichte","pt":"Pesquisa por país","ja":"国別調査","ko":"국가별 연구","zh-Hans":"国别研究","ar":"أبحاث الدول"},"freedomResearch":{"en":"Religious-freedom research","es":"Estudios de libertad religiosa","fr":"Études sur la liberté religieuse","de":"Forschung zur Religionsfreiheit","pt":"Pesquisa sobre liberdade religiosa","ja":"信教の自由に関する調査","ko":"종교의 자유 연구","zh-Hans":"宗教自由研究","ar":"أبحاث الحرية الدينية"},"humanitarianReports":{"en":"Humanitarian reports","es":"Informes humanitarios","fr":"Rapports humanitaires","de":"Humanitäre Berichte","pt":"Relatórios humanitários","ja":"人道支援報告","ko":"인도주의 보고서","zh-Hans":"人道报告","ar":"تقارير إنسانية"},"currencyReference":{"en":"Currency reference · no payment","es":"Referencia monetaria · sin pagos","fr":"Conversion indicative · aucun paiement","de":"Währungsreferenz · keine Zahlung","pt":"Referência monetária · sem pagamento","ja":"通貨換算の参考値・支払いなし","ko":"통화 참고값 · 결제 없음","zh-Hans":"货币参考值 · 不涉及支付","ar":"مرجع للعملة · دون دفع"},"xrpAmount":{"en":"Reference XRP amount","es":"Cantidad de XRP de referencia","fr":"Montant XRP de référence","de":"XRP-Referenzbetrag","pt":"Quantia de referência em XRP","ja":"参考XRP数量","ko":"참고 XRP 수량","zh-Hans":"参考XRP数量","ar":"مبلغ XRP المرجعي"},"refreshReference":{"en":"Refresh reference rates","es":"Actualizar tipos de referencia","fr":"Actualiser les taux indicatifs","de":"Referenzkurse aktualisieren","pt":"Atualizar taxas de referência","ja":"参考レートを更新","ko":"참고 환율 새로고침","zh-Hans":"刷新参考汇率","ar":"تحديث أسعار الصرف المرجعية"},"globalLedger":{"en":"Global Prayer Ledger","es":"Registro mundial de oración","fr":"Registre mondial de prière","de":"Globales Gebetsregister","pt":"Registro global de oração","ja":"世界の祈りの台帳","ko":"세계 기도 기록","zh-Hans":"全球祈祷记录","ar":"سجل الصلاة العالمي"},"clarityTitle":{"en":"Prayer, evidence & understanding","es":"Oración, evidencia y comprensión","fr":"Prière, preuves et compréhension","de":"Gebet, Belege und Verständnis","pt":"Oração, evidência e compreensão","ja":"祈り・証拠・理解","ko":"기도, 근거와 이해","zh-Hans":"祈祷、证据与理解","ar":"الصلاة والأدلة والفهم"},"guideTitle":{"en":"Four layers. Different kinds of evidence.","es":"Cuatro capas. Distintos tipos de evidencia.","fr":"Quatre couches. Des preuves de natures différentes.","de":"Vier Ebenen. Unterschiedliche Belegarten.","pt":"Quatro camadas. Diferentes tipos de evidência.","ja":"4つのレイヤー。それぞれ異なる証拠。","ko":"네 가지 레이어, 서로 다른 근거.","zh-Hans":"四个图层，不同类型的证据。","ar":"أربع طبقات، وأنواع مختلفة من الأدلة."},"loading":{"en":"Loading","es":"Cargando","fr":"Chargement","de":"Wird geladen","pt":"Carregando","ja":"読み込み中","ko":"불러오는 중","zh-Hans":"加载中","ar":"جارٍ التحميل"},"cached":{"en":"Cached","es":"En caché","fr":"En cache","de":"Gespeichert","pt":"Em cache","ja":"保存済み","ko":"캐시됨","zh-Hans":"已缓存","ar":"نسخة محفوظة"},"unavailable":{"en":"Unavailable","es":"No disponible","fr":"Indisponible","de":"Nicht verfügbar","pt":"Indisponível","ja":"利用不可","ko":"사용 불가","zh-Hans":"不可用","ar":"غير متاح"},"current":{"en":"Current","es":"Actual","fr":"Actuel","de":"Aktuell","pt":"Atual","ja":"最新","ko":"현재","zh-Hans":"当前","ar":"حالي"},"live":{"en":"Live","es":"Validado recientemente","fr":"Récemment validé","de":"Kürzlich validiert","pt":"Validado recentemente","ja":"直近に検証済み","ko":"최근 검증됨","zh-Hans":"近期已验证","ar":"تم التحقق حديثًا"},"embedded":{"en":"Embedded","es":"Incluido en la página","fr":"Intégré à la page","de":"In der Seite enthalten","pt":"Incluído na página","ja":"ページ内の資料","ko":"페이지 내 자료","zh-Hans":"页面内置资料","ar":"مضمّن في الصفحة"},"snapshot":{"en":"Historical snapshot","es":"Instantánea histórica","fr":"Instantané historique","de":"Historischer Stand","pt":"Registro histórico","ja":"過去のスナップショット","ko":"과거 스냅샷","zh-Hans":"历史快照","ar":"لقطة تاريخية"},"records":{"en":"Public registry records","es":"Registros públicos","fr":"Enregistrements publics","de":"Öffentliche Registereinträge","pt":"Registros públicos","ja":"公開台帳記録","ko":"공개 등록 기록","zh-Hans":"公开登记记录","ar":"السجلات العامة"},"nfts":{"en":"Verified prayer NFTs","es":"NFT de oración verificados","fr":"NFT de prière vérifiés","de":"Verifizierte Gebets-NFTs","pt":"NFTs de oração verificados","ja":"検証済みの祈りNFT","ko":"검증된 기도 NFT","zh-Hans":"已验证的祈祷NFT","ar":"رموز NFT للصلاة تم التحقق منها"},"groups":{"en":"Public map groups","es":"Grupos públicos en el mapa","fr":"Groupes publics sur la carte","de":"Öffentliche Kartengruppen","pt":"Grupos públicos no mapa","ja":"公開地図グループ","ko":"공개 지도 그룹","zh-Hans":"公开地图分组","ar":"مجموعات الخريطة العامة"},"noGroups":{"en":"No public geographic group in this observation. Privacy thresholds are not evidence of an absence of prayer.","es":"Esta observación no contiene grupos geográficos públicos. Los umbrales de privacidad no indican ausencia de oración.","fr":"Aucun groupe géographique public dans cette observation. Les seuils de confidentialité ne signifient pas une absence de prières.","de":"Dieser Stand enthält keine öffentliche geografische Gruppe. Datenschutzschwellen bedeuten nicht, dass niemand betet.","pt":"Esta observação não contém grupos geográficos públicos. Limites de privacidade não significam ausência de oração.","ja":"この観測には公開地域グループがありません。プライバシー基準は祈りがないことを意味しません。","ko":"이 관측에는 공개 지리 그룹이 없습니다. 개인정보 보호 기준은 기도가 없다는 뜻이 아닙니다.","zh-Hans":"本次观测没有公开地理分组。隐私门槛不代表无人祈祷。","ar":"لا توجد مجموعة جغرافية عامة في هذا الرصد. شروط الخصوصية لا تعني غياب الصلاة."},"focusOnly":{"en":"Markers describe voluntary prayer focus—not where a person lives.","es":"Los marcadores describen el enfoque voluntario de la oración, no dónde vive una persona.","fr":"Les marqueurs indiquent l’objet volontaire de la prière, pas le lieu de résidence d’une personne.","de":"Markierungen zeigen freiwillige Gebetsanliegen, nicht den Wohnort einer Person.","pt":"Os marcadores mostram o foco voluntário da oração, não onde uma pessoa mora.","ja":"マーカーは任意に公開された祈りの対象であり、居住地ではありません。","ko":"표시는 자발적으로 공개한 기도 대상이며 거주지가 아닙니다.","zh-Hans":"标记表示自愿公开的祈祷关注点，不是参与者住址。","ar":"تمثل العلامات موضوع الصلاة المنشور طوعًا، وليس مكان إقامة الأشخاص."},"counts":{"en":"{records} public records · {nfts} prayer NFTs · {groups} public groups","es":"{records} registros públicos · {nfts} NFT de oración · {groups} grupos públicos","fr":"{records} enregistrements publics · {nfts} NFT de prière · {groups} groupes publics","de":"{records} öffentliche Einträge · {nfts} Gebets-NFTs · {groups} öffentliche Gruppen","pt":"{records} registros públicos · {nfts} NFTs de oração · {groups} grupos públicos","ja":"公開記録 {records}件・祈りNFT {nfts}件・公開グループ {groups}件","ko":"공개 기록 {records}개 · 기도 NFT {nfts}개 · 공개 그룹 {groups}개","zh-Hans":"{records}条公开记录 · {nfts}个祈祷NFT · {groups}个公开分组","ar":"{records} سجلًا عامًا · {nfts} رمز NFT للصلاة · {groups} مجموعة عامة"},"checkedAt":{"en":"Checked {date}","es":"Consultado {date}","fr":"Vérifié le {date}","de":"Geprüft: {date}","pt":"Verificado em {date}","ja":"確認日時 {date}","ko":"확인: {date}","zh-Hans":"检查时间 {date}","ar":"تم الفحص {date}"},"observedAt":{"en":"Observation: {date}","es":"Observación: {date}","fr":"Observation : {date}","de":"Beobachtung: {date}","pt":"Observação: {date}","ja":"観測: {date}","ko":"관측: {date}","zh-Hans":"观测时间：{date}","ar":"الرصد: {date}"},"reportsLoading":{"en":"Loading source-linked reporting…","es":"Cargando informes con fuentes…","fr":"Chargement des articles sourcés…","de":"Berichte mit Quellen werden geladen…","pt":"Carregando notícias com fontes…","ja":"出典付き報道を読み込み中…","ko":"출처가 있는 보도를 불러오는 중…","zh-Hans":"正在加载带来源的报道…","ar":"جارٍ تحميل تقارير مرتبطة بالمصادر…"},"reportsReady":{"en":"{count} reports in the retrieved sample","es":"{count} informes en la muestra obtenida","fr":"{count} articles dans l’échantillon récupéré","de":"{count} Berichte in der abgerufenen Stichprobe","pt":"{count} notícias na amostra obtida","ja":"取得したサンプル内の報道 {count}件","ko":"가져온 표본에 보도 {count}건","zh-Hans":"获取的样本中有{count}篇报道","ar":"{count} تقرير في العينة المسترجعة"},"reportsEmpty":{"en":"No matching articles returned. This is not proof that nothing happened.","es":"No se devolvieron artículos coincidentes. Esto no prueba que no haya ocurrido nada.","fr":"Aucun article correspondant reçu. Cela ne prouve pas qu’il ne s’est rien passé.","de":"Keine passenden Artikel zurückgegeben. Das beweist nicht, dass nichts geschehen ist.","pt":"Nenhum artigo correspondente retornou. Isso não prova que nada aconteceu.","ja":"一致する記事が返されませんでした。何も起きていない証拠ではありません。","ko":"일치하는 기사가 없습니다. 아무 일도 없었다는 증거는 아닙니다.","zh-Hans":"未返回匹配文章。这不证明没有事情发生。","ar":"لم تُرجع الخدمة مقالات مطابقة. هذا ليس دليلًا على عدم وقوع أحداث."},"reportsError":{"en":"Reporting unavailable. Earlier results, if present, retain their original scope and time.","es":"Informes no disponibles. Los resultados anteriores conservan su ámbito y fecha originales.","fr":"Articles indisponibles. Les anciens résultats conservent leur périmètre et leur date d’origine.","de":"Berichte nicht verfügbar. Frühere Ergebnisse behalten ihren ursprünglichen Bereich und Zeitpunkt.","pt":"Notícias indisponíveis. Resultados anteriores mantêm o âmbito e a data originais.","ja":"報道を取得できません。以前の結果があれば元の対象範囲と時刻を保持します。","ko":"보도를 사용할 수 없습니다. 이전 결과의 원래 범위와 시각은 유지됩니다.","zh-Hans":"报道暂不可用。已有结果保留原始范围与时间。","ar":"التقارير غير متاحة. تحتفظ النتائج السابقة بنطاقها ووقتها الأصليين."},"reportsStopped":{"en":"Reporting check stopped. Nothing was submitted to the ledger.","es":"Consulta detenida. No se envió nada al registro.","fr":"Recherche arrêtée. Rien n’a été soumis au registre.","de":"Berichtsabfrage gestoppt. Nichts wurde an das Ledger übermittelt.","pt":"Consulta interrompida. Nada foi enviado ao registro.","ja":"報道の確認を停止しました。台帳への送信はありません。","ko":"보도 확인을 중지했습니다. 원장에 제출한 내용은 없습니다.","zh-Hans":"报道查询已停止。未向账本提交任何内容。","ar":"توقف فحص التقارير. لم يُرسل أي شيء إلى السجل."},"sourceSeen":{"en":"GDELT first seen: {date}","es":"Primera detección en GDELT: {date}","fr":"Première détection GDELT : {date}","de":"Bei GDELT erstmals erfasst: {date}","pt":"Primeira detecção no GDELT: {date}","ja":"GDELT初回検出: {date}","ko":"GDELT 최초 수집: {date}","zh-Hans":"GDELT首次收录：{date}","ar":"أول رصد لدى GDELT: {date}"},"countryMention":{"en":"Headline mentions {country}","es":"El titular menciona {country}","fr":"Le titre mentionne {country}","de":"Überschrift nennt {country}","pt":"O título menciona {country}","ja":"見出し中の言及: {country}","ko":"제목에서 언급: {country}","zh-Hans":"标题提及{country}","ar":"يذكر العنوان {country}"},"rateLoading":{"en":"Loading reference rates…","es":"Cargando tipos de referencia…","fr":"Chargement des taux indicatifs…","de":"Referenzkurse werden geladen…","pt":"Carregando taxas de referência…","ja":"参考レートを読み込み中…","ko":"참고 환율 불러오는 중…","zh-Hans":"正在加载参考汇率…","ar":"جارٍ تحميل أسعار الصرف المرجعية…"},"rateUnavailable":{"en":"Reference unavailable. The map and ledger functions remain independent.","es":"Referencia no disponible. El mapa y el registro funcionan de forma independiente.","fr":"Référence indisponible. La carte et le registre restent indépendants.","de":"Referenz nicht verfügbar. Karte und Ledger-Funktionen bleiben unabhängig.","pt":"Referência indisponível. Mapa e registro permanecem independentes.","ja":"参考値を利用できません。地図と台帳機能は独立しています。","ko":"참고값을 사용할 수 없습니다. 지도와 원장 기능은 독립적입니다.","zh-Hans":"参考值不可用。地图与账本功能不受其控制。","ar":"المرجع غير متاح. تبقى وظائف الخريطة والسجل مستقلة."},"rateEstimate":{"en":"Reference estimate only—not an executable quote.","es":"Solo estimación de referencia, no cotización ejecutable.","fr":"Estimation indicative, pas un cours exécutable.","de":"Nur Referenzschätzung, kein ausführbarer Kurs.","pt":"Apenas estimativa de referência, não cotação executável.","ja":"参考推定値のみ。約定価格ではありません。","ko":"참고 추정값이며 실제 체결 가격이 아닙니다.","zh-Hans":"仅为参考估算，并非可执行报价。","ar":"تقدير مرجعي فقط، وليس سعرًا قابلًا للتنفيذ."},"rateInvalid":{"en":"Enter a non-negative XRP amount with at most six decimal places.","es":"Introduzca una cantidad de XRP no negativa con hasta seis decimales.","fr":"Saisissez un montant XRP positif ou nul, avec six décimales au maximum.","de":"Nicht negativen XRP-Betrag mit höchstens sechs Nachkommastellen eingeben.","pt":"Digite uma quantia de XRP não negativa com até seis casas decimais.","ja":"0以上のXRP数量を小数点以下6桁以内で入力してください。","ko":"0 이상의 XRP 수량을 소수점 이하 6자리까지 입력하세요.","zh-Hans":"请输入非负XRP数量，最多六位小数。","ar":"أدخل مبلغ XRP غير سالب وبحد أقصى ست منازل عشرية."},"readOriginal":{"en":"Read original report","es":"Leer informe original","fr":"Lire l’article original","de":"Originalbericht lesen","pt":"Ler notícia original","ja":"元の報道を読む","ko":"원문 읽기","zh-Hans":"阅读原文","ar":"قراءة التقرير الأصلي"},"moreReports":{"en":"Show more reports","es":"Mostrar más informes","fr":"Afficher plus d’articles","de":"Weitere Berichte anzeigen","pt":"Mostrar mais notícias","ja":"報道をさらに表示","ko":"보도 더 보기","zh-Hans":"显示更多报道","ar":"عرض مزيد من التقارير"},"selectHint":{"en":"Country context: {country}. Select the country scope and load reports to search it.","es":"Contexto del país: {country}. Seleccione el ámbito del país y cargue los informes.","fr":"Pays : {country}. Choisissez le périmètre du pays, puis chargez les articles.","de":"Länderkontext: {country}. Länderbereich wählen und Berichte laden.","pt":"Contexto do país: {country}. Selecione o âmbito do país e carregue as notícias.","ja":"国の情報: {country}。対象を国に切り替えて報道を読み込んでください。","ko":"국가 맥락: {country}. 국가 범위를 선택하고 보도를 불러오세요.","zh-Hans":"国家背景：{country}。请选择国家范围后加载报道。","ar":"سياق الدولة: {country}. اختر نطاق الدولة وحمّل التقارير للبحث."},"waitRetry":{"en":"Please wait before another request.","es":"Espere antes de otra consulta.","fr":"Patientez avant une autre requête.","de":"Bitte vor einer weiteren Anfrage warten.","pt":"Aguarde antes de outra consulta.","ja":"次のリクエストまでお待ちください。","ko":"다음 요청 전에 기다려 주세요.","zh-Hans":"请稍候再请求。","ar":"يرجى الانتظار قبل طلب آخر."},"sourceOriginal":{"en":"Original-language source text","es":"Texto original de la fuente","fr":"Texte source dans sa langue d’origine","de":"Quelltext in Originalsprache","pt":"Texto original da fonte","ja":"出典の原文","ko":"출처 원문","zh-Hans":"来源原文","ar":"نص المصدر بلغته الأصلية"},"guide":{"en":"Annual research describes country conditions. Reporting helps you explore recent developments. XRPL confirms public records, not their truth or the location of a person. No map marker means no qualifying public group—not no prayers.","es":"La investigación anual describe las condiciones de cada país. Las noticias ayudan a explorar novedades. XRPL confirma registros públicos, no su veracidad ni la ubicación de una persona. Sin marcador no significa sin oraciones, sino sin grupo público apto.","fr":"Les études annuelles décrivent les conditions des pays. Les articles permettent d’explorer les évolutions récentes. XRPL confirme des enregistrements publics, pas leur véracité ni la position d’une personne. L’absence de marqueur signifie qu’aucun groupe public ne remplit les critères, pas qu’il n’y a pas de prières.","de":"Jahresberichte beschreiben die Lage in Ländern. Berichte erschließen aktuelle Entwicklungen. XRPL bestätigt öffentliche Einträge, nicht deren Wahrheitsgehalt oder den Standort einer Person. Kein Marker bedeutet keine qualifizierte öffentliche Gruppe – nicht keine Gebete.","pt":"Pesquisas anuais descrevem condições dos países. Notícias ajudam a explorar acontecimentos recentes. XRPL confirma registros públicos, não sua veracidade ou a localização de alguém. Sem marcador significa sem grupo público elegível, não ausência de orações.","ja":"年次調査は各国の状況を説明します。報道から最近の動きを調べられます。XRPLが確認するのは公開記録であり、内容の真実性や人の居場所ではありません。マーカーがないのは公開基準を満たすグループがないためで、祈りがないという意味ではありません。","ko":"연례 연구는 국가 상황을 설명합니다. 보도로 최근 동향을 살펴볼 수 있습니다. XRPL은 공개 기록을 확인할 뿐, 내용의 진실성이나 사람의 위치를 입증하지 않습니다. 표시가 없다는 것은 공개 기준에 맞는 그룹이 없다는 뜻이지, 기도가 없다는 뜻이 아닙니다.","zh-Hans":"年度研究描述各国状况；报道帮助了解近期动态。XRPL确认的是公开记录，并不证明内容真实或个人位置。没有地图标记表示没有达到公开条件的分组，而不是没有祈祷。","ar":"تصف الأبحاث السنوية ظروف الدول، وتساعد التقارير على استكشاف التطورات. يؤكد XRPL وجود سجلات عامة، لا صدق محتواها أو مكان الأشخاص. غياب العلامة يعني عدم وجود مجموعة مستوفية لشروط النشر، وليس غياب الصلاة."},"translationNote":{"en":"Interface and guide translations are provided for convenience. Original research, detailed protocols, security instructions and news titles remain in their source language. Review the original before signing.","es":"Las traducciones de la interfaz y la guía son orientativas. La investigación original, los protocolos detallados, las instrucciones de seguridad y los titulares mantienen su idioma original. Revise el original antes de firmar.","fr":"Les traductions de l’interface et du guide sont proposées à titre pratique. Les études originales, protocoles détaillés, consignes de sécurité et titres restent dans leur langue d’origine. Consultez l’original avant de signer.","de":"Übersetzungen der Oberfläche und Anleitung dienen der Orientierung. Originalberichte, ausführliche Protokolle, Sicherheitshinweise und Überschriften bleiben in ihrer Originalsprache. Vor dem Signieren das Original prüfen.","pt":"As traduções da interface e do guia são uma conveniência. Pesquisas originais, protocolos detalhados, instruções de segurança e títulos permanecem no idioma de origem. Consulte o original antes de assinar.","ja":"画面とガイドの翻訳は補助情報です。原典の調査、詳細な仕様、安全上の指示、報道の見出しは原語のままです。署名前に原文を確認してください。","ko":"화면과 안내 번역은 편의를 위한 것입니다. 원본 연구, 상세 프로토콜, 보안 지침과 뉴스 제목은 원어로 유지됩니다. 서명 전에 원문을 확인하세요.","zh-Hans":"界面与指南翻译仅供方便。原始研究、详细协议、安全指引和新闻标题保留原文。签名前请核对原文。","ar":"ترجمة الواجهة والدليل للتيسير. تبقى الأبحاث الأصلية والبروتوكولات المفصلة وتعليمات الأمان والعناوين بلغتها الأصلية. راجع الأصل قبل التوقيع."},"privacyGuide":{"en":"Never share exact locations, escape routes, wallet secrets or identifying details about vulnerable people. Prayer focus is not a participant location. Private Capsule contents stay outside this map.","es":"Nunca comparta ubicaciones exactas, rutas de escape, secretos de la cartera ni datos que identifiquen a personas vulnerables. El enfoque de oración no es la ubicación del participante. La Cápsula Privada permanece fuera del mapa.","fr":"Ne partagez jamais de positions précises, itinéraires de fuite, secrets de portefeuille ou détails identifiant des personnes vulnérables. L’objet d’une prière n’est pas le lieu du participant. La capsule privée reste hors de la carte.","de":"Keine genauen Standorte, Fluchtrouten, Wallet-Geheimnisse oder identifizierenden Angaben zu gefährdeten Personen teilen. Ein Gebetsanliegen ist kein Teilnehmerstandort. Private-Capsule-Inhalte bleiben außerhalb der Karte.","pt":"Nunca compartilhe locais exatos, rotas de fuga, segredos da carteira ou dados que identifiquem pessoas vulneráveis. O foco de oração não é a localização do participante. A Cápsula Privada fica fora do mapa.","ja":"正確な場所、避難経路、ウォレットの秘密情報、危険にさらされる人を特定できる情報は共有しないでください。祈りの対象は参加者の所在地ではありません。Private Capsuleの内容は地図に含めません。","ko":"정확한 위치, 탈출 경로, 지갑 비밀정보나 취약한 사람을 식별하는 정보를 공유하지 마세요. 기도 대상은 참여자의 위치가 아닙니다. 비공개 캡슐 내용은 지도에 포함되지 않습니다.","zh-Hans":"切勿分享精确位置、逃生路线、钱包密钥或可识别弱势人员的信息。祈祷关注点不是参与者位置。私密胶囊的内容不会进入地图。","ar":"لا تشارك مواقع دقيقة أو طرق هروب أو أسرار محافظ أو معلومات تكشف هوية أشخاص معرضين للخطر. موضوع الصلاة ليس موقع المشارك. يبقى محتوى الكبسولة الخاصة خارج الخريطة."},"newsGuide":{"en":"Recent reporting is a starting point, not a verified incident feed. Markers show country names mentioned in headlines. Publisher location is never used as the event location.","es":"Las noticias recientes son un punto de partida, no incidentes verificados. Los marcadores muestran países mencionados en titulares. La ubicación del medio nunca se usa como lugar del suceso.","fr":"Les articles récents sont un point de départ, pas un flux d’incidents vérifiés. Les marqueurs indiquent les pays cités dans les titres. Le pays de l’éditeur n’est jamais utilisé comme lieu de l’événement.","de":"Aktuelle Berichte sind ein Ausgangspunkt, kein verifizierter Ereignisfeed. Marker zeigen in Überschriften genannte Länder. Der Standort des Herausgebers gilt nie als Ereignisort.","pt":"Notícias recentes são um ponto de partida, não incidentes verificados. Marcadores mostram países citados em títulos. A localização do veículo nunca é usada como local do acontecimento.","ja":"最新報道は調査の出発点で、検証済み事件の一覧ではありません。マーカーは見出しに出た国名を示します。報道機関の所在地を出来事の場所として使うことはありません。","ko":"최근 보도는 조사의 출발점이며 검증된 사건 목록이 아닙니다. 표시는 제목에 언급된 국가를 나타냅니다. 언론사 위치를 사건 위치로 사용하지 않습니다.","zh-Hans":"近期报道是调查起点，不是已核实事件流。标记表示标题中提及的国家。绝不将媒体所在地当作事件地点。","ar":"التقارير الحديثة نقطة بداية، وليست سجلًا لحوادث موثقة. تشير العلامات إلى الدول المذكورة في العناوين. لا يُستخدم موقع الناشر بوصفه موقع الحدث."},"newsLimits":{"en":"Headlines and first-seen times come from GDELT. A match can be incomplete, duplicated or wrong. No matches does not prove that nothing happened. No full articles or private data are copied here.","es":"Los titulares y las fechas de primera detección provienen de GDELT. Las coincidencias pueden ser incompletas, duplicadas o erróneas. Sin resultados no significa sin acontecimientos. No copiamos artículos completos ni datos privados.","fr":"Les titres et dates de première détection proviennent de GDELT. Un résultat peut être incomplet, dupliqué ou erroné. Aucun résultat ne prouve pas une absence d’événements. Aucun article complet ni donnée privée n’est copié ici.","de":"Überschriften und erste Erfassungszeiten stammen von GDELT. Treffer können unvollständig, doppelt oder falsch sein. Keine Treffer belegen nicht, dass nichts geschah. Keine vollständigen Artikel oder privaten Daten werden kopiert.","pt":"Títulos e datas da primeira detecção vêm do GDELT. Resultados podem ser incompletos, duplicados ou incorretos. Sem resultados não prova ausência de acontecimentos. Não copiamos artigos completos nem dados privados.","ja":"見出しと初回検出時刻はGDELTから取得します。不完全、重複、誤検出の可能性があります。該当なしは何も起きていない証拠ではありません。記事全文や私的情報は複製しません。","ko":"제목과 최초 수집 시각은 GDELT에서 제공합니다. 불완전하거나 중복되거나 잘못된 결과일 수 있습니다. 검색 결과가 없다고 사건이 없음을 입증하지는 않습니다. 기사 전문이나 개인 데이터는 복사하지 않습니다.","zh-Hans":"标题和首次收录时间来自GDELT。匹配可能不完整、重复或错误。没有匹配不证明没有事件。此处不复制文章全文或私密数据。","ar":"العناوين وأوقات الرصد الأولى من GDELT. قد تكون النتائج ناقصة أو مكررة أو خاطئة. عدم وجود نتائج لا يثبت عدم وقوع أحداث. لا تُنسخ مقالات كاملة أو بيانات خاصة هنا."},"currencyGuide":{"en":"Convert a reference XRP amount into your display currency. This is not a fee quote, a donation request or a value assigned to prayer. Changing the currency cannot change a transaction.","es":"Convierta una cantidad de XRP a la moneda elegida. No es una cotización de comisión, solicitud de donación ni valoración de una oración. Cambiar la moneda no cambia transacciones.","fr":"Convertissez un montant XRP indicatif dans la devise choisie. Il ne s’agit ni d’un devis de frais, ni d’un don, ni d’une valeur attribuée à la prière. Le choix de devise ne modifie aucune transaction.","de":"Einen XRP-Referenzbetrag in die gewählte Währung umrechnen. Dies ist weder Gebührenangebot noch Spendenaufruf noch Geldwert eines Gebets. Die Währungswahl verändert keine Transaktion.","pt":"Converta uma quantia de referência em XRP para a moeda escolhida. Não é cotação de taxa, pedido de doação ou valor atribuído à oração. A escolha da moeda não altera transações.","ja":"参考XRP数量を選んだ通貨へ換算します。手数料見積もり、寄付の依頼、祈りの金銭評価ではありません。通貨を変えても取引は変わりません。","ko":"참고 XRP 수량을 선택한 통화로 환산합니다. 수수료 견적, 기부 요청 또는 기도의 금전적 가치가 아닙니다. 통화 선택으로 거래가 변경되지 않습니다.","zh-Hans":"将参考XRP数量换算为所选货币。这不是手续费报价、捐款请求或祈祷的定价。改变显示货币不会改变交易。","ar":"حوّل مبلغ XRP مرجعيًا إلى عملة العرض. هذا ليس عرض رسوم أو طلب تبرع أو قيمة مالية للصلاة. تغيير العملة لا يغيّر أي معاملة."},"numberHint":{"en":"Use a decimal point, without grouping separators. No amount is sent to the data providers.","es":"Use punto decimal, sin separadores de miles. La cantidad no se envía a los proveedores.","fr":"Utilisez un point décimal, sans séparateur de milliers. Le montant n’est pas envoyé aux fournisseurs.","de":"Dezimalpunkt ohne Tausendertrennzeichen verwenden. Der Betrag wird nicht an Anbieter gesendet.","pt":"Use ponto decimal, sem separador de milhares. A quantia não é enviada aos provedores.","ja":"小数点はピリオドを使い、桁区切りは入れないでください。数量は提供元に送信しません。","ko":"소수점은 마침표를 쓰고 자릿수 구분은 넣지 마세요. 수량은 제공업체에 전송되지 않습니다.","zh-Hans":"使用小数点，不加千位分隔符。输入的数量不会发送给数据提供商。","ar":"استخدم النقطة العشرية دون فواصل تجميع. لا يُرسل المبلغ إلى مزودي البيانات."},"ratePrivacy":{"en":"Rates load only when this panel is opened or refreshed. Coinbase supplies an XRP/USD reference; Frankfurter supplies dated ECB foreign-exchange references. Providers receive ordinary network requests, not your wallet, message or entered amount.","es":"Los tipos se cargan solo al abrir o actualizar este panel. Coinbase aporta XRP/USD; Frankfurter, referencias del BCE con fecha. Los proveedores reciben solicitudes de red, no su cartera, mensaje ni cantidad.","fr":"Les taux ne sont chargés qu’à l’ouverture ou à l’actualisation du panneau. Coinbase fournit XRP/USD ; Frankfurter fournit des références BCE datées. Les fournisseurs reçoivent des requêtes réseau, pas votre portefeuille, message ou montant.","de":"Kurse werden erst beim Öffnen oder Aktualisieren dieses Bereichs geladen. Coinbase liefert XRP/USD, Frankfurter datierte EZB-Referenzen. Anbieter erhalten Netzwerkanfragen, nicht Wallet, Nachricht oder eingegebenen Betrag.","pt":"As taxas carregam apenas ao abrir ou atualizar este painel. Coinbase fornece XRP/USD; Frankfurter fornece referências datadas do BCE. Provedores recebem requisições de rede, não sua carteira, mensagem ou quantia.","ja":"このパネルを開くか更新するとレートを取得します。CoinbaseはXRP/USD、Frankfurterは日付付きECB為替参考値を提供します。送信されるのは通常の通信要求で、ウォレット、メッセージ、入力数量ではありません。","ko":"이 패널을 열거나 새로고침할 때만 환율을 불러옵니다. Coinbase는 XRP/USD, Frankfurter는 날짜가 있는 ECB 참고 환율을 제공합니다. 제공업체에는 네트워크 요청만 전달되며 지갑, 메시지, 입력 수량은 전달되지 않습니다.","zh-Hans":"仅在打开或刷新此面板时加载汇率。Coinbase提供XRP/USD参考值；Frankfurter提供带日期的ECB外汇参考值。提供商只收到普通网络请求，不会收到钱包、消息或输入金额。","ar":"تُحمّل الأسعار عند فتح اللوحة أو تحديثها فقط. يقدم Coinbase مرجع XRP/USD، ويقدم Frankfurter مراجع مؤرخة للبنك المركزي الأوروبي. يتلقى المزودون طلبات شبكة عادية، لا محفظتك أو رسالتك أو المبلغ المدخل."},"rateLimit":{"en":"Daily FX references are not executable prices. Missing or old rates stay unavailable. Countries, counts and pressure scores are never converted into money.","es":"Los tipos diarios no son precios ejecutables. Los tipos ausentes o antiguos quedan no disponibles. Los países, recuentos y puntuaciones de presión nunca se convierten en dinero.","fr":"Les références de change quotidiennes ne sont pas des cours exécutables. Les taux absents ou anciens restent indisponibles. Pays, compteurs et scores de pression ne sont jamais convertis en argent.","de":"Tägliche Devisenreferenzen sind keine ausführbaren Kurse. Fehlende oder alte Kurse bleiben nicht verfügbar. Länder, Anzahlen und Druckwerte werden niemals in Geld umgerechnet.","pt":"Referências cambiais diárias não são preços executáveis. Taxas ausentes ou antigas ficam indisponíveis. Países, contagens e índices de pressão nunca são convertidos em dinheiro.","ja":"日次為替参考値は約定価格ではありません。欠落・古いレートは利用不可とします。国、件数、迫害圧力スコアを金額に換算することはありません。","ko":"일일 참고 환율은 체결 가능한 가격이 아닙니다. 없거나 오래된 환율은 사용 불가로 남습니다. 국가, 건수와 박해 압력 점수는 돈으로 환산하지 않습니다.","zh-Hans":"每日外汇参考值不是可执行价格。缺失或过旧的汇率保持不可用。国家、计数与压力评分绝不会换算成金钱。","ar":"مراجع الصرف اليومية ليست أسعار تنفيذ. تبقى الأسعار المفقودة أو القديمة غير متاحة. لا تُحوّل الدول أو الأعداد أو درجات الضغط إلى نقود."},"home":{"en":"Home","es":"Inicio","fr":"Accueil","de":"Startseite","pt":"Início","ja":"ホーム","ko":"홈","zh-Hans":"首页","ar":"الرئيسية"},"trade":{"en":"Trade","es":"Operar","fr":"Échanger","de":"Handeln","pt":"Negociar","ja":"取引","ko":"거래","zh-Hans":"交易","ar":"التداول"},"fellowship":{"en":"Fellowship","es":"Comunidad","fr":"Communauté","de":"Gemeinschaft","pt":"Comunidade","ja":"交わり","ko":"교제","zh-Hans":"团契","ar":"الشركة الروحية"},"scripture":{"en":"Scripture","es":"Escrituras","fr":"Écritures","de":"Heilige Schrift","pt":"Escrituras","ja":"聖書","ko":"성경","zh-Hans":"经文","ar":"الكتاب المقدس"},"film":{"en":"Sacred Film","es":"Cine sagrado","fr":"Films sacrés","de":"Religiöse Filme","pt":"Filmes sagrados","ja":"信仰の映像","ko":"신앙 영화","zh-Hans":"信仰影片","ar":"أفلام دينية"},"audio":{"en":"Sacred Audio","es":"Audio sagrado","fr":"Audio sacré","de":"Religiöses Audio","pt":"Áudio sagrado","ja":"信仰の音声","ko":"신앙 오디오","zh-Hans":"信仰音频","ar":"صوتيات دينية"},"signLedger":{"en":"Sign the Ledger","es":"Firmar el registro","fr":"Signer le registre","de":"Register signieren","pt":"Assinar o registro","ja":"台帳に署名","ko":"원장에 서명","zh-Hans":"签署账本","ar":"التوقيع في السجل"},"prayerMap":{"en":"Prayer Map","es":"Mapa de oración","fr":"Carte des prières","de":"Gebetskarte","pt":"Mapa de oração","ja":"祈りの地図","ko":"기도 지도","zh-Hans":"祈祷地图","ar":"خريطة الصلاة"},"marketMonitor":{"en":"Market Monitor","es":"Monitor de mercado","fr":"Suivi du marché","de":"Marktübersicht","pt":"Monitor de mercado","ja":"市場モニター","ko":"시장 모니터","zh-Hans":"市场监测","ar":"مراقبة السوق"},"readiness":{"en":"Account Readiness","es":"Preparación de cuenta","fr":"État du compte","de":"Kontobereitschaft","pt":"Preparação da conta","ja":"アカウント準備状況","ko":"계정 준비 상태","zh-Hans":"账户就绪情况","ar":"جاهزية الحساب"},"vision":{"en":"About & Vision","es":"Acerca de y visión","fr":"À propos et vision","de":"Über uns und Vision","pt":"Sobre e visão","ja":"概要と理念","ko":"소개와 비전","zh-Hans":"关于与愿景","ar":"نبذة ورؤية"},"menu":{"en":"Menu","es":"Menú","fr":"Menu","de":"Menü","pt":"Menu","ja":"メニュー","ko":"메뉴","zh-Hans":"菜单","ar":"القائمة"},"sanctuary":{"en":"Sanctuary mode","es":"Modo santuario","fr":"Mode sanctuaire","de":"Andachtsmodus","pt":"Modo santuário","ja":"静穏モード","ko":"안식 모드","zh-Hans":"静心模式","ar":"وضع السكينة"},"ledgerFocus":{"en":"Ledger focus","es":"Enfoque en el registro","fr":"Vue registre","de":"Ledger-Fokus","pt":"Foco no registro","ja":"台帳に集中","ko":"원장 집중","zh-Hans":"账本聚焦","ar":"التركيز على السجل"},"light":{"en":"Light mode","es":"Modo claro","fr":"Mode clair","de":"Heller Modus","pt":"Modo claro","ja":"ライトモード","ko":"밝은 모드","zh-Hans":"浅色模式","ar":"الوضع الفاتح"},"dark":{"en":"Dark mode","es":"Modo oscuro","fr":"Mode sombre","de":"Dunkler Modus","pt":"Modo escuro","ja":"ダークモード","ko":"어두운 모드","zh-Hans":"深色模式","ar":"الوضع الداكن"},"connect":{"en":"Connect Xaman","es":"Conectar Xaman","fr":"Connecter Xaman","de":"Xaman verbinden","pt":"Conectar Xaman","ja":"Xamanに接続","ko":"Xaman 연결","zh-Hans":"连接Xaman","ar":"ربط Xaman"},"disconnect":{"en":"Disconnect","es":"Desconectar","fr":"Déconnecter","de":"Trennen","pt":"Desconectar","ja":"切断","ko":"연결 해제","zh-Hans":"断开连接","ar":"قطع الاتصال"},"walletDisconnected":{"en":"Wallet disconnected","es":"Cartera desconectada","fr":"Portefeuille déconnecté","de":"Wallet getrennt","pt":"Carteira desconectada","ja":"ウォレット未接続","ko":"지갑 연결 안 됨","zh-Hans":"钱包未连接","ar":"المحفظة غير متصلة"},"terms":{"en":"Terms","es":"Condiciones","fr":"Conditions","de":"Bedingungen","pt":"Termos","ja":"利用規約","ko":"이용약관","zh-Hans":"条款","ar":"الشروط"},"privacy":{"en":"Privacy","es":"Privacidad","fr":"Confidentialité","de":"Datenschutz","pt":"Privacidade","ja":"プライバシー","ko":"개인정보 보호","zh-Hans":"隐私","ar":"الخصوصية"},"security":{"en":"Security","es":"Seguridad","fr":"Sécurité","de":"Sicherheit","pt":"Segurança","ja":"セキュリティ","ko":"보안","zh-Hans":"安全","ar":"الأمان"},"support":{"en":"Support","es":"Ayuda","fr":"Assistance","de":"Unterstützung","pt":"Suporte","ja":"サポート","ko":"지원","zh-Hans":"支持","ar":"الدعم"},"pressure":{"en":"Christian pressure","es":"Presión sobre cristianos","fr":"Pression sur les chrétiens","de":"Druck auf Christen","pt":"Pressão sobre cristãos","ja":"キリスト教徒への圧力","ko":"기독교인에 대한 압력","zh-Hans":"基督徒面临的压力","ar":"الضغط على المسيحيين"},"concern":{"en":"Official concern","es":"Preocupación oficial","fr":"Préoccupation officielle","de":"Offizielle Besorgnis","pt":"Preocupação oficial","ja":"公的な懸念","ko":"공식 우려","zh-Hans":"官方关切","ar":"قلق رسمي"},"mediaSignals":{"en":"Current media signals","es":"Señales actuales en medios","fr":"Signaux médiatiques actuels","de":"Aktuelle Mediensignale","pt":"Sinais atuais da mídia","ja":"現在の報道シグナル","ko":"현재 미디어 신호","zh-Hans":"当前媒体信号","ar":"مؤشرات إعلامية حالية"},"prayerRecords":{"en":"XRPL prayer records","es":"Registros de oración en XRPL","fr":"Prières enregistrées sur XRPL","de":"XRPL-Gebetseinträge","pt":"Registros de oração no XRPL","ja":"XRPLの祈り記録","ko":"XRPL 기도 기록","zh-Hans":"XRPL祈祷记录","ar":"سجلات الصلاة في XRPL"},"aggregateSupport":{"en":"Aggregate support","es":"Apoyo agregado","fr":"Soutien agrégé","de":"Zusammengefasste Unterstützung","pt":"Apoio agregado","ja":"集計された支援","ko":"집계된 지원","zh-Hans":"汇总支持","ar":"الدعم المجمّع"},"refreshLayers":{"en":"Refresh live layers","es":"Actualizar capas dinámicas","fr":"Actualiser les couches dynamiques","de":"Dynamische Ebenen aktualisieren","pt":"Atualizar camadas dinâmicas","ja":"動的レイヤーを更新","ko":"동적 레이어 새로고침","zh-Hans":"刷新动态图层","ar":"تحديث الطبقات المتغيرة"},"exportMap":{"en":"Export live map JSON","es":"Exportar JSON del mapa","fr":"Exporter le JSON de la carte","de":"Karten-JSON exportieren","pt":"Exportar JSON do mapa","ja":"地図JSONを出力","ko":"지도 JSON 내보내기","zh-Hans":"导出地图JSON","ar":"تصدير JSON الخريطة"},"resetView":{"en":"Reset view","es":"Restablecer vista","fr":"Réinitialiser la vue","de":"Ansicht zurücksetzen","pt":"Redefinir vista","ja":"表示をリセット","ko":"보기 초기화","zh-Hans":"重置视图","ar":"إعادة ضبط العرض"},"mapTitle":{"en":"Prayer, pressure & verified support signals","es":"Oración, presión y señales de apoyo verificadas","fr":"Prière, pression et signaux de soutien vérifiés","de":"Gebet, Druck und verifizierte Unterstützungssignale","pt":"Oração, pressão e sinais de apoio verificados","ja":"祈り、圧力、検証済みの支援シグナル","ko":"기도, 압력, 검증된 지원 신호","zh-Hans":"祈祷、压力与已验证的支持信号","ar":"الصلاة والضغط ومؤشرات الدعم المتحقق منها"},"signPrayer":{"en":"Sign or map a prayer","es":"Firmar o enfocar una oración","fr":"Signer ou situer l’objet d’une prière","de":"Gebet signieren oder Fokus angeben","pt":"Assinar ou indicar o foco da oração","ja":"祈りに署名・対象を指定","ko":"기도 서명 또는 대상 지정","zh-Hans":"签署祈祷或指定关注点","ar":"توقيع صلاة أو تحديد موضوعها"},"protocolDownload":{"en":"Download map protocol JSON","es":"Descargar protocolo JSON del mapa","fr":"Télécharger le protocole JSON","de":"Kartenprotokoll als JSON laden","pt":"Baixar protocolo JSON do mapa","ja":"地図仕様JSONを保存","ko":"지도 프로토콜 JSON 다운로드","zh-Hans":"下载地图协议JSON","ar":"تنزيل بروتوكول الخريطة بصيغة JSON"},"registryProtocol":{"en":"Registry protocol","es":"Protocolo de registro","fr":"Protocole du registre","de":"Registerprotokoll","pt":"Protocolo de registro","ja":"登録プロトコル","ko":"등록 프로토콜","zh-Hans":"登记协议","ar":"بروتوكول السجل"},"latestLedger":{"en":"Latest XRPL ledger","es":"Último libro de XRPL","fr":"Dernier registre XRPL","de":"Letztes XRPL-Ledger","pt":"Último ledger XRPL","ja":"直近のXRPL台帳","ko":"최신 XRPL 원장","zh-Hans":"最新XRPL账本","ar":"أحدث سجل XRPL"},"lastSnapshot":{"en":"Last XRPL snapshot","es":"Última instantánea XRPL","fr":"Dernier instantané XRPL","de":"Letzter XRPL-Snapshot","pt":"Último registro XRPL","ja":"前回のXRPLスナップショット","ko":"마지막 XRPL 스냅샷","zh-Hans":"上次XRPL快照","ar":"آخر لقطة XRPL"},"establish":{"en":"What this map can establish","es":"Qué puede demostrar el mapa","fr":"Ce que cette carte peut établir","de":"Was diese Karte belegen kann","pt":"O que este mapa pode estabelecer","ja":"この地図で確認できること","ko":"이 지도로 확인할 수 있는 것","zh-Hans":"此地图能确认什么","ar":"ما يمكن للخريطة إثباته"},"publicRecords":{"en":"Public XRPL records","es":"Registros públicos XRPL","fr":"Enregistrements publics XRPL","de":"Öffentliche XRPL-Einträge","pt":"Registros públicos XRPL","ja":"公開XRPL記録","ko":"공개 XRPL 기록","zh-Hans":"公开XRPL记录","ar":"سجلات XRPL العامة"},"mapped":{"en":"Map-focus labeled","es":"Con enfoque de mapa","fr":"Avec objet géographique déclaré","de":"Mit angegebenem Kartenfokus","pt":"Com foco de mapa declarado","ja":"地図の対象を明示","ko":"지도 대상 표시됨","zh-Hans":"已标记地图关注点","ar":"بموضوع جغرافي معلن"},"unpublished":{"en":"NFT map focus not published","es":"Enfoque del NFT no publicado","fr":"Objet géographique du NFT non publié","de":"NFT-Kartenfokus nicht veröffentlicht","pt":"Foco do NFT não publicado","ja":"NFTの地図対象は非公開","ko":"NFT 지도 대상 미공개","zh-Hans":"NFT地图关注点未公开","ar":"موضوع NFT الجغرافي غير منشور"},"responses":{"en":"Community responses","es":"Respuestas de la comunidad","fr":"Réponses de la communauté","de":"Antworten der Gemeinschaft","pt":"Respostas da comunidade","ja":"共同体からの応答","ko":"공동체 응답","zh-Hans":"社群回应","ar":"استجابات المجتمع"},"relationships":{"en":"Public support relationships","es":"Relaciones de apoyo públicas","fr":"Liens publics de soutien","de":"Öffentliche Unterstützungsbeziehungen","pt":"Relações públicas de apoio","ja":"公開支援関係","ko":"공개 지원 관계","zh-Hans":"公开支持关系","ar":"علاقات الدعم العامة"},"visibleGroups":{"en":"Public prayer groups now visible on the map","es":"Grupos de oración públicos visibles","fr":"Groupes de prière publics visibles","de":"Sichtbare öffentliche Gebetsgruppen","pt":"Grupos públicos de oração visíveis","ja":"地図上の公開祈りグループ","ko":"지도에 표시된 공개 기도 그룹","zh-Hans":"地图上可见的公开祈祷分组","ar":"مجموعات الصلاة العامة الظاهرة"},"sourceHealth":{"en":"Source health & freshness","es":"Estado y actualidad de fuentes","fr":"État et fraîcheur des sources","de":"Quellenstatus und Aktualität","pt":"Estado e atualização das fontes","ja":"情報源の状態と鮮度","ko":"출처 상태와 최신성","zh-Hans":"来源状态与时效","ar":"حالة المصادر وحداثتها"},"mapKey":{"en":"Map key","es":"Leyenda del mapa","fr":"Légende","de":"Kartenlegende","pt":"Legenda do mapa","ja":"凡例","ko":"지도 범례","zh-Hans":"地图图例","ar":"مفتاح الخريطة"},"annualChange":{"en":"Annual change","es":"Cambio anual","fr":"Évolution annuelle","de":"Jährliche Veränderung","pt":"Mudança anual","ja":"年次変化","ko":"연간 변화","zh-Hans":"年度变化","ar":"التغير السنوي"},"interpretation":{"en":"Interpretation","es":"Interpretación","fr":"Interprétation","de":"Einordnung","pt":"Interpretação","ja":"解釈","ko":"해석","zh-Hans":"解释","ar":"التفسير"},"statistics":{"en":"Statistical reading","es":"Lectura estadística","fr":"Lecture statistique","de":"Statistische Einordnung","pt":"Leitura estatística","ja":"統計の読み方","ko":"통계 해석","zh-Hans":"统计解读","ar":"قراءة إحصائية"},"countrySearch":{"en":"Find a ranked country","es":"Buscar país clasificado","fr":"Trouver un pays classé","de":"Bewertetes Land suchen","pt":"Encontrar país classificado","ja":"掲載国を検索","ko":"순위에 있는 국가 찾기","zh-Hans":"查找上榜国家","ar":"البحث عن دولة مصنفة"},"capsule":{"en":"Private Capsule · local encrypted communication","es":"Cápsula Privada · comunicación cifrada local","fr":"Capsule privée · communication chiffrée localement","de":"Private Capsule · lokal verschlüsselte Kommunikation","pt":"Cápsula Privada · comunicação cifrada local","ja":"Private Capsule・端末内暗号化通信","ko":"비공개 캡슐 · 로컬 암호화 통신","zh-Hans":"私密胶囊 · 本地加密通信","ar":"الكبسولة الخاصة · تواصل مشفّر محليًا"},"localOnly":{"en":"Local-only by default","es":"Solo local por defecto","fr":"Local uniquement par défaut","de":"Standardmäßig nur lokal","pt":"Apenas local por padrão","ja":"初期設定は端末内のみ","ko":"기본값은 로컬 전용","zh-Hans":"默认仅本地","ar":"محلي فقط افتراضيًا"},"privateMessage":{"en":"Private message","es":"Mensaje privado","fr":"Message privé","de":"Private Nachricht","pt":"Mensagem privada","ja":"私的メッセージ","ko":"비공개 메시지","zh-Hans":"私密消息","ar":"رسالة خاصة"},"encrypt":{"en":"Encrypt private capsule","es":"Cifrar cápsula privada","fr":"Chiffrer la capsule privée","de":"Private Capsule verschlüsseln","pt":"Criptografar cápsula privada","ja":"Private Capsuleを暗号化","ko":"비공개 캡슐 암호화","zh-Hans":"加密私密胶囊","ar":"تشفير الكبسولة الخاصة"},"downloadCipher":{"en":"Download ciphertext JSON","es":"Descargar JSON cifrado","fr":"Télécharger le JSON chiffré","de":"Chiffrat-JSON herunterladen","pt":"Baixar JSON cifrado","ja":"暗号文JSONを保存","ko":"암호문 JSON 다운로드","zh-Hans":"下载密文JSON","ar":"تنزيل JSON النص المشفّر"},"downloadKey":{"en":"Download key card","es":"Descargar tarjeta de clave","fr":"Télécharger la carte de clé","de":"Schlüsselkarte herunterladen","pt":"Baixar cartão da chave","ja":"鍵カードを保存","ko":"키 카드 다운로드","zh-Hans":"下载密钥卡","ar":"تنزيل بطاقة المفتاح"},"downloadBackup":{"en":"Download private backup","es":"Descargar copia privada","fr":"Télécharger la sauvegarde privée","de":"Private Sicherung herunterladen","pt":"Baixar cópia privada","ja":"非公開バックアップを保存","ko":"비공개 백업 다운로드","zh-Hans":"下载私密备份","ar":"تنزيل النسخة الاحتياطية الخاصة"},"receipt":{"en":"Download receipt evidence","es":"Descargar evidencia del recibo","fr":"Télécharger la preuve du reçu","de":"Belegnachweis herunterladen","pt":"Baixar evidência do recibo","ja":"受領証の証拠を保存","ko":"영수증 근거 다운로드","zh-Hans":"下载凭证证据","ar":"تنزيل دليل الإيصال"},"decrypt":{"en":"Decrypt locally","es":"Descifrar localmente","fr":"Déchiffrer localement","de":"Lokal entschlüsseln","pt":"Descriptografar localmente","ja":"端末内で復号","ko":"로컬에서 복호화","zh-Hans":"本地解密","ar":"فك التشفير محليًا"},"clearPrivate":{"en":"Clear private fields","es":"Borrar campos privados","fr":"Effacer les champs privés","de":"Private Felder leeren","pt":"Limpar campos privados","ja":"非公開入力を消去","ko":"비공개 필드 지우기","zh-Hans":"清空私密输入","ar":"مسح الحقول الخاصة"},"privacyRules":{"en":"Location and privacy rules","es":"Reglas de ubicación y privacidad","fr":"Règles de localisation et de confidentialité","de":"Standort- und Datenschutzregeln","pt":"Regras de localização e privacidade","ja":"位置とプライバシーの規則","ko":"위치 및 개인정보 보호 규칙","zh-Hans":"位置与隐私规则","ar":"قواعد الموقع والخصوصية"},"reader":{"en":"How the XRPL reader works","es":"Cómo funciona el lector XRPL","fr":"Fonctionnement du lecteur XRPL","de":"Funktionsweise des XRPL-Lesers","pt":"Como funciona o leitor XRPL","ja":"XRPL読み取り機能の仕組み","ko":"XRPL 리더 작동 방식","zh-Hans":"XRPL读取器如何工作","ar":"كيف يعمل قارئ XRPL"},"limits":{"en":"Evidence limits","es":"Límites de la evidencia","fr":"Limites des preuves","de":"Grenzen der Belege","pt":"Limites da evidência","ja":"証拠の限界","ko":"근거의 한계","zh-Hans":"证据局限","ar":"حدود الأدلة"},"contract":{"en":"Machine-readable map contract","es":"Contrato del mapa legible por máquina","fr":"Contrat de carte lisible par machine","de":"Maschinenlesbare Kartenspezifikation","pt":"Contrato do mapa legível por máquina","ja":"機械可読の地図仕様","ko":"기계 판독 지도 규약","zh-Hans":"机器可读地图约定","ar":"عقد خريطة قابل للقراءة آليًا"},"protocol":{"en":"Download protocol JSON","es":"Descargar protocolo JSON","fr":"Télécharger le protocole JSON","de":"Protokoll-JSON herunterladen","pt":"Baixar protocolo JSON","ja":"仕様JSONを保存","ko":"프로토콜 JSON 다운로드","zh-Hans":"下载协议JSON","ar":"تنزيل بروتوكول JSON"},"close":{"en":"Close","es":"Cerrar","fr":"Fermer","de":"Schließen","pt":"Fechar","ja":"閉じる","ko":"닫기","zh-Hans":"关闭","ar":"إغلاق"},"openXaman":{"en":"Open in Xaman","es":"Abrir en Xaman","fr":"Ouvrir dans Xaman","de":"In Xaman öffnen","pt":"Abrir no Xaman","ja":"Xamanで開く","ko":"Xaman에서 열기","zh-Hans":"在Xaman中打开","ar":"فتح في Xaman"},"partial":{"en":"Partial scan","es":"Consulta parcial","fr":"Analyse partielle","de":"Teilprüfung","pt":"Verificação parcial","ja":"部分的な確認","ko":"부분 확인","zh-Hans":"部分扫描","ar":"فحص جزئي"},"validatedRecent":{"en":"Recently validated","es":"Validado recientemente","fr":"Récemment validé","de":"Kürzlich validiert","pt":"Validado recentemente","ja":"直近に検証済み","ko":"최근 검증됨","zh-Hans":"近期已验证","ar":"تم التحقق حديثًا"}}</script>
+<script id="jcs-map-clarity-js">
+/* JCS Map Clarity 5.1.0 — public presentation only.
+ * Source records, privacy thresholds, Private Capsule and signing stay in the original controllers.
+ * No wallet fields, private text, transaction IDs or recovery material are consumed here.
+ */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const LANGUAGES = ['en','es','fr','de','pt','ja','ko','zh-Hans','ar'];
+  const LOCALES = {en:'en-US',es:'es-ES',fr:'fr-FR',de:'de-DE',pt:'pt-BR',ja:'ja-JP',ko:'ko-KR','zh-Hans':'zh-CN',ar:'ar'};
+  const CURRENCIES = ['USD','EUR','GBP','CAD','AUD','JPY','CHF','CNY','INR','BRL','KRW'];
+  const NEWS_URL = 'https://api.gdeltproject.org/api/v2/doc/doc';
+  const FX_URL = 'https://api.frankfurter.dev/v2/providers/ecb/rates?base=USD&quotes=EUR,GBP,CAD,AUD,JPY,CHF,CNY,INR,BRL,KRW';
+  const XRP_URL = 'https://api.exchange.coinbase.com/products/XRP-USD/ticker';
+  const PREF_KEY = 'jcs.map.presentation.v1';
+  const NEWS_INTERVAL = 15 * 60 * 1000, XRP_FRESH = 5 * 60 * 1000, FX_MAX_AGE = 7 * 86400000;
+  const dict = JSON.parse($('jcs-clarity-dictionary').textContent);
+  const P = {lang:'en',currency:'USD'};
+  const S = {countries:[],selected:null,aggregate:null,lastLiveCount:null,lastLiveLedger:null,lastLiveComplete:false,
+    news:[],newsContext:null,newsAt:0,newsStatus:'idle',newsError:'',newsRun:null,newsCooldown:0,
+    newsLimit:8,newsViewCountry:null,newsNewCountries:new Set(),newsAuto:false,newsNext:0,newsFailed:false,
+    quote:null,fx:new Map(),rateRun:null,rateFailure:false,rateCooldown:0,rateStatus:'idle',
+    stopped:false,timer:null};
+  const text = (v,max=250) => typeof v === 'string' ? v.replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g,' ').trim().slice(0,max) : '';
+  const languageTag = () => P.lang === 'zh-Hans' ? 'zh-Hans' : P.lang;
+  function t(key,values={}){
+    const row=dict[key];const template=row?.[P.lang]||row?.en||key;
+    return template.replace(/\{([A-Za-z]+)\}/g,(_,k)=>Object.hasOwn(values,k)?String(values[k]):'{'+k+'}');
+  }
+  function el(tag,cls,value){const n=document.createElement(tag);if(cls)n.className=cls;if(value!==undefined)n.textContent=String(value);return n;}
+  function put(id,value){const n=$(id);if(n&&n.textContent!==value)n.textContent=value;}
+  function fmt(value){return new Intl.NumberFormat(LOCALES[P.lang],{maximumFractionDigits:0}).format(value);}
+  function dateTime(value){const ms=Date.parse(value);return Number.isFinite(ms)?new Intl.DateTimeFormat(LOCALES[P.lang],{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC',timeZoneName:'short'}).format(ms):'—';}
+  function countryName(c){
+    if(!c)return '—';
+    if(c.iso2 && typeof Intl.DisplayNames==='function')try{return new Intl.DisplayNames([LOCALES[P.lang]],{type:'region'}).of(c.iso2)||c.name;}catch(_){}
+    return c.name;
+  }
+  function savePrefs(){try{localStorage.setItem(PREF_KEY,JSON.stringify(P));}catch(_){/* Preference storage is optional. */}}
+  function loadPrefs(){try{const p=JSON.parse(localStorage.getItem(PREF_KEY)||'null');if(LANGUAGES.includes(p?.lang))P.lang=p.lang;if(CURRENCIES.includes(p?.currency))P.currency=p.currency;}catch(_){} }
+  function translateStatic(){
+    document.documentElement.lang=languageTag();
+    document.querySelectorAll('.jcs-clarity-guide,.jcs-world-pulse,.jcs-currency-reference,.jcs-global-strip').forEach(n=>{n.lang=languageTag();n.dir=P.lang==='ar'?'rtl':'ltr';});
+    // Only these explicitly annotated labels and explanations are translated.
+    document.querySelectorAll('[data-jcs-key]').forEach(n=>{
+      const key=n.dataset.jcsKey;if(!dict[key])return;
+      n.textContent=t(key);n.lang=languageTag();
+      if(n.tagName!=='OPTION')n.dir=P.lang==='ar'?'rtl':'auto';
+    });
+    $('jcs-language').value=P.lang;$('jcs-currency').value=P.currency;
+    $('jcs-language').setAttribute('aria-label',t('language'));$('jcs-currency').setAttribute('aria-label',t('currency'));
+  }
+  // A small explicit set of existing dynamic UI labels. Never observe private input/output.
+  const dynamicIds=['xrpl-status','media-status','xrpl-map-state','media-map-state','refresh-button','themeToggleText'];
+  const dynOriginal=new Map(),dynLast=new Map();
+  const englishKeys = new Map(Object.entries(dict).map(([k,v])=>[v.en,k]));
+  function translateKnownDynamic(){
+    for(const id of dynamicIds){const n=$(id);if(!n)continue;
+      const current=n.textContent.trim();
+      if(current!==dynLast.get(id))dynOriginal.set(id,current);
+      const original=dynOriginal.get(id),key=englishKeys.get(original);
+      if(!key)continue;
+      const translated=t(key);if(n.textContent!==translated)n.textContent=translated;
+      n.lang=languageTag();dynLast.set(id,translated);
+    }
+  }
+  function validSummary(a){
+    if(!a||typeof a!=='object')return false;
+    if(!['records','nfts','groups','connections'].every(k=>Number.isSafeInteger(a[k])&&a[k]>=0&&a[k]<=10000000))return false;
+    if(a.nfts>a.records||!Number.isFinite(Date.parse(a.asOf)))return false;
+    return ['ready','cached'].includes(a.sourceState)&&(a.ledger===null||(Number.isSafeInteger(a.ledger)&&a.ledger>0));
+  }
+  function receiveSummary(a){
+    if(!validSummary(a))return;
+    S.aggregate={records:a.records,nfts:a.nfts,groups:a.groups,connections:a.connections,asOf:a.asOf,ledger:a.ledger,sourceState:a.sourceState,complete:a.complete===true,embedded:a.embedded===true};
+    // Only compare successive live scans, never animate a historical fallback as a new prayer.
+    if(a.sourceState==='ready'){
+      if(S.lastLiveCount!==null&&S.lastLiveComplete&&a.complete===true&&Number.isSafeInteger(a.ledger)&&a.ledger>S.lastLiveLedger&&a.records>S.lastLiveCount&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+        const strip=$('jcs-global-strip');strip.classList.remove('is-new');void strip.offsetWidth;strip.classList.add('is-new');setTimeout(()=>strip.classList.remove('is-new'),1800);
+      }
+      S.lastLiveCount=a.records;S.lastLiveLedger=a.ledger;S.lastLiveComplete=a.complete===true;
+    }
+    renderGlobal();
+  }
+  function renderGlobal(){
+    const a=S.aggregate, strip=$('jcs-global-strip');
+    if(!a){put('jcs-global-state',t('unavailable'));return;}
+    const age=Date.now()-Date.parse(a.asOf), fresh=a.sourceState==='ready'&&!a.embedded&&age>=-60000&&age<20*60000;
+    strip.dataset.fresh=String(fresh);
+    put('jcs-global-state',(fresh?t('validatedRecent'):a.embedded?t('snapshot'):t('cached'))+(a.complete?'':' · '+t('partial'))+' · '+dateTime(a.asOf));
+    put('jcs-global-counts',t('counts',{records:fmt(a.records),nfts:fmt(a.nfts),groups:fmt(a.groups)}));
+    put('jcs-global-explanation',t(a.groups?'focusOnly':'noGroups'));
+  }
+  function safePublicURL(v){
+    try{const u=new URL(text(v,1800));const h=u.hostname.toLowerCase();
+      if(u.protocol!=='https:'||u.username||u.password||(u.port&&u.port!=='443')||!h.includes('.')||h==='localhost'||h.endsWith('.local')||h.endsWith('.internal')||h.includes(':')||/^\d+\.\d+\.\d+\.\d+$/.test(h))return null;
+      u.hash='';for(const key of [...u.searchParams.keys()])if(/^utm_/i.test(key)||['fbclid','gclid','mc_cid','mc_eid'].includes(key))u.searchParams.delete(key);
+      return u.href;
+    }catch(_){return null;}
+  }
+  function parseSeen(v){
+    if(typeof v!=='string')return null;
+    const m=v.match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})(\d{2})(\d{2})Z$/);
+    const normalized=m?`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}Z`:v;
+    const ms=Date.parse(normalized);if(!Number.isFinite(ms)||ms>Date.now()+300000)return null;
+    if(m&&new Date(ms).toISOString().replace(/[-:]/g,'').replace('.000','')!==v.replace('T','').replace(/^(\d{8})(\d)/,'$1T$2'))return null;
+    return new Date(ms).toISOString();
+  }
+  const words=s=>' '+text(s,1000).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()+' ';
+  function mentionedCountries(title){
+    const w=words(title), matched=[];
+    for(const c of S.countries){
+      // Avoid names with common non-country meanings or ambiguous Congo/Georgia matches.
+      if(['Georgia','Congo','Jordan','Guinea'].includes(c.name))continue;
+      const names=[c.name];
+      if(c.iso3==='TUR')names.push('Turkey','Türkiye');
+      if(c.iso3==='COD')names.push('Democratic Republic of Congo','DR Congo');
+      if(c.iso3==='GBR')names.push('United Kingdom');
+      if(c.iso3==='USA')names.push('United States');
+      if(names.some(n=>n.length>=4&&w.includes(words(n))))matched.push(c.iso3);
+      if(matched.length>=4)break;
+    }
+    return matched;
+  }
+  function normalizeReports(body,context){
+    if(!body||!Array.isArray(body.articles)||body.articles.length>250)throw new Error('Unexpected article response');
+    const seen=new Set(),items=[];
+    for(const row of body.articles){
+      const url=safePublicURL(row?.url),title=text(row?.title,350);if(!url||!title||seen.has(url))continue;
+      const firstSeen=parseSeen(row.seendate);if(firstSeen&&Date.parse(firstSeen)<Date.now()-(context.window==='24h'?2:8)*86400000)continue;
+      seen.add(url);
+      items.push({url,title,domain:new URL(url).hostname,firstSeen,language:text(row.language,50),mentions:mentionedCountries(title)});
+      if(items.length>=40)break;
+    }
+    return items;
+  }
+  function abortReason(error){return error?.name==='AbortError';}
+  async function fetchPublicJSON(url,signal,{timeout=20000,maxBytes=650000}={}){
+    const controller=new AbortController(),abort=()=>controller.abort();
+    if(signal?.aborted)throw new DOMException('Stopped','AbortError');
+    signal?.addEventListener('abort',abort,{once:true});const timer=setTimeout(abort,timeout);
+    try{
+      const r=await fetch(url,{method:'GET',headers:{Accept:'application/json'},credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',signal:controller.signal});
+      if(!r.ok){const e=new Error('HTTP '+r.status);e.status=r.status;const retry=r.headers.get('retry-after');const delay=retry?(Number.isFinite(Number(retry))?Number(retry)*1000:Date.parse(retry)-Date.now()):0;e.retry=Number.isFinite(delay)?Math.min(1800000,Math.max(0,delay)):0;throw e;}
+      if(Number(r.headers.get('content-length'))>maxBytes)throw new Error('Response too large');
+      const raw=await r.text();if(raw.length>maxBytes)throw new Error('Response too large');
+      try{return JSON.parse(raw);}catch(_){throw new Error('Invalid JSON');}
+    }catch(e){if(abortReason(e)&&!signal?.aborted)throw new Error('Request timed out');throw e;}
+    finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
+  }
+  function newsContext(){
+    const scope=$('jcs-news-scope').value==='country'?'country':'global';
+    return {scope,country:scope==='country'?S.selected:null,window:$('jcs-news-window').value==='24h'?'24h':'7d',topic:$('jcs-news-topic').value==='response'?'response':'freedom'};
+  }
+  function contextName(c){if(!c)return '—';return [c.scope==='global'?t('world'):countryName(c.country),t(c.topic==='freedom'?'freedomTopic':'responseTopic'),t(c.window==='24h'?'day':'week')].join(' · ');}
+  function queryURL(c){
+    const terms=c.topic==='response'?['humanitarian response','humanitarian aid','church reopened','prisoners released']:['religious freedom','Christian persecution','attacks on Christians','church attack'];
+    let query='('+terms.map(v=>'"'+v+'"').join(' OR ')+')';
+    if(c.scope==='country'){
+      if(!c.country||!S.countries.some(n=>n.iso3===c.country.iso3))throw new Error('Choose a country first');
+      const name=text(c.country.name,100).replace(/["\\()]/g,'');query+=' "'+name+'"';
+    }
+    const u=new URL(NEWS_URL);u.search=new URLSearchParams({query,mode:'artlist',format:'json',sort:'DateDesc',timespan:c.window,maxrecords:'40'});return u.href;
+  }
+  async function loadReports(){
+    if(S.stopped||document.hidden||S.newsRun)return;
+    if(Date.now()<S.newsCooldown){put('jcs-news-status',t('waitRetry'));return;}
+    let context;try{context=newsContext();queryURL(context);}catch(_){put('jcs-news-status',t('selectedCountry'));return;}
+    const run={ctrl:new AbortController(),context};S.newsRun=run;S.newsStatus='loading';S.newsError='';renderNewsStatus();
+    try{
+      const body=await fetchPublicJSON(queryURL(context),run.ctrl.signal,{timeout:45000,maxBytes:650000});
+      if(S.newsRun!==run||run.ctrl.signal.aborted)return;
+      const items=normalizeReports(body,context);
+      const comparable=S.newsContext&&JSON.stringify(context)===JSON.stringify(S.newsContext);
+      const previous=new Set(S.news.map(n=>n.url));
+      S.newsNewCountries=new Set(comparable?items.filter(n=>!previous.has(n.url)).flatMap(n=>n.mentions):[]);
+      S.newsViewCountry=null;S.news=items;S.newsContext=context;S.newsAt=Date.now();S.newsLimit=8;S.newsFailed=false;S.newsStatus='ready';S.newsNext=Date.now()+NEWS_INTERVAL;
+      renderReports();renderNewsMarkers();
+    }catch(e){
+      if(S.newsRun!==run)return;
+      S.newsStatus=abortReason(e)?'stopped':'error';S.newsFailed=true;
+      S.newsError=text(e.message,100);S.newsNext=Date.now()+NEWS_INTERVAL;
+      S.newsCooldown=Date.now()+Math.max(30000,e.retry||0);
+      // Old stories remain explicitly stamped with their old query/time. Do not relabel them.
+      renderReports();renderNewsMarkers();
+    }finally{
+      if(S.newsRun===run){S.newsRun=null;S.newsCooldown=Math.max(S.newsCooldown,Date.now()+15000);renderNewsStatus();}
+    }
+  }
+  function renderNewsStatus(){
+    $('jcs-news-load').disabled=!!S.newsRun;$('jcs-news-stop').hidden=!S.newsRun;
+    put('jcs-news-selection',t('selectHint',{country:countryName(S.selected)}));
+    if(S.newsStatus==='loading')put('jcs-news-status',t('reportsLoading'));
+    else if(S.newsStatus==='error')put('jcs-news-status',t('reportsError')+(S.newsError?' ['+S.newsError+']':''));
+    else if(S.newsStatus==='stopped')put('jcs-news-status',t('reportsStopped'));
+    else if(S.newsStatus==='ready')put('jcs-news-status',S.news.length?t('reportsReady',{count:fmt(S.news.length)}):t('reportsEmpty'));
+    else put('jcs-news-status',t('loadReports'));
+    put('jcs-news-provenance',S.newsContext?contextName(S.newsContext)+' · '+t('checkedAt',{date:dateTime(new Date(S.newsAt).toISOString())})+((S.newsFailed||Date.now()-S.newsAt>NEWS_INTERVAL*2)?' · '+t('cached'):'')+(S.newsViewCountry?' · '+t('countryMention',{country:countryName(S.countries.find(c=>c.iso3===S.newsViewCountry))}):''):'');
+  }
+  function openCountry(c){
+    S.selected=c;$('jcs-news-scope').value='country';renderNewsStatus();
+    document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:c.iso3}}));
+    $('jcs-world-pulse').scrollIntoView({block:'nearest',behavior:'auto'});
+  }
+  function renderReports(){
+    const list=$('jcs-news-list');list.replaceChildren();
+    const viewed=S.newsViewCountry?S.news.filter(n=>n.mentions.includes(S.newsViewCountry)):S.news;
+    if(S.newsViewCountry){const reset=el('button','button',t('world'));reset.type='button';reset.addEventListener('click',()=>{S.newsViewCountry=null;renderReports();});list.append(reset);}
+    for(const item of viewed.slice(0,S.newsLimit)){
+      const card=el('article','jcs-news-card'),heading=el('h3'),a=el('a','',item.title);
+      a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';a.referrerPolicy='no-referrer';a.translate=false;a.lang='';a.dir='auto';heading.append(a);card.append(heading);
+      const meta=el('p','jcs-news-meta',item.domain+' · '+(item.firstSeen?t('sourceSeen',{date:dateTime(item.firstSeen)}):t('sourceOriginal'))+(item.language?' · '+item.language:''));card.append(meta);
+      for(const iso of item.mentions){const c=S.countries.find(x=>x.iso3===iso);if(!c)continue;
+        const b=el('button','jcs-country-chip',t('countryMention',{country:countryName(c)}));b.type='button';b.addEventListener('click',()=>{S.newsViewCountry=iso;openCountry(c);renderReports();});card.append(b);
+      }
+      list.append(card);
+    }
+    if(viewed.length>S.newsLimit){const more=el('button','button',t('moreReports'));more.type='button';more.addEventListener('click',()=>{S.newsLimit+=8;renderReports();});list.append(more);}
+    renderNewsStatus();
+  }
+  function renderNewsMarkers(){
+    const layer=$('jcs-news-layer');layer.replaceChildren();
+    if(S.newsFailed||Date.now()-S.newsAt>NEWS_INTERVAL*2||!$('media-toggle')?.checked)return;
+    const counts=new Map();for(const n of S.news)for(const iso of n.mentions)counts.set(iso,(counts.get(iso)||0)+1);
+    for(const [iso,count] of counts){const c=S.countries.find(n=>n.iso3===iso);if(!c)continue;
+      const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','jcs-news-marker'+(S.newsNewCountries.has(iso)?' jcs-news-arrived':''));g.setAttribute('role','button');g.setAttribute('tabindex','0');g.setAttribute('transform',`translate(${c.x} ${c.y})`);g.setAttribute('aria-label',t('countryMention',{country:countryName(c)})+' · '+count);
+      const box=document.createElementNS(g.namespaceURI,'rect');box.setAttribute('x','-8');box.setAttribute('y','-8');box.setAttribute('width','16');box.setAttribute('height','16');box.setAttribute('rx','4');
+      const hit=document.createElementNS(g.namespaceURI,'rect');hit.setAttribute('class','jcs-marker-hit');hit.setAttribute('fill','transparent');hit.setAttribute('stroke','none');
+      const n=document.createElementNS(g.namespaceURI,'text');n.textContent=String(count);g.append(hit,box,n);const title=document.createElementNS(g.namespaceURI,'title');title.textContent=t('countryMention',{country:countryName(c)})+' · '+count;g.append(title);
+      const choose=()=>{S.newsViewCountry=iso;openCountry(c);S.newsLimit=8;renderReports();};
+      g.addEventListener('click',choose);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});layer.append(g);
+    }
+    S.newsNewCountries.clear();sizeNewsMarkers();
+  }
+  function sizeNewsMarkers(){
+    const matrix=$('world-map').getScreenCTM();if(!matrix)return;
+    const scale=Math.hypot(matrix.a,matrix.b);if(!Number.isFinite(scale)||scale<=0)return;
+    for(const g of $('jcs-news-layer').children){
+      const [hit,box,n]=g.children;if(!hit||!box||!n)continue;
+      for(const [r,size]of [[hit,44],[box,22]]){r.setAttribute('x',String(-size/2/scale));r.setAttribute('y',String(-size/2/scale));r.setAttribute('width',String(size/scale));r.setAttribute('height',String(size/scale));r.setAttribute('rx',String(4/scale));}
+      n.setAttribute('y',String(3.8/scale));n.style.fontSize=String(11/scale)+'px';
+    }
+  }
+  function parseXrpInput(v){
+    const raw=String(v).trim();if(!/^\d{1,12}(?:\.\d{0,6})?$/.test(raw))return null;
+    const value=Number(raw);return Number.isFinite(value)&&value>=0&&value<=100000000000?value:null;
+  }
+  function normalizeQuote(body,now=Date.now()){
+    if(!body||typeof body.price!=='string'||body.price.length>60||!/^\d+(?:\.\d+)?$/.test(body.price))throw new Error('Invalid XRP price');
+    const price=Number(body.price),time=Date.parse(body.time);
+    if(!Number.isFinite(price)||price<=0||!Number.isFinite(time)||now-time>XRP_FRESH||now-time< -60000)throw new Error('XRP reference missing or dated');
+    return {priceUsd:price,sourceAt:time,checkedAt:now};
+  }
+  function normalizeFx(body,now=Date.now()){
+    if(!Array.isArray(body)||body.length>100)throw new Error('Invalid FX response');
+    const out=new Map();
+    for(const r of body){
+      if(!r||r.base!=='USD'||!CURRENCIES.includes(r.quote)||r.quote==='USD'||typeof r.rate!=='number'||!Number.isFinite(r.rate)||r.rate<=0||typeof r.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(r.date))continue;
+      const ms=Date.parse(r.date+'T00:00:00Z');if(!Number.isFinite(ms)||now-ms>FX_MAX_AGE||ms>Math.floor(now/86400000)*86400000||new Date(ms).toISOString().slice(0,10)!==r.date)continue;
+      if(out.has(r.quote))throw new Error('Duplicate FX pair');out.set(r.quote,{rate:r.rate,date:r.date});
+    }
+    if(!out.size)throw new Error('No usable dated FX references');return out;
+  }
+  function rateFor(code){if(code==='USD')return {rate:1,date:null};const r=S.fx.get(code);return r&&Date.now()-Date.parse(r.date+'T00:00:00Z')<=FX_MAX_AGE?r:null;}
+  function renderReference(){
+    $('jcs-reference-refresh').disabled=!!S.rateRun;
+    const amount=parseXrpInput($('jcs-reference-xrp').value);$('jcs-reference-xrp').setAttribute('aria-invalid',String(amount===null));
+    const fx=rateFor(P.currency),quote=S.quote;
+    if(amount===null){put('jcs-reference-value','—');put('jcs-reference-status',t('rateInvalid'));return;}
+    const fresh=quote&&Date.now()-quote.sourceAt<=XRP_FRESH&&Date.now()-quote.sourceAt>=-60000;
+    if(!fresh||!fx||S.rateFailure){put('jcs-reference-value','—');put('jcs-reference-status',t(S.rateRun?'rateLoading':'rateUnavailable'));}
+    else{
+      const value=amount*quote.priceUsd*fx.rate;
+      put('jcs-reference-value',Number.isFinite(value)?'≈ '+new Intl.NumberFormat(LOCALES[P.lang],{style:'currency',currency:P.currency,currencyDisplay:'code',maximumFractionDigits:P.currency==='JPY'||P.currency==='KRW'?0:2}).format(value):'—');
+      put('jcs-reference-status',t('rateEstimate'));
+    }
+    const parts=[];if(quote)parts.push('Coinbase XRP/USD · '+dateTime(new Date(quote.sourceAt).toISOString()));if(fx?.date)parts.push('Frankfurter / ECB · USD/'+P.currency+' · '+fx.date);else if(P.currency==='USD')parts.push('USD/USD = 1');
+    put('jcs-reference-source',parts.join(' · '));$('jcs-reference-refresh').disabled=!!S.rateRun;
+  }
+  async function refreshReference(force=false){
+    if(S.stopped||document.hidden||S.rateRun||!$('jcs-reference-details').open)return;
+    if(Date.now()<S.rateCooldown){renderReference();return;}
+    const needQuote=force||!S.quote||Date.now()-S.quote.checkedAt>60000||Date.now()-S.quote.sourceAt>XRP_FRESH;
+    const needFx=force||!S.fx.size||(P.currency!=='USD'&&!rateFor(P.currency));
+    if(!needQuote&&!needFx){S.rateFailure=false;renderReference();return;}
+    const run={ctrl:new AbortController()};S.rateRun=run;S.rateFailure=false;renderReference();
+    try{
+      const responses=await Promise.allSettled([
+        needQuote?fetchPublicJSON(XRP_URL,run.ctrl.signal,{timeout:15000,maxBytes:30000}):Promise.resolve(null),
+        needFx?fetchPublicJSON(FX_URL,run.ctrl.signal,{timeout:15000,maxBytes:45000}):Promise.resolve(null)
+      ]);
+      if(S.rateRun!==run||run.ctrl.signal.aborted)return;
+      if(needQuote){
+        if(responses[0].status==='fulfilled')try{S.quote=normalizeQuote(responses[0].value);}catch(_){S.quote=null;}
+        else S.quote=null;
+      }
+      if(needFx){
+        if(responses[1].status==='fulfilled')try{S.fx=normalizeFx(responses[1].value);}catch(_){S.fx=new Map();}
+        else S.fx=new Map();
+      }
+      // FX failure must not prevent a valid USD reference, or touch map/ledger functionality.
+      S.rateFailure=!S.quote||!rateFor(P.currency);
+      for(const response of responses)if(response.status==='rejected'&&response.reason?.retry)S.rateCooldown=Math.max(S.rateCooldown,Date.now()+response.reason.retry);
+    }catch(e){if(S.rateRun===run){S.rateFailure=true;S.rateCooldown=Date.now()+Math.max(30000,e.retry||0);}}
+    finally{if(S.rateRun===run){S.rateRun=null;S.rateCooldown=Math.max(S.rateCooldown,Date.now()+10000);renderReference();}}
+  }
+  function applyLocale(){translateStatic();translateKnownDynamic();renderGlobal();renderReports();renderNewsMarkers();renderReference();}
+  function start(){
+    loadPrefs();applyLocale();
+    $('jcs-language').addEventListener('change',e=>{if(!LANGUAGES.includes(e.target.value))return;P.lang=e.target.value;savePrefs();applyLocale();});
+    $('jcs-currency').addEventListener('change',e=>{if(!CURRENCIES.includes(e.target.value))return;P.currency=e.target.value;savePrefs();S.rateFailure=!S.quote||!rateFor(P.currency);renderReference();if($('jcs-reference-details').open)void refreshReference();});
+    $('jcs-reference-details').addEventListener('toggle',()=>{if($('jcs-reference-details').open)void refreshReference();});
+    $('jcs-reference-xrp').addEventListener('input',renderReference);
+    $('jcs-reference-refresh').addEventListener('click',()=>void refreshReference(true));
+    $('jcs-news-load').addEventListener('click',()=>void loadReports());
+    $('jcs-news-stop').addEventListener('click',()=>{S.newsAuto=false;$('jcs-news-auto').checked=false;S.newsRun?.ctrl.abort();});
+    $('jcs-news-auto').addEventListener('change',e=>{S.newsAuto=e.target.checked;if(S.newsAuto&&!S.newsAt)void loadReports();});
+    for(const id of ['jcs-news-scope','jcs-news-window','jcs-news-topic'])$(id).addEventListener('change',renderNewsStatus);
+    $('media-toggle')?.addEventListener('change',renderNewsMarkers);
+    new MutationObserver(sizeNewsMarkers).observe($('world-map'),{attributes:true,attributeFilter:['viewBox']});
+    if(typeof ResizeObserver==='function')new ResizeObserver(sizeNewsMarkers).observe($('world-map'));else window.addEventListener('resize',sizeNewsMarkers);
+    document.addEventListener('jcs:public-map-summary',e=>receiveSummary(e.detail));
+    document.addEventListener('jcs:map-country-catalog',e=>{
+      if(!Array.isArray(e.detail)||e.detail.length>350)return;
+      S.countries=e.detail.filter(c=>c&&/^[A-Z]{3}$/.test(c.iso3)&&typeof c.name==='string'&&Number.isFinite(c.x)&&Number.isFinite(c.y)&&c.x>=0&&c.x<=1000&&c.y>=0&&c.y<=500).map(c=>({iso3:c.iso3,name:text(c.name,100),iso2:/^[A-Z]{2}$/.test(c.iso2||'')?c.iso2:null,x:c.x,y:c.y}));
+      if(!S.selected)S.selected=S.countries.find(c=>c.iso3==='PRK')||S.countries[0]||null;
+      renderNewsStatus();
+    });
+    document.addEventListener('jcs:map-country-selected',e=>{const c=S.countries.find(n=>n.iso3===e.detail?.iso3);if(c){S.selected=c;renderNewsStatus();}});
+    document.addEventListener('jcs:open-country-reporting',e=>{const c=S.countries.find(n=>n.iso3===e.detail?.iso3);if(c){S.selected=c;$('jcs-news-scope').value='country';$('jcs-world-pulse').scrollIntoView({block:'nearest'});void loadReports();}});
+    const mo=new MutationObserver(()=>translateKnownDynamic());for(const id of dynamicIds){const n=$(id);if(n)mo.observe(n,{childList:true,characterData:true,subtree:true});}
+    document.dispatchEvent(new Event('jcs:request-public-map'));
+    const tick=()=>{
+      if(S.stopped||document.hidden)return;renderGlobal();renderReference();renderNewsStatus();
+      if(S.newsAt&&Date.now()-S.newsAt>NEWS_INTERVAL*2)$('jcs-news-layer').replaceChildren();
+      if(S.newsAuto&&Date.now()>=S.newsNext&&!S.newsRun&&Date.now()>=S.newsCooldown)void loadReports();
+    };
+    S.timer=setInterval(tick,30000);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden){S.newsRun?.ctrl.abort();S.rateRun?.ctrl.abort();}else tick();});
+    window.addEventListener('pagehide',()=>{S.stopped=true;clearInterval(S.timer);S.newsRun?.ctrl.abort();S.rateRun?.ctrl.abort();});
+    window.addEventListener('pageshow',e=>{if(e.persisted){S.stopped=false;clearInterval(S.timer);S.timer=setInterval(tick,30000);tick();}});
+    // One bounded public news request, independent of ledger refresh and wallet SDK.
+    if(!document.hidden)void loadReports();
+  }
+  try{start();}catch(e){const n=$('jcs-news-status');if(n)n.textContent='Clarity controls unavailable. Original map and wallet controls were not changed.';}
+})();
+
+</script>
 </body>
 </html>
