@@ -136,7 +136,8 @@
     <div class="jcs-receipt-service"><span id="jcsReceiptServiceStatus" class="jcs-tool-small" role="status" aria-live="polite">Checking NFT receipt service…</span><button type="button" class="btn" id="jcsReceiptServiceCheck">Check NFT service</button><small id="jcsReceiptRelease">Receipt tools v5</small></div>
     <form id="jcsReceiptLookup"><label for="jcsReceiptLookupHash">Earlier transaction hash</label><div class="jcs-receipt-lookup-row"><input id="jcsReceiptLookupHash" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" placeholder="Paste the 64-character transaction hash" aria-describedby="jcsReceiptLookupStatus"><button type="submit" class="btn" id="jcsReceiptLookupCheck">Check transaction</button></div></form>
     <p id="jcsReceiptLookupStatus" class="jcs-tool-small" role="status" aria-live="polite"></p>`;
-  trade.querySelector('.jcs-exchange-tabs').insertAdjacentElement('afterend', receiptEntry);
+  // Optional receipts follow the selected trading/liquidity/NFT workspace.
+  trade.appendChild(receiptEntry);
   receiptEntry.dataset.release = RECEIPT_RELEASE;
   const receiptPanel = doc.createElement('section');
   receiptPanel.id = 'jcsReceiptActions'; receiptPanel.className = 'jcs-receipt-actions'; receiptPanel.hidden = false;

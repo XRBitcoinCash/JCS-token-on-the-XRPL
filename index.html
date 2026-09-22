@@ -8880,7 +8880,7 @@ body::after{
 .jcs-receipt-service small { flex-basis: 100%; opacity: .72; }
 
 </style>
-  <link rel="stylesheet" href="/css/jcs-exchange-ui.css?v=20260922-1">
+  <link rel="stylesheet" href="/css/jcs-exchange-ui.css?v=20260922-2">
 </head>
 <body class="jcs-exchange-shell" id="top">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -9213,7 +9213,7 @@ Your browser does not support the public-domain film stream.
 <article aria-label="Buy or sell Jesus Christ Saves Token through Xaman" class="card trade-card jcs-trade-terminal buy" id="trade">
 <div class="trade-terminal-head">
 <div class="trade-pair-heading">
-<img alt="Jesus Christ Saves Token" height="46" src="https://jesuschristsavestoken.com/jcs-logo.png" width="46"/>
+<span class="jcs-pair-logos" aria-hidden="true"><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="38" height="38"><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="38" height="38"></span>
 <div>
 <h2 class="trade-pair-code">JCS / XRP</h2>
 <p>Live XRP Ledger pricing with wallet-side review and signing through the working JCS Xaman endpoint.</p>
@@ -9243,11 +9243,11 @@ Your browser does not support the public-domain film stream.
 <strong id="tradeWalletSummary">Not connected</strong>
 </div>
 <div class="trade-stat">
-<span>XRP balance</span>
+<span><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="20" height="20">XRP balance</span>
 <strong id="tradeXrpBalance">—</strong>
 </div>
 <div class="trade-stat">
-<span>JCS balance</span>
+<span><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="20" height="20">JCS balance</span>
 <strong id="tradeJcsBalance">—</strong>
 </div>
 <div class="trade-stat">
@@ -15429,12 +15429,12 @@ try {
   liquidityPanel.setAttribute('role', 'tabpanel');
   liquidityPanel.setAttribute('aria-labelledby', 'jcsTabLiquidity');
   liquidityPanel.innerHTML = `
-    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Native XRP Ledger pool</span><h2>JCS / XRP liquidity</h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
+    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Native XRP Ledger pool</span><h2 class="jcs-pair-title"><span class="jcs-pair-logos" aria-hidden="true"><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="38" height="38"><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="38" height="38"></span><span>JCS / XRP liquidity</span></h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
     <p class="jcs-tool-copy">Add both assets to receive pool-share tokens, or redeem your existing share. Connect the same wallet you used elsewhere: your liquidity is already on the XRP Ledger.</p>
     <div class="jcs-liquidity-workspace">
       <div class="jcs-liquidity-overview">
         <section class="jcs-pool-card" aria-labelledby="jcsPoolTitle"><div class="jcs-card-heading"><h3 id="jcsPoolTitle">Pool overview</h3><span class="jcs-pool-badge">JCS / XRP</span></div>
-          <div class="jcs-pool-stats"><div><span>XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span>JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div></div>
+          <div class="jcs-pool-stats"><div><span><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="20" height="20">XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="20" height="20">JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div></div>
           <dl class="jcs-readout"><div><dt>Pool rate</dt><dd id="jcsPoolRate">—</dd></div><div><dt>Pool trading fee</dt><dd id="jcsPoolFee">—</dd></div><div><dt>Total LP tokens</dt><dd id="jcsPoolTotalLP">—</dd></div></dl>
           <p class="jcs-tool-small" id="jcsPoolEvidence">Checking the current validated ledger…</p>
         </section>
@@ -15450,8 +15450,8 @@ try {
         <select id="jcsLiquidityAction" hidden aria-label="Liquidity action"><option value="deposit">Add XRP and JCS</option><option value="withdraw">Withdraw my XRP and JCS</option></select>
         <div class="jcs-liquidity-form">
           <div id="jcsDepositInput"><p class="jcs-action-explanation">Set the maximum of each asset to deposit. The pool uses both in its current proportion and may use less of one.</p>
-            <label for="jcsDepositXrp">Maximum XRP to deposit</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositXrpAvailable"><span>XRP</span></div><p class="jcs-balance-hint" id="jcsDepositXrpAvailable">Connect your wallet to see available XRP.</p>
-            <label for="jcsDepositJcs">Maximum JCS to deposit</label><div class="jcs-amount-field"><input id="jcsDepositJcs" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositJcsAvailable jcsDepositHelp"><span>JCS</span></div><p class="jcs-balance-hint" id="jcsDepositJcsAvailable">Connect your wallet to see available JCS.</p>
+            <label for="jcsDepositXrp">Maximum XRP to deposit</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositXrpAvailable"><span><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="20" height="20">XRP</span></div><p class="jcs-balance-hint" id="jcsDepositXrpAvailable">Connect your wallet to see available XRP.</p>
+            <label for="jcsDepositJcs">Maximum JCS to deposit</label><div class="jcs-amount-field"><input id="jcsDepositJcs" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositJcsAvailable jcsDepositHelp"><span><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="20" height="20">JCS</span></div><p class="jcs-balance-hint" id="jcsDepositJcsAvailable">Connect your wallet to see available JCS.</p>
             <div class="jcs-percentage-options" role="group" aria-label="Use available balance"><button type="button" data-deposit-percent="25">25%</button><button type="button" data-deposit-percent="50">50%</button><button type="button" data-deposit-percent="75">75%</button><button type="button" data-deposit-percent="100">Max</button></div>
             <button class="btn jcs-match-amount" type="button" id="jcsMatchDeposit">Match JCS to XRP</button><p class="jcs-tool-small" id="jcsDepositHelp">JCS matches XRP automatically until you edit JCS. Balance shortcuts allow for wallet reserves, the network fee and an extra 1 XRP buffer.</p>
           </div>
@@ -15945,7 +15945,8 @@ try {
     <div class="jcs-receipt-service"><span id="jcsReceiptServiceStatus" class="jcs-tool-small" role="status" aria-live="polite">Checking NFT receipt service…</span><button type="button" class="btn" id="jcsReceiptServiceCheck">Check NFT service</button><small id="jcsReceiptRelease">Receipt tools v5</small></div>
     <form id="jcsReceiptLookup"><label for="jcsReceiptLookupHash">Earlier transaction hash</label><div class="jcs-receipt-lookup-row"><input id="jcsReceiptLookupHash" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" placeholder="Paste the 64-character transaction hash" aria-describedby="jcsReceiptLookupStatus"><button type="submit" class="btn" id="jcsReceiptLookupCheck">Check transaction</button></div></form>
     <p id="jcsReceiptLookupStatus" class="jcs-tool-small" role="status" aria-live="polite"></p>`;
-  trade.querySelector('.jcs-exchange-tabs').insertAdjacentElement('afterend', receiptEntry);
+  // Optional receipts follow the selected trading/liquidity/NFT workspace.
+  trade.appendChild(receiptEntry);
   receiptEntry.dataset.release = RECEIPT_RELEASE;
   const receiptPanel = doc.createElement('section');
   receiptPanel.id = 'jcsReceiptActions'; receiptPanel.className = 'jcs-receipt-actions'; receiptPanel.hidden = false;

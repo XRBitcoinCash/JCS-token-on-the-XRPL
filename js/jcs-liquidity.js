@@ -100,12 +100,12 @@
   liquidityPanel.setAttribute('role', 'tabpanel');
   liquidityPanel.setAttribute('aria-labelledby', 'jcsTabLiquidity');
   liquidityPanel.innerHTML = `
-    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Native XRP Ledger pool</span><h2>JCS / XRP liquidity</h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
+    <div class="jcs-tool-heading"><div><span class="jcs-tool-eyebrow">Native XRP Ledger pool</span><h2 class="jcs-pair-title"><span class="jcs-pair-logos" aria-hidden="true"><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="38" height="38"><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="38" height="38"></span><span>JCS / XRP liquidity</span></h2></div><button class="btn" type="button" id="jcsPoolRefresh">Refresh pool</button></div>
     <p class="jcs-tool-copy">Add both assets to receive pool-share tokens, or redeem your existing share. Connect the same wallet you used elsewhere: your liquidity is already on the XRP Ledger.</p>
     <div class="jcs-liquidity-workspace">
       <div class="jcs-liquidity-overview">
         <section class="jcs-pool-card" aria-labelledby="jcsPoolTitle"><div class="jcs-card-heading"><h3 id="jcsPoolTitle">Pool overview</h3><span class="jcs-pool-badge">JCS / XRP</span></div>
-          <div class="jcs-pool-stats"><div><span>XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span>JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div></div>
+          <div class="jcs-pool-stats"><div><span><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="20" height="20">XRP in the pool</span><strong id="jcsPoolXrp">—</strong></div><div><span><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="20" height="20">JCS in the pool</span><strong id="jcsPoolJcs">—</strong></div></div>
           <dl class="jcs-readout"><div><dt>Pool rate</dt><dd id="jcsPoolRate">—</dd></div><div><dt>Pool trading fee</dt><dd id="jcsPoolFee">—</dd></div><div><dt>Total LP tokens</dt><dd id="jcsPoolTotalLP">—</dd></div></dl>
           <p class="jcs-tool-small" id="jcsPoolEvidence">Checking the current validated ledger…</p>
         </section>
@@ -121,8 +121,8 @@
         <select id="jcsLiquidityAction" hidden aria-label="Liquidity action"><option value="deposit">Add XRP and JCS</option><option value="withdraw">Withdraw my XRP and JCS</option></select>
         <div class="jcs-liquidity-form">
           <div id="jcsDepositInput"><p class="jcs-action-explanation">Set the maximum of each asset to deposit. The pool uses both in its current proportion and may use less of one.</p>
-            <label for="jcsDepositXrp">Maximum XRP to deposit</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositXrpAvailable"><span>XRP</span></div><p class="jcs-balance-hint" id="jcsDepositXrpAvailable">Connect your wallet to see available XRP.</p>
-            <label for="jcsDepositJcs">Maximum JCS to deposit</label><div class="jcs-amount-field"><input id="jcsDepositJcs" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositJcsAvailable jcsDepositHelp"><span>JCS</span></div><p class="jcs-balance-hint" id="jcsDepositJcsAvailable">Connect your wallet to see available JCS.</p>
+            <label for="jcsDepositXrp">Maximum XRP to deposit</label><div class="jcs-amount-field"><input id="jcsDepositXrp" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositXrpAvailable"><span><img class="jcs-token-logo" src="assets/tokens/xrp.svg" alt="" aria-hidden="true" width="20" height="20">XRP</span></div><p class="jcs-balance-hint" id="jcsDepositXrpAvailable">Connect your wallet to see available XRP.</p>
+            <label for="jcsDepositJcs">Maximum JCS to deposit</label><div class="jcs-amount-field"><input id="jcsDepositJcs" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="jcsDepositJcsAvailable jcsDepositHelp"><span><img class="jcs-token-logo" src="jcs-logo.png" alt="" aria-hidden="true" width="20" height="20">JCS</span></div><p class="jcs-balance-hint" id="jcsDepositJcsAvailable">Connect your wallet to see available JCS.</p>
             <div class="jcs-percentage-options" role="group" aria-label="Use available balance"><button type="button" data-deposit-percent="25">25%</button><button type="button" data-deposit-percent="50">50%</button><button type="button" data-deposit-percent="75">75%</button><button type="button" data-deposit-percent="100">Max</button></div>
             <button class="btn jcs-match-amount" type="button" id="jcsMatchDeposit">Match JCS to XRP</button><p class="jcs-tool-small" id="jcsDepositHelp">JCS matches XRP automatically until you edit JCS. Balance shortcuts allow for wallet reserves, the network fee and an extra 1 XRP buffer.</p>
           </div>
