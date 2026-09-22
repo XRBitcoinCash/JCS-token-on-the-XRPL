@@ -7,6 +7,7 @@
   const BACKEND_URL = 'https://xrbitcoincash-github-io.onrender.com';
   const RECEIPT_ROUTE = '/api/jcs-receipts-v1';
   const RECEIPT_RELEASE = 'jcs-nft-render-v5';
+  const RECEIPT_NOTICE = 'Transaction proof only. Not liquidity or LP tokens. Not for resale.';
   const DISPLAY_METADATA = Object.freeze({ schema: 'jcs-receipt-display-v1', name: 'JCS Transaction Receipt',
     description: 'A personal record of a validated JCS/XRP transaction. The source transaction and full receipt details are recorded in the NFT mint transaction memo. Historical receipt only; not a claim to pool funds, a spiritual reward, or an investment guarantee.',
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
@@ -132,7 +133,7 @@
   const receiptEntry = doc.createElement('section');
   receiptEntry.id = 'jcsReceiptEntry'; receiptEntry.className = 'jcs-receipt-entry'; receiptEntry.setAttribute('aria-labelledby', 'jcsReceiptEntryHeading');
   receiptEntry.innerHTML = `<div class="jcs-receipt-entry-heading"><img src="jcs-logo.png" alt="" width="52" height="52"><div><span class="jcs-tool-eyebrow">Keep your transaction record</span><h3 id="jcsReceiptEntryHeading">Create an NFT receipt</h3></div></div>
-    <p class="jcs-tool-small">After a JCS buy, sale, liquidity deposit or withdrawal, your confirmed transaction appears here. You can also find an earlier transaction by its hash.</p>
+    <p class="jcs-tool-small">After a JCS buy, sale, liquidity deposit or withdrawal, your confirmed transaction appears here. You can also find an earlier transaction by its hash. ${RECEIPT_NOTICE}</p>
     <div class="jcs-receipt-service"><span id="jcsReceiptServiceStatus" class="jcs-tool-small" role="status" aria-live="polite">Checking NFT receipt service…</span><button type="button" class="btn" id="jcsReceiptServiceCheck">Check NFT service</button><small id="jcsReceiptRelease">Receipt tools v5</small></div>
     <form id="jcsReceiptLookup"><label for="jcsReceiptLookupHash">Earlier transaction hash</label><div class="jcs-receipt-lookup-row"><input id="jcsReceiptLookupHash" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" placeholder="Paste the 64-character transaction hash" aria-describedby="jcsReceiptLookupStatus"><button type="submit" class="btn" id="jcsReceiptLookupCheck">Check transaction</button></div></form>
     <p id="jcsReceiptLookupStatus" class="jcs-tool-small" role="status" aria-live="polite"></p>`;
@@ -143,11 +144,11 @@
   receiptPanel.id = 'jcsReceiptActions'; receiptPanel.className = 'jcs-receipt-actions'; receiptPanel.hidden = false;
   receiptPanel.setAttribute('aria-labelledby', 'jcsReceiptHeading');
   receiptPanel.innerHTML = `<div class="jcs-receipt-heading"><div><span class="jcs-tool-eyebrow">Your ledger record</span><h3 id="jcsReceiptHeading">Transaction receipt</h3></div><span class="jcs-pool-badge" id="jcsReceiptNetwork"></span></div>
-    <div class="jcs-receipt-preview"><img id="jcsReceiptArtwork" src="jcs-logo.png" alt="Jesus Christ Saves Token receipt artwork" width="112" height="112"><div><span class="jcs-tool-eyebrow" id="jcsReceiptPreviewState">Receipt preview · not minted</span><h4 id="jcsReceiptActionLabel">JCS transaction</h4><p id="jcsReceiptConfirmation" class="jcs-tool-small"></p></div></div>
+    <div class="jcs-receipt-preview"><img id="jcsReceiptArtwork" src="jcs-logo.png" alt="JCS / XRP transaction receipt artwork" width="112" height="112"><div><span class="jcs-tool-eyebrow" id="jcsReceiptPreviewState">Receipt preview · not minted</span><h4 id="jcsReceiptActionLabel">JCS transaction</h4><p id="jcsReceiptConfirmation" class="jcs-tool-small"></p></div></div>
     <p id="jcsReceiptStatus" role="status" aria-live="polite"></p><a id="jcsReceiptHash" class="jcs-nft-id" target="_blank" rel="noopener noreferrer" hidden></a>
-    <p class="jcs-tool-small" id="jcsReceiptMeaning">An optional personal record of your transaction. Minting is a separate network transaction with its own fee.</p>
+    <p class="jcs-tool-small" id="jcsReceiptMeaning">${RECEIPT_NOTICE} Minting is a separate optional transaction with its own network fee.</p>
     <div class="jcs-nft-actions"><button type="button" class="btn primary" id="jcsReceiptMint" aria-describedby="jcsReceiptStatus" disabled>Mint receipt NFT</button><button type="button" class="btn" id="jcsReceiptDownload" aria-describedby="jcsReceiptStatus" disabled>Download receipt JSON</button><button type="button" class="btn" id="jcsReceiptOpenNfts">Open My NFTs</button></div>
-    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">Your receipt has its own artwork and metadata on the existing receipt service. The values come from the validated transaction. Its URI and verification digest are included in the separate mint request.</p>
+    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">${RECEIPT_NOTICE} The JCS / XRP artwork and metadata record the validated transaction. This notice is also included in the NFT mint memo.</p>
       <p class="jcs-tool-small">The receipt includes the public signing wallet and source transaction. It contains no private journal or worship activity.</p>
       <a id="jcsReceiptImageLink" target="_blank" rel="noopener noreferrer">Open full receipt artwork ↗</a><dl class="jcs-readout" id="jcsMintReadout"></dl><details><summary>Receipt JSON &amp; permanent URI</summary><pre id="jcsReceiptJson"></pre><code class="jcs-nft-id" id="jcsReceiptUri"></code></details>
       <p class="jcs-tool-small">Personal receipt: general transfer flag off. XRPL still permits transfers involving its original issuer. This receipt is not a spiritual reward or an investment guarantee.</p>
@@ -176,7 +177,7 @@
     byId('jcsReceiptPreviewState').textContent = 'Receipt preview · not minted';
     byId('jcsReceiptActionLabel').textContent = 'Waiting for a verified transaction';
     byId('jcsReceiptConfirmation').textContent = 'Buy, sell, add liquidity or withdraw liquidity to create a transaction record.';
-    byId('jcsReceiptMeaning').textContent = 'An optional personal record of your transaction. Minting is a separate network transaction with its own fee.';
+    byId('jcsReceiptMeaning').textContent = RECEIPT_NOTICE + ' Minting is a separate optional transaction with its own network fee.';
     const hash = byId('jcsReceiptHash'); hash.textContent = ''; hash.removeAttribute('href'); hash.hidden = true;
     byId('jcsReceiptMint').textContent = 'Mint receipt NFT';
     byId('jcsReceiptMint').disabled = true;
@@ -275,7 +276,7 @@
       const amounts = source.record.assetA.value + ' JCS · ' + source.record.assetB.value + ' XRP' + (source.record.lp ? ' · ' + source.record.lp.value + ' LP tokens' : '');
       byId('jcsReceiptConfirmation').textContent = amounts + ' · Validated ledger #' + source.ledgerIndex + ' · ' + new Date(source.validatedAt).toLocaleString();
       byId('jcsReceiptNetwork').textContent = NETWORK + ' · ledger #' + source.ledgerIndex;
-      byId('jcsReceiptMeaning').textContent = source.kind === 'limit-order' ? 'This records the limit order transaction and any amounts exchanged in that transaction. It does not prove that the remaining order filled. Minting is a separate optional transaction.' : 'This receipt records actual wallet movements from the confirmed transaction. It conveys no ownership of liquidity or redemption rights. Minting is a separate optional transaction.';
+      byId('jcsReceiptMeaning').textContent = RECEIPT_NOTICE + (source.kind === 'limit-order' ? ' This records the limit order transaction and any amounts exchanged in that transaction. It does not prove that the remaining order filled.' : ' This records actual wallet movements from the confirmed transaction and grants no withdrawal or redemption rights.') + ' Minting is a separate optional transaction.';
       byId('jcsReceiptMint').textContent = saved ? 'Check receipt mint on ledger' : 'Mint receipt NFT';
       byId('jcsReceiptMint').disabled = false; byId('jcsReceiptDownload').disabled = false;
       lookupStatus('Transaction verified. Your receipt actions are ready below.');
@@ -390,7 +391,8 @@
       byId('jcsReceiptArtwork').src = published.urls.image; byId('jcsReceiptArtwork').dataset.verified = 'true'; byId('jcsReceiptImageLink').href = published.urls.image;
       const readout = byId('jcsMintReadout'); readout.replaceChildren();
       row(readout, 'JCS moved', selected.record.assetA.value + ' JCS'); row(readout, 'XRP moved', selected.record.assetB.value + ' XRP (network fee excluded)');
-      if (selected.record.lp) row(readout, selected.record.kind === 'deposit' ? 'LP tokens received' : 'LP tokens redeemed', selected.record.lp.value);
+      if (selected.record.lp) row(readout, selected.record.kind === 'deposit' ? 'LP tokens received in source transaction' : 'LP tokens redeemed in source transaction', selected.record.lp.value);
+      row(readout, 'Receipt purpose', RECEIPT_NOTICE);
       row(readout, 'Network fee', Number(limits.fee) / 1000000 + ' XRP'); row(readout, 'Possible extra account reserve', limits.extraReserve + ' XRP (held in your wallet)'); row(readout, 'Available balance buffer', '1 XRP kept available'); row(readout, 'NFT issuer', account); row(readout, 'Taxon', String(TAXON));
       const review = byId('jcsReceiptReview'); review.hidden = false; byId('jcsReceiptSign').disabled = false;
       // The review is below the receipt action row. Bring the complete NFT
