@@ -831,6 +831,18 @@
   let xamanAvailable = false;
   let xamanReady = false;
   let xamanAuthorizing = false;
+  let xamanResetting = false;
+  let xamanGeneration = 0;
+  let xamanAttempt = null;
+  const XAMAN_AUTH_TIMEOUT = 180000;
+
+  function invalidateXamanAttempt() {
+    xamanGeneration++;
+    xamanAuthorizing = false;
+    const attempt = xamanAttempt;
+    xamanAttempt = null;
+    attempt?.cancel();
+  }
   let currentAccount = null;
   let HAS_TRUSTLINE = false;
   let APP_INITIALIZED = false;
@@ -849,7 +861,7 @@
     const connected = !!currentAccount;
     const allowTrade = connected && HAS_TRUSTLINE;
     const canConnect =
-      xamanAvailable && xamanReady && !connected && !xamanAuthorizing;
+      xamanAvailable && (xamanReady || !xumm) && !connected && !xamanAuthorizing && !xamanResetting;
 
     connectButtons.forEach((button) => {
       button.disabled = !canConnect;
@@ -861,11 +873,12 @@
     });
 
     disconnectButtons.forEach((button) => {
-      button.disabled = !connected || xamanAuthorizing;
+      button.disabled = xamanResetting || (!connected && !xamanAuthorizing);
+      button.textContent = xamanResetting ? 'Resetting…' : xamanAuthorizing ? 'Cancel / restart Xaman' : 'Disconnect';
     });
 
     if (headerConnectBtn) headerConnectBtn.hidden = connected;
-    if (headerDisconnectBtn) headerDisconnectBtn.hidden = !connected;
+    if (headerDisconnectBtn) headerDisconnectBtn.hidden = !connected && !xamanAuthorizing && !xamanResetting;
 
     if (walletPill) {
       walletPill.textContent = connected
@@ -982,6 +995,7 @@
   }
 
   function setDisconnected() {
+    invalidateXamanAttempt();
     currentAccount = null;
     window.__jcsWallet = null;
     window.__jcsManualDisconnect = true;
@@ -1001,93 +1015,78 @@
   }
 
 
-  async function resolveXamanAccount(event = null) {
+  async function resolveXamanAccount(event = null, sdk = xumm) {
     const nested = event?.data || event || {};
-    const direct =
-      nested.account ||
-      nested.me?.account ||
-      nested.data?.account ||
-      nested.user?.account ||
-      '';
-
-    if (direct) return String(direct).trim();
-
+    const direct = nested.account || nested.me?.account || nested.data?.account || nested.user?.account || '';
     try {
-      const account = await xumm?.user?.account;
-      return String(account || '').trim();
-    } catch {
-      return '';
-    }
+      const account = direct || await withTimeout(sdk?.user?.account, 12000, 'Xaman has not returned an account.');
+      const address = String(account || '').trim();
+      return /^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(address) ? address : '';
+    } catch { return ''; }
   }
 
-  async function applyXamanIdentity(event = null) {
-    const account = await resolveXamanAccount(event);
-    if (!account) return false;
-    setConnected(account);
+  async function applyXamanIdentity(event = null, sdk = xumm, generation = xamanGeneration) {
+    if (!sdk || sdk !== xumm || xamanResetting || window.__jcsManualDisconnect) return false;
+    const account = await resolveXamanAccount(event, sdk);
+    if (!account || sdk !== xumm || generation !== xamanGeneration ||
+        xamanResetting || window.__jcsManualDisconnect) return false;
+    if (xamanAttempt?.sdk === sdk) xamanAttempt.accept(account);
+    else if (account !== currentAccount) setConnected(account);
     return true;
   }
 
   async function beginXamanConnection(event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    if (!xumm || !xamanAvailable) {
-      setStatus(
-        walletStatus,
-        'The Xaman SDK is unavailable. Reload the page and try again.',
-        'err'
-      );
+    event?.preventDefault();
+    event?.stopPropagation();
+    if (xamanAuthorizing || xamanResetting || currentAccount) return;
+    if (!xamanAvailable) {
+      setStatus(walletStatus, 'The Xaman SDK is unavailable. Reload the page and try again.', 'err');
       return;
     }
-
-    if (!xamanReady) {
-      setStatus(walletStatus, 'Xaman is still loading. Try again in a moment.');
+    try { if (!xumm) installXamanSdk(); }
+    catch (error) {
+      setStatus(walletStatus, 'Xaman could not initialize. Click Connect Xaman to retry.', 'err');
+      updateWalletButtons();
       return;
     }
-
-    if (xamanAuthorizing || currentAccount) return;
-
-    let authorization;
-
-    try {
-      /*
-       * IMPORTANT: authorize() must be invoked directly inside the original
-       * user click. Do not await account/session checks before this call or
-       * browsers may block Xaman's authorization window as an unsolicited popup.
-       */
-      authorization = xumm.authorize();
-    } catch (error) {
-      setStatus(
-        walletStatus,
-        'Xaman could not open authorization: ' +
-          (error?.message || error || 'Unknown error'),
-        'err'
-      );
-      return;
-    }
-
+    const sdk = xumm, generation = ++xamanGeneration;
+    window.__jcsManualDisconnect = false;
     xamanAuthorizing = true;
-    setStatus(walletStatus, 'Opening Xaman authorization…');
+    let resolve, reject;
+    const completed = new Promise((yes, no) => { resolve = yes; reject = no; });
+    const attempt = {
+      sdk,
+      accept: account => {
+        if (xamanAttempt === attempt && sdk === xumm && generation === xamanGeneration) resolve(account);
+      },
+      cancel: () => reject(new Error('Xaman authorization canceled.'))
+    };
+    xamanAttempt = attempt;
+    setStatus(walletStatus, 'Opening Xaman authorization… Cancel / restart is available; the wait is limited to 3 minutes.');
     updateWalletButtons();
-
     try {
-      await authorization;
-
-      const connected = await applyXamanIdentity();
-      if (!connected) {
-        throw new Error('Xaman authorization completed without returning an account.');
+      // Invoke authorize in the original click; SDK events can finish the same attempt.
+      if (sdk.runtime?.xapp === true) {
+        applyXamanIdentity(null, sdk, generation).catch(reject);
+      } else {
+        try {
+          Promise.resolve(sdk.authorize()).then(
+            result => applyXamanIdentity(result, sdk, generation), reject
+          ).catch(reject);
+        } catch (error) { reject(error); }
       }
-    } catch (error) {
-      setStatus(
-        walletStatus,
-        'Xaman connection failed or was canceled: ' +
-          (error?.message || error || 'Unknown error'),
-        'err'
-      );
-    } finally {
+      const account = await withTimeout(completed, XAMAN_AUTH_TIMEOUT, 'Xaman authorization timed out.');
+      if (xamanAttempt !== attempt || sdk !== xumm || generation !== xamanGeneration) return;
+      xamanAttempt = null;
       xamanAuthorizing = false;
+      setConnected(account);
+    } catch (error) {
+      if (xamanAttempt === attempt && generation === xamanGeneration) {
+        await disconnectXaman();
+        setStatus(walletStatus, 'Connection was not completed: ' + (error?.message || error) + ' Click Connect Xaman to retry.', 'err');
+      }
+    } finally {
+      if (xamanAttempt === attempt) { xamanAttempt = null; xamanAuthorizing = false; }
       updateWalletButtons();
     }
   }
@@ -1178,76 +1177,66 @@
   }
 
   async function disconnectXaman() {
-    window.__jcsManualDisconnect = true;
-
-    disconnectButtons.forEach((button) => {
-      button.disabled = true;
-      button.textContent = 'Disconnecting…';
-    });
-
-    try {
-      await Promise.resolve(xumm?.logout());
-    } catch (error) {
-      console.warn('Xaman logout returned an error:', error);
-    } finally {
-      setDisconnected();
-
-      disconnectButtons.forEach((button) => {
-        button.textContent = 'Disconnect';
-        button.disabled = true;
-      });
+    if (xamanResetting) return;
+    if (!xamanAuthorizing && (xamanPayloadInFlight || signingRequestActive || liquiditySigning || nftSigning)) {
+      setStatus(walletStatus, 'Finish or cancel the active Xaman request before disconnecting.');
+      return;
     }
+    if (xumm?.runtime?.xapp === true && !xamanAuthorizing) {
+      setStatus(walletStatus, 'Select the intended wallet in Xaman, then reopen this xApp.');
+      return;
+    }
+    const oldSdk = xumm;
+    xamanResetting = true;
+    xumm = null;
+    xamanReady = false;
+    setDisconnected();
+    updateWalletButtons();
+    try {
+      await withTimeout(Promise.resolve(oldSdk?.logout()), 5000, 'Xaman logout timed out.');
+    } catch (error) {
+      console.warn('Xaman logout did not finish:', error);
+    } finally {
+      try { localStorage.removeItem('XummPkceJwt'); } catch {}
+      xamanResetting = false;
+      updateWalletButtons();
+      setStatus(walletStatus, 'Wallet disconnected. Click Connect Xaman to start again.');
+    }
+  }
+
+  function installXamanSdk() {
+    const sdk = new window.Xumm(XUMM_API_KEY);
+    xumm = sdk;
+    xamanReady = false;
+    const restore = event => {
+      if (sdk === xumm) applyXamanIdentity(event, sdk).catch(() => {});
+    };
+    sdk.on('ready', () => {
+      if (sdk !== xumm) return;
+      xamanReady = true;
+      updateWalletButtons();
+      restore();
+    });
+    sdk.on('success', restore);
+    sdk.on('retrieved', restore);
+    const loggedOut = () => { if (sdk === xumm) setDisconnected(); };
+    sdk.on('logout', loggedOut);
+    sdk.on('loggedout', loggedOut);
+    sdk.on('error', error => {
+      if (sdk !== xumm) return;
+      if (xamanAttempt?.sdk === sdk) xamanAttempt.cancel();
+      else setStatus(walletStatus, 'Xaman connection error: ' + (error?.message || error || 'Unknown error'), 'err');
+    });
+    return sdk;
   }
 
   if (typeof window.Xumm === 'function' && XUMM_API_KEY) {
     xamanAvailable = true;
-    xumm = new window.Xumm(XUMM_API_KEY);
+    try { installXamanSdk(); }
+    catch (error) { setStatus(walletStatus, 'Xaman could not initialize. Click Connect Xaman to retry.', 'err'); }
     updateWalletButtons();
-
-    xumm.on('ready', async () => {
-      xamanReady = true;
-      updateWalletButtons();
-
-      const connected = await applyXamanIdentity();
-
-      if (!connected && !currentAccount) {
-        setStatus(walletStatus, 'Status: Not connected');
-      }
-    });
-
-    xumm.on('success', async (event) => {
-      await applyXamanIdentity(event);
-    });
-
-    xumm.on('retrieved', async (event) => {
-      await applyXamanIdentity(event);
-    });
-
-    xumm.on('logout', () => {
-      setDisconnected();
-    });
-
-    xumm.on('loggedout', () => {
-      setDisconnected();
-    });
-
-    xumm.on('error', (error) => {
-      setStatus(
-        walletStatus,
-        'Xaman connection error: ' +
-          (error?.message || error || 'Unknown error'),
-        'err'
-      );
-      console.error('JCS Xaman SDK error:', error);
-    });
-
-    window.addEventListener('pageshow', () => {
-      applyXamanIdentity().catch(() => {});
-    });
-
-    window.addEventListener('focus', () => {
-      applyXamanIdentity().catch(() => {});
-    });
+    window.addEventListener('pageshow', () => { applyXamanIdentity().catch(() => {}); });
+    window.addEventListener('focus', () => { applyXamanIdentity().catch(() => {}); });
 
     connectButtons.forEach((button) => {
       button.addEventListener('click', beginXamanConnection);
