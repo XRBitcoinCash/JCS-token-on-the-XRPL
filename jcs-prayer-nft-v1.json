@@ -1,0 +1,27 @@
+{
+  "schema": "ipfs://QmNpi8rcXEkohca8iXu7zysKKSJYqCvBJn3xJwga8jXqWU",
+  "nftType": "art.v0",
+  "name": "JCS Prayer Witness",
+  "description": "A non-fungible witness of a prayer offered in the name of Jesus Christ. This shared collection metadata supplies the JCS artwork. Each prayer's own words, content commitment and optional details are recorded in its public XRPL mint transaction memos; a separately validated JCS registry transaction makes it discoverable on the prayer wall. The witness represents the prayer and its call to Christ. It does not establish ownership of Christ or measure anyone's faith.",
+  "image": "https://jesuschristsavestoken.com/jcs-logo.png",
+  "external_url": "https://jesuschristsavestoken.com/verify.html",
+  "collection": {
+    "name": "JCS Prayer Witnesses",
+    "family": "Jesus Christ Saves"
+  },
+  "attributes": [
+    {"trait_type": "Purpose", "value": "Prayer and remembrance"},
+    {"trait_type": "Network", "value": "XRP Ledger Mainnet"},
+    {"trait_type": "Prayer record", "value": "Validated mint transaction memos"},
+    {"trait_type": "Public wall", "value": "Separate validated JCS registry transaction"}
+  ],
+  "properties": {
+    "jcs_schema": "jcs-prayer-display-v1",
+    "metadata_scope": "shared collection artwork and description",
+    "individual_prayer_source": "NFTokenMint transaction memos",
+    "prayer_memo_type": "msg",
+    "content_commitment_memo_type": "hash",
+    "registry_app_tag": "JCS_SOCIAL_V6",
+    "ledger_records_and_hosted_artwork_are_separate": true
+  }
+}
