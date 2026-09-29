@@ -2511,6 +2511,50 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
 @media(max-width:1000px){.workspace{display:block!important}.analysis-panel{height:auto!important;max-height:none!important;position:static;overflow:visible}.jcs-map-viewport{height:clamp(410px,62vh,680px)}.jcs-chronology-panel{padding:20px!important}.jcs-chronology-events{max-height:300px}}
 @media(max-width:600px){.jcs-map-controls{padding:12px}.jcs-map-heading h1{font-size:2rem!important}.jcs-map-viewport{height:56dvh;min-height:390px;max-height:600px}.jcs-zoom-tools{right:8px;top:8px;left:8px;max-width:none;justify-content:center;gap:4px;padding:4px}.jcs-zoom-tools button{font-size:.76rem;padding:7px 9px}.jcs-chronology-control{padding:14px 12px}.jcs-map-help{font-size:.68rem;left:5px;right:5px}.jcs-year-entry{gap:6px}.jcs-year-entry button{padding:8px}.jcs-map-expanded .jcs-map-viewport{inset:0;border-radius:0;min-height:0;max-height:none}}
 
+/* Motion echoes the existing red/green Nexus streams and gold core. */
+.jcs-history-nexus{cursor:pointer;outline:none;isolation:isolate}
+.jcs-history-nexus .nexus-memory-glow{fill:#dcbd77;opacity:.11;animation:nexus-memory-breathe 3.8s ease-in-out infinite}
+.nexus-memory-arm,.nexus-memory-arc{fill:none;stroke-width:1.8;stroke-linecap:round;opacity:.65}
+.nexus-memory-arm.harm,.nexus-memory-arc.harm{stroke:#ef8796}.nexus-memory-arm.response,.nexus-memory-arc.response{stroke:#77d4b0}
+.nexus-memory-end.harm,.nexus-memory-particle.harm{fill:#ef8796}.nexus-memory-end.response,.nexus-memory-particle.response{fill:#77d4b0}
+.nexus-memory-orbit{transform-origin:0 0;animation:nexus-memory-orbit 8s linear infinite}
+.nexus-memory-wave{fill:none;stroke-width:1;transform-origin:0 0;pointer-events:none;opacity:0;animation:nexus-memory-wave 4.2s ease-out infinite}
+.nexus-memory-wave.harm{stroke:#ef8796}.nexus-memory-wave.response{stroke:#77d4b0;animation-delay:-2.1s}
+.nexus-memory-core{fill:#e7c778;stroke:#fff0bf;stroke-width:1.3;filter:drop-shadow(0 0 4px #e6bf7590)}
+.nexus-memory-cross{fill:none;stroke:#172432;stroke-width:1.4;stroke-linecap:round}
+.nexus-memory-particle{pointer-events:none;opacity:0;animation:nexus-memory-harm 2.8s ease-in-out infinite;animation-delay:var(--nexus-phase,0s)}
+.nexus-memory-particle.response{animation-name:nexus-memory-response}
+.nexus-memory-particle.echo{animation-delay:calc(var(--nexus-phase,0s) - 1.4s)}
+.nexus-memory-label{font:700 7.5px system-ui,sans-serif;letter-spacing:1px;fill:#f0d897;paint-order:stroke;stroke:#081321;stroke-width:2px;stroke-linejoin:round;pointer-events:none}
+.jcs-history-nexus:nth-child(2){--nexus-phase:-.7s}.jcs-history-nexus:nth-child(3){--nexus-phase:-1.1s}
+.jcs-history-nexus:focus .nexus-memory-core,.jcs-history-nexus:hover .nexus-memory-core,.jcs-history-nexus[aria-pressed=true] .nexus-memory-core{stroke:#fff;stroke-width:2.4}
+.jcs-history-nexus:focus .nexus-memory-glow,.jcs-history-nexus[aria-pressed=true] .nexus-memory-glow{opacity:.35}
+.nexus-memory-arrival .nexus-memory-core{animation:nexus-memory-arrival .95s ease-out 1}
+@keyframes nexus-memory-harm{0%{transform:translate(-29px,0);opacity:0}12%{opacity:1}50%{transform:translate(-17px,-6px);opacity:1}90%{opacity:1}100%{transform:translate(-3px,0);opacity:0}}
+@keyframes nexus-memory-response{0%{transform:translate(29px,0);opacity:0}12%{opacity:1}50%{transform:translate(17px,6px);opacity:1}90%{opacity:1}100%{transform:translate(3px,0);opacity:0}}
+@keyframes nexus-memory-orbit{to{transform:rotate(360deg)}}
+@keyframes nexus-memory-breathe{0%,100%{opacity:.10}50%{opacity:.26}}
+@keyframes nexus-memory-wave{0%{transform:scale(.8);opacity:0}20%{opacity:.5}100%{transform:scale(2.3);opacity:0}}
+@keyframes nexus-memory-arrival{0%{stroke-width:5;fill:#fff1ba}100%{stroke-width:1.3;fill:#e7c778}}
+.jcs-nexus-memory-strip{display:flex;gap:5px 15px;flex-wrap:wrap;align-items:center;padding-top:10px;margin-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:.76rem}
+.jcs-nexus-memory-strip strong{color:var(--gold);font-weight:700}.jcs-nexus-memory-strip b{font-variant-numeric:tabular-nums;color:var(--gold)}
+.jcs-nexus-memory-strip .harm-key{color:#ef8796}.jcs-nexus-memory-strip .response-key{color:#77d4b0}
+#jcs-history-nexus-card{border:1px solid #a58b53;border-radius:10px;padding:13px;margin:14px 0;background:var(--surface-2);outline-offset:4px}
+#jcs-history-nexus-card[hidden]{display:none!important}
+.jcs-history-nexus-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#jcs-history-nexus-name{font:400 1.25rem Georgia,serif;margin:0;color:var(--gold)}
+#jcs-history-nexus-close{min-height:44px;min-width:44px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:7px;cursor:pointer;font-size:1.3rem}
+#jcs-history-nexus-card p{font-size:.75rem;margin:8px 0}
+.jcs-nexus-evidence-side{margin-top:12px}.jcs-nexus-evidence-side h4{font:700 .8rem system-ui;margin:0 0 7px}.jcs-nexus-evidence-side.harm h4{color:#ef8796}.jcs-nexus-evidence-side.response h4{color:#77d4b0}
+.jcs-nexus-evidence-side ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}.jcs-nexus-evidence-side button{width:100%;min-height:46px;text-align:left;padding:7px 9px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;font-size:.76rem;cursor:pointer}
+.jcs-nexus-evidence-side button small{display:block;color:var(--muted);font-size:.67rem;margin-bottom:3px}
+body:not([data-timeline=full]) #jcs-chronology-nexus-layer{display:none!important}
+body.jcs-nexus-motion-idle .jcs-history-nexus *{animation-play-state:paused!important}
+html[data-theme=light] .nexus-memory-label{fill:#705315;stroke:#f5f4ed}
+html[data-theme=light] .jcs-nexus-memory-strip .harm-key,html[data-theme=light] .jcs-nexus-evidence-side.harm h4{color:#a32640}
+html[data-theme=light] .jcs-nexus-memory-strip .response-key,html[data-theme=light] .jcs-nexus-evidence-side.response h4{color:#17664c}
+@media(prefers-reduced-motion:reduce){.jcs-history-nexus *{animation:none!important}.nexus-memory-particle,.nexus-memory-wave{display:none}.jcs-history-nexus .nexus-memory-glow{opacity:.16}}
+
 </style>
 </head>
 
@@ -2674,6 +2718,7 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
           <g id="grid-layer" aria-hidden="true"></g>
           <g id="country-layer"></g>
           <g id="jcs-chronology-layer" aria-label="Dated Christian history milestones"></g>
+          <g id="jcs-chronology-nexus-layer" aria-label="Persistent historical Nexus points: suffering and faith or support milestones"></g>
           <g id="history-layer" aria-label="Annual organized violence by country"></g>
           <g id="annual-pressure-layer" aria-label="Annual Christian pressure change, World Watch List 2025 to 2026"></g>
           <g class="map-group" id="media-layer" aria-label="Current media signals"></g>
@@ -2695,7 +2740,8 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
 <div class="jcs-year-entry"><button type="button" id="jcs-year-back" aria-label="Previous year">−1 year</button><label for="jcs-chronology-input">Go to year</label><input id="jcs-chronology-input" type="number" min="1" max="2026" step="1" value="2026" inputmode="numeric"><button type="button" id="jcs-year-forward" aria-label="Next year">+1 year</button></div>
 <div class="jcs-era-shortcuts" role="group" aria-label="Jump to a period"><button type="button" data-era-year="1" data-era-end="312">Early church</button><button type="button" data-era-year="313" data-era-end="999">313–999</button><button type="button" data-era-year="1000" data-era-end="1499">1000–1499</button><button type="button" data-era-year="1500" data-era-end="1899">1500–1899</button><button type="button" data-era-year="1900" data-era-end="2025">1900–2025</button><button type="button" data-era-year="2026" data-era-end="2026">2026</button></div>
 <p id="jcs-chronology-status" role="status" aria-live="polite"></p>
-<p>Selected historical milestones, with sources. Missing years have no invented score. Modern country boundaries provide orientation only.</p>
+<div class="jcs-nexus-memory-strip"><strong>✦ Persistent Nexus <b id="jcs-history-nexus-count">0</b></strong><span class="harm-key">Red · suffering &amp; pressure</span><span class="response-key">Green · faith, support &amp; freedom</span><span id="jcs-history-nexus-summary"></span></div>
+<p>Selected historical milestones, with sources. Nexus points retain their dates as time advances; the opposing motion is symbolic. Modern country boundaries provide orientation only.</p>
 </section>
         <section class="jcs-history-control" id="jcs-history-control" aria-label="Seven-year history controls">
   <div class="jcs-history-topline"><div><h2 id="jcs-history-period">Seven years. Every life matters.</h2><p id="jcs-history-period-subtitle">2020–2026 · seven annual World Watch List editions</p></div><button type="button" class="jcs-history-journey" id="jcs-history-journey">Watch the years unfold <span aria-hidden="true">↗</span></button></div>
@@ -2716,6 +2762,7 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
 
       <aside class="analysis-panel" id="analysis-panel" tabindex="-1" aria-label="Statistics, methods, and sources">
 <section class="panel-section jcs-chronology-panel" id="jcs-chronology-panel" aria-labelledby="jcs-chronology-title">
+<section id="jcs-history-nexus-card" aria-labelledby="jcs-history-nexus-name" tabindex="-1" hidden><div class="jcs-history-nexus-heading"><h3 id="jcs-history-nexus-name">Historical Nexus</h3><button id="jcs-history-nexus-close" type="button" aria-label="Close Nexus details">×</button></div><p id="jcs-history-nexus-dates"></p><p>These regional milestones remain as historical memory. Their dates show when each side entered the record; animation does not mean an earlier conflict is still active.</p><div class="jcs-nexus-evidence-side harm"><h4>Red · Suffering &amp; pressure</h4><ul id="jcs-history-nexus-harm"></ul></div><div class="jcs-nexus-evidence-side response"><h4>Green · Faith, support &amp; freedom</h4><ul id="jcs-history-nexus-response"></ul></div><p>Select a milestone to read its source.</p></section>
 <span class="jcs-country-eyebrow">A witness across generations</span><p class="jcs-chronology-date" id="jcs-chronology-date"></p><h2 id="jcs-chronology-title">Christian history</h2><p id="jcs-chronology-place"></p><div class="jcs-chronology-selected"><p id="jcs-chronology-text"></p><a id="jcs-chronology-source" target="_blank" rel="noopener noreferrer">Read source</a></div>
 <a class="jcs-history-pray" href="./verify.html">Offer a prayer</a><button type="button" class="button" id="jcs-chronology-current">See annual pressure for this year</button>
 <h3 id="jcs-chronology-events-title">Milestones through 2026</h3><ol class="jcs-chronology-events" id="jcs-chronology-events"></ol>
@@ -6023,7 +6070,7 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
 
 
 
-<script id="jcs-chronology-data" type="application/json">{"schema":"jcs-christian-chronology-v1","range":{"from":1,"through":2026},"coverage":"Selected, sourced milestones in Christian history, suffering, reconciliation and religious freedom. This is not an exhaustive record or an annual persecution index.","geography":"Approximate reference locations on modern geography, not historical borders, population coverage or travel routes.","events":[{"id":"pentecost","year":33,"date":"First century · c. AD 33","kind":"community","title":"The first Christian community","place":"Jerusalem","lon":35.23,"lat":31.78,"summary":"Acts describes the disciples gathering at Pentecost and a community forming around prayer, teaching and fellowship. The placement around AD 33 is approximate; Acts does not give a calendar year.","source":"Acts 2 · USCCB","url":"https://bible.usccb.org/bible/readings/051516-pentecost-day.cfm"},{"id":"rome64","year":64,"date":"AD 64","kind":"suffering","title":"Persecution under Nero","place":"Rome","lon":12.5,"lat":41.9,"summary":"After the fire of Rome, Nero persecuted Christians in the capital. This marker records that episode without estimating a death toll.","source":"Pontifical Biblical Commission","url":"https://press.vatican.va/roman_curia/congregations/cfaith/pcb_documents/rc_con_cfaith_doc_20020212_popolo-ebraico_en.html"},{"id":"armenia","year":301,"date":"AD 301 · traditional date","kind":"community","title":"Armenia embraces Christianity","place":"Armenia · Etchmiadzin reference","lon":44.29,"lat":40.17,"summary":"Armenian tradition dates the conversion associated with Gregory the Illuminator and King Tiridates III to 301. The date is explicitly presented as traditional.","source":"Holy See · Baptism of Armenia","url":"https://www.vatican.va/content/john-paul-ii/en/apost_letters/2001/documents/hf_jp-ii_apl_20010217_battesimo-armenia.html"},{"id":"milan","year":313,"date":"AD 313","kind":"freedom","title":"The Edict of Milan","place":"Milan","lon":9.19,"lat":45.46,"summary":"The settlement associated with Constantine and Licinius marked a change from imperial persecution toward toleration of Christianity.","source":"Holy See · In Unitate Fidei","url":"https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251123-in-unitate-fidei.html"},{"id":"nicaea","year":325,"date":"AD 325","kind":"community","title":"The Council of Nicaea","place":"Nicaea · present-day İznik","lon":29.72,"lat":40.43,"summary":"Bishops gathered at Nicaea and formulated a profession of Christian faith. Some participants still bore the injuries of earlier persecution.","source":"Holy See · In Unitate Fidei","url":"https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251123-in-unitate-fidei.html"},{"id":"aksum","year":330,"date":"Around AD 330 · approximate","kind":"community","title":"Christianity in Aksum","place":"Aksum · present-day Ethiopia","lon":38.72,"lat":14.13,"summary":"The Aksumite kingdom adopted Christianity during the fourth century. The Metropolitan Museum places the conversion around 330; this is an approximate milestone.","source":"The Metropolitan Museum of Art","url":"https://www.metmuseum.org/art/collection/search/318333"},{"id":"china635","year":635,"date":"AD 635","kind":"community","title":"Christian communities reach China","place":"Chang’an · present-day Xi’an","lon":108.94,"lat":34.34,"summary":"The inscription on the later Xi’an stele records Christians arriving in the capital in 635 and receiving permission to establish churches.","source":"Australian Museum · stele inscription","url":"https://australian.museum/learn/cultures/international-collection/chinese/nestorian-stele-inscription-b11298/"},{"id":"china845","year":845,"date":"AD 845","kind":"suffering","title":"Religious suppression in Tang China","place":"Tang China · Xi’an reference","lon":108.94,"lat":34.34,"summary":"Emperor Wuzong’s measures banned Christianity alongside other religions and confiscated religious property, according to the Australian Museum’s account.","source":"Australian Museum · stele inscription","url":"https://australian.museum/learn/cultures/international-collection/chinese/nestorian-stele-inscription-b11298/"},{"id":"moravia","year":863,"date":"Around AD 863 · approximate","kind":"community","title":"Cyril and Methodius in Greater Moravia","place":"Greater Moravia · regional reference","lon":17.15,"lat":48.8,"summary":"Cyril and Methodius brought their mission and Slavonic liturgical texts to Greater Moravia, probably by 863. The point represents the region, not an exact event site.","source":"Holy See · Slavorum Apostoli","url":"https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_19850602_slavorum-apostoli.html"},{"id":"1054","year":1054,"date":"AD 1054","kind":"division","title":"A rupture between East and West","place":"Constantinople · present-day Istanbul","lon":28.98,"lat":41.01,"summary":"Excommunications exchanged in 1054 became a lasting symbol of division. The 1965 joint declaration explains that the censures concerned people and that estrangement developed over time.","source":"Joint Catholic–Orthodox declaration","url":"https://www.vatican.va/content/paul-vi/en/speeches/1965/documents/hf_p-vi_spe_19651207_common-declaration.html"},{"id":"1453","year":1453,"date":"AD 1453","kind":"change","title":"The fall of Constantinople","place":"Constantinople · present-day Istanbul","lon":28.98,"lat":41.01,"summary":"The Ottoman conquest of Constantinople ended the Byzantine Empire and changed the setting in which its Christian communities lived.","source":"Library of Congress · Renaissance guide","url":"https://guides.loc.gov/renaissance-era-resources"},{"id":"reformation","year":1517,"date":"AD 1517","kind":"change","title":"The Reformation","place":"Wittenberg","lon":12.64,"lat":51.87,"summary":"Martin Luther’s Ninety-Five Theses became a central document of the Protestant Reformation, a turning point in Christian and European history.","source":"Library of Congress · Ninety-Five Theses","url":"https://www.loc.gov/item/2021667736"},{"id":"guadalupe","year":1531,"date":"AD 1531 · Catholic tradition","kind":"community","title":"The Guadalupe tradition","place":"Tepeyac · present-day Mexico City","lon":-99.12,"lat":19.48,"summary":"Catholic tradition associates Juan Diego and the apparitions of Our Lady of Guadalupe with Tepeyac in 1531. This records a religious tradition and its place in Christian devotion.","source":"Holy See · Juan Diego biography","url":"https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020731_juan-diego_en.html"},{"id":"nagasaki","year":1597,"date":"5 February 1597","kind":"suffering","title":"The martyrs of Nagasaki","place":"Nagasaki","lon":129.87,"lat":32.75,"summary":"Paul Miki and his companions were executed at Nagasaki during persecution of Christians in Japan. Their witness is commemorated in Christian tradition.","source":"Holy See · martyrs record","url":"https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/002.html"},{"id":"uganda","year":1886,"date":"3 June 1886","kind":"suffering","title":"The martyrs at Namugongo","place":"Namugongo · present-day Uganda","lon":32.67,"lat":0.39,"summary":"Christian martyrs are remembered at Namugongo for executions in 1886. The cited record describes this episode within the wider persecution of 1885–1887.","source":"Holy See · In Africam quisnam","url":"https://www.vatican.va/content/benedict-xv/it/briefs/documents/hf_ben-xv_briefs_19200606_africam-quisnam.html"},{"id":"rights1948","year":1948,"date":"10 December 1948","kind":"freedom","title":"Freedom of thought, conscience and religion","place":"Paris · declaration adopted","lon":2.35,"lat":48.86,"summary":"The United Nations adopted the Universal Declaration of Human Rights. Article 18 recognizes freedom of thought, conscience and religion for everyone.","source":"United Nations · Universal Declaration","url":"https://www.un.org/en/about-us/universal-declaration-of-human-rights"},{"id":"reconciliation1965","year":1965,"date":"7 December 1965","kind":"freedom","title":"A step toward reconciliation","place":"Rome and Istanbul · Rome reference","lon":12.45,"lat":41.9,"summary":"A joint Catholic–Orthodox declaration set aside the memory of the 1054 excommunications. It acknowledged that differences between the churches remained.","source":"Joint Catholic–Orthodox declaration","url":"https://www.vatican.va/content/paul-vi/en/speeches/1965/documents/hf_p-vi_spe_19651207_common-declaration.html"},{"id":"today2026","year":2026,"date":"2026 edition","kind":"evidence","title":"Christian communities today","place":"Worldwide · country data in Annual pressure","summary":"Open Annual pressure for the loaded 2020–2026 World Watch List editions, or Violence & peace for the loaded 2019–2025 UCDP records. These annual series do not measure earlier centuries.","source":"Open Doors · World Watch List","url":"https://www.opendoors.org/en-US/persecution/countries/"}]}</script>
+<script id="jcs-chronology-data" type="application/json">{"schema":"jcs-christian-chronology-v1","range":{"from":1,"through":2026},"coverage":"Selected, sourced milestones in Christian history, suffering, reconciliation and religious freedom. This is not an exhaustive record or an annual persecution index.","geography":"Approximate reference locations on modern geography, not historical borders, population coverage or travel routes.","events":[{"id":"pentecost","year":33,"date":"First century · c. AD 33","kind":"community","title":"The first Christian community","place":"Jerusalem","lon":35.23,"lat":31.78,"summary":"Acts describes the disciples gathering at Pentecost and a community forming around prayer, teaching and fellowship. The placement around AD 33 is approximate; Acts does not give a calendar year.","source":"Acts 2 · USCCB","url":"https://bible.usccb.org/bible/readings/051516-pentecost-day.cfm"},{"id":"rome64","year":64,"date":"AD 64","kind":"suffering","title":"Persecution under Nero","place":"Rome","lon":12.5,"lat":41.9,"summary":"After the fire of Rome, Nero persecuted Christians in the capital. This marker records that episode without estimating a death toll.","source":"Pontifical Biblical Commission","url":"https://press.vatican.va/roman_curia/congregations/cfaith/pcb_documents/rc_con_cfaith_doc_20020212_popolo-ebraico_en.html"},{"id":"armenia","year":301,"date":"AD 301 · traditional date","kind":"community","title":"Armenia embraces Christianity","place":"Armenia · Etchmiadzin reference","lon":44.29,"lat":40.17,"summary":"Armenian tradition dates the conversion associated with Gregory the Illuminator and King Tiridates III to 301. The date is explicitly presented as traditional.","source":"Holy See · Baptism of Armenia","url":"https://www.vatican.va/content/john-paul-ii/en/apost_letters/2001/documents/hf_jp-ii_apl_20010217_battesimo-armenia.html"},{"id":"milan","year":313,"date":"AD 313","kind":"freedom","title":"The Edict of Milan","place":"Milan","lon":9.19,"lat":45.46,"summary":"The settlement associated with Constantine and Licinius marked a change from imperial persecution toward toleration of Christianity.","source":"Holy See · In Unitate Fidei","url":"https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251123-in-unitate-fidei.html"},{"id":"nicaea","year":325,"date":"AD 325","kind":"community","title":"The Council of Nicaea","place":"Nicaea · present-day İznik","lon":29.72,"lat":40.43,"summary":"Bishops gathered at Nicaea and formulated a profession of Christian faith. Some participants still bore the injuries of earlier persecution.","source":"Holy See · In Unitate Fidei","url":"https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251123-in-unitate-fidei.html"},{"id":"aksum","year":330,"date":"Around AD 330 · approximate","kind":"community","title":"Christianity in Aksum","place":"Aksum · present-day Ethiopia","lon":38.72,"lat":14.13,"summary":"The Aksumite kingdom adopted Christianity during the fourth century. The Metropolitan Museum places the conversion around 330; this is an approximate milestone.","source":"The Metropolitan Museum of Art","url":"https://www.metmuseum.org/art/collection/search/318333"},{"id":"china635","year":635,"date":"AD 635","kind":"community","title":"Christian communities reach China","place":"Chang’an · present-day Xi’an","lon":108.94,"lat":34.34,"summary":"The inscription on the later Xi’an stele records Christians arriving in the capital in 635 and receiving permission to establish churches.","source":"Australian Museum · stele inscription","url":"https://australian.museum/learn/cultures/international-collection/chinese/nestorian-stele-inscription-b11298/"},{"id":"china845","year":845,"date":"AD 845","kind":"suffering","title":"Religious suppression in Tang China","place":"Tang China · Xi’an reference","lon":108.94,"lat":34.34,"summary":"Emperor Wuzong’s measures banned Christianity alongside other religions and confiscated religious property, according to the Australian Museum’s account.","source":"Australian Museum · stele inscription","url":"https://australian.museum/learn/cultures/international-collection/chinese/nestorian-stele-inscription-b11298/"},{"id":"moravia","year":863,"date":"Around AD 863 · approximate","kind":"community","title":"Cyril and Methodius in Greater Moravia","place":"Greater Moravia · regional reference","lon":17.15,"lat":48.8,"summary":"Cyril and Methodius brought their mission and Slavonic liturgical texts to Greater Moravia, probably by 863. The point represents the region, not an exact event site.","source":"Holy See · Slavorum Apostoli","url":"https://www.vatican.va/content/john-paul-ii/en/encyclicals/documents/hf_jp-ii_enc_19850602_slavorum-apostoli.html"},{"id":"1054","year":1054,"date":"AD 1054","kind":"division","title":"A rupture between East and West","place":"Constantinople · present-day Istanbul","lon":28.98,"lat":41.01,"summary":"Excommunications exchanged in 1054 became a lasting symbol of division. The 1965 joint declaration explains that the censures concerned people and that estrangement developed over time.","source":"Joint Catholic–Orthodox declaration","url":"https://www.vatican.va/content/paul-vi/en/speeches/1965/documents/hf_p-vi_spe_19651207_common-declaration.html"},{"id":"1453","year":1453,"date":"AD 1453","kind":"change","title":"The fall of Constantinople","place":"Constantinople · present-day Istanbul","lon":28.98,"lat":41.01,"summary":"The Ottoman conquest of Constantinople ended the Byzantine Empire and changed the setting in which its Christian communities lived.","source":"Library of Congress · Renaissance guide","url":"https://guides.loc.gov/renaissance-era-resources"},{"id":"reformation","year":1517,"date":"AD 1517","kind":"change","title":"The Reformation","place":"Wittenberg","lon":12.64,"lat":51.87,"summary":"Martin Luther’s Ninety-Five Theses became a central document of the Protestant Reformation, a turning point in Christian and European history.","source":"Library of Congress · Ninety-Five Theses","url":"https://www.loc.gov/item/2021667736"},{"id":"guadalupe","year":1531,"date":"AD 1531 · Catholic tradition","kind":"community","title":"The Guadalupe tradition","place":"Tepeyac · present-day Mexico City","lon":-99.12,"lat":19.48,"summary":"Catholic tradition associates Juan Diego and the apparitions of Our Lady of Guadalupe with Tepeyac in 1531. This records a religious tradition and its place in Christian devotion.","source":"Holy See · Juan Diego biography","url":"https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020731_juan-diego_en.html"},{"id":"nagasaki","year":1597,"date":"5 February 1597","kind":"suffering","title":"The martyrs of Nagasaki","place":"Nagasaki","lon":129.87,"lat":32.75,"summary":"Paul Miki and his companions were executed at Nagasaki during persecution of Christians in Japan. Their witness is commemorated in Christian tradition.","source":"Holy See · martyrs record","url":"https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/002.html"},{"id":"uganda","year":1886,"date":"3 June 1886","kind":"suffering","title":"The martyrs at Namugongo","place":"Namugongo · present-day Uganda","lon":32.67,"lat":0.39,"summary":"Christian martyrs are remembered at Namugongo for executions in 1886. The cited record describes this episode within the wider persecution of 1885–1887.","source":"Holy See · In Africam quisnam","url":"https://www.vatican.va/content/benedict-xv/it/briefs/documents/hf_ben-xv_briefs_19200606_africam-quisnam.html"},{"id":"rights1948","year":1948,"date":"10 December 1948","kind":"freedom","title":"Freedom of thought, conscience and religion","place":"Paris · declaration adopted","lon":2.35,"lat":48.86,"summary":"The United Nations adopted the Universal Declaration of Human Rights. Article 18 recognizes freedom of thought, conscience and religion for everyone.","source":"United Nations · Universal Declaration","url":"https://www.un.org/en/about-us/universal-declaration-of-human-rights"},{"id":"reconciliation1965","year":1965,"date":"7 December 1965","kind":"freedom","title":"A step toward reconciliation","place":"Rome and Istanbul · Rome reference","lon":12.45,"lat":41.9,"summary":"A joint Catholic–Orthodox declaration set aside the memory of the 1054 excommunications. It acknowledged that differences between the churches remained.","source":"Joint Catholic–Orthodox declaration","url":"https://www.vatican.va/content/paul-vi/en/speeches/1965/documents/hf_p-vi_spe_19651207_common-declaration.html"},{"id":"today2026","year":2026,"date":"2026 edition","kind":"evidence","title":"Christian communities today","place":"Worldwide · country data in Annual pressure","summary":"Open Annual pressure for the loaded 2020–2026 World Watch List editions, or Violence & peace for the loaded 2019–2025 UCDP records. These annual series do not measure earlier centuries.","source":"Open Doors · World Watch List","url":"https://www.opendoors.org/en-US/persecution/countries/"}],"nexus":{"schema":"jcs-historical-nexus-v1","method":"Cumulative regional juxtaposition of selected, sourced historical milestones. A Nexus begins when both suffering and faith/support milestones are present by the selected year. Its persistence remembers the dated context; it does not indicate an ongoing conflict, a causal response, a route, or the relative strength of either side. Neutral change and division milestones do not count as harm.","harmKinds":["suffering"],"responseKinds":["community","freedom"],"regions":[{"id":"mediterranean","name":"Mediterranean","lon":20.5,"lat":37.0,"eventIds":["pentecost","rome64","milan","nicaea","reconciliation1965"]},{"id":"east-asia","name":"East Asia","lon":119.0,"lat":33.5,"eventIds":["china635","china845","nagasaki"]},{"id":"east-africa","name":"East Africa","lon":35.7,"lat":7.3,"eventIds":["aksum","uganda"]}]}}</script>
 <script id="jcs-map-navigation">
 (() => {
   'use strict';
@@ -6091,29 +6138,137 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
 })();
 
 </script>
+<script id="jcs-historical-nexus">
+/* Persistent historical Nexus: dated context grouped by region, never a score. */
+function createHistoricalNexus(options) {
+  'use strict';
+  const {document, make, data, getYear, getEvents, onEvent, onChange}=options;
+  const $=id=>document.getElementById(id), layer=$('jcs-chronology-nexus-layer');
+  const nodes=new Map(), regions=data.nexus.regions;
+  let selected=null,active=[];
+  const present=()=>getEvents().filter(e=>e.year<=getYear());
+  function state(){
+    const events=present();
+    return regions.map(region=>{
+      const rows=events.filter(e=>region.eventIds.includes(e.id));
+      const harm=rows.filter(e=>data.nexus.harmKinds.includes(e.kind));
+      const response=rows.filter(e=>data.nexus.responseKinds.includes(e.kind));
+      return {...region,harm,response,born:Math.max(harm[0]?.year||Infinity,response[0]?.year||Infinity)};
+    }).filter(region=>region.harm.length&&region.response.length);
+  }
+  function pulse(node){
+    node.classList.remove('nexus-memory-arrival');
+    void node.getBoundingClientRect();
+    node.classList.add('nexus-memory-arrival');
+  }
+  function glyph(){
+    const sized=make('g',{'data-nexus-size':''});
+    sized.append(make('circle',{r:32,fill:'transparent',class:'nexus-memory-hit'}));
+    sized.append(make('circle',{r:17,class:'nexus-memory-glow'}));
+    sized.append(make('circle',{r:13,class:'nexus-memory-wave harm'}));
+    sized.append(make('circle',{r:13,class:'nexus-memory-wave response'}));
+    sized.append(make('path',{d:'M -29 0 C -20 -9 -10 -9 -3 0',class:'nexus-memory-arm harm'}));
+    sized.append(make('path',{d:'M 29 0 C 20 9 10 9 3 0',class:'nexus-memory-arm response'}));
+    sized.append(make('circle',{cx:-29,cy:0,r:3.5,class:'nexus-memory-end harm'}));
+    sized.append(make('circle',{cx:29,cy:0,r:3.5,class:'nexus-memory-end response'}));
+    const rotor=make('g',{class:'nexus-memory-orbit'});
+    rotor.append(make('path',{d:'M 0 -13 A 13 13 0 0 0 0 13',class:'nexus-memory-arc harm'}));
+    rotor.append(make('path',{d:'M 0 13 A 13 13 0 0 0 0 -13',class:'nexus-memory-arc response'}));
+    sized.append(rotor);
+    for(const side of ['harm','response'])for(let i=0;i<2;i++)sized.append(make('circle',{r:2.6,class:'nexus-memory-particle '+side+(i?' echo':'')}));
+    sized.append(make('circle',{r:7,class:'nexus-memory-core'}));
+    sized.append(make('path',{d:'M 0 -4 V 4 M -3 0 H 3',class:'nexus-memory-cross'}));
+    const label=make('text',{y:37,'text-anchor':'middle',class:'nexus-memory-label'});label.textContent='NEXUS';sized.append(label);
+    return sized;
+  }
+  function scale(){
+    const map=$('world-map'),matrix=map.getScreenCTM();
+    const factor=(map.getBoundingClientRect().width<600?.58:.78)/Math.max(.001,matrix?.a||1);
+    for(const n of nodes.values())n.sized.setAttribute('transform','scale('+factor+')');
+  }
+  function select(id,zoom=true){
+    const region=active.find(n=>n.id===id);if(!region)return;
+    selected=id;render();
+    if(zoom)window.JCSMapViewport.focus(region.lon,region.lat);
+    const card=$('jcs-history-nexus-card');card.focus({preventScroll:true});
+    if(matchMedia('(max-width:1000px)').matches)card.scrollIntoView({block:'nearest',behavior:'auto'});
+    onChange();
+  }
+  function detail(){
+    const region=active.find(n=>n.id===selected),card=$('jcs-history-nexus-card');card.hidden=!region;
+    if(!region)return;
+    $('jcs-history-nexus-name').textContent=region.name+' Nexus';
+    $('jcs-history-nexus-dates').textContent='First joined in AD '+region.born+' · retained through AD '+getYear();
+    for(const [side,rows] of [['harm',region.harm],['response',region.response]]){
+      const list=$('jcs-history-nexus-'+side);list.replaceChildren();
+      rows.forEach(event=>{
+        const li=document.createElement('li'),button=document.createElement('button'),date=document.createElement('small');
+        button.type='button';date.textContent=event.date;
+        button.append(date,document.createTextNode(event.title));
+        button.addEventListener('click',()=>{selected=null;detail();render();onEvent(event.id);});li.append(button);list.append(li);
+      });
+    }
+  }
+  function render(){
+    active=state();const ids=new Set(active.map(r=>r.id));
+    for(const [id,n] of nodes)n.g.style.display=ids.has(id)?'':'none';
+    if(selected&&!ids.has(selected))selected=null;
+    for(const region of active){
+      let n=nodes.get(region.id),fresh=false;
+      if(!n){
+        const g=make('g',{class:'jcs-history-nexus',role:'button',tabindex:'0','data-nexus-id':region.id,transform:'translate('+((region.lon+180)/360*1000)+' '+((90-region.lat)/180*500)+')'}),title=make('title'),sized=glyph();
+        g.append(title,sized);layer.append(g);n={g,title,sized,signature:''};nodes.set(region.id,n);fresh=true;
+        g.addEventListener('click',()=>select(region.id));
+        g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(region.id);}});
+      }
+      n.g.style.display='';n.g.setAttribute('aria-pressed',String(selected===region.id));
+      n.g.setAttribute('aria-label',region.name+' historical Nexus: '+region.harm.length+' suffering milestones and '+region.response.length+' faith or support milestones, through '+getYear()+'. Open dated sources.');
+      n.title.textContent=region.name+' · historical Nexus\nRed: '+region.harm.map(e=>e.date+' — '+e.title).join('; ')+'\nGreen: '+region.response.map(e=>e.date+' — '+e.title).join('; ');
+      const signature=[...region.harm,...region.response].map(e=>e.id).sort().join('|');
+      if(fresh||(n.signature&&n.signature!==signature))pulse(n.g);
+      n.signature=signature;
+    }
+    $('jcs-history-nexus-count').textContent=String(active.length);
+    $('jcs-history-nexus-summary').textContent=active.length?'Select a gold Nexus to see both sides and their dates.':'A Nexus appears when this timeline contains both sides in a region.';
+    detail();scale();
+  }
+  $('jcs-history-nexus-close').addEventListener('click',()=>{selected=null;render();onChange();});
+  return {render,scale,select,clearSelection:()=>{selected=null;detail();},snapshot:()=>({method:data.nexus.method,selected,points:state().map(r=>({id:r.id,name:r.name,bornYear:r.born,throughYear:getYear(),harmEventIds:r.harm.map(e=>e.id),responseEventIds:r.response.map(e=>e.id),position:{longitude:r.lon,latitude:r.lat}}))})};
+}
+
+</script>
 <script id="jcs-full-chronology">
 (() => {
   'use strict';
   const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
   const data=JSON.parse($('jcs-chronology-data').textContent),events=data.events.slice().sort((a,b)=>a.year-b.year);
-  const layer=$('jcs-chronology-layer');let year=2026,selected='today2026',timer=0,playing=false;
+  const layer=$('jcs-chronology-layer'),markerNodes=new Map();let year=2026,selected='today2026',timer=0,playing=false;
   const full=()=>document.body.dataset.timeline==='full';
   const available=()=>events.filter(e=>e.year<=year);
   const make=(tag,attrs={})=>{const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,String(v)));return n;};
   function stop(){clearTimeout(timer);playing=false;$('jcs-chronology-play').textContent='Play history';$('jcs-chronology-play').setAttribute('aria-pressed','false');}
-  function machine(){if(!full())return;$('jcs-history-state').textContent=JSON.stringify({schema:'jcs-map-full-history-v1',view:'chronology',range:data.range,displayedYear:year,selectedEvent:selected,coverage:data.coverage,geography:data.geography,eventIds:available().map(e=>e.id),currentOverlaysSeparate:$('jcs-live-over-history').checked,annualData:{christianPressure:[2020,2026],organizedViolence:[2019,2025]}});}
-  function markerScale(){const w=$('world-map').viewBox.baseVal.width,scale=Math.max(.06,w/1000);layer.querySelectorAll('[data-marker-size]').forEach(n=>n.setAttribute('transform','scale('+scale+')'));}
-  function select(id,zoom=true){const e=available().find(x=>x.id===id);if(!e)return;selected=id;render();if(zoom&&Number.isFinite(e.lon))window.JCSMapViewport.focus(e.lon,e.lat);}
+  const nexus=createHistoricalNexus({document,make,data,getYear:()=>year,getEvents:()=>events,onEvent:id=>select(id),onChange:machine});
+  function machine(){if(!full())return;$('jcs-history-state').textContent=JSON.stringify({schema:'jcs-map-full-history-v1',view:'chronology',range:data.range,displayedYear:year,selectedEvent:selected,coverage:data.coverage,geography:data.geography,eventIds:available().map(e=>e.id),historicalNexus:nexus.snapshot(),currentOverlaysSeparate:$('jcs-live-over-history').checked,annualData:{christianPressure:[2020,2026],organizedViolence:[2019,2025]}});}
+  function markerScale(){const w=$('world-map').viewBox.baseVal.width,scale=Math.max(.06,w/1000);layer.querySelectorAll('[data-marker-size]').forEach(n=>n.setAttribute('transform','scale('+scale+')'));nexus.scale();}
+  function select(id,zoom=true){const e=available().find(x=>x.id===id);if(!e)return;selected=id;nexus.clearSelection();render();if(zoom&&Number.isFinite(e.lon))window.JCSMapViewport.focus(e.lon,e.lat);}
   function renderMap(){
-    layer.replaceChildren();const groups=new Map();
+    const groups=new Map();
     for(const e of available())if(Number.isFinite(e.lon)){const key=e.lon+','+e.lat;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
-    for(const group of groups.values()){
+    for(const [key,n] of markerNodes)n.g.style.display=groups.has(key)?'':'none';
+    for(const [key,group] of groups){
       const e=group.find(x=>x.id===selected)||group.at(-1),x=(e.lon+180)/360*1000,y=(90-e.lat)/180*500;
-      const g=make('g',{class:'jcs-chronology-marker',role:'button',tabindex:'0','data-kind':e.kind,'data-event-id':e.id,'aria-pressed':String(e.id===selected),'aria-label':e.date+': '+e.title+(group.length>1?' · '+group.length+' milestones at this location':''),transform:'translate('+x+' '+y+')'});
-      const sized=make('g',{'data-marker-size':''}),hit=make('circle',{r:18,fill:'transparent'}),ring=make('circle',{class:'jcs-chronology-ring',r:12}),core=make('circle',{class:'jcs-chronology-core',r:7}),title=make('title');title.textContent=group.map(a=>a.date+' · '+a.title).join('\n');sized.append(hit,ring,core);g.append(title,sized);
-      function choose(){select(e.id);if(group.length>1)$('jcs-chronology-status').textContent=group.length+' milestones share this reference location. Use the dated list below to select each one.';}
-      g.addEventListener('click',choose);g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();choose();}});layer.append(g);
+      let n=markerNodes.get(key);
+      if(!n){
+        const g=make('g',{class:'jcs-chronology-marker',role:'button',tabindex:'0',transform:'translate('+x+' '+y+')'});
+        const sized=make('g',{'data-marker-size':''}),hit=make('circle',{r:18,fill:'transparent'}),ring=make('circle',{class:'jcs-chronology-ring',r:12}),core=make('circle',{class:'jcs-chronology-core',r:7}),title=make('title');
+        sized.append(hit,ring,core);g.append(title,sized);n={g,title,eventId:e.id,group};markerNodes.set(key,n);layer.append(g);
+        const choose=()=>{select(n.eventId);if(n.group.length>1)$('jcs-chronology-status').textContent=n.group.length+' milestones share this reference location. Use the dated list below to select each one.';};
+        g.addEventListener('click',choose);g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();choose();}});
+      }
+      n.eventId=e.id;n.group=group;n.g.style.display='';
+      n.g.setAttribute('data-kind',e.kind);n.g.setAttribute('data-event-id',e.id);n.g.setAttribute('aria-pressed',String(e.id===selected));n.g.setAttribute('aria-label',e.date+': '+e.title+(group.length>1?' · '+group.length+' milestones at this location':''));n.title.textContent=group.map(a=>a.date+' · '+a.title).join('\n');
     }
+    nexus.render();
     markerScale();
   }
   function render(){
@@ -6153,11 +6308,12 @@ body:not([data-timeline=full]) #jcs-chronology-layer,body:not([data-timeline=ful
     const stops=[1,...new Set(events.map(e=>e.year)),2026].filter((v,i,a)=>a.indexOf(v)===i);let i=0;
     const next=()=>{if(!playing||document.hidden||!full()){stop();return;}setYear(stops[i],false);i++;if(i<stops.length)timer=setTimeout(next,2300);else timer=setTimeout(stop,2300);};next();
   });
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});window.addEventListener('pagehide',stop);
+  document.addEventListener('visibilitychange',()=>{document.body.classList.toggle('jcs-nexus-motion-idle',document.hidden);if(document.hidden)stop();});window.addEventListener('pagehide',stop);
   $('jcs-live-over-history').addEventListener('change',machine);
   new MutationObserver(markerScale).observe($('world-map'),{attributes:true,attributeFilter:['viewBox']});
+  if(typeof ResizeObserver==='function')new ResizeObserver(markerScale).observe($('world-map'));
   document.addEventListener('jcs:map-country-selected',e=>{if(full())$('jcs-chronology-status').textContent=(e.detail?.name||'Place')+' selected. Historical markers retain their own dates; annual country scores are under Annual pressure.';});
-  window.JCSFullHistory={setYear,activate,getYear:()=>year};activate();
+  window.JCSFullHistory={setYear,activate,getYear:()=>year,getNexusState:()=>nexus.snapshot()};activate();
 })();
 
 </script>
