@@ -1,0 +1,52 @@
+{
+  "schema": "jcs-observatory-project-coverage-v1",
+  "generatedAt": "2026-09-30",
+  "sourceCommit": "deb0769551fba810c26b9b5e98b1e801aeb1a4c0",
+  "sourcePage": "./prayer.map.html",
+  "timeline": {
+    "from": 1,
+    "through": 2026
+  },
+  "counts": {
+    "historicalAccounts": 194,
+    "polityAreaRecords": 12321,
+    "cityNameRecords": 15182,
+    "modernConflictRecords": 417968
+  },
+  "sources": [
+    {
+      "name": "Seshat Global History Databank \u00b7 Cliopatria v0.1.2",
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria"
+    },
+    {
+      "name": "Pleiades ancient places gazetteer",
+      "url": "https://pleiades.stoa.org/downloads"
+    },
+    {
+      "name": "UCDP datasets",
+      "url": "https://ucdp.uu.se/downloads/"
+    }
+  ],
+  "coverage": "194 sourced historical accounts; 417,968 UCDP event records aggregated for 1989\u20132025; 4,595 modern reference subdivisions; 221 dated labels (194 account-place labels and 27 selected name periods). Historical and administrative chronology coverage remains incomplete. Missing newer evidence retains the prior dated snapshot, not an estimate of current conditions. No 2026 annual death total is fabricated.",
+  "limitations": [
+    "Project dataset coverage, not visitor analytics.",
+    "Historical records, modern conflict records and prayer registrations use different units.",
+    "Historical borders and place names have incomplete and uneven coverage.",
+    "Scriptural imagery is artistic interpretation, not evidence of historical causation."
+  ],
+  "modernSource": {
+    "dataset": "UCDP Georeferenced Event Dataset",
+    "version": "26.1",
+    "range": [
+      1989,
+      2025
+    ],
+    "retrieved": "2026-09-29",
+    "rows": 417968,
+    "countries": 126,
+    "url": "https://ucdp.uu.se/downloads/ged/ged261-csv.zip",
+    "downloadPage": "https://ucdp.uu.se/downloads/index.html",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}
