@@ -12,7 +12,7 @@
   <meta name="jcs-prayer-map-interface" content="5.2.0">
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.frankfurter.dev https://api.exchange.coinbase.com https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; frame-src 'self' https://www.openstreetmap.org https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
+    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.frankfurter.dev https://api.exchange.coinbase.com https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; media-src 'self' https://archive.org https://*.archive.org; frame-src 'self' https://www.openstreetmap.org https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
   >
   <title>JCS Prayer Map · Global Clarity, Prayer Evidence &amp; Current Reporting</title>
   <meta name="description" content="JCS Prayer Map: sourced Christian-pressure research, global violence and humanitarian-response headlines, privacy-thresholded XRPL prayer aggregates, and evidence limits. Media matches are not verified incidents.">
@@ -2600,6 +2600,16 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
 
 
 
+
+/* Direct-file reading: docked beside the map, moved above it on mobile. */
+.jcs-watchers-player{box-sizing:border-box;min-width:0;padding:13px;margin:12px;border:1px solid #786688;border-radius:10px;background:var(--surface-2);color:var(--ink)}
+.jcs-watchers-player summary{cursor:pointer;font:600 .95rem Georgia,serif;color:var(--gold);padding:3px 0}
+.jcs-watchers-player p{font-size:.77rem;line-height:1.5;margin:9px 0}.jcs-watchers-player audio{display:block;width:100%;max-width:100%;height:42px;margin:9px 0}
+.jcs-watchers-player label{display:block;font-size:.76rem;line-height:1.5;margin:8px 0}.jcs-watchers-player select{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;padding:8px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;font:inherit}
+.jcs-watchers-buttons{display:flex;flex-wrap:wrap;gap:6px}.jcs-watchers-buttons button{min-height:40px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font:600 .76rem system-ui;cursor:pointer}
+.jcs-watchers-player a{color:var(--gold);text-decoration:underline}.jcs-watchers-player output{display:block;font-size:.75rem;margin:7px 0;color:var(--muted);font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.jcs-map-controls>.jcs-watchers-player{flex:1 0 100%;width:100%;order:99;margin:10px 0 0}}
+
 /* Scriptural imagery is an independent canvas; evidence geometry is untouched. */
 #atlas-scripture-canvas{position:absolute;pointer-events:none;z-index:3;display:block}
 #atlas-scripture-caption{position:absolute;left:12px;bottom:12px;z-index:4;pointer-events:none;padding:5px 9px;border:1px solid #806879;border-radius:5px;color:#f0dce6;background:#111c2be8;font:11px system-ui,sans-serif}
@@ -2866,6 +2876,20 @@ html[data-theme=light] .atlas-historical-polity{fill:#91722a;stroke:#725a20}
       </section>
 
       <aside class="analysis-panel" id="analysis-panel" tabindex="-1" aria-label="Statistics, methods, and sources">
+
+<section class="jcs-watchers-player" id="jcs-watchers-player" aria-label="The Watchers: Book of Enoch audio">
+<details open><summary>Listen · the fall of the Watchers</summary>
+<p><strong>1 Enoch, chapters 1–19.</strong> Includes the Watchers’ descent in chapter 6, its consequences, judgment, and Enoch’s encounter with them. English reading by CJ Plogue · approximately 30:37.</p>
+<label for="jcs-watchers-track">Reading section<select id="jcs-watchers-track"><option value="0">1–11 · the Watchers descend</option><option value="1">12–19 · Enoch and the Watchers</option></select></label>
+<audio id="jcs-watchers-audio" controls preload="none" src="https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" aria-label="Book of Enoch reading">Your browser does not support audio. Use the direct audio link below.</audio>
+<div class="jcs-watchers-buttons"><button type="button" id="jcs-watchers-play" aria-pressed="false">Play reading</button><button type="button" id="jcs-watchers-restart">Restart</button><button type="button" id="jcs-watchers-mute" aria-pressed="false">Mute</button></div>
+<output id="jcs-watchers-progress" aria-label="Reading elapsed time and total duration">0:00 / 30:37</output>
+<label><input id="jcs-watchers-sync" type="checkbox" checked> Sync AD 1–2026 with the reading</label>
+<p id="jcs-watchers-status" role="status">Ready · press Play reading.</p>
+<p class="atlas-note">The recording sets the pace in synced mode; dense years show representative star descents. All historical records remain available. Turn sync off for the full descent queue. Narration accompanies history symbolically; its chapter timings do not date historical events.</p>
+<p class="atlas-note">Direct MP3 playback · no advertising player. <a id="jcs-watchers-direct" href="https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" target="_blank" rel="noopener noreferrer">Open audio</a> · <a href="https://archive.org/details/bookofenoch_1812_librivox" target="_blank" rel="noopener noreferrer">Recording and credits</a></p>
+</details></section>
+
 <section class="panel-section jcs-chronology-panel" id="jcs-chronology-panel" aria-labelledby="atlas-panel-title">
 <p class="eyebrow">Persistent places · dated evidence</p><h2 id="atlas-panel-title">Follow places.<br>Understand the record.</h2>
 <p class="atlas-reading-key"><strong>Coverage varies by place and period.</strong> Blank or hatched areas do not establish that no violence occurred. Earlier records can contain disputed dates, accounts and numbers; open a Nexus to see attribution. The larger annual dataset begins in 1989. At 2026 its latest complete snapshot is retained and labeled 2025.</p>
@@ -6475,7 +6499,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const geography=createAtlasGeography({data,make:(...args)=>make(...args),layer:$('atlas-geography-layer'),labelLayer:$('atlas-geography-labels'),onSelect:selection=>{stop();selected=selection;if(!full()){document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:selection.iso3||selection.feature?.iso3||selection.label?.iso3}}));return;}const p=selection.feature||selection.label||selection;if(Number.isFinite(p.lon)&&Number.isFinite(p.lat))window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}});
   const colors=['#20374a','#69424b','#89424c','#aa4051','#c8374f','#e32343','#fa6078'];
   let year=2026,playing=false,timer=0,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
-  let scripture=null;
+  let scripture=null,narration=null;
   const full=()=>document.body.dataset.timeline==='full';
   const mode=()=>metric==='auto'?(year>=1989?'deaths':'context'):metric;
   const fmt=n=>Number(n||0).toLocaleString('en-US');
@@ -6557,9 +6581,9 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const history=()=>model.events.filter(canShow);
   const active=()=>history().filter(e=>model.active(e,year));
   const motion=()=>{document.body.classList.toggle('atlas-motion-paused',document.hidden||$('atlas-pause-motion').checked);scripture?.motion();};
-  function stop(){clearTimeout(timer);playing=false;$('jcs-chronology-play').textContent=year>=2026?'Timeline complete':'Play every year';$('jcs-chronology-play').disabled=year>=2026;$('jcs-chronology-play').setAttribute('aria-pressed','false');}
-  function setYear(value,manual=true){const n=Number(value);if(!Number.isFinite(n))return;year=Math.max(1,Math.min(2026,Math.round(n)));if(manual||year===2026)stop();render();}
-  function play(){if(playing){stop();return;}if(year>=2026){stop();return;}playing=true;$('jcs-chronology-play').textContent='Pause years';$('jcs-chronology-play').setAttribute('aria-pressed','true');render();const step=()=>{if(!playing||document.hidden||!full()){stop();return;}if(year>=2026){stop();return;}if(scripture?.isBusy()){timer=setTimeout(step,100);return;}setYear(year+1,false);timer=setTimeout(step,Number($('atlas-speed').value));};timer=setTimeout(step,Number($('atlas-speed').value));}
+  function stop(){clearTimeout(timer);playing=false;$('jcs-chronology-play').textContent=year>=2026?'Timeline complete':'Play every year';$('jcs-chronology-play').disabled=year>=2026;$('jcs-chronology-play').setAttribute('aria-pressed','false');narration?.pauseFromMap();}
+  function setYear(value,manual=true){const n=Number(value);if(!Number.isFinite(n))return;year=Math.max(1,Math.min(2026,Math.round(n)));if(manual||year===2026)stop();if(manual)narration?.seekYear(year);render();}
+  function play(){if(narration?.ownsTimeline()){narration.toggle();return;}if(playing){stop();return;}if(year>=2026){stop();return;}playing=true;$('jcs-chronology-play').textContent='Pause years';$('jcs-chronology-play').setAttribute('aria-pressed','true');render();const step=()=>{if(!playing||document.hidden||!full()){stop();return;}if(year>=2026){stop();return;}if(scripture?.isBusy()){timer=setTimeout(step,100);return;}setYear(year+1,false);timer=setTimeout(step,Number($('atlas-speed').value));};timer=setTimeout(step,Number($('atlas-speed').value));}
   function pickEvent(e,zoom=true){stop();if(e.start>year)year=e.start;selected={kind:'event',id:e.id};if(zoom)window.JCSMapViewport.focus(e.lon,e.lat);render();showDetail();}
   function pickPlace(p){stop();selected={kind:'place',id:p.id};window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}
   function pickCountry(c,zoom=true){stop();country=c.iso3||'';$('atlas-country').value=country;selected={kind:'country',name:c.name};if(zoom&&Number.isFinite(c.lon))window.JCSMapViewport.focus(model.countryNexus(c).lon,model.countryNexus(c).lat);render();showDetail();}
@@ -6773,7 +6797,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     $('jcs-chronology-status').textContent=modern?(hasAnnual?'Annual totals: '+evidenceYear+' · low '+fmt(totals.low)+' / high '+fmt(totals.high)+'. '+(year>2025?'2026 retains the 2025 snapshot; 2026 totals are not loaded. ':'')+'Dashed regional/country markers retain their own last source year and are not added to these totals.':'No annual series before 1989. Historical evidence stays visible.'):'Historical accounts: '+active().length+' dated periods include '+year+'. Earlier evidence stays visible with dashed outlines; it is not treated as continuing violence.';
     $('atlas-shading-note').textContent=modern?'Country totals stay on national reference points. Regional event-group Nexus points show UCDP groups separately from 1989 onward when enabled; country and regional totals are not added together. Earlier dated accounts remain visible in the separate historical layer, so the UCDP series beginning in 1989 does not imply earlier violence began then. Retained values show their source year.':'Historical shading counts documented harm accounts (1 / 2 / 3+); it does not measure a universal oppression score. Evidence stays visible after its recorded interval. Dashed outlines identify retained accounts, not confirmed ongoing activity.';
     $('atlas-death-legend').hidden=!modern;document.querySelectorAll('[data-era-year]').forEach(b=>b.setAttribute('aria-pressed',String(year>=Number(b.dataset.eraYear)&&year<=Number(b.dataset.eraEnd))));
-    $('atlas-context-legend').hidden=modern;detail();list();renderMap();machine();
+    $('atlas-context-legend').hidden=modern;detail();list();renderMap();machine();narration?.refresh();
   }
   function activate(){stop();document.body.dataset.timeline='full';document.body.classList.remove('jcs-recent-visible');const recent=$('jcs-live-over-history');if(recent)recent.checked=false;$('jcs-view-full-history').setAttribute('aria-pressed','true');$('jcs-view-history').setAttribute('aria-pressed','false');$('jcs-view-communities').setAttribute('aria-pressed','false');$('jcs-history-control').hidden=true;$('jcs-history-country').hidden=true;$('jcs-chronology-control').hidden=false;$('jcs-chronology-panel').hidden=false;render();}
   $('jcs-chronology-play').addEventListener('click',play);$('jcs-chronology-slider').addEventListener('input',e=>setYear(e.target.value));$('jcs-chronology-input').addEventListener('change',e=>setYear(e.target.value));$('jcs-year-back').addEventListener('click',()=>setYear(year-1));$('jcs-year-forward').addEventListener('click',()=>setYear(year+1));$('atlas-start').addEventListener('click',()=>setYear(1));$('atlas-latest').addEventListener('click',()=>{metric='auto';$('atlas-metric').value='auto';setYear(2026);});
@@ -6826,7 +6850,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const hash=s=>Array.from(s).reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,7);
     const visible=p=>p&&p.x>=0&&p.x<=width&&p.y>=0&&p.y<=height;
     const origin=i=>({x:width*(.045+.91*((i*.61803398875)%1)),y:19+(i%4)*8});
-    const canMove=()=>enabled&&full()&&!document.hidden&&motionChoice.checked&&!$('atlas-pause-motion').checked&&!tableau;
+    const canMove=()=>enabled&&full()&&!document.hidden&&motionChoice.checked&&!$('atlas-pause-motion').checked&&!tableau&&!narration?.motionPaused();
     const cancel=()=>{if(raf)cancelAnimationFrame(raf);raf=0;lastFrame=0;};
     function geometry(){
       const svg=$('world-map'),rect=svg.getBoundingClientRect(),parent=canvas.parentElement.getBoundingClientRect();
@@ -6902,7 +6926,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         (country?' in the selected area':'')+(flights.length||pending.length?' · '+flights.length+' descending / '+pending.length+' queued':'')+paused+'.':'Canvas is unavailable; text associations remain available.';
     }
     function fillFlights(){
-      const duration=Math.max(850,Math.min(1800,(Number($('atlas-speed').value)||800)*1.3));
+      const duration=narration?.ownsTimeline()?450:Math.max(850,Math.min(1800,(Number($('atlas-speed').value)||800)*1.3));
       while(flights.length<MAX_FLIGHTS&&pending.length){
         const record=pending.shift();if(visible(points.get(record.id)))flights.push({record,elapsed:0,duration});
       }
@@ -6924,11 +6948,12 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       updateStatus();
     }
     function startFlights(rows,replace=false){
-      if(replace){cancel();flights=[];pending=[];}
+      if(replace||narration?.ownsTimeline()){cancel();flights=[];pending=[];}
       if(!canMove()){cancel();flights=[];pending=[];draw();updateStatus();return;}
       const occupied=new Set([...flights.map(f=>f.record.nexusId),...pending.map(r=>r.nexusId)]);
       const unique=new Map();for(const r of rows)if(visible(points.get(r.id))&&!occupied.has(r.nexusId))unique.set(r.nexusId,r);
-      pending.push(...Array.from(unique.values()).sort((a,b)=>Number(b.star===0)-Number(a.star===0)||a.start-b.start||a.id.localeCompare(b.id)));
+      const arrivals=Array.from(unique.values()).sort((a,b)=>Number(b.star===0)-Number(a.star===0)||a.start-b.start||a.id.localeCompare(b.id));
+      pending.push(...(narration?.ownsTimeline()?arrivals.slice(0,MAX_FLIGHTS):arrivals));
       fillFlights();motion();draw();
     }
     function labels(){
@@ -6985,7 +7010,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       const changed=Array.from(targets,([i,r])=>!wasEnabled||oldTargets.get(i)?.id!==r.id?r:null).filter(Boolean);
       const arrivals=reset?Array.from(targets.values()):year!==previousYear?[...seen.filter(activeInYear),...changed]:changed;
       lastYear=year;lastCountry=country;
-      if(!enabled){cancel();flights=[];pending=[];draw();updateStatus();}else if(arrivals.length)startFlights(arrivals,reset);else motion();
+      if(!enabled){cancel();flights=[];pending=[];draw();updateStatus();}else if(arrivals.length||reset)startFlights(arrivals,reset);else motion();
     }
     function sync(){if(disposed)return;geometry();labels();draw();motion();}
     toggle.addEventListener('change',()=>{tableau=false;updateTableauButton();update(true);});
@@ -7001,11 +7026,117 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{update,sync,motion,isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:COUNT,descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'fixed Nexus assignments; 19 Enoch leader names recur across 199 numbered motifs plus Morning Star; artistic association only',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{update,sync,motion,settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:COUNT,descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'fixed Nexus assignments; 19 Enoch leader names recur across 199 numbered motifs plus Morning Star; artistic association only',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+  }
+
+  function createWatchersNarration(){
+    const panel=$('jcs-watchers-player'),audio=$('jcs-watchers-audio'),track=$('jcs-watchers-track');
+    const linked=$('jcs-watchers-sync'),status=$('jcs-watchers-status'),main=$('jcs-watchers-play');
+    const tracks=[
+      {label:'Chapters 1–11 · the Watchers descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
+      {label:'Chapters 12–19 · Enoch and the Watchers',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
+    ];
+    let index=0,started=false,internal=false,pendingSeek=null,request=0,buffering=false,failed=false,complete=false;
+    const total=()=>tracks.reduce((n,t)=>n+t.duration,0),offset=()=>tracks.slice(0,index).reduce((n,t)=>n+t.duration,0);
+    const clock=()=>Math.min(total(),offset()+(Number(audio.currentTime)||0));
+    const time=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
+    const ownsTimeline=()=>started&&linked.checked;
+    function guarded(fn){const previous=internal;internal=true;try{return fn();}finally{internal=previous;}}
+    function refresh(){
+      main.textContent=complete?'Replay reading':audio.paused?'Play reading':'Pause reading';
+      main.setAttribute('aria-pressed',String(!audio.paused));
+      $('jcs-watchers-mute').textContent=audio.muted?'Unmute':'Mute';
+      $('jcs-watchers-mute').setAttribute('aria-pressed',String(audio.muted));
+      $('jcs-watchers-progress').textContent=time(clock())+' / '+time(total());
+      $('jcs-watchers-direct').href=tracks[index].url;
+      if(!failed)status.textContent=complete?'Reading complete.':buffering?'Loading audio…':!started?'Ready · press Play reading.':audio.paused?'Paused.':tracks[index].label+(ownsTimeline()?' · map follows the recording.':' · audio only.');
+      if(ownsTimeline()){
+        const b=$('jcs-chronology-play');b.disabled=false;b.textContent=complete?'Replay narration + map':audio.paused?'Resume narration + map':'Pause narration + map';b.setAttribute('aria-pressed',String(!audio.paused));
+      }
+    }
+    function sync(){
+      if(!ownsTimeline()||pendingSeek!==null||!full())return;
+      const next=complete?2026:1+Math.floor(Math.max(0,Math.min(1,clock()/total()))*2025);
+      if(next!==year)guarded(()=>setYear(next,false));
+    }
+    function fail(error){
+      if(error?.name==='AbortError')return;
+      failed=true;buffering=false;audio.pause();
+      status.textContent='Audio could not start. Try Play reading again, or open the direct audio link below.';
+      refresh();scripture?.motion();
+    }
+    function playAudio(){
+      const attempt=++request;failed=false;buffering=true;
+      if(audio.error){pendingSeek=Number(audio.currentTime)||0;audio.load();}
+      refresh();const promise=audio.play();if(promise?.catch)promise.catch(e=>{if(attempt===request)fail(e);});
+    }
+    function loadTrack(next,seconds=0,resume=false){
+      ++request;index=next;track.value=String(index);complete=false;failed=false;buffering=resume;
+      pendingSeek=seconds;audio.src=tracks[index].url;audio.load();refresh();
+      if(resume)playAudio();
+    }
+    function start(){
+      started=true;complete=false;
+      if(linked.checked)guarded(()=>{if(!full())activate();else stop();setYear(1,false);});
+      loadTrack(0,0,true);
+    }
+    function toggle(){
+      if(!started||complete){start();return;}
+      if(audio.paused)playAudio();else audio.pause();
+    }
+    function pauseFromMap(){if(!internal&&ownsTimeline()){++request;audio.pause();buffering=false;refresh();scripture?.motion();}}
+    function seekYear(value){
+      if(internal||!ownsTimeline())return;
+      const position=Math.max(0,Math.min(1,(value-1)/2025))*total();
+      const next=position>=tracks[0].duration?1:0,seconds=position-(next?tracks[0].duration:0);
+      audio.pause();complete=value===2026;
+      if(next!==index){loadTrack(next,Math.min(seconds,tracks[next].duration),false);complete=value===2026;}
+      else if(audio.readyState>=1){audio.currentTime=Math.min(seconds,audio.duration||tracks[index].duration);}
+      else pendingSeek=seconds;
+      refresh();
+    }
+    audio.addEventListener('loadedmetadata',()=>{
+      if(Number.isFinite(audio.duration)&&audio.duration>0)tracks[index].duration=audio.duration;
+      if(pendingSeek!==null){audio.currentTime=Math.min(pendingSeek,tracks[index].duration);pendingSeek=null;}
+      sync();refresh();
+    });
+    audio.addEventListener('play',()=>{
+      const first=!started;started=true;complete=false;failed=false;
+      if(linked.checked)guarded(()=>{if(!full())activate();else stop();if(first)setYear(1,false);});
+      refresh();scripture?.motion();
+    });
+    audio.addEventListener('playing',()=>{buffering=false;sync();refresh();scripture?.motion();});
+    audio.addEventListener('pause',()=>{buffering=false;refresh();scripture?.motion();});
+    audio.addEventListener('waiting',()=>{buffering=true;refresh();scripture?.motion();});
+    audio.addEventListener('seeking',()=>{buffering=true;});
+    audio.addEventListener('seeked',()=>{buffering=false;sync();refresh();scripture?.motion();});
+    audio.addEventListener('timeupdate',()=>{sync();refresh();});
+    audio.addEventListener('volumechange',refresh);
+    audio.addEventListener('error',()=>fail(audio.error));
+    audio.addEventListener('ended',()=>{
+      if(index<tracks.length-1){loadTrack(index+1,0,true);return;}
+      complete=true;buffering=false;sync();if(ownsTimeline())scripture?.settle();refresh();
+    });
+    main.addEventListener('click',toggle);
+    $('jcs-watchers-restart').addEventListener('click',start);
+    $('jcs-watchers-mute').addEventListener('click',()=>{audio.muted=!audio.muted;refresh();});
+    track.addEventListener('change',()=>{const resume=!audio.paused;started=true;if(linked.checked)guarded(()=>stop());loadTrack(Number(track.value),0,resume);});
+    linked.addEventListener('change',()=>{
+      if(ownsTimeline()){guarded(()=>{if(!full())activate();else stop();});sync();}
+      else if(full())render();refresh();scripture?.motion();
+    });
+    const small=matchMedia('(max-width:1000px)');
+    function position(){const host=small.matches?document.querySelector('.jcs-map-controls'):$('analysis-panel');if(host&&!host.contains(panel)){if(small.matches)host.append(panel);else host.prepend(panel);}}
+    small.addEventListener('change',position);position();refresh();
+    document.addEventListener('visibilitychange',()=>{if(document.hidden&&ownsTimeline())pauseFromMap();});
+    document.addEventListener('jcs:annual-view',pauseFromMap);
+    window.addEventListener('pagehide',()=>{++request;audio.pause();});
+    return{ownsTimeline,toggle,pauseFromMap,seekYear,refresh,motionPaused:()=>ownsTimeline()&&!complete&&(audio.paused||buffering),state:()=>({track:index+1,elapsed:clock(),duration:total(),linked:linked.checked,started,paused:audio.paused,failed})};
   }
 
   scripture=createScripturalLayer();
-  window.JCSFullHistory={setYear,activate,getScripturalState:()=>scripture.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
+  narration=createWatchersNarration();
+  window.JCSFullHistory={setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
   activate();motion();
 })();
 
