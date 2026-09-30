@@ -12,7 +12,7 @@
   <meta name="jcs-prayer-map-interface" content="5.2.0">
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.frankfurter.dev https://api.exchange.coinbase.com https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; media-src 'self' https://archive.org https://*.archive.org; frame-src 'self' https://www.openstreetmap.org https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
+    content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://xaman.app https://*.xaman.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.frankfurter.dev https://api.exchange.coinbase.com https://api.gdeltproject.org https://xrbitcoincash-github-io.onrender.com https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app wss://xumm.app wss://*.xumm.app wss://xaman.app wss://*.xaman.app wss://xrplcluster.com wss://s2.ripple.com wss://honeycluster.io wss://s1.ripple.com; media-src 'self' blob: https://archive.org https://*.archive.org; frame-src 'self' https://www.openstreetmap.org https://xumm.app https://*.xumm.app https://oauth2.xumm.app https://xaman.app https://*.xaman.app; upgrade-insecure-requests"
   >
   <title>JCS Prayer Map · Global Clarity, Prayer Evidence &amp; Current Reporting</title>
   <meta name="description" content="JCS Prayer Map: sourced Christian-pressure research, global violence and humanitarian-response headlines, privacy-thresholded XRPL prayer aggregates, and evidence limits. Media matches are not verified incidents.">
@@ -2757,6 +2757,8 @@ body[data-timeline=annual] #atlas-historical-labels{display:none!important}
 .jcs-cinema-head{position:absolute;top:19px;left:22px;right:20px;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;pointer-events:none}
 .jcs-cinema-kicker{font-size:9px;font-weight:700;letter-spacing:.19em;line-height:1.7;color:#9caec2;text-transform:uppercase}
 .jcs-cinema-year{font:400 clamp(24px,3.1vw,42px)/1.2 Georgia,serif;letter-spacing:-.035em;color:#e8e9e9;margin-top:3px;text-shadow:0 2px 15px #000}
+.jcs-cinema-space-note{position:absolute;left:22px;top:101px;max-width:258px;color:#8293a5;font-size:8px;line-height:1.65;letter-spacing:.015em;pointer-events:none}
+.jcs-cinema-space-note a{color:#9cabbc;text-decoration-color:#64798f;text-underline-offset:2px;pointer-events:auto}
 .jcs-cinema-controls{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:285px;pointer-events:auto}
 .jcs-cinema button{font:500 10px/1.2 ui-sans-serif,system-ui,sans-serif;color:#bfcddd;border:1px solid #34415299;background:#0b1421cc;border-radius:5px;padding:7px 9px;cursor:pointer;box-shadow:none;letter-spacing:.02em;min-height:29px}
 .jcs-cinema button:hover{border-color:#8798b3;color:#fff;background:#152338e6}
@@ -2780,12 +2782,13 @@ body[data-timeline=annual] #atlas-historical-labels{display:none!important}
 .jcs-cinema-status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:600px){.jcs-cinema{min-height:410px}.jcs-cinema-head{left:14px;right:14px;top:13px;gap:7px}.jcs-cinema-kicker{font-size:8px;letter-spacing:.11em;max-width:150px}.jcs-cinema-controls{max-width:190px;gap:4px}.jcs-cinema button{padding:6px 7px;font-size:9px;min-height:27px}.jcs-cinema-bottom{left:14px;right:14px;bottom:14px;gap:8px}.jcs-cinema-caption{padding-left:10px;max-width:calc(100% - 35px)}.jcs-cinema-copy{font-size:9px}.jcs-cinema-source{font-size:9px}.jcs-cinema-hint{font-size:0;width:20px}.jcs-cinema-title{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.jcs-cinema *{scroll-behavior:auto!important}}
+@media(max-width:600px){.jcs-cinema-space-note{left:14px;top:82px;max-width:134px;font-size:7px;line-height:1.55;opacity:.86}}
 
 .jcs-gospel-story{flex:1 0 100%;width:100%;min-width:0;order:3;margin:10px 0 14px;border:1px solid #826a4366;border-radius:9px;background:linear-gradient(125deg,#141b29,#121822);color:#d9d7cc;overflow:hidden}
 .jcs-gospel-canvas[hidden]{display:none!important}
 .jcs-gospel-top{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 14px;flex-wrap:wrap}.jcs-gospel-heading{font:400 19px/1.2 Georgia,serif;color:#e2d5b6}.jcs-gospel-heading span{font:10px/1.5 system-ui,sans-serif;display:block;letter-spacing:.1em;color:#9db2c6;text-transform:uppercase;margin-top:3px}.jcs-gospel-toggle{font:12px system-ui,sans-serif;display:flex;align-items:center;gap:7px}.jcs-gospel-nav{display:flex;gap:6px;overflow-x:auto;padding:0 13px 11px;scrollbar-width:thin}.jcs-gospel-nav button,.jcs-gospel-actions button{flex:none;border:1px solid #536273;background:#192738;color:#cdd8e4;border-radius:5px;padding:7px 10px;font:11px/1.3 system-ui,sans-serif;cursor:pointer}.jcs-gospel-nav button[aria-pressed=true]{border-color:#be9a5f;background:#493632;color:#fff0d0}.jcs-gospel-story button:focus-visible,.jcs-gospel-story summary:focus-visible{outline:2px solid #d7bd83;outline-offset:2px}.jcs-gospel-reading{border-top:1px solid #7b6b4938;padding:10px 14px}.jcs-gospel-reading summary{cursor:pointer;font:13px/1.5 system-ui,sans-serif;color:#dcd8cd}.jcs-gospel-detail{padding:10px 0 3px;max-width:900px}.jcs-gospel-detail p{font:12px/1.6 system-ui,sans-serif;color:#b1c0d0;margin:7px 0}.jcs-gospel-detail strong{color:#eadbc0}.jcs-gospel-detail a{color:#d7bc88;text-decoration:underline;text-underline-offset:2px}.jcs-gospel-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.jcs-gospel-notes{font:11px/1.55 system-ui,sans-serif;margin-top:10px}.jcs-gospel-notes p{font-size:11px}.jcs-gospel-live{font:10px/1.5 system-ui,sans-serif;color:#97abc0;padding:0 14px 10px;margin:0}.jcs-gospel-marker-hit{fill:transparent;stroke:transparent;cursor:pointer;pointer-events:all}.jcs-gospel-marker-hit:focus{stroke:#cdb685;stroke-width:1;outline:none}.jcs-gospel-canvas{position:absolute!important;pointer-events:none;z-index:6;display:block}body[data-map-projection=globe] .jcs-gospel-canvas{display:none!important}
 @media(max-width:600px){.jcs-gospel-top{padding:10px}.jcs-gospel-heading{font-size:17px}.jcs-gospel-reading{padding:9px 10px}.jcs-gospel-nav{padding-left:10px;padding-right:10px}.jcs-gospel-toggle{font-size:11px}}
-
+.jcs-gospel-nav button[aria-pressed=true]{border-color:#66a9dd;background:#173b60;color:#e6f4ff}.jcs-gospel-reading[open]>summary{color:#baddff}.jcs-gospel-heading{color:#b9dcff}
 
 /* The map stays mounted in its existing grid cell. Projection never controls playback. */
 #jcs-map-viewport #world-map,#jcs-cinematic-globe-host{grid-column:1;grid-row:3!important}
@@ -2799,6 +2802,26 @@ body[data-map-projection="globe"] #jcs-zoom-in,body[data-map-projection="globe"]
 .jcs-projection-switch button[aria-pressed="true"]{background:#642c38!important;color:#fff1cf!important;border-color:#cfab67!important}
 #jcs-globe-mode-status{display:block;font-size:.71rem;padding:2px 0;color:#f0d294}
 body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
+
+
+</style>
+<style id="jcs-ambient-radio-style">
+.jcs-ambient-radio{margin-top:14px;padding:12px;border:1px solid #94713f;border-radius:9px;background:linear-gradient(140deg,#201712,#11151d);color:#eee3cb;box-shadow:inset 0 1px 0 #caa36d24;font-family:inherit}
+.jcs-ambient-heading{display:flex;gap:7px;align-items:center;flex-wrap:wrap;color:#dbbd82}
+.jcs-ambient-heading>span:first-child{font-size:20px;line-height:1}
+.jcs-ambient-heading>strong{font-family:Georgia,serif;font-size:17px}
+.jcs-ambient-heading>span:last-child{font-size:11px;color:#c8b99c;margin-left:auto}
+.jcs-ambient-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:9px 0 6px}
+.jcs-ambient-actions button{min-height:38px;border:1px solid #b38b51;border-radius:6px;background:#382723;color:#fff0cf;padding:6px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.jcs-ambient-actions button[aria-pressed="true"]{background:#243741;border-color:#8caab7}
+.jcs-ambient-actions button:focus-visible,.jcs-ambient-actions input:focus-visible{outline:2px solid #eac780;outline-offset:3px}
+.jcs-ambient-actions label{font-size:12px!important;margin:0!important}
+.jcs-ambient-actions input[type="range"]{flex:1;min-width:68px;width:100px;max-width:190px;accent-color:#ceb477}
+.jcs-ambient-actions output{min-width:29px;font-size:12px;font-variant-numeric:tabular-nums;color:#e7cca4}
+#jcs-ambient-status{font-size:12px;line-height:1.45;margin:5px 0;color:#e6d7bf}
+.jcs-ambient-radio .jcs-ambient-note{font-size:11px;line-height:1.5;margin:5px 0 0;color:#bfb4a4}
+#jcs-ambient-audio{display:none!important}
+@media(max-width:480px){.jcs-ambient-radio{padding:10px}.jcs-ambient-heading>span:last-child{width:100%;margin-left:27px}.jcs-ambient-actions{gap:6px}}
 
 </style>
 </head>
@@ -2885,7 +2908,7 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
       <section class="map-shell" aria-label="Interactive global evidence map">
         <div class="jcs-map-controls">
         <div class="jcs-map-heading"><svg class="jcs-gothic-seal" viewBox="0 0 72 94" width="72" height="94" aria-hidden="true" focusable="false"><path d="M5 89V40Q5 18 36 4Q67 18 67 40V89ZM12 82V41Q12 24 36 12Q60 24 60 41V82Z"/><path class="jcs-gothic-cross" d="M36 28V70M22 42H50"/><circle cx="36" cy="42" r="16"/><path d="M22 82Q22 68 36 63Q50 68 50 82M12 57H19M53 57H60"/></svg><span class="jcs-map-kicker">FAITH IN ACTION</span><h1>Prayer Map</h1><p>A witness to suffering. A call to peace.</p><span class="jcs-map-scripture">“Blessed are the peacemakers.” <span>Matthew 5:9</span></span></div>
-        <div class="jcs-view-choice" role="group" aria-label="Explore the map"><button type="button" id="jcs-view-full-history" aria-pressed="true">Human history · AD 1–2026</button><button type="button" id="jcs-view-history" aria-pressed="false">Annual pressure</button><button type="button" id="jcs-view-communities" aria-pressed="false">Violence &amp; peace</button></div>
+        <div class="jcs-view-choice" role="group" aria-label="Explore the map"><button type="button" id="jcs-view-full-history" aria-pressed="true">Human history · 5 BC–AD 2026</button><button type="button" id="jcs-view-history" aria-pressed="false">Annual pressure</button><button type="button" id="jcs-view-communities" aria-pressed="false">Violence &amp; peace</button></div>
 
         <div class="map-actions" aria-label="Map controls">
           <button class="button" id="refresh-button" type="button"><span data-jcs-key="refreshLayers">Refresh live layers</span></button>
@@ -2959,7 +2982,7 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
           aria-labelledby="map-title map-description"
           preserveAspectRatio="xMidYMid meet"
         >
-          <title id="map-title">Prayer Map: human history from AD 1 to 2026, recorded violence and dated context</title>
+          <title id="map-title">Prayer Map: human history from 5 BC to AD 2026, recorded violence and dated context</title>
           <desc id="map-description">Interactive human-history atlas with persistent Nexus centers, dated evidence, annual mortality estimates and modern reference subdivisions. Colors and source years are explained in the timeline legend. </desc>
           <defs><radialGradient id="jcs-map-ocean" cx="50%" cy="38%" r="75%"><stop offset="0%" stop-color="#173649"/><stop offset="65%" stop-color="#0b2233"/><stop offset="100%" stop-color="#061622"/></radialGradient><filter id="jcs-soft-light"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="1000" height="500" fill="url(#jcs-map-ocean)"></rect>
           <g id="grid-layer" aria-hidden="true"></g>
@@ -2988,20 +3011,20 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
 </div>
 
 
-<section class="jcs-chronology-control" id="jcs-chronology-control" aria-label="Human history atlas, AD 1 through 2026">
-<div class="jcs-chronology-heading"><div><h2><span id="jcs-chronology-year">AD 1</span> · Human history atlas</h2><p>Religion, ideology, power, harm and coexistence · move through every year</p></div><button type="button" id="jcs-chronology-play" aria-pressed="false">Play timeline and narration</button></div>
-<input class="jcs-chronology-slider" id="jcs-chronology-slider" type="range" min="1" max="2026" step="1" value="2025" aria-label="Historical year, AD 1 through 2026">
-<div class="jcs-chronology-labels" aria-hidden="true"><span>AD 1</span><span>500</span><span>1000</span><span>1500</span><span>2026</span></div>
-<div class="jcs-year-entry"><button type="button" id="jcs-year-back" aria-label="Previous year">−1 year</button><label for="jcs-chronology-input">Go to year</label><input id="jcs-chronology-input" type="number" min="1" max="2026" step="1" value="2025" inputmode="numeric"><button type="button" id="jcs-year-forward" aria-label="Next year">+1 year</button><button type="button" id="atlas-start">Start at AD 1</button><button type="button" id="atlas-latest">Present · 2026</button></div>
-<div class="atlas-controls"><label>Playback <select id="atlas-speed"><option value="474" selected>Recording length · AD 1–2026</option></select></label><label>Evidence <select id="atlas-metric"><option value="auto">Auto · accounts + annual data from 1989</option><option value="context">Dated historical context</option><option value="deaths">Recorded deaths · 1989–2025</option></select></label><span class="atlas-note">Past Nexus always retained</span><label><input id="atlas-pause-motion" type="checkbox"> Pause map motion</label></div>
-<p id="atlas-historical-coverage" class="atlas-note">Loading dated city and polity layers…</p><div class="jcs-era-shortcuts" role="group" aria-label="Jump to a period"><button type="button" data-era-year="1" data-era-end="499">1–499</button><button type="button" data-era-year="500" data-era-end="999">500–999</button><button type="button" data-era-year="1000" data-era-end="1499">1000–1499</button><button type="button" data-era-year="1500" data-era-end="1899">1500–1899</button><button type="button" data-era-year="1900" data-era-end="1988">1900–1988</button><button type="button" data-era-year="1989" data-era-end="2025">1989–2025</button><button type="button" data-era-year="2026" data-era-end="2026">2026</button></div>
+<section class="jcs-chronology-control" id="jcs-chronology-control" aria-label="Human history atlas, 5 BC through AD 2026">
+<div class="jcs-chronology-heading"><div><h2><span id="jcs-chronology-year">5 BC</span> · Human history atlas</h2><p>Religion, ideology, power, harm and coexistence · move through every year</p></div><button type="button" id="jcs-chronology-play" aria-pressed="false">Play timeline and narration</button></div>
+<input class="jcs-chronology-slider" id="jcs-chronology-slider" type="range" min="-4" max="2026" step="1" value="-4" aria-label="Historical year, 5 BC through AD 2026" aria-valuetext="5 BC">
+<div class="jcs-chronology-labels" aria-hidden="true"><span>5 BC</span><span>500</span><span>1000</span><span>1500</span><span>2026</span></div>
+<div class="jcs-year-entry"><button type="button" id="jcs-year-back" aria-label="Previous year">−1 year</button><label for="jcs-chronology-input">Go to year</label><input id="jcs-chronology-input" type="text" value="5 BC" inputmode="text" maxlength="12" aria-label="Year, for example 5 BC or AD 1"><button type="button" id="jcs-year-forward" aria-label="Next year">+1 year</button><button type="button" id="atlas-start">Birth of Jesus · 5 BC</button><button type="button" id="atlas-latest">Present · 2026</button></div>
+<div class="atlas-controls"><label>Playback <select id="atlas-speed"><option value="474" selected>Recording length · 5 BC–AD 2026</option></select></label><label>Evidence <select id="atlas-metric"><option value="auto">Auto · accounts + annual data from 1989</option><option value="context">Dated historical context</option><option value="deaths">Recorded deaths · 1989–2025</option></select></label><span class="atlas-note">Past Nexus always retained</span><label><input id="atlas-pause-motion" type="checkbox"> Pause map motion</label></div>
+<p id="atlas-historical-coverage" class="atlas-note">Loading dated city and polity layers…</p><div class="jcs-era-shortcuts" role="group" aria-label="Jump to a period"><button type="button" data-era-year="-4" data-era-end="0">Birth · 5–1 BC</button><button type="button" data-era-year="1" data-era-end="499">AD 1–499</button><button type="button" data-era-year="500" data-era-end="999">500–999</button><button type="button" data-era-year="1000" data-era-end="1499">1000–1499</button><button type="button" data-era-year="1500" data-era-end="1899">1500–1899</button><button type="button" data-era-year="1900" data-era-end="1988">1900–1988</button><button type="button" data-era-year="1989" data-era-end="2025">1989–2025</button><button type="button" data-era-year="2026" data-era-end="2026">2026</button></div>
 <div class="atlas-summary"><div><b id="atlas-count-a">—</b><small id="atlas-label-a">recorded deaths</small></div><div><b id="atlas-count-b">—</b><small id="atlas-label-b">event records</small></div><div><b id="atlas-count-c">—</b><small id="atlas-label-c">country groups</small></div></div>
 <p class="atlas-reading-key"><strong>Read the Nexus:</strong> gold diamonds are persistent Nexus centers. Select one to see linked provinces and records. Darker/lighter shading follows loaded evidence; absent new records keep the last dated evidence, with dashed outlines. Geographic grouping alone does not identify a source of influence. Documented influence links are shown separately in violet.</p>
-<p id="jcs-chronology-status" role="status" aria-live="polite"></p><p id="atlas-end-note" class="atlas-note" hidden>Timeline complete. The map stays at 2026. Choose Start at AD 1 or an earlier year to replay.</p><p id="atlas-shading-note" class="atlas-note"></p><p class="atlas-note atlas-cause-key">✝ marks a sourced record that specifically names Christians targeted for their faith; it does not label every Christian victim or violent event. Actor badges use cited names. Violet curves show cited outside-influence links. Their 0–100 score measures source-link completeness, not probability or share of blame. Gold geographic connectors do not assert cause.</p>
+<p id="jcs-chronology-status" role="status" aria-live="polite"></p><p id="atlas-end-note" class="atlas-note" hidden>Timeline complete. The map stays at 2026. Choose Birth of Jesus or an earlier year to replay.</p><p id="atlas-shading-note" class="atlas-note"></p><p class="atlas-note atlas-cause-key">✝ marks a sourced record that specifically names Christians targeted for their faith; it does not label every Christian victim or violent event. Actor badges use cited names. Violet curves show cited outside-influence links. Their 0–100 score measures source-link completeness, not probability or share of blame. Gold geographic connectors do not assert cause.</p>
 
 <section class="atlas-scripture-panel" aria-labelledby="atlas-scripture-heading">
 <h3 id="atlas-scripture-heading">✦ Scriptural imagery · the descent of the stars</h3>
-<div class="atlas-controls"><label><input id="atlas-scripture-motion" type="checkbox" checked> Animate descents</label><button type="button" class="atlas-button" id="atlas-scripture-begin">Start timeline and narration</button><button type="button" class="atlas-button" id="atlas-scripture-replay">Restart from AD 1</button><button type="button" class="atlas-button" id="atlas-scripture-revelation" aria-pressed="false">Revelation · undated scene</button></div>
+<div class="atlas-controls"><label><input id="atlas-scripture-motion" type="checkbox" checked> Animate descents</label><button type="button" class="atlas-button" id="atlas-scripture-begin">Start timeline and narration</button><button type="button" class="atlas-button" id="atlas-scripture-replay">Restart from Jesus’ birth</button><button type="button" class="atlas-button" id="atlas-scripture-revelation" aria-pressed="false">Revelation · undated scene</button></div>
 <p>Press <strong>Start timeline and narration</strong>. Morning Star visibly leaves the floating cluster and lands at Pakistan during an eight-second artistic opening. Each following star has one primary Nexus and follows a slow curved path to it as the timeline approaches that Nexus’s selected date. The same star stays at its destination; it is removed from the cluster. City and regional detail records share their existing primary geographic Nexus. Historical dates and earlier markers remain intact.</p>
 <p class="atlas-note"><strong>Population matters:</strong> 100 deaths among 100,000 people and 1,000 among 1,000,000 both equal 0.1%, or 100 per 100,000. This dataset has no matched historical population denominators, so per-capita rankings are unavailable. Raw annual peaks are a temporary reference, not a ranking of genocides or a comparison of severity across eras. A valid rate requires a population estimate for the same place, period and population group as the deaths. Open a star’s linked records for its date rule, mean and median where available.</p>
 <p class="atlas-note"><strong>Reading this layer:</strong> the number 200 comes from <a href="https://en.wikisource.org/wiki/Book_of_Enoch/Chapter_06" target="_blank" rel="noopener noreferrer">1 Enoch 6:6</a>. Morning Star is one assigned motif in this artistic sequence. The 19 leader names listed in 1 Enoch 6:7 are used once each, followed by numbered “Unnamed Watcher” labels; the text does not name all 200. The assignment order is an artistic choice, not a most-likely identification. Each primary Nexus keeps one assigned star. Unassigned stars remain in the cluster; no atrocities or future dates are invented to reach 200. Reaching a count of 200 has no established predictive meaning. Crowded names appear on hover or keyboard focus; zoom in to separate them. Their names, order and map associations are symbolic choices, not identifications in historical sources or evidence that angels caused these events. This layer does not change the map’s historical explanations, counts or source scores.</p>
@@ -3038,10 +3061,10 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
 <details open><summary>Listen · the fall of the Watchers</summary>
 <p><strong>1 Enoch, chapters 1–11.</strong> Includes the Watchers’ descent in chapter 6. English reading by CJ Plogue. The map follows the selected recording at its natural speed; chapters 12–19 are a separate optional reading.</p>
 <label for="jcs-watchers-track">Reading section<select id="jcs-watchers-track"><option value="0">1–11 · the Watchers descend</option><option value="1">12–19 · Enoch and the Watchers</option></select></label>
-<audio id="jcs-watchers-audio" controls preload="none" src="https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" aria-label="Book of Enoch reading">Your browser does not support audio. Use the direct audio link below.</audio>
+<audio id="jcs-watchers-audio" controls preload="metadata" src="https://dn801704.us.archive.org/0/items/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" aria-label="Book of Enoch reading">Your browser does not support audio. Use the direct audio link below.</audio>
 <div class="jcs-watchers-buttons"><button type="button" id="jcs-watchers-play" aria-pressed="false">Play reading</button><button type="button" id="jcs-watchers-restart">Restart</button><button type="button" id="jcs-watchers-mute" aria-pressed="false">Mute</button></div>
 <output id="jcs-watchers-progress" aria-label="Reading elapsed time and total duration">0:00 / 16:04</output>
-<label><input id="jcs-watchers-sync" type="checkbox" checked> Sync reading + AD 1–2026 · full recording</label>
+<label><input id="jcs-watchers-sync" type="checkbox" checked> Sync reading + 5 BC–AD 2026 · full recording</label>
 <p id="jcs-watchers-status" role="status">Ready · press Play reading.</p>
 <p class="atlas-note">Synced playback uses the recording’s actual duration at normal speed (about 16 minutes for chapters 1–11). The map advances at a steady rate, with descents approaching their selected dates. No second track starts automatically. Pausing the reading pauses the map. Narration accompanies history symbolically; its chapter timings do not date historical events.</p>
 <p class="atlas-note">Direct MP3 playback · no advertising player. <a id="jcs-watchers-direct" href="https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" target="_blank" rel="noopener noreferrer">Open audio</a> · <a href="https://archive.org/details/bookofenoch_1812_librivox" target="_blank" rel="noopener noreferrer">Recording and credits</a></p>
@@ -6562,7 +6585,11 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   for(const f of features){if(!byCountry.has(f.iso3))byCountry.set(f.iso3,[]);byCountry.get(f.iso3).push(f);}
   const point=(lon,lat)=>({x:(lon+180)/360*1000,y:(90-lat)/180*500});
   const within=(p,b)=>p.x>=b.x&&p.x<=b.x+b.width&&p.y>=b.y&&p.y<=b.y+b.height;
-  const periods=(year)=>dated.filter(d=>d.kind==='name-period'&&d.start<=year&&year<=d.end);
+  const sourceYear=y=>y<=0?y-1:y;
+  const yearText=y=>y<=0?(1-y)+' BC':'AD '+y;
+  const sourceDate=y=>y<0?Math.abs(y)+' BCE':y===0?'1 BC':'AD '+y;
+  const sourceSpan=(a,b)=>sourceDate(a)+(a===b?'':'–'+sourceDate(b));
+  const periods=(year)=>dated.filter(d=>d.kind==='name-period'&&d.start<=sourceYear(year)&&sourceYear(year)<=d.end);
   const nameFor=(iso,year,fallback)=>periods(year).filter(d=>d.iso3===iso&&d.scope==='country').sort((a,b)=>b.start-a.start)[0]?.name||fallback;
   function render({year,country='',enabled=true,box,annualRows=[],scale=1,catalog=[],markers=[],blocked=[]}){
     for(const n of shapes.values())n.style.display='none';
@@ -6590,11 +6617,11 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     // Give sourced dated names their own space before modern reference labels.
     const cityPeriods=periodRows.filter(d=>d.scope==='city'&&(!country||d.iso3===country));
-    for(const d of cityPeriods)place('city-period:'+d.lineage,point(d.lon,d.lat),d.name,'atlas-dated-name',d.name+' · AD '+d.start+'–'+d.end,()=>onSelect({kind:'dated-label',label:d}));
+    for(const d of cityPeriods)place('city-period:'+d.lineage,point(d.lon,d.lat),d.name,'atlas-dated-name',d.name+' · '+sourceSpan(d.start,d.end),()=>onSelect({kind:'dated-label',label:d}));
     const subset=(country?byCountry.get(country)||[]:features).filter(f=>within(point(f.lon,f.lat),box));
     const adminNames=new Map(periodRows.filter(d=>d.admin1Id).map(d=>[d.admin1Id,d]));
     const knownAdminIds=new Set();
-    for(const f of subset){const known=adminNames.get(f.id);if(known&&place('admin:'+f.id,point(f.lon,f.lat),known.name,'atlas-dated-name',known.name+' · sourced name in AD '+year+'; outline is modern reference',()=>onSelect({kind:'dated-label',label:known})))knownAdminIds.add(f.id);}
+    for(const f of subset){const known=adminNames.get(f.id);if(known&&place('admin:'+f.id,point(f.lon,f.lat),known.name,'atlas-dated-name',known.name+' · sourced name in '+yearText(year)+'; outline is modern reference',()=>onSelect({kind:'dated-label',label:known})))knownAdminIds.add(f.id);}
     const countries=catalog.length?catalog:Array.from(byCountry,([iso3,fs])=>{
       const f=fs.reduce((a,b)=>(b.bbox[2]-b.bbox[0])*(b.bbox[3]-b.bbox[1])>(a.bbox[2]-a.bbox[0])*(a.bbox[3]-a.bbox[1])?b:a);
       return {iso3,name:f.country,...point(f.lon,f.lat)};
@@ -6602,21 +6629,21 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     for(const c of countries.filter(c=>!country||c.iso3===country).sort((a,b)=>a.iso3.localeCompare(b.iso3))){
       const datedName=countryNames.get(c.iso3),name=datedName?.name||c.name;
       // Modern country names provide orientation without claiming ancient states existed.
-      place('country:'+c.iso3,c,name,datedName?'atlas-dated-name':'atlas-country-name',datedName?name+' · name in AD '+year:name+' · modern reference name; historical name not established here',()=>onSelect(datedName?{kind:'dated-label',label:datedName}:{kind:'reference-country',iso3:c.iso3,name:c.name,lon:c.x/1000*360-180,lat:90-c.y/500*180}));
+      place('country:'+c.iso3,c,name,datedName?'atlas-dated-name':'atlas-country-name',datedName?name+' · name in '+yearText(year):name+' · modern reference name; historical name not established here',()=>onSelect(datedName?{kind:'dated-label',label:datedName}:{kind:'reference-country',iso3:c.iso3,name:c.name,lon:c.x/1000*360-180,lat:90-c.y/500*180}));
     }
     // Event-place names supplement sourced name periods when the map is enlarged.
     const latestPlaces=new Map();
     for(const d of dated){
-      if(d.kind!=='event-place'||d.start>year||country&&d.iso3!==country&&!(d.iso3Codes||[]).includes(country))continue;
+      if(d.kind!=='event-place'||d.start>sourceYear(year)||country&&d.iso3!==country&&!(d.iso3Codes||[]).includes(country))continue;
       const k=Math.round(d.lon*2)+':'+Math.round(d.lat*2),old=latestPlaces.get(k);
       if(!old||d.start>old.start)latestPlaces.set(k,d);
     }
     if(detailed)for(const d of latestPlaces.values()){
       if(cityPeriods.some(c=>Math.hypot(c.lon-d.lon,c.lat-d.lat)<.7))continue;
-      const current=year<=d.end,record=data.events.find(e=>e.id===d.eventId);
+      const current=sourceYear(year)<=d.end,record=data.events.find(e=>e.id===d.eventId);
       // Keep the place visible after its event, but do not extend a historical name's validity.
       const value=current?d.name:(record?.modernPlace||d.name);
-      place('place-name:'+d.id,point(d.lon,d.lat),value,current?'atlas-dated-name':'atlas-city-name',current?d.name+' · dated account AD '+d.start+'–'+d.end:value+' · reference for an earlier account; last account ended '+d.end,()=>onSelect({kind:'dated-label',label:d}));
+      place('place-name:'+d.id,point(d.lon,d.lat),value,current?'atlas-dated-name':'atlas-city-name',current?d.name+' · dated account '+sourceSpan(d.start,d.end):value+' · reference for an earlier account; last account ended '+sourceDate(d.end),()=>onSelect({kind:'dated-label',label:d}));
     }
     if(detailed){
       const rowsByName=new Map();for(const r of annualRows){const k=norm(r.name);if(!rowsByName.has(k))rowsByName.set(k,[]);rowsByName.get(k).push(r);}
@@ -6636,7 +6663,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       const adminLabelLimit=Math.min(subset.length,detailed?Math.max(country?8:4,Math.floor(scale*9)):Math.max(2,Math.floor(scale*5)));let adminLabelsPlaced=knownAdminIds.size;
       for(const f of subset){
         const known=adminNames.get(f.id);if(knownAdminIds.has(f.id)||adminLabelsPlaced>=adminLabelLimit)continue;
-        if(place('admin:'+f.id,point(f.lon,f.lat),known?.name||f.name,known?'atlas-dated-name':'atlas-admin-name',known?known.name+' · sourced name in AD '+year+'; outline is modern reference':f.name+' · modern state/province reference; historical name for AD '+year+' is unverified',()=>onSelect(known?{kind:'dated-label',label:known}:{kind:'admin',feature:f})))adminLabelsPlaced++;
+        if(place('admin:'+f.id,point(f.lon,f.lat),known?.name||f.name,known?'atlas-dated-name':'atlas-admin-name',known?known.name+' · sourced name in '+yearText(year)+'; outline is modern reference':f.name+' · modern state/province reference; historical name for '+yearText(year)+' is unverified',()=>onSelect(known?{kind:'dated-label',label:known}:{kind:'admin',feature:f})))adminLabelsPlaced++;
       }
     }
     return occupied;
@@ -6651,6 +6678,41 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
 
 </script>
 <script src="./jcs-historical-atlas-data.js?v=20260930-atlas"></script>
+<script id="jcs-audio-manifest" type="application/json">[{"id":"reading-02","title":"1 Enoch \u00b7 Chapters 1\u201311","bundled":false,"file":"reading-02.mp3","duration":963.709388,"bytes":7718822,"source":"https://dn801704.us.archive.org/0/items/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3","sha256":"404168583441f07c49c9f8fca354da93b31f6265079cc1f32bbf0756279b9ee7"},{"id":"reading-03","title":"1 Enoch \u00b7 Chapters 12\u201319","bundled":false,"duration":872.7,"bytes":0,"source":"https://dn801704.us.archive.org/0/items/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3","archiveSource":"https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3"},{"id":"chant-02","title":"Gregorian Chant Mass \u00b7 2","bundled":false,"file":"chant-02.mp3","duration":407.222857,"bytes":3258118,"source":"https://ia601609.us.archive.org/2/items/GregorianChantMass/02Track2_64kb.mp3","sha256":"f64ccc1d937c6ee6844679a546046ef839f209cec0e54de105303382299b1fcc"},{"id":"chant-04","title":"Gregorian Chant Mass \u00b7 4","bundled":false,"file":"chant-04.mp3","duration":284.708571,"bytes":2278004,"source":"https://ia601609.us.archive.org/2/items/GregorianChantMass/04Track4_64kb.mp3","sha256":"ba99b626eb094e8b570414aaa9eb4c964cb8e7489656088d5213505e7c6f8057"},{"id":"chant-05","title":"Gregorian Chant Mass \u00b7 5","bundled":false,"file":"chant-05.mp3","duration":249.521633,"bytes":1996509,"source":"https://ia601609.us.archive.org/2/items/GregorianChantMass/05Track5_64kb.mp3","sha256":"b45d1e573ff83a9a84d731c87d4651612ddc303bc94eac9cee86527dfb778114"},{"id":"chant-06","title":"Gregorian Chant Mass \u00b7 6","bundled":false,"file":"chant-06.mp3","duration":328.045714,"bytes":2624701,"source":"https://ia601609.us.archive.org/2/items/GregorianChantMass/06Track6_64kb.mp3","sha256":"807431e97b2bdff9e30944b50ed45004ec5c963503a3a306826b9f0311d214a9"}]</script>
+<script id="jcs-audio-assets">
+/* Same public recordings, bundled for reliable playback without remote redirects. */
+(() => {
+  'use strict';
+  const manifest = JSON.parse(document.getElementById('jcs-audio-manifest').textContent);
+  const entries = new Map(manifest.map(entry => [entry.id, entry]));
+  const urls = new Map();
+  function source(id) {
+    if (urls.has(id)) return urls.get(id);
+    if (!entries.has(id)) throw new Error('Unknown audio recording.');
+    if (entries.get(id).bundled === false) return entries.get(id).source;
+    const node = document.getElementById('jcs-audio-data-' + id);
+    if (!node) throw new Error('The bundled recording is missing.');
+    const encoded = node.textContent.trim(), parts = [];
+    // Small blocks avoid one large temporary binary string on mobile devices.
+    for (let offset = 0; offset < encoded.length; offset += 65536) {
+      const binary = atob(encoded.slice(offset, offset + 65536));
+      const bytes = new Uint8Array(binary.length);
+      for (let index = 0; index < binary.length; index++) bytes[index] = binary.charCodeAt(index);
+      parts.push(bytes);
+    }
+    const url = URL.createObjectURL(new Blob(parts, {type:'audio/mpeg'}));
+    urls.set(id, url);
+    node.textContent = ''; // The Blob is now the reusable source; release the encoded payload.
+    return url;
+  }
+  window.JCSAudioAssets = Object.freeze({
+    source,
+    stationEpochMs: Date.parse('2026-09-30T23:19:57.000Z'),
+    playlist: Object.freeze(manifest.filter(entry => !entry.id.startsWith('reading-')).map(entry => Object.freeze({id:entry.id,title:entry.title,duration:entry.duration}))),
+    recording: id => entries.get(id) || null
+  });
+})();
+</script>
 <script id="jcs-full-chronology">
 (() => {
   'use strict';
@@ -6663,9 +6725,10 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   for(const row of cityRows){if(!cityRecordsById.has(row[0]))cityRecordsById.set(row[0],[]);cityRecordsById.get(row[0]).push(row);}
   const geography=createAtlasGeography({data,make:(...args)=>make(...args),layer:$('atlas-geography-layer'),labelLayer:$('atlas-geography-labels'),onSelect:selection=>{selected=selection;if(!full()){document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:selection.iso3||selection.feature?.iso3||selection.label?.iso3}}));return;}const p=selection.feature||selection.label||selection;if(Number.isFinite(p.lon)&&Number.isFinite(p.lat))window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}});
   const colors=['#20374a','#69424b','#89424c','#aa4051','#c8374f','#e32343','#fa6078'];
-  let timelinePosition=1,journeyStarted=false;
+  const TIMELINE_START=-4,TIMELINE_END=2026;
+  let timelinePosition=TIMELINE_START,journeyStarted=false;
   const journeySeconds=()=>narration?.duration()||964;
-  let year=1,playing=false,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
+  let year=TIMELINE_START,playing=false,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
   let scripture=null,narration=null;
   const full=()=>document.body.dataset.timeline==='full';
   const mode=()=>metric==='auto'?(year>=1989?'deaths':'context'):metric;
@@ -6675,7 +6738,16 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const text=(tag,value,className)=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
   const button=(label,fn,cls='atlas-button')=>{const n=text('button',label,cls);n.type='button';n.addEventListener('click',fn);return n;};
   const link=(label,url)=>{const n=text('a',label);n.href=url;n.target='_blank';n.rel='noopener noreferrer';return n;};
-  const historicalYearText=y=>y<0?fmt(Math.abs(y))+' BCE':'AD '+fmt(y);
+  const timelineYearText=y=>y<=0?fmt(1-y)+' BC':'AD '+fmt(y);
+  // Source records use signed BCE years; the continuous clock uses astronomical years.
+  const toSourceYear=y=>y<=0?y-1:y;
+  const fromSourceYear=y=>y<0?y+1:y;
+  const historicalYearText=y=>y<0?fmt(Math.abs(y))+' BCE':y===0?'1 BC':'AD '+fmt(y);
+  function parseTimelineYear(value){
+    const m=String(value).replace(/,/g,'').trim().match(/^(?:(AD|CE|BC|BCE)\s*)?(\d+)(?:\s*(AD|CE|BC|BCE))?$/i);
+    if(!m||Number(m[2])<1||m[1]&&m[3]&&m[1].toUpperCase()!==m[3].toUpperCase())return NaN;
+    return /^(BC|BCE)$/i.test(m[1]||m[3]||'AD')?1-Number(m[2]):Number(m[2]);
+  }
   const datedSpan=(a,b)=>historicalYearText(a)+(a===b?'':'–'+historicalYearText(b));
   const projectPoint=(lon,lat)=>({x:(lon+180)*(1000/360),y:(90-lat)*(500/180)});
   function decodePolityRings(rings){
@@ -6683,7 +6755,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     for(const encoded of rings){let i=0,x=0,y=0,points=[];while(i<encoded.length){let result=0,shift=0,chunk;do{chunk=encoded.charCodeAt(i++)-63;result|=(chunk&31)<<shift;shift+=5;}while(chunk>=32&&i<encoded.length);x+=(result&1)?~(result>>1):(result>>1);result=0;shift=0;do{chunk=encoded.charCodeAt(i++)-63;result|=(chunk&31)<<shift;shift+=5;}while(chunk>=32&&i<encoded.length);y+=(result&1)?~(result>>1):(result>>1);points.push((x/10).toFixed(1)+' '+(y/10).toFixed(1));}if(points.length>=4)d+='M'+points.join('L')+'Z';}
     return d;
   }
-  const chooseHistoricalYear=(start,end,current,through)=>{const low=Math.max(1,start),high=Math.min(through,end);return low<=current&&current<=high?current:current<low?low:high;};
+  const chooseHistoricalYear=(start,end,current,through)=>{const low=Math.max(TIMELINE_START,fromSourceYear(start)),high=Math.min(through,fromSourceYear(end));return low<=current&&current<=high?current:current<low?low:high;};
   function pickCity(row){selected={kind:'city',cityId:row[0],row};window.JCSMapViewport.focus(row[4],row[5]);render();showDetail();}
   function pickCityCluster(group){selected={kind:'city-cluster',count:group.count,rows:group.rows,lat:group.lat,lon:group.lon};window.JCSMapViewport.focus(group.lon,group.lat);render();showDetail();}
   function pickPolity(index){const row=polityRows[index];if(!row)return;selected={kind:'polity',index};const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);window.JCSMapViewport.focus(lon,lat);render();showDetail();}
@@ -6707,7 +6779,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     };
     let displayedPolities=0;
     if(showPolities){
-      const polityYear=Math.min(year,2024);
+      const polityYear=Math.min(toSourceYear(year),2024);
       for(let i=0;i<polityRows.length;i++){
         const row=polityRows[i];if(polityYear<row[1]||polityYear>row[2]||!intersects(row[6]))continue;
         let path=polityNodes.get(i);
@@ -6735,7 +6807,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     for(const item of polityNames){const {node,row,retained}=item;if(shownPolityNames>=labelLimit){node.style.display='none';continue;}const b=row[6],at=visibleName(node,{x:(b[0]+b[2])/2,y:(b[1]+b[3])/2},row[0]+(retained?' · 2024':''));if(at){node.setAttribute('transform','translate('+at.x+' '+at.y+') scale('+(1/screenScale)+')');node.setAttribute('aria-label',row[0]+' · '+datedSpan(row[1],row[2])+(retained?' · retained 2024 sample':''));shownPolityNames++;}}
     let activeCities=new Map();
     if(showCities){
-      for(const row of cityRows){if(row[2]>year||row[3]<year)continue;let item=activeCities.get(row[0]);if(!item)activeCities.set(row[0],{row,rows:[row]});else{item.rows.push(row);if(Number(row[9]==='certain')>Number(item.row[9]==='certain')||(row[9]===item.row[9]&&row[2]>item.row[2]))item.row=row;}}
+      for(const row of cityRows){if(row[2]>toSourceYear(year)||row[3]<toSourceYear(year))continue;let item=activeCities.get(row[0]);if(!item)activeCities.set(row[0],{row,rows:[row]});else{item.rows.push(row);if(Number(row[9]==='certain')>Number(item.row[9]==='certain')||(row[9]===item.row[9]&&row[2]>item.row[2]))item.row=row;}}
       const cell=28/Math.max(.15,screenScale),buckets=new Map();
       for(const item of activeCities.values()){const row=item.row,p=projectPoint(row[4],row[5]);if(p.x<box.x||p.x>box.x+box.width||p.y<box.y||p.y>box.y+box.height)continue;const key=Math.floor(p.x/cell)+':'+Math.floor(p.y/cell);if(!buckets.has(key))buckets.set(key,{x:0,y:0,items:[]});const group=buckets.get(key);group.x+=p.x;group.y+=p.y;group.items.push(item);}
       for(const [key,group]of buckets){
@@ -6765,7 +6837,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       }
     }
     const status=$('atlas-historical-coverage');
-    if(status)status.textContent=(showCities?activeCities.size.toLocaleString('en-US')+' dated city/settlement names active in AD '+fmt(year):'City-name layer hidden')+' · '+(showPolities?displayedPolities.toLocaleString('en-US')+' Seshat polity areas shown for '+(year>2024?'the retained AD 2024 sample':'AD '+fmt(year)):'Civilization layer hidden')+'. Gold names follow dated records; reference country/state names use modern geography where no dated name is supplied. Missing city or territory periods are source gaps, not proof that a place disappeared. Zoom for more names.';
+    if(status)status.textContent=(showCities?activeCities.size.toLocaleString('en-US')+' dated city/settlement names active in '+timelineYearText(year):'City-name layer hidden')+' · '+(showPolities?displayedPolities.toLocaleString('en-US')+' Seshat polity areas shown for '+(year>2024?'the retained AD 2024 sample':timelineYearText(year)):'Civilization layer hidden')+'. Gold names follow dated records; reference country/state names use modern geography where no dated name is supplied. Missing city or territory periods are source gaps, not proof that a place disappeared. Zoom for more names.';
     return nameBoxes;
   }
   const countryMatch=e=>!country||(e.iso3Codes||[]).includes(country);
@@ -6776,7 +6848,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const motion=()=>{document.body.classList.toggle('atlas-motion-paused',document.hidden||$('atlas-pause-motion').checked);scripture?.motion();};
   function clockPosition(){return narration?.position()??timelinePosition;}
   function applyJourneyState(position,started,active,force=false){
-    const next=Math.max(1,Math.min(2026,Math.floor(position+1e-8))),changed=next!==year;
+    const next=Math.max(TIMELINE_START,Math.min(TIMELINE_END,Math.floor(position+1e-8))),changed=next!==year;
     timelinePosition=position;year=next;journeyStarted=started;playing=active;
     if(full()&&(changed||force))render();else scripture?.sync();
   }
@@ -6804,7 +6876,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const box=$('atlas-selected');box.replaceChildren();
     if(!selected){box.append(text('span','Explore a Nexus','atlas-tag'),text('h3','A place, a year, the evidence'),text('p','Select a point or shaded country. Review dated records, compare annual estimates and open the local street map. Search below also finds earlier or later records.'));return;}
     if(selected.kind==='city'){
-      const row=selected.row,all=cityRecordsById.get(selected.cityId)||[],activeNames=all.filter(r=>r[2]<=year&&r[3]>=year),precision=row[6]==='precise'?'precise representative point':row[6]==='rough'?'rough representative point':'unrated representative point';
+      const row=selected.row,all=cityRecordsById.get(selected.cityId)||[],activeNames=all.filter(r=>r[2]<=toSourceYear(year)&&r[3]>=toSourceYear(year)),precision=row[6]==='precise'?'precise representative point':row[6]==='rough'?'rough representative point':'unrated representative point';
       box.append(text('span','Dated city / settlement name · '+datedSpan(row[2],row[3]),'atlas-tag'),text('h3',row[10]||row[1]),text('p','Map label: '+row[1]+' · '+precision+'. Pleiades dates this name or place record to the stated interval; this does not prove uninterrupted occupation or administration.'));
       if(row[9]&&row[9]!=='certain')box.append(text('p','Pleiades association certainty: '+row[9]+'. Review the source record before treating the place-name match as certain.','atlas-note'));
       const names=document.createElement('ul');names.className='atlas-source-list';for(const r of (activeNames.length?activeNames:all).slice(0,12)){const li=document.createElement('li');li.textContent=r[1]+' · '+datedSpan(r[2],r[3]);names.append(li);}box.append(names,link('Open Pleiades place record',row[7]),button('Explore current local map',()=>localMap(row[10]||row[1],row[5],row[4],'site','Pleiades representative location; '+precision+'.')));return;
@@ -6815,23 +6887,23 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     if(selected.kind==='polity'){
       const row=polityRows[selected.index],retained=year>2024,source=row[4]||historicalCatalog.politySource.url;
-      box.append(text('span','Historical polity area · '+datedSpan(row[1],row[2]),'atlas-tag'),text('h3',row[0]),text('p',(row[5]?fmt(row[5])+' km² source polygon area. ':'')+'This is one sampled historical territory outline. Borders, names and dates can be uncertain or disputed; it is not a claim of continuous control.'),retained?text('p','The selected timeline is AD '+fmt(year)+'. The latest available Seshat map for this area is AD 2024 and is retained as older reference context, not a current border.','atlas-note'):text('p','The outline follows the source record for '+datedSpan(row[1],row[2])+'; it is not interpolated between sampled periods.','atlas-note'));
+      box.append(text('span','Historical polity area · '+datedSpan(row[1],row[2]),'atlas-tag'),text('h3',row[0]),text('p',(row[5]?fmt(row[5])+' km² source polygon area. ':'')+'This is one sampled historical territory outline. Borders, names and dates can be uncertain or disputed; it is not a claim of continuous control.'),retained?text('p','The selected timeline is '+timelineYearText(year)+'. The latest available Seshat map for this area is AD 2024 and is retained as older reference context, not a current border.','atlas-note'):text('p','The outline follows the source record for '+datedSpan(row[1],row[2])+'; it is not interpolated between sampled periods.','atlas-note'));
       box.append(link(row[3]?'Open linked historical entity':'Open Seshat Cliopatria source',source),button('Explore local map',()=>{const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);localMap(row[0],lat,lon,'region','Sampled historical polity outline; not a modern or exact border.');}));return;
     }
     if(selected.kind==='reference-country'){
       country=selected.iso3;$('atlas-country').value=country;const c=cRow();selected={kind:'country',name:c?.name||selected.name};
     }
     if(selected.kind==='admin'){
-      const f=selected.feature;box.append(text('span','Modern state / province reference','atlas-tag'),text('h3',f.name),text('p',(f.type||'Subdivision')+' · '+(f.country||f.iso3)),text('p','This is a modern reference boundary, not a reconstructed boundary for AD '+year+'. Dated historical names appear separately in gold.','atlas-note'));
+      const f=selected.feature;box.append(text('span','Modern state / province reference','atlas-tag'),text('h3',f.name),text('p',(f.type||'Subdivision')+' · '+(f.country||f.iso3)),text('p','This is a modern reference boundary, not a reconstructed boundary for '+timelineYearText(year)+'. Dated historical names appear separately in gold.','atlas-note'));
       sources(box,[{title:'Natural Earth: state/province reference geography',url:data.admin1.source.url||'https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/'}]);
       box.append(button('Explore local map',()=>localMap(f.name,f.lat,f.lon,'region','Modern administrative reference.')));return;
     }
     if(selected.kind==='dated-label'){
-      const d=selected.label;box.append(text('span','Dated place name · AD '+d.start+'–'+d.end,'atlas-tag'),text('h3',d.name),text('p',d.note||d.uncertainty||'A sourced historical label at an approximate reference location. This does not reconstruct every border or administrative division.'),text('p',year>d.end?'Last sourced label retained. The loaded evidence does not establish the name for the selected year.':'Label is within its sourced interval.','atlas-note'));sources(box,[{title:d.sourceTitle||'Historical name source',url:d.sourceUrl}]);return;
+      const d=selected.label;box.append(text('span','Dated place name · '+datedSpan(d.start,d.end),'atlas-tag'),text('h3',d.name),text('p',d.note||d.uncertainty||'A sourced historical label at an approximate reference location. This does not reconstruct every border or administrative division.'),text('p',toSourceYear(year)>d.end?'Last sourced label retained. The loaded evidence does not establish the name for the selected year.':'Label is within its sourced interval.','atlas-note'));sources(box,[{title:d.sourceTitle||'Historical name source',url:d.sourceUrl}]);return;
     }
     if(selected.kind==='place'){
       const p=model.places.find(x=>x.id===selected.id),rows=p?.events.filter(canShow)||[];if(!rows.length){selected=null;detail();return;}const latest=rows.at(-1),current=rows.filter(e=>model.active(e,year));
-      box.append(text('span','Historical Nexus · '+year,'atlas-tag'),text('h3',p.label),text('p','Fixed geographic reference · '+p.lat.toFixed(2)+', '+p.lon.toFixed(2)+'. '+current.length+' documented periods include this year; '+rows.length+' accounts retained here. Rings keep their last evidence when no new record exists; dashed outlines identify retained evidence. Red and teal channels are independent. They do not measure a complete harm total. Select an account for its sources.'));
+      box.append(text('span','Historical Nexus · '+timelineYearText(year),'atlas-tag'),text('h3',p.label),text('p','Fixed geographic reference · '+p.lat.toFixed(2)+', '+p.lon.toFixed(2)+'. '+current.length+' documented periods include this year; '+rows.length+' accounts retained here. Rings keep their last evidence when no new record exists; dashed outlines identify retained evidence. Red and teal channels are independent. They do not measure a complete harm total. Select an account for its sources.'));
       const list=document.createElement('div');list.className='atlas-region-list';for(const e of rows.slice().reverse()){const b=button(e.title,()=>pickEvent(e,false),'');b.append(text('small',dates(e)+' · '+e.kind+' · '+e.regionLabel));list.append(b);}box.append(list,button('Explore local map',()=>localMap(latest.modernPlace,p.lat,p.lon,latest.precision,'Historical place cluster; approximate reference only.')));return;
     }
     if(selected.kind==='event'){
@@ -6868,11 +6940,11 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     if(selected.kind==='country'&&mode()==='context'){
       const rows=history(),counts=model.contextCounts(rows,year);
-      box.append(text('span','Historical accounts · '+year,'atlas-tag'),text('h3',selected.name||country),text('p',counts.harm+' dated harm accounts; '+counts.support+' expansion/protection accounts; '+counts.uncertain+' uncertain-date accounts. Records can overlap. These counts describe loaded evidence, not the level of violence.'));
+      box.append(text('span','Historical accounts · '+timelineYearText(year),'atlas-tag'),text('h3',selected.name||country),text('p',counts.harm+' dated harm accounts; '+counts.support+' expansion/protection accounts; '+counts.uncertain+' uncertain-date accounts. Records can overlap. These counts describe loaded evidence, not the level of violence.'));
       const list=document.createElement('div');list.className='atlas-region-list';for(const e of rows.slice().reverse()){const b=button(e.title,()=>pickEvent(e,false),'');b.append(text('small',dates(e)+' · '+e.regionLabel));list.append(b);}box.append(list);if(!rows.length)box.append(text('p','No historical account is loaded for this selection yet. This is a coverage gap.'));return;
     }
     const c=model.countries.find(x=>x.name===selected.name);if(!c){box.prepend(text('h3',selected.name||country));box.append(text('p','No annual series is loaded for this country reference. Its geography and dated accounts remain available.'));return;}const snapshot=model.latestAnnual(c,year),a=snapshot?.row;
-    box.append(text('span','UCDP 26.1 · selected '+year+(snapshot?' · evidence '+snapshot.sourceYear:''),'atlas-tag'),text('h3',c.label));
+    box.append(text('span','UCDP 26.1 · selected '+timelineYearText(year)+(snapshot?' · evidence '+snapshot.sourceYear:''),'atlas-tag'),text('h3',c.label));
     if(c.groupingNote)box.append(text('p',c.groupingNote,'atlas-note'));
     if(!a){box.append(text('p','No annual record is loaded at or before this year. Historical records remain available; no zero is inferred.'));return;}
     if(snapshot.carried)box.append(text('p','Retained evidence from '+snapshot.sourceYear+'. No newer annual row is loaded for this place. Color and size remain visible; they are not a measurement for '+year+'.','atlas-reading-key'));
@@ -7015,26 +7087,26 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const out=$('atlas-events'),query=$('atlas-search').value.trim().toLowerCase();out.replaceChildren();const through=history(),comparisons=through.filter(e=>(e.estimates||[]).length>1);$('atlas-evidence-summary').textContent=through.length+' retained event accounts · '+comparisons.length+' with separately attributed differing estimates. City and polity results are dated place sources, not event claims.';
     const visible=model.events.filter(e=>countryMatch(e)&&(!$('atlas-compare-only').checked||(e.estimates||[]).length>1)&&(query?(e.title+' '+e.regionLabel+' '+e.modernPlace+' '+e.summary).toLowerCase().includes(query):e.start<=year)).sort((a,b)=>(model.active(b,year)-model.active(a,year))||b.start-a.start);
     const cityHits=[],seenCities=new Set();if(query){for(const row of cityRows){if(!(row[1]+' '+row[10]).toLowerCase().includes(query)||seenCities.has(row[0]))continue;seenCities.add(row[0]);cityHits.push(row);if(cityHits.length>=12)break;}}
-    const polityByName=new Map();if(query){for(let i=0;i<polityRows.length;i++){const row=polityRows[i];if(!row[0].toLowerCase().includes(query))continue;const active=row[1]<=Math.min(year,2024)&&row[2]>=Math.min(year,2024),old=polityByName.get(row[0]);if(!old||active)polityByName.set(row[0],{row,index:i,active});}}
+    const polityByName=new Map();if(query){for(let i=0;i<polityRows.length;i++){const row=polityRows[i];if(!row[0].toLowerCase().includes(query))continue;const active=row[1]<=Math.min(toSourceYear(year),2024)&&row[2]>=Math.min(toSourceYear(year),2024),old=polityByName.get(row[0]);if(!old||active)polityByName.set(row[0],{row,index:i,active});}}
     const polityHits=Array.from(polityByName.values()).sort((a,b)=>Number(b.active)-Number(a.active)).slice(0,12);
-    $('atlas-events-title').textContent=query?'Search across all years · '+visible.length+' event records · '+cityHits.length+' city names · '+polityHits.length+' polity periods':'Dated context · '+visible.length+' event records through AD '+fmt(year);
+    $('atlas-events-title').textContent=query?'Search across all years · '+visible.length+' event records · '+cityHits.length+' city names · '+polityHits.length+' polity periods':'Dated context · '+visible.length+' event records through '+timelineYearText(year);
     for(const e of visible){const li=document.createElement('li'),b=button(e.title,()=>pickEvent(e),'');b.append(text('small',dates(e)+' · '+e.regionLabel+((e.estimates||[]).length>1?' · '+e.estimates.length+' source estimates':'')+(e.intervalMeaning==='dating-window'?' · uncertain dating':model.active(e,year)?' · within recorded period':'')));li.append(b);out.append(li);}
     for(const row of cityHits){const li=document.createElement('li'),b=button(row[1]+' · '+(row[10]||'settlement'),()=>pickCity(row),'');b.append(text('small','Dated Pleiades name · '+datedSpan(row[2],row[3])+' · '+row[6]+' representative location'));li.append(b);out.append(li);}
     for(const item of polityHits){const row=item.row,li=document.createElement('li'),b=button(row[0],()=>pickPolity(item.index),'');b.append(text('small','Seshat polity area · '+datedSpan(row[1],row[2])+' · sampled historical outline'));li.append(b);out.append(li);}
     if(!visible.length&&!cityHits.length&&!polityHits.length)out.append(text('li','No matching event, dated place name, or polity record. This is a coverage gap, not evidence of absence.','atlas-note'));
   }
-  function machine(){if(!full())return;$('jcs-history-state').textContent=JSON.stringify({schema:'jcs-human-history-atlas-v3',scripturalImagery:scripture?.state()||null,nexus:{anchors:'fixed reference coordinates',motion:'rings change with evidence year; cited influence paths animate unless paused or reduced-motion is active',historicalUnit:'loaded documented accounts; not severity',annualUnit:'recorded deaths; logarithmic added disk area',regionalAnnualLayer:'separate UCDP regional groups; never added to country totals',causeLinks:'cited relations only; score is link completeness, not causal probability',anomalyDetection:false},displayedYear:year,mode:mode(),country:country||null,selected,range:[1,2026],historicalEventIds:history().map(x=>x.id),activeHistoricalIds:active().map(x=>x.id),modernDataset:{version:'26.1',range:[1989,2025],loadedYear:model.documented(year)?year:null,retainedSnapshotYear:year>2025?2025:null,retainedTotals:year>2025?model.totals(2025):null,metric:'UCDP best/low/high recorded deaths; not all violence or religious causation',totals:model.documented(year)?model.totals(year):null},geography:'Modern province/state reference outlines and sourced historical names; no universal historical border reconstruction',coverage:data.coverage});}
+  function machine(){if(!full())return;$('jcs-history-state').textContent=JSON.stringify({schema:'jcs-human-history-atlas-v3',scripturalImagery:scripture?.state()||null,nexus:{anchors:'fixed reference coordinates',motion:'rings change with evidence year; cited influence paths animate unless paused or reduced-motion is active',historicalUnit:'loaded documented accounts; not severity',annualUnit:'recorded deaths; logarithmic added disk area',regionalAnnualLayer:'separate UCDP regional groups; never added to country totals',causeLinks:'cited relations only; score is link completeness, not causal probability',anomalyDetection:false},displayedYear:year,mode:mode(),country:country||null,selected,range:[TIMELINE_START,TIMELINE_END],historicalEventIds:history().map(x=>x.id),activeHistoricalIds:active().map(x=>x.id),modernDataset:{version:'26.1',range:[1989,2025],loadedYear:model.documented(year)?year:null,retainedSnapshotYear:year>2025?2025:null,retainedTotals:year>2025?model.totals(2025):null,metric:'UCDP best/low/high recorded deaths; not all violence or religious causation',totals:model.documented(year)?model.totals(year):null},geography:'Modern province/state reference outlines and sourced historical names; no universal historical border reconstruction',coverage:data.coverage});}
   function render(){
-    if(!full())return;$('atlas-end-note').hidden=year<2026;$('jcs-chronology-year').textContent='AD '+fmt(year);$('jcs-chronology-slider').value=String(year);$('jcs-chronology-slider').setAttribute('aria-valuetext','AD '+year);$('jcs-chronology-input').value=String(year);$('jcs-year-back').disabled=year===1;$('jcs-year-forward').disabled=year===2026;
-    const evidenceYear=Math.min(year,2025),totals=model.totals(evidenceYear),modern=mode()==='deaths',hasAnnual=year>=1989;$('atlas-count-a').textContent=modern&&hasAnnual?fmt(totals.best):String(active().length);$('atlas-label-a').textContent=modern?'recorded deaths · '+evidenceYear+' estimate':'documented periods in this year';$('atlas-count-b').textContent=modern&&hasAnnual?fmt(totals.events):String(history().length);$('atlas-label-b').textContent=modern?'event records · '+evidenceYear:'context records through this year';$('atlas-count-c').textContent=modern&&hasAnnual?String(totals.countries):String(new Set(active().map(e=>e.regionLabel)).size);$('atlas-label-c').textContent=modern?'countries with event rows':'active historical regions';
+    if(!full())return;$('atlas-end-note').hidden=year<2026;$('jcs-chronology-year').textContent=timelineYearText(year);$('jcs-chronology-slider').value=String(year);$('jcs-chronology-slider').setAttribute('aria-valuetext',timelineYearText(year));$('jcs-chronology-input').value=timelineYearText(year);$('jcs-year-back').disabled=year===TIMELINE_START;$('jcs-year-forward').disabled=year===2026;
+    const evidenceYear=Math.min(year,2025),totals=model.totals(evidenceYear),modern=mode()==='deaths',hasAnnual=year>=1989;$('atlas-count-a').textContent=modern&&hasAnnual?fmt(totals.best):String(active().length);$('atlas-label-a').textContent=modern?'recorded deaths · '+timelineYearText(evidenceYear)+' estimate':'documented periods in this year';$('atlas-count-b').textContent=modern&&hasAnnual?fmt(totals.events):String(history().length);$('atlas-label-b').textContent=modern?'event records · '+timelineYearText(evidenceYear):'context records through this year';$('atlas-count-c').textContent=modern&&hasAnnual?String(totals.countries):String(new Set(active().map(e=>e.regionLabel)).size);$('atlas-label-c').textContent=modern?'countries with event rows':'active historical regions';
     if(modern&&!hasAnnual){for(const id of['atlas-count-a','atlas-count-b','atlas-count-c'])$(id).textContent='—';}
-    $('jcs-chronology-status').textContent=modern?(hasAnnual?'Annual totals: '+evidenceYear+' · low '+fmt(totals.low)+' / high '+fmt(totals.high)+'. '+(year>2025?'2026 retains the 2025 snapshot; 2026 totals are not loaded. ':'')+'Dashed regional/country markers retain their own last source year and are not added to these totals.':'No annual series before 1989. Historical evidence stays visible.'):'Historical accounts: '+active().length+' dated periods include '+year+'. Earlier evidence stays visible with dashed outlines; it is not treated as continuing violence.';
+    $('jcs-chronology-status').textContent=modern?(hasAnnual?'Annual totals: '+evidenceYear+' · low '+fmt(totals.low)+' / high '+fmt(totals.high)+'. '+(year>2025?'2026 retains the 2025 snapshot; 2026 totals are not loaded. ':'')+'Dashed regional/country markers retain their own last source year and are not added to these totals.':'No annual series before 1989. Historical evidence stays visible.'):'Historical accounts: '+active().length+' dated periods include '+timelineYearText(year)+'. Earlier evidence stays visible with dashed outlines; it is not treated as continuing violence.';
     $('atlas-shading-note').textContent=modern?'Country totals stay on national reference points. Regional event-group Nexus points show UCDP groups separately from 1989 onward when enabled; country and regional totals are not added together. Earlier dated accounts remain visible in the separate historical layer, so the UCDP series beginning in 1989 does not imply earlier violence began then. Retained values show their source year.':'Historical shading counts documented harm accounts (1 / 2 / 3+); it does not measure a universal oppression score. Evidence stays visible after its recorded interval. Dashed outlines identify retained accounts, not confirmed ongoing activity.';
     $('atlas-death-legend').hidden=!modern;document.querySelectorAll('[data-era-year]').forEach(b=>b.setAttribute('aria-pressed',String(year>=Number(b.dataset.eraYear)&&year<=Number(b.dataset.eraEnd))));
     $('atlas-context-legend').hidden=modern;detail();list();renderMap();machine();narration?.refresh();
   }
   function activate(){document.body.dataset.timeline='full';document.dispatchEvent(new Event('jcs:full-view'));const recent=$('jcs-live-over-history');document.body.classList.toggle('jcs-recent-visible',!!recent?.checked);$('jcs-view-full-history').setAttribute('aria-pressed','true');$('jcs-view-history').setAttribute('aria-pressed','false');$('jcs-view-communities').setAttribute('aria-pressed','false');$('jcs-history-control').hidden=true;$('jcs-history-country').hidden=true;$('jcs-chronology-control').hidden=false;$('jcs-chronology-panel').hidden=false;render();}
-  $('jcs-chronology-play').addEventListener('click',play);$('jcs-chronology-slider').addEventListener('input',e=>setYear(e.target.value));$('jcs-chronology-input').addEventListener('change',e=>setYear(e.target.value));$('jcs-year-back').addEventListener('click',()=>setYear(year-1));$('jcs-year-forward').addEventListener('click',()=>setYear(year+1));$('atlas-start').addEventListener('click',()=>setYear(1));$('atlas-latest').addEventListener('click',()=>{metric='auto';$('atlas-metric').value='auto';setYear(2026);});
+  $('jcs-chronology-play').addEventListener('click',play);$('jcs-chronology-slider').addEventListener('input',e=>setYear(e.target.value));$('jcs-chronology-input').addEventListener('change',e=>{const n=parseTimelineYear(e.target.value);if(Number.isFinite(n))setYear(n);else e.target.value=timelineYearText(year);});$('jcs-year-back').addEventListener('click',()=>setYear(year-1));$('jcs-year-forward').addEventListener('click',()=>setYear(year+1));$('atlas-start').addEventListener('click',()=>setYear(TIMELINE_START));$('atlas-latest').addEventListener('click',()=>{metric='auto';$('atlas-metric').value='auto';setYear(2026);});
   $('atlas-metric').addEventListener('change',e=>{metric=e.target.value;render();});$('atlas-regional-nexuses').addEventListener('change',renderMap);$('atlas-cause-links').addEventListener('change',renderMap);$('atlas-search').addEventListener('input',list);$('atlas-compare-only').addEventListener('change',list);$('atlas-admin-labels').addEventListener('change',renderMap);$('atlas-civilizations').addEventListener('change',scale);$('atlas-cities').addEventListener('change',scale);$('atlas-labels').addEventListener('change',renderMap);$('atlas-pause-motion').addEventListener('change',motion);$('atlas-country').addEventListener('change',e=>{country=e.target.value;const c=cRow();selected=country?{kind:'country',name:c?.name||catalog.find(c=>c.iso3===country)?.name||geography.features.find(f=>f.iso3===country)?.country||country}:null;const reference=c?model.countryNexus(c):model.contextNexuses.find(h=>h.iso3===country)||geography.features.find(f=>f.iso3===country);if(reference)window.JCSMapViewport.focus(reference.lon,reference.lat);render();});$('atlas-clear').addEventListener('click',()=>{country='';selected=null;$('atlas-country').value='';window.JCSMapViewport.reset();render();});
   $('atlas-local-close').addEventListener('click',()=>$('atlas-local-dialog').close());$('atlas-local-dialog').addEventListener('close',()=>{$('atlas-local-frame').src='about:blank';});
   document.querySelectorAll('[data-era-year]').forEach(b=>b.addEventListener('click',()=>{setYear(b.dataset.eraYear);window.JCSMapViewport.reset();}));
@@ -7114,7 +7186,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     let width=0,height=0,enabled=false,lastYear=null,lastCountry=null,tableau=false,disposed=false,drift=0;
     const hash=s=>Array.from(s).reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,7);
     const visible=p=>p&&p.x>=0&&p.x<=width&&p.y>=0&&p.y<=height;
-    const position=()=>journeyStarted?clockPosition():1;
+    const position=()=>journeyStarted?clockPosition():TIMELINE_START;
     function refreshSchedule(){for(const r of schedule){if(r.artisticOnly)r.landingYear=1+2025*8/journeySeconds();r.departureYear=r.artisticOnly?1:Math.max(1,r.landingYear-descentYears());}}
     const phase=r=>position()<r.departureYear?'waiting':position()<r.landingYear?'descending':'landed';
     const origin=i=>({x:width*(.045+.91*((i*.61803398875)%1))+Math.sin(drift*.00018+i)*9,y:19+(i%4)*8+Math.cos(drift*.00013+i)*4});
@@ -7275,141 +7347,193 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; the former undated Pakistan opening is replaced by a separate Bethlehem Gospel prelude; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; the former undated Pakistan opening is replaced by the Bethlehem Gospel layer on the shared timeline; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   function createWatchersNarration(){
     const panel=$('jcs-watchers-player'),audio=$('jcs-watchers-audio'),track=$('jcs-watchers-track');
     const linked=$('jcs-watchers-sync'),status=$('jcs-watchers-status'),main=$('jcs-watchers-play');
     const tracks=[
-      {label:'Chapters 1–11 · the Watchers descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
-      {label:'Chapters 12–19 · Enoch and the Watchers',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
+      {asset:'reading-02',label:'Chapters 1–11 · the Watchers descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
+      {asset:'reading-03',label:'Chapters 12–19 · Enoch and the Watchers',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
     ];
-    // This is the only owner of journey time and playback intent. Map selection,
-    // viewport and layer preferences never write this state.
-    const state={position:1,started:false,wantsPlay:false,ready:false,loaded:false,buffering:false,failed:false,complete:false,linked:linked.checked,track:0,pendingYear:null};
-    let request=0,inFlight=0,internalPauseEvents=0;
+    for(const item of tracks){const duration=window.JCSAudioAssets?.recording?.(item.asset)?.duration;if(Number.isFinite(duration)&&duration>0)item.duration=duration;}
+    // Narration remains the only owner of historical time and playback intent.
+    const TIMELINE_START=-4,TIMELINE_END=2026,TIMELINE_SPAN=TIMELINE_END-TIMELINE_START;
+    const state={position:TIMELINE_START,started:false,wantsPlay:false,ready:false,loaded:false,buffering:false,failed:false,complete:false,linked:linked.checked,track:0,pendingYear:null,failureMessage:''};
+    const LOAD_DEADLINE_MS=12000;
+    let request=0,inFlight=0,internalPauseEvents=0,preparedTrack=-1,deadline=0,deadlineRequest=0,lastProgress=0;
     const total=()=>tracks[state.track].duration;
-    const clampYear=value=>Math.max(1,Math.min(2026,Number(value)));
+    const clampYear=value=>Math.max(TIMELINE_START,Math.min(TIMELINE_END,Number(value)));
     const seconds=()=>Math.max(0,Math.min(total(),Number(audio.currentTime)||0));
     const ownsTimeline=()=>state.linked&&state.started;
-    const position=()=>state.pendingYear!==null?state.pendingYear:ownsTimeline()&&state.ready&&!state.failed?(state.complete?2026:1+seconds()/total()*2025):state.position;
+    const position=()=>state.pendingYear!==null?state.pendingYear:ownsTimeline()&&state.ready&&!state.failed?(state.complete?TIMELINE_END:TIMELINE_START+seconds()/total()*TIMELINE_SPAN):state.position;
     const active=()=>ownsTimeline()&&state.wantsPlay&&!audio.paused&&!state.complete&&!state.failed;
     const time=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
     function publish(force=false){
       if(ownsTimeline())state.position=position();
-      applyJourneyState(state.position,state.started,active(),force);
       refresh();
+      applyJourneyState(state.position,state.started,active(),force);
     }
     function refresh(){
       const running=state.wantsPlay&&!state.failed&&!state.complete;
-      main.textContent=state.complete?'Replay reading':running?'Pause reading':'Play reading';
+      main.textContent=state.complete?'Replay reading':state.failed?'Retry reading':state.buffering&&running?'Cancel loading':running?'Pause reading':'Play reading';
       main.setAttribute('aria-pressed',String(running));
       $('jcs-watchers-mute').textContent=audio.muted?'Unmute':'Mute';
       $('jcs-watchers-mute').setAttribute('aria-pressed',String(audio.muted));
       $('jcs-watchers-progress').textContent=time(seconds())+' / '+time(total());
       $('jcs-watchers-direct').href=tracks[state.track].url;
-      status.textContent=state.failed?'Audio could not start. Your place and layers are kept. Press Play to try again or open the audio link.':state.complete?'Reading complete. The map keeps its final state.':state.buffering&&state.wantsPlay?'Loading audio · the map waits at the same point.':!state.started?'Press Play timeline and narration to begin.':audio.paused?'Paused · your place, view and layer choices are kept.':tracks[state.track].label+(state.linked?' · one clock for narration and map.':' · audio only; the map holds its year.');
+      status.textContent=state.failed?state.failureMessage:state.complete?'Reading complete. The map keeps its final state.':state.buffering&&state.wantsPlay?'Loading audio · the map waits at the same point. This attempt stops after 12 seconds if playback cannot begin.':!state.started?'Press Play timeline and narration to begin.':audio.paused?'Paused · your place, view and layer choices are kept.':tracks[state.track].label+(state.linked?' · one clock for narration and map.':' · audio only; the map holds its year.');
       const b=$('jcs-chronology-play');b.disabled=false;
-      b.textContent=state.linked&&running?'Pause timeline and narration':state.position>=2026?'Replay timeline and narration':state.started&&state.position>1?'Resume timeline and narration':'Play timeline and narration';
+      b.textContent=state.failed?'Retry timeline and narration':state.linked&&running?(state.buffering?'Cancel audio loading':'Pause timeline and narration'):state.position>=TIMELINE_END?'Replay timeline and narration':state.started&&state.position>TIMELINE_START?'Resume timeline and narration':'Play timeline and narration';
       b.setAttribute('aria-pressed',String(active()));
-      const speed=$('atlas-speed');if(speed?.options?.length)speed.options[0].textContent='Recording length · '+time(total())+' · AD 1–2026';
+      const speed=$('atlas-speed');if(speed?.options?.length)speed.options[0].textContent='Recording length · '+time(total())+' · 5 BC–AD 2026';
+    }
+    function clearDeadline(){if(deadline)clearTimeout(deadline);deadline=0;deadlineRequest=0;}
+    function armDeadline(reason='start'){
+      if(!state.wantsPlay||state.failed||state.complete)return;
+      // Repeated waiting/stalled events must not extend the same failed attempt.
+      if(deadline&&deadlineRequest===request)return;
+      clearDeadline();const attempt=request;deadlineRequest=attempt;
+      deadline=setTimeout(()=>{
+        deadline=0;deadlineRequest=0;
+        if(attempt!==request||!state.wantsPlay||state.complete)return;
+        fail({message:reason==='start'?'The reading did not start within 12 seconds.':'The reading stopped making progress for 12 seconds.'},attempt);
+      },LOAD_DEADLINE_MS);
     }
     function pauseMedia(){if(!audio.paused){internalPauseEvents++;audio.pause();}}
-    function pause(){
-      state.position=position();state.wantsPlay=false;state.buffering=false;++request;inFlight=0;
+    function pause(publishState=true){
+      state.position=position();state.wantsPlay=false;state.buffering=false;++request;inFlight=0;clearDeadline();
+      pauseMedia();if(publishState)publish();
+    }
+    function fail(error,attempt=request){
+      if(attempt!==request)return;
+      state.position=position();state.pendingYear=state.position;state.failed=true;state.wantsPlay=false;state.buffering=false;
+      ++request;inFlight=0;clearDeadline();
+      const why=error?.name==='NotAllowedError'?'The browser blocked playback.':error?.name==='AbortError'?'The playback attempt was interrupted.':error?.message||'The reading could not load or play.';
+      state.failureMessage=why+' Your place is kept. Press Retry reading, or use the direct audio link.';
       pauseMedia();publish();
     }
-    function fail(error){
-      if(error?.name==='AbortError')return;
-      state.position=position();state.pendingYear=state.position;state.failed=true;state.wantsPlay=false;state.buffering=false;
-      inFlight=0;pauseMedia();publish();
+    function source(){
+      if(typeof window.JCSAudioAssets?.source==='function'){
+        const url=window.JCSAudioAssets.source(tracks[state.track].asset);
+        if(typeof url!=='string'||!url)throw Error('The bundled reading is unavailable.');
+        return url;
+      }
+      return tracks[state.track].url;
     }
     function ensureMedia(){
-      if(state.loaded&&!audio.error&&!state.failed)return;
-      state.pendingYear=state.position;state.ready=false;state.loaded=true;state.failed=false;
-      audio.src=tracks[state.track].url;audio.load();
+      if(state.loaded&&!audio.error&&!state.failed&&preparedTrack===state.track)return;
+      const next=source();state.pendingYear=state.position;state.ready=false;state.loaded=true;state.failed=false;
+      preparedTrack=state.track;audio.src=next;audio.load();
     }
-    function requestPlay(){
-      state.wantsPlay=true;state.started=true;state.complete=false;state.buffering=true;
-      ensureMedia();const attempt=++request;inFlight=attempt;audio.playbackRate=1;publish();
+    function showTimeline(){if(state.linked&&!full())activate();scripture?.leaveTableau();}
+    function requestPlay(force=false){
+      const attempt=++request;inFlight=attempt;clearDeadline();
+      state.wantsPlay=true;state.started=true;state.complete=false;state.buffering=true;state.failureMessage='';lastProgress=seconds();
+      let result;
       try{
-        const result=audio.play();
-        if(result?.then)result.then(()=>{if(attempt!==request)return;inFlight=0;if(!state.wantsPlay)pauseMedia();else{state.buffering=false;publish();}}).catch(error=>{if(attempt===request)fail(error);});
-      }catch(error){if(attempt===request)fail(error);}
+        ensureMedia();audio.playbackRate=1;
+        // Stay within the user's activation: do not render the map before play().
+        result=audio.play();
+      }catch(error){fail(error,attempt);return;}
+      armDeadline();
+      if(result?.then)result.then(()=>{
+        if(attempt!==request)return;inFlight=0;
+        if(!state.wantsPlay){pauseMedia();return;}
+        if(!audio.paused&&audio.readyState>=3){state.buffering=false;clearDeadline();}
+        publish();
+      }).catch(error=>{if(attempt===request)fail(error,attempt);});
+      showTimeline();publish(force);
+    }
+    function applyPendingYear(){
+      if(state.pendingYear===null||!state.ready||state.failed)return;
+      try{audio.currentTime=(state.pendingYear-TIMELINE_START)/TIMELINE_SPAN*total();state.pendingYear=null;lastProgress=seconds();}
+      catch(_){state.ready=false;armDeadline('seek');}
     }
     function seekYear(value,options={}){
       const at=clampYear(value);if(!Number.isFinite(at))return;
       const resume=options.resume??state.wantsPlay;
-      state.position=at;state.pendingYear=at;state.started=true;state.complete=at===2026;
-      state.wantsPlay=!!resume&&!state.complete;
-      if(state.ready&&!state.failed){
-        try{audio.currentTime=(at-1)/2025*total();state.pendingYear=null;}catch(_){state.ready=false;}
-      }
-      if(state.complete||!state.wantsPlay){++request;inFlight=0;pauseMedia();state.buffering=false;}
-      publish(true);
-      if(state.wantsPlay&&audio.paused&&!inFlight)requestPlay();
+      ++request;inFlight=0;clearDeadline();
+      state.position=at;state.pendingYear=at;state.started=true;state.complete=at===TIMELINE_END;state.wantsPlay=!!resume&&!state.complete;
+      applyPendingYear();
+      if(state.complete||!state.wantsPlay){pauseMedia();state.buffering=false;publish(true);return;}
+      if(audio.paused){requestPlay(true);return;}
+      if(!state.ready||audio.readyState<3){state.buffering=true;armDeadline('seek');}
+      showTimeline();publish(true);
     }
-    function restart(){
-      state.linked=true;linked.checked=true;
-      if(!full())activate();
-      scripture?.leaveTableau();seekYear(1,{resume:true});
-    }
+    function restart(){state.linked=true;linked.checked=true;seekYear(TIMELINE_START,{resume:true});}
     function playTimeline(){
-      if(!full())activate();
-      scripture?.leaveTableau();
-      if(state.position>=2026){restart();return;}
-      if(!state.linked){state.linked=true;linked.checked=true;seekYear(state.position,{resume:false});}
-      if(state.wantsPlay)pause();else requestPlay();
+      if(state.position>=TIMELINE_END){restart();return;}
+      if(!state.linked){state.linked=true;linked.checked=true;seekYear(state.position,{resume:true});return;}
+      if(state.wantsPlay){pause();if(!full())activate();}else requestPlay();
     }
     function toggle(){
       if(state.linked){playTimeline();return;}
-      if(!audio.paused){pause();return;}
+      if(state.wantsPlay||!audio.paused){pause();return;}
       if(state.complete){state.complete=false;audio.currentTime=0;}
       requestPlay();
     }
     audio.addEventListener('loadedmetadata',()=>{
+      if(audio.readyState<1)return; // Ignore metadata queued by a replaced source.
       if(Number.isFinite(audio.duration)&&audio.duration>0)tracks[state.track].duration=audio.duration;
-      state.loaded=true;state.ready=true;audio.playbackRate=1;
-      if(state.pendingYear!==null){const at=state.pendingYear;audio.currentTime=(at-1)/2025*total();state.pendingYear=null;}
-      publish(true);
+      state.loaded=true;state.ready=true;audio.playbackRate=1;applyPendingYear();publish(true);
     });
     audio.addEventListener('play',()=>{
-      if(audio.paused)return; // A queued event cannot undo a later Pause.
-      state.started=true;state.wantsPlay=true;state.complete=false;state.failed=false;
-      if(state.linked&&!full())activate();
-      scripture?.leaveTableau();publish();
+      if(audio.paused)return;
+      // Native audio controls enter the same state machine and deadline.
+      if(!state.wantsPlay){++request;inFlight=0;clearDeadline();}
+      state.started=true;state.wantsPlay=true;state.complete=false;state.failed=false;state.failureMessage='';state.loaded=true;
+      state.buffering=audio.readyState<3;lastProgress=seconds();
+      if(state.buffering)armDeadline();else clearDeadline();
+      showTimeline();publish();
     });
-    audio.addEventListener('playing',()=>{state.buffering=false;publish();});
+    audio.addEventListener('playing',()=>{
+      if(audio.paused||!state.wantsPlay||audio.readyState<3)return;
+      state.buffering=false;lastProgress=seconds();clearDeadline();publish();
+    });
     audio.addEventListener('pause',()=>{
       if(internalPauseEvents){internalPauseEvents--;return;}
-      if(!audio.paused)return; // Ignore a queued pause event after playback resumed.
-      state.wantsPlay=false;state.buffering=false;publish();
+      if(!audio.paused)return;
+      state.position=position();state.wantsPlay=false;state.buffering=false;++request;inFlight=0;clearDeadline();publish();
     });
-    audio.addEventListener('waiting',()=>{state.buffering=true;publish();});
-    audio.addEventListener('seeking',()=>{state.buffering=true;state.complete=false;publish();});
-    audio.addEventListener('seeked',()=>{state.buffering=false;publish(true);});
-    audio.addEventListener('timeupdate',()=>publish());
+    function waiting(){if(!state.wantsPlay||state.complete)return;state.buffering=true;armDeadline('buffer');publish();}
+    audio.addEventListener('waiting',waiting);audio.addEventListener('stalled',waiting);
+    audio.addEventListener('seeking',()=>{state.buffering=state.wantsPlay;state.complete=state.ready&&seconds()>=total();if(state.wantsPlay)armDeadline('seek');publish();});
+    audio.addEventListener('seeked',()=>{
+      state.buffering=state.wantsPlay&&(audio.paused||audio.readyState<3);
+      if(state.buffering)armDeadline('seek');else clearDeadline();publish(true);
+    });
+    audio.addEventListener('timeupdate',()=>{
+      const at=seconds();if(state.wantsPlay&&!audio.paused&&at>lastProgress+.01){state.buffering=false;clearDeadline();}lastProgress=at;publish();
+    });
     audio.addEventListener('volumechange',refresh);
     audio.addEventListener('error',()=>{if(audio.error)fail(audio.error);});
     audio.addEventListener('ended',()=>{
-      if(seconds()+.05<total())return; // Ignore an old track's queued ending after seek/restart.
-      state.complete=true;state.pendingYear=null;state.wantsPlay=false;state.buffering=false;
-      if(state.linked)state.position=2026;
+      if(seconds()+.05<total())return;
+      state.complete=true;state.pendingYear=null;state.wantsPlay=false;state.buffering=false;++request;inFlight=0;clearDeadline();
+      if(state.linked)state.position=TIMELINE_END;
       publish(true);if(state.linked)scripture?.settle();
     });
     main.addEventListener('click',toggle);
     $('jcs-watchers-restart').addEventListener('click',restart);
     $('jcs-watchers-mute').addEventListener('click',()=>{audio.muted=!audio.muted;refresh();});
     track.addEventListener('change',()=>{
-      const resume=state.wantsPlay;pause();state.track=Number(track.value);state.loaded=false;state.ready=false;state.failed=false;state.complete=false;
-      // Track changes preserve the chosen historical position and layer choices.
-      state.pendingYear=state.position;ensureMedia();publish();if(resume)requestPlay();
+      const resume=state.wantsPlay;pause(false);state.track=Math.max(0,Math.min(tracks.length-1,Number(track.value)||0));state.loaded=false;state.ready=false;state.failed=false;state.complete=false;
+      state.pendingYear=state.position;
+      if(resume)requestPlay(true);else{try{ensureMedia();publish();}catch(error){fail(error);}}
     });
     linked.addEventListener('change',()=>{
       state.position=position();const resume=state.wantsPlay;state.linked=linked.checked;
       if(state.linked)seekYear(state.position,{resume});else publish();
     });
+    // Prepare the bundled first source without loading or playing it, so a click
+    // on the browser's native audio control uses the same local source.
+    if(typeof window.JCSAudioAssets?.source==='function'){
+      try{audio.src=source();preparedTrack=state.track;}
+      catch(error){state.failed=true;state.failureMessage=(error.message||'The bundled reading is unavailable.')+' Press Retry reading, or use the direct audio link.';}
+    }
+    audio.volume=.8;
     const small=matchMedia('(max-width:1000px)');
     function positionPlayer(){const host=small.matches?document.querySelector('.jcs-map-controls'):$('analysis-panel');if(host&&!host.contains(panel)){if(small.matches)host.append(panel);else host.prepend(panel);}}
     small.addEventListener('change',positionPlayer);positionPlayer();refresh();
@@ -7426,18 +7550,18 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const layers={stars:checked('atlas-scripture-toggle'),nexuses:checked('atlas-historical-nexuses'),labels:checked('atlas-labels'),names:checked('atlas-scripture-names'),geography:true};
     const cacheKey=[year,country,catalog.length,checked('atlas-admin-labels'),checked('atlas-civilizations'),checked('atlas-cities')].join('|');
     if(cacheKey!==globeCacheKey){
-      globeCacheKey=cacheKey;const labels=[],periods=geography.periods(year);
+      globeCacheKey=cacheKey;const labels=[],periods=geography.periods(year),sourceYear=toSourceYear(year),currentDate=year<=0?(1-year)+' BC':'AD '+year;
       if(checked('atlas-admin-labels')){
-        for(const c of catalog){const dated=periods.find(p=>p.iso3===c.iso3&&p.scope==='country');labels.push({id:'reference:'+c.iso3,name:dated?.name||c.name,lon:c.x/1000*360-180,lat:90-c.y/500*180,kind:dated?'dated':'reference',iso3:c.iso3,description:dated?'Sourced name in AD '+year:'Modern reference geography'});}
-        for(const p of periods.filter(p=>p.scope!=='country'&&(!country||p.iso3===country)))labels.push({id:'dated:'+p.id,name:p.name,lon:p.lon,lat:p.lat,kind:'dated',record:p,description:'Dated name · AD '+p.start+'–'+p.end});
+        for(const c of catalog){const dated=periods.find(p=>p.iso3===c.iso3&&p.scope==='country');labels.push({id:'reference:'+c.iso3,name:dated?.name||c.name,lon:c.x/1000*360-180,lat:90-c.y/500*180,kind:dated?'dated':'reference',iso3:c.iso3,description:dated?'Sourced name in '+currentDate:'Modern reference geography'});}
+        for(const p of periods.filter(p=>p.scope!=='country'&&(!country||p.iso3===country)))labels.push({id:'dated:'+p.id,name:p.name,lon:p.lon,lat:p.lat,kind:'dated',record:p,description:'Dated name · '+datedSpan(p.start,p.end)});
       }
       if(checked('atlas-civilizations'))for(let i=0;i<polityRows.length;i++){
-        const r=polityRows[i],at=Math.min(year,2024);if(at<r[1]||at>r[2])continue;const b=r[6];
-        labels.push({id:'polity:'+i,name:r[0]+(year>2024?' · 2024':''),lon:(b[0]+b[2])/2*.36-180,lat:90-(b[1]+b[3])/2*.36,kind:'polity',index:i,description:'Sampled polity name · AD '+r[1]+'–'+r[2]+(year>2024?' · retained 2024 sample':'')});
+        const r=polityRows[i],at=Math.min(sourceYear,2024);if(at<r[1]||at>r[2])continue;const b=r[6];
+        labels.push({id:'polity:'+i,name:r[0]+(year>2024?' · 2024':''),lon:(b[0]+b[2])/2*.36-180,lat:90-(b[1]+b[3])/2*.36,kind:'polity',index:i,description:'Sampled polity name · '+datedSpan(r[1],r[2])+(year>2024?' · retained 2024 sample':'')});
       }
       if(checked('atlas-cities')){
-        const activeCities=new Map();for(const r of cityRows){if(r[2]>year||r[3]<year)continue;const old=activeCities.get(r[0]);if(!old||Number(r[9]==='certain')>Number(old[9]==='certain')||(r[9]===old[9]&&r[2]>old[2]))activeCities.set(r[0],r);}
-        for(const r of activeCities.values())labels.push({id:'city:'+r[0],name:r[1],lon:r[4],lat:r[5],kind:'city',row:r,description:'Dated settlement name · AD '+r[2]+'–'+r[3]});
+        const activeCities=new Map();for(const r of cityRows){if(r[2]>sourceYear||r[3]<sourceYear)continue;const old=activeCities.get(r[0]);if(!old||Number(r[9]==='certain')>Number(old[9]==='certain')||(r[9]===old[9]&&r[2]>old[2]))activeCities.set(r[0],r);}
+        for(const r of activeCities.values())labels.push({id:'city:'+r[0],name:r[1],lon:r[4],lat:r[5],kind:'city',row:r,description:'Dated settlement name · '+datedSpan(r[2],r[3])});
       }
       globeCachedLabels=labels.filter(p=>Number.isFinite(p.lon)&&Number.isFinite(p.lat));
     }
@@ -7469,7 +7593,6 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if(c){pickCountry(c,false);return;}
     if(iso){selected={kind:'reference-country',iso3:iso,name:item.name||item.label,lon:item.lon,lat:item.lat};render();showDetail();}
   }
-
   window.JCSFullHistory={getGlobeSnapshot,selectGlobeItem,setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
   activate();motion();
 })();
@@ -7481,24 +7604,24 @@ window.JCSGospelData = {
   events: [
     {
       id: 'annunciation', kind: 'annunciation', title: 'Annunciation and Incarnation', shortTitle: 'Annunciation',
-      lon: 35.303, lat: 32.700, at: 1, dateLabel: 'Before AD 1 · exact year disputed',
+      lon: 35.303, lat: 32.700, at: -4, dateLabel: 'Before the Nativity · exact year disputed',
       summary: 'Luke places Gabriel’s announcement to Mary in Nazareth. Mary consents; the Holy Spirit overshadows her and she conceives Jesus.',
-      context: 'Nazareth, Galilee. The marker introduces events preceding this map’s AD 1 starting point.',
+      context: 'Nazareth, Galilee. Shown with the opening birth context; its shared display anchor does not make the conception and birth simultaneous.',
       connection: 'Christian belief presents the Incarnation as God entering human life. This is distinct from the Watcher descent imagery.',
       sourceLabel: 'Luke 1:26–38', sourceUrl: 'https://bible.usccb.org/bible/luke/1', relatedSources: []
     },
     {
       id: 'nativity', kind: 'nativity', title: 'Nativity and the Star of Bethlehem', shortTitle: 'Birth of Jesus',
-      lon: 35.2078, lat: 31.7043, at: 1, dateLabel: 'Before AD 1 · exact year disputed',
+      lon: 35.2078, lat: 31.7043, at: -4, dateLabel: 'c. 6–4 BC · 5 BC display anchor',
       summary: 'Luke locates Jesus’ birth in Bethlehem and recounts an angelic proclamation of peace. Matthew tells of a star guiding Magi to the child.',
-      context: 'Bethlehem, Judea. Matthew names Herod; Luke frames the birth within Augustus’ empire. Their chronological details do not align neatly.',
-      connection: 'The Bethlehem star signifies the Gospel’s announcement of Jesus; it is not counted among the fallen Watchers.',
+      context: 'Bethlehem, Judea. Matthew names Herod; Luke frames the birth within Augustus’ empire. The birth year remains uncertain.',
+      connection: 'The Bethlehem star is distinct from the Watchers. The blue cross identifies Jesus devotionally here; it does not depict his Crucifixion at birth.',
       sourceLabel: 'Matthew 2:1–12', sourceUrl: 'https://bible.usccb.org/bible/matthew/2',
       relatedSources: [{ label: 'Luke 2:1–20', url: 'https://bible.usccb.org/bible/luke/2' }]
     },
     {
       id: 'refuge', kind: 'refuge', title: 'Herod’s Violence and the Flight to Egypt', shortTitle: 'Flight to Egypt',
-      lon: 35.2078, lat: 31.7043, at: 1, dateLabel: 'Infancy narrative · exact date unknown',
+      lon: 35.2078, lat: 31.7043, at: -3, dateLabel: 'Infancy narrative · 4 BC display anchor, not an exact date',
       summary: 'Matthew describes Herod’s killing of children and Joseph taking Mary and Jesus to Egypt after an angelic warning.',
       context: 'This marker shows the Bethlehem departure area. Matthew supplies no exact Egyptian destination, route or casualty count.',
       connection: 'The narrative connects threatened children, displacement and refuge. It supplies no named Watcher responsible for Herod’s actions.',
@@ -7533,7 +7656,7 @@ window.JCSGospelData = {
       id: 'crucifixion', kind: 'crucifixion', title: 'Crucifixion of Jesus', shortTitle: 'Crucifixion',
       lon: 35.229, lat: 31.778, at: 33, dateLabel: 'AD 30 or 33 · exact date debated',
       summary: 'The Gospel recounts Jesus’ Roman crucifixion at Golgotha following judgment under Pontius Pilate.',
-      context: 'Jerusalem. The blue cross with waterlike movement is this project’s devotional design, not a reported physical phenomenon.',
+      context: 'Jerusalem. The blue cross, waterlike interior and soft blue haze are this project’s devotional design, not reported physical phenomena.',
       connection: 'Christian reflection places suffering and redemption here. The cross does not identify a supernatural cause for other plotted atrocities.',
       sourceLabel: 'Matthew 27:24–56', sourceUrl: 'https://bible.usccb.org/bible/matthew/27', relatedSources: []
     },
@@ -7595,30 +7718,35 @@ window.JCSGospelData = {
     },
     {
       title: 'Dates and display order',
-      text: 'Dates are approximate. Pre-AD 1 scenes are introductory context. AD 28, 29 and 33 are display anchors, not exact dates. Shared-year Gospel scenes preserve narrative order without invented subyear timestamps.',
+      text: 'The timeline opens at 5 BC, a midpoint display anchor for the uncertain c. 6–4 BC birth range. It passes from 1 BC to AD 1 without AD 0. AD 28, 29 and 33 are display anchors; shared-year scenes preserve Gospel order without invented subyear timestamps.',
       url: 'https://bible.usccb.org/bible/luke/2', label: 'Luke 2 and chronological notes'
     }
   ]
 };
-
 </script>
 <script id="jcs-gospel-art">
 /* Shared, source-labelled iconography. Shapes are symbols, not astronomical measurements. */
 (()=>{'use strict';
 function crossPath(c){c.beginPath();c.moveTo(-.11,-.48);c.lineTo(.11,-.48);c.lineTo(.11,-.20);c.lineTo(.36,-.20);c.lineTo(.36,0);c.lineTo(.11,0);c.lineTo(.11,.5);c.lineTo(-.11,.5);c.lineTo(-.11,0);c.lineTo(-.36,0);c.lineTo(-.36,-.20);c.lineTo(-.11,-.20);c.closePath();}
 function dove(c){c.beginPath();c.moveTo(-.03,.10);c.bezierCurveTo(-.22,.02,-.43,-.11,-.47,-.34);c.bezierCurveTo(-.25,-.19,-.12,-.25,0,-.07);c.bezierCurveTo(.16,-.34,.35,-.30,.46,-.40);c.bezierCurveTo(.39,-.11,.20,.06,.13,.12);c.lineTo(.23,.33);c.lineTo(.03,.24);c.lineTo(-.20,.34);c.closePath();c.fill();c.beginPath();c.arc(.09,-.03,.09,0,Math.PI*2);c.fill();}
+function waterCross(c,phase){
+ const haze=c.createRadialGradient(0,-.035,.04,0,-.035,.76);haze.addColorStop(0,'rgba(28,126,225,.30)');haze.addColorStop(.48,'rgba(28,110,202,.18)');haze.addColorStop(1,'rgba(13,83,171,0)');c.fillStyle=haze;c.fillRect(-.78,-.83,1.56,1.58);
+ c.save();crossPath(c);c.clip();const blue=c.createLinearGradient(-.4,-.5,.3,.5);blue.addColorStop(0,'#267bc5');blue.addColorStop(.5,'#0f4e9c');blue.addColorStop(1,'#1261af');c.fillStyle=blue;c.fillRect(-.5,-.5,1,1);
+ for(let i=-5;i<7;i++){const yy=i*.11+Math.sin(phase*.5)*.018;c.beginPath();c.moveTo(-.5,yy);c.bezierCurveTo(-.22,yy+Math.sin(phase+i)*.085,.2,yy-Math.cos(phase+i)*.085,.5,yy+.01);c.strokeStyle=i%2?'#529ee0':'#246fbe';c.lineWidth=.042;c.stroke();}c.restore();
+ crossPath(c);c.strokeStyle='#72b8f1';c.lineWidth=.022;c.stroke();
+}
 function draw(c,kind,x,y,size,phase=0){
  c.save();c.translate(x,y);c.scale(size,size);c.shadowBlur=0;c.shadowColor='transparent';c.globalCompositeOperation='source-over';c.globalAlpha=1;
- if(kind==='crucifixion'){
-  c.save();crossPath(c);c.clip();c.fillStyle='#135076';c.fillRect(-.5,-.5,1,1);
-  for(let i=-5;i<7;i++){const yy=i*.11+Math.sin(phase*.5)*.018;c.beginPath();c.moveTo(-.5,yy);c.bezierCurveTo(-.22,yy+Math.sin(phase+i)*.085,.2,yy-Math.cos(phase+i)*.085,.5,yy+.01);c.strokeStyle=i%2?'#367da1':'#225f8d';c.lineWidth=.042;c.stroke();}c.restore();
-  crossPath(c);c.strokeStyle='#698ba0';c.lineWidth=.018;c.stroke();
-  // Restrained crucifix silhouette, with no halo, bloom or outward light.
-  c.strokeStyle='#b4c6cb';c.fillStyle='#b4c6cb';c.lineWidth=.034;c.lineCap='round';c.beginPath();c.arc(.012,-.245,.046,0,Math.PI*2);c.fill();c.beginPath();c.moveTo(-.25,-.13);c.quadraticCurveTo(-.09,-.075,0,-.09);c.quadraticCurveTo(.09,-.075,.25,-.13);c.moveTo(0,-.15);c.lineTo(-.025,.14);c.lineTo(.036,.34);c.moveTo(-.025,.14);c.lineTo(-.045,.34);c.stroke();c.fillStyle='#b0c4cc';c.beginPath();c.moveTo(-.075,.07);c.lineTo(.05,.08);c.lineTo(.067,.17);c.lineTo(-.065,.17);c.closePath();c.fill();
+ if(['jesus','crucifixion','baptism','ministry','resurrection','refuge'].includes(kind)){
+  waterCross(c,phase);
+  if(kind==='baptism'){c.save();c.translate(.28,.25);c.scale(.36,.36);c.fillStyle='#e6eff5';dove(c);c.restore();}
  }else if(kind==='nativity'){
-  c.fillStyle='#f2d99a';c.beginPath();for(let i=0;i<16;i++){const a=-Math.PI/2+i*Math.PI/8,r=i%2?.09:(i%4===0?.49:.26);const xx=Math.cos(a)*r,yy=Math.sin(a)*r;i?c.lineTo(xx,yy):c.moveTo(xx,yy);}c.closePath();c.fill();c.fillStyle='#fff0c7';c.beginPath();c.arc(0,0,.055,0,Math.PI*2);c.fill();
+  const glow=c.createRadialGradient(0,0,.01,0,0,.76);glow.addColorStop(0,'rgba(255,244,200,.60)');glow.addColorStop(.28,'rgba(255,218,136,.25)');glow.addColorStop(1,'rgba(235,185,90,0)');c.fillStyle=glow;c.fillRect(-.8,-.8,1.6,1.6);
+  c.fillStyle='#ffe4a0';c.beginPath();for(let i=0;i<16;i++){const a=-Math.PI/2+i*Math.PI/8,r=i%2?.09:(i%4===0?.49:.26);const xx=Math.cos(a)*r,yy=Math.sin(a)*r;i?c.lineTo(xx,yy):c.moveTo(xx,yy);}c.closePath();c.fill();c.fillStyle='#fffbed';c.beginPath();c.arc(0,0,.06,0,Math.PI*2);c.fill();
  }else if(kind==='eucharist'){
+  waterCross(c,phase);c.save();c.translate(.26,.20);c.scale(.50,.50);
   c.fillStyle='#d3b77d';c.beginPath();c.moveTo(-.23,-.07);c.quadraticCurveTo(-.2,.19,0,.18);c.quadraticCurveTo(.2,.19,.23,-.07);c.closePath();c.fill();c.fillRect(-.027,.13,.054,.19);c.fillRect(-.18,.32,.36,.045);c.fillStyle='#e7e4d5';c.beginPath();c.arc(0,-.25,.145,0,Math.PI*2);c.fill();c.strokeStyle='#938a74';c.lineWidth=.017;c.beginPath();c.moveTo(0,-.34);c.lineTo(0,-.16);c.moveTo(-.067,-.26);c.lineTo(.067,-.26);c.stroke();
+  c.restore();
  }else if(kind==='annunciation'){
   c.fillStyle='#92bed2';c.beginPath();c.moveTo(0,-.37);c.bezierCurveTo(-.35,-.22,-.32,.17,-.39,.4);c.quadraticCurveTo(0,.3,.32,.41);c.bezierCurveTo(.22,.05,.3,-.27,0,-.37);c.fill();c.fillStyle='#d6d4c2';c.beginPath();c.ellipse(0,-.18,.077,.10,0,0,Math.PI*2);c.fill();c.strokeStyle='#d6d4c2';c.lineWidth=.029;c.beginPath();c.moveTo(-.1,.12);c.lineTo(0,.02);c.lineTo(.1,.12);c.stroke();
  }else if(kind==='pentecost'){
@@ -7628,7 +7756,6 @@ function draw(c,kind,x,y,size,phase=0){
 }
 window.JCSGospelArt=Object.freeze({draw});
 })();
-
 </script>
 <script id="jcs-gospel-layer">
 /* Gospel and theological context share the atlas clock; they never alter harm metrics. */
@@ -7639,25 +7766,27 @@ window.JCSGospelArt=Object.freeze({draw});
  let selectedId='',enabled=true,revision=0,raf=0,lastPaint=0,lastKey='',lastUI='',canvasSize='',mounted=true;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),$=id=>document.getElementById(id);
  const story=document.createElement('section');story.className='jcs-gospel-story';story.setAttribute('aria-label','Jesus Christ · Gospel journey');
- story.innerHTML='<div class="jcs-gospel-top"><div class="jcs-gospel-heading">Jesus Christ · the Gospel journey<span>Bethlehem’s star · the cross · peace and the Spirit</span></div><label class="jcs-gospel-toggle"><input id="jcs-gospel-enabled" type="checkbox" checked> Gospel layer</label></div><nav class="jcs-gospel-nav" aria-label="Read a Gospel account"></nav><details class="jcs-gospel-reading"><summary id="jcs-gospel-summary"></summary><div class="jcs-gospel-detail"><p id="jcs-gospel-description"></p><p id="jcs-gospel-context"></p><p id="jcs-gospel-connection"></p><p id="jcs-gospel-sources"></p><div class="jcs-gospel-actions"><button type="button" id="jcs-gospel-jump">Go to this timeline moment</button><button type="button" id="jcs-gospel-follow">Follow timeline again</button></div><details class="jcs-gospel-notes"><summary>Dates, traditions and how the layers relate</summary><div id="jcs-gospel-notes"></div></details></div></details><p class="jcs-gospel-live" id="jcs-gospel-live"></p>';
+ story.innerHTML='<div class="jcs-gospel-top"><div class="jcs-gospel-heading">Jesus Christ · the Gospel journey<span>Bethlehem’s star · the blue cross · peace and the Spirit</span></div><label class="jcs-gospel-toggle"><input id="jcs-gospel-enabled" type="checkbox" checked> Gospel layer</label></div><nav class="jcs-gospel-nav" aria-label="Read a Gospel account"></nav><details class="jcs-gospel-reading" open><summary id="jcs-gospel-summary"></summary><div class="jcs-gospel-detail"><p id="jcs-gospel-description"></p><p id="jcs-gospel-context"></p><p id="jcs-gospel-connection"></p><p id="jcs-gospel-sources"></p><div class="jcs-gospel-actions"><button type="button" id="jcs-gospel-jump">Go to this timeline moment</button><button type="button" id="jcs-gospel-follow">Follow timeline again</button></div><details class="jcs-gospel-notes"><summary>Dates, traditions and how the layers relate</summary><div id="jcs-gospel-notes"></div></details></div></details><p class="jcs-gospel-live" id="jcs-gospel-live"></p>';
  (document.querySelector('.jcs-map-controls')||viewport.parentElement).append(story);
  const nav=story.querySelector('nav'),buttons=new Map();
  function sourceLink(label,url){const a=document.createElement('a');a.textContent=label;a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
- for(const e of events){const b=document.createElement('button');b.type='button';b.textContent=e.shortTitle||e.title;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>select(e.id));nav.append(b);buttons.set(e.id,b);}
+ for(const e of [byId.get('nativity'),...events.filter(e=>e.id!=='nativity')]){const b=document.createElement('button');b.type='button';b.textContent=e.shortTitle||e.title;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>select(e.id));nav.append(b);buttons.set(e.id,b);}
  for(const note of data.notes){const p=document.createElement('p'),strong=document.createElement('strong');strong.textContent=note.title+'. ';p.append(strong,document.createTextNode(note.text+' '));if(note.url)p.append(sourceLink(note.label||'Source',note.url));$('jcs-gospel-notes').append(p);}
  function autoEvent(position){if(position<28)return byId.get('nativity');if(position<29)return byId.get('baptism');if(position<33)return byId.get('ministry');return byId.get('crucifixion');}
  function state(position,full=true){
+  position=Number.isFinite(Number(position))?Math.max(-4,Number(position)):-4;
   const current=byId.get(selectedId)||autoEvent(position),focus=enabled&&full&&(selectedId||position<44)?current:null,focusWeight=selectedId?1:Math.max(0,Math.min(1,(44-position)/10));
   // Close sites use clearly drawn callouts, retaining their exact map anchor.
-  const markers=events.map(e=>({...e,gospelId:e.id,visible:enabled&&full&&(e.id===selectedId||(e.at<=position&&['nativity','crucifixion'].includes(e.id))||(!selectedId&&current.id===e.id)),selected:e.id===selectedId,offsetX:e.id==='nativity'?-24:e.id==='crucifixion'?28:0,offsetY:e.id==='nativity'?-34:e.id==='crucifixion'?-34:-45}));
+  const markers=events.map(e=>({...e,kind:e.id==='nativity'?'jesus':e.kind,gospelId:e.id,visible:enabled&&full&&(e.id===selectedId||(e.at<=position&&['nativity','crucifixion'].includes(e.id))||(!selectedId&&current.id===e.id)),selected:e.id===selectedId,offsetX:e.id==='nativity'?-30:e.id==='crucifixion'?36:0,offsetY:e.id==='nativity'?28:e.id==='crucifixion'?-38:-45}));
+  const birth=markers.find(e=>e.id==='nativity');markers.push({...birth,id:'bethlehem-star',kind:'nativity',title:'Star of Bethlehem',shortTitle:'Star of Bethlehem',gospelId:'nativity',offsetX:-30,offsetY:-52});
   return{enabled:enabled&&full,selectedId,focus,focusWeight,current,markers,revision};
  }
  function updateUI(g,position,mode){const e=g.current,key=[e.id,selectedId,enabled,Math.floor(position),mode].join('|');if(key===lastUI)return;lastUI=key;
   $('jcs-gospel-summary').textContent=e.title+' · '+e.dateLabel+' · read account and sources';$('jcs-gospel-description').textContent=e.summary;$('jcs-gospel-context').textContent=e.context;$('jcs-gospel-connection').textContent=e.connection;
   const links=$('jcs-gospel-sources');links.replaceChildren(sourceLink(e.sourceLabel,e.sourceUrl));for(const link of e.relatedSources||[])links.append(' · ',sourceLink(link.label,link.url));
   for(const [id,b]of buttons)b.setAttribute('aria-pressed',String(id===e.id));$('jcs-gospel-follow').hidden=!selectedId;
-  $('jcs-gospel-jump').textContent=e.at===1?'Show the opening / birth context':'Go to display year AD '+e.at;
-  $('jcs-gospel-live').textContent=mode!=='full'?'Gospel markers appear in Human history; the source accounts remain available.':selectedId?'Reading a selected Gospel account; the timeline and narration continue independently.':position<28?'Opening context: the birth accounts precede AD 1. The existing timeline begins at AD 1.':'Gospel milestones persist as religious context. Their symbols do not change the recorded violence totals.';
+  $('jcs-gospel-jump').textContent=e.at===-4?'Return to the birth opening · 5 BC':'Go to display year '+(e.at<1?(1-e.at)+' BC':'AD '+e.at);
+  $('jcs-gospel-live').textContent=mode!=='full'?'Gospel markers appear in Human history; the source accounts remain available.':selectedId?'Reading a selected Gospel account; the timeline and narration continue independently.':position<28?'The journey begins at a 5 BC birth anchor within the uncertain c. 6–4 BC range. The blue cross identifies Jesus; the separate star represents Matthew’s account.':'Gospel milestones persist as religious context. Their symbols do not change the recorded violence totals.';
  }
  function changed(){revision++;lastKey='';const s=atlas.getGlobeSnapshot();updateUI(s.gospel,s.position,s.mode);document.dispatchEvent(new Event('jcs:gospel-change'));wake();}
  function select(id){if(!byId.has(id))return;selectedId=id;enabled=true;$('jcs-gospel-enabled').checked=true;story.querySelector('.jcs-gospel-reading').open=true;changed();}
@@ -7667,7 +7796,7 @@ window.JCSGospelArt=Object.freeze({draw});
  $('jcs-gospel-jump').addEventListener('click',()=>{const e=byId.get(selectedId)||autoEvent(atlas.getYear());atlas.activate();atlas.setYear(e.at);changed();});
  const canvas=document.createElement('canvas');canvas.className='jcs-gospel-canvas';canvas.setAttribute('aria-hidden','true');viewport.append(canvas);const ctx=canvas.getContext('2d');
  const hitLayer=document.createElementNS(NS,'g');hitLayer.id='jcs-gospel-hit-layer';svg.append(hitLayer);const hits=new Map();
- for(const e of events){const circle=document.createElementNS(NS,'circle');circle.setAttribute('class','jcs-gospel-marker-hit');circle.setAttribute('tabindex','0');circle.setAttribute('role','button');circle.setAttribute('aria-label',e.title+' · '+e.dateLabel+' · read Gospel source');circle.style.display='none';circle.addEventListener('click',ev=>{ev.stopPropagation();select(e.id)});circle.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();ev.stopPropagation();select(e.id)}});hitLayer.append(circle);hits.set(e.id,circle);}
+ for(const e of [...events,{...byId.get('nativity'),id:'bethlehem-star',gospelId:'nativity',title:'Star of Bethlehem'}]){const circle=document.createElementNS(NS,'circle');circle.setAttribute('class','jcs-gospel-marker-hit');circle.setAttribute('tabindex','0');circle.setAttribute('role','button');circle.setAttribute('aria-label',e.title+' · '+e.dateLabel+' · read Gospel source');circle.style.display='none';circle.addEventListener('click',ev=>{ev.stopPropagation();select(e.gospelId||e.id)});circle.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();ev.stopPropagation();select(e.gospelId||e.id)}});hitLayer.append(circle);hits.set(e.id,circle);}
  function drawFlat(s){
   const r=svg.getBoundingClientRect(),v=viewport.getBoundingClientRect(),m=svg.getScreenCTM();if(!ctx||!m||!r.width||!r.height)return;
   const w=Math.round(r.width),h=Math.round(r.height),dpr=Math.min(1.5,window.devicePixelRatio||1),sizeKey=[w,h,dpr].join('|');
@@ -7677,9 +7806,9 @@ window.JCSGospelArt=Object.freeze({draw});
   const phase=reduced.matches||s.animationsEnabled===false?0:s.position*.75,scale=Math.hypot(m.a,m.b)||1;
   for(const item of s.gospel.markers.filter(i=>i.visible).sort((a,b)=>Number(a.selected)-Number(b.selected))){
    const wx=(item.lon+180)*1000/360,wy=(90-item.lat)*500/180,ax=m.a*wx+m.c*wy+m.e-r.left,ay=m.b*wx+m.d*wy+m.f-r.top;
-   if(ax<0||ay<0||ax>w||ay>h)continue;const x=Math.max(28,Math.min(w-28,ax+item.offsetX)),y=Math.max(35,Math.min(h-30,ay+item.offsetY)),size=item.kind==='crucifixion'?52:item.kind==='nativity'?34:32;
+   if(ax<0||ay<0||ax>w||ay>h)continue;const x=Math.max(32,Math.min(w-32,ax+item.offsetX)),y=Math.max(42,Math.min(h-40,ay+item.offsetY)),size=item.kind==='crucifixion'?62:item.kind==='jesus'?54:item.kind==='nativity'?46:42;
    ctx.strokeStyle='#8da2b1';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(x,y+size*.38);ctx.stroke();ctx.fillStyle='#b5cbd4';ctx.beginPath();ctx.arc(ax,ay,2.1,0,Math.PI*2);ctx.fill();window.JCSGospelArt.draw(ctx,item.kind,x,y,size,phase);
-   const title=item.kind==='crucifixion'?'Jesus · Crucifixion':item.kind==='nativity'?'Jesus · Bethlehem':item.shortTitle;ctx.font='11px system-ui,sans-serif';const tw=ctx.measureText(title).width,tx=Math.max(4,Math.min(w-tw-4,x-tw/2)),ty=Math.min(h-4,y+size*.6);ctx.fillStyle='#081320e8';ctx.fillRect(tx-3,ty-12,tw+6,16);ctx.fillStyle='#d9e5eb';ctx.fillText(title,tx,ty);
+   const title=item.kind==='crucifixion'?'Jesus · Crucifixion':item.kind==='jesus'?'Jesus · Birth at Bethlehem':item.kind==='nativity'?'Star of Bethlehem':item.shortTitle;ctx.font='11px system-ui,sans-serif';const tw=ctx.measureText(title).width,tx=Math.max(4,Math.min(w-tw-4,x-tw/2)),ty=Math.min(h-4,y+size*.6);ctx.fillStyle='#081320e8';ctx.fillRect(tx-3,ty-12,tw+6,16);ctx.fillStyle=item.kind==='nativity'?'#fff0c2':'#acd7ff';ctx.fillText(title,tx,ty);
    const circle=hits.get(item.id),inv=m.inverse(),sx=x+r.left,sy=y+r.top;circle.setAttribute('cx',String(inv.a*sx+inv.c*sy+inv.e));circle.setAttribute('cy',String(inv.b*sx+inv.d*sy+inv.f));circle.setAttribute('r',String(size*.6/scale));circle.style.display='';
   }
  }
@@ -7691,7 +7820,6 @@ window.JCSGospelArt=Object.freeze({draw});
  if(typeof ResizeObserver==='function')new ResizeObserver(()=>{lastKey='';canvasSize='';wake()}).observe(svg);window.addEventListener('pagehide',()=>{mounted=false;cancelAnimationFrame(raf)});window.addEventListener('pageshow',()=>{mounted=true;wake()});
  changed();
 })();
-
 </script>
 <script id="jcs-cinematic-globe-renderer">
 /* Optional Canvas globe. Every visual phase is a pure function of atlas position.
@@ -7702,6 +7830,7 @@ window.JCSGospelArt=Object.freeze({draw});
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const ease = t => t * t * (3 - 2 * t);
   const mix = (a, b, t) => a + (b - a) * t;
+  const dateLabel = year => year <= 0 ? (1 - year).toLocaleString('en-US') + ' BC' : 'AD ' + year.toLocaleString('en-US');
   const hash = s => { let n = 2166136261; for (const c of String(s)) n = Math.imul(n ^ c.charCodeAt(0), 16777619); return n >>> 0; };
   const vec = (lon, lat) => { const a = lon * RAD, b = lat * RAD, c = Math.cos(b); return [c * Math.sin(a), Math.sin(b), c * Math.cos(a)]; };
   const normalized = v => { const m = Math.hypot(...v) || 1; return v.map(x => x / m); };
@@ -7731,6 +7860,7 @@ window.JCSGospelArt=Object.freeze({draw});
     const panel = document.createElement('div'); panel.className = 'jcs-cinema';
     panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe with Gospel markers and scriptural artwork. Drag or use arrow keys to explore; use Resume guided view to follow the timeline."></canvas>' +
       '<div class="jcs-cinema-head"><div><div class="jcs-cinema-kicker">Scriptural artwork · cinematic view</div><div class="jcs-cinema-year"></div></div><div class="jcs-cinema-controls" aria-label="Cinematic view options"></div></div>' +
+      '<div class="jcs-cinema-space-note"><a href="https://science.nasa.gov/universe/galaxies/types/" target="_blank" rel="noopener noreferrer">Representative galaxy forms</a> · motion accelerated<br>Red haze is an artistic frame, not a physical boundary.</div>' +
       '<div class="jcs-cinema-bottom"><div class="jcs-cinema-caption"><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy">Symbolic Watcher imagery · separately sourced history.<br>Modern coastlines and country outlines are reference geography.</p><p class="jcs-cinema-source"></p></div><div class="jcs-cinema-hint">' + iconDrag + 'Drag to explore<br>Timeline guides the view</div></div><div class="jcs-cinema-status" aria-live="polite"></div>';
     host.append(panel);
     const canvas = panel.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: false });
@@ -7740,14 +7870,16 @@ window.JCSGospelArt=Object.freeze({draw});
     const layer = { background: true, descents: true, ring: true };
     let active = false, disposed = false, raf = 0, lastFrame = 0, width = 1, height = 1, radius = 1, cx = 0, cy = 0;
     let manual = false, yaw = 0, pitch = 12, drag = null, dirty = true, lastPosition = NaN, lastSignature = '', hits = [], currentCamera = { lon: 0, lat: 12 };
-    let cameraSignature = '', cameraKeys = [], lastCaption = '', lastStatus = '', sky = null, labelBoxes = [];
+    let cameraSignature = '', cameraKeys = [], lastCaption = '', lastStatus = '', sky = null, haze = null, galaxySprites = null, labelBoxes = [];
+    let hazeX = 1, hazeY = 1, hazeCY = 0;
     let lastGospelSelected = getState()?.gospel?.selectedId || '';
     const vectorCache = new Map(), reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const toVector = p => { const key = p.lon + ',' + p.lat; if (!vectorCache.has(key)) vectorCache.set(key, vec(+p.lon, +p.lat)); return vectorCache.get(key); };
     const resume = document.createElement('button'); resume.type = 'button'; resume.className = 'jcs-cinema-resume'; resume.hidden = true;
     resume.innerHTML = iconOrbit + '<span>Resume guided view</span>'; resume.addEventListener('click', () => { manual = false; resume.hidden = true; invalidate(); }); controls.append(resume);
-    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Red ring']]) {
+    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Outer haze']]) {
       const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', 'true');
+      if (key === 'descents') b.title = 'Religious artwork: celestial origins are symbolic; dated destinations remain unchanged.';
       b.addEventListener('click', () => { layer[key] = !layer[key]; b.setAttribute('aria-pressed', String(layer[key])); dirty = true; invalidate(); }); controls.append(b);
     }
 
@@ -7760,22 +7892,59 @@ window.JCSGospelArt=Object.freeze({draw});
       wash.addColorStop(0, '#0b1526'); wash.addColorStop(.55, '#080e1c'); wash.addColorStop(1, '#03060d'); c.fillStyle = wash; c.fillRect(0, 0, w, h);
       // A seeded, abstract Milky Way band; this is not an astronomical simulation.
       c.save(); c.translate(w * .5, h * .46); c.rotate(-.39);
-      for (let i = 0; i < 125; i++) {
-        const x = (random() - .5) * w * 1.6, y = (random() - .5) * h * .24, r = 20 + random() * 75;
-        const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, i % 3 ? 'rgba(87,109,151,.045)' : 'rgba(173,148,143,.04)'); g.addColorStop(1, 'rgba(38,49,75,0)'); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+      for (let i = 0; i < 155; i++) {
+        const x = (random() - .5) * w * 1.7, y = (random() - .5) * h * .26, r = 24 + random() * 85;
+        const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, i % 3 ? 'rgba(87,109,151,.055)' : 'rgba(173,148,143,.048)'); g.addColorStop(1, 'rgba(38,49,75,0)'); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
       }
       c.restore();
-      const count = Math.min(1000, Math.round(w * h / 600));
+      const count = Math.min(1650, Math.round(w * h / 440));
       for (let i = 0; i < count; i++) {
         const x = random() * w, y = random() * h, a = .12 + random() * .57, r = random() < .035 ? 1.15 : .35 + random() * .4;
         c.fillStyle = 'rgba(' + (i % 5 ? '173,193,218,' : '225,200,165,') + a + ')'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill();
         if (r > 1) { c.globalAlpha = .16; c.fillRect(x - 3.5, y - .3, 7, .6); c.fillRect(x - .3, y - 3.5, .6, 7); c.globalAlpha = 1; }
       }
-      for (const [x, y, scale, angle] of [[.18, .28, .8, -.48], [.81, .25, .5, .65], [.88, .67, .42, -.25]]) {
-        c.save(); c.translate(w * x, h * y); c.rotate(angle); c.scale(scale, scale * .34);
-        const r = Math.min(w, h) * .1, g = c.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, 'rgba(234,219,192,.42)'); g.addColorStop(.07, 'rgba(216,201,186,.26)'); g.addColorStop(.3, 'rgba(112,124,155,.14)'); g.addColorStop(1, 'rgba(66,84,114,0)'); c.fillStyle = g; c.fillRect(-r, -r, r * 2, r * 2);
-        c.strokeStyle = 'rgba(141,163,193,.12)'; c.lineWidth = 2;
-        for (let arm = 0; arm < 2; arm++) { c.beginPath(); for (let j = 0; j < 100; j++) { const t = j / 99, a = t * 7 + arm * Math.PI, rr = t * r; const xx = Math.cos(a) * rr, yy = Math.sin(a) * rr; j ? c.lineTo(xx, yy) : c.moveTo(xx, yy); } c.stroke(); } c.restore();
+      // Cache the broad outer frame separately: toggling it never changes origins.
+      haze = document.createElement('canvas'); haze.width = Math.ceil(w); haze.height = Math.ceil(h);
+      const hc = haze.getContext('2d'); hc.translate(cx, hazeCY); hc.scale(hazeX, hazeY);
+      const edge = hc.createRadialGradient(0, 0, .70, 0, 0, 1.18); edge.addColorStop(0, 'rgba(94,25,39,0)'); edge.addColorStop(.32, 'rgba(124,39,52,.025)'); edge.addColorStop(.58, 'rgba(164,55,62,.12)'); edge.addColorStop(.78, 'rgba(111,28,45,.075)'); edge.addColorStop(1, 'rgba(76,16,31,0)'); hc.fillStyle = edge; hc.fillRect(-1.3, -1.3, 2.6, 2.6);
+      if (!galaxySprites) galaxySprites = makeGalaxies();
+    }
+    function makeGalaxies() {
+      const make = () => { const c = document.createElement('canvas'); c.width = c.height = 256; return c; };
+      const glow = (c, x, y, r, color, alpha) => { const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, 'rgba(' + color + ',' + alpha + ')'); g.addColorStop(.3, 'rgba(' + color + ',' + alpha * .33 + ')'); g.addColorStop(1, 'rgba(' + color + ',0)'); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2); };
+      const sprites = {};
+      for (const kind of ['spiral', 'elliptical', 'irregular']) {
+        const core = make(), inner = make(), outer = make(), random = seeded(hash(kind)), c = core.getContext('2d'), a = inner.getContext('2d'), b = outer.getContext('2d');
+        if (kind === 'spiral') {
+          glow(c, 128, 128, 115, '93,126,173', .16); glow(c, 128, 128, 45, '237,211,176', .76); glow(c, 128, 128, 13, '255,240,210', .85);
+          for (let arm = 0; arm < 2; arm++) for (let j = 0; j < 600; j++) {
+            const r = 14 + random() * 99, angle = arm * Math.PI + Math.log(r / 13) * 2.6 + (random() - .5) * .44, x = 128 + Math.cos(angle) * r, y = 128 + Math.sin(angle) * r, dest = r < 62 ? a : b;
+            dest.fillStyle = j % 7 ? 'rgba(159,191,226,' + (.18 + random() * .42) + ')' : 'rgba(237,190,180,.42)'; dest.beginPath(); dest.arc(x, y, .4 + random() * 1.35, 0, TAU); dest.fill();
+          }
+          for (const dest of [a, b]) { dest.strokeStyle = 'rgba(88,126,171,.13)'; dest.lineWidth = 5; for (let arm = 0; arm < 2; arm++) { dest.beginPath(); for (let j = 0; j < 100; j++) { const r = (dest === a ? 14 : 57) + j / 99 * (dest === a ? 51 : 57), angle = arm * Math.PI + Math.log(r / 13) * 2.6, x = 128 + Math.cos(angle) * r, y = 128 + Math.sin(angle) * r; j ? dest.lineTo(x, y) : dest.moveTo(x, y); } dest.stroke(); } }
+        } else if (kind === 'elliptical') {
+          glow(c, 128, 128, 114, '195,168,132', .40); glow(c, 128, 128, 59, '237,207,164', .57); glow(c, 128, 128, 16, '255,228,183', .64);
+          for (let j = 0; j < 600; j++) { const r = Math.pow(random(), .8) * 105, angle = random() * TAU; c.fillStyle = 'rgba(229,203,165,' + (.08 + random() * .22) + ')'; c.fillRect(128 + Math.cos(angle) * r, 128 + Math.sin(angle) * r, .6, .6); }
+        } else {
+          for (let j = 0; j < 24; j++) { const x = 77 + random() * 108, y = 83 + random() * 80; glow(c, x, y, 12 + random() * 37, j % 3 ? '112,155,204' : '185,133,166', .10 + random() * .12); }
+          for (let j = 0; j < 430; j++) { const t = random(), x = 58 + t * 140 + (random() - .5) * 31, y = 123 + Math.sin(t * 5) * 22 + (random() - .5) * 64; c.fillStyle = 'rgba(' + (j % 8 ? '160,197,226,' : '231,186,169,') + (.16 + random() * .44) + ')'; c.beginPath(); c.arc(x, y, .3 + random() * 1.25, 0, TAU); c.fill(); }
+        }
+        sprites[kind] = { core, inner, outer };
+      }
+      return sprites;
+    }
+    function drawGalaxies(position, state) {
+      if (!layer.background || !galaxySprites) return;
+      // Fast inner and slower outer components suggest differential rotation.
+      // Speeds are deliberately accelerated; wall time never enters this phase.
+      const t = reduced.matches || state.animationsEnabled === false ? 0 : (position + 4) / 2030;
+      const mobile = width < 550, scale = Math.min(width, height);
+      const scenes = mobile ? [['spiral', .15, .28, .24, .62, -.42], ['elliptical', .82, .25, .19, .7, .4], ['irregular', .84, .69, .21, .8, -.25]] : [['spiral', .15, .30, .25, .65, -.42], ['elliptical', .84, .28, .21, .69, .4], ['irregular', .85, .68, .22, .82, -.25], ['spiral', .13, .69, .18, .22, .25]];
+      for (const [kind, x, y, factor, tilt, angle] of scenes) {
+        const sprite = galaxySprites[kind], size = scale * factor; ctx.save(); ctx.translate(width * x, height * y); ctx.rotate(angle); ctx.scale(1, tilt); ctx.drawImage(sprite.core, -size / 2, -size / 2, size, size);
+        if (kind === 'spiral') { ctx.save(); ctx.rotate(t * .7); ctx.drawImage(sprite.outer, -size / 2, -size / 2, size, size); ctx.restore(); ctx.rotate(t * 1.2); ctx.drawImage(sprite.inner, -size / 2, -size / 2, size, size); }
+        ctx.restore();
+        if (!mobile || kind === 'spiral') { ctx.font = '8px ui-sans-serif,system-ui,sans-serif'; ctx.fillStyle = '#8192a4'; ctx.textAlign = 'center'; ctx.fillText(kind === 'spiral' && tilt < .3 ? 'Edge-on spiral' : kind[0].toUpperCase() + kind.slice(1), width * x, height * y + size * tilt * .58 + 11); ctx.textAlign = 'left'; }
       }
     }
 
@@ -7783,7 +7952,7 @@ window.JCSGospelArt=Object.freeze({draw});
       if (disposed) return;
       const rect = host.getBoundingClientRect(); width = Math.max(240, Math.round(rect.width || host.clientWidth || 800)); height = Math.max(360, Math.round(rect.height || host.clientHeight || 520));
       const dpr = Math.min(1.5, global.devicePixelRatio || 1); canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      radius = Math.min(width * .345, height * .347); cx = width * .5; cy = height * .485; makeSky(); dirty = true; invalidate();
+      radius = Math.min(width * .29, height * .28); cx = width * .5; cy = height * (width < 550 ? .56 : .51); hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
     }
     function camera(position, stars) {
       const valid = stars.filter(s => finitePoint(s) && Number.isFinite(+s.landing));
@@ -7794,7 +7963,7 @@ window.JCSGospelArt=Object.freeze({draw});
         cameraKeys = cameraKeys.filter((k, i, all) => i === 0 || k.at !== all[i - 1].at);
         if (cameraKeys.length) { let last = cameraKeys[0]; last.lon -= 14; for (let i = 1; i < cameraKeys.length; i++) { const k = cameraKeys[i]; k.lon -= 14; while (k.lon - last.lon > 180) k.lon -= 360; while (k.lon - last.lon < -180) k.lon += 360; if (k.at - last.at > 300) k.lon += 360; last = k; } }
       }
-      if (!cameraKeys.length) return { lon: (position - 1) * .16 - 20, lat: 18 };
+      if (!cameraKeys.length) return { lon: (position + 4) * .16 - 20, lat: 18 };
       const first = cameraKeys[0], last = cameraKeys[cameraKeys.length - 1];
       if (position <= first.at) return { lon: first.lon - Math.min(100, (first.at - position) * .13), lat: first.lat };
       if (position >= last.at) return { lon: last.lon + (position - last.at) * .14, lat: last.lat };
@@ -7864,8 +8033,9 @@ window.JCSGospelArt=Object.freeze({draw});
     }
     function starOrigin(starItem, fallbackIndex = 0) {
       const index = Number.isFinite(+starItem.star) ? +starItem.star : fallbackIndex, n = hash(starItem.id || starItem.name || index);
-      const angle = index === 0 ? -1.87 : -.18 - ((index * .61803398875) % 1) * 2.73;
-      return { x: cx + Math.cos(angle) * radius * (1.35 + (n % 4) * .035), y: cy + Math.sin(angle) * radius * 1.32 };
+      const angle = index === 0 ? -1.87 : -.12 - ((index * .61803398875) % 1) * 2.89;
+      const beyondHaze = 1.20 + (n % 4) * .025;
+      return { x: cx + Math.cos(angle) * hazeX * beyondHaze, y: hazeCY + Math.sin(angle) * hazeY * beyondHaze };
     }
     function flightPoint(starItem, endpoint, t) {
       const n = hash(starItem.id || starItem.name), side = n % 2 ? 1 : -1, start = starOrigin(starItem);
@@ -7924,24 +8094,31 @@ window.JCSGospelArt=Object.freeze({draw});
       const rows = (gospel.markers || []).filter(m => m.visible !== false && finitePoint(m)).map(m => ({ item: m, p: project(toVector(m)), focus: !!m.selected || m.id === gospel.selectedId || m.id === gospel.focus?.id })).filter(r => r.p.z > .055);
       // Nearby Gospel places retain their geographic anchors. Short leaders separate
       // the artwork so the Jerusalem scenes never cover Jesus's cross.
-      const offsets = { nativity: [-43, 31], annunciation: [-43, -35], baptism: [39, -39], eucharist: [-45, -3], crucifixion: [0, -19], resurrection: [42, -3], pentecost: [38, 34] };
-      rows.sort((a, b) => Number(a.focus) - Number(b.focus) || Number(a.item.kind === 'crucifixion') - Number(b.item.kind === 'crucifixion'));
-      const scale = width < 500 ? .85 : 1;
+      const offsets = { annunciation: [-48, -38], baptism: [45, -40], eucharist: [-49, 1], jesus: [0, -22], crucifixion: [0, -24], resurrection: [48, 3], pentecost: [43, 40] };
+      const isCross = m => m.kind === 'crucifixion' || m.kind === 'jesus';
+      rows.sort((a, b) => Number(a.focus) - Number(b.focus) || Number(isCross(a.item)) - Number(isCross(b.item)));
+      const scale = width < 500 ? .8 : 1;
       for (const row of rows) {
         const m = row.item, p = row.p, clustered = rows.some(other => other !== row && Math.hypot(other.p.x - p.x, other.p.y - p.y) < 45);
-        const offset = clustered ? offsets[m.kind] || [0, 0] : [0, 0];
-        const x = p.x + offset[0] * scale, y = p.y + offset[1] * scale;
-        const size = (m.kind === 'crucifixion' ? row.focus ? 53 : 46 : m.kind === 'nativity' ? row.focus ? 37 : 29 : row.focus ? 32 : 24) * scale;
+        const offset = clustered && m.kind !== 'nativity' ? offsets[m.kind] || [0, 0] : [0, 0];
+        let x = p.x + offset[0] * scale, y = p.y + offset[1] * scale;
+        if (m.kind === 'nativity') {
+          // Lift along Bethlehem's local north tangent and surface normal in world
+          // coordinates. The celestial star follows globe rotation, never the screen.
+          const lon = +m.lon * RAD, lat = +m.lat * RAD, ground = toVector(m), north = [-Math.sin(lat) * Math.sin(lon), Math.cos(lat), -Math.sin(lat) * Math.cos(lon)];
+          const high = project(ground.map((v, i) => v * 1.25 + north[i] * 1.24)); x = high.x; y = high.y;
+        }
+        const size = (isCross(m) ? row.focus ? 76 : 64 : m.kind === 'nativity' ? 48 : row.focus ? 34 : 25) * scale;
         Object.assign(row, { x, y, size }); labelBoxes.push({ x: x - size / 2 - 3, y: y - size / 2 - 3, w: size + 6, h: size + 6 });
         ctx.save(); ctx.shadowBlur = 0; ctx.shadowColor = 'transparent'; ctx.filter = 'none'; ctx.globalAlpha = 1;
-        if (clustered) { ctx.strokeStyle = 'rgba(115,180,204,.47)'; ctx.lineWidth = .75; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(x, y); ctx.stroke(); ctx.fillStyle = '#91c9dc'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, TAU); ctx.fill(); }
+        if (clustered || m.kind === 'nativity') { ctx.strokeStyle = m.kind === 'nativity' ? 'rgba(229,217,173,.16)' : 'rgba(115,180,204,.47)'; ctx.lineWidth = .75; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(x, y); ctx.stroke(); ctx.fillStyle = '#91c9dc'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, TAU); ctx.fill(); }
         if (global.JCSGospelArt && typeof global.JCSGospelArt.draw === 'function') global.JCSGospelArt.draw(ctx, m.kind, x, y, size, phase);
         else { ctx.fillStyle = '#123d5b'; ctx.strokeStyle = '#7bb9df'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, size * .29, 0, TAU); ctx.fill(); ctx.stroke(); }
         ctx.restore();
-        const item = { ...m, kind: 'gospel', gospelId: m.id, gospelKind: m.kind }, hit = { x, y, radius: Math.max(18, size / 2 + 5), priority: 2, item }; hits.push(hit); row.hit = hit;
+        const item = { ...m, kind: 'gospel', gospelId: m.gospelId || m.id, gospelKind: m.kind }, hit = { x, y, radius: Math.max(18, size / 2 + 5), priority: 2, item }; hits.push(hit); row.hit = hit;
       }
-      const labeled = rows.filter(r => r.focus || r.item.kind === 'crucifixion' || r.item.kind === 'nativity').sort((a, b) => Number(b.focus) - Number(a.focus) || Number(b.item.kind === 'crucifixion') - Number(a.item.kind === 'crucifixion')).slice(0, 2);
-      for (const row of labeled) { const m = row.item, title = m.kind === 'nativity' ? 'Bethlehem · Nativity' : m.kind === 'crucifixion' ? 'Jesus · Crucifixion' : m.title; row.hit.bounds = gospelLabel(title, row.x, row.y, row.size, m.kind === 'nativity' ? '#efe3b9' : '#a6d8f1'); }
+      const labeled = rows.filter(r => r.focus || isCross(r.item) || r.item.kind === 'nativity').sort((a, b) => Number(b.focus) - Number(a.focus) || Number(b.item.kind === 'nativity') - Number(a.item.kind === 'nativity')).slice(0, 2);
+      for (const row of labeled) { const m = row.item, title = m.kind === 'nativity' ? 'Star of Bethlehem' : m.kind === 'crucifixion' ? 'Jesus · Crucifixion' : m.kind === 'jesus' && (m.gospelId || m.id) === 'nativity' ? 'Jesus · Birth at Bethlehem' : m.title; row.hit.bounds = gospelLabel(title, row.x, row.y, row.size, m.kind === 'nativity' ? '#efe3b9' : '#a6d8f1'); }
     }
     function captions(state, position) {
       const year = Number.isFinite(+state.year) ? Math.round(+state.year) : Math.floor(position), stars = state.stars || [];
@@ -7954,22 +8131,22 @@ window.JCSGospelArt=Object.freeze({draw});
       const sourceUrl = gospel ? gospel.sourceUrl || '' : record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
       const sourceLabel = gospel?.sourceLabel || record?.sourceLabel || 'Source';
       const signature = [year, title, source, sourceUrl, sourceLabel, !!gospel, manual].join('|'); if (signature === lastCaption) return; lastCaption = signature;
-      yearEl.textContent = 'AD ' + year.toLocaleString('en-US'); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
+      yearEl.textContent = dateLabel(year); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
       panel.dataset.gospelFocus = String(!!gospel); copyEl.textContent = gospel ? 'Gospel imagery · biblical narrative. Modern coastlines and country outlines are reference geography.' : 'Symbolic Watcher imagery · separately sourced history. Modern coastlines and country outlines are reference geography.';
       if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = sourceLabel; sourceEl.append(' · ', link); }
-      const status = 'Cinematic globe, AD ' + year + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
+      const status = 'Cinematic globe, ' + dateLabel(year) + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
     }
     function draw() {
       if (!active || disposed || document.hidden) return;
-      const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : +state.year || 1, 1, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
+      const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : Number.isFinite(+state.year) ? +state.year : -4, -4, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
       const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
       if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
       ctx.clearRect(0, 0, width, height); if (layer.background && sky) ctx.drawImage(sky, 0, 0, width, height); else { ctx.fillStyle = '#040812'; ctx.fillRect(0, 0, width, height); }
+      drawGalaxies(rawPosition, state); if (layer.ring && haze) ctx.drawImage(haze, 0, 0, width, height);
       const gospelFocus = state.gospel?.enabled && finitePoint(state.gospel.focus) ? state.gospel.focus : null;
       const guided = camera(position, state.stars || []);
       if (gospelFocus) { const weight = ease(clamp(Number.isFinite(+state.gospel.focusWeight) ? +state.gospel.focusWeight : 1, 0, 1)), delta = ((+gospelFocus.lon - guided.lon) % 360 + 540) % 360 - 180; guided.lon += delta * weight; guided.lat = mix(guided.lat, clamp(+gospelFocus.lat, -75, 75), weight); }
       currentCamera = manual ? { lon: yaw, lat: pitch } : guided; const project = projection(currentCamera); hits = []; labelBoxes = [];
-      if (layer.ring) { ctx.save(); ctx.translate(cx, cy); ctx.rotate(-.12); ctx.strokeStyle = 'rgba(164,65,64,.23)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, 0, TAU); ctx.stroke(); ctx.strokeStyle = 'rgba(222,100,78,.42)'; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, .16, 1.13); ctx.stroke(); ctx.restore(); }
       drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
       const vignette = ctx.createLinearGradient(0, height * .69, 0, height); vignette.addColorStop(0, 'rgba(3,7,15,0)'); vignette.addColorStop(1, 'rgba(3,7,15,.94)'); ctx.fillStyle = vignette; ctx.fillRect(0, height * .69, width, height * .31); drawGospel(state, project, rawPosition); captions(state, position);
     }
@@ -7987,11 +8164,10 @@ window.JCSGospelArt=Object.freeze({draw});
     document.addEventListener('visibilitychange', visibility); document.addEventListener('jcs:gospel-change', gospelChange); reduced.addEventListener('change', invalidate);
     const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => resize()) : null; observer?.observe(host);
     if (!observer) global.addEventListener('resize', resize);
-    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; } };
+    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; haze = null; galaxySprites = null; } };
   }
   global.JCSCinematicGlobe = Object.freeze({ create });
 })(window);
-
 </script>
 <script id="jcs-cinematic-globe-bridge">
 (() => {
@@ -8028,7 +8204,7 @@ window.JCSGospelArt=Object.freeze({draw});
   }
   flat.addEventListener('click',()=>{initialPending=false;useGlobe(false)});globe.addEventListener('click',()=>{initialPending=false;useGlobe(true)});
   function modeChanged(){
-    const full=document.body.dataset.timeline==='full';globe.disabled=!full;globe.title=full?'Show the optional cinematic globe':'Choose the AD 1–2026 history view to use the cinematic globe';
+    const full=document.body.dataset.timeline==='full';globe.disabled=!full;globe.title=full?'Show the cinematic globe':'Choose the Birth of Jesus–2026 history view to use the cinematic globe';
     if(!full&&active){useGlobe(false);status.textContent='Annual and current-data views use the original flat map.';}
   }
   new MutationObserver(modeChanged).observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
@@ -8043,7 +8219,264 @@ window.JCSGospelArt=Object.freeze({draw});
   document.addEventListener('jcs:full-view',initialView);
   modeChanged();initialView();
 })();
-
+</script>
+<script id="jcs-ambient-radio">
+/* JCS Church Music Radio. A separate wall-clock station; never owns the map clock. */
+(() => {
+  'use strict';
+  if (window.JCSAmbientRadio) return;
+  const assets = window.JCSAudioAssets;
+  const sacredIds = ['chant-02', 'chant-04', 'chant-05', 'chant-06'];
+  const playlist = sacredIds.map(id => assets?.playlist?.find(track => track.id === id)).filter(track => track && Number(track.duration) > 0);
+  const narrationPanel = document.getElementById('jcs-watchers-player');
+  if (!narrationPanel || !playlist.length || typeof assets.source !== 'function') return;
+  const epoch = Number(assets.stationEpochMs || Date.parse('2026-09-30T23:19:57Z')) / 1000;
+  const seed = 0;
+  const total = playlist.reduce((sum, track) => sum + Number(track.duration), 0);
+  const storageKey = 'jcs.ambientRadio.sacred.v2';
+  const clamp = value => Math.max(0, Math.min(1, Number(value) || 0));
+  let enabled = true, level = 0.35;
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+    const previous = saved ? null : JSON.parse(localStorage.getItem('jcs.ambientRadio.v1') || 'null');
+    if (previous && previous.enabled === false) enabled = false;
+    if (saved && typeof saved.enabled === 'boolean') enabled = saved.enabled;
+    if (saved && Number.isFinite(saved.volume)) level = clamp(saved.volume);
+  } catch {}
+  const panel = document.createElement('section');
+  panel.id = 'jcs-ambient-radio';
+  panel.className = 'jcs-ambient-radio';
+  panel.setAttribute('aria-labelledby', 'jcs-ambient-title');
+  panel.innerHTML = '<div class="jcs-ambient-heading"><span aria-hidden="true">✠</span><strong id="jcs-ambient-title">Church music</strong><span>Continuous station</span></div>' +
+    '<div class="jcs-ambient-actions"><button type="button" id="jcs-ambient-toggle" aria-pressed="false">Music on</button><label for="jcs-ambient-volume">Volume</label><input id="jcs-ambient-volume" type="range" min="0" max="1" step="0.01" aria-label="Background music volume"><output id="jcs-ambient-level" for="jcs-ambient-volume"></output></div>' +
+    '<p id="jcs-ambient-status" role="status" aria-live="polite"></p><p class="jcs-ambient-note">Joins the current station position. The same four chants and 35% music level as Sacred Audio; the reading starts at 80%. Music stays on when the timeline pauses. Recordings require internet access. Playback continues in the background when the browser allows it; closing this page or device restrictions can stop the sound.</p>';
+  narrationPanel.appendChild(panel); // Keep music controls visible when reading details are collapsed.
+  const audio = document.createElement('audio');
+  audio.id = 'jcs-ambient-audio';
+  audio.preload = 'metadata';
+  audio.crossOrigin = 'anonymous';
+  audio.setAttribute('playsinline', '');
+  audio.setAttribute('aria-label', 'Church music background station');
+  panel.appendChild(audio);
+  const button = document.getElementById('jcs-ambient-toggle');
+  const slider = document.getElementById('jcs-ambient-volume');
+  const output = document.getElementById('jcs-ambient-level');
+  const status = document.getElementById('jcs-ambient-status');
+  let activated = false, failed = false, needsGesture = false, loading = false;
+  let suspended = false, generation = 0, activeIndex = -1, boundaryTimer = null;
+  let audioContext = null, gainNode = null, mediaNode = null, contextUnavailable = false, effectiveVolume = level;
+  function position(now = Date.now() / 1000) {
+    let elapsed = (((now - epoch + seed) % total) + total) % total;
+    for (let index = 0; index < playlist.length; index++) {
+      const duration = Number(playlist[index].duration);
+      if (elapsed < duration) return {index, track: playlist[index], offset: elapsed, remaining: duration - elapsed};
+      elapsed -= duration;
+    }
+    return {index: 0, track: playlist[0], offset: 0, remaining: Number(playlist[0].duration)};
+  }
+  function save() {
+    try { localStorage.setItem(storageKey, JSON.stringify({enabled, volume: level})); } catch {}
+  }
+  function mix() {
+    effectiveVolume = level; // Match the Sacred Audio page instead of applying the old near-silent cap.
+    if (gainNode && audioContext) {
+      audio.volume = 1;
+      gainNode.gain.setTargetAtTime(effectiveVolume, audioContext.currentTime, 0.06);
+    } else {
+      audio.volume = effectiveVolume;
+    }
+    slider.value = String(level);
+    output.textContent = Math.round(level * 100) + '%';
+  }
+  function prepareOutput() {
+    mix();
+    // Use the Sacred page's direct media path when volume control works. A separate
+    // suspended AudioContext must not silence an otherwise playable desktop recording.
+    if (!audioContext && Math.abs(audio.volume - effectiveVolume) <= 0.01) return null;
+    const AudioContextType = window.AudioContext || window.webkitAudioContext;
+    if (!audioContext && !contextUnavailable && AudioContextType) {
+      try {
+        audioContext = new AudioContextType();
+        gainNode = audioContext.createGain();
+        gainNode.gain.value = 0; // Never connect music at the default full-volume gain.
+        mediaNode = audioContext.createMediaElementSource(audio);
+        mediaNode.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+      } catch (error) {
+        if (mediaNode) throw error; // A captured media source cannot safely bypass its graph.
+        try { audioContext?.close()?.catch?.(() => {}); } catch {}
+        audioContext = null;
+        gainNode = null;
+        contextUnavailable = true;
+      }
+    }
+    mix();
+    if (audioContext) {
+      if (audioContext.state === 'closed') throw new Error('Music audio output is closed.');
+      return audioContext.state === 'running' ? null : audioContext.resume();
+    }
+    // Browser fallback is acceptable only if the requested quiet level can be set.
+    if (Math.abs(audio.volume - effectiveVolume) > 0.01) {
+      const error = new Error('This browser cannot control quiet background music.');
+      error.name = 'MusicVolumeUnsupported';
+      throw error;
+    }
+    return null;
+  }
+  function controls() {
+    const requested = enabled && activated && !failed;
+    button.textContent = requested ? 'Music off' : 'Music on';
+    button.setAttribute('aria-pressed', String(requested));
+    button.setAttribute('aria-label', requested ? 'Turn background music off' : 'Turn background music on at the current station position');
+  }
+  function cancelBoundary() {
+    if (boundaryTimer !== null) clearTimeout(boundaryTimer);
+    boundaryTimer = null;
+  }
+  function stop() {
+    generation++;
+    loading = false;
+    cancelBoundary();
+    audio.pause();
+  }
+  function failure(error) {
+    stop();
+    failed = true;
+    needsGesture = true;
+    status.textContent = error?.name === 'MusicVolumeUnsupported'
+      ? 'Music is off because this browser cannot control a quiet background level. Try a browser with Web Audio support.'
+      : error?.name === 'MusicLoadingTimeout'
+      ? 'Music did not start within 12 seconds. Choose Music on to try again; the reading and timeline remain available.'
+      : error?.name === 'NotAllowedError'
+      ? 'Your browser blocked music. Choose Music on to allow listening.'
+      : 'Music could not play. Choose Music on to try again; the reading and timeline remain available.';
+    controls();
+  }
+  function schedule(target = position()) {
+    cancelBoundary();
+    if (!enabled || !activated || failed || suspended) return;
+    boundaryTimer = setTimeout(() => { boundaryTimer = null; join(false); }, Math.max(80, target.remaining * 1000 + 60));
+  }
+  function seek(target) {
+    if (audio.readyState < 1 || target.index !== activeIndex) return;
+    const duration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : Number(target.track.duration);
+    const offset = Math.min(target.offset, Math.max(0, duration - 0.06));
+    try { audio.currentTime = offset; } catch {}
+  }
+  function join(fromGesture) {
+    if (!enabled || suspended || (!fromGesture && needsGesture)) return;
+    if (fromGesture) { activated = true; failed = false; needsGesture = false; }
+    if (!activated || failed) return;
+    const request = ++generation;
+    loading = true;
+    cancelBoundary();
+    const target = position();
+    try {
+      if (activeIndex !== target.index || !audio.src) {
+        const nextSource = assets.source(target.track.id);
+        activeIndex = target.index;
+        loading = true;
+        audio.src = nextSource;
+        audio.load();
+      }
+      seek(target);
+      const outputReady = prepareOutput();
+      controls();
+      status.textContent = 'Joining ' + target.track.title + '…';
+      // One timer slot: loading watchdog first, then the station boundary after playback starts.
+      boundaryTimer = setTimeout(() => {
+        boundaryTimer = null;
+        if (request !== generation) return;
+        const error = new Error('Music took too long to start.');
+        error.name = 'MusicLoadingTimeout';
+        failure(error);
+      }, 12000);
+      // Call synchronously in the gesture, without awaiting metadata or narration.
+      const playResult = audio.play();
+      Promise.all([Promise.resolve(outputReady), Promise.resolve(playResult)]).then(() => {
+        if (request !== generation || !enabled || suspended) return;
+        if (audioContext && audioContext.state !== 'running') {
+          const error = new Error('Music audio output is suspended.');
+          error.name = 'NotAllowedError';
+          failure(error);
+          return;
+        }
+        loading = false;
+        status.textContent = 'Now playing: ' + target.track.title;
+        controls();
+        schedule(position());
+      }).catch(error => { if (request === generation) failure(error); });
+    } catch (error) { if (request === generation) failure(error); }
+  }
+  audio.addEventListener('loadedmetadata', () => {
+    if (!enabled || !activated || failed || suspended) return;
+    const target = position();
+    if (target.index !== activeIndex) { join(false); return; }
+    seek(target);
+  });
+  audio.addEventListener('ended', () => {
+    if (!enabled || !activated || failed || suspended || loading) return;
+    const target = position();
+    if (target.index !== activeIndex) join(false);
+    else schedule(target); // Do not restart the same track in the last few milliseconds.
+  });
+  audio.addEventListener('error', () => { if (activated && enabled && !failed) failure(audio.error); });
+  button.addEventListener('click', () => {
+    if (enabled && activated && !failed) {
+      enabled = false;
+      stop();
+      status.textContent = 'Music off. The station clock continues; Music on rejoins its current position.';
+      controls();
+    } else {
+      enabled = true;
+      suspended = false;
+      join(true);
+    }
+    save();
+  });
+  slider.addEventListener('input', () => { level = clamp(slider.value); mix(); save(); });
+  function gesture(event) {
+    if (!enabled || document.hidden || event.isTrusted === false) return;
+    if (event.type === 'keydown' && (event.repeat || event.ctrlKey || event.metaKey || event.altKey || ['Shift','Control','Alt','Meta','Escape','Tab'].includes(event.key))) return;
+    if (event.target?.closest?.('#jcs-ambient-radio, #connectBtn, #disconnectBtn, #jcsWalletConnect, #jcsWalletDisconnect, #jcsWalletReload, #jcs-wallet-top, #publishBtn, #mintOnlyBtn, #resumePublishBtn, #signPanel, .amen-btn, .reply-submit')) return;
+    const playControl = event.target?.closest?.('#jcs-watchers-play, #jcs-chronology-play, #atlas-scripture-begin, #atlas-scripture-replay, #jcs-watchers-restart');
+    const explicitPlay = playControl && playControl.getAttribute('aria-pressed') !== 'true' && (event.type === 'click' || event.key === 'Enter' || event.key === ' ');
+    const needsStart = !activated || failed || needsGesture || audio.paused || audio.ended || Boolean(audioContext && audioContext.state !== 'running');
+    // A later explicit Play is a fresh permission attempt, even if the first dropdown
+    // click failed. Ordinary page interactions never retry an unsuccessful request.
+    if (activated && (!explicitPlay || !needsStart)) return;
+    suspended = false;
+    join(true);
+  }
+  document.addEventListener('click', gesture, true);
+  document.addEventListener('keydown', gesture, true);
+  function suspend() {
+    suspended = true;
+    stop();
+    if (enabled && activated && !failed) status.textContent = 'Listening stopped because this page was left; the station clock continues.';
+  }
+  function resume() {
+    if (document.hidden) return;
+    const returned = suspended;
+    suspended = false;
+    if (!enabled || !activated || failed || needsGesture || loading) return;
+    const target = position();
+    const clockDrift = Math.abs((audio.currentTime || 0) - target.offset);
+    const interrupted = Boolean(audioContext && audioContext.state !== 'running');
+    if (returned || audio.paused || audio.ended || interrupted || target.index !== activeIndex || clockDrift > 3) join(false);
+  }
+  // Background listening continues whenever the browser allows it. Becoming visible
+  // only rejoins after an interruption or meaningful drift, avoiding an unnecessary seek.
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) resume(); });
+  window.addEventListener('pagehide', suspend);
+  window.addEventListener('pageshow', resume);
+  mix();
+  controls();
+  status.textContent = enabled ? 'Music will join its current station position after your first interaction.' : 'Music off. Choose Music on to join the current station position.';
+  window.JCSAmbientRadio = Object.freeze({
+    state: () => ({enabled, activated, failed, loading, audible: !audio.paused && !audio.muted && effectiveVolume > 0 && (!audioContext || audioContext.state === 'running'), volume: effectiveVolume, preferredVolume: level, station: position(), independentTimeline: true})
+  });
+})();
 </script>
 </body>
 </html>
