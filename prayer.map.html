@@ -2612,6 +2612,7 @@ body:not([data-timeline=full]) #atlas-scripture-canvas,body:not([data-timeline=f
 #atlas-scripture-records{max-height:210px;overflow:auto;padding-left:19px}
 #atlas-scripture-records li{margin:8px 0}#atlas-scripture-records small{display:block;font-size:.72rem;color:var(--muted);padding-top:3px}
 #atlas-scripture-records button{text-align:left;white-space:normal}
+.atlas-node .scripture-name{font:600 9px system-ui,sans-serif;fill:#eed1e6;stroke:#102131;stroke-width:3px;paint-order:stroke fill;pointer-events:none;opacity:.94}.atlas-node .scripture-name[data-crowded=true]{opacity:0}.atlas-node:hover .scripture-name,.atlas-node:focus-visible .scripture-name,.atlas-node.selected .scripture-name{opacity:1}
 #atlas-scripture-canvas[hidden],#atlas-scripture-caption[hidden]{display:none}
 @media(max-width:600px){.atlas-scripture-panel .atlas-controls{align-items:stretch}.atlas-scripture-panel label{max-width:100%}#atlas-scripture-caption{font-size:10px;bottom:8px;left:8px}}
 
@@ -2834,10 +2835,10 @@ html[data-theme=light] .atlas-historical-polity{fill:#91722a;stroke:#725a20}
 
 <section class="atlas-scripture-panel" aria-labelledby="atlas-scripture-heading">
 <h3 id="atlas-scripture-heading">✦ Scriptural imagery · the descent of the stars</h3>
-<div class="atlas-controls"><label><input type="checkbox" id="atlas-scripture-toggle" checked> Show the 200 stars</label><button type="button" class="atlas-button" id="atlas-scripture-begin">Begin with Morning Star</button><button type="button" class="atlas-button" id="atlas-scripture-replay">Replay descents</button><button type="button" class="atlas-button" id="atlas-scripture-revelation" aria-pressed="false">Revelation · undated scene</button></div>
-<p>Falling stars accompany the recorded history of harm. As the timeline advances, they descend along curved paths to fixed Nexus points and remain as dim embers. A star can recur across many records; the sequence does not require 200 atrocities. Select a star to see its linked records. Pause map motion freezes the descent.</p>
-<p class="atlas-note"><strong>Reading this layer:</strong> the number 200 comes from <a href="https://en.wikisource.org/wiki/Book_of_Enoch/Chapter_06" target="_blank" rel="noopener noreferrer">1 Enoch 6:6</a>. Morning Star opens this artistic sequence; numbered Watchers follow. Their names, order and map associations are symbolic choices, not identifications in historical sources or evidence that angels caused these events. This layer does not change the map’s historical explanations, counts or source scores.</p>
-<p id="atlas-scripture-status" role="status"></p>
+<div class="atlas-controls"><label><input type="checkbox" id="atlas-scripture-toggle" checked> Show the 200 stars</label><label><input id="atlas-scripture-motion" type="checkbox" checked> Animate descents</label><label><input id="atlas-scripture-names" type="checkbox" checked> Angel names on Nexus points</label><button type="button" class="atlas-button" id="atlas-scripture-begin">Begin with Morning Star</button><button type="button" class="atlas-button" id="atlas-scripture-replay">Replay descents</button><button type="button" class="atlas-button" id="atlas-scripture-revelation" aria-pressed="false">Revelation · undated scene</button></div>
+<p>Falling stars accompany the recorded history of harm. During playback, named stars descend to Nexus points with a recorded period of harm or a positive annual violence record. Every visible arrival is queued, six at a time; the year advances after its descents finish. The stars remain as dim embers. Earlier records stay visible without creating new activity in years with no evidence. A star can recur across many records; the sequence does not require 200 atrocities. Select a star to see its linked records. Pause map motion freezes the descent.</p>
+<p class="atlas-note"><strong>Reading this layer:</strong> the number 200 comes from <a href="https://en.wikisource.org/wiki/Book_of_Enoch/Chapter_06" target="_blank" rel="noopener noreferrer">1 Enoch 6:6</a>. Morning Star opens this artistic sequence. Names from the leaders listed in 1 Enoch 6:7 recur across numbered star motifs; the text does not name all 200 Watchers. Each Nexus keeps its assigned motif. Crowded names appear on hover or keyboard focus; zoom in to separate them. Their names, order and map associations are symbolic choices, not identifications in historical sources or evidence that angels caused these events. This layer does not change the map’s historical explanations, counts or source scores.</p>
+<p id="atlas-scripture-origin" class="atlas-note"></p><p id="atlas-scripture-status" role="status"></p>
 <div class="atlas-controls"><label for="atlas-scripture-star">Explore a star <select id="atlas-scripture-star" aria-controls="atlas-scripture-records"></select></label></div>
 <details><summary id="atlas-scripture-selection">Linked records</summary><ul id="atlas-scripture-records"></ul></details>
 <details><summary>Eternity and the Revelation scene</summary><p>This visual reading treats spiritual imagery as recurring across human history. Calendar years locate the historical records; they do not measure eternity. The Revelation scene is an undated artistic epilogue, available separately from the historical timeline. Reaching 2026 only reaches the end of the loaded timeline; it does not predict the Second Coming or establish that violence has ended.</p></details>
@@ -6558,7 +6559,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const motion=()=>{document.body.classList.toggle('atlas-motion-paused',document.hidden||$('atlas-pause-motion').checked);scripture?.motion();};
   function stop(){clearTimeout(timer);playing=false;$('jcs-chronology-play').textContent=year>=2026?'Timeline complete':'Play every year';$('jcs-chronology-play').disabled=year>=2026;$('jcs-chronology-play').setAttribute('aria-pressed','false');}
   function setYear(value,manual=true){const n=Number(value);if(!Number.isFinite(n))return;year=Math.max(1,Math.min(2026,Math.round(n)));if(manual||year===2026)stop();render();}
-  function play(){if(playing){stop();return;}if(year>=2026){stop();return;}playing=true;$('jcs-chronology-play').textContent='Pause years';$('jcs-chronology-play').setAttribute('aria-pressed','true');render();const step=()=>{if(!playing||document.hidden||!full()){stop();return;}if(year>=2026){stop();return;}setYear(year+1,false);timer=setTimeout(step,Number($('atlas-speed').value));};timer=setTimeout(step,Number($('atlas-speed').value));}
+  function play(){if(playing){stop();return;}if(year>=2026){stop();return;}playing=true;$('jcs-chronology-play').textContent='Pause years';$('jcs-chronology-play').setAttribute('aria-pressed','true');render();const step=()=>{if(!playing||document.hidden||!full()){stop();return;}if(year>=2026){stop();return;}if(scripture?.isBusy()){timer=setTimeout(step,100);return;}setYear(year+1,false);timer=setTimeout(step,Number($('atlas-speed').value));};timer=setTimeout(step,Number($('atlas-speed').value));}
   function pickEvent(e,zoom=true){stop();if(e.start>year)year=e.start;selected={kind:'event',id:e.id};if(zoom)window.JCSMapViewport.focus(e.lon,e.lat);render();showDetail();}
   function pickPlace(p){stop();selected={kind:'place',id:p.id};window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}
   function pickCountry(c,zoom=true){stop();country=c.iso3||'';$('atlas-country').value=country;selected={kind:'country',name:c.name};if(zoom&&Number.isFinite(c.lon))window.JCSMapViewport.focus(model.countryNexus(c).lon,model.countryNexus(c).lat);render();showDetail();}
@@ -6789,34 +6790,43 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const toggle=$('atlas-scripture-toggle'),chooser=$('atlas-scripture-star');
     const summary=$('atlas-scripture-status'),recordsBox=$('atlas-scripture-records');
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    const COUNT=200,MAX_FLIGHTS=6,DURATION=2900,records=[];
-    const name=i=>i===0?'Morning Star':'Watcher '+String(i+1).padStart(3,'0');
+    const COUNT=200,MAX_FLIGHTS=6,records=[];
+    // Leader names in R. H. Charles, 1 Enoch 6:7; these are reused motif names.
+    const leaderNames=['Samiazaz','Arakiba','Rameel','Kokabiel','Tamiel','Ramiel','Danel','Ezeqeel','Baraqijal','Asael','Armaros','Batarel','Ananel','Zaqiel','Samsapeel','Satarel','Turel','Jomjael','Sariel'];
+    const name=i=>i===0?'Morning Star':leaderNames[(i-1)%leaderNames.length]+' · '+String(i+1).padStart(3,'0');
+    const nameToggle=$('atlas-scripture-names'),motionChoice=$('atlas-scripture-motion');
+    motionChoice.checked=!reduced.matches;let motionOverride=false;
     for(const e of model.events){
       if(!model.harm.has(e.kind)||!Number.isFinite(e.lon)||!Number.isFinite(e.lat))continue;
       const place=model.places.find(p=>p.events.some(item=>item.id===e.id));
       records.push({id:'event:'+e.id,start:e.start,end:e.end,lon:place?.lon??e.lon,lat:place?.lat??e.lat,
-        title:e.title,location:e.regionLabel,iso3:e.iso3Codes||[],kind:'historical account',event:e});
+        title:e.title,location:e.regionLabel,iso3:e.iso3Codes||[],nexusId:place?'place:'+place.id:'event:'+e.id,kind:'historical account',event:e});
     }
     for(const c of model.countries){
-      const firstPositive=new Map();
+      const firstPositive=new Map(),positiveYears=new Map();
       for(const y of Object.keys(c.years||{}).map(Number).sort((a,b)=>a-b)){
-        for(const r of c.years[y].regions||[]){if(r.best>0&&!firstPositive.has(r.name))firstPositive.set(r.name,y);}
+        for(const r of c.years[y].regions||[]){if(r.best<=0)continue;if(!firstPositive.has(r.name))firstPositive.set(r.name,y);if(!positiveYears.has(r.name))positiveYears.set(r.name,new Set());positiveYears.get(r.name).add(y);}
       }
       for(const a of model.regions(c)){
         const first=firstPositive.get(a.name);if(first===undefined)continue;
         records.push({id:'region:'+c.name+':'+a.name,start:first,end:first,lon:a.lon,lat:a.lat,
-          title:a.name+' · '+c.label,location:c.label,iso3:c.mapIso3,kind:'regional violence series',region:a,owner:c});
+          title:a.name+' · '+c.label,location:c.label,iso3:c.mapIso3,nexusId:'region:'+c.name+':'+a.name,years:positiveYears.get(a.name),kind:'regional violence series',region:a,owner:c});
       }
     }
     records.sort((a,b)=>a.start-b.start||a.id.localeCompare(b.id));
-    records.forEach((r,i)=>{r.star=i%COUNT;});
+    const openingRecord=records.find(r=>r.event?.causeAttribution?.christianTarget)||records[0];
+    const assigned=new Map();if(openingRecord)assigned.set(openingRecord.nexusId,0);
+    let nextStar=1;
+    for(const r of records){if(!assigned.has(r.nexusId)){assigned.set(r.nexusId,nextStar);nextStar=nextStar===COUNT-1?1:nextStar+1;}r.star=assigned.get(r.nexusId);}
+    const activeInYear=r=>r.years?r.years.has(year):(r.event?.intervalMeaning==='dating-window'?r.start===year:r.start<=year&&r.end>=year);
+    $('atlas-scripture-origin').textContent=openingRecord?'Opening motif: '+openingRecord.location+' · AD '+fmt(openingRecord.start)+'. This is the earliest loaded record explicitly tagged as targeting Christians, not an established angelic fall site or the first atrocity in history.':'No opening record is available.';
     for(let i=0;i<COUNT;i++){const option=document.createElement('option');option.value=i;option.textContent=name(i);chooser.append(option);}
-    let chosen=0,seen=[],targets=new Map(),points=new Map(),flights=[],raf=0,lastFrame=0;
+    let chosen=0,seen=[],targets=new Map(),points=new Map(),flights=[],pending=[],raf=0,lastFrame=0;
     let width=0,height=0,enabled=false,lastYear=null,lastCountry=null,tableau=false,disposed=false;
     const hash=s=>Array.from(s).reduce((n,c)=>(Math.imul(n,31)+c.charCodeAt(0))>>>0,7);
     const visible=p=>p&&p.x>=0&&p.x<=width&&p.y>=0&&p.y<=height;
     const origin=i=>({x:width*(.045+.91*((i*.61803398875)%1)),y:19+(i%4)*8});
-    const canMove=()=>enabled&&full()&&!document.hidden&&!reduced.matches&&!$('atlas-pause-motion').checked&&!tableau;
+    const canMove=()=>enabled&&full()&&!document.hidden&&motionChoice.checked&&!$('atlas-pause-motion').checked&&!tableau;
     const cancel=()=>{if(raf)cancelAnimationFrame(raf);raf=0;lastFrame=0;};
     function geometry(){
       const svg=$('world-map'),rect=svg.getBoundingClientRect(),parent=canvas.parentElement.getBoundingClientRect();
@@ -6865,43 +6875,82 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
           star(p,3,'#bd8392',.4);
         }ctx.setLineDash([]);
       }
-      const moving=new Set(flights.map(f=>f.record.star));
-      for(const [i,r]of targets){const p=points.get(r.id);if(!visible(p)||moving.has(i))continue;
+      const moving=new Set(flights.map(f=>f.record.id));
+      const landed=new Map();for(const r of seen)landed.set(r.nexusId,r);
+      for(const r of landed.values()){const i=r.star;const p=points.get(r.id);if(!visible(p)||moving.has(r.id))continue;
         star(p,i===chosen?7:3.5,i===0?'#e7b9a0':'#ba8bb0',i===chosen?.95:.6);
         if(i===chosen){ctx.globalAlpha=.85;ctx.strokeStyle='#d4a9b7';ctx.lineWidth=1;ctx.beginPath();ctx.arc(p.x,p.y,12,0,Math.PI*2);ctx.stroke();}
       }
       for(const f of flights){
         const end=points.get(f.record.id);if(!visible(end))continue;
-        const raw=Math.max(0,Math.min(1,f.elapsed/DURATION)),t=1-Math.pow(1-raw,1.6),p=curve(f.record.star,end,t);
+        const raw=Math.max(0,Math.min(1,f.elapsed/f.duration)),t=1-Math.pow(1-raw,1.6),p=curve(f.record.star,end,t);
         for(let j=0;j<12;j++){
           const a=curve(f.record.star,end,Math.max(0,t-.17+j*.014)),b=curve(f.record.star,end,Math.max(0,t-.156+j*.014));
           ctx.globalAlpha=(j+1)/12*.65;ctx.strokeStyle=f.record.star===0?'#d6a183':'#ac719c';ctx.lineWidth=1+j*.2;
           ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
         }
         star(p,f.record.star===0?7:5,'#f0c7b6',.95);
-        if(f.record.star===chosen||f.record.star===0){ctx.globalAlpha=.95;ctx.fillStyle='#f0d9db';ctx.fillText(name(f.record.star),Math.min(width-105,p.x+10),Math.max(65,p.y-10));}
+        if(nameToggle.checked){ctx.globalAlpha=.95;ctx.fillStyle='#f0d9db';ctx.fillText(name(f.record.star),Math.min(width-105,p.x+10),Math.max(65,p.y-10));}
         if(raw>.78){ctx.globalAlpha=(1-raw)*2;ctx.strokeStyle='#b87791';ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(end.x,end.y,6+(raw-.78)*80,0,Math.PI*2);ctx.stroke();}
       }
-      if(visible(focus)&&!moving.has(chosen)){ctx.globalAlpha=.95;ctx.fillStyle='#edd8e3';ctx.fillText(name(chosen),Math.max(4,Math.min(width-110,focus.x+14)),Math.max(66,focus.y-12));}
+      if(nameToggle.checked&&visible(focus)&&!moving.has(selected.id)){ctx.globalAlpha=.95;ctx.fillStyle='#edd8e3';ctx.fillText(name(chosen),Math.max(4,Math.min(width-110,focus.x+14)),Math.max(66,focus.y-12));}
       ctx.restore();
     }
+    function updateStatus(){
+      const paused=!motionChoice.checked?' · descent animation off':$('atlas-pause-motion').checked?' · motion paused':'';
+      summary.textContent=ctx?seen.length+' visual associations · '+targets.size+' of 200 star motifs through AD '+fmt(year)+
+        (country?' in the selected area':'')+(flights.length||pending.length?' · '+flights.length+' descending / '+pending.length+' queued':'')+paused+'.':'Canvas is unavailable; text associations remain available.';
+    }
+    function fillFlights(){
+      const duration=Math.max(850,Math.min(1800,(Number($('atlas-speed').value)||800)*1.3));
+      while(flights.length<MAX_FLIGHTS&&pending.length){
+        const record=pending.shift();if(visible(points.get(record.id)))flights.push({record,elapsed:0,duration});
+      }
+    }
     function frame(now){
-      raf=0;if(!canMove()||!flights.length){lastFrame=0;draw();return;}
+      raf=0;if(!canMove()){lastFrame=0;draw();return;}
+      fillFlights();if(!flights.length){lastFrame=0;draw();updateStatus();return;}
       if(lastFrame&&now-lastFrame<1000/24){raf=requestAnimationFrame(frame);return;}
       const delta=lastFrame?Math.min(100,now-lastFrame):0;lastFrame=now;
       for(const f of flights)f.elapsed+=delta;
-      flights=flights.filter(f=>f.elapsed<DURATION);draw();
-      if(flights.length)raf=requestAnimationFrame(frame);else lastFrame=0;
+      const count=flights.length;flights=flights.filter(f=>f.elapsed<f.duration);
+      if(flights.length!==count){fillFlights();updateStatus();}
+      draw();if(flights.length||pending.length)raf=requestAnimationFrame(frame);else lastFrame=0;
     }
-    function motion(){cancel();if(canMove()&&flights.length)raf=requestAnimationFrame(frame);else draw();}
-    function startFlights(rows){
-      cancel();flights=[];
-      if(canMove()){
-        const available=rows.filter(r=>visible(points.get(r.id))),priority=available.filter(r=>r.star===chosen||r.star===0);
-        const others=available.filter(r=>r.star!==chosen&&r.star!==0).sort((a,b)=>b.start-a.start);
-        flights=[...priority,...others].slice(0,MAX_FLIGHTS).map((record,i)=>({record,elapsed:-i*130}));
-        if(flights.length)raf=requestAnimationFrame(frame);
-      }draw();
+    function motion(){
+      if(!canMove()){cancel();draw();}
+      else if((flights.length||pending.length)&&!raf){lastFrame=0;raf=requestAnimationFrame(frame);}
+      else if(!raf)draw();
+      updateStatus();
+    }
+    function startFlights(rows,replace=false){
+      if(replace){cancel();flights=[];pending=[];}
+      if(!canMove()){cancel();flights=[];pending=[];draw();updateStatus();return;}
+      const occupied=new Set([...flights.map(f=>f.record.nexusId),...pending.map(r=>r.nexusId)]);
+      const unique=new Map();for(const r of rows)if(visible(points.get(r.id))&&!occupied.has(r.nexusId))unique.set(r.nexusId,r);
+      pending.push(...Array.from(unique.values()).sort((a,b)=>Number(b.star===0)-Number(a.star===0)||a.start-b.start||a.id.localeCompare(b.id)));
+      fillFlights();motion();draw();
+    }
+    function labels(){
+      const byNode=new Map(),byCountry=new Map();
+      for(const r of seen){byNode.set(r.nexusId,r);if(r.event?.influence)byNode.set('influence:'+r.event.id,r);for(const iso of r.iso3)if(!byCountry.has(iso))byCountry.set(iso,r);}
+      for(const c of model.countries){const r=c.mapIso3.map(iso=>byCountry.get(iso)).find(Boolean);if(r)byNode.set('country:'+c.name,r);}
+      for(const [iso,r]of byCountry)byNode.set('context-nexus:'+iso,r);
+      const occupied=new Set(),matrix=$('world-map').getScreenCTM();
+      for(const [id,n]of nodes){
+        const r=byNode.get(id),shown=enabled&&nameToggle.checked&&r&&n.g.style.display!=='none';
+        const base=n.title.textContent.split(' · Scriptural motif:')[0];
+        n.title.textContent=base;n.g.setAttribute('aria-label',base);
+        if(!shown){if(n.scriptureName)n.scriptureName.style.display='none';delete n.g.dataset.scriptureStar;continue;}
+        if(!n.scriptureName){n.scriptureName=make('text',{class:'scripture-name','text-anchor':'middle'});n.sized.append(n.scriptureName);}
+        const label=name(r.star);n.scriptureName.textContent=label;n.scriptureName.style.display='';
+        const offset=-Math.max(30,Number(n.ring.getAttribute('r'))+15);n.scriptureName.setAttribute('y',String(offset));
+        n.g.dataset.scriptureStar=String(r.star);const description=base+' · Scriptural motif: '+label+'; artistic association.';
+        n.title.textContent=description;n.g.setAttribute('aria-label',description);
+        const p=projectPoint(n.lon,n.lat),x=matrix?matrix.a*p.x+matrix.c*p.y+matrix.e:p.x,y=matrix?matrix.b*p.x+matrix.d*p.y+matrix.f+offset:p.y;
+        const cell=Math.floor(x/95)+':'+Math.floor(y/22),crowded=occupied.has(cell)&&!n.g.classList.contains('selected');
+        n.scriptureName.dataset.crowded=String(crowded);occupied.add(cell);
+      }
     }
     function showRecords(){
       recordsBox.replaceChildren();const linked=seen.filter(r=>r.star===chosen);
@@ -6924,31 +6973,35 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       if(disposed)return;
       const nextEnabled=toggle.checked&&!!ctx;
       if(!force&&year===lastYear&&country===lastCountry&&enabled===nextEnabled)return;
-      const oldTargets=targets,wasEnabled=enabled;enabled=nextEnabled;
+      const oldTargets=targets,wasEnabled=enabled,previousYear=lastYear,previousCountry=lastCountry;enabled=nextEnabled;
       if(year!==lastYear||country!==lastCountry){tableau=false;updateTableauButton();}
       seen=records.filter(r=>r.start<=year&&(!country||r.iso3.includes(country)));
       targets=new Map();for(const r of seen)targets.set(r.star,r);
       const counts=new Map();for(const r of seen)counts.set(r.star,(counts.get(r.star)||0)+1);
       for(let i=0;i<COUNT;i++)chooser.options[i].textContent=name(i)+' · '+(counts.get(i)||0)+' records';
-      summary.textContent=ctx?seen.length+' visual associations · '+targets.size+' of 200 stars linked through AD '+fmt(year)+(country?' in the selected area':'')+'.':'Canvas is unavailable; the text associations remain available.';
       canvas.hidden=!enabled;$('atlas-scripture-caption').hidden=!enabled;
-      geometry();showRecords();
+      geometry();showRecords();labels();
+      const reset=previousYear===null||year<previousYear||country!==previousCountry||!wasEnabled;
       const changed=Array.from(targets,([i,r])=>!wasEnabled||oldTargets.get(i)?.id!==r.id?r:null).filter(Boolean);
+      const arrivals=reset?Array.from(targets.values()):year!==previousYear?[...seen.filter(activeInYear),...changed]:changed;
       lastYear=year;lastCountry=country;
-      if(!enabled){cancel();flights=[];draw();}else if(changed.length)startFlights(changed);else motion();
+      if(!enabled){cancel();flights=[];pending=[];draw();updateStatus();}else if(arrivals.length)startFlights(arrivals,reset);else motion();
     }
-    function sync(){if(disposed)return;geometry();motion();}
+    function sync(){if(disposed)return;geometry();labels();draw();motion();}
     toggle.addEventListener('change',()=>{tableau=false;updateTableauButton();update(true);});
     chooser.addEventListener('change',()=>{chosen=Number(chooser.value);tableau=false;updateTableauButton();showRecords();draw();});
-    $('atlas-scripture-replay').addEventListener('click',()=>{tableau=false;updateTableauButton();startFlights(Array.from(targets.values()));});
-    $('atlas-scripture-begin').addEventListener('click',()=>{const first=records[0];if(first){country='';$('atlas-country').value='';selected=null;window.JCSMapViewport.reset();toggle.checked=true;chosen=0;chooser.value='0';lastYear=null;setYear(Math.max(1,first.start));}});
-    $('atlas-scripture-revelation').addEventListener('click',()=>{stop();if(!enabled){toggle.checked=true;update(true);}tableau=!tableau;cancel();flights=[];updateTableauButton();draw();});
-    reduced.addEventListener('change',()=>{if(reduced.matches)flights=[];motion();});
+    function enableMotion(){motionOverride=true;motionChoice.checked=true;$('atlas-pause-motion').checked=false;$('atlas-pause-motion').dispatchEvent(new Event('change'));}
+    nameToggle.addEventListener('change',()=>{labels();draw();});
+    motionChoice.addEventListener('change',()=>{motionOverride=true;if(motionChoice.checked&&!flights.length&&!pending.length)startFlights(Array.from(targets.values()),true);else motion();});
+    $('atlas-scripture-replay').addEventListener('click',()=>{tableau=false;updateTableauButton();enableMotion();startFlights(seen,true);});
+    $('atlas-scripture-begin').addEventListener('click',()=>{const first=openingRecord;if(first){country='';$('atlas-country').value='';selected=null;window.JCSMapViewport.reset();toggle.checked=true;chosen=0;chooser.value='0';enableMotion();lastYear=null;setYear(Math.max(1,first.start));if(!playing&&year<2026)play();}});
+    $('atlas-scripture-revelation').addEventListener('click',()=>{stop();if(!enabled){toggle.checked=true;update(true);}tableau=!tableau;cancel();flights=[];pending=[];updateTableauButton();draw();updateStatus();});
+    reduced.addEventListener('change',()=>{if(!motionOverride)motionChoice.checked=!reduced.matches;motion();});
     const observer=new MutationObserver(()=>{if(!full()){cancel();canvas.hidden=true;$('atlas-scripture-caption').hidden=true;}else{canvas.hidden=!enabled;$('atlas-scripture-caption').hidden=!enabled;sync();}});
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
-    window.addEventListener('pagehide',()=>{cancel();flights=[];});
+    window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{update,sync,motion,state:()=>({layer:'scriptural imagery',stars:COUNT,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'chronological record sequence, repeated modulo 200; artistic association only',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{update,sync,motion,isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:COUNT,descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'fixed Nexus assignments; 19 Enoch leader names recur across 199 numbered motifs plus Morning Star; artistic association only',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   scripture=createScripturalLayer();
