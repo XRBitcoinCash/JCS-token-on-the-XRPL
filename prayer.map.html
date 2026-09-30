@@ -2771,11 +2771,20 @@ body[data-timeline=annual] #atlas-historical-labels{display:none!important}
 .jcs-cinema-copy{font-size:10px;line-height:1.55;letter-spacing:.02em;color:#a1b0c3;margin:0;max-width:440px}
 .jcs-cinema-source{font-size:10px;line-height:1.5;color:#ccd3df;margin:6px 0 0;max-width:490px}
 .jcs-cinema-source a{pointer-events:auto;color:#dabf9d;text-underline-offset:2px}
+.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-caption{border-left-color:#80bdd4;max-width:540px}
+.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-title{color:#d9eff9}
+.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-source{max-width:520px}
+.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-source a{color:#a2d3e8}
 .jcs-cinema-hint{font-size:9px;line-height:1.6;color:#8293aa;text-align:right;flex:none;letter-spacing:.015em}
 .jcs-cinema-hint svg{display:block;width:19px;height:19px;fill:none;stroke:#879ab4;stroke-width:1.2;margin:0 0 4px auto}
 .jcs-cinema-status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:600px){.jcs-cinema{min-height:410px}.jcs-cinema-head{left:14px;right:14px;top:13px;gap:7px}.jcs-cinema-kicker{font-size:8px;letter-spacing:.11em;max-width:150px}.jcs-cinema-controls{max-width:190px;gap:4px}.jcs-cinema button{padding:6px 7px;font-size:9px;min-height:27px}.jcs-cinema-bottom{left:14px;right:14px;bottom:14px;gap:8px}.jcs-cinema-caption{padding-left:10px;max-width:calc(100% - 35px)}.jcs-cinema-copy{font-size:9px}.jcs-cinema-source{font-size:9px}.jcs-cinema-hint{font-size:0;width:20px}.jcs-cinema-title{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.jcs-cinema *{scroll-behavior:auto!important}}
+
+.jcs-gospel-story{flex:1 0 100%;width:100%;min-width:0;order:3;margin:10px 0 14px;border:1px solid #826a4366;border-radius:9px;background:linear-gradient(125deg,#141b29,#121822);color:#d9d7cc;overflow:hidden}
+.jcs-gospel-canvas[hidden]{display:none!important}
+.jcs-gospel-top{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 14px;flex-wrap:wrap}.jcs-gospel-heading{font:400 19px/1.2 Georgia,serif;color:#e2d5b6}.jcs-gospel-heading span{font:10px/1.5 system-ui,sans-serif;display:block;letter-spacing:.1em;color:#9db2c6;text-transform:uppercase;margin-top:3px}.jcs-gospel-toggle{font:12px system-ui,sans-serif;display:flex;align-items:center;gap:7px}.jcs-gospel-nav{display:flex;gap:6px;overflow-x:auto;padding:0 13px 11px;scrollbar-width:thin}.jcs-gospel-nav button,.jcs-gospel-actions button{flex:none;border:1px solid #536273;background:#192738;color:#cdd8e4;border-radius:5px;padding:7px 10px;font:11px/1.3 system-ui,sans-serif;cursor:pointer}.jcs-gospel-nav button[aria-pressed=true]{border-color:#be9a5f;background:#493632;color:#fff0d0}.jcs-gospel-story button:focus-visible,.jcs-gospel-story summary:focus-visible{outline:2px solid #d7bd83;outline-offset:2px}.jcs-gospel-reading{border-top:1px solid #7b6b4938;padding:10px 14px}.jcs-gospel-reading summary{cursor:pointer;font:13px/1.5 system-ui,sans-serif;color:#dcd8cd}.jcs-gospel-detail{padding:10px 0 3px;max-width:900px}.jcs-gospel-detail p{font:12px/1.6 system-ui,sans-serif;color:#b1c0d0;margin:7px 0}.jcs-gospel-detail strong{color:#eadbc0}.jcs-gospel-detail a{color:#d7bc88;text-decoration:underline;text-underline-offset:2px}.jcs-gospel-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}.jcs-gospel-notes{font:11px/1.55 system-ui,sans-serif;margin-top:10px}.jcs-gospel-notes p{font-size:11px}.jcs-gospel-live{font:10px/1.5 system-ui,sans-serif;color:#97abc0;padding:0 14px 10px;margin:0}.jcs-gospel-marker-hit{fill:transparent;stroke:transparent;cursor:pointer;pointer-events:all}.jcs-gospel-marker-hit:focus{stroke:#cdb685;stroke-width:1;outline:none}.jcs-gospel-canvas{position:absolute!important;pointer-events:none;z-index:6;display:block}body[data-map-projection=globe] .jcs-gospel-canvas{display:none!important}
+@media(max-width:600px){.jcs-gospel-top{padding:10px}.jcs-gospel-heading{font-size:17px}.jcs-gospel-reading{padding:9px 10px}.jcs-gospel-nav{padding-left:10px;padding-right:10px}.jcs-gospel-toggle{font-size:11px}}
 
 
 /* The map stays mounted in its existing grid cell. Projection never controls playback. */
@@ -2937,7 +2946,7 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
         </details>
 
 <div class="jcs-zoom-tools" role="group" aria-label="Map zoom and view controls">
-<span class="jcs-projection-switch" role="group" aria-label="Map presentation"><button type="button" id="jcs-flat-map-button" aria-pressed="true">Flat map</button><button type="button" id="jcs-globe-map-button" aria-pressed="false">✦ Cinematic globe</button></span>
+<span class="jcs-projection-switch" role="group" aria-label="Map presentation"><button type="button" id="jcs-globe-map-button" aria-pressed="true">✦ Cinematic globe</button><button type="button" id="jcs-flat-map-button" aria-pressed="false">Flat map</button></span>
 <button type="button" id="jcs-zoom-in" data-zoom="in" aria-label="Zoom in" title="Zoom in">+</button>
 <button type="button" id="jcs-zoom-out" data-zoom="out" aria-label="Zoom out" title="Zoom out">−</button>
 <button class="button" id="reset-map-button" type="button" title="Restore the world view; keep the year, playback and layer choices">Reset map view</button><button type="button" id="jcs-map-expand" aria-expanded="false" aria-controls="jcs-map-viewport">Expand map</button>
@@ -2975,7 +2984,7 @@ body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
 
         <section id="jcs-cinematic-globe-host" class="jcs-cinematic-globe-host" aria-label="Optional cinematic globe" hidden></section>
         <canvas id="atlas-scripture-canvas" aria-hidden="true" hidden></canvas><span id="atlas-scripture-caption" hidden>Scriptural imagery · 200 stars</span>
-        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span id="jcs-globe-mode-status" role="status">Flat map · original layers and controls.</span> <span>Drag or pinch to explore · Reset map view keeps the year, playback and layer choices</span></p>
+        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span id="jcs-globe-mode-status" role="status">Cinematic globe · loading the existing reference geography.</span> <span>Drag or pinch to explore · Reset map view keeps the year, playback and layer choices</span></p>
 </div>
 
 
@@ -7092,16 +7101,14 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       schedule.push(representative);
     }
     schedule.sort((a,b)=>a.peakYear-b.peakYear||a.id.localeCompare(b.id));
-    const pakistan=model.countries.find(c=>c.mapIso3.includes('PAK'));
-    const pakistanPoint=pakistan?model.countryNexus(pakistan):null;
-    const openingRecord=pakistanPoint?{id:'artistic:morning-star',nexusId:'artistic:morning-star',start:1,end:1,peakYear:null,landingYear:1+2025*8/journeySeconds(),departureYear:1,peakValue:null,peakMethod:'Undated artistic opening chosen by the author. No historical fall location, date or genocide is asserted.',title:'Morning Star · Pakistan',location:'Pakistan · artistic opening',iso3:['PAK'],lon:pakistanPoint.lon,lat:pakistanPoint.lat,kind:'undated artistic opening',artisticOnly:true,owner:pakistan,star:0}:null;
+    const openingRecord=null; // The Gospel layer opens at Bethlehem; Enoch places the Watchers at Hermon.
     if(openingRecord){records.unshift(openingRecord);schedule.unshift(openingRecord);}
-    const assigned=new Map();schedule.forEach((r,i)=>{r.star=i;r.landingYear??=r.peakYear;r.departureYear??=Math.max(1,r.landingYear-descentYears());assigned.set(r.nexusId,i);});
+    const assigned=new Map();schedule.forEach((r,index)=>{const i=index+1;r.star=i;r.landingYear??=r.peakYear;r.departureYear??=Math.max(1,r.landingYear-descentYears());assigned.set(r.nexusId,i);});
     for(const r of records)r.star=assigned.get(r.nexusId);
     // One unique star per primary Nexus. No modulo reuse, fictional records,
     // or future descents are added merely to exhaust the scriptural number.
-    const STAR_COUNT=Math.max(COUNT,schedule.length);
-    $('atlas-scripture-origin').textContent='Morning Star opens at Pakistan as an undated artistic association. Historical records keep their actual dates. '+(schedule.length-(openingRecord?1:0))+' primary harm Nexus points have assigned stars; regional detail remains available. These are not all classified as genocides.';
+    const STAR_COUNT=Math.max(COUNT,schedule.length+1);
+    $('atlas-scripture-origin').textContent='The Gospel opens at Bethlehem. Enoch 6 places the Watchers at Mount Hermon in a primeval narrative. Historical Nexus star assignments are artistic parallels, not fall locations or dates. '+(schedule.length-(openingRecord?1:0))+' primary harm Nexus points have assigned stars; regional detail remains available. These are not all classified as genocides.';
     for(let i=0;i<STAR_COUNT;i++){const option=document.createElement('option');option.value=i;option.textContent=name(i);chooser.append(option);}
     let chosen=0,seen=[],targets=new Map(),points=new Map(),flights=[],pending=[],raf=0,lastFrame=0;
     let width=0,height=0,enabled=false,lastYear=null,lastCountry=null,tableau=false,disposed=false,drift=0;
@@ -7268,7 +7275,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; Morning Star opens at Pakistan artistically; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; the former undated Pakistan opening is replaced by a separate Bethlehem Gospel prelude; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   function createWatchersNarration(){
@@ -7436,18 +7443,20 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     const nodeKey=[year,country,metric,selected?.kind,selected?.id,selected?.cityId,selected?.index,selected?.name,checked('atlas-regional-nexuses'),nodes.size].join('|');
     if(nodeKey!==globeNodeKey){globeNodeKey=nodeKey;globeCachedNodes=Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,label:n.caption.textContent,description:n.title.textContent,tone:n.g.style.getPropertyValue('--tone'),radius:Number(n.ring.getAttribute('r'))||4,visible:n.g.style.display!=='none',selected:n.g.classList.contains('selected'),kind:n.g.dataset.kind,carried:n.g.dataset.carried}));}
-    const stars=scripture.globeState(),audio=narration.state();
-    return{position:clockPosition(),year,playing,started:journeyStarted,mode:full()?'full':document.body.dataset.timeline,
+    const stars=scripture.globeState(),audio=narration.state(),position=clockPosition();
+    const snapshot={position,year,playing,started:journeyStarted,mode:full()?'full':document.body.dataset.timeline,
       duration:journeySeconds(),animationsEnabled:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion'),motionAllowed:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion')&&!narration.motionPaused(),
       selected:selected?{kind:selected.kind,id:selected.id,cityId:selected.cityId,index:selected.index,name:selected.name}:null,
       stars:stars.stars,allStarNames:stars.allStarNames,selectedStar:stars.selectedStar,
       layers,labels:globeCachedLabels,
-      nodes:globeCachedNodes,
+      nodes:globeCachedNodes,gospel:window.JCSGospel?.getState(position,full()),
       narration:{paused:audio.paused,buffering:audio.buffering,failed:audio.failed,complete:audio.complete},
       referenceGeography:'Coastlines and country outlines are modern reference geography. Dated names follow the existing historical sources.'};
+    if(snapshot.gospel)window.JCSGospel.refreshUI(snapshot);return snapshot;
   }
   function selectGlobeItem(item){
     if(!item)return;
+    if(item.kind==='gospel'){window.JCSGospel?.select(item.gospelId||item.id);return;}
     if(item.artisticOnly){$('atlas-scripture-star').value=String(item.star);$('atlas-scripture-star').dispatchEvent(new Event('change'));return;}
     if(item.kind==='city'&&item.row){pickCity(item.row);return;}
     if(item.kind==='polity'&&Number.isInteger(item.index)){pickPolity(item.index);return;}
@@ -7463,6 +7472,224 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
 
   window.JCSFullHistory={getGlobeSnapshot,selectGlobeItem,setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
   activate();motion();
+})();
+
+</script>
+<script id="jcs-gospel-data">
+/* Gospel milestones: scripture-grounded descriptions; approximate geographic anchors. */
+window.JCSGospelData = {
+  events: [
+    {
+      id: 'annunciation', kind: 'annunciation', title: 'Annunciation and Incarnation', shortTitle: 'Annunciation',
+      lon: 35.303, lat: 32.700, at: 1, dateLabel: 'Before AD 1 · exact year disputed',
+      summary: 'Luke places Gabriel’s announcement to Mary in Nazareth. Mary consents; the Holy Spirit overshadows her and she conceives Jesus.',
+      context: 'Nazareth, Galilee. The marker introduces events preceding this map’s AD 1 starting point.',
+      connection: 'Christian belief presents the Incarnation as God entering human life. This is distinct from the Watcher descent imagery.',
+      sourceLabel: 'Luke 1:26–38', sourceUrl: 'https://bible.usccb.org/bible/luke/1', relatedSources: []
+    },
+    {
+      id: 'nativity', kind: 'nativity', title: 'Nativity and the Star of Bethlehem', shortTitle: 'Birth of Jesus',
+      lon: 35.2078, lat: 31.7043, at: 1, dateLabel: 'Before AD 1 · exact year disputed',
+      summary: 'Luke locates Jesus’ birth in Bethlehem and recounts an angelic proclamation of peace. Matthew tells of a star guiding Magi to the child.',
+      context: 'Bethlehem, Judea. Matthew names Herod; Luke frames the birth within Augustus’ empire. Their chronological details do not align neatly.',
+      connection: 'The Bethlehem star signifies the Gospel’s announcement of Jesus; it is not counted among the fallen Watchers.',
+      sourceLabel: 'Matthew 2:1–12', sourceUrl: 'https://bible.usccb.org/bible/matthew/2',
+      relatedSources: [{ label: 'Luke 2:1–20', url: 'https://bible.usccb.org/bible/luke/2' }]
+    },
+    {
+      id: 'refuge', kind: 'refuge', title: 'Herod’s Violence and the Flight to Egypt', shortTitle: 'Flight to Egypt',
+      lon: 35.2078, lat: 31.7043, at: 1, dateLabel: 'Infancy narrative · exact date unknown',
+      summary: 'Matthew describes Herod’s killing of children and Joseph taking Mary and Jesus to Egypt after an angelic warning.',
+      context: 'This marker shows the Bethlehem departure area. Matthew supplies no exact Egyptian destination, route or casualty count.',
+      connection: 'The narrative connects threatened children, displacement and refuge. It supplies no named Watcher responsible for Herod’s actions.',
+      sourceLabel: 'Matthew 2:13–23', sourceUrl: 'https://bible.usccb.org/bible/matthew/2', relatedSources: []
+    },
+    {
+      id: 'baptism', kind: 'baptism', title: 'Baptism of Jesus', shortTitle: 'Baptism',
+      lon: 35.550, lat: 31.836, at: 28, dateLabel: 'Beginning of ministry · AD 28 display anchor',
+      summary: 'Matthew describes Jesus’ baptism in the Jordan, the Spirit descending like a dove and the Father’s voice affirming the Son.',
+      context: 'Approximate marker near the traditional Bethany Beyond the Jordan site; the Gospel does not provide modern coordinates.',
+      connection: 'The dove represents the Holy Spirit’s manifestation, not a fallen angel or the beginning of the Spirit’s existence.',
+      sourceLabel: 'Matthew 3:13–17', sourceUrl: 'https://bible.usccb.org/bible/matthew/3',
+      relatedSources: [{ label: 'UNESCO: Bethany Beyond the Jordan', url: 'https://whc.unesco.org/en/list/1446/' }]
+    },
+    {
+      id: 'ministry', kind: 'ministry', title: 'Peacemaking, Mercy and Love of Enemies', shortTitle: 'Teaching peace',
+      lon: 35.303, lat: 32.700, at: 29, dateLabel: 'Galilean ministry · AD 29 display anchor',
+      summary: 'Matthew’s Sermon on the Mount blesses peacemakers and calls for love of enemies and prayer for persecutors.',
+      context: 'A regional Galilee marker near Nazareth, not a claim to identify the sermon’s exact mountain.',
+      connection: 'These teachings provide a Christian response to violence. The map does not convert them into an invented casualty reduction.',
+      sourceLabel: 'Matthew 5:9, 38–48', sourceUrl: 'https://bible.usccb.org/bible/matthew/5', relatedSources: []
+    },
+    {
+      id: 'eucharist', kind: 'eucharist', title: 'Last Supper and the Eucharist', shortTitle: 'Last Supper',
+      lon: 35.229, lat: 31.778, at: 33, dateLabel: 'Passion sequence · AD 30 or 33',
+      summary: 'At the Last Supper, Jesus shares bread and wine as his body and covenant blood. Catholic tradition understands this as the institution of the Eucharist.',
+      context: 'Jerusalem. The city marker does not identify an independently verified room.',
+      connection: 'Later in Matthew’s Passion narrative, Jesus commands a disciple to put away his sword.',
+      sourceLabel: 'Matthew 26:26–29, 52', sourceUrl: 'https://bible.usccb.org/bible/matthew/26', relatedSources: []
+    },
+    {
+      id: 'crucifixion', kind: 'crucifixion', title: 'Crucifixion of Jesus', shortTitle: 'Crucifixion',
+      lon: 35.229, lat: 31.778, at: 33, dateLabel: 'AD 30 or 33 · exact date debated',
+      summary: 'The Gospel recounts Jesus’ Roman crucifixion at Golgotha following judgment under Pontius Pilate.',
+      context: 'Jerusalem. The blue cross with waterlike movement is this project’s devotional design, not a reported physical phenomenon.',
+      connection: 'Christian reflection places suffering and redemption here. The cross does not identify a supernatural cause for other plotted atrocities.',
+      sourceLabel: 'Matthew 27:24–56', sourceUrl: 'https://bible.usccb.org/bible/matthew/27', relatedSources: []
+    },
+    {
+      id: 'resurrection', kind: 'resurrection', title: 'Resurrection', shortTitle: 'Resurrection',
+      lon: 35.229, lat: 31.778, at: 33, dateLabel: 'After the Crucifixion · Gospel sequence',
+      summary: 'Matthew recounts the empty tomb, an angelic announcement and the risen Jesus meeting the women.',
+      context: 'Jerusalem burial setting; the marker follows the Gospel narrative rather than supplying a modern verified event timestamp.',
+      connection: 'The Resurrection expresses Christian hope beyond violence and death; historical layers remain independently visible.',
+      sourceLabel: 'Matthew 28:1–10', sourceUrl: 'https://bible.usccb.org/bible/matthew/28', relatedSources: []
+    },
+    {
+      id: 'spirit', kind: 'pentecost', title: 'Peace and the Gift of the Spirit', shortTitle: 'Gift of the Spirit',
+      lon: 35.229, lat: 31.778, at: 33, dateLabel: 'Resurrection evening · John’s account',
+      summary: 'John describes the risen Jesus greeting his disciples with peace, breathing upon them and giving the Holy Spirit.',
+      context: 'Read alongside Acts’ Pentecost account, preserving each author’s narrative setting.',
+      connection: 'This depicts the gift of the eternal Spirit, not God and Jesus creating a new divine person.',
+      sourceLabel: 'John 20:19–23', sourceUrl: 'https://bible.usccb.org/bible/john/20', relatedSources: []
+    },
+    {
+      id: 'pentecost', kind: 'pentecost', title: 'Pentecost and the Peoples of the Ancient World', shortTitle: 'Pentecost',
+      lon: 35.229, lat: 31.778, at: 33, dateLabel: 'After Easter · Acts’ Pentecost narrative',
+      summary: 'Acts describes the Spirit’s coming through wind, tongues like fire and speech understood by people from many regions.',
+      context: 'Jerusalem. Named regions include Mesopotamia, Cappadocia, Egypt and Rome; these names can be read alongside the historical geography.',
+      connection: 'The narrative offers a theme of communication across peoples. Its flames are distinct from the Watcher stars.',
+      sourceLabel: 'Acts 2:1–13', sourceUrl: 'https://bible.usccb.org/bible/acts/2', relatedSources: []
+    }
+  ],
+  notes: [
+    {
+      title: 'One God, three eternal persons',
+      text: 'Catholic teaching understands Father, Son and Holy Spirit as eternal and consubstantial. Incarnation and Pentecost do not create new divine persons.',
+      url: 'https://www.vatican.va/content/catechism/en/part_one/section_two/chapter_three.html', label: 'Catechism 685–689'
+    },
+    {
+      title: 'Enoch and Mount Hermon',
+      text: '1 Enoch 6 describes 200 Watchers descending at Mount Hermon in Jared’s days. It does not assign them to dated modern atrocities or Pakistan.',
+      url: 'https://www.ccel.org/c/charles/otpseudepig/enoch.htm', label: '1 Enoch 6–10'
+    },
+    {
+      title: 'Ethiopian scriptural tradition',
+      text: 'Enoch belongs to the Ethiopian Orthodox canon. Its canonical status differs across Christian traditions.',
+      url: 'https://www.ethiopianorthodox.org/english/canonical/books.html?lang=en', label: 'Ethiopian Orthodox canon'
+    },
+    {
+      title: 'Dead Sea Scrolls context',
+      text: 'The IAA identifies an Aramaic Enoch fragment dated 150–50 BCE. It documents ancient literature, not the map’s proposed modern correlations.',
+      url: 'https://www.deadseascrolls.org.il/featured-scrolls/?locale=en_US', label: 'Israel Antiquities Authority'
+    },
+    {
+      title: 'Celestial symbols',
+      text: 'The texts provide no measured star size, altitude or icon point count. Star shapes, trajectories and galactic origins here are artistic choices.',
+      url: 'https://bible.usccb.org/bible/matthew/2', label: 'Matthew 2'
+    },
+    {
+      title: 'Reading the layers together',
+      text: 'Theological parallels invite reflection; they are not statistical evidence that named angels caused particular conflicts or that symbols changed casualty totals.',
+      url: 'https://bible.usccb.org/bible/matthew/5', label: 'Gospel teaching on peace'
+    },
+    {
+      title: 'Dates and display order',
+      text: 'Dates are approximate. Pre-AD 1 scenes are introductory context. AD 28, 29 and 33 are display anchors, not exact dates. Shared-year Gospel scenes preserve narrative order without invented subyear timestamps.',
+      url: 'https://bible.usccb.org/bible/luke/2', label: 'Luke 2 and chronological notes'
+    }
+  ]
+};
+
+</script>
+<script id="jcs-gospel-art">
+/* Shared, source-labelled iconography. Shapes are symbols, not astronomical measurements. */
+(()=>{'use strict';
+function crossPath(c){c.beginPath();c.moveTo(-.11,-.48);c.lineTo(.11,-.48);c.lineTo(.11,-.20);c.lineTo(.36,-.20);c.lineTo(.36,0);c.lineTo(.11,0);c.lineTo(.11,.5);c.lineTo(-.11,.5);c.lineTo(-.11,0);c.lineTo(-.36,0);c.lineTo(-.36,-.20);c.lineTo(-.11,-.20);c.closePath();}
+function dove(c){c.beginPath();c.moveTo(-.03,.10);c.bezierCurveTo(-.22,.02,-.43,-.11,-.47,-.34);c.bezierCurveTo(-.25,-.19,-.12,-.25,0,-.07);c.bezierCurveTo(.16,-.34,.35,-.30,.46,-.40);c.bezierCurveTo(.39,-.11,.20,.06,.13,.12);c.lineTo(.23,.33);c.lineTo(.03,.24);c.lineTo(-.20,.34);c.closePath();c.fill();c.beginPath();c.arc(.09,-.03,.09,0,Math.PI*2);c.fill();}
+function draw(c,kind,x,y,size,phase=0){
+ c.save();c.translate(x,y);c.scale(size,size);c.shadowBlur=0;c.shadowColor='transparent';c.globalCompositeOperation='source-over';c.globalAlpha=1;
+ if(kind==='crucifixion'){
+  c.save();crossPath(c);c.clip();c.fillStyle='#135076';c.fillRect(-.5,-.5,1,1);
+  for(let i=-5;i<7;i++){const yy=i*.11+Math.sin(phase*.5)*.018;c.beginPath();c.moveTo(-.5,yy);c.bezierCurveTo(-.22,yy+Math.sin(phase+i)*.085,.2,yy-Math.cos(phase+i)*.085,.5,yy+.01);c.strokeStyle=i%2?'#367da1':'#225f8d';c.lineWidth=.042;c.stroke();}c.restore();
+  crossPath(c);c.strokeStyle='#698ba0';c.lineWidth=.018;c.stroke();
+  // Restrained crucifix silhouette, with no halo, bloom or outward light.
+  c.strokeStyle='#b4c6cb';c.fillStyle='#b4c6cb';c.lineWidth=.034;c.lineCap='round';c.beginPath();c.arc(.012,-.245,.046,0,Math.PI*2);c.fill();c.beginPath();c.moveTo(-.25,-.13);c.quadraticCurveTo(-.09,-.075,0,-.09);c.quadraticCurveTo(.09,-.075,.25,-.13);c.moveTo(0,-.15);c.lineTo(-.025,.14);c.lineTo(.036,.34);c.moveTo(-.025,.14);c.lineTo(-.045,.34);c.stroke();c.fillStyle='#b0c4cc';c.beginPath();c.moveTo(-.075,.07);c.lineTo(.05,.08);c.lineTo(.067,.17);c.lineTo(-.065,.17);c.closePath();c.fill();
+ }else if(kind==='nativity'){
+  c.fillStyle='#f2d99a';c.beginPath();for(let i=0;i<16;i++){const a=-Math.PI/2+i*Math.PI/8,r=i%2?.09:(i%4===0?.49:.26);const xx=Math.cos(a)*r,yy=Math.sin(a)*r;i?c.lineTo(xx,yy):c.moveTo(xx,yy);}c.closePath();c.fill();c.fillStyle='#fff0c7';c.beginPath();c.arc(0,0,.055,0,Math.PI*2);c.fill();
+ }else if(kind==='eucharist'){
+  c.fillStyle='#d3b77d';c.beginPath();c.moveTo(-.23,-.07);c.quadraticCurveTo(-.2,.19,0,.18);c.quadraticCurveTo(.2,.19,.23,-.07);c.closePath();c.fill();c.fillRect(-.027,.13,.054,.19);c.fillRect(-.18,.32,.36,.045);c.fillStyle='#e7e4d5';c.beginPath();c.arc(0,-.25,.145,0,Math.PI*2);c.fill();c.strokeStyle='#938a74';c.lineWidth=.017;c.beginPath();c.moveTo(0,-.34);c.lineTo(0,-.16);c.moveTo(-.067,-.26);c.lineTo(.067,-.26);c.stroke();
+ }else if(kind==='annunciation'){
+  c.fillStyle='#92bed2';c.beginPath();c.moveTo(0,-.37);c.bezierCurveTo(-.35,-.22,-.32,.17,-.39,.4);c.quadraticCurveTo(0,.3,.32,.41);c.bezierCurveTo(.22,.05,.3,-.27,0,-.37);c.fill();c.fillStyle='#d6d4c2';c.beginPath();c.ellipse(0,-.18,.077,.10,0,0,Math.PI*2);c.fill();c.strokeStyle='#d6d4c2';c.lineWidth=.029;c.beginPath();c.moveTo(-.1,.12);c.lineTo(0,.02);c.lineTo(.1,.12);c.stroke();
+ }else if(kind==='pentecost'){
+  c.fillStyle='#dca674';c.beginPath();c.moveTo(0,-.48);c.bezierCurveTo(.09,-.18,.34,-.09,.20,.17);c.bezierCurveTo(.07,.36,-.19,.25,-.21,.1);c.bezierCurveTo(-.31,-.12,-.05,-.12,0,-.48);c.fill();c.save();c.translate(0,.20);c.scale(.65,.65);c.fillStyle='#cbdde4';dove(c);c.restore();
+ }else{c.fillStyle=kind==='resurrection'?'#e2d8bd':'#b7d3df';dove(c);}
+ c.restore();
+}
+window.JCSGospelArt=Object.freeze({draw});
+})();
+
+</script>
+<script id="jcs-gospel-layer">
+/* Gospel and theological context share the atlas clock; they never alter harm metrics. */
+(()=>{'use strict';
+ const data=window.JCSGospelData,atlas=window.JCSFullHistory,svg=document.getElementById('world-map'),viewport=document.getElementById('jcs-map-viewport');
+ if(!data||!atlas||!svg||!viewport)return;
+ const events=data.events,byId=new Map(events.map(e=>[e.id,e])),NS='http://www.w3.org/2000/svg';
+ let selectedId='',enabled=true,revision=0,raf=0,lastPaint=0,lastKey='',lastUI='',canvasSize='',mounted=true;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)'),$=id=>document.getElementById(id);
+ const story=document.createElement('section');story.className='jcs-gospel-story';story.setAttribute('aria-label','Jesus Christ · Gospel journey');
+ story.innerHTML='<div class="jcs-gospel-top"><div class="jcs-gospel-heading">Jesus Christ · the Gospel journey<span>Bethlehem’s star · the cross · peace and the Spirit</span></div><label class="jcs-gospel-toggle"><input id="jcs-gospel-enabled" type="checkbox" checked> Gospel layer</label></div><nav class="jcs-gospel-nav" aria-label="Read a Gospel account"></nav><details class="jcs-gospel-reading"><summary id="jcs-gospel-summary"></summary><div class="jcs-gospel-detail"><p id="jcs-gospel-description"></p><p id="jcs-gospel-context"></p><p id="jcs-gospel-connection"></p><p id="jcs-gospel-sources"></p><div class="jcs-gospel-actions"><button type="button" id="jcs-gospel-jump">Go to this timeline moment</button><button type="button" id="jcs-gospel-follow">Follow timeline again</button></div><details class="jcs-gospel-notes"><summary>Dates, traditions and how the layers relate</summary><div id="jcs-gospel-notes"></div></details></div></details><p class="jcs-gospel-live" id="jcs-gospel-live"></p>';
+ (document.querySelector('.jcs-map-controls')||viewport.parentElement).append(story);
+ const nav=story.querySelector('nav'),buttons=new Map();
+ function sourceLink(label,url){const a=document.createElement('a');a.textContent=label;a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
+ for(const e of events){const b=document.createElement('button');b.type='button';b.textContent=e.shortTitle||e.title;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>select(e.id));nav.append(b);buttons.set(e.id,b);}
+ for(const note of data.notes){const p=document.createElement('p'),strong=document.createElement('strong');strong.textContent=note.title+'. ';p.append(strong,document.createTextNode(note.text+' '));if(note.url)p.append(sourceLink(note.label||'Source',note.url));$('jcs-gospel-notes').append(p);}
+ function autoEvent(position){if(position<28)return byId.get('nativity');if(position<29)return byId.get('baptism');if(position<33)return byId.get('ministry');return byId.get('crucifixion');}
+ function state(position,full=true){
+  const current=byId.get(selectedId)||autoEvent(position),focus=enabled&&full&&(selectedId||position<44)?current:null,focusWeight=selectedId?1:Math.max(0,Math.min(1,(44-position)/10));
+  // Close sites use clearly drawn callouts, retaining their exact map anchor.
+  const markers=events.map(e=>({...e,gospelId:e.id,visible:enabled&&full&&(e.id===selectedId||(e.at<=position&&['nativity','crucifixion'].includes(e.id))||(!selectedId&&current.id===e.id)),selected:e.id===selectedId,offsetX:e.id==='nativity'?-24:e.id==='crucifixion'?28:0,offsetY:e.id==='nativity'?-34:e.id==='crucifixion'?-34:-45}));
+  return{enabled:enabled&&full,selectedId,focus,focusWeight,current,markers,revision};
+ }
+ function updateUI(g,position,mode){const e=g.current,key=[e.id,selectedId,enabled,Math.floor(position),mode].join('|');if(key===lastUI)return;lastUI=key;
+  $('jcs-gospel-summary').textContent=e.title+' · '+e.dateLabel+' · read account and sources';$('jcs-gospel-description').textContent=e.summary;$('jcs-gospel-context').textContent=e.context;$('jcs-gospel-connection').textContent=e.connection;
+  const links=$('jcs-gospel-sources');links.replaceChildren(sourceLink(e.sourceLabel,e.sourceUrl));for(const link of e.relatedSources||[])links.append(' · ',sourceLink(link.label,link.url));
+  for(const [id,b]of buttons)b.setAttribute('aria-pressed',String(id===e.id));$('jcs-gospel-follow').hidden=!selectedId;
+  $('jcs-gospel-jump').textContent=e.at===1?'Show the opening / birth context':'Go to display year AD '+e.at;
+  $('jcs-gospel-live').textContent=mode!=='full'?'Gospel markers appear in Human history; the source accounts remain available.':selectedId?'Reading a selected Gospel account; the timeline and narration continue independently.':position<28?'Opening context: the birth accounts precede AD 1. The existing timeline begins at AD 1.':'Gospel milestones persist as religious context. Their symbols do not change the recorded violence totals.';
+ }
+ function changed(){revision++;lastKey='';const s=atlas.getGlobeSnapshot();updateUI(s.gospel,s.position,s.mode);document.dispatchEvent(new Event('jcs:gospel-change'));wake();}
+ function select(id){if(!byId.has(id))return;selectedId=id;enabled=true;$('jcs-gospel-enabled').checked=true;story.querySelector('.jcs-gospel-reading').open=true;changed();}
+ $('jcs-gospel-enabled').addEventListener('change',e=>{enabled=e.target.checked;changed();});
+ $('jcs-gospel-follow').addEventListener('click',()=>{selectedId='';changed();});
+ for(const id of ['atlas-start','jcs-watchers-restart','atlas-scripture-replay','atlas-scripture-begin'])$(id)?.addEventListener('click',()=>{selectedId='';changed();});
+ $('jcs-gospel-jump').addEventListener('click',()=>{const e=byId.get(selectedId)||autoEvent(atlas.getYear());atlas.activate();atlas.setYear(e.at);changed();});
+ const canvas=document.createElement('canvas');canvas.className='jcs-gospel-canvas';canvas.setAttribute('aria-hidden','true');viewport.append(canvas);const ctx=canvas.getContext('2d');
+ const hitLayer=document.createElementNS(NS,'g');hitLayer.id='jcs-gospel-hit-layer';svg.append(hitLayer);const hits=new Map();
+ for(const e of events){const circle=document.createElementNS(NS,'circle');circle.setAttribute('class','jcs-gospel-marker-hit');circle.setAttribute('tabindex','0');circle.setAttribute('role','button');circle.setAttribute('aria-label',e.title+' · '+e.dateLabel+' · read Gospel source');circle.style.display='none';circle.addEventListener('click',ev=>{ev.stopPropagation();select(e.id)});circle.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();ev.stopPropagation();select(e.id)}});hitLayer.append(circle);hits.set(e.id,circle);}
+ function drawFlat(s){
+  const r=svg.getBoundingClientRect(),v=viewport.getBoundingClientRect(),m=svg.getScreenCTM();if(!ctx||!m||!r.width||!r.height)return;
+  const w=Math.round(r.width),h=Math.round(r.height),dpr=Math.min(1.5,window.devicePixelRatio||1),sizeKey=[w,h,dpr].join('|');
+  canvas.style.left=(r.left-v.left+viewport.scrollLeft)+'px';canvas.style.top=(r.top-v.top+viewport.scrollTop)+'px';canvas.style.width=w+'px';canvas.style.height=h+'px';
+  if(sizeKey!==canvasSize){canvasSize=sizeKey;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+  ctx.clearRect(0,0,w,h);for(const circle of hits.values())circle.style.display='none';if(!s.gospel?.enabled)return;
+  const phase=reduced.matches||s.animationsEnabled===false?0:s.position*.75,scale=Math.hypot(m.a,m.b)||1;
+  for(const item of s.gospel.markers.filter(i=>i.visible).sort((a,b)=>Number(a.selected)-Number(b.selected))){
+   const wx=(item.lon+180)*1000/360,wy=(90-item.lat)*500/180,ax=m.a*wx+m.c*wy+m.e-r.left,ay=m.b*wx+m.d*wy+m.f-r.top;
+   if(ax<0||ay<0||ax>w||ay>h)continue;const x=Math.max(28,Math.min(w-28,ax+item.offsetX)),y=Math.max(35,Math.min(h-30,ay+item.offsetY)),size=item.kind==='crucifixion'?52:item.kind==='nativity'?34:32;
+   ctx.strokeStyle='#8da2b1';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(x,y+size*.38);ctx.stroke();ctx.fillStyle='#b5cbd4';ctx.beginPath();ctx.arc(ax,ay,2.1,0,Math.PI*2);ctx.fill();window.JCSGospelArt.draw(ctx,item.kind,x,y,size,phase);
+   const title=item.kind==='crucifixion'?'Jesus · Crucifixion':item.kind==='nativity'?'Jesus · Bethlehem':item.shortTitle;ctx.font='11px system-ui,sans-serif';const tw=ctx.measureText(title).width,tx=Math.max(4,Math.min(w-tw-4,x-tw/2)),ty=Math.min(h-4,y+size*.6);ctx.fillStyle='#081320e8';ctx.fillRect(tx-3,ty-12,tw+6,16);ctx.fillStyle='#d9e5eb';ctx.fillText(title,tx,ty);
+   const circle=hits.get(item.id),inv=m.inverse(),sx=x+r.left,sy=y+r.top;circle.setAttribute('cx',String(inv.a*sx+inv.c*sy+inv.e));circle.setAttribute('cy',String(inv.b*sx+inv.d*sy+inv.f));circle.setAttribute('r',String(size*.6/scale));circle.style.display='';
+  }
+ }
+ function flatActive(){return document.body.dataset.mapProjection!=='globe'&&document.body.dataset.timeline==='full';}
+ function frame(now){raf=0;if(!mounted||document.hidden||!flatActive())return;if(now-lastPaint>1000/24){lastPaint=now;const s=atlas.getGlobeSnapshot();updateUI(s.gospel,s.position,s.mode);const box=svg.getAttribute('viewBox'),at=reduced.matches||s.animationsEnabled===false?Math.floor(s.position):s.position,key=[at,s.gospel.revision,s.animationsEnabled,box,canvasSize].join('|');if(key!==lastKey){lastKey=key;drawFlat(s);}}raf=requestAnimationFrame(frame);}
+ function wake(){cancelAnimationFrame(raf);raf=0;const flat=flatActive();canvas.hidden=!flat;hitLayer.style.display=flat?'':'none';if(flat&&!document.hidden){lastKey='';raf=requestAnimationFrame(frame);}}
+ window.JCSGospel=Object.freeze({getState:state,select,refreshUI:s=>updateUI(s.gospel,s.position,s.mode)});
+ document.addEventListener('jcs:map-projection-change',wake);document.addEventListener('visibilitychange',wake);document.addEventListener('jcs:full-view',wake);new MutationObserver(wake).observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
+ if(typeof ResizeObserver==='function')new ResizeObserver(()=>{lastKey='';canvasSize='';wake()}).observe(svg);window.addEventListener('pagehide',()=>{mounted=false;cancelAnimationFrame(raf)});window.addEventListener('pageshow',()=>{mounted=true;wake()});
+ changed();
 })();
 
 </script>
@@ -7502,18 +7729,19 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if (!options || !options.host || typeof options.getState !== 'function') throw new Error('Cinematic globe requires host and getState.');
     const host = options.host, getState = options.getState, land = prepareLand(options.land);
     const panel = document.createElement('div'); panel.className = 'jcs-cinema';
-    panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe with scriptural artwork. Drag or use arrow keys to explore; use Resume guided view to follow the timeline."></canvas>' +
+    panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe with Gospel markers and scriptural artwork. Drag or use arrow keys to explore; use Resume guided view to follow the timeline."></canvas>' +
       '<div class="jcs-cinema-head"><div><div class="jcs-cinema-kicker">Scriptural artwork · cinematic view</div><div class="jcs-cinema-year"></div></div><div class="jcs-cinema-controls" aria-label="Cinematic view options"></div></div>' +
       '<div class="jcs-cinema-bottom"><div class="jcs-cinema-caption"><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy">Symbolic Watcher imagery · separately sourced history.<br>Modern coastlines and country outlines are reference geography.</p><p class="jcs-cinema-source"></p></div><div class="jcs-cinema-hint">' + iconDrag + 'Drag to explore<br>Timeline guides the view</div></div><div class="jcs-cinema-status" aria-live="polite"></div>';
     host.append(panel);
     const canvas = panel.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) { panel.remove(); throw new Error('Canvas 2D is unavailable; use the flat map.'); }
     const controls = panel.querySelector('.jcs-cinema-controls'), yearEl = panel.querySelector('.jcs-cinema-year'), titleEl = panel.querySelector('.jcs-cinema-title');
-    const sourceEl = panel.querySelector('.jcs-cinema-source'), statusEl = panel.querySelector('.jcs-cinema-status');
+    const sourceEl = panel.querySelector('.jcs-cinema-source'), copyEl = panel.querySelector('.jcs-cinema-copy'), statusEl = panel.querySelector('.jcs-cinema-status');
     const layer = { background: true, descents: true, ring: true };
     let active = false, disposed = false, raf = 0, lastFrame = 0, width = 1, height = 1, radius = 1, cx = 0, cy = 0;
     let manual = false, yaw = 0, pitch = 12, drag = null, dirty = true, lastPosition = NaN, lastSignature = '', hits = [], currentCamera = { lon: 0, lat: 12 };
     let cameraSignature = '', cameraKeys = [], lastCaption = '', lastStatus = '', sky = null, labelBoxes = [];
+    let lastGospelSelected = getState()?.gospel?.selectedId || '';
     const vectorCache = new Map(), reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const toVector = p => { const key = p.lon + ',' + p.lat; if (!vectorCache.has(key)) vectorCache.set(key, vec(+p.lon, +p.lat)); return vectorCache.get(key); };
     const resume = document.createElement('button'); resume.type = 'button'; resume.className = 'jcs-cinema-resume'; resume.hidden = true;
@@ -7679,44 +7907,87 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         if (names && (f.focus || activeFlights.indexOf(f) < 3)) label(f.item.name || 'Unnamed Watcher', here.x + 10, here.y - 11, '#dfc5cc', undefined, f.focus); hits.push({ x: here.x, y: here.y, item: f.item });
       }
     }
+    function gospelLabel(text, x, y, size, color) {
+      const font = '500 10px ui-sans-serif,system-ui,sans-serif', maxWidth = Math.min(180, width * .42), lines = [];
+      ctx.font = font; let line = '';
+      for (const word of String(text || '').split(/\s+/)) { const next = line ? line + ' ' + word : word; if (line && ctx.measureText(next).width > maxWidth) { lines.push(line); line = word; } else line = next; }
+      if (line) lines.push(line); if (!lines.length) return;
+      const w = Math.max(...lines.map(s => ctx.measureText(s).width)) + 12, h = lines.length * 13 + 7;
+      const candidates = [[x + size / 2 + 7, y - h / 2], [x - w / 2, y + size / 2 + 5], [x - w - size / 2 - 7, y - h / 2], [x - w / 2, y - size / 2 - h - 5], [x + size / 2 + 50, y - h / 2], [x - w - size / 2 - 50, y - h / 2]].map(([a, b]) => ({ x: clamp(a, 8, width - w - 8), y: clamp(b, 91, height - h - 122), w, h }));
+      const box = candidates.find(a => !labelBoxes.some(b => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y)) || candidates[0];
+      labelBoxes.push(box); ctx.fillStyle = 'rgba(4,15,26,.94)'; ctx.fillRect(box.x, box.y, w, h); ctx.fillStyle = color; lines.forEach((s, i) => ctx.fillText(s, box.x + 6, box.y + 13 + i * 13));
+      return box;
+    }
+    function drawGospel(state, project, rawPosition) {
+      const gospel = state.gospel; if (!gospel?.enabled) return;
+      const phase = reduced.matches || state.animationsEnabled === false ? 0 : rawPosition * .75;
+      const rows = (gospel.markers || []).filter(m => m.visible !== false && finitePoint(m)).map(m => ({ item: m, p: project(toVector(m)), focus: !!m.selected || m.id === gospel.selectedId || m.id === gospel.focus?.id })).filter(r => r.p.z > .055);
+      // Nearby Gospel places retain their geographic anchors. Short leaders separate
+      // the artwork so the Jerusalem scenes never cover Jesus's cross.
+      const offsets = { nativity: [-43, 31], annunciation: [-43, -35], baptism: [39, -39], eucharist: [-45, -3], crucifixion: [0, -19], resurrection: [42, -3], pentecost: [38, 34] };
+      rows.sort((a, b) => Number(a.focus) - Number(b.focus) || Number(a.item.kind === 'crucifixion') - Number(b.item.kind === 'crucifixion'));
+      const scale = width < 500 ? .85 : 1;
+      for (const row of rows) {
+        const m = row.item, p = row.p, clustered = rows.some(other => other !== row && Math.hypot(other.p.x - p.x, other.p.y - p.y) < 45);
+        const offset = clustered ? offsets[m.kind] || [0, 0] : [0, 0];
+        const x = p.x + offset[0] * scale, y = p.y + offset[1] * scale;
+        const size = (m.kind === 'crucifixion' ? row.focus ? 53 : 46 : m.kind === 'nativity' ? row.focus ? 37 : 29 : row.focus ? 32 : 24) * scale;
+        Object.assign(row, { x, y, size }); labelBoxes.push({ x: x - size / 2 - 3, y: y - size / 2 - 3, w: size + 6, h: size + 6 });
+        ctx.save(); ctx.shadowBlur = 0; ctx.shadowColor = 'transparent'; ctx.filter = 'none'; ctx.globalAlpha = 1;
+        if (clustered) { ctx.strokeStyle = 'rgba(115,180,204,.47)'; ctx.lineWidth = .75; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(x, y); ctx.stroke(); ctx.fillStyle = '#91c9dc'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, TAU); ctx.fill(); }
+        if (global.JCSGospelArt && typeof global.JCSGospelArt.draw === 'function') global.JCSGospelArt.draw(ctx, m.kind, x, y, size, phase);
+        else { ctx.fillStyle = '#123d5b'; ctx.strokeStyle = '#7bb9df'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, size * .29, 0, TAU); ctx.fill(); ctx.stroke(); }
+        ctx.restore();
+        const item = { ...m, kind: 'gospel', gospelId: m.id, gospelKind: m.kind }, hit = { x, y, radius: Math.max(18, size / 2 + 5), priority: 2, item }; hits.push(hit); row.hit = hit;
+      }
+      const labeled = rows.filter(r => r.focus || r.item.kind === 'crucifixion' || r.item.kind === 'nativity').sort((a, b) => Number(b.focus) - Number(a.focus) || Number(b.item.kind === 'crucifixion') - Number(a.item.kind === 'crucifixion')).slice(0, 2);
+      for (const row of labeled) { const m = row.item, title = m.kind === 'nativity' ? 'Bethlehem · Nativity' : m.kind === 'crucifixion' ? 'Jesus · Crucifixion' : m.title; row.hit.bounds = gospelLabel(title, row.x, row.y, row.size, m.kind === 'nativity' ? '#efe3b9' : '#a6d8f1'); }
+    }
     function captions(state, position) {
       const year = Number.isFinite(+state.year) ? Math.round(+state.year) : Math.floor(position), stars = state.stars || [];
       const full = !state.mode || state.mode === 'full', started = state.started !== false;
       const current = started && full && stars.find(s => position >= +s.departure && position < +s.landing), seen = started && full ? stars.filter(s => position >= +s.landing).length : 0;
-      const title = !full ? 'Full history view required for dated descents' : current ? (state.layers?.names === false ? 'A Watcher' : current.name || 'An unnamed Watcher') + ' · a symbolic descent' : seen ? 'The Earth turns. The records remain.' : 'A world beneath the stars';
+      const gospel = state.gospel?.enabled && state.gospel.focus ? state.gospel.current : null;
+      const title = gospel?.title || (!full ? 'Full history view required for dated descents' : current ? (state.layers?.names === false ? 'A Watcher' : current.name || 'An unnamed Watcher') + ' · a symbolic descent' : seen ? 'The Earth turns. The records remain.' : 'A world beneath the stars');
       const latest = started && full ? stars.filter(s => position >= +s.landing).sort((a, b) => +b.landing - +a.landing)[0] : null, record = current || latest;
-      const source = typeof state.caption === 'string' ? state.caption : state.caption?.text || (record?.artisticOnly ? 'Undated artistic opening · no historical fall location or date is asserted.' : record?.title ? 'Historical account · ' + record.title : '');
-      const sourceUrl = record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
-      const signature = [year, title, source, sourceUrl, manual].join('|'); if (signature === lastCaption) return; lastCaption = signature;
+      const source = gospel ? [gospel.dateLabel, gospel.summary].filter(Boolean).join(' · ') : typeof state.caption === 'string' ? state.caption : state.caption?.text || (record?.artisticOnly ? 'Undated artistic opening · no historical fall location or date is asserted.' : record?.title ? 'Historical account · ' + record.title : '');
+      const sourceUrl = gospel ? gospel.sourceUrl || '' : record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
+      const sourceLabel = gospel?.sourceLabel || record?.sourceLabel || 'Source';
+      const signature = [year, title, source, sourceUrl, sourceLabel, !!gospel, manual].join('|'); if (signature === lastCaption) return; lastCaption = signature;
       yearEl.textContent = 'AD ' + year.toLocaleString('en-US'); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
-      if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = record?.sourceLabel || 'Source'; sourceEl.append(' · ', link); }
+      panel.dataset.gospelFocus = String(!!gospel); copyEl.textContent = gospel ? 'Gospel imagery · biblical narrative. Modern coastlines and country outlines are reference geography.' : 'Symbolic Watcher imagery · separately sourced history. Modern coastlines and country outlines are reference geography.';
+      if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = sourceLabel; sourceEl.append(' · ', link); }
       const status = 'Cinematic globe, AD ' + year + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
     }
     function draw() {
       if (!active || disposed || document.hidden) return;
       const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : +state.year || 1, 1, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
-      const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year].join('|');
+      const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
       if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
       ctx.clearRect(0, 0, width, height); if (layer.background && sky) ctx.drawImage(sky, 0, 0, width, height); else { ctx.fillStyle = '#040812'; ctx.fillRect(0, 0, width, height); }
-      currentCamera = manual ? { lon: yaw, lat: pitch } : camera(position, state.stars || []); const project = projection(currentCamera); hits = []; labelBoxes = [];
+      const gospelFocus = state.gospel?.enabled && finitePoint(state.gospel.focus) ? state.gospel.focus : null;
+      const guided = camera(position, state.stars || []);
+      if (gospelFocus) { const weight = ease(clamp(Number.isFinite(+state.gospel.focusWeight) ? +state.gospel.focusWeight : 1, 0, 1)), delta = ((+gospelFocus.lon - guided.lon) % 360 + 540) % 360 - 180; guided.lon += delta * weight; guided.lat = mix(guided.lat, clamp(+gospelFocus.lat, -75, 75), weight); }
+      currentCamera = manual ? { lon: yaw, lat: pitch } : guided; const project = projection(currentCamera); hits = []; labelBoxes = [];
       if (layer.ring) { ctx.save(); ctx.translate(cx, cy); ctx.rotate(-.12); ctx.strokeStyle = 'rgba(164,65,64,.23)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, 0, TAU); ctx.stroke(); ctx.strokeStyle = 'rgba(222,100,78,.42)'; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, .16, 1.13); ctx.stroke(); ctx.restore(); }
       drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
-      const vignette = ctx.createLinearGradient(0, height * .69, 0, height); vignette.addColorStop(0, 'rgba(3,7,15,0)'); vignette.addColorStop(1, 'rgba(3,7,15,.94)'); ctx.fillStyle = vignette; ctx.fillRect(0, height * .69, width, height * .31); captions(state, position);
+      const vignette = ctx.createLinearGradient(0, height * .69, 0, height); vignette.addColorStop(0, 'rgba(3,7,15,0)'); vignette.addColorStop(1, 'rgba(3,7,15,.94)'); ctx.fillStyle = vignette; ctx.fillRect(0, height * .69, width, height * .31); drawGospel(state, project, rawPosition); captions(state, position);
     }
     function frame(now) { raf = 0; if (!active || disposed || document.hidden) return; if (!lastFrame || now - lastFrame >= 1000 / 24) { lastFrame = now; draw(); } raf = requestAnimationFrame(frame); }
     function invalidate() { dirty = true; if (active && !document.hidden) { draw(); if (!raf) raf = requestAnimationFrame(frame); } }
     function start() { if (disposed) return; active = true; lastFrame = 0; resize(); invalidate(); }
     function stop() { active = false; cancelAnimationFrame(raf); raf = 0; lastFrame = 0; }
     function visibility() { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (active) invalidate(); }
+    function gospelChange() { const selectedId = getState()?.gospel?.selectedId || ''; if (selectedId !== lastGospelSelected) { manual = false; resume.hidden = true; lastGospelSelected = selectedId; } invalidate(); }
     function pointerDown(e) { if (e.button !== 0) return; drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lon: currentCamera.lon, lat: currentCamera.lat, moved: false }; canvas.setPointerCapture(e.pointerId); }
     function pointerMove(e) { if (!drag || drag.id !== e.pointerId) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.hypot(dx, dy) < 4 && !drag.moved) return; drag.moved = true; manual = true; yaw = drag.lon - dx / radius * 56; pitch = clamp(drag.lat + dy / radius * 56, -78, 78); resume.hidden = false; invalidate(); }
-    function pointerUp(e) { if (!drag || drag.id !== e.pointerId) return; if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < 18).sort((a, b) => a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); }
+    function pointerUp(e) { if (!drag || drag.id !== e.pointerId) return; if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < (h.radius || 18) || h.bounds && x >= h.bounds.x && x <= h.bounds.x + h.bounds.w && y >= h.bounds.y && y <= h.bounds.y + h.bounds.h).sort((a, b) => (b.priority || 0) - (a.priority || 0) || a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); }
     function keyDown(e) { const delta = { ArrowLeft: [-9, 0], ArrowRight: [9, 0], ArrowUp: [0, 7], ArrowDown: [0, -7] }[e.key]; if (!delta) return; e.preventDefault(); if (!manual) { yaw = currentCamera.lon; pitch = currentCamera.lat; } manual = true; yaw += delta[0]; pitch = clamp(pitch + delta[1], -78, 78); resume.hidden = false; invalidate(); }
     canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown);
-    document.addEventListener('visibilitychange', visibility); reduced.addEventListener('change', invalidate);
+    document.addEventListener('visibilitychange', visibility); document.addEventListener('jcs:gospel-change', gospelChange); reduced.addEventListener('change', invalidate);
     const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => resize()) : null; observer?.observe(host);
     if (!observer) global.addEventListener('resize', resize);
-    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; } };
+    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; } };
   }
   global.JCSCinematicGlobe = Object.freeze({ create });
 })(window);
@@ -7727,7 +7998,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   'use strict';
   const $=id=>document.getElementById(id),svg=$('world-map'),host=$('jcs-cinematic-globe-host'),flat=$('jcs-flat-map-button'),globe=$('jcs-globe-map-button'),status=$('jcs-globe-mode-status');
   if(!svg||!host||!flat||!globe||!window.JCSFullHistory)return;
-  let scene=null,active=false;
+  let scene=null,active=false,initialPending=true;
   // Reuse the visible map's existing equirectangular coastlines, once on first selection.
   function referenceLand(){
     return Array.from(svg.querySelectorAll('#country-layer path.country'),path=>{
@@ -7746,7 +8017,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         if(!window.JCSCinematicGlobe?.create)throw Error('Cinematic view is unavailable.');
         const land=referenceLand();if(!land.length)throw Error('Reference geography has not loaded yet.');
         scene=window.JCSCinematicGlobe.create({host,getState:()=>window.JCSFullHistory.getGlobeSnapshot(),land,onSelect:item=>window.JCSFullHistory.selectGlobeItem(item)});
-      }catch(error){status.textContent=error.message+' The existing map is still available.';host.hidden=true;return;}
+      }catch(error){active=false;document.body.dataset.mapProjection='flat';host.hidden=true;svg.inert=false;svg.setAttribute('aria-hidden','false');svg.setAttribute('tabindex','0');flat.setAttribute('aria-pressed','true');globe.setAttribute('aria-pressed','false');status.textContent=error.message+' The existing map is still available.';document.dispatchEvent(new Event('jcs:map-projection-change'));return;}
     }
     active=next;document.body.dataset.mapProjection=next?'globe':'flat';
     host.hidden=!next;svg.inert=next;svg.setAttribute('aria-hidden',String(next));svg.setAttribute('tabindex',next?'-1':'0');
@@ -7755,7 +8026,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if(next){scene.start();}else scene?.stop();
     document.dispatchEvent(new Event('jcs:map-projection-change'));
   }
-  flat.addEventListener('click',()=>useGlobe(false));globe.addEventListener('click',()=>useGlobe(true));
+  flat.addEventListener('click',()=>{initialPending=false;useGlobe(false)});globe.addEventListener('click',()=>{initialPending=false;useGlobe(true)});
   function modeChanged(){
     const full=document.body.dataset.timeline==='full';globe.disabled=!full;globe.title=full?'Show the optional cinematic globe':'Choose the AD 1–2026 history view to use the cinematic globe';
     if(!full&&active){useGlobe(false);status.textContent='Annual and current-data views use the original flat map.';}
@@ -7763,7 +8034,14 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   new MutationObserver(modeChanged).observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
   document.addEventListener('visibilitychange',()=>{if(active){if(document.hidden)scene?.stop();else scene?.start();}});
   window.addEventListener('pagehide',()=>scene?.stop());window.addEventListener('pageshow',()=>{if(active&&!document.hidden)scene?.start();});
-  modeChanged();useGlobe(false);
+  function initialView(){
+    if(!initialPending||document.body.dataset.timeline!=='full')return;
+    if(!svg.querySelectorAll('#country-layer path.country').length)return;
+    initialPending=false;useGlobe(true);
+  }
+  document.addEventListener('jcs:map-country-catalog',initialView);
+  document.addEventListener('jcs:full-view',initialView);
+  modeChanged();initialView();
 })();
 
 </script>
