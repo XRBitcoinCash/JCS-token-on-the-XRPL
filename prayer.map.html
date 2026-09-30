@@ -2678,6 +2678,77 @@ html[data-theme=light] .atlas-historical-polity{fill:#91722a;stroke:#725a20}
 body[data-timeline=full].jcs-recent-visible #world-map:not(.pressure-hidden) #annual-pressure-layer{display:initial!important}
 body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc,body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-swl{stroke:var(--line)!important;stroke-width:.55;stroke-dasharray:none}
 </style>
+
+<style id="jcs-gothic-map-presentation">
+/* A cathedral frame around the map. Evidence colors keep their existing meaning. */
+.map-shell,.analysis-panel{--bg:#100e16;--surface:#19151e;--surface-2:#211b27;--ink:#f5ebd6;--muted:#c9bda9;--gold:#e0bf79;--line:#574a3c;--line-strong:#89724d;--ocean:#101a24;color:var(--ink);background:var(--surface)}
+.map-shell{border:1px solid #80653d;border-radius:24px 24px 7px 7px;box-shadow:0 0 0 4px #18141d,0 0 0 5px #584633,0 18px 46px #0003}
+.analysis-panel{border-left:1px solid #695439}
+.jcs-map-controls{background:radial-gradient(ellipse at 50% 0,#6a29313d,transparent 75%),linear-gradient(90deg,#17131d,#231922 50%,#17131d);border-bottom:1px solid var(--gold);border-radius:24px 24px 0 0;gap:12px;padding:20px 20px 14px}
+.jcs-map-heading{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr);column-gap:18px;align-items:center}
+.jcs-map-heading>*{grid-column:2}.jcs-map-heading .jcs-gothic-seal{grid-column:1;grid-row:1/5;align-self:center;width:72px;height:94px;fill:none;stroke:var(--gold);stroke-width:1;opacity:.92;pointer-events:none}
+.jcs-gothic-seal .jcs-gothic-cross{stroke-width:2.3;stroke-linecap:square}
+.jcs-map-heading h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:.025em;font-variant:small-caps;color:#f7e3b4!important;font-weight:400}
+.jcs-map-heading .jcs-map-kicker{color:#d4b67c;letter-spacing:.2em;font-size:.64rem}
+.jcs-map-heading p{color:#e0d1ba}.jcs-map-scripture{color:#c5ad91;font-family:Georgia,"Times New Roman",serif;font-size:.75rem;font-style:italic;line-height:1.5}
+.jcs-map-scripture>span{font-style:normal;font-size:.69rem;white-space:nowrap}
+.jcs-view-choice{order:1}.jcs-map-controls .map-actions{order:2;align-self:end}
+.map-shell button,.analysis-panel button{border-color:var(--line-strong);box-shadow:inset 0 1px #ffffff08}
+.map-shell button:hover,.analysis-panel button:hover{border-color:var(--gold)}
+.map-shell button:focus-visible,.map-shell input:focus-visible,.map-shell summary:focus-visible,.analysis-panel button:focus-visible{outline:2px solid #f2cf80;outline-offset:3px}
+.jcs-view-choice button[aria-pressed=true],#jcs-chronology-play,#atlas-start-journey{background:#642c38!important;border-color:#b9955a!important;color:#fff0d4!important}
+#jcs-map-viewport #jcs-layers,#jcs-map-viewport #jcs-layers[open]{position:static;inset:auto;display:block;grid-row:1;box-sizing:border-box;width:100%;max-width:100%;margin:0;padding:0;border:0;border-bottom:1px solid #80653d;border-radius:0;background:#14141c;overflow:hidden;box-shadow:none;backdrop-filter:none}
+#jcs-layers>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:9px 13px;color:#ead3a3;background:linear-gradient(90deg,#3b202b,#251b26);font-family:Georgia,"Times New Roman",serif;font-size:.95rem;list-style:none}
+#jcs-layers>summary::-webkit-details-marker{display:none}
+#jcs-layers>summary>span:last-child{margin-left:auto}
+#jcs-layers .jcs-layer-live-label{font:400 .7rem/1.3 system-ui,sans-serif;color:#d5c3ac}
+#jcs-layers .jcs-layer-body{grid-auto-rows:48px;block-size:240px;max-block-size:240px;padding:0 12px;scrollbar-color:#a88852 #14141c;scroll-snap-type:y proximity}
+#jcs-layers .layer-switch{min-block-size:48px;block-size:48px;padding:4px 0;border-bottom-color:#3c3440;grid-template-columns:21px minmax(0,1fr) auto;font-size:.77rem;cursor:pointer}
+#jcs-layers .layer-switch:hover{background:#d5b6770b}
+#jcs-layers .layer-switch input{appearance:auto;width:18px;height:18px;margin:0;accent-color:#d6b06c;cursor:pointer}
+#jcs-layers .layer-switch strong{color:#f4e8d0;font-weight:650}
+#jcs-layers .layer-state{font-size:.66rem;color:#c2b6a6;line-height:1.2;-webkit-line-clamp:1}
+#jcs-layers .jcs-layer-help,#jcs-layers #handoff-status{padding:7px 12px;color:#cfc1ac;font-size:.69rem;line-height:1.4}
+#jcs-layers #handoff-status{border-top:1px solid #44394a}
+.jcs-map-viewport{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;height:clamp(840px,105dvh,1180px);min-height:840px;background:#101a24;border-block:1px solid #786344}
+.jcs-map-viewport .jcs-zoom-tools{position:relative;grid-row:2;inset:auto;max-width:none;justify-content:flex-end;flex-wrap:wrap;margin:0;padding:7px 12px;border:0;border-bottom:1px solid #665235;border-radius:0;background:#17151e;box-shadow:none}
+.jcs-map-viewport .jcs-zoom-tools button{border-color:#806844;color:#f2dfb9;background:#25212b;min-height:44px}
+.jcs-map-viewport #world-map{grid-row:3!important;min-height:0!important;align-self:stretch;width:100%;height:100%!important;isolation:isolate}
+.jcs-map-viewport .jcs-map-help{position:static;grid-row:4;margin:0;padding:6px 8px;border-top:1px solid #4d4034;color:#d3c1a3;background:#17151e;font-size:.68rem;text-shadow:none}
+.jcs-map-help span{padding:0;background:none}
+#atlas-scripture-caption{bottom:38px;color:#f4dfb1;border-color:#80653d;background:#17121ae6;max-width:calc(100% - 24px)}
+.jcs-chronology-control{background:linear-gradient(110deg,#2c1b25,#19151e 65%);border-top:1px solid #8c7047}
+.jcs-chronology-control h2,.jcs-chronology-panel h2,.atlas-card h3,.jcs-watchers-player summary{font-family:Georgia,"Times New Roman",serif;color:#ecd29d}
+.jcs-chronology-slider{accent-color:#d7b67c}
+.jcs-chronology-heading>button{min-height:48px;font-weight:700}
+.jcs-watchers-player,.atlas-scripture-panel,.atlas-card,#jcs-history-nexus-card{border-color:#80653d;border-radius:18px 18px 4px 4px;background:linear-gradient(140deg,#4e253122,transparent 65%),var(--surface-2)}
+.jcs-watchers-player summary{padding:5px 0;border-bottom:1px solid #574636}
+.jcs-watchers-player audio{color-scheme:dark}
+.jcs-global-strip,.map-caption{border-color:#60503b;color:var(--muted);background:var(--surface)}
+.map-shell #atlas-geography-labels text,.map-shell .atlas-polity-name,.map-shell .atlas-settlement-name{stroke:#112031;fill:#eee3cc}
+.map-shell #atlas-geography-labels .atlas-dated-name text,.map-shell .atlas-polity-name{fill:#ffe1a0}
+.map-shell #atlas-geography-labels .atlas-admin-name text{fill:#d7e0e8}
+.map-shell #atlas-geography-labels .atlas-continent-name text{fill:#ead5a9;font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:1px}
+.map-shell .atlas-historical-polity{fill:#d5bd7b;stroke:#e4ca84}
+.map-shell .atlas-node .label,.map-shell .atlas-node .scripture-name{stroke:#102131}
+.jcs-map-expanded .jcs-map-viewport{display:grid;min-height:0;max-height:none;border-radius:5px}
+@media(max-width:1000px){.map-shell{margin-top:4px}.jcs-map-viewport{height:clamp(810px,100dvh,1080px);min-height:810px}.jcs-map-controls>.jcs-watchers-player{order:90;margin-top:0}.analysis-panel{border-left:0;border-top:1px solid #80653d}}
+@media(max-width:600px){.map-shell{border-radius:18px 18px 4px 4px;box-shadow:0 0 0 2px #17141d,0 0 0 3px #584633}.jcs-map-controls{padding:15px 12px 12px;border-radius:18px 18px 0 0;gap:10px}.jcs-map-heading{grid-template-columns:50px minmax(0,1fr);column-gap:12px}.jcs-map-heading .jcs-gothic-seal{width:50px;height:70px}.jcs-map-heading h1{font-size:1.95rem!important}.jcs-map-heading p{font-size:.73rem}.jcs-map-scripture{font-size:.68rem}.jcs-map-kicker{font-size:.55rem!important}.jcs-map-controls .map-actions{margin-left:0;width:100%}.jcs-map-controls .map-actions .button{width:100%}#jcs-layers .jcs-layer-live-label{font-size:.65rem}#jcs-layers .layer-switch{font-size:.72rem}#jcs-layers .layer-state{font-size:.63rem}#jcs-layers .jcs-layer-context{font-size:.54rem}.jcs-map-viewport{height:clamp(790px,108dvh,1050px);min-height:790px;max-height:1050px}.jcs-map-viewport .jcs-zoom-tools{justify-content:center;gap:4px;padding:6px}.jcs-map-viewport .jcs-zoom-tools button{font-size:.72rem;padding:7px}.jcs-map-viewport .jcs-zoom-tools button[data-zoom]{font-size:1.45rem}.jcs-chronology-control{padding:15px 12px}.jcs-chronology-heading>button{width:100%}.jcs-map-expanded .jcs-map-viewport{inset:0;min-height:0;max-height:none}}
+@media(prefers-reduced-motion:reduce){.jcs-gothic-seal{animation:none!important}}
+</style>
+
+
+<style id="jcs-layer-compositor">
+#world-map [hidden]{display:none!important}
+body[data-timeline=full] #world-map #network-layer:not([hidden]),body[data-timeline=full] #world-map #prayer-layer:not([hidden]),body[data-timeline=full] #world-map #local-prayer-layer:not([hidden]){display:initial!important}
+#world-map #atlas-polity-layer .atlas-historical-polity{fill-opacity:.065!important;stroke-opacity:.65;pointer-events:stroke}
+#world-map #atlas-polity-layer .atlas-historical-polity.selected{fill-opacity:.15!important;stroke-opacity:1}
+#world-map #atlas-geography-layer,#world-map #atlas-evidence-links,#world-map #network-layer{pointer-events:none}
+#world-map .atlas-node .halo,#world-map .atlas-node .ring,#world-map .atlas-node .support-ring,#world-map .atlas-node .uncertain-ring{pointer-events:none}
+#world-map .atlas-node .label[data-crowded=true],#world-map .atlas-node .scripture-name[data-crowded=true],#world-map .atlas-node .scripture-name[data-star-crowded=true]{opacity:0;pointer-events:none}
+#world-map .atlas-node:hover .label,#world-map .atlas-node:focus-within .label,#world-map .atlas-node.selected .label,#world-map .atlas-node:hover .scripture-name,#world-map .atlas-node:focus-within .scripture-name,#world-map .atlas-node.selected .scripture-name{opacity:1}
+body[data-timeline=annual] #atlas-historical-labels{display:none!important}
+</style>
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -2761,21 +2832,32 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
     <div class="workspace">
       <section class="map-shell" aria-label="Interactive global evidence map">
         <div class="jcs-map-controls">
-        <div class="jcs-map-heading"><span class="jcs-map-kicker">FAITH IN ACTION</span><h1>Prayer Map</h1><p>A witness to suffering. A call to peace.</p><span class="jcs-map-scripture">“Blessed are the peacemakers.” <span>Matthew 5:9</span></span></div>
+        <div class="jcs-map-heading"><svg class="jcs-gothic-seal" viewBox="0 0 72 94" width="72" height="94" aria-hidden="true" focusable="false"><path d="M5 89V40Q5 18 36 4Q67 18 67 40V89ZM12 82V41Q12 24 36 12Q60 24 60 41V82Z"/><path class="jcs-gothic-cross" d="M36 28V70M22 42H50"/><circle cx="36" cy="42" r="16"/><path d="M22 82Q22 68 36 63Q50 68 50 82M12 57H19M53 57H60"/></svg><span class="jcs-map-kicker">FAITH IN ACTION</span><h1>Prayer Map</h1><p>A witness to suffering. A call to peace.</p><span class="jcs-map-scripture">“Blessed are the peacemakers.” <span>Matthew 5:9</span></span></div>
         <div class="jcs-view-choice" role="group" aria-label="Explore the map"><button type="button" id="jcs-view-full-history" aria-pressed="true">Human history · AD 1–2026</button><button type="button" id="jcs-view-history" aria-pressed="false">Annual pressure</button><button type="button" id="jcs-view-communities" aria-pressed="false">Violence &amp; peace</button></div>
-        <details class="map-toolbar jcs-layer-disclosure" id="jcs-layers" aria-label="Map layers">
-          <summary><span data-jcs-key="layers">Map layers</span><span aria-hidden="true"> ▾</span></summary>
-          <p id="jcs-layer-scroll-help" class="jcs-layer-help">All layers start on. Scroll for more layers; current reports stay separate from the selected historical year.</p>
+
+        <div class="map-actions" aria-label="Map controls">
+          <button class="button" id="refresh-button" type="button"><span data-jcs-key="refreshLayers">Refresh live layers</span></button>
+          
+          
+          
+        </div>
+
+        </div>
+<div class="jcs-map-viewport" id="jcs-map-viewport" role="region" aria-label="Zoomable world map">
+        <details class="map-toolbar jcs-layer-disclosure" id="jcs-layers" aria-label="Live map layers" open>
+          <summary><span data-jcs-key="layers">Map layers</span><span class="jcs-layer-live-label">Change the view while listening</span><span aria-hidden="true"> ▾</span></summary>
+          <p id="jcs-layer-scroll-help" class="jcs-layer-help">These switches keep narration playing. Scroll for all 16 layers. Annual-view buttons pause the journey; current reports remain separate from the selected historical year.</p>
           <div class="jcs-layer-body" tabindex="0" role="group" aria-label="Map layer switches" aria-describedby="jcs-layer-scroll-help">
 <label class="layer-switch"><input id="atlas-admin-labels" type="checkbox" checked><strong>Geography labels</strong><span class="layer-state">Reference boundaries and supported dated names</span></label>
 <label class="layer-switch"><input type="checkbox" id="atlas-cities" checked><strong>Cities and settlements</strong><span class="layer-state">Names change where dated evidence is available</span></label>
 <label class="layer-switch"><input type="checkbox" id="atlas-civilizations" checked><strong>Historical civilizations</strong><span class="layer-state">Dated, sampled territory; gaps remain explicit</span></label>
 <label class="layer-switch"><input type="checkbox" id="atlas-scripture-toggle" checked><strong>The 200 stars</strong><span class="layer-state">Scriptural imagery; assigned descents follow the timeline</span></label>
+<label class="layer-switch"><input id="atlas-historical-nexuses" type="checkbox" checked><strong>Historical Nexus markers</strong><span class="layer-state">Show or hide the evidence rings; star playback continues</span></label>
 <label class="layer-switch"><input id="atlas-labels" type="checkbox" checked><strong>Historical Nexus names</strong><span class="layer-state">Names of dated history and evidence points</span></label>
 <label class="layer-switch"><input id="atlas-scripture-names" type="checkbox" checked><strong>Angel names on Nexus points</strong><span class="layer-state">Symbolic assignments, separate from historical evidence</span></label>
 <label class="layer-switch"><input id="atlas-regional-nexuses" type="checkbox" checked><strong>Regional event-group points</strong><span class="layer-state">Dated records from 1989–2025</span></label>
 <label class="layer-switch"><input id="atlas-cause-links" type="checkbox" checked><strong>Documented outside-influence links</strong><span class="layer-state">Only links supported by the loaded sources</span></label>
-          <label class="layer-switch"><input id="jcs-live-over-history" type="checkbox" checked><strong>Current reporting overlays</strong><span class="layer-state">Current reports · separate from selected year</span></label>
+          <label class="layer-switch"><input id="jcs-live-over-history" type="checkbox" checked><strong>Current reports: group visibility</strong><span class="layer-state">News, annual pressure and official concern; prayer layers stay independent</span></label>
           
           <label class="layer-switch">
             <input id="pressure-toggle" type="checkbox" checked>
@@ -2810,19 +2892,11 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
         </div>
         <p class="map-toolbar-note" id="handoff-status">Waiting for validated XRPL refresh or Verify-page handoff.</p>
         </details>
-        <div class="map-actions" aria-label="Map controls">
-          <button class="button" id="refresh-button" type="button"><span data-jcs-key="refreshLayers">Refresh live layers</span></button>
-          
-          
-          
-        </div>
 
-        </div>
-<div class="jcs-map-viewport" id="jcs-map-viewport" role="region" aria-label="Zoomable world map">
 <div class="jcs-zoom-tools" role="group" aria-label="Map zoom and view controls">
 <button type="button" id="jcs-zoom-in" data-zoom="in" aria-label="Zoom in" title="Zoom in">+</button>
 <button type="button" id="jcs-zoom-out" data-zoom="out" aria-label="Zoom out" title="Zoom out">−</button>
-<button class="button" id="reset-map-button" type="button">Reset map</button><button type="button" id="jcs-map-expand" aria-expanded="false" aria-controls="jcs-map-viewport">Expand map</button>
+<button class="button" id="reset-map-button" type="button" title="Restore the world view; keep the year, playback and layer choices">Reset map view</button><button type="button" id="jcs-map-expand" aria-expanded="false" aria-controls="jcs-map-viewport">Expand map</button>
 <output id="jcs-zoom-level" class="sr-only" aria-live="polite">1.0×</output>
 </div>
         <svg
@@ -2836,26 +2910,27 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
           <desc id="map-description">Interactive human-history atlas with persistent Nexus centers, dated evidence, annual mortality estimates and modern reference subdivisions. Colors and source years are explained in the timeline legend. </desc>
           <defs><radialGradient id="jcs-map-ocean" cx="50%" cy="38%" r="75%"><stop offset="0%" stop-color="#173649"/><stop offset="65%" stop-color="#0b2233"/><stop offset="100%" stop-color="#061622"/></radialGradient><filter id="jcs-soft-light"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="1000" height="500" fill="url(#jcs-map-ocean)"></rect>
           <g id="grid-layer" aria-hidden="true"></g>
-          <g id="country-layer"></g><g id="atlas-polity-layer" aria-label="Dated historical polity territories"></g><g id="atlas-city-layer" aria-label="Dated city and settlement locations"></g>
-          <g id="jcs-chronology-layer" aria-label="Dated Christian history milestones"></g>
-          <defs><pattern id="atlas-unmeasured" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#20374a"/><path d="M0 7L7 0" stroke="#768397" stroke-width=".5" opacity=".25"/></pattern></defs>
-<g id="atlas-geography-layer" aria-label="Modern subdivision reference boundaries and dated names"></g>
-<g id="atlas-evidence-links" aria-label="Geographic connections and separately documented influence links"></g>
-<defs><marker id="atlas-influence-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c3a7ee"/></marker></defs>
-<g id="jcs-chronology-nexus-layer" aria-label="Persistent Nexus: dated historical context and annual recorded violence"></g>
-          <g id="history-layer" aria-label="Annual organized violence by country"></g>
+          <g id="country-layer"></g>
+          <g id="atlas-polity-layer" aria-label="Dated historical polity territories"></g>
+          <g id="atlas-geography-layer" aria-label="Modern subdivision reference boundaries and dated names"></g>
+          <g id="atlas-evidence-links" aria-label="Geographic connections and separately documented influence links"></g>
+          <g class="map-group" id="network-layer" aria-label="Thresholded aggregate community-support connections"></g>
           <g id="annual-pressure-layer" aria-label="Annual Christian pressure change, World Watch List 2025 to 2026"></g>
           <g class="map-group" id="media-layer" aria-label="Current media signals"></g>
-          <g class="map-group" id="network-layer" aria-label="Thresholded aggregate community-support connections"></g>
-          <g class="map-group" id="jcs-nexus-layer" aria-label="Country mentions in independent violence and response headlines; not incident locations"></g>
           <g class="map-group" id="jcs-news-layer" aria-label="Country mentions in selected reporting; not incident locations"></g>
+          <g class="map-group" id="jcs-nexus-layer" aria-label="Country mentions in independent violence and response headlines; not incident locations"></g>
           <g class="map-group" id="prayer-layer" aria-label="Thresholded XRPL prayer-focus areas"></g>
           <g id="local-prayer-layer" aria-label="Your approximate country, visible only on this device"></g>
-<g id="atlas-geography-labels" aria-label="Continents, country references, cities and dated state/province names"></g>
+          <g id="history-layer" aria-label="Annual organized violence by country"></g>
+          <g id="jcs-chronology-layer" aria-label="Dated Christian history milestones"></g>
+          <g id="jcs-chronology-nexus-layer" aria-label="Persistent Nexus: dated historical context and annual recorded violence"></g>
+          <g id="atlas-city-layer" aria-label="Dated city and settlement locations"></g>
+          <g id="atlas-geography-labels" aria-label="Continents, country references, cities and dated state/province names"></g>
+          <g id="atlas-historical-labels" aria-label="Dated city and civilization names"><g id="atlas-polity-labels"></g><g id="atlas-city-labels"></g></g>
         </svg>
 
         <canvas id="atlas-scripture-canvas" aria-hidden="true" hidden></canvas><span id="atlas-scripture-caption" hidden>Scriptural imagery · 200 stars</span>
-        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span>Select a place · + / − to zoom · drag to move · pinch on touchscreens</span></p>
+        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span>Drag or pinch to explore · Reset map view keeps the year, playback and layer choices</span></p>
 </div>
 
 
@@ -5373,13 +5448,13 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
         dom.map.classList.toggle("uscirf-hidden", !dom.uscirfToggle.checked);
       });
       dom.mediaToggle.addEventListener("change", function () {
-        dom.mediaLayer.hidden = !dom.mediaToggle.checked;
+        dom.mediaLayer.toggleAttribute("hidden", !dom.mediaToggle.checked);
       });
       dom.prayerToggle.addEventListener("change", function () {
-        dom.prayerLayer.hidden = !dom.prayerToggle.checked;
+        dom.prayerLayer.toggleAttribute("hidden", !dom.prayerToggle.checked);
       });
       dom.networkToggle.addEventListener("change", function () {
-        dom.networkLayer.hidden = !dom.networkToggle.checked;
+        dom.networkLayer.toggleAttribute("hidden", !dom.networkToggle.checked);
       });
       dom.resetMap.addEventListener("click", resetView);
       dom.refresh.addEventListener("click", refreshAll);
@@ -5891,7 +5966,7 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
     layer.replaceChildren();
     const stateLabel=$('jcs-nexus-map-state');
     let context,key;try{context=newsContext();key=nexusContextKey(context);}catch(_){if(stateLabel)stateLabel.textContent=t('nexusWaiting');return;}
-    if(!toggle?.checked||!$('media-toggle')?.checked){if(stateLabel)stateLabel.textContent=t('nexusHidden');return;}
+    if(!toggle?.checked){if(stateLabel)stateLabel.textContent=t('nexusHidden');return;}
     const counts=new Map();
     for(const topic of ['harm','response']){
       const data=S.nexus[topic];
@@ -6202,7 +6277,7 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
     stopJourney();const run=S.journey,years=YEARS.filter(y=>y>=S.from&&y<=S.to);let i=0;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){setYear(years.at(-1));return;}
     $('jcs-history-journey').disabled=true;
-    const next=()=>{if(run!==S.journey||document.hidden){stopJourney();return;}setYear(years[i]);$('jcs-history-journey').textContent='Showing '+years[i]+'…';i++;if(i<years.length)S.timer=setTimeout(next,1600);else S.timer=setTimeout(stopJourney,1600);};next();
+    const next=()=>{if(run!==S.journey||document.hidden||document.body.dataset.timeline==='full'){stopJourney();return;}setYear(years[i]);$('jcs-history-journey').textContent='Showing '+years[i]+'…';i++;if(i<years.length)S.timer=setTimeout(next,1600);else S.timer=setTimeout(stopJourney,1600);};next();
   }
   function renderYearControls(){
   $('jcs-history-years').replaceChildren();$('jcs-history-from').replaceChildren();$('jcs-history-to').replaceChildren();
@@ -6213,6 +6288,7 @@ body[data-timeline=full]:not(.jcs-recent-visible) #world-map .country.uscirf-cpc
   }
   $('jcs-history-from').addEventListener('change',e=>{stopJourney();S.from=Number(e.target.value);if(S.to<S.from)S.to=S.from;S.year=S.to;renderYearUI();renderNodes(true);renderCountry();});
   $('jcs-history-to').addEventListener('change',e=>{stopJourney();S.to=Number(e.target.value);if(S.from>S.to)S.from=S.to;setYear(S.to);});
+  document.addEventListener('jcs:full-view',stopJourney);
   $('jcs-history-journey').addEventListener('click',journey);$('jcs-view-history').addEventListener('click',()=>setView('christian'));$('jcs-view-communities').addEventListener('click',()=>setView('violence'));
   $('jcs-history-country-select').addEventListener('change',e=>selectCountry(e.target.value,true));
   $('jcs-live-over-history').addEventListener('change',e=>document.body.classList.toggle('jcs-recent-visible',e.target.checked));
@@ -6434,12 +6510,12 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const within=(p,b)=>p.x>=b.x&&p.x<=b.x+b.width&&p.y>=b.y&&p.y<=b.y+b.height;
   const periods=(year)=>dated.filter(d=>d.kind==='name-period'&&d.start<=year&&year<=d.end);
   const nameFor=(iso,year,fallback)=>periods(year).filter(d=>d.iso3===iso&&d.scope==='country').sort((a,b)=>b.start-a.start)[0]?.name||fallback;
-  function render({year,country='',enabled=true,box,annualRows=[],scale=1,catalog=[],markers=[]}){
+  function render({year,country='',enabled=true,box,annualRows=[],scale=1,catalog=[],markers=[],blocked=[]}){
     for(const n of shapes.values())n.style.display='none';
     for(const n of labels.values())n.style.display='none';
     if(!enabled)return;
     scale=Math.max(.001,scale);
-    const occupied=[],detailed=!!country||box.width<450,periodRows=periods(year),countryNames=new Map();
+    const occupied=blocked.slice(),detailed=!!country||box.width<450,periodRows=periods(year),countryNames=new Map();
     for(const d of periodRows)if(d.scope==='country')countryNames.set(d.iso3,d);
     // Geography placement depends on geography, not on the growing evidence-marker count.
     // Otherwise the post-1989 evidence layer makes stable place names disappear.
@@ -6509,6 +6585,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         if(place('admin:'+f.id,point(f.lon,f.lat),known?.name||f.name,known?'atlas-dated-name':'atlas-admin-name',known?known.name+' · sourced name in AD '+year+'; outline is modern reference':f.name+' · modern state/province reference; historical name for AD '+year+' is unverified',()=>onSelect(known?{kind:'dated-label',label:known}:{kind:'admin',feature:f})))adminLabelsPlaced++;
       }
     }
+    return occupied;
   }
   function put(id,p,value,cls,titleText,fn,scale){
     let g=labels.get(id);
@@ -6528,13 +6605,13 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const layer=$('jcs-chronology-nexus-layer'),nodes=new Map(),links=$('atlas-evidence-links');
   const historicalCatalog=window.JCSHistoricalAtlasData||{polities:[],cities:[],politySource:{}};
   const polityRows=historicalCatalog.polities||[],cityRows=historicalCatalog.cities||[],polityLayer=$('atlas-polity-layer'),cityLayer=$('atlas-city-layer');
-  const polityNodes=new Map(),cityNodes=new Map(),cityRecordsById=new Map();
+  const polityNodes=new Map(),cityNodes=new Map(),cityRecordsById=new Map(),polityLabelLayer=$('atlas-polity-labels'),cityLabelLayer=$('atlas-city-labels');
   for(const row of cityRows){if(!cityRecordsById.has(row[0]))cityRecordsById.set(row[0],[]);cityRecordsById.get(row[0]).push(row);}
-  const geography=createAtlasGeography({data,make:(...args)=>make(...args),layer:$('atlas-geography-layer'),labelLayer:$('atlas-geography-labels'),onSelect:selection=>{stop();selected=selection;if(!full()){document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:selection.iso3||selection.feature?.iso3||selection.label?.iso3}}));return;}const p=selection.feature||selection.label||selection;if(Number.isFinite(p.lon)&&Number.isFinite(p.lat))window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}});
+  const geography=createAtlasGeography({data,make:(...args)=>make(...args),layer:$('atlas-geography-layer'),labelLayer:$('atlas-geography-labels'),onSelect:selection=>{selected=selection;if(!full()){document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:selection.iso3||selection.feature?.iso3||selection.label?.iso3}}));return;}const p=selection.feature||selection.label||selection;if(Number.isFinite(p.lon)&&Number.isFinite(p.lat))window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}});
   const colors=['#20374a','#69424b','#89424c','#aa4051','#c8374f','#e32343','#fa6078'];
   let timelinePosition=1,journeyStarted=false;
   const journeySeconds=()=>narration?.duration()||964;
-  let year=1,playing=false,timer=0,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
+  let year=1,playing=false,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
   let scripture=null,narration=null;
   const full=()=>document.body.dataset.timeline==='full';
   const mode=()=>metric==='auto'?(year>=1989?'deaths':'context'):metric;
@@ -6553,11 +6630,11 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     return d;
   }
   const chooseHistoricalYear=(start,end,current,through)=>{const low=Math.max(1,start),high=Math.min(through,end);return low<=current&&current<=high?current:current<low?low:high;};
-  function pickCity(row){setYear(chooseHistoricalYear(row[2],row[3],year,2026));selected={kind:'city',cityId:row[0],row};window.JCSMapViewport.focus(row[4],row[5]);render();showDetail();}
-  function pickCityCluster(group){stop();selected={kind:'city-cluster',count:group.count,rows:group.rows,lat:group.lat,lon:group.lon};window.JCSMapViewport.focus(group.lon,group.lat);render();showDetail();}
-  function pickPolity(index){const row=polityRows[index];if(!row)return;setYear(chooseHistoricalYear(row[1],row[2],Math.min(year,2024),2024));selected={kind:'polity',index};const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);window.JCSMapViewport.focus(lon,lat);render();showDetail();}
+  function pickCity(row){selected={kind:'city',cityId:row[0],row};window.JCSMapViewport.focus(row[4],row[5]);render();showDetail();}
+  function pickCityCluster(group){selected={kind:'city-cluster',count:group.count,rows:group.rows,lat:group.lat,lon:group.lon};window.JCSMapViewport.focus(group.lon,group.lat);render();showDetail();}
+  function pickPolity(index){const row=polityRows[index];if(!row)return;selected={kind:'polity',index};const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);window.JCSMapViewport.focus(lon,lat);render();showDetail();}
   function renderHistoricalAtlasLayers(box=viewBox(),screenScale=1){
-    for(const n of polityNodes.values()){n.style.display='none';if(n.atlasNameLabel)n.atlasNameLabel.style.display='none';}for(const n of cityNodes.values())n.g.style.display='none';
+    for(const n of polityNodes.values()){n.style.display='none';if(n.atlasNameLabel)n.atlasNameLabel.style.display='none';}for(const n of cityNodes.values()){n.g.style.display='none';n.name.style.display='none';}
     if(!full()){polityLayer.style.display='none';cityLayer.style.display='none';return;}
     const showPolities=$('atlas-civilizations').checked,showCities=$('atlas-cities').checked;
     polityLayer.style.display=showPolities?'':'none';cityLayer.style.display=showCities?'':'none';
@@ -6587,7 +6664,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
           path.addEventListener('click',activate);path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate(e);}});
           const label=make('text',{class:'atlas-polity-name','text-anchor':'middle','dominant-baseline':'middle',role:'button',tabindex:'0'});
           label.addEventListener('click',activate);label.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate(e);}});
-          path.atlasNameLabel=label;polityLayer.append(path,label);polityNodes.set(i,path);
+          path.atlasNameLabel=label;polityLayer.append(path);polityLabelLayer.append(label);polityNodes.set(i,path);
         }
         path.style.display='';
         if(!path.dataset.pathReady){path.setAttribute('d',decodePolityRings(row[7]));path.dataset.pathReady='true';}
@@ -6612,14 +6689,14 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         let mark=cityNodes.get(key);
         if(!mark){
           const g=make('g',{class:'atlas-city-cluster',role:'button',tabindex:'0'}),circle=make('circle',{class:'atlas-city-dot'}),badge=make('text',{class:'atlas-city-count','text-anchor':'middle','dominant-baseline':'central'}),title=make('title');g.append(circle,badge,title);
-          const name=make('text',{class:'atlas-settlement-name','text-anchor':'middle','dominant-baseline':'middle'});g.append(name);
+          const name=make('text',{class:'atlas-settlement-name','text-anchor':'middle','dominant-baseline':'middle'});cityLabelLayer.append(name);
           mark={g,circle,badge,title,name,row:null,items:[]};
           const activate=e=>{e?.stopPropagation?.();if(mark.items.length===1)pickCity(mark.items[0]);else pickCityCluster({count:mark.items.length,rows:mark.items.slice(0,80),lat:mark.row[5],lon:mark.row[4]});};
           g.addEventListener('click',activate);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate(e);}});
           cityLayer.append(g);cityNodes.set(key,mark);
         }
         mark.g.style.display='';mark.row=row;mark.items=group.items.map(v=>v.row);mark.g.setAttribute('transform','translate('+x+' '+y+') scale('+(1/screenScale)+')');
-        mark.g.dataset.rough=String(row[6]!=='precise');mark.g.classList.toggle('selected',items.some(v=>selected?.kind==='city'&&v.row[0]===selected.cityId));
+        mark.name.setAttribute('transform','translate('+x+' '+y+') scale('+(1/screenScale)+')');mark.g.dataset.rough=String(row[6]!=='precise');mark.g.classList.toggle('selected',items.some(v=>selected?.kind==='city'&&v.row[0]===selected.cityId));
         mark.circle.setAttribute('r',String(count===1?2.1:Math.min(6,2.3+Math.log(count))));mark.badge.textContent=count>1&&screenScale>1.35?String(count):'';
         mark.title.textContent=count===1?row[1]+' · '+row[10]+' · Pleiades dated name '+datedSpan(row[2],row[3])+' · '+row[6]+' representative location':count+' dated Pleiades city/settlement places in this map cell · '+row[1]+' and other names; zoom in or search';
         mark.g.setAttribute('aria-label',mark.title.textContent);mark.name.style.display='none';
@@ -6635,6 +6712,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     const status=$('atlas-historical-coverage');
     if(status)status.textContent=(showCities?activeCities.size.toLocaleString('en-US')+' dated city/settlement names active in AD '+fmt(year):'City-name layer hidden')+' · '+(showPolities?displayedPolities.toLocaleString('en-US')+' Seshat polity areas shown for '+(year>2024?'the retained AD 2024 sample':'AD '+fmt(year)):'Civilization layer hidden')+'. Gold names follow dated records; reference country/state names use modern geography where no dated name is supplied. Missing city or territory periods are source gaps, not proof that a place disappeared. Zoom for more names.';
+    return nameBoxes;
   }
   const countryMatch=e=>!country||(e.iso3Codes||[]).includes(country);
   const cRow=()=>model.countries.find(c=>c.mapIso3.includes(country));
@@ -6642,13 +6720,18 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const history=()=>model.events.filter(canShow);
   const active=()=>history().filter(e=>model.active(e,year));
   const motion=()=>{document.body.classList.toggle('atlas-motion-paused',document.hidden||$('atlas-pause-motion').checked);scripture?.motion();};
-  function clockPosition(){return narration?.ownsTimeline()?narration.position():timelinePosition;}
-  function stop(){timelinePosition=clockPosition();clearTimeout(timer);playing=false;narration?.pauseFromMap();narration?.refresh();}
-  function setYear(value,manual=true){const n=Number(value);if(!Number.isFinite(n))return;if(manual)stop();journeyStarted=true;year=Math.max(1,Math.min(2026,Math.round(n)));if(manual){timelinePosition=year;narration?.seekYear(year);}if(year===2026)stop();render();}
+  function clockPosition(){return narration?.position()??timelinePosition;}
+  function applyJourneyState(position,started,active,force=false){
+    const next=Math.max(1,Math.min(2026,Math.floor(position+1e-8))),changed=next!==year;
+    timelinePosition=position;year=next;journeyStarted=started;playing=active;
+    if(full()&&(changed||force))render();else scripture?.sync();
+  }
+  function stop(){narration?.pauseFromMap();}
+  function setYear(value){const n=Number(value);if(Number.isFinite(n))narration?.seekYear(n);}
   function play(){narration?.playTimeline();}
-  function pickEvent(e,zoom=true){stop();if(e.start>year)setYear(e.start);selected={kind:'event',id:e.id};if(zoom)window.JCSMapViewport.focus(e.lon,e.lat);render();showDetail();}
-  function pickPlace(p){stop();selected={kind:'place',id:p.id};window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}
-  function pickCountry(c,zoom=true){stop();country=c.iso3||'';$('atlas-country').value=country;selected={kind:'country',name:c.name};if(zoom&&Number.isFinite(c.lon))window.JCSMapViewport.focus(model.countryNexus(c).lon,model.countryNexus(c).lat);render();showDetail();}
+  function pickEvent(e,zoom=true){selected={kind:'event',id:e.id};if(zoom)window.JCSMapViewport.focus(e.lon,e.lat);render();showDetail();}
+  function pickPlace(p){selected={kind:'place',id:p.id};window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}
+  function pickCountry(c,zoom=true){country=c.iso3||'';$('atlas-country').value=country;selected={kind:'country',name:c.name};if(zoom&&Number.isFinite(c.lon))window.JCSMapViewport.focus(model.countryNexus(c).lon,model.countryNexus(c).lat);render();showDetail();}
   function showDetail(){const panel=$('atlas-selected');panel.focus({preventScroll:true});if(matchMedia('(max-width:1000px)').matches)panel.scrollIntoView({block:'nearest',behavior:'auto'});}
   function localMap(title,lat,lon,precision,note){
     const wide=precision==='region'?.9:.055;
@@ -6661,7 +6744,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   }
   function sources(container,rows){const ul=document.createElement('ul');ul.className='atlas-source-list';for(const s of rows){const li=document.createElement('li');li.append(link(s.title,s.url));ul.append(li);}container.append(ul);}
   function regionDetail(c,r){
-    selected={kind:'region',name:c.name,region:r.name};stop();render();const anchor=model.regions(c).find(x=>x.name===r.name);if(anchor)window.JCSMapViewport.focus(anchor.lon,anchor.lat);showDetail();
+    selected={kind:'region',name:c.name,region:r.name};render();const anchor=model.regions(c).find(x=>x.name===r.name);if(anchor)window.JCSMapViewport.focus(anchor.lon,anchor.lat);showDetail();
   }
   function detail(){
     const box=$('atlas-selected');box.replaceChildren();
@@ -6780,6 +6863,39 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if(support){n.ring.setAttribute('stroke-dasharray',Math.PI*r+' '+Math.PI*r);n.ring.setAttribute('transform','rotate(90)');n.supportRing.setAttribute('stroke-dasharray',Math.PI*sr+' '+Math.PI*sr);n.supportRing.setAttribute('transform','rotate(-90)');}
   }
   function viewBox(){const parts=($('world-map').getAttribute('viewBox')||'0 0 1000 500').split(/[ ,]+/).map(Number);return{x:parts[0],y:parts[1],width:parts[2],height:parts[3]};}
+  const layerGroups=[
+    ['atlas-admin-labels',['atlas-geography-layer','atlas-geography-labels']],
+    ['atlas-civilizations',['atlas-polity-layer','atlas-polity-labels']],
+    ['atlas-cities',['atlas-city-layer','atlas-city-labels']],
+    ['atlas-historical-nexuses',['jcs-chronology-nexus-layer']],
+    ['atlas-cause-links',['atlas-evidence-links']],
+    ['media-toggle',['media-layer','jcs-news-layer'],'current'],
+    ['jcs-nexus-toggle',['jcs-nexus-layer'],'current'],
+    ['prayer-toggle',['prayer-layer','local-prayer-layer']],
+    ['network-toggle',['network-layer']],
+    ['pressure-toggle',['annual-pressure-layer'],'current']
+  ];
+  function applyLayerVisibility(){
+    const current=$('jcs-live-over-history').checked;
+    document.body.classList.toggle('jcs-recent-visible',current);
+    for(const [control,ids,group]of layerGroups){const on=$(control).checked&&(group!=='current'||current);for(const id of ids)$(id)?.toggleAttribute('hidden',!on);}
+    $('world-map').classList.toggle('pressure-hidden',!current||!$('pressure-toggle').checked);
+    $('world-map').classList.toggle('uscirf-hidden',!current||!$('uscirf-toggle').checked);
+  }
+  function resolveNexusLabels(occupied,box,screenScale){
+    const overlap=(a,b)=>Math.abs(a.x-b.x)<(a.w+b.w)/2&&Math.abs(a.y-b.y)<(a.h+b.h)/2;
+    const ordered=[...nodes.values()].filter(n=>n.g.style.display!=='none').sort((a,b)=>Number(b.g.classList.contains('selected'))-Number(a.g.classList.contains('selected')));
+    for(const n of ordered){
+      const anchor=projectPoint(n.lon,n.lat),chosen=n.g.classList.contains('selected');
+      for(const label of [n.scriptureName,n.caption]){
+        if(!label||label.style.display==='none')continue;
+        const text=label.textContent||'',at={x:anchor.x,y:anchor.y+(Number(label.getAttribute('y'))||0)/screenScale,w:(Array.from(text).length*5.7+10)/screenScale,h:16/screenScale};
+        const outside=at.x<box.x||at.x>box.x+box.width||at.y<box.y||at.y>box.y+box.height;
+        const crowded=outside||(!chosen&&occupied.some(b=>overlap(at,b)));
+        label.dataset.crowded=String(crowded);if(!crowded)occupied.push(at);
+      }
+    }
+  }
   function scale(){
     const map=$('world-map'),matrix=map.getScreenCTM(),screenScale=Math.max(.001,Math.abs(matrix?.a)||1);
     if(full())for(const n of nodes.values())n.sized.setAttribute('transform','scale('+(1/screenScale)+')');
@@ -6790,9 +6906,9 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     const c=full()?cRow():null,annualRows=c?model.regions(c).map(a=>model.latestRegion(c,a,year)).filter(Boolean).map(s=>({...s.row,level:model.level(s.row.best),sourceYear:s.sourceYear,carried:s.carried})):[];
     const markers=full()?Array.from(nodes.values()).filter(n=>n.g.style.display!=='none').map(n=>({x:(n.lon+180)/360*1000,y:(90-n.lat)/180*500})):catalog;
-    geography.render({year:displayYear,country:displayCountry,enabled:!full()||$('atlas-admin-labels').checked,box:viewBox(),annualRows,scale:screenScale,catalog,markers});
-    renderHistoricalAtlasLayers(viewBox(),screenScale);
-    scripture?.sync();
+    const box=viewBox(),datedBoxes=renderHistoricalAtlasLayers(box,screenScale)||[];
+    const occupied=geography.render({year:displayYear,country:displayCountry,enabled:$('atlas-admin-labels').checked,box,annualRows,scale:screenScale,catalog,markers,blocked:datedBoxes})||datedBoxes;
+    scripture?.sync();resolveNexusLabels(occupied,box,screenScale);applyLayerVisibility();
   }
   function causeEvidenceScore(event){const i=event.influence||{},points={'documented-orders':35,'central-policy':35,'documented-command-center':35,'regional-command':25,'military-approach':20};let n=points[i.relationship]||0;if(i.actorBadge)n+=15;if(/^https?:\/\//i.test(i.sourceUrl||''))n+=20;if((event.sources||[]).some(s=>s.url===i.sourceUrl))n+=15;if((i.note||'').length>=40)n+=10;if((event.sources||[]).some(s=>s.url&&s.url!==i.sourceUrl))n+=5;return Math.min(100,n);}
   function connection(a,b,{influence=false,title='',score=0,current=true}={}){const x1=(a.lon+180)/360*1000,y1=(90-a.lat)/180*500,x2=(b.lon+180)/360*1000,y2=(90-b.lat)/180*500,dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,side=Array.from(String(title)).reduce((n,c)=>n+c.charCodeAt(0),0)%2?1:-1,bend=Math.min(72,Math.max(14,len*.16))*side,cx=(x1+x2)/2-dy/len*bend,cy=(y1+y2)/2+dx/len*bend,d=influence?'M'+x1+' '+y1+' Q'+cx+' '+cy+' '+x2+' '+y2:'M'+x1+' '+y1+' L'+x2+' '+y2,path=make('path',{d,class:influence?'atlas-influence-link':'atlas-connection'});if(influence){path.setAttribute('marker-end','url(#atlas-influence-arrow)');path.dataset.current=String(current);path.dataset.score=String(score);path.style.strokeWidth=(1.25+score/100*1.15)+'px';}const t=make('title');t.textContent=title;path.append(t);links.append(path);}
@@ -6863,9 +6979,9 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     $('atlas-death-legend').hidden=!modern;document.querySelectorAll('[data-era-year]').forEach(b=>b.setAttribute('aria-pressed',String(year>=Number(b.dataset.eraYear)&&year<=Number(b.dataset.eraEnd))));
     $('atlas-context-legend').hidden=modern;detail();list();renderMap();machine();narration?.refresh();
   }
-  function activate(){stop();document.body.dataset.timeline='full';const recent=$('jcs-live-over-history');document.body.classList.toggle('jcs-recent-visible',!!recent?.checked);$('jcs-view-full-history').setAttribute('aria-pressed','true');$('jcs-view-history').setAttribute('aria-pressed','false');$('jcs-view-communities').setAttribute('aria-pressed','false');$('jcs-history-control').hidden=true;$('jcs-history-country').hidden=true;$('jcs-chronology-control').hidden=false;$('jcs-chronology-panel').hidden=false;render();}
+  function activate(){document.body.dataset.timeline='full';document.dispatchEvent(new Event('jcs:full-view'));const recent=$('jcs-live-over-history');document.body.classList.toggle('jcs-recent-visible',!!recent?.checked);$('jcs-view-full-history').setAttribute('aria-pressed','true');$('jcs-view-history').setAttribute('aria-pressed','false');$('jcs-view-communities').setAttribute('aria-pressed','false');$('jcs-history-control').hidden=true;$('jcs-history-country').hidden=true;$('jcs-chronology-control').hidden=false;$('jcs-chronology-panel').hidden=false;render();}
   $('jcs-chronology-play').addEventListener('click',play);$('jcs-chronology-slider').addEventListener('input',e=>setYear(e.target.value));$('jcs-chronology-input').addEventListener('change',e=>setYear(e.target.value));$('jcs-year-back').addEventListener('click',()=>setYear(year-1));$('jcs-year-forward').addEventListener('click',()=>setYear(year+1));$('atlas-start').addEventListener('click',()=>setYear(1));$('atlas-latest').addEventListener('click',()=>{metric='auto';$('atlas-metric').value='auto';setYear(2026);});
-  $('atlas-metric').addEventListener('change',e=>{metric=e.target.value;render();});$('atlas-regional-nexuses').addEventListener('change',renderMap);$('atlas-cause-links').addEventListener('change',renderMap);$('atlas-search').addEventListener('input',list);$('atlas-compare-only').addEventListener('change',list);$('atlas-admin-labels').addEventListener('change',renderMap);$('atlas-civilizations').addEventListener('change',scale);$('atlas-cities').addEventListener('change',scale);$('atlas-labels').addEventListener('change',renderMap);$('atlas-pause-motion').addEventListener('change',()=>{if($('atlas-pause-motion').checked)stop();motion();});$('atlas-country').addEventListener('change',e=>{country=e.target.value;const c=cRow();selected=country?{kind:'country',name:c?.name||catalog.find(c=>c.iso3===country)?.name||geography.features.find(f=>f.iso3===country)?.country||country}:null;const reference=c?model.countryNexus(c):model.contextNexuses.find(h=>h.iso3===country)||geography.features.find(f=>f.iso3===country);if(reference)window.JCSMapViewport.focus(reference.lon,reference.lat);render();});$('atlas-clear').addEventListener('click',()=>{country='';selected=null;$('atlas-country').value='';window.JCSMapViewport.reset();render();});
+  $('atlas-metric').addEventListener('change',e=>{metric=e.target.value;render();});$('atlas-regional-nexuses').addEventListener('change',renderMap);$('atlas-cause-links').addEventListener('change',renderMap);$('atlas-search').addEventListener('input',list);$('atlas-compare-only').addEventListener('change',list);$('atlas-admin-labels').addEventListener('change',renderMap);$('atlas-civilizations').addEventListener('change',scale);$('atlas-cities').addEventListener('change',scale);$('atlas-labels').addEventListener('change',renderMap);$('atlas-pause-motion').addEventListener('change',motion);$('atlas-country').addEventListener('change',e=>{country=e.target.value;const c=cRow();selected=country?{kind:'country',name:c?.name||catalog.find(c=>c.iso3===country)?.name||geography.features.find(f=>f.iso3===country)?.country||country}:null;const reference=c?model.countryNexus(c):model.contextNexuses.find(h=>h.iso3===country)||geography.features.find(f=>f.iso3===country);if(reference)window.JCSMapViewport.focus(reference.lon,reference.lat);render();});$('atlas-clear').addEventListener('click',()=>{country='';selected=null;$('atlas-country').value='';window.JCSMapViewport.reset();render();});
   $('atlas-local-close').addEventListener('click',()=>$('atlas-local-dialog').close());$('atlas-local-dialog').addEventListener('close',()=>{$('atlas-local-frame').src='about:blank';});
   document.querySelectorAll('[data-era-year]').forEach(b=>b.addEventListener('click',()=>{setYear(b.dataset.eraYear);window.JCSMapViewport.reset();}));
   $('jcs-view-full-history').addEventListener('click',activate);document.addEventListener('jcs:annual-view',()=>{stop();$('jcs-view-full-history').setAttribute('aria-pressed','false');$('jcs-history-country').hidden=false;$('jcs-chronology-control').hidden=true;$('jcs-chronology-panel').hidden=true;});
@@ -7050,7 +7166,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
         n.title.textContent=description;n.g.setAttribute('aria-label',description);
         const p=projectPoint(n.lon,n.lat),x=matrix?matrix.a*p.x+matrix.c*p.y+matrix.e:p.x,y=matrix?matrix.b*p.x+matrix.d*p.y+matrix.f+offset:p.y;
         const cell=Math.floor(x/95)+':'+Math.floor(y/22),crowded=occupied.has(cell)&&!n.g.classList.contains('selected');
-        n.scriptureName.dataset.crowded=String(crowded);occupied.add(cell);
+        n.scriptureName.dataset.starCrowded=String(crowded);occupied.add(cell);
       }
     }
     function showRecords(){
@@ -7073,7 +7189,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     function update(force=false){
       if(disposed)return;
       const nextEnabled=toggle.checked&&!!ctx;
-      if(!force&&year===lastYear&&country===lastCountry&&enabled===nextEnabled)return;
+      if(!force&&year===lastYear&&country===lastCountry&&enabled===nextEnabled){sync();return;}
       const oldTargets=targets,wasEnabled=enabled,previousYear=lastYear,previousCountry=lastCountry;enabled=nextEnabled;
       if(year!==lastYear||country!==lastCountry){tableau=false;updateTableauButton();}
       seen=records.filter(r=>r.start<=year&&(!country||r.iso3.includes(country)));
@@ -7085,13 +7201,18 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       lastYear=year;lastCountry=country;
       syncFlights();draw();if(!enabled){cancel();flights=[];pending=[];draw();updateStatus();}else motion();
     }
-    function sync(){if(disposed)return;geometry();syncFlights();labels();draw();motion();}
+    function sync(){
+      if(disposed)return;enabled=toggle.checked&&!!ctx;
+      canvas.hidden=!enabled||!full();$('atlas-scripture-caption').hidden=!enabled||!full();
+      targets=new Map();if(journeyStarted)for(const r of schedule)if(phase(r)==='landed')targets.set(r.star,r);
+      geometry();syncFlights();labels();draw();motion();
+    }
     toggle.addEventListener('change',()=>{tableau=false;updateTableauButton();update(true);});
     chooser.addEventListener('change',()=>{chosen=Number(chooser.value);tableau=false;updateTableauButton();showRecords();draw();});
     function enableMotion(){motionOverride=true;motionChoice.checked=true;$('atlas-pause-motion').checked=false;$('atlas-pause-motion').dispatchEvent(new Event('change'));}
     nameToggle.addEventListener('change',()=>{labels();draw();});
     motionChoice.addEventListener('change',()=>{motionOverride=true;motion();});
-    function beginJourney(){if(!full())activate();stop();country='';$('atlas-country').value='';selected=null;window.JCSMapViewport.reset();toggle.checked=true;chosen=0;chooser.value='0';enableMotion();setYear(1);play();}
+    function beginJourney(){narration?.restart();}
     $('atlas-scripture-replay').addEventListener('click',beginJourney);
     $('atlas-scripture-begin').addEventListener('click',beginJourney);
     $('atlas-scripture-revelation').addEventListener('click',()=>{stop();if(!enabled){toggle.checked=true;update(true);}tableau=!tableau;cancel();flights=[];pending=[];updateTableauButton();draw();updateStatus();});
@@ -7100,7 +7221,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{update,sync,motion,preparePlayback:()=>{enableMotion();update(true);},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; Morning Star opens at Pakistan artistically; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; Morning Star opens at Pakistan artistically; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   function createWatchersNarration(){
@@ -7110,121 +7231,138 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       {label:'Chapters 1–11 · the Watchers descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
       {label:'Chapters 12–19 · Enoch and the Watchers',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
     ];
-    let index=0,started=false,internal=false,pendingYear=null,request=0,buffering=false,failed=false,complete=false;
-    const total=()=>tracks[index].duration;
-    const clock=()=>Math.max(0,Math.min(total(),Number(audio.currentTime)||0));
-    const position=()=>pendingYear!==null?pendingYear:complete?2026:1+clock()/total()*2025;
+    // This is the only owner of journey time and playback intent. Map selection,
+    // viewport and layer preferences never write this state.
+    const state={position:1,started:false,wantsPlay:false,ready:false,loaded:false,buffering:false,failed:false,complete:false,linked:linked.checked,track:0,pendingYear:null};
+    let request=0,inFlight=0,internalPauseEvents=0;
+    const total=()=>tracks[state.track].duration;
+    const clampYear=value=>Math.max(1,Math.min(2026,Number(value)));
+    const seconds=()=>Math.max(0,Math.min(total(),Number(audio.currentTime)||0));
+    const ownsTimeline=()=>state.linked&&state.started;
+    const position=()=>state.pendingYear!==null?state.pendingYear:ownsTimeline()&&state.ready&&!state.failed?(state.complete?2026:1+seconds()/total()*2025):state.position;
+    const active=()=>ownsTimeline()&&state.wantsPlay&&!audio.paused&&!state.complete&&!state.failed;
     const time=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
-    const ownsTimeline=()=>started&&linked.checked;
-    function guarded(fn){const previous=internal;internal=true;try{return fn();}finally{internal=previous;}}
+    function publish(force=false){
+      if(ownsTimeline())state.position=position();
+      applyJourneyState(state.position,state.started,active(),force);
+      refresh();
+    }
     function refresh(){
-      const active=ownsTimeline()&&!audio.paused&&!failed;
-      playing=active;
-      main.textContent=complete?'Replay reading':audio.paused?'Play reading':'Pause reading';
-      main.setAttribute('aria-pressed',String(!audio.paused));
+      const running=state.wantsPlay&&!state.failed&&!state.complete;
+      main.textContent=state.complete?'Replay reading':running?'Pause reading':'Play reading';
+      main.setAttribute('aria-pressed',String(running));
       $('jcs-watchers-mute').textContent=audio.muted?'Unmute':'Mute';
       $('jcs-watchers-mute').setAttribute('aria-pressed',String(audio.muted));
-      $('jcs-watchers-progress').textContent=time(clock())+' / '+time(total());
-      $('jcs-watchers-direct').href=tracks[index].url;
-      if(!failed)status.textContent=complete?'Reading complete. The map remains at AD 2026.':buffering?'Loading audio · timeline waits for the recording.':!started?'Ready · press Play timeline and narration below the map.':audio.paused?'Paused · timeline and stars hold their position.':tracks[index].label+(ownsTimeline()?' · map follows the recording.':' · audio only.');
+      $('jcs-watchers-progress').textContent=time(seconds())+' / '+time(total());
+      $('jcs-watchers-direct').href=tracks[state.track].url;
+      status.textContent=state.failed?'Audio could not start. Your place and layers are kept. Press Play to try again or open the audio link.':state.complete?'Reading complete. The map keeps its final state.':state.buffering&&state.wantsPlay?'Loading audio · the map waits at the same point.':!state.started?'Press Play timeline and narration to begin.':audio.paused?'Paused · your place, view and layer choices are kept.':tracks[state.track].label+(state.linked?' · one clock for narration and map.':' · audio only; the map holds its year.');
       const b=$('jcs-chronology-play');b.disabled=false;
-      b.textContent=active?'Pause timeline and narration':year>=2026?'Replay timeline and narration':started&&year>1?'Resume timeline and narration':'Play timeline and narration';
-      b.setAttribute('aria-pressed',String(active));
+      b.textContent=state.linked&&running?'Pause timeline and narration':state.position>=2026?'Replay timeline and narration':state.started&&state.position>1?'Resume timeline and narration':'Play timeline and narration';
+      b.setAttribute('aria-pressed',String(active()));
       const speed=$('atlas-speed');if(speed?.options?.length)speed.options[0].textContent='Recording length · '+time(total())+' · AD 1–2026';
     }
-    function sync(){
-      if(!ownsTimeline()||pendingYear!==null||!full())return;
-      timelinePosition=position();const next=Math.floor(timelinePosition);
-      if(next!==year)guarded(()=>setYear(next,false));
+    function pauseMedia(){if(!audio.paused){internalPauseEvents++;audio.pause();}}
+    function pause(){
+      state.position=position();state.wantsPlay=false;state.buffering=false;++request;inFlight=0;
+      pauseMedia();publish();
     }
     function fail(error){
       if(error?.name==='AbortError')return;
-      timelinePosition=position();failed=true;buffering=false;audio.pause();
-      status.textContent='Audio could not start. The timeline is paused. Try Play again or open the direct audio link below.';
-      refresh();scripture?.sync();
+      state.position=position();state.pendingYear=state.position;state.failed=true;state.wantsPlay=false;state.buffering=false;
+      inFlight=0;pauseMedia();publish();
     }
-    function playAudio(){
-      const attempt=++request;failed=false;buffering=true;
-      if(audio.error){pendingYear=year;audio.load();}
-      audio.playbackRate=1;refresh();
-      try{const promise=audio.play();if(promise?.catch)promise.catch(e=>{if(attempt===request)fail(e);});}catch(e){fail(e);}
+    function ensureMedia(){
+      if(state.loaded&&!audio.error&&!state.failed)return;
+      state.pendingYear=state.position;state.ready=false;state.loaded=true;state.failed=false;
+      audio.src=tracks[state.track].url;audio.load();
     }
-    function loadTrack(next,atYear=1,resume=false){
-      ++request;index=next;track.value=String(index);complete=false;failed=false;buffering=resume;
-      pendingYear=atYear;audio.src=tracks[index].url;audio.load();refresh();
-      if(resume)playAudio();
+    function requestPlay(){
+      state.wantsPlay=true;state.started=true;state.complete=false;state.buffering=true;
+      ensureMedia();const attempt=++request;inFlight=attempt;audio.playbackRate=1;publish();
+      try{
+        const result=audio.play();
+        if(result?.then)result.then(()=>{if(attempt!==request)return;inFlight=0;if(!state.wantsPlay)pauseMedia();else{state.buffering=false;publish();}}).catch(error=>{if(attempt===request)fail(error);});
+      }catch(error){if(attempt===request)fail(error);}
     }
-    function start(atYear=1){
-      started=true;complete=false;
-      if(linked.checked)guarded(()=>{if(!full())activate();else stop();timelinePosition=atYear;setYear(atYear,false);});
-      loadTrack(index,atYear,true);
+    function seekYear(value,options={}){
+      const at=clampYear(value);if(!Number.isFinite(at))return;
+      const resume=options.resume??state.wantsPlay;
+      state.position=at;state.pendingYear=at;state.started=true;state.complete=at===2026;
+      state.wantsPlay=!!resume&&!state.complete;
+      if(state.ready&&!state.failed){
+        try{audio.currentTime=(at-1)/2025*total();state.pendingYear=null;}catch(_){state.ready=false;}
+      }
+      if(state.complete||!state.wantsPlay){++request;inFlight=0;pauseMedia();state.buffering=false;}
+      publish(true);
+      if(state.wantsPlay&&audio.paused&&!inFlight)requestPlay();
     }
-    function toggle(){
-      if(!started||complete){start(complete?1:year);return;}
-      if(audio.paused)playAudio();else audio.pause();
+    function restart(){
+      state.linked=true;linked.checked=true;
+      if(!full())activate();
+      scripture?.leaveTableau();seekYear(1,{resume:true});
     }
     function playTimeline(){
-      if(year>=2026){linked.checked=true;start(1);return;}
-      if(!linked.checked){linked.checked=true;seekYear(year);}
-      toggle();
+      if(!full())activate();
+      scripture?.leaveTableau();
+      if(state.position>=2026){restart();return;}
+      if(!state.linked){state.linked=true;linked.checked=true;seekYear(state.position,{resume:false});}
+      if(state.wantsPlay)pause();else requestPlay();
     }
-    function pauseFromMap(){if(!internal&&ownsTimeline()){++request;audio.pause();buffering=false;refresh();scripture?.motion();}}
-    function seekYear(value){
-      if(internal)return;
-      const at=Math.max(1,Math.min(2026,Number(value)));
-      complete=at===2026;pendingYear=at;
-      if(started&&linked.checked){
-        audio.pause();
-        if(audio.readyState>=1){audio.currentTime=(at-1)/2025*total();pendingYear=null;}
-      }
-      refresh();scripture?.sync();
+    function toggle(){
+      if(state.linked){playTimeline();return;}
+      if(!audio.paused){pause();return;}
+      if(state.complete){state.complete=false;audio.currentTime=0;}
+      requestPlay();
     }
     audio.addEventListener('loadedmetadata',()=>{
-      if(Number.isFinite(audio.duration)&&audio.duration>0)tracks[index].duration=audio.duration;
-      audio.playbackRate=1;
-      if(pendingYear!==null){audio.currentTime=(pendingYear-1)/2025*total();pendingYear=null;}
-      sync();refresh();scripture?.sync();
+      if(Number.isFinite(audio.duration)&&audio.duration>0)tracks[state.track].duration=audio.duration;
+      state.loaded=true;state.ready=true;audio.playbackRate=1;
+      if(state.pendingYear!==null){const at=state.pendingYear;audio.currentTime=(at-1)/2025*total();state.pendingYear=null;}
+      publish(true);
     });
     audio.addEventListener('play',()=>{
-      started=true;complete=false;failed=false;
-      if(linked.checked){journeyStarted=true;guarded(()=>{if(!full())activate();});scripture?.preparePlayback();}
-      refresh();scripture?.motion();
+      if(audio.paused)return; // A queued event cannot undo a later Pause.
+      state.started=true;state.wantsPlay=true;state.complete=false;state.failed=false;
+      if(state.linked&&!full())activate();
+      scripture?.leaveTableau();publish();
     });
-    audio.addEventListener('playing',()=>{buffering=false;sync();refresh();scripture?.motion();});
-    audio.addEventListener('pause',()=>{buffering=false;timelinePosition=position();refresh();scripture?.sync();});
-    audio.addEventListener('waiting',()=>{buffering=true;refresh();scripture?.motion();});
-    audio.addEventListener('seeking',()=>{buffering=true;scripture?.motion();});
-    audio.addEventListener('seeked',()=>{buffering=false;sync();refresh();scripture?.sync();});
-    audio.addEventListener('timeupdate',()=>{sync();refresh();});
+    audio.addEventListener('playing',()=>{state.buffering=false;publish();});
+    audio.addEventListener('pause',()=>{
+      if(internalPauseEvents){internalPauseEvents--;return;}
+      if(!audio.paused)return; // Ignore a queued pause event after playback resumed.
+      state.wantsPlay=false;state.buffering=false;publish();
+    });
+    audio.addEventListener('waiting',()=>{state.buffering=true;publish();});
+    audio.addEventListener('seeking',()=>{state.buffering=true;state.complete=false;publish();});
+    audio.addEventListener('seeked',()=>{state.buffering=false;publish(true);});
+    audio.addEventListener('timeupdate',()=>publish());
     audio.addEventListener('volumechange',refresh);
-    audio.addEventListener('error',()=>fail(audio.error));
+    audio.addEventListener('error',()=>{if(audio.error)fail(audio.error);});
     audio.addEventListener('ended',()=>{
-      complete=true;pendingYear=null;buffering=false;
-      if(ownsTimeline()){timelinePosition=2026;guarded(()=>setYear(2026,false));scripture?.settle();}
-      refresh();
+      if(seconds()+.05<total())return; // Ignore an old track's queued ending after seek/restart.
+      state.complete=true;state.pendingYear=null;state.wantsPlay=false;state.buffering=false;
+      if(state.linked)state.position=2026;
+      publish(true);if(state.linked)scripture?.settle();
     });
     main.addEventListener('click',toggle);
-    $('jcs-watchers-restart').addEventListener('click',()=>start(1));
+    $('jcs-watchers-restart').addEventListener('click',restart);
     $('jcs-watchers-mute').addEventListener('click',()=>{audio.muted=!audio.muted;refresh();});
     track.addEventListener('change',()=>{
-      const resume=!audio.paused;audio.pause();started=true;
-      if(linked.checked)guarded(()=>{timelinePosition=1;setYear(1,false);});
-      loadTrack(Number(track.value),1,resume);
+      const resume=state.wantsPlay;pause();state.track=Number(track.value);state.loaded=false;state.ready=false;state.failed=false;state.complete=false;
+      // Track changes preserve the chosen historical position and layer choices.
+      state.pendingYear=state.position;ensureMedia();publish();if(resume)requestPlay();
     });
     linked.addEventListener('change',()=>{
-      timelinePosition=year;
-      if(ownsTimeline()){guarded(()=>{if(!full())activate();});seekYear(year);}
-      refresh();scripture?.sync();
+      state.position=position();const resume=state.wantsPlay;state.linked=linked.checked;
+      if(state.linked)seekYear(state.position,{resume});else publish();
     });
     const small=matchMedia('(max-width:1000px)');
     function positionPlayer(){const host=small.matches?document.querySelector('.jcs-map-controls'):$('analysis-panel');if(host&&!host.contains(panel)){if(small.matches)host.append(panel);else host.prepend(panel);}}
     small.addEventListener('change',positionPlayer);positionPlayer();refresh();
-    document.addEventListener('visibilitychange',()=>{if(document.hidden&&ownsTimeline())pauseFromMap();});
-    document.addEventListener('jcs:annual-view',pauseFromMap);
-    window.addEventListener('pagehide',()=>{++request;audio.pause();});
-    return{ownsTimeline,position,toggle,playTimeline,pauseFromMap,seekYear,refresh,duration:total,motionPaused:()=>ownsTimeline()&&!complete&&(audio.paused||buffering||failed),state:()=>({track:index+1,elapsed:clock(),duration:total(),linked:linked.checked,started,paused:audio.paused,failed})};
+    return{ownsTimeline,position,toggle,playTimeline,restart,pauseFromMap:pause,seekYear,refresh,duration:total,motionPaused:()=>ownsTimeline()&&!state.complete&&(!state.wantsPlay||audio.paused||state.buffering||state.failed),state:()=>({track:state.track+1,elapsed:seconds(),duration:total(),linked:state.linked,started:state.started,paused:audio.paused,failed:state.failed,buffering:state.buffering,position:position(),wantsPlay:state.wantsPlay,complete:state.complete})};
   }
 
+  for(const id of [...new Set([...layerGroups.map(row=>row[0]),'jcs-live-over-history','uscirf-toggle','atlas-scripture-toggle','atlas-scripture-names','atlas-labels','atlas-regional-nexuses'])])$(id).addEventListener('change',()=>{applyLayerVisibility();scale();});
   scripture=createScripturalLayer();
   narration=createWatchersNarration();
   window.JCSFullHistory={setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
