@@ -2623,6 +2623,17 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
 #atlas-end-note{padding:8px 12px;border-left:3px solid var(--gold)}
 #jcs-chronology-play:disabled{opacity:.7;cursor:default}
 
+
+body:not([data-timeline=full]) #atlas-polity-layer,body:not([data-timeline=full]) #atlas-city-layer{display:none!important}
+.atlas-historical-polity{fill:#d5bd7b;fill-opacity:.16;stroke:#e4ca84;stroke-opacity:.72;stroke-width:.7;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill-opacity .15s ease}
+.atlas-historical-polity:hover,.atlas-historical-polity:focus,.atlas-historical-polity.selected{fill-opacity:.34;stroke:#fff0bc;stroke-width:1.6;outline:none}
+.atlas-historical-polity[data-retained=true]{fill-opacity:.08;stroke-dasharray:3 2;stroke-opacity:.52}
+.atlas-city-cluster{cursor:pointer;outline:none}
+.atlas-city-dot{fill:#86d9c5;stroke:#102b39;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.atlas-city-cluster[data-rough=true] .atlas-city-dot{fill:#203c47;stroke:#9bd8cd;stroke-dasharray:1.5 1}
+.atlas-city-cluster:hover .atlas-city-dot,.atlas-city-cluster:focus .atlas-city-dot,.atlas-city-cluster.selected .atlas-city-dot{stroke:#fff;stroke-width:2.4}
+.atlas-city-count{fill:#f6f3e7;font:700 6px system-ui,sans-serif;paint-order:stroke;stroke:#153343;stroke-width:1.8;pointer-events:none}
+html[data-theme=light] .atlas-historical-polity{fill:#91722a;stroke:#725a20}
 </style>
 </head>
 
@@ -2772,7 +2783,7 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
           <desc id="map-description">Interactive human-history atlas with persistent Nexus centers, dated evidence, annual mortality estimates and modern reference subdivisions. Colors and source years are explained in the timeline legend. </desc>
           <defs><radialGradient id="jcs-map-ocean" cx="50%" cy="38%" r="75%"><stop offset="0%" stop-color="#173649"/><stop offset="65%" stop-color="#0b2233"/><stop offset="100%" stop-color="#061622"/></radialGradient><filter id="jcs-soft-light"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="1000" height="500" fill="url(#jcs-map-ocean)"></rect>
           <g id="grid-layer" aria-hidden="true"></g>
-          <g id="country-layer"></g>
+          <g id="country-layer"></g><g id="atlas-polity-layer" aria-label="Dated historical polity territories"></g><g id="atlas-city-layer" aria-label="Dated city and settlement locations"></g>
           <g id="jcs-chronology-layer" aria-label="Dated Christian history milestones"></g>
           <defs><pattern id="atlas-unmeasured" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#20374a"/><path d="M0 7L7 0" stroke="#768397" stroke-width=".5" opacity=".25"/></pattern></defs>
 <g id="atlas-geography-layer" aria-label="Modern subdivision reference boundaries and dated names"></g>
@@ -2800,13 +2811,13 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
 <div class="jcs-chronology-labels" aria-hidden="true"><span>AD 1</span><span>500</span><span>1000</span><span>1500</span><span>2026</span></div>
 <div class="jcs-year-entry"><button type="button" id="jcs-year-back" aria-label="Previous year">−1 year</button><label for="jcs-chronology-input">Go to year</label><input id="jcs-chronology-input" type="number" min="1" max="2026" step="1" value="2025" inputmode="numeric"><button type="button" id="jcs-year-forward" aria-label="Next year">+1 year</button><button type="button" id="atlas-start">Start at AD 1</button><button type="button" id="atlas-latest">Present · 2026</button></div>
 <div class="atlas-controls"><label>Playback <select id="atlas-speed"><option value="1600">Slow · 1 year / 1.6s</option><option value="800" selected>Normal · 1 year / 0.8s</option><option value="200">Fast · 1 year / 0.2s</option></select></label><label>Evidence <select id="atlas-metric"><option value="auto">Auto · accounts + annual data from 1989</option><option value="context">Dated historical context</option><option value="deaths">Recorded deaths · 1989–2025</option></select></label><span class="atlas-note">Past Nexus always retained</span><label><input id="atlas-admin-labels" type="checkbox" checked> Geography labels · more detail as you zoom</label><label><input id="atlas-labels" type="checkbox" checked> Nexus names</label><label><input id="atlas-pause-motion" type="checkbox"> Instant ring changes</label></div>
-<div class="jcs-era-shortcuts" role="group" aria-label="Jump to a period"><button type="button" data-era-year="1" data-era-end="499">1–499</button><button type="button" data-era-year="500" data-era-end="999">500–999</button><button type="button" data-era-year="1000" data-era-end="1499">1000–1499</button><button type="button" data-era-year="1500" data-era-end="1899">1500–1899</button><button type="button" data-era-year="1900" data-era-end="1988">1900–1988</button><button type="button" data-era-year="1989" data-era-end="2025">1989–2025</button><button type="button" data-era-year="2026" data-era-end="2026">2026</button></div>
+<div class="atlas-controls atlas-history-layers" aria-label="Historical cities and civilizations"><label><input type="checkbox" id="atlas-civilizations" checked> Historical civilizations · sampled territory</label><label><input type="checkbox" id="atlas-cities" checked> Cities and settlements · dated names</label></div><p id="atlas-historical-coverage" class="atlas-note">Loading dated city and polity layers…</p><div class="jcs-era-shortcuts" role="group" aria-label="Jump to a period"><button type="button" data-era-year="1" data-era-end="499">1–499</button><button type="button" data-era-year="500" data-era-end="999">500–999</button><button type="button" data-era-year="1000" data-era-end="1499">1000–1499</button><button type="button" data-era-year="1500" data-era-end="1899">1500–1899</button><button type="button" data-era-year="1900" data-era-end="1988">1900–1988</button><button type="button" data-era-year="1989" data-era-end="2025">1989–2025</button><button type="button" data-era-year="2026" data-era-end="2026">2026</button></div>
 <div class="atlas-summary"><div><b id="atlas-count-a">—</b><small id="atlas-label-a">recorded deaths</small></div><div><b id="atlas-count-b">—</b><small id="atlas-label-b">event records</small></div><div><b id="atlas-count-c">—</b><small id="atlas-label-c">country groups</small></div></div>
 <p class="atlas-reading-key"><strong>Read the Nexus:</strong> gold diamonds are persistent Nexus centers. Select one to see linked provinces and records. Darker/lighter shading follows loaded evidence; absent new records keep the last dated evidence, with dashed outlines. Geographic grouping alone does not identify a source of influence. Documented influence links are shown separately in violet.</p>
 <p id="jcs-chronology-status" role="status" aria-live="polite"></p><p id="atlas-end-note" class="atlas-note" hidden>Timeline complete. The map stays at 2026. Choose Start at AD 1 or an earlier year to replay.</p><p id="atlas-shading-note" class="atlas-note"></p>
 <div id="atlas-context-legend" class="atlas-legend"><span><i style="--c:#513b49"></i>1 harm account</span><span><i style="--c:#73404e"></i>2 harm accounts</span><span><i style="--c:#914253"></i>3+ harm accounts</span><span><i style="--c:#284b49"></i>Expansion / protection</span><span><i style="--c:#555044"></i>Uncertain date</span><span><i class="atlas-hatch"></i>No account loaded for this year</span></div>
 <div id="atlas-death-legend" class="atlas-legend"><span><i class="atlas-hatch"></i>No loaded row / unmeasured</span><span><i style="--c:#69424b"></i>1–9</span><span><i style="--c:#89424c"></i>10–99</span><span><i style="--c:#aa4051"></i>100–999</span><span><i style="--c:#c8374f"></i>1,000–9,999</span><span><i style="--c:#e32343"></i>10,000–99,999</span><span><i style="--c:#fa6078"></i>100,000+</span></div>
-<p class="atlas-note">Country shading is an annual total, not a claim that every place inside it was affected. Regional Nexus retain source names and fixed anchors. Continent and country labels provide orientation in every map. Zoom in or select a country for city and state/province labels. Pale labels and boundaries are modern references; gold labels are dated where sourced. Name changes use the new name from its transition year; open the label for the exact date when supplied. Their currentness varies, and they do not reconstruct all historical boundaries. Street detail shows today’s geography; historical labels remain attached to dated records.</p>
+<p class="atlas-note">Country shading is an annual total, not a claim that every place inside it was affected. The country selector filters event accounts only; Nexus points, city names, and civilization areas remain visible globally. Regional Nexus retain source names and fixed anchors. Continent and country labels provide orientation in every map. Zoom in or select a country for city and state/province labels. Pale labels and boundaries are modern references; gold labels are dated where sourced. Name changes use the new name from its transition year; open the label for the exact date when supplied. Their currentness varies, and they do not reconstruct all historical boundaries. Street detail shows today’s geography; historical labels remain attached to dated records.</p>
 </section>
         <section class="jcs-history-control" id="jcs-history-control" aria-label="Seven-year history controls">
   <div class="jcs-history-topline"><div><h2 id="jcs-history-period">Seven years. Every life matters.</h2><p id="jcs-history-period-subtitle">2020–2026 · seven annual World Watch List editions</p></div><button type="button" class="jcs-history-journey" id="jcs-history-journey">Watch the years unfold <span aria-hidden="true">↗</span></button></div>
@@ -2829,10 +2840,10 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
 <section class="panel-section jcs-chronology-panel" id="jcs-chronology-panel" aria-labelledby="atlas-panel-title">
 <p class="eyebrow">Persistent places · dated evidence</p><h2 id="atlas-panel-title">Follow places.<br>Understand the record.</h2>
 <p class="atlas-reading-key"><strong>Coverage varies by place and period.</strong> Blank or hatched areas do not establish that no violence occurred. Earlier records can contain disputed dates, accounts and numbers; open a Nexus to see attribution. The larger annual dataset begins in 1989. At 2026 its latest complete snapshot is retained and labeled 2025.</p>
-<p class="atlas-intro">Explore <strong>194 historical accounts</strong> and annual aggregates from <strong>417,968 UCDP event records</strong>. This is an expandable research tool, not a complete census of human harm.</p>
+<p class="atlas-intro">Explore <strong>194 sourced history accounts</strong>, <strong>12,321 dated polity-area records</strong>, <strong>15,182 dated urban and settlement names</strong>, and annual aggregates from <strong>417,968 UCDP event records</strong>. These are different sources with uneven coverage, not a complete census of every city or civilization.</p>
 <div class="atlas-controls"><label for="atlas-country">Country / source group</label><select id="atlas-country"><option value="">All places</option><option value="AFG">Afghanistan</option><option value="ALB">Albania</option><option value="DZA">Algeria</option><option value="AGO">Angola</option><option value="ARG">Argentina</option><option value="ARM">Armenia</option><option value="AUS">Australia</option><option value="AUT">Austria</option><option value="AZE">Azerbaijan</option><option value="BLR">BLR</option><option value="BHR">Bahrain</option><option value="BGD">Bangladesh</option><option value="BEL">Belgium</option><option value="BEN">Benin</option><option value="BTN">Bhutan</option><option value="BOL">Bolivia</option><option value="BIH">Bosnia-Herzegovina</option><option value="BWA">Botswana</option><option value="BRA">Brazil</option><option value="BFA">Burkina Faso</option><option value="BDI">Burundi</option><option value="KHM">Cambodia (Kampuchea)</option><option value="CMR">Cameroon</option><option value="CAN">Canada</option><option value="CAF">Central African Republic</option><option value="TCD">Chad</option><option value="CHN">China</option><option value="COL">Colombia</option><option value="COM">Comoros</option><option value="COG">Congo</option><option value="CRI">Costa Rica</option><option value="HRV">Croatia</option><option value="CYP">Cyprus</option><option value="CZE">Czechia</option><option value="COD">DR Congo (Zaire)</option><option value="DJI">Djibouti</option><option value="ECU">Ecuador</option><option value="EGY">Egypt</option><option value="SLV">El Salvador</option><option value="ERI">Eritrea</option><option value="ETH">Ethiopia</option><option value="FRA">France</option><option value="GMB">Gambia</option><option value="GEO">Georgia</option><option value="DEU">Germany</option><option value="GHA">Ghana</option><option value="GRC">Greece</option><option value="GTM">Guatemala</option><option value="GIN">Guinea</option><option value="GNB">Guinea-Bissau</option><option value="GUY">Guyana</option><option value="HTI">Haiti</option><option value="HND">Honduras</option><option value="HUN">Hungary</option><option value="IND">India</option><option value="IDN">Indonesia</option><option value="IRN">Iran</option><option value="IRQ">Iraq</option><option value="ISR">Israel / Palestine (UCDP group)</option><option value="ITA">Italy</option><option value="CIV">Ivory Coast</option><option value="JAM">Jamaica</option><option value="JPN">Japan</option><option value="JOR">Jordan</option><option value="KAZ">KAZ</option><option value="KOR">KOR</option><option value="KEN">Kenya</option><option value="SWZ">Kingdom of eSwatini (Swaziland)</option><option value="KWT">Kuwait</option><option value="KGZ">Kyrgyzstan</option><option value="LAO">Laos</option><option value="LVA">Latvia</option><option value="LBN">Lebanon</option><option value="LSO">Lesotho</option><option value="LBR">Liberia</option><option value="LBY">Libya</option><option value="LTU">Lithuania</option><option value="MDG">Madagascar (Malagasy)</option><option value="MYS">Malaysia</option><option value="MLI">Mali</option><option value="MLT">Malta</option><option value="MRT">Mauritania</option><option value="MEX">Mexico</option><option value="MDA">Moldova</option><option value="MAR">Morocco</option><option value="MOZ">Mozambique</option><option value="MMR">Myanmar (Burma)</option><option value="NAM">Namibia</option><option value="NPL">Nepal</option><option value="NLD">Netherlands</option><option value="NZL">New Zealand</option><option value="NIC">Nicaragua</option><option value="NER">Niger</option><option value="NGA">Nigeria</option><option value="MKD">North Macedonia</option><option value="PRK">PRK</option><option value="PAK">Pakistan</option><option value="PSE">Palestinian territories</option><option value="PAN">Panama</option><option value="PNG">Papua New Guinea</option><option value="PRY">Paraguay</option><option value="PER">Peru</option><option value="PHL">Philippines</option><option value="POL">Poland</option><option value="PRT">Portugal</option><option value="QAT">Qatar</option><option value="ROU">Romania</option><option value="RUS">Russia (Soviet Union)</option><option value="RWA">Rwanda</option><option value="SAU">Saudi Arabia</option><option value="SEN">Senegal</option><option value="SRB">Serbia (Yugoslavia)</option><option value="SLE">Sierra Leone</option><option value="SVK">Slovakia</option><option value="SLB">Solomon Islands</option><option value="SOM">Somalia</option><option value="ZAF">South Africa</option><option value="SSD">South Sudan</option><option value="ESP">Spain</option><option value="LKA">Sri Lanka</option><option value="SDN">Sudan</option><option value="SWE">Sweden</option><option value="SYR">Syria</option><option value="TJK">Tajikistan</option><option value="TZA">Tanzania</option><option value="THA">Thailand</option><option value="TGO">Togo</option><option value="TTO">Trinidad and Tobago</option><option value="TUN">Tunisia</option><option value="TUR">Turkey</option><option value="UGA">Uganda</option><option value="UKR">Ukraine</option><option value="ARE">United Arab Emirates</option><option value="GBR">United Kingdom</option><option value="USA">United States of America</option><option value="UZB">Uzbekistan</option><option value="VEN">Venezuela</option><option value="YEM">Yemen (North Yemen)</option><option value="ZMB">Zambia</option><option value="ZWE">Zimbabwe (Rhodesia)</option><option value="CHE">Switzerland</option><option value="CHL">Chile</option><option value="IRL">Ireland</option><option value="NOR">Norway</option><option value="VNM">Vietnam</option></select><button class="atlas-button" id="atlas-clear" type="button">Clear selection</button></div>
 <section class="atlas-card" id="atlas-selected" aria-label="Selected place and sources" tabindex="-1"></section>
-<label for="atlas-search" class="atlas-note">Find a place, event or theme across every year</label><div class="atlas-controls"><input id="atlas-search" type="search" placeholder="Try Rwanda, Buddhism, emancipation…" autocomplete="off"></div>
+<label for="atlas-search" class="atlas-note">Find a city, polity, place, event or theme across every year</label><div class="atlas-controls"><input id="atlas-search" type="search" placeholder="Try Chang’an, Mali Empire, Rome…" autocomplete="off"></div>
 <div class="atlas-controls"><label><input type="checkbox" id="atlas-compare-only"> Compare differing estimates</label></div><p id="atlas-evidence-summary" class="atlas-note"></p>
 <h3 id="atlas-events-title">Dated context</h3><ol id="atlas-events" class="atlas-list"></ol>
 <details class="atlas-method"><summary>How to read the map and its limits</summary>
@@ -2843,7 +2854,7 @@ body[data-timeline=full] #country-layer .country[data-carried=true]{stroke-dasha
 <p><strong>Names and boundaries.</strong> 4,595 Natural Earth reference subdivisions provide state/province outlines and labels when zoomed in or a country is selected. 214 dated labels include 20 selected name periods plus 194 account-place names. Verified name changes update by year; other subdivision names remain explicitly modern references. This is not a complete reconstruction of historical administrative boundaries or every name change. Natural Earth version 5.1.1 is public domain; currentness varies by country. <a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/" target="_blank" rel="noopener noreferrer">Geography source and limits</a>.</p>
 <p><strong>Local exploration.</strong> OpenStreetMap supplies current city/street detail on demand. Historical coordinates and source precision remain visible; zoom cannot establish an exact house or incident site that the evidence does not identify. Network access is required for street tiles; the embedded history and annual aggregates work without a data API.</p>
 <p>Source: <a href="https://ucdp.uu.se/downloads/index.html" target="_blank" rel="noopener noreferrer">UCDP GED 26.1, downloaded 29 September2026</a> · <a href="https://ucdp.uu.se/downloads/ged/ged261.pdf" target="_blank" rel="noopener noreferrer">Codebook</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY4.0</a>. Aggregated and adapted for this map. Sundberg &amp; Melander (2013); Högbladh (2026); Davies, Pettersson &amp; Öberg (2026). Individual historical sources appear in each record.</p>
-<p>Useful precedents: <a href="https://ucdp.uu.se/" target="_blank" rel="noopener noreferrer">UCDP Conflict Encyclopedia</a>; <a href="https://encyclopedia.ushmm.org/content/en/gallery/the-holocaust-maps" target="_blank" rel="noopener noreferrer">USHMM historical maps</a>. These illustrate event drilldown and dated regional context; no affiliation is implied.</p>
+<p><strong>Cities and civilizations.</strong> The map adds 12,321 dated polity-area records from <a href="https://github.com/Seshat-Global-History-Databank/cliopatria" target="_blank" rel="noopener noreferrer">Seshat Cliopatria</a> (CC BY 4.0) and 15,182 dated names for 12,971 settlement and urban records from the <a href="https://pleiades.stoa.org/downloads" target="_blank" rel="noopener noreferrer">Pleiades ancient places gazetteer</a> (CC BY 3.0). These additions are not a complete world history. Seshat outlines are sampled interpretations of historical territory; Pleiades coverage is uneven and representative points can be rough. A dated name is not proof of uninterrupted occupation. Polity outlines through AD 2024 are retained as the latest mapped snapshot in AD 2025–2026 and are marked as older context, not current borders.</p><p>Useful precedents: <a href="https://ucdp.uu.se/" target="_blank" rel="noopener noreferrer">UCDP Conflict Encyclopedia</a>; <a href="https://encyclopedia.ushmm.org/content/en/gallery/the-holocaust-maps" target="_blank" rel="noopener noreferrer">USHMM historical maps</a>. These illustrate event drilldown and dated regional context; no affiliation is implied.</p>
 </details></section>
 <section class="panel-section jcs-history-country" id="jcs-history-country" aria-labelledby="jcs-history-country-name">
   <div class="jcs-country-search-bar"><select id="jcs-history-country-select" aria-label="Explore a country"><option value="">Explore a country</option></select></div>
@@ -6407,9 +6418,10 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       }
       // Largest reference areas first, followed by finer labels as the map is enlarged.
       subset.sort((a,b)=>(b.bbox[2]-b.bbox[0])*(b.bbox[3]-b.bbox[1])-(a.bbox[2]-a.bbox[0])*(a.bbox[3]-a.bbox[1])||a.id.localeCompare(b.id));
+      const adminLabelLimit=Math.min(subset.length,Math.max(country?8:4,Math.floor(scale*9)));let adminLabelsPlaced=0;
       for(const f of subset){
-        const known=adminNames.get(f.id);
-        place('admin:'+f.id,point(f.lon,f.lat),known?.name||f.name,known?'atlas-dated-name':'atlas-admin-name',known?known.name+' · sourced name in AD '+year+'; outline is modern reference':f.name+' · modern state/province reference; historical name for AD '+year+' is unverified',()=>onSelect(known?{kind:'dated-label',label:known}:{kind:'admin',feature:f}));
+        const known=adminNames.get(f.id);if(adminLabelsPlaced>=adminLabelLimit)continue;
+        if(place('admin:'+f.id,point(f.lon,f.lat),known?.name||f.name,known?'atlas-dated-name':'atlas-admin-name',known?known.name+' · sourced name in AD '+year+'; outline is modern reference':f.name+' · modern state/province reference; historical name for AD '+year+' is unverified',()=>onSelect(known?{kind:'dated-label',label:known}:{kind:'admin',feature:f})))adminLabelsPlaced++;
       }
     }
   }
@@ -6422,12 +6434,17 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
 }
 
 </script>
+<script src="./jcs-historical-atlas-data.js"></script>
 <script id="jcs-full-chronology">
 (() => {
   'use strict';
   const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
   const data=JSON.parse($('jcs-chronology-data').textContent),model=createHumanHistoryModel(data);
   const layer=$('jcs-chronology-nexus-layer'),nodes=new Map(),links=$('atlas-evidence-links');
+  const historicalCatalog=window.JCSHistoricalAtlasData||{polities:[],cities:[],politySource:{}};
+  const polityRows=historicalCatalog.polities||[],cityRows=historicalCatalog.cities||[],polityLayer=$('atlas-polity-layer'),cityLayer=$('atlas-city-layer');
+  const polityNodes=new Map(),cityNodes=new Map(),cityRecordsById=new Map();
+  for(const row of cityRows){if(!cityRecordsById.has(row[0]))cityRecordsById.set(row[0],[]);cityRecordsById.get(row[0]).push(row);}
   const geography=createAtlasGeography({data,make:(...args)=>make(...args),layer:$('atlas-geography-layer'),labelLayer:$('atlas-geography-labels'),onSelect:selection=>{stop();selected=selection;if(!full()){document.dispatchEvent(new CustomEvent('jcs:choose-map-country',{detail:{iso3:selection.iso3||selection.feature?.iso3||selection.label?.iso3}}));return;}const p=selection.feature||selection.label||selection;if(Number.isFinite(p.lon)&&Number.isFinite(p.lat))window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}});
   const colors=['#20374a','#69424b','#89424c','#aa4051','#c8374f','#e32343','#fa6078'];
   let year=2026,playing=false,timer=0,country='',selected=null,metric='auto',catalog=window.JCSCountryCatalog||[];
@@ -6439,6 +6456,73 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   const text=(tag,value,className)=>{const n=document.createElement(tag);n.textContent=value;if(className)n.className=className;return n;};
   const button=(label,fn,cls='atlas-button')=>{const n=text('button',label,cls);n.type='button';n.addEventListener('click',fn);return n;};
   const link=(label,url)=>{const n=text('a',label);n.href=url;n.target='_blank';n.rel='noopener noreferrer';return n;};
+  const historicalYearText=y=>y<0?fmt(Math.abs(y))+' BCE':'AD '+fmt(y);
+  const datedSpan=(a,b)=>historicalYearText(a)+(a===b?'':'–'+historicalYearText(b));
+  const projectPoint=(lon,lat)=>({x:(lon+180)*(1000/360),y:(90-lat)*(500/180)});
+  function decodePolityRings(rings){
+    let d='';
+    for(const encoded of rings){let i=0,x=0,y=0,points=[];while(i<encoded.length){let result=0,shift=0,chunk;do{chunk=encoded.charCodeAt(i++)-63;result|=(chunk&31)<<shift;shift+=5;}while(chunk>=32&&i<encoded.length);x+=(result&1)?~(result>>1):(result>>1);result=0;shift=0;do{chunk=encoded.charCodeAt(i++)-63;result|=(chunk&31)<<shift;shift+=5;}while(chunk>=32&&i<encoded.length);y+=(result&1)?~(result>>1):(result>>1);points.push((x/10).toFixed(1)+' '+(y/10).toFixed(1));}if(points.length>=4)d+='M'+points.join('L')+'Z';}
+    return d;
+  }
+  const chooseHistoricalYear=(start,end,current,through)=>{const low=Math.max(1,start),high=Math.min(through,end);return low<=current&&current<=high?current:current<low?low:high;};
+  function pickCity(row){stop();year=chooseHistoricalYear(row[2],row[3],year,2026);selected={kind:'city',cityId:row[0],row};window.JCSMapViewport.focus(row[4],row[5]);render();showDetail();}
+  function pickCityCluster(group){stop();selected={kind:'city-cluster',count:group.count,rows:group.rows,lat:group.lat,lon:group.lon};window.JCSMapViewport.focus(group.lon,group.lat);render();showDetail();}
+  function pickPolity(index){const row=polityRows[index];if(!row)return;stop();year=chooseHistoricalYear(row[1],row[2],Math.min(year,2024),2024);selected={kind:'polity',index};const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);window.JCSMapViewport.focus(lon,lat);render();showDetail();}
+  function renderHistoricalAtlasLayers(box=viewBox(),screenScale=1){
+    for(const n of polityNodes.values())n.style.display='none';for(const n of cityNodes.values())n.g.style.display='none';
+    if(!full()){polityLayer.style.display='none';cityLayer.style.display='none';return;}
+    const showPolities=$('atlas-civilizations').checked,showCities=$('atlas-cities').checked;
+    polityLayer.style.display=showPolities?'':'none';cityLayer.style.display=showCities?'':'none';
+    const intersects=b=>b[2]>=box.x&&b[0]<=box.x+box.width&&b[3]>=box.y&&b[1]<=box.y+box.height;
+    let displayedPolities=0;
+    if(showPolities){
+      const polityYear=Math.min(year,2024);
+      for(let i=0;i<polityRows.length;i++){
+        const row=polityRows[i];if(polityYear<row[1]||polityYear>row[2]||!intersects(row[6]))continue;
+        let path=polityNodes.get(i);
+        if(!path){
+          path=make('path',{class:'atlas-historical-polity','fill-rule':'evenodd','data-polity-index':i,role:'button',tabindex:'0'});
+          const title=make('title');path.append(title);
+          const activate=e=>{e?.stopPropagation?.();pickPolity(i);};
+          path.addEventListener('click',activate);path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate(e);}});
+          polityLayer.append(path);polityNodes.set(i,path);
+        }
+        path.style.display='';
+        if(!path.dataset.pathReady){path.setAttribute('d',decodePolityRings(row[7]));path.dataset.pathReady='true';}
+        const retained=year>2024;path.dataset.retained=String(retained);path.classList.toggle('selected',selected?.kind==='polity'&&selected.index===i);
+        path.setAttribute('aria-label',row[0]+' · mapped '+datedSpan(row[1],row[2])+(retained?' · last mapped sample AD 2024':'')+' · select for source and limits');
+        path.firstChild.textContent=row[0]+' · '+datedSpan(row[1],row[2])+(retained?' · last mapped sample AD 2024; not a current border claim':' · sampled historical territory; boundaries are interpretive');
+        path.style.fillOpacity=retained?'.08':'.16';path.style.strokeDasharray=retained?'3 2':'';displayedPolities++;
+      }
+    }
+    let activeCities=new Map();
+    if(showCities){
+      for(const row of cityRows){if(row[2]>year||row[3]<year)continue;let item=activeCities.get(row[0]);if(!item)activeCities.set(row[0],{row,rows:[row]});else{item.rows.push(row);if(item.row[9]!=='certain'&&row[9]==='certain')item.row=row;}}
+      const cell=28/Math.max(.15,screenScale),buckets=new Map();
+      for(const item of activeCities.values()){const row=item.row,p=projectPoint(row[4],row[5]);if(p.x<box.x||p.x>box.x+box.width||p.y<box.y||p.y>box.y+box.height)continue;const key=Math.floor(p.x/cell)+':'+Math.floor(p.y/cell);if(!buckets.has(key))buckets.set(key,{x:0,y:0,items:[]});const group=buckets.get(key);group.x+=p.x;group.y+=p.y;group.items.push(item);}
+      for(const [key,group]of buckets){
+        const count=group.items.length,x=group.x/count,y=group.y/count,items=group.items,chosen=items.find(v=>selected?.kind==='city'&&v.row[0]===selected.cityId),row=chosen?.row||items.slice().sort((a,b)=>Number(b.row[9]==='certain')-Number(a.row[9]==='certain'))[0].row;
+        let mark=cityNodes.get(key);
+        if(!mark){
+          const g=make('g',{class:'atlas-city-cluster',role:'button',tabindex:'0'}),circle=make('circle',{class:'atlas-city-dot'}),badge=make('text',{class:'atlas-city-count','text-anchor':'middle','dominant-baseline':'central'}),title=make('title');g.append(circle,badge,title);
+          mark={g,circle,badge,title,row:null,items:[]};
+          const activate=e=>{e?.stopPropagation?.();if(mark.items.length===1)pickCity(mark.items[0]);else pickCityCluster({count:mark.items.length,rows:mark.items.slice(0,80),lat:mark.row[5],lon:mark.row[4]});};
+          g.addEventListener('click',activate);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate(e);}});
+          cityLayer.append(g);cityNodes.set(key,mark);
+        }
+        mark.g.style.display='';mark.row=row;mark.items=group.items.map(v=>v.row);mark.g.setAttribute('transform','translate('+x+' '+y+') scale('+(1/screenScale)+')');
+        mark.g.dataset.rough=String(row[6]!=='precise');mark.g.classList.toggle('selected',items.some(v=>selected?.kind==='city'&&v.row[0]===selected.cityId));
+        mark.circle.setAttribute('r',String(count===1?2.1:Math.min(6,2.3+Math.log(count))));mark.badge.textContent=count>1&&screenScale>1.35?String(count):'';
+        mark.title.textContent=count===1?row[1]+' · '+row[10]+' · Pleiades dated name '+datedSpan(row[2],row[3])+' · '+row[6]+' representative location':count+' dated Pleiades city/settlement places in this map cell · zoom in or search for names';
+      }
+      if(selected?.kind==='city'){
+        const row=selected.row,p=projectPoint(row[4],row[5]);let mark=cityNodes.get(Math.floor(p.x/cell)+':'+Math.floor(p.y/cell));
+        if(mark)mark.g.classList.add('selected');
+      }
+    }
+    const status=$('atlas-historical-coverage');
+    if(status)status.textContent=(showCities?activeCities.size.toLocaleString('en-US')+' dated city/settlement names active in AD '+fmt(year):'City-name layer hidden')+' · '+(showPolities?displayedPolities.toLocaleString('en-US')+' Seshat polity areas shown for '+(year>2024?'the retained AD 2024 sample':'AD '+fmt(year)):'Civilization layer hidden')+'. Source coverage and map precision vary.';
+  }
   const countryMatch=e=>!country||(e.iso3Codes||[]).includes(country);
   const cRow=()=>model.countries.find(c=>c.mapIso3.includes(country));
   const canShow=e=>e.start<=year&&countryMatch(e);
@@ -6468,6 +6552,21 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   function detail(){
     const box=$('atlas-selected');box.replaceChildren();
     if(!selected){box.append(text('span','Explore a Nexus','atlas-tag'),text('h3','A place, a year, the evidence'),text('p','Select a point or shaded country. Review dated records, compare annual estimates and open the local street map. Search below also finds earlier or later records.'));return;}
+    if(selected.kind==='city'){
+      const row=selected.row,all=cityRecordsById.get(selected.cityId)||[],activeNames=all.filter(r=>r[2]<=year&&r[3]>=year),precision=row[6]==='precise'?'precise representative point':row[6]==='rough'?'rough representative point':'unrated representative point';
+      box.append(text('span','Dated city / settlement name · '+datedSpan(row[2],row[3]),'atlas-tag'),text('h3',row[10]||row[1]),text('p','Map label: '+row[1]+' · '+precision+'. Pleiades dates this name or place record to the stated interval; this does not prove uninterrupted occupation or administration.'));
+      if(row[9]&&row[9]!=='certain')box.append(text('p','Pleiades association certainty: '+row[9]+'. Review the source record before treating the place-name match as certain.','atlas-note'));
+      const names=document.createElement('ul');names.className='atlas-source-list';for(const r of (activeNames.length?activeNames:all).slice(0,12)){const li=document.createElement('li');li.textContent=r[1]+' · '+datedSpan(r[2],r[3]);names.append(li);}box.append(names,link('Open Pleiades place record',row[7]),button('Explore current local map',()=>localMap(row[10]||row[1],row[5],row[4],'site','Pleiades representative location; '+precision+'.')));return;
+    }
+    if(selected.kind==='city-cluster'){
+      box.append(text('span','Map marker group','atlas-tag'),text('h3',selected.count.toLocaleString('en-US')+' dated place records'),text('p','Markers are grouped so the world view stays readable. Select a name below or zoom closer to separate nearby places. Locations follow Pleiades representative-point precision.'));
+      const list=document.createElement('div');list.className='atlas-region-list';for(const row of selected.rows.slice(0,40)){const b=button(row[1]+' · '+(row[10]||''),()=>pickCity(row),'');b.append(text('small',datedSpan(row[2],row[3])+' · '+row[6]+' location'));list.append(b);}box.append(list);return;
+    }
+    if(selected.kind==='polity'){
+      const row=polityRows[selected.index],retained=year>2024,source=row[4]||historicalCatalog.politySource.url;
+      box.append(text('span','Historical polity area · '+datedSpan(row[1],row[2]),'atlas-tag'),text('h3',row[0]),text('p',(row[5]?fmt(row[5])+' km² source polygon area. ':'')+'This is one sampled historical territory outline. Borders, names and dates can be uncertain or disputed; it is not a claim of continuous control.'),retained?text('p','The selected timeline is AD '+fmt(year)+'. The latest available Seshat map for this area is AD 2024 and is retained as older reference context, not a current border.','atlas-note'):text('p','The outline follows the source record for '+datedSpan(row[1],row[2])+'; it is not interpolated between sampled periods.','atlas-note'));
+      box.append(link(row[3]?'Open linked historical entity':'Open Seshat Cliopatria source',source),button('Explore local map',()=>{const b=row[6],lon=((b[0]+b[2])/2)*(360/1000)-180,lat=90-((b[1]+b[3])/2)*(180/500);localMap(row[0],lat,lon,'region','Sampled historical polity outline; not a modern or exact border.');}));return;
+    }
     if(selected.kind==='reference-country'){
       country=selected.iso3;$('atlas-country').value=country;const c=cRow();selected={kind:'country',name:c?.name||selected.name};
     }
@@ -6577,6 +6676,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const c=full()?cRow():null,annualRows=c?model.regions(c).map(a=>model.latestRegion(c,a,year)).filter(Boolean).map(s=>({...s.row,level:model.level(s.row.best),sourceYear:s.sourceYear,carried:s.carried})):[];
     const markers=full()?Array.from(nodes.values()).filter(n=>n.g.style.display!=='none').map(n=>({x:(n.lon+180)/360*1000,y:(90-n.lat)/180*500})):catalog;
     geography.render({year:displayYear,country:displayCountry,enabled:!full()||$('atlas-admin-labels').checked,box:viewBox(),annualRows,scale:screenScale,catalog,markers});
+    renderHistoricalAtlasLayers(viewBox(),screenScale);
   }
   function connection(a,b,{influence=false,title='' }={}){
     const path=make('path',{d:'M'+((a.lon+180)/360*1000)+' '+((90-a.lat)/180*500)+' L'+((b.lon+180)/360*1000)+' '+((90-b.lat)/180*500),class:influence?'atlas-influence-link':'atlas-connection'});
@@ -6605,12 +6705,12 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       n.g.dataset.active='true';n.g.dataset.kind='historical';n.core.setAttribute('d','M0 -3 L3 0 L0 3 L-3 0 Z');
     }
     if(metricMode==='context')for(const hub of model.contextNexuses){
-      if(hub.firstYear>year||country&&hub.iso3!==country)continue;
+      if(hub.firstYear>year)continue;
       const snapshot=model.contextSnapshot(hub.events,year),v=snapshot.displayCounts,ref=catalog.find(c=>c.iso3===hub.iso3),base=ref?.name||geography.features.find(f=>f.iso3===hub.iso3)?.country||hub.iso3,label=geography.nameFor(hub.iso3,year,base);
       const n=node('context-nexus:'+hub.iso3,hub.lon,hub.lat,label,()=>{stop();country=hub.iso3;$('atlas-country').value=country;selected={kind:'country',name:label};window.JCSMapViewport.focus(hub.lon,hub.lat);render();showDetail();});
       styleNode(n,{r:Math.max(10,model.contextRadius(v.harm||v.other)),tone:'#e7c779',active:true,support:v.support,uncertain:v.uncertain,carried:snapshot.carried,label:'Nexus · '+label,description:label+' · fixed geographic mean of '+hub.points.length+' earliest dated account locations ('+hub.firstYear+'). Geographic grouping is not a source of influence.',chosen:country===hub.iso3,showLabel:names&&!!country});
       n.g.dataset.kind='context-nexus';n.core.setAttribute('d','M0 -8 L8 0 L0 8 L-8 0 Z');layer.append(n.g);
-      if(country)for(const p of model.places.filter(p=>p.events.some(e=>canShow(e))))connection(hub,p,{title:'Geographic link to a dated account; not an inferred cause.'});
+      if(country&&hub.iso3===country)for(const p of model.places.filter(p=>p.events.some(e=>canShow(e))))connection(hub,p,{title:'Geographic link to a dated account; not an inferred cause.'});
     }
     if(metricMode==='deaths'){
       const sorted=model.countries.filter(c=>(!country||c.mapIso3.includes(country))&&model.birth(c)<=year).sort((a,b)=>(model.latestAnnual(b,year)?.row.best||0)-(model.latestAnnual(a,year)?.row.best||0));
@@ -6632,11 +6732,16 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     scale();
   }
   function list(){
-    const out=$('atlas-events'),query=$('atlas-search').value.trim().toLowerCase();out.replaceChildren();const through=history(),comparisons=through.filter(e=>(e.estimates||[]).length>1);$('atlas-evidence-summary').textContent=through.length+' retained accounts · '+comparisons.length+' with separately attributed differing estimates. Figures remain attached to their sources.';
+    const out=$('atlas-events'),query=$('atlas-search').value.trim().toLowerCase();out.replaceChildren();const through=history(),comparisons=through.filter(e=>(e.estimates||[]).length>1);$('atlas-evidence-summary').textContent=through.length+' retained event accounts · '+comparisons.length+' with separately attributed differing estimates. City and polity results are dated place sources, not event claims.';
     const visible=model.events.filter(e=>countryMatch(e)&&(!$('atlas-compare-only').checked||(e.estimates||[]).length>1)&&(query?(e.title+' '+e.regionLabel+' '+e.modernPlace+' '+e.summary).toLowerCase().includes(query):e.start<=year)).sort((a,b)=>(model.active(b,year)-model.active(a,year))||b.start-a.start);
-    $('atlas-events-title').textContent=query?'Search across all years · '+visible.length+' records':'Dated context · '+visible.length+' records through '+year;
+    const cityHits=[],seenCities=new Set();if(query){for(const row of cityRows){if(!(row[1]+' '+row[10]).toLowerCase().includes(query)||seenCities.has(row[0]))continue;seenCities.add(row[0]);cityHits.push(row);if(cityHits.length>=12)break;}}
+    const polityByName=new Map();if(query){for(let i=0;i<polityRows.length;i++){const row=polityRows[i];if(!row[0].toLowerCase().includes(query))continue;const active=row[1]<=Math.min(year,2024)&&row[2]>=Math.min(year,2024),old=polityByName.get(row[0]);if(!old||active)polityByName.set(row[0],{row,index:i,active});}}
+    const polityHits=Array.from(polityByName.values()).sort((a,b)=>Number(b.active)-Number(a.active)).slice(0,12);
+    $('atlas-events-title').textContent=query?'Search across all years · '+visible.length+' event records · '+cityHits.length+' city names · '+polityHits.length+' polity periods':'Dated context · '+visible.length+' event records through AD '+fmt(year);
     for(const e of visible){const li=document.createElement('li'),b=button(e.title,()=>pickEvent(e),'');b.append(text('small',dates(e)+' · '+e.regionLabel+((e.estimates||[]).length>1?' · '+e.estimates.length+' source estimates':'')+(e.intervalMeaning==='dating-window'?' · uncertain dating':model.active(e,year)?' · within recorded period':'')));li.append(b);out.append(li);}
-    if(!visible.length)out.append(text('li','No matching context record in this selection. This is a coverage gap, not evidence of peace.','atlas-note'));
+    for(const row of cityHits){const li=document.createElement('li'),b=button(row[1]+' · '+(row[10]||'settlement'),()=>pickCity(row),'');b.append(text('small','Dated Pleiades name · '+datedSpan(row[2],row[3])+' · '+row[6]+' representative location'));li.append(b);out.append(li);}
+    for(const item of polityHits){const row=item.row,li=document.createElement('li'),b=button(row[0],()=>pickPolity(item.index),'');b.append(text('small','Seshat polity area · '+datedSpan(row[1],row[2])+' · sampled historical outline'));li.append(b);out.append(li);}
+    if(!visible.length&&!cityHits.length&&!polityHits.length)out.append(text('li','No matching event, dated place name, or polity record. This is a coverage gap, not evidence of absence.','atlas-note'));
   }
   function machine(){if(!full())return;$('jcs-history-state').textContent=JSON.stringify({schema:'jcs-human-history-atlas-v3',nexus:{anchors:'fixed reference coordinates',motion:'rings interpolate only when evidence year changes',historicalUnit:'loaded documented accounts; not severity',annualUnit:'recorded deaths; logarithmic added disk area',anomalyDetection:false},displayedYear:year,mode:mode(),country:country||null,selected,range:[1,2026],historicalEventIds:history().map(x=>x.id),activeHistoricalIds:active().map(x=>x.id),modernDataset:{version:'26.1',range:[1989,2025],loadedYear:model.documented(year)?year:null,retainedSnapshotYear:year>2025?2025:null,retainedTotals:year>2025?model.totals(2025):null,metric:'UCDP best/low/high recorded deaths; not all violence or religious causation',totals:model.documented(year)?model.totals(year):null},geography:'Modern province/state reference outlines and sourced historical names; no universal historical border reconstruction',coverage:data.coverage});}
   function render(){
@@ -6650,7 +6755,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   }
   function activate(){stop();document.body.dataset.timeline='full';document.body.classList.remove('jcs-recent-visible');const recent=$('jcs-live-over-history');if(recent)recent.checked=false;$('jcs-view-full-history').setAttribute('aria-pressed','true');$('jcs-view-history').setAttribute('aria-pressed','false');$('jcs-view-communities').setAttribute('aria-pressed','false');$('jcs-history-control').hidden=true;$('jcs-history-country').hidden=true;$('jcs-chronology-control').hidden=false;$('jcs-chronology-panel').hidden=false;render();}
   $('jcs-chronology-play').addEventListener('click',play);$('jcs-chronology-slider').addEventListener('input',e=>setYear(e.target.value));$('jcs-chronology-input').addEventListener('change',e=>setYear(e.target.value));$('jcs-year-back').addEventListener('click',()=>setYear(year-1));$('jcs-year-forward').addEventListener('click',()=>setYear(year+1));$('atlas-start').addEventListener('click',()=>setYear(1));$('atlas-latest').addEventListener('click',()=>{metric='auto';$('atlas-metric').value='auto';setYear(2026);});
-  $('atlas-metric').addEventListener('change',e=>{metric=e.target.value;render();});$('atlas-search').addEventListener('input',list);$('atlas-compare-only').addEventListener('change',list);$('atlas-admin-labels').addEventListener('change',renderMap);$('atlas-labels').addEventListener('change',renderMap);$('atlas-pause-motion').addEventListener('change',motion);$('atlas-country').addEventListener('change',e=>{country=e.target.value;const c=cRow();selected=country?{kind:'country',name:c?.name||catalog.find(c=>c.iso3===country)?.name||geography.features.find(f=>f.iso3===country)?.country||country}:null;const reference=c?model.countryNexus(c):model.contextNexuses.find(h=>h.iso3===country)||geography.features.find(f=>f.iso3===country);if(reference)window.JCSMapViewport.focus(reference.lon,reference.lat);render();});$('atlas-clear').addEventListener('click',()=>{country='';selected=null;$('atlas-country').value='';window.JCSMapViewport.reset();render();});
+  $('atlas-metric').addEventListener('change',e=>{metric=e.target.value;render();});$('atlas-search').addEventListener('input',list);$('atlas-compare-only').addEventListener('change',list);$('atlas-admin-labels').addEventListener('change',renderMap);$('atlas-civilizations').addEventListener('change',scale);$('atlas-cities').addEventListener('change',scale);$('atlas-labels').addEventListener('change',renderMap);$('atlas-pause-motion').addEventListener('change',motion);$('atlas-country').addEventListener('change',e=>{country=e.target.value;const c=cRow();selected=country?{kind:'country',name:c?.name||catalog.find(c=>c.iso3===country)?.name||geography.features.find(f=>f.iso3===country)?.country||country}:null;const reference=c?model.countryNexus(c):model.contextNexuses.find(h=>h.iso3===country)||geography.features.find(f=>f.iso3===country);if(reference)window.JCSMapViewport.focus(reference.lon,reference.lat);render();});$('atlas-clear').addEventListener('click',()=>{country='';selected=null;$('atlas-country').value='';window.JCSMapViewport.reset();render();});
   $('atlas-local-close').addEventListener('click',()=>$('atlas-local-dialog').close());$('atlas-local-dialog').addEventListener('close',()=>{$('atlas-local-frame').src='about:blank';});
   document.querySelectorAll('[data-era-year]').forEach(b=>b.addEventListener('click',()=>{setYear(b.dataset.eraYear);window.JCSMapViewport.reset();}));
   $('jcs-view-full-history').addEventListener('click',activate);document.addEventListener('jcs:annual-view',()=>{stop();$('jcs-view-full-history').setAttribute('aria-pressed','false');$('jcs-history-country').hidden=false;$('jcs-chronology-control').hidden=true;$('jcs-chronology-panel').hidden=true;});
