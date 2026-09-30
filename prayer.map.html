@@ -2749,6 +2749,49 @@ body[data-timeline=full] #world-map #network-layer:not([hidden]),body[data-timel
 #world-map .atlas-node:hover .label,#world-map .atlas-node:focus-within .label,#world-map .atlas-node.selected .label,#world-map .atlas-node:hover .scripture-name,#world-map .atlas-node:focus-within .scripture-name,#world-map .atlas-node.selected .scripture-name{opacity:1}
 body[data-timeline=annual] #atlas-historical-labels{display:none!important}
 </style>
+<style id="jcs-cinematic-globe-style">
+.jcs-cinema{position:relative;isolation:isolate;min-height:430px;height:100%;width:100%;overflow:hidden;background:#030711;color:#d6dfeb;border-radius:inherit;font-family:Inter,ui-sans-serif,system-ui,sans-serif;touch-action:pan-y}
+.jcs-cinema canvas{display:block;width:100%;height:100%;position:absolute;inset:0;outline:none;touch-action:none;cursor:grab}
+.jcs-cinema canvas:active{cursor:grabbing}
+.jcs-cinema canvas:focus-visible{outline:2px solid #91b7cb;outline-offset:-5px}
+.jcs-cinema-head{position:absolute;top:19px;left:22px;right:20px;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;pointer-events:none}
+.jcs-cinema-kicker{font-size:9px;font-weight:700;letter-spacing:.19em;line-height:1.7;color:#9caec2;text-transform:uppercase}
+.jcs-cinema-year{font:400 clamp(24px,3.1vw,42px)/1.2 Georgia,serif;letter-spacing:-.035em;color:#e8e9e9;margin-top:3px;text-shadow:0 2px 15px #000}
+.jcs-cinema-controls{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:285px;pointer-events:auto}
+.jcs-cinema button{font:500 10px/1.2 ui-sans-serif,system-ui,sans-serif;color:#bfcddd;border:1px solid #34415299;background:#0b1421cc;border-radius:5px;padding:7px 9px;cursor:pointer;box-shadow:none;letter-spacing:.02em;min-height:29px}
+.jcs-cinema button:hover{border-color:#8798b3;color:#fff;background:#152338e6}
+.jcs-cinema button:focus-visible{outline:2px solid #a4d2e7;outline-offset:3px}
+.jcs-cinema button[aria-pressed="false"]{opacity:.58}
+.jcs-cinema .jcs-cinema-resume{display:flex;align-items:center;gap:5px;color:#e4c3a1;border-color:#94785177}
+.jcs-cinema .jcs-cinema-resume[hidden]{display:none}
+.jcs-cinema button svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4;flex:none}
+.jcs-cinema-bottom{position:absolute;left:22px;right:22px;bottom:18px;z-index:2;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-end;gap:22px}
+.jcs-cinema-caption{max-width:510px;border-left:1px solid #b5906580;padding:0 0 0 13px;text-shadow:0 2px 10px #000}
+.jcs-cinema-title{font:400 clamp(16px,1.8vw,23px)/1.25 Georgia,serif;color:#e7e1d9;margin:0 0 5px}
+.jcs-cinema-copy{font-size:10px;line-height:1.55;letter-spacing:.02em;color:#a1b0c3;margin:0;max-width:440px}
+.jcs-cinema-source{font-size:10px;line-height:1.5;color:#ccd3df;margin:6px 0 0;max-width:490px}
+.jcs-cinema-source a{pointer-events:auto;color:#dabf9d;text-underline-offset:2px}
+.jcs-cinema-hint{font-size:9px;line-height:1.6;color:#8293aa;text-align:right;flex:none;letter-spacing:.015em}
+.jcs-cinema-hint svg{display:block;width:19px;height:19px;fill:none;stroke:#879ab4;stroke-width:1.2;margin:0 0 4px auto}
+.jcs-cinema-status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){.jcs-cinema{min-height:410px}.jcs-cinema-head{left:14px;right:14px;top:13px;gap:7px}.jcs-cinema-kicker{font-size:8px;letter-spacing:.11em;max-width:150px}.jcs-cinema-controls{max-width:190px;gap:4px}.jcs-cinema button{padding:6px 7px;font-size:9px;min-height:27px}.jcs-cinema-bottom{left:14px;right:14px;bottom:14px;gap:8px}.jcs-cinema-caption{padding-left:10px;max-width:calc(100% - 35px)}.jcs-cinema-copy{font-size:9px}.jcs-cinema-source{font-size:9px}.jcs-cinema-hint{font-size:0;width:20px}.jcs-cinema-title{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.jcs-cinema *{scroll-behavior:auto!important}}
+
+
+/* The map stays mounted in its existing grid cell. Projection never controls playback. */
+#jcs-map-viewport #world-map,#jcs-cinematic-globe-host{grid-column:1;grid-row:3!important}
+#jcs-cinematic-globe-host{position:relative;align-self:stretch;min-width:0;min-height:430px;z-index:2;overflow:hidden;isolation:isolate}
+#jcs-cinematic-globe-host[hidden]{display:none!important}
+body[data-map-projection="globe"] #world-map{visibility:hidden!important;pointer-events:none!important}
+body[data-map-projection="globe"] #atlas-scripture-canvas,body[data-map-projection="globe"] #atlas-scripture-caption,body[data-map-projection="globe"] #map-tooltip{visibility:hidden!important;pointer-events:none!important}
+body[data-map-projection="globe"] #jcs-zoom-in,body[data-map-projection="globe"] #jcs-zoom-out,body[data-map-projection="globe"] #reset-map-button{display:none!important}
+@media(max-width:600px){#jcs-cinematic-globe-host{min-height:410px}}
+.jcs-projection-switch{display:inline-flex;gap:5px;flex-wrap:wrap;margin-right:auto}
+.jcs-projection-switch button[aria-pressed="true"]{background:#642c38!important;color:#fff1cf!important;border-color:#cfab67!important}
+#jcs-globe-mode-status{display:block;font-size:.71rem;padding:2px 0;color:#f0d294}
+body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
+
+</style>
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -2894,6 +2937,7 @@ body[data-timeline=annual] #atlas-historical-labels{display:none!important}
         </details>
 
 <div class="jcs-zoom-tools" role="group" aria-label="Map zoom and view controls">
+<span class="jcs-projection-switch" role="group" aria-label="Map presentation"><button type="button" id="jcs-flat-map-button" aria-pressed="true">Flat map</button><button type="button" id="jcs-globe-map-button" aria-pressed="false">✦ Cinematic globe</button></span>
 <button type="button" id="jcs-zoom-in" data-zoom="in" aria-label="Zoom in" title="Zoom in">+</button>
 <button type="button" id="jcs-zoom-out" data-zoom="out" aria-label="Zoom out" title="Zoom out">−</button>
 <button class="button" id="reset-map-button" type="button" title="Restore the world view; keep the year, playback and layer choices">Reset map view</button><button type="button" id="jcs-map-expand" aria-expanded="false" aria-controls="jcs-map-viewport">Expand map</button>
@@ -2929,8 +2973,9 @@ body[data-timeline=annual] #atlas-historical-labels{display:none!important}
           <g id="atlas-historical-labels" aria-label="Dated city and civilization names"><g id="atlas-polity-labels"></g><g id="atlas-city-labels"></g></g>
         </svg>
 
+        <section id="jcs-cinematic-globe-host" class="jcs-cinematic-globe-host" aria-label="Optional cinematic globe" hidden></section>
         <canvas id="atlas-scripture-canvas" aria-hidden="true" hidden></canvas><span id="atlas-scripture-caption" hidden>Scriptural imagery · 200 stars</span>
-        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span>Drag or pinch to explore · Reset map view keeps the year, playback and layer choices</span></p>
+        <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div><p class="jcs-map-help"><span id="jcs-globe-mode-status" role="status">Flat map · original layers and controls.</span> <span>Drag or pinch to explore · Reset map view keeps the year, playback and layer choices</span></p>
 </div>
 
 
@@ -7066,7 +7111,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     function refreshSchedule(){for(const r of schedule){if(r.artisticOnly)r.landingYear=1+2025*8/journeySeconds();r.departureYear=r.artisticOnly?1:Math.max(1,r.landingYear-descentYears());}}
     const phase=r=>position()<r.departureYear?'waiting':position()<r.landingYear?'descending':'landed';
     const origin=i=>({x:width*(.045+.91*((i*.61803398875)%1))+Math.sin(drift*.00018+i)*9,y:19+(i%4)*8+Math.cos(drift*.00013+i)*4});
-    const canMove=()=>enabled&&full()&&!document.hidden&&motionChoice.checked&&!$('atlas-pause-motion').checked&&!tableau&&!narration?.motionPaused();
+    const canMove=()=>document.body.dataset.mapProjection!=='globe'&&enabled&&full()&&!document.hidden&&motionChoice.checked&&!$('atlas-pause-motion').checked&&!tableau&&!narration?.motionPaused();
     const cancel=()=>{if(raf)cancelAnimationFrame(raf);raf=0;lastFrame=0;};
     function geometry(){
       const svg=$('world-map'),rect=svg.getBoundingClientRect(),parent=canvas.parentElement.getBoundingClientRect();
@@ -7091,6 +7136,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       return{x:u*u*a.x+2*u*t*b.x+t*t*end.x,y:u*u*a.y+2*u*t*b.y+t*t*end.y};
     }
     function draw(){
+      if(document.body.dataset.mapProjection==='globe')return;
       if(!ctx)return;ctx.clearRect(0,0,width,height);if(!enabled||!full())return;
       ctx.save();ctx.font='11px system-ui, sans-serif';
       if(tableau){
@@ -7207,6 +7253,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       targets=new Map();if(journeyStarted)for(const r of schedule)if(phase(r)==='landed')targets.set(r.star,r);
       geometry();syncFlights();labels();draw();motion();
     }
+    document.addEventListener('jcs:map-projection-change',sync);
     toggle.addEventListener('change',()=>{tableau=false;updateTableauButton();update(true);});
     chooser.addEventListener('change',()=>{chosen=Number(chooser.value);tableau=false;updateTableauButton();showRecords();draw();});
     function enableMotion(){motionOverride=true;motionChoice.checked=true;$('atlas-pause-motion').checked=false;$('atlas-pause-motion').dispatchEvent(new Event('change'));}
@@ -7221,7 +7268,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; Morning Star opens at Pakistan artistically; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; Morning Star opens at Pakistan artistically; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   function createWatchersNarration(){
@@ -7365,8 +7412,358 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   for(const id of [...new Set([...layerGroups.map(row=>row[0]),'jcs-live-over-history','uscirf-toggle','atlas-scripture-toggle','atlas-scripture-names','atlas-labels','atlas-regional-nexuses'])])$(id).addEventListener('change',()=>{applyLayerVisibility();scale();});
   scripture=createScripturalLayer();
   narration=createWatchersNarration();
-  window.JCSFullHistory={setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
+  // Read-only projection adapter. The existing narration remains the only clock owner.
+  let globeCacheKey='',globeCachedLabels=[],globeNodeKey='',globeCachedNodes=[];
+  function getGlobeSnapshot(){
+    const checked=id=>!!$(id)?.checked;
+    const layers={stars:checked('atlas-scripture-toggle'),nexuses:checked('atlas-historical-nexuses'),labels:checked('atlas-labels'),names:checked('atlas-scripture-names'),geography:true};
+    const cacheKey=[year,country,catalog.length,checked('atlas-admin-labels'),checked('atlas-civilizations'),checked('atlas-cities')].join('|');
+    if(cacheKey!==globeCacheKey){
+      globeCacheKey=cacheKey;const labels=[],periods=geography.periods(year);
+      if(checked('atlas-admin-labels')){
+        for(const c of catalog){const dated=periods.find(p=>p.iso3===c.iso3&&p.scope==='country');labels.push({id:'reference:'+c.iso3,name:dated?.name||c.name,lon:c.x/1000*360-180,lat:90-c.y/500*180,kind:dated?'dated':'reference',iso3:c.iso3,description:dated?'Sourced name in AD '+year:'Modern reference geography'});}
+        for(const p of periods.filter(p=>p.scope!=='country'&&(!country||p.iso3===country)))labels.push({id:'dated:'+p.id,name:p.name,lon:p.lon,lat:p.lat,kind:'dated',record:p,description:'Dated name · AD '+p.start+'–'+p.end});
+      }
+      if(checked('atlas-civilizations'))for(let i=0;i<polityRows.length;i++){
+        const r=polityRows[i],at=Math.min(year,2024);if(at<r[1]||at>r[2])continue;const b=r[6];
+        labels.push({id:'polity:'+i,name:r[0]+(year>2024?' · 2024':''),lon:(b[0]+b[2])/2*.36-180,lat:90-(b[1]+b[3])/2*.36,kind:'polity',index:i,description:'Sampled polity name · AD '+r[1]+'–'+r[2]+(year>2024?' · retained 2024 sample':'')});
+      }
+      if(checked('atlas-cities')){
+        const activeCities=new Map();for(const r of cityRows){if(r[2]>year||r[3]<year)continue;const old=activeCities.get(r[0]);if(!old||Number(r[9]==='certain')>Number(old[9]==='certain')||(r[9]===old[9]&&r[2]>old[2]))activeCities.set(r[0],r);}
+        for(const r of activeCities.values())labels.push({id:'city:'+r[0],name:r[1],lon:r[4],lat:r[5],kind:'city',row:r,description:'Dated settlement name · AD '+r[2]+'–'+r[3]});
+      }
+      globeCachedLabels=labels.filter(p=>Number.isFinite(p.lon)&&Number.isFinite(p.lat));
+    }
+    const nodeKey=[year,country,metric,selected?.kind,selected?.id,selected?.cityId,selected?.index,selected?.name,checked('atlas-regional-nexuses'),nodes.size].join('|');
+    if(nodeKey!==globeNodeKey){globeNodeKey=nodeKey;globeCachedNodes=Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,label:n.caption.textContent,description:n.title.textContent,tone:n.g.style.getPropertyValue('--tone'),radius:Number(n.ring.getAttribute('r'))||4,visible:n.g.style.display!=='none',selected:n.g.classList.contains('selected'),kind:n.g.dataset.kind,carried:n.g.dataset.carried}));}
+    const stars=scripture.globeState(),audio=narration.state();
+    return{position:clockPosition(),year,playing,started:journeyStarted,mode:full()?'full':document.body.dataset.timeline,
+      duration:journeySeconds(),animationsEnabled:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion'),motionAllowed:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion')&&!narration.motionPaused(),
+      selected:selected?{kind:selected.kind,id:selected.id,cityId:selected.cityId,index:selected.index,name:selected.name}:null,
+      stars:stars.stars,allStarNames:stars.allStarNames,selectedStar:stars.selectedStar,
+      layers,labels:globeCachedLabels,
+      nodes:globeCachedNodes,
+      narration:{paused:audio.paused,buffering:audio.buffering,failed:audio.failed,complete:audio.complete},
+      referenceGeography:'Coastlines and country outlines are modern reference geography. Dated names follow the existing historical sources.'};
+  }
+  function selectGlobeItem(item){
+    if(!item)return;
+    if(item.artisticOnly){$('atlas-scripture-star').value=String(item.star);$('atlas-scripture-star').dispatchEvent(new Event('change'));return;}
+    if(item.kind==='city'&&item.row){pickCity(item.row);return;}
+    if(item.kind==='polity'&&Number.isInteger(item.index)){pickPolity(item.index);return;}
+    if(item.kind==='dated'&&item.record){selected={kind:'dated-label',label:item.record};render();showDetail();return;}
+    const id=item.id||'',eventId=id.startsWith('event:')?id.slice(6):item.eventId;
+    const event=eventId&&model.events.find(e=>e.id===eventId);if(event){pickEvent(event,false);return;}
+    const target=id.startsWith('place:')?model.places.find(p=>p.id===id.slice(6)):null;if(target){pickPlace(target);return;}
+    const iso=item.iso3||(id.startsWith('context-nexus:')?id.slice(14):id.startsWith('reference:')?id.slice(10):'');
+    const c=iso?model.countries.find(c=>c.mapIso3.includes(iso)):id.startsWith('country:')?model.countries.find(c=>c.name===id.slice(8)):null;
+    if(c){pickCountry(c,false);return;}
+    if(iso){selected={kind:'reference-country',iso3:iso,name:item.name||item.label,lon:item.lon,lat:item.lat};render();showDetail();}
+  }
+
+  window.JCSFullHistory={getGlobeSnapshot,selectGlobeItem,setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
   activate();motion();
+})();
+
+</script>
+<script id="jcs-cinematic-globe-renderer">
+/* Optional Canvas globe. Every visual phase is a pure function of atlas position.
+   Space imagery and Watcher associations are decorative scriptural artwork. */
+(function (global) {
+  'use strict';
+  const TAU = Math.PI * 2, RAD = Math.PI / 180;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const ease = t => t * t * (3 - 2 * t);
+  const mix = (a, b, t) => a + (b - a) * t;
+  const hash = s => { let n = 2166136261; for (const c of String(s)) n = Math.imul(n ^ c.charCodeAt(0), 16777619); return n >>> 0; };
+  const vec = (lon, lat) => { const a = lon * RAD, b = lat * RAD, c = Math.cos(b); return [c * Math.sin(a), Math.sin(b), c * Math.cos(a)]; };
+  const normalized = v => { const m = Math.hypot(...v) || 1; return v.map(x => x / m); };
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const finitePoint = p => p && Number.isFinite(+p.lon) && Number.isFinite(+p.lat);
+  const iconOrbit = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="4"/><ellipse cx="10" cy="10" rx="9" ry="4" transform="rotate(-35 10 10)"/><path d="m15 1 3 2-3 2"/></svg>';
+  const iconDrag = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M3 9 1 12l2 3M21 9l2 3-2 3M9 3l3-2 3 2M9 21l3 2 3-2M5 12h14M12 5v14"/></svg>';
+
+  function prepareLand(land) {
+    return (land || []).flatMap(country => (country.rings || []).map(ring => {
+      if (!Array.isArray(ring) || ring.length < 3) return null;
+      const points = [], clean = ring.filter(p => p && Number.isFinite(+p[0]) && Number.isFinite(+p[1]));
+      if (clean.length < 3) return null;
+      // Densification follows the short spherical edge and is performed only once.
+      for (let i = 0; i < clean.length; i++) {
+        const a = vec(+clean[i][0], +clean[i][1]), b = vec(+clean[(i + 1) % clean.length][0], +clean[(i + 1) % clean.length][1]);
+        const steps = Math.max(1, Math.ceil(Math.acos(clamp(dot(a, b), -1, 1)) / (3 * RAD)));
+        for (let j = 0; j < steps; j++) points.push(normalized(a.map((v, k) => mix(v, b[k], j / steps))));
+      }
+      return { points, key: country.iso3 || country.name || '' };
+    }).filter(Boolean));
+  }
+
+  function create(options) {
+    if (!options || !options.host || typeof options.getState !== 'function') throw new Error('Cinematic globe requires host and getState.');
+    const host = options.host, getState = options.getState, land = prepareLand(options.land);
+    const panel = document.createElement('div'); panel.className = 'jcs-cinema';
+    panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe with scriptural artwork. Drag or use arrow keys to explore; use Resume guided view to follow the timeline."></canvas>' +
+      '<div class="jcs-cinema-head"><div><div class="jcs-cinema-kicker">Scriptural artwork · cinematic view</div><div class="jcs-cinema-year"></div></div><div class="jcs-cinema-controls" aria-label="Cinematic view options"></div></div>' +
+      '<div class="jcs-cinema-bottom"><div class="jcs-cinema-caption"><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy">Symbolic Watcher imagery · separately sourced history.<br>Modern coastlines and country outlines are reference geography.</p><p class="jcs-cinema-source"></p></div><div class="jcs-cinema-hint">' + iconDrag + 'Drag to explore<br>Timeline guides the view</div></div><div class="jcs-cinema-status" aria-live="polite"></div>';
+    host.append(panel);
+    const canvas = panel.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: false });
+    if (!ctx) { panel.remove(); throw new Error('Canvas 2D is unavailable; use the flat map.'); }
+    const controls = panel.querySelector('.jcs-cinema-controls'), yearEl = panel.querySelector('.jcs-cinema-year'), titleEl = panel.querySelector('.jcs-cinema-title');
+    const sourceEl = panel.querySelector('.jcs-cinema-source'), statusEl = panel.querySelector('.jcs-cinema-status');
+    const layer = { background: true, descents: true, ring: true };
+    let active = false, disposed = false, raf = 0, lastFrame = 0, width = 1, height = 1, radius = 1, cx = 0, cy = 0;
+    let manual = false, yaw = 0, pitch = 12, drag = null, dirty = true, lastPosition = NaN, lastSignature = '', hits = [], currentCamera = { lon: 0, lat: 12 };
+    let cameraSignature = '', cameraKeys = [], lastCaption = '', lastStatus = '', sky = null, labelBoxes = [];
+    const vectorCache = new Map(), reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const toVector = p => { const key = p.lon + ',' + p.lat; if (!vectorCache.has(key)) vectorCache.set(key, vec(+p.lon, +p.lat)); return vectorCache.get(key); };
+    const resume = document.createElement('button'); resume.type = 'button'; resume.className = 'jcs-cinema-resume'; resume.hidden = true;
+    resume.innerHTML = iconOrbit + '<span>Resume guided view</span>'; resume.addEventListener('click', () => { manual = false; resume.hidden = true; invalidate(); }); controls.append(resume);
+    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Red ring']]) {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', 'true');
+      b.addEventListener('click', () => { layer[key] = !layer[key]; b.setAttribute('aria-pressed', String(layer[key])); dirty = true; invalidate(); }); controls.append(b);
+    }
+
+    function seeded(seed) { let n = seed >>> 0; return () => { n = (Math.imul(1664525, n) + 1013904223) >>> 0; return n / 4294967296; }; }
+    function makeSky() {
+      sky = document.createElement('canvas'); sky.width = Math.ceil(width); sky.height = Math.ceil(height);
+      const c = sky.getContext('2d'), random = seeded(682109), w = width, h = height;
+      c.fillStyle = '#040812'; c.fillRect(0, 0, w, h);
+      const wash = c.createRadialGradient(w * .62, h * .34, 0, w * .56, h * .5, w * .8);
+      wash.addColorStop(0, '#0b1526'); wash.addColorStop(.55, '#080e1c'); wash.addColorStop(1, '#03060d'); c.fillStyle = wash; c.fillRect(0, 0, w, h);
+      // A seeded, abstract Milky Way band; this is not an astronomical simulation.
+      c.save(); c.translate(w * .5, h * .46); c.rotate(-.39);
+      for (let i = 0; i < 125; i++) {
+        const x = (random() - .5) * w * 1.6, y = (random() - .5) * h * .24, r = 20 + random() * 75;
+        const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, i % 3 ? 'rgba(87,109,151,.045)' : 'rgba(173,148,143,.04)'); g.addColorStop(1, 'rgba(38,49,75,0)'); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+      }
+      c.restore();
+      const count = Math.min(1000, Math.round(w * h / 600));
+      for (let i = 0; i < count; i++) {
+        const x = random() * w, y = random() * h, a = .12 + random() * .57, r = random() < .035 ? 1.15 : .35 + random() * .4;
+        c.fillStyle = 'rgba(' + (i % 5 ? '173,193,218,' : '225,200,165,') + a + ')'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill();
+        if (r > 1) { c.globalAlpha = .16; c.fillRect(x - 3.5, y - .3, 7, .6); c.fillRect(x - .3, y - 3.5, .6, 7); c.globalAlpha = 1; }
+      }
+      for (const [x, y, scale, angle] of [[.18, .28, .8, -.48], [.81, .25, .5, .65], [.88, .67, .42, -.25]]) {
+        c.save(); c.translate(w * x, h * y); c.rotate(angle); c.scale(scale, scale * .34);
+        const r = Math.min(w, h) * .1, g = c.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, 'rgba(234,219,192,.42)'); g.addColorStop(.07, 'rgba(216,201,186,.26)'); g.addColorStop(.3, 'rgba(112,124,155,.14)'); g.addColorStop(1, 'rgba(66,84,114,0)'); c.fillStyle = g; c.fillRect(-r, -r, r * 2, r * 2);
+        c.strokeStyle = 'rgba(141,163,193,.12)'; c.lineWidth = 2;
+        for (let arm = 0; arm < 2; arm++) { c.beginPath(); for (let j = 0; j < 100; j++) { const t = j / 99, a = t * 7 + arm * Math.PI, rr = t * r; const xx = Math.cos(a) * rr, yy = Math.sin(a) * rr; j ? c.lineTo(xx, yy) : c.moveTo(xx, yy); } c.stroke(); } c.restore();
+      }
+    }
+
+    function resize() {
+      if (disposed) return;
+      const rect = host.getBoundingClientRect(); width = Math.max(240, Math.round(rect.width || host.clientWidth || 800)); height = Math.max(360, Math.round(rect.height || host.clientHeight || 520));
+      const dpr = Math.min(1.5, global.devicePixelRatio || 1); canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      radius = Math.min(width * .345, height * .347); cx = width * .5; cy = height * .485; makeSky(); dirty = true; invalidate();
+    }
+    function camera(position, stars) {
+      const valid = stars.filter(s => finitePoint(s) && Number.isFinite(+s.landing));
+      const signature = valid.map(s => [s.id, s.lon, s.lat, s.landing].join(':')).join('|');
+      if (signature !== cameraSignature) {
+        cameraSignature = signature; cameraKeys = valid.map(s => ({ at: +s.landing, lon: +s.lon, lat: clamp(+s.lat * .52, -32, 42) })).sort((a, b) => a.at - b.at);
+        // Co-located timeline moments share one stable camera target.
+        cameraKeys = cameraKeys.filter((k, i, all) => i === 0 || k.at !== all[i - 1].at);
+        if (cameraKeys.length) { let last = cameraKeys[0]; last.lon -= 14; for (let i = 1; i < cameraKeys.length; i++) { const k = cameraKeys[i]; k.lon -= 14; while (k.lon - last.lon > 180) k.lon -= 360; while (k.lon - last.lon < -180) k.lon += 360; if (k.at - last.at > 300) k.lon += 360; last = k; } }
+      }
+      if (!cameraKeys.length) return { lon: (position - 1) * .16 - 20, lat: 18 };
+      const first = cameraKeys[0], last = cameraKeys[cameraKeys.length - 1];
+      if (position <= first.at) return { lon: first.lon - Math.min(100, (first.at - position) * .13), lat: first.lat };
+      if (position >= last.at) return { lon: last.lon + (position - last.at) * .14, lat: last.lat };
+      let lo = 0, hi = cameraKeys.length - 1; while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (cameraKeys[mid].at <= position) lo = mid; else hi = mid; }
+      const a = cameraKeys[lo], b = cameraKeys[hi], t = ease(clamp((position - a.at) / (b.at - a.at), 0, 1));
+      return { lon: mix(a.lon, b.lon, t), lat: mix(a.lat, b.lat, t) };
+    }
+    function projection(view) {
+      const a = view.lon * RAD, b = view.lat * RAD, sa = Math.sin(a), ca = Math.cos(a), sb = Math.sin(b), cb = Math.cos(b);
+      return v => { const x = v[0] * ca - v[2] * sa, zz = v[0] * sa + v[2] * ca, y = v[1] * cb - zz * sb, z = v[1] * sb + zz * cb; return { x: cx + x * radius, y: cy - y * radius, z, ux: x, uy: -y }; };
+    }
+    function horizon(a, b) { const t = a.z / (a.z - b.z), x = mix(a.ux, b.ux, t), y = mix(a.uy, b.uy, t), d = Math.hypot(x, y) || 1; return { x: cx + x / d * radius, y: cy + y / d * radius, z: 0, ux: x / d, uy: y / d }; }
+    function drawLand(project) {
+      ctx.fillStyle = '#1e3b43'; ctx.strokeStyle = 'rgba(140,180,172,.26)'; ctx.lineWidth = .6;
+      for (const ring of land) {
+        const p = ring.points.map(project), visible = p.reduce((n, v) => n + (v.z >= 0 ? 1 : 0), 0); if (!visible) continue;
+        if (visible === p.length) { ctx.beginPath(); p.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)); ctx.closePath(); ctx.fill(); ctx.stroke(); continue; }
+        // Begin on a hidden vertex; each visible run closes along the spherical limb.
+        const start = p.findIndex(v => v.z < 0); let run = [];
+        for (let n = 0; n < p.length; n++) {
+          const a = p[(start + n) % p.length], b = p[(start + n + 1) % p.length];
+          if (a.z < 0 && b.z >= 0) run = [horizon(a, b), b];
+          else if (a.z >= 0 && b.z >= 0) run.push(b);
+          else if (a.z >= 0 && b.z < 0 && run.length) {
+            const end = horizon(a, b); run.push(end); ctx.beginPath(); run.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y));
+            const begin = run[0], endAngle = Math.atan2(end.uy, end.ux), beginAngle = Math.atan2(begin.uy, begin.ux);
+            // Reference countries are smaller than a hemisphere. The minor limb arc
+            // closes a clipped portion without depending on mixed source windings.
+            const turn = ((beginAngle - endAngle + Math.PI * 3) % TAU) - Math.PI;
+            ctx.arc(cx, cy, radius, endAngle, beginAngle, turn < 0); ctx.closePath(); ctx.fill();
+            ctx.beginPath(); run.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)); ctx.stroke(); run = [];
+          }
+        }
+      }
+    }
+    function lineOnSphere(points, project) { let pen = false; ctx.beginPath(); for (const v of points) { const p = project(v); if (p.z > .015) { pen ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); pen = true; } else pen = false; } ctx.stroke(); }
+    const grid = [];
+    for (let lat = -60; lat <= 60; lat += 30) { const points = []; for (let lon = -180; lon <= 180; lon += 3) points.push(vec(lon, lat)); grid.push(points); }
+    for (let lon = -180; lon < 180; lon += 30) { const points = []; for (let lat = -90; lat <= 90; lat += 3) points.push(vec(lon, lat)); grid.push(points); }
+    function drawEarth(project, state) {
+      const halo = ctx.createRadialGradient(cx, cy, radius * .97, cx, cy, radius * 1.12); halo.addColorStop(0, 'rgba(84,164,193,.22)'); halo.addColorStop(.25, 'rgba(60,128,165,.11)'); halo.addColorStop(1, 'rgba(16,42,68,0)'); ctx.fillStyle = halo; ctx.fillRect(cx - radius * 1.13, cy - radius * 1.13, radius * 2.26, radius * 2.26);
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.clip();
+      const ocean = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius, cy + radius); ocean.addColorStop(0, '#143449'); ocean.addColorStop(.45, '#0a2639'); ocean.addColorStop(1, '#06121f'); ctx.fillStyle = ocean; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+      if (state.layers?.geography !== false) drawLand(project);
+      ctx.strokeStyle = 'rgba(93,140,160,.13)'; ctx.lineWidth = .5; grid.forEach(points => lineOnSphere(points, project));
+      const shadow = ctx.createRadialGradient(cx - radius * .43, cy - radius * .35, radius * .15, cx + radius * .04, cy + radius * .06, radius * 1.2); shadow.addColorStop(0, 'rgba(154,204,211,.04)'); shadow.addColorStop(.46, 'rgba(0,3,13,.06)'); shadow.addColorStop(.8, 'rgba(0,3,12,.36)'); shadow.addColorStop(1, 'rgba(0,2,8,.88)'); ctx.fillStyle = shadow; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2); ctx.restore();
+      ctx.strokeStyle = 'rgba(127,198,215,.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.stroke();
+    }
+    function star(x, y, r, color, alpha) { ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r * .23, y - r * .23); ctx.lineTo(x + r, y); ctx.lineTo(x + r * .23, y + r * .23); ctx.lineTo(x, y + r); ctx.lineTo(x - r * .23, y + r * .23); ctx.lineTo(x - r, y); ctx.lineTo(x - r * .23, y - r * .23); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1; }
+    function label(text, x, y, color, font = '10px ui-sans-serif,system-ui,sans-serif', priority = false) {
+      if (!text) return; ctx.font = font; const w = ctx.measureText(text).width; x = clamp(x, 10, width - w - 10); y = clamp(y, 94, height - 104);
+      const box = { x: x - 5, y: y - 12, w: w + 10, h: 18 }; if (!priority && labelBoxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) return;
+      labelBoxes.push(box); ctx.fillStyle = 'rgba(3,8,17,.82)'; ctx.fillRect(x - 4, y - 11, w + 8, 16); ctx.fillStyle = color; ctx.fillText(text, x, y);
+    }
+    function selected(item, value) { if (value == null) return false; return typeof value === 'object' ? item.id === value.id : String(item.id) === String(value); }
+    function drawNodes(state, project) {
+      const nodes = state.nodes || [], labels = state.labels || [], allowLabels = state.layers?.labels !== false;
+      if (state.layers?.nexuses !== false) for (const node of nodes) {
+        if (!finitePoint(node) || node.visible === false) continue; const p = project(toVector(node)); if (p.z < .045) continue;
+        const focused = node.selected || selected(node, state.selected), r = focused ? 5.5 : 2.7; ctx.globalAlpha = .4 + p.z * .6; ctx.strokeStyle = focused ? '#fae1b1' : '#c79b6d'; ctx.fillStyle = '#eed1a1'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, r + 3.5, 0, TAU); ctx.stroke(); ctx.beginPath(); ctx.arc(p.x, p.y, r * .5, 0, TAU); ctx.fill(); ctx.globalAlpha = 1; hits.push({ x: p.x, y: p.y, item: node });
+        if (allowLabels && (focused || nodes.length < 9)) label(node.label || node.name || '', p.x + 10, p.y - 8, '#d8c4a7');
+      }
+      // Rank after projection, so all enabled settlements and polities get a chance.
+      const geographicLabels = labels.filter(item => finitePoint(item) && item.visible !== false).map(item => ({ item, p: project(toVector(item)) })).filter(v => v.p.z > .25).sort((a, b) => Number(selected(b.item, state.selected)) - Number(selected(a.item, state.selected)) || b.p.z - a.p.z);
+      { let drawn = 0; for (const { item, p } of geographicLabels) { if (drawn >= 7) break; const before = labelBoxes.length; label(item.name || item.label || '', p.x + 6, p.y - 5, '#90a6b5', '9px ui-sans-serif,system-ui,sans-serif'); if (labelBoxes.length > before) { hits.push({ x: p.x, y: p.y, item }); drawn++; } } }
+    }
+    function starOrigin(starItem, fallbackIndex = 0) {
+      const index = Number.isFinite(+starItem.star) ? +starItem.star : fallbackIndex, n = hash(starItem.id || starItem.name || index);
+      const angle = index === 0 ? -1.87 : -.18 - ((index * .61803398875) % 1) * 2.73;
+      return { x: cx + Math.cos(angle) * radius * (1.35 + (n % 4) * .035), y: cy + Math.sin(angle) * radius * 1.32 };
+    }
+    function flightPoint(starItem, endpoint, t) {
+      const n = hash(starItem.id || starItem.name), side = n % 2 ? 1 : -1, start = starOrigin(starItem);
+      if (t <= 0) return start;
+      const control = { x: (start.x + endpoint.x) * .5 + side * radius * .33, y: Math.min(start.y, endpoint.y) - radius * .22 };
+      const u = 1 - t; return { x: u * u * start.x + 2 * u * t * control.x + t * t * endpoint.x, y: u * u * start.y + 2 * u * t * control.y + t * t * endpoint.y };
+    }
+    function drawWatchers(state, project, position) {
+      if (!layer.descents || state.layers?.stars === false) return;
+      const stars = state.stars || [], activeFlights = [];
+      const full = !state.mode || state.mode === 'full', started = state.started !== false, names = state.layers?.names !== false;
+      const allNames = state.allStarNames || [];
+      const assigned = new Map(stars.map(s => [s.star ?? s.id, s]));
+      // Waiting points remain a celestial tableau; unassigned stars gain no invented event.
+      for (let i = 0; i < allNames.length; i++) {
+        const item = assigned.get(i), waiting = !item || !started || !full || position < +item.departure;
+        if (!waiting) continue; const { x, y } = starOrigin(item || { star: i, name: typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name }, i), focus = i === state.selectedStar;
+        star(x, y, focus ? 3.7 : i % 11 === 0 ? 1.4 : .85, '#abb3ce', focus ? .85 : .36);
+        if (focus && names) label(typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name || 'Watcher', x + 8, y - 7, '#c8c7da');
+      }
+      if (!started || !full) return;
+      for (const item of stars) {
+        if (!finitePoint(item)) continue; const landing = +item.landing, departure = Number.isFinite(+item.departure) ? +item.departure : landing - 28;
+        if (!Number.isFinite(landing)) continue; const p = project(toVector(item)), focus = item.star === state.selectedStar || selected(item, state.selected);
+        if (position >= landing && p.z > .045) {
+          star(p.x, p.y, focus ? 6 : 3.2, '#cea6b5', .5 + .35 * p.z); hits.push({ x: p.x, y: p.y, item });
+          if (focus) { ctx.strokeStyle = '#cda1ae88'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, 11, 0, TAU); ctx.stroke(); if (names) label(item.name || 'Watcher', p.x + 12, p.y - 9, '#ead4d8', undefined, true); }
+        } else if (position >= departure && position < landing) activeFlights.push({ item, p, t: clamp((position - departure) / Math.max(.001, landing - departure), 0, 1), focus });
+      }
+      activeFlights.sort((a, b) => Number(b.focus) - Number(a.focus) || a.t - b.t);
+      for (const f of activeFlights.slice(0, 8)) {
+        if (f.p.z < -.05) continue; const t = 1 - Math.pow(1 - f.t, 1.6), here = flightPoint(f.item, f.p, t);
+        const opening = f.item.star === 0 || /morning star/i.test(f.item.name || '');
+        for (let j = 0; j < 14; j++) {
+          const u = Math.max(0, t - .2 + j * .2 / 14), v = Math.max(0, t - .2 + (j + 1) * .2 / 14), a = flightPoint(f.item, f.p, u), b = flightPoint(f.item, f.p, v);
+          ctx.strokeStyle = 'rgba(' + (opening ? '227,182,134,' : '215,168,173,') + (.08 + j / 14 * .6) + ')'; ctx.lineWidth = .5 + j / 14 * (opening ? 2.5 : 1.4); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        const glowRadius = opening ? 24 : 15, halo = ctx.createRadialGradient(here.x, here.y, 0, here.x, here.y, glowRadius); halo.addColorStop(0, 'rgba(234,192,178,.38)'); halo.addColorStop(1, 'rgba(234,192,178,0)'); ctx.fillStyle = halo; ctx.fillRect(here.x - glowRadius, here.y - glowRadius, glowRadius * 2, glowRadius * 2); star(here.x, here.y, opening ? 8 : f.focus ? 7 : 5, opening ? '#ffe1ac' : '#f1d9c1', .98);
+        if (names && (f.focus || activeFlights.indexOf(f) < 3)) label(f.item.name || 'Unnamed Watcher', here.x + 10, here.y - 11, '#dfc5cc', undefined, f.focus); hits.push({ x: here.x, y: here.y, item: f.item });
+      }
+    }
+    function captions(state, position) {
+      const year = Number.isFinite(+state.year) ? Math.round(+state.year) : Math.floor(position), stars = state.stars || [];
+      const full = !state.mode || state.mode === 'full', started = state.started !== false;
+      const current = started && full && stars.find(s => position >= +s.departure && position < +s.landing), seen = started && full ? stars.filter(s => position >= +s.landing).length : 0;
+      const title = !full ? 'Full history view required for dated descents' : current ? (state.layers?.names === false ? 'A Watcher' : current.name || 'An unnamed Watcher') + ' · a symbolic descent' : seen ? 'The Earth turns. The records remain.' : 'A world beneath the stars';
+      const latest = started && full ? stars.filter(s => position >= +s.landing).sort((a, b) => +b.landing - +a.landing)[0] : null, record = current || latest;
+      const source = typeof state.caption === 'string' ? state.caption : state.caption?.text || (record?.artisticOnly ? 'Undated artistic opening · no historical fall location or date is asserted.' : record?.title ? 'Historical account · ' + record.title : '');
+      const sourceUrl = record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
+      const signature = [year, title, source, sourceUrl, manual].join('|'); if (signature === lastCaption) return; lastCaption = signature;
+      yearEl.textContent = 'AD ' + year.toLocaleString('en-US'); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
+      if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = record?.sourceLabel || 'Source'; sourceEl.append(' · ', link); }
+      const status = 'Cinematic globe, AD ' + year + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
+    }
+    function draw() {
+      if (!active || disposed || document.hidden) return;
+      const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : +state.year || 1, 1, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
+      const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year].join('|');
+      if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
+      ctx.clearRect(0, 0, width, height); if (layer.background && sky) ctx.drawImage(sky, 0, 0, width, height); else { ctx.fillStyle = '#040812'; ctx.fillRect(0, 0, width, height); }
+      currentCamera = manual ? { lon: yaw, lat: pitch } : camera(position, state.stars || []); const project = projection(currentCamera); hits = []; labelBoxes = [];
+      if (layer.ring) { ctx.save(); ctx.translate(cx, cy); ctx.rotate(-.12); ctx.strokeStyle = 'rgba(164,65,64,.23)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, 0, TAU); ctx.stroke(); ctx.strokeStyle = 'rgba(222,100,78,.42)'; ctx.beginPath(); ctx.ellipse(0, 0, radius * 1.2, radius * 1.17, 0, .16, 1.13); ctx.stroke(); ctx.restore(); }
+      drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
+      const vignette = ctx.createLinearGradient(0, height * .69, 0, height); vignette.addColorStop(0, 'rgba(3,7,15,0)'); vignette.addColorStop(1, 'rgba(3,7,15,.94)'); ctx.fillStyle = vignette; ctx.fillRect(0, height * .69, width, height * .31); captions(state, position);
+    }
+    function frame(now) { raf = 0; if (!active || disposed || document.hidden) return; if (!lastFrame || now - lastFrame >= 1000 / 24) { lastFrame = now; draw(); } raf = requestAnimationFrame(frame); }
+    function invalidate() { dirty = true; if (active && !document.hidden) { draw(); if (!raf) raf = requestAnimationFrame(frame); } }
+    function start() { if (disposed) return; active = true; lastFrame = 0; resize(); invalidate(); }
+    function stop() { active = false; cancelAnimationFrame(raf); raf = 0; lastFrame = 0; }
+    function visibility() { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (active) invalidate(); }
+    function pointerDown(e) { if (e.button !== 0) return; drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lon: currentCamera.lon, lat: currentCamera.lat, moved: false }; canvas.setPointerCapture(e.pointerId); }
+    function pointerMove(e) { if (!drag || drag.id !== e.pointerId) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.hypot(dx, dy) < 4 && !drag.moved) return; drag.moved = true; manual = true; yaw = drag.lon - dx / radius * 56; pitch = clamp(drag.lat + dy / radius * 56, -78, 78); resume.hidden = false; invalidate(); }
+    function pointerUp(e) { if (!drag || drag.id !== e.pointerId) return; if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < 18).sort((a, b) => a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); }
+    function keyDown(e) { const delta = { ArrowLeft: [-9, 0], ArrowRight: [9, 0], ArrowUp: [0, 7], ArrowDown: [0, -7] }[e.key]; if (!delta) return; e.preventDefault(); if (!manual) { yaw = currentCamera.lon; pitch = currentCamera.lat; } manual = true; yaw += delta[0]; pitch = clamp(pitch + delta[1], -78, 78); resume.hidden = false; invalidate(); }
+    canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown);
+    document.addEventListener('visibilitychange', visibility); reduced.addEventListener('change', invalidate);
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => resize()) : null; observer?.observe(host);
+    if (!observer) global.addEventListener('resize', resize);
+    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; } };
+  }
+  global.JCSCinematicGlobe = Object.freeze({ create });
+})(window);
+
+</script>
+<script id="jcs-cinematic-globe-bridge">
+(() => {
+  'use strict';
+  const $=id=>document.getElementById(id),svg=$('world-map'),host=$('jcs-cinematic-globe-host'),flat=$('jcs-flat-map-button'),globe=$('jcs-globe-map-button'),status=$('jcs-globe-mode-status');
+  if(!svg||!host||!flat||!globe||!window.JCSFullHistory)return;
+  let scene=null,active=false;
+  // Reuse the visible map's existing equirectangular coastlines, once on first selection.
+  function referenceLand(){
+    return Array.from(svg.querySelectorAll('#country-layer path.country'),path=>{
+      const rings=[];for(const part of (path.getAttribute('d')||'').split(/[Mm]/).slice(1)){
+        const n=(part.match(/-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g)||[]).map(Number),ring=[];
+        for(let i=0;i+1<n.length;i+=2)ring.push([n[i]*.36-180,90-n[i+1]*.36]);
+        if(ring.length>=3)rings.push(ring);
+      }
+      return{iso3:path.dataset.iso3,name:path.getAttribute('aria-label')||path.dataset.iso3,rings};
+    }).filter(country=>country.rings.length);
+  }
+  function useGlobe(next){
+    next=Boolean(next&&document.body.dataset.timeline==='full');
+    if(next&&!scene){
+      try{
+        if(!window.JCSCinematicGlobe?.create)throw Error('Cinematic view is unavailable.');
+        const land=referenceLand();if(!land.length)throw Error('Reference geography has not loaded yet.');
+        scene=window.JCSCinematicGlobe.create({host,getState:()=>window.JCSFullHistory.getGlobeSnapshot(),land,onSelect:item=>window.JCSFullHistory.selectGlobeItem(item)});
+      }catch(error){status.textContent=error.message+' The existing map is still available.';host.hidden=true;return;}
+    }
+    active=next;document.body.dataset.mapProjection=next?'globe':'flat';
+    host.hidden=!next;svg.inert=next;svg.setAttribute('aria-hidden',String(next));svg.setAttribute('tabindex',next?'-1':'0');
+    flat.setAttribute('aria-pressed',String(!next));globe.setAttribute('aria-pressed',String(next));
+    status.textContent=next?'Cinematic view · same timeline and narration. Flat map retains detailed evidence layers.':'Flat map · original layers and controls.';
+    if(next){scene.start();}else scene?.stop();
+    document.dispatchEvent(new Event('jcs:map-projection-change'));
+  }
+  flat.addEventListener('click',()=>useGlobe(false));globe.addEventListener('click',()=>useGlobe(true));
+  function modeChanged(){
+    const full=document.body.dataset.timeline==='full';globe.disabled=!full;globe.title=full?'Show the optional cinematic globe':'Choose the AD 1–2026 history view to use the cinematic globe';
+    if(!full&&active){useGlobe(false);status.textContent='Annual and current-data views use the original flat map.';}
+  }
+  new MutationObserver(modeChanged).observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
+  document.addEventListener('visibilitychange',()=>{if(active){if(document.hidden)scene?.stop();else scene?.start();}});
+  window.addEventListener('pagehide',()=>scene?.stop());window.addEventListener('pageshow',()=>{if(active&&!document.hidden)scene?.start();});
+  modeChanged();useGlobe(false);
 })();
 
 </script>
