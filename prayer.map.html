@@ -2750,39 +2750,42 @@ body[data-timeline=full] #world-map #network-layer:not([hidden]),body[data-timel
 body[data-timeline=annual] #atlas-historical-labels{display:none!important}
 </style>
 <style id="jcs-cinematic-globe-style">
-.jcs-cinema{position:relative;isolation:isolate;min-height:430px;height:100%;width:100%;overflow:hidden;background:#030711;color:#d6dfeb;border-radius:inherit;font-family:Inter,ui-sans-serif,system-ui,sans-serif;touch-action:pan-y}
+.jcs-cinema{position:relative;isolation:isolate;height:100%;width:100%;min-height:360px;overflow:hidden;background:#030711;color:#d6dfeb;border-radius:inherit;touch-action:none}
 .jcs-cinema canvas{display:block;width:100%;height:100%;position:absolute;inset:0;outline:none;touch-action:none;cursor:grab}
 .jcs-cinema canvas:active{cursor:grabbing}
 .jcs-cinema canvas:focus-visible{outline:2px solid #91b7cb;outline-offset:-5px}
-.jcs-cinema-head{position:absolute;top:19px;left:22px;right:20px;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;pointer-events:none}
-.jcs-cinema-kicker{font-size:9px;font-weight:700;letter-spacing:.19em;line-height:1.7;color:#9caec2;text-transform:uppercase}
-.jcs-cinema-year{font:400 clamp(24px,3.1vw,42px)/1.2 Georgia,serif;letter-spacing:-.035em;color:#e8e9e9;margin-top:3px;text-shadow:0 2px 15px #000}
-.jcs-cinema-space-note{position:absolute;left:22px;top:101px;max-width:258px;color:#8293a5;font-size:8px;line-height:1.65;letter-spacing:.015em;pointer-events:none}
-.jcs-cinema-space-note a{color:#9cabbc;text-decoration-color:#64798f;text-underline-offset:2px;pointer-events:auto}
-.jcs-cinema-controls{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:285px;pointer-events:auto}
-.jcs-cinema button{font:500 10px/1.2 ui-sans-serif,system-ui,sans-serif;color:#bfcddd;border:1px solid #34415299;background:#0b1421cc;border-radius:5px;padding:7px 9px;cursor:pointer;box-shadow:none;letter-spacing:.02em;min-height:29px}
-.jcs-cinema button:hover{border-color:#8798b3;color:#fff;background:#152338e6}
-.jcs-cinema button:focus-visible{outline:2px solid #a4d2e7;outline-offset:3px}
-.jcs-cinema button[aria-pressed="false"]{opacity:.58}
-.jcs-cinema .jcs-cinema-resume{display:flex;align-items:center;gap:5px;color:#e4c3a1;border-color:#94785177}
-.jcs-cinema .jcs-cinema-resume[hidden]{display:none}
-.jcs-cinema button svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4;flex:none}
-.jcs-cinema-bottom{position:absolute;left:22px;right:22px;bottom:18px;z-index:2;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-end;gap:22px}
-.jcs-cinema-caption{max-width:510px;border-left:1px solid #b5906580;padding:0 0 0 13px;text-shadow:0 2px 10px #000}
-.jcs-cinema-title{font:400 clamp(16px,1.8vw,23px)/1.25 Georgia,serif;color:#e7e1d9;margin:0 0 5px}
-.jcs-cinema-copy{font-size:10px;line-height:1.55;letter-spacing:.02em;color:#a1b0c3;margin:0;max-width:440px}
-.jcs-cinema-source{font-size:10px;line-height:1.5;color:#ccd3df;margin:6px 0 0;max-width:490px}
-.jcs-cinema-source a{pointer-events:auto;color:#dabf9d;text-underline-offset:2px}
-.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-caption{border-left-color:#80bdd4;max-width:540px}
-.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-title{color:#d9eff9}
-.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-source{max-width:520px}
-.jcs-cinema[data-gospel-focus="true"] .jcs-cinema-source a{color:#a2d3e8}
-.jcs-cinema-hint{font-size:9px;line-height:1.6;color:#8293aa;text-align:right;flex:none;letter-spacing:.015em}
-.jcs-cinema-hint svg{display:block;width:19px;height:19px;fill:none;stroke:#879ab4;stroke-width:1.2;margin:0 0 4px auto}
+.jcs-cinema-controls,.jcs-cinema-footer{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#c4d0dd;box-sizing:border-box;width:100%;min-width:0}
+.jcs-cinema-controls[hidden],.jcs-cinema-footer[hidden]{display:none!important}
+.jcs-cinema-controls{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;padding:7px 0}
+.jcs-cinema-menu{border:1px solid #35455577;border-radius:5px;background:#0b1421b3;max-width:100%;min-width:160px}
+.jcs-cinema-menu[open]{flex:1 1 310px}
+.jcs-cinema-menu summary,.jcs-cinema-caption summary{font-size:11px;line-height:1.5;letter-spacing:.025em;cursor:pointer;padding:8px 12px;color:#bdcddc}
+.jcs-cinema-view-actions,.jcs-cinema-layer-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 8px}
+.jcs-cinema-controls button{font:500 11px/1.2 ui-sans-serif,system-ui,sans-serif;color:#c4d2df;border:1px solid #50617788;background:#0e1a2acc;border-radius:4px;padding:8px 10px;cursor:pointer;min-height:33px;box-shadow:none;letter-spacing:.01em}
+.jcs-cinema-controls button:hover{border-color:#9badc3;color:#fff;background:#1a2a3de6}
+.jcs-cinema-controls button:focus-visible,.jcs-cinema-menu summary:focus-visible,.jcs-cinema-caption summary:focus-visible{outline:2px solid #a4d2e7;outline-offset:2px}
+.jcs-cinema-controls button[aria-pressed="false"]{opacity:.55}
+.jcs-cinema-controls button[hidden]{display:none!important}
+.jcs-cinema-controls .jcs-cinema-resume{display:flex;align-items:center;gap:5px;color:#e4c3a1}
+.jcs-cinema-controls button svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.4;flex:none}
+.jcs-cinema-help{font-size:10px;line-height:1.6;color:#8395aa;margin:0;padding:0 12px 10px;max-width:650px}
+.jcs-cinema-footer{padding:6px 0 0}
+.jcs-cinema-timeline{display:flex;align-items:center;gap:12px;min-height:26px;padding:3px 2px}
+.jcs-cinema-year{font:400 15px/1.25 Georgia,serif;color:#e1e4e6;flex:none;min-width:57px}
+.jcs-cinema-progress{height:4px;min-width:40px;flex:1;border:0;border-radius:2px;overflow:hidden;accent-color:#9bb5c9;background:#1d2a38}
+.jcs-cinema-progress::-webkit-progress-bar{background:#1d2a38}
+.jcs-cinema-progress::-webkit-progress-value{background:#9bb5c9}
+.jcs-cinema-progress::-moz-progress-bar{background:#9bb5c9}
+.jcs-cinema-progress-label{font-size:10px;color:#9cabbc;font-variant-numeric:tabular-nums;flex:none}
+.jcs-cinema-caption{border-top:1px solid #33445366;margin-top:4px}
+.jcs-cinema-caption summary{padding:7px 2px;color:#9fb1c2}
+.jcs-cinema-title{font:400 19px/1.35 Georgia,serif;color:#e5e1d9;margin:8px 0}
+.jcs-cinema-copy,.jcs-cinema-source,.jcs-cinema-space-note{font-size:11px;line-height:1.6;color:#9eafc1;margin:6px 0;max-width:920px}
+.jcs-cinema-source{color:#c2ced9}
+.jcs-cinema-source a,.jcs-cinema-space-note a{color:#b8cfe0;text-underline-offset:3px}
+.jcs-cinema-footer[data-gospel-focus="true"] .jcs-cinema-title{color:#d6ebf4}
 .jcs-cinema-status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:600px){.jcs-cinema{min-height:410px}.jcs-cinema-head{left:14px;right:14px;top:13px;gap:7px}.jcs-cinema-kicker{font-size:8px;letter-spacing:.11em;max-width:150px}.jcs-cinema-controls{max-width:190px;gap:4px}.jcs-cinema button{padding:6px 7px;font-size:9px;min-height:27px}.jcs-cinema-bottom{left:14px;right:14px;bottom:14px;gap:8px}.jcs-cinema-caption{padding-left:10px;max-width:calc(100% - 35px)}.jcs-cinema-copy{font-size:9px}.jcs-cinema-source{font-size:9px}.jcs-cinema-hint{font-size:0;width:20px}.jcs-cinema-title{font-size:17px}}
-@media(prefers-reduced-motion:reduce){.jcs-cinema *{scroll-behavior:auto!important}}
-@media(max-width:600px){.jcs-cinema-space-note{left:14px;top:82px;max-width:134px;font-size:7px;line-height:1.55;opacity:.86}}
+@media(max-width:600px){.jcs-cinema{min-height:300px}.jcs-cinema-controls{gap:6px}.jcs-cinema-menu{min-width:0;flex:1 1 135px}.jcs-cinema-menu[open]{flex-basis:100%}.jcs-cinema-menu summary{font-size:10px;padding:8px}.jcs-cinema-controls button{font-size:10px;padding:8px;min-height:34px}.jcs-cinema-timeline{gap:8px}.jcs-cinema-year{font-size:13px;min-width:50px}.jcs-cinema-progress-label{font-size:9px}.jcs-cinema-title{font-size:17px}}
 
 .jcs-gospel-story{flex:1 0 100%;width:100%;min-width:0;order:3;margin:10px 0 14px;border:1px solid #826a4366;border-radius:9px;background:linear-gradient(125deg,#141b29,#121822);color:#d9d7cc;overflow:hidden}
 .jcs-gospel-canvas[hidden]{display:none!important}
@@ -2803,6 +2806,79 @@ body[data-map-projection="globe"] #jcs-zoom-in,body[data-map-projection="globe"]
 #jcs-globe-mode-status{display:block;font-size:.71rem;padding:2px 0;color:#f0d294}
 body[data-map-projection="globe"] .jcs-map-help>span:last-child{display:none}
 
+
+
+/* Load last: one drawing rectangle, with every option in normal flow outside it. */
+.jcs-map-focus-shell{display:block!important;grid-template-rows:none!important;min-width:0;overflow:visible}
+#jcs-map-focus-frame{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;min-width:0;width:100%;position:relative;isolation:isolate}
+#jcs-map-focus-top{grid-row:1;min-width:0;position:relative;z-index:2}
+#jcs-map-focus-top .jcs-map-controls{display:block;padding:12px 14px 10px;background:linear-gradient(105deg,#251923,#17151e);border-bottom:1px solid #685237}
+#jcs-map-focus-top .jcs-map-heading{grid-template-columns:42px minmax(0,1fr);column-gap:11px;margin:0 0 9px}
+#jcs-map-focus-top .jcs-gothic-seal{width:42px;height:59px;grid-row:1/4}
+#jcs-map-focus-top .jcs-map-heading h1{font-size:1.65rem!important;line-height:1.1}
+#jcs-map-focus-top .jcs-map-heading p{font-size:.71rem}
+#jcs-map-focus-top .jcs-map-kicker{font-size:.54rem;letter-spacing:.15em}
+#jcs-map-focus-top .jcs-map-scripture{display:none}
+#jcs-map-focus-options{display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;min-width:0}
+#jcs-map-focus-frame .jcs-focus-disclosure,#jcs-map-focus-narration{position:static;inset:auto;flex:0 1 auto;box-sizing:border-box;min-width:0;max-width:100%;width:auto;margin:0;padding:0;border:1px solid #655039;border-radius:6px;background:#171720;box-shadow:none;backdrop-filter:none;overflow:visible}
+#jcs-map-focus-frame .jcs-focus-disclosure>summary,#jcs-map-focus-narration .jcs-watchers-player>details>summary{box-sizing:border-box;min-height:40px;display:flex;align-items:center;gap:8px;padding:8px 11px;cursor:pointer;list-style:none;color:#e6d4b0;background:none;border:0;font:600 .73rem/1.3 system-ui,sans-serif}
+#jcs-map-focus-frame .jcs-focus-disclosure>summary::-webkit-details-marker,#jcs-map-focus-narration summary::-webkit-details-marker{display:none}
+#jcs-map-focus-frame .jcs-focus-disclosure>summary::after,#jcs-map-focus-narration .jcs-watchers-player>details>summary::after{content:'⌄';margin-left:auto;color:#c8aa78;font-size:.9rem}
+#jcs-map-focus-frame .jcs-focus-disclosure[open]>summary::after,#jcs-map-focus-narration details[open]>summary::after{content:'⌃'}
+#jcs-map-focus-frame .jcs-focus-disclosure[open]{flex-basis:100%;width:100%}
+#jcs-map-focus-frame .jcs-focus-disclosure[open]>summary{border-bottom:1px solid #483b32}
+#jcs-map-focus-frame .jcs-focus-disclosure>summary:focus-visible{outline:2px solid #dfc08d;outline-offset:2px}
+#jcs-map-focus-options #jcs-layers{order:0;display:block;max-width:100%;min-width:0;width:auto}
+#jcs-map-focus-options #jcs-layers[open]{width:100%}
+#jcs-map-focus-options #jcs-layers>summary .jcs-layer-live-label,#jcs-map-focus-options #jcs-layers>summary>span[aria-hidden]{display:none}
+#jcs-map-focus-options #jcs-layers .jcs-layer-body{grid-auto-rows:48px;block-size:240px;max-block-size:240px;overflow:auto;overscroll-behavior:contain}
+#jcs-map-focus-options #jcs-layers .layer-switch{min-block-size:48px;block-size:48px}
+#jcs-map-focus-navigation .jcs-view-choice,#jcs-map-focus-navigation .map-actions{display:flex;flex-wrap:wrap;gap:6px;margin:0!important;padding:8px 10px}
+#jcs-map-focus-navigation .map-actions{justify-content:flex-start}
+#jcs-map-focus-navigation .map-actions .button{width:auto}
+#jcs-map-focus-navigation .jcs-zoom-tools{position:static;inset:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;max-width:100%;margin:0;padding:8px 10px;border:0;border-block:1px solid #3e3540;border-radius:0;box-shadow:none;background:none}
+#jcs-map-focus-navigation .jcs-zoom-tools button{min-height:40px;min-width:40px;padding:7px 10px;border:1px solid #66553e;border-radius:5px;background:#25212b;color:#ecdfc7;font-size:.72rem;cursor:pointer}
+#jcs-map-focus-navigation .jcs-zoom-tools button[data-zoom]{font-size:1.4rem}
+#jcs-map-focus-narration .jcs-watchers-player{width:auto;margin:0;padding:0;border:0;border-radius:6px;background:none}
+#jcs-map-focus-narration:has(details[open]){flex-basis:100%;width:100%}
+#jcs-map-focus-narration .jcs-watchers-player>details[open]{padding:0 12px 10px}
+#jcs-map-focus-narration .jcs-watchers-player>details[open]>summary{margin:0 -12px}
+#jcs-map-focus-gospel .jcs-gospel-story{width:100%;margin:0;border:0;border-radius:0;background:none}
+#jcs-map-focus-gospel .jcs-gospel-reading{margin:0}
+#jcs-globe-controls-mount{flex:0 1 auto;min-width:0;max-width:100%}
+#jcs-globe-controls-mount:empty,#jcs-globe-footer-mount:empty{display:none}
+#jcs-map-focus-frame #jcs-map-viewport{position:relative!important;inset:auto!important;display:grid!important;grid-row:2!important;grid-column:1!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important;width:100%!important;height:72vh!important;height:72dvh!important;min-height:390px!important;max-height:none!important;padding:0;margin:0;border:0;border-block:1px solid #675337;border-radius:0;background:#030711;overflow:hidden;box-shadow:none}
+#jcs-map-focus-frame #jcs-map-viewport #world-map,#jcs-map-focus-frame #jcs-cinematic-globe-host{grid-area:1/1!important;position:relative;align-self:stretch;justify-self:stretch;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0}
+#jcs-map-focus-frame #jcs-cinematic-globe-host .jcs-cinema{height:100%!important;min-height:0!important}
+#jcs-map-focus-frame #jcs-cinematic-globe-host[hidden]{display:none!important}
+/* Visibility (not display:none) preserves the original flat geometry and state owner. */
+body[data-map-projection=globe] #jcs-map-focus-frame #world-map{visibility:hidden!important;pointer-events:none!important}
+#jcs-map-focus-frame #jcs-chronology-control{grid-row:3;grid-column:1;display:grid;grid-template-columns:minmax(0,1fr);gap:1px;padding:7px 12px 8px;border-top:1px solid #665135;background:linear-gradient(100deg,#281d26,#171720);min-width:0}
+#jcs-map-focus-frame #jcs-chronology-control[hidden]{display:none!important}
+#jcs-map-focus-frame .jcs-chronology-heading{gap:8px;flex-wrap:nowrap;min-width:0}
+#jcs-map-focus-frame .jcs-chronology-heading h2{font:400 .91rem/1.2 Georgia,serif;white-space:normal;margin:0}
+#jcs-map-focus-frame .jcs-chronology-heading>button{width:auto;min-width:0;min-height:36px;padding:7px 9px;font-size:.7rem;line-height:1.2;flex:none}
+#jcs-map-focus-frame #jcs-chronology-slider{width:100%;height:26px;min-height:26px;margin:0;padding:0}
+#jcs-map-focus-frame .jcs-chronology-labels{font-size:.61rem;line-height:1.2}
+#jcs-map-focus-frame #jcs-history-control{grid-column:1;grid-row:3;margin:0}
+#jcs-map-focus-bottom{grid-column:1;grid-row:4;display:grid;gap:6px;min-width:0;padding:8px 10px 10px;background:#18151d}
+#jcs-map-focus-bottom>.jcs-focus-disclosure{width:100%}
+#jcs-map-focus-bottom>.jcs-focus-disclosure[open]{padding:0 10px 10px}
+#jcs-map-focus-bottom>.jcs-focus-disclosure[open]>summary{margin:0 -10px}
+#jcs-map-focus-bottom .jcs-map-help{position:static;inset:auto;margin:8px 0;padding:0;border:0;background:none;pointer-events:auto;text-align:left;font-size:.72rem}
+#jcs-map-focus-bottom .jcs-map-help span{background:none;padding:0}
+#jcs-map-focus-bottom #atlas-scripture-caption{position:static;display:block;max-width:none;margin:7px 0;padding:6px 8px;font-size:.7rem;background:#211b26}
+#jcs-map-focus-bottom #atlas-scripture-caption[hidden]{display:none!important}
+#jcs-map-focus-bottom .jcs-global-strip,#jcs-map-focus-bottom .map-caption{grid-row:auto;position:static;margin:0;padding:10px 0}
+body:not([data-timeline=full]) #jcs-map-focus-timeline-options{display:none!important}
+#jcs-map-focus-timeline-options .atlas-scripture-panel{margin:10px 0}
+#jcs-map-focus-timeline-options .jcs-era-shortcuts{gap:6px}
+#jcs-map-focus-timeline-options p{font-size:.76rem;line-height:1.5;color:var(--muted)}
+#jcs-map-focus-frame [hidden]{display:none!important}
+/* Expanding includes the outside controls; no panel floats over the drawing area. */
+body.jcs-map-expanded #jcs-map-focus-frame{position:fixed;inset:6px;z-index:5000;width:auto;height:calc(100dvh - 12px);overflow:auto;overscroll-behavior:contain;background:#17151e;border:1px solid #b08c51;border-radius:6px;grid-template-rows:auto minmax(260px,1fr) auto auto;box-shadow:0 0 0 8px #100e16}
+body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:100%!important;min-height:260px!important;max-height:none!important;z-index:auto;box-shadow:none}
+@media(max-width:700px){#jcs-map-focus-top .jcs-map-controls{padding:9px 10px}#jcs-map-focus-top .jcs-map-heading{grid-template-columns:34px minmax(0,1fr);column-gap:8px;margin-bottom:8px}#jcs-map-focus-top .jcs-gothic-seal{width:34px;height:48px}#jcs-map-focus-top .jcs-map-heading h1{font-size:1.4rem!important}#jcs-map-focus-top .jcs-map-heading p{font-size:.66rem}#jcs-map-focus-options{gap:5px}#jcs-map-focus-frame .jcs-focus-disclosure>summary,#jcs-map-focus-narration .jcs-watchers-player>details>summary{font-size:.69rem;min-height:39px;padding:8px 9px}#jcs-map-focus-frame #jcs-map-viewport{height:65vh!important;height:65dvh!important;min-height:330px!important}#jcs-map-focus-frame #jcs-chronology-control{padding:7px 9px}#jcs-map-focus-frame .jcs-chronology-heading h2{font-size:.77rem}#jcs-map-focus-frame .jcs-chronology-heading>button{font-size:.64rem;padding:6px 8px;max-width:48%;min-height:36px}#jcs-map-focus-frame #jcs-chronology-slider{height:28px;min-height:28px}#jcs-map-focus-bottom{padding:6px 8px 8px}body.jcs-map-expanded #jcs-map-focus-frame{inset:0;height:100dvh;border-radius:0}body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{min-height:240px!important}}
 
 </style>
 <style id="jcs-ambient-radio-style">
@@ -7535,7 +7611,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     }
     audio.volume=.8;
     const small=matchMedia('(max-width:1000px)');
-    function positionPlayer(){const host=small.matches?document.querySelector('.jcs-map-controls'):$('analysis-panel');if(host&&!host.contains(panel)){if(small.matches)host.append(panel);else host.prepend(panel);}}
+    function positionPlayer(){const focusHost=$('jcs-map-focus-narration'),host=focusHost||(small.matches?document.querySelector('.jcs-map-controls'):$('analysis-panel'));if(host&&!host.contains(panel)){if(focusHost||small.matches)host.append(panel);else host.prepend(panel);}}
     small.addEventListener('change',positionPlayer);positionPlayer();refresh();
     return{ownsTimeline,position,toggle,playTimeline,restart,pauseFromMap:pause,seekYear,refresh,duration:total,motionPaused:()=>ownsTimeline()&&!state.complete&&(!state.wantsPlay||audio.paused||state.buffering||state.failed),state:()=>({track:state.track+1,elapsed:seconds(),duration:total(),linked:state.linked,started:state.started,paused:audio.paused,failed:state.failed,buffering:state.buffering,position:position(),wantsPlay:state.wantsPlay,complete:state.complete})};
   }
@@ -7593,7 +7669,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if(c){pickCountry(c,false);return;}
     if(iso){selected={kind:'reference-country',iso3:iso,name:item.name||item.label,lon:item.lon,lat:item.lat};render();showDetail();}
   }
-  window.JCSFullHistory={getGlobeSnapshot,selectGlobeItem,setYear,activate,getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
+  window.JCSFullHistory={getGlobeSnapshot,selectGlobeItem,setYear,activate,pauseTimeline:()=>narration.pauseFromMap(),resumeTimeline:()=>{if(!narration.state().wantsPlay)narration.playTimeline();},getScripturalState:()=>scripture.state(),getNarrationState:()=>narration.state(),getYear:()=>year,getNexusState:()=>JSON.parse($('jcs-history-state').textContent),getCoverage:()=>data.coverage,getVisibleNodes:()=>Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,visible:n.g.style.display!=='none',kind:n.g.dataset.kind,carried:n.g.dataset.carried}))};
   activate();motion();
 })();
 
@@ -7615,7 +7691,7 @@ window.JCSGospelData = {
       lon: 35.2078, lat: 31.7043, at: -4, dateLabel: 'c. 6–4 BC · 5 BC display anchor',
       summary: 'Luke locates Jesus’ birth in Bethlehem and recounts an angelic proclamation of peace. Matthew tells of a star guiding Magi to the child.',
       context: 'Bethlehem, Judea. Matthew names Herod; Luke frames the birth within Augustus’ empire. The birth year remains uncertain.',
-      connection: 'The Bethlehem star is distinct from the Watchers. The blue cross identifies Jesus devotionally here; it does not depict his Crucifixion at birth.',
+      connection: 'The Bethlehem star is distinct from the Watchers. It marks the birth opening, then retreats into the celestial scene over the opening BC years. The blue cross appears only at the Crucifixion display date.',
       sourceLabel: 'Matthew 2:1–12', sourceUrl: 'https://bible.usccb.org/bible/matthew/2',
       relatedSources: [{ label: 'Luke 2:1–20', url: 'https://bible.usccb.org/bible/luke/2' }]
     },
@@ -7736,15 +7812,22 @@ function waterCross(c,phase){
  crossPath(c);c.strokeStyle='#72b8f1';c.lineWidth=.022;c.stroke();
 }
 function draw(c,kind,x,y,size,phase=0){
- c.save();c.translate(x,y);c.scale(size,size);c.shadowBlur=0;c.shadowColor='transparent';c.globalCompositeOperation='source-over';c.globalAlpha=1;
- if(['jesus','crucifixion','baptism','ministry','resurrection','refuge'].includes(kind)){
+ c.save();c.translate(x,y);c.scale(size,size);c.shadowBlur=0;c.shadowColor='transparent';c.globalCompositeOperation='source-over';
+ if(kind==='crucifixion'){
   waterCross(c,phase);
-  if(kind==='baptism'){c.save();c.translate(.28,.25);c.scale(.36,.36);c.fillStyle='#e6eff5';dove(c);c.restore();}
+ }else if(kind==='baptism'){
+  c.fillStyle='#e6eff5';c.save();c.translate(0,-.10);c.scale(.78,.78);dove(c);c.restore();c.strokeStyle='#6eb6e6';c.lineWidth=.05;for(let i=0;i<3;i++){const y=.22+i*.1;c.beginPath();c.moveTo(-.4,y);c.bezierCurveTo(-.15,y-.09,.12,y+.09,.4,y);c.stroke();}
+ }else if(kind==='ministry'){
+  c.fillStyle='#d6c797';c.strokeStyle='#eee6cc';c.lineWidth=.035;c.beginPath();c.moveTo(0,-.26);c.quadraticCurveTo(-.22,-.43,-.43,-.25);c.lineTo(-.43,.33);c.quadraticCurveTo(-.2,.18,0,.35);c.quadraticCurveTo(.2,.18,.43,.33);c.lineTo(.43,-.25);c.quadraticCurveTo(.22,-.43,0,-.26);c.fill();c.stroke();c.beginPath();c.moveTo(0,-.24);c.lineTo(0,.33);c.stroke();
+ }else if(kind==='refuge'){
+  c.strokeStyle='#d6c797';c.lineWidth=.05;c.beginPath();c.moveTo(-.43,-.06);c.lineTo(0,-.4);c.lineTo(.43,-.06);c.moveTo(-.31,-.02);c.lineTo(-.31,.32);c.lineTo(.31,.32);c.lineTo(.31,-.02);c.stroke();c.strokeStyle='#9bc4df';c.beginPath();c.moveTo(-.2,.48);c.bezierCurveTo(.29,.15,-.3,.16,0,-.01);c.stroke();
+ }else if(kind==='resurrection'){
+  c.fillStyle='#d6c797';c.beginPath();c.arc(0,.18,.4,Math.PI,0);c.lineTo(.4,.37);c.lineTo(-.4,.37);c.closePath();c.fill();c.fillStyle='#132239';c.beginPath();c.arc(.07,.19,.21,Math.PI,0);c.lineTo(.28,.37);c.lineTo(-.14,.37);c.fill();c.fillStyle='#c7beaa';c.beginPath();c.ellipse(-.37,.26,.13,.19,-.3,0,Math.PI*2);c.fill();
  }else if(kind==='nativity'){
   const glow=c.createRadialGradient(0,0,.01,0,0,.76);glow.addColorStop(0,'rgba(255,244,200,.60)');glow.addColorStop(.28,'rgba(255,218,136,.25)');glow.addColorStop(1,'rgba(235,185,90,0)');c.fillStyle=glow;c.fillRect(-.8,-.8,1.6,1.6);
   c.fillStyle='#ffe4a0';c.beginPath();for(let i=0;i<16;i++){const a=-Math.PI/2+i*Math.PI/8,r=i%2?.09:(i%4===0?.49:.26);const xx=Math.cos(a)*r,yy=Math.sin(a)*r;i?c.lineTo(xx,yy):c.moveTo(xx,yy);}c.closePath();c.fill();c.fillStyle='#fffbed';c.beginPath();c.arc(0,0,.06,0,Math.PI*2);c.fill();
  }else if(kind==='eucharist'){
-  waterCross(c,phase);c.save();c.translate(.26,.20);c.scale(.50,.50);
+  c.save();c.scale(1.15,1.15);
   c.fillStyle='#d3b77d';c.beginPath();c.moveTo(-.23,-.07);c.quadraticCurveTo(-.2,.19,0,.18);c.quadraticCurveTo(.2,.19,.23,-.07);c.closePath();c.fill();c.fillRect(-.027,.13,.054,.19);c.fillRect(-.18,.32,.36,.045);c.fillStyle='#e7e4d5';c.beginPath();c.arc(0,-.25,.145,0,Math.PI*2);c.fill();c.strokeStyle='#938a74';c.lineWidth=.017;c.beginPath();c.moveTo(0,-.34);c.lineTo(0,-.16);c.moveTo(-.067,-.26);c.lineTo(.067,-.26);c.stroke();
   c.restore();
  }else if(kind==='annunciation'){
@@ -7775,10 +7858,10 @@ window.JCSGospelArt=Object.freeze({draw});
  function autoEvent(position){if(position<28)return byId.get('nativity');if(position<29)return byId.get('baptism');if(position<33)return byId.get('ministry');return byId.get('crucifixion');}
  function state(position,full=true){
   position=Number.isFinite(Number(position))?Math.max(-4,Number(position)):-4;
-  const current=byId.get(selectedId)||autoEvent(position),focus=enabled&&full&&(selectedId||position<44)?current:null,focusWeight=selectedId?1:Math.max(0,Math.min(1,(44-position)/10));
-  // Close sites use clearly drawn callouts, retaining their exact map anchor.
-  const markers=events.map(e=>({...e,kind:e.id==='nativity'?'jesus':e.kind,gospelId:e.id,visible:enabled&&full&&(e.id===selectedId||(e.at<=position&&['nativity','crucifixion'].includes(e.id))||(!selectedId&&current.id===e.id)),selected:e.id===selectedId,offsetX:e.id==='nativity'?-30:e.id==='crucifixion'?36:0,offsetY:e.id==='nativity'?28:e.id==='crucifixion'?-38:-45}));
-  const birth=markers.find(e=>e.id==='nativity');markers.push({...birth,id:'bethlehem-star',kind:'nativity',title:'Star of Bethlehem',shortTitle:'Star of Bethlehem',gospelId:'nativity',offsetX:-30,offsetY:-52});
+  const current=byId.get(selectedId)||autoEvent(position),focus=enabled&&full&&current.at<=position&&(selectedId||position<44)?current:null,focusWeight=selectedId?1:Math.max(0,Math.min(1,(44-position)/10));
+  // Reading a future account never draws its marker before the shared timeline reaches it.
+  const markers=events.filter(e=>e.id!=='nativity').map(e=>({...e,gospelId:e.id,visible:enabled&&full&&e.at<=position&&(e.id==='crucifixion'||e.id===selectedId||(!selectedId&&current.id===e.id)),selected:e.id===selectedId,offsetX:e.id==='crucifixion'?22:0,offsetY:e.id==='crucifixion'?-26:-34}));
+  const birth=byId.get('nativity');markers.push({...birth,id:'bethlehem-star',kind:'nativity',title:'Star of Bethlehem',shortTitle:'Star of Bethlehem',gospelId:'nativity',visible:enabled&&full&&position>=birth.at,selected:selectedId==='nativity',retreat:Math.max(0,Math.min(1,(position+4)/4)),offsetX:-22,offsetY:-34});
   return{enabled:enabled&&full,selectedId,focus,focusWeight,current,markers,revision};
  }
  function updateUI(g,position,mode){const e=g.current,key=[e.id,selectedId,enabled,Math.floor(position),mode].join('|');if(key===lastUI)return;lastUI=key;
@@ -7786,10 +7869,10 @@ window.JCSGospelArt=Object.freeze({draw});
   const links=$('jcs-gospel-sources');links.replaceChildren(sourceLink(e.sourceLabel,e.sourceUrl));for(const link of e.relatedSources||[])links.append(' · ',sourceLink(link.label,link.url));
   for(const [id,b]of buttons)b.setAttribute('aria-pressed',String(id===e.id));$('jcs-gospel-follow').hidden=!selectedId;
   $('jcs-gospel-jump').textContent=e.at===-4?'Return to the birth opening · 5 BC':'Go to display year '+(e.at<1?(1-e.at)+' BC':'AD '+e.at);
-  $('jcs-gospel-live').textContent=mode!=='full'?'Gospel markers appear in Human history; the source accounts remain available.':selectedId?'Reading a selected Gospel account; the timeline and narration continue independently.':position<28?'The journey begins at a 5 BC birth anchor within the uncertain c. 6–4 BC range. The blue cross identifies Jesus; the separate star represents Matthew’s account.':'Gospel milestones persist as religious context. Their symbols do not change the recorded violence totals.';
+  $('jcs-gospel-live').textContent=mode!=='full'?'Gospel markers appear in Human history; the source accounts remain available.':selectedId?'Reading a selected Gospel account; dated markers still follow the timeline.':position<28?'The journey opens with Bethlehem’s star at a 5 BC display anchor within the uncertain c. 6–4 BC range. It retreats into the celestial scene over the opening BC years. The blue cross appears at the AD 33 Crucifixion display date.':'Gospel milestones persist as religious context. Their symbols do not change the recorded violence totals.';
  }
  function changed(){revision++;lastKey='';const s=atlas.getGlobeSnapshot();updateUI(s.gospel,s.position,s.mode);document.dispatchEvent(new Event('jcs:gospel-change'));wake();}
- function select(id){if(!byId.has(id))return;selectedId=id;enabled=true;$('jcs-gospel-enabled').checked=true;story.querySelector('.jcs-gospel-reading').open=true;changed();}
+ function select(id){if(!byId.has(id))return;selectedId=id;enabled=true;$('jcs-gospel-enabled').checked=true;const disclosure=$('jcs-map-focus-gospel');if(disclosure)disclosure.open=true;story.querySelector('.jcs-gospel-reading').open=true;changed();}
  $('jcs-gospel-enabled').addEventListener('change',e=>{enabled=e.target.checked;changed();});
  $('jcs-gospel-follow').addEventListener('click',()=>{selectedId='';changed();});
  for(const id of ['atlas-start','jcs-watchers-restart','atlas-scripture-replay','atlas-scripture-begin'])$(id)?.addEventListener('click',()=>{selectedId='';changed();});
@@ -7806,9 +7889,10 @@ window.JCSGospelArt=Object.freeze({draw});
   const phase=reduced.matches||s.animationsEnabled===false?0:s.position*.75,scale=Math.hypot(m.a,m.b)||1;
   for(const item of s.gospel.markers.filter(i=>i.visible).sort((a,b)=>Number(a.selected)-Number(b.selected))){
    const wx=(item.lon+180)*1000/360,wy=(90-item.lat)*500/180,ax=m.a*wx+m.c*wy+m.e-r.left,ay=m.b*wx+m.d*wy+m.f-r.top;
-   if(ax<0||ay<0||ax>w||ay>h)continue;const x=Math.max(32,Math.min(w-32,ax+item.offsetX)),y=Math.max(42,Math.min(h-40,ay+item.offsetY)),size=item.kind==='crucifixion'?62:item.kind==='jesus'?54:item.kind==='nativity'?46:42;
+   if(ax<0||ay<0||ax>w||ay>h)continue;const x=Math.max(24,Math.min(w-24,ax+item.offsetX)),y=Math.max(26,Math.min(h-28,ay+item.offsetY)),size=item.kind==='crucifixion'?28:item.kind==='nativity'?28:23;
+   ctx.save();if(item.id==='bethlehem-star')ctx.globalAlpha=1-.85*(item.retreat||0);
    ctx.strokeStyle='#8da2b1';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(x,y+size*.38);ctx.stroke();ctx.fillStyle='#b5cbd4';ctx.beginPath();ctx.arc(ax,ay,2.1,0,Math.PI*2);ctx.fill();window.JCSGospelArt.draw(ctx,item.kind,x,y,size,phase);
-   const title=item.kind==='crucifixion'?'Jesus · Crucifixion':item.kind==='jesus'?'Jesus · Birth at Bethlehem':item.kind==='nativity'?'Star of Bethlehem':item.shortTitle;ctx.font='11px system-ui,sans-serif';const tw=ctx.measureText(title).width,tx=Math.max(4,Math.min(w-tw-4,x-tw/2)),ty=Math.min(h-4,y+size*.6);ctx.fillStyle='#081320e8';ctx.fillRect(tx-3,ty-12,tw+6,16);ctx.fillStyle=item.kind==='nativity'?'#fff0c2':'#acd7ff';ctx.fillText(title,tx,ty);
+   const title=item.kind==='crucifixion'?'Jesus · Crucifixion':item.kind==='nativity'?'Star of Bethlehem':item.shortTitle;ctx.font='11px system-ui,sans-serif';const tw=ctx.measureText(title).width,tx=Math.max(4,Math.min(w-tw-4,x-tw/2)),ty=Math.min(h-4,y+size*.6);if(item.id!=='bethlehem-star'||item.retreat<.8||item.selected){ctx.fillStyle='#081320e8';ctx.fillRect(tx-3,ty-12,tw+6,16);ctx.fillStyle=item.kind==='nativity'?'#fff0c2':'#acd7ff';ctx.fillText(title,tx,ty);}ctx.restore();
    const circle=hits.get(item.id),inv=m.inverse(),sx=x+r.left,sy=y+r.top;circle.setAttribute('cx',String(inv.a*sx+inv.c*sy+inv.e));circle.setAttribute('cy',String(inv.b*sx+inv.d*sy+inv.f));circle.setAttribute('r',String(size*.6/scale));circle.style.display='';
   }
  }
@@ -7858,56 +7942,76 @@ window.JCSGospelArt=Object.freeze({draw});
     if (!options || !options.host || typeof options.getState !== 'function') throw new Error('Cinematic globe requires host and getState.');
     const host = options.host, getState = options.getState, land = prepareLand(options.land);
     const panel = document.createElement('div'); panel.className = 'jcs-cinema';
-    panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe with Gospel markers and scriptural artwork. Drag or use arrow keys to explore; use Resume guided view to follow the timeline."></canvas>' +
-      '<div class="jcs-cinema-head"><div><div class="jcs-cinema-kicker">Scriptural artwork · cinematic view</div><div class="jcs-cinema-year"></div></div><div class="jcs-cinema-controls" aria-label="Cinematic view options"></div></div>' +
-      '<div class="jcs-cinema-space-note"><a href="https://science.nasa.gov/universe/galaxies/types/" target="_blank" rel="noopener noreferrer">Representative galaxy forms</a> · motion accelerated<br>Red haze is an artistic frame, not a physical boundary.</div>' +
-      '<div class="jcs-cinema-bottom"><div class="jcs-cinema-caption"><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy">Symbolic Watcher imagery · separately sourced history.<br>Modern coastlines and country outlines are reference geography.</p><p class="jcs-cinema-source"></p></div><div class="jcs-cinema-hint">' + iconDrag + 'Drag to explore<br>Timeline guides the view</div></div><div class="jcs-cinema-status" aria-live="polite"></div>';
+    panel.innerHTML = '<canvas tabindex="0" role="img" aria-label="Cinematic globe. Drag or use arrow keys to rotate; use wheel, pinch, or plus and minus to zoom. Exploration controls are above the scene."></canvas>';
     host.append(panel);
     const canvas = panel.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) { panel.remove(); throw new Error('Canvas 2D is unavailable; use the flat map.'); }
-    const controls = panel.querySelector('.jcs-cinema-controls'), yearEl = panel.querySelector('.jcs-cinema-year'), titleEl = panel.querySelector('.jcs-cinema-title');
-    const sourceEl = panel.querySelector('.jcs-cinema-source'), copyEl = panel.querySelector('.jcs-cinema-copy'), statusEl = panel.querySelector('.jcs-cinema-status');
-    const layer = { background: true, descents: true, ring: true };
-    let active = false, disposed = false, raf = 0, lastFrame = 0, width = 1, height = 1, radius = 1, cx = 0, cy = 0;
+    const toolbar = document.createElement('div'); toolbar.className = 'jcs-cinema-controls'; toolbar.setAttribute('aria-label', 'Globe controls');
+    toolbar.innerHTML = '<details class="jcs-cinema-menu"><summary>Explore the globe</summary><div class="jcs-cinema-view-actions"></div><p class="jcs-cinema-help">Drag to turn · wheel or pinch to zoom · arrow keys to turn · + / − to zoom · 0 for overview. Dragging and zooming leave the journey running.</p></details><details class="jcs-cinema-menu"><summary>Celestial layers</summary><div class="jcs-cinema-layer-actions"></div></details>';
+    const footer = document.createElement('div'); footer.className = 'jcs-cinema-footer';
+    footer.innerHTML = '<div class="jcs-cinema-timeline"><strong class="jcs-cinema-year"></strong><progress class="jcs-cinema-progress" max="2030" value="0" aria-label="Journey progress"></progress><span class="jcs-cinema-progress-label"></span></div><details class="jcs-cinema-caption"><summary>Scene and sources</summary><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy"></p><p class="jcs-cinema-source"></p><p class="jcs-cinema-space-note"><a href="https://science.nasa.gov/universe/galaxies/types/" target="_blank" rel="noopener noreferrer">Representative galaxy forms</a>; rotational motion is accelerated. The red haze and abstract golden architecture are religious artwork, not a physical boundary or a prediction. Modern coastlines and country outlines are reference geography.</p></details><div class="jcs-cinema-status" aria-live="polite"></div>';
+    if (options.controlsHost) options.controlsHost.append(toolbar); else if (host.parentElement) host.parentElement.insertBefore(toolbar, host);
+    if (options.footerHost) options.footerHost.append(footer); else if (host.parentElement) host.parentElement.insertBefore(footer, host.nextSibling);
+    const controls = toolbar.querySelector('.jcs-cinema-view-actions'), layerControls = toolbar.querySelector('.jcs-cinema-layer-actions'), yearEl = footer.querySelector('.jcs-cinema-year'), titleEl = footer.querySelector('.jcs-cinema-title');
+    const sourceEl = footer.querySelector('.jcs-cinema-source'), copyEl = footer.querySelector('.jcs-cinema-copy'), statusEl = footer.querySelector('.jcs-cinema-status'), progressEl = footer.querySelector('.jcs-cinema-progress'), progressLabel = footer.querySelector('.jcs-cinema-progress-label');
+    const layer = { background: true, descents: true, ring: true, architecture: true };
+    let active = false, disposed = false, raf = 0, lastFrame = 0, width = 1, height = 1, radius = 1, baseRadius = 1, cx = 0, cy = 0, viewZoom = 1, manualZoom = 1;
     let manual = false, yaw = 0, pitch = 12, drag = null, dirty = true, lastPosition = NaN, lastSignature = '', hits = [], currentCamera = { lon: 0, lat: 12 };
-    let cameraSignature = '', cameraKeys = [], lastCaption = '', lastStatus = '', sky = null, haze = null, galaxySprites = null, labelBoxes = [];
+    let lastCaption = '', lastStatus = '', sky = null, haze = null, galaxySprites = null, labelBoxes = [], skyDirections = null, skyClouds = null, skyStamp = null, skySignature = '', architecture = null, birthSprite = null, density = 0;
+    const pointers = new Map(); let pinch = null;
     let hazeX = 1, hazeY = 1, hazeCY = 0;
     let lastGospelSelected = getState()?.gospel?.selectedId || '';
     const vectorCache = new Map(), reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const toVector = p => { const key = p.lon + ',' + p.lat; if (!vectorCache.has(key)) vectorCache.set(key, vec(+p.lon, +p.lat)); return vectorCache.get(key); };
     const resume = document.createElement('button'); resume.type = 'button'; resume.className = 'jcs-cinema-resume'; resume.hidden = true;
-    resume.innerHTML = iconOrbit + '<span>Resume guided view</span>'; resume.addEventListener('click', () => { manual = false; resume.hidden = true; invalidate(); }); controls.append(resume);
-    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Outer haze']]) {
+    resume.innerHTML = iconOrbit + '<span>Guided view</span>'; resume.addEventListener('click', () => { manual = false; resume.hidden = true; invalidate(); }); controls.append(resume);
+    for (const [action, title, run] of [['zoom-out', '−', () => changeZoom(viewZoom / 1.25)], ['zoom-in', '+', () => changeZoom(viewZoom * 1.25)], ['overview', 'Overview', () => { takeManual(); manualZoom = 1; invalidate(); }], ['pause', 'Pause & explore', () => { takeManual(); options.onPause?.(); invalidate(); }], ['resume', 'Resume journey', () => { manual = false; resume.hidden = true; options.onResume?.(); invalidate(); }]]) { const button = document.createElement('button'); button.type = 'button'; button.textContent = title; button.dataset.viewAction = action; if (action === 'pause') button.id = 'jcs-cinema-pause'; if (action === 'resume') button.id = 'jcs-cinema-journey-play'; button.setAttribute('aria-label', action === 'zoom-in' ? 'Zoom in' : action === 'zoom-out' ? 'Zoom out' : title); button.addEventListener('click', run); controls.append(button); }
+    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Outer haze'], ['architecture', 'Golden architecture']]) {
       const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', 'true');
       if (key === 'descents') b.title = 'Religious artwork: celestial origins are symbolic; dated destinations remain unchanged.';
-      b.addEventListener('click', () => { layer[key] = !layer[key]; b.setAttribute('aria-pressed', String(layer[key])); dirty = true; invalidate(); }); controls.append(b);
+      b.addEventListener('click', () => { layer[key] = !layer[key]; b.setAttribute('aria-pressed', String(layer[key])); dirty = true; invalidate(); }); layerControls.append(b);
     }
 
     function seeded(seed) { let n = seed >>> 0; return () => { n = (Math.imul(1664525, n) + 1013904223) >>> 0; return n / 4294967296; }; }
     function makeSky() {
-      sky = document.createElement('canvas'); sky.width = Math.ceil(width); sky.height = Math.ceil(height);
-      const c = sky.getContext('2d'), random = seeded(682109), w = width, h = height;
-      c.fillStyle = '#040812'; c.fillRect(0, 0, w, h);
-      const wash = c.createRadialGradient(w * .62, h * .34, 0, w * .56, h * .5, w * .8);
-      wash.addColorStop(0, '#0b1526'); wash.addColorStop(.55, '#080e1c'); wash.addColorStop(1, '#03060d'); c.fillStyle = wash; c.fillRect(0, 0, w, h);
-      // A seeded, abstract Milky Way band; this is not an astronomical simulation.
-      c.save(); c.translate(w * .5, h * .46); c.rotate(-.39);
-      for (let i = 0; i < 155; i++) {
-        const x = (random() - .5) * w * 1.7, y = (random() - .5) * h * .26, r = 24 + random() * 85;
-        const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, i % 3 ? 'rgba(87,109,151,.055)' : 'rgba(173,148,143,.048)'); g.addColorStop(1, 'rgba(38,49,75,0)'); c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+      sky = document.createElement('canvas'); sky.width = Math.ceil(width); sky.height = Math.ceil(height); skySignature = '';
+      const random = seeded(682109);
+      if (!skyDirections) {
+        skyDirections = Array.from({ length: 1550 }, (_, i) => ({ v: vec(random() * 360 - 180, Math.asin(random() * 2 - 1) / RAD), r: random() < .025 ? 1.2 : .4 + random() * .45, alpha: .15 + random() * .58, warm: i % 7 === 0 }));
+        skyClouds = Array.from({ length: 145 }, () => { const lon = random() * 360 - 180; return { v: vec(lon, Math.sin(lon * RAD) * 29 + (random() - .5) * 11), r: 28 + random() * 70 }; });
+        skyStamp = document.createElement('canvas'); skyStamp.width = skyStamp.height = 96; const c = skyStamp.getContext('2d'), g = c.createRadialGradient(48, 48, 0, 48, 48, 48); g.addColorStop(0, 'rgba(116,137,173,.115)'); g.addColorStop(.3, 'rgba(89,109,157,.055)'); g.addColorStop(1, 'rgba(43,62,94,0)'); c.fillStyle = g; c.fillRect(0, 0, 96, 96);
       }
-      c.restore();
-      const count = Math.min(1650, Math.round(w * h / 440));
-      for (let i = 0; i < count; i++) {
-        const x = random() * w, y = random() * h, a = .12 + random() * .57, r = random() < .035 ? 1.15 : .35 + random() * .4;
-        c.fillStyle = 'rgba(' + (i % 5 ? '173,193,218,' : '225,200,165,') + a + ')'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill();
-        if (r > 1) { c.globalAlpha = .16; c.fillRect(x - 3.5, y - .3, 7, .6); c.fillRect(x - .3, y - 3.5, .6, 7); c.globalAlpha = 1; }
-      }
-      // Cache the broad outer frame separately: toggling it never changes origins.
-      haze = document.createElement('canvas'); haze.width = Math.ceil(w); haze.height = Math.ceil(h);
+      haze = document.createElement('canvas'); haze.width = Math.ceil(width); haze.height = Math.ceil(height);
       const hc = haze.getContext('2d'); hc.translate(cx, hazeCY); hc.scale(hazeX, hazeY);
       const edge = hc.createRadialGradient(0, 0, .70, 0, 0, 1.18); edge.addColorStop(0, 'rgba(94,25,39,0)'); edge.addColorStop(.32, 'rgba(124,39,52,.025)'); edge.addColorStop(.58, 'rgba(164,55,62,.12)'); edge.addColorStop(.78, 'rgba(111,28,45,.075)'); edge.addColorStop(1, 'rgba(76,16,31,0)'); hc.fillStyle = edge; hc.fillRect(-1.3, -1.3, 2.6, 2.6);
+      architecture = document.createElement('canvas'); architecture.width = Math.ceil(width); architecture.height = Math.ceil(height);
+      const ac = architecture.getContext('2d'), unit = Math.min(width, height) * .13;
+      for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+        ac.save(); ac.translate(sx > 0 ? width * .035 : width * .965, sy > 0 ? height * .045 : height * .955); ac.scale(sx, sy);
+        for (let tower = 0; tower < 5; tower++) {
+          const x = tower * unit * .23, y = Math.abs(tower - 2) * unit * .11, w = unit * .17, h = unit * (.72 + (tower % 3) * .17);
+          ac.fillStyle = tower % 2 ? 'rgba(148,108,43,.12)' : 'rgba(210,166,77,.10)'; ac.strokeStyle = 'rgba(221,183,99,.39)'; ac.lineWidth = .7;
+          ac.beginPath(); ac.moveTo(x, y + h); ac.lineTo(x, y + w); ac.lineTo(x + w / 2, y); ac.lineTo(x + w, y + w); ac.lineTo(x + w, y + h); ac.lineTo(x + w / 2, y + h + w * .4); ac.closePath(); ac.fill(); ac.stroke();
+          ac.beginPath(); ac.moveTo(x + w / 2, y); ac.lineTo(x + w / 2, y + h + w * .4); ac.moveTo(x, y + w); ac.lineTo(x + w, y + w); ac.moveTo(x, y + h * .62); ac.lineTo(x + w, y + h * .46); ac.stroke();
+        }
+        ac.strokeStyle = 'rgba(206,159,73,.27)'; ac.beginPath(); ac.moveTo(0, unit * 1.2); ac.lineTo(unit * 1.15, unit * 1.2); ac.lineTo(unit * 1.3, unit * 1.04); ac.lineTo(unit * .16, unit * 1.04); ac.closePath(); ac.stroke(); ac.restore();
+      }
       if (!galaxySprites) galaxySprites = makeGalaxies();
+    }
+    function skyProjection() {
+      const project = projection(currentCamera), scale = Math.pow(viewZoom, .28);
+      return v => { const p = project(v), d = .9 + p.z * .25; return { x: cx + p.ux / d * width * .65 * scale, y: height * .5 + p.uy / d * height * .66 * scale, z: p.z }; };
+    }
+    function drawSky() {
+      if (!layer.background || !sky) { ctx.fillStyle = '#040812'; ctx.fillRect(0, 0, width, height); return; }
+      const signature = [Math.round(currentCamera.lon * 10), Math.round(currentCamera.lat * 10), Math.round(viewZoom * 60), width, height].join('|');
+      if (signature !== skySignature) {
+        skySignature = signature; const c = sky.getContext('2d'), project = skyProjection(); c.fillStyle = '#040812'; c.fillRect(0, 0, width, height);
+        const wash = c.createRadialGradient(cx, height * .4, 0, cx, height * .5, width * .7); wash.addColorStop(0, '#0b1526'); wash.addColorStop(1, '#03060d'); c.fillStyle = wash; c.fillRect(0, 0, width, height);
+        for (const cloud of skyClouds) { const p = project(cloud.v); if (p.z < .03 || !onScreen(p, -100)) continue; c.drawImage(skyStamp, p.x - cloud.r, p.y - cloud.r, cloud.r * 2, cloud.r * 2); }
+        for (const point of skyDirections) { const p = project(point.v); if (p.z < .02 || !onScreen(p, -2)) continue; c.fillStyle = 'rgba(' + (point.warm ? '222,203,174,' : '177,197,222,') + point.alpha + ')'; c.fillRect(p.x, p.y, point.r, point.r); }
+      }
+      ctx.drawImage(sky, 0, 0, width, height);
     }
     function makeGalaxies() {
       const make = () => { const c = document.createElement('canvas'); c.width = c.height = 256; return c; };
@@ -7933,48 +8037,42 @@ window.JCSGospelArt=Object.freeze({draw});
       }
       return sprites;
     }
+    const galaxyDirections = [['spiral', -14, 43, .23, .65, -.42], ['elliptical', 92, 44, .2, .69, .4], ['irregular', 85, -15, .21, .82, -.25], ['spiral', -5, -20, .17, .22, .25], ['elliptical', 165, 35, .18, .68, -.2], ['spiral', -120, 29, .22, .58, .5], ['irregular', -72, -34, .18, .8, -.4], ['spiral', 150, -38, .17, .3, -.3]].map(([kind, lon, lat, size, tilt, angle]) => ({ kind, v: vec(lon, lat), size, tilt, angle }));
     function drawGalaxies(position, state) {
       if (!layer.background || !galaxySprites) return;
-      // Fast inner and slower outer components suggest differential rotation.
-      // Speeds are deliberately accelerated; wall time never enters this phase.
-      const t = reduced.matches || state.animationsEnabled === false ? 0 : (position + 4) / 2030;
-      const mobile = width < 550, scale = Math.min(width, height);
-      const scenes = mobile ? [['spiral', .15, .28, .24, .62, -.42], ['elliptical', .82, .25, .19, .7, .4], ['irregular', .84, .69, .21, .8, -.25]] : [['spiral', .15, .30, .25, .65, -.42], ['elliptical', .84, .28, .21, .69, .4], ['irregular', .85, .68, .22, .82, -.25], ['spiral', .13, .69, .18, .22, .25]];
-      for (const [kind, x, y, factor, tilt, angle] of scenes) {
-        const sprite = galaxySprites[kind], size = scale * factor; ctx.save(); ctx.translate(width * x, height * y); ctx.rotate(angle); ctx.scale(1, tilt); ctx.drawImage(sprite.core, -size / 2, -size / 2, size, size);
-        if (kind === 'spiral') { ctx.save(); ctx.rotate(t * .7); ctx.drawImage(sprite.outer, -size / 2, -size / 2, size, size); ctx.restore(); ctx.rotate(t * 1.2); ctx.drawImage(sprite.inner, -size / 2, -size / 2, size, size); }
-        ctx.restore();
-        if (!mobile || kind === 'spiral') { ctx.font = '8px ui-sans-serif,system-ui,sans-serif'; ctx.fillStyle = '#8192a4'; ctx.textAlign = 'center'; ctx.fillText(kind === 'spiral' && tilt < .3 ? 'Edge-on spiral' : kind[0].toUpperCase() + kind.slice(1), width * x, height * y + size * tilt * .58 + 11); ctx.textAlign = 'left'; }
+      const t = reduced.matches || state.animationsEnabled === false ? 0 : (position + 4) / 2030, project = skyProjection();
+      for (const item of galaxyDirections) {
+        const p = project(item.v); if (p.z < .08 || !onScreen(p, -80)) continue;
+        const sprite = galaxySprites[item.kind], size = Math.min(width, height) * item.size * Math.pow(viewZoom, .28); ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(item.angle - currentCamera.lon * .001); ctx.scale(1, item.tilt); ctx.drawImage(sprite.core, -size / 2, -size / 2, size, size);
+        if (item.kind === 'spiral') { ctx.save(); ctx.rotate(t * .7); ctx.drawImage(sprite.outer, -size / 2, -size / 2, size, size); ctx.restore(); ctx.rotate(t * 1.2); ctx.drawImage(sprite.inner, -size / 2, -size / 2, size, size); } ctx.restore();
       }
     }
+    function drawArchitecture() { if (layer.architecture && architecture) { ctx.save(); ctx.globalAlpha = .55 + density * .45; ctx.drawImage(architecture, Math.sin(currentCamera.lon * RAD) * 5, Math.sin(currentCamera.lat * RAD) * 3, width, height); ctx.restore(); } }
 
     function resize() {
       if (disposed) return;
       const rect = host.getBoundingClientRect(); width = Math.max(240, Math.round(rect.width || host.clientWidth || 800)); height = Math.max(360, Math.round(rect.height || host.clientHeight || 520));
       const dpr = Math.min(1.5, global.devicePixelRatio || 1); canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      radius = Math.min(width * .29, height * .28); cx = width * .5; cy = height * (width < 550 ? .56 : .51); hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
+      baseRadius = Math.min(width * .30, height * .32); radius = baseRadius * viewZoom; cx = width * .5; cy = height * .52; hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
     }
     function camera(position, stars) {
-      const valid = stars.filter(s => finitePoint(s) && Number.isFinite(+s.landing));
-      const signature = valid.map(s => [s.id, s.lon, s.lat, s.landing].join(':')).join('|');
-      if (signature !== cameraSignature) {
-        cameraSignature = signature; cameraKeys = valid.map(s => ({ at: +s.landing, lon: +s.lon, lat: clamp(+s.lat * .52, -32, 42) })).sort((a, b) => a.at - b.at);
-        // Co-located timeline moments share one stable camera target.
-        cameraKeys = cameraKeys.filter((k, i, all) => i === 0 || k.at !== all[i - 1].at);
-        if (cameraKeys.length) { let last = cameraKeys[0]; last.lon -= 14; for (let i = 1; i < cameraKeys.length; i++) { const k = cameraKeys[i]; k.lon -= 14; while (k.lon - last.lon > 180) k.lon -= 360; while (k.lon - last.lon < -180) k.lon += 360; if (k.at - last.at > 300) k.lon += 360; last = k; } }
+      const base = { lon: 22 + (position + 4) * .12, lat: 18, zoom: 1 };
+      let total = 0, maximum = 0, target = [0, 0, 0];
+      for (const star of stars) {
+        if (!finitePoint(star) || !Number.isFinite(+star.landing)) continue;
+        const departure = Number.isFinite(+star.departure) ? +star.departure : +star.landing - 14, duration = Math.max(1, +star.landing - departure), entry = departure - duration * .8, exit = +star.landing + duration * .65;
+        const weight = ease(clamp((position - entry) / (duration * .8), 0, 1)) * ease(clamp((exit - position) / (duration * .65), 0, 1));
+        if (weight <= 0) continue; total += weight; maximum = Math.max(maximum, weight); const v = toVector(star); target = target.map((n, i) => n + v[i] * weight);
       }
-      if (!cameraKeys.length) return { lon: (position + 4) * .16 - 20, lat: 18 };
-      const first = cameraKeys[0], last = cameraKeys[cameraKeys.length - 1];
-      if (position <= first.at) return { lon: first.lon - Math.min(100, (first.at - position) * .13), lat: first.lat };
-      if (position >= last.at) return { lon: last.lon + (position - last.at) * .14, lat: last.lat };
-      let lo = 0, hi = cameraKeys.length - 1; while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (cameraKeys[mid].at <= position) lo = mid; else hi = mid; }
-      const a = cameraKeys[lo], b = cameraKeys[hi], t = ease(clamp((position - a.at) / (b.at - a.at), 0, 1));
-      return { lon: mix(a.lon, b.lon, t), lat: mix(a.lat, b.lat, t) };
+      density = ease(clamp((total - 2) / 4, 0, 1));
+      if (total > 0) { const lon = Math.atan2(target[0], target[2]) / RAD, lat = Math.atan2(target[1], Math.hypot(target[0], target[2])) / RAD, influence = maximum * (1 - density); base.lon += (((lon - base.lon) % 360 + 540) % 360 - 180) * influence; base.lat = mix(base.lat, clamp(lat, -65, 65), influence); base.zoom += influence * 1.1; }
+      return base;
     }
     function projection(view) {
       const a = view.lon * RAD, b = view.lat * RAD, sa = Math.sin(a), ca = Math.cos(a), sb = Math.sin(b), cb = Math.cos(b);
       return v => { const x = v[0] * ca - v[2] * sa, zz = v[0] * sa + v[2] * ca, y = v[1] * cb - zz * sb, z = v[1] * sb + zz * cb; return { x: cx + x * radius, y: cy - y * radius, z, ux: x, uy: -y }; };
     }
+    function onScreen(p, padding = 0) { return p.x >= padding && p.x <= width - padding && p.y >= padding && p.y <= height - padding; }
     function horizon(a, b) { const t = a.z / (a.z - b.z), x = mix(a.ux, b.ux, t), y = mix(a.uy, b.uy, t), d = Math.hypot(x, y) || 1; return { x: cx + x / d * radius, y: cy + y / d * radius, z: 0, ux: x / d, uy: y / d }; }
     function drawLand(project) {
       ctx.fillStyle = '#1e3b43'; ctx.strokeStyle = 'rgba(140,180,172,.26)'; ctx.lineWidth = .6;
@@ -8011,25 +8109,26 @@ window.JCSGospelArt=Object.freeze({draw});
       ctx.strokeStyle = 'rgba(93,140,160,.13)'; ctx.lineWidth = .5; grid.forEach(points => lineOnSphere(points, project));
       const shadow = ctx.createRadialGradient(cx - radius * .43, cy - radius * .35, radius * .15, cx + radius * .04, cy + radius * .06, radius * 1.2); shadow.addColorStop(0, 'rgba(154,204,211,.04)'); shadow.addColorStop(.46, 'rgba(0,3,13,.06)'); shadow.addColorStop(.8, 'rgba(0,3,12,.36)'); shadow.addColorStop(1, 'rgba(0,2,8,.88)'); ctx.fillStyle = shadow; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2); ctx.restore();
       ctx.strokeStyle = 'rgba(127,198,215,.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.stroke();
+      if (density > .02) { const gold = ctx.createRadialGradient(cx, cy, radius * .94, cx, cy, radius * 1.15); gold.addColorStop(0, 'rgba(198,144,55,0)'); gold.addColorStop(.3, 'rgba(227,181,85,' + density * .18 + ')'); gold.addColorStop(1, 'rgba(165,112,29,0)'); ctx.fillStyle = gold; ctx.fillRect(cx - radius * 1.15, cy - radius * 1.15, radius * 2.3, radius * 2.3); }
     }
     function star(x, y, r, color, alpha) { ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r * .23, y - r * .23); ctx.lineTo(x + r, y); ctx.lineTo(x + r * .23, y + r * .23); ctx.lineTo(x, y + r); ctx.lineTo(x - r * .23, y + r * .23); ctx.lineTo(x - r, y); ctx.lineTo(x - r * .23, y - r * .23); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1; }
     function label(text, x, y, color, font = '10px ui-sans-serif,system-ui,sans-serif', priority = false) {
-      if (!text) return; ctx.font = font; const w = ctx.measureText(text).width; x = clamp(x, 10, width - w - 10); y = clamp(y, 94, height - 104);
+      if (!text || !onScreen({ x, y }, 8)) return; ctx.font = font; const w = ctx.measureText(text).width; if (w > width - 24) return; x = clamp(x, 10, width - w - 10); y = clamp(y, 18, height - 12);
       const box = { x: x - 5, y: y - 12, w: w + 10, h: 18 }; if (!priority && labelBoxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) return;
-      labelBoxes.push(box); ctx.fillStyle = 'rgba(3,8,17,.82)'; ctx.fillRect(x - 4, y - 11, w + 8, 16); ctx.fillStyle = color; ctx.fillText(text, x, y);
+      labelBoxes.push(box); ctx.fillStyle = 'rgba(3,8,17,.56)'; ctx.fillRect(x - 4, y - 11, w + 8, 16); ctx.fillStyle = color; ctx.fillText(text, x, y);
     }
     function selected(item, value) { if (value == null) return false; return typeof value === 'object' ? item.id === value.id : String(item.id) === String(value); }
     function drawNodes(state, project) {
-      const nodes = state.nodes || [], labels = state.labels || [], allowLabels = state.layers?.labels !== false;
-      if (state.layers?.nexuses !== false) for (const node of nodes) {
-        if (!finitePoint(node) || node.visible === false) continue; const p = project(toVector(node)); if (p.z < .045) continue;
+      const nodes = state.nodes || [], labels = state.labels || [], allowLabels = state.layers?.labels !== false, budget = Math.floor(3 + (viewZoom - 1) * 7);
+      const nodeRows = nodes.filter(n => finitePoint(n) && n.visible !== false).map(node => ({ node, p: project(toVector(node)) })).filter(r => r.p.z > .045 && onScreen(r.p, 6)).sort((a, b) => Number(b.node.selected) - Number(a.node.selected) || b.p.z - a.p.z); let nodeLabels = 0;
+      if (state.layers?.nexuses !== false) for (const { node, p } of nodeRows) {
         const focused = node.selected || selected(node, state.selected), r = focused ? 5.5 : 2.7; ctx.globalAlpha = .4 + p.z * .6; ctx.strokeStyle = focused ? '#fae1b1' : '#c79b6d'; ctx.fillStyle = '#eed1a1'; ctx.lineWidth = 1;
         ctx.beginPath(); ctx.arc(p.x, p.y, r + 3.5, 0, TAU); ctx.stroke(); ctx.beginPath(); ctx.arc(p.x, p.y, r * .5, 0, TAU); ctx.fill(); ctx.globalAlpha = 1; hits.push({ x: p.x, y: p.y, item: node });
-        if (allowLabels && (focused || nodes.length < 9)) label(node.label || node.name || '', p.x + 10, p.y - 8, '#d8c4a7');
+        if (allowLabels && (focused || nodeLabels < budget)) { const before = labelBoxes.length; label(node.label || node.name || '', p.x + 10, p.y - 8, '#d8c4a7'); if (labelBoxes.length > before) nodeLabels++; }
       }
       // Rank after projection, so all enabled settlements and polities get a chance.
-      const geographicLabels = labels.filter(item => finitePoint(item) && item.visible !== false).map(item => ({ item, p: project(toVector(item)) })).filter(v => v.p.z > .25).sort((a, b) => Number(selected(b.item, state.selected)) - Number(selected(a.item, state.selected)) || b.p.z - a.p.z);
-      { let drawn = 0; for (const { item, p } of geographicLabels) { if (drawn >= 7) break; const before = labelBoxes.length; label(item.name || item.label || '', p.x + 6, p.y - 5, '#90a6b5', '9px ui-sans-serif,system-ui,sans-serif'); if (labelBoxes.length > before) { hits.push({ x: p.x, y: p.y, item }); drawn++; } } }
+      const geographicLabels = labels.filter(item => finitePoint(item) && item.visible !== false).map(item => ({ item, p: project(toVector(item)) })).filter(v => v.p.z > .25 && onScreen(v.p, 6)).sort((a, b) => Number(selected(b.item, state.selected)) - Number(selected(a.item, state.selected)) || b.p.z - a.p.z);
+      { let drawn = 0; for (const { item, p } of geographicLabels) { if (drawn >= budget + 2) break; const before = labelBoxes.length; label(item.name || item.label || '', p.x + 6, p.y - 5, '#a5b9c7', Math.min(12, 9 + viewZoom - 1) + 'px ui-sans-serif,system-ui,sans-serif'); if (labelBoxes.length > before) { hits.push({ x: p.x, y: p.y, item }); drawn++; } } }
     }
     function starOrigin(starItem, fallbackIndex = 0) {
       const index = Number.isFinite(+starItem.star) ? +starItem.star : fallbackIndex, n = hash(starItem.id || starItem.name || index);
@@ -8083,19 +8182,19 @@ window.JCSGospelArt=Object.freeze({draw});
       for (const word of String(text || '').split(/\s+/)) { const next = line ? line + ' ' + word : word; if (line && ctx.measureText(next).width > maxWidth) { lines.push(line); line = word; } else line = next; }
       if (line) lines.push(line); if (!lines.length) return;
       const w = Math.max(...lines.map(s => ctx.measureText(s).width)) + 12, h = lines.length * 13 + 7;
-      const candidates = [[x + size / 2 + 7, y - h / 2], [x - w / 2, y + size / 2 + 5], [x - w - size / 2 - 7, y - h / 2], [x - w / 2, y - size / 2 - h - 5], [x + size / 2 + 50, y - h / 2], [x - w - size / 2 - 50, y - h / 2]].map(([a, b]) => ({ x: clamp(a, 8, width - w - 8), y: clamp(b, 91, height - h - 122), w, h }));
+      const candidates = [[x + size / 2 + 7, y - h / 2], [x - w / 2, y + size / 2 + 5], [x - w - size / 2 - 7, y - h / 2], [x - w / 2, y - size / 2 - h - 5], [x + size / 2 + 50, y - h / 2], [x - w - size / 2 - 50, y - h / 2]].map(([a, b]) => ({ x: clamp(a, 8, width - w - 8), y: clamp(b, 8, height - h - 8), w, h }));
       const box = candidates.find(a => !labelBoxes.some(b => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y)) || candidates[0];
-      labelBoxes.push(box); ctx.fillStyle = 'rgba(4,15,26,.94)'; ctx.fillRect(box.x, box.y, w, h); ctx.fillStyle = color; lines.forEach((s, i) => ctx.fillText(s, box.x + 6, box.y + 13 + i * 13));
+      labelBoxes.push(box); ctx.fillStyle = 'rgba(4,15,26,.58)'; ctx.fillRect(box.x, box.y, w, h); ctx.fillStyle = color; lines.forEach((s, i) => ctx.fillText(s, box.x + 6, box.y + 13 + i * 13));
       return box;
     }
     function drawGospel(state, project, rawPosition) {
       const gospel = state.gospel; if (!gospel?.enabled) return;
       const phase = reduced.matches || state.animationsEnabled === false ? 0 : rawPosition * .75;
-      const rows = (gospel.markers || []).filter(m => m.visible !== false && finitePoint(m)).map(m => ({ item: m, p: project(toVector(m)), focus: !!m.selected || m.id === gospel.selectedId || m.id === gospel.focus?.id })).filter(r => r.p.z > .055);
+      const rows = (gospel.markers || []).filter(m => m.visible !== false && finitePoint(m) && (m.kind !== 'crucifixion' || rawPosition >= 33)).map(m => ({ item: m, p: project(toVector(m)), focus: !!m.selected || m.id === gospel.selectedId || m.id === gospel.focus?.id, retreat: m.kind === 'nativity' ? clamp(Number.isFinite(+m.retreat) ? +m.retreat : (rawPosition + 4) / 4, 0, 1) : 0 })).filter(r => r.p.z > .055 || r.item.kind === 'nativity' && r.retreat > .1);
       // Nearby Gospel places retain their geographic anchors. Short leaders separate
       // the artwork so the Jerusalem scenes never cover Jesus's cross.
       const offsets = { annunciation: [-48, -38], baptism: [45, -40], eucharist: [-49, 1], jesus: [0, -22], crucifixion: [0, -24], resurrection: [48, 3], pentecost: [43, 40] };
-      const isCross = m => m.kind === 'crucifixion' || m.kind === 'jesus';
+      const isCross = m => m.kind === 'crucifixion';
       rows.sort((a, b) => Number(a.focus) - Number(b.focus) || Number(isCross(a.item)) - Number(isCross(b.item)));
       const scale = width < 500 ? .8 : 1;
       for (const row of rows) {
@@ -8106,18 +8205,23 @@ window.JCSGospelArt=Object.freeze({draw});
           // Lift along Bethlehem's local north tangent and surface normal in world
           // coordinates. The celestial star follows globe rotation, never the screen.
           const lon = +m.lon * RAD, lat = +m.lat * RAD, ground = toVector(m), north = [-Math.sin(lat) * Math.sin(lon), Math.cos(lat), -Math.sin(lat) * Math.cos(lon)];
-          const high = project(ground.map((v, i) => v * 1.25 + north[i] * 1.24)); x = high.x; y = high.y;
+          const high = project(ground.map((v, i) => v * 1.25 + north[i] * 1.24)), heaven = skyProjection()(vec(-55, 66)), travel = ease(row.retreat);
+          const dx = (heaven.x - cx) / hazeX, dy = (heaven.y - hazeCY) / hazeY, far = 1.23 / Math.max(.2, Math.hypot(dx, dy));
+          x = mix(high.x, cx + dx * hazeX * far, travel); y = mix(high.y, hazeCY + dy * hazeY * far, travel);
+          if (row.retreat > .9 && heaven.z < .02) continue;
         }
-        const size = (isCross(m) ? row.focus ? 76 : 64 : m.kind === 'nativity' ? 48 : row.focus ? 34 : 25) * scale;
+        const size = (isCross(m) ? clamp(28 + (viewZoom - 1) * 8, 28, 42) : m.kind === 'nativity' ? mix(36, 8, ease(row.retreat)) : row.focus ? 24 : 18) * scale;
+        if (!onScreen({ x, y }, -size)) continue;
         Object.assign(row, { x, y, size }); labelBoxes.push({ x: x - size / 2 - 3, y: y - size / 2 - 3, w: size + 6, h: size + 6 });
         ctx.save(); ctx.shadowBlur = 0; ctx.shadowColor = 'transparent'; ctx.filter = 'none'; ctx.globalAlpha = 1;
-        if (clustered || m.kind === 'nativity') { ctx.strokeStyle = m.kind === 'nativity' ? 'rgba(229,217,173,.16)' : 'rgba(115,180,204,.47)'; ctx.lineWidth = .75; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(x, y); ctx.stroke(); ctx.fillStyle = '#91c9dc'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, TAU); ctx.fill(); }
-        if (global.JCSGospelArt && typeof global.JCSGospelArt.draw === 'function') global.JCSGospelArt.draw(ctx, m.kind, x, y, size, phase);
+        if (m.kind !== 'nativity' && clustered) { ctx.strokeStyle = 'rgba(115,180,204,.35)'; ctx.lineWidth = .75; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(x, y); ctx.stroke(); ctx.fillStyle = '#91c9dc'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, TAU); ctx.fill(); }
+        if (m.kind === 'nativity' && global.JCSGospelArt?.draw) { if (!birthSprite) { birthSprite = document.createElement('canvas'); birthSprite.width = birthSprite.height = 160; global.JCSGospelArt.draw(birthSprite.getContext('2d'), 'nativity', 80, 80, 48, 0); } const fullSize = size * 160 / 48; ctx.globalAlpha = mix(1, .25, row.retreat); ctx.drawImage(birthSprite, x - fullSize / 2, y - fullSize / 2, fullSize, fullSize); }
+        else if (global.JCSGospelArt && typeof global.JCSGospelArt.draw === 'function') global.JCSGospelArt.draw(ctx, m.kind, x, y, size, phase);
         else { ctx.fillStyle = '#123d5b'; ctx.strokeStyle = '#7bb9df'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, size * .29, 0, TAU); ctx.fill(); ctx.stroke(); }
         ctx.restore();
         const item = { ...m, kind: 'gospel', gospelId: m.gospelId || m.id, gospelKind: m.kind }, hit = { x, y, radius: Math.max(18, size / 2 + 5), priority: 2, item }; hits.push(hit); row.hit = hit;
       }
-      const labeled = rows.filter(r => r.focus || isCross(r.item) || r.item.kind === 'nativity').sort((a, b) => Number(b.focus) - Number(a.focus) || Number(b.item.kind === 'nativity') - Number(a.item.kind === 'nativity')).slice(0, 2);
+      const labeled = rows.filter(r => r.hit && (r.focus || isCross(r.item) || r.item.kind === 'nativity' && r.retreat < .65)).sort((a, b) => Number(b.focus) - Number(a.focus) || Number(b.item.kind === 'nativity') - Number(a.item.kind === 'nativity')).slice(0, 2);
       for (const row of labeled) { const m = row.item, title = m.kind === 'nativity' ? 'Star of Bethlehem' : m.kind === 'crucifixion' ? 'Jesus · Crucifixion' : m.kind === 'jesus' && (m.gospelId || m.id) === 'nativity' ? 'Jesus · Birth at Bethlehem' : m.title; row.hit.bounds = gospelLabel(title, row.x, row.y, row.size, m.kind === 'nativity' ? '#efe3b9' : '#a6d8f1'); }
     }
     function captions(state, position) {
@@ -8130,9 +8234,12 @@ window.JCSGospelArt=Object.freeze({draw});
       const source = gospel ? [gospel.dateLabel, gospel.summary].filter(Boolean).join(' · ') : typeof state.caption === 'string' ? state.caption : state.caption?.text || (record?.artisticOnly ? 'Undated artistic opening · no historical fall location or date is asserted.' : record?.title ? 'Historical account · ' + record.title : '');
       const sourceUrl = gospel ? gospel.sourceUrl || '' : record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
       const sourceLabel = gospel?.sourceLabel || record?.sourceLabel || 'Source';
-      const signature = [year, title, source, sourceUrl, sourceLabel, !!gospel, manual].join('|'); if (signature === lastCaption) return; lastCaption = signature;
+      const fraction = clamp((position + 4) / 2030, 0, 1); progressEl.value = position + 4;
+      const clock = seconds => Math.floor(seconds / 60) + ':' + String(Math.floor(seconds % 60)).padStart(2, '0');
+      progressLabel.textContent = state.duration > 0 ? clock(fraction * state.duration) + ' / ' + clock(state.duration) : (fraction * 100).toFixed(1) + '%';
+      const signature = [year, title, source, sourceUrl, sourceLabel, !!gospel, manual, density > .35].join('|'); if (signature === lastCaption) return; lastCaption = signature;
       yearEl.textContent = dateLabel(year); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
-      panel.dataset.gospelFocus = String(!!gospel); copyEl.textContent = gospel ? 'Gospel imagery · biblical narrative. Modern coastlines and country outlines are reference geography.' : 'Symbolic Watcher imagery · separately sourced history. Modern coastlines and country outlines are reference geography.';
+      footer.dataset.gospelFocus = String(!!gospel); copyEl.textContent = (gospel ? 'Gospel imagery · biblical narrative.' : 'Symbolic Watcher imagery · separately sourced history.') + (density > .35 ? ' Golden atmosphere marks overlapping visual journeys.' : '');
       if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = sourceLabel; sourceEl.append(' · ', link); }
       const status = 'Cinematic globe, ' + dateLabel(year) + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
     }
@@ -8141,33 +8248,162 @@ window.JCSGospelArt=Object.freeze({draw});
       const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : Number.isFinite(+state.year) ? +state.year : -4, -4, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
       const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
       if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
-      ctx.clearRect(0, 0, width, height); if (layer.background && sky) ctx.drawImage(sky, 0, 0, width, height); else { ctx.fillStyle = '#040812'; ctx.fillRect(0, 0, width, height); }
-      drawGalaxies(rawPosition, state); if (layer.ring && haze) ctx.drawImage(haze, 0, 0, width, height);
       const gospelFocus = state.gospel?.enabled && finitePoint(state.gospel.focus) ? state.gospel.focus : null;
       const guided = camera(position, state.stars || []);
       if (gospelFocus) { const weight = ease(clamp(Number.isFinite(+state.gospel.focusWeight) ? +state.gospel.focusWeight : 1, 0, 1)), delta = ((+gospelFocus.lon - guided.lon) % 360 + 540) % 360 - 180; guided.lon += delta * weight; guided.lat = mix(guided.lat, clamp(+gospelFocus.lat, -75, 75), weight); }
-      currentCamera = manual ? { lon: yaw, lat: pitch } : guided; const project = projection(currentCamera); hits = []; labelBoxes = [];
+      if (state.gospel?.enabled) { const approach = ease(clamp(1 - Math.abs(position - 33) / 7, 0, 1)); guided.zoom = Math.max(guided.zoom, 1 + approach * .95); }
+      currentCamera = manual ? { lon: yaw, lat: pitch } : guided; viewZoom = clamp(manual ? manualZoom : guided.zoom, 1, 3.5); radius = baseRadius * viewZoom; const project = projection(currentCamera); hits = []; labelBoxes = [];
+      ctx.clearRect(0, 0, width, height); drawSky(); drawGalaxies(rawPosition, state); if (layer.ring && haze) ctx.drawImage(haze, 0, 0, width, height); drawArchitecture();
       drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
-      const vignette = ctx.createLinearGradient(0, height * .69, 0, height); vignette.addColorStop(0, 'rgba(3,7,15,0)'); vignette.addColorStop(1, 'rgba(3,7,15,.94)'); ctx.fillStyle = vignette; ctx.fillRect(0, height * .69, width, height * .31); drawGospel(state, project, rawPosition); captions(state, position);
+      drawGospel(state, project, rawPosition); captions(state, position);
     }
     function frame(now) { raf = 0; if (!active || disposed || document.hidden) return; if (!lastFrame || now - lastFrame >= 1000 / 24) { lastFrame = now; draw(); } raf = requestAnimationFrame(frame); }
     function invalidate() { dirty = true; if (active && !document.hidden) { draw(); if (!raf) raf = requestAnimationFrame(frame); } }
-    function start() { if (disposed) return; active = true; lastFrame = 0; resize(); invalidate(); }
-    function stop() { active = false; cancelAnimationFrame(raf); raf = 0; lastFrame = 0; }
+    function start() { if (disposed) return; active = true; toolbar.hidden = false; footer.hidden = false; lastFrame = 0; resize(); invalidate(); }
+    function stop() { active = false; toolbar.hidden = true; footer.hidden = true; cancelAnimationFrame(raf); raf = 0; lastFrame = 0; }
     function visibility() { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else if (active) invalidate(); }
     function gospelChange() { const selectedId = getState()?.gospel?.selectedId || ''; if (selectedId !== lastGospelSelected) { manual = false; resume.hidden = true; lastGospelSelected = selectedId; } invalidate(); }
-    function pointerDown(e) { if (e.button !== 0) return; drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lon: currentCamera.lon, lat: currentCamera.lat, moved: false }; canvas.setPointerCapture(e.pointerId); }
-    function pointerMove(e) { if (!drag || drag.id !== e.pointerId) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.hypot(dx, dy) < 4 && !drag.moved) return; drag.moved = true; manual = true; yaw = drag.lon - dx / radius * 56; pitch = clamp(drag.lat + dy / radius * 56, -78, 78); resume.hidden = false; invalidate(); }
-    function pointerUp(e) { if (!drag || drag.id !== e.pointerId) return; if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < (h.radius || 18) || h.bounds && x >= h.bounds.x && x <= h.bounds.x + h.bounds.w && y >= h.bounds.y && y <= h.bounds.y + h.bounds.h).sort((a, b) => (b.priority || 0) - (a.priority || 0) || a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null; if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId); }
-    function keyDown(e) { const delta = { ArrowLeft: [-9, 0], ArrowRight: [9, 0], ArrowUp: [0, 7], ArrowDown: [0, -7] }[e.key]; if (!delta) return; e.preventDefault(); if (!manual) { yaw = currentCamera.lon; pitch = currentCamera.lat; } manual = true; yaw += delta[0]; pitch = clamp(pitch + delta[1], -78, 78); resume.hidden = false; invalidate(); }
-    canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown);
+    function takeManual() { if (!manual) { yaw = currentCamera.lon; pitch = currentCamera.lat; manualZoom = viewZoom; } manual = true; resume.hidden = false; }
+    function changeZoom(next) { takeManual(); manualZoom = clamp(next, 1, 3.5); invalidate(); }
+    function pointerDown(e) {
+      if (e.button !== 0 && e.pointerType !== 'touch') return; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); canvas.setPointerCapture(e.pointerId);
+      if (pointers.size === 2) { takeManual(); const [a, b] = Array.from(pointers.values()); pinch = { distance: Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), zoom: viewZoom, x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, lon: yaw, lat: pitch }; drag = null; }
+      else if (pointers.size === 1) drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lon: currentCamera.lon, lat: currentCamera.lat, moved: false };
+    }
+    function pointerMove(e) {
+      if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pinch && pointers.size >= 2) { const [a, b] = Array.from(pointers.values()); manualZoom = clamp(pinch.zoom * Math.hypot(a.x - b.x, a.y - b.y) / pinch.distance, 1, 3.5); yaw = pinch.lon - ((a.x + b.x) / 2 - pinch.x) / radius * 56; pitch = clamp(pinch.lat + ((a.y + b.y) / 2 - pinch.y) / radius * 56, -78, 78); invalidate(); return; }
+      if (!drag || drag.id !== e.pointerId) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.hypot(dx, dy) < 4 && !drag.moved) return; drag.moved = true; takeManual(); yaw = drag.lon - dx / radius * 56; pitch = clamp(drag.lat + dy / radius * 56, -78, 78); invalidate();
+    }
+    function pointerUp(e) {
+      const wasPinch = !!pinch; pointers.delete(e.pointerId); if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+      if (wasPinch) { pinch = null; const remaining = Array.from(pointers.entries())[0]; drag = remaining ? { id: remaining[0], x: remaining[1].x, y: remaining[1].y, lon: yaw, lat: pitch, moved: true } : null; return; }
+      if (!drag || drag.id !== e.pointerId) return;
+      if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < (h.radius || 18) || h.bounds && x >= h.bounds.x && x <= h.bounds.x + h.bounds.w && y >= h.bounds.y && y <= h.bounds.y + h.bounds.h).sort((a, b) => (b.priority || 0) - (a.priority || 0) || a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null;
+    }
+    function wheel(e) { e.preventDefault(); changeZoom(viewZoom * Math.exp(-clamp(e.deltaY, -240, 240) * .0025)); }
+    function keyDown(e) {
+      if (['+', '=', '-', '_', '0', 'Home'].includes(e.key)) { e.preventDefault(); if (e.key === '0' || e.key === 'Home') changeZoom(1); else changeZoom(viewZoom * (e.key === '-' || e.key === '_' ? .8 : 1.25)); return; }
+      const delta = { ArrowLeft: [-9, 0], ArrowRight: [9, 0], ArrowUp: [0, 7], ArrowDown: [0, -7] }[e.key]; if (!delta) return; e.preventDefault(); takeManual(); yaw += delta[0]; pitch = clamp(pitch + delta[1], -78, 78); invalidate();
+    }
+    canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown); canvas.addEventListener('wheel', wheel, { passive: false });
     document.addEventListener('visibilitychange', visibility); document.addEventListener('jcs:gospel-change', gospelChange); reduced.addEventListener('change', invalidate);
     const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => resize()) : null; observer?.observe(host);
     if (!observer) global.addEventListener('resize', resize);
-    return { start, stop, resize, destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); panel.remove(); vectorCache.clear(); sky = null; haze = null; galaxySprites = null; } };
+    return { start, stop, resize, controls: toolbar, footer, getViewState: () => ({ zoom: viewZoom, manual, lon: currentCamera.lon, lat: currentCamera.lat }), destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); pointers.clear(); panel.remove(); toolbar.remove(); footer.remove(); vectorCache.clear(); sky = null; haze = null; galaxySprites = null; architecture = null; skyStamp = null; birthSprite = null; } };
   }
   global.JCSCinematicGlobe = Object.freeze({ create });
 })(window);
+</script>
+<script id="jcs-map-focus-layout">
+/* Layout adapter only: the existing map, timeline, narration and controls keep ownership. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  if ($('jcs-map-focus-frame')) return;
+  const viewport = $('jcs-map-viewport');
+  const shell = viewport?.closest('.map-shell');
+  const controls = shell?.querySelector('.jcs-map-controls');
+  const timeline = $('jcs-chronology-control');
+  if (!viewport || !shell || !controls || !timeline) return;
+
+  function node(tag, id, className) {
+    const element = document.createElement(tag);
+    if (id) element.id = id;
+    if (className) element.className = className;
+    return element;
+  }
+  function disclosure(id, title) {
+    const detail = node('details', id, 'jcs-focus-disclosure');
+    const summary = node('summary');
+    summary.textContent = title;
+    detail.append(summary);
+    return detail;
+  }
+  function move(parent, element) {
+    if (element && element.parentElement !== parent) parent.append(element);
+  }
+
+  const frame = node('div', 'jcs-map-focus-frame');
+  const top = node('div', 'jcs-map-focus-top');
+  const bottom = node('div', 'jcs-map-focus-bottom');
+  const options = node('div', 'jcs-map-focus-options', 'jcs-focus-options');
+  const navigation = disclosure('jcs-map-focus-navigation', 'Map view & navigation');
+  const timelineOptions = disclosure('jcs-map-focus-timeline-options', 'Timeline settings & explanations');
+  const guide = disclosure('jcs-map-focus-guide', 'Map guide & public prayer evidence');
+  const gospel = disclosure('jcs-map-focus-gospel', 'Gospel journey & reading');
+  const narrationHost = node('div', 'jcs-map-focus-narration');
+  const controlsHost = node('div', 'jcs-globe-controls-mount');
+  const footerHost = node('div', 'jcs-globe-footer-mount');
+  const narration = $('jcs-watchers-player');
+  const layers = $('jcs-layers');
+  const zoomTools = viewport.querySelector('.jcs-zoom-tools');
+  const help = viewport.querySelector('.jcs-map-help');
+  const imageryCaption = $('atlas-scripture-caption');
+  const story = controls.querySelector('.jcs-gospel-story');
+
+  shell.insertBefore(frame, viewport);
+  frame.append(top, viewport, timeline, bottom);
+  top.append(controls);
+  move(navigation, controls.querySelector('.jcs-view-choice'));
+  move(navigation, zoomTools);
+  move(navigation, controls.querySelector('.map-actions'));
+  options.append(navigation);
+  if (layers) {
+    layers.open = false;
+    layers.classList.add('jcs-focus-disclosure');
+    options.append(layers);
+  }
+  if (story) {
+    move(gospel, story);
+    const reading = story.querySelector('.jcs-gospel-reading');
+    if (reading) reading.open = false;
+    options.append(gospel);
+  }
+  if (narration) {
+    const detail = narration.querySelector('details');
+    if (detail) detail.open = false;
+    narrationHost.append(narration);
+    options.append(narrationHost);
+  }
+  options.append(controlsHost);
+  controls.append(options);
+
+  // The bottom strip keeps the original year, play button and seek input.
+  // Only settings and explanations leave it; their elements and listeners survive.
+  const heading = timeline.querySelector('.jcs-chronology-heading');
+  const slider = $('jcs-chronology-slider');
+  const ticks = timeline.querySelector('.jcs-chronology-labels');
+  const retained = new Set([heading, slider, ticks]);
+  const intro = heading?.querySelector('p');
+  move(timelineOptions, intro);
+  for (const child of Array.from(timeline.children)) {
+    if (!retained.has(child)) timelineOptions.append(child);
+  }
+  bottom.append(footerHost, timelineOptions, guide);
+  move(guide, help);
+  move(guide, imageryCaption);
+  move(guide, $('jcs-global-strip'));
+  move(guide, shell.querySelector('.map-caption'));
+  const annualTimeline = $('jcs-history-control');
+  if (annualTimeline) frame.insertBefore(annualTimeline, bottom);
+
+  shell.classList.add('jcs-map-focus-shell');
+  frame.dataset.ready = 'true';
+
+  // The narration controller can prefer this mount at every responsive breakpoint.
+  // Returning the same audio element to its dock keeps playback and subscriptions.
+  function keepNarrationDocked() {
+    if (narration && narration.parentElement !== narrationHost) narrationHost.append(narration);
+  }
+
+  window.JCSMapFocusLayout = Object.freeze({
+    frame, top, bottom, controlsHost, footerHost, narrationHost,
+    positionPlayer: keepNarrationDocked
+  });
+  document.dispatchEvent(new CustomEvent('jcs:map-layout-ready'));
+})();
+
 </script>
 <script id="jcs-cinematic-globe-bridge">
 (() => {
@@ -8192,7 +8428,7 @@ window.JCSGospelArt=Object.freeze({draw});
       try{
         if(!window.JCSCinematicGlobe?.create)throw Error('Cinematic view is unavailable.');
         const land=referenceLand();if(!land.length)throw Error('Reference geography has not loaded yet.');
-        scene=window.JCSCinematicGlobe.create({host,getState:()=>window.JCSFullHistory.getGlobeSnapshot(),land,onSelect:item=>window.JCSFullHistory.selectGlobeItem(item)});
+        scene=window.JCSCinematicGlobe.create({host,getState:()=>window.JCSFullHistory.getGlobeSnapshot(),land,onSelect:item=>window.JCSFullHistory.selectGlobeItem(item),onPause:()=>window.JCSFullHistory.pauseTimeline(),onResume:()=>window.JCSFullHistory.resumeTimeline(),controlsHost:$('jcs-globe-controls-mount'),footerHost:$('jcs-globe-footer-mount')});
       }catch(error){active=false;document.body.dataset.mapProjection='flat';host.hidden=true;svg.inert=false;svg.setAttribute('aria-hidden','false');svg.setAttribute('tabindex','0');flat.setAttribute('aria-pressed','true');globe.setAttribute('aria-pressed','false');status.textContent=error.message+' The existing map is still available.';document.dispatchEvent(new Event('jcs:map-projection-change'));return;}
     }
     active=next;document.body.dataset.mapProjection=next?'globe':'flat';
@@ -8439,7 +8675,7 @@ window.JCSGospelArt=Object.freeze({draw});
     if (!enabled || document.hidden || event.isTrusted === false) return;
     if (event.type === 'keydown' && (event.repeat || event.ctrlKey || event.metaKey || event.altKey || ['Shift','Control','Alt','Meta','Escape','Tab'].includes(event.key))) return;
     if (event.target?.closest?.('#jcs-ambient-radio, #connectBtn, #disconnectBtn, #jcsWalletConnect, #jcsWalletDisconnect, #jcsWalletReload, #jcs-wallet-top, #publishBtn, #mintOnlyBtn, #resumePublishBtn, #signPanel, .amen-btn, .reply-submit')) return;
-    const playControl = event.target?.closest?.('#jcs-watchers-play, #jcs-chronology-play, #atlas-scripture-begin, #atlas-scripture-replay, #jcs-watchers-restart');
+    const playControl = event.target?.closest?.('#jcs-watchers-play, #jcs-chronology-play, #atlas-scripture-begin, #atlas-scripture-replay, #jcs-watchers-restart, #jcs-cinema-journey-play');
     const explicitPlay = playControl && playControl.getAttribute('aria-pressed') !== 'true' && (event.type === 'click' || event.key === 'Enter' || event.key === ' ');
     const needsStart = !activated || failed || needsGesture || audio.paused || audio.ended || Boolean(audioContext && audioContext.state !== 'running');
     // A later explicit Play is a fresh permission attempt, even if the first dropdown
