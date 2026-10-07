@@ -16144,7 +16144,7 @@ try {
   function showServiceStatus(ready, explanation = '') {
     const element = byId('jcsReceiptServiceStatus');
     element.dataset.state = ready ? 'ready' : 'unavailable';
-    element.textContent = ready ? 'NFT receipt service ready. Completed transactions can be used without making another deposit.'
+    element.textContent = ready ? 'NFT receipt status is reachable. Metadata and artwork are checked for each transaction before a mint request opens.'
       : 'NFT minting is unavailable. ' + explanation + ' Your completed transaction can be used when the service is ready; no new deposit is needed.';
   }
   function validateService(readiness) {
@@ -16181,7 +16181,7 @@ try {
       if (response.status === 404) throw new Error(url.endsWith('/status.json')
         ? 'The JCS receipt endpoint is not deployed on the backend (HTTP 404). The existing Render service needs the JCS receipt update.'
         : 'The receipt service is ready, but this transaction’s metadata or artwork is currently unavailable (HTTP 404). Retry this same receipt shortly.');
-      if (!response.ok) throw new Error('The receipt service returned HTTP ' + (response.status || 'error') + '. Please retry after the service is available.');
+      if (!response.ok) throw new Error('The receipt ' + (type === 'image/png' ? 'artwork' : url.endsWith('/status.json') ? 'service status' : 'metadata') + ' request returned HTTP ' + (response.status || 'error') + '. Please retry after the service is available.');
       if (response.url !== url) throw new Error('The receipt service returned an unexpected address.');
       if ((response.headers.get('content-type') || '').toLowerCase().split(';')[0].trim() !== type) throw new Error('The receipt service did not return the expected ' + type + ' file.');
       return response;
@@ -16205,6 +16205,11 @@ try {
       return { metadata, urls };
     } catch (error) {
       if (!serviceReady) showServiceStatus(false, error.message || 'The service could not be reached.');
+      else {
+        const element = byId('jcsReceiptServiceStatus');
+        element.dataset.state = 'unavailable';
+        element.textContent = 'Receipt metadata or artwork is unavailable for this transaction. ' + (error.message || 'Retry later.') + ' No mint request was created.';
+      }
       throw new Error('Your transaction is verified, but its receipt artwork could not be verified. ' + (error.message || '') + ' You can download the verified JSON now and retry this receipt. No new deposit is needed.');
     } finally { root.clearTimeout(timeout); }
   }
