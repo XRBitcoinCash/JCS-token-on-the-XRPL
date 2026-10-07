@@ -117,7 +117,7 @@ function updateHistoryControl(){
  $('moreHistoryBtn').disabled=!more||store.historyBusy||store.busy||waiting>0;
  write('moreHistoryBtn',store.historyBusy?'Reading…':'Load older records');
  write('historyPageNote',store.historyError
-   ? (waiting>0?'Provider limit; wait about '+Math.ceil(waiting/1000)+' seconds before trying again. ': 'Older records unavailable; you can try again. ')+store.historyError
+   ? (waiting>0?'Provider limit; wait about '+Math.ceil(waiting/1000)+' seconds before trying again. ': more?'Older records unavailable; try Load older records again. ':'History unavailable; use Refresh to try again. ')+store.historyError
    : store.historyPages>=HISTORY_PAGE_CAP?'Ten-page scan limit reached; counts remain partial.'
    : more?'Showing '+store.historyPages+' page'+(store.historyPages===1?'':'s')+'. Load one older page when needed.'
    : store.community?'The returned history range is complete at its recorded snapshot.':'');
