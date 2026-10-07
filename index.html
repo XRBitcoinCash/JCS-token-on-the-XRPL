@@ -15115,7 +15115,16 @@ try {
         if (!offer) throw new Error('The NFT sell offer identifier could not be verified. Check the validated transaction before trying again.');
         output.offerId = offer.LedgerIndex;
       }
-      setXamanSignStatus(mint ? 'Receipt NFT validated on XRPL Mainnet.' : 'NFT sell offer validated on XRPL Mainnet.', 'validated');
+      // Keep a later, unrelated Xaman request open if one started while this NFT validated.
+      if (activeXamanPayload?.purpose === (mint ? 'nft-mint' : 'nft-sell')) {
+        setXamanSignStatus(mint ? 'Receipt NFT validated on XRPL Mainnet.' : 'NFT sell offer validated on XRPL Mainnet.', 'validated');
+        setStatus(walletStatus, (mint ? 'Receipt NFT confirmed on XRPL Mainnet' : 'NFT sell offer confirmed on XRPL Mainnet') +
+          ' · ledger #' + confirmedLedger, 'ok');
+        xamanHasRequest = false;
+        activeXamanPayload = null;
+        closeXamanSignPanel();
+        xamanReturnFocus = null;
+      }
       return output;
     } catch (error) {
       error.signingStarted = signingStarted;
