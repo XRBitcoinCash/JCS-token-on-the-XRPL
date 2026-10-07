@@ -1,4 +1,4 @@
-import {LedgerClient,ISSUER,parseAmm,summarizeBook} from './jcs-metrics-ledger.js?v=4';
+import {LedgerClient,ISSUER,parseAmm,summarizeBook} from './jcs-metrics-ledger.js?v=5';
 import {summarizeCommunity,verifyPrayerMint,classifyWalletNfts} from './jcs-metrics-community.js?v=4';
 const $=id=>document.getElementById(id),DAY=86400000;
 const number=value=>value!==null&&value!==undefined&&value!==''&&Number.isFinite(Number(value))?Number(value):null;
@@ -11,7 +11,9 @@ const stamp=iso=>iso?new Date(iso).toLocaleString(): 'Date unavailable';
 const explorer=hash=>'https://livenet.xrpl.org/transactions/'+encodeURIComponent(hash);
 const write=(id,text)=>{const el=$(id);if(el)el.textContent=text;};
 const setStatus=(id,label,state='')=>{write(id,label);$(id).dataset.state=state;};
-const store={snapshot:null,parts:{},community:null,trust:null,project:null,proofs:[],proofCache:new Map(),period:90,auto:true,busy:false,checking:false,lastCore:0,lastHistory:0,lastTrust:0,account:'',walletEpoch:0,walletBusy:false,xaman:null,connection:'connecting',sources:{}};
+const store={snapshot:null,parts:{},community:null,trust:null,project:null,proofs:[],proofCache:new Map(),period:90,auto:true,busy:false,checking:false,lastCore:0,lastHistory:0,lastTrust:0,historyEntries:[],historyCursor:null,historySnapshot:null,historyPages:0,historyBusy:false,historyError:'',historyCooldownUntil:0,account:'',walletEpoch:0,walletBusy:false,xaman:null,connection:'connecting',sources:{}};
+const HISTORY_PAGE_CAP=10;
+let historyCooldownTimer;
 const features=[
  {name:'DynamicNFT',title:'NFT metadata updates',id:'C1CE18F2A268E6A849C27B3DE485006771B4C01B2FCEC4F18356FE92ECD6BB74',text:'Allows the URI of an NFT minted with the mutable flag to be changed.',note:'A fixed URI does not guarantee that a web server’s contents cannot change.',anchor:'dynamicnft'},
  {name:'NFTokenMintOffer',title:'Mint & offer together',id:'EE3CF852F0506782D05E65D49E5DCC3D16D50898CD1B646BAE274863401CC3CE',text:'Allows an NFT mint and its sell offer to be created in one transaction.',note:'Availability is reported here; this page does not mint or sell NFTs.',anchor:'nftokenmintoffer'},
@@ -107,6 +109,18 @@ function renderCommunity(){
  const eligible=c.posts.some(p=>p.nftId&&p.minttx&&p.contentHash);$('verifyMintsBtn').disabled=!eligible||store.checking;
  if(!eligible){write('proofVerified','No sample');write('proofNote','No records with complete NFT, mint and commitment references were found in this scan. Registrations are still shown above.');}
  $('downloadActivityBtn').disabled=false;
+ updateHistoryControl();
+}
+function updateHistoryControl(){
+ const waiting=Math.max(0,store.historyCooldownUntil-Date.now());
+ const more=Boolean(store.historyCursor)&&store.historyPages<HISTORY_PAGE_CAP;
+ $('moreHistoryBtn').disabled=!more||store.historyBusy||store.busy||waiting>0;
+ write('moreHistoryBtn',store.historyBusy?'Reading…':'Load older records');
+ write('historyPageNote',store.historyError
+   ? (waiting>0?'Provider limit; wait about '+Math.ceil(waiting/1000)+' seconds before trying again. ': 'Older records unavailable; you can try again. ')+store.historyError
+   : store.historyPages>=HISTORY_PAGE_CAP?'Ten-page scan limit reached; counts remain partial.'
+   : more?'Showing '+store.historyPages+' page'+(store.historyPages===1?'':'s')+'. Load one older page when needed.'
+   : store.community?'The returned history range is complete at its recorded snapshot.':'');
 }
 function renderResponseRate(){
  const c=store.community;if(!c)return;
@@ -143,12 +157,29 @@ function renderGroups(){
  const groups=store.community?.mapGroups||[];
  $('mapGroups').innerHTML=groups.length?groups.map(g=>'<div class="focus-group">'+esc(g.label.replaceAll('-',' '))+'<strong>'+fmt(g.count)+'+</strong><span class="sr-only"> public records; at least '+fmt(g.distinctAccounts)+' distinct wallets</span></div>').join(''):'<p class="empty">No public focus groups meet the release thresholds in this scan. Small groups remain undisclosed.</p>';
 }
-async function loadCommunity(snapshot){
- setStatus('communityStatus','Reading public history','');
+async function loadCommunity(snapshot,{append=false}={}){
+ if(store.historyBusy||append&&(!store.historyCursor||!store.historySnapshot||store.historyPages>=HISTORY_PAGE_CAP||Date.now()<store.historyCooldownUntil))return;
+ store.historyBusy=true;updateHistoryControl();
+ if(!append)setStatus('communityStatus','Reading public history','');
  try{
- const scan=await client.scanHistory(snapshot);if(!Array.isArray(scan.entries))throw new Error(scan.error||'No history returned');
- store.community={...summarizeCommunity(scan.entries,{complete:scan.complete,ledger:scan.ledger,ledgerMin:scan.ledgerMin,ledgerMax:scan.ledgerMax}),at:new Date().toISOString(),error:scan.error||null,retained:false};store.lastHistory=Date.now();renderCommunity();
- }catch(e){store.lastHistory=Date.now();if(store.community){store.community.retained=true;store.community.error=e.message;renderCommunity();}else{setStatus('communityStatus','History unavailable','error');source('community','Prayer registry','Unavailable','No history loaded',null,null,e.message);$('recentActivity').innerHTML='<p class="empty">Public history could not be loaded. Use Refresh to try again.</p>';}}
+ const pin=append?store.historySnapshot:snapshot;
+ const scan=await client.scanHistory(pin,{maxPages:1,cursor:append?store.historyCursor:null});
+ if(!Array.isArray(scan.entries))throw new Error(scan.error||'No history returned');
+ const entries=append?[...store.historyEntries,...scan.entries]:scan.entries;
+ const community=summarizeCommunity(entries,{complete:scan.complete,ledger:scan.ledger,ledgerMin:scan.ledgerMin,ledgerMax:scan.ledgerMax});
+ store.historySnapshot=pin;store.historyEntries=entries;store.historyCursor=scan.cursor;store.historyPages=append?store.historyPages+scan.pages:scan.pages;
+ store.historyError=scan.error||'';store.historyCooldownUntil=0;
+ store.community={...community,at:new Date().toISOString(),error:scan.error||null,retained:false};
+ store.lastHistory=Date.now();renderCommunity();
+ }catch(e){
+ store.lastHistory=Date.now();store.historyError=e.message;
+ const match=/retry in\s*~?(\d+)\s*ms/i.exec(e.message);
+ store.historyCooldownUntil=match?Date.now()+Math.min(60000,Number(match[1])):0;
+ clearTimeout(historyCooldownTimer);
+ if(store.historyCooldownUntil)historyCooldownTimer=setTimeout(updateHistoryControl,store.historyCooldownUntil-Date.now()+50);
+ if(store.community){if(!append)store.community.retained=true;store.community.error=e.message;renderCommunity();}
+ else{setStatus('communityStatus','History unavailable','error');source('community','Prayer registry','Unavailable','No history loaded',null,null,e.message);$('recentActivity').innerHTML='<p class="empty">Public history could not be loaded. Use Refresh to try again.</p>';}
+ }finally{store.historyBusy=false;updateHistoryControl();}
 }
 async function loadHolders(snapshot){
  try{const scan=await client.scanLines(snapshot),t=summarizeLines(scan);if(!t)throw new Error(scan.error||'No trust-line response');store.trust=t;store.lastTrust=Date.now();renderTrust();}
@@ -179,11 +210,11 @@ async function refresh(manual=false){
  const snapshot=await client.snapshot();store.lastCore=Date.now();
  if(!snapshot.ledger){store.auto=false;updateAuto();const why=snapshot.errors.ledger||snapshot.errors.server||'Validated data unavailable';markRetained(why);write('refreshNote','Public ledger data is unavailable. Live updates paused; use Refresh when ready.');setStatus('ledgerStatus','No fresh ledger','error');source('ledger','XRPL ledger',store.snapshot?'Retained · source unavailable':'Unavailable',store.snapshot?'Last successful ledger '+fmt(store.snapshot.ledger.index):'No validated snapshot',store.snapshot?.at,store.snapshot?.ledger.index,why);return;}
  renderSnapshot(snapshot);
- const tasks=[];if(manual||!store.lastHistory||now-store.lastHistory>120000)tasks.push(loadCommunity(snapshot));if(manual||!store.lastTrust||now-store.lastTrust>300000)tasks.push(loadHolders(snapshot));await Promise.allSettled(tasks);
+ const tasks=[];if((manual||!store.lastHistory)&&now>=store.historyCooldownUntil)tasks.push(loadCommunity(snapshot));if(manual||!store.lastTrust||now-store.lastTrust>300000)tasks.push(loadHolders(snapshot));await Promise.allSettled(tasks);
  const errors=Object.keys(snapshot.errors).filter(k=>k!=='subscription');write('refreshNote',errors.length?'Snapshot loaded with '+errors.length+' unavailable source'+(errors.length===1?'':'s')+'. See Sources, freshness & coverage below.':'Updated '+time(snapshot.at)+' · read-only Mainnet data · history and balances carry their own ledger references.');
  if(store.account&&(manual||$('walletResults').hidden))await loadWallet();
  }catch(e){store.auto=false;updateAuto();write('refreshNote','Refresh stopped: '+e.message+'. Existing readings are retained.');}
- finally{store.busy=false;$('refreshBtn').disabled=false;write('refreshBtn','Refresh');}
+ finally{store.busy=false;$('refreshBtn').disabled=false;write('refreshBtn','Refresh');updateHistoryControl();}
 }
 function buildSnapshot(){
  const c=store.community,t=store.trust,m=store.market;
@@ -223,13 +254,14 @@ function initHeader(){
 }
 initHeader();initXaman();updateWallet();renderFeatures();
 $('refreshBtn').addEventListener('click',()=>refresh(true));$('autoBtn').addEventListener('click',()=>{store.auto=!store.auto;updateAuto();if(store.auto)refresh(false);});
+$('moreHistoryBtn').addEventListener('click',()=>loadCommunity(store.historySnapshot,{append:true}));
 for(const button of document.querySelectorAll('[data-period]'))button.addEventListener('click',()=>{store.period=Number(button.dataset.period);for(const b of document.querySelectorAll('[data-period]'))b.setAttribute('aria-pressed',String(b===button));renderChart();});
 $('activityFilter').addEventListener('change',renderRecent);$('verifyMintsBtn').addEventListener('click',checkMints);$('downloadSnapshotBtn').addEventListener('click',exportSnapshot);
 $('downloadActivityBtn').addEventListener('click',()=>{const rows=chartRows();download('jcs-public-activity-'+store.period+'-days.csv','date_utc,publications,responses,coverage\r\n'+rows.map(r=>[r.day,r.observed?r.posts:'',r.observed?r.responses:'',r.observed?'observed':'unknown'].join(',')).join('\r\n')+'\r\n','text/csv;charset=utf-8');});
 $('copyIssuer').addEventListener('click',async()=>{try{await copy(ISSUER);toast('Official JCS issuer copied.');}catch(e){toast(e.message);}});
 $('copySummaryBtn').addEventListener('click',async()=>{const c=store.community,t=store.trust;const text=['JCS Observatory','Read at: '+new Date().toISOString(),'Ledger: '+fmt(store.snapshot?.ledger?.index),'Public records in scanned range: '+fmt(c?.counts.posts),'Participating wallets: '+fmt(c?.counts.participants),'History coverage: '+(c?(c.coverage.complete?'provider range exhausted':'partial sample'):'unavailable'),'Positive JCS accounts: '+fmt(t?.holders)+(t&&!t.complete?' (lower bound)':''),'Mint sample: '+store.proofs.filter(p=>p.verified).length+' / '+store.proofs.length+' matched','Historical accounts in project dataset: '+fmt(store.project?.counts.historicalAccounts),'Sources: '+Object.values(store.sources).map(s=>s.label+' — '+s.state).join('; '),'https://jesuschristsavestoken.com/metrics.html'].join('\n');try{await copy(text);write('exportStatus','Plain-language summary copied.');}catch(e){write('exportStatus',e.message);}});
 loadProject();refresh(false);
-let timer=setInterval(()=>{if(store.auto&&!store.busy&&document.visibilityState==='visible'&&Date.now()-store.lastCore>=30000)refresh(false);},15000);
+let timer=setInterval(()=>{if(store.auto&&!store.busy&&!store.historyBusy&&document.visibilityState==='visible'&&Date.now()-store.lastCore>=60000)refresh(false);},15000);
 let mapChannel;try{mapChannel=new BroadcastChannel('jcs-prayer-map');mapChannel.onmessage=e=>{if(e.data?.type==='jcs-prayer-map-signal'&&e.data?.signal?.schema==='jcs-prayer-map-refresh-v1')store.lastHistory=0;};}catch{}
-window.addEventListener('pagehide',()=>{clearInterval(timer);client.close();mapChannel?.close();});
-window.addEventListener('pageshow',e=>{if(e.persisted){client=new LedgerClient(clientCallbacks);store.auto=false;updateAuto();markRetained('Page restored from browser memory.');write('refreshNote','Readings restored from browser memory. Use Refresh or turn on live updates for fresh data.');timer=setInterval(()=>{if(store.auto&&!store.busy&&document.visibilityState==='visible'&&Date.now()-store.lastCore>=30000)refresh(false);},15000);}});
+window.addEventListener('pagehide',()=>{clearInterval(timer);clearTimeout(historyCooldownTimer);client.close();mapChannel?.close();});
+window.addEventListener('pageshow',e=>{if(e.persisted){client=new LedgerClient(clientCallbacks);store.auto=false;updateAuto();markRetained('Page restored from browser memory.');write('refreshNote','Readings restored from browser memory. Use Refresh or turn on live updates for fresh data.');timer=setInterval(()=>{if(store.auto&&!store.busy&&!store.historyBusy&&document.visibilityState==='visible'&&Date.now()-store.lastCore>=60000)refresh(false);},15000);}});
