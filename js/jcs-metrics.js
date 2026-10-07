@@ -174,7 +174,7 @@ async function loadCommunity(snapshot,{append=false}={}){
  }catch(e){
  store.lastHistory=Date.now();store.historyError=e.message;
  const match=/retry in\s*~?(\d+)\s*ms/i.exec(e.message);
- store.historyCooldownUntil=match?Date.now()+Math.min(60000,Number(match[1])):0;
+ store.historyCooldownUntil=match?Date.now()+Math.min(2147483600,Number(match[1])):0;
  clearTimeout(historyCooldownTimer);
  if(store.historyCooldownUntil)historyCooldownTimer=setTimeout(updateHistoryControl,store.historyCooldownUntil-Date.now()+50);
  if(store.community){if(!append)store.community.retained=true;store.community.error=e.message;renderCommunity();}
