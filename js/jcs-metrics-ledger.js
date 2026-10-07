@@ -265,24 +265,33 @@ export class LedgerClient {
     const {values, ...rest} = await this._pages('account_lines', {account: ISSUER}, 'lines', snapshot, pagesLimit(maxPages, 12));
     return {...rest, lines: values?.filter(line => line.currency === CURRENCY) ?? null};
   }
-  async scanHistory(snapshot, {maxPages = 10} = {}) {
-    const ledger = this._pin(snapshot), entries = [], markers = new Set();
-    let marker, pages = 0, complete = false, error = null, ledgerMin = null, ledgerMax = null;
+  async scanHistory(snapshot, {maxPages = 1, cursor = null} = {}) {
+    const ledger = this._pin(snapshot), entries = [], markers = new Set(cursor?.seen || []);
+    if (cursor && (cursor.ledger !== ledger.index || cursor.ledgerHash !== ledger.hash ||
+        cursor.marker === undefined || !positiveInteger(cursor.ledgerMin) ||
+        !positiveInteger(cursor.ledgerMax) || !Array.isArray(cursor.seen) || cursor.seen.length > 10)) {
+      throw new RpcError('History cursor belongs to another validated snapshot.');
+    }
+    let marker = cursor?.marker, pages = 0, complete = false, error = null;
+    let ledgerMin = cursor?.ledgerMin ?? null, ledgerMax = cursor?.ledgerMax ?? null;
     for (let page = 0; page < pagesLimit(maxPages, 10); page++) {
       try {
         const result = await this.rpc('account_tx', {account: ISSUER, ledger_index_min: ledgerMin ?? -1, ledger_index_max: ledger.index, binary: false, forward: false, limit: 200, ...(marker === undefined ? {} : {marker})});
         const minimum = positiveInteger(result.ledger_index_min), maximum = positiveInteger(result.ledger_index_max);
         if (!minimum || !maximum || minimum > maximum || maximum > ledger.index || !Array.isArray(result.transactions)) throw new RpcError('History response did not report a valid bounded ledger range.');
-        if (pages && (minimum !== ledgerMin || maximum !== ledgerMax)) throw new RpcError('The source changed history coverage while paginating.');
+        if (ledgerMin !== null && (minimum !== ledgerMin || maximum !== ledgerMax)) throw new RpcError('The source changed history coverage while paginating.');
+        const next = result.marker, signature = next == null ? null : JSON.stringify(next);
+        if (signature && markers.has(signature)) throw new RpcError('History source repeated a pagination marker.');
         ledgerMin = minimum; ledgerMax = maximum; pages++; entries.push(...result.transactions);
-        marker = result.marker;
-        if (marker === undefined || marker === null) { complete = true; break; }
-        const signature = JSON.stringify(marker);
-        if (markers.has(signature)) throw new RpcError('History source repeated a pagination marker.');
+        marker = next;
+        if (signature === null) { complete = true; break; }
         markers.add(signature);
       } catch (failure) { error = errorText(failure); break; }
     }
-    return {ledger: ledger.index, ledgerHash: ledger.hash, complete, entries: pages ? entries : null, pages, ledgerMin, ledgerMax, error, truncated: !complete && !error};
+    return {ledger: ledger.index, ledgerHash: ledger.hash, complete, entries: pages ? entries : null, pages, ledgerMin, ledgerMax, error,
+      cursor: !complete && marker != null && ledgerMin !== null ?
+        {ledger: ledger.index, ledgerHash: ledger.hash, ledgerMin, ledgerMax, marker, seen: [...markers]} : null,
+      truncated: !complete && !error};
   }
   async wallet(account, snapshot) {
     if (!ADDRESS.test(account || '')) throw new RpcError('A valid classic XRPL account address is required.');
