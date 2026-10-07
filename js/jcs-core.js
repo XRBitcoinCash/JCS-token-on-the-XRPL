@@ -2058,6 +2058,7 @@
       setStatus(tradeMsg, 'Live ' + side + ' quote refreshed.', 'ok');
       return price;
     } catch (error) {
+      if (sideEl.value !== side || Number(amountEl.value) !== amount) return null;
       if (tradeLivePrice) tradeLivePrice.textContent = 'Unavailable';
       setStatus(
         tradeMsg,
