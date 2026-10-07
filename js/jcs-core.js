@@ -187,6 +187,7 @@
   let activeXamanPayload = null;
   let xamanResetTimer = null;
   let xamanResetDeadline = 0;
+  let marketTradePending = false;
   let xamanAbortController = null;
   const XAMAN_RESET_DELAY = 10000;
 
@@ -257,7 +258,7 @@
     if (!xamanSignStatus) return;
     xamanSignStatus.textContent = message;
     xamanSignStatus.dataset.state = state || '';
-    const terminal = ['signed', 'rejected', 'expired', 'error', 'canceled'];
+    const terminal = ['signed', 'validated', 'rejected', 'expired', 'error', 'canceled'];
     if (terminal.includes(state)) {
       clearXamanResetTimer();
       if (xamanOpenPayload) { xamanOpenPayload.hidden = true; xamanOpenPayload.removeAttribute('href'); }
@@ -269,9 +270,14 @@
         xamanClosePanel.textContent = 'Close';
         xamanClosePanel.disabled = false;
       }
-      if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman result';
-      if (xamanSignHelp) xamanSignHelp.textContent = state === 'signed'
-        ? 'The request was signed. The page checks the XRP Ledger separately before reporting a successful transaction.'
+      if (xamanReopenPanel) xamanReopenPanel.textContent = state === 'validated' ? 'View validated result' : 'View Xaman result';
+      const instruction = $('xamanCodeInstruction');
+      if (instruction && state === 'signed') instruction.textContent = 'Signed in Xaman. Waiting for the validated ledger result.';
+      if (instruction && state === 'validated') instruction.textContent = 'Ledger confirmation complete. No further signing is needed for this trade.';
+      if (xamanSignHelp) xamanSignHelp.textContent = state === 'validated'
+        ? 'The confirmed amounts are from validated wallet movements. Choose another amount to trade again.'
+        : state === 'signed'
+          ? 'The request was signed. The page checks the XRP Ledger separately before reporting a successful transaction.'
         : state === 'canceled'
           ? 'The request was canceled and the controls are available again.'
           : 'Check the request outcome in Xaman before starting again. Hiding this window does not cancel a wallet request.';
@@ -333,6 +339,8 @@
     xamanReturnFocus = document.activeElement;
     xamanHasRequest = true;
     if (xamanSignTitle) xamanSignTitle.textContent = labels[purpose] || 'Review in Xaman';
+    const instruction = $('xamanCodeInstruction');
+    if (instruction) instruction.textContent = 'Match this code with the verification memo in Xaman, then check the amounts before signing.';
     if (xamanClosePanel) { xamanClosePanel.textContent = 'Hide'; xamanClosePanel.disabled = false; }
     if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman request';
     if (xamanSignHelp) xamanSignHelp.textContent = 'Hiding this window keeps the request active. Complete or reject it in Xaman, then return to this page.';
@@ -342,7 +350,10 @@
         if (!/^\d+$/.test(String(value))) return String(value);
         const n = BigInt(value); return (n / 1000000n).toString() + '.' + (n % 1000000n).toString().padStart(6, '0') + ' XRP';
       };
-      if (transaction.TransactionType === 'AMMDeposit') {
+      if (transaction.TransactionType === 'OfferCreate' && purpose === 'swap') {
+        if (typeof transaction.TakerGets === 'string') rows.push(['Maximum XRP offered', exactXrp(transaction.TakerGets)], ['JCS requested', String(transaction.TakerPays?.value || '') + ' JCS']);
+        else rows.push(['JCS offered', String(transaction.TakerGets?.value || '') + ' JCS'], ['Minimum XRP requested', exactXrp(transaction.TakerPays)]);
+      } else if (transaction.TransactionType === 'AMMDeposit') {
         rows.push(['Maximum XRP', exactXrp(transaction.Amount)], ['Maximum JCS', String(transaction.Amount2?.value || '') + ' JCS']);
       } else if (transaction.TransactionType === 'AMMWithdraw') rows.push(['LP tokens to redeem', String(transaction.LPTokenIn?.value || '')]);
       else if (transaction.TransactionType === 'NFTokenMint') {
@@ -893,7 +904,7 @@
     }
 
     if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade;
-    if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade;
+    if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade || marketTradePending || !(Number($('amount')?.value) > 0);
     if ($('btnHealthScan')) $('btnHealthScan').disabled = !connected;
 
     setReadyStep(walletStepConnect, connected);
@@ -1702,6 +1713,11 @@
       }
     }
 
+    if (marketBtn) marketBtn.disabled = marketTradePending || !currentAccount || !HAS_TRUSTLINE || !(amount > 0);
+    if (amount > 0 && tradeMsg?.dataset.confirmed) {
+      delete tradeMsg.dataset.confirmed;
+      setStatus(tradeMsg, 'New amount selected. Refresh the quote and review a new request in Xaman.', 'ok');
+    }
     if (tradeQuoteNote) {
       tradeQuoteNote.textContent =
         amount <= 0
@@ -2028,6 +2044,7 @@
 
     try {
       const price = await getMarketPrice(side);
+      if (sideEl.value !== side || Number(amountEl.value) !== amount) return null;
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
       priceEl.value = Number(price).toFixed(9);
@@ -2041,6 +2058,7 @@
       setStatus(tradeMsg, 'Live ' + side + ' quote refreshed.', 'ok');
       return price;
     } catch (error) {
+      if (sideEl.value !== side || Number(amountEl.value) !== amount) return null;
       if (tradeLivePrice) tradeLivePrice.textContent = 'Unavailable';
       setStatus(
         tradeMsg,
@@ -2108,6 +2126,11 @@
 
   if (marketBtn) {
     marketBtn.addEventListener('click', async () => {
+      if (marketTradePending) return;
+      marketTradePending = true;
+      updateWalletButtons();
+      let submittedTxid = '';
+      if (tradeMsg) delete tradeMsg.dataset.confirmed;
       try {
         if (!currentAccount) throw new Error('Connect wallet first');
         if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
@@ -2175,26 +2198,45 @@
         const signed = await signWithSentinel(tx, 'swap');
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the market order.');
+        submittedTxid = txid;
 
         setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
         const receipt = await waitForQuickBuyValidation(txid);
 
-        setStatus(
-          tradeMsg,
-          'AMM/DEX market transaction validated on XRPL Mainnet · ' +
-            txid.slice(0, 10) + '…' + txid.slice(-8),
-          'ok'
-        );
-
+        const record = window.JCS_RECEIPTS?.fromLedger?.(receipt.transaction, txid);
+        if (!record || record.account !== signed.txjson.Account || record.source_kind !== 'market-swap' ||
+            record.kind !== side || record.execution !== 'executed' || Number(record.assetA.value) !== amt) {
+          throw new Error('The validated ledger movements do not match the requested JCS trade. Check this transaction before retrying.');
+        }
+        const confirmation = (side === 'buy' ? 'Buy confirmed: ' : 'Sell confirmed: ') +
+          record.assetA.value + ' JCS ' + (side === 'buy' ? 'received for ' : 'sold for ') +
+          record.assetB.value + ' XRP (network fee excluded) · ledger #' + record.ledger +
+          ' · ' + txid.slice(0, 10) + '…' + txid.slice(-8) + '. See the transaction receipt below.';
+        setStatus(tradeMsg, confirmation, 'ok');
+        tradeMsg.dataset.confirmed = txid;
+        setStatus(walletStatus, 'Trade confirmed on XRPL Mainnet · ledger #' + record.ledger, 'ok');
+        setXamanSignStatus(confirmation, 'validated');
         setResult('Validated AMM/DEX market transaction: ' + txid);
         document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
           detail: validatedReceiptDetail(receipt, { kind:'market-swap', txid, side, amountJcs:amt, referencePriceXrpPerJcs:basePx })
         }));
 
+        if (sideEl.value === side && Number(amountEl.value) === amt) {
+          amountEl.value = '';
+          priceEl.value = '';
+          recalcTotals();
+        }
         ammSnapshotCache = null;
         await Promise.allSettled([refreshAll({ force: true }), fetchBalances()]);
       } catch (e) {
-        setStatus(tradeMsg, 'Error: ' + (e.message || e), 'err');
+        const message = submittedTxid
+          ? 'Trade result needs review. Check transaction ' + submittedTxid + ' before trying again. ' + (e.message || e)
+          : 'Error: ' + (e.message || e);
+        setStatus(tradeMsg, message, 'err');
+        if (submittedTxid) setXamanSignStatus(message, 'error');
+      } finally {
+        marketTradePending = false;
+        updateWalletButtons();
       }
     });
   }
