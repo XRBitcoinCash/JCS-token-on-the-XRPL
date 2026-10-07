@@ -6016,7 +6016,9 @@ You may edit the wording before minting or publishing anything.
   const PROFILE_KEY = 'jcs.social.profile.v4';
   const PENDING_KEY = 'jcs.social.pending.v4';
   const THEME_KEY = 'jcs-ledger-theme';
-  const RECENT_HISTORY_PAGES = 12;
+  // Keep public history reads small so a busy XRPL server does not reject a burst.
+  const RECENT_HISTORY_PAGES = 1;
+  const FEED_RATE_LIMIT_RETRY_MS = 30_000;
   const MAP_SIGNAL_KEY = 'jcs.prayer.map.signals.v1';
   const MAP_FOCUS_KEY = 'jcs.prayer.map.focus.v1';
   const BOOKMARK_KEY = 'jcs.social.bookmarks.v1';
@@ -6077,6 +6079,8 @@ You may edit the wording before minting or publishing anything.
     feedError: '',
     feedChecked: '',
     feedPromise: null,
+    feedRetryAfter: 0,
+    feedRetryTimer: null,
     pending: null,
     publishing: false,
     subscribed: false,
@@ -8600,29 +8604,37 @@ setComposerStatus(errorText(e),'err');
     const complete = history?.complete === true;
     const stale = state.feedState === 'error' && Boolean(history);
     const count = state.posts.length.toLocaleString();
+    const cooling = Date.now() < state.feedRetryAfter;
     let status;
     if (state.feedLoading) status = 'Reading validated public prayer history…';
     else if (state.feedState === 'error') status = 'Could not load history. '+state.feedError+(stale ? ' Previously loaded prayers remain visible.' : ' Use Refresh to retry.');
     else if (complete) status = 'Loaded '+count+' public prayers from this server’s available history.';
     else status = 'Partial history: '+count+' prayers found. Load older prayers to continue.'+(history?.error ? ' The scan paused: '+history.error : '');
+    if (cooling) status += ' History source requested a pause; try again in about 30 seconds.';
     setFeedStatus(status, state.feedState === 'error' ? 'err' : complete ? 'ok' : '');
     const bounds = history ? ' Ledger range '+history.min.toLocaleString()+'–'+history.max.toLocaleString()+'.' : '';
     $('feedCountScope').textContent = (stale ? 'Counts from the previous scan.' : complete ? 'Counts for this server’s available ledger range.' : 'Counts from the portion loaded so far; not lifetime totals.')+bounds+' Wallets are not a count of people.';
     $('olderHistoryBtn').hidden = !history?.marker;
-    $('olderHistoryBtn').disabled = state.feedLoading;
-    $('refreshFeedBtn').disabled = state.feedLoading;
+    $('olderHistoryBtn').disabled = state.feedLoading || cooling;
+    $('refreshFeedBtn').disabled = state.feedLoading || cooling;
     $('feed').setAttribute('aria-busy',String(state.feedLoading));
     $('feedDiagnostics').textContent = JSON.stringify({
       state:state.feedState, endpoint:history?.endpoint || null, lastSuccessfulRead:state.feedChecked || null,
       pages:history?.pages || 0, ledgerRange:history ? [history.min,history.max] : null,
       availableRangeComplete:complete, moreHistory:Boolean(history?.marker),
-      ...state.feedDiagnostics, error:state.feedError || history?.error || null
+      ...state.feedDiagnostics, error:state.feedError || history?.error || null,
+      retryAfter:cooling ? new Date(state.feedRetryAfter).toISOString() : null
     },null,2);
+  }
+
+  function feedWasRateLimited(error) {
+    return /too much load|rate limit|too many requests|slow down|http 429/i.test(String(error || ''));
   }
 
   async function loadFeed(force=false, older=false) {
     // Coalesce automatic, publication-triggered and manual refreshes.
     if (state.feedPromise) return state.feedPromise;
+    if (Date.now() < state.feedRetryAfter) return;
     if (older && !state.feedHistory?.marker) return;
     state.feedLoading = true;
     state.feedState = 'loading';
@@ -8646,6 +8658,16 @@ setComposerStatus(errorText(e),'err');
         state.feedState = 'error';
         state.feedError = String(error?.message || 'History source unavailable.').slice(0,220);
       } finally {
+        clearTimeout(state.feedRetryTimer);
+        state.feedRetryTimer = null;
+        if (feedWasRateLimited(state.feedError)) {
+          state.feedRetryAfter = Date.now() + FEED_RATE_LIMIT_RETRY_MS;
+          state.feedRetryTimer = window.setTimeout(() => {
+            state.feedRetryAfter = 0;
+            state.feedRetryTimer = null;
+            renderFeedHistoryState();
+          }, FEED_RATE_LIMIT_RETRY_MS);
+        } else state.feedRetryAfter = 0;
         state.feedLoading = false;
         state.feedPromise = null;
         updateStats();
