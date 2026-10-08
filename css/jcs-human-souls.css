@@ -1,0 +1,25 @@
+/* Keep source detail in a compact disclosure alongside existing globe controls. */
+#jcs-souls-controls { color: #f0dfb7; font: 13px/1.45 Georgia, serif; }
+#jcs-souls-controls summary { cursor: pointer; min-height: 36px; display: flex; align-items: center; }
+#jcs-souls-controls .jcs-souls-options {
+  max-width: 560px;
+  padding: 12px;
+  background: #101a26;
+  border: 1px solid #b997535c;
+  border-radius: 7px;
+  color: #e4e6e9;
+}
+#jcs-souls-controls .jcs-souls-toggles { display: flex; gap: 8px 16px; flex-wrap: wrap; }
+#jcs-souls-controls label { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; cursor: pointer; }
+#jcs-souls-controls input { width: 17px; height: 17px; accent-color: #8fcdf3; }
+#jcs-souls-controls .jcs-souls-population { margin: 9px 0; color: #bce5ff; font-weight: 700; }
+#jcs-souls-controls .jcs-souls-counts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px 12px; font: 12px/1.45 system-ui,sans-serif; }
+#jcs-souls-controls .jcs-souls-note { margin: 10px 0; font-size: 12px; line-height: 1.55; }
+#jcs-souls-controls .jcs-souls-sources { display: grid; gap: 7px; margin: 8px 0 0; }
+#jcs-souls-controls a { color: #d3e9ff; text-decoration: underline; text-underline-offset: 2px; }
+#jcs-souls-controls button { min-height: 36px; margin-top: 9px; }
+#jcs-souls-controls :is(a,input,summary,button):focus-visible { outline: 2px solid #f4d686; outline-offset: 3px; }
+@media(max-width: 520px) {
+  #jcs-souls-controls .jcs-souls-options { max-width: 100%; }
+  #jcs-souls-controls .jcs-souls-toggles { display: grid; gap: 2px; }
+}
