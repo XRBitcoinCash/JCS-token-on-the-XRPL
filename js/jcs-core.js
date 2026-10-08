@@ -854,6 +854,7 @@
     attempt?.cancel();
   }
   let currentAccount = null;
+  let walletIdentityVersion = 0;
   let HAS_TRUSTLINE = false;
   let APP_INITIALIZED = false;
   let signingRequestActive = false;
@@ -964,13 +965,17 @@
   }
 
   async function refreshTrustline() {
-    if (!currentAccount) {
+    const account = currentAccount;
+    const identityVersion = walletIdentityVersion;
+    if (!account) {
       HAS_TRUSTLINE = false;
       updateWalletButtons();
       return false;
     }
 
-    HAS_TRUSTLINE = await checkTrustline(currentAccount);
+    const hasTrustline = await checkTrustline(account);
+    if (currentAccount !== account || walletIdentityVersion !== identityVersion) return false;
+    HAS_TRUSTLINE = hasTrustline;
 
     if (HAS_TRUSTLINE) {
       setStatus(trustlineMsg, '✅ JCS trustline present.', 'ok');
@@ -989,7 +994,16 @@
     const account = String(acct || '').trim();
     if (!account) return;
 
+    const accountChanged = currentAccount !== account;
     currentAccount = account;
+    if (accountChanged) {
+      walletIdentityVersion++;
+      HAS_TRUSTLINE = false;
+      BAL.xrp = BAL.jcs = 0;
+      if (tradeXrpBalance) tradeXrpBalance.textContent = '—';
+      if (tradeJcsBalance) tradeJcsBalance.textContent = '—';
+      setStatus(trustlineMsg, 'Checking JCS trustline…');
+    }
     window.__jcsWallet = account;
     window.__jcsManualDisconnect = false;
 
@@ -1006,7 +1020,10 @@
 
   function setDisconnected() {
     invalidateXamanAttempt();
+    walletIdentityVersion++;
     currentAccount = null;
+    if (tradeXrpBalance) tradeXrpBalance.textContent = '—';
+    if (tradeJcsBalance) tradeJcsBalance.textContent = '—';
     window.__jcsWallet = null;
     window.__jcsManualDisconnect = true;
 
@@ -1741,7 +1758,9 @@
   if (priceEl) priceEl.addEventListener('input', recalcTotals);
 
   async function fetchBalances() {
-    if (!currentAccount) {
+    const account = currentAccount;
+    const identityVersion = walletIdentityVersion;
+    if (!account) {
       BAL.xrp = 0;
       BAL.jcs = 0;
       if (tradeXrpBalance) tradeXrpBalance.textContent = '—';
@@ -1749,18 +1768,18 @@
       return BAL;
     }
 
+    let xrp = 0;
+    let jcs = 0;
     try {
-      const info = await call('account_info', { account: currentAccount });
-      BAL.xrp = Number(info.account_data.Balance || 0) / XRP_TO_DROPS;
-    } catch {
-      BAL.xrp = 0;
-    }
+      const info = await call('account_info', { account });
+      xrp = Number(info.account_data.Balance || 0) / XRP_TO_DROPS;
+    } catch {}
 
     try {
       const r = await xrplRequest({
         method: 'account_lines',
         params: [{
-          account: currentAccount,
+          account,
           peer: ISSUER,
           ledger_index: 'validated',
           limit: 400
@@ -1773,21 +1792,22 @@
         normalizeHexCurrency(line.currency) === CURRENCY_HEX_NORM
       );
 
-      BAL.jcs = trustline
+      jcs = trustline
         ? Math.max(0, Number(trustline.balance || 0))
         : 0;
-    } catch {
-      BAL.jcs = 0;
-    }
+    } catch {}
+
+    // A late response from another Xaman identity must not set this wallet's
+    // displayed balances or enable a sell estimate.
+    if (currentAccount !== account || walletIdentityVersion !== identityVersion) return BAL;
+    BAL.xrp = xrp;
+    BAL.jcs = jcs;
 
     if (tradeXrpBalance) {
-      tradeXrpBalance.textContent =
-        formatTradeNumber(BAL.xrp, 6) + ' XRP';
+      tradeXrpBalance.textContent = formatTradeNumber(BAL.xrp, 6) + ' XRP';
     }
-
     if (tradeJcsBalance) {
-      tradeJcsBalance.textContent =
-        formatTradeNumber(BAL.jcs, 6) + ' JCS';
+      tradeJcsBalance.textContent = formatTradeNumber(BAL.jcs, 6) + ' JCS';
     }
 
     return BAL;
@@ -1812,7 +1832,10 @@
           const pct = Number(button.dataset.sellPct || 0);
           if (!pct) return;
 
+          const account = currentAccount;
+          const identityVersion = walletIdentityVersion;
           await fetchBalances();
+          if (currentAccount !== account || walletIdentityVersion !== identityVersion || sideEl?.value !== 'sell') return;
           const amount = BAL.jcs * (pct / 100);
 
           if (amountEl) {
