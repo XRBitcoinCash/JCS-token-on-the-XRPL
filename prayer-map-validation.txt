@@ -1,3 +1,72 @@
+JCS PRAYER MAP — GOTHIC READING SUBTITLES
+Prepared: 2026-10-08
+Baseline: db417b5d71e1e9811ced3b0693e57feda682265f
+
+CURRENT CHANGE
+Local English subtitles for BOTH existing Enoch narration tracks: chapters 1–11
+(214 cues) and 12–19 (203 cues). Catholic Gothic presentation uses unmodified
+UnifrakturMaguntia blackletter, gold details and parchment-colored text, with
+CC on/off, three text sizes and a clear-serif alternative. Preferences stay local.
+The panel reads the narration clock; it never changes playback, timeline or wallet
+state. Globe sizing accounts for the caption panel. Unknown recordings fail closed.
+
+CONTENT AND TIMING
+Public-domain R. H. Charles text: https://sacred-texts.com/bib/boe/index.htm
+LibriVox source: https://librivox.org/the-book-of-enoch/
+Audio already used by the page remains remote and unchanged. Its SHA-256 hashes
+are included in the caption JSON. Word timings were derived locally from those
+recordings, with text aligned to the linked edition and long transcription errors
+repaired from their audio spans. This is machine-assisted captioning, not a claim
+of a complete human listening audit or word-perfect timing. Coverage is these two
+Prayer Map readings; other site Scripture streams and music are not captioned here.
+Font: original UnifrakturMaguntia-Book.ttf from google/fonts, SIL OFL 1.1.
+License: data/captions/OFL-UnifrakturMaguntia.txt. Font embedded in the local CSS;
+no external font or transcription service is called at runtime.
+
+FOCUSED CHECKS
+PASS: Subtitle module and modified stage-sizing adapter pass Node syntax checks.
+PASS: All 8 embedded JSON blocks are byte-identical to baseline and parse normally.
+PASS: Only the final stage-sizing adapter changes among existing inline scripts;
+      wallet, mint validation, audio/timeline, map datasets and prayer lights remain
+      unchanged. Two external asset references are added.
+PASS: All 417 cues have ordered, non-overlapping times within their recording.
+PASS: Actual subtitle module in a controlled DOM fixture follows playback time,
+      pause, forward/backward seek, gaps, CC visibility, track changes (including
+      stale currentSrc), delayed data loading, completion, load retry and malformed
+      cue rejection. Audio mutation methods throw in this fixture and are not called.
+
+LIMITS / NEXT REVIEW
+Desktop/mobile visual appearance and listening synchronization remain to be
+reviewed on the live page when the user resumes. Local file preview is blocked by
+the browser URL policy. No wallet/transaction testing was needed for this addition.
+Deployment is evidenced by the associated PR/Pages run, not by this preparation
+record. Stop all tools after deployment succeeds under the checkpoint protocol.
+
+ARTIFACTS
+prayer.map.html
+Bytes: 9306416
+SHA-256: bfd4a79ad89408f39839cdd94994b1ba69be4d751b7ac5aeccfa067c392c6543
+Git blob: bb3e0230215bc1b6eb1ca2f346e25f463eea27c9
+js/jcs-scripture-captions.js
+Bytes: 6656
+SHA-256: da0dcab21a6f35724b3be6c5e2bdcb326da6ec3f909df9feb1793230634d25a6
+Git blob: 6162dc756a33bf670be8fd991574167718533c7f
+css/jcs-scripture-captions.css
+Bytes: 121058
+SHA-256: 27529385b0b3404a39ccb9dbb7bee4dcc6b5dbc49e0c7c6f8d105bf6bc081a15
+Git blob: 1bc129563fd0e3cdf95b566f14eb2c8541fd8115
+data/captions/enoch-en.json
+Bytes: 57143
+SHA-256: 08302d558cb0a64632406c1e363be09682b9a855a0a52235b00fcc4fb183372a
+Git blob: af7da9db57c188e7ae4252644e019f659a356b58
+data/captions/OFL-UnifrakturMaguntia.txt
+Bytes: 4511
+SHA-256: 96199bf9ff12dd471a66911dee95440737b437e7f5a6fd30e9e950c16d66e8df
+Git blob: 2794d29c2d604ba1b2fc485f1819b5400d51d8d2
+
+PRIOR RECORD — preserved as historical evidence, not rerun for this change
+==============================================================================
+
 JCS PRAYER MAP — GLOBE USABILITY UPDATE
 Checked: 2026-10-08
 Baseline: 47b1aa72bd504b12b42120077866b6c08b5f80c4
@@ -206,3 +275,4 @@ jcs-prayer-map-protocol.json
 prayer-map-validation.txt
 
 If prayer.map.html or jcs-prayer-map-protocol.json changes, regenerate this validation record so its hashes remain bound to the exact deployed artifacts.
+
