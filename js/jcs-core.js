@@ -349,7 +349,7 @@
         if (!/^\d+$/.test(String(value))) return String(value);
         const n = BigInt(value); return (n / 1000000n).toString() + '.' + (n % 1000000n).toString().padStart(6, '0') + ' XRP';
       };
-      if (transaction.TransactionType === 'OfferCreate' && purpose === 'swap') {
+      if (transaction.TransactionType === 'OfferCreate' && (purpose === 'swap' || purpose === 'offer')) {
         if (typeof transaction.TakerGets === 'string') rows.push(['Maximum XRP offered', exactXrp(transaction.TakerGets)], ['JCS requested', String(transaction.TakerPays?.value || '') + ' JCS']);
         else rows.push(['JCS offered', String(transaction.TakerGets?.value || '') + ' JCS'], ['Minimum XRP requested', exactXrp(transaction.TakerPays)]);
       } else if (transaction.TransactionType === 'AMMDeposit') {
@@ -403,10 +403,6 @@
     xamanPayloadQr.hidden = true;
     if (xamanQrPlaceholder) { xamanQrPlaceholder.hidden = false; xamanQrPlaceholder.textContent = 'The QR image could not load. Open the Xaman signing page instead.'; }
   });
-
-  function toDrops(xrp) {
-    return Math.round(Number(xrp) * XRP_TO_DROPS).toString();
-  }
 
   function genCode() {
     return String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
@@ -2007,29 +2003,95 @@
     };
   }
 
+  // A top-of-book price does not describe a large trade. Quote only funded
+  // order-book depth that can fill the whole requested JCS amount.
+  const bookSnapshotCache = { buy: null, sell: null };
+  const bookSnapshotPromise = { buy: null, sell: null };
+
+  async function getJcsBookSnapshot(side) {
+    const cached = bookSnapshotCache[side];
+    if (cached && Date.now() - cached.at < AMM_SNAPSHOT_CACHE_MS) return cached.offers;
+    if (bookSnapshotPromise[side]) return bookSnapshotPromise[side];
+
+    const buying = side === 'buy';
+    bookSnapshotPromise[side] = (async () => {
+      const response = await xrplRequest({
+        method: 'book_offers',
+        params: [{
+          taker_gets: buying ? { currency: CURRENCY_HEX, issuer: ISSUER } : { currency: 'XRP' },
+          taker_pays: buying ? { currency: 'XRP' } : { currency: CURRENCY_HEX, issuer: ISSUER },
+          limit: 100,
+          ledger_index: 'validated'
+        }]
+      });
+      const offers = response?.result?.offers;
+      if (!Array.isArray(offers)) throw new Error('JCS/XRP order-book depth is unavailable.');
+      bookSnapshotCache[side] = { at: Date.now(), offers };
+      return offers;
+    })();
+
+    try {
+      return await bookSnapshotPromise[side];
+    } finally {
+      bookSnapshotPromise[side] = null;
+    }
+  }
+
+  async function getExecutableBookPrice(side, amount) {
+    const buying = side === 'buy';
+    const offers = await getJcsBookSnapshot(side);
+    let remaining = amount;
+    let totalXrp = 0;
+
+    for (const offer of offers) {
+      if (buying
+        ? !isJcsCurrencyAmount(offer.TakerGets) || !isXrpCurrencyAmount(offer.TakerPays)
+        : !isXrpCurrencyAmount(offer.TakerGets) || !isJcsCurrencyAmount(offer.TakerPays)) continue;
+
+      const jcs = amountToNumber(buying ? offer.TakerGets : offer.TakerPays);
+      const xrp = amountToNumber(buying ? offer.TakerPays : offer.TakerGets);
+      const fundedJcs = amountToNumber(buying
+        ? (offer.taker_gets_funded ?? offer.TakerGets)
+        : (offer.taker_pays_funded ?? offer.TakerPays));
+      const fundedXrp = amountToNumber(buying
+        ? (offer.taker_pays_funded ?? offer.TakerPays)
+        : (offer.taker_gets_funded ?? offer.TakerGets));
+      if (![jcs, xrp, fundedJcs, fundedXrp].every(value => Number.isFinite(value) && value > 0)) continue;
+
+      const availableJcs = Math.min(jcs, fundedJcs, jcs * fundedXrp / xrp);
+      const filledJcs = Math.min(remaining, availableJcs);
+      totalXrp += filledJcs * xrp / jcs;
+      remaining -= filledJcs;
+      if (remaining <= amount * Number.EPSILON * 8) {
+        return totalXrp / amount;
+      }
+    }
+    return null;
+  }
+
   async function getMarketPrice(side, requestedAmount) {
     const amount = Number(
       requestedAmount != null
         ? requestedAmount
         : (amountEl && amountEl.value)
     );
-
     if (!Number.isFinite(amount) || amount <= 0) return null;
 
-    try {
-      const snapshot = await getJcsAmmSnapshot();
-      const quote = quoteJcsAmmTrade(side, amount, snapshot);
-      if (quote) return quote.unitPrice;
-    } catch (error) {
-      console.warn('JCS AMM quote unavailable; checking the order book.', error);
-    }
-
-    const { bestAsk, bestBid } = await getTopOfBook();
-    return side === 'buy' ? bestAsk : bestBid;
+    const [ammResult, bookResult] = await Promise.allSettled([
+      getJcsAmmSnapshot().then(snapshot => quoteJcsAmmTrade(side, amount, snapshot)?.unitPrice),
+      getExecutableBookPrice(side, amount)
+    ]);
+    const prices = [ammResult, bookResult]
+      .filter(result => result.status === 'fulfilled' && Number.isFinite(result.value) && result.value > 0)
+      .map(result => result.value);
+    if (!prices.length) return null;
+    // The ledger can combine venues. The best fully executable standalone
+    // path is a conservative estimate; OfferCreate enforces the signed limit.
+    return side === 'buy' ? Math.min(...prices) : Math.max(...prices);
   }
 
   async function fillBestPrice() {
-    if (!amountEl || !priceEl) return null;
+    if (!amountEl || !priceEl || marketTradePending) return null;
 
     const side = sideEl.value;
     const amount = Number(amountEl.value);
@@ -2043,7 +2105,7 @@
 
     try {
       const price = await getMarketPrice(side);
-      if (sideEl.value !== side || Number(amountEl.value) !== amount) return null;
+      if (marketTradePending || sideEl.value !== side || Number(amountEl.value) !== amount) return null;
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
       priceEl.value = Number(price).toFixed(9);
@@ -2057,7 +2119,7 @@
       setStatus(tradeMsg, 'Live ' + side + ' quote refreshed.', 'ok');
       return price;
     } catch (error) {
-      if (sideEl.value !== side || Number(amountEl.value) !== amount) return null;
+      if (marketTradePending || sideEl.value !== side || Number(amountEl.value) !== amount) return null;
       if (tradeLivePrice) tradeLivePrice.textContent = 'Unavailable';
       setStatus(
         tradeMsg,
@@ -2079,28 +2141,40 @@
       try {
         if (!currentAccount) throw new Error('Connect wallet first');
         if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
+        const account = currentAccount;
         const side = sideEl.value;
         const amt = Number(amountEl.value);
         const px = Number(priceEl.value);
-        if (!amt || !px || amt <= 0 || px <= 0) throw new Error('Enter Amount and Price');
+        if (!Number.isFinite(amt) || !Number.isFinite(px) || amt <= 0 || px <= 0) throw new Error('Enter Amount and Price');
         const xrpTotal = px * amt;
+        const xrpDrops = side === 'buy'
+          ? Math.floor(xrpTotal * XRP_TO_DROPS)
+          : Math.ceil(xrpTotal * XRP_TO_DROPS);
+        if (!Number.isSafeInteger(xrpDrops) || xrpDrops < 1) {
+          throw new Error('This limit price cannot be represented safely in XRP drops. Adjust the amount or price.');
+        }
         let tx;
         if (side === 'sell') {
           tx = {
             TransactionType: 'OfferCreate',
+            Account: account,
             TakerGets: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
-            TakerPays: toDrops(xrpTotal),
+            TakerPays: String(xrpDrops),
             Flags: 0x00080000
           };
         } else {
           tx = {
             TransactionType: 'OfferCreate',
-            TakerGets: toDrops(xrpTotal),
+            Account: account,
+            TakerGets: String(xrpDrops),
             TakerPays: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
             Flags: 0
           };
         }
-        setStatus(tradeMsg, 'Open Xaman to review limit order.');
+        if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt || Number(priceEl.value) !== px) {
+          throw new Error('Wallet or limit details changed. Review the order again.');
+        }
+        setStatus(tradeMsg, 'Review the exact JCS amount and XRP price in Xaman. A limit order may wait until filled or canceled.');
         const signed = await signWithSentinel(tx, 'offer');
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
@@ -2128,12 +2202,14 @@
       if (marketTradePending) return;
       marketTradePending = true;
       updateWalletButtons();
+      if (suggestBtn) suggestBtn.disabled = true;
       let submittedTxid = '';
       if (tradeMsg) delete tradeMsg.dataset.confirmed;
       try {
         if (!currentAccount) throw new Error('Connect wallet first');
         if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
 
+        const account = currentAccount;
         const side = sideEl.value;
         const amt = Number(amountEl.value);
         if (!Number.isFinite(amt) || amt <= 0) throw new Error('Enter Amount');
@@ -2143,21 +2219,37 @@
           'Preparing an AMM/DEX quote from validated XRPL liquidity…'
         );
 
+        // A signing request always starts with fresh validated liquidity.
+        ammSnapshotCache = null;
+        bookSnapshotCache[side] = null;
         const basePx = await getMarketPrice(side, amt);
         if (!basePx || basePx <= 0) {
-          throw new Error('No executable AMM or order-book price is available.');
+          throw new Error('No complete AMM or order-book quote is available for this amount.');
         }
+        if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt) {
+          throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
+        }
+        priceEl.value = String(basePx);
+        if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 9) + ' XRP / JCS';
+        recalcTotals();
 
         const slip = SLIPPAGE_PCT / 100;
         const estimatedXrp = amt * basePx;
+        if (!Number.isFinite(estimatedXrp) || estimatedXrp <= 0) {
+          throw new Error('The requested trade is too large to quote safely.');
+        }
         let tx;
 
         if (side === 'buy') {
           const maximumXrp = estimatedXrp * (1 + slip);
-          const maximumDrops = Math.max(1, Math.ceil(maximumXrp * XRP_TO_DROPS));
+          const maximumDrops = Math.floor(maximumXrp * XRP_TO_DROPS);
+          if (!Number.isSafeInteger(maximumDrops) || maximumDrops < 1) {
+            throw new Error('This trade cannot be limited safely in XRP drops. Adjust the JCS amount.');
+          }
 
           tx = {
             TransactionType: 'OfferCreate',
+            Account: account,
             TakerGets: String(maximumDrops),
             TakerPays: {
               currency: CURRENCY_HEX,
@@ -2174,10 +2266,14 @@
           }
 
           const minimumXrp = estimatedXrp * (1 - slip);
-          const minimumDrops = Math.max(1, Math.floor(minimumXrp * XRP_TO_DROPS));
+          const minimumDrops = Math.ceil(minimumXrp * XRP_TO_DROPS);
+          if (!Number.isSafeInteger(minimumDrops) || minimumDrops < 1) {
+            throw new Error('This trade cannot be limited safely in XRP drops. Adjust the JCS amount.');
+          }
 
           tx = {
             TransactionType: 'OfferCreate',
+            Account: account,
             TakerGets: {
               currency: CURRENCY_HEX,
               issuer: ISSUER,
@@ -2189,9 +2285,29 @@
           };
         }
 
+        if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt) {
+          throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
+        }
+        const ledger = await getLedgerSummary();
+        if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt) {
+          throw new Error('Wallet or trade details changed before signing. Review the amount again.');
+        }
+        const ledgerIndex = Number(ledger.index);
+        if (!ledger.validated || !Number.isSafeInteger(ledgerIndex) || ledgerIndex < 1 || ledgerIndex + 90 > 4294967295) {
+          throw new Error('A current validated ledger is required before signing this quote.');
+        }
+        tx.LastLedgerSequence = ledgerIndex + 90;
+        const boundDrops = BigInt(side === 'buy' ? tx.TakerGets : tx.TakerPays);
+        const boundXrp = (boundDrops / 1000000n).toString() + '.' +
+          (boundDrops % 1000000n).toString().padStart(6, '0');
+        const boundLabel = side === 'buy' ? 'Maximum XRP cost' : 'Minimum XRP proceeds';
+        if (tradeQuoteNote) tradeQuoteNote.textContent =
+          'Fresh estimate: ' + estimatedXrp.toFixed(6) + ' XRP. ' + boundLabel + ': ' +
+          boundXrp + ' XRP for ' + amt + ' JCS. Review the exact limit in Xaman.';
         setStatus(
           tradeMsg,
-          'Open Xaman and review the AMM/DEX market order. XRPL will use the best available order-book, AMM, or combined liquidity.'
+          'Review ' + amt + ' JCS and ' + boundLabel.toLowerCase() + ' ' +
+            boundXrp + ' XRP in Xaman. The order expires after ledger #' + tx.LastLedgerSequence + '.'
         );
 
         const signed = await signWithSentinel(tx, 'swap');
@@ -2203,9 +2319,15 @@
         const receipt = await waitForTradeValidation(txid);
 
         const record = window.JCS_RECEIPTS?.fromLedger?.(receipt.transaction, txid);
-        if (!record || record.account !== signed.txjson.Account || record.source_kind !== 'market-swap' ||
-            record.kind !== side || record.execution !== 'executed' || Number(record.assetA.value) !== amt) {
+        if (!record || record.account !== account || record.account !== signed.txjson.Account || record.source_kind !== 'market-swap' ||
+            record.kind !== side || record.execution !== 'executed' || Number(record.assetA.value) !== amt ||
+            !/^\d+(?:\.\d{1,6})?$/.test(record.assetB.value)) {
           throw new Error('The validated ledger movements do not match the requested JCS trade. Check this transaction before retrying.');
+        }
+        const [wholeXrp, fractionXrp = ''] = record.assetB.value.split('.');
+        const actualDrops = BigInt(wholeXrp) * 1000000n + BigInt(fractionXrp.padEnd(6, '0'));
+        if (side === 'buy' ? actualDrops > BigInt(tx.TakerGets) : actualDrops < BigInt(tx.TakerPays)) {
+          throw new Error('The validated XRP amount differs from the signed trade limit. Check this transaction before retrying.');
         }
         const confirmation = (side === 'buy' ? 'Buy confirmed: ' : 'Sell confirmed: ') +
           record.assetA.value + ' JCS ' + (side === 'buy' ? 'received for ' : 'sold for ') +
@@ -2226,6 +2348,7 @@
           recalcTotals();
         }
         ammSnapshotCache = null;
+        bookSnapshotCache.buy = bookSnapshotCache.sell = null;
         await Promise.allSettled([refreshAll({ force: true }), fetchBalances()]);
       } catch (e) {
         const message = submittedTxid
@@ -2235,6 +2358,7 @@
         if (submittedTxid) setXamanSignStatus(message, 'error');
       } finally {
         marketTradePending = false;
+        if (suggestBtn) suggestBtn.disabled = false;
         updateWalletButtons();
       }
     });
