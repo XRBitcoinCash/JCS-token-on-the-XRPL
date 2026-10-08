@@ -1842,9 +1842,6 @@
     }
     updateWalletButtons();
     recalcTotals();
-    if (sellExceedsBalance(sideEl?.value, Number(amountEl?.value))) {
-      setStatus(tradeMsg, sellBalanceMessage, 'err');
-    }
 
     return BAL;
   }
