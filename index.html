@@ -13918,6 +13918,16 @@ try {
   const btnRefreshOffers = $('btnRefresh');
   const btnCancelAll = $('btnCancelAll');
 
+  let offersRequestVersion = 0;
+  let displayedOffersAccount = null;
+  document.addEventListener('jcs:wallet-changed', () => {
+    offersRequestVersion++;
+    displayedOffersAccount = null;
+    if (offersWrap) offersWrap.textContent = currentAccount ? 'Check orders for this wallet.' : 'Connect Xaman to check orders.';
+    setOffersStatus(currentAccount ? 'Check orders for this wallet.' : 'Connect Xaman first.');
+    setOffersProgress(0);
+  });
+
   function setOffersStatus(msg, cls) { setStatus(offersStatus, msg, cls); }
   function setOffersProgress(pct) {
     if (!offersProgress) return;
@@ -13940,9 +13950,12 @@ try {
   }
 
   async function fetchOffers(acct) {
+    const requestVersion = ++offersRequestVersion;
+    displayedOffersAccount = null;
+    if (offersWrap) offersWrap.textContent = acct ? 'Checking orders for this wallet…' : 'Connect Xaman to check orders.';
     if (!acct) {
       setOffersStatus('Connect Xaman first.', 'err');
-      renderOffers([]);
+      setOffersProgress(0);
       return;
     }
 
@@ -13950,22 +13963,47 @@ try {
     setOffersProgress(10);
 
     try {
-      const r = await xrplRequest({
-        method: 'account_offers',
-        params: [{
-          account: acct,
-          ledger_index: 'validated',
-          limit: 500
-        }]
-      });
+      const allOffers = [];
+      const seenMarkers = new Set();
+      let marker = null;
+      let ledgerIndex = null;
 
-      const allOffers = (r.result && r.result.offers) || [];
+      for (let page = 0; page < 25; page++) {
+        const params = {
+          account: acct,
+          ledger_index: ledgerIndex || 'validated',
+          limit: 400
+        };
+        if (marker !== null) params.marker = marker;
+        const r = await xrplRequest({ method: 'account_offers', params: [params] });
+        if (requestVersion !== offersRequestVersion || acct !== currentAccount) return;
+
+        const result = r.result || {};
+        const resultLedger = Number(result.ledger_index);
+        if (result.validated !== true || result.account !== acct ||
+            !Array.isArray(result.offers) ||
+            !Number.isSafeInteger(resultLedger) || resultLedger <= 0 ||
+            (ledgerIndex !== null && resultLedger !== ledgerIndex)) {
+          throw new Error('The open-order response is not a complete validated snapshot. Check again.');
+        }
+        ledgerIndex = resultLedger;
+        allOffers.push(...result.offers);
+        marker = result.marker ?? null;
+        if (marker === null) break;
+        const markerKey = JSON.stringify(marker);
+        if (seenMarkers.has(markerKey)) throw new Error('Open-order pagination repeated. Check again.');
+        seenMarkers.add(markerKey);
+      }
+      if (marker !== null) throw new Error('Too many open orders to verify in one pass. Check again.');
+      if (requestVersion !== offersRequestVersion || acct !== currentAccount) return;
+
       const offers = allOffers.filter((offer) =>
         isJcsAmount(offer.taker_gets) ||
         isJcsAmount(offer.taker_pays)
       );
 
-      renderOffers(offers);
+      displayedOffersAccount = acct;
+      renderOffers(offers, acct);
       setOffersStatus(
         'You have ' + offers.length + ' unfinished JCS order(s). Canceling stops the remaining trade; it does not undo completed trades.',
         'ok'
@@ -13973,7 +14011,9 @@ try {
       setOffersProgress(100);
       setTimeout(() => setOffersProgress(0), 400);
     } catch (error) {
-      renderOffers([]);
+      if (requestVersion !== offersRequestVersion || acct !== currentAccount) return;
+      displayedOffersAccount = null;
+      if (offersWrap) offersWrap.textContent = 'Open orders could not be verified. Check again.';
       setOffersStatus(
         'Open-order error: ' + (error?.message || error),
         'err'
@@ -13982,7 +14022,7 @@ try {
     }
   }
 
-  function renderOffers(offers) {
+  function renderOffers(offers, account) {
     if (!offersWrap) return;
 
     offersWrap.innerHTML = '';
@@ -14066,6 +14106,7 @@ try {
     offers.forEach((offer) => {
       const row = document.createElement('tr');
       row.dataset.seq = offer.seq;
+      row.dataset.account = account;
 
       const seq = document.createElement('td');
       seq.className = 'mono';
@@ -14096,7 +14137,7 @@ try {
       cancel.className = 'btn';
       cancel.type = 'button';
       cancel.textContent = 'Cancel order';
-      cancel.addEventListener('click', () => cancelOne(offer.seq));
+      cancel.addEventListener('click', () => cancelOne(offer.seq, account));
       action.appendChild(cancel);
       row.appendChild(action);
 
@@ -14108,32 +14149,49 @@ try {
     offersWrap.appendChild(wrap);
   }
 
-  async function cancelOne(seq) {
+  async function cancelOne(seq, account) {
     try {
-      const tx = { TransactionType: 'OfferCancel', OfferSequence: Number(seq) };
+      const offerSequence = Number(seq);
+      if (!Number.isSafeInteger(offerSequence) || offerSequence <= 0) {
+        throw new Error('The selected order sequence is invalid. Check orders again.');
+      }
+      if (!account || account !== currentAccount || account !== displayedOffersAccount) {
+        throw new Error('Your connected wallet or order list changed. Check orders again.');
+      }
+      const tx = { TransactionType: 'OfferCancel', Account: account, OfferSequence: offerSequence };
       const signed = await signWithSentinel(tx, 'cancel');
       const txid = signed && signed.txid;
       if (!txid) throw new Error('Xaman returned no transaction ID for the cancellation.');
-      setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
+      if (account === currentAccount) setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
       const receipt = await waitForTradeValidation(txid);
       const validatedCancel = receipt.transaction?.tx_json || receipt.transaction;
       if (validatedCancel?.TransactionType !== 'OfferCancel' ||
-          validatedCancel.Account !== signed.txjson.Account ||
-          Number(validatedCancel.OfferSequence) !== Number(seq)) {
+          signed.txjson.Account !== account ||
+          validatedCancel.Account !== account ||
+          Number(validatedCancel.OfferSequence) !== offerSequence) {
         throw new Error('The validated transaction does not match the selected order. Check transaction ' + txid + ' before retrying.');
       }
-      setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
       document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-        detail: { kind:'offer-cancel', txid, offerSequence:Number(seq) }
+        detail: { kind:'offer-cancel', txid, offerSequence }
       }));
-      await fetchOffers(currentAccount);
+      if (account === currentAccount) {
+        setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
+        await fetchOffers(account);
+      }
+      return true;
     } catch (e) {
-      setOffersStatus('Cancel error: ' + (e.message || e), 'err');
+      if (account === currentAccount) setOffersStatus('Cancel error: ' + (e.message || e), 'err');
+      return false;
     }
   }
 
   async function cancelAll() {
     if (!offersWrap) return;
+    const account = displayedOffersAccount;
+    if (!account || account !== currentAccount) {
+      setOffersStatus('Check orders for the connected wallet first.', 'err');
+      return;
+    }
     const rows = offersWrap.querySelectorAll('tbody tr');
     const count = rows.length;
     if (!count) {
@@ -14142,12 +14200,20 @@ try {
     }
     if (!confirm('Cancel ' + count + ' offer(s)?')) return;
     let i = 0;
-    for (const r of rows) {
-      const seq = r.dataset.seq;
-      if (!seq) continue;
+    for (const row of rows) {
+      if (account !== currentAccount || account !== displayedOffersAccount ||
+          row.dataset.account !== account) {
+        setOffersStatus('Your connected wallet or order list changed. Check orders again.', 'err');
+        setOffersProgress(0);
+        return;
+      }
+      const seq = row.dataset.seq;
       i++;
       setOffersProgress(((i - 1) / count) * 100);
-      try { await cancelOne(seq); } catch {}
+      if (!await cancelOne(seq, account)) {
+        setOffersProgress(0);
+        return;
+      }
     }
     setOffersProgress(100);
     setTimeout(() => setOffersProgress(0), 400);
