@@ -13,6 +13,9 @@
   layer.className = 'jcs-prayer-descent';
   layer.setAttribute('aria-hidden', 'true');
   layer.hidden = true;
+  const badge = document.createElement('span');
+  badge.className = 'jcs-prayer-descent-badge';
+  layer.append(badge);
   viewport.append(layer);
 
   const note = document.createElement('p');
@@ -45,7 +48,7 @@
       light.style.setProperty('--delay', `${(-i * 1.91).toFixed(2)}s`);
       lights.push(light);
     }
-    layer.replaceChildren(...lights);
+    layer.replaceChildren(badge, ...lights);
   }
 
   function onSummary(event) {
@@ -54,6 +57,7 @@
     count = data.nfts;
     renderLights(count);
     layer.dataset.verifiedNfts = String(count);
+    badge.textContent = `${count.toLocaleString()} prayer NFT lights · symbolic, no location`;
     const source = data.sourceState === 'ready' ? 'live validated scan'
       : data.embedded ? 'audited snapshot' : 'cached validated aggregate';
     const scale = count > maxLights ? `Up to ${maxLights} lights illustrate the count.` : 'One light per verified prayer NFT.';
