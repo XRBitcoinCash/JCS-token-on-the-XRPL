@@ -1772,7 +1772,7 @@
             : insufficientJcs
               ? sellBalanceMessage
               : price > 0
-                ? 'Live reference: ' + formatTradeNumber(price, 9) +
+                ? 'Live reference: ' + formatTradeNumber(price, 12) +
                   ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
                 : 'Refresh the live quote before submitting the request.';
     }
@@ -2259,11 +2259,11 @@
       }
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
-      priceEl.value = Number(price).toFixed(9);
+      priceEl.value = Number(price).toFixed(15);
 
       if (tradeLivePrice) {
         tradeLivePrice.textContent =
-          formatTradeNumber(price, 9) + ' XRP / JCS';
+          formatTradeNumber(price, 12) + ' XRP / JCS';
       }
 
       recalcTotals();
@@ -2426,7 +2426,7 @@
           throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
         }
         priceEl.value = String(basePx);
-        if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 9) + ' XRP / JCS';
+        if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 12) + ' XRP / JCS';
         recalcTotals();
 
         const estimatedXrp = amt * basePx;
