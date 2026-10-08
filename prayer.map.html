@@ -2938,6 +2938,7 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-st
 @media(max-width:700px){#jcs-map-focus-top .jcs-map-controls{padding:9px 10px}#jcs-map-focus-bottom{grid-template-columns:minmax(0,1fr)}.jcs-cinema-controls button{padding:8px 10px}.jcs-cinema-help{font-size:10px}#jcs-map-focus-frame #jcs-map-viewport{min-height:300px!important}#jcs-map-evidence>summary{padding:12px}}
 </style>
 <link rel="stylesheet" href="css/jcs-scripture-captions.css?v=20261008a">
+<link rel="stylesheet" href="css/jcs-human-souls.css?v=20261008a">
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -3141,7 +3142,7 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-st
 <div class="atlas-controls"><label><input id="atlas-scripture-motion" type="checkbox" checked> Animate descents</label><button type="button" class="atlas-button" id="atlas-scripture-begin">Start timeline and narration</button><button type="button" class="atlas-button" id="atlas-scripture-replay">Restart from Jesus’ birth</button><button type="button" class="atlas-button" id="atlas-scripture-revelation" aria-pressed="false">Revelation · undated scene</button></div>
 <p>Press <strong>Start timeline and narration</strong>. Morning Star visibly leaves the floating cluster and lands at Pakistan during an eight-second artistic opening. Each following star has one primary Nexus and follows a slow curved path to it as the timeline approaches that Nexus’s selected date. The same star stays at its destination; it is removed from the cluster. City and regional detail records share their existing primary geographic Nexus. Historical dates and earlier markers remain intact.</p>
 <p class="atlas-note"><strong>Population matters:</strong> 100 deaths among 100,000 people and 1,000 among 1,000,000 both equal 0.1%, or 100 per 100,000. This dataset has no matched historical population denominators, so per-capita rankings are unavailable. Raw annual peaks are a temporary reference, not a ranking of genocides or a comparison of severity across eras. A valid rate requires a population estimate for the same place, period and population group as the deaths. Open a star’s linked records for its date rule, mean and median where available.</p>
-<p class="atlas-note"><strong>Reading this layer:</strong> the number 200 comes from <a href="https://en.wikisource.org/wiki/Book_of_Enoch/Chapter_06" target="_blank" rel="noopener noreferrer">1 Enoch 6:6</a>. Morning Star is one assigned motif in this artistic sequence. The 19 leader names listed in 1 Enoch 6:7 are used once each, followed by numbered “Unnamed Watcher” labels; the text does not name all 200. The assignment order is an artistic choice, not a most-likely identification. Each primary Nexus keeps one assigned star. Unassigned stars remain in the cluster; no atrocities or future dates are invented to reach 200. Reaching a count of 200 has no established predictive meaning. Crowded names appear on hover or keyboard focus; zoom in to separate them. Their names, order and map associations are symbolic choices, not identifications in historical sources or evidence that angels caused these events. This layer does not change the map’s historical explanations, counts or source scores.</p>
+<p class="atlas-note"><strong>Reading this layer:</strong> the number 200 comes from <a href="https://en.wikisource.org/wiki/Book_of_Enoch/Chapter_06" target="_blank" rel="noopener noreferrer">1 Enoch 6:6</a>. Morning Star is one assigned motif in this artistic sequence. The 19 leader names listed in 1 Enoch 6:7 are used once each, followed by numbered “Unnamed Angel” labels; the text does not name all 200. The assignment order is an artistic choice, not a most-likely identification. Each primary Nexus keeps one assigned star. Unassigned stars remain in the cluster; no atrocities or future dates are invented to reach 200. Reaching a count of 200 has no established predictive meaning. Crowded names appear on hover or keyboard focus; zoom in to separate them. Their names, order and map associations are symbolic choices, not identifications in historical sources or evidence that angels caused these events. This layer does not change the map’s historical explanations, counts or source scores.</p>
 <p id="atlas-scripture-origin" class="atlas-note"></p><p id="atlas-scripture-status" role="status"></p>
 <div class="atlas-controls"><label for="atlas-scripture-star">Explore a star <select id="atlas-scripture-star" aria-controls="atlas-scripture-records"></select></label></div>
 <details><summary id="atlas-scripture-selection">Linked records</summary><ul id="atlas-scripture-records"></ul></details>
@@ -3172,9 +3173,9 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-st
       <aside class="analysis-panel" id="analysis-panel" tabindex="-1" aria-label="Statistics, methods, and sources">
 
 <section class="jcs-watchers-player" id="jcs-watchers-player" aria-label="The Watchers: Book of Enoch audio">
-<details open><summary>Listen · the fall of the Watchers</summary>
-<p><strong>1 Enoch, chapters 1–11.</strong> Includes the Watchers’ descent in chapter 6. English reading by CJ Plogue. The map follows the selected recording at its natural speed; chapters 12–19 are a separate optional reading.</p>
-<label for="jcs-watchers-track">Reading section<select id="jcs-watchers-track"><option value="0">1–11 · the Watchers descend</option><option value="1">12–19 · Enoch and the Watchers</option></select></label>
+<details open><summary>Listen · the descent of the Angels</summary>
+<p><strong>1 Enoch, chapters 1–11.</strong> Includes the angels’ descent (the Watchers in Enoch) in chapter 6. English reading by CJ Plogue. The map follows the selected recording at its natural speed; chapters 12–19 are a separate optional reading.</p>
+<label for="jcs-watchers-track">Reading section<select id="jcs-watchers-track"><option value="0">1–11 · the Angels descend</option><option value="1">12–19 · Enoch and the Angels</option></select></label>
 <audio id="jcs-watchers-audio" controls preload="metadata" src="https://dn801704.us.archive.org/0/items/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3" aria-label="Book of Enoch reading">Your browser does not support audio. Use the direct audio link below.</audio>
 <div class="jcs-watchers-buttons"><button type="button" id="jcs-watchers-play" aria-pressed="false">Play reading</button><button type="button" id="jcs-watchers-restart">Restart</button><button type="button" id="jcs-watchers-mute" aria-pressed="false">Mute</button></div>
 <output id="jcs-watchers-progress" aria-label="Reading elapsed time and total duration">0:00 / 16:04</output>
@@ -7260,7 +7261,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     const descentYears=()=>2025*7/journeySeconds();
     // Leader names in R. H. Charles, 1 Enoch 6:7; these are reused motif names.
     const leaderNames=['Samiazaz','Arakiba','Rameel','Kokabiel','Tamiel','Ramiel','Danel','Ezeqeel','Baraqijal','Asael','Armaros','Batarel','Ananel','Zaqiel','Samsapeel','Satarel','Turel','Jomjael','Sariel'];
-    const name=i=>i===0?'Morning Star':i<=leaderNames.length?leaderNames[i-1]+' · '+String(i+1).padStart(3,'0'):'Unnamed Watcher · '+String(i+1).padStart(3,'0');
+    const name=i=>i===0?'Morning Star':i<=leaderNames.length?leaderNames[i-1]+' · '+String(i+1).padStart(3,'0'):'Unnamed Angel · '+String(i+1).padStart(3,'0');
     const nameToggle=$('atlas-scripture-names'),motionChoice=$('atlas-scripture-motion');
     motionChoice.checked=!reduced.matches;let motionOverride=false;
     for(const e of model.events){
@@ -7483,15 +7484,15 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     observer.observe(document.body,{attributes:true,attributeFilter:['data-timeline']});
     window.addEventListener('pagehide',()=>{cancel();flights=[];pending=[];});
     window.addEventListener('pageshow',()=>{if(!disposed)sync();});
-    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; the former undated Pakistan opening is replaced by the Bethlehem Gospel layer on the shared timeline; 19 leader names followed by numbered unnamed Watchers; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
+    return{globeState:()=>{refreshSchedule();return{stars:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),lon:r.lon,lat:r.lat,departure:r.departureYear,landing:r.landingYear,nexusId:r.nexusId,nodeId:r.nodeId,title:r.title,kind:r.kind,artisticOnly:!!r.artisticOnly,eventId:r.event?.id,description:r.event?.summary||r.peakMethod,sourceUrl:r.event?.sources?.[0]?.url||null,sourceLabel:r.event?.sources?.[0]?.title||null})),allStarNames:Array.from({length:STAR_COUNT},(_,i)=>name(i)),selectedStar:chosen};},update,sync,motion,preparePlayback:()=>update(true),leaveTableau:()=>{if(tableau){tableau=false;updateTableauButton();sync();}},settle:()=>{cancel();flights=[];pending=[];draw();updateStatus();},isBusy:()=>canMove()&&(flights.length>0||pending.length>0),state:()=>({layer:'scriptural imagery',stars:STAR_COUNT,counts:counts(),journeySeconds:journeySeconds(),perCapitaAvailable:false,peaks:schedule.map(r=>({id:r.id,star:r.star,name:name(r.star),departure:r.departureYear,landing:r.landingYear,phase:journeyStarted?phase(r):'waiting',x:points.get(r.id)?.x,y:points.get(r.id)?.y,year:r.peakYear,value:r.peakValue,mean:r.mean,median:r.median,method:r.peakMethod})),descending:flights.map(f=>({recordId:f.record.id,star:f.record.star,elapsed:f.elapsed,duration:f.duration})),queued:pending.length,animate:motionChoice.checked,names:leaderNames,openingRecord:openingRecord?.id,openingLocation:openingRecord?.location,associations:seen.length,linkedStars:targets.size,selectedStar:name(chosen),assignment:'one fixed star per primary Nexus; the former undated Pakistan opening is replaced by the Bethlehem Gospel layer on the shared timeline; 19 leader names followed by numbered unnamed Angels; no historical or prophetic attribution',source:'1 Enoch 6:6',historicalCausation:false,predictedDate:null,undatedTableau:tableau}),destroy:()=>{disposed=true;cancel();observer.disconnect();}};
   }
 
   function createWatchersNarration(){
     const panel=$('jcs-watchers-player'),audio=$('jcs-watchers-audio'),track=$('jcs-watchers-track');
     const linked=$('jcs-watchers-sync'),status=$('jcs-watchers-status'),main=$('jcs-watchers-play');
     const tracks=[
-      {asset:'reading-02',label:'Chapters 1–11 · the Watchers descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
-      {asset:'reading-03',label:'Chapters 12–19 · Enoch and the Watchers',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
+      {asset:'reading-02',label:'Chapters 1–11 · the Angels descend',duration:964,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_02_charles_64kb.mp3'},
+      {asset:'reading-03',label:'Chapters 12–19 · Enoch and the Angels',duration:873,url:'https://archive.org/download/bookofenoch_1812_librivox/bookofenoch_03_charles_64kb.mp3'}
     ];
     for(const item of tracks){const duration=window.JCSAudioAssets?.recording?.(item.asset)?.duration;if(Number.isFinite(duration)&&duration>0)item.duration=duration;}
     // Narration remains the only owner of historical time and playback intent.
@@ -7968,7 +7969,7 @@ window.JCSGospelArt=Object.freeze({draw});
 </script>
 <script id="jcs-cinematic-globe-renderer">
 /* Optional Canvas globe. Every visual phase is a pure function of atlas position.
-   Space imagery and Watcher associations are decorative scriptural artwork. */
+   Space imagery and angel associations are decorative scriptural artwork. */
 (function (global) {
   'use strict';
   const TAU = Math.PI * 2, RAD = Math.PI / 180;
@@ -8028,9 +8029,9 @@ window.JCSGospelArt=Object.freeze({draw});
     const resume = document.createElement('button'); resume.type = 'button'; resume.className = 'jcs-cinema-resume'; resume.hidden = true;
     resume.innerHTML = iconOrbit + '<span>Guided view</span>'; resume.addEventListener('click', () => { manual = false; resume.hidden = true; invalidate(); }); controls.append(resume);
     for (const [action, title, run] of [['zoom-out', '−', () => changeZoom(viewZoom / 1.25)], ['zoom-in', '+', () => changeZoom(viewZoom * 1.25)], ['overview', 'Overview', () => { takeManual(); manualZoom = 1; invalidate(); }], ['pause', 'Pause & explore', () => { takeManual(); options.onPause?.(); invalidate(); }], ['resume', 'Resume journey', () => { manual = false; resume.hidden = true; options.onResume?.(); invalidate(); }]]) { const button = document.createElement('button'); button.type = 'button'; button.textContent = title; button.dataset.viewAction = action; if (action === 'pause') button.id = 'jcs-cinema-pause'; if (action === 'resume') button.id = 'jcs-cinema-journey-play'; button.setAttribute('aria-label', action === 'zoom-in' ? 'Zoom in' : action === 'zoom-out' ? 'Zoom out' : title); button.addEventListener('click', run); controls.append(button); }
-    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Watchers'], ['ring', 'Outer haze'], ['architecture', 'Golden architecture']]) {
+    for (const [key, label] of [['background', 'Galaxies'], ['descents', 'Angels'], ['ring', 'Outer haze'], ['architecture', 'Sacred symbols']]) {
       const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', 'true');
-      if (key === 'descents') b.title = 'Religious artwork: celestial origins are symbolic; dated destinations remain unchanged.';
+      if (key === 'descents') b.title = 'Angels in the Enoch tradition · religious artwork. Celestial origins are symbolic; source landing years and destinations remain unchanged.';
       b.addEventListener('click', () => { layer[key] = !layer[key]; b.setAttribute('aria-pressed', String(layer[key])); dirty = true; invalidate(); }); layerControls.append(b);
     }
 
@@ -8109,7 +8110,7 @@ window.JCSGospelArt=Object.freeze({draw});
         if (item.kind === 'spiral') { ctx.save(); ctx.rotate(t * .7); ctx.drawImage(sprite.outer, -size / 2, -size / 2, size, size); ctx.restore(); ctx.rotate(t * 1.2); ctx.drawImage(sprite.inner, -size / 2, -size / 2, size, size); } ctx.restore();
       }
     }
-    function drawArchitecture() { if (layer.architecture && architecture) { ctx.save(); ctx.globalAlpha = .55 + density * .45; ctx.drawImage(architecture, Math.sin(currentCamera.lon * RAD) * 5, Math.sin(currentCamera.lat * RAD) * 3, width, height); ctx.restore(); } }
+    function drawArchitecture() { if (!global.JCSHumanSouls && layer.architecture && architecture) { ctx.save(); ctx.globalAlpha = .55 + density * .45; ctx.drawImage(architecture, Math.sin(currentCamera.lon * RAD) * 5, Math.sin(currentCamera.lat * RAD) * 3, width, height); ctx.restore(); } }
 
     function resize() {
       if (disposed) return;
@@ -8118,17 +8119,15 @@ window.JCSGospelArt=Object.freeze({draw});
       baseRadius = Math.min(width * .41, height * .40); radius = baseRadius * viewZoom; cx = width * .5; cy = height * .52; hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
     }
     function camera(position, stars) {
-      const base = { lon: 22 + (position + 4) * .12, lat: 18, zoom: 1 };
-      let total = 0, maximum = 0, target = [0, 0, 0];
-      for (const star of stars) {
-        if (!finitePoint(star) || !Number.isFinite(+star.landing)) continue;
-        const departure = Number.isFinite(+star.departure) ? +star.departure : +star.landing - 14, duration = Math.max(1, +star.landing - departure), entry = departure - duration * .8, exit = +star.landing + duration * .65;
-        const weight = ease(clamp((position - entry) / (duration * .8), 0, 1)) * ease(clamp((exit - position) / (duration * .65), 0, 1));
-        if (weight <= 0) continue; total += weight; maximum = Math.max(maximum, weight); const v = toVector(star); target = target.map((n, i) => n + v[i] * weight);
+      // A steady overview does not chase competing destinations across hemispheres.
+      // Explicit Gospel focus and the visitor's manual controls remain authoritative.
+      let journeys = 0;
+      for (const item of stars) {
+        const end = +item.landing, start = Number.isFinite(+item.departure) ? +item.departure : end - 28;
+        if (finitePoint(item) && Number.isFinite(end) && position >= start && position < end) journeys++;
       }
-      density = ease(clamp((total - 2) / 4, 0, 1));
-      if (total > 0) { const lon = Math.atan2(target[0], target[2]) / RAD, lat = Math.atan2(target[1], Math.hypot(target[0], target[2])) / RAD, influence = maximum * (1 - density); base.lon += (((lon - base.lon) % 360 + 540) % 360 - 180) * influence; base.lat = mix(base.lat, clamp(lat, -65, 65), influence); base.zoom += influence * 1.1; }
-      return base;
+      density = ease(clamp((journeys - 2) / 6, 0, 1));
+      return { lon: 22 + (position + 4) * .24, lat: 18, zoom: 1 };
     }
     function projection(view) {
       const a = view.lon * RAD, b = view.lat * RAD, sa = Math.sin(a), ca = Math.cos(a), sb = Math.sin(b), cb = Math.cos(b);
@@ -8219,38 +8218,89 @@ window.JCSGospelArt=Object.freeze({draw});
       const control = { x: (start.x + endpoint.x) * .5 + side * radius * .33, y: Math.min(start.y, endpoint.y) - radius * .22 };
       const u = 1 - t; return { x: u * u * start.x + 2 * u * t * control.x + t * t * endpoint.x, y: u * u * start.y + 2 * u * t * control.y + t * t * endpoint.y };
     }
+    let angelScheduleKey = '', angelWindows = new Map();
+    const angelKey = item => String(item.id ?? item.star ?? item.name);
+    function prepareAngelWindows(stars) {
+      const key = stars.map(s => [angelKey(s), s.departure, s.landing].join(':')).join('|');
+      if (key === angelScheduleKey) return;
+      angelScheduleKey = key; angelWindows.clear();
+      const rows = stars.filter(s => Number.isFinite(+s.landing)).map(item => {
+        const landing = +item.landing, departure = Number.isFinite(+item.departure) ? +item.departure : landing - 28;
+        return { item, landing, departure: Math.min(departure, landing - .001) };
+      });
+      for (const row of rows) {
+        // Compress visual travel only; the source landing year is never moved.
+        // The window is fixed for this schedule, so a newly visible flight cannot
+        // change another flight's progress or push it out of the renderer.
+        const overlap = rows.filter(other => other.departure < row.landing && other.landing > row.departure).length;
+        const original = row.landing - row.departure, speed = Math.min(4, Math.sqrt(Math.max(1, overlap / 4)));
+        const duration = Math.min(original, Math.max(.6, original / speed));
+        angelWindows.set(angelKey(row.item), { departure: row.landing - duration, landing: row.landing, duration });
+      }
+    }
     function drawWatchers(state, project, position) {
       if (!layer.descents || state.layers?.stars === false) return;
       const stars = state.stars || [], activeFlights = [];
       const full = !state.mode || state.mode === 'full', started = state.started !== false, names = state.layers?.names !== false;
       const allNames = state.allStarNames || [];
+      prepareAngelWindows(stars);
       const assigned = new Map(stars.map(s => [s.star ?? s.id, s]));
       // Waiting points remain a celestial tableau; unassigned stars gain no invented event.
       for (let i = 0; i < allNames.length; i++) {
-        const item = assigned.get(i), waiting = !item || !started || !full || position < +item.departure;
-        if (!waiting) continue; const { x, y } = starOrigin(item || { star: i, name: typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name }, i), focus = i === state.selectedStar;
+        const item = assigned.get(i), window = item && angelWindows.get(angelKey(item));
+        const waiting = !window || !started || !full || position < window.departure;
+        if (!waiting) continue;
+        const { x, y } = starOrigin(item || { star: i, name: typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name }, i), focus = i === state.selectedStar;
         star(x, y, focus ? 3.7 : i % 11 === 0 ? 1.4 : .85, '#abb3ce', focus ? .85 : .36);
-        if (focus && names) label(typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name || 'Watcher', x + 8, y - 7, '#c8c7da');
+        if (focus && names) label(typeof allNames[i] === 'string' ? allNames[i] : allNames[i]?.name || 'Angel', x + 8, y - 7, '#c8c7da');
       }
       if (!started || !full) return;
       for (const item of stars) {
-        if (!finitePoint(item)) continue; const landing = +item.landing, departure = Number.isFinite(+item.departure) ? +item.departure : landing - 28;
-        if (!Number.isFinite(landing)) continue; const p = project(toVector(item)), focus = item.star === state.selectedStar || selected(item, state.selected);
-        if (position >= landing && p.z > .045) {
-          star(p.x, p.y, focus ? 6 : 3.2, '#cea6b5', .5 + .35 * p.z); hits.push({ x: p.x, y: p.y, item });
-          if (focus) { ctx.strokeStyle = '#cda1ae88'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p.x, p.y, 11, 0, TAU); ctx.stroke(); if (names) label(item.name || 'Watcher', p.x + 12, p.y - 9, '#ead4d8', undefined, true); }
-        } else if (position >= departure && position < landing) activeFlights.push({ item, p, t: clamp((position - departure) / Math.max(.001, landing - departure), 0, 1), focus });
-      }
-      activeFlights.sort((a, b) => Number(b.focus) - Number(a.focus) || a.t - b.t);
-      for (const f of activeFlights.slice(0, 8)) {
-        if (f.p.z < -.05) continue; const t = 1 - Math.pow(1 - f.t, 1.6), here = flightPoint(f.item, f.p, t);
-        const opening = f.item.star === 0 || /morning star/i.test(f.item.name || '');
-        for (let j = 0; j < 14; j++) {
-          const u = Math.max(0, t - .2 + j * .2 / 14), v = Math.max(0, t - .2 + (j + 1) * .2 / 14), a = flightPoint(f.item, f.p, u), b = flightPoint(f.item, f.p, v);
-          ctx.strokeStyle = 'rgba(' + (opening ? '227,182,134,' : '215,168,173,') + (.08 + j / 14 * .6) + ')'; ctx.lineWidth = .5 + j / 14 * (opening ? 2.5 : 1.4); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        if (!finitePoint(item)) continue;
+        const window = angelWindows.get(angelKey(item)); if (!window) continue;
+        const p = project(toVector(item)), focus = item.star === state.selectedStar || selected(item, state.selected);
+        const farSide = p.z <= .045;
+        if (position >= window.landing) {
+          // Far-side rings use the true projected destination. They are ghosted
+          // through the globe, never relocated to an unrelated visible country.
+          if (farSide) {
+            ctx.save(); ctx.globalAlpha = focus ? .7 : .27; ctx.strokeStyle = '#d6b9cd'; ctx.lineWidth = focus ? 1.5 : .8; ctx.setLineDash([2, 2]);
+            ctx.beginPath(); ctx.arc(p.x, p.y, focus ? 5.5 : 2.2, 0, TAU); ctx.stroke(); ctx.restore();
+          } else star(p.x, p.y, focus ? 6 : 3.2, '#cea6b5', .5 + .35 * p.z);
+          hits.push({ x: p.x, y: p.y, item: farSide ? { ...item, description: (item.name || 'Angel') + ' · landed on the far side of the globe' } : item });
+          const arrival = clamp(1 - (position - window.landing) / 3, 0, 1);
+          if (focus || arrival > 0 && !reduced.matches && state.animationsEnabled !== false) {
+            ctx.save(); ctx.strokeStyle = farSide ? '#b8a2bd55' : '#f3d5bdaa'; ctx.globalAlpha = focus ? .8 : arrival; ctx.lineWidth = 1; if (farSide) ctx.setLineDash([2, 3]);
+            ctx.beginPath(); ctx.arc(p.x, p.y, focus ? 11 : 5 + (1 - arrival) * 10, 0, TAU); ctx.stroke(); ctx.restore();
+          }
+          if (focus && names) label((item.name || 'Angel') + (farSide ? ' · far side' : ''), p.x + 12, p.y - 9, '#ead4d8', undefined, true);
+        } else if (position >= window.departure) {
+          activeFlights.push({ item, p, t: clamp((position - window.departure) / window.duration, 0, 1), focus, farSide });
         }
-        const glowRadius = opening ? 24 : 15, halo = ctx.createRadialGradient(here.x, here.y, 0, here.x, here.y, glowRadius); halo.addColorStop(0, 'rgba(234,192,178,.38)'); halo.addColorStop(1, 'rgba(234,192,178,0)'); ctx.fillStyle = halo; ctx.fillRect(here.x - glowRadius, here.y - glowRadius, glowRadius * 2, glowRadius * 2); star(here.x, here.y, opening ? 8 : f.focus ? 7 : 5, opening ? '#ffe1ac' : '#f1d9c1', .98);
-        if (names && (f.focus || activeFlights.indexOf(f) < 3)) label(f.item.name || 'Unnamed Watcher', here.x + 10, here.y - 11, '#dfc5cc', undefined, f.focus); hits.push({ x: here.x, y: here.y, item: f.item });
+      }
+      // Every flight keeps its marker. Only expensive trails/halos are budgeted;
+      // arrivals and the selected angel receive that detail before younger flights.
+      activeFlights.sort((a, b) => Number(b.focus) - Number(a.focus) || b.t - a.t || angelKey(a.item).localeCompare(angelKey(b.item)));
+      for (let i = 0; i < activeFlights.length; i++) {
+        const f = activeFlights[i], detailed = i < 8, t = 1 - Math.pow(1 - f.t, 1.6), here = flightPoint(f.item, f.p, t);
+        const opening = f.item.star === 0 || /morning star/i.test(f.item.name || '');
+        const segments = reduced.matches || state.animationsEnabled === false ? 0 : detailed ? 10 : 2;
+        const alpha = f.farSide ? .42 : .98;
+        ctx.save(); ctx.globalAlpha = alpha; if (f.farSide) ctx.setLineDash([2, 3]);
+        for (let j = 0; j < segments; j++) {
+          const length = detailed ? .16 : .06, u = Math.max(0, t - length + j * length / segments), v = Math.max(0, t - length + (j + 1) * length / segments);
+          const a = flightPoint(f.item, f.p, u), b = flightPoint(f.item, f.p, v);
+          ctx.strokeStyle = 'rgba(' + (opening ? '227,182,134,' : '215,168,173,') + (.15 + j / segments * .5) + ')'; ctx.lineWidth = detailed ? .6 + j / segments * 1.4 : .75;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        ctx.restore();
+        if (detailed && !f.farSide) {
+          const glowRadius = opening ? 21 : 12, halo = ctx.createRadialGradient(here.x, here.y, 0, here.x, here.y, glowRadius);
+          halo.addColorStop(0, 'rgba(234,192,178,.3)'); halo.addColorStop(1, 'rgba(234,192,178,0)'); ctx.fillStyle = halo; ctx.fillRect(here.x - glowRadius, here.y - glowRadius, glowRadius * 2, glowRadius * 2);
+        }
+        star(here.x, here.y, opening ? 8 : f.focus ? 7 : detailed ? 4.5 : 2.7, opening ? '#ffe1ac' : '#f1d9c1', alpha);
+        if (names && (f.focus || i < 3)) label((f.item.name || 'Unnamed angel') + (f.farSide ? ' · far side' : ''), here.x + 10, here.y - 11, '#dfc5cc', undefined, f.focus);
+        hits.push({ x: here.x, y: here.y, item: f.item });
       }
     }
     function gospelLabel(text, x, y, size, color) {
@@ -8305,9 +8355,10 @@ window.JCSGospelArt=Object.freeze({draw});
     function captions(state, position) {
       const year = Number.isFinite(+state.year) ? Math.round(+state.year) : Math.floor(position), stars = state.stars || [];
       const full = !state.mode || state.mode === 'full', started = state.started !== false;
-      const current = started && full && stars.find(s => position >= +s.departure && position < +s.landing), seen = started && full ? stars.filter(s => position >= +s.landing).length : 0;
+      prepareAngelWindows(stars);
+      const current = started && full && stars.find(s => { const window = angelWindows.get(angelKey(s)); return window && position >= window.departure && position < window.landing; }), seen = started && full ? stars.filter(s => position >= +s.landing).length : 0;
       const gospel = state.gospel?.enabled && state.gospel.focus ? state.gospel.current : null;
-      const title = gospel?.title || (!full ? 'Full history view required for dated descents' : current ? (state.layers?.names === false ? 'A Watcher' : current.name || 'An unnamed Watcher') + ' · a symbolic descent' : seen ? 'The Earth turns. The records remain.' : 'A world beneath the stars');
+      const title = gospel?.title || (!full ? 'Full history view required for dated descents' : current ? (state.layers?.names === false ? 'An angel' : current.name || 'An unnamed angel') + ' · a symbolic descent' : seen ? 'The Earth turns. The records remain.' : 'A world beneath the stars');
       const latest = started && full ? stars.filter(s => position >= +s.landing).sort((a, b) => +b.landing - +a.landing)[0] : null, record = current || latest;
       const source = gospel ? [gospel.dateLabel, gospel.summary].filter(Boolean).join(' · ') : typeof state.caption === 'string' ? state.caption : state.caption?.text || (record?.artisticOnly ? 'Undated artistic opening · no historical fall location or date is asserted.' : record?.title ? 'Historical account · ' + record.title : '');
       const sourceUrl = gospel ? gospel.sourceUrl || '' : record?.artisticOnly ? '' : record?.sourceUrl || state.caption?.sourceUrl || '';
@@ -8317,26 +8368,28 @@ window.JCSGospelArt=Object.freeze({draw});
       progressLabel.textContent = state.duration > 0 ? clock(fraction * state.duration) + ' / ' + clock(state.duration) : (fraction * 100).toFixed(1) + '%';
       const signature = [year, title, source, sourceUrl, sourceLabel, !!gospel, manual, density > .35].join('|'); if (signature === lastCaption) return; lastCaption = signature;
       yearEl.textContent = dateLabel(year); titleEl.textContent = title; sourceEl.textContent = source; sourceEl.hidden = !source;
-      footer.dataset.gospelFocus = String(!!gospel); copyEl.textContent = (gospel ? 'Gospel imagery · biblical narrative.' : 'Symbolic Watcher imagery · separately sourced history.') + (density > .35 ? ' Golden atmosphere marks overlapping visual journeys.' : '');
+      footer.dataset.gospelFocus = String(!!gospel); copyEl.textContent = (gospel ? 'Gospel imagery · biblical narrative.' : 'Symbolic angels from the Enoch tradition · separately sourced history. Dashed rings indicate far-side landings.') + (density > .35 ? ' Dense passages use quicker arrivals and simplified trails.' : '');
       if (/^https?:\/\//i.test(sourceUrl)) { const link = document.createElement('a'); link.href = sourceUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = sourceLabel; sourceEl.append(' · ', link); }
       const status = 'Cinematic globe, ' + dateLabel(year) + '. ' + title; if (status !== lastStatus && !state.playing) { statusEl.textContent = status; lastStatus = status; }
     }
     function draw() {
       if (!active || disposed || document.hidden) return;
       const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : Number.isFinite(+state.year) ? +state.year : -4, -4, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
-      const signature = [position, JSON.stringify(state.selected), state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
+      const signature = [position, JSON.stringify(state.selected), state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight, global.JCSHumanSouls?.revision].join('|');
       if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
       const gospelFocus = state.gospel?.enabled && finitePoint(state.gospel.focus) ? state.gospel.focus : null;
       const guided = camera(position, state.stars || []);
       if (gospelFocus) { const weight = ease(clamp(Number.isFinite(+state.gospel.focusWeight) ? +state.gospel.focusWeight : 1, 0, 1)), delta = ((+gospelFocus.lon - guided.lon) % 360 + 540) % 360 - 180; guided.lon += delta * weight; guided.lat = mix(guided.lat, clamp(+gospelFocus.lat, -75, 75), weight); }
       if (state.gospel?.enabled) { const approach = ease(clamp(1 - Math.abs(position - 33) / 7, 0, 1)); guided.zoom = Math.max(guided.zoom, 1 + approach * .95); }
       currentCamera = manual ? { lon: yaw, lat: pitch } : guided; viewZoom = clamp(manual ? manualZoom : guided.zoom, 1, 3.5); radius = baseRadius * viewZoom;
-      // These dimensions position decorative prayer lights; they carry no geography.
+      // Shared geometry is retained for overlays and the responsive stage.
       const viewport = host.parentElement;
       if (viewport) { const geometry = [cx,cy,radius].map(n => n.toFixed(2)); if (viewport.dataset.globeGeometry !== geometry.join(',')) { viewport.dataset.globeGeometry = geometry.join(','); for (const [i,key] of ['x','y','radius'].entries()) viewport.style.setProperty('--jcs-globe-'+key,geometry[i]+'px'); } }
       const project = projection(currentCamera); hits = []; labelBoxes = [];
       ctx.clearRect(0, 0, width, height); drawSky(); drawGalaxies(rawPosition, state); if (layer.ring && haze) ctx.drawImage(haze, 0, 0, width, height); drawArchitecture();
-      drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
+      drawEarth(project, state);
+      global.JCSHumanSouls?.draw({ ctx, width, height, radius, cx, cy, position: rawPosition, state, project: point => project(toVector(point)), reduced: reduced.matches, architectureEnabled: layer.architecture });
+      drawNodes(state, project); drawWatchers(state, project, position);
       drawGospel(state, project, rawPosition); captions(state, position);
     }
     function frame(now) { raf = 0; if (!active || disposed || document.hidden) return; if (!lastFrame || now - lastFrame >= 1000 / 24) { lastFrame = now; draw(); } raf = requestAnimationFrame(frame); }
@@ -8372,10 +8425,10 @@ window.JCSGospelArt=Object.freeze({draw});
       const delta = { ArrowLeft: [-9, 0], ArrowRight: [9, 0], ArrowUp: [0, 7], ArrowDown: [0, -7] }[e.key]; if (!delta) return; e.preventDefault(); takeManual(); yaw += delta[0]; pitch = clamp(pitch + delta[1], -78, 78); invalidate();
     }
     canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown); canvas.addEventListener('wheel', wheel, { passive: false });
-    document.addEventListener('visibilitychange', visibility); document.addEventListener('jcs:gospel-change', gospelChange); reduced.addEventListener('change', invalidate);
+    document.addEventListener('visibilitychange', visibility); document.addEventListener('jcs:gospel-change', gospelChange); document.addEventListener('jcs:souls-change', invalidate); reduced.addEventListener('change', invalidate);
     const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => resize()) : null; observer?.observe(host);
     if (!observer) global.addEventListener('resize', resize);
-    return { start, stop, resize, controls: toolbar, footer, getViewState: () => ({ zoom: viewZoom, manual, lon: currentCamera.lon, lat: currentCamera.lat }), destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); reduced.removeEventListener('change', invalidate); pointers.clear(); panel.remove(); toolbar.remove(); footer.remove(); vectorCache.clear(); sky = null; haze = null; galaxySprites = null; architecture = null; skyStamp = null; birthSprite = null; } };
+    return { start, stop, resize, controls: toolbar, footer, getViewState: () => ({ zoom: viewZoom, manual, lon: currentCamera.lon, lat: currentCamera.lat }), destroy() { if (disposed) return; stop(); disposed = true; observer?.disconnect(); global.removeEventListener('resize', resize); document.removeEventListener('visibilitychange', visibility); document.removeEventListener('jcs:gospel-change', gospelChange); document.removeEventListener('jcs:souls-change', invalidate); reduced.removeEventListener('change', invalidate); pointers.clear(); panel.remove(); toolbar.remove(); footer.remove(); vectorCache.clear(); angelWindows.clear(); sky = null; haze = null; galaxySprites = null; architecture = null; skyStamp = null; birthSprite = null; } };
   }
   global.JCSCinematicGlobe = Object.freeze({ create });
 })(window);
@@ -8870,5 +8923,6 @@ window.JCSGospelArt=Object.freeze({draw});
 })();
 </script>
 <script src="js/jcs-scripture-captions.js?v=20261008a"></script>
+<script src="js/jcs-human-souls.js?v=20261008a"></script>
 </body>
 </html>

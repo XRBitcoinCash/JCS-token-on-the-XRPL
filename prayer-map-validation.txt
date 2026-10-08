@@ -1,3 +1,91 @@
+JCS PRAYER MAP — ANGEL ARRIVALS, HUMAN SOULS AND SACRED SYMBOLS
+Prepared: 2026-10-08
+Baseline: 5e4268f73b3d8c1d8194f492a790625a2e677c1e (PR31 Gothic subtitles)
+
+CURRENT CHANGE
+Fix late-reading angel disappearance: every active flight retains a marker; only
+expensive trails and halos are limited to eight. New flights cannot evict arrivals.
+Dense journeys shorten visually without changing their historical display dates.
+All landed records persist, including dim dashed far-side rings at their true
+projected coordinates. A steady orbit replaces automatic destination chasing;
+manual controls and explicit Gospel focus remain available.
+Visual controls and numbered names now say Angels. Enoch's source terminology and
+spoken subtitles retain Watchers where appropriate; these are artistic associations.
+
+Blue continental clusters scale with estimated population stock, using 254 source
+anchors and six regional series. Fixed bounded particles avoid per-person rendering.
+Coordinates are broad illustrative land anchors, not settlement maps or evidence
+of migration. Changes are NET population change, not measured births or deaths.
+AD1 is interpolated; beforeAD1 the display holdsAD1 context. 2024–2026 are projections.
+The former random Prayer NFT falling lights are removed. Validated NFT counts and
+privacy thresholds are preserved and remain separate from population symbolism.
+
+Three local vector artwork files depict crystal/pearl/gold Heaven above left and
+right; red/dark Hell below left; amber/white Purgatory below right. Devotional paths
+originate at an unlocated Earth halo, never a country, victim or historical event.
+Purgatory continues toward Heaven. There are no inferred salvation percentages,
+condemnation scores or per-region afterlife assignments. See docs/prayer-map-souls.md.
+
+FOCUSED CHECKS
+PASS: Changed inline scripts, population module and NFT aggregate-note module syntax.
+PASS: All 8 embedded JSON blocks remain byte-identical; subtitle assets unchanged.
+PASS: All 200 simultaneous angel flights render, including far-side arrivals;
+      detail budget <=8; exact projected destination persists at and after2026.
+PASS: Rewind restores waiting; dense flights preserve landing years; captions share
+      the compressed windows; steady camera independent of destination density.
+PASS: Population interpolation, early-to-modern stock growth,2026 projectionlabel,
+      deterministic pause/seek geometry, bounded72cluster dots,reducedmotion,
+      finite mobile drawing coordinates and failed-load Retry recovery.
+PASS: Three SVG assets parse and contain no script or foreignObject.
+Only existing history display labels and cinematic rendering changed among the
+inline scripts. Wallet, mint validation, NFT aggregation and audio clocks untouched.
+
+LIMITS / NEXT USER REVIEW
+The population layer is six-continent context, not a fine-grained settlement model.
+No gross birth/death or migration totals are claimed; no spiritual fate is measurable.
+No live visual/listening pass is claimed. Local browser file previews are blocked.
+Next requested session: inspect1989–2026 arrivals, corner labels/blue clusters,
+manualturn/zoom,flat-map fallback andpause/seekon the live page.
+Stop all tools after deployment success under the checkpoint protocol.
+Deployment status is recorded by the associated PR/Pages run, not this file.
+
+ARTIFACTS
+prayer.map.html
+Bytes: 9309709
+SHA-256: 93130dc848535c7452cb917f5a27e15915a0520bd5f2a948f4506b9236892835
+Git blob: 2570e2794111b38047d55ef46d9daa78295f1918
+js/jcs-prayer-descent.js
+Bytes: 1015
+SHA-256: 8c0c1462bf1055ee9f7731894c284d80122582411ba4b4fb6a3634e14389e914
+Git blob: f7a794fca430396129de89cc5855cde606ed964f
+js/jcs-human-souls.js
+Bytes: 15039
+SHA-256: 4c56745aef05909c32a498e95db660c068cef5486e70e4bbcdda5b2a98be8cb7
+Git blob: 451b2ac0c188ba65a0df6c95781e57c41122aaef
+css/jcs-human-souls.css
+Bytes: 1591
+SHA-256: 02c2c5d7b4bcc1672b4c65060027577bd452514416926dfd21733db6c8851920
+Git blob: 0e12e8f9e86a2d22442d82f051b1babbca7577a6
+data/population-history.json
+Bytes: 23801
+SHA-256: 71ddb75128145f4192b22d5686a37d8a338f7e01db256b2cfcee9aefc8619ec5
+Git blob: 7fe2e9df1363cf2a4b9b3a1da398aac5d81ed26b
+assets/sacred/heaven.svg
+Bytes: 3843
+SHA-256: 42cd3678dac3aa30d8b8e3f554f3fbe3ebba21f2ee14099fceb3bee2be483e24
+Git blob: fd0cb9115fc17920d4ffb7e202b496b261628bac
+assets/sacred/hell.svg
+Bytes: 1799
+SHA-256: 49f08e44bc1a2e3e725b927a1b997bf64ab4f25b09f5070c359a7065a989af8f
+Git blob: 6560423aa43c625747391f5697f129c4f1a04e12
+assets/sacred/purgatory.svg
+Bytes: 1947
+SHA-256: 9f413f9b5a8270c1e15dfd11d4f1e638640a3b21556f0dc7564ef14f07dfe405
+Git blob: 3a105523f9e428c1c0605e24f7608752431f483f
+
+HISTORICAL RECORD — prior results retained, not rerun wholesale
+==============================================================================
+
 JCS PRAYER MAP — GOTHIC READING SUBTITLES
 Prepared: 2026-10-08
 Baseline: db417b5d71e1e9811ced3b0693e57feda682265f
