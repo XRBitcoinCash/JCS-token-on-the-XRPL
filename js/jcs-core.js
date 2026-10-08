@@ -2203,6 +2203,35 @@
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
         setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
         const receipt = await waitForTradeValidation(txid);
+        const validatedOffer = receipt.transaction?.tx_json || receipt.transaction;
+        const expectedOffer = signed.txjson;
+        const normalizedOfferValue = value => {
+          const match = String(value).match(/^(-?)(\d+)(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+          if (!match) return null;
+          let digits = (match[2] + (match[3] || '')).replace(/^0+/, '') || '0';
+          let exponent = Number(match[4] || 0) - (match[3] || '').length;
+          while (digits.length > 1 && digits.endsWith('0')) { digits = digits.slice(0, -1); exponent++; }
+          return digits === '0' ? '0' : match[1] + digits + 'e' + exponent;
+        };
+        const sameOfferAmount = (expected, actual) => {
+          if (typeof expected === 'string') {
+            return typeof actual === 'string' && /^\d+$/.test(expected) && /^\d+$/.test(actual) &&
+              BigInt(expected) === BigInt(actual);
+          }
+          if (!expected || typeof expected !== 'object' || !actual || typeof actual !== 'object') return false;
+          const value = normalizedOfferValue(expected.value);
+          return Object.keys(actual).length === 3 && expected.currency === actual.currency &&
+            expected.issuer === actual.issuer && value !== null && value === normalizedOfferValue(actual.value);
+        };
+        const actualFlags = Number(validatedOffer?.Flags ?? 0);
+        if (validatedOffer?.TransactionType !== 'OfferCreate' ||
+            validatedOffer.Account !== expectedOffer.Account ||
+            !sameOfferAmount(expectedOffer.TakerGets, validatedOffer.TakerGets) ||
+            !sameOfferAmount(expectedOffer.TakerPays, validatedOffer.TakerPays) ||
+            !Number.isInteger(actualFlags) || (actualFlags & 0x7fffffff) !== Number(expectedOffer.Flags || 0) ||
+            validatedOffer.OfferSequence != null || validatedOffer.Expiration != null) {
+          throw new Error('The validated limit order differs from the reviewed request. Check transaction ' + txid + ' before retrying.');
+        }
         setStatus(
           tradeMsg,
           'Limit order transaction validated on XRPL Mainnet · ' +
