@@ -1609,6 +1609,9 @@
   const placeOfferBtn = $('placeOfferBtn');
   const marketBtn = $('marketTradeBtn');
   const tradeMsg = $('tradeMsg');
+  // Market preview is valid only for the exact amount and side just quoted.
+  // The same price input also serves advanced limit orders, so keep it intact.
+  let marketQuote = null;
 
   document.addEventListener('jcs:signing-reset', event => {
     signingRequestActive = false;
@@ -1714,6 +1717,10 @@
     const amount = Number(amountEl && amountEl.value) || 0;
     const price = Number(priceEl && priceEl.value) || 0;
     const total = amount * price;
+    const marketPrice = marketQuote && marketQuote.amount === amount &&
+      marketQuote.side === side && marketQuote.price === price ? price : 0;
+    const marketTotal = amount * marketPrice;
+    if (!marketPrice && tradeLivePrice) tradeLivePrice.textContent = '—';
 
     const balanceUnavailable = amount > 0 && sellBalanceUnavailable(side);
     const insufficientJcs = sellExceedsBalance(side, amount);
@@ -1729,8 +1736,8 @@
       if (tradeReceiveLabel) tradeReceiveLabel.textContent = 'JCS requested';
       if (tradePayValue) {
         tradePayValue.textContent =
-          amount > 0 && price > 0
-            ? formatEstimatedXrp(total)
+          amount > 0 && marketPrice > 0
+            ? formatEstimatedXrp(marketTotal)
             : '— XRP';
       }
       if (tradeReceiveValue) {
@@ -1750,8 +1757,8 @@
       }
       if (tradeReceiveValue) {
         tradeReceiveValue.textContent =
-          amount > 0 && price > 0 && !cannotSell
-            ? formatEstimatedXrp(total)
+          amount > 0 && marketPrice > 0 && !cannotSell
+            ? formatEstimatedXrp(marketTotal)
             : '— XRP';
       }
     }
@@ -1771,8 +1778,8 @@
             ? sellBalanceUnavailableMessage
             : insufficientJcs
               ? sellBalanceMessage
-              : price > 0
-                ? 'Live reference: ' + formatTradeNumber(price, 12) +
+              : marketPrice > 0
+                ? 'Live reference: ' + formatTradeNumber(marketPrice, 12) +
                   ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
                 : 'Refresh the live quote before submitting the request.';
     }
@@ -1780,6 +1787,7 @@
 
   function selectTradeSide(side) {
     if (sideEl.value === side) return;
+    marketQuote = null;
     setSide(side);
     if (Number(amountEl?.value) > 0) {
       if (marketBtn) marketBtn.disabled = true;
@@ -1792,6 +1800,7 @@
   setSide('buy');
 
   if (amountEl) amountEl.addEventListener('input', () => {
+    marketQuote = null;
     recalcTotals();
     const balanceUnavailable = Number(amountEl.value) > 0 && sellBalanceUnavailable(sideEl?.value);
     const exceedsBalance = sellExceedsBalance(sideEl?.value, Number(amountEl.value));
@@ -1805,7 +1814,10 @@
       balanceUnavailable || exceedsBalance ? 'err' : undefined
     );
   });
-  if (priceEl) priceEl.addEventListener('input', recalcTotals);
+  if (priceEl) priceEl.addEventListener('input', () => {
+    marketQuote = null;
+    recalcTotals();
+  });
 
   async function fetchBalances() {
     const account = currentAccount;
@@ -1922,6 +1934,7 @@
 
           if (amountEl) {
             amountEl.value = amount.toFixed(6);
+            marketQuote = null;
             recalcTotals();
             await fillBestPrice();
           }
@@ -2228,6 +2241,8 @@
       setStatus(tradeMsg, 'Enter an JCS amount before refreshing the quote.');
       return null;
     }
+    marketQuote = null;
+    recalcTotals();
 
     if (side === 'sell') {
       const account = currentAccount;
@@ -2260,6 +2275,7 @@
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
       priceEl.value = Number(price).toFixed(15);
+      marketQuote = { side, amount, price: Number(priceEl.value) };
 
       if (tradeLivePrice) {
         tradeLivePrice.textContent =
@@ -2278,6 +2294,8 @@
       return price;
     } catch (error) {
       if (marketTradePending || sideEl.value !== side || Number(amountEl.value) !== amount) return null;
+      marketQuote = null;
+      recalcTotals();
       if (tradeLivePrice) tradeLivePrice.textContent = 'Unavailable';
       setStatus(
         tradeMsg,
@@ -2426,6 +2444,7 @@
           throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
         }
         priceEl.value = String(basePx);
+        marketQuote = { side, amount: amt, price: Number(priceEl.value) };
         if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 12) + ' XRP / JCS';
         recalcTotals();
 
@@ -2533,6 +2552,7 @@
         if (sideEl.value === side && Number(amountEl.value) === amt) {
           amountEl.value = '';
           priceEl.value = '';
+          marketQuote = null;
           recalcTotals();
         }
         ammSnapshotCache = null;
