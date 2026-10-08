@@ -13439,7 +13439,7 @@ try {
     return NaN;
   }
 
-  async function getTopOfBook() {
+  async function getTopOfBook(ledgerIndex) {
     const [askRes, bidRes] = await Promise.all([
       xrplRequest({
         method: 'book_offers',
@@ -13447,7 +13447,7 @@ try {
           taker_gets: { currency: CURRENCY_HEX, issuer: ISSUER },
           taker_pays: { currency: 'XRP' },
           limit: 5,
-          ledger_index: 'validated'
+          ledger_index: ledgerIndex
         }]
       }),
       xrplRequest({
@@ -13456,13 +13456,20 @@ try {
           taker_gets: { currency: 'XRP' },
           taker_pays: { currency: CURRENCY_HEX, issuer: ISSUER },
           limit: 5,
-          ledger_index: 'validated'
+          ledger_index: ledgerIndex
         }]
       })
     ]);
 
-    const ask = (askRes.result.offers || [])[0];
-    const bid = (bidRes.result.offers || [])[0];
+    const askResult = askRes?.result;
+    const bidResult = bidRes?.result;
+    if (Number(askResult?.ledger_index) !== ledgerIndex ||
+        Number(bidResult?.ledger_index) !== ledgerIndex ||
+        !Array.isArray(askResult.offers) || !Array.isArray(bidResult.offers)) {
+      throw new Error('The JCS order book did not return the selected validated ledger.');
+    }
+    const ask = askResult.offers[0];
+    const bid = bidResult.offers[0];
 
     const askGets = ask ? amountToNumber(ask.TakerGets) : NaN;
     const askPays = ask ? amountToNumber(ask.TakerPays) : NaN;
@@ -14482,13 +14489,16 @@ try {
   async function refreshSummary() {
     try {
       const ledInfo = await getLedgerSummary();
-      if (!ledInfo.validated || !ledInfo.index) throw new Error('A validated ledger is unavailable.');
+      const ledgerIndex = Number(ledInfo.index);
+      if (!ledInfo.validated || !Number.isSafeInteger(ledgerIndex) || ledgerIndex < 1) {
+        throw new Error('A validated ledger is unavailable.');
+      }
       const [ob, ammWrap] = await Promise.allSettled([
-        getTopOfBook(),
+        getTopOfBook(ledgerIndex),
         xrplRequest({ method: 'amm_info', params: [{
           asset: { currency: 'XRP' },
           asset2: { currency: CURRENCY_HEX, issuer: ISSUER },
-          ledger_index: Number(ledInfo.index)
+          ledger_index: ledgerIndex
         }] })
       ]);
       const bestAsk = ob.status === 'fulfilled' ? ob.value.bestAsk : null;
@@ -14511,7 +14521,9 @@ try {
         reserveXrp: reserves.reserveXrp, reserveJcs: reserves.reserveJcs, source: 'XRPL AMM'
       } }));
     } catch {
+      if (spotEl) spotEl.textContent = 'Order book unavailable';
       if (ammEl) ammEl.textContent = 'Live pool data unavailable';
+      if (spreadEl) spreadEl.textContent = 'Book midpoint spread: —';
       if (ledMiniEl) ledMiniEl.textContent = 'Ledger check unavailable';
     }
   }
