@@ -1679,6 +1679,13 @@
     });
   }
 
+  function formatEstimatedXrp(value, fixed = false) {
+    const xrp = Number(value);
+    if (!Number.isFinite(xrp)) return '— XRP';
+    if (xrp > 0 && xrp < 1 / XRP_TO_DROPS) return '<0.000001 XRP';
+    return (fixed ? xrp.toFixed(6) : formatTradeNumber(xrp, 6)) + ' XRP';
+  }
+
   function recalcTotals() {
     const side = (sideEl && sideEl.value) || 'buy';
     const amount = Number(amountEl && amountEl.value) || 0;
@@ -1687,7 +1694,7 @@
 
     if (totalXrpEl) {
       totalXrpEl.textContent =
-        (Number.isFinite(total) ? total : 0).toFixed(6) + ' XRP';
+        formatEstimatedXrp(Number.isFinite(total) ? total : 0, true);
     }
 
     if (side === 'buy') {
@@ -1696,7 +1703,7 @@
       if (tradePayValue) {
         tradePayValue.textContent =
           amount > 0 && price > 0
-            ? formatTradeNumber(total, 6) + ' XRP'
+            ? formatEstimatedXrp(total)
             : '— XRP';
       }
       if (tradeReceiveValue) {
@@ -1717,7 +1724,7 @@
       if (tradeReceiveValue) {
         tradeReceiveValue.textContent =
           amount > 0 && price > 0
-            ? formatTradeNumber(total, 6) + ' XRP'
+            ? formatEstimatedXrp(total)
             : '— XRP';
       }
     }
