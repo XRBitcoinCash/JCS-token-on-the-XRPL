@@ -1,3 +1,49 @@
+JCS PRAYER MAP — GLOBE USABILITY UPDATE
+Checked: 2026-10-08
+Baseline: 47b1aa72bd504b12b42120077866b6c08b5f80c4
+
+CURRENT CHANGE
+Full-width map workspace with collapsed audio and evidence controls, visible globe
+navigation, viewport sizing that keeps the timeline nearby, improved globe contrast
+and spaced marker rings, and clickable labels with collision avoidance.
+Regional markers route to their exact source region; changing regions invalidates
+the selected-node cache. Symbolic prayer lights scale with the globe's drawing
+dimensions and remain independent of the historical timeline and signer locations.
+
+ARTIFACT
+prayer.map.html
+Bytes: 9306090
+SHA-256: 9f273875be823b267248ae854ad8e82c97c11bbc6314c616ef598178cf186ddc
+Git blob: abaab742cc820c4710f276d071510561a6767cd2
+js/jcs-prayer-descent.js: e8c91443f68ab21152069b45111ec579d553b935
+css/jcs-prayer-descent.css: 493c59e1a59bd821534dafacc9c16a225812f6c1
+
+FOCUSED CHECKS
+PASS: 18 executable inline scripts and the prayer-light module pass Node syntax.
+PASS: All 8 embedded application/json blocks are byte-identical to baseline.
+PASS: Only chronology and canvas-renderer existing inline script bodies changed;
+      the wallet, mint validation, public aggregate and privacy code is unchanged.
+PASS: Actual selection router resolves two regions of the same country, including
+      names containing colons; unknown region IDs select no unrelated record.
+PASS: Actual globe snapshot updates selected markers when only the region changes.
+PASS: Dense marker fixture keeps all 30 selection targets while spacing rings.
+PASS: Selected and geographic text receive clickable bounds; priority labels
+      choose separate positions; Nexus and geographic name controls stay separate.
+
+LIMITS / NEXT LIVE REVIEW
+No live transaction or wallet signing was performed for this presentation update.
+Local file previews are blocked by the current cloud browser URL policy.
+The revised desktop/mobile appearance, expanded-map controls, live regional
+selection, globe/flat switches, and prayer-light zoom need live visual review.
+Deployment status is recorded by the associated GitHub PR/Pages run, not this file.
+Honor the checkpoint protocol: stop after successful deployment; do live review
+only when the user resumes testing.
+
+HISTORICAL RECORD — 2026-08-31
+The older results below are retained for provenance. They are not tests rerun
+against this 2026-10-08 artifact and their old hashes do not identify this update.
+===============================================================================
+
 JCS PRAYER MAP v5.0.0 — VALIDATION RECORD
 Generated: 2026-08-31
 
