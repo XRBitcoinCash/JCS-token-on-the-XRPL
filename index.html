@@ -13219,11 +13219,23 @@ try {
     }
   }
 
-  if (buyTab) buyTab.addEventListener('click', () => setSide('buy'));
-  if (sellTab) sellTab.addEventListener('click', () => setSide('sell'));
+  function selectTradeSide(side) {
+    if (sideEl.value === side) return;
+    setSide(side);
+    if (Number(amountEl?.value) > 0) {
+      if (marketBtn) marketBtn.disabled = true;
+      fillBestPrice().catch(() => {});
+    }
+  }
+
+  if (buyTab) buyTab.addEventListener('click', () => selectTradeSide('buy'));
+  if (sellTab) sellTab.addEventListener('click', () => selectTradeSide('sell'));
   setSide('buy');
 
-  if (amountEl) amountEl.addEventListener('input', recalcTotals);
+  if (amountEl) amountEl.addEventListener('input', () => {
+    recalcTotals();
+    setStatus(tradeMsg, 'Amount changed. Refresh the live quote or review a new request in Xaman.');
+  });
   if (priceEl) priceEl.addEventListener('input', recalcTotals);
 
   async function fetchBalances() {
