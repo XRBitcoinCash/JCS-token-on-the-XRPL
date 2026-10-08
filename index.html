@@ -11831,7 +11831,7 @@ try {
         if (!/^\d+$/.test(String(value))) return String(value);
         const n = BigInt(value); return (n / 1000000n).toString() + '.' + (n % 1000000n).toString().padStart(6, '0') + ' XRP';
       };
-      if (transaction.TransactionType === 'OfferCreate' && purpose === 'swap') {
+      if (transaction.TransactionType === 'OfferCreate' && (purpose === 'swap' || purpose === 'offer')) {
         if (typeof transaction.TakerGets === 'string') rows.push(['Maximum XRP offered', exactXrp(transaction.TakerGets)], ['JCS requested', String(transaction.TakerPays?.value || '') + ' JCS']);
         else rows.push(['JCS offered', String(transaction.TakerGets?.value || '') + ' JCS'], ['Minimum XRP requested', exactXrp(transaction.TakerPays)]);
       } else if (transaction.TransactionType === 'AMMDeposit') {
@@ -11885,10 +11885,6 @@ try {
     xamanPayloadQr.hidden = true;
     if (xamanQrPlaceholder) { xamanQrPlaceholder.hidden = false; xamanQrPlaceholder.textContent = 'The QR image could not load. Open the Xaman signing page instead.'; }
   });
-
-  function toDrops(xrp) {
-    return Math.round(Number(xrp) * XRP_TO_DROPS).toString();
-  }
 
   function genCode() {
     return String(Math.floor(Math.random() * 1000000)).padStart(6, '0');
@@ -13640,28 +13636,40 @@ try {
       try {
         if (!currentAccount) throw new Error('Connect wallet first');
         if (!HAS_TRUSTLINE) throw new Error('Add ' + APP_NAME + ' trustline first');
+        const account = currentAccount;
         const side = sideEl.value;
         const amt = Number(amountEl.value);
         const px = Number(priceEl.value);
-        if (!amt || !px || amt <= 0 || px <= 0) throw new Error('Enter Amount and Price');
+        if (!Number.isFinite(amt) || !Number.isFinite(px) || amt <= 0 || px <= 0) throw new Error('Enter Amount and Price');
         const xrpTotal = px * amt;
+        const xrpDrops = side === 'buy'
+          ? Math.floor(xrpTotal * XRP_TO_DROPS)
+          : Math.ceil(xrpTotal * XRP_TO_DROPS);
+        if (!Number.isSafeInteger(xrpDrops) || xrpDrops < 1) {
+          throw new Error('This limit price cannot be represented safely in XRP drops. Adjust the amount or price.');
+        }
         let tx;
         if (side === 'sell') {
           tx = {
             TransactionType: 'OfferCreate',
+            Account: account,
             TakerGets: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
-            TakerPays: toDrops(xrpTotal),
+            TakerPays: String(xrpDrops),
             Flags: 0x00080000
           };
         } else {
           tx = {
             TransactionType: 'OfferCreate',
-            TakerGets: toDrops(xrpTotal),
+            Account: account,
+            TakerGets: String(xrpDrops),
             TakerPays: { currency: CURRENCY_HEX, issuer: ISSUER, value: String(amt) },
             Flags: 0
           };
         }
-        setStatus(tradeMsg, 'Open Xaman to review limit order.');
+        if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt || Number(priceEl.value) !== px) {
+          throw new Error('Wallet or limit details changed. Review the order again.');
+        }
+        setStatus(tradeMsg, 'Review the exact JCS amount and XRP price in Xaman. A limit order may wait until filled or canceled.');
         const signed = await signWithSentinel(tx, 'offer');
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
