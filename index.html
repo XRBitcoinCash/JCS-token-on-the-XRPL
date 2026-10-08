@@ -14086,7 +14086,13 @@ try {
       const txid = signed && signed.txid;
       if (!txid) throw new Error('Xaman returned no transaction ID for the cancellation.');
       setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
-      await waitForTradeValidation(txid);
+      const receipt = await waitForTradeValidation(txid);
+      const validatedCancel = receipt.transaction?.tx_json || receipt.transaction;
+      if (validatedCancel?.TransactionType !== 'OfferCancel' ||
+          validatedCancel.Account !== signed.txjson.Account ||
+          Number(validatedCancel.OfferSequence) !== Number(seq)) {
+        throw new Error('The validated transaction does not match the selected order. Check transaction ' + txid + ' before retrying.');
+      }
       setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
       document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
         detail: { kind:'offer-cancel', txid, offerSequence:Number(seq) }
