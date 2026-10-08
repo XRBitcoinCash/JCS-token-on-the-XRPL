@@ -74,7 +74,7 @@
   const tradeReceiveLabel = $('tradeReceiveLabel');
   const tradeReceiveValue = $('tradeReceiveValue');
   const tradeQuoteNote = $('tradeQuoteNote');
-  const quickAmountMode = $('quickAmountMode');
+  const sellPercentageLabel = $('sellPercentageLabel');
 
   const xamanSignPanel = $('xamanSignPanel');
   const xamanSignTitle = $('xamanSignTitle');
@@ -1601,25 +1601,18 @@
 
     if (hint) {
       hint.textContent = showBuy
-        ? 'Select 25, 50, 75, or 100 JCS, or enter a custom amount.'
+        ? 'Enter the JCS amount to buy. Very small trades may not fit the 2% limit in whole XRP drops.'
         : 'Use a balance percentage or enter the exact JCS amount to sell.';
     }
 
-    if (quickAmountMode) {
-      quickAmountMode.textContent = showBuy
-        ? 'Quick JCS amounts'
-        : 'Percentage of JCS balance';
-    }
+    if (sellPercentageLabel) sellPercentageLabel.hidden = showBuy;
+    const sellPercentages = document.querySelector('.sell-percentages');
+    if (sellPercentages) sellPercentages.hidden = showBuy;
 
-    document.querySelectorAll('.quick-amounts .qa').forEach((button) => {
-      if (showBuy) {
-        button.textContent = button.dataset.buyAmount + ' JCS';
-      } else {
-        button.textContent =
-          button.dataset.sellPct === '100'
-            ? 'Max'
-            : button.dataset.sellPct + '%';
-      }
+    document.querySelectorAll('.sell-percentages .qa').forEach((button) => {
+      button.textContent = button.dataset.sellPct === '100'
+        ? 'Max'
+        : button.dataset.sellPct + '%';
     });
 
     if (marketBtn) {
@@ -1796,26 +1789,16 @@
     return BAL;
   }
 
-  (function initQuickAmounts() {
-    const chips = document.querySelectorAll('.quick-amounts .qa');
+  (function initSellPercentages() {
+    const chips = document.querySelectorAll('.sell-percentages .qa');
     if (!chips.length) return;
 
     chips.forEach((button) => {
       button.addEventListener('click', async () => {
-        const side = (sideEl && sideEl.value) || 'buy';
+        if (sideEl?.value !== 'sell') return;
         button.disabled = true;
 
         try {
-          if (side === 'buy') {
-            const amount = Number(button.dataset.buyAmount || 0);
-            if (amountEl && amount > 0) {
-              amountEl.value = amount.toFixed(6);
-              recalcTotals();
-              await fillBestPrice();
-            }
-            return;
-          }
-
           if (!currentAccount) {
             setStatus(tradeMsg, 'Connect Xaman before using balance percentages.', 'err');
             connectBtn && connectBtn.focus();

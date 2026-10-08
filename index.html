@@ -245,7 +245,7 @@
 
     .refresh-indicator { justify-content: center; margin-top: 2px; }
 
-    .quick-amounts { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .sell-percentages { grid-template-columns: repeat(4, 1fr); gap: 6px; }
 
     #offersWrap { overflow-x: auto; }
     #offersWrap table { min-width: 640px; }
@@ -618,14 +618,16 @@
     font-weight: 850;
   }
 
-  .quick-amounts-modern {
+  .sell-percentages[hidden] { display: none !important; }
+
+  .sell-percentages-modern {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
     margin-top: 10px;
   }
 
-  .quick-amounts-modern .qa {
+  .sell-percentages-modern .qa {
     min-height: 41px;
     padding: 8px;
     border: 1px solid var(--line);
@@ -635,8 +637,8 @@
     font-weight: 800;
   }
 
-  .quick-amounts-modern .qa:hover,
-  .quick-amounts-modern .qa:focus-visible {
+  .sell-percentages-modern .qa:hover,
+  .sell-percentages-modern .qa:focus-visible {
     border-color: var(--blue, #38bdf8);
     background: rgba(56, 189, 248, .08);
     outline: none;
@@ -943,7 +945,7 @@
       grid-template-columns: 1fr;
     }
 
-    .quick-amounts-modern {
+    .sell-percentages-modern {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -2443,7 +2445,7 @@ body.light-mode{
 .wallet-identity,
 .trade-form-grid,
 .trade-grid,
-.quick-amounts,
+.sell-percentages,
 .metrics-grid{
   gap:10px!important;
 }
@@ -9255,21 +9257,21 @@ Your browser does not support the public-domain film stream.
 <div class="trade-amount-block">
 <div class="trade-amount-label">
 <label for="amount" id="amountLabel">JCS amount to buy</label>
-<span id="quickAmountMode">Quick JCS amounts</span>
+<span hidden="" id="sellPercentageLabel">Percentage of JCS balance</span>
 </div>
 <div class="trade-amount-control">
 <img alt="" aria-hidden="true" height="34" src="https://jesuschristsavestoken.com/jcs-logo.png" width="34"/>
 <input autocomplete="off" id="amount" inputmode="decimal" min="0" placeholder="0" step="0.000001" type="number"/>
 <span class="trade-asset-code">Jesus Christ Saves Token</span>
 </div>
-<div aria-label="Quick JCS amount" class="quick-amounts quick-amounts-modern" role="group">
-<button class="qa" data-buy-amount="25" data-sell-pct="25" type="button">25 Jesus Christ Saves Token</button>
-<button class="qa" data-buy-amount="50" data-sell-pct="50" type="button">50 Jesus Christ Saves Token</button>
-<button class="qa" data-buy-amount="75" data-sell-pct="75" type="button">75 Jesus Christ Saves Token</button>
-<button class="qa" data-buy-amount="100" data-sell-pct="100" type="button">100 Jesus Christ Saves Token</button>
+<div aria-label="JCS balance percentages" class="sell-percentages sell-percentages-modern" hidden="" role="group">
+<button class="qa" data-sell-pct="25" type="button">25%</button>
+<button class="qa" data-sell-pct="50" type="button">50%</button>
+<button class="qa" data-sell-pct="75" type="button">75%</button>
+<button class="qa" data-sell-pct="100" type="button">Max</button>
 </div>
 <div class="inline-hint" id="amountHint" style="margin-top:9px">
-          Select 25, 50, 75, or 100 Jesus Christ Saves Token, or enter a custom amount.
+          Enter the JCS amount to buy. Very small trades may not fit the 2% limit in whole XRP drops.
         </div>
 </div>
 <div aria-live="polite" class="trade-quote-card">
@@ -11556,7 +11558,7 @@ try {
   const tradeReceiveLabel = $('tradeReceiveLabel');
   const tradeReceiveValue = $('tradeReceiveValue');
   const tradeQuoteNote = $('tradeQuoteNote');
-  const quickAmountMode = $('quickAmountMode');
+  const sellPercentageLabel = $('sellPercentageLabel');
 
   const xamanSignPanel = $('xamanSignPanel');
   const xamanSignTitle = $('xamanSignTitle');
@@ -13096,25 +13098,18 @@ try {
 
     if (hint) {
       hint.textContent = showBuy
-        ? 'Select 25, 50, 75, or 100 JCS, or enter a custom amount.'
+        ? 'Enter the JCS amount to buy. Very small trades may not fit the 2% limit in whole XRP drops.'
         : 'Use a balance percentage or enter the exact JCS amount to sell.';
     }
 
-    if (quickAmountMode) {
-      quickAmountMode.textContent = showBuy
-        ? 'Quick JCS amounts'
-        : 'Percentage of JCS balance';
-    }
+    if (sellPercentageLabel) sellPercentageLabel.hidden = showBuy;
+    const sellPercentages = document.querySelector('.sell-percentages');
+    if (sellPercentages) sellPercentages.hidden = showBuy;
 
-    document.querySelectorAll('.quick-amounts .qa').forEach((button) => {
-      if (showBuy) {
-        button.textContent = button.dataset.buyAmount + ' JCS';
-      } else {
-        button.textContent =
-          button.dataset.sellPct === '100'
-            ? 'Max'
-            : button.dataset.sellPct + '%';
-      }
+    document.querySelectorAll('.sell-percentages .qa').forEach((button) => {
+      button.textContent = button.dataset.sellPct === '100'
+        ? 'Max'
+        : button.dataset.sellPct + '%';
     });
 
     if (marketBtn) {
@@ -13291,26 +13286,16 @@ try {
     return BAL;
   }
 
-  (function initQuickAmounts() {
-    const chips = document.querySelectorAll('.quick-amounts .qa');
+  (function initSellPercentages() {
+    const chips = document.querySelectorAll('.sell-percentages .qa');
     if (!chips.length) return;
 
     chips.forEach((button) => {
       button.addEventListener('click', async () => {
-        const side = (sideEl && sideEl.value) || 'buy';
+        if (sideEl?.value !== 'sell') return;
         button.disabled = true;
 
         try {
-          if (side === 'buy') {
-            const amount = Number(button.dataset.buyAmount || 0);
-            if (amountEl && amount > 0) {
-              amountEl.value = amount.toFixed(6);
-              recalcTotals();
-              await fillBestPrice();
-            }
-            return;
-          }
-
           if (!currentAccount) {
             setStatus(tradeMsg, 'Connect Xaman before using balance percentages.', 'err');
             connectBtn && connectBtn.focus();
