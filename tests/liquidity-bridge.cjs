@@ -1,6 +1,6 @@
 const fs=require('fs'),assert=require('assert/strict');const {JSDOM}=require('jsdom');
 const src=fs.readFileSync(require('path').resolve(__dirname, '../js/jcs-core.js'),'utf8');
-const waitCode=src.slice(src.indexOf('  async function waitForQuickBuyValidation('),src.indexOf('  async function quickBuy('));
+const waitCode=src.slice(src.indexOf('  async function waitForTradeValidation('),src.indexOf('  let liquiditySigning = false;'));
 const bridge=src.slice(src.indexOf('  let liquiditySigning = false;'),src.indexOf('  let refreshing = false;'));
 const hash='B'.repeat(64),issuer='rIssuerTest',acct='rWalletTest';
 function fixture(){const dom=new JSDOM('',{url:'https://jesuschristsavestoken.com/',runScripts:'outside-only'}),w=dom.window;
@@ -11,7 +11,7 @@ function fixture(){const dom=new JSDOM('',{url:'https://jesuschristsavestoken.co
  const refreshAll=async()=>{};const signWithSentinel=async()=>{state.signed++;return {txid:'${hash}'};};
  ${waitCode}
  ${bridge}
- window.__testWait=waitForQuickBuyValidation;
+ window.__testWait=waitForTradeValidation;
  })();`);
  return{dom,w,state};}
 const tx={TransactionType:'AMMDeposit',Account:acct,Asset:{currency:'XRP'},Asset2:{currency:'JCS',issuer},Flags:1048576,Amount:'400000',Amount2:{currency:'JCS',issuer,value:'10000'},Fee:'12',LastLedgerSequence:100000021};
