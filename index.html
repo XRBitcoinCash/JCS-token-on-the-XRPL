@@ -15449,6 +15449,7 @@ try {
   const asset = Object.freeze({ currency: String(config.asset?.currencyHex || '').toUpperCase(), issuer: String(config.asset?.issuer || '') });
   if (!asset.currency || !asset.issuer) return;
   const byId = id => doc.getElementById(id);
+  const REVIEW_TTL_MS = 5 * 60 * 1000;
   const fmt = (value, digits = 7) => Number(value).toLocaleString('en-US', { maximumSignificantDigits: digits });
   const xrpText = drops => fmt(Number(drops) / 1000000);
   const exactXrp = drops => { const value = BigInt(drops); return (value / 1000000n).toString() + ((value % 1000000n) ? '.' + (value % 1000000n).toString().padStart(6, '0').replace(/0+$/, '') : ''); };
@@ -15709,7 +15710,7 @@ try {
     rows.splice(rows.length - 1, 0, ['Verified ledger', '#' + data.ledgerIndex]);
     byId('jcsLiquidityReviewRows').innerHTML = readout(rows);
     byId('jcsLiquidityReviewNote').textContent = mode === 'deposit'
-      ? 'These are hard maximum inputs. XRPL adds both assets in the current pool proportion and may use less of one. LP tokens are estimated; this deposit mode cannot enforce a minimum LP output. The review expires after 60 seconds.'
+      ? 'These are hard maximum inputs. XRPL adds both assets in the current pool proportion and may use less of one. LP tokens are estimated; this deposit mode cannot enforce a minimum LP output. The review expires after five minutes.'
       : 'Both assets return to this wallet in the pool’s proportion at execution. These are estimates: proportional redemption cannot enforce minimum XRP/JCS outputs. We recheck the pool before Xaman and use a short transaction expiry.';
     byId('jcsLiquidityAccept').checked = false;
     byId('jcsLiquiditySign').disabled = true;
@@ -15732,7 +15733,7 @@ try {
     const accepted = review;
     signing = true; setBusy(true); byId('jcsLiquiditySign').disabled = true;
     try {
-      if (Date.now() - accepted.createdAt > 60000) throw new Error('This review expired. Review the amounts again.');
+      if (Date.now() - accepted.createdAt > REVIEW_TTL_MS) throw new Error('This review expired. Click Preview deposit or Preview withdrawal to check fresh amounts.');
       status('Rechecking the wallet, pool, reserve and fee before Xaman…');
       const fresh = await loadSnapshot(true);
       if (fresh.account !== accepted.data.account || fresh.pool.account !== accepted.data.pool.account || review !== accepted) throw new Error('The wallet or review changed. Review again.');
