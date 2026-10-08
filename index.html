@@ -1191,7 +1191,7 @@ h1,h2,h3{text-wrap:balance}
 .hero-lead{max-width:760px;margin:0 auto;color:var(--muted);font-size:1rem;text-align:center}
 .network-lock,.section-badge{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--panel-2);font-size:.72rem;font-weight:850;white-space:nowrap}
 .network-lock{min-height:38px;border-color:rgba(16,185,129,.45);color:#bbf7d0;background:rgba(16,185,129,.08);font-size:.76rem;font-weight:900}
-.feature-strip,.tool-jump-grid,.public-metrics,.readiness-grid,.action-grid,.form-grid,.quick-buy-grid,.receipt-grid,.signing-summary{display:grid;gap:10px}
+.feature-strip,.tool-jump-grid,.public-metrics,.readiness-grid,.action-grid,.form-grid,.receipt-grid,.signing-summary{display:grid;gap:10px}
 .feature-strip{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:18px}
 .feature-pill{min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);color:var(--muted);font-size:.78rem;font-weight:750;text-align:center}
 .wallet-shell{border-color:rgba(16,185,129,.3)}
@@ -1211,7 +1211,7 @@ input,select,textarea{min-height:44px;padding:9px 11px;border:1px solid var(--li
 .status-card,.metric-card,.quote-card{min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
 .status-card span,.metric-card span,.quote-card span{display:block;margin-bottom:4px;color:var(--muted);font-size:.72rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase}
 .status-card strong,.metric-card strong,.quote-card strong{display:block;overflow-wrap:anywhere}
-#walletStatus,#healthStatus,#slStatus,#panicStatus,#buyStatus,#offersStatus{min-height:1.45em;font-size:.9rem}
+#walletStatus,#healthStatus,#slStatus,#panicStatus,#offersStatus{min-height:1.45em;font-size:.9rem}
 #challengeBadge,#xamanSecurityCode{margin:0;padding:7px 12px;border-color:rgba(250,204,21,.55);color:#facc15;background:rgba(0,0,0,.72);font-size:1rem;font-weight:900;letter-spacing:.12em}
 .security-panel,.truth-panel,.danger-panel{margin-top:13px;padding:12px 14px;border:1px solid var(--line);border-left-width:4px;border-radius:12px;background:var(--panel-2)}
 .security-panel{border-left-color:#10b981}.truth-panel{border-left-color:#60a5fa}.danger-panel{border-left-color:#fb7185}
@@ -1244,9 +1244,6 @@ th{color:var(--muted);background:rgba(148,163,184,.05);font-size:.74rem;letter-s
 #slTokens th,#slTokens td,#slTokens input,#slTokens select{font-size:.82rem}
 #slTokens input,#slTokens select{min-height:40px}
 .log{min-height:74px;max-height:300px;padding:12px;border-radius:12px;font-size:.82rem;line-height:1.5}
-.quick-buy-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
-.quick-buy{min-height:112px;display:grid;align-content:center;gap:7px;padding:14px;border:1px solid var(--line);border-radius:14px;color:var(--ink);background:linear-gradient(180deg,rgba(56,189,248,.08),transparent),var(--panel-2);cursor:pointer}
-.quick-buy:hover,.quick-buy:focus-visible{border-color:#38bdf8}.quick-buy strong{font-size:1.08rem}.quick-buy span{color:var(--muted);font-size:.8rem}
 .signing-panel{border-color:rgba(56,189,248,.4)}.signing-panel[hidden]{display:none!important}
 .signing-grid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:18px;align-items:center;margin-top:14px}
 .signing-summary{grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0}
@@ -1350,9 +1347,9 @@ th{color:var(--muted);background:rgba(148,163,184,.05);font-size:.74rem;letter-s
 }
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 [hidden]{display:none!important}
-@media(max-width:860px){.header-wrap{grid-template-columns:1fr}.header-nav{justify-content:flex-start}.feature-strip,.tool-jump-grid,.public-metrics,.quick-buy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){.header-wrap{grid-template-columns:1fr}.header-nav{justify-content:flex-start}.feature-strip,.tool-jump-grid,.public-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.container{padding-top:12px}.card{padding:15px;border-radius:15px}.hero-topline,.section-heading,.wallet-head,.signing-head,.results-head{flex-direction:column;align-items:stretch}.network-lock,.section-badge{width:fit-content}.readiness-grid,.action-grid,.wallet-status-grid,.form-grid,.signing-summary{grid-template-columns:1fr}.signing-grid{grid-template-columns:1fr}.qr-shell{width:min(100%,250px);margin:0 auto}#walletHealth .wh-top,.wallet-health-card .wh-top{grid-template-columns:1fr}}
-@media(max-width:430px){.feature-strip,.tool-jump-grid,.public-metrics,.quick-buy-grid{grid-template-columns:1fr}.header-nav{display:grid;grid-template-columns:1fr 1fr;width:100%}.nav-btn{width:100%;box-sizing:border-box;text-align:center}}
+@media(max-width:430px){.feature-strip,.tool-jump-grid,.public-metrics{grid-template-columns:1fr}.header-nav{display:grid;grid-template-columns:1fr 1fr;width:100%}.nav-btn{width:100%;box-sizing:border-box;text-align:center}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 
@@ -11636,7 +11633,6 @@ try {
     if (el === $('tradeMsg')) log('[trade] ' + msg);
     if (el === $('offersStatus')) log('[offers] ' + msg);
     if (el === $('healthStatus')) log('[health] ' + msg);
-    if (el === $('buyStatus')) log('[buy] ' + msg);
   }
 
   function setResult(msg) {
@@ -11817,7 +11813,7 @@ try {
     const qr = officialXamanUrl(created?.refs?.qr_png, uuid);
     const labels = {
       trust: 'Add JCS trustline', offer: 'Review JCS limit order', swap: 'Review JCS market swap',
-      cancel: 'Cancel JCS order', quickbuy: 'Review JCS quick buy',
+      cancel: 'Cancel JCS order',
       'liquidity-add': 'Approve liquidity deposit', 'liquidity-remove': 'Approve liquidity withdrawal',
       'nft-mint': 'Mint your optional receipt NFT', 'nft-sell': 'Review NFT sell offer'
     };
@@ -13073,7 +13069,7 @@ try {
     signingRequestActive = false;
     xamanPayloadInFlight = false;
     updateWalletButtons();
-    const target = $('tradeMsg') || $('buyStatus') || $('offersStatus');
+    const target = $('tradeMsg') || $('offersStatus');
     if (target) setStatus(target, (event.detail?.reason || 'Xaman request canceled.') + ' Controls reset. Review again when ready.', 'err');
   });
 
@@ -13608,7 +13604,7 @@ try {
           detail: { txid, account: signed.txjson?.Account, kind: 'limit-order', network: 'XRPL Mainnet', validated: false }
         }));
         setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
-        const receipt = await waitForQuickBuyValidation(txid);
+        const receipt = await waitForTradeValidation(txid);
         setStatus(
           tradeMsg,
           'Limit order transaction validated on XRPL Mainnet · ' +
@@ -13707,7 +13703,7 @@ try {
         }));
 
         setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
-        const receipt = await waitForQuickBuyValidation(txid);
+        const receipt = await waitForTradeValidation(txid);
 
         const record = window.JCS_RECEIPTS?.fromLedger?.(receipt.transaction, txid);
         if (!record || record.account !== signed.txjson.Account || record.source_kind !== 'market-swap' ||
@@ -13950,7 +13946,7 @@ try {
       const txid = signed && signed.txid;
       if (!txid) throw new Error('Xaman returned no transaction ID for the cancellation.');
       setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
-      await waitForQuickBuyValidation(txid);
+      await waitForTradeValidation(txid);
       setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
       document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
         detail: { kind:'offer-cancel', txid, offerSequence:Number(seq) }
@@ -14156,11 +14152,6 @@ try {
   const btnExportJson = $('btnExportJson');
   const btnCopyJson = $('btnCopyJson');
   const btnClearLog = $('btnClearLog');
-  const btnRefreshEst = $('btnRefreshEst');
-  const btnTrustJCS = $('btnTrustJCS');
-  const buyStatus = $('buyStatus');
-  const est1 = $('est1'), est25 = $('est25'), est50 = $('est50'), est100 = $('est100');
-  const buy1 = $('buy1'), buy25 = $('buy25'), buy50 = $('buy50'), buy100 = $('buy100');
 
   const state = {
     scanning: false,
@@ -14590,48 +14581,7 @@ try {
   }
   startAutoRefresh();
 
-  async function hasTrustline() {
-    return HAS_TRUSTLINE || await checkTrustline(currentAccount);
-  }
-
-  async function estimateBuy(units) {
-    if (!currentAccount) return null;
-
-    try {
-      const price = await getMarketPrice('buy', units);
-      if (!Number.isFinite(price) || price <= 0) return null;
-      return Number(units) * price;
-    } catch {
-      return null;
-    }
-  }
-
-  async function refreshEstimates() {
-    const outEls = [est1, est25, est50, est100];
-    if (!outEls.some(Boolean)) return;
-    if (!currentAccount) {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-      return;
-    }
-    outEls.forEach(el => { if (el) el.textContent = '…'; });
-    try {
-      const vals = await Promise.all([1, 25, 50, 100].map(estimateBuy));
-      vals.forEach((v, i) => {
-        const el = outEls[i];
-        if (!el) return;
-        el.textContent = '≈ ' + (typeof v === 'number' ? v.toFixed(6) + ' XRP' : '—');
-      });
-    } catch {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-    }
-  }
-
-  async function quickTrust() {
-    if (!setTrustBtn) return;
-    setTrustBtn.click();
-  }
-
-  async function waitForQuickBuyValidation(txid) {
+  async function waitForTradeValidation(txid) {
     let lastError = null;
     for (let attempt = 0; attempt < 36; attempt++) {
       try {
@@ -14689,108 +14639,6 @@ try {
         : result.close_time_iso || new Date().toISOString()
     };
   }
-
-  async function quickBuy(units) {
-    try {
-      if (!currentAccount) throw new Error('Connect Xaman first.');
-      if (!await hasTrustline()) throw new Error('Add the JCS trustline first.');
-
-      const requestedJcs = Number(units);
-      if (!Number.isFinite(requestedJcs) || requestedJcs <= 0) {
-        throw new Error('Enter a valid JCS amount.');
-      }
-
-      setStatus(
-        buyStatus,
-        'Preparing a validated JCS/XRP AMM and DEX quote…'
-      );
-
-      const price = await getMarketPrice('buy', requestedJcs);
-      if (!Number.isFinite(price) || price <= 0) {
-        throw new Error('No executable JCS/XRP AMM or order-book price is available.');
-      }
-
-      const estimatedXrp = requestedJcs * price;
-      const maximumXrp = estimatedXrp * (1 + SLIPPAGE_PCT / 100);
-      const maximumDrops = Math.max(
-        1,
-        Math.ceil(maximumXrp * XRP_TO_DROPS)
-      );
-
-      const transaction = {
-        TransactionType: 'OfferCreate',
-        TakerGets: String(maximumDrops),
-        TakerPays: {
-          currency: CURRENCY_HEX,
-          issuer: ISSUER,
-          value: String(requestedJcs)
-        },
-        // Fill or Kill prevents an unfilled remainder from becoming an open order.
-        Flags: 0x00040000
-      };
-
-      setStatus(
-        buyStatus,
-        'Review the exact JCS amount and maximum XRP cost in Xaman. XRPL will use the best available AMM, order-book, or combined liquidity.'
-      );
-
-      const signed = await signWithSentinel(transaction, 'quickbuy');
-      const txid = signed?.txid;
-
-      if (!txid) {
-        throw new Error(
-          'Xaman did not return a transaction ID for the Quick Buy.'
-        );
-      }
-      if (!/^[A-F0-9]{64}$/i.test(txid)) throw new Error('Xaman returned an invalid transaction ID for the Quick Buy.');
-      document.dispatchEvent(new CustomEvent('jcs:submitted-transaction', {
-        detail: { txid, account: signed.txjson?.Account, kind: 'market-swap', network: 'XRPL Mainnet', validated: false }
-      }));
-
-      setStatus(
-        buyStatus,
-        'Quick Buy submitted. Waiting for validated XRPL confirmation…'
-      );
-
-      const receipt = await waitForQuickBuyValidation(txid);
-      const deliveredText = formatTradeNumber(requestedJcs, 6) + ' ' + APP_NAME;
-
-      setStatus(
-        buyStatus,
-        'Quick Buy validated: ' + deliveredText +
-          ' · ' + txid.slice(0, 10) + '…' + txid.slice(-8),
-        'ok'
-      );
-
-      setResult(
-        'Validated AMM/DEX Quick Buy · ' + deliveredText +
-          ' · Transaction: ' + txid
-      );
-      document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-        detail: validatedReceiptDetail(receipt, { kind:'market-swap', legacyKind:'quick-buy', txid, side:'buy', amountJcs:requestedJcs, referencePriceXrpPerJcs:price })
-      }));
-
-      ammSnapshotCache = null;
-      await Promise.allSettled([
-        refreshAll(),
-        fetchBalances(),
-        refreshEstimates()
-      ]);
-    } catch (error) {
-      setStatus(
-        buyStatus,
-        'Quick Buy error: ' + (error?.message || error),
-        'err'
-      );
-    }
-  }
-
-  if (btnRefreshEst) btnRefreshEst.addEventListener('click', () => refreshEstimates());
-  if (btnTrustJCS) btnTrustJCS.addEventListener('click', () => quickTrust());
-  if (buy1) buy1.addEventListener('click', () => quickBuy(1));
-  if (buy25) buy25.addEventListener('click', () => quickBuy(25));
-  if (buy50) buy50.addEventListener('click', () => quickBuy(50));
-  if (buy100) buy100.addEventListener('click', () => quickBuy(100));
 
   let liquiditySigning = false;
   let nftSigning = false;
@@ -15081,7 +14929,7 @@ try {
       const signed = await signWithSentinel(transaction, mint ? 'nft-mint' : 'nft-sell', onRequest);
       if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
       submittedTxid = signed.txid.toUpperCase();
-      const receipt = await waitForQuickBuyValidation(submittedTxid);
+      const receipt = await waitForTradeValidation(submittedTxid);
       const result = receipt.transaction, actual = result.tx_json || result, meta = result.meta || result.metaData || {};
       receiptValidated = true;
       const expected = signed.txjson;
@@ -15207,7 +15055,7 @@ try {
           detail: { txid: signed.txid, account, kind: deposit ? 'add-liquidity' : 'withdraw-liquidity',
             network: 'XRPL Mainnet', validated: false }
         }));
-        const receipt = await waitForQuickBuyValidation(signed.txid);
+        const receipt = await waitForTradeValidation(signed.txid);
         const actual = receipt.transaction.tx_json || receipt.transaction;
         const confirmedHash = String(receipt.transaction.hash || actual.hash || '');
         if (confirmedHash.toUpperCase() !== signed.txid.toUpperCase()) {
@@ -15300,8 +15148,7 @@ try {
         refreshBook(),
         refreshSummary(),
         currentAccount ? fetchBalances() : Promise.resolve(),
-        currentAccount ? fetchOffers(currentAccount) : Promise.resolve(),
-        currentAccount ? refreshEstimates() : Promise.resolve()
+        currentAccount ? fetchOffers(currentAccount) : Promise.resolve()
       ]);
     } finally {
       refreshing = false;
@@ -15874,7 +15721,7 @@ try {
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
   const HASH = /^[A-F0-9]{64}$/i;
   const PAYLOAD_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
-  const KIND = { 'market-swap': 'market-swap', 'quick-buy': 'market-swap', 'limit-order': 'limit-order', 'liquidity-add': 'add-liquidity', 'add-liquidity': 'add-liquidity', 'liquidity-remove': 'withdraw-liquidity', 'withdraw-liquidity': 'withdraw-liquidity' };
+  const KIND = { 'market-swap': 'market-swap', 'limit-order': 'limit-order', 'liquidity-add': 'add-liquidity', 'add-liquidity': 'add-liquidity', 'liquidity-remove': 'withdraw-liquidity', 'withdraw-liquidity': 'withdraw-liquidity' };
   const TYPE = { Payment: 'market-swap', OfferCreate: 'limit-order', AMMDeposit: 'add-liquidity', AMMWithdraw: 'withdraw-liquidity' };
   const KIND_LABEL = { 'market-swap': 'Buy / sell transaction', 'limit-order': 'Limit order created', 'add-liquidity': 'Liquidity added', 'withdraw-liquidity': 'Liquidity withdrawn' };
   const sourceKind = tx => tx.TransactionType === 'OfferCreate' ? ((Number(tx.Flags || 0) & 0x60000) ? 'market-swap' : 'limit-order') : TYPE[tx.TransactionType];
