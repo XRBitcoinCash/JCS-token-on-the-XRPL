@@ -2937,6 +2937,7 @@ body.jcs-map-expanded #jcs-map-focus-frame{display:block;height:100dvh;inset:0;o
 body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-stage-height)!important;min-height:280px!important}
 @media(max-width:700px){#jcs-map-focus-top .jcs-map-controls{padding:9px 10px}#jcs-map-focus-bottom{grid-template-columns:minmax(0,1fr)}.jcs-cinema-controls button{padding:8px 10px}.jcs-cinema-help{font-size:10px}#jcs-map-focus-frame #jcs-map-viewport{min-height:300px!important}#jcs-map-evidence>summary{padding:12px}}
 </style>
+<link rel="stylesheet" href="css/jcs-scripture-captions.css?v=20261008a">
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -8849,7 +8850,8 @@ window.JCSGospelArt=Object.freeze({draw});
     const timeline = document.getElementById(document.body.dataset.timeline === 'full' ? 'jcs-chronology-control' : 'jcs-history-control');
     const screen = window.visualViewport?.height || window.innerHeight;
     const minimum = window.innerWidth <= 700 ? 300 : 320;
-    const height = Math.max(minimum, Math.floor(screen - top.getBoundingClientRect().height - (timeline?.getBoundingClientRect().height || 90) - 24));
+    const captions = document.getElementById('jcs-scripture-captions');
+    const height = Math.max(minimum, Math.floor(screen - top.getBoundingClientRect().height - (timeline?.getBoundingClientRect().height || 90) - (captions?.getBoundingClientRect().height || 0) - 24));
     const value = height + 'px';
     if (frame.style.getPropertyValue('--jcs-stage-height') !== value) frame.style.setProperty('--jcs-stage-height', value);
   }
@@ -8863,8 +8865,10 @@ window.JCSGospelArt=Object.freeze({draw});
   window.addEventListener('resize', schedule);
   window.visualViewport?.addEventListener('resize', schedule);
   document.addEventListener('jcs:map-projection-change', schedule);
+  document.addEventListener('jcs:caption-layout', schedule);
   fit();
 })();
 </script>
+<script src="js/jcs-scripture-captions.js?v=20261008a"></script>
 </body>
 </html>
