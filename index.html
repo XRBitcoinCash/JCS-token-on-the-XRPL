@@ -9313,7 +9313,7 @@ Your browser does not support the public-domain film stream.
 <div class="trade-advanced-body">
 <div class="field" id="priceField">
 <label for="price">Limit price (XRP per JCS)</label>
-<input autocomplete="off" id="price" inputmode="decimal" min="0" placeholder="Live quote will appear here" step="0.000000001" type="number"/>
+<input autocomplete="off" id="price" inputmode="decimal" min="0" placeholder="Live quote will appear here" step="0.000000000000001" type="number"/>
 <div class="inline-hint">
               Set the maximum buy price or minimum sell price before creating the XRPL Offer.
             </div>
@@ -13268,7 +13268,7 @@ try {
             : insufficientJcs
               ? sellBalanceMessage
               : price > 0
-                ? 'Live reference: ' + formatTradeNumber(price, 9) +
+                ? 'Live reference: ' + formatTradeNumber(price, 12) +
                   ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
                 : 'Refresh the live quote before submitting the request.';
     }
@@ -13755,11 +13755,11 @@ try {
       }
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
-      priceEl.value = Number(price).toFixed(9);
+      priceEl.value = Number(price).toFixed(15);
 
       if (tradeLivePrice) {
         tradeLivePrice.textContent =
-          formatTradeNumber(price, 9) + ' XRP / JCS';
+          formatTradeNumber(price, 12) + ' XRP / JCS';
       }
 
       recalcTotals();
@@ -13926,7 +13926,7 @@ try {
           throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
         }
         priceEl.value = String(basePx);
-        if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 9) + ' XRP / JCS';
+        if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 12) + ' XRP / JCS';
         recalcTotals();
 
         const estimatedXrp = amt * basePx;
