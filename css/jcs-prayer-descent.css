@@ -16,16 +16,30 @@
   width: 100%;
   height: 100%;
 }
+.jcs-prayer-descent-badge {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  z-index: 1;
+  max-width: min(70%, 260px);
+  padding: 5px 8px;
+  border: 1px solid #95d9ce88;
+  border-radius: 6px;
+  background: #102c34e8;
+  color: #c3f4e9;
+  font: 600 11px/1.35 system-ui, sans-serif;
+  text-shadow: 0 1px 2px #071b21;
+}
 .jcs-prayer-light {
   position: absolute;
   left: var(--x);
   top: var(--y);
   width: 10px;
   height: 10px;
-  border: 1px solid #fff1c1;
+  border: 1px solid #e1fff8;
   border-radius: 50%;
-  background: #fbe5a6;
-  box-shadow: 0 0 7px 3px #f5cb79, 0 0 22px 9px #f6c76e88;
+  background: #bceee2;
+  box-shadow: 0 0 7px 3px #77dccc, 0 0 22px 9px #56d2c188;
   opacity: 0;
   animation: jcs-prayer-fall 14s ease-in-out var(--delay) infinite;
 }
@@ -36,7 +50,7 @@
   top: -28px;
   width: 2px;
   height: 27px;
-  background: linear-gradient(transparent, #ffe9afaa);
+  background: linear-gradient(transparent, #a3eadbaa);
 }
 @keyframes jcs-prayer-fall {
   0% { opacity: 0; transform: translate(-50%, -210px) scale(.5); }
