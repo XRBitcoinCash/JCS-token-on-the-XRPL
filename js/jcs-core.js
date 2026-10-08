@@ -151,7 +151,6 @@
     if (el === $('tradeMsg')) log('[trade] ' + msg);
     if (el === $('offersStatus')) log('[offers] ' + msg);
     if (el === $('healthStatus')) log('[health] ' + msg);
-    if (el === $('buyStatus')) log('[buy] ' + msg);
   }
 
   function setResult(msg) {
@@ -332,7 +331,7 @@
     const qr = officialXamanUrl(created?.refs?.qr_png, uuid);
     const labels = {
       trust: 'Add JCS trustline', offer: 'Review JCS limit order', swap: 'Review JCS market swap',
-      cancel: 'Cancel JCS order', quickbuy: 'Review JCS quick buy',
+      cancel: 'Cancel JCS order',
       'liquidity-add': 'Approve liquidity deposit', 'liquidity-remove': 'Approve liquidity withdrawal',
       'nft-mint': 'Mint your optional receipt NFT', 'nft-sell': 'Review NFT sell offer'
     };
@@ -1575,7 +1574,7 @@
     signingRequestActive = false;
     xamanPayloadInFlight = false;
     updateWalletButtons();
-    const target = $('tradeMsg') || $('buyStatus') || $('offersStatus');
+    const target = $('tradeMsg') || $('offersStatus');
     if (target) setStatus(target, (event.detail?.reason || 'Xaman request canceled.') + ' Controls reset. Review again when ready.', 'err');
   });
 
@@ -2106,7 +2105,7 @@
         const txid = signed && signed.txid;
         if (!txid) throw new Error('Xaman returned no transaction ID for the limit order.');
         setStatus(tradeMsg, 'Limit order submitted. Waiting for validated XRPL confirmation…');
-        const receipt = await waitForQuickBuyValidation(txid);
+        const receipt = await waitForTradeValidation(txid);
         setStatus(
           tradeMsg,
           'Limit order transaction validated on XRPL Mainnet · ' +
@@ -2201,7 +2200,7 @@
         submittedTxid = txid;
 
         setStatus(tradeMsg, 'AMM/DEX market order submitted. Waiting for validated XRPL confirmation…');
-        const receipt = await waitForQuickBuyValidation(txid);
+        const receipt = await waitForTradeValidation(txid);
 
         const record = window.JCS_RECEIPTS?.fromLedger?.(receipt.transaction, txid);
         if (!record || record.account !== signed.txjson.Account || record.source_kind !== 'market-swap' ||
@@ -2444,7 +2443,7 @@
       const txid = signed && signed.txid;
       if (!txid) throw new Error('Xaman returned no transaction ID for the cancellation.');
       setOffersStatus('Cancellation submitted. Waiting for validated XRPL confirmation…');
-      await waitForQuickBuyValidation(txid);
+      await waitForTradeValidation(txid);
       setOffersStatus('Cancellation transaction validated · ' + txid.slice(0, 10) + '…', 'ok');
       document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
         detail: { kind:'offer-cancel', txid, offerSequence:Number(seq) }
@@ -2650,11 +2649,6 @@
   const btnExportJson = $('btnExportJson');
   const btnCopyJson = $('btnCopyJson');
   const btnClearLog = $('btnClearLog');
-  const btnRefreshEst = $('btnRefreshEst');
-  const btnTrustJCS = $('btnTrustJCS');
-  const buyStatus = $('buyStatus');
-  const est1 = $('est1'), est25 = $('est25'), est50 = $('est50'), est100 = $('est100');
-  const buy1 = $('buy1'), buy25 = $('buy25'), buy50 = $('buy50'), buy100 = $('buy100');
 
   const state = {
     scanning: false,
@@ -3084,48 +3078,7 @@
   }
   startAutoRefresh();
 
-  async function hasTrustline() {
-    return HAS_TRUSTLINE || await checkTrustline(currentAccount);
-  }
-
-  async function estimateBuy(units) {
-    if (!currentAccount) return null;
-
-    try {
-      const price = await getMarketPrice('buy', units);
-      if (!Number.isFinite(price) || price <= 0) return null;
-      return Number(units) * price;
-    } catch {
-      return null;
-    }
-  }
-
-  async function refreshEstimates() {
-    const outEls = [est1, est25, est50, est100];
-    if (!outEls.some(Boolean)) return;
-    if (!currentAccount) {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-      return;
-    }
-    outEls.forEach(el => { if (el) el.textContent = '…'; });
-    try {
-      const vals = await Promise.all([1, 25, 50, 100].map(estimateBuy));
-      vals.forEach((v, i) => {
-        const el = outEls[i];
-        if (!el) return;
-        el.textContent = '≈ ' + (typeof v === 'number' ? v.toFixed(6) + ' XRP' : '—');
-      });
-    } catch {
-      outEls.forEach(el => { if (el) el.textContent = '≈ — XRP'; });
-    }
-  }
-
-  async function quickTrust() {
-    if (!setTrustBtn) return;
-    setTrustBtn.click();
-  }
-
-  async function waitForQuickBuyValidation(txid) {
+  async function waitForTradeValidation(txid) {
     let lastError = null;
     for (let attempt = 0; attempt < 36; attempt++) {
       try {
@@ -3183,104 +3136,6 @@
         : result.close_time_iso || new Date().toISOString()
     };
   }
-
-  async function quickBuy(units) {
-    try {
-      if (!currentAccount) throw new Error('Connect Xaman first.');
-      if (!await hasTrustline()) throw new Error('Add the JCS trustline first.');
-
-      const requestedJcs = Number(units);
-      if (!Number.isFinite(requestedJcs) || requestedJcs <= 0) {
-        throw new Error('Enter a valid JCS amount.');
-      }
-
-      setStatus(
-        buyStatus,
-        'Preparing a validated JCS/XRP AMM and DEX quote…'
-      );
-
-      const price = await getMarketPrice('buy', requestedJcs);
-      if (!Number.isFinite(price) || price <= 0) {
-        throw new Error('No executable JCS/XRP AMM or order-book price is available.');
-      }
-
-      const estimatedXrp = requestedJcs * price;
-      const maximumXrp = estimatedXrp * (1 + SLIPPAGE_PCT / 100);
-      const maximumDrops = Math.max(
-        1,
-        Math.ceil(maximumXrp * XRP_TO_DROPS)
-      );
-
-      const transaction = {
-        TransactionType: 'OfferCreate',
-        TakerGets: String(maximumDrops),
-        TakerPays: {
-          currency: CURRENCY_HEX,
-          issuer: ISSUER,
-          value: String(requestedJcs)
-        },
-        // Fill or Kill prevents an unfilled remainder from becoming an open order.
-        Flags: 0x00040000
-      };
-
-      setStatus(
-        buyStatus,
-        'Review the exact JCS amount and maximum XRP cost in Xaman. XRPL will use the best available AMM, order-book, or combined liquidity.'
-      );
-
-      const signed = await signWithSentinel(transaction, 'quickbuy');
-      const txid = signed?.txid;
-
-      if (!txid) {
-        throw new Error(
-          'Xaman did not return a transaction ID for the Quick Buy.'
-        );
-      }
-
-      setStatus(
-        buyStatus,
-        'Quick Buy submitted. Waiting for validated XRPL confirmation…'
-      );
-
-      const receipt = await waitForQuickBuyValidation(txid);
-      const deliveredText = formatTradeNumber(requestedJcs, 6) + ' ' + APP_NAME;
-
-      setStatus(
-        buyStatus,
-        'Quick Buy validated: ' + deliveredText +
-          ' · ' + txid.slice(0, 10) + '…' + txid.slice(-8),
-        'ok'
-      );
-
-      setResult(
-        'Validated AMM/DEX Quick Buy · ' + deliveredText +
-          ' · Transaction: ' + txid
-      );
-      document.dispatchEvent(new CustomEvent('jcs:validated-transaction', {
-        detail: validatedReceiptDetail(receipt, { kind:'market-swap', legacyKind:'quick-buy', txid, side:'buy', amountJcs:requestedJcs, referencePriceXrpPerJcs:price })
-      }));
-
-      ammSnapshotCache = null;
-      await Promise.allSettled([
-        refreshAll(),
-        fetchBalances(),
-        refreshEstimates()
-      ]);
-    } catch (error) {
-      setStatus(
-        buyStatus,
-        'Quick Buy error: ' + (error?.message || error),
-        'err'
-      );
-    }
-  }
-
-  if (btnRefreshEst) btnRefreshEst.addEventListener('click', () => refreshEstimates());
-  if (btnTrustJCS) btnTrustJCS.addEventListener('click', () => quickTrust());
-  if (buy1) buy1.addEventListener('click', () => quickBuy(1));
-  if (buy25) buy25.addEventListener('click', () => quickBuy(25));
-  if (buy50) buy50.addEventListener('click', () => quickBuy(50));
-  if (buy100) buy100.addEventListener('click', () => quickBuy(100));
 
   let liquiditySigning = false;
   let nftSigning = false;
@@ -3456,7 +3311,7 @@
       const signed = await signWithSentinel(transaction, mint ? 'nft-mint' : 'nft-sell');
       if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
       submittedTxid = signed.txid.toUpperCase();
-      const receipt = await waitForQuickBuyValidation(submittedTxid);
+      const receipt = await waitForTradeValidation(submittedTxid);
       const result = receipt.transaction, actual = result.tx_json || result, meta = result.meta || result.metaData || {};
       receiptValidated = true;
       const expected = signed.txjson;
@@ -3541,7 +3396,7 @@
         const signed = await signWithSentinel(transaction, deposit ? 'liquidity-add' : 'liquidity-remove');
         if (!/^[A-F0-9]{64}$/i.test(signed.txid || '')) throw new Error('Xaman returned an invalid transaction ID.');
         submittedTxid = signed.txid;
-        const receipt = await waitForQuickBuyValidation(signed.txid);
+        const receipt = await waitForTradeValidation(signed.txid);
         const actual = receipt.transaction.tx_json || receipt.transaction;
         const confirmedHash = String(receipt.transaction.hash || actual.hash || '');
         if (confirmedHash.toUpperCase() !== signed.txid.toUpperCase()) {
@@ -3598,8 +3453,7 @@
         refreshBook(),
         refreshSummary(),
         currentAccount ? fetchBalances() : Promise.resolve(),
-        currentAccount ? fetchOffers(currentAccount) : Promise.resolve(),
-        currentAccount ? refreshEstimates() : Promise.resolve()
+        currentAccount ? fetchOffers(currentAccount) : Promise.resolve()
       ]);
     } finally {
       refreshing = false;
