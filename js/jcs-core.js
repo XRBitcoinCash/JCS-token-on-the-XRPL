@@ -1610,8 +1610,9 @@
   const marketBtn = $('marketTradeBtn');
   const tradeMsg = $('tradeMsg');
   // Market preview is valid only for the exact amount and side just quoted.
-  // The same price input also serves advanced limit orders, so keep it intact.
+  // A user-entered limit price must survive automatic market quote refreshes.
   let marketQuote = null;
+  let manualLimitPrice = false;
 
   document.addEventListener('jcs:signing-reset', event => {
     signingRequestActive = false;
@@ -1718,7 +1719,8 @@
     const price = Number(priceEl && priceEl.value) || 0;
     const total = amount * price;
     const marketPrice = marketQuote && marketQuote.amount === amount &&
-      marketQuote.side === side && marketQuote.price === price ? price : 0;
+      marketQuote.side === side && Number.isFinite(marketQuote.price) &&
+      marketQuote.price > 0 ? marketQuote.price : 0;
     const marketTotal = amount * marketPrice;
     if (!marketPrice && tradeLivePrice) tradeLivePrice.textContent = '—';
 
@@ -1815,6 +1817,7 @@
     );
   });
   if (priceEl) priceEl.addEventListener('input', () => {
+    manualLimitPrice = priceEl.value.trim() !== '';
     marketQuote = null;
     recalcTotals();
   });
@@ -2274,8 +2277,8 @@
       }
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
-      priceEl.value = Number(price).toFixed(15);
-      marketQuote = { side, amount, price: Number(priceEl.value) };
+      if (!manualLimitPrice) priceEl.value = Number(price).toFixed(15);
+      marketQuote = { side, amount, price: Number(price) };
 
       if (tradeLivePrice) {
         tradeLivePrice.textContent =
@@ -2443,8 +2446,8 @@
         if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt) {
           throw new Error('Wallet or trade details changed while quoting. Review the amount again.');
         }
-        priceEl.value = String(basePx);
-        marketQuote = { side, amount: amt, price: Number(priceEl.value) };
+        if (!manualLimitPrice) priceEl.value = String(basePx);
+        marketQuote = { side, amount: amt, price: basePx };
         if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 12) + ' XRP / JCS';
         recalcTotals();
 
@@ -2551,7 +2554,7 @@
 
         if (sideEl.value === side && Number(amountEl.value) === amt) {
           amountEl.value = '';
-          priceEl.value = '';
+          if (!manualLimitPrice) priceEl.value = '';
           marketQuote = null;
           recalcTotals();
         }
