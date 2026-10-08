@@ -72,3 +72,9 @@ body.atlas-motion-paused #jcs-prayer-descent .jcs-prayer-light {
   }
   #jcs-prayer-descent .jcs-prayer-light::after { display: none; }
 }
+
+/* Scale illustration endpoints with the visible globe, never with signer coordinates. */
+body[data-map-projection="globe"] #jcs-prayer-descent .jcs-prayer-light {
+  left: calc(var(--jcs-globe-x, 50%) + var(--jcs-globe-radius, 180px) * var(--orbit-x, 0));
+  top: calc(var(--jcs-globe-y, 52%) + var(--jcs-globe-radius, 180px) * var(--orbit-y, 0));
+}

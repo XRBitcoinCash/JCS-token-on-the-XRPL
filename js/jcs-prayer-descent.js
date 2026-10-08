@@ -45,6 +45,8 @@
       const radius = Math.sqrt((i + 0.5) / Math.max(visible, 1));
       light.style.setProperty('--x', `${(50 + Math.cos(angle) * radius * 29).toFixed(2)}%`);
       light.style.setProperty('--y', `${(53 + Math.sin(angle) * radius * 20).toFixed(2)}%`);
+      light.style.setProperty('--orbit-x', (Math.cos(angle) * radius * .74).toFixed(4));
+      light.style.setProperty('--orbit-y', (Math.sin(angle) * radius * .70).toFixed(4));
       light.style.setProperty('--delay', `${(-i * 1.91).toFixed(2)}s`);
       lights.push(light);
     }
