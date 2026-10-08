@@ -13,7 +13,7 @@
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
   const HASH = /^[A-F0-9]{64}$/i;
   const PAYLOAD_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
-  const KIND = { 'market-swap': 'market-swap', 'quick-buy': 'market-swap', 'limit-order': 'limit-order', 'liquidity-add': 'add-liquidity', 'add-liquidity': 'add-liquidity', 'liquidity-remove': 'withdraw-liquidity', 'withdraw-liquidity': 'withdraw-liquidity' };
+  const KIND = { 'market-swap': 'market-swap', 'limit-order': 'limit-order', 'liquidity-add': 'add-liquidity', 'add-liquidity': 'add-liquidity', 'liquidity-remove': 'withdraw-liquidity', 'withdraw-liquidity': 'withdraw-liquidity' };
   const TYPE = { Payment: 'market-swap', OfferCreate: 'limit-order', AMMDeposit: 'add-liquidity', AMMWithdraw: 'withdraw-liquidity' };
   const KIND_LABEL = { 'market-swap': 'Buy / sell transaction', 'limit-order': 'Limit order created', 'add-liquidity': 'Liquidity added', 'withdraw-liquidity': 'Liquidity withdrawn' };
   const sourceKind = tx => tx.TransactionType === 'OfferCreate' ? ((Number(tx.Flags || 0) & 0x60000) ? 'market-swap' : 'limit-order') : TYPE[tx.TransactionType];
