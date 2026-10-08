@@ -1790,6 +1790,8 @@
   function selectTradeSide(side) {
     if (sideEl.value === side) return;
     marketQuote = null;
+    manualLimitPrice = false;
+    if (priceEl) priceEl.value = '';
     setSide(side);
     if (Number(amountEl?.value) > 0) {
       if (marketBtn) marketBtn.disabled = true;
