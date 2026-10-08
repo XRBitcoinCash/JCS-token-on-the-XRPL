@@ -1,0 +1,47 @@
+/* Shared project identity for JCS navigation, footer and ecosystem links.
+   Logos are local copies of the existing XRBC GitLab assets. */
+body a:is(.xrbc-link,[href="https://xrbitcoincash.com/"],[href="https://xrbitcoincash.com/support.html"]){
+  --jcs-project-logo:url('../assets/projects/xrbc.png');
+}
+body a:is(.xrbitcoin-link,[href="https://xrbitcoinlabs.com/"],[href="https://xrbitcoincash.com/xrbitcoin-links.html"],[href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html"]){
+  --jcs-project-logo:url('../assets/projects/xrbitcoin.webp');
+}
+body a:is(.creature-link,[href="https://xrbitcoincash.com/creature-nft-links.html"]){
+  --jcs-project-logo:url('../assets/projects/creature-nft.webp');
+}
+body a:is(.xrbc-link,.xrbitcoin-link,.creature-link,[href="https://xrbitcoincash.com/"],[href="https://xrbitcoincash.com/support.html"],[href="https://xrbitcoinlabs.com/"],[href="https://xrbitcoincash.com/xrbitcoin-links.html"],[href="https://xrbitcoincash-project-15389d.gitlab.io/xrbitcoin-links.html"],[href="https://xrbitcoincash.com/creature-nft-links.html"])::before{
+  content:"";
+  display:inline-block;
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  margin-inline-end:7px;
+  vertical-align:middle;
+  border-radius:50%;
+  background-image:var(--jcs-project-logo);
+  background-position:center;
+  background-size:contain;
+  background-repeat:no-repeat;
+  pointer-events:none;
+}
+html body .index-ecosystem-links .index-ecosystem-link{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+html body .index-ecosystem-links .index-ecosystem-link::before{
+  margin-inline-end:0;
+}
+/* Keep multi-line resource cards aligned with their existing text columns. */
+body a.directory-link[href="https://xrbitcoincash.com/"],
+body a[href="https://xrbitcoincash.com/support.html"]{
+  position:relative;
+  padding-inline-start:48px;
+}
+body a.directory-link[href="https://xrbitcoincash.com/"]::before,
+body a[href="https://xrbitcoincash.com/support.html"]::before{
+  position:absolute;
+  inset-inline-start:14px;
+  top:14px;
+  margin:0;
+}
