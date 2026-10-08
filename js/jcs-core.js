@@ -860,6 +860,14 @@
   let signingRequestActive = false;
   const BAL = { xrp: 0, jcs: 0 };
 
+  function sellExceedsBalance(side, amount) {
+    return side === 'sell' && HAS_TRUSTLINE &&
+      Number.isFinite(amount) && amount > BAL.jcs + 1e-12;
+  }
+
+  const sellBalanceMessage =
+    'The shown JCS balance is lower than this sell amount. Reduce the amount or retry after the balance refreshes.';
+
   function scheduleAppRefresh() {
     window.setTimeout(() => {
       if (!APP_INITIALIZED) return;
@@ -903,8 +911,11 @@
       setTrustBtn.disabled = !connected || HAS_TRUSTLINE;
     }
 
-    if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade;
-    if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade || marketTradePending || !(Number($('amount')?.value) > 0);
+    if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade ||
+      sellExceedsBalance($('side')?.value, Number($('amount')?.value));
+    const marketAmount = Number($('amount')?.value);
+    if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade || marketTradePending ||
+      !(marketAmount > 0) || sellExceedsBalance($('side')?.value, marketAmount);
     if ($('btnHealthScan')) $('btnHealthScan').disabled = !connected;
 
     setReadyStep(walletStepConnect, connected);
@@ -1692,9 +1703,11 @@
     const price = Number(priceEl && priceEl.value) || 0;
     const total = amount * price;
 
+    const insufficientJcs = sellExceedsBalance(side, amount);
     if (totalXrpEl) {
-      totalXrpEl.textContent =
-        formatEstimatedXrp(Number.isFinite(total) ? total : 0, true);
+      totalXrpEl.textContent = insufficientJcs
+        ? '— XRP'
+        : formatEstimatedXrp(Number.isFinite(total) ? total : 0, true);
     }
 
     if (side === 'buy') {
@@ -1723,13 +1736,15 @@
       }
       if (tradeReceiveValue) {
         tradeReceiveValue.textContent =
-          amount > 0 && price > 0
+          amount > 0 && price > 0 && !insufficientJcs
             ? formatEstimatedXrp(total)
             : '— XRP';
       }
     }
 
-    if (marketBtn) marketBtn.disabled = marketTradePending || !currentAccount || !HAS_TRUSTLINE || !(amount > 0);
+    if (marketBtn) marketBtn.disabled = marketTradePending || !currentAccount || !HAS_TRUSTLINE ||
+      !(amount > 0) || insufficientJcs;
+    if (placeOfferBtn) placeOfferBtn.disabled = !currentAccount || !HAS_TRUSTLINE || insufficientJcs;
     if (amount > 0 && tradeMsg?.dataset.confirmed) {
       delete tradeMsg.dataset.confirmed;
       setStatus(tradeMsg, 'New amount selected. Refresh the quote and review a new request in Xaman.', 'ok');
@@ -1738,6 +1753,8 @@
       tradeQuoteNote.textContent =
         amount <= 0
           ? 'Enter an amount to load a live AMM or order-book estimate.'
+          : insufficientJcs
+            ? sellBalanceMessage
           : price > 0
             ? 'Live reference: ' + formatTradeNumber(price, 9) +
               ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
@@ -1760,7 +1777,11 @@
 
   if (amountEl) amountEl.addEventListener('input', () => {
     recalcTotals();
-    setStatus(tradeMsg, 'Amount changed. Refresh the live quote or review a new request in Xaman.');
+    const exceedsBalance = sellExceedsBalance(sideEl?.value, Number(amountEl.value));
+    setStatus(tradeMsg, exceedsBalance
+      ? sellBalanceMessage
+      : 'Amount changed. Refresh the live quote or review a new request in Xaman.',
+    exceedsBalance ? 'err' : undefined);
   });
   if (priceEl) priceEl.addEventListener('input', recalcTotals);
 
@@ -1815,6 +1836,11 @@
     }
     if (tradeJcsBalance) {
       tradeJcsBalance.textContent = formatTradeNumber(BAL.jcs, 6) + ' JCS';
+    }
+    updateWalletButtons();
+    recalcTotals();
+    if (sellExceedsBalance(sideEl?.value, Number(amountEl?.value))) {
+      setStatus(tradeMsg, sellBalanceMessage, 'err');
     }
 
     return BAL;
@@ -2147,11 +2173,22 @@
       return null;
     }
 
+    if (sellExceedsBalance(side, amount)) {
+      if (marketBtn) marketBtn.disabled = true;
+      setStatus(tradeMsg, sellBalanceMessage, 'err');
+      return null;
+    }
+
     setStatus(tradeMsg, 'Querying XRPL for the live ' + side + ' quote…');
 
     try {
       const price = await getMarketPrice(side);
       if (marketTradePending || sideEl.value !== side || Number(amountEl.value) !== amount) return null;
+      if (sellExceedsBalance(side, amount)) {
+        if (marketBtn) marketBtn.disabled = true;
+        setStatus(tradeMsg, sellBalanceMessage, 'err');
+        return null;
+      }
       if (!price || price <= 0) throw new Error('No live market price is available.');
 
       priceEl.value = Number(price).toFixed(9);
@@ -2208,6 +2245,14 @@
         }
         let tx;
         if (side === 'sell') {
+          await fetchBalances();
+          if (currentAccount !== account || sideEl.value !== side || Number(amountEl.value) !== amt ||
+              Number(priceEl.value) !== px) {
+            throw new Error('Wallet or limit details changed. Review the order again.');
+          }
+          if (BAL.jcs + 1e-12 < amt) {
+            throw new Error('The connected wallet does not hold enough JCS.');
+          }
           tx = {
             TransactionType: 'OfferCreate',
             Account: account,
