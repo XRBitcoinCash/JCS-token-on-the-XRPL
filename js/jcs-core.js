@@ -2090,6 +2090,23 @@
     return side === 'buy' ? Math.min(...prices) : Math.max(...prices);
   }
 
+  // XRP can only be signed in whole drops. At tiny trade sizes, a 2% limit
+  // may round past the estimate and make the order unfillable.
+  function getMarketDropLimit(side, estimatedXrp) {
+    const estimatedDrops = estimatedXrp * XRP_TO_DROPS;
+    const slip = SLIPPAGE_PCT / 100;
+    const bound = side === 'buy'
+      ? Math.floor(estimatedDrops * (1 + slip))
+      : Math.ceil(estimatedDrops * (1 - slip));
+    if (!Number.isSafeInteger(bound) || bound < 1) {
+      throw new Error('This trade cannot be limited safely in XRP drops. Adjust the JCS amount.');
+    }
+    if (side === 'buy' ? bound < estimatedDrops : bound > estimatedDrops) {
+      throw new Error('This JCS amount is too small for a 2% limit in whole XRP drops. Increase the amount and refresh the quote.');
+    }
+    return bound;
+  }
+
   async function fillBestPrice() {
     if (!amountEl || !priceEl || marketTradePending) return null;
 
@@ -2116,6 +2133,13 @@
       }
 
       recalcTotals();
+      try {
+        getMarketDropLimit(side, amount * price);
+      } catch (error) {
+        if (marketBtn) marketBtn.disabled = true;
+        setStatus(tradeMsg, error.message, 'err');
+        return null;
+      }
       setStatus(tradeMsg, 'Live ' + side + ' quote refreshed.', 'ok');
       return price;
     } catch (error) {
@@ -2233,7 +2257,6 @@
         if (tradeLivePrice) tradeLivePrice.textContent = formatTradeNumber(basePx, 9) + ' XRP / JCS';
         recalcTotals();
 
-        const slip = SLIPPAGE_PCT / 100;
         const estimatedXrp = amt * basePx;
         if (!Number.isFinite(estimatedXrp) || estimatedXrp <= 0) {
           throw new Error('The requested trade is too large to quote safely.');
@@ -2241,11 +2264,7 @@
         let tx;
 
         if (side === 'buy') {
-          const maximumXrp = estimatedXrp * (1 + slip);
-          const maximumDrops = Math.floor(maximumXrp * XRP_TO_DROPS);
-          if (!Number.isSafeInteger(maximumDrops) || maximumDrops < 1) {
-            throw new Error('This trade cannot be limited safely in XRP drops. Adjust the JCS amount.');
-          }
+          const maximumDrops = getMarketDropLimit(side, estimatedXrp);
 
           tx = {
             TransactionType: 'OfferCreate',
@@ -2265,11 +2284,7 @@
             throw new Error('The connected wallet does not hold enough JCS.');
           }
 
-          const minimumXrp = estimatedXrp * (1 - slip);
-          const minimumDrops = Math.ceil(minimumXrp * XRP_TO_DROPS);
-          if (!Number.isSafeInteger(minimumDrops) || minimumDrops < 1) {
-            throw new Error('This trade cannot be limited safely in XRP drops. Adjust the JCS amount.');
-          }
+          const minimumDrops = getMarketDropLimit(side, estimatedXrp);
 
           tx = {
             TransactionType: 'OfferCreate',
