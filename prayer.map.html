@@ -2900,7 +2900,43 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:100%!importa
 @media(max-width:480px){.jcs-ambient-radio{padding:10px}.jcs-ambient-heading>span:last-child{width:100%;margin-left:27px}.jcs-ambient-actions{gap:6px}}
 
 </style>
-<link rel="stylesheet" href="./css/jcs-prayer-descent.css?v=20261008b">
+<link rel="stylesheet" href="./css/jcs-prayer-descent.css?v=20261008c">
+<style id="jcs-map-stage-20261008">
+/* Map-first workspace; the shared site navigation remains unchanged. */
+.workspace{grid-template-columns:minmax(0,1fr)!important;display:block!important}
+#jcs-map-focus-frame{--jcs-stage-height:64dvh}
+#jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-stage-height)!important;min-height:320px!important}
+#jcs-map-focus-top .jcs-map-controls{padding:10px 16px 8px}
+#jcs-map-focus-top .jcs-map-heading{margin-bottom:8px}
+#jcs-map-focus-options{align-items:center}
+#jcs-map-focus-narration{border:0!important;background:none!important;flex:0 1 auto!important;width:auto!important}
+#jcs-map-focus-narration:has(#jcs-map-audio[open]){flex-basis:100%!important;width:100%!important}
+#jcs-map-audio>summary{min-height:40px}
+#jcs-map-audio[open]>.jcs-watchers-player{padding:10px!important}
+#jcs-map-audio .jcs-ambient-radio{margin-top:8px}
+#jcs-globe-controls-mount{flex:1 0 100%;width:100%}
+.jcs-cinema-controls{align-items:center;padding:2px 0 0;gap:8px}
+.jcs-cinema-navigation{min-width:0}
+.jcs-cinema-view-actions{padding:0;align-items:center}
+.jcs-cinema-controls button{min-height:38px;font-size:12px;padding:8px 12px}
+.jcs-cinema-menu{min-width:0}
+.jcs-cinema-help{padding:6px 2px 0;font-size:11px;flex:1 0 100%}
+#jcs-evidence-button{border:1px solid #655039;background:#171720;color:#e6d4b0;border-radius:6px;padding:9px 11px;min-height:40px;font:600 .73rem/1.3 system-ui,sans-serif;cursor:pointer}
+#jcs-evidence-button:focus-visible,#jcs-map-evidence>summary:focus-visible{outline:2px solid #dfc08d;outline-offset:2px}
+#jcs-map-evidence{border:1px solid #655039;background:#15141d;margin:10px 0 0;border-radius:6px;min-width:0}
+#jcs-map-evidence>summary{padding:15px 18px;cursor:pointer;color:#e6d4b0;font:600 14px/1.4 system-ui,sans-serif}
+#jcs-map-evidence .analysis-panel{position:static!important;display:block!important;width:100%;height:auto!important;max-height:none!important;overflow:visible!important;border:0;min-width:0}
+#jcs-map-evidence .panel-section{max-width:none}
+#jcs-map-evidence .atlas-list{max-height:340px;overflow:auto}
+#jcs-map-evidence #atlas-selected{scroll-margin-top:16px}
+#jcs-map-focus-bottom{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+#jcs-globe-footer-mount{grid-column:1/-1}
+#jcs-map-focus-bottom>.jcs-focus-disclosure[open]{grid-column:1/-1}
+.jcs-cinema-timeline{display:none} /* The interactive timeline directly above already shows this. */
+body.jcs-map-expanded #jcs-map-focus-frame{display:block;height:100dvh;inset:0;overflow:auto}
+body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:var(--jcs-stage-height)!important;min-height:280px!important}
+@media(max-width:700px){#jcs-map-focus-top .jcs-map-controls{padding:9px 10px}#jcs-map-focus-bottom{grid-template-columns:minmax(0,1fr)}.jcs-cinema-controls button{padding:8px 10px}.jcs-cinema-help{font-size:10px}#jcs-map-focus-frame #jcs-map-viewport{min-height:300px!important}#jcs-map-evidence>summary{padding:12px}}
+</style>
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -6957,7 +6993,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
   function pickEvent(e,zoom=true){selected={kind:'event',id:e.id};if(zoom)window.JCSMapViewport.focus(e.lon,e.lat);render();showDetail();}
   function pickPlace(p){selected={kind:'place',id:p.id};window.JCSMapViewport.focus(p.lon,p.lat);render();showDetail();}
   function pickCountry(c,zoom=true){country=c.iso3||'';$('atlas-country').value=country;selected={kind:'country',name:c.name};if(zoom&&Number.isFinite(c.lon))window.JCSMapViewport.focus(model.countryNexus(c).lon,model.countryNexus(c).lat);render();showDetail();}
-  function showDetail(){const panel=$('atlas-selected');panel.focus({preventScroll:true});if(matchMedia('(max-width:1000px)').matches)panel.scrollIntoView({block:'nearest',behavior:'auto'});}
+  function showDetail(){const panel=$('atlas-selected'),drawer=$('jcs-map-evidence');if(drawer){if(document.body.classList.contains('jcs-map-expanded'))$('jcs-map-expand')?.click();drawer.open=true;}panel.focus({preventScroll:true});if(drawer||matchMedia('(max-width:1000px)').matches)panel.scrollIntoView({block:'nearest',behavior:'auto'});}
   function localMap(title,lat,lon,precision,note){
     const wide=precision==='region'?.9:.055;
     $('atlas-local-title').textContent=title;
@@ -7664,12 +7700,12 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
       }
       globeCachedLabels=labels.filter(p=>Number.isFinite(p.lon)&&Number.isFinite(p.lat));
     }
-    const nodeKey=[year,country,metric,selected?.kind,selected?.id,selected?.cityId,selected?.index,selected?.name,checked('atlas-regional-nexuses'),nodes.size].join('|');
+    const nodeKey=[year,country,metric,selected?.kind,selected?.id,selected?.cityId,selected?.index,selected?.name,selected?.region,checked('atlas-regional-nexuses'),nodes.size].join('|');
     if(nodeKey!==globeNodeKey){globeNodeKey=nodeKey;globeCachedNodes=Array.from(nodes,([id,n])=>({id,lon:n.lon,lat:n.lat,label:n.caption.textContent,description:n.title.textContent,tone:n.g.style.getPropertyValue('--tone'),radius:Number(n.ring.getAttribute('r'))||4,visible:n.g.style.display!=='none',selected:n.g.classList.contains('selected'),kind:n.g.dataset.kind,carried:n.g.dataset.carried}));}
     const stars=scripture.globeState(),audio=narration.state(),position=clockPosition();
     const snapshot={position,year,playing,started:journeyStarted,mode:full()?'full':document.body.dataset.timeline,
       duration:journeySeconds(),animationsEnabled:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion'),motionAllowed:!checked('atlas-pause-motion')&&checked('atlas-scripture-motion')&&!narration.motionPaused(),
-      selected:selected?{kind:selected.kind,id:selected.id,cityId:selected.cityId,index:selected.index,name:selected.name}:null,
+      selected:selected?{kind:selected.kind,id:selected.id,cityId:selected.cityId,index:selected.index,name:selected.name,region:selected.region}:null,
       stars:stars.stars,allStarNames:stars.allStarNames,selectedStar:stars.selectedStar,
       layers,labels:globeCachedLabels,
       nodes:globeCachedNodes,gospel:window.JCSGospel?.getState(position,full()),
@@ -7686,6 +7722,7 @@ function createAtlasGeography({data,make,layer,labelLayer=layer,onSelect}){
     if(item.kind==='dated'&&item.record){selected={kind:'dated-label',label:item.record};render();showDetail();return;}
     const id=item.id||'',eventId=id.startsWith('event:')?id.slice(6):item.eventId;
     const event=eventId&&model.events.find(e=>e.id===eventId);if(event){pickEvent(event,false);return;}
+    if(id.startsWith('region:')){for(const c of model.countries){const anchor=model.regions(c).find(r=>'region:'+c.name+':'+r.name===id);if(anchor){regionDetail(c,anchor);return;}}}
     const target=id.startsWith('place:')?model.places.find(p=>p.id===id.slice(6)):null;if(target){pickPlace(target);return;}
     const iso=item.iso3||(id.startsWith('context-nexus:')?id.slice(14):id.startsWith('reference:')?id.slice(10):'');
     const c=iso?model.countries.find(c=>c.mapIso3.includes(iso)):id.startsWith('country:')?model.countries.find(c=>c.name===id.slice(8)):null;
@@ -7970,10 +8007,11 @@ window.JCSGospelArt=Object.freeze({draw});
     const canvas = panel.querySelector('canvas'), ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) { panel.remove(); throw new Error('Canvas 2D is unavailable; use the flat map.'); }
     const toolbar = document.createElement('div'); toolbar.className = 'jcs-cinema-controls'; toolbar.setAttribute('aria-label', 'Globe controls');
-    toolbar.innerHTML = '<details class="jcs-cinema-menu"><summary>Explore the globe</summary><div class="jcs-cinema-view-actions"></div><p class="jcs-cinema-help">Drag to turn · wheel or pinch to zoom · arrow keys to turn · + / − to zoom · 0 for overview. Dragging and zooming leave the journey running.</p></details><details class="jcs-cinema-menu"><summary>Celestial layers</summary><div class="jcs-cinema-layer-actions"></div></details>';
+    toolbar.innerHTML = '<div class="jcs-cinema-navigation" role="group" aria-label="Globe navigation"><div class="jcs-cinema-view-actions"></div></div><details class="jcs-cinema-menu"><summary>Celestial layers</summary><div class="jcs-cinema-layer-actions"></div></details>';
     const footer = document.createElement('div'); footer.className = 'jcs-cinema-footer';
     footer.innerHTML = '<div class="jcs-cinema-timeline"><strong class="jcs-cinema-year"></strong><progress class="jcs-cinema-progress" max="2030" value="0" aria-label="Journey progress"></progress><span class="jcs-cinema-progress-label"></span></div><details class="jcs-cinema-caption"><summary>Scene and sources</summary><p class="jcs-cinema-title"></p><p class="jcs-cinema-copy"></p><p class="jcs-cinema-source"></p><p class="jcs-cinema-space-note"><a href="https://science.nasa.gov/universe/galaxies/types/" target="_blank" rel="noopener noreferrer">Representative galaxy forms</a>; rotational motion is accelerated. The red haze and abstract golden architecture are religious artwork, not a physical boundary or a prediction. Modern coastlines and country outlines are reference geography.</p></details><div class="jcs-cinema-status" aria-live="polite"></div>';
     if (options.controlsHost) options.controlsHost.append(toolbar); else if (host.parentElement) host.parentElement.insertBefore(toolbar, host);
+    const hint = document.createElement("p"); hint.className = "jcs-cinema-help"; hint.textContent = "Drag to turn · wheel or pinch to zoom · arrow keys to turn · select a point or name for its evidence."; toolbar.append(hint);
     if (options.footerHost) options.footerHost.append(footer); else if (host.parentElement) host.parentElement.insertBefore(footer, host.nextSibling);
     const controls = toolbar.querySelector('.jcs-cinema-view-actions'), layerControls = toolbar.querySelector('.jcs-cinema-layer-actions'), yearEl = footer.querySelector('.jcs-cinema-year'), titleEl = footer.querySelector('.jcs-cinema-title');
     const sourceEl = footer.querySelector('.jcs-cinema-source'), copyEl = footer.querySelector('.jcs-cinema-copy'), statusEl = footer.querySelector('.jcs-cinema-status'), progressEl = footer.querySelector('.jcs-cinema-progress'), progressLabel = footer.querySelector('.jcs-cinema-progress-label');
@@ -8074,9 +8112,9 @@ window.JCSGospelArt=Object.freeze({draw});
 
     function resize() {
       if (disposed) return;
-      const rect = host.getBoundingClientRect(); width = Math.max(240, Math.round(rect.width || host.clientWidth || 800)); height = Math.max(360, Math.round(rect.height || host.clientHeight || 520));
+      const rect = host.getBoundingClientRect(); width = Math.max(1, Math.round(rect.width || host.clientWidth || 800)); height = Math.max(1, Math.round(rect.height || host.clientHeight || 520));
       const dpr = Math.min(1.5, global.devicePixelRatio || 1); canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      baseRadius = Math.min(width * .30, height * .32); radius = baseRadius * viewZoom; cx = width * .5; cy = height * .52; hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
+      baseRadius = Math.min(width * .41, height * .40); radius = baseRadius * viewZoom; cx = width * .5; cy = height * .52; hazeX = width * .49; hazeY = height * .49; hazeCY = height * .5; makeSky(); dirty = true; invalidate();
     }
     function camera(position, stars) {
       const base = { lon: 22 + (position + 4) * .12, lat: 18, zoom: 1 };
@@ -8098,7 +8136,7 @@ window.JCSGospelArt=Object.freeze({draw});
     function onScreen(p, padding = 0) { return p.x >= padding && p.x <= width - padding && p.y >= padding && p.y <= height - padding; }
     function horizon(a, b) { const t = a.z / (a.z - b.z), x = mix(a.ux, b.ux, t), y = mix(a.uy, b.uy, t), d = Math.hypot(x, y) || 1; return { x: cx + x / d * radius, y: cy + y / d * radius, z: 0, ux: x / d, uy: y / d }; }
     function drawLand(project) {
-      ctx.fillStyle = '#1e3b43'; ctx.strokeStyle = 'rgba(140,180,172,.26)'; ctx.lineWidth = .6;
+      ctx.fillStyle = '#31575b'; ctx.strokeStyle = 'rgba(166,205,191,.48)'; ctx.lineWidth = .6;
       for (const ring of land) {
         const p = ring.points.map(project), visible = p.reduce((n, v) => n + (v.z >= 0 ? 1 : 0), 0); if (!visible) continue;
         if (visible === p.length) { ctx.beginPath(); p.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)); ctx.closePath(); ctx.fill(); ctx.stroke(); continue; }
@@ -8130,28 +8168,43 @@ window.JCSGospelArt=Object.freeze({draw});
       const ocean = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius, cy + radius); ocean.addColorStop(0, '#143449'); ocean.addColorStop(.45, '#0a2639'); ocean.addColorStop(1, '#06121f'); ctx.fillStyle = ocean; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
       if (state.layers?.geography !== false) drawLand(project);
       ctx.strokeStyle = 'rgba(93,140,160,.13)'; ctx.lineWidth = .5; grid.forEach(points => lineOnSphere(points, project));
-      const shadow = ctx.createRadialGradient(cx - radius * .43, cy - radius * .35, radius * .15, cx + radius * .04, cy + radius * .06, radius * 1.2); shadow.addColorStop(0, 'rgba(154,204,211,.04)'); shadow.addColorStop(.46, 'rgba(0,3,13,.06)'); shadow.addColorStop(.8, 'rgba(0,3,12,.36)'); shadow.addColorStop(1, 'rgba(0,2,8,.88)'); ctx.fillStyle = shadow; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2); ctx.restore();
+      const shadow = ctx.createRadialGradient(cx - radius * .43, cy - radius * .35, radius * .15, cx + radius * .04, cy + radius * .06, radius * 1.2); shadow.addColorStop(0, 'rgba(154,204,211,.04)'); shadow.addColorStop(.46, 'rgba(0,3,13,.06)'); shadow.addColorStop(.8, 'rgba(0,3,12,.23)'); shadow.addColorStop(1, 'rgba(0,2,8,.72)'); ctx.fillStyle = shadow; ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2); ctx.restore();
       ctx.strokeStyle = 'rgba(127,198,215,.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.stroke();
       if (density > .02) { const gold = ctx.createRadialGradient(cx, cy, radius * .94, cx, cy, radius * 1.15); gold.addColorStop(0, 'rgba(198,144,55,0)'); gold.addColorStop(.3, 'rgba(227,181,85,' + density * .18 + ')'); gold.addColorStop(1, 'rgba(165,112,29,0)'); ctx.fillStyle = gold; ctx.fillRect(cx - radius * 1.15, cy - radius * 1.15, radius * 2.3, radius * 2.3); }
     }
     function star(x, y, r, color, alpha) { ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r * .23, y - r * .23); ctx.lineTo(x + r, y); ctx.lineTo(x + r * .23, y + r * .23); ctx.lineTo(x, y + r); ctx.lineTo(x - r * .23, y + r * .23); ctx.lineTo(x - r, y); ctx.lineTo(x - r * .23, y - r * .23); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1; }
-    function label(text, x, y, color, font = '10px ui-sans-serif,system-ui,sans-serif', priority = false) {
-      if (!text || !onScreen({ x, y }, 8)) return; ctx.font = font; const w = ctx.measureText(text).width; if (w > width - 24) return; x = clamp(x, 10, width - w - 10); y = clamp(y, 18, height - 12);
-      const box = { x: x - 5, y: y - 12, w: w + 10, h: 18 }; if (!priority && labelBoxes.some(b => box.x < b.x + b.w && box.x + box.w > b.x && box.y < b.y + b.h && box.y + box.h > b.y)) return;
-      labelBoxes.push(box); ctx.fillStyle = 'rgba(3,8,17,.56)'; ctx.fillRect(x - 4, y - 11, w + 8, 16); ctx.fillStyle = color; ctx.fillText(text, x, y);
+    function label(text, x, y, color, font = '11px ui-sans-serif,system-ui,sans-serif', priority = false) {
+      if (!text || !onScreen({ x, y }, 8)) return;
+      ctx.font = font; const w = ctx.measureText(text).width; if (w > width - 24) return;
+      const candidates = (priority ? [[x,y],[x,y+22],[x-w-20,y],[x,y-22]] : [[x,y]]).map(([a,b]) => ({x:clamp(a,10,width-w-10)-5,y:clamp(b,18,height-12)-12,w:w+10,h:18}));
+      const box = candidates.find(a => !labelBoxes.some(b => a.x < b.x+b.w && a.x+a.w > b.x && a.y < b.y+b.h && a.y+a.h > b.y));
+      if (!box) return;
+      labelBoxes.push(box); ctx.fillStyle = 'rgba(3,8,17,.82)'; ctx.fillRect(box.x,box.y,box.w,box.h); ctx.fillStyle = color; ctx.fillText(text,box.x+5,box.y+12);
+      return box;
     }
     function selected(item, value) { if (value == null) return false; return typeof value === 'object' ? item.id === value.id : String(item.id) === String(value); }
     function drawNodes(state, project) {
-      const nodes = state.nodes || [], labels = state.labels || [], allowLabels = state.layers?.labels !== false, budget = Math.floor(3 + (viewZoom - 1) * 7);
-      const nodeRows = nodes.filter(n => finitePoint(n) && n.visible !== false).map(node => ({ node, p: project(toVector(node)) })).filter(r => r.p.z > .045 && onScreen(r.p, 6)).sort((a, b) => Number(b.node.selected) - Number(a.node.selected) || b.p.z - a.p.z); let nodeLabels = 0;
-      if (state.layers?.nexuses !== false) for (const { node, p } of nodeRows) {
-        const focused = node.selected || selected(node, state.selected), r = focused ? 5.5 : 2.7; ctx.globalAlpha = .4 + p.z * .6; ctx.strokeStyle = focused ? '#fae1b1' : '#c79b6d'; ctx.fillStyle = '#eed1a1'; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.arc(p.x, p.y, r + 3.5, 0, TAU); ctx.stroke(); ctx.beginPath(); ctx.arc(p.x, p.y, r * .5, 0, TAU); ctx.fill(); ctx.globalAlpha = 1; hits.push({ x: p.x, y: p.y, item: node });
-        if (allowLabels && (focused || nodeLabels < budget)) { const before = labelBoxes.length; label(node.label || node.name || '', p.x + 10, p.y - 8, '#d8c4a7'); if (labelBoxes.length > before) nodeLabels++; }
+      const nodes = state.nodes || [], labels = state.labels || [], allowLabels = state.layers?.labels !== false, budget = Math.floor(5 + (viewZoom - 1) * 6), rings = [];
+      const nodeRows = nodes.filter(n => finitePoint(n) && n.visible !== false).map(node => ({ node, p: project(toVector(node)) })).filter(r => r.p.z > .045 && onScreen(r.p, 6)).sort((a,b) => Number(b.node.selected)-Number(a.node.selected) || b.p.z-a.p.z); let nodeLabels = 0;
+      if (state.layers?.nexuses !== false) for (const {node,p} of nodeRows) {
+        const focused = node.selected || selected(node,state.selected), spaced = focused || !rings.some(q => Math.hypot(q.x-p.x,q.y-p.y) < 16), r = focused ? 5.5 : 2.7;
+        ctx.globalAlpha = .45+p.z*.55; ctx.strokeStyle = focused ? '#fff0c7' : node.tone || '#c79b6d'; ctx.fillStyle = focused ? '#fff0c7' : node.tone || '#eed1a1'; ctx.lineWidth = focused ? 1.5 : 1;
+        if (spaced) { ctx.beginPath(); ctx.arc(p.x,p.y,r+3.5,0,TAU); ctx.stroke(); rings.push(p); }
+        ctx.beginPath(); ctx.arc(p.x,p.y,focused ? 2.8 : 1.6,0,TAU); ctx.fill(); ctx.globalAlpha = 1;
+        const hit = {x:p.x,y:p.y,item:node,radius:focused ? 14 : 9}; hits.push(hit);
+        if (allowLabels && (focused || spaced && nodeLabels < budget)) {
+          const box = label(node.label || node.name || '',p.x+10,p.y-8,'#ecdcc2',undefined,focused);
+          if (box) { hit.bounds=box; nodeLabels++; }
+        }
       }
-      // Rank after projection, so all enabled settlements and polities get a chance.
-      const geographicLabels = labels.filter(item => finitePoint(item) && item.visible !== false).map(item => ({ item, p: project(toVector(item)) })).filter(v => v.p.z > .25 && onScreen(v.p, 6)).sort((a, b) => Number(selected(b.item, state.selected)) - Number(selected(a.item, state.selected)) || b.p.z - a.p.z);
-      { let drawn = 0; for (const { item, p } of geographicLabels) { if (drawn >= budget + 2) break; const before = labelBoxes.length; label(item.name || item.label || '', p.x + 6, p.y - 5, '#a5b9c7', Math.min(12, 9 + viewZoom - 1) + 'px ui-sans-serif,system-ui,sans-serif'); if (labelBoxes.length > before) { hits.push({ x: p.x, y: p.y, item }); drawn++; } } }
+      // Geographic names have their own layer controls, separate from Nexus names.
+      const geographicLabels = labels.filter(item => finitePoint(item) && item.visible !== false).map(item => ({item,p:project(toVector(item))})).filter(v => v.p.z > .25 && onScreen(v.p,6)).sort((a,b) => Number(selected(b.item,state.selected))-Number(selected(a.item,state.selected)) || b.p.z-a.p.z);
+      let drawn = 0;
+      for (const {item,p} of geographicLabels) {
+        if (drawn >= budget+2) break;
+        const box = label(item.name || item.label || '',p.x+6,p.y-5,'#c4d9df',Math.min(13,11+viewZoom-1)+'px ui-sans-serif,system-ui,sans-serif');
+        if (box) { hits.push({x:p.x,y:p.y,item,bounds:box,radius:8}); drawn++; }
+      }
     }
     function starOrigin(starItem, fallbackIndex = 0) {
       const index = Number.isFinite(+starItem.star) ? +starItem.star : fallbackIndex, n = hash(starItem.id || starItem.name || index);
@@ -8206,7 +8259,8 @@ window.JCSGospelArt=Object.freeze({draw});
       if (line) lines.push(line); if (!lines.length) return;
       const w = Math.max(...lines.map(s => ctx.measureText(s).width)) + 12, h = lines.length * 13 + 7;
       const candidates = [[x + size / 2 + 7, y - h / 2], [x - w / 2, y + size / 2 + 5], [x - w - size / 2 - 7, y - h / 2], [x - w / 2, y - size / 2 - h - 5], [x + size / 2 + 50, y - h / 2], [x - w - size / 2 - 50, y - h / 2]].map(([a, b]) => ({ x: clamp(a, 8, width - w - 8), y: clamp(b, 8, height - h - 8), w, h }));
-      const box = candidates.find(a => !labelBoxes.some(b => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y)) || candidates[0];
+      const box = candidates.find(a => !labelBoxes.some(b => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y));
+      if (!box) return;
       labelBoxes.push(box); ctx.fillStyle = 'rgba(4,15,26,.58)'; ctx.fillRect(box.x, box.y, w, h); ctx.fillStyle = color; lines.forEach((s, i) => ctx.fillText(s, box.x + 6, box.y + 13 + i * 13));
       return box;
     }
@@ -8269,13 +8323,17 @@ window.JCSGospelArt=Object.freeze({draw});
     function draw() {
       if (!active || disposed || document.hidden) return;
       const state = getState() || {}, rawPosition = clamp(Number.isFinite(+state.position) ? +state.position : Number.isFinite(+state.year) ? +state.year : -4, -4, 2026), position = reduced.matches || state.animationsEnabled === false ? Math.floor(rawPosition) : rawPosition;
-      const signature = [position, state.selected?.id || state.selected, state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
+      const signature = [position, JSON.stringify(state.selected), state.selectedStar, state.layers?.stars, state.layers?.nexuses, state.layers?.labels, state.layers?.names, state.layers?.geography, state.animationsEnabled, state.started, state.mode, state.nodes?.length, state.labels?.map(l => l.id).join(','), state.stars?.length, state.caption?.text || state.caption || '', state.year, state.gospel?.enabled, state.gospel?.selectedId, state.gospel?.revision, state.gospel?.focus?.id, state.gospel?.focusWeight].join('|');
       if (!dirty && position === lastPosition && signature === lastSignature) return; dirty = false; lastPosition = position; lastSignature = signature;
       const gospelFocus = state.gospel?.enabled && finitePoint(state.gospel.focus) ? state.gospel.focus : null;
       const guided = camera(position, state.stars || []);
       if (gospelFocus) { const weight = ease(clamp(Number.isFinite(+state.gospel.focusWeight) ? +state.gospel.focusWeight : 1, 0, 1)), delta = ((+gospelFocus.lon - guided.lon) % 360 + 540) % 360 - 180; guided.lon += delta * weight; guided.lat = mix(guided.lat, clamp(+gospelFocus.lat, -75, 75), weight); }
       if (state.gospel?.enabled) { const approach = ease(clamp(1 - Math.abs(position - 33) / 7, 0, 1)); guided.zoom = Math.max(guided.zoom, 1 + approach * .95); }
-      currentCamera = manual ? { lon: yaw, lat: pitch } : guided; viewZoom = clamp(manual ? manualZoom : guided.zoom, 1, 3.5); radius = baseRadius * viewZoom; const project = projection(currentCamera); hits = []; labelBoxes = [];
+      currentCamera = manual ? { lon: yaw, lat: pitch } : guided; viewZoom = clamp(manual ? manualZoom : guided.zoom, 1, 3.5); radius = baseRadius * viewZoom;
+      // These dimensions position decorative prayer lights; they carry no geography.
+      const viewport = host.parentElement;
+      if (viewport) { const geometry = [cx,cy,radius].map(n => n.toFixed(2)); if (viewport.dataset.globeGeometry !== geometry.join(',')) { viewport.dataset.globeGeometry = geometry.join(','); for (const [i,key] of ['x','y','radius'].entries()) viewport.style.setProperty('--jcs-globe-'+key,geometry[i]+'px'); } }
+      const project = projection(currentCamera); hits = []; labelBoxes = [];
       ctx.clearRect(0, 0, width, height); drawSky(); drawGalaxies(rawPosition, state); if (layer.ring && haze) ctx.drawImage(haze, 0, 0, width, height); drawArchitecture();
       drawEarth(project, state); drawNodes(state, project); drawWatchers(state, project, position);
       drawGospel(state, project, rawPosition); captions(state, position);
@@ -8288,13 +8346,16 @@ window.JCSGospelArt=Object.freeze({draw});
     function gospelChange() { const selectedId = getState()?.gospel?.selectedId || ''; if (selectedId !== lastGospelSelected) { manual = false; resume.hidden = true; lastGospelSelected = selectedId; } invalidate(); }
     function takeManual() { if (!manual) { yaw = currentCamera.lon; pitch = currentCamera.lat; manualZoom = viewZoom; } manual = true; resume.hidden = false; }
     function changeZoom(next) { takeManual(); manualZoom = clamp(next, 1, 3.5); invalidate(); }
+    function hitAt(x,y) {
+      return hits.map(h => ({...h,distance:Math.hypot(h.x-x,h.y-y)})).filter(h => h.distance < (h.radius || 18) || h.bounds && x >= h.bounds.x && x <= h.bounds.x+h.bounds.w && y >= h.bounds.y && y <= h.bounds.y+h.bounds.h).sort((a,b) => (b.priority || 0)-(a.priority || 0) || a.distance-b.distance)[0];
+    }
     function pointerDown(e) {
       if (e.button !== 0 && e.pointerType !== 'touch') return; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); canvas.setPointerCapture(e.pointerId);
       if (pointers.size === 2) { takeManual(); const [a, b] = Array.from(pointers.values()); pinch = { distance: Math.max(1, Math.hypot(a.x - b.x, a.y - b.y)), zoom: viewZoom, x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, lon: yaw, lat: pitch }; drag = null; }
       else if (pointers.size === 1) drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lon: currentCamera.lon, lat: currentCamera.lat, moved: false };
     }
     function pointerMove(e) {
-      if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (!pointers.has(e.pointerId)) { const rect=canvas.getBoundingClientRect(),hit=hitAt(e.clientX-rect.left,e.clientY-rect.top); canvas.style.cursor=hit?'pointer':'grab'; canvas.title=hit?(hit.item.description || hit.item.label || hit.item.name || ''):''; return; } pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       if (pinch && pointers.size >= 2) { const [a, b] = Array.from(pointers.values()); manualZoom = clamp(pinch.zoom * Math.hypot(a.x - b.x, a.y - b.y) / pinch.distance, 1, 3.5); yaw = pinch.lon - ((a.x + b.x) / 2 - pinch.x) / radius * 56; pitch = clamp(pinch.lat + ((a.y + b.y) / 2 - pinch.y) / radius * 56, -78, 78); invalidate(); return; }
       if (!drag || drag.id !== e.pointerId) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.hypot(dx, dy) < 4 && !drag.moved) return; drag.moved = true; takeManual(); yaw = drag.lon - dx / radius * 56; pitch = clamp(drag.lat + dy / radius * 56, -78, 78); invalidate();
     }
@@ -8302,7 +8363,7 @@ window.JCSGospelArt=Object.freeze({draw});
       const wasPinch = !!pinch; pointers.delete(e.pointerId); if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
       if (wasPinch) { pinch = null; const remaining = Array.from(pointers.entries())[0]; drag = remaining ? { id: remaining[0], x: remaining[1].x, y: remaining[1].y, lon: yaw, lat: pitch, moved: true } : null; return; }
       if (!drag || drag.id !== e.pointerId) return;
-      if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hits.map(h => ({ ...h, distance: Math.hypot(h.x - x, h.y - y) })).filter(h => h.distance < (h.radius || 18) || h.bounds && x >= h.bounds.x && x <= h.bounds.x + h.bounds.w && y >= h.bounds.y && y <= h.bounds.y + h.bounds.h).sort((a, b) => (b.priority || 0) - (a.priority || 0) || a.distance - b.distance)[0]; if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null;
+      if (!drag.moved && e.type !== 'pointercancel') { const rect = canvas.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top; const hit = hitAt(x,y); if (hit && typeof options.onSelect === 'function') options.onSelect(hit.item); } drag = null;
     }
     function wheel(e) { e.preventDefault(); changeZoom(viewZoom * Math.exp(-clamp(e.deltaY, -240, 240) * .0025)); }
     function keyDown(e) {
@@ -8737,6 +8798,73 @@ window.JCSGospelArt=Object.freeze({draw});
   });
 })();
 </script>
-<script src="./js/jcs-prayer-descent.js?v=20261008b"></script>
+<script src="./js/jcs-prayer-descent.js?v=20261008c"></script>
+<script id="jcs-map-stage-20261008-js">
+/* Keep the globe, its controls and timeline together; evidence remains accessible. */
+(() => {
+  'use strict';
+  const frame = document.getElementById('jcs-map-focus-frame');
+  const top = document.getElementById('jcs-map-focus-top');
+  const options = document.getElementById('jcs-map-focus-options');
+  const narration = document.getElementById('jcs-map-focus-narration');
+  const player = document.getElementById('jcs-watchers-player');
+  const panel = document.getElementById('analysis-panel');
+  if (!frame || !top || !options || !panel) return;
+
+  if (narration && player) {
+    const audio = document.createElement('details');
+    audio.id = 'jcs-map-audio';
+    audio.className = 'jcs-focus-disclosure';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Audio & music';
+    audio.append(summary, player);
+    narration.append(audio);
+  }
+
+  const evidence = document.createElement('details');
+  evidence.id = 'jcs-map-evidence';
+  const summary = document.createElement('summary');
+  summary.textContent = 'Explore places, selected evidence & sources';
+  panel.before(evidence);
+  evidence.append(summary, panel);
+  const find = document.createElement('button');
+  find.type = 'button';
+  find.id = 'jcs-evidence-button';
+  find.textContent = 'Find a place / evidence';
+  find.setAttribute('aria-controls', evidence.id);
+  find.setAttribute('aria-expanded', 'false');
+  find.addEventListener('click', () => {
+    if (document.body.classList.contains('jcs-map-expanded')) document.getElementById('jcs-map-expand')?.click();
+    evidence.open = true;
+    const target = document.getElementById('atlas-country');
+    (target && target.offsetParent ? target : summary).focus();
+  });
+  evidence.addEventListener('toggle', () => find.setAttribute('aria-expanded', String(evidence.open)));
+  options.insertBefore(find, document.getElementById('jcs-globe-controls-mount'));
+
+  // Expanded controls stay in normal flow. Only the drawing rectangle resizes.
+  let queued = false;
+  function fit() {
+    queued = false;
+    const timeline = document.getElementById(document.body.dataset.timeline === 'full' ? 'jcs-chronology-control' : 'jcs-history-control');
+    const screen = window.visualViewport?.height || window.innerHeight;
+    const minimum = window.innerWidth <= 700 ? 300 : 320;
+    const height = Math.max(minimum, Math.floor(screen - top.getBoundingClientRect().height - (timeline?.getBoundingClientRect().height || 90) - 24));
+    const value = height + 'px';
+    if (frame.style.getPropertyValue('--jcs-stage-height') !== value) frame.style.setProperty('--jcs-stage-height', value);
+  }
+  function schedule() { if (!queued) { queued = true; requestAnimationFrame(fit); } }
+  const observer = new ResizeObserver(schedule);
+  observer.observe(top);
+  for (const id of ['jcs-chronology-control', 'jcs-history-control']) {
+    const timeline = document.getElementById(id);
+    if (timeline) observer.observe(timeline);
+  }
+  window.addEventListener('resize', schedule);
+  window.visualViewport?.addEventListener('resize', schedule);
+  document.addEventListener('jcs:map-projection-change', schedule);
+  fit();
+})();
+</script>
 </body>
 </html>
