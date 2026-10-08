@@ -339,7 +339,9 @@
     xamanHasRequest = true;
     if (xamanSignTitle) xamanSignTitle.textContent = labels[purpose] || 'Review in Xaman';
     const instruction = $('xamanCodeInstruction');
-    if (instruction) instruction.textContent = 'Match this code with the verification memo in Xaman, then check the amounts before signing.';
+    if (instruction) instruction.textContent = purpose === 'cancel'
+      ? 'Match this code and the order sequence in Xaman before signing.'
+      : 'Match this code with the verification memo in Xaman, then check the amounts before signing.';
     if (xamanClosePanel) { xamanClosePanel.textContent = 'Hide'; xamanClosePanel.disabled = false; }
     if (xamanReopenPanel) xamanReopenPanel.textContent = 'View Xaman request';
     if (xamanSignHelp) xamanSignHelp.textContent = 'Hiding this window keeps the request active. Complete or reject it in Xaman, then return to this page.';
@@ -352,6 +354,8 @@
       if (transaction.TransactionType === 'OfferCreate' && (purpose === 'swap' || purpose === 'offer')) {
         if (typeof transaction.TakerGets === 'string') rows.push(['Maximum XRP offered', exactXrp(transaction.TakerGets)], ['JCS requested', String(transaction.TakerPays?.value || '') + ' JCS']);
         else rows.push(['JCS offered', String(transaction.TakerGets?.value || '') + ' JCS'], ['Minimum XRP requested', exactXrp(transaction.TakerPays)]);
+      } else if (transaction.TransactionType === 'OfferCancel') {
+        rows.push(['Order sequence to cancel', String(transaction.OfferSequence)]);
       } else if (transaction.TransactionType === 'AMMDeposit') {
         rows.push(['Maximum XRP', exactXrp(transaction.Amount)], ['Maximum JCS', String(transaction.Amount2?.value || '') + ' JCS']);
       } else if (transaction.TransactionType === 'AMMWithdraw') rows.push(['LP tokens to redeem', String(transaction.LPTokenIn?.value || '')]);
