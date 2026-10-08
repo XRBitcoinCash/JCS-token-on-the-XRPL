@@ -1755,10 +1755,10 @@
           ? 'Enter an amount to load a live AMM or order-book estimate.'
           : insufficientJcs
             ? sellBalanceMessage
-          : price > 0
-            ? 'Live reference: ' + formatTradeNumber(price, 9) +
-              ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
-            : 'Refresh the live quote before submitting the request.';
+            : price > 0
+              ? 'Live reference: ' + formatTradeNumber(price, 9) +
+                ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
+              : 'Refresh the live quote before submitting the request.';
     }
   }
 
@@ -1778,10 +1778,13 @@
   if (amountEl) amountEl.addEventListener('input', () => {
     recalcTotals();
     const exceedsBalance = sellExceedsBalance(sideEl?.value, Number(amountEl.value));
-    setStatus(tradeMsg, exceedsBalance
-      ? sellBalanceMessage
-      : 'Amount changed. Refresh the live quote or review a new request in Xaman.',
-    exceedsBalance ? 'err' : undefined);
+    setStatus(
+      tradeMsg,
+      exceedsBalance
+        ? sellBalanceMessage
+        : 'Amount changed. Refresh the live quote or review a new request in Xaman.',
+      exceedsBalance ? 'err' : undefined
+    );
   });
   if (priceEl) priceEl.addEventListener('input', recalcTotals);
 
