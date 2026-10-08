@@ -1772,9 +1772,9 @@
             : insufficientJcs
               ? sellBalanceMessage
               : price > 0
-              ? 'Live reference: ' + formatTradeNumber(price, 9) +
-                ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
-              : 'Refresh the live quote before submitting the request.';
+                ? 'Live reference: ' + formatTradeNumber(price, 9) +
+                  ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
+                : 'Refresh the live quote before submitting the request.';
     }
   }
 
@@ -1856,8 +1856,9 @@
         );
         if (trustline) {
           const rawBalance = trustline.balance;
-          const balance = (typeof rawBalance === 'string' && rawBalance.trim() !== '') ||
-            typeof rawBalance === 'number' ? Number(rawBalance) : NaN;
+          const hasBalance = (typeof rawBalance === 'string' && rawBalance.trim() !== '') ||
+            typeof rawBalance === 'number';
+          const balance = hasBalance ? Number(rawBalance) : NaN;
           if (Number.isFinite(balance)) {
             jcs = Math.max(0, balance);
             jcsKnown = true;
