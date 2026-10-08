@@ -13263,7 +13263,8 @@ try {
 
     if (marketBtn) marketBtn.disabled = marketTradePending || !currentAccount || !HAS_TRUSTLINE ||
       !(amount > 0) || cannotSell;
-    if (placeOfferBtn) placeOfferBtn.disabled = !currentAccount || !HAS_TRUSTLINE || cannotSell;
+    if (placeOfferBtn) placeOfferBtn.disabled = !currentAccount || !HAS_TRUSTLINE ||
+      !(amount > 0) || !(price > 0) || cannotSell;
     if (amount > 0 && tradeMsg?.dataset.confirmed) {
       delete tradeMsg.dataset.confirmed;
       setStatus(tradeMsg, 'New amount selected. Refresh the quote and review a new request in Xaman.', 'ok');
