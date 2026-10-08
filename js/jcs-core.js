@@ -858,13 +858,21 @@
   let HAS_TRUSTLINE = false;
   let APP_INITIALIZED = false;
   let signingRequestActive = false;
-  const BAL = { xrp: 0, jcs: 0 };
+  const BAL = { xrp: 0, jcs: 0, xrpKnown: false, jcsKnown: false };
+  let balanceReadVersion = 0;
+  let balanceAppliedVersion = 0;
+
+  function sellBalanceUnavailable(side) {
+    return side === 'sell' && HAS_TRUSTLINE && !BAL.jcsKnown;
+  }
 
   function sellExceedsBalance(side, amount) {
-    return side === 'sell' && HAS_TRUSTLINE &&
+    return side === 'sell' && HAS_TRUSTLINE && BAL.jcsKnown &&
       Number.isFinite(amount) && amount > BAL.jcs + 1e-12;
   }
 
+  const sellBalanceUnavailableMessage =
+    'JCS balance unavailable. Refresh the live quote to retry the ledger read.';
   const sellBalanceMessage =
     'The shown JCS balance is lower than this sell amount. Reduce the amount or retry after the balance refreshes.';
 
@@ -911,11 +919,13 @@
       setTrustBtn.disabled = !connected || HAS_TRUSTLINE;
     }
 
-    if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade ||
-      sellExceedsBalance($('side')?.value, Number($('amount')?.value));
+    const tradeSide = $('side')?.value;
     const marketAmount = Number($('amount')?.value);
+    if ($('placeOfferBtn')) $('placeOfferBtn').disabled = !allowTrade ||
+      sellBalanceUnavailable(tradeSide) || sellExceedsBalance(tradeSide, marketAmount);
     if ($('marketTradeBtn')) $('marketTradeBtn').disabled = !allowTrade || marketTradePending ||
-      !(marketAmount > 0) || sellExceedsBalance($('side')?.value, marketAmount);
+      !(marketAmount > 0) || sellBalanceUnavailable(tradeSide) ||
+      sellExceedsBalance(tradeSide, marketAmount);
     if ($('btnHealthScan')) $('btnHealthScan').disabled = !connected;
 
     setReadyStep(walletStepConnect, connected);
@@ -1011,6 +1021,7 @@
       walletIdentityVersion++;
       HAS_TRUSTLINE = false;
       BAL.xrp = BAL.jcs = 0;
+      BAL.xrpKnown = BAL.jcsKnown = false;
       if (tradeXrpBalance) tradeXrpBalance.textContent = '—';
       if (tradeJcsBalance) tradeJcsBalance.textContent = '—';
       setStatus(trustlineMsg, 'Checking JCS trustline…');
@@ -1043,6 +1054,7 @@
     HAS_TRUSTLINE = false;
     BAL.xrp = 0;
     BAL.jcs = 0;
+    BAL.xrpKnown = BAL.jcsKnown = false;
 
     setStatus(walletStatus, 'Status: Not connected');
     setStatus(trustlineMsg, 'Connect Xaman to check the trustline.');
@@ -1703,9 +1715,11 @@
     const price = Number(priceEl && priceEl.value) || 0;
     const total = amount * price;
 
+    const balanceUnavailable = amount > 0 && sellBalanceUnavailable(side);
     const insufficientJcs = sellExceedsBalance(side, amount);
+    const cannotSell = balanceUnavailable || insufficientJcs;
     if (totalXrpEl) {
-      totalXrpEl.textContent = insufficientJcs
+      totalXrpEl.textContent = cannotSell
         ? '— XRP'
         : formatEstimatedXrp(Number.isFinite(total) ? total : 0, true);
     }
@@ -1736,15 +1750,15 @@
       }
       if (tradeReceiveValue) {
         tradeReceiveValue.textContent =
-          amount > 0 && price > 0 && !insufficientJcs
+          amount > 0 && price > 0 && !cannotSell
             ? formatEstimatedXrp(total)
             : '— XRP';
       }
     }
 
     if (marketBtn) marketBtn.disabled = marketTradePending || !currentAccount || !HAS_TRUSTLINE ||
-      !(amount > 0) || insufficientJcs;
-    if (placeOfferBtn) placeOfferBtn.disabled = !currentAccount || !HAS_TRUSTLINE || insufficientJcs;
+      !(amount > 0) || cannotSell;
+    if (placeOfferBtn) placeOfferBtn.disabled = !currentAccount || !HAS_TRUSTLINE || cannotSell;
     if (amount > 0 && tradeMsg?.dataset.confirmed) {
       delete tradeMsg.dataset.confirmed;
       setStatus(tradeMsg, 'New amount selected. Refresh the quote and review a new request in Xaman.', 'ok');
@@ -1753,12 +1767,14 @@
       tradeQuoteNote.textContent =
         amount <= 0
           ? 'Enter an amount to load a live AMM or order-book estimate.'
-          : insufficientJcs
-            ? sellBalanceMessage
-            : price > 0
-              ? 'Live reference: ' + formatTradeNumber(price, 9) +
-                ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
-              : 'Refresh the live quote before submitting the request.';
+          : balanceUnavailable
+            ? sellBalanceUnavailableMessage
+            : insufficientJcs
+              ? sellBalanceMessage
+              : price > 0
+                ? 'Live reference: ' + formatTradeNumber(price, 9) +
+                  ' XRP per JCS. The quote is rechecked before the Xaman request is created.'
+                : 'Refresh the live quote before submitting the request.';
     }
   }
 
@@ -1777,13 +1793,16 @@
 
   if (amountEl) amountEl.addEventListener('input', () => {
     recalcTotals();
+    const balanceUnavailable = Number(amountEl.value) > 0 && sellBalanceUnavailable(sideEl?.value);
     const exceedsBalance = sellExceedsBalance(sideEl?.value, Number(amountEl.value));
     setStatus(
       tradeMsg,
-      exceedsBalance
-        ? sellBalanceMessage
-        : 'Amount changed. Refresh the live quote or review a new request in Xaman.',
-      exceedsBalance ? 'err' : undefined
+      balanceUnavailable
+        ? sellBalanceUnavailableMessage
+        : exceedsBalance
+          ? sellBalanceMessage
+          : 'Amount changed. Refresh the live quote or review a new request in Xaman.',
+      balanceUnavailable || exceedsBalance ? 'err' : undefined
     );
   });
   if (priceEl) priceEl.addEventListener('input', recalcTotals);
@@ -1791,9 +1810,11 @@
   async function fetchBalances() {
     const account = currentAccount;
     const identityVersion = walletIdentityVersion;
+    const requestVersion = ++balanceReadVersion;
     if (!account) {
-      BAL.xrp = 0;
-      BAL.jcs = 0;
+      balanceAppliedVersion = requestVersion;
+      BAL.xrp = BAL.jcs = 0;
+      BAL.xrpKnown = BAL.jcsKnown = false;
       if (tradeXrpBalance) tradeXrpBalance.textContent = '—';
       if (tradeJcsBalance) tradeJcsBalance.textContent = '—';
       return BAL;
@@ -1801,9 +1822,19 @@
 
     let xrp = 0;
     let jcs = 0;
+    let xrpKnown = false;
+    let jcsKnown = false;
     try {
       const info = await call('account_info', { account });
-      xrp = Number(info.account_data.Balance || 0) / XRP_TO_DROPS;
+      const rawDrops = info?.account_data?.Balance;
+      const drops = typeof rawDrops === 'string' && /^\d+$/.test(rawDrops)
+        ? Number(rawDrops)
+        : typeof rawDrops === 'number' ? rawDrops : NaN;
+      if (info?.account_data?.Account === account &&
+          Number.isSafeInteger(drops) && drops >= 0) {
+        xrp = drops / XRP_TO_DROPS;
+        xrpKnown = true;
+      }
     } catch {}
 
     try {
@@ -1817,28 +1848,42 @@
         }]
       });
 
-      const lines = (r.result && r.result.lines) || [];
-      const trustline = lines.find((line) =>
-        line.account === ISSUER &&
-        normalizeHexCurrency(line.currency) === CURRENCY_HEX_NORM
-      );
-
-      jcs = trustline
-        ? Math.max(0, Number(trustline.balance || 0))
-        : 0;
+      const result = r?.result;
+      if (result?.account === account && Array.isArray(result.lines)) {
+        const trustline = result.lines.find((line) =>
+          line.account === ISSUER &&
+          normalizeHexCurrency(line.currency) === CURRENCY_HEX_NORM
+        );
+        if (trustline) {
+          const rawBalance = trustline.balance;
+          const hasBalance = (typeof rawBalance === 'string' && rawBalance.trim() !== '') ||
+            typeof rawBalance === 'number';
+          const balance = hasBalance ? Number(rawBalance) : NaN;
+          if (Number.isFinite(balance)) {
+            jcs = Math.max(0, balance);
+            jcsKnown = true;
+          }
+        } else if (!result.marker) {
+          jcsKnown = true;
+        }
+      }
     } catch {}
 
-    // A late response from another Xaman identity must not set this wallet's
-    // displayed balances or enable a sell estimate.
-    if (currentAccount !== account || walletIdentityVersion !== identityVersion) return BAL;
+    // Ignore an old-wallet response or an older request that completed after
+    // a newer balance read. A read failure must not appear as a real zero.
+    if (currentAccount !== account || walletIdentityVersion !== identityVersion ||
+        requestVersion < balanceAppliedVersion) return BAL;
+    balanceAppliedVersion = requestVersion;
     BAL.xrp = xrp;
     BAL.jcs = jcs;
+    BAL.xrpKnown = xrpKnown;
+    BAL.jcsKnown = jcsKnown;
 
     if (tradeXrpBalance) {
-      tradeXrpBalance.textContent = formatTradeNumber(BAL.xrp, 6) + ' XRP';
+      tradeXrpBalance.textContent = xrpKnown ? formatTradeNumber(xrp, 6) + ' XRP' : 'Unavailable';
     }
     if (tradeJcsBalance) {
-      tradeJcsBalance.textContent = formatTradeNumber(BAL.jcs, 6) + ' JCS';
+      tradeJcsBalance.textContent = jcsKnown ? formatTradeNumber(jcs, 6) + ' JCS' : 'Unavailable';
     }
     updateWalletButtons();
     recalcTotals();
@@ -1869,6 +1914,10 @@
           const identityVersion = walletIdentityVersion;
           await fetchBalances();
           if (currentAccount !== account || walletIdentityVersion !== identityVersion || sideEl?.value !== 'sell') return;
+          if (!BAL.jcsKnown) {
+            setStatus(tradeMsg, sellBalanceUnavailableMessage, 'err');
+            return;
+          }
           const amount = BAL.jcs * (pct / 100);
 
           if (amountEl) {
@@ -2173,6 +2222,17 @@
       return null;
     }
 
+    if (side === 'sell') {
+      const account = currentAccount;
+      const identityVersion = walletIdentityVersion;
+      await fetchBalances();
+      if (currentAccount !== account || walletIdentityVersion !== identityVersion ||
+          sideEl.value !== side || Number(amountEl.value) !== amount) return null;
+      if (sellBalanceUnavailable(side)) {
+        setStatus(tradeMsg, sellBalanceUnavailableMessage, 'err');
+        return null;
+      }
+    }
     if (sellExceedsBalance(side, amount)) {
       if (marketBtn) marketBtn.disabled = true;
       setStatus(tradeMsg, sellBalanceMessage, 'err');
@@ -2184,9 +2244,10 @@
     try {
       const price = await getMarketPrice(side);
       if (marketTradePending || sideEl.value !== side || Number(amountEl.value) !== amount) return null;
-      if (sellExceedsBalance(side, amount)) {
+      if (sellBalanceUnavailable(side) || sellExceedsBalance(side, amount)) {
         if (marketBtn) marketBtn.disabled = true;
-        setStatus(tradeMsg, sellBalanceMessage, 'err');
+        setStatus(tradeMsg, sellBalanceUnavailable(side)
+          ? sellBalanceUnavailableMessage : sellBalanceMessage, 'err');
         return null;
       }
       if (!price || price <= 0) throw new Error('No live market price is available.');
@@ -2250,6 +2311,7 @@
               Number(priceEl.value) !== px) {
             throw new Error('Wallet or limit details changed. Review the order again.');
           }
+          if (!BAL.jcsKnown) throw new Error('The connected wallet JCS balance could not be verified. Retry after the ledger reconnects.');
           if (BAL.jcs + 1e-12 < amt) {
             throw new Error('The connected wallet does not hold enough JCS.');
           }
@@ -2383,6 +2445,7 @@
           };
         } else {
           await fetchBalances();
+          if (!BAL.jcsKnown) throw new Error('The connected wallet JCS balance could not be verified. Retry after the ledger reconnects.');
           if (BAL.jcs + 1e-12 < amt) {
             throw new Error('The connected wallet does not hold enough JCS.');
           }
