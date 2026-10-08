@@ -154,6 +154,7 @@
     reviewVersion++;
     review = null; byId('jcsLiquidityReview').hidden = true;
     byId('jcsLiquidityAccept').checked = false; byId('jcsLiquiditySign').disabled = true;
+    status(snapshot?.wallet ? 'Choose an amount, then preview it against the latest pool and wallet balances.' : 'Connect Xaman above to add or withdraw liquidity.');
   }
   function setBusy(value) {
     loading = value;
