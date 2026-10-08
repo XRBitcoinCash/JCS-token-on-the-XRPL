@@ -9559,9 +9559,9 @@ Your browser does not support the public-domain film stream.
 <p class="muted" style="margin-top:10px;">Reference values describe available data; they are not a guaranteed trade price.</p>
 <section aria-label="JCS market snapshot" class="home-market-strip bottom-market-strip">
 <article class="market-item">
-<span>JCS / XRP spot reference</span>
+<span>JCS / XRP book reference</span>
 <strong id="homeSpotState">—</strong>
-<small>Derived from current public XRPL liquidity</small>
+<small>Indicative book midpoint or best side, not a trade quote</small>
 </article>
 <article class="market-item">
 <span>AMM reference</span>
@@ -9569,9 +9569,9 @@ Your browser does not support the public-domain film stream.
 <small>Reserve ratio is not a guaranteed execution price</small>
 </article>
 <article class="market-item">
-<span>Visible spread</span>
+<span>Book spread</span>
 <strong id="homeSpreadState">—</strong>
-<small>Only available when both funded book sides exist</small>
+<small>Midpoint-based; requires both funded book sides</small>
 </article>
 <article class="market-item">
 <span>Wallet JCS balance</span>
@@ -14498,10 +14498,12 @@ try {
       const reserves = ammResult?.validated === true && Number(ammResult.ledger_index) === Number(ledInfo.index)
         ? readJcsAmmReserves(ammResult.amm) : null;
       const ammPx = reserves ? reserves.reserveXrp / reserves.reserveJcs : null;
-      const spread = bestAsk && bestBid && bestBid <= bestAsk ? ((bestAsk - bestBid) / bestAsk) * 100 : null;
-      if (spotEl) spotEl.textContent = 'Order book: ' + formatJcsPrice(spot) + ' XRP / JCS';
+      const spread = bestAsk && bestBid && bestBid <= bestAsk
+        ? ((bestAsk - bestBid) / ((bestAsk + bestBid) / 2)) * 100 : null;
+      const bookLabel = bestAsk && bestBid ? 'Book midpoint' : bestAsk ? 'Best funded ask' : bestBid ? 'Best funded bid' : 'Order book unavailable';
+      if (spotEl) spotEl.textContent = spot ? bookLabel + ': ' + formatJcsPrice(spot) + ' XRP / JCS' : 'Order book unavailable';
       if (ammEl) ammEl.textContent = ammPx ? formatJcsPrice(ammPx) + ' XRP / JCS' : 'Pool price unavailable';
-      if (spreadEl) spreadEl.textContent = 'Buy/sell price gap: ' + (spread != null ? spread.toFixed(2) + '%' : '—');
+      if (spreadEl) spreadEl.textContent = 'Book midpoint spread: ' + (spread != null ? spread.toFixed(1) + '%' : '—');
       if (ledMiniEl) ledMiniEl.textContent = 'Verified ledger #' + ledInfo.index;
       if (reserves) window.dispatchEvent(new CustomEvent('jcs:market-snapshot', { detail: {
         ledgerIndex: Number(ledInfo.index), ledgerHash: ledInfo.hash, validated: true,

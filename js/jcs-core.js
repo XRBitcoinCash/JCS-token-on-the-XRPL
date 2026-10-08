@@ -2994,10 +2994,12 @@
       const reserves = ammResult?.validated === true && Number(ammResult.ledger_index) === Number(ledInfo.index)
         ? readJcsAmmReserves(ammResult.amm) : null;
       const ammPx = reserves ? reserves.reserveXrp / reserves.reserveJcs : null;
-      const spread = bestAsk && bestBid && bestBid <= bestAsk ? ((bestAsk - bestBid) / bestAsk) * 100 : null;
-      if (spotEl) spotEl.textContent = 'Order book: ' + formatJcsPrice(spot) + ' XRP / JCS';
+      const spread = bestAsk && bestBid && bestBid <= bestAsk
+        ? ((bestAsk - bestBid) / ((bestAsk + bestBid) / 2)) * 100 : null;
+      const bookLabel = bestAsk && bestBid ? 'Book midpoint' : bestAsk ? 'Best funded ask' : bestBid ? 'Best funded bid' : 'Order book unavailable';
+      if (spotEl) spotEl.textContent = spot ? bookLabel + ': ' + formatJcsPrice(spot) + ' XRP / JCS' : 'Order book unavailable';
       if (ammEl) ammEl.textContent = ammPx ? formatJcsPrice(ammPx) + ' XRP / JCS' : 'Pool price unavailable';
-      if (spreadEl) spreadEl.textContent = 'Buy/sell price gap: ' + (spread != null ? spread.toFixed(2) + '%' : '—');
+      if (spreadEl) spreadEl.textContent = 'Book midpoint spread: ' + (spread != null ? spread.toFixed(1) + '%' : '—');
       if (ledMiniEl) ledMiniEl.textContent = 'Verified ledger #' + ledInfo.index;
       if (reserves) window.dispatchEvent(new CustomEvent('jcs:market-snapshot', { detail: {
         ledgerIndex: Number(ledInfo.index), ledgerHash: ledInfo.hash, validated: true,
