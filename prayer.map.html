@@ -2900,7 +2900,7 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:100%!importa
 @media(max-width:480px){.jcs-ambient-radio{padding:10px}.jcs-ambient-heading>span:last-child{width:100%;margin-left:27px}.jcs-ambient-actions{gap:6px}}
 
 </style>
-<link rel="stylesheet" href="./css/jcs-prayer-descent.css?v=20261008">
+<link rel="stylesheet" href="./css/jcs-prayer-descent.css?v=20261008b">
 </head>
 
 <body class="jcs-exchange-shell jcs-recent-visible" id="top" lang="en">
@@ -5046,6 +5046,34 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:100%!importa
       };
     }
 
+    function mintedIdFromMeta(meta) {
+      const direct = String(meta.nftoken_id || meta.NFTokenID || "").toUpperCase();
+      if (HASH_256.test(direct)) return direct;
+      const nodes = Array.isArray(meta.AffectedNodes) ? meta.AffectedNodes : [];
+      const previous = new Set();
+      const final = [];
+      nodes.forEach(function (item) {
+        const created = item && item.CreatedNode;
+        const modified = item && item.ModifiedNode;
+        const node = created || modified;
+        if (!node || node.LedgerEntryType !== "NFTokenPage") return;
+        // A page relink can modify FinalFields without changing its NFTs.
+        if (modified && !Array.isArray(modified.PreviousFields && modified.PreviousFields.NFTokens)) return;
+        const oldTokens = modified ? modified.PreviousFields.NFTokens : [];
+        const newTokens = created ? created.NewFields && created.NewFields.NFTokens : modified.FinalFields && modified.FinalFields.NFTokens;
+        oldTokens.forEach(function (entry) {
+          const id = String(entry && entry.NFToken && entry.NFToken.NFTokenID || "").toUpperCase();
+          if (HASH_256.test(id)) previous.add(id);
+        });
+        (Array.isArray(newTokens) ? newTokens : []).forEach(function (entry) {
+          const id = String(entry && entry.NFToken && entry.NFToken.NFTokenID || "").toUpperCase();
+          if (HASH_256.test(id)) final.push(id);
+        });
+      });
+      const added = Array.from(new Set(final.filter(function (id) { return !previous.has(id); })));
+      return added.length === 1 ? added[0] : "";
+    }
+
     function validPrayerMint(result, expectedHash, expectedId, expectedAccount) {
       const normalized = normalizeTxResult(result);
       const tx = normalized.tx;
@@ -5054,15 +5082,9 @@ body.jcs-map-expanded #jcs-map-focus-frame #jcs-map-viewport{height:100%!importa
       if (transactionResult !== "tesSUCCESS") return false;
       if (Number(tx.NFTokenTaxon) !== NFT_TAXON) return false;
       if (expectedAccount && tx.Account !== expectedAccount) return false;
-      if (normalized.hash && normalized.hash !== expectedHash) return false;
-      const returnedId = String(
-        normalized.meta.nftoken_id ||
-        normalized.meta.NFTokenID ||
-        result && result.nftoken_id ||
-        ""
-      ).toUpperCase();
-      if (returnedId && expectedId && returnedId !== expectedId) return false;
-      return true;
+      if (normalized.hash !== expectedHash || !HASH_256.test(expectedId)) return false;
+      const returnedId = mintedIdFromMeta(normalized.meta) || String(result && result.nftoken_id || "").toUpperCase();
+      return returnedId === expectedId;
     }
 
     async function verifyNewClaims(posts, transport) {
@@ -8715,6 +8737,6 @@ window.JCSGospelArt=Object.freeze({draw});
   });
 })();
 </script>
-<script src="./js/jcs-prayer-descent.js?v=20261008"></script>
+<script src="./js/jcs-prayer-descent.js?v=20261008b"></script>
 </body>
 </html>
