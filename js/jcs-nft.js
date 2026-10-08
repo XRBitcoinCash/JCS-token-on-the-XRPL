@@ -7,7 +7,7 @@
   const BACKEND_URL = 'https://xrbitcoincash-github-io.onrender.com';
   const RECEIPT_ROUTE = '/api/jcs-receipts-v1';
   const RECEIPT_RELEASE = 'jcs-nft-render-v5';
-  const RECEIPT_NOTICE = 'Transaction proof only. Not liquidity or LP tokens. Not for resale.';
+  const RECEIPT_NOTICE = 'Personal historical transaction record only. This NFT holds no JCS or XRP and cannot be redeemed for either asset, LP tokens, pool funds, or withdrawal rights. Not for resale.';
   const DISPLAY_METADATA = Object.freeze({ schema: 'jcs-receipt-display-v1', name: 'JCS Transaction Receipt',
     description: 'A personal record of a validated JCS/XRP transaction. The source transaction and full receipt details are recorded in the NFT mint transaction memo. Historical receipt only; not a claim to pool funds, a spiritual reward, or an investment guarantee.',
     image: 'https://jesuschristsavestoken.com/jcs-logo.png', network: NETWORK, jcs_issuer: ISSUER, asset: 'JCS/XRP' });
@@ -148,7 +148,7 @@
     <p id="jcsReceiptStatus" role="status" aria-live="polite"></p><a id="jcsReceiptHash" class="jcs-nft-id" target="_blank" rel="noopener noreferrer" hidden></a>
     <p class="jcs-tool-small" id="jcsReceiptMeaning">${RECEIPT_NOTICE} Minting is a separate optional transaction with its own network fee.</p>
     <div class="jcs-nft-actions"><button type="button" class="btn primary" id="jcsReceiptMint" aria-describedby="jcsReceiptStatus" disabled>Mint receipt NFT</button><button type="button" class="btn" id="jcsReceiptDownload" aria-describedby="jcsReceiptStatus" disabled>Download receipt JSON</button><button type="button" class="btn" id="jcsReceiptOpenNfts">Open My NFTs</button></div>
-    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">${RECEIPT_NOTICE} The JCS / XRP artwork and metadata record the validated transaction. This notice is also included in the NFT mint memo.</p>
+    <div id="jcsReceiptReview" class="jcs-nft-review" hidden><h4>Review your receipt NFT</h4><p class="jcs-tool-small">${RECEIPT_NOTICE} The JCS / XRP artwork and metadata record the validated transaction. The mint memo also labels it as transaction proof with no liquidity or withdrawal rights.</p>
       <p class="jcs-tool-small">The receipt includes the public signing wallet and source transaction. It contains no private journal or worship activity.</p>
       <a id="jcsReceiptImageLink" target="_blank" rel="noopener noreferrer">Open full receipt artwork ↗</a><dl class="jcs-readout" id="jcsMintReadout"></dl><details><summary>Receipt JSON &amp; permanent URI</summary><pre id="jcsReceiptJson"></pre><code class="jcs-nft-id" id="jcsReceiptUri"></code></details>
       <p class="jcs-tool-small">Personal receipt: general transfer flag off. XRPL still permits transfers involving its original issuer. This receipt is not a spiritual reward or an investment guarantee.</p>
